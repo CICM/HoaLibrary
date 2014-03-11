@@ -16,6 +16,33 @@ Inheritance diagram for Hoa2\-D\-:\-:Sources\-Trajectory\-:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{class_hoa2_d_1_1_sources_trajectory}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_sources_trajectory_a8d96898f30c4fb18957847e3ddd3e407}{Sources\-Trajectory} ()
+\begin{DoxyCompactList}\small\item\em The source trajectory constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_a7b2452c54b5991fe6c1cbcf7fe999a87}{\hyperlink{class_hoa2_d_1_1_sources_trajectory_a7b2452c54b5991fe6c1cbcf7fe999a87}{$\sim$\-Sources\-Trajectory} ()}\label{class_hoa2_d_1_1_sources_trajectory_a7b2452c54b5991fe6c1cbcf7fe999a87}
+
+\begin{DoxyCompactList}\small\item\em The source trajectory destructor free the memory. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_aa225a14abe75ded0726d8f4bfa29bdbd}{set\-Recording} (bool is\-Recording)
+\begin{DoxyCompactList}\small\item\em Set the recording state. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_ad2456a1b3bec2079e5de4a048a6d81b5}{set\-Limited} (bool is\-Limited)
+\begin{DoxyCompactList}\small\item\em Set the limited state. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_ad3cf3a9e8a4833f1c90ada4874a74df1}{record\-Source\-In\-Trajectory} (\hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} $\ast$sources\-Manager, long source\-Index)
+\begin{DoxyCompactList}\small\item\em Record a source in trajectory. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_a98cf3aaa04964515e73fd9f74a8128b3}{record\-Group\-In\-Trajectory} (\hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} $\ast$sources\-Manager, long group\-Index)
+\begin{DoxyCompactList}\small\item\em Record a group in trajectory. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_ad6a6337c49063b1cb61e2ddde8cfdd5a}{play\-Trajectory} (\hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} $\ast$sources\-Manager, double fractionnal\-Value)
+\begin{DoxyCompactList}\small\item\em Play a trajectory at a fractionnal index. \end{DoxyCompactList}\item 
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_adb8caed9806cb32f81593ca0d644180a}{void \hyperlink{class_hoa2_d_1_1_sources_trajectory_adb8caed9806cb32f81593ca0d644180a}{erase} ()}\label{class_hoa2_d_1_1_sources_trajectory_adb8caed9806cb32f81593ca0d644180a}
+
+\begin{DoxyCompactList}\small\item\em Erase all of the trajectory. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_sources_trajectory_a07801a5aae503de937f14439630b1a0a}{erase} (double fractionnal\-Value\-Begin, double fractionnal\-Value\-End)
+\begin{DoxyCompactList}\small\item\em Erase a part of a trajectory. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_sources_trajectory_a4839f9906e4ee789723cb92c902d0881}{get\-Limited} () const 
+\begin{DoxyCompactList}\small\item\em Is the sources trajectory limited. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_sources_trajectory_ab2dff5f94b051bc6beaa9791ab583367}{get\-Recording} () const 
+\begin{DoxyCompactList}\small\item\em Get the recording state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -27,7 +54,196 @@ Definition at line 17 of file Sources\-Trajectory.\-h.
 
 
 
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_a8d96898f30c4fb18957847e3ddd3e407}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!Sources\-Trajectory@{Sources\-Trajectory}}
+\index{Sources\-Trajectory@{Sources\-Trajectory}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{Sources\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Sources\-Trajectory\-::\-Sources\-Trajectory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_a8d96898f30c4fb18957847e3ddd3e407}
+
+
+The source trajectory constructor. 
+
+The source trajectory constructor allocates and initialize the member values. 
+
+Definition at line 11 of file Sources\-Trajectory.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_a07801a5aae503de937f14439630b1a0a}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!erase@{erase}}
+\index{erase@{erase}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{erase}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::erase (
+\begin{DoxyParamCaption}
+\item[{double}]{fractionnal\-Value\-Begin, }
+\item[{double}]{fractionnal\-Value\-End}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_a07801a5aae503de937f14439630b1a0a}
+
+
+Erase a part of a trajectory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fractionnal\-Value\-Begin} & The fractionnal begin value of the trajectory (between 0. and 1.). \\
+\hline
+{\em fractionnal\-Value\-End} & The fractionnal end value of the trajectory (between 0. and 1.). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file Sources\-Trajectory.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_a4839f9906e4ee789723cb92c902d0881}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!get\-Limited@{get\-Limited}}
+\index{get\-Limited@{get\-Limited}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{get\-Limited}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Sources\-Trajectory\-::get\-Limited (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_sources_trajectory_a4839f9906e4ee789723cb92c902d0881}
+
+
+Is the sources trajectory limited. 
+
+\begin{DoxyReturn}{Returns}
+The limited state 
+\end{DoxyReturn}
+
+
+Definition at line 82 of file Sources\-Trajectory.\-h.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_ab2dff5f94b051bc6beaa9791ab583367}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!get\-Recording@{get\-Recording}}
+\index{get\-Recording@{get\-Recording}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{get\-Recording}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Sources\-Trajectory\-::get\-Recording (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_sources_trajectory_ab2dff5f94b051bc6beaa9791ab583367}
+
+
+Get the recording state. 
+
+\begin{DoxyReturn}{Returns}
+The recording state 
+\end{DoxyReturn}
+
+
+Definition at line 88 of file Sources\-Trajectory.\-h.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_ad6a6337c49063b1cb61e2ddde8cfdd5a}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!play\-Trajectory@{play\-Trajectory}}
+\index{play\-Trajectory@{play\-Trajectory}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{play\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::play\-Trajectory (
+\begin{DoxyParamCaption}
+\item[{{\bf Sources\-Manager} $\ast$}]{sources\-Manager, }
+\item[{double}]{fractionnal\-Value}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_ad6a6337c49063b1cb61e2ddde8cfdd5a}
+
+
+Play a trajectory at a fractionnal index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sources\-Manager} & A \hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} object pointer. \\
+\hline
+{\em fractionnal\-Value} & The fractionnal value (between 0. and 1.). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file Sources\-Trajectory.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_a98cf3aaa04964515e73fd9f74a8128b3}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!record\-Group\-In\-Trajectory@{record\-Group\-In\-Trajectory}}
+\index{record\-Group\-In\-Trajectory@{record\-Group\-In\-Trajectory}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{record\-Group\-In\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::record\-Group\-In\-Trajectory (
+\begin{DoxyParamCaption}
+\item[{{\bf Sources\-Manager} $\ast$}]{sources\-Manager, }
+\item[{long}]{group\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_a98cf3aaa04964515e73fd9f74a8128b3}
+
+
+Record a group in trajectory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sources\-Manager} & A \hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} object pointer. \\
+\hline
+{\em group\-Index} & The index of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file Sources\-Trajectory.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_ad3cf3a9e8a4833f1c90ada4874a74df1}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!record\-Source\-In\-Trajectory@{record\-Source\-In\-Trajectory}}
+\index{record\-Source\-In\-Trajectory@{record\-Source\-In\-Trajectory}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{record\-Source\-In\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::record\-Source\-In\-Trajectory (
+\begin{DoxyParamCaption}
+\item[{{\bf Sources\-Manager} $\ast$}]{sources\-Manager, }
+\item[{long}]{source\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_ad3cf3a9e8a4833f1c90ada4874a74df1}
+
+
+Record a source in trajectory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sources\-Manager} & A \hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} object pointer. \\
+\hline
+{\em source\-Index} & The index of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Sources\-Trajectory.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_ad2456a1b3bec2079e5de4a048a6d81b5}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!set\-Limited@{set\-Limited}}
+\index{set\-Limited@{set\-Limited}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{set\-Limited}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::set\-Limited (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\-Limited}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_ad2456a1b3bec2079e5de4a048a6d81b5}
+
+
+Set the limited state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\-Limited} & The limited state \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file Sources\-Trajectory.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_trajectory_aa225a14abe75ded0726d8f4bfa29bdbd}{\index{Hoa2\-D\-::\-Sources\-Trajectory@{Hoa2\-D\-::\-Sources\-Trajectory}!set\-Recording@{set\-Recording}}
+\index{set\-Recording@{set\-Recording}!Hoa2D::SourcesTrajectory@{Hoa2\-D\-::\-Sources\-Trajectory}}
+\subsubsection[{set\-Recording}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Sources\-Trajectory\-::set\-Recording (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\-Recording}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_trajectory_aa225a14abe75ded0726d8f4bfa29bdbd}
+
+
+Set the recording state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\-Recording} & The recording state \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 17 of file Sources\-Trajectory.\-cpp.
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Sources\-Trajectory.\-h\item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Sources\-Trajectory.\-cpp\end{DoxyCompactItemize}
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Sources\-Trajectory.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Sources\-Trajectory.\-cpp\end{DoxyCompactItemize}

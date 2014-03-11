@@ -14,17 +14,17 @@ namespace Hoa2D
 		m_limited = 0;
 	}
 	
-	void SourcesTrajectory::setRecording(long isRecording)
+	void SourcesTrajectory::setRecording(bool isRecording)
 	{
-		m_recording = isRecording != 0;
+		m_recording = isRecording;
 	}
 	
-	void SourcesTrajectory::setLimited(long isLimited)
+	void SourcesTrajectory::setLimited(bool isLimited)
 	{
-		m_limited = isLimited != 0;
+		m_limited = isLimited;
 	}
 	
-	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* aSouceManager, long sourceIndex)
+	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* sourcesManager, long sourceIndex)
 	{
 		if(m_recording)
 		{
@@ -32,16 +32,16 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeSourceAtNextSlot(aSouceManager, sourceIndex);
-					recallSlot(aSouceManager, m_last_slot_stored);
+					storeSourceAtNextSlot(sourcesManager, sourceIndex);
+					recallSlot(sourcesManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, sourceIndex);
+					storeSourceAtNextSlot(sourcesManager, sourceIndex);
 			}
 		}
 	}
 	
-	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* aSouceManager, long groupeIndex)
+	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* sourcesManager, long groupIndex)
 	{
 		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
 		{
@@ -49,21 +49,21 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeGroupAtNextSlot(aSouceManager, groupeIndex);
-					recallSlot(aSouceManager, m_last_slot_stored);
+					storeGroupAtNextSlot(sourcesManager, groupIndex);
+					recallSlot(sourcesManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, groupeIndex);
+					storeSourceAtNextSlot(sourcesManager, groupIndex);
 			}
 		}
 	}
 	
-	void SourcesTrajectory::playTrajectory(SourcesManager* aSouceManager, double aFractionnalValue)
+	void SourcesTrajectory::playTrajectory(SourcesManager* sourcesManager, double fractionnalValue)
 	{
-		aFractionnalValue = clip_minmax(aFractionnalValue, 0., 1.);
-		double aFractionalIndex = aFractionnalValue * (double)getMaximumIndexOfSlot();
+		fractionnalValue = clip_minmax(fractionnalValue, 0., 1.);
+		double aFractionalIndex = fractionnalValue * (double)getMaximumIndexOfSlot();
 		
-		recallFractionalSlot(aSouceManager, aFractionalIndex);
+		recallFractionalSlot(sourcesManager, aFractionalIndex);
 		m_last_slot_stored = aFractionalIndex-1;
 	}
 	
@@ -73,24 +73,14 @@ namespace Hoa2D
 		m_last_slot_stored = -1;
 	}
 	
-	void SourcesTrajectory::erase(double aFractionnalValueBegin, double aFractionnalValueEnd)
+	void SourcesTrajectory::erase(double fractionnalValueBegin, double fractionnalValueEnd)
 	{
-		long anIndexBegin = clip_minmax(aFractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();
-		long anIndexEnd = clip_minmax(aFractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();
+		long anIndexBegin = clip_minmax(fractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();
+		long anIndexEnd = clip_minmax(fractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();
 		for(long i = anIndexBegin; i < anIndexEnd; i++)
 		{
 			deleteSlot(i);
 		}
-	}
-	
-	long SourcesTrajectory::getRecording()
-	{
-		return m_recording;
-	}
-	
-	long SourcesTrajectory::getLimited()
-	{
-		return m_limited;
 	}
 	
 	SourcesTrajectory::~SourcesTrajectory()

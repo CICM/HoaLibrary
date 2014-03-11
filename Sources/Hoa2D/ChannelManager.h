@@ -7,7 +7,7 @@
 #ifndef __DEF_HOA_2D_CHANNELMANAGER__
 #define __DEF_HOA_2D_CHANNELMANAGER__
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 namespace Hoa2D
 {

@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_LIBRARY_2D
 #define DEF_HOA_LIBRARY_2D
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 //! The 2D high order ambisonic namespace.
 /**

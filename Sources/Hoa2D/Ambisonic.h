@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_2D_AMBISONIC
 #define DEF_HOA_2D_AMBISONIC
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 namespace Hoa2D
 {

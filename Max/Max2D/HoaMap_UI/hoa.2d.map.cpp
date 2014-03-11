@@ -494,7 +494,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(atom_getsym(av+1) == hoa_sym_radius)
             x->f_source_manager->sourceSetRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_angle)
-            x->f_source_manager->sourceSetAngle(atom_getlong(av), atom_getfloat(av+2));
+            x->f_source_manager->sourceSetAzimuth(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
             x->f_source_manager->sourceSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
         else if(atom_getsym(av+1) == hoa_sym_abscissa)
@@ -579,7 +579,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(atom_getsym(av+1) == hoa_sym_radius)
             x->f_source_manager->groupSetRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_angle)
-            x->f_source_manager->groupSetAngle(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
+            x->f_source_manager->groupSetAzimuth(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
         else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
             x->f_source_manager->groupSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
         else if(atom_getsym(av+1) == hoa_sym_abscissa)
@@ -591,7 +591,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(atom_getsym(av+1) == hoa_sym_relradius || atom_getsym(av+1) == hoa_sym_relativeradius)
             x->f_source_manager->groupSetRelativeRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_relangle || atom_getsym(av+1) == hoa_sym_relativeangle)
-            x->f_source_manager->groupSetRelativeAngle(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
+            x->f_source_manager->groupSetRelativeAzimuth(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
         else if(atom_getsym(av+1) == hoa_sym_mute)
             x->f_source_manager->groupSetMute(atom_getlong(av), atom_getlong(av+2));
         else if(atom_getsym(av+1) == hoa_sym_remove)
@@ -661,15 +661,15 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         {
             t_symbol *sym = atom_getsym(av);
             if(sym == hoa_sym_store)
-                x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
+                x->f_source_preset->storeSourceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
             else if(sym == hoa_sym_storeagain)
-                x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtLastUsedSlot(x->f_source_manager);
             else if(sym == hoa_sym_storeempty)
-                x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtFirstEmptySlot(x->f_source_manager);
             else if(sym == hoa_sym_storeend)
-                x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtNewEndSlot(x->f_source_manager);
             else if(sym == hoa_sym_storenext)
-                x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtNextSlot(x->f_source_manager);
             else if(sym == hoa_sym_insert)
                 x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
             else if(sym == hoa_sym_remove)
@@ -1071,7 +1071,7 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
         {
             if(atom_getsym(av+i) == hoa_sym_slot)
             {
-                x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+                x->f_source_preset->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
@@ -1096,7 +1096,7 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
                 temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
             }
         }
-        x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+        x->f_source_preset->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
         delete temporySourceManager;
     }
 }
@@ -1112,7 +1112,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
         {
             if(atom_getsym(av+i) == hoa_sym_slot)
             {
-                x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+                x->f_source_trajectory->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
@@ -1137,7 +1137,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
                 temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
             }
         }
-        x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+        x->f_source_trajectory->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
         delete temporySourceManager;
     }
 }
@@ -1300,7 +1300,7 @@ void hoamap_bang(t_hoamap *x)
             {
                 atom_setlong(av, i);
                 atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->groupGetAngle(i));
+                atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
                 outlet_list(x->f_out_groups, 0L, 4, av);
             }
         }
@@ -2049,7 +2049,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - HOA_PI2);
+			x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - HOA_PI2);
 
 		 // Radius
 #ifdef _WINDOWS
@@ -2085,7 +2085,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-            x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+            x->f_source_manager->groupSetRelativeAzimuth(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift

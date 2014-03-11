@@ -7,7 +7,7 @@
 #ifndef DEF_SOURCE
 #define DEF_SOURCE
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 namespace Hoa2D
 {
@@ -32,178 +32,178 @@ namespace Hoa2D
 		//! The source constructor.
 		/**	The source constructor allocates and initialize the member values for a source.
 		 
-		 @param     existance		The existance state of the source.
-		 @param     radius			The radius of the source.
-		 @param     azimuth			The azimuth of the source.
+			@param     existence		The existence state of the source.
+			@param     radius			The radius of the source.
+			@param     azimuth			The azimuth of the source.
 		 */
-		Source(bool existance = true, double radius = 0., double azimuth = 0.);
+		Source(bool existence = true, double radius = 0., double azimuth = 0.);
 		
 		//! The source destructor.
         /**	The source destructor free the memory.
          */
 		~Source();
 		
-		//! Set the existance state of the source.
+		//! Set the existence state of the source.
 		/**
-		 @param     state		The existance state of the source.
-		 @see getExistence
+			@param     state		The existence state of the source.
+			@see getExistence
          */
 		void setExistence(bool state);
 		
 		//! Set the position of the source with polar coordinates.
 		/**
-		 @param     radius			The radius of the source.
-		 @param     azimuth			The azimuth of the source.
-		 @see setCoordinatesCartesian
+			@param     radius			The radius of the source.
+			@param     azimuth			The azimuth of the source.
+			@see setCoordinatesCartesian
          */
 		void setCoordinatesPolar(double radius, double azimuth);
 		
 		//! Set the radius of the source.
 		/**
-		 @param     radius			The radius of the source.
-		 @see getRadius
+			@param     radius			The radius of the source.
+			@see getRadius
          */
 		void setRadius(double radius);
 		
 		//! Set the azimuth of the source.
 		/**
-		 @param     azimuth			The azimuth of the source.
+			@param     azimuth			The azimuth of the source.
          */
 		void seAzimuth(double azimuth);
 		
 		//! Set the position of the source with cartesians coordinates.
 		/**
-		 @param     abscissa		The abscissa of the source.
-		 @param     ordinate		The ordinate of the source.
+			@param     abscissa		The abscissa of the source.
+			@param     ordinate		The ordinate of the source.
          */
 		void setCoordinatesCartesian(double abscissa, double ordinate);
 		
 		//! Set the abscissa of the source.
 		/**
-		 @param     abscissa		The abscissa of the source.
+			@param     abscissa		The abscissa of the source.
          */
 		void setAbscissa(double abscissa);
 		
 		//! Set the ordinate of the source.
 		/**
-		 @param     ordinate		The ordinate of the source.
+			@param     ordinate		The ordinate of the source.
          */
 		void setOrdinate(double ordinate);
 		
 		//! Set the color of the source.
 		/**
-		 @param     red			The red component of the color.
-		 @param     green		The green component of the color
-		 @param     blue		The blue component of the color
-		 @param     alpha		The alpha component of the color
+		 * @param     red		The red component of the color.
+		 * @param     green		The green component of the color
+		 * @param     blue		The blue component of the color
+		 * @param     alpha		The alpha component of the color
          */
 		void setColor(double red, double green, double blue, double alpha);
 		
 		//! Set the description of the source.
 		/**
-		 @param     description		The text description of the source.
+		 * @param     description		The text description of the source.
          */
 		void setDescription(std::string description);
 		
 		//! Add source to an indexed group.
 		/**
-		 @param     groupeIndex		The index of the group.
+			@param     groupIndex		The index of the group.
          */
-		void setGroup(long groupeIndex);
+		void setGroup(long groupIndex);
 		
 		//! Remove source from an indexed group.
 		/**
-		 @param     groupeIndex		The index of the group.
+			@param     groupIndex		The index of the group.
          */
-		void removeGroup(long groupeIndex);
+		void removeGroup(long groupIndex);
 		
 		//! Set the maximum radius of the source
 		/**
-		 @param     limitValue		The radius limit value.
+			@param     limitValue		The radius limit value.
          */
 		void setMaximumRadius(double limitValue);
 		
 		//! Set the mute state of the source
 		/**
-		 @param     state		The mute state of the source.
-		 @see getMute
+			@param     state		The mute state of the source.
+			@see getMute
          */
 		void setMute(bool state);
 		
-		//! Get the existance state of the source.
+		//! Get the existence state of the source.
 		/**
-		 @return		The existance state of the source.
-		 @see setExistence
+			@return		The existence state of the source.
+			@see setExistence
          */
 		bool			getExistence()		const {return m_exist;}
 		
 		//! Get the radius of the source.
 		/**
-		 @return		The radius of the source.
-		 @see setRadius, setCoordinatesPolar
+			@return		The radius of the source.
+			@see setRadius, setCoordinatesPolar
          */
 		double			getRadius()			const {return m_radius;}
 		
 		//! Get the azimuth of the source.
 		/**
-		 @return		The azimuth of the source.
-		 @see setAzimuth, setCoordinatesPolar
+			@return		The azimuth of the source.
+			@see setAzimuth, setCoordinatesPolar
          */
 		double			getAzimuth()		const {return m_azimuth;}
 		
 		//! Get the abscissa of the source.
 		/**
-		 @return		The abscissa of the source.
-		 @see setAbscissa, setCoordinatesCartesian
+			@return		The abscissa of the source.
+			@see setAbscissa, setCoordinatesCartesian
          */
 		double			getAbscissa()		const {return abscissa(m_radius, m_azimuth + HOA_PI2);}
 		
 		//! Get the ordinate of the source.
 		/**
-		 @return		The ordinate of the source.
-		 @see setOrdinate, setCoordinatesCartesian
+			@return		The ordinate of the source.
+			@see setOrdinate, setCoordinatesCartesian
          */
 		double			getOrdinate()		const {return ordinate(m_radius, m_azimuth + HOA_PI2);}
 		
 		//! Get the color of the source.
 		/**
-		 @return		The rgba color of the source as an array of 4 double.
-		 @see setColor
+			@return		The rgba color of the source as an array of 4 double.
+			@see setColor
          */
 		double*			getColor()			const {return m_color;}
 		
 		//! Get the description of the source.
 		/**
-		 @return		The description of the source.
-		 @see setDescription
+			@return		The description of the source.
+			@see setDescription
          */
 		std::string		getDescription()	const {return m_description;}
 		
 		//! Get the number of group the source is owned by.
 		/**
-		 @return		The number of group.
-		 @see setDescription
+			@return		The number of group.
+			@see setDescription
          */
 		long			getNumberOfGroups() const {return m_groups.size();}
 		
 		//! Get the the group index the source is owned by at a particular index.
 		/**
-		 @param			index			The index of the group
-		 @return		The group index.
+			@param			index			The index of the group
+			@return		The group index.
          */
 		long			getGroupIndex(long index);
 		
 		//! Determine if the source is owned by a particular group
 		/**
-		 @param			groupeIndex		The index of the group
-		 @return		true if the source is in the group, false otherwise.
+			@param			groupIndex		The index of the group
+			@return		true if the source is in the group, false otherwise.
          */
-		bool			isOwnedByGroup(long groupeIndex);
+		bool			isOwnedByGroup(long groupIndex);
 		
 		//! Get the mute state of the source
 		/**
-		 @return		The mute state of the source.
-		 @see setMute
+			@return		The mute state of the source.
+			@see setMute
          */
 		bool			getMute()			const {return m_mute;}
 	};

@@ -27,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
    &#160;<span id="projectnumber">2.0</span>
@@ -152,12 +153,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af31ea39af39be29e71f3b075470f16ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#af31ea39af39be29e71f3b075470f16ad">getChannelsOffset</a> () const </td></tr>
 <tr class="memdesc:af31ea39af39be29e71f3b075470f16ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the offset of the channels of the regular decoding.  <a href="#af31ea39af39be29e71f3b075470f16ad">More...</a><br/></td></tr>
 <tr class="separator:af31ea39af39be29e71f3b075470f16ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42d2b7697ae84fd9ed43f8d1f4799dce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a42d2b7697ae84fd9ed43f8d1f4799dce">setChannelPosition</a> (unsigned int index, double azimuth)</td></tr>
-<tr class="memdesc:a42d2b7697ae84fd9ed43f8d1f4799dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel for the irregular decoding mode.  <a href="#a42d2b7697ae84fd9ed43f8d1f4799dce">More...</a><br/></td></tr>
-<tr class="separator:a42d2b7697ae84fd9ed43f8d1f4799dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a226c24223ee381fd04dcbc44b4e8155e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a226c24223ee381fd04dcbc44b4e8155e">setChannelsPosition</a> (double *azimuths)</td></tr>
-<tr class="memdesc:a226c24223ee381fd04dcbc44b4e8155e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimtuh of all the channels for the irregular decoding mode.  <a href="#a226c24223ee381fd04dcbc44b4e8155e">More...</a><br/></td></tr>
-<tr class="separator:a226c24223ee381fd04dcbc44b4e8155e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8a24171531b8a83a21199d0c21608b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a3f8a24171531b8a83a21199d0c21608b">setChannelAzimuth</a> (unsigned int index, double azimuth)</td></tr>
+<tr class="memdesc:a3f8a24171531b8a83a21199d0c21608b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel for the irregular decoding mode.  <a href="#a3f8a24171531b8a83a21199d0c21608b">More...</a><br/></td></tr>
+<tr class="separator:a3f8a24171531b8a83a21199d0c21608b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae87c004b9f042b301532e90a64f92414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#ae87c004b9f042b301532e90a64f92414">setChannelsAzimtuh</a> (double *azimuths)</td></tr>
+<tr class="memdesc:ae87c004b9f042b301532e90a64f92414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimtuh of all the channels for the irregular decoding mode.  <a href="#ae87c004b9f042b301532e90a64f92414">More...</a><br/></td></tr>
+<tr class="separator:ae87c004b9f042b301532e90a64f92414"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa15da12ba3889edc22ec9c148dd5c692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#aa15da12ba3889edc22ec9c148dd5c692">setSampleRate</a> (unsigned int sampleRate)</td></tr>
 <tr class="memdesc:aa15da12ba3889edc22ec9c148dd5c692"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sample rate.  <a href="#aa15da12ba3889edc22ec9c148dd5c692">More...</a><br/></td></tr>
 <tr class="separator:aa15da12ba3889edc22ec9c148dd5c692"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,15 +243,18 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_hoa2_d_1_1_planewaves"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_hoa2_d_1_1_planewaves')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_hoa2_d_1_1_planewaves.html">Hoa2D::Planewaves</a></td></tr>
-<tr class="memitem:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a3b85f0d194899156b24d66b17ccc34f6">setChannelPosition</a> (unsigned int index, double azimuth)</td></tr>
-<tr class="memdesc:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel.  <a href="#a3b85f0d194899156b24d66b17ccc34f6">More...</a><br/></td></tr>
-<tr class="separator:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a54376d0d157e410a012a9aa59bb3574e">setChannelAzimuth</a> (unsigned int index, double azimuth)</td></tr>
+<tr class="memdesc:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel.  <a href="#a54376d0d157e410a012a9aa59bb3574e">More...</a><br/></td></tr>
+<tr class="separator:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a6f0f2aa4035861ebfa3f74f36cd7e266">setChannelsAzimuth</a> (double *azimuths)</td></tr>
+<tr class="memdesc:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimtuh of all the channels.  <a href="#a6f0f2aa4035861ebfa3f74f36cd7e266">More...</a><br/></td></tr>
+<tr class="separator:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ambisonic multi-decoder. </p>
 <p>The multi-decoder is a class that facilitates the use of the three decoder : regular, irregular and binaural. </p>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00263">263</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00280">280</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a0ac23d6bd77378d9cd5ddf6e71029300"></a>
 <div class="memitem">
@@ -273,7 +277,7 @@ Additional Inherited Members</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00267">267</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00284">284</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -301,7 +305,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00452">452</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00440">440</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +325,7 @@ Additional Inherited Members</h2></td></tr>
 <p>The multi-decoder destructor. </p>
 <p>The multi-decoder destructor free the memory. </p>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00542">542</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00516">516</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +355,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Retrieve if the impulses has been loaded and the matrix allocated.</p>
 <dl class="section return"><dt>Returns</dt><dd>The true if the binaural decoder is ready to process and false if not. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00399">399</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00418">418</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -392,7 +396,7 @@ Additional Inherited Members</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_decoder_multi.html#af2208568e5aff57ade0ba5a00656db32" title="Retrieve a name for a channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00438">438</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00457">457</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +437,7 @@ Additional Inherited Members</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_decoder_multi.html#af2208568e5aff57ade0ba5a00656db32" title="Retrieve a name for a channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00417">417</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00436">436</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -469,7 +473,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The method returns a name for the channel. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00475">475</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00494">494</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -510,7 +514,7 @@ Additional Inherited Members</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_decoder_multi.html#af2208568e5aff57ade0ba5a00656db32" title="Retrieve a name for a channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00458">458</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00477">477</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -539,7 +543,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Retreive the azimuth offset of the channels in radian the regular decoding.</p>
 <dl class="section return"><dt>Returns</dt><dd>The offset of the channels if the regular decoding mode is active, otherwise it returns 0. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00348">348</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00365">365</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -568,7 +572,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Retrieve the current decoding mode of the multi-decoder.</p>
 <dl class="section return"><dt>Returns</dt><dd>The decoding mode; </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00309">309</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00326">326</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -597,7 +601,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Retrieve the number of channels of the planewave class.</p>
 <dl class="section return"><dt>Returns</dt><dd>The number of channels. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00326">326</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00343">343</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -643,7 +647,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00491">491</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00510">510</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -689,7 +693,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00502">502</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00521">521</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -735,7 +739,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00535">535</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00554">554</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -781,7 +785,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00546">546</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00565">565</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -827,7 +831,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00513">513</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00532">532</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -873,16 +877,16 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00524">524</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00543">543</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a42d2b7697ae84fd9ed43f8d1f4799dce"></a>
+<a class="anchor" id="a3f8a24171531b8a83a21199d0c21608b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Hoa2D::DecoderMulti::setChannelPosition </td>
+          <td class="memname">void Hoa2D::DecoderMulti::setChannelAzimuth </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>index</em>, </td>
@@ -910,9 +914,37 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a226c24223ee381fd04dcbc44b4e8155e" title="Set the azimtuh of all the channels for the irregular decoding mode. ">setChannelsPosition</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#ae87c004b9f042b301532e90a64f92414" title="Set the azimtuh of all the channels for the irregular decoding mode. ">setChannelsAzimtuh</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00508">508</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00482">482</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae87c004b9f042b301532e90a64f92414"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hoa2D::DecoderMulti::setChannelsAzimtuh </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>azimuths</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the azimtuh of all the channels for the irregular decoding mode. </p>
+<p>Set the azimtuh of all the channels for the irregular decoding mode. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">azimuths</td><td>The azimuths array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a3f8a24171531b8a83a21199d0c21608b" title="Set the azimuth of a channel for the irregular decoding mode. ">setChannelAzimuth</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00490">490</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -939,35 +971,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00500">500</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a226c24223ee381fd04dcbc44b4e8155e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Hoa2D::DecoderMulti::setChannelsPosition </td>
-          <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>azimuths</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the azimtuh of all the channels for the irregular decoding mode. </p>
-<p>Set the azimtuh of all the channels for the irregular decoding mode. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">azimuths</td><td>The azimuths array.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a42d2b7697ae84fd9ed43f8d1f4799dce" title="Set the azimuth of a channel for the irregular decoding mode. ">setChannelPosition</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00516">516</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00470">470</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -994,7 +998,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00458">458</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00448">448</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1025,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00483">483</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00453">453</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -1049,7 +1053,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a875eb671767c2f547453e6d7a1401f15" title="Set the vector size. ">setVectorSize</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00524">524</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00498">498</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -1077,18 +1081,18 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_decoder_multi.html#aa15da12ba3889edc22ec9c148dd5c692" title="Set the sample rate. ">setSampleRate</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00533">533</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html#l00507">507</a> of file <a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a></li>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a></li>
+<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a></li>
+<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 07:29:38 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 17:41:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
