@@ -116,66 +116,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    m_ramp;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    m_vector_size;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span>*         m_loudspeakers_peaks;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span>*         m_channels_peaks;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*   m_matrix;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_hoa2_d_1_1_meter.html#a14d0584c4d3cd7fbfcbe73b7f9b072ce">Meter</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  numberOfChannels);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046">~Meter</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">double</span>*         m_channels_azimuths_mapped;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">double</span>*         m_channels_azimuths_widths;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="class_hoa2_d_1_1_meter.html#ac2a73532fb2dc735d5c72886281b75e8">Meter</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  number_of_channels);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046">~Meter</a>();</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a4170ee9ed709f6d6bfecd30591ac8347">setChannelAzimuth</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> <a class="code" href="namespace_hoa.html#a29fdd6f7a1826039c063ce42221fcd0d">azimuth</a>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">double</span>       getLoudspeakerAngleMapped(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">double</span>       getLoudspeakerWidth(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">double</span>       getLoudspeakerAngleRadian(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">double</span>       getLoudspeakerAngleMappedRadian(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">double</span>       getLoudspeakerWidthRadian(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span> setVectorSize(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vectorSize);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a4170ee9ed709f6d6bfecd30591ac8347">setChannelAzimuth</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> azimuth);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_meter.html#afeb35ed7f980219e9a0ef0a2b3474e42">getChannelAzimuthMapped</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">double</span> getChannelPeak(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            assert(index &lt; m_number_of_channels);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">return</span> m_loudspeakers_peaks[index];</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">double</span> getChannelEnergy(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            assert(index &lt; m_number_of_channels);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> 20. * log10(m_loudspeakers_peaks[index]);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    };</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a10ccf98fe02151155c22644e7a61450a">getChannelWidth</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a2f179adb5ec28fe4c2256c8333ea22ab">getChannelAzimuth</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#ab3c720b0e9061f43218aff20a678aa9a">setVectorSize</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vectorSize);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_meter.html#af6336b9eaed75ec9b31405b28fe3f811">   89</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_hoa2_d_1_1_meter.html#af6336b9eaed75ec9b31405b28fe3f811">getVectorSize</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vectorSize)<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_vector_size;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_meter.html#a3e697d8c692f5fa4484dd99cce866310">   96</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a3e697d8c692f5fa4484dd99cce866310">getChannelPeak</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            assert(index &lt; m_number_of_channels);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">return</span> m_channels_peaks[index];</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_meter.html#af2bd3c8691c6004e378ff17f12c88c29">  107</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_meter.html#af2bd3c8691c6004e378ff17f12c88c29">getChannelEnergy</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            assert(index &lt; m_number_of_channels);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">return</span> 20. * log10(m_channels_peaks[index]);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    };</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_ab3c720b0e9061f43218aff20a678aa9a"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#ab3c720b0e9061f43218aff20a678aa9a">Hoa2D::Meter::setVectorSize</a></div><div class="ttdeci">void setVectorSize(unsigned int vectorSize)</div><div class="ttdoc">Set the vector size. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00020">Meter.cpp:20</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_afeb35ed7f980219e9a0ef0a2b3474e42"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#afeb35ed7f980219e9a0ef0a2b3474e42">Hoa2D::Meter::getChannelAzimuthMapped</a></div><div class="ttdeci">double getChannelAzimuthMapped(unsigned int index) const </div><div class="ttdoc">Get the mapped azimuth of a given channel. </div></div>
 <div class="ttc" id="class_hoa2_d_1_1_meter_html"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html">Hoa2D::Meter</a></div><div class="ttdoc">The planewaves peak level meter. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8h_source.html#l00018">Meter.h:18</a></div></div>
-<div class="ttc" id="namespace_hoa_html_a29fdd6f7a1826039c063ce42221fcd0d"><div class="ttname"><a href="namespace_hoa.html#a29fdd6f7a1826039c063ce42221fcd0d">Hoa::azimuth</a></div><div class="ttdeci">double azimuth(const double x, const double y)</div><div class="ttdoc">The azimuth converter function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00407">HoaMath.h:407</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_meter_html_a48276da266f600f4d24db748ff4ca046"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046">Hoa2D::Meter::~Meter</a></div><div class="ttdeci">~Meter()</div><div class="ttdoc">The meter destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00094">Meter.cpp:94</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_meter_html_a14d0584c4d3cd7fbfcbe73b7f9b072ce"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a14d0584c4d3cd7fbfcbe73b7f9b072ce">Hoa2D::Meter::Meter</a></div><div class="ttdeci">Meter(unsigned int numberOfChannels)</div><div class="ttdoc">The meter constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00011">Meter.cpp:11</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_meter_html_a4170ee9ed709f6d6bfecd30591ac8347"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a4170ee9ed709f6d6bfecd30591ac8347">Hoa2D::Meter::setChannelAzimuth</a></div><div class="ttdeci">void setChannelAzimuth(unsigned int index, double azimuth)</div><div class="ttdoc">Set the position of a loudspeaker. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00024">Meter.cpp:24</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a10ccf98fe02151155c22644e7a61450a"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a10ccf98fe02151155c22644e7a61450a">Hoa2D::Meter::getChannelWidth</a></div><div class="ttdeci">double getChannelWidth(unsigned int index) const </div><div class="ttdoc">Get the width of a given channel. </div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_af2bd3c8691c6004e378ff17f12c88c29"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#af2bd3c8691c6004e378ff17f12c88c29">Hoa2D::Meter::getChannelEnergy</a></div><div class="ttdeci">double getChannelEnergy(unsigned int index) const </div><div class="ttdoc">Retrieve the energy of a given channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8h_source.html#l00107">Meter.h:107</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a48276da266f600f4d24db748ff4ca046"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046">Hoa2D::Meter::~Meter</a></div><div class="ttdeci">~Meter()</div><div class="ttdoc">The meter destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00096">Meter.cpp:96</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a3e697d8c692f5fa4484dd99cce866310"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a3e697d8c692f5fa4484dd99cce866310">Hoa2D::Meter::getChannelPeak</a></div><div class="ttdeci">double getChannelPeak(unsigned int index) const </div><div class="ttdoc">Retrieve the peak value of a given channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8h_source.html#l00096">Meter.h:96</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a4170ee9ed709f6d6bfecd30591ac8347"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a4170ee9ed709f6d6bfecd30591ac8347">Hoa2D::Meter::setChannelAzimuth</a></div><div class="ttdeci">void setChannelAzimuth(unsigned int index, double azimuth)</div><div class="ttdoc">Set the azimuth of a channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00026">Meter.cpp:26</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_planewaves_html"><div class="ttname"><a href="class_hoa2_d_1_1_planewaves.html">Hoa2D::Planewaves</a></div><div class="ttdoc">The planewaves class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_planewaves_8h_source.html#l00018">Planewaves.h:18</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_meter_html_a1b05d443d17a910e7e9cc7b3f81badc6"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">Hoa2D::Meter::process</a></div><div class="ttdeci">void process(const float *inputs)</div><div class="ttdoc">This method performs the widening with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00054">Meter.cpp:54</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_ac2a73532fb2dc735d5c72886281b75e8"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#ac2a73532fb2dc735d5c72886281b75e8">Hoa2D::Meter::Meter</a></div><div class="ttdeci">Meter(unsigned int number_of_channels)</div><div class="ttdoc">The meter constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00011">Meter.cpp:11</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a1b05d443d17a910e7e9cc7b3f81badc6"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a1b05d443d17a910e7e9cc7b3f81badc6">Hoa2D::Meter::process</a></div><div class="ttdeci">void process(const float *inputs)</div><div class="ttdoc">This method performs the metering with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8cpp_source.html#l00056">Meter.cpp:56</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_a2f179adb5ec28fe4c2256c8333ea22ab"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#a2f179adb5ec28fe4c2256c8333ea22ab">Hoa2D::Meter::getChannelAzimuth</a></div><div class="ttdeci">double getChannelAzimuth(unsigned int index) const </div><div class="ttdoc">Get the azimuth of a channel. </div></div>
+<div class="ttc" id="class_hoa2_d_1_1_meter_html_af6336b9eaed75ec9b31405b28fe3f811"><div class="ttname"><a href="class_hoa2_d_1_1_meter.html#af6336b9eaed75ec9b31405b28fe3f811">Hoa2D::Meter::getVectorSize</a></div><div class="ttdeci">unsigned int getVectorSize(unsigned int vectorSize) const </div><div class="ttdoc">Get the vector size. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_meter_8h_source.html#l00089">Meter.h:89</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 17:41:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 23:24:09 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

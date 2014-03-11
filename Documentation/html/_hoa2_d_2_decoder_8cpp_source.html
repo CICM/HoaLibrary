@@ -120,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">   25</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">DecoderRegular::setChannelsOffset</a>(<span class="keywordtype">double</span> offset)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        m_offset = <a class="code" href="namespace_hoa.html#a951a6800c87c7cb7428ccb05ed778e84">wrap_twopi</a>(offset);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        m_offset = wrap_twopi(offset);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_channels; i++)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            m_encoder-&gt;<a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">setAzimuth</a>(m_channels_azimuth[i] + m_offset);</div>
@@ -165,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_irregular.html#a0998a88c2f0c45fe02caa7a22966c807">   72</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#a0998a88c2f0c45fe02caa7a22966c807">DecoderIrregular::setChannelsOffset</a>(<span class="keywordtype">double</span> offset)</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        m_offset = <a class="code" href="namespace_hoa.html#a951a6800c87c7cb7428ccb05ed778e84">wrap_twopi</a>(offset);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        m_offset = wrap_twopi(offset);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#a3bc83d37db5c22105fa6948be376b16b">setChannelAzimuth</a>(0, m_channels_azimuth[0]);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
@@ -626,7 +626,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_acc60cfd737fe1f0866e7d464ef1ec1f8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00016">Encoder.cpp:16</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_planewaves_html_a54376d0d157e410a012a9aa59bb3574e"><div class="ttname"><a href="class_hoa2_d_1_1_planewaves.html#a54376d0d157e410a012a9aa59bb3574e">Hoa2D::Planewaves::setChannelAzimuth</a></div><div class="ttdeci">void setChannelAzimuth(unsigned int index, double azimuth)</div><div class="ttdoc">Set the azimuth of a channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_planewaves_8cpp_source.html#l00022">Planewaves.cpp:22</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_multi_html_a2a0aeff9157db4a486fa331b3dcd04cc"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_multi.html#a2a0aeff9157db4a486fa331b3dcd04cc">Hoa2D::DecoderMulti::~DecoderMulti</a></div><div class="ttdeci">~DecoderMulti()</div><div class="ttdoc">The multi-decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00516">Decoder.cpp:516</a></div></div>
-<div class="ttc" id="namespace_hoa_html_a951a6800c87c7cb7428ccb05ed778e84"><div class="ttname"><a href="namespace_hoa.html#a951a6800c87c7cb7428ccb05ed778e84">Hoa::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(const double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00322">HoaMath.h:322</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a2d12e80e9a7a59970972dca6b444b6bc"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Hoa2D::Encoder::process</a></div><div class="ttdeci">void process(const float input, float *outputs)</div><div class="ttdoc">This method performs the encoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00023">Encoder.cpp:23</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_af8a618d1d04c00f33c360fde6d09e03f"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f">Hoa2D::DecoderIrregular::~DecoderIrregular</a></div><div class="ttdeci">~DecoderIrregular()</div><div class="ttdoc">The irregular decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00183">Decoder.cpp:183</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html">Hoa2D::DecoderIrregular</a></div><div class="ttdoc">The ambisonic irregular decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00086">Decoder.h:86</a></div></div>
@@ -655,7 +654,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 17:41:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 23:24:09 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
