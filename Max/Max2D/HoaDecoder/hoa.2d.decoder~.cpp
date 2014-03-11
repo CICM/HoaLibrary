@@ -143,6 +143,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         
         if(d)
             attr_dictionary_process(x, d);
+        defer_low(x, (method)send_configuration, NULL, 0, NULL);
 	}
 
 	return (x);
@@ -267,7 +268,7 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Irregular);
             object_attr_setdisabled((t_object *)x, gensym("angles"), 0);
             object_attr_setdisabled((t_object *)x, gensym("channels"), 0);
-            object_attr_setdisabled((t_object *)x, gensym("offset"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("offset"), 0);
         }
         else if(atom_getsym(argv) == gensym("binaural") && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Binaural)
         {
@@ -292,7 +293,6 @@ t_max_err offset_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv
     if(argv[0])
     {
         atom_setfloat(argv[0], x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f);
-        
     }
     else
     {
@@ -337,7 +337,7 @@ t_max_err channel_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **arg
 t_max_err channel_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
     t_object *b = NULL;
-    if(argc && argv && atom_gettype(argv) == A_LONG && atom_getlong(argv) != x->f_decoder->getNumberOfChannels())
+    if(argc && argv && atom_gettype(argv) == A_LONG && atom_getlong(argv) != outlet_count((t_object *)x))
     {
         if(x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Regular || atom_getlong(argv) >= x->f_decoder->getNumberOfHarmonics())
         {
@@ -345,19 +345,19 @@ t_max_err channel_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             
             object_obex_lookup(x, gensym("#B"), (t_object **)&b);
             object_method(b, gensym("dynlet_begin"));
-            long last_number_of_channels = x->f_decoder->getNumberOfChannels();
+            
             x->f_decoder->setNumberOfChannels(atom_getlong(argv));
             
-            if(last_number_of_channels > x->f_decoder->getNumberOfChannels())
+            if(outlet_count((t_object *)x) > x->f_decoder->getNumberOfChannels())
             {
-                for(int i = last_number_of_channels; i > x->f_decoder->getNumberOfChannels(); i--)
+                for(int i = outlet_count((t_object *)x); i > x->f_decoder->getNumberOfChannels(); i--)
                 {
                     outlet_delete(outlet_nth((t_object*)x, i-1));
                 }
             }
-            else if(last_number_of_channels < x->f_decoder->getNumberOfChannels())
+            else if(outlet_count((t_object *)x) < x->f_decoder->getNumberOfChannels())
             {
-                for(int i = last_number_of_channels; i < x->f_decoder->getNumberOfChannels(); i++)
+                for(int i = outlet_count((t_object *)x); i < x->f_decoder->getNumberOfChannels(); i++)
                 {
                     outlet_append((t_object*)x, NULL, gensym("signal"));
                 }
@@ -399,7 +399,7 @@ t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         for(int i = 0; i < argc && i < x->f_decoder->getNumberOfChannels(); i++)
         {
             if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
-                x->f_decoder->setChannelPosition(i, atom_getfloat(argv+i) / 360. * HOA_2PI);
+                x->f_decoder->setChannelAzimuth(i, atom_getfloat(argv+i) / 360. * HOA_2PI);
         }
     }
     send_configuration(x);
@@ -428,28 +428,31 @@ void send_configuration(t_hoa_decoder *x)
     t_atom nchannels;
     t_atom offset;
     t_atom *argv = new t_atom[x->f_decoder->getNumberOfChannels()];
-    atom_setlong(&nchannels, x->f_decoder->getNumberOfChannels());
-    atom_setfloat(&offset, x->f_decoder->getChannelsOffset() / HOA_2PI * 360.);
-    for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
-        atom_setfloat(argv+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
-    
-    for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+    if(argv)
     {
-        if (jpatchline_get_box1(line) == decoder)
+        atom_setlong(&nchannels, x->f_decoder->getNumberOfChannels());
+        atom_setfloat(&offset, x->f_decoder->getChannelsOffset() / HOA_2PI * 360.);
+        for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
+            atom_setfloat(argv+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
+        
+        for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
         {
-            object = jpatchline_get_box2(line);
-            t_symbol* classname = object_classname(jbox_get_object(object));
-            if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") ||  classname == gensym("hoa.2d.vector~"))
+            if (jpatchline_get_box1(line) == decoder)
             {
-                object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
-                object_method_typed(jbox_get_object(object), gensym("angles"), x->f_decoder->getNumberOfChannels(), argv, NULL);
-                object_method_typed(jbox_get_object(object), gensym("offset"), 1, &offset, NULL);
+                object = jpatchline_get_box2(line);
+                t_symbol* classname = object_classname(jbox_get_object(object));
+                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") ||  classname == gensym("hoa.2d.vector~"))
+                {
+                    object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
+                    object_method_typed(jbox_get_object(object), gensym("angles"), x->f_decoder->getNumberOfChannels(), argv, NULL);
+                    object_method_typed(jbox_get_object(object), gensym("offset"), 1, &offset, NULL);
+                }
+                else if(classname == gensym("hoa.gain~"))
+                    object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
             }
-            else if(classname == gensym("hoa.gain~"))
-                object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
         }
+        
+        free(argv);
     }
-    
-    free(argv);
 }
 

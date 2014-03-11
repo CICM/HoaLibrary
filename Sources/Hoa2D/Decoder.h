@@ -92,6 +92,7 @@ namespace Hoa2D
         double*         m_channels_azimuth_sorted;
         double*         m_decoder_matrix_sorted;
         Encoder*        m_encoder;
+        double          m_offset;
         
     public:
         
@@ -108,24 +109,41 @@ namespace Hoa2D
          */
 		~DecoderIrregular();
         
+        //! Set the offset of the channels.
+		/**	Set the azimuth offset of the channels in radian.
+         
+            @param     offset		An azimuth value.
+         */
+		void setChannelsOffset(double offset);
+        
+        //! Get the offset of the channels.
+        /**	Retreive the azimuth offset of the channels in radian.
+         
+            @return    The offset of the channels.
+         */
+		double getChannelsOffset() const
+        {
+            return m_offset;
+        }
+        
         //! Set the azimuth of a channel.
         /** Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
          
             @param     index		The index of the loudspeaker.
             @param     azimuth		The azimuth.
          
-            @see    setChannelsPosition
+            @see    setChannelsAzimtuh
          */
-        void setChannelPosition(unsigned int index, double azimuth);
+        void setChannelAzimuth(unsigned int index, double azimuth);
         
         //! Set the azimtuh of all the channels.
         /** Set the azimtuh of all the channels. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
         
             @param     azimuths		The azimuths array.
          
-            @see    setChannelPosition
+            @see    setChannelAzimuth
          */
-        void setChannelsPosition(double* azimuths);
+        void setChannelsAzimtuh(double* azimuths);
         
         //! This method performs the irregular decoding with single precision.
 		/**	You should use this method for in-place or not-in-place processing and performs the irregular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimum size must be the number of channels.
@@ -349,6 +367,8 @@ namespace Hoa2D
         {
             if(m_mode == Regular)
                 return m_decoder_regular->getChannelsOffset();
+            else if(m_mode == Irregular)
+                return m_decoder_irregular->getChannelsOffset();
             else
                 return 0;
         }
@@ -359,18 +379,18 @@ namespace Hoa2D
             @param     index		The index of the loudspeaker.
             @param     azimuth		The azimuth.
          
-            @see    setChannelsPosition
+            @see    setChannelsAzimtuh
          */
-        void setChannelPosition(unsigned int index, double azimuth);
+        void setChannelAzimuth(unsigned int index, double azimuth);
         
         //! Set the azimtuh of all the channels for the irregular decoding mode.
         /** Set the azimtuh of all the channels for the irregular decoding mode. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
          
             @param     azimuths		The azimuths array.
          
-            @see    setChannelPosition
+            @see    setChannelAzimuth
          */
-        void setChannelsPosition(double* azimuths);
+        void setChannelsAzimtuh(double* azimuths);
         
         //! Set the sample rate.
         /** Set the sample rate. The sample will change the impulse responses size and their sizes increase with it. The valid sample rate are 44100, 48000, 88200 and 9600. Setting the sample rate will load the impulse responses, it is essential to define it before the digital signal processing.

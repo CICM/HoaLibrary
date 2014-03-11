@@ -67,24 +67,31 @@ namespace Hoa2D
         m_decoder_matrix_float      = new float[m_number_of_channels * m_number_of_harmonics];
         m_channels_azimuth_sorted   = new double[m_number_of_channels];
         m_encoder                   = new Encoder(m_order);
-        setChannelPosition(0, 0.);
+        m_offset = 0;
+        setChannelAzimuth(0, 0.);
     }
     
-    void DecoderIrregular::setChannelsPosition(double* azimuths)
+    void DecoderIrregular::setChannelsOffset(double offset)
+	{
+        m_offset = wrap_twopi(offset);
+        setChannelAzimuth(0, m_channels_azimuth[0]);
+    }
+    
+    void DecoderIrregular::setChannelsAzimtuh(double* azimuths)
     {
         for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            Planewaves::setChannelPosition(i, azimuths[i]);
+            Planewaves::setChannelAzimuth(i, azimuths[i]);
         }
-        setChannelPosition(0, azimuths[0]);
+        setChannelAzimuth(0, azimuths[0]);
     }
     
-    void DecoderIrregular::setChannelPosition(unsigned int index, double azimuth)
+    void DecoderIrregular::setChannelAzimuth(unsigned int index, double azimuth)
     {
         long    number_of_virutal_channels;
         double  current_distance, minimum_distance;
         
-        Planewaves::setChannelPosition(index, azimuth);
+        Planewaves::setChannelAzimuth(index, azimuth);
         
         // Sort the channels azimuth
         memcpy(m_channels_azimuth_sorted, m_channels_azimuth, m_number_of_channels * sizeof(double));
@@ -242,6 +249,9 @@ namespace Hoa2D
         m_harmonics_vector  = new float[m_number_of_harmonics];
         m_channels_vector   = new float[m_number_of_virtual_channels];
         m_decoder           = new DecoderRegular(m_order, m_number_of_virtual_channels);
+        
+        m_channels_azimuth[0] = HOA_PI2;
+        m_channels_azimuth[1] = HOA_PI + HOA_PI2;
     }
     
     void DecoderBinaural::setSampleRate(unsigned int sampleRate)
@@ -452,32 +462,14 @@ namespace Hoa2D
     DecoderMulti::DecoderMulti(unsigned int order) : Ambisonic(order), Planewaves(order * 2 + 2)
     {
         m_mode = Regular;
-        m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
+        m_decoder_regular   = new DecoderRegular(m_order, m_order * 2 + 2);
+        m_decoder_irregular = new DecoderIrregular(m_order, m_order * 2 + 2);
+        m_decoder_binaural  = new DecoderBinaural(m_order);
     }
     
     void DecoderMulti::setDecodingMode(Mode mode)
     {
-        if(mode != m_mode)
-        {
-            if(mode == Regular)
-            {
-                m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
-            }
-            else if(mode == Irregular)
-            {
-                m_decoder_irregular = new DecoderIrregular(m_order, m_order * 2 + 2);
-            }
-            else
-                m_decoder_binaural = new DecoderBinaural(m_order);
-            
-            if(m_mode == Regular)
-                delete m_decoder_regular;
-            else if(m_mode == Irregular)
-                delete m_decoder_irregular;
-            else
-                delete m_decoder_binaural;
-            m_mode = mode;
-        }
+        m_mode = mode;
     }
     
     void DecoderMulti::setNumberOfChannels(unsigned int numberOfChannels)
@@ -503,21 +495,25 @@ namespace Hoa2D
         {
             m_decoder_regular->setChannelsOffset(offset);
         }
+        else if(m_mode == Irregular)
+        {
+            m_decoder_irregular->setChannelsOffset(offset);
+        }
 	}
     
-    void DecoderMulti::setChannelPosition(unsigned int index, double azimuth)
+    void DecoderMulti::setChannelAzimuth(unsigned int index, double azimuth)
     {
         if(m_mode == Irregular)
         {
-            m_decoder_irregular->setChannelPosition(index, azimuth);
+            m_decoder_irregular->setChannelAzimuth(index, azimuth);
         }
     }
     
-    void DecoderMulti::setChannelsPosition(double* azimuths)
+    void DecoderMulti::setChannelsAzimtuh(double* azimuths)
     {
         if(m_mode == Irregular)
         {
-            m_decoder_irregular->setChannelsPosition(azimuths);
+            m_decoder_irregular->setChannelsAzimtuh(azimuths);
         }
     }
     
@@ -541,12 +537,9 @@ namespace Hoa2D
 	
 	DecoderMulti::~DecoderMulti()
 	{
-		if(m_mode == Regular)
-            delete m_decoder_regular;
-        else if(m_mode == Irregular)
-            delete m_decoder_irregular;
-        else
-            delete m_decoder_binaural;
+        delete m_decoder_regular;
+        delete m_decoder_irregular;
+        delete m_decoder_binaural;
 	}
 }
 

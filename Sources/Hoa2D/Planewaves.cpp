@@ -19,7 +19,7 @@ namespace Hoa2D
         }
     }
 	
-	void Planewaves::setChannelPosition(unsigned int index, double azimuth)
+	void Planewaves::setChannelAzimuth(unsigned int index, double azimuth)
 	{
 		assert(index < m_number_of_channels);
 		m_channels_azimuth[index] = wrap_twopi(azimuth);

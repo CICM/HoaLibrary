@@ -28,7 +28,7 @@ namespace Hoa2D
          @param     index		The index of the loudspeaker.
          @param     azimuth		The azimuth.
          */
-		void setChannelPosition(unsigned int index, double azimuth);
+		void setChannelAzimuth(unsigned int index, double azimuth);
 		
     public:
         

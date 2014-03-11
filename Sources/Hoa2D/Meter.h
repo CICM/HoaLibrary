@@ -44,7 +44,7 @@ namespace Hoa2D
          @param     azimuth		The azimuth.
          @param     elevation	The elevation.
          */
-		void setChannelPosition(unsigned int index, double azimuth);
+		void setChannelAzimuth(unsigned int index, double azimuth);
         
         double       getLoudspeakerAngleMapped(long anIndex);
         double       getLoudspeakerWidth(long anIndex);
