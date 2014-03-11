@@ -12,25 +12,25 @@
 namespace Hoa2D
 {
     //! The ambisonic vector.
-    /** The vector class compute the energy and the velocity vector of a soudfield for a set of loudspeakers. It is an useful tool to characterize the quality of the sound field resitution. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992. This class retreive the cartesian coordinates of the vectors, the abscissa and the ordinate.
+    /** The vector class compute the energy and the velocity vector of a soudfield for a set of channels. It is an useful tool to characterize the quality of the sound field resitution. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992. This class retreive the cartesian coordinates of the vectors, the abscissa and the ordinate.
      */
     class Vector : public Planewaves
     {
         
     private:
-        double* m_loudspeakers_abscissa_double;
-        double* m_loudspeakers_ordinate_double;
-        double* m_loudspeakers_double;
+        double* m_channels_abscissa_double;
+        double* m_channels_ordinate_double;
+        double* m_channels_double;
         
-        float* m_loudspeakers_abscissa_float;
-        float* m_loudspeakers_ordinate_float;
-        float* m_loudspeakers_float;
+        float* m_channels_abscissa_float;
+        float* m_channels_ordinate_float;
+        float* m_channels_float;
     public:
         
         //! The vector constructor.
         /**	The optimization constructor allocates and initialize the member values to computes vectors. The number of channels must be at least 1.
          
-            @param     numberOfChannels	The number of loudspeakers.
+            @param     numberOfChannels	The number of channels.
          */
         Vector(unsigned int numberOfChannels);
         
@@ -45,7 +45,7 @@ namespace Hoa2D
             @param     index		The index of the channel.
             @param     azimuth		The azimuth.
          */
-		void setChannelPosition(unsigned int index, double azimuth);
+		void setChannelAzimuth(unsigned int index, double azimuth);
         
         //! This method compute the energy and velocity vectors with single precision.
         /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.

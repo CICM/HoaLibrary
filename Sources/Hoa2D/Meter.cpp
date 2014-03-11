@@ -21,9 +21,9 @@ namespace Hoa2D
         m_ramp          = 0;
     }
     
-    void Meter::setChannelPosition(unsigned int index, double azimuth)
+    void Meter::setChannelAzimuth(unsigned int index, double azimuth)
 	{
-        Planewaves::setChannelPosition(index, azimuth);
+        Planewaves::setChannelAzimuth(index, azimuth);
         /*
         double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
         for(int i = 0; i < m_number_of_loudspeakers; i++)

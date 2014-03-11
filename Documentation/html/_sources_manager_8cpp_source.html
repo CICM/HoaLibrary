@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>HoaLibrary: /Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa2D/SourcesManager.cpp Source File</title>
+<title>HoaLibrary: /Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa2D/SourcesManager.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
    &#160;<span id="projectnumber">2.0</span>
@@ -106,24 +105,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Hoa2D</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_sources_manager.html#a9af44e634cc63d77fce116baa8d03886">   11</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_sources_manager.html#a9af44e634cc63d77fce116baa8d03886">SourcesManager::SourcesManager</a>(<span class="keywordtype">double</span> maximumLimitValue, <span class="keywordtype">bool</span> existence)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    SourcesManager::SourcesManager(<span class="keywordtype">double</span> maximumLimitValue, <span class="keywordtype">long</span> deadOrAlive)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        setExistence(existence);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        setExistence(deadOrAlive);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        setMaximumRadius(maximumLimitValue);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        m_zoom = 1.;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> SourcesManager::setExistence(<span class="keywordtype">bool</span> state)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> SourcesManager::setExistence(<span class="keywordtype">long</span> deadOrAlive)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_exist = state;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">if</span>(m_exist == 0)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_existence = <a class="code" href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">if</span>(m_existence == 0)</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            m_sources.clear();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            m_groups.clear();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_sources_manager.html#a1b248551ce36262e064d88b41eba076b">   28</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_sources_manager.html#a1b248551ce36262e064d88b41eba076b">SourcesManager::clearAll</a>()</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> SourcesManager::clearAll()</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt;= getMaximumIndexOfSource(); i++)</div>
@@ -134,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">long</span> SourcesManager::getExistence()</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> m_exist;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> m_existence;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> SourcesManager::setMaximumRadius(<span class="keywordtype">double</span> limitValue)</div>
@@ -625,7 +624,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    {</div>
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        <span class="keywordflow">if</span>(groupeIndex &lt; m_groups.size() &amp;&amp; groupeIndex &gt;= 0)</div>
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        {</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            m_groups[groupeIndex]-&gt;setRelativeAzimuth(azimuth);</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            m_groups[groupeIndex]-&gt;setRelativeAngle(azimuth);</div>
 <div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        }</div>
 <div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    }</div>
 <div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    </div>
@@ -849,22 +848,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;        }</div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    }</div>
 <div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    </div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    <span class="comment">/************************************/</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    </div>
-<div class="line"><a name="l00756"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_sources_manager.html#ae116065cec424f8c845b8fa4ade1e718">  756</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_sources_manager.html#ae116065cec424f8c845b8fa4ade1e718">SourcesManager::~SourcesManager</a>()</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    {</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;        m_sources.clear();</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;        m_groups.clear();</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    }</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;}</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    <span class="keywordtype">int</span> SourcesManager::groupCompare(<span class="keywordtype">long</span> groupIndexA, <span class="keyword">const</span> <span class="keywordtype">long</span> groupIndexB)</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    {</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        <span class="keywordflow">return</span> m_groups[groupIndexA]-&gt;compare(m_groups[groupIndexA], m_groups[groupIndexB]);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    }</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    </div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    <span class="comment">/************************************/</span></div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    </div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    SourcesManager::~SourcesManager()</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    {</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        m_sources.clear();</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;        m_groups.clear();</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    }</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;}</div>
 <div class="ttc" id="namespace_hoa_html_a03b9d89f84b73d4bbe335ac186d0c222"><div class="ttname"><a href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double min, const double max)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_sources_manager_html_ae116065cec424f8c845b8fa4ade1e718"><div class="ttname"><a href="class_hoa2_d_1_1_sources_manager.html#ae116065cec424f8c845b8fa4ade1e718">Hoa2D::SourcesManager::~SourcesManager</a></div><div class="ttdeci">~SourcesManager()</div><div class="ttdoc">The source manager destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_sources_manager_8cpp_source.html#l00756">SourcesManager.cpp:756</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_sources_manager_html_a1b248551ce36262e064d88b41eba076b"><div class="ttname"><a href="class_hoa2_d_1_1_sources_manager.html#a1b248551ce36262e064d88b41eba076b">Hoa2D::SourcesManager::clearAll</a></div><div class="ttdeci">void clearAll()</div><div class="ttdoc">Clear all the sources and groups. </div><div class="ttdef"><b>Definition:</b> <a href="_sources_manager_8cpp_source.html#l00028">SourcesManager.cpp:28</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_sources_manager_html_a9af44e634cc63d77fce116baa8d03886"><div class="ttname"><a href="class_hoa2_d_1_1_sources_manager.html#a9af44e634cc63d77fce116baa8d03886">Hoa2D::SourcesManager::SourcesManager</a></div><div class="ttdeci">SourcesManager(double maximumRadius=1., bool existence=true)</div><div class="ttdoc">The source manager constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_sources_manager_8cpp_source.html#l00011">SourcesManager.cpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 13:06:20 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 07:29:37 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

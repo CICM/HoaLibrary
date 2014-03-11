@@ -25,11 +25,19 @@ namespace Hoa2D
         //! Set the azimuth of a channel.
         /** Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
          
-         @param     index		The index of the loudspeaker.
-         @param     azimuth		The azimuth.
+            @param     index		The index of the loudspeaker.
+            @param     azimuth		The azimuth.
          */
-		void setChannelPosition(unsigned int index, double azimuth);
+		void setChannelAzimuth(unsigned int index, double azimuth);
 		
+        //! Set the azimtuh of all the channels.
+        /** Set the azimtuh of all the channels. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
+         
+            @param     azimuths		The azimuths array.
+         
+            @see    setChannelAzimuth
+         */
+        void setChannelsAzimuth(double* azimuths);
     public:
         
 		//! The planewaves constructor.

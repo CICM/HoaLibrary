@@ -520,6 +520,50 @@ namespace Hoa
 		for (int i=0; i < size; i++)
 			vec[i] = clip_minmax(vec[i], min, max);
 	}
+    
+    inline void vector_sort(unsigned int size, double* vector)
+	{
+        int index;
+        double* temp = new double[size];
+        if(temp && size)
+        {
+            index  = 0;
+            temp[0] = vector[0];
+            temp[size - 1] = vector[0];
+            
+            for(unsigned int i = 1; i < size; i++)
+            {
+                if(vector[i] < temp[0]) // Get the minimum
+                {
+                    temp[0] = vector[i];
+                    index = i;
+                }
+                if(vector[i] > temp[size - 1]) // Get the maximum
+                    temp[size - 1] = vector[i];
+            }
+            vector[index] -= 1;
+            
+            for(unsigned int i = 1; i < size - 1; i++)
+            {
+                temp[i] = temp[size - 1];
+                index   = -1;
+                for(unsigned int j = 0; j < size; j++)
+                {
+                    if(vector[j] >= temp[i-1] && vector[j] <= temp[i])
+                    {
+                        temp[i] = vector[j];
+                        index = j;
+                    }
+                }
+                if(index > -1)
+                {
+                    vector[index] -= 1;
+                }
+            }
+            memcpy(vector, temp, size * sizeof(double));
+            delete [] temp;
+        }
+	}
 }
 
 #endif
