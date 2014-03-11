@@ -19,6 +19,8 @@ var searchData=
   ['_7esource',['~Source',['../class_hoa2_d_1_1_source.html#ae5d9130e101151dbceb0a23f9df62807',1,'Hoa2D::Source']]],
   ['_7esourcesgroup',['~SourcesGroup',['../class_hoa2_d_1_1_sources_group.html#a8032706e849ee56ef785e38654d6349d',1,'Hoa2D::SourcesGroup']]],
   ['_7esourcesmanager',['~SourcesManager',['../class_hoa2_d_1_1_sources_manager.html#ae116065cec424f8c845b8fa4ade1e718',1,'Hoa2D::SourcesManager']]],
+  ['_7esourcespreset',['~SourcesPreset',['../class_hoa2_d_1_1_sources_preset.html#a2cc55290d42ea26d556c76845ac289c6',1,'Hoa2D::SourcesPreset']]],
+  ['_7esourcestrajectory',['~SourcesTrajectory',['../class_hoa2_d_1_1_sources_trajectory.html#a7b2452c54b5991fe6c1cbcf7fe999a87',1,'Hoa2D::SourcesTrajectory']]],
   ['_7evector',['~Vector',['../class_hoa2_d_1_1_vector.html#aa260b1636ddc02ac37279f1b3c6160da',1,'Hoa2D::Vector::~Vector()'],['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector::~Vector()']]],
   ['_7ewider',['~Wider',['../class_hoa2_d_1_1_wider.html#a350dd3e9918f7fdaa977fe5c56db98d1',1,'Hoa2D::Wider::~Wider()'],['../class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38',1,'Hoa3D::Wider::~Wider()']]]
 ];

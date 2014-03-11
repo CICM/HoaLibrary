@@ -8,9 +8,9 @@
 
 namespace Hoa2D
 {
-	SourcesGroup::SourcesGroup(SourcesManager* sourceManager, bool state)
+	SourcesGroup::SourcesGroup(SourcesManager* sourcesManager, bool state)
 	{
-		m_source_manager = sourceManager;
+		m_source_manager = sourcesManager;
 		setExistence(state);
 		m_color = new double[4];
 		setColor(0.2, 0.2, 0.2, 1.);

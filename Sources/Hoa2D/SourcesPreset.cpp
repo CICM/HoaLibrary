@@ -13,141 +13,141 @@ namespace Hoa2D
 		m_last_slot_stored = -1;
 	}
 	
-	void SourcesPreset::copySourceManager(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination)
+	void SourcesPreset::copySourceManager(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination)
 	{
 		double* color;
-		sourceManagerDestination->setExistence(0);
-		if(sourceManagerSource->getExistence() == 1)
+		sourcesManagerDestination->setExistence(0);
+		if(sourcesManagerSource->getExistence() == 1)
 		{
-			sourceManagerDestination->setExistence(1);
-			sourceManagerDestination->setMaximumRadius(sourceManagerSource->getLimitMaximum());
+			sourcesManagerDestination->setExistence(1);
+			sourcesManagerDestination->setMaximumRadius(sourcesManagerSource->getLimitMaximum());
 			
-			for(long i = 0; i <= sourceManagerSource->getMaximumIndexOfSource(); i++)
+			for(long i = 0; i <= sourcesManagerSource->getMaximumIndexOfSource(); i++)
 			{
-				if(sourceManagerSource->sourceGetExistence(i) == 1)
+				if(sourcesManagerSource->sourceGetExistence(i) == 1)
 				{
-					color = sourceManagerSource->sourceGetColor(i);
-					sourceManagerDestination->sourceSetRadius(i, sourceManagerSource->sourceGetRadius(i));
-					sourceManagerDestination->sourceSetAzimuth(i, sourceManagerSource->sourceGetAzimuth(i));
-					sourceManagerDestination->sourceSetColor(i, color[0], color[1], color[2], color[3]);
-					sourceManagerDestination->sourceSetDescription(i, sourceManagerSource->sourceGetDescription(i));
-					sourceManagerDestination->sourceSetMute(i, sourceManagerSource->sourceGetMute(i));
+					color = sourcesManagerSource->sourceGetColor(i);
+					sourcesManagerDestination->sourceSetRadius(i, sourcesManagerSource->sourceGetRadius(i));
+					sourcesManagerDestination->sourceSetAzimuth(i, sourcesManagerSource->sourceGetAzimuth(i));
+					sourcesManagerDestination->sourceSetColor(i, color[0], color[1], color[2], color[3]);
+					sourcesManagerDestination->sourceSetDescription(i, sourcesManagerSource->sourceGetDescription(i));
+					sourcesManagerDestination->sourceSetMute(i, sourcesManagerSource->sourceGetMute(i));
 				}
 			}
-			for(long i = 0; i <= sourceManagerSource->getMaximumIndexOfGroup(); i++)
+			for(long i = 0; i <= sourcesManagerSource->getMaximumIndexOfGroup(); i++)
 			{
-				if(sourceManagerSource->groupGetExistence(i) == 1)
+				if(sourcesManagerSource->groupGetExistence(i) == 1)
 				{
-					for(long j = 0; j < sourceManagerSource->groupGetNumberOfSources(i); j++)
+					for(long j = 0; j < sourcesManagerSource->groupGetNumberOfSources(i); j++)
 					{
-						sourceManagerDestination->groupSetSource(i, sourceManagerSource->groupGetSourceIndex(i, j));
+						sourcesManagerDestination->groupSetSource(i, sourcesManagerSource->groupGetSourceIndex(i, j));
 					}
-					color = sourceManagerSource->groupGetColor(i);
-					sourceManagerDestination->groupSetColor(i, color[0], color[1], color[2], color[3]);
-					sourceManagerDestination->groupSetDescription(i, sourceManagerSource->groupGetDescription(i));
+					color = sourcesManagerSource->groupGetColor(i);
+					sourcesManagerDestination->groupSetColor(i, color[0], color[1], color[2], color[3]);
+					sourcesManagerDestination->groupSetDescription(i, sourcesManagerSource->groupGetDescription(i));
 				}
 			}
 		}
 	}
 	
-	void SourcesPreset::copySource(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long sourceIndex)
+	void SourcesPreset::copySource(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination, long sourceIndex)
 	{
 		double* color;
-		if(sourceManagerSource->getExistence() == 1)
+		if(sourcesManagerSource->getExistence() == 1)
 		{
-			if(sourceManagerDestination->getExistence() == 0)
-				sourceManagerDestination->setExistence(1);
+			if(sourcesManagerDestination->getExistence() == 0)
+				sourcesManagerDestination->setExistence(1);
 			
-			if(sourceManagerSource->getMaximumIndexOfSource() >= sourceIndex && sourceIndex >= 0 && sourceManagerSource->sourceGetExistence(sourceIndex) == 1)
+			if(sourcesManagerSource->getMaximumIndexOfSource() >= sourceIndex && sourceIndex >= 0 && sourcesManagerSource->sourceGetExistence(sourceIndex) == 1)
 			{
-				color = sourceManagerSource->sourceGetColor(sourceIndex);
-				sourceManagerDestination->sourceSetRadius(sourceIndex, sourceManagerSource->sourceGetRadius(sourceIndex));
-				sourceManagerDestination->sourceSetAzimuth(sourceIndex, sourceManagerSource->sourceGetAzimuth(sourceIndex));
-				sourceManagerDestination->sourceSetColor(sourceIndex, color[0], color[1], color[2], color[3]);
-				sourceManagerDestination->sourceSetDescription(sourceIndex, sourceManagerSource->sourceGetDescription(sourceIndex));
-				sourceManagerDestination->sourceSetMute(sourceIndex, sourceManagerSource->sourceGetMute(sourceIndex));
-				for(int i = 0; i < sourceManagerSource->sourceGetNumberOfGroups(sourceIndex); i++)
+				color = sourcesManagerSource->sourceGetColor(sourceIndex);
+				sourcesManagerDestination->sourceSetRadius(sourceIndex, sourcesManagerSource->sourceGetRadius(sourceIndex));
+				sourcesManagerDestination->sourceSetAzimuth(sourceIndex, sourcesManagerSource->sourceGetAzimuth(sourceIndex));
+				sourcesManagerDestination->sourceSetColor(sourceIndex, color[0], color[1], color[2], color[3]);
+				sourcesManagerDestination->sourceSetDescription(sourceIndex, sourcesManagerSource->sourceGetDescription(sourceIndex));
+				sourcesManagerDestination->sourceSetMute(sourceIndex, sourcesManagerSource->sourceGetMute(sourceIndex));
+				for(int i = 0; i < sourcesManagerSource->sourceGetNumberOfGroups(sourceIndex); i++)
 				{
-					sourceManagerDestination->groupSetSource(sourceManagerSource->sourceGetGroupIndex(sourceIndex, i), sourceIndex);
+					sourcesManagerDestination->groupSetSource(sourcesManagerSource->sourceGetGroupIndex(sourceIndex, i), sourceIndex);
 				}
 			}
 		}
 	}
 	
-	void SourcesPreset::copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupIndex)
+	void SourcesPreset::copyGroup(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination, long groupIndex)
 	{
 		double* color;
-		if(sourceManagerSource->getExistence() == 1)
+		if(sourcesManagerSource->getExistence() == 1)
 		{
-			if(sourceManagerDestination->getExistence() == 0)
-				sourceManagerDestination->setExistence(1);
-			if(sourceManagerSource->getMaximumIndexOfGroup() >= groupIndex && groupIndex >= 0 && sourceManagerSource->groupGetExistence(groupIndex) == 1)
+			if(sourcesManagerDestination->getExistence() == 0)
+				sourcesManagerDestination->setExistence(1);
+			if(sourcesManagerSource->getMaximumIndexOfGroup() >= groupIndex && groupIndex >= 0 && sourcesManagerSource->groupGetExistence(groupIndex) == 1)
 			{
-				for(long j = 0; j < sourceManagerSource->groupGetNumberOfSources(groupIndex); j++)
+				for(long j = 0; j < sourcesManagerSource->groupGetNumberOfSources(groupIndex); j++)
 				{
-					copySource(sourceManagerSource, sourceManagerDestination, sourceManagerSource->groupGetSourceIndex(groupIndex, j));
-					sourceManagerDestination->groupSetSource(groupIndex, sourceManagerSource->groupGetSourceIndex(groupIndex, j));
+					copySource(sourcesManagerSource, sourcesManagerDestination, sourcesManagerSource->groupGetSourceIndex(groupIndex, j));
+					sourcesManagerDestination->groupSetSource(groupIndex, sourcesManagerSource->groupGetSourceIndex(groupIndex, j));
 				}
-				color = sourceManagerSource->groupGetColor(groupIndex);
-				sourceManagerDestination->groupSetColor(groupIndex, color[0], color[1], color[2], color[3]);
-				sourceManagerDestination->groupSetDescription(groupIndex, sourceManagerSource->groupGetDescription(groupIndex));
+				color = sourcesManagerSource->groupGetColor(groupIndex);
+				sourcesManagerDestination->groupSetColor(groupIndex, color[0], color[1], color[2], color[3]);
+				sourcesManagerDestination->groupSetDescription(groupIndex, sourcesManagerSource->groupGetDescription(groupIndex));
 			}
 		}
 	}
 	
-	long SourcesPreset::interpolationSourceManager(SourcesManager* sourceManagerSourceOne, SourcesManager* sourceManagerSourceTwo, SourcesManager* sourceManagerDestination, double aFrac)
+	long SourcesPreset::interpolationSourceManager(SourcesManager* sourcesManagerSourceOne, SourcesManager* sourcesManagerSourceTwo, SourcesManager* sourcesManagerDestination, double aFrac)
 	{
 		double *color1, *color2;
-		sourceManagerDestination->setExistence(0);
-		if(sourceManagerSourceOne->getExistence() == 1 && sourceManagerSourceTwo->getExistence() == 1)
+		sourcesManagerDestination->setExistence(0);
+		if(sourcesManagerSourceOne->getExistence() == 1 && sourcesManagerSourceTwo->getExistence() == 1)
 		{
-			sourceManagerDestination->setExistence(1);
-			sourceManagerDestination->setMaximumRadius(sourceManagerSourceOne->getLimitMaximum());
+			sourcesManagerDestination->setExistence(1);
+			sourcesManagerDestination->setMaximumRadius(sourcesManagerSourceOne->getLimitMaximum());
 			
-			for(long i = 0; i <= sourceManagerSourceOne->getMaximumIndexOfSource(); i++)
+			for(long i = 0; i <= sourcesManagerSourceOne->getMaximumIndexOfSource(); i++)
 			{
-				if(sourceManagerSourceOne->sourceGetExistence(i) == 1 && sourceManagerSourceTwo->sourceGetExistence(i) == 1)
+				if(sourcesManagerSourceOne->sourceGetExistence(i) == 1 && sourcesManagerSourceTwo->sourceGetExistence(i) == 1)
 				{
-					color1 = sourceManagerSourceOne->sourceGetColor(i);
-					color2 = sourceManagerSourceTwo->sourceGetColor(i);
-					sourceManagerDestination->sourceSetAbscissa(i, sourceManagerSourceOne->sourceGetAbscissa(i) * (1 - aFrac)
-																+ sourceManagerSourceTwo->sourceGetAbscissa(i) * aFrac);
-					sourceManagerDestination->sourceSetOrdinate(i,  sourceManagerSourceOne->sourceGetOrdinate(i) * (1 - aFrac)
-																+ sourceManagerSourceTwo->sourceGetOrdinate(i) * aFrac);
-					sourceManagerDestination->sourceSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
+					color1 = sourcesManagerSourceOne->sourceGetColor(i);
+					color2 = sourcesManagerSourceTwo->sourceGetColor(i);
+					sourcesManagerDestination->sourceSetAbscissa(i, sourcesManagerSourceOne->sourceGetAbscissa(i) * (1 - aFrac)
+																+ sourcesManagerSourceTwo->sourceGetAbscissa(i) * aFrac);
+					sourcesManagerDestination->sourceSetOrdinate(i,  sourcesManagerSourceOne->sourceGetOrdinate(i) * (1 - aFrac)
+																+ sourcesManagerSourceTwo->sourceGetOrdinate(i) * aFrac);
+					sourcesManagerDestination->sourceSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
 																color1[1] * (1. - aFrac) + color2[1] * aFrac,
 																color1[2] * (1. - aFrac) + color2[2] * aFrac,
 																color1[3] * (1. - aFrac) + color2[3] * aFrac);
 					
 				}
-				else if(sourceManagerSourceOne->sourceGetExistence(i) == 1 && sourceManagerSourceTwo->sourceGetExistence(i) == 0)
+				else if(sourcesManagerSourceOne->sourceGetExistence(i) == 1 && sourcesManagerSourceTwo->sourceGetExistence(i) == 0)
 				{
-					color1 = sourceManagerSourceOne->sourceGetColor(i);
+					color1 = sourcesManagerSourceOne->sourceGetColor(i);
 					
-					sourceManagerDestination->sourceSetRadius(i, sourceManagerSourceOne->sourceGetRadius(i));
-					sourceManagerDestination->sourceSetAzimuth(i, sourceManagerSourceOne->sourceGetAzimuth(i));
-					sourceManagerDestination->sourceSetColor(i, color1[0], color1[1], color1[2], color1[3]);
+					sourcesManagerDestination->sourceSetRadius(i, sourcesManagerSourceOne->sourceGetRadius(i));
+					sourcesManagerDestination->sourceSetAzimuth(i, sourcesManagerSourceOne->sourceGetAzimuth(i));
+					sourcesManagerDestination->sourceSetColor(i, color1[0], color1[1], color1[2], color1[3]);
 				}
-				sourceManagerDestination->sourceSetDescription(i, sourceManagerSourceOne->sourceGetDescription(i));
-				sourceManagerDestination->sourceSetMute(i, sourceManagerSourceOne->sourceGetMute(i));
+				sourcesManagerDestination->sourceSetDescription(i, sourcesManagerSourceOne->sourceGetDescription(i));
+				sourcesManagerDestination->sourceSetMute(i, sourcesManagerSourceOne->sourceGetMute(i));
 			}
-			for(long i = 0; i <= sourceManagerSourceOne->getMaximumIndexOfGroup(); i++)
+			for(long i = 0; i <= sourcesManagerSourceOne->getMaximumIndexOfGroup(); i++)
 			{
-				if(sourceManagerSourceOne->groupGetExistence(i) == 1)
+				if(sourcesManagerSourceOne->groupGetExistence(i) == 1)
 				{
-					for(long j = 0; j < sourceManagerSourceOne->groupGetNumberOfSources(i); j++)
+					for(long j = 0; j < sourcesManagerSourceOne->groupGetNumberOfSources(i); j++)
 					{
-						sourceManagerDestination->groupSetSource(i, sourceManagerSourceOne->groupGetSourceIndex(i, j));
+						sourcesManagerDestination->groupSetSource(i, sourcesManagerSourceOne->groupGetSourceIndex(i, j));
 					}
-					color1 = sourceManagerSourceOne->groupGetColor(i);
-					sourceManagerDestination->groupSetColor(i, color1[0], color1[1], color1[2], color1[3]);
-					sourceManagerDestination->groupSetDescription(i, sourceManagerSourceOne->groupGetDescription(i));
+					color1 = sourcesManagerSourceOne->groupGetColor(i);
+					sourcesManagerDestination->groupSetColor(i, color1[0], color1[1], color1[2], color1[3]);
+					sourcesManagerDestination->groupSetDescription(i, sourcesManagerSourceOne->groupGetDescription(i));
 				}
-				if(sourceManagerSourceOne->groupGetExistence(i) == 1 && sourceManagerSourceTwo->groupGetExistence(i) == 1 )
+				if(sourcesManagerSourceOne->groupGetExistence(i) == 1 && sourcesManagerSourceTwo->groupGetExistence(i) == 1 )
 				{
-					color1 = sourceManagerSourceOne->groupGetColor(i);
-					color2 = sourceManagerSourceTwo->groupGetColor(i);
-					sourceManagerDestination->groupSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
+					color1 = sourcesManagerSourceOne->groupGetColor(i);
+					color2 = sourcesManagerSourceTwo->groupGetColor(i);
+					sourcesManagerDestination->groupSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
 															color1[1] * (1. - aFrac) + color2[1] * aFrac,
 															color1[2] * (1. - aFrac) + color2[2] * aFrac,
 															color1[3] * (1. - aFrac) + color2[3] * aFrac);
@@ -162,7 +162,7 @@ namespace Hoa2D
 	/*************************************************************************************/
 	/*************************************************************************************/
 	
-	void SourcesPreset::storeSourceManagerAtSlot(SourcesManager* sourceManager, long index)
+	void SourcesPreset::storeSourceManagerAtSlot(SourcesManager* sourcesManager, long index)
 	{
 		if(index >= 0)
 		{
@@ -173,90 +173,90 @@ namespace Hoa2D
 					m_source_managers.push_back(new SourcesManager(-1, 0));
 				}
 			}
-			copySourceManager(sourceManager, m_source_managers[index]);
+			copySourceManager(sourcesManager, m_source_managers[index]);
 			m_last_slot_stored = index;
 		}
 	}
 	
-	void SourcesPreset::storeSourceManagerAtFirstEmptySlot(SourcesManager* sourceManager)
+	void SourcesPreset::storeSourceManagerAtFirstEmptySlot(SourcesManager* sourcesManager)
 	{
 		for(long i = 0; i < m_source_managers.size(); i++)
 		{
 			if(!m_source_managers[i]->getExistence())
 			{
-				storeSourceManagerAtSlot(sourceManager, i);
+				storeSourceManagerAtSlot(sourcesManager, i);
 				return;
 			}
 		}
-		storeSourceManagerAtSlot(sourceManager, m_source_managers.size());
+		storeSourceManagerAtSlot(sourcesManager, m_source_managers.size());
 	}
 	
 	
-	void SourcesPreset::storeSourceManagerAtLastUsedSlot(SourcesManager* sourceManager)
+	void SourcesPreset::storeSourceManagerAtLastUsedSlot(SourcesManager* sourcesManager)
 	{
-		storeSourceManagerAtSlot(sourceManager, m_last_slot_stored);
+		storeSourceManagerAtSlot(sourcesManager, m_last_slot_stored);
 	}
 	
-	void SourcesPreset::storeSourceManagerAtNextSlot(SourcesManager* sourceManager)
+	void SourcesPreset::storeSourceManagerAtNextSlot(SourcesManager* sourcesManager)
 	{
-		storeSourceManagerAtSlot(sourceManager, m_last_slot_stored+1);
+		storeSourceManagerAtSlot(sourcesManager, m_last_slot_stored+1);
 	}
 	
-	void SourcesPreset::storeSourceManagerAtNewEndSlot(SourcesManager* sourceManager)
+	void SourcesPreset::storeSourceManagerAtNewEndSlot(SourcesManager* sourcesManager)
 	{
-		storeSourceManagerAtSlot(sourceManager, m_source_managers.size());
+		storeSourceManagerAtSlot(sourcesManager, m_source_managers.size());
 	}
 	
-	void SourcesPreset::storeSourceAtSlot(SourcesManager* sourceManager, long aSlotIndex, long sourceIndex)
+	void SourcesPreset::storeSourceAtSlot(SourcesManager* sourcesManager, long slotIndex, long sourceIndex)
 	{
-		if(aSlotIndex >= 0 && sourceManager->sourceGetExistence(sourceIndex))
+		if(slotIndex >= 0 && sourcesManager->sourceGetExistence(sourceIndex))
 		{
-			if(aSlotIndex >= m_source_managers.size())
+			if(slotIndex >= m_source_managers.size())
 			{
-				for(long i = m_source_managers.size(); i <= aSlotIndex; i++)
+				for(long i = m_source_managers.size(); i <= slotIndex; i++)
 				{
 					m_source_managers.push_back(new SourcesManager(-1, 0));
 				}
 			}
-			copySource(sourceManager, m_source_managers[aSlotIndex], sourceIndex);
-			m_last_slot_stored = aSlotIndex;
+			copySource(sourcesManager, m_source_managers[slotIndex], sourceIndex);
+			m_last_slot_stored = slotIndex;
 		}
 	}
 	
-	void SourcesPreset::storeSourceAtNextSlot(SourcesManager* sourceManager, long sourceIndex)
+	void SourcesPreset::storeSourceAtNextSlot(SourcesManager* sourcesManager, long sourceIndex)
 	{
-		storeSourceAtSlot(sourceManager, m_last_slot_stored+1, sourceIndex);
+		storeSourceAtSlot(sourcesManager, m_last_slot_stored+1, sourceIndex);
 	}
 	
-	void SourcesPreset::storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupIndex)
+	void SourcesPreset::storeGroupAtSlot(SourcesManager* sourcesManager, long slotIndex, long groupIndex)
 	{
-		if(groupIndex >= 0 && sourceManager->groupGetExistence(groupIndex))
+		if(groupIndex >= 0 && sourcesManager->groupGetExistence(groupIndex))
 		{
-			if(aSlotIndex >= m_source_managers.size())
+			if(slotIndex >= m_source_managers.size())
 			{
-				for(long i = m_source_managers.size(); i <= aSlotIndex; i++)
+				for(long i = m_source_managers.size(); i <= slotIndex; i++)
 				{
 					m_source_managers.push_back(new SourcesManager(-1, 0));
 				}
 			}
-			copyGroup(sourceManager, m_source_managers[aSlotIndex], groupIndex);
-			m_last_slot_stored = aSlotIndex;
+			copyGroup(sourcesManager, m_source_managers[slotIndex], groupIndex);
+			m_last_slot_stored = slotIndex;
 		}
 	}
 	
-	void SourcesPreset::storeGroupAtNextSlot(SourcesManager* sourceManager, long groupIndex)
+	void SourcesPreset::storeGroupAtNextSlot(SourcesManager* sourcesManager, long groupIndex)
 	{
-		storeGroupAtSlot(sourceManager, m_last_slot_stored+1, groupIndex);
+		storeGroupAtSlot(sourcesManager, m_last_slot_stored+1, groupIndex);
 	}
 	
 	
-	void SourcesPreset::insertSlot(SourcesManager* sourceManager, long index)
+	void SourcesPreset::insertSlot(SourcesManager* sourcesManager, long index)
 	{
 		if(index >= 0)
 		{
 			if(index >= m_source_managers.size())
 			{
-				storeSourceManagerAtSlot(sourceManager, index);
+				storeSourceManagerAtSlot(sourcesManager, index);
 			}
 			else
 			{
@@ -265,7 +265,7 @@ namespace Hoa2D
 				{
 					copySourceManager(m_source_managers[i-1], m_source_managers[i]);
 				}
-				copySourceManager(sourceManager, m_source_managers[index]);
+				copySourceManager(sourcesManager, m_source_managers[index]);
 				m_last_slot_stored = index;
 			}
 		}
@@ -294,14 +294,14 @@ namespace Hoa2D
 		}
 	}
 	
-	void SourcesPreset::copySlot(long anIndexSouce, long anIndexDestination)
+	void SourcesPreset::copySlot(long sourceIndex, long destinationIndex)
 	{
-		if(anIndexSouce >= 0 && anIndexSouce < m_source_managers.size())
+		if(sourceIndex >= 0 && sourceIndex < m_source_managers.size())
 		{
-			if(anIndexDestination >= 0 && anIndexDestination < m_source_managers.size())
-				copySourceManager(m_source_managers[anIndexSouce], m_source_managers[anIndexDestination]);
+			if(destinationIndex >= 0 && destinationIndex < m_source_managers.size())
+				copySourceManager(m_source_managers[sourceIndex], m_source_managers[destinationIndex]);
 			else
-				storeSourceManagerAtSlot(m_source_managers[anIndexSouce], anIndexDestination);
+				storeSourceManagerAtSlot(m_source_managers[sourceIndex], destinationIndex);
 		}
 	}
 	
@@ -330,28 +330,28 @@ namespace Hoa2D
 	/*************************************************************************************/
 	/*************************************************************************************/
 	
-	void SourcesPreset::recallSlot(SourcesManager* sourceManager, long index)
+	void SourcesPreset::recallSlot(SourcesManager* sourcesManager, long index)
 	{
 		if(index >= 0 && index < m_source_managers.size())
 		{
 			if(m_source_managers[index]->getExistence())
-				copySourceManager(m_source_managers[index], sourceManager);
+				copySourceManager(m_source_managers[index], sourcesManager);
 		}
 	}
 	
-	void SourcesPreset::recallFractionalSlot(SourcesManager* sourceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex)
+	void SourcesPreset::recallFractionalSlot(SourcesManager* sourcesManager, long sourceIndex, long destinationIndex, double fractionnalIndex)
 	{
-		if(anIndexSource >= 0 && anIndexSource < m_source_managers.size() && anIndexDestination >= 0 && anIndexDestination < m_source_managers.size())
+		if(sourceIndex >= 0 && sourceIndex < m_source_managers.size() && destinationIndex >= 0 && destinationIndex < m_source_managers.size())
 		{
-			if(m_source_managers[anIndexSource]->getExistence() && m_source_managers[anIndexDestination]->getExistence())
+			if(m_source_managers[sourceIndex]->getExistence() && m_source_managers[destinationIndex]->getExistence())
 			{
-				aFractionnalIndex = clip_minmax(aFractionnalIndex, 0., 1.);
-				interpolationSourceManager(m_source_managers[anIndexSource], m_source_managers[anIndexDestination], sourceManager, aFractionnalIndex);
+				fractionnalIndex = clip_minmax(fractionnalIndex, 0., 1.);
+				interpolationSourceManager(m_source_managers[sourceIndex], m_source_managers[destinationIndex], sourcesManager, fractionnalIndex);
 			}
 		}
 	}
 	
-	long SourcesPreset::recallFractionalSlot(SourcesManager* sourceManager, double aFractionnalIndex)
+	long SourcesPreset::recallFractionalSlot(SourcesManager* sourcesManager, double fractionnalIndex)
 	{
 		if(m_source_managers.size() == 0)
 			return 0;
@@ -361,29 +361,29 @@ namespace Hoa2D
 			{
 				if(m_source_managers[i]->getExistence())
 				{
-					copySourceManager(m_source_managers[i], sourceManager);
+					copySourceManager(m_source_managers[i], sourcesManager);
 					return 1;
 				}
 			}
 		}
-		else if(aFractionnalIndex < 0.)
+		else if(fractionnalIndex < 0.)
 		{
 			for(long i = 0; i < m_source_managers.size(); i++)
 			{
 				if(m_source_managers[i]->getExistence())
 				{
-					copySourceManager(m_source_managers[i], sourceManager);
+					copySourceManager(m_source_managers[i], sourcesManager);
 					return 1;
 				}
 			}
 		}
-		else if(aFractionnalIndex > m_source_managers.size() - 1)
+		else if(fractionnalIndex > m_source_managers.size() - 1)
 		{
 			for(long i = m_source_managers.size() - 1; i >= 0; i--)
 			{
 				if(m_source_managers[i]->getExistence())
 				{
-					copySourceManager(m_source_managers[i], sourceManager);
+					copySourceManager(m_source_managers[i], sourcesManager);
 					return 1;
 				}
 			}
@@ -392,7 +392,7 @@ namespace Hoa2D
 		{
 			long indexOne  = -1;
 			long indexTwo  = -1;
-			for(long i = floor(aFractionnalIndex); i >= 0 && indexOne == -1; i--)
+			for(long i = floor(fractionnalIndex); i >= 0 && indexOne == -1; i--)
 			{
 				if(m_source_managers[i]->getExistence())
 					indexOne  = i;
@@ -406,7 +406,7 @@ namespace Hoa2D
 				}
 				if(indexOne != -1)
 				{
-					copySourceManager(m_source_managers[indexOne], sourceManager);
+					copySourceManager(m_source_managers[indexOne], sourcesManager);
 				}
 				return 1;
 			}
@@ -419,13 +419,13 @@ namespace Hoa2D
 				}
 				if(indexTwo == -1)
 				{
-					copySourceManager(m_source_managers[indexOne], sourceManager);
+					copySourceManager(m_source_managers[indexOne], sourcesManager);
 					return 1;
 				}
 				else
 				{
-					double fracPart = clip_minmax((double)(aFractionnalIndex - (long)indexOne) / (double)(indexTwo - indexOne), 0., 1.);
-					return interpolationSourceManager(m_source_managers[indexOne], m_source_managers[indexTwo], sourceManager, fracPart);
+					double fracPart = clip_minmax((double)(fractionnalIndex - (long)indexOne) / (double)(indexTwo - indexOne), 0., 1.);
+					return interpolationSourceManager(m_source_managers[indexOne], m_source_managers[indexTwo], sourcesManager, fracPart);
 				}
 			}
 		}

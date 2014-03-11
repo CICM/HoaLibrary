@@ -35,9 +35,9 @@ namespace Hoa2D
 		
 		//! The source manager constructor.
 		/**	The source manager constructor allocates and initialize the member values.
-		 
-		 @param     maximumRadius		The maximum radius the sources or groups in the source manager could have
-		 @param     existence			The existence state of the source manager.
+		 *
+		 * @param     maximumRadius		The maximum radius the sources or groups in the source manager could have
+		 * @param     existence			The existence state of the source manager.
 		 */
 		SourcesManager(double maximumRadius = 1., bool existence = true);
 		
@@ -49,14 +49,14 @@ namespace Hoa2D
 		
 		//! Set the maximum radius the sources and groups can have
 		/**
-		 @param     limitValue		The radius limit value.
+		 * @param     limitValue		The radius limit value.
          */
 		void setMaximumRadius(double limitValue);
 		
 		//! Set the existence state of the sources manager
 		/** If the existence state is false it will delete all sources and groups already stored.
-		 
-			@param     state		The existence state.
+		 *
+		 * @param     state		The existence state.
          */
 		void setExistence(bool state);
 		
@@ -109,7 +109,9 @@ namespace Hoa2D
          */
 		double getZoom();
 		
-		/* ---------------- Source ---------------- */
+		/* ------------------------------------------------------------------------ */
+		/* ------------------------------- Sources -------------------------------- */
+		/* ------------------------------------------------------------------------ */
 		
 		//! Add a new source with polar coordinates.
 		/**
@@ -278,7 +280,9 @@ namespace Hoa2D
          */
 		long sourceGetMute(long index);
 		
-		/* ---------------- Groups ---------------- */
+		/* ------------------------------------------------------------------------ */
+		/* -------------------------------- Groups -------------------------------- */
+		/* ------------------------------------------------------------------------ */
 		
 		//! Add a source to a group.
 		/**

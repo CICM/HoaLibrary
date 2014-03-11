@@ -22,39 +22,150 @@ namespace Hoa2D
 		long    m_last_slot_stored;
 		std::vector <SourcesManager*> m_source_managers;
 		
-		void copySourceManager(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination);
-		void copySource(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long sourceIndex);
-		void copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupIndex);
-		long interpolationSourceManager(SourcesManager* sourceManagerSourceOne, SourcesManager* sourceManagerSourceTwo, SourcesManager* sourceManagerDestination, double aFrac);
+		void copySourceManager(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination);
+		void copySource(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination, long sourceIndex);
+		void copyGroup(SourcesManager* sourcesManagerSource, SourcesManager* sourcesManagerDestination, long groupIndex);
+		long interpolationSourceManager(SourcesManager* sourcesManagerSourceOne, SourcesManager* sourcesManagerSourceTwo, SourcesManager* sourcesManagerDestination, double aFrac);
 		
 	public:
+		
+		//! The source preset constructor.
+		/**	The source preset constructor allocates and initialize the member values.
+		 */
 		SourcesPreset();
 		
-		void storeSourceManagerAtSlot(SourcesManager* sourceManager, long index);
-		void storeSourceManagerAtFirstEmptySlot(SourcesManager* sourceManager);
-		void storeSourceManagerAtLastUsedSlot(SourcesManager* sourceManager);
-		void storeSourceManagerAtNewEndSlot(SourcesManager* sourceManager);
-		void storeSourceManagerAtNextSlot(SourcesManager* sourceManager);
-		void insertSlot(SourcesManager* sourceManager, long index);
+		//! The source preset destructor free the memory.
+		~SourcesPreset();
+		
+		//! Store a SourcesManager object at a particular slot index.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     index				The index of the slot.
+         */
+		void storeSourceManagerAtSlot(SourcesManager* sourcesManager, long index);
+		
+		//! Store a SourcesManager object at the first empty slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+         */
+		void storeSourceManagerAtFirstEmptySlot(SourcesManager* sourcesManager);
+		
+		//! Store a SourcesManager object at the last used slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+         */
+		void storeSourceManagerAtLastUsedSlot(SourcesManager* sourcesManager);
+		
+		//! Store a SourcesManager object in a new slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+         */
+		void storeSourceManagerAtNewEndSlot(SourcesManager* sourcesManager);
+		
+		//! Store a SourcesManager object at the next slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+         */
+		void storeSourceManagerAtNextSlot(SourcesManager* sourcesManager);
+		
+		//! Store a SourcesManager object by inserting it at a particular slot index.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     index					The index of the slot.
+         */
+		void insertSlot(SourcesManager* sourcesManager, long index);
+		
+		//! Delete the content of a slot.
+		/**
+		 * @param     index					The index of the slot.
+         */
 		void removeSlot(long index);
+		
+		//! Delete the slot and its content.
+		/**
+		 * @param     index					The index of the slot.
+         */
 		void deleteSlot(long index);
-		void copySlot(long anIndexSouce, long anIndexDestination);
+		
+		//! Copy the content of a slot into another slot
+		/**
+		 * @param     sourceIndex			The index of the slot to copy.
+		 * @param     destinationIndex		The index of the slot to copy in.
+         */
+		void copySlot(long sourceIndex, long destinationIndex);
+		
+		//! Renumber all slots
 		void renumber();
+		
+		//! Clear all slots
 		void clear();
 		
-		void storeSourceAtSlot(SourcesManager* sourceManager, long aSlotIndex, long sourceIndex);
-		void storeSourceAtNextSlot(SourcesManager* sourceManager, long sourceIndex);
-		void storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupIndex);
-		void storeGroupAtNextSlot(SourcesManager* sourceManager,long groupIndex);
+		//! Store a source at a given slot index.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     slotIndex				The index of the slot.
+		 * @param     sourceIndex			The index of the source to store.
+         */
+		void storeSourceAtSlot(SourcesManager* sourcesManager, long slotIndex, long sourceIndex);
 		
-		void recallSlot(SourcesManager* sourceManager, long index);
-		void recallFractionalSlot(SourcesManager* sourceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);
-		long recallFractionalSlot(SourcesManager* sourceManager, double aFractionnalIndex);
+		//! Store a source at the next slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     slotIndex				The index of the slot.
+		 * @param     sourceIndex			The index of the source to store.
+         */
+		void storeSourceAtNextSlot(SourcesManager* sourcesManager, long sourceIndex);
 		
+		//! Store a group of source at a given slot index.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     slotIndex				The index of the slot.
+		 * @param     groupIndex			The index of the group to store.
+         */
+		void storeGroupAtSlot(SourcesManager* sourcesManager, long slotIndex, long groupIndex);
+		
+		//! Store a group at the next slot.
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     slotIndex				The index of the slot.
+		 * @param     groupIndex			The index of the group to store.
+         */
+		void storeGroupAtNextSlot(SourcesManager* sourcesManager,long groupIndex);
+		
+		//! Recall a given slot.
+		/** Recall SourcesManager state directly
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     index					The index of the slot.
+		 * @see recallFractionalSlot
+         */
+		void recallSlot(SourcesManager* sourcesManager, long index);
+		
+		//! Recall a given slot at a fractionnal index between two slot index.
+		/** Interpolate between two SourcesManager's states.
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     sourceIndex			Index of the first slot.
+		 * @param     destinationIndex		Index of the second slot.
+		 * @param     fractionnalIndex		The fractionnal index (between 0 and 1).
+		 * @see recallFractionalSlot
+         */
+		void recallFractionalSlot(SourcesManager* sourcesManager, long sourceIndex, long destinationIndex, double fractionnalIndex);
+		
+		//! Recall a given slot at a fractionnal index between two consecutive slot.
+		/** Interpolate between two SourcesManager's states.
+		 * @param     sourcesManager		A SourcesManager object pointer.
+		 * @param     fractionnalIndex		The fractionnal index. (ex. 2.3 will interpolate between the slot 2 and slot 3)
+		 * @see recallFractionalSlot
+         */
+		long recallFractionalSlot(SourcesManager* sourcesManager, double fractionnalIndex);
+		
+		//! Get The maximum index of slots.
 		long getMaximumIndexOfSlot();
-		long getSlotExistence(long index);
 		
-		~SourcesPreset();
+		//! Get the existence state of a given slot.
+		/**
+		 * @param     index					The index of the slot.
+         */
+		long getSlotExistence(long index);
 	};
 }
 #endif

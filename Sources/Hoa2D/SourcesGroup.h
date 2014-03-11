@@ -45,10 +45,10 @@ namespace Hoa2D
 		//! The source group constructor.
 		/**	The source group constructor allocates and initialize the member values for a source group.
 		 
-			@param     sourceManager		A SourceManager object's pointer.
+			@param     sourcesManager		A SourceManager object's pointer.
 			@param     existence			The existence state of the source.
 		 */
-		SourcesGroup(SourcesManager* sourceManager, bool existence);
+		SourcesGroup(SourcesManager* sourcesManager, bool existence);
 		
 		//! The source group destructor.
         /**	The source group destructor free the memory.
