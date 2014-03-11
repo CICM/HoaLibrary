@@ -28,7 +28,7 @@ namespace Hoa2D
 		void setLimited(long aOnOffValue);
 		
 		void recordSourceInTrajectory(SourcesManager* sourceManager, long sourceIndex);
-		void recordGroupInTrajectory(SourcesManager* sourceManager,  long groupeIndex);
+		void recordGroupInTrajectory(SourcesManager* sourceManager,  long groupIndex);
 		void playTrajectory(SourcesManager* sourceManager, double aFractionnalValue);
 		void erase();
 		void erase(double aFractionnalValueBegin, double aFractionnalValueEnd);

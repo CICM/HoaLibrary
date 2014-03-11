@@ -41,7 +41,7 @@ namespace Hoa2D
 		}
 	}
 	
-	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* sourceManager, long groupeIndex)
+	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* sourceManager, long groupIndex)
 	{
 		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
 		{
@@ -49,11 +49,11 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeGroupAtNextSlot(sourceManager, groupeIndex);
+					storeGroupAtNextSlot(sourceManager, groupIndex);
 					recallSlot(sourceManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(sourceManager, groupeIndex);
+					storeSourceAtNextSlot(sourceManager, groupIndex);
 			}
 		}
 	}

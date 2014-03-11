@@ -36,8 +36,10 @@ std\-::string \hyperlink{class_hoa2_d_1_1_planewaves_a66b40a511ac3dd9f3ab1102e98
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_hoa2_d_1_1_planewaves_a3b85f0d194899156b24d66b17ccc34f6}{set\-Channel\-Position} (unsigned int index, double azimuth)
-\begin{DoxyCompactList}\small\item\em Set the azimuth of a channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \hyperlink{class_hoa2_d_1_1_planewaves_a54376d0d157e410a012a9aa59bb3574e}{set\-Channel\-Azimuth} (unsigned int index, double azimuth)
+\begin{DoxyCompactList}\small\item\em Set the azimuth of a channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_planewaves_a6f0f2aa4035861ebfa3f74f36cd7e266}{set\-Channels\-Azimuth} (double $\ast$azimuths)
+\begin{DoxyCompactList}\small\item\em Set the azimtuh of all the channels. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -85,7 +87,7 @@ The planewaves destructor.
 
 The \hyperlink{class_hoa2_d_1_1_planewaves}{Planewaves} destructor free the memorie allocated. 
 
-Definition at line 28 of file Planewaves.\-cpp.
+Definition at line 36 of file Planewaves.\-cpp.
 
 
 
@@ -120,7 +122,7 @@ The abscissa of the channel if the channel exists, otherwise the function genera
 \end{DoxySeeAlso}
 
 
-Definition at line 84 of file Planewaves.\-h.
+Definition at line 92 of file Planewaves.\-h.
 
 \hypertarget{class_hoa2_d_1_1_planewaves_a52c4f8b05137ab56e82b0e076d7f5d3a}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!get\-Channel\-Azimuth@{get\-Channel\-Azimuth}}
 \index{get\-Channel\-Azimuth@{get\-Channel\-Azimuth}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
@@ -152,7 +154,7 @@ The azimuth of the channel if the channel exists, otherwise the function generat
 \end{DoxySeeAlso}
 
 
-Definition at line 67 of file Planewaves.\-h.
+Definition at line 75 of file Planewaves.\-h.
 
 \hypertarget{class_hoa2_d_1_1_planewaves_a66b40a511ac3dd9f3ab1102e98370dbd}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!get\-Channel\-Name@{get\-Channel\-Name}}
 \index{get\-Channel\-Name@{get\-Channel\-Name}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
@@ -184,7 +186,7 @@ The method returns a name for the channel that contains its index and its azimut
 \end{DoxySeeAlso}
 
 
-Definition at line 116 of file Planewaves.\-h.
+Definition at line 124 of file Planewaves.\-h.
 
 \hypertarget{class_hoa2_d_1_1_planewaves_ade9d19725af0826e02b43bcf10a4bc73}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!get\-Channel\-Ordinate@{get\-Channel\-Ordinate}}
 \index{get\-Channel\-Ordinate@{get\-Channel\-Ordinate}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
@@ -216,7 +218,7 @@ The ordinate of the channel if the channel exists, otherwise the function genera
 \end{DoxySeeAlso}
 
 
-Definition at line 100 of file Planewaves.\-h.
+Definition at line 108 of file Planewaves.\-h.
 
 \hypertarget{class_hoa2_d_1_1_planewaves_a4bf0de6ae4ac7ac03fc552d477237a85}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}}
 \index{get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
@@ -236,16 +238,16 @@ The number of channels.
 \end{DoxyReturn}
 
 
-Definition at line 52 of file Planewaves.\-h.
+Definition at line 60 of file Planewaves.\-h.
 
-\hypertarget{class_hoa2_d_1_1_planewaves_a3b85f0d194899156b24d66b17ccc34f6}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!set\-Channel\-Position@{set\-Channel\-Position}}
-\index{set\-Channel\-Position@{set\-Channel\-Position}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
-\subsubsection[{set\-Channel\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Planewaves\-::set\-Channel\-Position (
+\hypertarget{class_hoa2_d_1_1_planewaves_a54376d0d157e410a012a9aa59bb3574e}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!set\-Channel\-Azimuth@{set\-Channel\-Azimuth}}
+\index{set\-Channel\-Azimuth@{set\-Channel\-Azimuth}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
+\subsubsection[{set\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Planewaves\-::set\-Channel\-Azimuth (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index, }
 \item[{double}]{azimuth}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_hoa2_d_1_1_planewaves_a3b85f0d194899156b24d66b17ccc34f6}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_hoa2_d_1_1_planewaves_a54376d0d157e410a012a9aa59bb3574e}
 
 
 Set the azimuth of a channel. 
@@ -263,9 +265,34 @@ Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is 
 
 Definition at line 22 of file Planewaves.\-cpp.
 
+\hypertarget{class_hoa2_d_1_1_planewaves_a6f0f2aa4035861ebfa3f74f36cd7e266}{\index{Hoa2\-D\-::\-Planewaves@{Hoa2\-D\-::\-Planewaves}!set\-Channels\-Azimuth@{set\-Channels\-Azimuth}}
+\index{set\-Channels\-Azimuth@{set\-Channels\-Azimuth}!Hoa2D::Planewaves@{Hoa2\-D\-::\-Planewaves}}
+\subsubsection[{set\-Channels\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Planewaves\-::set\-Channels\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{azimuths}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_hoa2_d_1_1_planewaves_a6f0f2aa4035861ebfa3f74f36cd7e266}
+
+
+Set the azimtuh of all the channels. 
+
+Set the azimtuh of all the channels. It is more efficient to set all the channels azimuths at the same time because even if only one channel has changed, all the decoding matrix have to be recomputed. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuths} & The azimuths array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_planewaves_a54376d0d157e410a012a9aa59bb3574e}{set\-Channel\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 29 of file Planewaves.\-cpp.
+
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Planewaves.\-h\item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Planewaves.\-cpp\end{DoxyCompactItemize}
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Planewaves.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Planewaves.\-cpp\end{DoxyCompactItemize}

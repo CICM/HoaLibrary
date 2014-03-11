@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>HoaLibrary: /Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa/HoaMath.h Source File</title>
+<title>HoaLibrary: /Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa/HoaMath.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
    &#160;<span id="projectnumber">2.0</span>
@@ -427,9 +428,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i &lt; size; i++)</div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;            vec[i] = <a class="code" href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">clip_minmax</a>(vec[i], min, max);</div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;    }</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;}</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> vector_sort(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keywordtype">double</span>* vector)</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    {</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        <span class="keywordtype">int</span> index;</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        <span class="keywordtype">double</span>* temp = <span class="keyword">new</span> <span class="keywordtype">double</span>[size];</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        <span class="keywordflow">if</span>(temp &amp;&amp; size)</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        {</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            index  = 0;</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;            temp[0] = vector[0];</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;            temp[size - 1] = vector[0];</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;            </div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; size; i++)</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;            {</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                <span class="keywordflow">if</span>(vector[i] &lt; temp[0]) <span class="comment">// Get the minimum</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;                {</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;                    temp[0] = vector[i];</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;                    index = i;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;                }</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;                <span class="keywordflow">if</span>(vector[i] &gt; temp[size - 1]) <span class="comment">// Get the maximum</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                    temp[size - 1] = vector[i];</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;            }</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;            vector[index] -= 1;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;            </div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; size - 1; i++)</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;            {</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;                temp[i] = temp[size - 1];</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;                index   = -1;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; size; j++)</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;                {</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;                    <span class="keywordflow">if</span>(vector[j] &gt;= temp[i-1] &amp;&amp; vector[j] &lt;= temp[i])</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;                    {</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;                        temp[i] = vector[j];</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;                        index = j;</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;                    }</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;                }</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;                <span class="keywordflow">if</span>(index &gt; -1)</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;                {</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;                    vector[index] -= 1;</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;                }</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;            }</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;            memcpy(vector, temp, size * <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;            <span class="keyword">delete</span> [] temp;</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        }</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;    }</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;}</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="namespace_hoa_html_a0a42d201c216cf76c4cdcebab728227d"><div class="ttname"><a href="namespace_hoa.html#a0a42d201c216cf76c4cdcebab728227d">Hoa::factorial</a></div><div class="ttdeci">long double factorial(long n)</div><div class="ttdoc">The factorial. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00119">HoaMath.h:119</a></div></div>
 <div class="ttc" id="namespace_hoa_html_a03b9d89f84b73d4bbe335ac186d0c222"><div class="ttname"><a href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double min, const double max)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
 <div class="ttc" id="namespace_hoa_html_a29fdd6f7a1826039c063ce42221fcd0d"><div class="ttname"><a href="namespace_hoa.html#a29fdd6f7a1826039c063ce42221fcd0d">Hoa::azimuth</a></div><div class="ttdeci">double azimuth(const double x, const double y)</div><div class="ttdoc">The azimuth converter function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00407">HoaMath.h:407</a></div></div>
@@ -452,7 +497,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 07:29:37 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 15:05:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

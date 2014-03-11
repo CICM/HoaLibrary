@@ -35,9 +35,9 @@ void \hyperlink{class_hoa2_d_1_1_source_ab88a3aed83fc470d7411f008ae6fd7b6}{set\-
 \begin{DoxyCompactList}\small\item\em Set the color of the source. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}{set\-Description} (std\-::string description)
 \begin{DoxyCompactList}\small\item\em Set the description of the source. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}{set\-Group} (long groupe\-Index)
+void \hyperlink{class_hoa2_d_1_1_source_a5c96a7bfe41bca940cc3a28056802d49}{set\-Group} (long group\-Index)
 \begin{DoxyCompactList}\small\item\em Add source to an indexed group. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}{remove\-Group} (long groupe\-Index)
+void \hyperlink{class_hoa2_d_1_1_source_ac29d7c4efc09cf75b238fb5825853ad3}{remove\-Group} (long group\-Index)
 \begin{DoxyCompactList}\small\item\em Remove source from an indexed group. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_source_ac6e71e18e48a887d08f60f2ae3c63195}{set\-Maximum\-Radius} (double limit\-Value)
 \begin{DoxyCompactList}\small\item\em Set the maximum radius of the source. \end{DoxyCompactList}\item 
@@ -61,7 +61,7 @@ long \hyperlink{class_hoa2_d_1_1_source_a24ebd335837005f381291d30b55e7a93}{get\-
 \begin{DoxyCompactList}\small\item\em Get the number of group the source is owned by. \end{DoxyCompactList}\item 
 long \hyperlink{class_hoa2_d_1_1_source_a3aaa2f340a459a69500a1909ae23f3b5}{get\-Group\-Index} (long index)
 \begin{DoxyCompactList}\small\item\em Get the the group index the source is owned by at a particular index. \end{DoxyCompactList}\item 
-bool \hyperlink{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}{is\-Owned\-By\-Group} (long groupe\-Index)
+bool \hyperlink{class_hoa2_d_1_1_source_a1f4a899282d443e61a71e0350261a727}{is\-Owned\-By\-Group} (long group\-Index)
 \begin{DoxyCompactList}\small\item\em Determine if the source is owned by a particular group. \end{DoxyCompactList}\item 
 bool \hyperlink{class_hoa2_d_1_1_source_addb6bdf4acf1f30fc50b255bdf0d73c4}{get\-Mute} () const 
 \begin{DoxyCompactList}\small\item\em Get the mute state of the source. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -90,9 +90,7 @@ Definition at line 17 of file Source.\-h.
 
 The source constructor. 
 
-\begin{DoxyVerb}The source constructor allocates and initialize the member values for a source.
-\end{DoxyVerb}
-
+The source constructor allocates and initialize the member values for a source.
 
 
 \begin{DoxyParams}{Parameters}
@@ -337,20 +335,20 @@ The radius of the source.
 
 Definition at line 145 of file Source.\-h.
 
-\hypertarget{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!is\-Owned\-By\-Group@{is\-Owned\-By\-Group}}
+\hypertarget{class_hoa2_d_1_1_source_a1f4a899282d443e61a71e0350261a727}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!is\-Owned\-By\-Group@{is\-Owned\-By\-Group}}
 \index{is\-Owned\-By\-Group@{is\-Owned\-By\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
 \subsubsection[{is\-Owned\-By\-Group}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Source\-::is\-Owned\-By\-Group (
 \begin{DoxyParamCaption}
-\item[{long}]{groupe\-Index}
+\item[{long}]{group\-Index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}
+)}}\label{class_hoa2_d_1_1_source_a1f4a899282d443e61a71e0350261a727}
 
 
 Determine if the source is owned by a particular group. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em groupe\-Index} & The index of the group \\
+{\em group\-Index} & The index of the group \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -360,20 +358,20 @@ true if the source is in the group, false otherwise.
 
 Definition at line 125 of file Source.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!remove\-Group@{remove\-Group}}
+\hypertarget{class_hoa2_d_1_1_source_ac29d7c4efc09cf75b238fb5825853ad3}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!remove\-Group@{remove\-Group}}
 \index{remove\-Group@{remove\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
 \subsubsection[{remove\-Group}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::remove\-Group (
 \begin{DoxyParamCaption}
-\item[{long}]{groupe\-Index}
+\item[{long}]{group\-Index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}
+)}}\label{class_hoa2_d_1_1_source_ac29d7c4efc09cf75b238fb5825853ad3}
 
 
 Remove source from an indexed group. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em groupe\-Index} & The index of the group. \\
+{\em group\-Index} & The index of the group. \\
 \hline
 \end{DoxyParams}
 
@@ -541,20 +539,20 @@ Set the existence state of the source.
 
 Definition at line 28 of file Source.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Group@{set\-Group}}
+\hypertarget{class_hoa2_d_1_1_source_a5c96a7bfe41bca940cc3a28056802d49}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Group@{set\-Group}}
 \index{set\-Group@{set\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
 \subsubsection[{set\-Group}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Group (
 \begin{DoxyParamCaption}
-\item[{long}]{groupe\-Index}
+\item[{long}]{group\-Index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}
+)}}\label{class_hoa2_d_1_1_source_a5c96a7bfe41bca940cc3a28056802d49}
 
 
 Add source to an indexed group. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em groupe\-Index} & The index of the group. \\
+{\em group\-Index} & The index of the group. \\
 \hline
 \end{DoxyParams}
 
@@ -651,5 +649,5 @@ Definition at line 39 of file Source.\-cpp.
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Source.\-h\item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Source.\-cpp\end{DoxyCompactItemize}
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Source.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Source.\-cpp\end{DoxyCompactItemize}

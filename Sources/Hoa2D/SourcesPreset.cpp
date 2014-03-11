@@ -28,7 +28,7 @@ namespace Hoa2D
 				{
 					color = sourceManagerSource->sourceGetColor(i);
 					sourceManagerDestination->sourceSetRadius(i, sourceManagerSource->sourceGetRadius(i));
-					sourceManagerDestination->sourceSetAngle(i, sourceManagerSource->sourceGetAzimuth(i));
+					sourceManagerDestination->sourceSetAzimuth(i, sourceManagerSource->sourceGetAzimuth(i));
 					sourceManagerDestination->sourceSetColor(i, color[0], color[1], color[2], color[3]);
 					sourceManagerDestination->sourceSetDescription(i, sourceManagerSource->sourceGetDescription(i));
 					sourceManagerDestination->sourceSetMute(i, sourceManagerSource->sourceGetMute(i));
@@ -62,7 +62,7 @@ namespace Hoa2D
 			{
 				color = sourceManagerSource->sourceGetColor(sourceIndex);
 				sourceManagerDestination->sourceSetRadius(sourceIndex, sourceManagerSource->sourceGetRadius(sourceIndex));
-				sourceManagerDestination->sourceSetAngle(sourceIndex, sourceManagerSource->sourceGetAzimuth(sourceIndex));
+				sourceManagerDestination->sourceSetAzimuth(sourceIndex, sourceManagerSource->sourceGetAzimuth(sourceIndex));
 				sourceManagerDestination->sourceSetColor(sourceIndex, color[0], color[1], color[2], color[3]);
 				sourceManagerDestination->sourceSetDescription(sourceIndex, sourceManagerSource->sourceGetDescription(sourceIndex));
 				sourceManagerDestination->sourceSetMute(sourceIndex, sourceManagerSource->sourceGetMute(sourceIndex));
@@ -74,23 +74,23 @@ namespace Hoa2D
 		}
 	}
 	
-	void SourcesPreset::copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupeIndex)
+	void SourcesPreset::copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupIndex)
 	{
 		double* color;
 		if(sourceManagerSource->getExistence() == 1)
 		{
 			if(sourceManagerDestination->getExistence() == 0)
 				sourceManagerDestination->setExistence(1);
-			if(sourceManagerSource->getMaximumIndexOfGroup() >= groupeIndex && groupeIndex >= 0 && sourceManagerSource->groupGetExistence(groupeIndex) == 1)
+			if(sourceManagerSource->getMaximumIndexOfGroup() >= groupIndex && groupIndex >= 0 && sourceManagerSource->groupGetExistence(groupIndex) == 1)
 			{
-				for(long j = 0; j < sourceManagerSource->groupGetNumberOfSources(groupeIndex); j++)
+				for(long j = 0; j < sourceManagerSource->groupGetNumberOfSources(groupIndex); j++)
 				{
-					copySource(sourceManagerSource, sourceManagerDestination, sourceManagerSource->groupGetSourceIndex(groupeIndex, j));
-					sourceManagerDestination->groupSetSource(groupeIndex, sourceManagerSource->groupGetSourceIndex(groupeIndex, j));
+					copySource(sourceManagerSource, sourceManagerDestination, sourceManagerSource->groupGetSourceIndex(groupIndex, j));
+					sourceManagerDestination->groupSetSource(groupIndex, sourceManagerSource->groupGetSourceIndex(groupIndex, j));
 				}
-				color = sourceManagerSource->groupGetColor(groupeIndex);
-				sourceManagerDestination->groupSetColor(groupeIndex, color[0], color[1], color[2], color[3]);
-				sourceManagerDestination->groupSetDescription(groupeIndex, sourceManagerSource->groupGetDescription(groupeIndex));
+				color = sourceManagerSource->groupGetColor(groupIndex);
+				sourceManagerDestination->groupSetColor(groupIndex, color[0], color[1], color[2], color[3]);
+				sourceManagerDestination->groupSetDescription(groupIndex, sourceManagerSource->groupGetDescription(groupIndex));
 			}
 		}
 	}
@@ -125,7 +125,7 @@ namespace Hoa2D
 					color1 = sourceManagerSourceOne->sourceGetColor(i);
 					
 					sourceManagerDestination->sourceSetRadius(i, sourceManagerSourceOne->sourceGetRadius(i));
-					sourceManagerDestination->sourceSetAngle(i, sourceManagerSourceOne->sourceGetAzimuth(i));
+					sourceManagerDestination->sourceSetAzimuth(i, sourceManagerSourceOne->sourceGetAzimuth(i));
 					sourceManagerDestination->sourceSetColor(i, color1[0], color1[1], color1[2], color1[3]);
 				}
 				sourceManagerDestination->sourceSetDescription(i, sourceManagerSourceOne->sourceGetDescription(i));
@@ -228,9 +228,9 @@ namespace Hoa2D
 		storeSourceAtSlot(sourceManager, m_last_slot_stored+1, sourceIndex);
 	}
 	
-	void SourcesPreset::storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupeIndex)
+	void SourcesPreset::storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupIndex)
 	{
-		if(groupeIndex >= 0 && sourceManager->groupGetExistence(groupeIndex))
+		if(groupIndex >= 0 && sourceManager->groupGetExistence(groupIndex))
 		{
 			if(aSlotIndex >= m_source_managers.size())
 			{
@@ -239,14 +239,14 @@ namespace Hoa2D
 					m_source_managers.push_back(new SourcesManager(-1, 0));
 				}
 			}
-			copyGroup(sourceManager, m_source_managers[aSlotIndex], groupeIndex);
+			copyGroup(sourceManager, m_source_managers[aSlotIndex], groupIndex);
 			m_last_slot_stored = aSlotIndex;
 		}
 	}
 	
-	void SourcesPreset::storeGroupAtNextSlot(SourcesManager* sourceManager, long groupeIndex)
+	void SourcesPreset::storeGroupAtNextSlot(SourcesManager* sourceManager, long groupIndex)
 	{
-		storeGroupAtSlot(sourceManager, m_last_slot_stored+1, groupeIndex);
+		storeGroupAtSlot(sourceManager, m_last_slot_stored+1, groupIndex);
 	}
 	
 	

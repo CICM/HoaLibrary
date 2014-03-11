@@ -24,7 +24,7 @@ namespace Hoa2D
 		
 		void copySourceManager(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination);
 		void copySource(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long sourceIndex);
-		void copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupeIndex);
+		void copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupIndex);
 		long interpolationSourceManager(SourcesManager* sourceManagerSourceOne, SourcesManager* sourceManagerSourceTwo, SourcesManager* sourceManagerDestination, double aFrac);
 		
 	public:
@@ -44,8 +44,8 @@ namespace Hoa2D
 		
 		void storeSourceAtSlot(SourcesManager* sourceManager, long aSlotIndex, long sourceIndex);
 		void storeSourceAtNextSlot(SourcesManager* sourceManager, long sourceIndex);
-		void storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupeIndex);
-		void storeGroupAtNextSlot(SourcesManager* sourceManager,long groupeIndex);
+		void storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupIndex);
+		void storeGroupAtNextSlot(SourcesManager* sourceManager,long groupIndex);
 		
 		void recallSlot(SourcesManager* sourceManager, long index);
 		void recallFractionalSlot(SourcesManager* sourceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);

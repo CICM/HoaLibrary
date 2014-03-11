@@ -84,14 +84,14 @@ namespace Hoa2D
 		m_description = description;
 	}
 	
-	void Source::setGroup(long groupeIndex)
+	void Source::setGroup(long groupIndex)
 	{
 		for(int i = 0; i < m_groups.size(); i++)
 		{
-			if(m_groups[i] == groupeIndex)
+			if(m_groups[i] == groupIndex)
 				return;
 		}
-		m_groups.push_back(groupeIndex);
+		m_groups.push_back(groupIndex);
 	}
 	
 	void Source::setMute(bool state)
@@ -99,11 +99,11 @@ namespace Hoa2D
 		m_mute = state;
 	}
 	
-	void Source::removeGroup(long groupeIndex)
+	void Source::removeGroup(long groupIndex)
 	{
 		for(int i = 0; i < m_groups.size(); i++)
 		{
-			if(m_groups[i] == groupeIndex)
+			if(m_groups[i] == groupIndex)
 			{
 				for(int j = i; j < m_groups.size() - 1; j++)
 				{
@@ -122,10 +122,10 @@ namespace Hoa2D
 			return -1;
 	}
 	
-	bool Source::isOwnedByGroup(long groupeIndex)
+	bool Source::isOwnedByGroup(long groupIndex)
 	{
 		for (int i = 0; i < m_groups.size(); i++)
-			if (m_groups[i] == groupeIndex) return true;
+			if (m_groups[i] == groupIndex) return true;
 		return false;
 	}
 	

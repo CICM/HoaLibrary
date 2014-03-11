@@ -27,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
    &#160;<span id="projectnumber">2.0</span>
@@ -182,15 +183,18 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_hoa2_d_1_1_planewaves"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_hoa2_d_1_1_planewaves')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_hoa2_d_1_1_planewaves.html">Hoa2D::Planewaves</a></td></tr>
-<tr class="memitem:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a3b85f0d194899156b24d66b17ccc34f6">setChannelPosition</a> (unsigned int index, double azimuth)</td></tr>
-<tr class="memdesc:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel.  <a href="#a3b85f0d194899156b24d66b17ccc34f6">More...</a><br/></td></tr>
-<tr class="separator:a3b85f0d194899156b24d66b17ccc34f6 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a54376d0d157e410a012a9aa59bb3574e">setChannelAzimuth</a> (unsigned int index, double azimuth)</td></tr>
+<tr class="memdesc:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel.  <a href="#a54376d0d157e410a012a9aa59bb3574e">More...</a><br/></td></tr>
+<tr class="separator:a54376d0d157e410a012a9aa59bb3574e inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a6f0f2aa4035861ebfa3f74f36cd7e266">setChannelsAzimuth</a> (double *azimuths)</td></tr>
+<tr class="memdesc:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimtuh of all the channels.  <a href="#a6f0f2aa4035861ebfa3f74f36cd7e266">More...</a><br/></td></tr>
+<tr class="separator:a6f0f2aa4035861ebfa3f74f36cd7e266 inherit pro_methods_class_hoa2_d_1_1_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ambisonic regular decoder. </p>
 <p>The regular decoder should be used to decode an ambisonic sound field for a set a channels at equal distances on a circle depending on a decomposition order. The number of channels must be at least the number of harmonics. Note that you can only change the offset of the channels. </p>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00019">19</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00020">20</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a0666daa8b343e44ef7d90a31922cbecc"></a>
 <div class="memitem">
@@ -276,7 +280,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Retreive the azimuth offset of the channels in radian.</p>
 <dl class="section return"><dt>Returns</dt><dd>The offset of the channels. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00056">56</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_decoder_8h_source.html#l00057">57</a> of file <a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -384,13 +388,13 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a></li>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a></li>
+<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8h_source.html">Decoder.h</a></li>
+<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa2D/<a class="el" href="_hoa2_d_2_decoder_8cpp_source.html">Decoder.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 07:29:38 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 15:05:26 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -151,7 +151,7 @@ namespace Hoa2D
 	{
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetAngle(m_sources[i], azimuth + m_source_manager->sourceGetAzimuth(m_sources[i]));
+			m_source_manager->sourceSetAzimuth(m_sources[i], azimuth + m_source_manager->sourceGetAzimuth(m_sources[i]));
 		}
 	}
 	

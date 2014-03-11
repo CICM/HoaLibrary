@@ -23,9 +23,13 @@ Inheritance diagram for Hoa2\-D\-:\-:Decoder\-Irregular\-:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em The irregular decoder constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_hoa2_d_1_1_decoder_irregular_af8a618d1d04c00f33c360fde6d09e03f}{$\sim$\-Decoder\-Irregular} ()
 \begin{DoxyCompactList}\small\item\em The irregular decoder destructor. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_decoder_irregular_ab74543528e37f6455de5452f00ac7c1c}{set\-Channel\-Position} (unsigned int index, double azimuth)
+void \hyperlink{class_hoa2_d_1_1_decoder_irregular_a0998a88c2f0c45fe02caa7a22966c807}{set\-Channels\-Offset} (double offset)
+\begin{DoxyCompactList}\small\item\em Set the offset of the channels. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_decoder_irregular_a413f5d995d8c9f9147ff5bc7f3140625}{get\-Channels\-Offset} () const 
+\begin{DoxyCompactList}\small\item\em Get the offset of the channels. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_irregular_a3bc83d37db5c22105fa6948be376b16b}{set\-Channel\-Azimuth} (unsigned int index, double azimuth)
 \begin{DoxyCompactList}\small\item\em Set the azimuth of a channel. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_decoder_irregular_a6c4b42a6c7f9030b4db0d53186a9d6e0}{set\-Channels\-Position} (double $\ast$azimuths)
+void \hyperlink{class_hoa2_d_1_1_decoder_irregular_acace6638ba2c2f8fe3156989d730f44b}{set\-Channels\-Azimtuh} (double $\ast$azimuths)
 \begin{DoxyCompactList}\small\item\em Set the azimtuh of all the channels. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_decoder_irregular_aacb9c2de89e276d0ede87e2ecfd2bde4}{process} (const float $\ast$input, float $\ast$output)
 \begin{DoxyCompactList}\small\item\em This method performs the irregular decoding with single precision. \end{DoxyCompactList}\item 
@@ -39,7 +43,7 @@ The ambisonic irregular decoder.
 
 The irregular decoder should be used to decode an ambisonic sound field for a set a channels not equally spaced on a circle, like stereo or 5.\-1, depending on a decomposition order. The number of channels must be at least 1. 
 
-Definition at line 85 of file Decoder.\-h.
+Definition at line 86 of file Decoder.\-h.
 
 
 
@@ -82,11 +86,31 @@ The irregular decoder destructor.
 
 The irregular decoder destructor free the memory. 
 
-Definition at line 196 of file Decoder.\-cpp.
+Definition at line 183 of file Decoder.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_decoder_irregular_a413f5d995d8c9f9147ff5bc7f3140625}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!get\-Channels\-Offset@{get\-Channels\-Offset}}
+\index{get\-Channels\-Offset@{get\-Channels\-Offset}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
+\subsubsection[{get\-Channels\-Offset}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Decoder\-Irregular\-::get\-Channels\-Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_decoder_irregular_a413f5d995d8c9f9147ff5bc7f3140625}
+
+
+Get the offset of the channels. 
+
+Retreive the azimuth offset of the channels in radian.
+
+\begin{DoxyReturn}{Returns}
+The offset of the channels. 
+\end{DoxyReturn}
+
+
+Definition at line 123 of file Decoder.\-h.
+
 \hypertarget{class_hoa2_d_1_1_decoder_irregular_aacb9c2de89e276d0ede87e2ecfd2bde4}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::process (
@@ -110,7 +134,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 186 of file Decoder.\-cpp.
+Definition at line 173 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_irregular_aa94b51fed5c341c0980d0d0ba9c53414}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
@@ -135,16 +159,16 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 191 of file Decoder.\-cpp.
+Definition at line 178 of file Decoder.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_decoder_irregular_ab74543528e37f6455de5452f00ac7c1c}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!set\-Channel\-Position@{set\-Channel\-Position}}
-\index{set\-Channel\-Position@{set\-Channel\-Position}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
-\subsubsection[{set\-Channel\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::set\-Channel\-Position (
+\hypertarget{class_hoa2_d_1_1_decoder_irregular_a3bc83d37db5c22105fa6948be376b16b}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!set\-Channel\-Azimuth@{set\-Channel\-Azimuth}}
+\index{set\-Channel\-Azimuth@{set\-Channel\-Azimuth}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
+\subsubsection[{set\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::set\-Channel\-Azimuth (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index, }
 \item[{double}]{azimuth}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_decoder_irregular_ab74543528e37f6455de5452f00ac7c1c}
+)}}\label{class_hoa2_d_1_1_decoder_irregular_a3bc83d37db5c22105fa6948be376b16b}
 
 
 Set the azimuth of a channel. 
@@ -159,19 +183,19 @@ Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is 
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_decoder_irregular_a6c4b42a6c7f9030b4db0d53186a9d6e0}{set\-Channels\-Position} 
+\hyperlink{class_hoa2_d_1_1_decoder_irregular_acace6638ba2c2f8fe3156989d730f44b}{set\-Channels\-Azimtuh} 
 \end{DoxySeeAlso}
 
 
-Definition at line 82 of file Decoder.\-cpp.
+Definition at line 84 of file Decoder.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_decoder_irregular_a6c4b42a6c7f9030b4db0d53186a9d6e0}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!set\-Channels\-Position@{set\-Channels\-Position}}
-\index{set\-Channels\-Position@{set\-Channels\-Position}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
-\subsubsection[{set\-Channels\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::set\-Channels\-Position (
+\hypertarget{class_hoa2_d_1_1_decoder_irregular_acace6638ba2c2f8fe3156989d730f44b}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!set\-Channels\-Azimtuh@{set\-Channels\-Azimtuh}}
+\index{set\-Channels\-Azimtuh@{set\-Channels\-Azimtuh}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
+\subsubsection[{set\-Channels\-Azimtuh}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::set\-Channels\-Azimtuh (
 \begin{DoxyParamCaption}
 \item[{double $\ast$}]{azimuths}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_decoder_irregular_a6c4b42a6c7f9030b4db0d53186a9d6e0}
+)}}\label{class_hoa2_d_1_1_decoder_irregular_acace6638ba2c2f8fe3156989d730f44b}
 
 
 Set the azimtuh of all the channels. 
@@ -184,15 +208,37 @@ Set the azimtuh of all the channels. It is more efficient to set all the channel
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_decoder_irregular_ab74543528e37f6455de5452f00ac7c1c}{set\-Channel\-Position} 
+\hyperlink{class_hoa2_d_1_1_decoder_irregular_a3bc83d37db5c22105fa6948be376b16b}{set\-Channel\-Azimuth} 
 \end{DoxySeeAlso}
 
 
-Definition at line 73 of file Decoder.\-cpp.
+Definition at line 78 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_irregular_a0998a88c2f0c45fe02caa7a22966c807}{\index{Hoa2\-D\-::\-Decoder\-Irregular@{Hoa2\-D\-::\-Decoder\-Irregular}!set\-Channels\-Offset@{set\-Channels\-Offset}}
+\index{set\-Channels\-Offset@{set\-Channels\-Offset}!Hoa2D::DecoderIrregular@{Hoa2\-D\-::\-Decoder\-Irregular}}
+\subsubsection[{set\-Channels\-Offset}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Irregular\-::set\-Channels\-Offset (
+\begin{DoxyParamCaption}
+\item[{double}]{offset}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_irregular_a0998a88c2f0c45fe02caa7a22966c807}
+
+
+Set the offset of the channels. 
+
+Set the azimuth offset of the channels in radian.
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & An azimuth value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 72 of file Decoder.\-cpp.
 
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}
