@@ -7,7 +7,7 @@
 #ifndef DEF_SOURCE
 #define DEF_SOURCE
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 namespace Hoa2D
 {

@@ -7,7 +7,7 @@
 #ifndef DEF_SOURCESPRESET
 #define DEF_SOURCESPRESET
 
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 #include "SourcesManager.h"
 
 namespace Hoa2D
