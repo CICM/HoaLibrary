@@ -110,7 +110,8 @@ namespace Hoa2D
         
         for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
         {
-            m_decoder_matrix[i] = 0;
+            m_decoder_matrix[i] = 0.;
+            m_decoder_matrix_float[i] = 0.;
         }
         
         // Compute the decoding matrix for sorted channels
@@ -132,22 +133,20 @@ namespace Hoa2D
                     double distance_index1 = angle - m_channels_azimuth[j];
                     double distance_index2 = m_channels_azimuth[j+1] - angle;
                     double distance_ratio = distance_index1 + distance_index2;
-                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
-                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
-                    break;
+                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
+                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
                 }
-                else
+                else if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
                 {
-                    channel_index1 = j;
+                    channel_index1 = m_number_of_channels-1;
                     channel_index2 = 0;
                         
                     // Get the factor for the pair of real channels
-                    double distance_index1 = angle - m_channels_azimuth[j];
-                    double distance_index2 = (m_channels_azimuth[0] + HOA_2PI) - angle;
+                    double distance_index1 = angle - m_channels_azimuth[m_number_of_channels-1];
+                    double distance_index2 = HOA_2PI - angle + m_channels_azimuth[0];
                     double distance_ratio = distance_index1 + distance_index2;
-                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
-                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
-                    break;
+                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
+                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
                 }
             }
             
@@ -161,6 +160,11 @@ namespace Hoa2D
             {
                 m_decoder_matrix[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
                 m_decoder_matrix[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
+            }
+            
+            for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
+            {
+                m_decoder_matrix_float[i] = m_decoder_matrix[i];
             }
         }
     }
