@@ -32,20 +32,20 @@ namespace Hoa2D
 		//! The source constructor.
 		/**	The source constructor allocates and initialize the member values for a source.
 		 
-		 @param     existance		The existance state of the source.
+		 @param     existence		The existence state of the source.
 		 @param     radius			The radius of the source.
 		 @param     azimuth			The azimuth of the source.
 		 */
-		Source(bool existance = true, double radius = 0., double azimuth = 0.);
+		Source(bool existence = true, double radius = 0., double azimuth = 0.);
 		
 		//! The source destructor.
         /**	The source destructor free the memory.
          */
 		~Source();
 		
-		//! Set the existance state of the source.
+		//! Set the existence state of the source.
 		/**
-		 @param     state		The existance state of the source.
+		 @param     state		The existence state of the source.
 		 @see getExistence
          */
 		void setExistence(bool state);
@@ -130,9 +130,9 @@ namespace Hoa2D
          */
 		void setMute(bool state);
 		
-		//! Get the existance state of the source.
+		//! Get the existence state of the source.
 		/**
-		 @return		The existance state of the source.
+		 @return		The existence state of the source.
 		 @see setExistence
          */
 		bool			getExistence()		const {return m_exist;}

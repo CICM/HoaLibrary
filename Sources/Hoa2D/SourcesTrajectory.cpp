@@ -24,7 +24,7 @@ namespace Hoa2D
 		m_limited = isLimited != 0;
 	}
 	
-	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* aSouceManager, long sourceIndex)
+	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* sourceManager, long sourceIndex)
 	{
 		if(m_recording)
 		{
@@ -32,16 +32,16 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeSourceAtNextSlot(aSouceManager, sourceIndex);
-					recallSlot(aSouceManager, m_last_slot_stored);
+					storeSourceAtNextSlot(sourceManager, sourceIndex);
+					recallSlot(sourceManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, sourceIndex);
+					storeSourceAtNextSlot(sourceManager, sourceIndex);
 			}
 		}
 	}
 	
-	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* aSouceManager, long groupeIndex)
+	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* sourceManager, long groupeIndex)
 	{
 		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
 		{
@@ -49,21 +49,21 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeGroupAtNextSlot(aSouceManager, groupeIndex);
-					recallSlot(aSouceManager, m_last_slot_stored);
+					storeGroupAtNextSlot(sourceManager, groupeIndex);
+					recallSlot(sourceManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, groupeIndex);
+					storeSourceAtNextSlot(sourceManager, groupeIndex);
 			}
 		}
 	}
 	
-	void SourcesTrajectory::playTrajectory(SourcesManager* aSouceManager, double aFractionnalValue)
+	void SourcesTrajectory::playTrajectory(SourcesManager* sourceManager, double aFractionnalValue)
 	{
 		aFractionnalValue = clip_minmax(aFractionnalValue, 0., 1.);
 		double aFractionalIndex = aFractionnalValue * (double)getMaximumIndexOfSlot();
 		
-		recallFractionalSlot(aSouceManager, aFractionalIndex);
+		recallFractionalSlot(sourceManager, aFractionalIndex);
 		m_last_slot_stored = aFractionalIndex-1;
 	}
 	

@@ -10,6 +10,16 @@ The sources manager.
 
 {\ttfamily \#include $<$Sources\-Manager.\-h$>$}
 
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_sources_manager_a9af44e634cc63d77fce116baa8d03886}{Sources\-Manager} (double maximum\-Radius=1., bool existence=true)
+\begin{DoxyCompactList}\small\item\em The source manager constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_sources_manager_ae116065cec424f8c845b8fa4ade1e718}{$\sim$\-Sources\-Manager} ()
+\begin{DoxyCompactList}\small\item\em The source manager destructor. \end{DoxyCompactList}\item 
+\hypertarget{class_hoa2_d_1_1_sources_manager_a1b248551ce36262e064d88b41eba076b}{void \hyperlink{class_hoa2_d_1_1_sources_manager_a1b248551ce36262e064d88b41eba076b}{clear\-All} ()}\label{class_hoa2_d_1_1_sources_manager_a1b248551ce36262e064d88b41eba076b}
+
+\begin{DoxyCompactList}\small\item\em Clear all the sources and groups. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -18,6 +28,51 @@ The sources manager.
 The \hyperlink{class_hoa2_d_1_1_sources_manager}{Sources\-Manager} should be used to store and manage multiple \hyperlink{class_hoa2_d_1_1_source}{Source} and \hyperlink{class_hoa2_d_1_1_sources_group}{Sources\-Group} 
 
 Definition at line 21 of file Sources\-Manager.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_sources_manager_a9af44e634cc63d77fce116baa8d03886}{\index{Hoa2\-D\-::\-Sources\-Manager@{Hoa2\-D\-::\-Sources\-Manager}!Sources\-Manager@{Sources\-Manager}}
+\index{Sources\-Manager@{Sources\-Manager}!Hoa2D::SourcesManager@{Hoa2\-D\-::\-Sources\-Manager}}
+\subsubsection[{Sources\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Sources\-Manager\-::\-Sources\-Manager (
+\begin{DoxyParamCaption}
+\item[{double}]{maximum\-Radius = {\ttfamily 1.}, }
+\item[{bool}]{existence = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_manager_a9af44e634cc63d77fce116baa8d03886}
+
+
+The source manager constructor. 
+
+\begin{DoxyVerb}The source manager constructor allocates and initialize the member values.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em maximum\-Radius} & The maximum radius the sources or groups in the source manager could have \\
+\hline
+{\em existence} & The existence state of the source manager. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Sources\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_sources_manager_ae116065cec424f8c845b8fa4ade1e718}{\index{Hoa2\-D\-::\-Sources\-Manager@{Hoa2\-D\-::\-Sources\-Manager}!$\sim$\-Sources\-Manager@{$\sim$\-Sources\-Manager}}
+\index{$\sim$\-Sources\-Manager@{$\sim$\-Sources\-Manager}!Hoa2D::SourcesManager@{Hoa2\-D\-::\-Sources\-Manager}}
+\subsubsection[{$\sim$\-Sources\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Sources\-Manager\-::$\sim$\-Sources\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_sources_manager_ae116065cec424f8c845b8fa4ade1e718}
+
+
+The source manager destructor. 
+
+The source manager destructor free the memory. 
+
+Definition at line 756 of file Sources\-Manager.\-cpp.
 
 
 

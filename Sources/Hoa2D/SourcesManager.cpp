@@ -8,17 +8,17 @@
 
 namespace Hoa2D
 {
-	SourcesManager::SourcesManager(double maximumLimitValue, long deadOrAlive)
+	SourcesManager::SourcesManager(double maximumLimitValue, bool existence)
 	{
-		setExistence(deadOrAlive);
+		setExistence(existence);
 		setMaximumRadius(maximumLimitValue);
 		m_zoom = 1.;
 	}
 	
-	void SourcesManager::setExistence(long deadOrAlive)
+	void SourcesManager::setExistence(bool state)
 	{
-		m_existence = clip_minmax(deadOrAlive, (long)0, (long)1);
-		if(m_existence == 0)
+		m_exist = state;
+		if(m_exist == 0)
 		{
 			m_sources.clear();
 			m_groups.clear();
@@ -36,7 +36,7 @@ namespace Hoa2D
 	
 	long SourcesManager::getExistence()
 	{
-		return m_existence;
+		return m_exist;
 	}
 	
 	void SourcesManager::setMaximumRadius(double limitValue)
@@ -527,7 +527,7 @@ namespace Hoa2D
 	{
 		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[groupeIndex]->setRelativeAngle(azimuth);
+			m_groups[groupeIndex]->setRelativeAzimuth(azimuth);
 		}
 	}
 	
@@ -749,11 +749,6 @@ namespace Hoa2D
 				}
 			}
 		}
-	}
-	
-	int SourcesManager::groupCompare(long groupIndexA, const long groupIndexB)
-	{
-		return m_groups[groupIndexA]->compare(m_groups[groupIndexA], m_groups[groupIndexB]);
 	}
 	
 	/************************************/

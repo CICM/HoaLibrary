@@ -8,10 +8,10 @@
 
 namespace Hoa2D
 {
-	SourcesGroup::SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive)
+	SourcesGroup::SourcesGroup(SourcesManager* sourceManager, bool state)
 	{
-		m_source_manager = aSourceManager;
-		setExistence(deadOrAlive);
+		m_source_manager = sourceManager;
+		setExistence(state);
 		m_color = new double[4];
 		setColor(0.2, 0.2, 0.2, 1.);
 		setDescription("");
@@ -20,32 +20,9 @@ namespace Hoa2D
 		m_mute = 0;
 	}
 	
-	int SourcesGroup::compare(const SourcesGroup* a, const SourcesGroup *b)
+	void SourcesGroup::setExistence(bool state)
 	{
-		auto leftIt = a->m_sources.begin();
-		auto rightIt = b->m_sources.begin();
-		auto diff = 0;
-		while (leftIt != a->m_sources.end() && rightIt != b->m_sources.end())
-		{
-			if (*leftIt != *rightIt)
-			{
-				diff++;
-			}
-			leftIt++;
-			rightIt++;
-		}
-		
-		if (0 == diff && (leftIt != a->m_sources.end() || rightIt != b->m_sources.end()))
-		{
-			diff = 1;
-		}
-		
-		return diff;
-	}
-	
-	void SourcesGroup::setExistence(long deadOrAlive)
-	{
-		m_exist = clip_minmax(deadOrAlive, (long)0, (long)1);
+		m_exist = state;
 	}
 	
 	void SourcesGroup::setDescription(std::string description)
@@ -55,7 +32,7 @@ namespace Hoa2D
 	
 	void SourcesGroup::setColor(double red, double green, double blue, double alpha)
 	{
-		m_color[0]		=  clip_minmax(red, 0., 1.);
+		m_color[0]	=  clip_minmax(red, 0., 1.);
 		m_color[1]	=  clip_minmax(green, 0., 1.);
 		m_color[2]	=  clip_minmax(blue, 0., 1.);
 		m_color[3]	=  clip_minmax(alpha, 0., 1.);
@@ -63,7 +40,7 @@ namespace Hoa2D
 	
 	void SourcesGroup::setMaximumRadius(double limitValue)
 	{
-		m_maximum_radius = limitValue;
+		m_maximum_radius = clip_min(limitValue, 0.0000001);
 	}
 	
 	void SourcesGroup::computeCentroid()
@@ -362,7 +339,7 @@ namespace Hoa2D
 	void SourcesGroup::setRelativeCoordinatesPolar(double radius, double azimuth)
 	{
 		setRelativeRadius(radius);
-		setRelativeAngle(azimuth);
+		setRelativeAzimuth(azimuth);
 	}
 	
 	void SourcesGroup::setRelativeRadius(double radius)
@@ -372,7 +349,7 @@ namespace Hoa2D
 		computeCentroid();
 	}
 	
-	void SourcesGroup::setRelativeAngle(double azimuth)
+	void SourcesGroup::setRelativeAzimuth(double azimuth)
 	{
 		azimuth +=  HOA_PI2;
 		while (azimuth > HOA_2PI)
@@ -389,62 +366,6 @@ namespace Hoa2D
 	{
 		m_mute = clip_minmax(aValue, (long)0, (long)1);
 	}
-	
-	double SourcesGroup::getRadius()
-	{
-		return radius(m_centroid_x, m_centroid_y);
-	}
-	
-	double SourcesGroup::getAzimuth()
-	{
-		return azimuth(m_centroid_x, m_centroid_y) + HOA_PI2;
-	}
-	
-	double SourcesGroup::getAbscissa()
-	{
-		return m_centroid_x;
-	}
-	
-	double SourcesGroup::getOrdinate()
-	{
-		return m_centroid_y;
-	}
-	
-	long SourcesGroup::getNumberOfSources()
-	{
-		return m_sources.size();
-	}
-	
-	
-	long SourcesGroup::getSourceIndex(long index)
-	{
-		if(index < m_sources.size() && index >= 0)
-			return m_sources[index];
-		else
-			return -1;
-	}
-	
-	
-	double* SourcesGroup::getColor()
-	{
-		return m_color;
-	}
-	
-	long SourcesGroup::getExistence()
-	{
-		return m_exist;
-	}
-	
-	std::string SourcesGroup::getDescription()
-	{
-		return m_description;
-	}
-	
-	long SourcesGroup::getMute()
-	{
-		return m_mute;
-	}
-	
 	
 	SourcesGroup::~SourcesGroup()
 	{

@@ -8,9 +8,9 @@
 
 namespace Hoa2D
 {
-	Source::Source(bool existance, double radius, double azimuth)
+	Source::Source(bool existence, double radius, double azimuth)
 	{
-		m_exist = existance;
+		m_exist = existence;
 		setRadius(radius);
 		seAzimuth(azimuth);
 		m_color = new double[4];

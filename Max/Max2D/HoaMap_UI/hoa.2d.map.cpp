@@ -661,15 +661,15 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         {
             t_symbol *sym = atom_getsym(av);
             if(sym == hoa_sym_store)
-                x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
+                x->f_source_preset->storeSourceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
             else if(sym == hoa_sym_storeagain)
-                x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtLastUsedSlot(x->f_source_manager);
             else if(sym == hoa_sym_storeempty)
-                x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtFirstEmptySlot(x->f_source_manager);
             else if(sym == hoa_sym_storeend)
-                x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtNewEndSlot(x->f_source_manager);
             else if(sym == hoa_sym_storenext)
-                x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
+                x->f_source_preset->storeSourceManagerAtNextSlot(x->f_source_manager);
             else if(sym == hoa_sym_insert)
                 x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
             else if(sym == hoa_sym_remove)
@@ -1071,7 +1071,7 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
         {
             if(atom_getsym(av+i) == hoa_sym_slot)
             {
-                x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+                x->f_source_preset->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
@@ -1096,7 +1096,7 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
                 temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
             }
         }
-        x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+        x->f_source_preset->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
         delete temporySourceManager;
     }
 }
@@ -1112,7 +1112,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
         {
             if(atom_getsym(av+i) == hoa_sym_slot)
             {
-                x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+                x->f_source_trajectory->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
@@ -1137,7 +1137,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
                 temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
             }
         }
-        x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
+        x->f_source_trajectory->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
         delete temporySourceManager;
     }
 }

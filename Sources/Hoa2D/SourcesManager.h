@@ -26,20 +26,63 @@ namespace Hoa2D
 		double                      m_maximum_radius;
 		std::vector <Source*>       m_sources;
 		std::vector <SourcesGroup*> m_groups;
-		long                        m_existence;
+		long                        m_exist;
 		double                      m_zoom;
 		
 		void checkMute();
 		
 	public:
-		SourcesManager(double maximumLimitValue = -1., long deadOrAlive = 1);
 		
+		//! The source manager constructor.
+		/**	The source manager constructor allocates and initialize the member values.
+		 
+		 @param     maximumRadius		The maximum radius the sources or groups in the source manager could have
+		 @param     existence			The existence state of the source manager.
+		 */
+		SourcesManager(double maximumRadius = 1., bool existence = true);
+		
+		//! The source manager destructor free the memory.
+		~SourcesManager();
+		
+		//! Clear all the sources and groups.
 		void clearAll();
+		
+		//! Set the maximum radius the sources and groups can have
+		/**
+		 @param     limitValue		The radius limit value.
+         */
 		void setMaximumRadius(double limitValue);
-		void setExistence(long deadOrAlive);
-		void setZoom(double aZoom);
+		
+		//! Set the existence state of the sources manager
+		/** If the existence state is false it will delete all sources and groups already stored.
+		 
+			@param     state		The existence state.
+         */
+		void setExistence(bool state);
+		
+		//! Set the zoom factor.
+		/** Set the zoom factor between 0 and 1.
+		 
+			@param     zoom		The zoom factor.
+         */
+		void setZoom(double zoom);
+		
+		//! Get the maximum index of sources.
+		/**
+			@return		The maximum index of source.
+         */
 		long getMaximumIndexOfSource();
+		
+		//! Get the number of sources actually managed.
+		/**
+			@return		The number of sources.
+         */
 		long getNumberOfSources();
+		
+		//! Get the maximum index of the sources actually managed.
+		/**
+		 @return		The maximum index.
+         */
 		long getMaximumIndexOfGroup();
 		long getNumberOfGroups();
 		double getLimitMaximum();
@@ -104,10 +147,6 @@ namespace Hoa2D
 		long groupGetMute(long index);
 		long groupGetIfSourceMuted(long index);
 		long groupGetNextIndex();
-		
-		int groupCompare(long groupIndexA, const long groupIndexB);
-		
-		~SourcesManager();
 	};
 }
 

@@ -22,34 +22,34 @@ namespace Hoa2D
 		long    m_last_slot_stored;
 		std::vector <SourcesManager*> m_source_managers;
 		
-		void copySourceManager(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination);
-		void copySource(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long sourceIndex);
-		void copyGroup(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long groupeIndex);
-		long interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac);
+		void copySourceManager(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination);
+		void copySource(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long sourceIndex);
+		void copyGroup(SourcesManager* sourceManagerSource, SourcesManager* sourceManagerDestination, long groupeIndex);
+		long interpolationSourceManager(SourcesManager* sourceManagerSourceOne, SourcesManager* sourceManagerSourceTwo, SourcesManager* sourceManagerDestination, double aFrac);
 		
 	public:
 		SourcesPreset();
 		
-		void storeSouceManagerAtSlot(SourcesManager* aSouceManager, long index);
-		void storeSouceManagerAtFirstEmptySlot(SourcesManager* aSouceManager);
-		void storeSouceManagerAtLastUsedSlot(SourcesManager* aSouceManager);
-		void storeSouceManagerAtNewEndSlot(SourcesManager* aSouceManager);
-		void storeSouceManagerAtNextSlot(SourcesManager* aSouceManager);
-		void insertSlot(SourcesManager* aSouceManager, long index);
+		void storeSourceManagerAtSlot(SourcesManager* sourceManager, long index);
+		void storeSourceManagerAtFirstEmptySlot(SourcesManager* sourceManager);
+		void storeSourceManagerAtLastUsedSlot(SourcesManager* sourceManager);
+		void storeSourceManagerAtNewEndSlot(SourcesManager* sourceManager);
+		void storeSourceManagerAtNextSlot(SourcesManager* sourceManager);
+		void insertSlot(SourcesManager* sourceManager, long index);
 		void removeSlot(long index);
 		void deleteSlot(long index);
 		void copySlot(long anIndexSouce, long anIndexDestination);
 		void renumber();
 		void clear();
 		
-		void storeSourceAtSlot(SourcesManager* aSouceManager, long aSlotIndex, long sourceIndex);
-		void storeSourceAtNextSlot(SourcesManager* aSouceManager, long sourceIndex);
-		void storeGroupAtSlot(SourcesManager* aSouceManager, long aSlotIndex, long groupeIndex);
-		void storeGroupAtNextSlot(SourcesManager* aSouceManager,long groupeIndex);
+		void storeSourceAtSlot(SourcesManager* sourceManager, long aSlotIndex, long sourceIndex);
+		void storeSourceAtNextSlot(SourcesManager* sourceManager, long sourceIndex);
+		void storeGroupAtSlot(SourcesManager* sourceManager, long aSlotIndex, long groupeIndex);
+		void storeGroupAtNextSlot(SourcesManager* sourceManager,long groupeIndex);
 		
-		void recallSlot(SourcesManager* aSouceManager, long index);
-		void recallFractionalSlot(SourcesManager* aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);
-		long recallFractionalSlot(SourcesManager* aSouceManager, double aFractionnalIndex);
+		void recallSlot(SourcesManager* sourceManager, long index);
+		void recallFractionalSlot(SourcesManager* sourceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);
+		long recallFractionalSlot(SourcesManager* sourceManager, double aFractionnalIndex);
 		
 		long getMaximumIndexOfSlot();
 		long getSlotExistence(long index);
