@@ -104,11 +104,12 @@ int main()
             {
                 sprintf(path, "%s/",path_temp2);
                 if(k < 10)
-                    sprintf(temp, "L0e00%ia.wav", (int)k);
+                    sprintf(temp, "R0e00%ia.wav", (int)k);
+                    //sprintf(temp, "L0e00%ia.wav", (int)k);
                 else if(k < 100)
-                    sprintf(temp, "L0e0%ia.wav", (int)k);
+                    sprintf(temp, "R0e0%ia.wav", (int)k);
                 else
-                    sprintf(temp, "L0e%ia.wav", (int)k);
+                    sprintf(temp, "R0e%ia.wav", (int)k);
                 
                 strcat(path, temp);
                 wavfile = Read_Wav(path, &size);

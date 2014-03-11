@@ -164,13 +164,20 @@ namespace Hoa2D
     
     
     
-    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth);
+    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth, bool large);
     
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
      */
     class DecoderBinaural : public Ambisonic, public Planewaves
     {
+    public:
+        
+        enum PinnaSize
+        {
+            Small       = 0,	/**< Small Pinna Size  */
+            Large       = 1,	/**< Large Pinna Size */
+        };
         
     private:
         float*          m_impulses_matrix;
@@ -192,12 +199,13 @@ namespace Hoa2D
         float*          m_linear_vector_right;
         
         const float**   m_impulses_vector;
+        PinnaSize       m_pinna_size;
         
         DecoderRegular* m_decoder;
     public:
         
         //! The binaural decoder constructor.
-        /**	The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35. It is essential to set the sample rate and the vector size to load the impulse response and to be able to use the binaural decoding. The binaural process is optimized for block processing.
+        /**	The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35. It is essential to set the sample rate and the vector size to load the impulse response and to be able to use the binaural decoding. The binaural process is optimized for block processing. The HRTF are from the MIT database.
          
             @param     order				The order
          */
@@ -220,7 +228,7 @@ namespace Hoa2D
         //! Set the vector size.
         /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
          
-            @param     vectorSize		The vector rate.
+            @param     vectorSize		The vector size.
          
             @see    setSampleRate
          */
@@ -230,7 +238,7 @@ namespace Hoa2D
         //! Retrieve if the decoder is ready to process.
         /** Retrieve if the impulses has been loaded and the matrix allocated.
          
-            @return    The true if the decoder is ready to process and false if not.
+            @return    The function returns true if the decoder is ready to process and false if not.
          */
 		inline bool getState() const
         {
@@ -240,6 +248,23 @@ namespace Hoa2D
                 return false;
         };
         
+        //! Set the pinna size.
+        /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
+         
+            @param     pinnaSize		The pinna size.
+         
+         */
+        void setPinnaSize(PinnaSize pinnaSize);
+        
+        //! Retrieve the pinna size.
+        /** Retrieve the current size of the pinna.
+         
+            @return    The function returns the pinna size used to compute the HRTF.
+         */
+		inline PinnaSize getPinnaSize() const
+        {
+            return m_pinna_size;
+        };
         
         //! Retrieve a name for a channel.
         /** Retrieve a name for a channel in a std::string format that will be "Headphone Left" or "Headphone Right".
@@ -273,10 +298,6 @@ namespace Hoa2D
          */
 		void process(const double* const* inputs, double** outputs);
         
-        const float* getImpulseResponse(int index)
-        {
-            return m_impulses_vector[index];
-        }
     };
     
     //! The ambisonic multi-decoder.
@@ -303,11 +324,6 @@ namespace Hoa2D
 
         
     public:
-        
-        const float* getImpulseResponse(int index)
-        {
-            return m_decoder_binaural->getImpulseResponse(index);
-        }
         
         //! The multi-decoder constructor.
         /**	The multi-decoder constructor allocates and initialize the three decoder. The default decoder will be the regular one with 2 * order + 2 number of channels.
@@ -411,7 +427,7 @@ namespace Hoa2D
         void setSampleRate(unsigned int sampleRate);
         
         //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
+        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding.
          
          @param     vectorSize		The vector rate.
          
@@ -420,10 +436,18 @@ namespace Hoa2D
         
         void setVectorSize(unsigned int vectorSize);
         
+        //! Set the pinna size.
+        /** Set the pinna size of the binaural decoding.
+         
+            @param     pinnaSize		The pinna size.
+         
+         */
+        void setPinnaSize(DecoderBinaural::PinnaSize pinnaSize);
+        
         //! Retrieve if the binaural decoder is ready to process.
         /** Retrieve if the impulses has been loaded and the matrix allocated.
          
-            @return    The true if the binaural decoder is ready to process and false if not.
+            @return    The function returns true if the binaural decoder is ready to process and false if not.
          */
 		inline bool getBinauralState() const
         {
@@ -431,6 +455,16 @@ namespace Hoa2D
                 return true;
             else
                 return false;
+        };
+        
+        //! Retrieve if the pinna size of the binaural decoder.
+        /** Retrieve if the pinna size of the binaural decoder.
+         
+            @return    The function returns the pinna size of the binaural decoder.
+         */
+		inline DecoderBinaural::PinnaSize getPinnaSize() const
+        {
+            return m_decoder_binaural->getPinnaSize();
         };
         
         //! Retrieve the azimuth of a channel.
