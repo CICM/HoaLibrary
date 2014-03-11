@@ -197,8 +197,8 @@ namespace Hoa2D
     
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
-    unsigned int hoa_binaural_impulse_sizes[]   = {200, 218, 400, 436}; // 200 // 37
-    unsigned int hoa_binaural_crop[]            = {26, 40, 64, 80};
+    unsigned int hoa_binaural_impulse_sizes[]   = {128, 142, 256, 286};
+    unsigned int hoa_binaural_crop[]            = {36, 40, 64, 80};
     
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {

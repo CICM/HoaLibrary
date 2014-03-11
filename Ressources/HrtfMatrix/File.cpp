@@ -82,9 +82,9 @@ int main()
     ofstream fichier("hrtfmatrix.cpp", ios::out | ios::trunc);
     if(fichier)
     {
-        fichier << header << "\nnamespace Hoa3D\n{";
+        fichier << header << "\nnamespace Hoa2D\n{";
         
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < 4; i++)
         {
             sprintf(path_temp1, "../MIT_HrtfDatabase/%i/elev0/L0e000a.wav", frequence[i]);
             wavfile = Read_Wav(path_temp1, &size);
@@ -112,7 +112,7 @@ int main()
                 
                 strcat(path, temp);
                 wavfile = Read_Wav(path, &size);
-                if(wavfile && size == 512)
+                if(wavfile)
                 {
                     for(int l = 0; l < size -1; l++)
                     {
