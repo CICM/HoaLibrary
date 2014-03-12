@@ -30,6 +30,16 @@ namespace Hoa2D
         m_channels_abscissa_float[index] = m_channels_abscissa_double[index] = getChannelAbscissa(index);
         m_channels_ordinate_float[index] = m_channels_ordinate_double[index] = getChannelOrdinate(index);
     }
+	
+	void Vector::setChannelsAzimuth(double* azimuths)
+    {
+        Planewaves::setChannelsAzimuth(azimuths);
+		for (int i = 0; i < m_number_of_channels; i++)
+		{
+			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
+			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
+		}
+    }
     
     void Vector::processVelocity(const float* inputs, float* outputs)
     {

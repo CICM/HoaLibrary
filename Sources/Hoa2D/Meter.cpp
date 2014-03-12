@@ -13,8 +13,9 @@ namespace Hoa2D
         m_ramp                  = 0;
         m_vector_size           = 256;
         m_channels_peaks    = new double[m_number_of_channels];
-		m_channels_azimuths_widths = new double[m_number_of_channels];
-		m_channels_azimuths_mapped = new double[m_number_of_channels];
+		m_channels_azimuth_width = new double[m_number_of_channels];
+		m_channels_azimuth_mapped = new double[m_number_of_channels];
+		computeAngles();
     }
     
     void Meter::setVectorSize(unsigned int vectorSize)
@@ -26,8 +27,18 @@ namespace Hoa2D
     void Meter::setChannelAzimuth(unsigned int index, double azimuth)
 	{
         Planewaves::setChannelAzimuth(index, azimuth);
-        
-        double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
+        computeAngles();
+	}
+	
+	void Meter::setChannelsAzimuth(double* azimuth)
+	{
+        Planewaves::setChannelsAzimuth(azimuth);
+		computeAngles();
+	}
+	
+	void Meter::computeAngles()
+	{
+		double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
         for(int i = 0; i < m_number_of_channels; i++)
         {
 			curAngle = getChannelAzimuth(i);
@@ -48,8 +59,8 @@ namespace Hoa2D
             if (prevPortion < 0.)
                 prevPortion += HOA_2PI;
             
-            m_channels_azimuths_widths[i] = (prevPortion + nextPortion)*0.5;
-            m_channels_azimuths_mapped[i] = (curAngle - prevPortion*0.5) + m_channels_azimuths_widths[i]*0.5;
+            m_channels_azimuth_width[i] = (prevPortion + nextPortion)*0.5;
+            m_channels_azimuth_mapped[i] = (curAngle - prevPortion*0.5) + m_channels_azimuth_width[i]*0.5;
         }
 	}
     
@@ -96,9 +107,8 @@ namespace Hoa2D
     Meter::~Meter()
     {
         delete [] m_channels_peaks;
-        delete [] m_matrix;
-		delete [] m_channels_azimuths_widths;
-		delete [] m_channels_azimuths_mapped;
+		delete [] m_channels_azimuth_width;
+		delete [] m_channels_azimuth_mapped;
     }
 }
 

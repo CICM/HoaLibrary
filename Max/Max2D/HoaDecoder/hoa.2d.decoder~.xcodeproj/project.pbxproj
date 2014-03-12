@@ -114,7 +114,7 @@
 		8FFEFFEB18CEED2B000BC0D6 /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
 		8FFEFFEC18CEED2B000BC0D6 /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
 		8FFEFFED18CEED2B000BC0D6 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
-		8FFEFFEE18CEED2B000BC0D6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8FFEFFEE18CEED2B000BC0D6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vector.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8FFEFFEF18CEED2B000BC0D6 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FFEFFF018CEED2B000BC0D6 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */

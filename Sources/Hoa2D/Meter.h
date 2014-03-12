@@ -21,10 +21,10 @@ namespace Hoa2D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-        unsigned int*   m_matrix;
-		double*			m_channels_azimuths_mapped;
-		double*			m_channels_azimuths_widths;
+		double*			m_channels_azimuth_mapped;
+		double*			m_channels_azimuth_width;
 
+		void computeAngles();
     public:
         
         //! The meter constructor.
@@ -39,14 +39,23 @@ namespace Hoa2D
          */
         ~Meter();
 
-        //! Set the azimuth of a channel.
-        /** Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
+        //! Set the azimuth of a given channel.
+        /** Set the azimuth of a given channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
          *
          * @param     index		The index of the channel.
          * @param     azimuth		The azimuth.
 		 * @see getChannelAzimuth
          */
 		void setChannelAzimuth(unsigned int index, double azimuth);
+		
+		//! Set the azimtuh of all the channels.
+        /** Set the azimtuh of all the channels. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
+         
+		 @param     azimuths		The azimuths array.
+         
+		 @see    setChannelAzimuth
+         */
+		void setChannelsAzimuth(double* azimuth);
         
 		//! Get the mapped azimuth of a given channel.
         /**
@@ -55,7 +64,11 @@ namespace Hoa2D
          * @return				The mapped azimuth.
 		 * @see getChannelAzimuth, getChannelAzimuthMapped
          */
-        double getChannelAzimuthMapped(unsigned int index) const;
+        double getChannelAzimuthMapped(unsigned int index) const
+		{
+			assert(index < m_number_of_channels);
+            return m_channels_azimuth_mapped[index];
+		}
 		
 		//! Get the width of a given channel.
         /**
@@ -64,15 +77,11 @@ namespace Hoa2D
          * @return				The channel width.
 		 * @see getChannelAzimuth, getChannelAzimuthMapped
          */
-        double getChannelWidth(unsigned int index) const;
-		
-		//! Get the azimuth of a channel.
-        /**
-         * @param		index		The index of the channel.
-         * @return					The channel azimuth.
-		 * @see getChannelAzimuth
-         */
-        double getChannelAzimuth(unsigned int index) const;
+        double getChannelWidth(unsigned int index) const
+		{
+			assert(index < m_number_of_channels);
+            return m_channels_azimuth_width[index];
+		}
         
         //! Set the vector size.
         /**
@@ -107,7 +116,7 @@ namespace Hoa2D
         inline double getChannelEnergy(unsigned int index) const
         {
             assert(index < m_number_of_channels);
-            return 20. * log10(m_channels_peaks[index]);
+            return atodb(m_channels_peaks[index]);
         }
         
         //! This method performs the metering with single precision.

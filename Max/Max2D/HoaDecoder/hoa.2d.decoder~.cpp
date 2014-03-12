@@ -510,7 +510,7 @@ void send_configuration(t_hoa_decoder *x)
             {
                 object = jpatchline_get_box2(line);
                 t_symbol* classname = object_classname(jbox_get_object(object));
-                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") ||  classname == gensym("hoa.2d.vector~"))
+                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.vector~"))
                 {
                     object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
                     object_method_typed(jbox_get_object(object), gensym("angles"), x->f_decoder->getNumberOfChannels(), argv, NULL);

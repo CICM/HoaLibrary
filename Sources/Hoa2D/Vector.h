@@ -46,9 +46,18 @@ namespace Hoa2D
             @param     azimuth		The azimuth.
          */
 		void setChannelAzimuth(unsigned int index, double azimuth);
+		
+		//! Set the azimtuh of all the channels.
+        /** Set the azimtuh of all the channels. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
+         
+		 @param     azimuths		The azimuths array.
+         
+		 @see    setChannelAzimuth
+         */
+		void setChannelsAzimuth(double* azimuth);
         
         //! This method compute the energy and velocity vectors with single precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array contains the channels samples and the minimum size must be the number of channels. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrangement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
          
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.
@@ -56,7 +65,7 @@ namespace Hoa2D
         void process(const float* inputs, float* outputs);
         
         //! This method compute the energy and velocity vectors with double precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array contains the channels samples and the minimum size must be the number of channels. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrangement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
          
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.
@@ -64,7 +73,7 @@ namespace Hoa2D
         void process(const double* inputs, double* outputs);
         
         //! This method compute the velocity vector with single precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of channels. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrangement in the outputs array is velocity abscissa, velocity ordinate.
          
          @param     inputs   The inputs array.
          @param     outputs  The outputs array.
@@ -72,7 +81,7 @@ namespace Hoa2D
         void processVelocity(const float* inputs, float* outputs);
         
         //! This method compute the velocity vector with double precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of channels. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrangement in the outputs array is velocity abscissa, velocity ordinate.
          
          @param     inputs   The inputs array.
          @param     outputs  The outputs array.
@@ -80,7 +89,7 @@ namespace Hoa2D
         void processVelocity(const double* inputs, double* outputs);
         
         //! This method compute the energy vector with single precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrangement in the outputs array is energy abscissa, energy ordinate.
          
          @param     inputs   The inputs array.
          @param     outputs  The outputs array.
@@ -88,7 +97,7 @@ namespace Hoa2D
         void processEnergy(const float* inputs, float* outputs);
         
         //! This method compute the energy vector with double precision.
-        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrangement in the outputs array is energy abscissa, energy ordinate.
          
          @param     inputs   The inputs array.
          @param     outputs  The outputs array.

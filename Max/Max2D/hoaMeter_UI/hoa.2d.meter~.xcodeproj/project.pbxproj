@@ -36,11 +36,11 @@
 		2FBBEAE508F335360078DB84 /* hoa.2d.meter~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.meter~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F16BFD218C6282E00B408F9 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
 		8F16BFD318C6282E00B408F9 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
-		8F16BFD618C6283700B408F9 /* hoa.2d.meter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.2d.meter~.cpp"; sourceTree = "<group>"; };
-		8F16BFD818C6306B00B408F9 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
-		8F16BFD918C6306B00B408F9 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8F16BFD618C6283700B408F9 /* hoa.2d.meter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = "hoa.2d.meter~.cpp"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		8F16BFD818C6306B00B408F9 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Meter.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		8F16BFD918C6306B00B408F9 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Meter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8F16BFDC18C63BA900B408F9 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
-		8F16BFDD18C63BA900B408F9 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8F16BFDD18C63BA900B408F9 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vector.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoa2D.xcconfig; path = ../MaxHoa2D.xcconfig; sourceTree = "<group>"; };
 		8F7ADEA618C4D60900CBCA70 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
@@ -290,11 +290,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
 				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
@@ -334,11 +330,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
 				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
