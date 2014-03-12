@@ -12,6 +12,92 @@ namespace Hoa2D
     // Kit Sources //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    KitSources::PolarLines::PolarLines(unsigned int numberOfSources)
+    {
+        assert(numberOfSources > 0);
+        m_number_of_sources = numberOfSources;
+        
+        m_values_old    = new float[m_number_of_sources * 2];
+        m_values_new    = new float[m_number_of_sources * 2];
+        m_values_step   = new float[m_number_of_sources * 2];
+    }
+    
+    KitSources::PolarLines::~PolarLines()
+    {
+        delete [] m_values_old;
+        delete [] m_values_new;
+        delete [] m_values_step;
+    }
+    
+    void KitSources::PolarLines::setRamp(unsigned int ramp)
+    {
+        m_ramp = clip_min(ramp, (long)1);
+    }
+    
+    void KitSources::PolarLines::setRadius(unsigned int index, double radius)
+    {
+        assert(index < m_number_of_sources);
+        m_values_new[index]  = radius;
+        m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
+        m_counter = 0;
+    }
+    
+    void KitSources::PolarLines::setAzimuth(unsigned int index, double azimuth)
+    {
+        assert(index < m_number_of_sources);
+        m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
+        m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+        double distance;
+        if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
+            distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
+        else
+            distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+        if(distance <= HOA_PI)
+        {
+            m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+        else
+        {
+            if(m_values_new > m_values_old)
+            {
+                m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+            }
+            else
+            {
+                m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+            }
+        }
+        m_counter = 0;
+    }
+    
+    void KitSources::PolarLines::setRadiusDirect(unsigned int index, double radius)
+    {
+        assert(index < m_number_of_sources);
+        m_values_old[index] = m_values_new[index] = radius;
+        m_values_step[index] = 0.;
+        m_counter = 0;
+    }
+    
+    void KitSources::PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
+    {
+        assert(index < m_number_of_sources);
+        m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
+        m_values_step[index + m_number_of_sources] = 0.;
+        m_counter = 0;
+    }
+    
+    void KitSources::PolarLines::process(float* vector)
+    {
+        cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
+        if(m_counter++ >= m_ramp)
+        {
+            cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
+            memset(m_values_step, 0, sizeof(double) * m_number_of_sources * 2);
+            m_counter    = 0;
+        }
+        cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
+    }
+    
     KitSources::KitSources(unsigned int order)
     {
         m_order                 = clip_min(order, 1);
@@ -20,6 +106,7 @@ namespace Hoa2D
         m_decoding_mode         = DecoderMulti::Irregular;
         m_optim_mode            = Optim::InPhase;
         m_offset                = 0.;
+        m_lines                 = new PolarLines(m_number_of_sources);
         
         m_map       = new Map(m_order, m_number_of_sources);
         m_optim     = new Optim(m_order, m_optim_mode);
@@ -30,6 +117,8 @@ namespace Hoa2D
         m_meter     = new Meter(m_number_of_channels);
         m_sources   = new SourcesManager();
         m_sources->sourceNewPolar(1., 0.);
+        m_lines->setRadiusDirect(0, 1.);
+        m_lines->setAzimuthDirect(0, 0.);
         
         m_inputs_double     = new double[1];
         m_outputs_double    = new double[1];
@@ -37,6 +126,7 @@ namespace Hoa2D
         m_inputs_float      = new float[1];
         m_outputs_float     = new float[1];
         m_harmonics_float   = new float[1];
+        m_lines_vector      = new float[m_number_of_sources * 2];
     }
     
     void KitSources::setOrder(unsigned int order)
@@ -116,6 +206,12 @@ namespace Hoa2D
         {
             for(int i = 0; i < m_vector_size; i++)
             {
+                m_lines->process(m_lines_vector);
+                for(int j = 0; j < numins; j++)
+                    m_map->setRadius(j, m_lines_vector[j]);
+                for(int j = 0; j < numins; j++)
+                    m_map->setAzimuth(j, m_lines_vector[j+numins]);
+                
                 m_map->process(m_inputs_float + numins * i, m_harmonics_float + nharmo * i);
                 m_optim->process(m_harmonics_float + nharmo * i, m_harmonics_float + nharmo * i);
                 m_decoder->processRegular( m_harmonics_float + nharmo * i, m_outputs_float + numouts * i);
@@ -126,6 +222,11 @@ namespace Hoa2D
         {
             for(int i = 0; i < m_vector_size; i++)
             {
+                m_lines->process(m_lines_vector);
+                for(int j = 0; j < numins; j++)
+                    m_map->setRadius(j, m_lines_vector[j]);
+                for(int j = 0; j < numins; j++)
+                    m_map->setAzimuth(j, m_lines_vector[j+numins]);
                 m_map->process(m_inputs_float + numins * i, m_harmonics_float + nharmo * i);
                 m_optim->process(m_harmonics_float + nharmo * i, m_harmonics_float + nharmo * i);
                 m_decoder->processIrregular(m_harmonics_float + nharmo * i, m_outputs_float + numouts * i);
@@ -136,6 +237,12 @@ namespace Hoa2D
         {
             for(int i = 0; i < m_vector_size; i++)
             {
+                m_lines->process(m_lines_vector);
+                for(int j = 0; j < numins; j++)
+                    m_map->setRadius(j, m_lines_vector[j]);
+                for(int j = 0; j < numins; j++)
+                    m_map->setAzimuth(j, m_lines_vector[j+numins]);
+            
                 m_map->process(m_inputs_float + numins * i, m_harmonics_float + nharmo * i);
                 m_optim->process(m_harmonics_float + nharmo * i, m_harmonics_float + nharmo * i);
             }
@@ -180,6 +287,19 @@ namespace Hoa2D
             delete m_meter;
             m_meter = new Meter(m_number_of_channels);
         }
+        if(m_map->getNumberOfSources() != m_number_of_sources)
+        {
+            delete m_map;
+            m_map       = new Map(m_order, m_number_of_sources);
+        }
+        if(m_lines->getNumberOfSources() != m_number_of_sources)
+        {
+            delete m_lines;
+            delete [] m_lines_vector;
+            m_lines    = new PolarLines(m_number_of_sources);
+            m_lines_vector = new float[m_number_of_sources * 2];
+            
+        }
         if(m_sources->getNumberOfSources() != m_number_of_sources)
         {
             ;
@@ -199,6 +319,7 @@ namespace Hoa2D
         delete m_meter;
         delete m_sources;
         
+        delete [] m_lines_vector;
         delete [] m_inputs_double;
         delete [] m_outputs_double;
         delete [] m_harmonics_double;

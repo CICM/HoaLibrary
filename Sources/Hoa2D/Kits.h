@@ -24,6 +24,53 @@ namespace Hoa2D
     {
         
     private:
+        
+        class PolarLines
+        {
+            
+        private:
+            float*      m_values_old;
+            float*      m_values_new;
+            float*      m_values_step;
+            unsigned int m_counter;
+            unsigned int m_ramp;
+            unsigned int m_number_of_sources;
+            
+        public:
+            PolarLines(unsigned int numberOfSources);
+            ~PolarLines();
+            
+            inline unsigned int getNumberOfSources() const
+            {
+                return m_number_of_sources;
+            }
+            
+            inline unsigned int getRamp() const
+            {
+                return m_ramp;
+            }
+            
+            inline double getRadius(unsigned int index) const
+            {
+                assert(index < m_number_of_sources);
+                return m_values_new[index];
+            }
+            
+            inline double getAzimuth(unsigned int index) const
+            {
+                assert(index < m_number_of_sources);
+                return m_values_new[m_number_of_sources +index];
+            }
+            
+            void setRamp(unsigned int ramp);
+            void setRadius(unsigned int index, double radius);
+            void setAzimuth(unsigned int index, double azimuth);
+            void setRadiusDirect(unsigned int index, double radius);
+            void setAzimuthDirect(unsigned int index, double azimuth);
+            
+            void process(float* vector);
+        };
+        
         unsigned int        m_order;
         unsigned int        m_number_of_sources;
         unsigned int        m_number_of_channels;
@@ -38,6 +85,7 @@ namespace Hoa2D
         DecoderMulti*   m_decoder;
         Meter*          m_meter;
         SourcesManager* m_sources;
+        PolarLines*     m_lines;
         
         double*         m_inputs_double;
         double*         m_outputs_double;
@@ -45,6 +93,7 @@ namespace Hoa2D
         float*          m_inputs_float;
         float*          m_outputs_float;
         float*          m_harmonics_float;
+        float*          m_lines_vector;
     public:
         
         //! The sources kit constructor.
