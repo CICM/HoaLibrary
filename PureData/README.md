@@ -2,7 +2,7 @@
 
 ##### Version :
 
-Beta 1.0 for Pure Data 0.43.4 (32 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
+Beta 1.0 for Pure Data 0.43.4 (32 bit) and higher on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
 
 ![Image Pd](https://raw.github.com/CICM/HoaLibrary/master/Ressources/PhotoPd.png "Pd Patch")
 
@@ -12,7 +12,7 @@ Pierre Guillot, Eliott Paris
 
 ##### Dependencies : 
 
-<a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>, <a title="PdEnhanced" href="https://github.com/pierreguillot/PdEnhanced" target="_blank">PdEnhanced</a>
+<a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>, <a title="CicmWrapper" href="https://github.com/CICM/CicmWrapper" target="_blank">CicmWrapper</a>
 
 ##### Licence : 
 
