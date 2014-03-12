@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
+		8F213C6518D05C4600A346AB /* Kits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213C6318D05C4600A346AB /* Kits.cpp */; };
+		8F213C6618D05C4600A346AB /* Kits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213C6418D05C4600A346AB /* Kits.h */; };
+		8F2A50C518C4EAFA00F9A068 /* hoa.2d.tool~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A50C418C4EAFA00F9A068 /* hoa.2d.tool~.cpp */; };
+		8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */; };
+		8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */; };
+		8F7AE5F718C4D88300CBCA70 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */; };
+		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+		8F85B66418C8457E00C50407 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */; };
+		8F85B66518C8457E00C50407 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F85B66218C8457E00C50407 /* hoa.max.cpp */; };
+		8F85B66618C8457E00C50407 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F85B66318C8457E00C50407 /* hoa.max.h */; };
+		8FFE000018CEED2B000BC0D6 /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFD418CEED2B000BC0D6 /* Map.h */; };
+		8FFE000118CEED2B000BC0D6 /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFD518CEED2B000BC0D6 /* Meter.cpp */; };
+		8FFE000218CEED2B000BC0D6 /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFD618CEED2B000BC0D6 /* Meter.h */; };
+		8FFE000318CEED2B000BC0D6 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFD718CEED2B000BC0D6 /* Optim.cpp */; };
+		8FFE000418CEED2B000BC0D6 /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFD818CEED2B000BC0D6 /* Optim.h */; };
+		8FFE000518CEED2B000BC0D6 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFD918CEED2B000BC0D6 /* Planewaves.cpp */; };
+		8FFE000618CEED2B000BC0D6 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFDA18CEED2B000BC0D6 /* Planewaves.h */; };
+		8FFE000718CEED2B000BC0D6 /* Projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFDB18CEED2B000BC0D6 /* Projector.cpp */; };
+		8FFE000818CEED2B000BC0D6 /* Projector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFDC18CEED2B000BC0D6 /* Projector.h */; };
+		8FFE000918CEED2B000BC0D6 /* Recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFDD18CEED2B000BC0D6 /* Recomposer.cpp */; };
+		8FFE000A18CEED2B000BC0D6 /* Recomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFDE18CEED2B000BC0D6 /* Recomposer.h */; };
+		8FFE000B18CEED2B000BC0D6 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFDF18CEED2B000BC0D6 /* Rotate.cpp */; };
+		8FFE000C18CEED2B000BC0D6 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFE018CEED2B000BC0D6 /* Rotate.h */; };
+		8FFE000D18CEED2B000BC0D6 /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFE118CEED2B000BC0D6 /* Scope.cpp */; };
+		8FFE000E18CEED2B000BC0D6 /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFE218CEED2B000BC0D6 /* Scope.h */; };
+		8FFE000F18CEED2B000BC0D6 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFE318CEED2B000BC0D6 /* Source.cpp */; };
+		8FFE001018CEED2B000BC0D6 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFE418CEED2B000BC0D6 /* Source.h */; };
+		8FFE001118CEED2B000BC0D6 /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFE518CEED2B000BC0D6 /* SourcesGroup.cpp */; };
+		8FFE001218CEED2B000BC0D6 /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFE618CEED2B000BC0D6 /* SourcesGroup.h */; };
+		8FFE001318CEED2B000BC0D6 /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFE718CEED2B000BC0D6 /* SourcesManager.cpp */; };
+		8FFE001418CEED2B000BC0D6 /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFE818CEED2B000BC0D6 /* SourcesManager.h */; };
+		8FFE001518CEED2B000BC0D6 /* SourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFE918CEED2B000BC0D6 /* SourcesPreset.cpp */; };
+		8FFE001618CEED2B000BC0D6 /* SourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFEA18CEED2B000BC0D6 /* SourcesPreset.h */; };
+		8FFE001718CEED2B000BC0D6 /* SourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFEB18CEED2B000BC0D6 /* SourcesTrajectory.cpp */; };
+		8FFE001818CEED2B000BC0D6 /* SourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFEC18CEED2B000BC0D6 /* SourcesTrajectory.h */; };
+		8FFE001918CEED2B000BC0D6 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFED18CEED2B000BC0D6 /* Vector.cpp */; };
+		8FFE001A18CEED2B000BC0D6 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFEE18CEED2B000BC0D6 /* Vector.h */; };
+		8FFE001B18CEED2B000BC0D6 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFEF18CEED2B000BC0D6 /* Wider.cpp */; };
+		8FFE001C18CEED2B000BC0D6 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFF018CEED2B000BC0D6 /* Wider.h */; };
+		8FFEFFF518CEED2B000BC0D6 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFC918CEED2B000BC0D6 /* Ambisonic.cpp */; };
+		8FFEFFF618CEED2B000BC0D6 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFCA18CEED2B000BC0D6 /* Ambisonic.h */; };
+		8FFEFFF718CEED2B000BC0D6 /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFCB18CEED2B000BC0D6 /* BinauralMatrix2D.cpp */; };
+		8FFEFFF818CEED2B000BC0D6 /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFCC18CEED2B000BC0D6 /* ChannelManager.cpp */; };
+		8FFEFFF918CEED2B000BC0D6 /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFCD18CEED2B000BC0D6 /* ChannelManager.h */; };
+		8FFEFFFA18CEED2B000BC0D6 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFCE18CEED2B000BC0D6 /* Decoder.cpp */; };
+		8FFEFFFB18CEED2B000BC0D6 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFCF18CEED2B000BC0D6 /* Decoder.h */; };
+		8FFEFFFC18CEED2B000BC0D6 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFD018CEED2B000BC0D6 /* Encoder.cpp */; };
+		8FFEFFFD18CEED2B000BC0D6 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFD118CEED2B000BC0D6 /* Encoder.h */; };
+		8FFEFFFE18CEED2B000BC0D6 /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFEFFD218CEED2B000BC0D6 /* Hoa2D.h */; };
+		8FFEFFFF18CEED2B000BC0D6 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FFEFFD318CEED2B000BC0D6 /* Map.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2FBBEAE508F335360078DB84 /* hoa.2d.tool~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.tool~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F213C6318D05C4600A346AB /* Kits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kits.cpp; sourceTree = "<group>"; };
+		8F213C6418D05C4600A346AB /* Kits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kits.h; sourceTree = "<group>"; };
+		8F2A50C418C4EAFA00F9A068 /* hoa.2d.tool~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.2d.tool~.cpp"; sourceTree = "<group>"; };
+		8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoa2D.xcconfig; path = ../MaxHoa2D.xcconfig; sourceTree = "<group>"; };
+		8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.max.h; path = ../Hoa2D.max.h; sourceTree = "<group>"; };
+		8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max_commonsyms.h; path = ../../hoa.max_commonsyms.h; sourceTree = "<group>"; };
+		8F85B66218C8457E00C50407 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
+		8F85B66318C8457E00C50407 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
+		8FFEFFC918CEED2B000BC0D6 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8FFEFFCA18CEED2B000BC0D6 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		8FFEFFCB18CEED2B000BC0D6 /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
+		8FFEFFCC18CEED2B000BC0D6 /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
+		8FFEFFCD18CEED2B000BC0D6 /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
+		8FFEFFCE18CEED2B000BC0D6 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		8FFEFFCF18CEED2B000BC0D6 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8FFEFFD018CEED2B000BC0D6 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		8FFEFFD118CEED2B000BC0D6 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		8FFEFFD218CEED2B000BC0D6 /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
+		8FFEFFD318CEED2B000BC0D6 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8FFEFFD418CEED2B000BC0D6 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8FFEFFD518CEED2B000BC0D6 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		8FFEFFD618CEED2B000BC0D6 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8FFEFFD718CEED2B000BC0D6 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8FFEFFD818CEED2B000BC0D6 /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8FFEFFD918CEED2B000BC0D6 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8FFEFFDA18CEED2B000BC0D6 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8FFEFFDB18CEED2B000BC0D6 /* Projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projector.cpp; sourceTree = "<group>"; };
+		8FFEFFDC18CEED2B000BC0D6 /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
+		8FFEFFDD18CEED2B000BC0D6 /* Recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recomposer.cpp; sourceTree = "<group>"; };
+		8FFEFFDE18CEED2B000BC0D6 /* Recomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomposer.h; sourceTree = "<group>"; };
+		8FFEFFDF18CEED2B000BC0D6 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		8FFEFFE018CEED2B000BC0D6 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		8FFEFFE118CEED2B000BC0D6 /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
+		8FFEFFE218CEED2B000BC0D6 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		8FFEFFE318CEED2B000BC0D6 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
+		8FFEFFE418CEED2B000BC0D6 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		8FFEFFE518CEED2B000BC0D6 /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
+		8FFEFFE618CEED2B000BC0D6 /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
+		8FFEFFE718CEED2B000BC0D6 /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
+		8FFEFFE818CEED2B000BC0D6 /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
+		8FFEFFE918CEED2B000BC0D6 /* SourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesPreset.cpp; sourceTree = "<group>"; };
+		8FFEFFEA18CEED2B000BC0D6 /* SourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesPreset.h; sourceTree = "<group>"; };
+		8FFEFFEB18CEED2B000BC0D6 /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
+		8FFEFFEC18CEED2B000BC0D6 /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
+		8FFEFFED18CEED2B000BC0D6 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		8FFEFFEE18CEED2B000BC0D6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8FFEFFEF18CEED2B000BC0D6 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		8FFEFFF018CEED2B000BC0D6 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AE5F718C4D88300CBCA70 /* MaxAudioAPI.framework in Frameworks */,
+				8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */,
+				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				8F2A50C418C4EAFA00F9A068 /* hoa.2d.tool~.cpp */,
+				8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */,
+				8F85B66218C8457E00C50407 /* hoa.max.cpp */,
+				8F85B66318C8457E00C50407 /* hoa.max.h */,
+				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
+				8FFEFFC818CEED2B000BC0D6 /* Hoa2D */,
+				8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */,
+				8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */,
+				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
+				8F18A8BD17287341005FD621 /* Accelerate.framework */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* hoa.2d.tool~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8FFEFFC818CEED2B000BC0D6 /* Hoa2D */ = {
+			isa = PBXGroup;
+			children = (
+				8F213C6318D05C4600A346AB /* Kits.cpp */,
+				8F213C6418D05C4600A346AB /* Kits.h */,
+				8FFEFFC918CEED2B000BC0D6 /* Ambisonic.cpp */,
+				8FFEFFCA18CEED2B000BC0D6 /* Ambisonic.h */,
+				8FFEFFCB18CEED2B000BC0D6 /* BinauralMatrix2D.cpp */,
+				8FFEFFCC18CEED2B000BC0D6 /* ChannelManager.cpp */,
+				8FFEFFCD18CEED2B000BC0D6 /* ChannelManager.h */,
+				8FFEFFCE18CEED2B000BC0D6 /* Decoder.cpp */,
+				8FFEFFCF18CEED2B000BC0D6 /* Decoder.h */,
+				8FFEFFD018CEED2B000BC0D6 /* Encoder.cpp */,
+				8FFEFFD118CEED2B000BC0D6 /* Encoder.h */,
+				8FFEFFD218CEED2B000BC0D6 /* Hoa2D.h */,
+				8FFEFFD318CEED2B000BC0D6 /* Map.cpp */,
+				8FFEFFD418CEED2B000BC0D6 /* Map.h */,
+				8FFEFFD518CEED2B000BC0D6 /* Meter.cpp */,
+				8FFEFFD618CEED2B000BC0D6 /* Meter.h */,
+				8FFEFFD718CEED2B000BC0D6 /* Optim.cpp */,
+				8FFEFFD818CEED2B000BC0D6 /* Optim.h */,
+				8FFEFFD918CEED2B000BC0D6 /* Planewaves.cpp */,
+				8FFEFFDA18CEED2B000BC0D6 /* Planewaves.h */,
+				8FFEFFDB18CEED2B000BC0D6 /* Projector.cpp */,
+				8FFEFFDC18CEED2B000BC0D6 /* Projector.h */,
+				8FFEFFDD18CEED2B000BC0D6 /* Recomposer.cpp */,
+				8FFEFFDE18CEED2B000BC0D6 /* Recomposer.h */,
+				8FFEFFDF18CEED2B000BC0D6 /* Rotate.cpp */,
+				8FFEFFE018CEED2B000BC0D6 /* Rotate.h */,
+				8FFEFFE118CEED2B000BC0D6 /* Scope.cpp */,
+				8FFEFFE218CEED2B000BC0D6 /* Scope.h */,
+				8FFEFFE318CEED2B000BC0D6 /* Source.cpp */,
+				8FFEFFE418CEED2B000BC0D6 /* Source.h */,
+				8FFEFFE518CEED2B000BC0D6 /* SourcesGroup.cpp */,
+				8FFEFFE618CEED2B000BC0D6 /* SourcesGroup.h */,
+				8FFEFFE718CEED2B000BC0D6 /* SourcesManager.cpp */,
+				8FFEFFE818CEED2B000BC0D6 /* SourcesManager.h */,
+				8FFEFFE918CEED2B000BC0D6 /* SourcesPreset.cpp */,
+				8FFEFFEA18CEED2B000BC0D6 /* SourcesPreset.h */,
+				8FFEFFEB18CEED2B000BC0D6 /* SourcesTrajectory.cpp */,
+				8FFEFFEC18CEED2B000BC0D6 /* SourcesTrajectory.h */,
+				8FFEFFED18CEED2B000BC0D6 /* Vector.cpp */,
+				8FFEFFEE18CEED2B000BC0D6 /* Vector.h */,
+				8FFEFFEF18CEED2B000BC0D6 /* Wider.cpp */,
+				8FFEFFF018CEED2B000BC0D6 /* Wider.h */,
+			);
+			name = Hoa2D;
+			path = ../../../Sources/Hoa2D;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FFE001C18CEED2B000BC0D6 /* Wider.h in Headers */,
+				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
+				8FFE001218CEED2B000BC0D6 /* SourcesGroup.h in Headers */,
+				8FFE000A18CEED2B000BC0D6 /* Recomposer.h in Headers */,
+				8FFE000018CEED2B000BC0D6 /* Map.h in Headers */,
+				8FFE001418CEED2B000BC0D6 /* SourcesManager.h in Headers */,
+				8F213C6618D05C4600A346AB /* Kits.h in Headers */,
+				8FFE000E18CEED2B000BC0D6 /* Scope.h in Headers */,
+				8F85B66418C8457E00C50407 /* hoa.max_commonsyms.h in Headers */,
+				8FFE001018CEED2B000BC0D6 /* Source.h in Headers */,
+				8F85B66618C8457E00C50407 /* hoa.max.h in Headers */,
+				8FFE000218CEED2B000BC0D6 /* Meter.h in Headers */,
+				8FFEFFFE18CEED2B000BC0D6 /* Hoa2D.h in Headers */,
+				8FFE000C18CEED2B000BC0D6 /* Rotate.h in Headers */,
+				8FFEFFF918CEED2B000BC0D6 /* ChannelManager.h in Headers */,
+				8FFE000618CEED2B000BC0D6 /* Planewaves.h in Headers */,
+				8FFE000818CEED2B000BC0D6 /* Projector.h in Headers */,
+				8FFEFFFD18CEED2B000BC0D6 /* Encoder.h in Headers */,
+				8FFEFFFB18CEED2B000BC0D6 /* Decoder.h in Headers */,
+				8FFE001618CEED2B000BC0D6 /* SourcesPreset.h in Headers */,
+				8FFE000418CEED2B000BC0D6 /* Optim.h in Headers */,
+				8FFEFFF618CEED2B000BC0D6 /* Ambisonic.h in Headers */,
+				8FFE001818CEED2B000BC0D6 /* SourcesTrajectory.h in Headers */,
+				8FFE001A18CEED2B000BC0D6 /* Vector.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.2d.tool~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.2d.tool~" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FFE001318CEED2B000BC0D6 /* SourcesManager.cpp in Sources */,
+				8F85B66518C8457E00C50407 /* hoa.max.cpp in Sources */,
+				8FFE000918CEED2B000BC0D6 /* Recomposer.cpp in Sources */,
+				8FFEFFF818CEED2B000BC0D6 /* ChannelManager.cpp in Sources */,
+				8FFE000D18CEED2B000BC0D6 /* Scope.cpp in Sources */,
+				8FFE001B18CEED2B000BC0D6 /* Wider.cpp in Sources */,
+				8FFE000718CEED2B000BC0D6 /* Projector.cpp in Sources */,
+				8FFEFFFA18CEED2B000BC0D6 /* Decoder.cpp in Sources */,
+				8F2A50C518C4EAFA00F9A068 /* hoa.2d.tool~.cpp in Sources */,
+				8FFE001918CEED2B000BC0D6 /* Vector.cpp in Sources */,
+				8FFEFFF718CEED2B000BC0D6 /* BinauralMatrix2D.cpp in Sources */,
+				8FFEFFFC18CEED2B000BC0D6 /* Encoder.cpp in Sources */,
+				8FFEFFFF18CEED2B000BC0D6 /* Map.cpp in Sources */,
+				8FFE000118CEED2B000BC0D6 /* Meter.cpp in Sources */,
+				8FFE001518CEED2B000BC0D6 /* SourcesPreset.cpp in Sources */,
+				8FFE000B18CEED2B000BC0D6 /* Rotate.cpp in Sources */,
+				8FFE000F18CEED2B000BC0D6 /* Source.cpp in Sources */,
+				8FFE000518CEED2B000BC0D6 /* Planewaves.cpp in Sources */,
+				8FFEFFF518CEED2B000BC0D6 /* Ambisonic.cpp in Sources */,
+				8FFE001718CEED2B000BC0D6 /* SourcesTrajectory.cpp in Sources */,
+				8F213C6518D05C4600A346AB /* Kits.cpp in Sources */,
+				8FFE001118CEED2B000BC0D6 /* SourcesGroup.cpp in Sources */,
+				8FFE000318CEED2B000BC0D6 /* Optim.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(C74SUPPORT)/msp-includes\\\"",
+					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.2d.tool~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(C74SUPPORT)/msp-includes\\\"",
+					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.2d.tool~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.2d.tool~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

@@ -29,18 +29,25 @@ public:
          */
         Ambisonic(unsigned int order);
         
+        //! The ambisonic destructor.
         /** The ambisonic destructor.
          */
         ~Ambisonic();
         
+        //! Retrieve the decomposition order.
         /** Retrieve the decomposition order.
+            
+            @return The order.
          */
         unsigned int getOrder() const
         {
             return m_order;
         }
         
+        //! Retrieve the number of harmonics.
         /** Retrieve the number of harmonics.
+         
+            @return The number of harmonics.
          */
         unsigned int getNumberOfHarmonics() const
         {

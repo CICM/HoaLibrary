@@ -420,9 +420,9 @@ t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         if(angles)
         {
             object_method(gensym("dsp")->s_thing, gensym("stop"));
-            for(int i = 0; i < argc && i < x->f_decoder->getNumberOfChannels(); i++)
+            for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
             {
-                if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
+                if(i < argc && (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG))
                     angles[i] = atom_getfloat(argv+i) / 360. * HOA_2PI;
                 else
                     angles[i] = x->f_decoder->getChannelAzimuth(i);
