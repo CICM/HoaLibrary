@@ -93,6 +93,11 @@ static t_symbol* hoa_sym_channels_layer				= gensym("channels_layer");
 static t_symbol* hoa_sym_text_layer					= gensym("text_layer");
 static t_symbol* hoa_sym_fisheye_layer				= gensym("fisheye_layer");
 static t_symbol* hoa_sym_rectselection_layer		= gensym("rectselection_layer");
+static t_symbol* hoa_sym_velocity_layer				= gensym("velocity_layer");
+static t_symbol* hoa_sym_energy_layer				= gensym("energy_layer");
+static t_symbol* hoa_sym_leds_layer					= gensym("leds_layer");
+static t_symbol* hoa_sym_separator_layer			= gensym("separator_layer");
+static t_symbol* hoa_sym_skeleton_layer				= gensym("skeleton_layer");
 
 
 static t_symbol* hoa_sym_relpolar 					= gensym("relpolar");

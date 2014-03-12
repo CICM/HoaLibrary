@@ -99,7 +99,7 @@ Definition at line 379 of file Hoa\-Math.\-h.
 
 The associated Legendre polynomials. 
 
-\begin{DoxyVerb}The function computes the associated Legendre polynomial \form#7 that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
+\begin{DoxyVerb}The function computes the associated Legendre polynomial \form#2 that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
 \end{DoxyVerb}
  \[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\] \[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\] \[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\] with $0 \leq l$ and $-l \leq m \leq +l$
 
@@ -355,7 +355,7 @@ Definition at line 18 of file Hoa\-Utils.\-h.
 
 The legendre normalization. 
 
-\begin{DoxyVerb}The function normalizes the associated Legendre polynomial over \form#13 : \n
+\begin{DoxyVerb}The function normalizes the associated Legendre polynomial over \form#8 : \n
 \end{DoxyVerb}
  if $ m = 0$ \[K(l) = \sqrt{\frac{2 \times l + 1}{4\pi}}\] else \[K(l, m) = \sqrt{2 \times \frac{2 \times l + 1}{4\pi} \times \frac{(l - |m|)!}{(l + |m|)!}}\] with $0 \leq l$ and $-l \leq m \leq +l$
 
@@ -554,7 +554,7 @@ Definition at line 283 of file Hoa\-Math.\-h.
 
 The azimuth part of the spherical harmonics function. 
 
-\begin{DoxyVerb}The function computes the azimuth coefficient of the spherical harmonic \form#17 for an angle \form#18 in radian :\n
+\begin{DoxyVerb}The function computes the azimuth coefficient of the spherical harmonic \form#12 for an angle \form#13 in radian :\n
 \end{DoxyVerb}
  if $ m \geq 0$ \[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\] else \[Y_{azimuth}(l, m, \phi) = sin(-m \times \phi)\] with $0 \leq l$ and $-l \leq m \leq +l$
 
@@ -592,7 +592,7 @@ Definition at line 242 of file Hoa\-Math.\-h.
 
 The elevation part of the spherical harmonics function. 
 
-\begin{DoxyVerb}The function computes the elevation coefficient of the the spherical harmonic \form#17  for an angle \form#22 in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
+\begin{DoxyVerb}The function computes the elevation coefficient of the the spherical harmonic \form#12  for an angle \form#17 in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
 \end{DoxyVerb}
  \[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\] with $0 \leq l$, $-l \leq m \leq +l$ and $N$ the normalization and $P$ the associated Legendre polynomial.
 

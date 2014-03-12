@@ -253,7 +253,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The associated Legendre polynomials. </p>
-<pre class="fragment">The function computes the associated Legendre polynomial \form#7 that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
+<pre class="fragment">The function computes the associated Legendre polynomial \form#2 that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
 </pre> <p class="formulaDsp">
 \[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\]
 </p>
@@ -638,7 +638,7 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 </div><div class="memdoc">
 
 <p>The legendre normalization. </p>
-<pre class="fragment">The function normalizes the associated Legendre polynomial over \form#13 : \n
+<pre class="fragment">The function normalizes the associated Legendre polynomial over \form#8 : \n
 </pre><p> if \( m = 0\) </p>
 <p class="formulaDsp">
 \[K(l) = \sqrt{\frac{2 \times l + 1}{4\pi}}\]
@@ -962,7 +962,7 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 </div><div class="memdoc">
 
 <p>The azimuth part of the spherical harmonics function. </p>
-<pre class="fragment">The function computes the azimuth coefficient of the spherical harmonic \form#17 for an angle \form#18 in radian :\n
+<pre class="fragment">The function computes the azimuth coefficient of the spherical harmonic \form#12 for an angle \form#13 in radian :\n
 </pre><p> if \( m \geq 0\) </p>
 <p class="formulaDsp">
 \[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\]
@@ -1028,7 +1028,7 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 </div><div class="memdoc">
 
 <p>The elevation part of the spherical harmonics function. </p>
-<pre class="fragment">The function computes the elevation coefficient of the the spherical harmonic \form#17  for an angle \form#22 in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
+<pre class="fragment">The function computes the elevation coefficient of the the spherical harmonic \form#12  for an angle \form#17 in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
 </pre> <p class="formulaDsp">
 \[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\]
 </p>
@@ -1186,7 +1186,7 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 11 2014 17:41:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 11 2014 23:24:10 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
