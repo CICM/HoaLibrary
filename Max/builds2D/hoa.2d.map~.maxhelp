@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 5,
 			"architecture" : "x64"
 		}
 ,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -329,7 +329,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -715,7 +715,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -953,7 +953,7 @@
 									"outlettype" : [ "list", "list", "list" ],
 									"outputmode" : 1,
 									"patching_rect" : [ 15.0, 121.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, -0.783424, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.517235, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.663081, 0.454274, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.765093, 0.658299, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, -0.783424, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.517235, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.369795, 0.390516, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.395298, 0.811318, 1, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
@@ -973,7 +973,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -1175,7 +1175,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -1469,7 +1469,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -1751,7 +1751,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -1788,7 +1788,7 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 6,
+																			"revision" : 5,
 																			"architecture" : "x64"
 																		}
 ,
@@ -3169,7 +3169,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -4041,7 +4041,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -4449,7 +4449,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -4501,7 +4501,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -4509,34 +4509,34 @@
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_3.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundcoat.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
