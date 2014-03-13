@@ -2,75 +2,45 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:hoaFamily/hoa.record~.xcodeproj">
+      location = "group:Max2D/HoaDecoder/hoa.2d.decoder~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaFamily/hoa.plug~.xcodeproj">
+      location = "group:Max2D/HoaEncoder/hoa.2d.encoder~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaFamily/hoa.play~.xcodeproj">
+      location = "group:Max2D/HoaMap/hoa.2d.map~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaFamily/hoa.dac~.xcodeproj">
+      location = "group:Max2D/HoaMap_UI/hoa.2d.map.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaFamily/hoa.connect.xcodeproj">
+      location = "group:Max2D/hoaMeter_UI/hoa.2d.meter~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaGain_UI/hoa.gain~.xcodeproj">
+      location = "group:Max2D/HoaOptim/hoa.2d.optim~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaPiSig/hoa.pi~.xcodeproj">
+      location = "group:Max2D/HoaProjector/hoa.2d.projector~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaRecomposer_UI/hoa.recomposer.xcodeproj">
+      location = "group:Max2D/HoaRecomposer/hoa.2d.recomposer~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaVector/hoa.vector~.xcodeproj">
+      location = "group:Max2D/HoaRecomposer_UI/hoa.2d.recomposer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaWider/hoa.wider~.xcodeproj">
+      location = "group:Max2D/HoaRotate/hoa.2d.rotate~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaSpace_UI/hoa.space.xcodeproj">
+      location = "group:Max2D/hoaScope_UI/hoa.2d.scope~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaSpace/hoa.space~.xcodeproj">
+      location = "group:Max2D/hoaSpace_UI/hoa.2d.space.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaScope_UI/hoa.scope~.xcodeproj">
+      location = "group:Max2D/HoaVector/hoa.2d.vector~.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:hoaRotate/hoa.rotate~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaRecomposer/hoa.recomposer~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaProjector/hoa.projector~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaPi/hoa.pi.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaOptim/hoa.optim~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaMeter_UI/hoa.meter~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaMap_UI/hoa.map.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaMap/hoa.map~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaFreeverb/hoa.freeverb~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaEncoder/hoa.encoder~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:hoaDecoder/hoa.decoder~.xcodeproj">
+      location = "group:Max2D/HoaWider/hoa.2d.wider~.xcodeproj">
    </FileRef>
 </Workspace>
