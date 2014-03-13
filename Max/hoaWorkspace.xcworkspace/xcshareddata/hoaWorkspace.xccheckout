@@ -14,6 +14,8 @@
 		<string>https://github.com/pierreguillot/PdEnhanced.git</string>
 		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>https://github.com/CICM/HoaLibrary.git</string>
+		<key>9B15233E-FEE2-4774-8488-E7F1406DD153</key>
+		<string>https://github.com/Cycling74/max6-sdk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PureData/hoaWorkspace.xcworkspace</string>
@@ -23,9 +25,11 @@
 		<string>../../../PdEnhanced</string>
 		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>../..</string>
+		<key>9B15233E-FEE2-4774-8488-E7F1406DD153</key>
+		<string>../../ThirdParty/Max</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/CICM/HoaLibrary.git</string>
+	<string>file://localhost/Users/Pierre/SourceTree/HoaLibrary/Max/hoaWorkspace.xcworkspace/</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -39,6 +43,14 @@
 			<string>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HoaLibrary</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9B15233E-FEE2-4774-8488-E7F1406DD153</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Max</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
