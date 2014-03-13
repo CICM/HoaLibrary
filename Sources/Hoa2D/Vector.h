@@ -25,6 +25,7 @@ namespace Hoa2D
         float* m_channels_abscissa_float;
         float* m_channels_ordinate_float;
         float* m_channels_float;
+        double m_offset;
     public:
         
         //! The vector constructor.
@@ -38,6 +39,23 @@ namespace Hoa2D
         /**	The optimization destructor free the memory.
          */
         ~Vector();
+        
+        //! Set the offset of the channels.
+		/**	Set the azimuth offset of the channels in radian.
+         
+         @param     offset		An azimuth value.
+         */
+		void setChannelsOffset(double offset);
+        
+        //! Get the offset of the channels.
+        /**	Retreive the azimuth offset of the channels in radian.
+         
+         @return    The offset of the channels.
+         */
+		double getChannelsOffset() const
+        {
+            return m_offset;
+        }
         
         //! Set the azimtuh of a channel.
         /** Set the azimtuh of a channel. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.

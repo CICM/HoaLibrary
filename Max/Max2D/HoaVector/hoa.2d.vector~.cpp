@@ -28,6 +28,8 @@ t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
 
 t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 t_max_err channels_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
+t_max_err offset_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
+t_max_err offset_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
 
@@ -52,11 +54,19 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
     CLASS_ATTR_SAVE                 (c, "channels", 0);
     
+    CLASS_ATTR_DOUBLE               (c, "offset", 0, t_hoa_vector, f_attrs);
+	CLASS_ATTR_CATEGORY             (c, "offset", 0, "Planewaves");
+    CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
+	CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
+    CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
+    CLASS_ATTR_ORDER                (c, "offset", 0, "2");
+    CLASS_ATTR_SAVE                 (c, "offset", 0);
+    
     CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_vector, f_attrs, f_attrs, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "angles", 0, "Planewaves");
     CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
-    CLASS_ATTR_ORDER                (c, "angles", 0, "2");
+    CLASS_ATTR_ORDER                (c, "angles", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "angles", 0);
 	CLASS_ATTR_DEFAULT              (c, "angles", 0, "0. 90. 180. 270.");
     
@@ -189,6 +199,36 @@ t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
+t_max_err offset_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
+{
+    argc[0] = 1;
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    
+    if(argv[0])
+    {
+        atom_setfloat(argv[0], x->f_vector->getChannelsOffset() / HOA_2PI * 360.f);
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err offset_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        if(offset != x->f_vector->getChannelsOffset())
+        {
+            x->f_vector->setChannelsOffset(offset);
+        }
+    }
+    return MAX_ERR_NONE;
+}
+
 t_max_err angles_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
 {
     argc[0] = x->f_vector->getNumberOfChannels();
@@ -209,7 +249,7 @@ t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
         for(int i = 0; i < argc && i < x->f_vector->getNumberOfChannels(); i++)
         {
             if(atom_gettype(argv+i) == A_LONG || atom_gettype(argv+i) == A_FLOAT);
-               x->f_vector->setChannelPosition(i, clip_minmax(atom_getfloat(argv+i), -360., 360.) / 360. * HOA_2PI);
+               x->f_vector->setChannelAzimuth(i, clip_minmax(atom_getfloat(argv+i), -360., 360.) / 360. * HOA_2PI);
         }
     }
     return MAX_ERR_NONE;
