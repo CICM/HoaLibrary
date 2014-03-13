@@ -8,6 +8,7 @@ var searchData=
   ['_7edecodermulti',['~DecoderMulti',['../class_hoa2_d_1_1_decoder_multi.html#a2a0aeff9157db4a486fa331b3dcd04cc',1,'Hoa2D::DecoderMulti']]],
   ['_7edecoderregular',['~DecoderRegular',['../class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad',1,'Hoa2D::DecoderRegular']]],
   ['_7eencoder',['~Encoder',['../class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8',1,'Hoa2D::Encoder::~Encoder()'],['../class_hoa3_d_1_1_encoder.html#a9842ee9f5abcba58a05a98dbfdff1b15',1,'Hoa3D::Encoder::~Encoder()']]],
+  ['_7ekitsources',['~KitSources',['../class_hoa2_d_1_1_kit_sources.html#a2315dc84a9dbb1a99c321f40d14a4a75',1,'Hoa2D::KitSources']]],
   ['_7emap',['~Map',['../class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3',1,'Hoa2D::Map::~Map()'],['../class_hoa3_d_1_1_map.html#a89f5772a7f26cda206637dd1fca1c16e',1,'Hoa3D::Map::~Map()']]],
   ['_7emeter',['~Meter',['../class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046',1,'Hoa2D::Meter::~Meter()'],['../class_hoa3_d_1_1_meter.html#a2f4d18e0007e96c1cd60e2f17d9575cc',1,'Hoa3D::Meter::~Meter()']]],
   ['_7eoptim',['~Optim',['../class_hoa2_d_1_1_optim.html#a71b6d88873b054944db6efd2713bf8d3',1,'Hoa2D::Optim::~Optim()'],['../class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20',1,'Hoa3D::Optim::~Optim()']]],

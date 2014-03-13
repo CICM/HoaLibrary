@@ -16,6 +16,13 @@ Inheritance diagram for Hoa2\-D\-:\-:Decoder\-Binaural\-:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{class_hoa2_d_1_1_decoder_binaural}
 \end{center}
 \end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{Pinna\-Size} \{ \hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aa73b742cef9362a284ef7553f3c9ca507}{Small} = 0, 
+\hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aade3b787bd730bdf82e9b466dd3b246ac}{Large} = 1
+ \}
+\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,6 +36,10 @@ void \hyperlink{class_hoa2_d_1_1_decoder_binaural_a0c5dd214c4d8661439098d8d2031e
 \begin{DoxyCompactList}\small\item\em Set the vector size. \end{DoxyCompactList}\item 
 bool \hyperlink{class_hoa2_d_1_1_decoder_binaural_a8cb958da4f7f5f5888cd894a52f69aa5}{get\-State} () const 
 \begin{DoxyCompactList}\small\item\em Retrieve if the decoder is ready to process. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_binaural_ab64849cdd2b3d0b3d872271c95b1860d}{set\-Pinna\-Size} (\hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{Pinna\-Size} pinna\-Size)
+\begin{DoxyCompactList}\small\item\em Set the pinna size. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{Pinna\-Size} \hyperlink{class_hoa2_d_1_1_decoder_binaural_a3643f09471c58432e188693c839dd954}{get\-Pinna\-Size} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the pinna size. \end{DoxyCompactList}\item 
 std\-::string \hyperlink{class_hoa2_d_1_1_decoder_binaural_a045e4d443418211eca3074e10719ecd5}{get\-Channel\-Name} (unsigned int index)
 \begin{DoxyCompactList}\small\item\em Retrieve a name for a channel. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_decoder_binaural_accbfe84ed3e43f1e9ca93e58edb7020f}{process} (const float $\ast$const $\ast$inputs, float $\ast$$\ast$outputs)
@@ -47,6 +58,25 @@ Definition at line 172 of file Decoder.\-h.
 
 
 
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!Pinna\-Size@{Pinna\-Size}}
+\index{Pinna\-Size@{Pinna\-Size}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
+\subsubsection[{Pinna\-Size}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Hoa2\-D\-::\-Decoder\-Binaural\-::\-Pinna\-Size}}}\label{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Small@{Small}!Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}}\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!Small@{Small}}\item[{\em 
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aa73b742cef9362a284ef7553f3c9ca507}{Small}\label{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aa73b742cef9362a284ef7553f3c9ca507}
+}]Small Pinna Size \index{Large@{Large}!Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}}\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!Large@{Large}}\item[{\em 
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aade3b787bd730bdf82e9b466dd3b246ac}{Large}\label{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383aade3b787bd730bdf82e9b466dd3b246ac}
+}]Large Pinna Size \end{description}
+\end{Desc}
+
+
+Definition at line 176 of file Decoder.\-h.
+
+
+
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_a614b402069c035eb1bb03d3ec79c4098}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!Decoder\-Binaural@{Decoder\-Binaural}}
 \index{Decoder\-Binaural@{Decoder\-Binaural}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -59,7 +89,7 @@ Definition at line 172 of file Decoder.\-h.
 
 The binaural decoder constructor. 
 
-The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35. It is essential to set the sample rate and the vector size to load the impulse response and to be able to use the binaural decoding. The binaural process is optimized for block processing.
+The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35. It is essential to set the sample rate and the vector size to load the impulse response and to be able to use the binaural decoding. The binaural process is optimized for block processing. The H\-R\-T\-F are from the M\-I\-T database.
 
 
 \begin{DoxyParams}{Parameters}
@@ -83,7 +113,7 @@ The binaural decoder destructor.
 
 The binaural decoder destructor free the memory. 
 
-Definition at line 414 of file Decoder.\-cpp.
+Definition at line 430 of file Decoder.\-cpp.
 
 
 
@@ -111,7 +141,27 @@ The method returns a name for the channel.
 \end{DoxyReturn}
 
 
-Definition at line 251 of file Decoder.\-h.
+Definition at line 276 of file Decoder.\-h.
+
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a3643f09471c58432e188693c839dd954}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!get\-Pinna\-Size@{get\-Pinna\-Size}}
+\index{get\-Pinna\-Size@{get\-Pinna\-Size}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
+\subsubsection[{get\-Pinna\-Size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pinna\-Size} Hoa2\-D\-::\-Decoder\-Binaural\-::get\-Pinna\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_decoder_binaural_a3643f09471c58432e188693c839dd954}
+
+
+Retrieve the pinna size. 
+
+Retrieve the current size of the pinna.
+
+\begin{DoxyReturn}{Returns}
+The function returns the pinna size used to compute the H\-R\-T\-F. 
+\end{DoxyReturn}
+
+
+Definition at line 264 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_a8cb958da4f7f5f5888cd894a52f69aa5}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!get\-State@{get\-State}}
 \index{get\-State@{get\-State}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -127,11 +177,11 @@ Retrieve if the decoder is ready to process.
 Retrieve if the impulses has been loaded and the matrix allocated.
 
 \begin{DoxyReturn}{Returns}
-The true if the decoder is ready to process and false if not. 
+The function returns true if the decoder is ready to process and false if not. 
 \end{DoxyReturn}
 
 
-Definition at line 235 of file Decoder.\-h.
+Definition at line 243 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_accbfe84ed3e43f1e9ca93e58edb7020f}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -156,7 +206,7 @@ You should use this method for not-\/in-\/place processing and performs the bina
 \end{DoxyParams}
 
 
-Definition at line 345 of file Decoder.\-cpp.
+Definition at line 359 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_afab13c873d9c9b1a883bcc993ec0ec35}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -181,7 +231,29 @@ You should use this method for not-\/in-\/place processing and performs the bina
 \end{DoxyParams}
 
 
-Definition at line 376 of file Decoder.\-cpp.
+Definition at line 390 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_ab64849cdd2b3d0b3d872271c95b1860d}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!set\-Pinna\-Size@{set\-Pinna\-Size}}
+\index{set\-Pinna\-Size@{set\-Pinna\-Size}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
+\subsubsection[{set\-Pinna\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Binaural\-::set\-Pinna\-Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Pinna\-Size}}]{pinna\-Size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_binaural_ab64849cdd2b3d0b3d872271c95b1860d}
+
+
+Set the pinna size. 
+
+Set the pinna size used to compute the H\-R\-T\-F. Setting the pinna size will re-\/allocate the vector to compute the binaural decoding.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pinna\-Size} & The pinna size. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 236 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_a6a96a705952a4165dd916c74b64b60e4}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!set\-Sample\-Rate@{set\-Sample\-Rate}}
 \index{set\-Sample\-Rate@{set\-Sample\-Rate}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -206,7 +278,7 @@ Set the sample rate. The sample will change the impulse responses size and their
 \end{DoxySeeAlso}
 
 
-Definition at line 235 of file Decoder.\-cpp.
+Definition at line 247 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_a0c5dd214c4d8661439098d8d2031ecb9}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!set\-Vector\-Size@{set\-Vector\-Size}}
 \index{set\-Vector\-Size@{set\-Vector\-Size}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
@@ -223,7 +295,7 @@ Set the vector size. Setting the sample size will allocate the vector to compute
 
 
 \begin{DoxyParams}{Parameters}
-{\em vector\-Size} & The vector rate.\\
+{\em vector\-Size} & The vector size.\\
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
@@ -231,11 +303,5 @@ Set the vector size. Setting the sample size will allocate the vector to compute
 \end{DoxySeeAlso}
 
 
-Definition at line 309 of file Decoder.\-cpp.
+Definition at line 323 of file Decoder.\-cpp.
 
-
-
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
-\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}

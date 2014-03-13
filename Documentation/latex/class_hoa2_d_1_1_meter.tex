@@ -24,13 +24,13 @@ Inheritance diagram for Hoa2\-D\-:\-:Meter\-:\begin{figure}[H]
 \hyperlink{class_hoa2_d_1_1_meter_a48276da266f600f4d24db748ff4ca046}{$\sim$\-Meter} ()
 \begin{DoxyCompactList}\small\item\em The meter destructor. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_meter_a4170ee9ed709f6d6bfecd30591ac8347}{set\-Channel\-Azimuth} (unsigned int index, double azimuth)
-\begin{DoxyCompactList}\small\item\em Set the azimuth of a channel. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the azimuth of a given channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_meter_a83209e279e62c99d53da94baf0b60b2f}{set\-Channels\-Azimuth} (double $\ast$azimuth)
+\begin{DoxyCompactList}\small\item\em Set the azimtuh of all the channels. \end{DoxyCompactList}\item 
 double \hyperlink{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{get\-Channel\-Azimuth\-Mapped} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Get the mapped azimuth of a given channel. \end{DoxyCompactList}\item 
 double \hyperlink{class_hoa2_d_1_1_meter_a10ccf98fe02151155c22644e7a61450a}{get\-Channel\-Width} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Get the width of a given channel. \end{DoxyCompactList}\item 
-double \hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth} (unsigned int index) const 
-\begin{DoxyCompactList}\small\item\em Get the azimuth of a channel. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_meter_ab3c720b0e9061f43218aff20a678aa9a}{set\-Vector\-Size} (unsigned int vector\-Size)
 \begin{DoxyCompactList}\small\item\em Set the vector size. \end{DoxyCompactList}\item 
 unsigned int \hyperlink{class_hoa2_d_1_1_meter_af6336b9eaed75ec9b31405b28fe3f811}{get\-Vector\-Size} (unsigned int vector\-Size) const 
@@ -93,40 +93,18 @@ The meter destructor.
 
 The meter destructor free the memory. 
 
-Definition at line 96 of file Meter.\-cpp.
+Definition at line 107 of file Meter.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Channel\-Azimuth@{get\-Channel\-Azimuth}}
-\index{get\-Channel\-Azimuth@{get\-Channel\-Azimuth}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
-\subsubsection[{get\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Meter\-::get\-Channel\-Azimuth (
-\begin{DoxyParamCaption}
-\item[{unsigned int}]{index}
-\end{DoxyParamCaption}
-) const}}\label{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}
-
-
-Get the azimuth of a channel. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em index} & The index of the channel. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The channel azimuth. 
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth} 
-\end{DoxySeeAlso}
 \hypertarget{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Channel\-Azimuth\-Mapped@{get\-Channel\-Azimuth\-Mapped}}
 \index{get\-Channel\-Azimuth\-Mapped@{get\-Channel\-Azimuth\-Mapped}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
 \subsubsection[{get\-Channel\-Azimuth\-Mapped}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Meter\-::get\-Channel\-Azimuth\-Mapped (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index}
 \end{DoxyParamCaption}
-) const}}\label{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}
 
 
 Get the mapped azimuth of a given channel. 
@@ -140,8 +118,12 @@ Get the mapped azimuth of a given channel.
 The mapped azimuth. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth}, \hyperlink{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{get\-Channel\-Azimuth\-Mapped} 
+\hyperlink{class_hoa2_d_1_1_planewaves_a52c4f8b05137ab56e82b0e076d7f5d3a}{get\-Channel\-Azimuth}, \hyperlink{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{get\-Channel\-Azimuth\-Mapped} 
 \end{DoxySeeAlso}
+
+
+Definition at line 67 of file Meter.\-h.
+
 \hypertarget{class_hoa2_d_1_1_meter_af2bd3c8691c6004e378ff17f12c88c29}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Channel\-Energy@{get\-Channel\-Energy}}
 \index{get\-Channel\-Energy@{get\-Channel\-Energy}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
 \subsubsection[{get\-Channel\-Energy}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Meter\-::get\-Channel\-Energy (
@@ -163,7 +145,7 @@ Retrieve the energy of a given channel.
 \end{DoxySeeAlso}
 
 
-Definition at line 107 of file Meter.\-h.
+Definition at line 116 of file Meter.\-h.
 
 \hypertarget{class_hoa2_d_1_1_meter_a3e697d8c692f5fa4484dd99cce866310}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Channel\-Peak@{get\-Channel\-Peak}}
 \index{get\-Channel\-Peak@{get\-Channel\-Peak}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -186,7 +168,7 @@ Retrieve the peak value of a given channel.
 \end{DoxySeeAlso}
 
 
-Definition at line 96 of file Meter.\-h.
+Definition at line 105 of file Meter.\-h.
 
 \hypertarget{class_hoa2_d_1_1_meter_a10ccf98fe02151155c22644e7a61450a}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Channel\-Width@{get\-Channel\-Width}}
 \index{get\-Channel\-Width@{get\-Channel\-Width}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -194,7 +176,7 @@ Definition at line 96 of file Meter.\-h.
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index}
 \end{DoxyParamCaption}
-) const}}\label{class_hoa2_d_1_1_meter_a10ccf98fe02151155c22644e7a61450a}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_meter_a10ccf98fe02151155c22644e7a61450a}
 
 
 Get the width of a given channel. 
@@ -208,8 +190,12 @@ Get the width of a given channel.
 The channel width. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth}, \hyperlink{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{get\-Channel\-Azimuth\-Mapped} 
+\hyperlink{class_hoa2_d_1_1_planewaves_a52c4f8b05137ab56e82b0e076d7f5d3a}{get\-Channel\-Azimuth}, \hyperlink{class_hoa2_d_1_1_meter_afeb35ed7f980219e9a0ef0a2b3474e42}{get\-Channel\-Azimuth\-Mapped} 
 \end{DoxySeeAlso}
+
+
+Definition at line 80 of file Meter.\-h.
+
 \hypertarget{class_hoa2_d_1_1_meter_af6336b9eaed75ec9b31405b28fe3f811}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!get\-Vector\-Size@{get\-Vector\-Size}}
 \index{get\-Vector\-Size@{get\-Vector\-Size}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
 \subsubsection[{get\-Vector\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa2\-D\-::\-Meter\-::get\-Vector\-Size (
@@ -231,7 +217,7 @@ Get the vector size.
 \end{DoxySeeAlso}
 
 
-Definition at line 89 of file Meter.\-h.
+Definition at line 98 of file Meter.\-h.
 
 \hypertarget{class_hoa2_d_1_1_meter_a1b05d443d17a910e7e9cc7b3f81badc6}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!process@{process}}
 \index{process@{process}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -253,7 +239,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 56 of file Meter.\-cpp.
+Definition at line 67 of file Meter.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_meter_af523ed430333d4b861b117bda0bc6068}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!process@{process}}
 \index{process@{process}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -275,7 +261,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 76 of file Meter.\-cpp.
+Definition at line 87 of file Meter.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_meter_a4170ee9ed709f6d6bfecd30591ac8347}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!set\-Channel\-Azimuth@{set\-Channel\-Azimuth}}
 \index{set\-Channel\-Azimuth@{set\-Channel\-Azimuth}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -287,9 +273,9 @@ Definition at line 76 of file Meter.\-cpp.
 )}}\label{class_hoa2_d_1_1_meter_a4170ee9ed709f6d6bfecd30591ac8347}
 
 
-Set the azimuth of a channel. 
+Set the azimuth of a given channel. 
 
-Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
+Set the azimuth of a given channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
 
 
 \begin{DoxyParams}{Parameters}
@@ -299,11 +285,36 @@ Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is 
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth} 
+\hyperlink{class_hoa2_d_1_1_planewaves_a52c4f8b05137ab56e82b0e076d7f5d3a}{get\-Channel\-Azimuth} 
 \end{DoxySeeAlso}
 
 
-Definition at line 26 of file Meter.\-cpp.
+Definition at line 27 of file Meter.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_meter_a83209e279e62c99d53da94baf0b60b2f}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!set\-Channels\-Azimuth@{set\-Channels\-Azimuth}}
+\index{set\-Channels\-Azimuth@{set\-Channels\-Azimuth}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
+\subsubsection[{set\-Channels\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Meter\-::set\-Channels\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_meter_a83209e279e62c99d53da94baf0b60b2f}
+
+
+Set the azimtuh of all the channels. 
+
+Set the azimtuh of all the channels. The azimuths are in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The azimtuhs array must have a minimum size of the number of channels.
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuths} & The azimuths array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_meter_a4170ee9ed709f6d6bfecd30591ac8347}{set\-Channel\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 33 of file Meter.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_meter_ab3c720b0e9061f43218aff20a678aa9a}{\index{Hoa2\-D\-::\-Meter@{Hoa2\-D\-::\-Meter}!set\-Vector\-Size@{set\-Vector\-Size}}
 \index{set\-Vector\-Size@{set\-Vector\-Size}!Hoa2D::Meter@{Hoa2\-D\-::\-Meter}}
@@ -322,15 +333,9 @@ Set the vector size.
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_meter_a2f179adb5ec28fe4c2256c8333ea22ab}{get\-Channel\-Azimuth} 
+\hyperlink{class_hoa2_d_1_1_planewaves_a52c4f8b05137ab56e82b0e076d7f5d3a}{get\-Channel\-Azimuth} 
 \end{DoxySeeAlso}
 
 
-Definition at line 20 of file Meter.\-cpp.
+Definition at line 21 of file Meter.\-cpp.
 
-
-
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
-\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Meter.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Meter.\-cpp\end{DoxyCompactItemize}

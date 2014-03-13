@@ -51,8 +51,12 @@ void \hyperlink{class_hoa2_d_1_1_decoder_multi_aa15da12ba3889edc22ec9c148dd5c692
 \begin{DoxyCompactList}\small\item\em Set the sample rate. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_decoder_multi_a875eb671767c2f547453e6d7a1401f15}{set\-Vector\-Size} (unsigned int vector\-Size)
 \begin{DoxyCompactList}\small\item\em Set the vector size. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_multi_ace0ff4fdfda5661f27863d380e9e72c5}{set\-Pinna\-Size} (\hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{Decoder\-Binaural\-::\-Pinna\-Size} pinna\-Size)
+\begin{DoxyCompactList}\small\item\em Set the pinna size. \end{DoxyCompactList}\item 
 bool \hyperlink{class_hoa2_d_1_1_decoder_multi_a67e02e68e5ddaa18aa46e874ab5b6ad0}{get\-Binaural\-State} () const 
 \begin{DoxyCompactList}\small\item\em Retrieve if the binaural decoder is ready to process. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_decoder_binaural_a29505dfc8fda1797dc2b059530f2383a}{Decoder\-Binaural\-::\-Pinna\-Size} \hyperlink{class_hoa2_d_1_1_decoder_multi_ae2a743eba5e9d38fe3a8edb833a9e1ce}{get\-Pinna\-Size} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve if the pinna size of the binaural decoder. \end{DoxyCompactList}\item 
 double \hyperlink{class_hoa2_d_1_1_decoder_multi_a27e9a7dfb9e88e22470849f6f32c7270}{get\-Channel\-Azimuth} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Retrieve the azimuth of a channel. \end{DoxyCompactList}\item 
 double \hyperlink{class_hoa2_d_1_1_decoder_multi_a31085fe8704942e389e9e5cd00d195bd}{get\-Channel\-Abscissa} (unsigned int index) const 
@@ -81,7 +85,7 @@ The ambisonic multi-\/decoder.
 
 The multi-\/decoder is a class that facilitates the use of the three decoder \-: regular, irregular and binaural. 
 
-Definition at line 280 of file Decoder.\-h.
+Definition at line 306 of file Decoder.\-h.
 
 
 
@@ -102,7 +106,7 @@ Definition at line 280 of file Decoder.\-h.
 \end{Desc}
 
 
-Definition at line 284 of file Decoder.\-h.
+Definition at line 310 of file Decoder.\-h.
 
 
 
@@ -127,7 +131,7 @@ The multi-\/decoder constructor allocates and initialize the three decoder. The 
 \end{DoxyParams}
 
 
-Definition at line 440 of file Decoder.\-cpp.
+Definition at line 456 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a2a0aeff9157db4a486fa331b3dcd04cc}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!$\sim$\-Decoder\-Multi@{$\sim$\-Decoder\-Multi}}
 \index{$\sim$\-Decoder\-Multi@{$\sim$\-Decoder\-Multi}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -142,7 +146,7 @@ The multi-\/decoder destructor.
 
 The multi-\/decoder destructor free the memory. 
 
-Definition at line 516 of file Decoder.\-cpp.
+Definition at line 537 of file Decoder.\-cpp.
 
 
 
@@ -161,11 +165,11 @@ Retrieve if the binaural decoder is ready to process.
 Retrieve if the impulses has been loaded and the matrix allocated.
 
 \begin{DoxyReturn}{Returns}
-The true if the binaural decoder is ready to process and false if not. 
+The function returns true if the binaural decoder is ready to process and false if not. 
 \end{DoxyReturn}
 
 
-Definition at line 418 of file Decoder.\-h.
+Definition at line 452 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a31085fe8704942e389e9e5cd00d195bd}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Channel\-Abscissa@{get\-Channel\-Abscissa}}
 \index{get\-Channel\-Abscissa@{get\-Channel\-Abscissa}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -197,7 +201,7 @@ The abscissa of the channel if the channel exists, otherwise the function genera
 \end{DoxySeeAlso}
 
 
-Definition at line 457 of file Decoder.\-h.
+Definition at line 501 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a27e9a7dfb9e88e22470849f6f32c7270}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Channel\-Azimuth@{get\-Channel\-Azimuth}}
 \index{get\-Channel\-Azimuth@{get\-Channel\-Azimuth}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -229,7 +233,7 @@ The azimuth of the channel if the channel exists, otherwise the function generat
 \end{DoxySeeAlso}
 
 
-Definition at line 436 of file Decoder.\-h.
+Definition at line 480 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_af2208568e5aff57ade0ba5a00656db32}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Channel\-Name@{get\-Channel\-Name}}
 \index{get\-Channel\-Name@{get\-Channel\-Name}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -254,7 +258,7 @@ The method returns a name for the channel.
 \end{DoxyReturn}
 
 
-Definition at line 494 of file Decoder.\-h.
+Definition at line 538 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a4a0032053910595155cf5299c883385b}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Channel\-Ordinate@{get\-Channel\-Ordinate}}
 \index{get\-Channel\-Ordinate@{get\-Channel\-Ordinate}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -286,7 +290,7 @@ The ordinate of the channel if the channel exists, otherwise the function genera
 \end{DoxySeeAlso}
 
 
-Definition at line 477 of file Decoder.\-h.
+Definition at line 521 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_af31ea39af39be29e71f3b075470f16ad}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Channels\-Offset@{get\-Channels\-Offset}}
 \index{get\-Channels\-Offset@{get\-Channels\-Offset}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -306,7 +310,7 @@ The offset of the channels if the regular decoding mode is active, otherwise it 
 \end{DoxyReturn}
 
 
-Definition at line 365 of file Decoder.\-h.
+Definition at line 391 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_acc6e268ffd3e58bb9918d51c9dca282c}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Decoding\-Mode@{get\-Decoding\-Mode}}
 \index{get\-Decoding\-Mode@{get\-Decoding\-Mode}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -326,7 +330,7 @@ The decoding mode;
 \end{DoxyReturn}
 
 
-Definition at line 326 of file Decoder.\-h.
+Definition at line 352 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_ae7c6a450a9a9ff184965f70556e7bf9d}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}}
 \index{get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -346,7 +350,27 @@ The number of channels.
 \end{DoxyReturn}
 
 
-Definition at line 343 of file Decoder.\-h.
+Definition at line 369 of file Decoder.\-h.
+
+\hypertarget{class_hoa2_d_1_1_decoder_multi_ae2a743eba5e9d38fe3a8edb833a9e1ce}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!get\-Pinna\-Size@{get\-Pinna\-Size}}
+\index{get\-Pinna\-Size@{get\-Pinna\-Size}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
+\subsubsection[{get\-Pinna\-Size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Decoder\-Binaural\-::\-Pinna\-Size} Hoa2\-D\-::\-Decoder\-Multi\-::get\-Pinna\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_decoder_multi_ae2a743eba5e9d38fe3a8edb833a9e1ce}
+
+
+Retrieve if the pinna size of the binaural decoder. 
+
+Retrieve if the pinna size of the binaural decoder.
+
+\begin{DoxyReturn}{Returns}
+The function returns the pinna size of the binaural decoder. 
+\end{DoxyReturn}
+
+
+Definition at line 465 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a215385080edb593cb2d8c0e7124d0c00}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Binaural@{process\-Binaural}}
 \index{process\-Binaural@{process\-Binaural}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -371,7 +395,7 @@ You should use this method for not-\/in-\/place processing and performs the bina
 \end{DoxyParams}
 
 
-Definition at line 510 of file Decoder.\-h.
+Definition at line 554 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_ac2aed267552cfa2535156742529bfa54}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Binaural@{process\-Binaural}}
 \index{process\-Binaural@{process\-Binaural}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -396,7 +420,7 @@ You should use this method for not-\/in-\/place processing and performs the bina
 \end{DoxyParams}
 
 
-Definition at line 521 of file Decoder.\-h.
+Definition at line 565 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_ae7b3be8b1b39a2242a4a270d5278a4f6}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Irregular@{process\-Irregular}}
 \index{process\-Irregular@{process\-Irregular}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -421,7 +445,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 554 of file Decoder.\-h.
+Definition at line 598 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a11493b383a19d621202acebb17568000}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Irregular@{process\-Irregular}}
 \index{process\-Irregular@{process\-Irregular}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -446,7 +470,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 565 of file Decoder.\-h.
+Definition at line 609 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a7d4d1130db9e008e178a4210571d9f97}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Regular@{process\-Regular}}
 \index{process\-Regular@{process\-Regular}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -471,7 +495,7 @@ You should use this method for not-\/in-\/place processing and performs the bina
 \end{DoxyParams}
 
 
-Definition at line 532 of file Decoder.\-h.
+Definition at line 576 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a594583b4853dcabf5f655412faad0fe7}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!process\-Regular@{process\-Regular}}
 \index{process\-Regular@{process\-Regular}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -496,7 +520,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 543 of file Decoder.\-h.
+Definition at line 587 of file Decoder.\-h.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a3f8a24171531b8a83a21199d0c21608b}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Channel\-Azimuth@{set\-Channel\-Azimuth}}
 \index{set\-Channel\-Azimuth@{set\-Channel\-Azimuth}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -524,7 +548,7 @@ Set the azimuth of a channel for the irregular decoding mode. The azimuth is in 
 \end{DoxySeeAlso}
 
 
-Definition at line 482 of file Decoder.\-cpp.
+Definition at line 498 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_ae87c004b9f042b301532e90a64f92414}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Channels\-Azimtuh@{set\-Channels\-Azimtuh}}
 \index{set\-Channels\-Azimtuh@{set\-Channels\-Azimtuh}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -549,7 +573,7 @@ Set the azimtuh of all the channels for the irregular decoding mode. It is more 
 \end{DoxySeeAlso}
 
 
-Definition at line 490 of file Decoder.\-cpp.
+Definition at line 506 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a2cbf708c33f7bcb39895b058c1e139c1}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Channels\-Offset@{set\-Channels\-Offset}}
 \index{set\-Channels\-Offset@{set\-Channels\-Offset}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -571,7 +595,7 @@ Set the azimuth offset of the channels in radian for the regular decoding, if th
 \end{DoxyParams}
 
 
-Definition at line 470 of file Decoder.\-cpp.
+Definition at line 486 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a4c438ae79d50e9c01db919a76b506326}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Decoding\-Mode@{set\-Decoding\-Mode}}
 \index{set\-Decoding\-Mode@{set\-Decoding\-Mode}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -593,7 +617,7 @@ Set the decoding mode. It will allocate the right decoder and initialize the cla
 \end{DoxyParams}
 
 
-Definition at line 448 of file Decoder.\-cpp.
+Definition at line 464 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a807edafa3240a9815a52d686307bb2b4}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Number\-Of\-Channels@{set\-Number\-Of\-Channels}}
 \index{set\-Number\-Of\-Channels@{set\-Number\-Of\-Channels}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -615,7 +639,29 @@ Set the number of channels for the regular or irregular decoding.
 \end{DoxyParams}
 
 
-Definition at line 453 of file Decoder.\-cpp.
+Definition at line 469 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_multi_ace0ff4fdfda5661f27863d380e9e72c5}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Pinna\-Size@{set\-Pinna\-Size}}
+\index{set\-Pinna\-Size@{set\-Pinna\-Size}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
+\subsubsection[{set\-Pinna\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Multi\-::set\-Pinna\-Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Decoder\-Binaural\-::\-Pinna\-Size}}]{pinna\-Size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_multi_ace0ff4fdfda5661f27863d380e9e72c5}
+
+
+Set the pinna size. 
+
+Set the pinna size of the binaural decoding.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pinna\-Size} & The pinna size. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 514 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_aa15da12ba3889edc22ec9c148dd5c692}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Sample\-Rate@{set\-Sample\-Rate}}
 \index{set\-Sample\-Rate@{set\-Sample\-Rate}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -640,7 +686,7 @@ Set the sample rate. The sample will change the impulse responses size and their
 \end{DoxySeeAlso}
 
 
-Definition at line 498 of file Decoder.\-cpp.
+Definition at line 519 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_decoder_multi_a875eb671767c2f547453e6d7a1401f15}{\index{Hoa2\-D\-::\-Decoder\-Multi@{Hoa2\-D\-::\-Decoder\-Multi}!set\-Vector\-Size@{set\-Vector\-Size}}
 \index{set\-Vector\-Size@{set\-Vector\-Size}!Hoa2D::DecoderMulti@{Hoa2\-D\-::\-Decoder\-Multi}}
@@ -653,7 +699,7 @@ Definition at line 498 of file Decoder.\-cpp.
 
 Set the vector size. 
 
-Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
+Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding.
 
 
 \begin{DoxyParams}{Parameters}
@@ -665,11 +711,5 @@ Set the vector size. Setting the sample size will allocate the vector to compute
 \end{DoxySeeAlso}
 
 
-Definition at line 507 of file Decoder.\-cpp.
+Definition at line 528 of file Decoder.\-cpp.
 
-
-
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
-\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}

@@ -22,11 +22,11 @@ Inheritance diagram for Hoa2\-D\-:\-:Ambisonic\-:\begin{figure}[H]
 \hyperlink{class_hoa2_d_1_1_ambisonic_ac53cc3ea0b6600dd84d761f89b5af9d3}{Ambisonic} (unsigned int order)
 \begin{DoxyCompactList}\small\item\em The ambisonic constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_hoa2_d_1_1_ambisonic_a27be996cfb2bad88e13a32c0d7dba517}{$\sim$\-Ambisonic} ()
-\item 
+\begin{DoxyCompactList}\small\item\em The ambisonic destructor. \end{DoxyCompactList}\item 
 unsigned int \hyperlink{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}{get\-Order} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em Retrieve the decomposition order. \end{DoxyCompactList}\item 
 unsigned int \hyperlink{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}{get\-Number\-Of\-Harmonics} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em Retrieve the number of harmonics. \end{DoxyCompactList}\item 
 long \hyperlink{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}{get\-Harmonic\-Argument} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Retrieve the argument of an harmonic. \end{DoxyCompactList}\item 
 long \hyperlink{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{get\-Harmonic\-Band} (unsigned int index) const 
@@ -72,6 +72,10 @@ Definition at line 11 of file Ambisonic.\-cpp.
 {}
 \end{DoxyParamCaption}
 )}}\label{class_hoa2_d_1_1_ambisonic_a27be996cfb2bad88e13a32c0d7dba517}
+
+
+The ambisonic destructor. 
+
 The ambisonic destructor. 
 
 Definition at line 25 of file Ambisonic.\-cpp.
@@ -107,7 +111,7 @@ The method returns the argument of the harmonic if the harmonic exists, otherwis
 \end{DoxySeeAlso}
 
 
-Definition at line 58 of file Ambisonic.\-h.
+Definition at line 65 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonic\-Band@{get\-Harmonic\-Band}}
 \index{get\-Harmonic\-Band@{get\-Harmonic\-Band}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
@@ -137,7 +141,7 @@ The method returns the band of the harmonic if the harmonic exists, otherwise th
 \end{DoxySeeAlso}
 
 
-Definition at line 72 of file Ambisonic.\-h.
+Definition at line 79 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonics\-Name@{get\-Harmonics\-Name}}
 \index{get\-Harmonics\-Name@{get\-Harmonics\-Name}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
@@ -167,7 +171,7 @@ The method returns a name for the harmonic that contains its argument if the har
 \end{DoxySeeAlso}
 
 
-Definition at line 87 of file Ambisonic.\-h.
+Definition at line 94 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}}
 \index{get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
@@ -176,9 +180,18 @@ Definition at line 87 of file Ambisonic.\-h.
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}
+
+
 Retrieve the number of harmonics. 
 
-Definition at line 45 of file Ambisonic.\-h.
+Retrieve the number of harmonics.
+
+\begin{DoxyReturn}{Returns}
+The number of harmonics. 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Order@{get\-Order}}
 \index{get\-Order@{get\-Order}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
@@ -187,13 +200,16 @@ Definition at line 45 of file Ambisonic.\-h.
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}
+
+
 Retrieve the decomposition order. 
 
-Definition at line 38 of file Ambisonic.\-h.
+Retrieve the decomposition order.
+
+\begin{DoxyReturn}{Returns}
+The order. 
+\end{DoxyReturn}
 
 
+Definition at line 42 of file Ambisonic.\-h.
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
-\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Ambisonic.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Ambisonic.\-cpp\end{DoxyCompactItemize}

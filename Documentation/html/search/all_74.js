@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tools',['Tools',['../class_tools.html',1,'']]]
+  ['the_20hoalibrary_20documentation',['The HoaLibrary documentation',['../index.html',1,'']]]
 ];
