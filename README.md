@@ -12,7 +12,7 @@ Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
 #### Documentation :
 
-title="Documentation" href="http://cicm.github.io/HoaLibrary"
+<a>title="Documentation" href="http://cicm.github.io/HoaLibrary"</a>
 
 #### Dependencies : 
 
