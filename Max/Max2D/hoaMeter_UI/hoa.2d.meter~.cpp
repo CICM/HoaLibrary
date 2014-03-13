@@ -1043,10 +1043,10 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 {
 	double pointSize = rect->width*0.02;
 	double maxRadius = (x->f_rayonInt-pointSize-1);
+	double vecX, vecY;
 	t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_vectors_layer, rect->width, rect->height);
-	
 	t_jpattern *pattern = NULL;
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_vectors_layer, rect->width, rect->height);
 	
 	if (g)
 	{
@@ -1055,12 +1055,11 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 		
 		if (x->f_drawvector == 1 || x->f_drawvector == 3)
 		{
-			//jgraphics_set_source_jrgba(g, &x->f_color_velocity);
+			vecX = x->f_vector_coords[0] * maxRadius;
+			vecY = x->f_vector_coords[1] * maxRadius;
 			
-			pattern = jgraphics_pattern_create_radial(x->f_vector_coords[0] * maxRadius - pointSize*0.15,
-													  x->f_vector_coords[1] * maxRadius + pointSize*0.15, 0,
-													  x->f_vector_coords[0] * maxRadius + pointSize*0.5,
-													  x->f_vector_coords[1] * maxRadius - pointSize*0.5, 0);
+			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
+													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
 			
 			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
 			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
@@ -1070,18 +1069,17 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 												  x->f_color_velocity.alpha);
 			
 			jgraphics_set_source(g, pattern);
-			jgraphics_arc(g, x->f_vector_coords[0] * maxRadius, x->f_vector_coords[1] * maxRadius, pointSize, 0., HOA_2PI);
+			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
 			jgraphics_fill(g);
 		}
 		
 		if (x->f_drawvector == 2 || x->f_drawvector == 3)
 		{
-			//jgraphics_set_source_jrgba(g, &x->f_color_energy);
+			vecX = x->f_vector_coords[2] * maxRadius;
+			vecY = x->f_vector_coords[3] * maxRadius;
 			
-			pattern = jgraphics_pattern_create_radial(x->f_vector_coords[2] * maxRadius - pointSize*0.15,
-													  x->f_vector_coords[3] * maxRadius + pointSize*0.15, 0,
-													  x->f_vector_coords[2] * maxRadius + pointSize*0.5,
-													  x->f_vector_coords[3] * maxRadius - pointSize*0.5, 0);
+			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
+													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
 			
 			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
 			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
@@ -1091,8 +1089,7 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 												  x->f_color_energy.alpha);
 			
 			jgraphics_set_source(g, pattern);
-			
-			jgraphics_arc(g, x->f_vector_coords[2] * maxRadius, x->f_vector_coords[3] * maxRadius, pointSize, 0., HOA_2PI);
+			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
 			jgraphics_fill(g);
 		}
         

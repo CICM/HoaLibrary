@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>12F45</string>
+	<string>13B3116</string>
 	<key>CFBundleExecutable</key>
 	<string>HoaTools</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.HoaTools</string>
+	<string>com.cicm.HoaTools</string>
 	<key>CFBundleName</key>
 	<string>HoaTools</string>
 	<key>CFBundlePackageType</key>
