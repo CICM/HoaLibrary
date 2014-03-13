@@ -511,13 +511,13 @@ namespace Hoa
 	
 	inline void vector_add(unsigned int size, double *vec, double inc)
 	{
-		for (int i=0; i < size; i++)
+		for (unsigned int i=0; i < size; i++)
 			vec[i] += inc;
 	}
 	
 	inline void vector_clip_minmax(unsigned int size, double *vec, double min, double max)
 	{
-		for (int i=0; i < size; i++)
+		for (unsigned i=0; i < size; i++)
 			vec[i] = clip_minmax(vec[i], min, max);
 	}
     
