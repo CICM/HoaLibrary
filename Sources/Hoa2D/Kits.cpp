@@ -92,7 +92,7 @@ namespace Hoa2D
         if(m_counter++ >= m_ramp)
         {
             cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
-            memset(m_values_step, 0, sizeof(double) * m_number_of_sources * 2);
+            memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
             m_counter    = 0;
         }
         cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
@@ -258,6 +258,11 @@ namespace Hoa2D
         }
 	}
     
+    void KitSources::process(const double* input, double* output)
+	{
+		;
+	}
+    
     void KitSources::applyChanges()
     {
         if(m_order != m_map->getOrder())
@@ -305,11 +310,6 @@ namespace Hoa2D
             ;
         }
     }
-	
-	void KitSources::process(const double* input, double* output)
-	{
-		;
-	}
 	
 	KitSources::~KitSources()
 	{

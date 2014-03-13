@@ -17,7 +17,7 @@
 
 namespace Hoa2D
 {
-    //! The kit to spatialize lught points sources.
+    //! The kit to spatialize points sources.
     /** The KitSources is an all-in-one class that owns a Map, an Optim, a DecoderMulti, a Meter and a SourcesManager and that can be used to spatialize several sources. It allows to dynamicaly change the classes parameters.
      */
     class KitSources
