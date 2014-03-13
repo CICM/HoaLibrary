@@ -13,7 +13,6 @@
 		8F2A50C918C4EB8C00F9A068 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2A50C718C4EB8C00F9A068 /* Decoder.h */; };
 		8F2A50CC18C4FA5800F9A068 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A50CA18C4FA5800F9A068 /* Planewaves.cpp */; };
 		8F2A50CD18C4FA5800F9A068 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2A50CB18C4FA5800F9A068 /* Planewaves.h */; };
-		8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */; };
 		8F7ADEB618C4D60900CBCA70 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7ADEA618C4D60900CBCA70 /* Ambisonic.cpp */; };
 		8F7ADEB718C4D60900CBCA70 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADEA718C4D60900CBCA70 /* Ambisonic.h */; };
 		8F7ADEBA18C4D60900CBCA70 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7ADEAA18C4D60900CBCA70 /* Encoder.cpp */; };
@@ -183,7 +182,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.2d.recomposer~" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -209,7 +208,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

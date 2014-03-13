@@ -6,14 +6,61 @@
 
 #include "../Hoa2D.max.h"
 
+class PolarLines
+{
+    
+private:
+    float*      m_values_old;
+    float*      m_values_new;
+    float*      m_values_step;
+    unsigned int m_counter;
+    unsigned int m_ramp;
+    unsigned int m_number_of_sources;
+    
+public:
+    PolarLines(unsigned int numberOfSources);
+    ~PolarLines();
+    
+    inline unsigned int getNumberOfSources() const
+    {
+        return m_number_of_sources;
+    }
+    
+    inline unsigned int getRamp() const
+    {
+        return m_ramp;
+    }
+    
+    inline double getRadius(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[index];
+    }
+    
+    inline double getAzimuth(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[m_number_of_sources +index];
+    }
+    
+    void setRamp(unsigned int ramp);
+    void setRadius(unsigned int index, double radius);
+    void setAzimuth(unsigned int index, double azimuth);
+    void setRadiusDirect(unsigned int index, double radius);
+    void setAzimuthDirect(unsigned int index, double azimuth);
+    
+    void process(float* vector);
+};
+
 typedef struct _hoa_recomposer 
 {
 	t_pxobject              f_ob;
 	double*                 f_ins;
     double*                 f_outs;
     Hoa2D::Recomposer*      f_recomposer;
+    PolarLines*             f_lines;
     double                  f_ramp;
-    
+    float*                  f_lines_vector;
 } t_hoa_recomposer;
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv);
@@ -24,8 +71,6 @@ void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 
 t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv);
-
-t_max_err HoaRecomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 void hoa_recomposer_dsp64(t_hoa_recomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_recomposer_perform64(t_hoa_recomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -52,7 +97,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"ramp", NULL, ramp_set);
-    CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
+    CLASS_ATTR_ORDER			(c,"ramp", 0,  "1");
     CLASS_ATTR_SAVE             (c,"ramp", 1);
 	
 	class_dspinit(c);
@@ -79,14 +124,23 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
         if(numberOfLoudspeakers < order * 2 + 1)
             numberOfLoudspeakers = order * 2 + 1;
 		
+        x->f_ramp       = 100;
 		x->f_recomposer = new Hoa2D::Recomposer(order, numberOfLoudspeakers);
-		
+        x->f_lines      = new PolarLines(x->f_recomposer->getNumberOfChannels());
+        x->f_lines->setRamp(0.1 * sys_getsr());
+		for (int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
+        {
+            x->f_lines->setRadiusDirect(i, x->f_recomposer->getWideningValue(i));
+            x->f_lines->setAzimuthDirect(i, x->f_recomposer->getAzimuth(i));
+        }
+        
 		dsp_setup((t_pxobject *)x, x->f_recomposer->getNumberOfChannels() + 1);
 		for (int i = 0; i < x->f_recomposer->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
-		x->f_ins = new double[x->f_recomposer->getNumberOfChannels() * SYS_MAXBLKSIZE];
-        x->f_outs = new double[x->f_recomposer->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+		x->f_ins            = new double[x->f_recomposer->getNumberOfChannels() * SYS_MAXBLKSIZE];
+        x->f_outs           = new double[x->f_recomposer->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_lines_vector   = new float[x->f_recomposer->getNumberOfChannels() * 2];
 	}
 
 	return (x);
@@ -106,22 +160,46 @@ void hoa_recomposer_float(t_hoa_recomposer *x, double d)
 {
     if(proxy_getinlet((t_object *)x) == x->f_recomposer->getNumberOfChannels())
     {
-        ;
+        for(int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
+            x->f_lines->setRadius(i, 1);
+        for(int i = 0; i < floor(x->f_recomposer->getNumberOfChannels() * 0.5); i++)
+        {
+            x->f_lines->setAzimuth(i, (double)i * HOA_2PI / (double)x->f_recomposer->getNumberOfChannels() * clip_minmax(d, 0, 1));
+        }
+        for(int i = floor(x->f_recomposer->getNumberOfChannels() * 0.5); i < x->f_recomposer->getNumberOfChannels(); i++)
+        {
+            x->f_lines->setAzimuth(i, (double)i * HOA_2PI / (double)x->f_recomposer->getNumberOfChannels() * clip_minmax(d, 0, 1));
+        }
     }
 }
 
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    ;
+    if(ac && av)
+    {
+        for(int i = 0; i < x->f_recomposer->getNumberOfChannels() && i < ac; i++)
+        {
+            if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
+                x->f_lines->setAzimuth(i, atom_getfloat(av+i));
+        }
+    }
 }
 
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    ;
+    if(ac && av)
+    {
+        for(int i = 0; i < x->f_recomposer->getNumberOfChannels() && i < ac; i++)
+        {
+            if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
+                x->f_lines->setRadius(i, atom_getfloat(av+i));
+        }
+    }
 }
 
 void hoa_recomposer_dsp64(t_hoa_recomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
+    x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
     object_method(dsp64, gensym("dsp_add64"), x, hoa_recomposer_perform64, 0, NULL);
 }
 
@@ -161,12 +239,111 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_recomposer;
+    delete x->f_lines;
+    delete [] x->f_lines_vector;
     delete [] x->f_ins;
 	delete [] x->f_outs;
 }
 
 t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
 {
-    return 0;
+    if(argc && argv)
+    {
+        if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+        {
+            x->f_ramp = clip_min(atom_getfloat(argv), 0);
+            x->f_lines->setRamp(x->f_ramp / 1000. * sys_getsr());
+        }
+    }
+    
+    return MAX_ERR_NONE;
 }
+
+PolarLines::PolarLines(unsigned int numberOfSources)
+{
+    assert(numberOfSources > 0);
+    m_number_of_sources = numberOfSources;
+    
+    m_values_old    = new float[m_number_of_sources * 2];
+    m_values_new    = new float[m_number_of_sources * 2];
+    m_values_step   = new float[m_number_of_sources * 2];
+}
+
+PolarLines::~PolarLines()
+{
+    delete [] m_values_old;
+    delete [] m_values_new;
+    delete [] m_values_step;
+}
+
+void PolarLines::setRamp(unsigned int ramp)
+{
+    m_ramp = clip_min(ramp, (long)1);
+}
+
+void PolarLines::setRadius(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index]  = radius;
+    m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
+    m_counter = 0;
+}
+
+void PolarLines::setAzimuth(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
+    m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+    double distance;
+    if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
+        distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
+    else
+        distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new > m_values_old)
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
+}
+
+void PolarLines::setRadiusDirect(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index] = m_values_new[index] = radius;
+    m_values_step[index] = 0.;
+    m_counter = 0;
+}
+
+void PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
+    m_values_step[index + m_number_of_sources] = 0.;
+    m_counter = 0;
+}
+
+void PolarLines::process(float* vector)
+{
+    cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
+    if(m_counter++ >= m_ramp)
+    {
+        cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
+        memset(m_values_step, 0, sizeof(double) * m_number_of_sources * 2);
+        m_counter    = 0;
+    }
+    cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
+}
+
+
 
