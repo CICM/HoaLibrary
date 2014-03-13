@@ -9,11 +9,11 @@
 
 extern "C"
 {
-#include "ext.h"
-#include "ext_obex.h"
-#include "jpatcher_api.h"
-#include "jgraphics.h"
-#include "z_dsp.h"
+#include <ext.h>
+#include <ext_obex.h>
+#include <jpatcher_api.h>
+#include <jgraphics.h>
+#include <z_dsp.h>
 }
 
 #include "../JuceLibraryCode/JuceHeader.h"
