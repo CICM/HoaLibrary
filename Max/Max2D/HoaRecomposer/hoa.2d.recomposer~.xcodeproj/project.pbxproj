@@ -249,6 +249,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -276,6 +277,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,

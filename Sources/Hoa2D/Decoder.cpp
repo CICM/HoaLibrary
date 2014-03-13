@@ -16,7 +16,7 @@ namespace Hoa2D
         assert(numberOfChannels >= m_number_of_harmonics);
         
         m_harmonics_vector          = new double[m_number_of_harmonics];
-        m_decoder_matrix            = new double[m_number_of_channels * m_number_of_harmonics];
+        m_decoder_matrix_double     = new double[m_number_of_channels * m_number_of_harmonics];
         m_decoder_matrix_float      = new float[m_number_of_channels * m_number_of_harmonics];
         m_encoder                   = new Encoder(m_order);
         setChannelsOffset(0.);
@@ -30,10 +30,10 @@ namespace Hoa2D
             m_encoder->setAzimuth(m_channels_azimuth[i] + m_offset);
             m_encoder->process(1., m_harmonics_vector);
             
-            m_decoder_matrix_float[i * m_number_of_harmonics] = m_decoder_matrix[i * m_number_of_harmonics] = 0.5 / (double)(m_order + 1.);
+            m_decoder_matrix_float[i * m_number_of_harmonics] = m_decoder_matrix_double[i * m_number_of_harmonics] = 0.5 / (double)(m_order + 1.);
             for(unsigned int j = 1; j < m_number_of_harmonics; j++)
             {
-                m_decoder_matrix_float[i * m_number_of_harmonics + j] = m_decoder_matrix[i * m_number_of_harmonics + j] = m_harmonics_vector[j] / (double)(m_order + 1.);
+                m_decoder_matrix_float[i * m_number_of_harmonics + j] = m_decoder_matrix_double[i * m_number_of_harmonics + j] = m_harmonics_vector[j] / (double)(m_order + 1.);
             }
         }
 	}
@@ -45,12 +45,12 @@ namespace Hoa2D
 	
 	void DecoderRegular::process(const double* input, double* output)
 	{
-		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_decoder_matrix, m_number_of_harmonics, input, 1, 0.f, output, 1);
+		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_decoder_matrix_double, m_number_of_harmonics, input, 1, 0.f, output, 1);
 	}
 	
 	DecoderRegular::~DecoderRegular()
 	{
-		delete [] m_decoder_matrix;
+		delete [] m_decoder_matrix_double;
         delete [] m_decoder_matrix_float;
         delete [] m_harmonics_vector;
         delete m_encoder;

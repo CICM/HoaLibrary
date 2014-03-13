@@ -84,7 +84,7 @@ void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long num
 void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
@@ -119,7 +119,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
-	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, hoa_map_ramp);
+	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
 	
 	class_dspinit(c);
@@ -259,7 +259,7 @@ t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
-t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
@@ -540,7 +540,7 @@ void PolarLines::process(float* vector)
     if(m_counter++ >= m_ramp)
     {
         cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
-        memset(m_values_step, 0, sizeof(double) * m_number_of_sources * 2);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
         m_counter    = 0;
     }
     cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);

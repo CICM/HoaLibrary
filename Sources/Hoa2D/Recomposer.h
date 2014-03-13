@@ -21,10 +21,12 @@ namespace Hoa2D
     {
         
     private:
-		double*                 m_harmonics_double;
-        float*                  m_harmonics_float;
-        std::vector<Encoder*>   m_encoders;
-        std::vector<Wider*>     m_widers;
+		double*     m_harmonics_double;
+        float*      m_harmonics_float;
+        Encoder**   m_encoders;
+        Wider**     m_widers;
+        double*     m_recomposer_matrix_double;
+        float*      m_recomposer_matrix_float;
         
     public:
         
@@ -59,6 +61,11 @@ namespace Hoa2D
          */
         void setWideningValue(unsigned int index, const double value);
         
+        //! This method set the fisheye factor.
+        /**	The fisheye factor is between 0 and 1 and will defines the azimuth if the channels to retract or expand the soundfield foward the front.
+         */
+        void setFisheye(const double fisheye);
+        
         //! This method retrieve the azimuth of a channel.
         /** Retrieve the azimuth of a source.
          
@@ -89,7 +96,7 @@ namespace Hoa2D
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.
          */
-		void process(const float* inputs, float* outputs);
+		void processFixe(const float* inputs, float* outputs);
 		
 		//! This method performs the recomposition with double precision.
         /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics and the inputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
@@ -97,7 +104,40 @@ namespace Hoa2D
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.
          */
-		void process(const double* inputs, double* outputs);
+		void processFixe(const double* inputs, double* outputs);
+        
+        //! This method performs the fish-eye recomposition with single precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics and the  inputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+		void processFisheye(const float* inputs, float* outputs);
+		
+		//! This method performs the fish-eye recomposition with double precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics and the inputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+		void processFisheye(const double* inputs, double* outputs);
+        
+        //! This method performs the free recomposition with single precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics and the  inputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+		void processFree(const float* inputs, float* outputs);
+		
+		//! This method performs the free recomposition with double precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics and the inputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+		void processFree(const double* inputs, double* outputs);
+        
     };
 }
 
