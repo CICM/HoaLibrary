@@ -1,0 +1,9 @@
+# MaxMSP
+*.mxo binary merge=ours
+*.exec binary merge=theirs
+*.exe binary merge=theirs
+*.maxpat binary merge=theirs
+*.maxhelp binary merge=theirs
+*.png binary merge=binary
+*.app binary merge=binary
+
