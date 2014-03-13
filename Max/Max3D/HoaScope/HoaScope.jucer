@@ -66,12 +66,12 @@
                externalLibraries="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="64BitUniversal"
-                       isDebug="1" optimisation="1" targetName="hoa.3d.scope~" customXcodeFlags="C74SUPPORT= &quot;$(SRCROOT)/../../../../../SDKs/MaxSDK-6.1.4/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../builds3D&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"
+                       isDebug="1" optimisation="1" targetName="hoa.3d.scope~" customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../builds3D&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"
                        headerPath="$(C74SUPPORT)/max-includes&#10;$(C74SUPPORT)/msp-includes&#10;$(C74SUPPORT)/jit-includes"
                        libraryPath="" binaryPath=""/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="64BitUniversal"
                        isDebug="0" optimisation="3" targetName="hoa.3d.scope~" headerPath="$(C74SUPPORT)/max-includes&#10;$(C74SUPPORT)/msp-includes&#10;$(C74SUPPORT)/jit-includes"
-                       customXcodeFlags="C74SUPPORT= &quot;$(SRCROOT)/../../../../../SDKs/MaxSDK-6.1.4/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../builds3D&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"/>
+                       customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../builds3D&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../ThirdParty/JuceModules"/>
