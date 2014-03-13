@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C30011318C5D66D00D3C686 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30011218C5D66D00D3C686 /* hoa.max.cpp */; };
-		2C30011618C5E25100D3C686 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30011418C5E25100D3C686 /* Line.cpp */; };
-		2C30011718C5E25100D3C686 /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C30011518C5E25100D3C686 /* Line.h */; };
 		2C30011918C5E51B00D3C686 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C30011818C5E51B00D3C686 /* CoreFoundation.framework */; };
 		2C30011B18C5E52A00D3C686 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C30011A18C5E52A00D3C686 /* Accelerate.framework */; };
 		2C8F651F18C4DD1C007B67FF /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */; };
@@ -29,8 +27,6 @@
 
 /* Begin PBXFileReference section */
 		2C30011218C5D66D00D3C686 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
-		2C30011418C5E25100D3C686 /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Line.cpp; sourceTree = "<group>"; };
-		2C30011518C5E25100D3C686 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
 		2C30011818C5E51B00D3C686 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2C30011A18C5E52A00D3C686 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
@@ -68,8 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				2CC1BBDE18C4E4F700FB815B /* hoa.2d.map~.cpp */,
-				2C30011418C5E25100D3C686 /* Line.cpp */,
-				2C30011518C5E25100D3C686 /* Line.h */,
 				2C30011218C5D66D00D3C686 /* hoa.max.cpp */,
 				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F213C6718D0B18900A346AB /* hoa.max_commonsyms.h */,
@@ -120,7 +114,6 @@
 				8F213C6818D0B18900A346AB /* hoa.max_commonsyms.h in Headers */,
 				2CC1BBEB18C4E5BB00FB815B /* Wider.h in Headers */,
 				2C8F652018C4DD1C007B67FF /* Ambisonic.h in Headers */,
-				2C30011718C5E25100D3C686 /* Line.h in Headers */,
 				2CC1BBE918C4E5BB00FB815B /* Encoder.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 			);
@@ -154,7 +147,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.2d.map~" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -201,7 +194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC1BBDF18C4E4F700FB815B /* hoa.2d.map~.cpp in Sources */,
-				2C30011618C5E25100D3C686 /* Line.cpp in Sources */,
 				2CC1BBE218C4E57200FB815B /* Map.cpp in Sources */,
 				2CC1BBEA18C4E5BB00FB815B /* Wider.cpp in Sources */,
 				2C8F651F18C4DD1C007B67FF /* Ambisonic.cpp in Sources */,

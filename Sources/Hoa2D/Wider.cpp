@@ -63,6 +63,10 @@ namespace Hoa2D
     
     Wider::~Wider()
     {
+        for(unsigned int j = 0; j < NUMBEROFLINEARPOINTS; j++)
+        {
+            delete [] m_wide_matrix[j];
+        }
         delete [] m_wide_matrix;
     }
 }

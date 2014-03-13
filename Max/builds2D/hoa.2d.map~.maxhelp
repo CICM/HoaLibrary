@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1050.0, 473.0 ],
+						"rect" : [ 4.0, 126.0, 1050.0, 473.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -249,7 +249,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 32.733307, 211.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : "polar",
+										"mode" : "cartesian",
 										"ramp" : 100.0
 									}
 ,
@@ -719,7 +719,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 4.0, 126.0, 1050.0, 473.0 ],
+						"rect" : [ 0.0, 26.0, 1050.0, 473.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -953,7 +953,7 @@
 									"outlettype" : [ "list", "list", "list" ],
 									"outputmode" : 1,
 									"patching_rect" : [ 15.0, 121.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, -0.783424, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.517235, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.369795, 0.390516, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.395298, 0.811318, 1, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, -0.783424, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.517235, -0.553099, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.318789, 0.275752, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.395298, 0.811318, 1, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
