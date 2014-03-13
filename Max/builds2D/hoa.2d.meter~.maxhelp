@@ -32,9 +32,9 @@
 		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -246,7 +246,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 359.0, 394.0, 54.0, 20.0 ],
+									"patching_rect" : [ 768.0, 332.784058, 54.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -273,7 +273,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 359.0, 424.0, 96.0, 20.0 ],
+									"patching_rect" : [ 768.0, 362.784058, 96.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -506,95 +506,6 @@
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-36",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 141.0, 624.0, 67.0, 32.0 ],
-									"text" : "Velocity \nvector (x/y)",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-37",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 141.0, 624.0, 67.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-34",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 67.0, 32.0 ],
-									"text" : "Energy \nvector (x/y)",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-35",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 67.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-31",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 330.0, 535.0, 208.0, 19.0 ],
-									"text" : "Peak values for each metering interval",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-32",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 330.0, 535.0, 208.0, 19.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"hidden" : 1,
 									"id" : "obj-30",
@@ -602,70 +513,14 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 359.0, 267.0, 72.0, 20.0 ],
+									"patching_rect" : [ 747.5, 221.0, 72.0, 20.0 ],
 									"text" : "loadmess 1"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-23",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 719.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-24",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 659.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-26",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 599.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-27",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 539.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -701,7 +556,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 73.0, 524.0, 33.0 ],
-									"text" : "hoa.meter~ outputs in the left outlet a list of cartesians coordinates coresponding to the two different computed vectors, and in the right outlet the Peak values for each metering interval.",
+									"text" : "hoa.2d.meter~ outputs in the left outlet a list of cartesians coordinates coresponding to the two different computed vectors, and in the right outlet the Peak values for each metering interval.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -728,7 +583,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 694.0, 496.0, 44.0, 44.0 ]
+									"patching_rect" : [ 625.525879, 335.784058, 44.0, 44.0 ]
 								}
 
 							}
@@ -740,149 +595,9 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 691.0, 493.0, 50.0, 50.0 ],
+									"patching_rect" : [ 622.525879, 332.784058, 50.0, 50.0 ],
 									"rounded" : 6,
 									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-7",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 479.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-16",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 419.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-17",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 359.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-18",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 299.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-19",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 8,
-									"outlettype" : [ "float", "float", "float", "float", "float", "float", "float", "float" ],
-									"patching_rect" : [ 299.0, 563.0, 439.0, 20.0 ],
-									"text" : "unpack 0. 0. 0. 0. 0. 0. 0. 0."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-15",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 173.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-14",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 121.333328, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-11",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 69.666672, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-10",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 18.0, 596.0, 49.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-5",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 4,
-									"outlettype" : [ "float", "float", "float", "float" ],
-									"patching_rect" : [ 18.0, 563.0, 174.0, 20.0 ],
-									"text" : "unpack 0. 0. 0. 0."
 								}
 
 							}
@@ -897,7 +612,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 359.0, 297.0, 100.0, 20.0 ]
+									"patching_rect" : [ 747.5, 251.0, 100.0, 20.0 ]
 								}
 
 							}
@@ -910,7 +625,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 359.0, 330.0, 84.0, 18.0 ],
+									"patching_rect" : [ 747.5, 284.0, 84.0, 18.0 ],
 									"text" : "drawvector $1"
 								}
 
@@ -1151,19 +866,17 @@
 , 							{
 								"box" : 								{
 									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
+									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-25",
 									"interval" : 20,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.407843, 0.407843, 0.407843, 1.0 ],
 									"metersize" : 0.6,
 									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 18.0, 254.0, 300.0, 300.0 ],
-									"prototypename" : "bigQuadriBlack",
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"numoutlets" : 0,
+									"patching_rect" : [ 18.0, 254.0, 498.0, 498.0 ],
+									"prototypename" : "bigQuadriBlack"
 								}
 
 							}
@@ -1173,7 +886,6 @@
 									"destination" : [ "obj-25", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 368.5, 357.0, 338.5, 357.0, 338.5, 244.0, 308.5, 244.0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -1184,78 +896,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-16", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-17", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-23", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 7 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-24", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-26", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-27", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 4 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-19", 3 ]
 								}
 
 							}
@@ -1326,24 +966,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-2", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-25", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-5", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-25", 0 ]
 								}
 
 							}
@@ -1616,44 +1238,8 @@
 									"destination" : [ "obj-49", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 368.5, 415.0, 368.5, 415.0 ],
+									"midpoints" : [ 777.5, 353.784058, 777.5, 353.784058 ],
 									"source" : [ "obj-48", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-14", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-15", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 3 ]
 								}
 
 							}
@@ -1714,7 +1300,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 126.5, 72.0, 23.0 ],
+					"patching_rect" : [ 50.0, 126.5, 59.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -1728,7 +1314,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p outputs"
+					"text" : "p vectors"
 				}
 
 			}
@@ -1823,7 +1409,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 401.0, 345.0, 234.0, 33.0 ],
-									"text" : "Other attributes are exclusive to the hoa.meter~ :",
+									"text" : "Other attributes are exclusive to the hoa.2d.meter~ :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
 
@@ -1866,8 +1452,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 397.0, 137.0, 234.0, 33.0 ],
-									"text" : "hoa.decoder~ and hoa.meters are linked together, they share attributes together :",
+									"patching_rect" : [ 397.0, 137.0, 244.0, 33.0 ],
+									"text" : "hoa.decoder~ and hoa.2d.meters are linked together, they share attributes together :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
 
@@ -2089,7 +1675,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 73.0, 558.0, 33.0 ],
-									"text" : "hoa.meter~ displays the peak levels for a circurlar array of loudspeakers. It computes and displays the energy and velocity vectors.",
+									"text" : "hoa.2d.meter~ displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -2125,15 +1711,17 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-									"channels" : 16,
+									"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"drawvector" : 3,
+									"energycolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "hoa.2d.meter~",
-									"numinlets" : 16,
+									"numinlets" : 5,
 									"numoutlets" : 0,
-									"patching_rect" : [ 58.5, 409.5, 270.972229, 270.972229 ]
+									"patching_rect" : [ 58.5, 409.5, 221.5, 221.5 ],
+									"velocitycolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 								}
 
 							}
@@ -2201,14 +1789,14 @@
 									"id" : "obj-74",
 									"maxclass" : "newobj",
 									"numinlets" : 15,
-									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 5,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 58.5, 300.0, 221.5, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+										"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
 										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
+										"channels" : 5,
+										"mode" : "irregular",
 										"pinna" : "small"
 									}
 ,
@@ -2724,105 +2312,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-4", 15 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 15 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 14 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 14 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 13 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 13 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 12 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 12 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 11 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 11 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 10 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 10 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 9 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 9 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 8 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 8 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 7 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 7 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-74", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-4", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -2962,9 +2451,9 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-3",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -3020,8 +2509,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 481.0, 20.0 ],
-									"text" : "hoa.meter~ lets you set angles for each loudspeakers",
+									"patching_rect" : [ 4.0, 73.0, 481.0, 19.0 ],
+									"text" : "hoa.2d.meter~ lets you set angles for each loudspeakers",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3036,8 +2525,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 520.5, 523.5, 275.0, 33.0 ],
-									"text" : "You can send this message either in hoa.decoder~ or in hoa.meter~ ",
+									"patching_rect" : [ 520.5, 523.5, 275.0, 32.0 ],
+									"text" : "You can send this message either in hoa.decoder~ or in hoa.2d.meter~ ",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3066,7 +2555,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 520.5, 433.5, 276.0, 73.0 ],
+									"patching_rect" : [ 520.5, 433.5, 276.0, 71.0 ],
 									"text" : "\"angles\" message followed by a list of float sets the loudspeakers angles.\nEach angle can be set within -360° and 360° range.\nThe list will be sorted in ascending order between the equivalent 0 to 360° range.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -3088,7 +2577,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-26",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -3355,15 +2844,11 @@
 									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
-									"loudspeakers" : 5,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 5,
 									"numleds" : 10,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 31.0, 233.0, 424.0, 424.0 ],
-									"yls" : 5,
-									"zls" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ]
+									"numoutlets" : 0,
+									"patching_rect" : [ 31.0, 233.0, 424.0, 424.0 ]
 								}
 
 							}
@@ -3883,7 +3368,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 197.5, 67.0, 23.0 ],
+					"patching_rect" : [ 50.0, 197.5, 57.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -3903,9 +3388,9 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-39",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -3983,7 +3468,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -4014,11 +3499,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-40",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 73.0, 483.0, 20.0 ],
-									"text" : "hoa.meter~ and the vanilla msp meter~ object share the same behaviors and messages.",
+									"text" : "hoa.2d.meter~ and the vanilla msp meter~ object share the same behaviors and messages.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -4135,18 +3621,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 45.0, 90.0, 135.0 ],
 									"bgcolor" : [ 0.707936, 0.616169, 0.070814, 1.0 ],
-									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.46 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.380246, 0.380246, 0.380246, 1.0 ],
-									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 18.0, 182.0, 461.0, 461.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 18.0, 182.0, 461.0, 461.0 ]
 								}
 
 							}
@@ -4177,56 +3660,10 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 7 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 563.5, 378.0, 516.5, 378.0, 516.5, 172.0, 469.5, 172.0 ],
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-10", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 7 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-17", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 6 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-17", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 5 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-17", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 4 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-17", 0 ]
 								}
 
 							}
@@ -4287,7 +3724,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 227.5, 55.0, 23.0 ],
+					"patching_rect" : [ 50.0, 227.5, 48.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -4307,9 +3744,9 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-38",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -4473,7 +3910,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -4507,8 +3944,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 483.0, 20.0 ],
-									"text" : "hoa.meter~ and the vanilla msp meter~ object share the same behaviors and messages.",
+									"patching_rect" : [ 4.0, 73.0, 495.0, 20.0 ],
+									"text" : "hoa.2d.meter~ and the vanilla msp meter~ object share the same behaviors and messages.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -4779,21 +4216,18 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 									"bgcolor" : [ 0.503678, 0.503678, 0.503678, 1.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 0.24 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"drawvector" : 0,
 									"id" : "obj-1",
 									"interval" : 20,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.403061, 0.403061, 0.403061, 1.0 ],
 									"metersize" : 0.82,
-									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 18.0, 254.0, 300.0, 300.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 18.0, 254.0, 300.0, 300.0 ]
 								}
 
 							}
@@ -4968,7 +4402,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 7 ],
+									"destination" : [ "obj-1", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"midpoints" : [ 27.5, 240.0, 308.5, 240.0 ],
@@ -4978,50 +4412,10 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 27.5, 240.0, 268.357143, 240.0 ],
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 27.5, 240.0, 228.214286, 240.0 ],
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 4 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 27.5, 240.0, 188.071429, 240.0 ],
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 3 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 27.5, 240.0, 147.928571, 240.0 ],
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-1", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 27.5, 237.0, 107.785714, 237.0 ],
+									"midpoints" : [ 27.5, 237.0, 214.833333, 237.0 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -5031,7 +4425,7 @@
 									"destination" : [ "obj-1", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 27.5, 237.0, 67.642857, 237.0 ],
+									"midpoints" : [ 27.5, 237.0, 121.166667, 237.0 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -5085,7 +4479,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 94.5, 58.0, 23.0 ],
+					"patching_rect" : [ 50.0, 94.5, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -5105,9 +4499,9 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-33",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -5245,21 +4639,25 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.796078, 0.796078, 0.796078, 1.0 ],
+									"bgcolor2" : [ 0.797445, 0.797445, 0.797445, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"gradient" : 1,
 									"id" : "obj-17",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 748.0, 388.0, 75.0, 18.0 ],
-									"text" : "channels $1"
+									"text" : "channels $1",
+									"textcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-10",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -5290,12 +4688,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-40",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 503.0, 33.0 ],
-									"text" : "The number of loudspeakers could be defined at the object's creation with the attribute \"@ls\" ex : [hoa.meter~ @ls 8] or dynamically (Max6 only)",
+									"patching_rect" : [ 4.0, 73.0, 483.0, 20.0 ],
+									"text" : "The number of channels could be defined dynamically thanks to the @channels attribute.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -5309,7 +4706,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 503.0, 33.0 ],
+									"patching_rect" : [ 4.0, 73.0, 483.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -5364,26 +4761,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 497.0, 125.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 497.0, 125.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
+									"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-38",
 									"interval" : 150,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.407843, 0.407843, 0.407843, 1.0 ],
-									"numinlets" : 8,
-									"numoutlets" : 2,
+									"numinlets" : 4,
+									"numoutlets" : 0,
 									"offset" : -45.0,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 497.0, 155.0, 225.0, 225.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"patching_rect" : [ 497.0, 155.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -5396,29 +4790,24 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 497.0, 388.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 497.0, 388.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"angles" : [ 0.0, 15.0, 30.0, 45.0, 60.0, 75.0, 90.0, 105.0, 120.0, 135.0, 150.0, 165.0, 180.0, 195.0, 210.0, 225.0, 240.0, 255.0, 270.0, 285.0, 300.0, 315.0, 330.0, 345.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
 									"channels" : 24,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-27",
 									"interval" : 150,
-									"loudspeakers" : 24,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.407843, 0.407843, 0.407843, 1.0 ],
 									"numinlets" : 24,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
+									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 418.0, 225.0, 225.0 ],
-									"prototypename" : "bigOctoBlack",
-									"yls" : 24,
-									"zls" : [ 0.0, 15.0, 30.0, 45.0, 60.0, 75.0, 90.0, 105.0, 120.0, 135.0, 150.0, 165.0, 180.0, 195.0, 210.0, 225.0, 240.0, 255.0, 270.0, 285.0, 300.0, 315.0, 330.0, 345.0 ]
+									"prototypename" : "bigOctoBlack"
 								}
 
 							}
@@ -5431,28 +4820,26 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 15.0, 125.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 15.0, 125.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
+									"angles" : [ 0.0 ],
+									"channels" : 1,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"drawvector" : 0,
 									"id" : "obj-25",
 									"interval" : 150,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.407843, 0.407843, 0.407843, 1.0 ],
 									"metersize" : 0.93,
-									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
+									"numinlets" : 1,
+									"numoutlets" : 0,
 									"patching_rect" : [ 15.0, 155.0, 225.0, 225.0 ],
-									"prototypename" : "bigQuadriBlack",
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"prototypename" : "bigQuadriBlack"
 								}
 
 							}
@@ -5465,22 +4852,21 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 15.0, 388.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 15.0, 388.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-23",
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 15.0, 418.0, 225.0, 225.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"numoutlets" : 0,
+									"patching_rect" : [ 15.0, 418.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -5493,8 +4879,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 256.0, 388.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 256.0, 388.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
@@ -5507,8 +4893,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 256.0, 125.0, 121.0, 20.0 ],
-									"text" : "receive~ hoa.meter~"
+									"patching_rect" : [ 256.0, 125.0, 135.0, 20.0 ],
+									"text" : "receive~ hoa.2d.meter~"
 								}
 
 							}
@@ -5521,8 +4907,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 704.0, 86.0, 108.0, 20.0 ],
-									"text" : "send~ hoa.meter~"
+									"patching_rect" : [ 704.0, 86.0, 124.0, 20.0 ],
+									"text" : "send~ hoa.2d.meter~"
 								}
 
 							}
@@ -5573,39 +4959,33 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
-									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
-									"channels" : 4,
+									"angles" : [ 0.0, 180.0 ],
+									"channels" : 2,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"drawmborder" : 1,
 									"id" : "obj-2",
 									"interval" : 150,
-									"loudspeakers" : 4,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"mbgcolor" : [ 0.407843, 0.407843, 0.407843, 1.0 ],
-									"numinlets" : 4,
-									"numoutlets" : 2,
+									"numinlets" : 2,
+									"numoutlets" : 0,
 									"offset" : -90.0,
-									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 256.0, 155.0, 225.0, 225.0 ],
-									"prototypename" : "bigOctoBlack",
-									"yls" : 4,
-									"zls" : [ 0.0, 90.0, 180.0, 270.0 ]
+									"prototypename" : "bigOctoBlack"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"interval" : 150,
-									"maxclass" : "hoa.meter~",
-									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 256.0, 418.0, 225.0, 225.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"maxclass" : "hoa.2d.meter~",
+									"numinlets" : 16,
+									"numoutlets" : 0,
+									"patching_rect" : [ 256.0, 418.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -5617,7 +4997,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 735.0, 347.5, 76.0, 74.0 ],
+									"patching_rect" : [ 735.0, 347.5, 101.0, 73.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5750,7 +5130,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 62.5, 106.0, 23.0 ],
+					"patching_rect" : [ 50.0, 62.5, 89.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -5770,9 +5150,9 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.267659, 0.594304, 0.839216, 1.0 ],
+					"color" : [ 0.733333, 0.733333, 0.733333, 1.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 12.0,
 					"id" : "obj-30",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -5903,8 +5283,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 549.625, 175.0, 20.0 ],
-									"text" : "hoa.meter~ fill direction",
+									"patching_rect" : [ 613.0, 549.625, 175.0, 19.0 ],
+									"text" : "hoa.2d.meter~ fill direction",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -5929,11 +5309,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-50",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 485.0, 175.0, 20.0 ],
-									"text" : "hoa.meter~ direction of rotation",
+									"patching_rect" : [ 613.0, 485.0, 175.0, 32.0 ],
+									"text" : "hoa.2d.meter~ direction of rotation",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -5961,7 +5342,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 416.0, 175.0, 20.0 ],
+									"patching_rect" : [ 613.0, 416.0, 175.0, 19.0 ],
 									"text" : "Draw or hide Meter Borders",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5990,7 +5371,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 341.0, 175.0, 20.0 ],
+									"patching_rect" : [ 613.0, 341.0, 175.0, 19.0 ],
 									"text" : "Draw or hide vectors",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -6019,7 +5400,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 274.0, 175.0, 20.0 ],
+									"patching_rect" : [ 613.0, 274.0, 175.0, 19.0 ],
 									"text" : "Draw leds background.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -6048,7 +5429,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 203.0, 175.0, 20.0 ],
+									"patching_rect" : [ 613.0, 203.0, 175.0, 19.0 ],
 									"text" : "Change size of the interior circle",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -6070,7 +5451,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-15",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -6101,11 +5482,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-23",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 188.0, 20.0 ],
-									"text" : "hoa.meter~ is fully customizable..",
+									"patching_rect" : [ 4.0, 73.0, 188.0, 33.0 ],
+									"text" : "hoa.2d.meter~ is fully customizable..",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -6787,16 +6169,12 @@
 									"energycolor" : [ 0.027451, 0.0, 0.913725, 0.7 ],
 									"id" : "obj-1",
 									"interval" : 120,
-									"loudspeakers" : 32,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 32,
 									"numleds" : 15,
-									"numoutlets" : 2,
+									"numoutlets" : 0,
 									"orientation" : 1,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 31.0, 233.0, 424.0, 424.0 ],
-									"yls" : 32,
-									"zls" : [ 0.0, 11.25, 22.5, 33.75, 45.0, 56.25, 67.5, 78.75, 90.0, 101.25, 112.5, 123.75, 135.0, 146.25, 157.5, 168.75, 180.0, 191.25, 202.5, 213.75, 225.0, 236.25, 247.5, 258.75, 270.0, 281.25, 292.5, 303.75, 315.0, 326.25, 337.5, 348.75 ]
+									"patching_rect" : [ 31.0, 233.0, 424.0, 424.0 ]
 								}
 
 							}
@@ -7611,7 +6989,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 74.0, 160.5, 71.0, 23.0 ],
+					"patching_rect" : [ 50.0, 160.5, 60.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -7632,9 +7010,9 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
 			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
 			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
+			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
 			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
 		}
 ,
@@ -7660,7 +7038,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -7685,10 +7063,6 @@
 			}
 , 			{
 				"name" : "hoa.2d.encoder~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

@@ -81,8 +81,7 @@ void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *pa
 void meter_paint(t_meter *x, t_object *view);
 void draw_background(t_meter *x, t_object *view, t_rect *rect);
 void draw_leds(t_meter *x,  t_object *view, t_rect *rect);
-void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect);
-void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect);
+void draw_vectors(t_meter *x, t_object *view, t_rect *rect);
 void draw_angle(t_meter *x,  t_object *view, t_rect *rect);
 void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect);
 void draw_separator(t_meter *x,  t_object *view, t_rect *rect);
@@ -457,8 +456,7 @@ t_max_err azimuths_of_channels_set(t_meter *x, void *attr, long ac, t_atom *av)
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_leds_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_energy_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_velocity_layer);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_vectors_layer);
 	jbox_redraw((t_jbox *)x);
 	
     return MAX_ERR_NONE;
@@ -526,8 +524,7 @@ void meter_tick(t_meter *x)
     }
     
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_leds_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_energy_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_velocity_layer);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_vectors_layer);
 	jbox_redraw((t_jbox *)x);
 	
 	if (sys_getdspstate())
@@ -559,16 +556,14 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		}
         else if(name == gensym("drawvector") || name == gensym("energycolor") || name == gensym("velocitycolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_energy_layer);
-            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_velocity_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_vectors_layer);
 		}
 		else if(name == gensym("offset") || name == gensym("metersize") || name == gensym("direction") || name == gensym("orientation") || gensym("rotation"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_leds_layer);
-			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_energy_layer);
-            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_velocity_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_vectors_layer);
 		}
 		else if(name == gensym("dbperled") || name == gensym("nhotleds") || name == gensym("ntepidleds") || name == gensym("nwarmleds"))
 		{
@@ -596,10 +591,8 @@ void meter_paint(t_meter *x, t_object *view)
     draw_leds(x, view, &rect);
     if (x->f_drawmborder == 2 || x->f_drawmborder == 3)
         draw_separator(x, view, &rect);
-    if (x->f_drawvector == 2 || x->f_drawvector == 3)
-		draw_vector_velocity(x, view, &rect);
-	if (x->f_drawvector == 1 || x->f_drawvector == 3)
-		draw_vector_energy(x, view, &rect);
+    if (x->f_drawvector != 0)
+		draw_vectors(x, view, &rect);
 }
 
 void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
@@ -1046,74 +1039,68 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_leds_layer, 0., 0.);
 }
 
-void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect)
+void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 {
-	double angle, rayon, arrow;
+	double pointSize = rect->width*0.02;
+	double maxRadius = (x->f_rayonInt-pointSize-1);
 	t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_energy_layer, rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_vectors_layer, rect->width, rect->height);
+	
+	t_jpattern *pattern = NULL;
 	
 	if (g)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 		
-		jgraphics_set_source_jrgba(g, &x->f_color_energy);
+		if (x->f_drawvector == 1 || x->f_drawvector == 3)
+		{
+			//jgraphics_set_source_jrgba(g, &x->f_color_velocity);
+			
+			pattern = jgraphics_pattern_create_radial(x->f_vector_coords[0] * maxRadius - pointSize*0.15,
+													  x->f_vector_coords[1] * maxRadius + pointSize*0.15, 0,
+													  x->f_vector_coords[0] * maxRadius + pointSize*0.5,
+													  x->f_vector_coords[1] * maxRadius - pointSize*0.5, 0);
+			
+			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
+			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
+												  x->f_color_velocity.red,
+												  x->f_color_velocity.green,
+												  x->f_color_velocity.blue,
+												  x->f_color_velocity.alpha);
+			
+			jgraphics_set_source(g, pattern);
+			jgraphics_arc(g, x->f_vector_coords[0] * maxRadius, x->f_vector_coords[1] * maxRadius, pointSize, 0., HOA_2PI);
+			jgraphics_fill(g);
+		}
 		
-        rayon = x->f_rayonInt * 0.85 * radius(x->f_vector_coords[2], x->f_vector_coords[3]);
-		arrow = rayon * 0.15;
-        angle = azimuth(x->f_vector_coords[2], x->f_vector_coords[3]);
-        angle += (x->f_offset_of_channels / 180.) * HOA_PI;
-		jgraphics_rotate(g, x->f_rotation ? angle : -angle);
-		
-		// arrow
-		jgraphics_move_to(g, 0, 0);
-		jgraphics_line_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, -arrow, -arrow);
-		jgraphics_move_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, arrow, -arrow);
-		jgraphics_stroke(g);
-		
-		jgraphics_arc(g, 0, 0, 2, 0., HOA_2PI);
-		jgraphics_fill(g);
+		if (x->f_drawvector == 2 || x->f_drawvector == 3)
+		{
+			//jgraphics_set_source_jrgba(g, &x->f_color_energy);
+			
+			pattern = jgraphics_pattern_create_radial(x->f_vector_coords[2] * maxRadius - pointSize*0.15,
+													  x->f_vector_coords[3] * maxRadius + pointSize*0.15, 0,
+													  x->f_vector_coords[2] * maxRadius + pointSize*0.5,
+													  x->f_vector_coords[3] * maxRadius - pointSize*0.5, 0);
+			
+			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
+			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
+												  x->f_color_energy.red,
+												  x->f_color_energy.green,
+												  x->f_color_energy.blue,
+												  x->f_color_energy.alpha);
+			
+			jgraphics_set_source(g, pattern);
+			
+			jgraphics_arc(g, x->f_vector_coords[2] * maxRadius, x->f_vector_coords[3] * maxRadius, pointSize, 0., HOA_2PI);
+			jgraphics_fill(g);
+		}
         
-		jbox_end_layer((t_object*)x, view, hoa_sym_energy_layer);
+		jbox_end_layer((t_object*)x, view, hoa_sym_vectors_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, hoa_sym_energy_layer, 0., 0.);
-}
-
-void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect)
-{
-	double angle, rayon, arrow;
-	t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_velocity_layer, rect->width, rect->height);
 	
-	if (g)
-	{
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
-		jgraphics_set_matrix(g, &transform);
-		
-		jgraphics_set_source_jrgba(g, &x->f_color_velocity);
-        
-        rayon = x->f_rayonInt * 0.85;
-		arrow = rayon * 0.15;
-		angle = azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
-        angle += (x->f_offset_of_channels / 180.) * HOA_PI;
-		jgraphics_rotate(g, x->f_rotation ? angle : -angle);
-		
-		// arrow
-		jgraphics_move_to(g, 0, 0);
-		jgraphics_line_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, -arrow, -arrow);
-		jgraphics_move_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, arrow, -arrow);
-		jgraphics_stroke(g);
-		
-		jgraphics_arc(g, 0, 0, 2, 0., HOA_2PI);
-		jgraphics_fill(g);
-        
-		jbox_end_layer((t_object*)x, view, hoa_sym_velocity_layer);
-	}
-	jbox_paint_layer((t_object *)x, view, hoa_sym_velocity_layer, 0., 0.);
+	if (pattern)
+		jgraphics_pattern_destroy(pattern);
+	
+	jbox_paint_layer((t_object *)x, view, hoa_sym_vectors_layer, 0., 0.);
 }
-
-
