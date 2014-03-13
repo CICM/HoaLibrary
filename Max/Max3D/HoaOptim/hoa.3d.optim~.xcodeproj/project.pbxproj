@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255B918D1D01400A3A730 /* Hoa3D.max.h */; };
+		2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */; };
+		2C9255BE18D1D0EB00A3A730 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9255BD18D1D0EB00A3A730 /* MaxAudioAPI.framework */; };
+		2C9255D918D1D11B00A3A730 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C018D1D11B00A3A730 /* Ambisonic.cpp */; };
+		2C9255DA18D1D11B00A3A730 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C118D1D11B00A3A730 /* Ambisonic.h */; };
+		2C9255DB18D1D11B00A3A730 /* BinauralMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C218D1D11B00A3A730 /* BinauralMatrix.cpp */; };
+		2C9255DC18D1D11B00A3A730 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C318D1D11B00A3A730 /* Decoder.cpp */; };
+		2C9255DD18D1D11B00A3A730 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C418D1D11B00A3A730 /* Decoder.h */; };
+		2C9255DE18D1D11B00A3A730 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C518D1D11B00A3A730 /* Encoder.cpp */; };
+		2C9255DF18D1D11B00A3A730 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C618D1D11B00A3A730 /* Encoder.h */; };
+		2C9255E018D1D11B00A3A730 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C718D1D11B00A3A730 /* Hoa3D.h */; };
+		2C9255E118D1D11B00A3A730 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C818D1D11B00A3A730 /* Map.cpp */; };
+		2C9255E218D1D11B00A3A730 /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C918D1D11B00A3A730 /* Map.h */; };
+		2C9255E318D1D11B00A3A730 /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255CA18D1D11B00A3A730 /* Meter.cpp */; };
+		2C9255E418D1D11B00A3A730 /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255CB18D1D11B00A3A730 /* Meter.h */; };
+		2C9255E518D1D11B00A3A730 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255CC18D1D11B00A3A730 /* Optim.cpp */; };
+		2C9255E618D1D11B00A3A730 /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255CD18D1D11B00A3A730 /* Optim.h */; };
+		2C9255E718D1D11B00A3A730 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255CE18D1D11B00A3A730 /* Planewaves.cpp */; };
+		2C9255E818D1D11B00A3A730 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255CF18D1D11B00A3A730 /* Planewaves.h */; };
+		2C9255E918D1D11B00A3A730 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255D018D1D11B00A3A730 /* Rotate.cpp */; };
+		2C9255EA18D1D11B00A3A730 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255D118D1D11B00A3A730 /* Rotate.h */; };
+		2C9255EB18D1D11B00A3A730 /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255D218D1D11B00A3A730 /* Scope.cpp */; };
+		2C9255EC18D1D11B00A3A730 /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255D318D1D11B00A3A730 /* Scope.h */; };
+		2C9255ED18D1D11B00A3A730 /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255D418D1D11B00A3A730 /* Tools.h */; };
+		2C9255EE18D1D11B00A3A730 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255D518D1D11B00A3A730 /* Vector.cpp */; };
+		2C9255EF18D1D11B00A3A730 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255D618D1D11B00A3A730 /* Vector.h */; };
+		2C9255F018D1D11B00A3A730 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255D718D1D11B00A3A730 /* Wider.cpp */; };
+		2C9255F118D1D11B00A3A730 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255D818D1D11B00A3A730 /* Wider.h */; };
+		2C9255F518D1D16B00A3A730 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255F218D1D16B00A3A730 /* hoa.max_commonsyms.h */; };
+		2C9255F618D1D16B00A3A730 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255F318D1D16B00A3A730 /* hoa.max.cpp */; };
+		2C9255F718D1D16B00A3A730 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255F418D1D16B00A3A730 /* hoa.max.h */; };
+		2C9255FB18D1D86D00A3A730 /* hoa.3d.optim~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255FA18D1D86D00A3A730 /* hoa.3d.optim~.cpp */; };
+		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
+		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2C9255B918D1D01400A3A730 /* Hoa3D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa3D.max.h; path = ../Hoa3D.max.h; sourceTree = "<group>"; };
+		2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoa3D.xcconfig; path = ../MaxHoa3D.xcconfig; sourceTree = "<group>"; };
+		2C9255BD18D1D0EB00A3A730 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		2C9255C018D1D11B00A3A730 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		2C9255C118D1D11B00A3A730 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		2C9255C218D1D11B00A3A730 /* BinauralMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix.cpp; sourceTree = "<group>"; };
+		2C9255C318D1D11B00A3A730 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		2C9255C418D1D11B00A3A730 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		2C9255C518D1D11B00A3A730 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		2C9255C618D1D11B00A3A730 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Encoder.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255C718D1D11B00A3A730 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Hoa3D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255C818D1D11B00A3A730 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		2C9255C918D1D11B00A3A730 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		2C9255CA18D1D11B00A3A730 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		2C9255CB18D1D11B00A3A730 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		2C9255CC18D1D11B00A3A730 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		2C9255CD18D1D11B00A3A730 /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		2C9255CE18D1D11B00A3A730 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		2C9255CF18D1D11B00A3A730 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		2C9255D018D1D11B00A3A730 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Rotate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C9255D118D1D11B00A3A730 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Rotate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255D218D1D11B00A3A730 /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Scope.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C9255D318D1D11B00A3A730 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Scope.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255D418D1D11B00A3A730 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Tools.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255D518D1D11B00A3A730 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Vector.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C9255D618D1D11B00A3A730 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vector.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255D718D1D11B00A3A730 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Wider.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C9255D818D1D11B00A3A730 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Wider.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2C9255F218D1D16B00A3A730 /* hoa.max_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max_commonsyms.h; path = ../../hoa.max_commonsyms.h; sourceTree = "<group>"; };
+		2C9255F318D1D16B00A3A730 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
+		2C9255F418D1D16B00A3A730 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
+		2C9255FA18D1D86D00A3A730 /* hoa.3d.optim~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.3d.optim~.cpp"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.3d.optim~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.3d.optim~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C9255BE18D1D0EB00A3A730 /* MaxAudioAPI.framework in Frameworks */,
+				8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */,
+				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				2C9255FA18D1D86D00A3A730 /* hoa.3d.optim~.cpp */,
+				2C9255B918D1D01400A3A730 /* Hoa3D.max.h */,
+				2C9255F218D1D16B00A3A730 /* hoa.max_commonsyms.h */,
+				2C9255F318D1D16B00A3A730 /* hoa.max.cpp */,
+				2C9255F418D1D16B00A3A730 /* hoa.max.h */,
+				2C9255BF18D1D11B00A3A730 /* Hoa3D */,
+				2C9255BD18D1D0EB00A3A730 /* MaxAudioAPI.framework */,
+				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
+				8F18A8BD17287341005FD621 /* Accelerate.framework */,
+				2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* hoa.3d.optim~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C9255BF18D1D11B00A3A730 /* Hoa3D */ = {
+			isa = PBXGroup;
+			children = (
+				2C9255C018D1D11B00A3A730 /* Ambisonic.cpp */,
+				2C9255C118D1D11B00A3A730 /* Ambisonic.h */,
+				2C9255C218D1D11B00A3A730 /* BinauralMatrix.cpp */,
+				2C9255C318D1D11B00A3A730 /* Decoder.cpp */,
+				2C9255C418D1D11B00A3A730 /* Decoder.h */,
+				2C9255C518D1D11B00A3A730 /* Encoder.cpp */,
+				2C9255C618D1D11B00A3A730 /* Encoder.h */,
+				2C9255C718D1D11B00A3A730 /* Hoa3D.h */,
+				2C9255C818D1D11B00A3A730 /* Map.cpp */,
+				2C9255C918D1D11B00A3A730 /* Map.h */,
+				2C9255CA18D1D11B00A3A730 /* Meter.cpp */,
+				2C9255CB18D1D11B00A3A730 /* Meter.h */,
+				2C9255CC18D1D11B00A3A730 /* Optim.cpp */,
+				2C9255CD18D1D11B00A3A730 /* Optim.h */,
+				2C9255CE18D1D11B00A3A730 /* Planewaves.cpp */,
+				2C9255CF18D1D11B00A3A730 /* Planewaves.h */,
+				2C9255D018D1D11B00A3A730 /* Rotate.cpp */,
+				2C9255D118D1D11B00A3A730 /* Rotate.h */,
+				2C9255D218D1D11B00A3A730 /* Scope.cpp */,
+				2C9255D318D1D11B00A3A730 /* Scope.h */,
+				2C9255D418D1D11B00A3A730 /* Tools.h */,
+				2C9255D518D1D11B00A3A730 /* Vector.cpp */,
+				2C9255D618D1D11B00A3A730 /* Vector.h */,
+				2C9255D718D1D11B00A3A730 /* Wider.cpp */,
+				2C9255D818D1D11B00A3A730 /* Wider.h */,
+			);
+			name = Hoa3D;
+			path = ../../../Sources/Hoa3D;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C9255E018D1D11B00A3A730 /* Hoa3D.h in Headers */,
+				2C9255DA18D1D11B00A3A730 /* Ambisonic.h in Headers */,
+				2C9255E418D1D11B00A3A730 /* Meter.h in Headers */,
+				2C9255EF18D1D11B00A3A730 /* Vector.h in Headers */,
+				2C9255F518D1D16B00A3A730 /* hoa.max_commonsyms.h in Headers */,
+				2C9255EC18D1D11B00A3A730 /* Scope.h in Headers */,
+				2C9255EA18D1D11B00A3A730 /* Rotate.h in Headers */,
+				2C9255E618D1D11B00A3A730 /* Optim.h in Headers */,
+				2C9255DD18D1D11B00A3A730 /* Decoder.h in Headers */,
+				2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */,
+				2C9255E218D1D11B00A3A730 /* Map.h in Headers */,
+				2C9255F718D1D16B00A3A730 /* hoa.max.h in Headers */,
+				2C9255E818D1D11B00A3A730 /* Planewaves.h in Headers */,
+				2C9255F118D1D11B00A3A730 /* Wider.h in Headers */,
+				2C9255ED18D1D11B00A3A730 /* Tools.h in Headers */,
+				2C9255DF18D1D11B00A3A730 /* Encoder.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.3d.optim~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.3d.optim~" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C9255EB18D1D11B00A3A730 /* Scope.cpp in Sources */,
+				2C9255E718D1D11B00A3A730 /* Planewaves.cpp in Sources */,
+				2C9255DE18D1D11B00A3A730 /* Encoder.cpp in Sources */,
+				2C9255FB18D1D86D00A3A730 /* hoa.3d.optim~.cpp in Sources */,
+				2C9255E918D1D11B00A3A730 /* Rotate.cpp in Sources */,
+				2C9255DB18D1D11B00A3A730 /* BinauralMatrix.cpp in Sources */,
+				2C9255F018D1D11B00A3A730 /* Wider.cpp in Sources */,
+				2C9255D918D1D11B00A3A730 /* Ambisonic.cpp in Sources */,
+				2C9255EE18D1D11B00A3A730 /* Vector.cpp in Sources */,
+				2C9255E518D1D11B00A3A730 /* Optim.cpp in Sources */,
+				2C9255E118D1D11B00A3A730 /* Map.cpp in Sources */,
+				2C9255DC18D1D11B00A3A730 /* Decoder.cpp in Sources */,
+				2C9255F618D1D16B00A3A730 /* hoa.max.cpp in Sources */,
+				2C9255E318D1D11B00A3A730 /* Meter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = fast;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(C74SUPPORT)/msp-includes\\\"",
+					"/Users/elioton/Documents/programmation/CICM/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.3d.optim~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(C74SUPPORT)/msp-includes\\\"",
+					"/Users/elioton/Documents/programmation/CICM/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.3d.optim~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.3d.optim~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

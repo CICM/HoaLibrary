@@ -1,14 +1,13 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+#ifndef __DEF_HOA_LIBRARY_3D__
+#define __DEF_HOA_LIBRARY_3D__
 
-#ifndef DEF_HOA_LIBRARY_3D
-#define DEF_HOA_LIBRARY_3D
-
-#include "../Hoa/Hoa.h"
+#include "../Hoa.h"
 
 //! The 3D high order ambisonic namespace.
 /**
