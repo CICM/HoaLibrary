@@ -5,3 +5,6 @@
 [submodule "ThirdParty/Max"]
 	path = ThirdParty/Max
 	url = https://pierreguillot@github.com/Cycling74/max6-sdk.git
+[submodule "ThirdParty/PureData"]
+	path = ThirdParty/PureData
+	url = https://pierreguillot@github.com/CICM/CicmWrapper.git
