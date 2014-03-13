@@ -16,7 +16,7 @@ namespace Hoa2D
         m_channels_abscissa_double = new double[m_number_of_channels];
         m_channels_ordinate_float = new float[m_number_of_channels];
         m_channels_ordinate_double = new double[m_number_of_channels];
-        
+        m_offset    = 0.;
         for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
             m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
@@ -24,11 +24,21 @@ namespace Hoa2D
         }
     }
     
+    void Vector::setChannelsOffset(double offset)
+    {
+        m_offset = wrap_twopi(offset);
+        for (int i = 0; i < m_number_of_channels; i++)
+		{
+			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = abscissa(1., m_channels_azimuth[i] + m_offset);
+			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
+		}
+    }
+    
     void Vector::setChannelAzimuth(unsigned int index, double azimuth)
     {
         Planewaves::setChannelAzimuth(index, azimuth);
-        m_channels_abscissa_float[index] = m_channels_abscissa_double[index] = getChannelAbscissa(index);
-        m_channels_ordinate_float[index] = m_channels_ordinate_double[index] = getChannelOrdinate(index);
+        m_channels_abscissa_float[index] = m_channels_abscissa_double[index] = abscissa(1., m_channels_azimuth[index] + m_offset);
+        m_channels_ordinate_float[index] = m_channels_ordinate_double[index] = ordinate(1., m_channels_azimuth[index] + m_offset);
     }
 	
 	void Vector::setChannelsAzimuth(double* azimuths)
@@ -36,8 +46,8 @@ namespace Hoa2D
         Planewaves::setChannelsAzimuth(azimuths);
 		for (int i = 0; i < m_number_of_channels; i++)
 		{
-			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
-			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
+			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = abscissa(1., m_channels_azimuth[i] + m_offset);
+			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
 		}
     }
     

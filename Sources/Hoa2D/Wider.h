@@ -19,7 +19,7 @@ namespace Hoa2D
     private:
         
         long            m_wide;
-        double**        m_wide_matrix;
+        double*         m_wide_matrix;
         
     public:
         

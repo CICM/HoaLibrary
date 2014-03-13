@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -16,7 +16,7 @@ namespace Hoa2D
         m_harmonics_float   = new float[m_number_of_harmonics];
         m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_harmonics];
-		m_muted				= new bool[numberOfSources];
+		m_muted				= new bool[m_number_of_sources];
 		m_first_source      = 0;
 		
         for(unsigned int i = 0; i < m_number_of_sources; i++)

@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -84,7 +84,7 @@ void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long num
 void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
@@ -119,7 +119,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
-	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, hoa_map_ramp);
+	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
 	
 	class_dspinit(c);
@@ -162,14 +162,12 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 			outlet_new(x, "signal");
         
         if(x->f_map->getNumberOfSources() == 1)
-            x->f_sig_ins    =  new double[3 * SYS_MAXBLKSIZE];
+            x->f_sig_ins    = new double[3 * SYS_MAXBLKSIZE];
         else
-            x->f_sig_ins    =  new double[x->f_map->getNumberOfSources() * SYS_MAXBLKSIZE];
+            x->f_sig_ins    = new double[x->f_map->getNumberOfSources() * SYS_MAXBLKSIZE];
 		
-        x->f_sig_outs       =  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_sig_outs       = new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_lines_vector   = new float[x->f_map->getNumberOfSources() * 2];
-        
-        attr_args_process(x, argc, argv);
 	}
     
 	return (x);
@@ -196,10 +194,12 @@ void hoa_map_float(t_hoa_map *x, double f)
 			{
                 float ord = ordinate(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0));
 				x->f_lines->setRadius(0, radius(f, ord));
+                x->f_lines->setAzimuth(0, azimuth(f, ord));
 			}
 			else if(proxy_getinlet((t_object *)x) == 2)
 			{
 				float abs = abscissa(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0));
+                x->f_lines->setRadius(0, radius(abs, f));
 				x->f_lines->setAzimuth(0, azimuth(abs, f));
 			}
 		}
@@ -259,7 +259,7 @@ t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
-t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
@@ -338,7 +338,6 @@ void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins,
 
 void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	double abscissa, ordinate;
     for(int i = 0; i < sampleframes; i++)
     {
 		x->f_lines->process(x->f_lines_vector);
@@ -349,8 +348,8 @@ void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long num
 		}
 		else if (x->f_mode == hoa_sym_cartesian)
 		{
-			x->f_map->setAzimuth(0, azimuth(ins[1][i], ordinate));
-			x->f_map->setRadius(0, radius(ins[1][i], ordinate));
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], x->f_lines_vector[1]));
+			x->f_map->setRadius(0, radius(ins[1][i], x->f_lines_vector[1]));
 		}
 		
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
@@ -363,7 +362,6 @@ void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long num
 
 void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	double abscissa, ordinate;
 	for(int i = 0; i < sampleframes; i++)
     {
 		x->f_lines->process(x->f_lines_vector);
@@ -374,8 +372,8 @@ void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long num
 		}
 		else if (x->f_mode == hoa_sym_cartesian)
 		{
-			x->f_map->setAzimuth(0, azimuth(abscissa, ins[2][i]));
-			x->f_map->setRadius(0, radius(abscissa, ins[2][i]));
+			x->f_map->setAzimuth(0, azimuth(x->f_lines_vector[0], ins[2][i]));
+			x->f_map->setRadius(0, radius(x->f_lines_vector[0], ins[2][i]));
 		}
 		
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
@@ -455,12 +453,11 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 void hoa_map_free(t_hoa_map *x) 
 {
 	dsp_free((t_pxobject *)x);
-	
+	delete x->f_lines;
+	delete x->f_map;
     delete [] x->f_sig_ins;
     delete [] x->f_sig_outs;
 	delete [] x->f_lines_vector;
-	delete x->f_lines;
-	delete x->f_map;
 }
 
 PolarLines::PolarLines(unsigned int numberOfSources)
@@ -543,7 +540,7 @@ void PolarLines::process(float* vector)
     if(m_counter++ >= m_ramp)
     {
         cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
-        memset(m_values_step, 0, sizeof(double) * m_number_of_sources * 2);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
         m_counter    = 0;
     }
     cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);

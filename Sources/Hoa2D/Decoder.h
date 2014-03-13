@@ -22,7 +22,7 @@ namespace Hoa2D
         
     private:
         double          m_offset;
-        double*         m_decoder_matrix;
+        double*         m_decoder_matrix_double;
         float*          m_decoder_matrix_float;
 		double*         m_harmonics_vector;
         Encoder*        m_encoder;
