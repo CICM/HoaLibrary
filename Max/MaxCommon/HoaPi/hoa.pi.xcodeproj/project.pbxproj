@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C6657BF18C8D18200014011 /* MaxHoaCommon.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6657BE18C8D18200014011 /* MaxHoaCommon.xcconfig */; };
 		2C6657C118C8D2A200014011 /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6657C018C8D2A200014011 /* HoaCommon.max.h */; };
 		2C6657C518C8D50800014011 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */; };
 		2C6657C618C8D50800014011 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C6657C318C8D50800014011 /* hoa.max.cpp */; };
 		2C6657C718C8D50800014011 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6657C418C8D50800014011 /* hoa.max.h */; };
-		2C690E7D18CA237B00DCD0CB /* hoa.pi.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C690E7C18CA237B00DCD0CB /* hoa.pi.c */; };
+		2C690E7D18CA237B00DCD0CB /* hoa.pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C690E7C18CA237B00DCD0CB /* hoa.pi.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,7 @@
 		2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max_commonsyms.h; path = ../../hoa.max_commonsyms.h; sourceTree = "<group>"; };
 		2C6657C318C8D50800014011 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
 		2C6657C418C8D50800014011 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
-		2C690E7C18CA237B00DCD0CB /* hoa.pi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.pi.c; sourceTree = "<group>"; };
+		2C690E7C18CA237B00DCD0CB /* hoa.pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.pi.cpp; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.pi.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.pi.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,7 +38,7 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				2C690E7C18CA237B00DCD0CB /* hoa.pi.c */,
+				2C690E7C18CA237B00DCD0CB /* hoa.pi.cpp */,
 				2C6657C018C8D2A200014011 /* HoaCommon.max.h */,
 				2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */,
 				2C6657C318C8D50800014011 /* hoa.max.cpp */,
@@ -99,7 +98,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.pi" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -126,7 +125,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6657BF18C8D18200014011 /* MaxHoaCommon.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C690E7D18CA237B00DCD0CB /* hoa.pi.c in Sources */,
+				2C690E7D18CA237B00DCD0CB /* hoa.pi.cpp in Sources */,
 				2C6657C618C8D50800014011 /* hoa.max.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +157,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6657BE18C8D18200014011 /* MaxHoaCommon.xcconfig */;
 			buildSettings = {
+				DSTROOT = "$(SRCROOT)/../../builds2D";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				GCC_PREFIX_HEADER = "$(C74SUPPORT)/max-includes/macho-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -186,6 +191,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6657BE18C8D18200014011 /* MaxHoaCommon.xcconfig */;
 			buildSettings = {
+				DSTROOT = "$(SRCROOT)/../../builds2D";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				GCC_PREFIX_HEADER = "$(C74SUPPORT)/max-includes/macho-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -216,8 +228,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/elioton/Documents/programmation/CICM/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+					"\"$(C74SUPPORT)/msp-includes\"",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
@@ -260,8 +271,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/elioton/Documents/programmation/CICM/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
+					"\"$(C74SUPPORT)/msp-includes\"",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;

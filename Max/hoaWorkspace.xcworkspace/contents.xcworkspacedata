@@ -1,46 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "group:Max2D/HoaDecoder/hoa.2d.decoder~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaEncoder/hoa.2d.encoder~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaMap/hoa.2d.map~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaMap_UI/hoa.2d.map.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/hoaMeter_UI/hoa.2d.meter~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaOptim/hoa.2d.optim~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaProjector/hoa.2d.projector~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaRecomposer/hoa.2d.recomposer~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaRecomposer_UI/hoa.2d.recomposer.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaRotate/hoa.2d.rotate~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/hoaScope_UI/hoa.2d.scope~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/hoaSpace_UI/hoa.2d.space.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaVector/hoa.2d.vector~.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Max2D/HoaWider/hoa.2d.wider~.xcodeproj">
-   </FileRef>
+   <Group
+      location = "container:"
+      name = "hoa.common">
+      <FileRef
+         location = "group:MaxCommon/HoaRecord/hoa.record~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcessInlet/hoa.in.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcessInlet/hoa.out.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcess/hoa.in~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcess/hoa.out~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcess/hoa.process~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaProcess/hoa.thisprocess~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaPlay/hoa.play~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaPiSig/hoa.pi~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaPi/hoa.pi.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaGain/hoa.gain~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaDac/hoa.dac~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:MaxCommon/HoaConnect/hoa.connect.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "hoa.2d">
+      <FileRef
+         location = "group:Max2D/HoaDecoder/hoa.2d.decoder~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaEncoder/hoa.2d.encoder~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaMap/hoa.2d.map~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaMap_UI/hoa.2d.map.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/hoaMeter_UI/hoa.2d.meter~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaOptim/hoa.2d.optim~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaProjector/hoa.2d.projector~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaRecomposer/hoa.2d.recomposer~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaRecomposer_UI/hoa.2d.recomposer.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaRotate/hoa.2d.rotate~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/hoaScope_UI/hoa.2d.scope~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/hoaSpace_UI/hoa.2d.space.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaVector/hoa.2d.vector~.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Max2D/HoaWider/hoa.2d.wider~.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "hoa.3d">
+   </Group>
 </Workspace>
