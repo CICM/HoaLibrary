@@ -1,0 +1,4 @@
+[submodule "Documentation"]
+	path = Documentation
+	url = https://pierreguillot@github.com/CICM/HoaLibraryDocumentation.git
+	branch = gh-pages
