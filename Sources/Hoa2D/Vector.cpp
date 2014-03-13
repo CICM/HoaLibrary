@@ -10,28 +10,45 @@ namespace Hoa2D
 {
     Vector::Vector(unsigned int numberOfChannels) : Planewaves(numberOfChannels)
     {
-        m_loudspeakers_float = new float[m_number_of_channels];
-        m_loudspeakers_double = new double[m_number_of_channels];
-        m_loudspeakers_abscissa_float = new float[m_number_of_channels];
-        m_loudspeakers_abscissa_double = new double[m_number_of_channels];
-        m_loudspeakers_ordinate_float = new float[m_number_of_channels];
-        m_loudspeakers_ordinate_double = new double[m_number_of_channels];
-        
-        for(int i = 0; i < m_number_of_channels; i++)
+        m_channels_float = new float[m_number_of_channels];
+        m_channels_double = new double[m_number_of_channels];
+        m_channels_abscissa_float = new float[m_number_of_channels];
+        m_channels_abscissa_double = new double[m_number_of_channels];
+        m_channels_ordinate_float = new float[m_number_of_channels];
+        m_channels_ordinate_double = new double[m_number_of_channels];
+        m_offset    = 0.;
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getChannelAbscissa(i);
-            m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getChannelOrdinate(i);
+            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
+            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
         }
     }
     
-    void Vector::setChannelPosition(unsigned int index, double azimuth)
+    void Vector::setChannelsOffset(double offset)
     {
-        Planewaves::setChannelPosition(index, azimuth);
-        for(int i = 0; i < m_number_of_channels; i++)
-        {
-            m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getChannelAbscissa(i);
-            m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getChannelOrdinate(i);
-        }
+        m_offset = wrap_twopi(offset);
+        for (int i = 0; i < m_number_of_channels; i++)
+		{
+			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = abscissa(1., m_channels_azimuth[i] + m_offset);
+			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
+		}
+    }
+    
+    void Vector::setChannelAzimuth(unsigned int index, double azimuth)
+    {
+        Planewaves::setChannelAzimuth(index, azimuth);
+        m_channels_abscissa_float[index] = m_channels_abscissa_double[index] = abscissa(1., m_channels_azimuth[index] + m_offset);
+        m_channels_ordinate_float[index] = m_channels_ordinate_double[index] = ordinate(1., m_channels_azimuth[index] + m_offset);
+    }
+	
+	void Vector::setChannelsAzimuth(double* azimuths)
+    {
+        Planewaves::setChannelsAzimuth(azimuths);
+		for (int i = 0; i < m_number_of_channels; i++)
+		{
+			m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = abscissa(1., m_channels_azimuth[i] + m_offset);
+			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
+		}
     }
     
     void Vector::processVelocity(const float* inputs, float* outputs)
@@ -39,8 +56,8 @@ namespace Hoa2D
         float veclocitySum = 0.f, velocityAbscissa = 0.f, velocityOrdinate = 0.f;
         
         veclocitySum = cblas_sasum(m_number_of_channels, inputs, 1);
-        velocityAbscissa = cblas_sdot(m_number_of_channels, inputs, 1, m_loudspeakers_abscissa_float, 1);
-        velocityOrdinate = cblas_sdot(m_number_of_channels, inputs, 1, m_loudspeakers_ordinate_float, 1);
+        velocityAbscissa = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_abscissa_float, 1);
+        velocityOrdinate = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_ordinate_float, 1);
         if(veclocitySum)
         {
             outputs[0] = velocityAbscissa / veclocitySum;
@@ -56,9 +73,9 @@ namespace Hoa2D
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
-        veclocitySum = cblas_dasum(m_number_of_channels, m_loudspeakers_double, 1);
-        velocityAbscissa = cblas_ddot(m_number_of_channels, m_loudspeakers_double, 1, m_loudspeakers_abscissa_double, 1);
-        velocityOrdinate = cblas_ddot(m_number_of_channels, m_loudspeakers_double, 1, m_loudspeakers_ordinate_double, 1);
+        veclocitySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
+        velocityAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
+        velocityOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
         
         if(veclocitySum)
         {
@@ -75,13 +92,13 @@ namespace Hoa2D
     void Vector::processEnergy(const float* inputs, float* outputs)
     {
         float energySum = 0.f, energyAbscissa = 0.f, energyOrdinate = 0.f;
-        cblas_scopy(m_number_of_channels, inputs, 1, m_loudspeakers_float, 1);
+        cblas_scopy(m_number_of_channels, inputs, 1, m_channels_float, 1);
         for(int i = 0; i < m_number_of_channels; i++)
-            m_loudspeakers_float[i] *= m_loudspeakers_float[i];
+            m_channels_float[i] *= m_channels_float[i];
         
-        energySum = cblas_sasum(m_number_of_channels, m_loudspeakers_float, 1);
-        energyAbscissa = cblas_sdot(m_number_of_channels, m_loudspeakers_float, 1, m_loudspeakers_abscissa_float, 1);
-        energyOrdinate = cblas_sdot(m_number_of_channels, m_loudspeakers_float, 1, m_loudspeakers_ordinate_float, 1);
+        energySum = cblas_sasum(m_number_of_channels, m_channels_float, 1);
+        energyAbscissa = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_abscissa_float, 1);
+        energyOrdinate = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_ordinate_float, 1);
         
         if(energySum)
         {
@@ -99,13 +116,13 @@ namespace Hoa2D
     {
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0.;
         
-        cblas_dcopy(m_number_of_channels, inputs, 1, m_loudspeakers_double, 1);
+        cblas_dcopy(m_number_of_channels, inputs, 1, m_channels_double, 1);
         for(int i = 0; i < m_number_of_channels; i++)
-            m_loudspeakers_double[i] *= m_loudspeakers_double[i];
+            m_channels_double[i] *= m_channels_double[i];
         
-        energySum = cblas_dasum(m_number_of_channels, m_loudspeakers_double, 1);
-        energyAbscissa = cblas_ddot(m_number_of_channels, m_loudspeakers_double, 1, m_loudspeakers_abscissa_double, 1);
-        energyOrdinate = cblas_ddot(m_number_of_channels, m_loudspeakers_double, 1, m_loudspeakers_ordinate_double, 1);
+        energySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
+        energyAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
+        energyOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
         
         if(energySum)
         {
@@ -133,12 +150,12 @@ namespace Hoa2D
     
     Vector::~Vector()
     {
-        delete [] m_loudspeakers_float;
-        delete [] m_loudspeakers_double;
-        delete [] m_loudspeakers_ordinate_float;
-        delete [] m_loudspeakers_ordinate_double;
-        delete [] m_loudspeakers_abscissa_float;
-        delete [] m_loudspeakers_abscissa_double;
+        delete [] m_channels_float;
+        delete [] m_channels_double;
+        delete [] m_channels_ordinate_float;
+        delete [] m_channels_ordinate_double;
+        delete [] m_channels_abscissa_float;
+        delete [] m_channels_abscissa_double;
     }
 }
 

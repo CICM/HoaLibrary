@@ -1,12 +1,11 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-
-#ifndef DEF_HOA_3D_TOOLS
-#define DEF_HOA_3D_TOOLS
+#ifndef __DEF_HOA_3D_TOOLS__
+#define __DEF_HOA_3D_TOOLS__
 
 #include <iostream>
 #include <vector>
@@ -32,10 +31,10 @@
 
 #endif
     
-#define CICM_PI  (3.141592653589793238462643383279502884)
-#define CICM_2PI (6.283185307179586476925286766559005)
-#define CICM_PI2 (1.57079632679489661923132169163975144)
-#define CICM_PI4 (0.785398163397448309615660845819875721)
+#define HOA_PI  (3.141592653589793238462643383279502884)
+#define HOA_2PI (6.283185307179586476925286766559005)
+#define HOA_PI2 (1.57079632679489661923132169163975144)
+#define HOA_PI4 (0.785398163397448309615660845819875721)
 
 #define NUMBEROFLINEARPOINTS 10000
 #define NUMBEROFCIRCLEPOINTS 36000
@@ -139,9 +138,9 @@ namespace Hoa3D
     inline double legendre_normalization(int l, int m)
 	{
         if(m == 0)
-            return sqrt((2. * l + 1.) / (4. * CICM_PI));
+            return sqrt((2. * l + 1.) / (4. * HOA_PI));
         else
-            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
+            return sqrt((2. * l + 1.) / (4. * HOA_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
     
     /*
@@ -152,9 +151,9 @@ namespace Hoa3D
         if(m == l || m == 0)
             return 1. / double_factorial(2. * m - 1);
         else if(l == m + 1)
-            return 1. / associated_legendre(l, m , cos(CICM_PI / 4.));
+            return 1. / associated_legendre(l, m , cos(HOA_PI / 4.));
         else if(l == m + 2)
-            return 1. / associated_legendre(l, m , cos(CICM_PI / 2.));
+            return 1. / associated_legendre(l, m , cos(HOA_PI / 2.));
         else
             return 1.;
     }*/
@@ -260,12 +259,12 @@ namespace Hoa3D
         double new_value = value;
         while(new_value < 0.)
         {
-            new_value += CICM_2PI;
+            new_value += HOA_2PI;
         }
         
-        while(new_value > CICM_2PI)
+        while(new_value > HOA_2PI)
         {
-            new_value -= CICM_2PI;
+            new_value -= HOA_2PI;
         }
         return new_value;
     }
@@ -337,17 +336,17 @@ namespace Hoa3D
     
 	inline double angle(const double x, const double y)
 	{
-		return atan2(y, x) + CICM_PI2;
+		return atan2(y, x) + HOA_PI2;
 	}
     
 	inline double ordinate(const double radius, const double angle)
 	{
-		return radius * sin(angle - CICM_PI2);
+		return radius * sin(angle - HOA_PI2);
 	}
     
     inline double abscissa(const double radius, const double angle)
 	{
-		return radius * cos(angle - CICM_PI2);
+		return radius * cos(angle - HOA_PI2);
 	}
     
     inline double radius(double x, double y, double z)
@@ -367,12 +366,12 @@ namespace Hoa3D
     
 	inline double ordinate(double radius, double phi, double theta)
 	{
-		return radius * sin(phi - CICM_PI2) * cos(theta);
+		return radius * sin(phi - HOA_PI2) * cos(theta);
 	}
     
     inline double abscissa(double radius, double phi, double theta)
 	{
-		return radius * cos(phi - CICM_PI2) * cos(theta);
+		return radius * cos(phi - HOA_PI2) * cos(theta);
 	}
     
     inline double height(double radius, double phi, double theta)
@@ -408,90 +407,90 @@ namespace Hoa3D
         if(numberOfPoints == 4) // Tethrahedron
         {
             azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
+            elevations[0] = HOA_PI2;
             azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 3.;
-            azimuths[3] = 2. * CICM_2PI / 3.;
-            elevations[1] = elevations[2] = elevations[3] = CICM_PI2 - CICM_2PI / 3.;
+            azimuths[2] = HOA_2PI / 3.;
+            azimuths[3] = 2. * HOA_2PI / 3.;
+            elevations[1] = elevations[2] = elevations[3] = HOA_PI2 - HOA_2PI / 3.;
         }
         else if(numberOfPoints == 5) // Not regular : Octahedron with only 3 points at 0 azymuth
         {
             azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
+            elevations[0] = HOA_PI2;
             azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 3.;
-            azimuths[3] = 2. * CICM_2PI / 3.;
+            azimuths[2] = HOA_2PI / 3.;
+            azimuths[3] = 2. * HOA_2PI / 3.;
             elevations[1] = elevations[2] = elevations[3] = 0;
             azimuths[4] = 0.;
-            elevations[4] = -CICM_PI2;
+            elevations[4] = -HOA_PI2;
         }
         else if(numberOfPoints == 6) // Octahedron
         {
             azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
+            elevations[0] = HOA_PI2;
             azimuths[1] = 0.;
-            azimuths[2] = CICM_PI2;
-            azimuths[3] = 2. * CICM_PI2;
-            azimuths[4] = 3. * CICM_PI2;
+            azimuths[2] = HOA_PI2;
+            azimuths[3] = 2. * HOA_PI2;
+            azimuths[4] = 3. * HOA_PI2;
             elevations[1] = elevations[2] = elevations[3] = elevations[4] = 0;
             azimuths[5] = 0.;
-            elevations[5] = -CICM_PI2;
+            elevations[5] = -HOA_PI2;
         }
         else if(numberOfPoints == 7) // Not regular : Octahedron with only 5 points at 0 azymuth
         {
             azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
+            elevations[0] = HOA_PI2;
             azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 5.;
-            azimuths[3] = 2. * CICM_2PI / 5.;
-            azimuths[4] = 3. * CICM_2PI / 5.;
-            azimuths[5] = 4. * CICM_2PI / 5.;
+            azimuths[2] = HOA_2PI / 5.;
+            azimuths[3] = 2. * HOA_2PI / 5.;
+            azimuths[4] = 3. * HOA_2PI / 5.;
+            azimuths[5] = 4. * HOA_2PI / 5.;
             elevations[1] = elevations[2] = elevations[3] = elevations[4] = elevations[5] = 0;
             azimuths[6] = 0.;
-            elevations[6] = -CICM_PI2;
+            elevations[6] = -HOA_PI2;
         }
         else if(numberOfPoints == 8) // Hexahedron or cube
         {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
+            azimuths[0] = azimuths[4] = HOA_PI4;
+            azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
+            azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
+            azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
         }
         else if(numberOfPoints == 9) // Not regular : Hexahedron or cube with 1 at PI/2 elevation
         {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
+            azimuths[0] = azimuths[4] = HOA_PI4;
+            azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
+            azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
+            azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[8] = HOA_PI2;
             azimuths[8] = 0;
         }
         else if(numberOfPoints == 10) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
         {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
-            elevations[9] = -CICM_PI2;
+            azimuths[0] = azimuths[4] = HOA_PI4;
+            azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
+            azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
+            azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[8] = HOA_PI2;
+            elevations[9] = -HOA_PI2;
             azimuths[9] = azimuths[8] = 0;
         }
         else if(numberOfPoints == 11) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
         {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
-            elevations[9] = elevations[9] = -CICM_PI2;
+            azimuths[0] = azimuths[4] = HOA_PI4;
+            azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
+            azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
+            azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[8] = HOA_PI2;
+            elevations[9] = elevations[9] = -HOA_PI2;
             azimuths[9] = azimuths[8] = 0;
         }
     }

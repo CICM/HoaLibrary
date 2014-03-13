@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -16,7 +16,7 @@ void hoa_print_credit()
 		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
 		atom_setsym(sym, _sym_credit_line1);
 		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		atom_setsym(sym, gensym(" "));
+		atom_setsym(sym, _sym_hoa_version);
 		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
 		atom_setsym(sym, _sym_credit_line2);
 		object_method_typed(print, gensym("list"), 1, sym, NULL);

@@ -1,11 +1,11 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_3D_AMBISONIC
-#define DEF_HOA_3D_AMBISONIC
+#ifndef __DEF_HOA_3D_AMBISONIC__
+#define __DEF_HOA_3D_AMBISONIC__
 
 #include "Tools.h"
 
@@ -56,7 +56,7 @@ namespace Hoa3D
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the argument of an harmonic if it exists, generate an error otherwise.
+            @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicBand()
             @see       getHarmonicsName()
          */
@@ -72,7 +72,7 @@ namespace Hoa3D
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the band of an harmonic if it exists, generate an error otherwise.
+            @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicArgument()
             @see       getHarmonicsName()
          */
@@ -86,7 +86,7 @@ namespace Hoa3D
         /** Retrieve a name for an harmonic in a std::string format that will be "harmonic band argument".
          
             @param     index	The global index of an harmonic.
-            @return    The method returns a name of an harmonic that contains its band and the argument.
+            @return    The method returns a name for the harmonic that contains its band and its argument if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicBand()
             @see       getHarmonicArgument()
          */

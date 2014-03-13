@@ -19,12 +19,12 @@ namespace Hoa2D
     private:
         
         long            m_wide;
-        double**        m_wide_matrix;
+        double*         m_wide_matrix;
         
     public:
         
         //! The wider constructor.
-        /**	The wider constructor allocates and initialize the member values to computes spherical harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
+        /**	The wider constructor allocates and initialize the member values to computes circular harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
          
             @param     order	The order.
          */
@@ -36,14 +36,24 @@ namespace Hoa2D
         ~Wider();
         
         //! This method set the widening value.
-        /**	The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omnidirectionnal, only the harmonic [0 0] remains. From 0 to 1, the spherical hamronics appears in logarithmic way to linearly increase the sound field precision.
+        /**	The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omnidirectionnal, only the harmonic [0 0] remains. From 0 to 1, the circular hamronics appears in logarithmic way to linearly increase the sound field precision.
          
             @param     value The widening value.
          */
         void setWideningValue(const double value);
         
+        //! This method retreive the widening value.
+        /**	The method returns the widening value.
+         
+            @return     The widening value.
+         */
+        double getWideningValue() const
+        {
+            return m_wide / (double)(NUMBEROFLINEARPOINTS - 1);
+        }
+        
         //! This method performs the widening with single precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.
@@ -51,7 +61,7 @@ namespace Hoa2D
         void process(const float* inputs, float* outputs);
         
         //! This method performs the widening with double precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the circular harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The inputs array.
             @param     outputs  The outputs array.

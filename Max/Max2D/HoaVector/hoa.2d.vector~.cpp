@@ -9,13 +9,11 @@
 typedef struct _hoa_vector 
 {
 	t_pxobject          f_ob;
-	double*             f_ins;
+	
+    void*               f_attrs;
+    double*             f_ins;
     double*             f_outs;
     Hoa2D::Vector*      f_vector;
-    
-    t_symbol*           f_output_mode;
-    t_atom_long         f_number_of_channels;
-    t_atom_float*       f_angles_of_channels;
     
 } t_hoa_vector;
 
@@ -27,8 +25,13 @@ void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double sam
 void hoa_vector_perform64(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
+
 t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
+t_max_err channels_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
+t_max_err offset_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
+t_max_err offset_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
+t_max_err angles_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv);
 
 t_class *hoa_vector_class;
 
@@ -43,23 +46,31 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
     
-    CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_vector, f_number_of_channels);
+    CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_vector, f_attrs);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Planewaves");
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
-	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
+	CLASS_ATTR_ACCESSORS            (c, "channels", channels_get, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
-    CLASS_ATTR_SAVE                 (c, "channels", 1);
+    CLASS_ATTR_SAVE                 (c, "channels", 0);
     
-    CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_vector, f_angles_of_channels, f_number_of_channels, MAX_CHANNELS);
+    CLASS_ATTR_DOUBLE               (c, "offset", 0, t_hoa_vector, f_attrs);
+	CLASS_ATTR_CATEGORY             (c, "offset", 0, "Planewaves");
+    CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
+	CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
+    CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
+    CLASS_ATTR_ORDER                (c, "offset", 0, "2");
+    CLASS_ATTR_SAVE                 (c, "offset", 0);
+    
+    CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_vector, f_attrs, f_attrs, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "angles", 0, "Planewaves");
     CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
-	CLASS_ATTR_ACCESSORS            (c, "angles", NULL, angles_set);
-    CLASS_ATTR_ORDER                (c, "angles", 0, "2");
-	CLASS_ATTR_SAVE                 (c, "angles", 1);
+	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
+    CLASS_ATTR_ORDER                (c, "angles", 0, "3");
+	CLASS_ATTR_SAVE                 (c, "angles", 0);
 	CLASS_ATTR_DEFAULT              (c, "angles", 0, "0. 90. 180. 270.");
     
-	class_dspinit(c);
+    class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_vector_class = c;
     
@@ -70,26 +81,35 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_vector *x = NULL;
     t_dictionary *d = NULL;
-    
+    t_dictionary *attr = NULL;
+    t_atom_long nchannels = 0;
     x = (t_hoa_vector *)object_alloc(hoa_vector_class);
+    
 	if(x)
 	{
-        if((d = object_dictionaryarg(argc,argv)) && dictionary_hasentry(d, gensym("channels")))
-            dictionary_getlong(d, gensym("channels"), &x->f_number_of_channels);
+        d = (t_dictionary *)gensym("#D")->s_thing;
+        if(d && dictionary_getdictionary(d, gensym("saved_object_attributes"), (t_object **)&attr) == MAX_ERR_NONE)
+        {
+            if(dictionary_getlong(attr, gensym("channels"), &nchannels) != MAX_ERR_NONE)
+                nchannels = 4;
+        }
         else
-            x->f_number_of_channels = 4;
+            nchannels = 4;
+       
+        if(nchannels < 1)
+            nchannels = 1;
         
-        if(x->f_number_of_channels < 1)
-            x->f_number_of_channels = 1;
-		x->f_vector = new Hoa2D::Vector(4);
+		x->f_vector = new Hoa2D::Vector(nchannels);
 		
 		dsp_setup((t_pxobject *)x, x->f_vector->getNumberOfChannels());
 		for (int i = 0; i < 4; i++)
 			outlet_new(x, "signal");
         
-        x->f_angles_of_channels = new t_atom_float[MAX_CHANNELS];
 		x->f_ins = new double[x->f_vector->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_outs = new double[4 * SYS_MAXBLKSIZE];
+        
+        if(d)
+            attr_dictionary_process(x, d);
 	}
 
 	return (x);
@@ -141,7 +161,15 @@ void hoa_vector_free(t_hoa_vector *x)
 	delete x->f_vector;
     delete [] x->f_ins;
 	delete [] x->f_outs;
-    delete [] x->f_angles_of_channels;
+}
+
+t_max_err channels_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
+{
+    argc[0] = 1;
+    argv[0] = new t_atom[argc[0]];
+    atom_setlong(argv[0], x->f_vector->getNumberOfChannels());
+    
+    return MAX_ERR_NONE;
 }
 
 t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
@@ -154,42 +182,76 @@ t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
            number_of_loudspeakers > 0 &&
            number_of_loudspeakers <= MAX_CHANNELS)
         {
-            int dspState = sys_getdspobjdspstate((t_object*)x);
-            if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
+            object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             
             delete x->f_vector;
             x->f_vector = new Hoa2D::Vector(number_of_loudspeakers);
         
             object_obex_lookup(x, gensym("#B"), (t_object **)&b);
-            object_method(b, gensym("dynlet_begin"));
+            object_method(b, hoa_sym_dynlet_begin);
         
             dsp_resize((t_pxobject*)x, x->f_vector->getNumberOfChannels());
-            object_method(b, gensym("dynlet_end"));
+            object_method(b, hoa_sym_dynlet_end);
         
-            x->f_number_of_channels = x->f_vector->getNumberOfChannels();
-            object_attr_setvalueof(x, gensym("angles"), 0, NULL);
+            object_attr_setvalueof(x, hoa_sym_angles, 0, NULL);
         }
     }
-    return NULL;
+    return MAX_ERR_NONE;
+}
+
+t_max_err offset_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
+{
+    argc[0] = 1;
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    
+    if(argv[0])
+    {
+        atom_setfloat(argv[0], x->f_vector->getChannelsOffset() / HOA_2PI * 360.f);
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err offset_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        if(offset != x->f_vector->getChannelsOffset())
+        {
+            x->f_vector->setChannelsOffset(offset);
+        }
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err angles_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
+{
+    argc[0] = x->f_vector->getNumberOfChannels();
+    argv[0] = new t_atom[argc[0]];
+    
+    for(int i = 0; i < x->f_vector->getNumberOfChannels(); i++)
+    {
+        atom_setfloat(argv[0]+i, x->f_vector->getChannelAzimuth(i) / HOA_2PI * 360.);
+    }
+    
+    return MAX_ERR_NONE;
 }
 
 t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
-        for(int i = 0; i < argc && i < x->f_number_of_channels; i++)
+        for(int i = 0; i < argc && i < x->f_vector->getNumberOfChannels(); i++)
         {
-            if(atom_gettype(argv+i) == A_LONG || atom_gettype(argv+i) == A_FLOAT)
-                x->f_vector->setChannelPosition(i, atom_getfloat(argv+i) / 360. * CICM_2PI);
+            if(atom_gettype(argv+i) == A_LONG || atom_gettype(argv+i) == A_FLOAT);
+               x->f_vector->setChannelAzimuth(i, clip_minmax(atom_getfloat(argv+i), -360., 360.) / 360. * HOA_2PI);
         }
     }
-    
-    for(int i = 0; i < x->f_number_of_channels; i++)
-    {
-        x->f_angles_of_channels[i] = x->f_vector->getChannelAzimuth(i) / CICM_2PI * 360.;
-    }
-    
-    return NULL;
+    return MAX_ERR_NONE;
 }
 

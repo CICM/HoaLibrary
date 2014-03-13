@@ -4,9 +4,16 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-
 #ifndef DEF_HOA_LIBRARY_2D
 #define DEF_HOA_LIBRARY_2D
+
+#include "../Hoa.h"
+
+//! The 2D high order ambisonic namespace.
+/**
+ All the 2D ambisonic classes will be part of this namespace
+ */
+namespace Hoa2D{};
 
 #include "Encoder.h"
 #include "Rotate.h"
@@ -17,6 +24,12 @@
 #include "Projector.h"
 #include "Vector.h"
 #include "Scope.h"
+#include "Meter.h"
+#include "Recomposer.h"
+#include "SourcesManager.h"
+#include "SourcesPreset.h"
+#include "SourcesTrajectory.h"
+#include "ChannelManager.h"
 
 #endif
 

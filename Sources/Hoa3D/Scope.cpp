@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -20,7 +20,7 @@ namespace Hoa3D
         {
             for(unsigned int j = 0; j < m_number_of_columns; j++)
             {
-                m_decoder->setLoudspeakerPosition(i * m_number_of_columns + j, (double)j * CICM_2PI / (double)m_number_of_columns, (double)i * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2);
+                m_decoder->setLoudspeakerPosition(i * m_number_of_columns + j, (double)j * HOA_2PI / (double)m_number_of_columns, (double)i * HOA_PI / (double)(m_number_of_rows - 1) - HOA_PI2);
             }
         }
     }

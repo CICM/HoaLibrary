@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['rotate',['Rotate',['../class_hoa2_d_1_1_rotate.html',1,'Hoa2D']]],
-  ['rotate',['Rotate',['../class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800',1,'Hoa2D::Rotate::Rotate()'],['../class_hoa3_d_1_1_rotate.html#a9a5750cbff8e0449b3de62e7de338a8b',1,'Hoa3D::Rotate::Rotate()']]],
-  ['rotate',['Rotate',['../class_hoa3_d_1_1_rotate.html',1,'Hoa3D']]]
-];

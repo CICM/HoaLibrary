@@ -15,14 +15,22 @@ namespace Hoa2D
         m_channels_azimuth      = new double[m_number_of_channels];
         for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_channels_azimuth[i] = (double)i / (double)m_number_of_channels * CICM_2PI;
+            m_channels_azimuth[i] = (double)i / (double)m_number_of_channels * HOA_2PI;
         }
     }
 	
-	void Planewaves::setChannelPosition(unsigned int index, double azimuth)
+	void Planewaves::setChannelAzimuth(unsigned int index, double azimuth)
 	{
 		assert(index < m_number_of_channels);
 		m_channels_azimuth[index] = wrap_twopi(azimuth);
+        vector_sort(m_number_of_channels, m_channels_azimuth);
+	}
+    
+    void Planewaves::setChannelsAzimuth(double* azimuths)
+	{
+		for(unsigned int i = 0; i < m_number_of_channels; i++)
+            m_channels_azimuth[i] = wrap_twopi(azimuths[i]);
+        vector_sort(m_number_of_channels, m_channels_azimuth);
 	}
     
     Planewaves::~Planewaves()

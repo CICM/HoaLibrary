@@ -10,4 +10,6 @@
 #include "../hoa.max.h"
 #include "../../Sources/Hoa2D/Hoa2D.h"
 
+using namespace Hoa2D;
+
 #endif

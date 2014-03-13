@@ -11,13 +11,12 @@ namespace Hoa2D
     Scope::Scope(unsigned int order, unsigned int numberOfPoints) : Ambisonic(order)
     {
         m_number_of_points = numberOfPoints;
-		m_decoder   = new Decoder(order, m_number_of_points);
+		m_decoder   = new DecoderRegular(order, m_number_of_points);
         m_matrix    = new double[m_number_of_points];
         m_harmonics = new double[m_number_of_harmonics];
  
         for(unsigned int i = 0; i < m_number_of_points; i++)
         {
-            m_decoder->setChannelPosition(i, (double)i / (double)m_number_of_points * CICM_2PI);
             m_matrix[i] = 0.;
         }
     }

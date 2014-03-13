@@ -10,6 +10,10 @@ Sound space is one of the principal dimensions of the contemporary musical thoug
 
 Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
+#### Documentation :
+
+<a>title="Documentation" href="http://cicm.github.io/HoaDocumentation"</a>
+
 #### Dependencies : 
 
 <a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>, you can use Gsl, Apple Accelerate or Intel Composer XE.

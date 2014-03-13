@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x64"
 		}
 ,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 6,
 							"architecture" : "x64"
 						}
 ,
@@ -130,7 +130,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.encoder~", "@obj-desc", "An", "ambisonic", "encoder." ],
+									"args" : [ "@obj-name", "hoa.2d.encoder~", "@obj-desc", "An", "ambisonic", "encoder." ],
 									"id" : "obj-56",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -250,8 +250,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.75, 285.0, 222.199997, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"patching_rect" : [ 39.75, 285.0, 221.818176, 19.0 ],
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -262,9 +262,21 @@
 									"id" : "obj-12",
 									"maxclass" : "newobj",
 									"numinlets" : 15,
-									"numoutlets" : 10,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 16,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.0, 522.0, 221.5, 20.0 ],
+									"saved_object_attributes" : 									{
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+										"autoconnect" : 1,
+										"channels" : 16,
+										"loudspeakers" : 16,
+										"mode" : "ambisonic",
+										"pinnaesize" : "small",
+										"restitution" : "panning",
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+									}
+,
 									"text" : "hoa.decoder~ 7"
 								}
 
@@ -332,7 +344,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 5,
+											"revision" : 6,
 											"architecture" : "x64"
 										}
 ,
@@ -682,7 +694,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 282.0, 282.0, 252.449997, 282.0 ],
+									"midpoints" : [ 282.0, 282.0, 252.068176, 282.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -1108,7 +1120,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 6,
 							"architecture" : "x64"
 						}
 ,
@@ -1160,21 +1172,21 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1196,7 +1208,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

@@ -1,11 +1,11 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
- */
+*/
 
-#ifndef DEF_HOA_3D_SCOPE
-#define DEF_HOA_3D_SCOPE
+#ifndef __DEF_HOA_3D_SCOPE__
+#define __DEF_HOA_3D_SCOPE__
 
 #include "Ambisonic.h"
 #include "Decoder.h"
@@ -106,7 +106,7 @@ namespace Hoa3D
         inline double getAzimuth(unsigned int columnIndex) const
         {
             assert(columnIndex < m_number_of_columns);
-            return (double)columnIndex * CICM_2PI / (double)m_number_of_columns;
+            return (double)columnIndex * HOA_2PI / (double)m_number_of_columns;
         }
         
         //! Retrieve the elevation of a point of the spherical harmonics projection.
@@ -122,7 +122,7 @@ namespace Hoa3D
         inline double getElevation(unsigned int rowIndex) const
         {
             assert(rowIndex < m_number_of_rows);
-            return (double)rowIndex * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2;
+            return (double)rowIndex * HOA_PI / (double)(m_number_of_rows - 1) - HOA_PI2;
         }
         
         //! This method performs the spherical harmonics projection with single precision.

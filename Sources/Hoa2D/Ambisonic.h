@@ -7,12 +7,8 @@
 #ifndef DEF_HOA_2D_AMBISONIC
 #define DEF_HOA_2D_AMBISONIC
 
-#include "Tools.h"
+#include "../Hoa.h"
 
-//! The 2D ambisonic classes.
-/**
-All the 2D ambisonic classes will be part of this namespace
-*/
 namespace Hoa2D
 {
     //! The ambisonic class.
@@ -33,18 +29,25 @@ public:
          */
         Ambisonic(unsigned int order);
         
+        //! The ambisonic destructor.
         /** The ambisonic destructor.
          */
         ~Ambisonic();
         
+        //! Retrieve the decomposition order.
         /** Retrieve the decomposition order.
+            
+            @return The order.
          */
         unsigned int getOrder() const
         {
             return m_order;
         }
         
+        //! Retrieve the number of harmonics.
         /** Retrieve the number of harmonics.
+         
+            @return The number of harmonics.
          */
         unsigned int getNumberOfHarmonics() const
         {
@@ -54,9 +57,10 @@ public:
         //! Retrieve the argument of an harmonic.
         /** The argument of an harmonic is in the range -order to order. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, there are the 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[argument].
          
-         @param     index	The global index of an harmonic.
-         @return    The method returns the argument of an harmonic or 0 if the harmonic does not exist.
-         @see       getHarmonicBand()
+            @param     index	The index of an harmonic.
+            @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
+            @see       getHarmonicBand()
+            @see       getHarmonicsName()
          */
         long getHarmonicArgument(unsigned int index) const
         {
@@ -67,9 +71,10 @@ public:
         //! Retrieve the band of an harmonic.
         /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[argument].
          
-         @param     index	The global index of an harmonic.
-         @return    The method returns the band of an harmonic or 0 if the harmonic does not exist.
-         @see       getHarmonicArgument()
+            @param     index	The index of an harmonic.
+            @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
+            @see       getHarmonicArgument()
+            @see       getHarmonicsName()
          */
         long getHarmonicBand(unsigned int index) const
         {
@@ -77,10 +82,14 @@ public:
             return abs(m_harmonics_arguments[index]);
         }
         
-        //! Retrieve a good name for an harmonic.
-        /** Retrieve a good name for an harmonic.
+        //! Retrieve a name for an harmonic.
+        /** Retrieve a name for an harmonic in a std::string format that will be "harmonic argument".
          
-         @param     index	The global index of an harmonic.
+            @param     index	The index of an harmonic.
+            @return    The method returns a name for the harmonic that contains its argument if the harmonic exists, otherwise the function generates an error.
+         
+            @see       getHarmonicBand()
+            @see       getHarmonicArgument()
          */
         std::string getHarmonicsName(unsigned int index) const
         {

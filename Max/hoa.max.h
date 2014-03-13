@@ -1,14 +1,11 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_MAX
-#define DEF_HOA_MAX
-
-#include "../Sources/Hoa2D/Hoa2D.h"
-#include "../Sources/Hoa3D/Hoa3D.h"
+#ifndef __DEF_HOA_MAX__
+#define __DEF_HOA_MAX__
 
 extern "C"
 {
@@ -27,10 +24,16 @@ extern "C"
 #include "jpatcher_syms.h"
 }
 
+#include "hoa.max_commonsyms.h"
+
 #define MAX_CHANNELS 256
 
-static t_symbol* _sym_is_hoa = gensym("is_hoa");
-static t_symbol* _sym_credit_line1 = gensym("(v2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+#define HOA_UI_BORDERTHICKNESS 1
+#define HOA_UI_CORNERSIZE 8
+
+static t_symbol* _sym_is_hoa	   = gensym("is_hoa");
+static t_symbol* _sym_hoa_version  = gensym("(v2.0)");
+static t_symbol* _sym_credit_line1 = gensym("by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 static t_symbol* _sym_credit_line2 = gensym("Copyright \u00a9 2012 - 2014, CICM | Universite Paris 8");
 
 typedef long t_hoa_err;		///< an integer value suitable to be returned as an hoa error code  @ingroup misc

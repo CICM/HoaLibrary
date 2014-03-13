@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 133.0, 96.0, 840.0, 633.0 ],
+		"rect" : [ 133.0, 96.0, 890.0, 723.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 607.0 ],
+						"rect" : [ 0.0, 26.0, 890.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2210,7 +2210,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 607.0 ],
+						"rect" : [ 0.0, 26.0, 890.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3653,7 +3653,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 133.0, 122.0, 840.0, 607.0 ],
+						"rect" : [ 133.0, 122.0, 890.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3675,6 +3675,20 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"attr" : "offset",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-5",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 441.75, 282.0, 553.0, 19.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"args" : [ "@size", 1 ],
 									"id" : "obj-25",
@@ -3925,12 +3939,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
-									}
-,
-									"text" : "hoa.optim~ 7"
+									"patching_rect" : [ 174.75, 303.0, 240.000015, 19.0 ],
+									"text" : "hoa.2d.optim~ 7"
 								}
 
 							}
@@ -4033,8 +4043,9 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 175.258362, 377.5, 239.182892, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 0.0, 0.0, 0.0, 881563795456.0, 0.0, 0.0, 0.0, 7810440792225231184855040.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-										"channels" : 16
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+										"channels" : 16,
+										"offset" : 270.0
 									}
 ,
 									"text" : "hoa.2d.vector~"
@@ -4819,6 +4830,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-2", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
@@ -5008,7 +5028,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 607.0 ],
+						"rect" : [ 0.0, 26.0, 890.0, 697.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -5085,7 +5105,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.optim~.mxo",
+				"name" : "hoa.2d.optim~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -5102,6 +5122,10 @@
 			}
 , 			{
 				"name" : "hoa.meter~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.optim~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

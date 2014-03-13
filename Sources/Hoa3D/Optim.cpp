@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -28,7 +28,7 @@ namespace Hoa3D
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = cos(fabs(getHarmonicBand(i)) * CICM_PI / (2 * m_order + 2));;
+                m_harmonics[i] = cos(fabs(getHarmonicBand(i)) * HOA_PI / (2 * m_order + 2));;
             }
         }
         else
