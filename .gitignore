@@ -46,3 +46,12 @@ xcshareddata/
 
 *.mode1V3
 *.pbxuser
+
+#################
+## VST
+#################
+
+ThirdParty/Vst3SDK/*
+!ThirdParty/Vst3SDK/readme.txt
+
+

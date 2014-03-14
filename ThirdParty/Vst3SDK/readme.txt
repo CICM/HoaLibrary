@@ -1,0 +1,1 @@
+Place the content of your « VST3 SDK » here.
