@@ -31,6 +31,8 @@ namespace Hoa2D{};
 #include "SourcesTrajectory.h"
 #include "ChannelManager.h"
 
+using namespace Hoa2D;
+
 #endif
 
 

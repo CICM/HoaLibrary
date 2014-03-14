@@ -1,11 +1,16 @@
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#ifndef PLUGINEDITOR_H_INCLUDED
-#define PLUGINEDITOR_H_INCLUDED
+#ifndef __PLUGINEDITOR_H_INCLUDED__
+#define __PLUGINEDITOR_H_INCLUDED__
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
+#include "../../../Sources/Hoa2D/Hoa2D.h"
 #include "HoaMap/MapComponent.h"
 #include "HoaMeter/MeterComponent.h"
-
 #include "PluginProcessor.h"
 #include "HoaComponent.h"
 
@@ -28,9 +33,9 @@ private:
     Slider*                 m_sources_menu;
     Value                   m_nunber_of_sources;
     
-    Label*                  m_loudspeakers_text;
-    Slider*                 m_loudspeakers_menu;
-    Value                   m_nunber_of_loudspeakers;
+    Label*                  m_channels_text;
+    Slider*                 m_channels_menu;
+    Value                   m_nunber_of_channels;
     
     ComboBox*               m_decoder_menu;
     ComboBox*               m_optim_menu;

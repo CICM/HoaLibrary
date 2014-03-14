@@ -1,27 +1,8 @@
-/**
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice,
- *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,Z
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
@@ -97,20 +78,20 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     /////////////////////////////////////////////////
     /////////////////   NOUTPUTS  ///////////////////
     /////////////////////////////////////////////////
-    addAndMakeVisible(m_loudspeakers_text = new Label());
-    m_loudspeakers_text->setText(String("Loudspeakers :"), NotificationType(0));
-    m_loudspeakers_text->setBounds(501, 45, 80, 15);
-    m_loudspeakers_text->setFont(HoaFont);
+    addAndMakeVisible(m_channels_text = new Label());
+    m_channels_text->setText(String("Channels :"), NotificationType(0));
+    m_channels_text->setBounds(501, 45, 80, 15);
+    m_channels_text->setFont(HoaFont);
     
-    addAndMakeVisible(m_loudspeakers_menu = new Slider());
-    m_loudspeakers_menu->setSliderStyle(Slider::IncDecButtons);
-    m_loudspeakers_menu->setTextBoxIsEditable(1);
-    m_loudspeakers_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
-    m_loudspeakers_menu->setBounds(581, 45, 50, 12);
-    m_loudspeakers_menu->setRange(0, 64, 1);
-    m_nunber_of_loudspeakers = (int)m_hoa_processor->getNumberOfLoudspeakers();
-    m_loudspeakers_menu->getValueObject().referTo(m_nunber_of_loudspeakers);
-    m_nunber_of_loudspeakers.addListener(this);
+    addAndMakeVisible(m_channels_menu = new Slider());
+    m_channels_menu->setSliderStyle(Slider::IncDecButtons);
+    m_channels_menu->setTextBoxIsEditable(1);
+    m_channels_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
+    m_channels_menu->setBounds(581, 45, 50, 12);
+    m_channels_menu->setRange(0, 64, 1);
+    m_nunber_of_channels = (int)m_hoa_processor->getNumberOfChannels();
+    m_channels_menu->getValueObject().referTo(m_nunber_of_channels);
+    m_nunber_of_channels.addListener(this);
     
     /////////////////////////////////////////////////
     /////////////////   DECMODE   ///////////////////
@@ -143,7 +124,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_optim_menu->setLookAndFeel(&LookAndFeel);    
     
     addAndMakeVisible(m_offset_text = new Label("Offset"));
-    m_offset_text->setText(String("Offset of loudspeakers"), NotificationType(1));
+    m_offset_text->setText(String("Offset of channels"), NotificationType(1));
     m_offset_text->setBounds(501, 107, 122, 15);
     addAndMakeVisible(m_offset_menu = new Label("Offset"));
     m_offset_menu->setText(String(0), NotificationType(1));
@@ -190,9 +171,9 @@ void HoaToolsAudioProcessorEditor::valueChanged(Value& aValue)
     {
         m_hoa_processor->setNumberOfSources(m_sources_menu->getValue());
     }
-    else if(aValue == m_nunber_of_loudspeakers)
+    else if(aValue == m_nunber_of_channels)
     {
-        m_hoa_processor->setNumberOfLoudspeakers(m_loudspeakers_menu->getValue());
+        m_hoa_processor->setNumberOfChannels(m_channels_menu->getValue());
     }
 }
 

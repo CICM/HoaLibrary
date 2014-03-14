@@ -1,3 +1,8 @@
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
@@ -195,9 +200,9 @@ void HoaToolsAudioProcessor::numChannelsChanged()
     {
         m_processor->setNumberOfSources(getNumInputChannels());
     }
-    if(getNumOutputChannels() < m_processor->getNumberOfLoudspeakers())
+    if(getNumOutputChannels() < m_processor->getNumberOfChannels())
     {
-        m_processor->setNumberOfLoudspeakers(getNumOutputChannels());
+        m_processor->setNumberOfChannels(getNumOutputChannels());
     }
     m_processor->postProcess();
     
@@ -225,8 +230,10 @@ void HoaToolsAudioProcessor::releaseResources()
 void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     m_processor->process(buffer.getArrayOfChannels());
+	/*
     setNumberOfInputs(m_processor->getNumberOfSources());
-    setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
+    setNumberOfOutputs(m_processor->getNumberOfChannels());
+	*/
     m_processor->postProcess();
 }
 
@@ -240,8 +247,8 @@ void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
     
     xml.setAttribute("Order", (int)m_processor->getOrder());    
     xml.setAttribute("NumberOfSources", (int)m_processor->getNumberOfSources());
-    xml.setAttribute("NumberOfLoudspeakers", (int)m_processor->getNumberOfLoudspeakers());
-    xml.setAttribute("OffsetOfLoudspeakers", (int)m_processor->getOffsetOfLoudspeakers());
+    xml.setAttribute("NumberOfChannels", (int)m_processor->getNumberOfChannels());
+    xml.setAttribute("OffsetOfChannels", (int)m_processor->getOffsetOfChannels());
     xml.setAttribute("Optimization", (int)m_processor->getOptimization());
     xml.setAttribute("Zoom", (double)m_processor->getSourceManager()->getZoom());
     
@@ -258,13 +265,15 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
         {
             m_processor->setOrder(xmlState->getIntAttribute("Order"));
             m_processor->setNumberOfSources(xmlState->getIntAttribute("NumberOfSources"));
-            m_processor->setNumberOfLoudspeakers(xmlState->getIntAttribute("NumberOfLoudspeakers"));
-            m_processor->setOffsetOfLoudspeakers(xmlState->getIntAttribute("OffsetOfLoudspeakers"));
+            m_processor->setNumberOfChannels(xmlState->getIntAttribute("NumberOfChannels"));
+            m_processor->setOffsetOfChannels(xmlState->getIntAttribute("OffsetOfChannels"));
             m_processor->setOptimization(xmlState->getIntAttribute("Optimization"));
             m_processor->getSourceManager()->setZoom(xmlState->getDoubleAttribute("Zoom"));
             
+			/*
             setNumberOfInputs(m_processor->getNumberOfSources());
-            setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
+            setNumberOfOutputs(m_processor->getNumberOfChannels());
+			*/
         }
     }
 }
@@ -283,7 +292,7 @@ const String HoaToolsAudioProcessor::getInputChannelName (int channelIndex) cons
 const String HoaToolsAudioProcessor::getOutputChannelName (int channelIndex) const
 {
     char text[256];
-    sprintf(text, "Loudspeaker %i", channelIndex+1);
+    sprintf(text, "Channel %i", channelIndex+1);
     return String(text);
 }
 

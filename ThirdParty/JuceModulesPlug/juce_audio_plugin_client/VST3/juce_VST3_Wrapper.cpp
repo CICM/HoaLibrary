@@ -176,7 +176,9 @@ public:
             toString128 (info.title, p.getParameterName (index));
             toString128 (info.shortTitle, p.getParameterName (index, 8));
             toString128 (info.units, p.getParameterLabel (index));
-            info.stepCount = (Steinberg::int32) p.getParameterNumSteps (index);
+
+            const int numSteps = p.getParameterNumSteps (index);
+            info.stepCount = (Steinberg::int32) (numSteps > 0 && numSteps < 0x7fffffff ? numSteps - 1 : 0);
             info.defaultNormalizedValue = p.getParameterDefaultValue (index);
             info.unitId = Vst::kRootUnitId;
             info.flags = p.isParameterAutomatable (index) ? Vst::ParameterInfo::kCanAutomate : 0;
@@ -192,7 +194,6 @@ public:
             {
                 valueNormalized = v;
                 changed();
-                owner.setParameter (paramIndex, (float) v);
                 return true;
             }
 
@@ -623,10 +624,7 @@ public:
         addEventBusTo (eventOutputs, TRANS("MIDI Output"));
        #endif
 
-        {
-            const ScopedLock sl (contextLock);
-            processContext.sampleRate = processSetup.sampleRate;
-        }
+        processContext.sampleRate = processSetup.sampleRate;
 
         preparePlugin (processSetup.sampleRate, (int) processSetup.maxSamplesPerBlock);
 
@@ -735,16 +733,16 @@ public:
             double sampleRate = getPluginInstance().getSampleRate();
             int bufferSize = getPluginInstance().getBlockSize();
 
-            {
-                const ScopedLock sl (contextLock);
-                sampleRate = processSetup.sampleRate > 0.0
-                                ? processSetup.sampleRate
-                                : sampleRate;
+            sampleRate = processSetup.sampleRate > 0.0
+                            ? processSetup.sampleRate
+                            : sampleRate;
 
-                bufferSize = processSetup.maxSamplesPerBlock > 0
-                                ? (int) processSetup.maxSamplesPerBlock
-                                : bufferSize;
-            }
+            bufferSize = processSetup.maxSamplesPerBlock > 0
+                            ? (int) processSetup.maxSamplesPerBlock
+                            : bufferSize;
+
+            channelList.clear();
+            channelList.insertMultiple (0, nullptr, jmax (JucePlugin_MaxNumInputChannels, JucePlugin_MaxNumOutputChannels) + 1);
 
             preparePlugin (sampleRate, bufferSize);
         }
@@ -755,78 +753,72 @@ public:
     tresult PLUGIN_API setIoMode (Vst::IoMode) override { return kNotImplemented; }
     tresult PLUGIN_API getRoutingInfo (Vst::RoutingInfo&, Vst::RoutingInfo&) override { return kNotImplemented; }
 
-    tresult PLUGIN_API setState (IBStream* state) override
+    bool readFromMemoryStream (IBStream* state) const
     {
-        if (state != nullptr)
+        FUnknownPtr<MemoryStream> s (state);
+
+        if (s != nullptr
+             && s->getData() != nullptr
+             && s->getSize() > 0
+             && s->getSize() < 1024 * 1024 * 100) // (some hosts seem to return junk for the size)
         {
-            // Reset to the beginning of the stream:
-            if (state->seek (0, IBStream::kIBSeekSet, nullptr) != kResultTrue)
-                return kResultFalse;
+            // Adobe Audition CS6 hack to avoid trying to use corrupted streams:
+            if (getHostType().isAdobeAudition())
+                if (s->getSize() >= 5 && memcmp (s->getData(), "VC2!E", 5) == 0)
+                    return false;
 
-            Steinberg::int64 end = -1;
-
-            if (end < 0)
-            {
-                FUnknownPtr<ISizeableStream> s (state);
-
-                if (s != nullptr)
-                    s->getStreamSize (end);
-            }
-
-            if (end < 0)
-            {
-                FUnknownPtr<MemoryStream> s (state);
-
-                if (s != nullptr)
-                {
-                    if (getHostType().isAdobeAudition())
-                    {
-                        // Adobe Audition CS6 hack to avoid trying to use corrupted streams:
-                        bool failed = true;
-
-                        if (const char* const data = s->getData())
-                        {
-                            if (s->getSize() >= 5 && data[0] != 'V' && data[1] != 'C'
-                                 && data[2] != '2' && data[3] != '!' && data[4] != 'E')
-                            {
-                                failed = false;
-                            }
-                        }
-                        else
-                        {
-                            jassertfalse;
-                        }
-
-                        if (failed)
-                            return kResultFalse;
-                    }
-
-                    end = (Steinberg::int64) s->getSize();
-                }
-            }
-
-            if (end <= 0)
-                return kResultFalse;
-
-            // Try reading the data, and setting the plugin state:
-            Steinberg::int32 numBytes = (Steinberg::int32) jmin ((Steinberg::int64) std::numeric_limits<Steinberg::int32>::max(), end);
-
-            Array<char> buff;
-            buff.ensureStorageAllocated ((int) numBytes);
-            void* buffer = buff.getRawDataPointer();
-
-            if (state->read (buffer, numBytes, &numBytes) == kResultTrue
-                && buffer != nullptr
-                && numBytes > 0)
-            {
-                pluginInstance->setStateInformation (buffer, (int) numBytes);
-                return kResultTrue;
-            }
-
-            return kResultFalse;
+            pluginInstance->setStateInformation (s->getData(), (int) s->getSize());
+            return true;
         }
 
-        return kInvalidArgument;
+        return false;
+    }
+
+    bool readFromUnknownStream (IBStream* state) const
+    {
+        MemoryOutputStream allData;
+
+        {
+            const size_t bytesPerBlock = 4096;
+            HeapBlock<char> buffer (bytesPerBlock);
+
+            for (;;)
+            {
+                Steinberg::int32 bytesRead = 0;
+
+                if (state->read (buffer, (Steinberg::int32) bytesPerBlock, &bytesRead) == kResultTrue && bytesRead > 0)
+                {
+                    allData.write (buffer, bytesRead);
+                    continue;
+                }
+
+                break;
+            }
+        }
+
+        const size_t dataSize = allData.getDataSize();
+
+        if (dataSize > 0 && dataSize < 0x7fffffff)
+        {
+            pluginInstance->setStateInformation (allData.getData(), (int) dataSize);
+            return true;
+        }
+
+        return false;
+    }
+
+    tresult PLUGIN_API setState (IBStream* state) override
+    {
+        if (state == nullptr)
+            return kInvalidArgument;
+
+        FUnknownPtr<IBStream> stateRefHolder (state); // just in case the caller hasn't properly ref-counted the stream object
+
+        if (state->seek (0, IBStream::kIBSeekSet, nullptr) == kResultTrue)
+            if (readFromMemoryStream (state) || readFromUnknownStream (state))
+                return kResultTrue;
+
+        return kResultFalse;
     }
 
     tresult PLUGIN_API getState (IBStream* state) override
@@ -921,8 +913,6 @@ public:
     //==============================================================================
     bool getCurrentPosition (CurrentPositionInfo& info) override
     {
-        const ScopedLock sl (contextLock);
-
         info.timeInSamples              = jmax ((juce::int64) 0, processContext.projectTimeSamples);
         info.timeInSeconds              = processContext.projectTimeMusic;
         info.bpm                        = jmax (1.0, processContext.tempo);
@@ -1089,16 +1079,15 @@ public:
 
     tresult PLUGIN_API process (Vst::ProcessData& data) override
     {
+        if (pluginInstance == nullptr)
+            return kResultFalse;
+
+        if (data.processContext != nullptr)
+            processContext = *data.processContext;
+        else
+            zerostruct (processContext);
+
         midiBuffer.clear();
-
-        {
-            const ScopedLock sl (contextLock);
-
-            if (data.processContext != nullptr)
-                processContext = *data.processContext;
-            else
-                zerostruct (processContext);
-        }
 
        #if JucePlugin_WantsMidiInput
         if (data.inputEvents != nullptr)
@@ -1109,42 +1098,47 @@ public:
         const int numMidiEventsComingIn = midiBuffer.getNumEvents();
        #endif
 
-        if (pluginInstance != nullptr
-            && data.inputs != nullptr
-            && data.outputs != nullptr
-            && processContext.sampleRate > 0.0)
+        const int numInputChans  = data.inputs  != nullptr ? (int) data.inputs[0].numChannels : 0;
+        const int numOutputChans = data.outputs != nullptr ? (int) data.outputs[0].numChannels : 0;
+
+        int totalChans = 0;
+
+        while (totalChans < numInputChans)
+        {
+            channelList.set (totalChans, data.inputs[0].channelBuffers32[totalChans]);
+            ++totalChans;
+        }
+
+        while (totalChans < numOutputChans)
+        {
+            channelList.set (totalChans, data.outputs[0].channelBuffers32[totalChans]);
+            ++totalChans;
+        }
+
+        AudioSampleBuffer buffer (channelList.getRawDataPointer(), totalChans, (int) data.numSamples);
+
         {
             const ScopedLock sl (pluginInstance->getCallbackLock());
 
             pluginInstance->setNonRealtime (data.processMode == Vst::kOffline);
 
-            if (Vst::IParameterChanges* const paramChanges = data.inputParameterChanges)
-                processParameterChanges (*paramChanges);
-
-            const int numSamples = (int) data.numSamples;
-            const int numChannels = (int) data.inputs[0].numChannels;
-
-            AudioSampleBuffer buffer (data.inputs[0].channelBuffers32, numChannels, numSamples);
-            int startBusOffset = 1;
+            if (data.inputParameterChanges != nullptr)
+                processParameterChanges (*data.inputParameterChanges);
 
             if (pluginInstance->isSuspended())
-                startBusOffset = 0;
+                buffer.clear();
             else
                 pluginInstance->processBlock (buffer, midiBuffer);
+        }
 
-            // Copy the audio:
-            for (int i = 0; i < numChannels; ++i)
-                FloatVectorOperations::copy (data.outputs[0].channelBuffers32[i], buffer.getSampleData (i), numSamples);
+        for (int i = 0; i < numOutputChans; ++i)
+            FloatVectorOperations::copy (data.outputs[0].channelBuffers32[i], buffer.getSampleData (i), (int) data.numSamples);
 
-            // Clear the other busses:
-            for (int i = startBusOffset; i < data.numOutputs; ++i)
+        // clear extra busses..
+        if (data.outputs != nullptr)
+            for (int i = 1; i < data.numOutputs; ++i)
                 for (int f = 0; f < data.outputs[i].numChannels; ++f)
-                    FloatVectorOperations::clear (data.outputs[i].channelBuffers32[f], numSamples);
-        }
-        else
-        {
-            return kResultFalse;
-        }
+                    FloatVectorOperations::clear (data.outputs[i].channelBuffers32[f], (int) data.numSamples);
 
        #if JucePlugin_ProducesMidiOutput
         if (data.outputEvents != nullptr)
@@ -1183,12 +1177,12 @@ private:
         Since VST3 does not provide a way of knowing the buffer size and sample rate at any point,
         this object needs to be copied on every call to process() to be up-to-date...
     */
-    CriticalSection contextLock; //Not sure how necessary this is...
     Vst::ProcessContext processContext;
     Vst::ProcessSetup processSetup;
 
     Vst::BusList audioInputs, audioOutputs, eventInputs, eventOutputs;
     MidiBuffer midiBuffer;
+    Array<float*> channelList;
 
     const JuceLibraryRefCount juceCount;
 
@@ -1210,11 +1204,8 @@ private:
 
     Vst::BusList* getBusListFor (Vst::MediaType type, Vst::BusDirection dir)
     {
-        if (type == Vst::kAudio)
-            return dir == Vst::kInput ? &audioInputs : &audioOutputs;
-
-        if (type == Vst::kEvent)
-            return dir == Vst::kInput ? &eventInputs : &eventOutputs;
+        if (type == Vst::kAudio)  return dir == Vst::kInput ? &audioInputs : &audioOutputs;
+        if (type == Vst::kEvent)  return dir == Vst::kInput ? &eventInputs : &eventOutputs;
 
         return nullptr;
     }

@@ -1,10 +1,16 @@
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#ifndef PLUGINPROCESSOR_H_INCLUDED
-#define PLUGINPROCESSOR_H_INCLUDED
+#ifndef __PLUGINPROCESSOR_H_INCLUDED__
+#define __PLUGINPROCESSOR_H_INCLUDED__
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "HoaLookAndFeel.h"
 #include "HoaComponent.h"
+#include "../../../Sources/Hoa2D/Hoa2D.h"
 
 enum
 {

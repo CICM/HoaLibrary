@@ -255,7 +255,7 @@ void MapEditor::mouseDrag(const MouseEvent &event)
         }
         else if(m_drag_mode == 2)
         {
-            m_sources_manager->sourceSetAngle(m_souce_selected, mouse.getAngleToPoint(Point<float>(0., 0.)));
+            m_sources_manager->sourceSetAzimuth(m_souce_selected, mouse.getAngleToPoint(Point<float>(0., 0.)));
         }
         else if(m_drag_mode == 3)
         {
@@ -281,7 +281,7 @@ void MapEditor::mouseDrag(const MouseEvent &event)
         }
         else if(m_drag_mode == 2)
         {
-            m_sources_manager->groupSetRelativeAngle(m_group_selected, mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
+            m_sources_manager->groupSetRelativeAzimuth(m_group_selected, mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
         }
         else if(m_drag_mode == 3)
         {
@@ -293,7 +293,7 @@ void MapEditor::mouseDrag(const MouseEvent &event)
         }
         else if(m_drag_mode == 5)
         {
-            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
+            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
         }
         else
         {
@@ -349,11 +349,12 @@ void MapEditor::paint(Graphics& g)
     
     if(center / m_sources_manager->getZoom() > center / MIN_ZOOM * m_sources_manager->getZoom() - 5)
     {
-        Path P;
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, 0, 0, CICM_2PI);
-        g.strokePath(P, 1);
+		Path P;
+		PathStrokeType pathStrokeType = PathStrokeType(1);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, 0, 0, HOA_2PI);
+        g.strokePath(P, pathStrokeType);
         P.clear();
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, 0, 0, CICM_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, 0, 0, HOA_2PI);
         g.reduceClipRegion (P, AffineTransform::identity);
     }
     
@@ -439,7 +440,7 @@ void MapEditor::draw_sources(Graphics& g)
             {
                 g.setColour(Colours::red);
                 g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
-                g.drawLine(source_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 / 2.), source_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI2 / 2.), source_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 * 5. / 2.), source_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI * 5. / 4.));
+                g.drawLine(source_x + abscissa(m_sources_size * 0.5, HOA_PI2 / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI2 / 2.), source_x + abscissa(m_sources_size * 0.5, HOA_PI2 * 5. / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI * 5. / 4.));
             }
             else
             {
@@ -489,7 +490,7 @@ void MapEditor::draw_groups(Graphics& g)
             {
                 g.setColour(Colours::red);
                 g.drawEllipse(group_x - m_sources_size * 0.5, group_y - m_sources_size * 0.5, m_sources_size , m_sources_size, group_thickness);
-                g.drawLine(group_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 / 2.), group_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI2 / 2.), group_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 * 5. / 2.), group_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI * 5. / 4.));
+                g.drawLine(group_x + abscissa(m_sources_size * 0.5, HOA_PI2 / 2.), group_y + ordinate(m_sources_size * 0.5, HOA_PI2 / 2.), group_x + abscissa(m_sources_size * 0.5, HOA_PI2 * 5. / 2.), group_y + ordinate(m_sources_size * 0.5, HOA_PI * 5. / 4.));
             }
             else
             {
