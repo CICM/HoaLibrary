@@ -15,7 +15,6 @@
 		8FCDF75C18D23D7C0019E1CE /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCDF75B18D23D7C0019E1CE /* MaxAudioAPI.framework */; };
 		8FCDF78A18D23DF60019E1CE /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */; };
 		8FCDF78B18D23DF60019E1CE /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76118D23DF60019E1CE /* Ambisonic.h */; };
-		8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */; };
 		8FCDF78D18D23DF60019E1CE /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */; };
 		8FCDF78E18D23DF60019E1CE /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76418D23DF60019E1CE /* ChannelManager.h */; };
 		8FCDF78F18D23DF60019E1CE /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76518D23DF60019E1CE /* Decoder.cpp */; };
@@ -69,7 +68,6 @@
 		8FCDF75B18D23D7C0019E1CE /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../ThirdParty/Max/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8FCDF76118D23DF60019E1CE /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
 		8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
 		8FCDF76418D23DF60019E1CE /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
 		8FCDF76518D23DF60019E1CE /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			children = (
 				8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */,
 				8FCDF76118D23DF60019E1CE /* Ambisonic.h */,
-				8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */,
 				8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */,
 				8FCDF76418D23DF60019E1CE /* ChannelManager.h */,
 				8FCDF76518D23DF60019E1CE /* Decoder.cpp */,
@@ -327,7 +324,6 @@
 				8FCDF79418D23DF60019E1CE /* Kits.cpp in Sources */,
 				8FCDF7B018D23DF60019E1CE /* Vector.cpp in Sources */,
 				8FCDF7A618D23DF60019E1CE /* Source.cpp in Sources */,
-				8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */,
 				8FCDF79118D23DF60019E1CE /* Encoder.cpp in Sources */,
 				8FCDF7AA18D23DF60019E1CE /* SourcesManager.cpp in Sources */,
 				8FCDF78A18D23DF60019E1CE /* Ambisonic.cpp in Sources */,

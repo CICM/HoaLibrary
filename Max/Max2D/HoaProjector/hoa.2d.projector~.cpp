@@ -48,7 +48,7 @@ void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_projector *x = NULL;
 	int	order = 1;
-    int numberOfLoudspeakers = 10;
+    int numberOfLoudspeakers = 4;
     x = (t_hoa_projector *)object_alloc(hoa_projector_class);
 	if (x)
 	{		
