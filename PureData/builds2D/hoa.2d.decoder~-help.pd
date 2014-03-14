@@ -1,0 +1,200 @@
+#N canvas 117 42 1219 686 10;
+#X obj -325 -296 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.decoder~
+3 12 0 18 -204280 -1 0;
+#X text 243 -288 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X obj 365 -103 hoa.pi 2;
+#X obj 365 -122 loadbang;
+#X obj 350 -94 *~;
+#X obj 350 -151 phasor~ -0.3;
+#X text -322 -274 An ambisonic decoder;
+#X text 462 -209 Irregular mode is used for standart configurations
+: mono (1) \, stereo (2) \, 3.1 (3) \, quadriphonie (4) \, 5.1 (5)
+\, 6.1 \, 7.1. The fourth argument is the irregular decoding mode :
+panning (default) or projection. You should use "inPhase" optimization
+to avoid artefact.;
+#X obj -235 84 hoa.meter~ @size 261 261 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
+16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
+292.5 315 337.5 @offset 0 @rotation Anti-Clockwise @vectors Energy
+@interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor
+0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
+1 0 0 0.8;
+#X obj 467 87 hoa.meter~ @size 261 261 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
+5 @angles 0 30 110 250 330 @offset 0 @rotation Anti-Clockwise @vectors
+Energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor
+0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
+1 0 0 0.8;
+#X text -320 -216 1st argument is the order.;
+#X text -321 -201 2nd argument is decoding mode : ambisonic or 0 \,
+binaural or 1 (for headphones) \, irregular or 2 (for an irregular
+loudpspeakers array).;
+#X text -320 -160 3rd argument is the number of loudspeakers (minmum
+2 * order + 1 for ambisonic mode).;
+#X text -313 -107 Ambisonic mode is used for a perfect circle of loudspeakers
+where all of them are to equal distance. The minimum number of loudspeakers
+is 2 * order + 1 (default : 2 * order + 2). The fourth argument is
+the offset of loudpeakers in degrees.;
+#X obj -235 10 hoa.optim~ 7 @mode maxRe ------------------;
+#X obj 467 20 hoa.optim~ 7 @mode inPhase ----------------;
+#X obj 95 112 c.meter~ @size 9 71 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0
+0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 351 106 c.meter~ @size 9 71 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0
+0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 95 196 hoa.dac~ 1 2 ------------------------------;
+#X obj 37 23 c.menu @size 54 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items small large @states 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 95 -93 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
+0.5 1 @kncolor 0.5 0.5 0.5 1;
+#X obj 95 -135 noise~;
+#X msg 207 -218 \; pd dsp 1;
+#X msg 207 -183 \; pd dsp 0;
+#X obj 95 -72 hoa.2d.encoder~ 7 -------------------------;
+#X obj -235 43 hoa.2d.decoder~ 7 ambisonics 16 -----------;
+#X obj 467 48 hoa.2d.decoder~ 7 irregular 5 @angles 0 30 110 250 330
+, f 43;
+#X text -320 -246 hoa.2d.decoder~ decodes an ambisonic sound field
+for several loudspeakers configurations or for headphones.;
+#X obj 95 77 hoa.2d.decoder~ 7 binaural @pinna small ---;
+#X msg 35 43 pinna \$1;
+#X text 44 240 Binaural mode is used for headphones. It uses the MIT
+Hrtfs \, then the maximum order is 35 The fourth argument is the pinnae
+size : small (default) or large.;
+#X msg -316 3 offset \$1;
+#X obj -316 -30 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -319 -51 Offset of the loudspeakers in degrees;
+#X msg 444 -53 offset \$1;
+#X obj 444 -86 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 441 -107 Offset of the loudspeakers in degrees;
+#X connect 2 0 4 1;
+#X connect 3 0 2 0;
+#X connect 4 0 24 1;
+#X connect 5 0 4 0;
+#X connect 14 0 25 0;
+#X connect 14 1 25 1;
+#X connect 14 2 25 2;
+#X connect 14 3 25 3;
+#X connect 14 4 25 4;
+#X connect 14 5 25 5;
+#X connect 14 6 25 6;
+#X connect 14 7 25 7;
+#X connect 14 8 25 8;
+#X connect 14 9 25 9;
+#X connect 14 10 25 10;
+#X connect 14 11 25 11;
+#X connect 14 12 25 12;
+#X connect 14 13 25 13;
+#X connect 14 14 25 14;
+#X connect 15 0 26 0;
+#X connect 15 1 26 1;
+#X connect 15 2 26 2;
+#X connect 15 3 26 3;
+#X connect 15 4 26 4;
+#X connect 15 5 26 5;
+#X connect 15 6 26 6;
+#X connect 15 7 26 7;
+#X connect 15 8 26 8;
+#X connect 15 9 26 9;
+#X connect 15 10 26 10;
+#X connect 15 11 26 11;
+#X connect 15 12 26 12;
+#X connect 15 13 26 13;
+#X connect 15 14 26 14;
+#X connect 19 1 29 0;
+#X connect 20 0 24 0;
+#X connect 21 0 20 0;
+#X connect 24 0 14 0;
+#X connect 24 0 15 0;
+#X connect 24 0 28 0;
+#X connect 24 1 14 1;
+#X connect 24 1 15 1;
+#X connect 24 1 28 1;
+#X connect 24 2 14 2;
+#X connect 24 2 15 2;
+#X connect 24 2 28 2;
+#X connect 24 3 14 3;
+#X connect 24 3 15 3;
+#X connect 24 3 28 3;
+#X connect 24 4 14 4;
+#X connect 24 4 15 4;
+#X connect 24 4 28 4;
+#X connect 24 5 14 5;
+#X connect 24 5 15 5;
+#X connect 24 5 28 5;
+#X connect 24 6 14 6;
+#X connect 24 6 15 6;
+#X connect 24 6 28 6;
+#X connect 24 7 14 7;
+#X connect 24 7 15 7;
+#X connect 24 7 28 7;
+#X connect 24 8 14 8;
+#X connect 24 8 15 8;
+#X connect 24 8 28 8;
+#X connect 24 9 14 9;
+#X connect 24 9 15 9;
+#X connect 24 9 28 9;
+#X connect 24 10 14 10;
+#X connect 24 10 15 10;
+#X connect 24 10 28 10;
+#X connect 24 11 14 11;
+#X connect 24 11 15 11;
+#X connect 24 11 28 11;
+#X connect 24 12 14 12;
+#X connect 24 12 15 12;
+#X connect 24 12 28 12;
+#X connect 24 13 14 13;
+#X connect 24 13 15 13;
+#X connect 24 13 28 13;
+#X connect 24 14 14 14;
+#X connect 24 14 15 14;
+#X connect 24 14 28 14;
+#X connect 25 0 8 0;
+#X connect 25 1 8 1;
+#X connect 25 2 8 2;
+#X connect 25 3 8 3;
+#X connect 25 4 8 4;
+#X connect 25 5 8 5;
+#X connect 25 6 8 6;
+#X connect 25 7 8 7;
+#X connect 25 8 8 8;
+#X connect 25 9 8 9;
+#X connect 25 10 8 10;
+#X connect 25 11 8 11;
+#X connect 25 12 8 12;
+#X connect 25 13 8 13;
+#X connect 25 14 8 14;
+#X connect 25 15 8 15;
+#X connect 26 0 9 0;
+#X connect 26 1 9 1;
+#X connect 26 2 9 2;
+#X connect 26 3 9 3;
+#X connect 26 4 9 4;
+#X connect 28 0 18 0;
+#X connect 28 0 16 0;
+#X connect 28 1 18 1;
+#X connect 28 1 17 0;
+#X connect 29 0 28 0;
+#X connect 31 0 25 0;
+#X connect 32 0 31 0;
+#X connect 34 0 26 0;
+#X connect 35 0 34 0;
+#X coords 0 686 1 685 100 60 0;

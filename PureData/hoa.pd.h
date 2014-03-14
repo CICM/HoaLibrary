@@ -9,13 +9,13 @@
 
 extern "C"
 {
-#include "../../CicmWrapper/Sources/cicm_wrapper.h"
+#include "../ThirdParty/PureData/Sources/cicm_wrapper.h"
 #include "hoa.pd_commonsyms.h"
 }
 
 
 #define MAX_CHANNELS 256
-
+#define SYS_MAXBLKSIZE 8192
 #define HOA_UI_BORDERTHICKNESS 1
 #define HOA_UI_CORNERSIZE 8
 
