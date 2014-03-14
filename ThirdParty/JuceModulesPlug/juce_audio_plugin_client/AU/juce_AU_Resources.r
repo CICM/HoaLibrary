@@ -46,7 +46,7 @@
 #define DESCRIPTION     JucePlugin_Desc
 #define ENTRY_POINT     JucePlugin_AUExportPrefixQuoted "Entry"
 
-#include "AUResources.r"
+//#include "AUResources.r"
 
 //==============================================================================
 // component resources for Audio Unit Carbon View

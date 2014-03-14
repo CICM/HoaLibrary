@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_controller.html" title="extension to CControlListener used by UIDescription" alt="" coords="201,424,276,448" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_u_i_description.html" title="XML description parser and view creator." alt="" coords="509,223,603,247" />
+<area shape="rect" href="$class_c_control_listener.html" title="CControlListener" alt="" coords="7,424,116,448" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_view_added_removed_observer.html" title="view added removed observer interface for CFrame" alt="" coords="464,535,648,559" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_mouse_observer.html" title="generic mouse observer interface for CFrame" alt="" coords="501,583,611,607" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_keyboard_hook.html" title="generic keyboard hook interface for CFrame" alt="" coords="504,631,608,655" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_base_object.html" title="Base Object with reference counter." alt="" coords="193,7,284,31" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_u_i_description.html" title="IUIDescription" alt="" coords="191,55,287,79" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_xml_1_1_i_handler.html" title="IHandler" alt="" coords="205,103,272,127" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_dependency.html" title="simple dependency between objects." alt="" coords="193,151,284,175" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_resource_description.html" title="Describes a resource by name or by ID." alt="" coords="169,199,308,223" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_xml_1_1_i_content_provider.html" title="IContentProvider" alt="" coords="184,247,293,271" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_view_factory.html" title="IViewFactory" alt="" coords="193,295,284,319" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_bitmap_creator.html" title="IBitmapCreator" alt="" coords="188,343,289,367" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_point.html" title="Point structure." alt="" coords="527,679,585,703" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_v_s_t3_editor_delegate.html" title="delegate extension to Steinberg::Vst::EditController for a VST3 Editor" alt="" coords="491,727,621,751" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_rect.html" title="Rect structure." alt="" coords="529,775,583,799" />
+</map>
