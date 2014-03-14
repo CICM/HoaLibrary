@@ -8,7 +8,7 @@
 
 void hoa_print_credit()
 {
-    erouter_add_libary(gensym("HOA"), "HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    erouter_add_libary(gensym("HOA"), "HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 2.0");
 }
 
 int hoa_method_true(void *x)

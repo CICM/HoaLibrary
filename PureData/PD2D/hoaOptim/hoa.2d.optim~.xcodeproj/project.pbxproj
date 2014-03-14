@@ -13,46 +13,6 @@
 		8F213BB018D036F600A346AB /* hoa.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BAD18D036F600A346AB /* hoa.pd.h */; };
 		8F213BB218D0379800A346AB /* Hoa2D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BB118D0379800A346AB /* Hoa2D.pd.h */; };
 		8F213BE018D038FB00A346AB /* Hoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BB318D038FB00A346AB /* Hoa.h */; };
-		8F213BE118D038FB00A346AB /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BB518D038FB00A346AB /* Ambisonic.cpp */; };
-		8F213BE218D038FB00A346AB /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BB618D038FB00A346AB /* Ambisonic.h */; };
-		8F213BE318D038FB00A346AB /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BB718D038FB00A346AB /* BinauralMatrix2D.cpp */; };
-		8F213BE418D038FB00A346AB /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BB818D038FB00A346AB /* ChannelManager.cpp */; };
-		8F213BE518D038FB00A346AB /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BB918D038FB00A346AB /* ChannelManager.h */; };
-		8F213BE618D038FB00A346AB /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BBA18D038FB00A346AB /* Decoder.cpp */; };
-		8F213BE718D038FB00A346AB /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BBB18D038FB00A346AB /* Decoder.h */; };
-		8F213BE818D038FB00A346AB /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BBC18D038FB00A346AB /* Encoder.cpp */; };
-		8F213BE918D038FB00A346AB /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BBD18D038FB00A346AB /* Encoder.h */; };
-		8F213BEA18D038FB00A346AB /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BBE18D038FB00A346AB /* Hoa2D.h */; };
-		8F213BEB18D038FB00A346AB /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BBF18D038FB00A346AB /* Map.cpp */; };
-		8F213BEC18D038FB00A346AB /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BC018D038FB00A346AB /* Map.h */; };
-		8F213BED18D038FB00A346AB /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BC118D038FB00A346AB /* Meter.cpp */; };
-		8F213BEE18D038FB00A346AB /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BC218D038FB00A346AB /* Meter.h */; };
-		8F213BEF18D038FB00A346AB /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BC318D038FB00A346AB /* Optim.cpp */; };
-		8F213BF018D038FB00A346AB /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BC418D038FB00A346AB /* Optim.h */; };
-		8F213BF118D038FB00A346AB /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BC518D038FB00A346AB /* Planewaves.cpp */; };
-		8F213BF218D038FB00A346AB /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BC618D038FB00A346AB /* Planewaves.h */; };
-		8F213BF318D038FB00A346AB /* Projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BC718D038FB00A346AB /* Projector.cpp */; };
-		8F213BF418D038FB00A346AB /* Projector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BC818D038FB00A346AB /* Projector.h */; };
-		8F213BF518D038FB00A346AB /* Recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BC918D038FB00A346AB /* Recomposer.cpp */; };
-		8F213BF618D038FB00A346AB /* Recomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BCA18D038FB00A346AB /* Recomposer.h */; };
-		8F213BF718D038FB00A346AB /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BCB18D038FB00A346AB /* Rotate.cpp */; };
-		8F213BF818D038FB00A346AB /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BCC18D038FB00A346AB /* Rotate.h */; };
-		8F213BF918D038FB00A346AB /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BCD18D038FB00A346AB /* Scope.cpp */; };
-		8F213BFA18D038FB00A346AB /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BCE18D038FB00A346AB /* Scope.h */; };
-		8F213BFB18D038FB00A346AB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BCF18D038FB00A346AB /* Source.cpp */; };
-		8F213BFC18D038FB00A346AB /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BD018D038FB00A346AB /* Source.h */; };
-		8F213BFD18D038FB00A346AB /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BD118D038FB00A346AB /* SourcesGroup.cpp */; };
-		8F213BFE18D038FB00A346AB /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BD218D038FB00A346AB /* SourcesGroup.h */; };
-		8F213BFF18D038FB00A346AB /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BD318D038FB00A346AB /* SourcesManager.cpp */; };
-		8F213C0018D038FB00A346AB /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BD418D038FB00A346AB /* SourcesManager.h */; };
-		8F213C0118D038FB00A346AB /* SourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BD518D038FB00A346AB /* SourcesPreset.cpp */; };
-		8F213C0218D038FB00A346AB /* SourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BD618D038FB00A346AB /* SourcesPreset.h */; };
-		8F213C0318D038FB00A346AB /* SourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BD718D038FB00A346AB /* SourcesTrajectory.cpp */; };
-		8F213C0418D038FB00A346AB /* SourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BD818D038FB00A346AB /* SourcesTrajectory.h */; };
-		8F213C0518D038FB00A346AB /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BD918D038FB00A346AB /* Vector.cpp */; };
-		8F213C0618D038FB00A346AB /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BDA18D038FB00A346AB /* Vector.h */; };
-		8F213C0718D038FB00A346AB /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F213BDB18D038FB00A346AB /* Wider.cpp */; };
-		8F213C0818D038FB00A346AB /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BDC18D038FB00A346AB /* Wider.h */; };
 		8F213C0918D038FB00A346AB /* HoaDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BDD18D038FB00A346AB /* HoaDefs.h */; };
 		8F213C0A18D038FB00A346AB /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BDE18D038FB00A346AB /* HoaMath.h */; };
 		8F213C0B18D038FB00A346AB /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F213BDF18D038FB00A346AB /* HoaUtils.h */; };
@@ -97,6 +57,48 @@
 		8FCDF8D818D2D4B50019E1CE /* epopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF8B018D2D4B50019E1CE /* epopup.h */; };
 		8FCDF8D918D2D4B50019E1CE /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF8B118D2D4B50019E1CE /* estruct.h */; };
 		8FCDF8DD18D2F66B0019E1CE /* hoa.2d.optim~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF8DC18D2F66B0019E1CE /* hoa.2d.optim~.cpp */; };
+		8FCDFA0A18D311260019E1CE /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9E018D311260019E1CE /* Ambisonic.cpp */; };
+		8FCDFA0B18D311260019E1CE /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9E118D311260019E1CE /* Ambisonic.h */; };
+		8FCDFA0C18D311260019E1CE /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9E218D311260019E1CE /* BinauralMatrix2D.cpp */; };
+		8FCDFA0D18D311260019E1CE /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9E318D311260019E1CE /* ChannelManager.cpp */; };
+		8FCDFA0E18D311260019E1CE /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9E418D311260019E1CE /* ChannelManager.h */; };
+		8FCDFA0F18D311260019E1CE /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9E518D311260019E1CE /* Decoder.cpp */; };
+		8FCDFA1018D311260019E1CE /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9E618D311260019E1CE /* Decoder.h */; };
+		8FCDFA1118D311260019E1CE /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9E718D311260019E1CE /* Encoder.cpp */; };
+		8FCDFA1218D311260019E1CE /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9E818D311260019E1CE /* Encoder.h */; };
+		8FCDFA1318D311260019E1CE /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9E918D311260019E1CE /* Hoa2D.h */; };
+		8FCDFA1418D311260019E1CE /* Kits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9EA18D311260019E1CE /* Kits.cpp */; };
+		8FCDFA1518D311260019E1CE /* Kits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9EB18D311260019E1CE /* Kits.h */; };
+		8FCDFA1618D311260019E1CE /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9EC18D311260019E1CE /* Map.cpp */; };
+		8FCDFA1718D311260019E1CE /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9ED18D311260019E1CE /* Map.h */; };
+		8FCDFA1818D311260019E1CE /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9EE18D311260019E1CE /* Meter.cpp */; };
+		8FCDFA1918D311260019E1CE /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9EF18D311260019E1CE /* Meter.h */; };
+		8FCDFA1A18D311260019E1CE /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9F018D311260019E1CE /* Optim.cpp */; };
+		8FCDFA1B18D311260019E1CE /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9F118D311260019E1CE /* Optim.h */; };
+		8FCDFA1C18D311260019E1CE /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9F218D311260019E1CE /* Planewaves.cpp */; };
+		8FCDFA1D18D311260019E1CE /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9F318D311260019E1CE /* Planewaves.h */; };
+		8FCDFA1E18D311260019E1CE /* Projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9F418D311260019E1CE /* Projector.cpp */; };
+		8FCDFA1F18D311260019E1CE /* Projector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9F518D311260019E1CE /* Projector.h */; };
+		8FCDFA2018D311260019E1CE /* Recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9F618D311260019E1CE /* Recomposer.cpp */; };
+		8FCDFA2118D311260019E1CE /* Recomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9F718D311260019E1CE /* Recomposer.h */; };
+		8FCDFA2218D311260019E1CE /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9F818D311260019E1CE /* Rotate.cpp */; };
+		8FCDFA2318D311260019E1CE /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9F918D311260019E1CE /* Rotate.h */; };
+		8FCDFA2418D311260019E1CE /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9FA18D311260019E1CE /* Scope.cpp */; };
+		8FCDFA2518D311260019E1CE /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9FB18D311260019E1CE /* Scope.h */; };
+		8FCDFA2618D311260019E1CE /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9FC18D311260019E1CE /* Source.cpp */; };
+		8FCDFA2718D311260019E1CE /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9FD18D311260019E1CE /* Source.h */; };
+		8FCDFA2818D311260019E1CE /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF9FE18D311260019E1CE /* SourcesGroup.cpp */; };
+		8FCDFA2918D311260019E1CE /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF9FF18D311260019E1CE /* SourcesGroup.h */; };
+		8FCDFA2A18D311260019E1CE /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDFA0018D311260019E1CE /* SourcesManager.cpp */; };
+		8FCDFA2B18D311260019E1CE /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDFA0118D311260019E1CE /* SourcesManager.h */; };
+		8FCDFA2C18D311260019E1CE /* SourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDFA0218D311260019E1CE /* SourcesPreset.cpp */; };
+		8FCDFA2D18D311260019E1CE /* SourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDFA0318D311260019E1CE /* SourcesPreset.h */; };
+		8FCDFA2E18D311260019E1CE /* SourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDFA0418D311260019E1CE /* SourcesTrajectory.cpp */; };
+		8FCDFA2F18D311260019E1CE /* SourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDFA0518D311260019E1CE /* SourcesTrajectory.h */; };
+		8FCDFA3018D311260019E1CE /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDFA0618D311260019E1CE /* Vector.cpp */; };
+		8FCDFA3118D311260019E1CE /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDFA0718D311260019E1CE /* Vector.h */; };
+		8FCDFA3218D311260019E1CE /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDFA0818D311260019E1CE /* Wider.cpp */; };
+		8FCDFA3318D311260019E1CE /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDFA0918D311260019E1CE /* Wider.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,46 +109,6 @@
 		8F213BAD18D036F600A346AB /* hoa.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.pd.h; path = ../../hoa.pd.h; sourceTree = "<group>"; };
 		8F213BB118D0379800A346AB /* Hoa2D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.pd.h; path = ../Hoa2D.pd.h; sourceTree = "<group>"; };
 		8F213BB318D038FB00A346AB /* Hoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa.h; path = ../../../Sources/Hoa.h; sourceTree = "<group>"; };
-		8F213BB518D038FB00A346AB /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
-		8F213BB618D038FB00A346AB /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8F213BB718D038FB00A346AB /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
-		8F213BB818D038FB00A346AB /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
-		8F213BB918D038FB00A346AB /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
-		8F213BBA18D038FB00A346AB /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
-		8F213BBB18D038FB00A346AB /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
-		8F213BBC18D038FB00A346AB /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
-		8F213BBD18D038FB00A346AB /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
-		8F213BBE18D038FB00A346AB /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
-		8F213BBF18D038FB00A346AB /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		8F213BC018D038FB00A346AB /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		8F213BC118D038FB00A346AB /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
-		8F213BC218D038FB00A346AB /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
-		8F213BC318D038FB00A346AB /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
-		8F213BC418D038FB00A346AB /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
-		8F213BC518D038FB00A346AB /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
-		8F213BC618D038FB00A346AB /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
-		8F213BC718D038FB00A346AB /* Projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projector.cpp; sourceTree = "<group>"; };
-		8F213BC818D038FB00A346AB /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
-		8F213BC918D038FB00A346AB /* Recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recomposer.cpp; sourceTree = "<group>"; };
-		8F213BCA18D038FB00A346AB /* Recomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomposer.h; sourceTree = "<group>"; };
-		8F213BCB18D038FB00A346AB /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
-		8F213BCC18D038FB00A346AB /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
-		8F213BCD18D038FB00A346AB /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
-		8F213BCE18D038FB00A346AB /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
-		8F213BCF18D038FB00A346AB /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
-		8F213BD018D038FB00A346AB /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
-		8F213BD118D038FB00A346AB /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
-		8F213BD218D038FB00A346AB /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
-		8F213BD318D038FB00A346AB /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
-		8F213BD418D038FB00A346AB /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
-		8F213BD518D038FB00A346AB /* SourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesPreset.cpp; sourceTree = "<group>"; };
-		8F213BD618D038FB00A346AB /* SourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesPreset.h; sourceTree = "<group>"; };
-		8F213BD718D038FB00A346AB /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
-		8F213BD818D038FB00A346AB /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
-		8F213BD918D038FB00A346AB /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
-		8F213BDA18D038FB00A346AB /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
-		8F213BDB18D038FB00A346AB /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
-		8F213BDC18D038FB00A346AB /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8F213BDD18D038FB00A346AB /* HoaDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaDefs.h; path = ../../../Sources/HoaDefs.h; sourceTree = "<group>"; };
 		8F213BDE18D038FB00A346AB /* HoaMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaMath.h; path = ../../../Sources/HoaMath.h; sourceTree = "<group>"; };
 		8F213BDF18D038FB00A346AB /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaUtils.h; path = ../../../Sources/HoaUtils.h; sourceTree = "<group>"; };
@@ -191,6 +153,48 @@
 		8FCDF8B018D2D4B50019E1CE /* epopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
 		8FCDF8B118D2D4B50019E1CE /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
 		8FCDF8DC18D2F66B0019E1CE /* hoa.2d.optim~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.2d.optim~.cpp"; sourceTree = "<group>"; };
+		8FCDF9E018D311260019E1CE /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8FCDF9E118D311260019E1CE /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		8FCDF9E218D311260019E1CE /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
+		8FCDF9E318D311260019E1CE /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
+		8FCDF9E418D311260019E1CE /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
+		8FCDF9E518D311260019E1CE /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		8FCDF9E618D311260019E1CE /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8FCDF9E718D311260019E1CE /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		8FCDF9E818D311260019E1CE /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		8FCDF9E918D311260019E1CE /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
+		8FCDF9EA18D311260019E1CE /* Kits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kits.cpp; sourceTree = "<group>"; };
+		8FCDF9EB18D311260019E1CE /* Kits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kits.h; sourceTree = "<group>"; };
+		8FCDF9EC18D311260019E1CE /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8FCDF9ED18D311260019E1CE /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8FCDF9EE18D311260019E1CE /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		8FCDF9EF18D311260019E1CE /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8FCDF9F018D311260019E1CE /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8FCDF9F118D311260019E1CE /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8FCDF9F218D311260019E1CE /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8FCDF9F318D311260019E1CE /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8FCDF9F418D311260019E1CE /* Projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projector.cpp; sourceTree = "<group>"; };
+		8FCDF9F518D311260019E1CE /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
+		8FCDF9F618D311260019E1CE /* Recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recomposer.cpp; sourceTree = "<group>"; };
+		8FCDF9F718D311260019E1CE /* Recomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomposer.h; sourceTree = "<group>"; };
+		8FCDF9F818D311260019E1CE /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		8FCDF9F918D311260019E1CE /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		8FCDF9FA18D311260019E1CE /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
+		8FCDF9FB18D311260019E1CE /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		8FCDF9FC18D311260019E1CE /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
+		8FCDF9FD18D311260019E1CE /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		8FCDF9FE18D311260019E1CE /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
+		8FCDF9FF18D311260019E1CE /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
+		8FCDFA0018D311260019E1CE /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
+		8FCDFA0118D311260019E1CE /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
+		8FCDFA0218D311260019E1CE /* SourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesPreset.cpp; sourceTree = "<group>"; };
+		8FCDFA0318D311260019E1CE /* SourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesPreset.h; sourceTree = "<group>"; };
+		8FCDFA0418D311260019E1CE /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
+		8FCDFA0518D311260019E1CE /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
+		8FCDFA0618D311260019E1CE /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		8FCDFA0718D311260019E1CE /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8FCDFA0818D311260019E1CE /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		8FCDFA0918D311260019E1CE /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,10 +218,10 @@
 				8F213BAD18D036F600A346AB /* hoa.pd.h */,
 				8F213BB118D0379800A346AB /* Hoa2D.pd.h */,
 				8F213BB318D038FB00A346AB /* Hoa.h */,
-				8F213BB418D038FB00A346AB /* Hoa2D */,
 				8F213BDD18D038FB00A346AB /* HoaDefs.h */,
 				8F213BDE18D038FB00A346AB /* HoaMath.h */,
 				8F213BDF18D038FB00A346AB /* HoaUtils.h */,
+				8FCDF9DF18D311260019E1CE /* Hoa2D */,
 				8FCDF88318D2D4B50019E1CE /* Sources */,
 				59FB02F717A7FAA9001E977D /* Accelerate.framework */,
 				5913847015DAA36D0029AD16 /* Products */,
@@ -231,54 +235,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		8F213BB418D038FB00A346AB /* Hoa2D */ = {
-			isa = PBXGroup;
-			children = (
-				8F213BB518D038FB00A346AB /* Ambisonic.cpp */,
-				8F213BB618D038FB00A346AB /* Ambisonic.h */,
-				8F213BB718D038FB00A346AB /* BinauralMatrix2D.cpp */,
-				8F213BB818D038FB00A346AB /* ChannelManager.cpp */,
-				8F213BB918D038FB00A346AB /* ChannelManager.h */,
-				8F213BBA18D038FB00A346AB /* Decoder.cpp */,
-				8F213BBB18D038FB00A346AB /* Decoder.h */,
-				8F213BBC18D038FB00A346AB /* Encoder.cpp */,
-				8F213BBD18D038FB00A346AB /* Encoder.h */,
-				8F213BBE18D038FB00A346AB /* Hoa2D.h */,
-				8F213BBF18D038FB00A346AB /* Map.cpp */,
-				8F213BC018D038FB00A346AB /* Map.h */,
-				8F213BC118D038FB00A346AB /* Meter.cpp */,
-				8F213BC218D038FB00A346AB /* Meter.h */,
-				8F213BC318D038FB00A346AB /* Optim.cpp */,
-				8F213BC418D038FB00A346AB /* Optim.h */,
-				8F213BC518D038FB00A346AB /* Planewaves.cpp */,
-				8F213BC618D038FB00A346AB /* Planewaves.h */,
-				8F213BC718D038FB00A346AB /* Projector.cpp */,
-				8F213BC818D038FB00A346AB /* Projector.h */,
-				8F213BC918D038FB00A346AB /* Recomposer.cpp */,
-				8F213BCA18D038FB00A346AB /* Recomposer.h */,
-				8F213BCB18D038FB00A346AB /* Rotate.cpp */,
-				8F213BCC18D038FB00A346AB /* Rotate.h */,
-				8F213BCD18D038FB00A346AB /* Scope.cpp */,
-				8F213BCE18D038FB00A346AB /* Scope.h */,
-				8F213BCF18D038FB00A346AB /* Source.cpp */,
-				8F213BD018D038FB00A346AB /* Source.h */,
-				8F213BD118D038FB00A346AB /* SourcesGroup.cpp */,
-				8F213BD218D038FB00A346AB /* SourcesGroup.h */,
-				8F213BD318D038FB00A346AB /* SourcesManager.cpp */,
-				8F213BD418D038FB00A346AB /* SourcesManager.h */,
-				8F213BD518D038FB00A346AB /* SourcesPreset.cpp */,
-				8F213BD618D038FB00A346AB /* SourcesPreset.h */,
-				8F213BD718D038FB00A346AB /* SourcesTrajectory.cpp */,
-				8F213BD818D038FB00A346AB /* SourcesTrajectory.h */,
-				8F213BD918D038FB00A346AB /* Vector.cpp */,
-				8F213BDA18D038FB00A346AB /* Vector.h */,
-				8F213BDB18D038FB00A346AB /* Wider.cpp */,
-				8F213BDC18D038FB00A346AB /* Wider.h */,
-			);
-			name = Hoa2D;
-			path = ../../../Sources/Hoa2D;
-			sourceTree = SOURCE_ROOT;
 		};
 		8FCDF88318D2D4B50019E1CE /* Sources */ = {
 			isa = PBXGroup;
@@ -376,6 +332,56 @@
 			path = epopup;
 			sourceTree = "<group>";
 		};
+		8FCDF9DF18D311260019E1CE /* Hoa2D */ = {
+			isa = PBXGroup;
+			children = (
+				8FCDF9E018D311260019E1CE /* Ambisonic.cpp */,
+				8FCDF9E118D311260019E1CE /* Ambisonic.h */,
+				8FCDF9E218D311260019E1CE /* BinauralMatrix2D.cpp */,
+				8FCDF9E318D311260019E1CE /* ChannelManager.cpp */,
+				8FCDF9E418D311260019E1CE /* ChannelManager.h */,
+				8FCDF9E518D311260019E1CE /* Decoder.cpp */,
+				8FCDF9E618D311260019E1CE /* Decoder.h */,
+				8FCDF9E718D311260019E1CE /* Encoder.cpp */,
+				8FCDF9E818D311260019E1CE /* Encoder.h */,
+				8FCDF9E918D311260019E1CE /* Hoa2D.h */,
+				8FCDF9EA18D311260019E1CE /* Kits.cpp */,
+				8FCDF9EB18D311260019E1CE /* Kits.h */,
+				8FCDF9EC18D311260019E1CE /* Map.cpp */,
+				8FCDF9ED18D311260019E1CE /* Map.h */,
+				8FCDF9EE18D311260019E1CE /* Meter.cpp */,
+				8FCDF9EF18D311260019E1CE /* Meter.h */,
+				8FCDF9F018D311260019E1CE /* Optim.cpp */,
+				8FCDF9F118D311260019E1CE /* Optim.h */,
+				8FCDF9F218D311260019E1CE /* Planewaves.cpp */,
+				8FCDF9F318D311260019E1CE /* Planewaves.h */,
+				8FCDF9F418D311260019E1CE /* Projector.cpp */,
+				8FCDF9F518D311260019E1CE /* Projector.h */,
+				8FCDF9F618D311260019E1CE /* Recomposer.cpp */,
+				8FCDF9F718D311260019E1CE /* Recomposer.h */,
+				8FCDF9F818D311260019E1CE /* Rotate.cpp */,
+				8FCDF9F918D311260019E1CE /* Rotate.h */,
+				8FCDF9FA18D311260019E1CE /* Scope.cpp */,
+				8FCDF9FB18D311260019E1CE /* Scope.h */,
+				8FCDF9FC18D311260019E1CE /* Source.cpp */,
+				8FCDF9FD18D311260019E1CE /* Source.h */,
+				8FCDF9FE18D311260019E1CE /* SourcesGroup.cpp */,
+				8FCDF9FF18D311260019E1CE /* SourcesGroup.h */,
+				8FCDFA0018D311260019E1CE /* SourcesManager.cpp */,
+				8FCDFA0118D311260019E1CE /* SourcesManager.h */,
+				8FCDFA0218D311260019E1CE /* SourcesPreset.cpp */,
+				8FCDFA0318D311260019E1CE /* SourcesPreset.h */,
+				8FCDFA0418D311260019E1CE /* SourcesTrajectory.cpp */,
+				8FCDFA0518D311260019E1CE /* SourcesTrajectory.h */,
+				8FCDFA0618D311260019E1CE /* Vector.cpp */,
+				8FCDFA0718D311260019E1CE /* Vector.h */,
+				8FCDFA0818D311260019E1CE /* Wider.cpp */,
+				8FCDFA0918D311260019E1CE /* Wider.h */,
+			);
+			name = Hoa2D;
+			path = ../../../Sources/Hoa2D;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -383,48 +389,49 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FCDFA3318D311260019E1CE /* Wider.h in Headers */,
 				8FCDF8C118D2D4B50019E1CE /* eboxflag.h in Headers */,
-				8F213C0818D038FB00A346AB /* Wider.h in Headers */,
-				8F213BE518D038FB00A346AB /* ChannelManager.h in Headers */,
 				8FCDF8B318D2D4B50019E1CE /* ebox.h in Headers */,
-				8F213BFA18D038FB00A346AB /* Scope.h in Headers */,
+				8FCDFA1018D311260019E1CE /* Decoder.h in Headers */,
+				8FCDFA2518D311260019E1CE /* Scope.h in Headers */,
+				8FCDFA0B18D311260019E1CE /* Ambisonic.h in Headers */,
 				8FCDF8D618D2D4B50019E1CE /* epd_max.h in Headers */,
 				8FCDF8C818D2D4B50019E1CE /* efft.h in Headers */,
+				8FCDFA2F18D311260019E1CE /* SourcesTrajectory.h in Headers */,
 				8FCDF8C618D2D4B50019E1CE /* m_pd.h in Headers */,
-				8F213BEC18D038FB00A346AB /* Map.h in Headers */,
-				8F213BE218D038FB00A346AB /* Ambisonic.h in Headers */,
+				8FCDFA1218D311260019E1CE /* Encoder.h in Headers */,
 				8F213C0A18D038FB00A346AB /* HoaMath.h in Headers */,
 				8FCDF8D918D2D4B50019E1CE /* estruct.h in Headers */,
-				8F213BE718D038FB00A346AB /* Decoder.h in Headers */,
+				8FCDFA1B18D311260019E1CE /* Optim.h in Headers */,
+				8FCDFA2D18D311260019E1CE /* SourcesPreset.h in Headers */,
 				8F213C0B18D038FB00A346AB /* HoaUtils.h in Headers */,
 				8FCDF8B218D2D4B50019E1CE /* cicm_wrapper.h in Headers */,
-				8F213BFC18D038FB00A346AB /* Source.h in Headers */,
-				8F213C0418D038FB00A346AB /* SourcesTrajectory.h in Headers */,
+				8FCDFA2718D311260019E1CE /* Source.h in Headers */,
+				8FCDFA2918D311260019E1CE /* SourcesGroup.h in Headers */,
 				8FCDF8C318D2D4B50019E1CE /* ecommon.h in Headers */,
 				8F213C0918D038FB00A346AB /* HoaDefs.h in Headers */,
 				8FCDF8C518D2D4B50019E1CE /* m_imp.h in Headers */,
-				8F213BF618D038FB00A346AB /* Recomposer.h in Headers */,
+				8FCDFA1318D311260019E1CE /* Hoa2D.h in Headers */,
 				8F213BB018D036F600A346AB /* hoa.pd.h in Headers */,
+				8FCDFA1F18D311260019E1CE /* Projector.h in Headers */,
 				8FCDF8BA18D2D4B50019E1CE /* eclass.h in Headers */,
 				8FCDF8D518D2D4B50019E1CE /* epd.h in Headers */,
 				8F213BB218D0379800A346AB /* Hoa2D.pd.h in Headers */,
-				8F213C0018D038FB00A346AB /* SourcesManager.h in Headers */,
-				8F213C0618D038FB00A346AB /* Vector.h in Headers */,
-				8F213BF018D038FB00A346AB /* Optim.h in Headers */,
+				8FCDFA1718D311260019E1CE /* Map.h in Headers */,
 				8FCDF8C418D2D4B50019E1CE /* g_canvas.h in Headers */,
+				8FCDFA0E18D311260019E1CE /* ChannelManager.h in Headers */,
+				8FCDFA2318D311260019E1CE /* Rotate.h in Headers */,
+				8FCDFA3118D311260019E1CE /* Vector.h in Headers */,
+				8FCDFA1D18D311260019E1CE /* Planewaves.h in Headers */,
 				8FCDF8D818D2D4B50019E1CE /* epopup.h in Headers */,
-				8F213C0218D038FB00A346AB /* SourcesPreset.h in Headers */,
-				8F213BF218D038FB00A346AB /* Planewaves.h in Headers */,
+				8FCDFA1918D311260019E1CE /* Meter.h in Headers */,
+				8FCDFA1518D311260019E1CE /* Kits.h in Headers */,
 				8F213BAE18D036F600A346AB /* hoa.pd_commonsyms.h in Headers */,
-				8F213BEA18D038FB00A346AB /* Hoa2D.h in Headers */,
 				8F213BE018D038FB00A346AB /* Hoa.h in Headers */,
-				8F213BF418D038FB00A346AB /* Projector.h in Headers */,
-				8F213BFE18D038FB00A346AB /* SourcesGroup.h in Headers */,
-				8F213BF818D038FB00A346AB /* Rotate.h in Headers */,
 				8FCDF8CF18D2D4B50019E1CE /* eobj.h in Headers */,
 				8FCDF8CA18D2D4B50019E1CE /* egraphics.h in Headers */,
-				8F213BEE18D038FB00A346AB /* Meter.h in Headers */,
-				8F213BE918D038FB00A346AB /* Encoder.h in Headers */,
+				8FCDFA2118D311260019E1CE /* Recomposer.h in Headers */,
+				8FCDFA2B18D311260019E1CE /* SourcesManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,53 +485,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FCDFA1618D311260019E1CE /* Map.cpp in Sources */,
 				8FCDF8D718D2D4B50019E1CE /* epopup.c in Sources */,
+				8FCDFA2A18D311260019E1CE /* SourcesManager.cpp in Sources */,
 				8FCDF8D018D2D4B50019E1CE /* eobj_basic.c in Sources */,
-				8F213BFF18D038FB00A346AB /* SourcesManager.cpp in Sources */,
 				8FCDF8C918D2D4B50019E1CE /* egraphics.c in Sources */,
-				8F213BF518D038FB00A346AB /* Recomposer.cpp in Sources */,
 				8FCDF8D318D2D4B50019E1CE /* eobj_proxy.c in Sources */,
-				8F213BE418D038FB00A346AB /* ChannelManager.cpp in Sources */,
 				8FCDF8C718D2D4B50019E1CE /* efft.c in Sources */,
-				8F213BF918D038FB00A346AB /* Scope.cpp in Sources */,
-				8F213C0718D038FB00A346AB /* Wider.cpp in Sources */,
 				8FCDF8C218D2D4B50019E1CE /* ecommon.c in Sources */,
-				8F213BF318D038FB00A346AB /* Projector.cpp in Sources */,
-				8F213BE618D038FB00A346AB /* Decoder.cpp in Sources */,
 				8F213BAF18D036F600A346AB /* hoa.pd.cpp in Sources */,
-				8F213C0518D038FB00A346AB /* Vector.cpp in Sources */,
-				8F213BE318D038FB00A346AB /* BinauralMatrix2D.cpp in Sources */,
-				8F213BE818D038FB00A346AB /* Encoder.cpp in Sources */,
 				8FCDF8B518D2D4B50019E1CE /* ebox_basic.c in Sources */,
 				8FCDF8D218D2D4B50019E1CE /* eobj_handle.c in Sources */,
-				8F213BEB18D038FB00A346AB /* Map.cpp in Sources */,
-				8F213BED18D038FB00A346AB /* Meter.cpp in Sources */,
+				8FCDFA1E18D311260019E1CE /* Projector.cpp in Sources */,
 				8FCDF8DD18D2F66B0019E1CE /* hoa.2d.optim~.cpp in Sources */,
-				8F213C0118D038FB00A346AB /* SourcesPreset.cpp in Sources */,
 				8FCDF8BE18D2D4B50019E1CE /* eclass_attrsetter.c in Sources */,
+				8FCDFA0D18D311260019E1CE /* ChannelManager.cpp in Sources */,
 				8FCDF8B618D2D4B50019E1CE /* ebox_draw.c in Sources */,
 				8FCDF8CD18D2D4B50019E1CE /* egraphics_matrix.c in Sources */,
-				8F213BF718D038FB00A346AB /* Rotate.cpp in Sources */,
 				8FCDF8BC18D2D4B50019E1CE /* eclass_attrnew.c in Sources */,
 				8FCDF8BB18D2D4B50019E1CE /* eclass_attrgetter.c in Sources */,
-				8F213BFB18D038FB00A346AB /* Source.cpp in Sources */,
+				8FCDFA0A18D311260019E1CE /* Ambisonic.cpp in Sources */,
 				8FCDF8D118D2D4B50019E1CE /* eobj_dsp.c in Sources */,
+				8FCDFA3218D311260019E1CE /* Wider.cpp in Sources */,
 				8FCDF8BF18D2D4B50019E1CE /* eclass_basic.c in Sources */,
-				8F213BF118D038FB00A346AB /* Planewaves.cpp in Sources */,
-				8F213BE118D038FB00A346AB /* Ambisonic.cpp in Sources */,
-				8F213C0318D038FB00A346AB /* SourcesTrajectory.cpp in Sources */,
 				8FCDF8B818D2D4B50019E1CE /* ebox_patcher.c in Sources */,
+				8FCDFA1818D311260019E1CE /* Meter.cpp in Sources */,
 				8FCDF8CB18D2D4B50019E1CE /* egraphics_color.c in Sources */,
+				8FCDFA1A18D311260019E1CE /* Optim.cpp in Sources */,
 				8FCDF8B918D2D4B50019E1CE /* ebox_window.c in Sources */,
 				8FCDF8B418D2D4B50019E1CE /* ebox_attr.c in Sources */,
+				8FCDFA2018D311260019E1CE /* Recomposer.cpp in Sources */,
 				8FCDF8D418D2D4B50019E1CE /* eobj_router.c in Sources */,
+				8FCDFA3018D311260019E1CE /* Vector.cpp in Sources */,
+				8FCDFA2818D311260019E1CE /* SourcesGroup.cpp in Sources */,
+				8FCDFA2E18D311260019E1CE /* SourcesTrajectory.cpp in Sources */,
+				8FCDFA0C18D311260019E1CE /* BinauralMatrix2D.cpp in Sources */,
 				8FCDF8B718D2D4B50019E1CE /* ebox_handle.c in Sources */,
 				8FCDF8C018D2D4B50019E1CE /* eclass_widget.c in Sources */,
-				8F213BFD18D038FB00A346AB /* SourcesGroup.cpp in Sources */,
+				8FCDFA2418D311260019E1CE /* Scope.cpp in Sources */,
+				8FCDFA2C18D311260019E1CE /* SourcesPreset.cpp in Sources */,
+				8FCDFA0F18D311260019E1CE /* Decoder.cpp in Sources */,
+				8FCDFA2618D311260019E1CE /* Source.cpp in Sources */,
+				8FCDFA1118D311260019E1CE /* Encoder.cpp in Sources */,
+				8FCDFA2218D311260019E1CE /* Rotate.cpp in Sources */,
 				8FCDF8CC18D2D4B50019E1CE /* egraphics_forms.c in Sources */,
+				8FCDFA1418D311260019E1CE /* Kits.cpp in Sources */,
 				8FCDF8BD18D2D4B50019E1CE /* eclass_attroptions.c in Sources */,
-				8F213BEF18D038FB00A346AB /* Optim.cpp in Sources */,
 				8FCDF8CE18D2D4B50019E1CE /* egraphics_text.c in Sources */,
+				8FCDFA1C18D311260019E1CE /* Planewaves.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

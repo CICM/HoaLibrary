@@ -22,7 +22,7 @@ namespace Hoa2D
     
     void Rotate::process(const float* inputs, float* outputs)
     {
-		float cos_x = m_cosx;
+        float cos_x = m_cosx;
         float sin_x = m_sinx;
         float tcos_x = cos_x;
         float sig;

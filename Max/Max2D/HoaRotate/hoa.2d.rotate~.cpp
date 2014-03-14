@@ -6,13 +6,6 @@
 
 #include "../Hoa2D.max.h"
 
-extern "C"
-{
-#include <ext.h>
-#include <ext_obex.h>
-#include <z_dsp.h>
-}
-
 typedef struct _hoa_rotate 
 {
 	t_pxobject              f_ob;
@@ -48,9 +41,7 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.2d.rotate~", (method)hoa_rotate_new, (method)hoa_rotate_free, (long)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
 	
 	class_alias(c, gensym("hoa.rotate~"));
-	
-	t_hoa_err hoa_getinfos(t_hoa_rotate* x, t_hoa_boxinfos* boxinfos);
-	
+	hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_rotate_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_rotate_int,			"int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_rotate_dsp64,		"dsp64",	A_CANT, 0);

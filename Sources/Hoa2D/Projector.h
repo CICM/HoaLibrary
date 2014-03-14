@@ -20,11 +20,8 @@ namespace Hoa2D
     {
         
     private:
-        double*         m_projector_matrix;
-        float*          m_projector_matrix_float;
-		double*         m_harmonics_vector;
-        Encoder*        m_encoder;
-        
+        double*         m_projector_matrix_double;
+        float*          m_projector_matrix_float;        
     public:
         
         //! The projector constructor.
