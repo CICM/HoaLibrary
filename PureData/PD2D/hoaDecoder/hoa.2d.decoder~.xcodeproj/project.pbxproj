@@ -96,7 +96,7 @@
 		8FCDF8D718D2D4B50019E1CE /* epopup.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF8AF18D2D4B50019E1CE /* epopup.c */; };
 		8FCDF8D818D2D4B50019E1CE /* epopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF8B018D2D4B50019E1CE /* epopup.h */; };
 		8FCDF8D918D2D4B50019E1CE /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF8B118D2D4B50019E1CE /* estruct.h */; };
-		8FCDF8DB18D2E8090019E1CE /* hoa.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF8DA18D2E8090019E1CE /* hoa.decoder~.cpp */; };
+		8FCDF8DB18D2E8090019E1CE /* hoa.2d.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF8DA18D2E8090019E1CE /* hoa.2d.decoder~.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,7 +190,7 @@
 		8FCDF8AF18D2D4B50019E1CE /* epopup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = epopup.c; sourceTree = "<group>"; };
 		8FCDF8B018D2D4B50019E1CE /* epopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
 		8FCDF8B118D2D4B50019E1CE /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
-		8FCDF8DA18D2E8090019E1CE /* hoa.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder~.cpp"; sourceTree = "<group>"; };
+		8FCDF8DA18D2E8090019E1CE /* hoa.2d.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.2d.decoder~.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +208,7 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
-				8FCDF8DA18D2E8090019E1CE /* hoa.decoder~.cpp */,
+				8FCDF8DA18D2E8090019E1CE /* hoa.2d.decoder~.cpp */,
 				8F213BAB18D036F600A346AB /* hoa.pd_commonsyms.h */,
 				8F213BAC18D036F600A346AB /* hoa.pd.cpp */,
 				8F213BAD18D036F600A346AB /* hoa.pd.h */,
@@ -497,7 +497,7 @@
 				8F213BE818D038FB00A346AB /* Encoder.cpp in Sources */,
 				8FCDF8B518D2D4B50019E1CE /* ebox_basic.c in Sources */,
 				8FCDF8D218D2D4B50019E1CE /* eobj_handle.c in Sources */,
-				8FCDF8DB18D2E8090019E1CE /* hoa.decoder~.cpp in Sources */,
+				8FCDF8DB18D2E8090019E1CE /* hoa.2d.decoder~.cpp in Sources */,
 				8F213BEB18D038FB00A346AB /* Map.cpp in Sources */,
 				8F213BED18D038FB00A346AB /* Meter.cpp in Sources */,
 				8F213C0118D038FB00A346AB /* SourcesPreset.cpp in Sources */,
