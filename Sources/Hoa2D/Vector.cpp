@@ -55,7 +55,9 @@ namespace Hoa2D
     {
         float veclocitySum = 0.f, velocityAbscissa = 0.f, velocityOrdinate = 0.f;
         
-        veclocitySum = cblas_sasum(m_number_of_channels, inputs, 1);
+        veclocitySum = 0.;
+        for(int i = 0; i < m_number_of_channels; i++)
+            veclocitySum += inputs[i];
         velocityAbscissa = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_abscissa_float, 1);
         velocityOrdinate = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_ordinate_float, 1);
         if(veclocitySum)
@@ -73,9 +75,11 @@ namespace Hoa2D
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
-        veclocitySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
-        velocityAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
-        velocityOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
+        veclocitySum = 0.;
+        for(int i = 0; i < m_number_of_channels; i++)
+            veclocitySum += inputs[i];
+        velocityAbscissa = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_abscissa_double, 1);
+        velocityOrdinate = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_ordinate_double, 1);
         
         if(veclocitySum)
         {
