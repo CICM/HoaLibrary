@@ -1864,7 +1864,7 @@
 					"JUCE_APP_VERSION_HEX=0x10000", );
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = ("../../../../../../SDKs/Vst3SDK", "../../JuceLibraryCode", "../../../../ThirdParty/JuceModulesPlug", "$(inherited)");
+				HEADER_SEARCH_PATHS = ("../../../../ThirdParty/Vst3SDK", "../../JuceLibraryCode", "../../../../ThirdParty/JuceModulesPlug", "$(inherited)");
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
 				LIBRARY_STYLE = Bundle;
@@ -1891,7 +1891,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = ("../../../../../../SDKs/Vst3SDK", "../../JuceLibraryCode", "../../../../ThirdParty/JuceModulesPlug", "$(inherited)");
+				HEADER_SEARCH_PATHS = ("../../../../ThirdParty/Vst3SDK", "../../JuceLibraryCode", "../../../../ThirdParty/JuceModulesPlug", "$(inherited)");
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
 				LIBRARY_STYLE = Bundle;

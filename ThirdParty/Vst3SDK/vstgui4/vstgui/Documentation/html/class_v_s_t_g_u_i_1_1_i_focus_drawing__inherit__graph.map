@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_control.html" title="base class of all VSTGUI controls" alt="" coords="155,390,224,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_auto_animation.html" title="CAutoAnimation" alt="" coords="279,6,385,30" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_check_box.html" title="a check box control with a title and 3 states" alt="" coords="291,54,373,78" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_horizontal_switch.html" title="a horizontal switch control" alt="" coords="273,102,391,126" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_kick_button.html" title="CKickButton" alt="" coords="288,150,376,174" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_knob.html" title="a knob control" alt="" coords="303,198,361,222" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_bitmap.html" title="a bitmap view that displays different bitmaps according to its current value" alt="" coords="283,246,381,270" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_button.html" title="a bi&#45;states button with 2 subbitmaps" alt="" coords="284,294,380,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_on_off_button.html" title="a button control with 2 states" alt="" coords="284,342,380,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_param_display.html" title="a parameter display" alt="" coords="280,390,384,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_rocker_switch.html" title="a switch control with 3 sub bitmaps" alt="" coords="281,438,383,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_scrollbar.html" title="a scrollbar control" alt="" coords="293,486,371,510" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_slider.html" title="a slider control" alt="" coords="303,534,361,558" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_special_digit.html" title="special display with custom numbers (0...9)" alt="" coords="285,582,379,606" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_splash_screen.html" title="CSplashScreen" alt="" coords="280,630,384,654" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_button.html" title="a button which renders without bitmaps" alt="" coords="288,678,376,702" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vertical_switch.html" title="a vertical switch control" alt="" coords="280,726,384,750" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vu_meter.html" title="CVuMeter" alt="" coords="295,774,369,798" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_anim_knob.html" title="a bitmap knob control" alt="" coords="476,198,561,222" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_option_menu.html" title="a popup menu control" alt="" coords="471,342,567,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_label.html" title="a text label" alt="" coords="477,390,560,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_x_y_pad.html" title="CXYPad" alt="" coords="485,438,552,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_edit.html" title="a text edit control" alt="" coords="647,390,719,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_horizontal_slider.html" title="a horizontal slider control" alt="" coords="461,510,576,534" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vertical_slider.html" title="a vertical slider control" alt="" coords="469,558,568,582" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_animation_splash_screen.html" title="a splash screen which animates the opening and closing of the splash bitmap" alt="" coords="440,630,597,654" />
+</map>

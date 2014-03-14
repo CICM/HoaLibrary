@@ -1,0 +1,50 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_alpha_value_animation.html" title="animates the alpha value of the view" alt="" coords="188,6,324,30" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_animator.html" title="Animation runner." alt="" coords="222,54,291,78" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_control_value_animation.html" title="animates the value of a CControl" alt="" coords="186,102,327,126" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_exchange_view_animation.html" title="exchange a view by another view with an animation" alt="" coords="180,150,332,174" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_finished_message.html" title="Animation Finished Message Object." alt="" coords="199,198,314,222" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_view_size_animation.html" title="animates the view size of the view" alt="" coords="195,246,318,270" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_bitmap_filter_1_1_i_filter.html" title="Filter Interface." alt="" coords="231,294,282,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_bitmap_filter_1_1_property.html" title="Filter Property." alt="" coords="223,342,290,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_bitmap.html" title="Encapsulates various platform depended kinds of bitmaps." alt="" coords="223,390,290,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_bitmap_pixel_access.html" title="direct pixel access to a CBitmap" alt="" coords="191,438,322,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_draw_context.html" title="A drawing context encapsulates the drawing context of the underlying OS." alt="" coords="207,486,306,510" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_file_extension.html" title="file extension description" alt="" coords="206,534,307,558" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_file_stream.html" title="CFileStream" alt="" coords="212,582,300,606" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_font_desc.html" title="font class" alt="" coords="216,630,296,654" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_gradient.html" title="Gradient Object [new in 4.0]." alt="" coords="219,678,294,702" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_graphics_path.html" title="Graphics Path Object." alt="" coords="204,726,308,750" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_memory_stream.html" title="CMemoryStream" alt="" coords="200,774,312,798" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_menu_item.html" title="a menu item" alt="" coords="215,822,298,846" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_new_file_selector.html" title="New file selector class." alt="" coords="199,870,314,894" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_string.html" title="a string holder class" alt="" coords="226,918,287,942" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_tooltip_support.html" title="Generic Tooltip Support class." alt="" coords="203,966,310,990" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view.html" title="Base Class of all view objects." alt="" coords="228,1014,284,1038" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_v_s_t_g_u_i_timer.html" title="A timer class, which posts timer messages to CBaseObjects." alt="" coords="204,1062,308,1086" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_generic_string_list_data_browser_source.html" title="Generic string list data browser source." alt="" coords="147,1110,366,1134" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_data_package.html" title="interface for drag&amp;drop and clipboard data" alt="" coords="208,1158,304,1182" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_platform_font.html" title="platform font class" alt="" coords="210,1206,303,1230" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_u_i_attributes.html" title="UIAttributes" alt="" coords="214,1254,299,1278" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_u_i_description.html" title="XML description parser and view creator." alt="" coords="210,1302,303,1326" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_u_i_description_view_switch_controller.html" title="UIDescriptionViewSwitchController" alt="" coords="155,1350,358,1374" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_u_i_view_factory.html" title="Default view factory." alt="" coords="207,1398,306,1422" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_bitmap_filter_1_1_filter_base.html" title="A Base Class for Implementing Bitmap Filters." alt="" coords="452,294,527,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_nine_part_tiled_bitmap.html" title="a nine&#45;part tiled bitmap" alt="" coords="420,390,559,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_offscreen_context.html" title="A draw context using a bitmap as it&#39;s back buffer." alt="" coords="428,486,551,510" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_xml_1_1_memory_content_provider.html" title="MemoryContentProvider" alt="" coords="415,774,564,798" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_command_menu_item.html" title="a command menu item" alt="" coords="420,822,559,846" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_control.html" title="base class of all VSTGUI controls" alt="" coords="455,942,524,966" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_gradient_view.html" title="View which draws a gradient." alt="" coords="439,990,540,1014" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_open_g_l_view.html" title="a subview which uses OpenGL for drawing" alt="" coords="440,1038,539,1062" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view_container.html" title="Container Class of CView objects." alt="" coords="436,1086,543,1110" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_auto_animation.html" title="CAutoAnimation" alt="" coords="620,774,727,798" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_check_box.html" title="a check box control with a title and 3 states" alt="" coords="632,822,715,846" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_horizontal_switch.html" title="a horizontal switch control" alt="" coords="615,870,732,894" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_kick_button.html" title="CKickButton" alt="" coords="630,918,718,942" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_knob.html" title="a knob control" alt="" coords="644,966,703,990" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_bitmap.html" title="a bitmap view that displays different bitmaps according to its current value" alt="" coords="624,1014,723,1038" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_button.html" title="a bi&#45;states button with 2 subbitmaps" alt="" coords="626,1062,722,1086" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_on_off_button.html" title="a button control with 2 states" alt="" coords="626,1110,722,1134" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_drop_source.html" title="drop source" alt="" coords="443,1158,536,1182" />
+</map>

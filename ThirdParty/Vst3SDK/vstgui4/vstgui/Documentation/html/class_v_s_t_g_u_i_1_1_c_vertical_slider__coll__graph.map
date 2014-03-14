@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_slider.html" title="a slider control" alt="" coords="1521,162,1580,186" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_control.html" title="base class of all VSTGUI controls" alt="" coords="1175,114,1244,138" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view.html" title="Base Class of all view objects." alt="" coords="889,583,945,607" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_frame.html" title="The CFrame is the parent container of all views." alt="" coords="1519,574,1583,598" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view_container.html" title="Container Class of CView objects." alt="" coords="1156,634,1263,658" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CView \&gt;" alt="" coords="1333,730,1485,754" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_base_object.html" title="Base Object with reference counter." alt="" coords="31,750,121,774" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_bitmap.html" title="Encapsulates various platform depended kinds of bitmaps." alt="" coords="289,506,356,530" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_animator.html" title="Animation runner." alt="" coords="401,758,471,782" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_tooltip_support.html" title="Generic Tooltip Support class." alt="" coords="1699,694,1805,718" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_v_s_t_g_u_i_timer.html" title="A timer class, which posts timer messages to CBaseObjects." alt="" coords="271,816,375,840" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_graphics_path.html" title="Graphics Path Object." alt="" coords="271,655,375,679" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CBitmap \&gt;" alt="" coords="515,506,677,530" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_resource_description.html" title="Describes a resource by name or by ID." alt="" coords="7,491,145,515" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_v_s_t_g_u_i_editor_interface.html" title="VSTGUIEditorInterface" alt="" coords="1680,322,1824,346" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_point.html" title="Point structure." alt="" coords="888,268,947,292" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_color.html" title="RGBA Color structure." alt="" coords="888,416,947,440" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_rect.html" title="Rect structure." alt="" coords="569,694,623,718" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_view_added_removed_observer.html" title="view added removed observer interface for CFrame" alt="" coords="1117,436,1301,460" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CGraphicsPath \&gt;" alt="" coords="496,627,696,651" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_focus_drawing.html" title="Custom focus drawing interface." alt="" coords="867,67,968,91" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_dependency.html" title="simple dependency between objects." alt="" coords="872,115,963,139" />
+<area shape="rect" href="$class_c_control_listener.html" title="CControlListener" alt="" coords="863,163,972,187" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_button_state.html" title="Button and Modifier state." alt="" coords="1163,162,1256,186" />
+</map>

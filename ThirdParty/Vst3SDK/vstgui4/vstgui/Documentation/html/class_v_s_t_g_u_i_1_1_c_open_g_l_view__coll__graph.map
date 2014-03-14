@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view.html" title="Base Class of all view objects." alt="" coords="877,294,933,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_frame.html" title="The CFrame is the parent container of all views." alt="" coords="1495,330,1559,354" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view_container.html" title="Container Class of CView objects." alt="" coords="1132,440,1239,464" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CView \&gt;" alt="" coords="1309,582,1461,606" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_base_object.html" title="Base Object with reference counter." alt="" coords="31,286,121,310" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_bitmap.html" title="Encapsulates various platform depended kinds of bitmaps." alt="" coords="289,342,356,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_animator.html" title="Animation runner." alt="" coords="401,480,471,504" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_tooltip_support.html" title="Generic Tooltip Support class." alt="" coords="1675,492,1781,516" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_v_s_t_g_u_i_timer.html" title="A timer class, which posts timer messages to CBaseObjects." alt="" coords="271,167,375,191" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_graphics_path.html" title="Graphics Path Object." alt="" coords="271,294,375,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CBitmap \&gt;" alt="" coords="515,342,677,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_resource_description.html" title="Describes a resource by name or by ID." alt="" coords="7,352,145,376" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_v_s_t_g_u_i_editor_interface.html" title="VSTGUIEditorInterface" alt="" coords="1656,30,1800,54" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_point.html" title="Point structure." alt="" coords="876,615,935,639" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_color.html" title="RGBA Color structure." alt="" coords="876,500,935,524" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_rect.html" title="Rect structure." alt="" coords="569,418,623,442" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_view_added_removed_observer.html" title="view added removed observer interface for CFrame" alt="" coords="1093,254,1277,278" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CGraphicsPath \&gt;" alt="" coords="496,294,696,318" />
+</map>

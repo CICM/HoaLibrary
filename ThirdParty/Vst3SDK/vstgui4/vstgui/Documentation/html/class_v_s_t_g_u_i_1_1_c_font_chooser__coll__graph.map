@@ -1,0 +1,37 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view_container.html" title="Container Class of CView objects." alt="" coords="330,779,436,803" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_frame.html" title="The CFrame is the parent container of all views." alt="" coords="759,171,823,195" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_data_browser.html" title="DataBrowser view." alt="" coords="2175,1011,2274,1035" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_scroll_view.html" title="a scrollable container view with scrollbars" alt="" coords="1834,1036,1919,1060" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view.html" title="Base Class of all view objects." alt="" coords="1100,514,1156,538" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CView \&gt;" alt="" coords="1296,490,1448,514" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_control.html" title="base class of all VSTGUI controls" alt="" coords="1338,1358,1407,1382" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_base_object.html" title="Base Object with reference counter." alt="" coords="31,380,122,404" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_bitmap.html" title="Encapsulates various platform depended kinds of bitmaps." alt="" coords="350,435,416,459" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_animation_1_1_animator.html" title="Animation runner." alt="" coords="348,171,418,195" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_tooltip_support.html" title="Generic Tooltip Support class." alt="" coords="1560,184,1667,208" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_v_s_t_g_u_i_timer.html" title="A timer class, which posts timer messages to CBaseObjects." alt="" coords="531,484,635,508" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_graphics_path.html" title="Graphics Path Object." alt="" coords="331,286,435,310" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_font_desc.html" title="font class" alt="" coords="1332,1250,1412,1274" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_platform_font.html" title="platform font class" alt="" coords="927,1150,1020,1174" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CBitmap \&gt;" alt="" coords="710,406,872,430" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_resource_description.html" title="Describes a resource by name or by ID." alt="" coords="7,480,146,504" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_v_s_t_g_u_i_editor_interface.html" title="VSTGUIEditorInterface" alt="" coords="1056,164,1200,188" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_view_added_removed_observer.html" title="view added removed observer interface for CFrame" alt="" coords="291,219,475,243" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_point.html" title="Point structure." alt="" coords="47,1102,106,1126" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_scrollbar.html" title="a scrollbar control" alt="" coords="1575,1036,1652,1060" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_param_display.html" title="a parameter display" alt="" coords="1562,1474,1666,1498" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_shared_pointer.html" title="SharedPointer\&lt; CGraphicsPath \&gt;" alt="" coords="691,307,891,331" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_rect.html" title="Rect structure." alt="" coords="50,806,103,830" />
+<area shape="rect" href="$struct_v_s_t_g_u_i_1_1_c_color.html" title="RGBA Color structure." alt="" coords="47,1415,106,1439" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_check_box.html" title="a check box control with a title and 3 states" alt="" coords="1572,1322,1655,1346" />
+<area shape="rect" href="$class_c_control_listener.html" title="CControlListener" alt="" coords="1074,1148,1183,1172" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_generic_string_list_data_browser_source_selection_changed.html" title="IGenericStringListDataBrowserSourceSelectionChanged" alt="" coords="2066,963,2383,987" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_focus_drawing.html" title="Custom focus drawing interface." alt="" coords="1078,1407,1179,1431" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_dependency.html" title="simple dependency between objects." alt="" coords="1083,1359,1174,1383" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_scrollbar_drawer.html" title="IScrollbarDrawer" alt="" coords="1318,999,1427,1023" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_data_browser_delegate.html" title="DataBrowser Interface." alt="" coords="1806,938,1947,962" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_edit.html" title="a text edit control" alt="" coords="2188,1323,2260,1347" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_label.html" title="a text label" alt="" coords="1835,1398,1918,1422" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_font_chooser_delegate.html" title="IFontChooserDelegate" alt="" coords="2154,1371,2295,1395" />
+</map>

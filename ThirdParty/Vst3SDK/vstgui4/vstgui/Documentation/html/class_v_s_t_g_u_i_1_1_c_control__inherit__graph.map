@@ -1,0 +1,31 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_auto_animation.html" title="CAutoAnimation" alt="" coords="420,6,527,30" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_check_box.html" title="a check box control with a title and 3 states" alt="" coords="432,54,515,78" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_horizontal_switch.html" title="a horizontal switch control" alt="" coords="415,102,532,126" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_kick_button.html" title="CKickButton" alt="" coords="430,150,518,174" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_knob.html" title="a knob control" alt="" coords="444,198,503,222" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_bitmap.html" title="a bitmap view that displays different bitmaps according to its current value" alt="" coords="424,246,523,270" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_movie_button.html" title="a bi&#45;states button with 2 subbitmaps" alt="" coords="426,294,522,318" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_on_off_button.html" title="a button control with 2 states" alt="" coords="426,342,522,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_param_display.html" title="a parameter display" alt="" coords="422,390,526,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_rocker_switch.html" title="a switch control with 3 sub bitmaps" alt="" coords="423,438,524,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_scrollbar.html" title="a scrollbar control" alt="" coords="435,486,512,510" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_slider.html" title="a slider control" alt="" coords="444,534,503,558" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_special_digit.html" title="special display with custom numbers (0...9)" alt="" coords="427,582,520,606" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_splash_screen.html" title="CSplashScreen" alt="" coords="422,630,526,654" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_button.html" title="a button which renders without bitmaps" alt="" coords="430,678,518,702" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vertical_switch.html" title="a vertical switch control" alt="" coords="422,726,526,750" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vu_meter.html" title="CVuMeter" alt="" coords="436,774,511,798" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_view.html" title="Base Class of all view objects." alt="" coords="170,342,226,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_base_object.html" title="Base Object with reference counter." alt="" coords="7,342,98,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_focus_drawing.html" title="Custom focus drawing interface." alt="" coords="147,390,248,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_i_dependency.html" title="simple dependency between objects." alt="" coords="152,438,243,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_anim_knob.html" title="a bitmap knob control" alt="" coords="618,198,703,222" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_option_menu.html" title="a popup menu control" alt="" coords="612,342,708,366" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_label.html" title="a text label" alt="" coords="619,390,702,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_x_y_pad.html" title="CXYPad" alt="" coords="627,438,694,462" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_text_edit.html" title="a text edit control" alt="" coords="788,390,860,414" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_horizontal_slider.html" title="a horizontal slider control" alt="" coords="603,510,718,534" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_vertical_slider.html" title="a vertical slider control" alt="" coords="611,558,710,582" />
+<area shape="rect" href="$class_v_s_t_g_u_i_1_1_c_animation_splash_screen.html" title="a splash screen which animates the opening and closing of the splash bitmap" alt="" coords="582,630,739,654" />
+</map>
