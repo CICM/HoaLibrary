@@ -124,6 +124,15 @@ namespace Hoa2D
         {
             return m_order;
         }
+		
+		//! Get the SourcesManager object.
+        /**
+		 * @return The SourcesManager object.
+         */
+		SourcesManager* getSourcesManager() const
+		{
+			return m_sources;
+		}
         
         //! Set the number of sources.
 		/**	Set the number of sources. The change will operate during the post process call to avoid conflicts during the process.

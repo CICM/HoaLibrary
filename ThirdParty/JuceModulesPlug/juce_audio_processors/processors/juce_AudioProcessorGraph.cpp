@@ -690,13 +690,13 @@ private:
     bool isBufferNeededLater (int stepIndexToSearchFrom,
                               int inputChannelOfIndexToIgnore,
                               const uint32 nodeId,
-                              const int outputChanIndex) const
+                              const int outputChindex) const
     {
         while (stepIndexToSearchFrom < orderedNodes.size())
         {
             const AudioProcessorGraph::Node* const node = (const AudioProcessorGraph::Node*) orderedNodes.getUnchecked (stepIndexToSearchFrom);
 
-            if (outputChanIndex == AudioProcessorGraph::midiChannelIndex)
+            if (outputChindex == AudioProcessorGraph::midiChannelIndex)
             {
                 if (inputChannelOfIndexToIgnore != AudioProcessorGraph::midiChannelIndex
                      && graph.getConnectionBetween (nodeId, AudioProcessorGraph::midiChannelIndex,
@@ -707,7 +707,7 @@ private:
             {
                 for (int i = 0; i < node->getProcessor()->getNumInputChannels(); ++i)
                     if (i != inputChannelOfIndexToIgnore
-                         && graph.getConnectionBetween (nodeId, outputChanIndex,
+                         && graph.getConnectionBetween (nodeId, outputChindex,
                                                         node->nodeId, i) != nullptr)
                         return true;
             }

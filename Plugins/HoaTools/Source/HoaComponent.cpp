@@ -23,62 +23,43 @@ HoaProcessor::HoaProcessor()
     
     for(int i = 0; i < 256; i++)
     {
-        m_angles_of_channels[i] = 0;
+        m_azimuth_of_channels[i] = 0;
     }
     for(int i = 0; i < m_number_of_channels; i++)
     {
-        m_angles_of_channels[i] = i * 360. / m_number_of_channels;
+        m_azimuth_of_channels[i] = i * 360. / m_number_of_channels;
     }
-    
-    m_sources_manager       = new SourcesManager(1. / (double)MIN_ZOOM - 5., 1);
-    m_map                   = new Map(m_order, 2);
-    m_rotate                = new Rotate(m_order);
-    m_optim                 = new Optim(m_order);
-    m_decoder               = new DecoderMulti(m_order);
+	
+	m_hoa_manager			= new KitSources(m_order);
     m_meter                 = new Meter(m_number_of_channels);
 }
 
 HoaProcessor::~HoaProcessor()
 {
-    delete m_sources_manager;
-    delete m_map;
-    delete m_rotate;
-    delete m_decoder;
+	delete m_hoa_manager;
     delete m_meter;
-    delete m_optim;
 }
 
 void HoaProcessor::setOrder(long anOrder)
 {
     m_order = clip_minmax(anOrder, 1, m_maximum_order);
+	m_hoa_manager->setOrder(m_order);
+	m_order = m_hoa_manager->getOrder();
 }
 
 void HoaProcessor::setNumberOfSources(long aNumberOfSources)
 {
     m_number_of_sources = clip_minmax(aNumberOfSources, 1, 64);
-    if(m_number_of_sources != m_sources_manager->getNumberOfSources())
-    {
-        if(m_number_of_sources > m_sources_manager->getNumberOfSources())
-        {
-            while(m_sources_manager->getNumberOfSources() != m_number_of_sources)
-            {
-                m_sources_manager->sourceNewPolar(1., Random().nextDouble() * HOA_2PI);
-            }
-
-        }
-        else
-        {
-            while(m_sources_manager->getNumberOfSources() != m_number_of_sources+1)
-            {
-                m_sources_manager->sourceRemove(m_sources_manager->getMaximumIndexOfSource());
-            }
-        }
-    }
+	m_hoa_manager->setNumberOfSources(m_number_of_sources);
+	m_number_of_sources = m_hoa_manager->getNumberOfSources();
 }
 
 void HoaProcessor::setNumberOfChannels(long aNumberOfChannels)
 {
     m_number_of_channels = clip_minmax(aNumberOfChannels, m_minimum_number_of_channels, m_maximum_number_of_channels);
+	m_hoa_manager->setNumberOfChannels(m_number_of_channels);
+	m_number_of_channels = m_hoa_manager->getNumberOfChannels();
+	
     if(m_decoding_mode == DecoderMulti::Mode::Regular)
     {
         if(m_number_of_channels % 2)
@@ -90,21 +71,24 @@ void HoaProcessor::setNumberOfChannels(long aNumberOfChannels)
 
 void HoaProcessor::setDecodingMode(long aDecodingMode)
 {
-    m_decoding_mode = clip_minmax(aDecodingMode, DecoderMulti::Mode::Regular, DecoderMulti::Mode::Irregular);
+	m_hoa_manager->setDecodingMode(m_decoding_mode);
+	m_decoding_mode = m_hoa_manager->getDecodingMode();
 }
 
 void HoaProcessor::setOptimization(long optimization)
 {
-    m_optimization = clip_minmax(optimization, Optim::Mode::Basic, Optim::Mode::InPhase);
+	m_hoa_manager->setDecodingMode(m_decoding_mode);
+    m_optimization = m_hoa_manager->getOptimMode();
 }
 
 void HoaProcessor::setOffsetOfChannels(double anOffset)
 {
     m_offset_of_channels = wrap_360(anOffset);
-    m_rotate->setYaw(m_offset_of_channels / 360. * HOA_2PI + HOA_PI2);
+	m_hoa_manager->setChannelsOffset(m_offset_of_channels / 360. * HOA_2PI + HOA_PI2);
+	m_offset_of_channels = radToDeg(m_hoa_manager->getChannelsOffset());
 }
 
-void HoaProcessor::setAngleOfChannel(long anIndex, double anAngle)
+void HoaProcessor::setAzimuthOfChannel(long index, double anAngle)
 {
     
 }
@@ -151,31 +135,19 @@ void HoaProcessor::process(float** iovector)
 
 void HoaProcessor::postProcess()
 {
-    if(m_sources_manager->getNumberOfSources() != m_number_of_sources)
-    {
-        m_number_of_sources = m_sources_manager->getNumberOfSources();
-    }
-    if(m_order != m_decoder->getOrder())
-    {
-        delete m_map;
-        delete m_rotate;
-        delete m_optim;
-        delete m_decoder;
-        
-        m_map       = new Map(m_order, m_number_of_sources);
-        m_rotate    = new Rotate(m_order);
-        m_optim     = new Optim(m_order, Optim::Mode::InPhase);
-        m_decoder   = new DecoderMulti(m_order);
-    }
-    if(m_number_of_sources != m_map->getNumberOfSources())
-    {
-        //m_map->setNumberOfSources(m_number_of_sources);
-    }
+	m_hoa_manager->applyChanges();
+	
+	m_order = m_hoa_manager->getOrder();
+	m_number_of_sources = m_hoa_manager->getNumberOfSources();
+	m_number_of_channels = m_hoa_manager->getNumberOfChannels();
+	m_decoding_mode = m_hoa_manager->getDecodingMode();
+	m_optimization = m_hoa_manager->getOptimMode();
+	m_offset_of_channels = radToDeg(m_hoa_manager->getChannelsOffset());
+	
+	/*
     if(m_number_of_channels != m_meter->getNumberOfChannels())
-    {
-        m_decoder->setNumberOfChannels(m_number_of_channels);
-        //m_meter->setNumberOfChannels(m_number_of_channels);
-    }    
+        m_meter->setNumberOfChannels(m_number_of_channels);
+	*/
 }
 
 void HoaProcessor::releaseResources()

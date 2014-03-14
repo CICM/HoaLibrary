@@ -17,19 +17,15 @@ private:
     long                    m_number_of_sources;
     long                    m_number_of_harmonics;
     long                    m_number_of_channels;
-    long                    m_optimization;
-    long                    m_decoding_mode;
+    Optim::Mode             m_optimization;
+	DecoderMulti::Mode      m_decoding_mode;
     double                  m_offset_of_channels;
-    double                  m_angles_of_channels[256];
+    double                  m_azimuth_of_channels[256];
     long                    m_maximum_order;
     long                    m_maximum_number_of_channels;
     long                    m_minimum_number_of_channels;
 
-    SourcesManager*         m_sources_manager;
-    Map*					m_map;
-    Optim*					m_optim;
-    Rotate*					m_rotate;
-    DecoderMulti*			m_decoder;
+	KitSources*				m_hoa_manager;
     Meter*					m_meter;
     float*                  m_harmonics_matrix[64];
     
@@ -43,7 +39,7 @@ public:
     void setDecodingMode(long aDecodingMode);
     void setOptimization(long anOptimization);
     void setOffsetOfChannels(double anOffset);
-    void setAngleOfChannel(long anIndex, double anAngle);
+    void setAzimuthOfChannel(long index, double anAngle);
     void setZoom(double aZoom);
     
     void prepareToPlay(long aSampleRate, long aVectorSize);
@@ -61,10 +57,10 @@ public:
     long getDecodingMode(){return m_decoding_mode;};
     long getOptimization(){return m_optimization;};
     double getOffsetOfChannels(){return m_offset_of_channels;};
-    double getAngleOfChannel(long anIndex){return m_angles_of_channels[(int)clip_minmax(anIndex, 0, 255)];};
+    double getAzimuthOfChannel(long index){return m_azimuth_of_channels[(int)clip_minmax(index, 0, 255)];};
     
     Meter*				getMeter(){return m_meter;};
-    SourcesManager*     getSourceManager(){return m_sources_manager;};
+	SourcesManager*     getSourcesManager() const {return m_hoa_manager->getSourcesManager();}
 };
 
 #endif

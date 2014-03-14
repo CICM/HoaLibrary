@@ -25,7 +25,6 @@ private:
     
     long                        m_gui;
     HoaProcessor*               m_processor;
-    SourcesManager*             m_source_manager;
     
 public:
     HoaToolsAudioProcessor();
@@ -75,6 +74,8 @@ public:
 
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
+	
+	SourcesManager*     getSourcesManager() const {return m_processor->getSourcesManager();}
 };
 
 #endif  // PLUGINPROCESSOR_H_INCLUDED
