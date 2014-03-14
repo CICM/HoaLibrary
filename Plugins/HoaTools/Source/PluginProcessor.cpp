@@ -1,64 +1,290 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic startup code for a Juce application.
-
-  ==============================================================================
-*/
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-
-//==============================================================================
 HoaToolsAudioProcessor::HoaToolsAudioProcessor()
 {
+    m_processor         = new HoaProcessor();
+    m_source_manager    = m_processor->getSourceManager();
+    m_gui               = gui_mode_map;
 }
 
 HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
 {
+    delete m_processor;
 }
 
-//==============================================================================
+AudioProcessor* JUCE_CALLTYPE createPluginFilter()
+{
+    return new HoaToolsAudioProcessor();
+}
+
 const String HoaToolsAudioProcessor::getName() const
 {
-    return JucePlugin_Name;
+    return String("HoaTools");
 }
+
+AudioProcessorEditor* HoaToolsAudioProcessor::createEditor()
+{
+    return new HoaToolsAudioProcessorEditor(this, m_processor);
+}
+
+bool HoaToolsAudioProcessor::hasEditor() const
+{
+    return true;
+}
+
+/************************************************************************************/
+/***************************** PARAMETERS *******************************************/
+/************************************************************************************/
 
 int HoaToolsAudioProcessor::getNumParameters()
 {
-    return 0;
+    return m_processor->getNumberOfSources() * 3;
 }
 
-float HoaToolsAudioProcessor::getParameter (int index)
+float HoaToolsAudioProcessor::getParameter(int index)
 {
-    return 0.0f;
+    if((index + 1) % 3 == 0)
+        return m_source_manager->sourceGetMute(index / 3);
+    else if((index + 2) % 3 == 0)
+        return m_source_manager->sourceGetOrdinate(index / 3) / 10. - 0.5;
+    else
+        return m_source_manager->sourceGetAbscissa(index / 3) / 10. - 0.5;
 }
 
-void HoaToolsAudioProcessor::setParameter (int index, float newValue)
+void HoaToolsAudioProcessor::setParameter(int index, float newValue)
 {
+    if((index + 1) % 3 == 0)
+    {
+        newValue += 0.5;
+        m_source_manager->sourceSetMute(index / 3, newValue);
+    }
+    else if((index + 2) % 3 == 0)
+        m_source_manager->sourceSetOrdinate(index / 3, (newValue - 0.5) * 20.);
+    else
+        m_source_manager->sourceSetAbscissa(index / 3, (newValue - 0.5) * 20.);
+    
+    AudioProcessorEditor* Editor = NULL;
+    Editor = getActiveEditor();
+    if(Editor)
+        Editor->repaint();
+}
+
+float HoaToolsAudioProcessor::getParameterMin(int index)
+{
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return -10.;
+    else
+        return -10.;
+}
+
+float HoaToolsAudioProcessor::getParameterMax(int index)
+{
+    if((index + 1) % 3 == 0)
+        return 1;
+    else if((index + 2) % 3 == 0)
+        return 10.;
+    else
+        return 10.;
+}
+
+float HoaToolsAudioProcessor::getParameterDefault(int index)
+{
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return 0.;
+    else
+        return 0.;
+}
+
+int HoaToolsAudioProcessor::getParameterNumSteps(int index)
+{
+    if((index + 1) % 3 == 0)
+        return 1;
+    else if((index + 2) % 3 == 0)
+        return 0.001;
+    else
+        return 0.001;
+}
+
+float HoaToolsAudioProcessor::getParameterDefaultValue (int index)
+{
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return 0.;
+    else
+        return 0.;
 }
 
 const String HoaToolsAudioProcessor::getParameterName (int index)
 {
-    return String::empty;
+    char text[256];
+    if((index + 1) % 3 == 0)
+        sprintf(text, "Mute     %i : ", index / 3 + 1);
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "Ordinate %i : ", index / 3 + 1);
+    else
+        sprintf(text, "Abscissa %i : ", index / 3 + 1);
+       
+    return String(text);
+}
+
+String HoaToolsAudioProcessor::getParameterLabel(int index) const
+{
+    char text[256];
+    if((index + 1) % 3 == 0)
+    {
+        if (m_source_manager->sourceGetMute(index / 3))
+            sprintf(text, "Muted");
+        else
+           sprintf(text, "Unmuted"); 
+        
+    }
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
+    else
+        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+    
+    return String(text);
+}
+
+bool HoaToolsAudioProcessor::isParameterAutomatable (int index) const
+{
+    return true;
+}
+
+bool HoaToolsAudioProcessor::isMetaParameter(int index) const
+{
+    return false;
 }
 
 const String HoaToolsAudioProcessor::getParameterText (int index)
 {
-    return String::empty;
+    char text[256];
+    if((index + 1) % 3 == 0)
+    {
+        if (m_source_manager->sourceGetMute(index / 3))
+            sprintf(text, "Muted");
+        else
+            sprintf(text, "Unmuted");
+        
+    }
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
+    else
+        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+    
+    return String(text);
 }
+
+/************************************************************************************/
+/***************************** PLAY *************************************************/
+/************************************************************************************/
+
+
+void HoaToolsAudioProcessor::numChannelsChanged()
+{
+    AudioProcessorEditor* Editor = NULL;
+    
+    if(getNumInputChannels() < m_processor->getNumberOfSources())
+    {
+        m_processor->setNumberOfSources(getNumInputChannels());
+    }
+    if(getNumOutputChannels() < m_processor->getNumberOfLoudspeakers())
+    {
+        m_processor->setNumberOfLoudspeakers(getNumOutputChannels());
+    }
+    m_processor->postProcess();
+    
+    Editor = getActiveEditor();
+    if(Editor)
+        Editor->repaint();
+    bool state = isSuspended();
+    if(state)
+        suspendProcessing(true);
+    updateHostDisplay();
+    if(state)
+        suspendProcessing(false);
+}
+
+void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
+{
+    m_processor->prepareToPlay(sampleRate, samplesPerBlock);
+}
+
+void HoaToolsAudioProcessor::releaseResources()
+{
+    
+}
+
+void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+{
+    m_processor->process(buffer.getArrayOfChannels());
+    setNumberOfInputs(m_processor->getNumberOfSources());
+    setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
+    m_processor->postProcess();
+}
+
+/************************************************************************************/
+/***************************** SAVE METHOD ******************************************/
+/************************************************************************************/
+
+void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
+{
+    XmlElement xml("HoaToolsSettings");
+    
+    xml.setAttribute("Order", (int)m_processor->getOrder());    
+    xml.setAttribute("NumberOfSources", (int)m_processor->getNumberOfSources());
+    xml.setAttribute("NumberOfLoudspeakers", (int)m_processor->getNumberOfLoudspeakers());
+    xml.setAttribute("OffsetOfLoudspeakers", (int)m_processor->getOffsetOfLoudspeakers());
+    xml.setAttribute("Optimization", (int)m_processor->getOptimization());
+    xml.setAttribute("Zoom", (double)m_processor->getSourceManager()->getZoom());
+    
+    copyXmlToBinary(xml, destData);
+}
+
+void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+{
+    ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+    if (xmlState != nullptr)
+    {
+        if (xmlState->hasTagName("HoaToolsSettings"))
+        {
+            m_processor->setOrder(xmlState->getIntAttribute("Order"));
+            m_processor->setNumberOfSources(xmlState->getIntAttribute("NumberOfSources"));
+            m_processor->setNumberOfLoudspeakers(xmlState->getIntAttribute("NumberOfLoudspeakers"));
+            m_processor->setOffsetOfLoudspeakers(xmlState->getIntAttribute("OffsetOfLoudspeakers"));
+            m_processor->setOptimization(xmlState->getIntAttribute("Optimization"));
+            m_processor->getSourceManager()->setZoom(xmlState->getDoubleAttribute("Zoom"));
+            
+            setNumberOfInputs(m_processor->getNumberOfSources());
+            setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
+        }
+    }
+}
+
+/************************************************************************************/
+/***************************** OTHER ************************************************/
+/************************************************************************************/
 
 const String HoaToolsAudioProcessor::getInputChannelName (int channelIndex) const
 {
-    return String (channelIndex + 1);
+    char text[256];
+    sprintf(text, "Source %i", channelIndex+1);
+    return String(text);
 }
 
 const String HoaToolsAudioProcessor::getOutputChannelName (int channelIndex) const
 {
-    return String (channelIndex + 1);
+    char text[256];
+    sprintf(text, "Loudspeaker %i", channelIndex+1);
+    return String(text);
 }
 
 bool HoaToolsAudioProcessor::isInputChannelStereoPair (int index) const
@@ -73,20 +299,20 @@ bool HoaToolsAudioProcessor::isOutputChannelStereoPair (int index) const
 
 bool HoaToolsAudioProcessor::acceptsMidi() const
 {
-   #if JucePlugin_WantsMidiInput
+#if JucePlugin_WantsMidiInput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool HoaToolsAudioProcessor::producesMidi() const
 {
-   #if JucePlugin_ProducesMidiOutput
+#if JucePlugin_ProducesMidiOutput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool HoaToolsAudioProcessor::silenceInProducesSilenceOut() const
@@ -118,71 +344,8 @@ const String HoaToolsAudioProcessor::getProgramName (int index)
     return String::empty;
 }
 
-void HoaToolsAudioProcessor::changeProgramName (int index, const String& newName)
+void HoaToolsAudioProcessor::changeProgramName(int index, const String& newName)
 {
+    ;
 }
 
-//==============================================================================
-void HoaToolsAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
-{
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-}
-
-void HoaToolsAudioProcessor::releaseResources()
-{
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
-}
-
-void HoaToolsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
-{
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
-    {
-        float* channelData = buffer.getSampleData (channel);
-
-        // ..do something to the data...
-    }
-
-    // In case we have more outputs than inputs, we'll clear any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
-    {
-        buffer.clear (i, 0, buffer.getNumSamples());
-    }
-}
-
-//==============================================================================
-bool HoaToolsAudioProcessor::hasEditor() const
-{
-    return true; // (change this to false if you choose to not supply an editor)
-}
-
-AudioProcessorEditor* HoaToolsAudioProcessor::createEditor()
-{
-    return new HoaToolsAudioProcessorEditor (this);
-}
-
-//==============================================================================
-void HoaToolsAudioProcessor::getStateInformation (MemoryBlock& destData)
-{
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
-}
-
-void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
-}
-
-//==============================================================================
-// This creates new instances of the plugin..
-AudioProcessor* JUCE_CALLTYPE createPluginFilter()
-{
-    return new HoaToolsAudioProcessor();
-}
