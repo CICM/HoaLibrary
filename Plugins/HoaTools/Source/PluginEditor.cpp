@@ -12,7 +12,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_processor = ownerFilter;
     m_hoa_processor = aHoaProcessor;
     
-    m_map       = new MapEditor(m_hoa_processor->getSourceManager(), ownerFilter);
+    m_map       = new MapEditor(m_hoa_processor->getSourcesManager(), ownerFilter);
     m_meter     = new MeterEditor(m_hoa_processor->getMeter());
 
     HoaFont.setHeight(11.);

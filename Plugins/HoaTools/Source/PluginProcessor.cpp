@@ -10,7 +10,7 @@
 HoaToolsAudioProcessor::HoaToolsAudioProcessor()
 {
     m_processor         = new HoaProcessor();
-    m_source_manager    = m_processor->getSourceManager();
+    //m_source_manager    = m_processor->getSourceManager();
     m_gui               = gui_mode_map;
 }
 
@@ -51,11 +51,11 @@ int HoaToolsAudioProcessor::getNumParameters()
 float HoaToolsAudioProcessor::getParameter(int index)
 {
     if((index + 1) % 3 == 0)
-        return m_source_manager->sourceGetMute(index / 3);
+        return getSourcesManager()->sourceGetMute(index / 3);
     else if((index + 2) % 3 == 0)
-        return m_source_manager->sourceGetOrdinate(index / 3) / 10. - 0.5;
+        return getSourcesManager()->sourceGetOrdinate(index / 3) / 10. - 0.5;
     else
-        return m_source_manager->sourceGetAbscissa(index / 3) / 10. - 0.5;
+        return getSourcesManager()->sourceGetAbscissa(index / 3) / 10. - 0.5;
 }
 
 void HoaToolsAudioProcessor::setParameter(int index, float newValue)
@@ -63,12 +63,12 @@ void HoaToolsAudioProcessor::setParameter(int index, float newValue)
     if((index + 1) % 3 == 0)
     {
         newValue += 0.5;
-        m_source_manager->sourceSetMute(index / 3, newValue);
+        getSourcesManager()->sourceSetMute(index / 3, newValue);
     }
     else if((index + 2) % 3 == 0)
-        m_source_manager->sourceSetOrdinate(index / 3, (newValue - 0.5) * 20.);
+        getSourcesManager()->sourceSetOrdinate(index / 3, (newValue - 0.5) * 20.);
     else
-        m_source_manager->sourceSetAbscissa(index / 3, (newValue - 0.5) * 20.);
+        getSourcesManager()->sourceSetAbscissa(index / 3, (newValue - 0.5) * 20.);
     
     AudioProcessorEditor* Editor = NULL;
     Editor = getActiveEditor();
@@ -144,16 +144,16 @@ String HoaToolsAudioProcessor::getParameterLabel(int index) const
     char text[256];
     if((index + 1) % 3 == 0)
     {
-        if (m_source_manager->sourceGetMute(index / 3))
+        if (m_processor->getSourcesManager()->sourceGetMute(index / 3))
             sprintf(text, "Muted");
         else
            sprintf(text, "Unmuted"); 
         
     }
     else if((index + 2) % 3 == 0)
-        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
+        sprintf(text, "%f", m_processor->getSourcesManager()->sourceGetOrdinate(index / 3));
     else
-        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+        sprintf(text, "%f", m_processor->getSourcesManager()->sourceGetAbscissa(index / 3));
     
     return String(text);
 }
@@ -173,16 +173,16 @@ const String HoaToolsAudioProcessor::getParameterText (int index)
     char text[256];
     if((index + 1) % 3 == 0)
     {
-        if (m_source_manager->sourceGetMute(index / 3))
+        if (getSourcesManager()->sourceGetMute(index / 3))
             sprintf(text, "Muted");
         else
             sprintf(text, "Unmuted");
         
     }
     else if((index + 2) % 3 == 0)
-        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
+        sprintf(text, "%f", getSourcesManager()->sourceGetOrdinate(index / 3));
     else
-        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+        sprintf(text, "%f", getSourcesManager()->sourceGetAbscissa(index / 3));
     
     return String(text);
 }
@@ -250,7 +250,7 @@ void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
     xml.setAttribute("NumberOfChannels", (int)m_processor->getNumberOfChannels());
     xml.setAttribute("OffsetOfChannels", (int)m_processor->getOffsetOfChannels());
     xml.setAttribute("Optimization", (int)m_processor->getOptimization());
-    xml.setAttribute("Zoom", (double)m_processor->getSourceManager()->getZoom());
+    xml.setAttribute("Zoom", (double)m_processor->getSourcesManager()->getZoom());
     
     copyXmlToBinary(xml, destData);
 }
@@ -268,7 +268,7 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
             m_processor->setNumberOfChannels(xmlState->getIntAttribute("NumberOfChannels"));
             m_processor->setOffsetOfChannels(xmlState->getIntAttribute("OffsetOfChannels"));
             m_processor->setOptimization(xmlState->getIntAttribute("Optimization"));
-            m_processor->getSourceManager()->setZoom(xmlState->getDoubleAttribute("Zoom"));
+            m_processor->getSourcesManager()->setZoom(xmlState->getDoubleAttribute("Zoom"));
             
 			/*
             setNumberOfInputs(m_processor->getNumberOfSources());
