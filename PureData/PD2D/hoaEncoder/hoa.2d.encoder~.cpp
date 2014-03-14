@@ -20,17 +20,18 @@ void hoa_encoder_perform(t_hoa_encoder *x, t_object *dsp, float **ins, long ni, 
 
 t_eclass *hoa_encoder_class;
 
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos);
+
 extern "C" void setup_hoa0x2e2d0x2eencoder_tilde(void)
 {
     t_eclass *c;
     c = eclass_new("hoa.2d.encoder~", (method)hoa_encoder_new,(method)hoa_encoder_free, sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
-    
+
     eclass_dspinit(c);
-    
+    hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_encoder_dsp,     "dsp",		A_CANT, 0);
     
     eclass_register(CLASS_OBJ, c);
-    hoa_post();
     hoa_encoder_class = c;
 }
 
@@ -50,9 +51,19 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_encoder = new Encoder(order);
         eobj_dspsetup(x, 2, x->f_encoder->getNumberOfHarmonics());
         
-        //x->f_ob.d_misc = E_NO_INPLACE_REVERSED;
+        x->f_ob.d_misc = E_NO_INPLACE_REVERSED;
 	}
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_2D;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = x->f_encoder->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_encoder_dsp(t_hoa_encoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)

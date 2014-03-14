@@ -80,8 +80,9 @@ long object_is_hoa(t_object* o);
 
 void hoa_boxinfos_init(t_hoa_boxinfos* boxinfos);
 
+int hoa_method_true(void *x);
 t_hoa_err hoa_not_implemented_method();
-t_hoa_err hoa_initclass(t_class* c, method hoabox_getinfos);
+t_hoa_err hoa_initclass(t_eclass* c, method hoabox_getinfos);
 
 
 #endif
