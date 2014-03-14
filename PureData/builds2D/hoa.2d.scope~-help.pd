@@ -1,0 +1,95 @@
+#N canvas 408 103 580 521 10;
+#X obj 309 -665 hoa.pi 2;
+#X obj 309 -694 loadbang;
+#X obj 228 -622 *~;
+#X obj 228 -665 phasor~ 0.1;
+#X msg 428 -715 \; pd dsp 1;
+#X msg 428 -677 \; pd dsp 0;
+#X text 65 -288 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 65 -304 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -18 -769 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.scope~
+3 12 0 18 -204280 -1 0;
+#X text -16 -747 An ambisonic harmonic scope;
+#X obj 273 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max (null) @minmax 1 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 273 -524 order \$1;
+#X obj 363 -495 s hoascope;
+#X obj 273 -573 c.loadmess 7;
+#X obj 363 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 363 -524 gain \$1;
+#X obj 363 -573 c.loadmess 1;
+#X obj 453 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 20 @max 1000 @minmax 20 1000 @decimal 0 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 453 -524 interval \$1;
+#X obj 412 -345 s hoascope;
+#X obj 272 -416 c.colorpanel @size 97 14 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @matrix 8 1 @reverse 0 @saturation 1 @hue 0 @lightness 0.5 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
+#X obj 272 -397 c.prepend phcolor;
+#X obj 412 -416 c.colorpanel @size 97 14 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @matrix 8 1 @reverse 0 @saturation 1 @hue 0.65 @lightness 0.5
+@bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
+#X text 271 -597 order :;
+#X text 271 -607 Ambisonic;
+#X text 361 -607 Gain :;
+#X text 451 -597 interval :;
+#X text 271 -447 color :;
+#X text 271 -457 Positive;
+#X text 411 -447 color :;
+#X text 411 -457 Negative;
+#X obj 27 -633 osc~ 0.1;
+#X text 451 -607 Refresh;
+#X obj 453 -573 c.loadmess 20;
+#X obj 412 -397 c.prepend nhcolor;
+#X obj 27 -536 hoa.2d.scope~ @size 207 207 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive hoascope @send (null)
+@order 7 @gain 1 @interval 20 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7
+0.7 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 27 -582 hoa.2d.encoder~ 7 ----------------;
+#X text -15 -727 hoa.2d.scope~ displays the circular harmonics of an
+ambisonic sound field on a disc.;
+#X connect 0 0 2 1;
+#X connect 1 0 0 0;
+#X connect 2 0 36 1;
+#X connect 3 0 2 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 13 0 10 0;
+#X connect 14 0 15 0;
+#X connect 15 0 12 0;
+#X connect 16 0 14 0;
+#X connect 17 0 18 0;
+#X connect 18 0 12 0;
+#X connect 20 0 21 0;
+#X connect 21 0 19 0;
+#X connect 22 0 34 0;
+#X connect 31 0 36 0;
+#X connect 33 0 17 0;
+#X connect 34 0 19 0;
+#X connect 36 0 35 0;
+#X connect 36 1 35 1;
+#X connect 36 2 35 2;
+#X connect 36 3 35 3;
+#X connect 36 4 35 4;
+#X connect 36 5 35 5;
+#X connect 36 6 35 6;
+#X connect 36 7 35 7;
+#X connect 36 8 35 8;
+#X connect 36 9 35 9;
+#X connect 36 10 35 10;
+#X connect 36 11 35 11;
+#X connect 36 12 35 12;
+#X connect 36 13 35 13;
+#X connect 36 14 35 14;
+#X coords 0 521 1 520 85 60 0;
