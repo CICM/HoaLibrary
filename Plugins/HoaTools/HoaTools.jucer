@@ -3,7 +3,7 @@
 <JUCERPROJECT id="EBvNzI" name="HoaTools" projectType="audioplug" version="1.0.0"
               bundleIdentifier="com.cicm.HoaTools" includeBinaryInAppConfig="1"
               buildVST="1" buildVST3="1" buildAU="0" buildRTAS="0" buildAAX="0"
-              pluginName="HoaTools" pluginDesc="HoaTools" pluginManufacturer="cicm"
+              pluginName="HoaTools" pluginDesc="HoaTools" pluginManufacturer="CICM"
               pluginManufacturerEmail="support@yourcompany.com" pluginManufacturerCode="Cicm"
               pluginCode="Plug" pluginChannelConfigs="{1, 1}, {2, 2}" pluginIsSynth="0"
               pluginWantsMidiIn="0" pluginProducesMidiOut="0" pluginSilenceInIsSilenceOut="1"

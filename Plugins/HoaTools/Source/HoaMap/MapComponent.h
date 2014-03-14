@@ -7,8 +7,8 @@
 #ifndef __HOA_MAP_PLUGIN__
 #define __HOA_MAP_PLUGIN__
 
-#include "../JuceLibraryCode/JuceHeader.h"
-#include "../../../Sources/HoaLibrary.h"
+#include <JuceHeader.h>
+#include "../../../Sources/Hoa2D/Hoa2D.h"
 #include "HoaLookAndFeel.h"
 
 class MapEditor : public Component

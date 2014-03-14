@@ -7,10 +7,10 @@
 #ifndef __HOA_LOOK_AND_FEEL__
 #define __HOA_LOOK_AND_FEEL__
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 
 
-class HoaLookAndFeel : public LookAndFeel
+class HoaLookAndFeel : public LookAndFeel_V3
 {
 public:
     //==============================================================================
@@ -44,9 +44,11 @@ public:
                               bool isButtonDown);
 
     //==============================================================================
+	/*
     virtual void drawProgressBar (Graphics& g, ProgressBar& progressBar,
                                   int width, int height,
                                   double progress, const String& textToShow);
+	*/
 
     //==============================================================================
     virtual void drawScrollbarButton (Graphics& g,
@@ -115,9 +117,9 @@ public:
 
     virtual int getSliderThumbRadius (Slider& slider);
 
-    virtual Button* createSliderButton (bool isIncrement);
+    virtual void createSliderButton (bool isIncrement);
 
-    virtual ImageEffectFilter* getSliderEffect();
+    virtual void getSliderEffect();
 
     //==============================================================================
     virtual void drawCornerResizer (Graphics& g,

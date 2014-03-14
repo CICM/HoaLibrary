@@ -135,36 +135,6 @@ void HoaLookAndFeel::drawToggleButton (Graphics& g,
                       Justification::centredLeft, 10);
 }
 
-void HoaLookAndFeel::drawProgressBar (Graphics& g, ProgressBar& progressBar,
-                                            int width, int height,
-                                            double progress, const String& textToShow)
-{
-    if (progress < 0 || progress >= 1.0)
-    {
-        LookAndFeel::drawProgressBar (g, progressBar, width, height, progress, textToShow);
-    }
-    else
-    {
-        const Colour background (progressBar.findColour (ProgressBar::backgroundColourId));
-        const Colour foreground (progressBar.findColour (ProgressBar::foregroundColourId));
-
-        g.fillAll (background);
-        g.setColour (foreground);
-
-        g.fillRect (1, 1,
-                    jlimit (0, width - 2, roundToInt (progress * (width - 2))),
-                    height - 2);
-
-        if (textToShow.isNotEmpty())
-        {
-            g.setColour (Colour::contrasting (background, foreground));
-            g.setFont (height * 0.6f);
-
-            g.drawText (textToShow, 0, 0, width, height, Justification::centred, false);
-        }
-    }
-}
-
 void HoaLookAndFeel::drawScrollbarButton (Graphics& g,
                                                 ScrollBar& bar,
                                                 int width, int height,
@@ -442,17 +412,20 @@ void HoaLookAndFeel::drawLinearSlider (Graphics& g,
     }
 }
 
-Button* HoaLookAndFeel::createSliderButton (const bool isIncrement)
+void HoaLookAndFeel::createSliderButton (const bool isIncrement)
 {
+	/*
     if (isIncrement)
         return new ArrowButton ("u", 0.75f, Colours::white.withAlpha (0.8f));
     else
         return new ArrowButton ("d", 0.25f, Colours::white.withAlpha (0.8f));
+	*/
 }
 
-ImageEffectFilter* HoaLookAndFeel::getSliderEffect()
+void HoaLookAndFeel::getSliderEffect()
 {
-    return &scrollbarShadow;
+	;
+    //return &scrollbarShadow;
 }
 
 int HoaLookAndFeel::getSliderThumbRadius (Slider&)

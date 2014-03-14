@@ -12,7 +12,7 @@
 namespace Hoa2D
 {
     //! The ambisonic optimization.
-    /** The optimization should be used to optimize the ambisonic sound field. There are 3 optimization modes, Basic (no optimization), MaxRe (energy vector optimization) and InPhase (energy and velocity vector optimization). Basic has no effect, it should be used with a perfect ambisonic loudspeakers, arrengement where all the loudspeakers are to equal distance on a circle, and for a listener placed at the perfect center of the circle. MaxRe should be used for auditory confined to the center of the circle. InPhase should be used when the auditory covers the entire loudspeakers area and when the loudspeakers arragement is not a perfect circle or when the loudspeakers are not to equal distance. Note that the optimizations decrease the precision of the sound field restitution thus it can be compared to particular cases of the fractional orders.
+    /** The optimization should be used to optimize the ambisonic sound field. There are 3 optimization modes, Basic (no optimization), MaxRe (energy vector optimization) and InPhase (energy and velocity vector optimization). Basic has no effect, it should be used with a perfect ambisonic channels, arrengement where all the channels are to equal distance on a circle, and for a listener placed at the perfect center of the circle. MaxRe should be used for auditory confined to the center of the circle. InPhase should be used when the auditory covers the entire channels area and when the channels arragement is not a perfect circle or when the channels are not to equal distance. Note that the optimizations decrease the precision of the sound field restitution thus it can be compared to particular cases of the fractional orders.
      */    class Optim : public Ambisonic
     {
     public:
@@ -35,7 +35,7 @@ namespace Hoa2D
          
             @param     order	The order.
          */
-        Optim(unsigned int order, Mode mode);
+        Optim(unsigned int order, Mode mode = Basic);
         
         //! The optimization destructor.
         /**	The optimization destructor free the memory.

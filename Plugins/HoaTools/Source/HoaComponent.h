@@ -7,8 +7,8 @@
 #ifndef __HOA_COMPONENT_PLUGIN__
 #define __HOA_COMPONENT_PLUGIN__
 
-#include "../JuceLibraryCode/JuceHeader.h"
-#include "../../../Sources/HoaLibrary.h"
+#include <JuceHeader.h>
+#include "../../../Sources/Hoa2D/Hoa2D.h"
 
 class HoaProcessor
 {
@@ -16,21 +16,21 @@ private:
     long                    m_order;
     long                    m_number_of_sources;
     long                    m_number_of_harmonics;
-    long                    m_number_of_loudspeakers;
+    long                    m_number_of_channels;
     long                    m_optimization;
     long                    m_decoding_mode;
-    double                  m_offset_of_loudspeakers;
-    double                  m_angles_of_loudspeakers[256];
+    double                  m_offset_of_channels;
+    double                  m_angles_of_channels[256];
     long                    m_maximum_order;
-    long                    m_maximum_number_of_loudspeakers;
-    long                    m_minimum_number_of_loudspeakers;
+    long                    m_maximum_number_of_channels;
+    long                    m_minimum_number_of_channels;
 
     SourcesManager*         m_sources_manager;
-    AmbisonicsMultiMaps*    m_map;
-    AmbisonicOptim*         m_optim;
-    AmbisonicRotate*        m_rotate;
-    AmbisonicsMultiDecoder* m_decoder;
-    AmbisonicsMeter*        m_meter;
+    Map*					m_map;
+    Optim*					m_optim;
+    Rotate*					m_rotate;
+    DecoderMulti*			m_decoder;
+    Meter*					m_meter;
     float*                  m_harmonics_matrix[64];
     
 public:
@@ -39,11 +39,11 @@ public:
     
     void setOrder(long anOrder);
     void setNumberOfSources(long aNumberOfSources);
-    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
+    void setNumberOfChannels(long aNumberOfChannels);
     void setDecodingMode(long aDecodingMode);
     void setOptimization(long anOptimization);
-    void setOffsetOfLoudspeakers(double anOffset);
-    void setAngleOfLoudspeaker(long anIndex, double anAngle);
+    void setOffsetOfChannels(double anOffset);
+    void setAngleOfChannel(long anIndex, double anAngle);
     void setZoom(double aZoom);
     
     void prepareToPlay(long aSampleRate, long aVectorSize);
@@ -54,16 +54,16 @@ public:
     long getOrder(){return m_order;};
     long getNumberOfSources(){return m_number_of_sources;};
     long getNumberOfHarmonics(){return m_number_of_harmonics;};
-    long getNumberOfLoudspeakers(){return m_number_of_loudspeakers;};
+    long getNumberOfChannels(){return m_number_of_channels;};
     long getMaximumOrder(){return m_maximum_order;};
-    long getMaximumNumberOfLoudspeakers(){return m_maximum_number_of_loudspeakers;};
-    long getMinimumNumberOfLoudspeakers(){return m_minimum_number_of_loudspeakers;};
+    long getMaximumNumberOfChannels(){return m_maximum_number_of_channels;};
+    long getMinimumNumberOfChannels(){return m_minimum_number_of_channels;};
     long getDecodingMode(){return m_decoding_mode;};
     long getOptimization(){return m_optimization;};
-    double getOffsetOfLoudspeakers(){return m_offset_of_loudspeakers;};
-    double getAngleOfLoudspeaker(long anIndex){return m_angles_of_loudspeakers[(int)Tools::clip(anIndex, 0, 255)];};
+    double getOffsetOfChannels(){return m_offset_of_channels;};
+    double getAngleOfChannel(long anIndex){return m_angles_of_channels[(int)clip_minmax(anIndex, 0, 255)];};
     
-    AmbisonicsMeter*    getMeter(){return m_meter;};
+    Meter*				getMeter(){return m_meter;};
     SourcesManager*     getSourceManager(){return m_sources_manager;};
 };
 
