@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 8.0, 65.0, 886.0, 630.0 ],
+		"rect" : [ 8.0, 65.0, 929.0, 685.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -28,6 +28,108 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-19",
+					"maxclass" : "flonum",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "float", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 352.0, 375.0, 50.0, 20.0 ],
+					"presentation_rect" : [ 356.0, 373.0, 0.0, 0.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-17",
+					"maxclass" : "number~",
+					"mode" : 2,
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "float" ],
+					"patching_rect" : [ 422.0, 497.0, 56.0, 20.0 ],
+					"sig" : 0.0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-56",
+					"maxclass" : "number~",
+					"mode" : 1,
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "float" ],
+					"patching_rect" : [ 611.0, 373.0, 56.0, 20.0 ],
+					"sig" : 0.0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-55",
+					"maxclass" : "number~",
+					"mode" : 1,
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "float" ],
+					"patching_rect" : [ 627.5, 344.0, 56.0, 20.0 ],
+					"sig" : 0.0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-53",
+					"maxclass" : "number~",
+					"mode" : 1,
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "float" ],
+					"patching_rect" : [ 552.0, 344.0, 56.0, 20.0 ],
+					"sig" : 0.0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-54",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 745.0, 389.0, 43.0, 18.0 ],
+					"text" : "*******"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-52",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 745.0, 422.0, 34.0, 20.0 ],
+					"text" : "print"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -55,7 +157,8 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 686.0, 481.0, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "Wider"
+						"comment" : "Wider",
+						"extra" : 0
 					}
 ,
 					"text" : "hoa.in~"
@@ -142,7 +245,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 249.5, 373.0, 37.0, 18.0 ],
+					"patching_rect" : [ 14.0, 337.0, 37.0, 18.0 ],
 					"text" : "1 2 3"
 				}
 
@@ -185,7 +288,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 461.0, 584.0, 50.0, 20.0 ]
+					"patching_rect" : [ 428.0, 584.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -199,7 +302,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 391.5, 584.0, 50.0, 20.0 ]
+					"patching_rect" : [ 362.0, 584.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -213,7 +316,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 318.0, 584.0, 50.0, 20.0 ]
+					"patching_rect" : [ 293.0, 584.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -240,7 +343,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 330.0, 373.0, 51.0, 18.0 ],
+					"patching_rect" : [ 61.0, 337.0, 51.0, 18.0 ],
 					"text" : "target 1"
 				}
 
@@ -359,7 +462,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 94.0, 198.5, 224.0, 93.0 ]
+					"patching_rect" : [ 31.0, 174.5, 224.0, 93.0 ]
 				}
 
 			}
@@ -812,7 +915,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 461.0, 169.0, 91.0, 20.0 ],
+					"patching_rect" : [ 461.0, 169.0, 76.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -820,35 +923,7 @@
 						"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 					}
 ,
-					"text" : "hoa.connect3D"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-19",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 471.0, 32.0, 108.0, 18.0 ],
-					"text" : "help dynamicdsp~"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-17",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 471.0, 60.0, 53.0, 20.0 ],
-					"text" : "pcontrol"
+					"text" : "hoa.connect"
 				}
 
 			}
@@ -968,11 +1043,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 6,
-					"numoutlets" : 5,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 418.0, 383.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.ptest post args 23 fred 0.4 @buffer foo @pos 1. 6"
+					"numinlets" : 9,
+					"numoutlets" : 8,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+					"patching_rect" : [ 220.0, 418.0, 400.0, 20.0 ],
+					"text" : "hoa.2d.process~ 3 hoa.ptest post args 23 fred 0.4 @buffer foo @pos 1. 0"
 				}
 
 			}
@@ -983,6 +1058,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-1", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 7 ]
 				}
 
 			}
@@ -1034,7 +1118,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-17", 0 ],
+					"destination" : [ "obj-1", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-19", 0 ]
@@ -1207,6 +1291,24 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 7 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-52", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-54", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1226,13 +1328,13 @@
  ],
 		"parameters" : 		{
 			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
+			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.ptest.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/buildsCommon",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1253,7 +1355,7 @@
 			}
 , 			{
 				"name" : "hoa.pdev.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/buildsCommon",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1314,7 +1416,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.connect3D.mxo",
+				"name" : "hoa.connect.mxo",
 				"type" : "iLaX"
 			}
 , 			{

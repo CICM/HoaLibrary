@@ -32,10 +32,7 @@ void hoa_sig_out_assist(t_hoa_sig_out *x, void *b, long m, long a, char *s);
 void hoa_sig_out_int(t_hoa_sig_out *x, long intin);
 
 void hoa_sig_out_dsp64 (t_hoa_sig_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_sig_out_perform_scalar64 (t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userextra);
-#ifdef VECTOR_F64_128BIT
-void hoa_sig_out_perform64 (t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
-#endif
+void hoa_sig_out_perform64 (t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userextra);
 
 t_max_err hoa_sig_in_setattr_extra(t_hoa_sig_out *x, void *attr, long ac, t_atom *av);
 t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_out *x, void *attr, long ac, t_atom *av);
@@ -82,9 +79,12 @@ void *hoa_sig_out_new(t_symbol *s, long ac, t_atom *av)
     dsp_setup((t_pxobject *)x, 1);
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	x->outlet_num = (outlet_num > 0) ? outlet_num : x->parent_patcher_index;
 	
-	long realIndex = HoaProcessor_Get_Sigout_Index(hoaprocessor_parent, x->parent_patcher_index, outlet_num, x->extra);
+	//x->outlet_num = (outlet_num > 0) ? outlet_num : x->parent_patcher_index;
+	
+	x->outlet_num = HoaProcessor_Get_Sigout_Index(hoaprocessor_parent, x->parent_patcher_index, outlet_num, x->extra);
+	
+	object_post((t_object*)x, "inlet_real_index = %ld", x->outlet_num);
 	
 	x->outptrs_ptr = HoaProcessor_Get_Outptrs_Ptr(hoaprocessor_parent, Get_HoaProcessor_Patch_Index(hoaprocessor_parent));
 	x->declared_sig_outs = HoaProcessor_Get_Declared_Sigouts(hoaprocessor_parent);
@@ -123,17 +123,12 @@ void hoa_sig_out_int (t_hoa_sig_out *x, long intin)
 
 void hoa_sig_out_dsp64(t_hoa_sig_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-#ifdef VECTOR_F64_128BIT
-	if (maxvectorsize >= 8 && SSE2_check())
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_sig_out_perform64, 0, NULL);				// aligned vector 
-else
-#endif
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_sig_out_perform_scalar64, 0, NULL);		// scalar routine
+	object_method(dsp64, gensym("dsp_add64"), x, hoa_sig_out_perform64, 0, NULL);		// scalar routine
 }
 
 // Perform Routine for misaligned vectors or small vector sizes (done in scalar code) 64 Bit
 
-void hoa_sig_out_perform_scalar64(t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userextra)
+void hoa_sig_out_perform64(t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userextra)
 {	
     double *in1 = ins[0];	
 	double *io_pointer;
@@ -158,43 +153,6 @@ void hoa_sig_out_perform_scalar64(t_hoa_sig_out *x, t_object *dsp64, double **in
 		}
 	}
 }
-
-
-#ifdef VECTOR_F64_128BIT
-
-// Aligned SIMD Perform Routine 64 Bit
-
-void hoa_sig_out_perform64(t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
-{	
-    vDouble *in1 = (vDouble *) ins[0];	
-	vDouble *io_pointer;
-	
-	double ***outptrs_ptr = (double ***) x->outptrs_ptr;
-	double **out_ptrs;
-	
-	long declared_sig_outs = x->declared_sig_outs;
-	long outlet_num = x->outlet_num;
-	long i;
-	
-	if (outptrs_ptr)
-	{
-		out_ptrs = *outptrs_ptr;
-		if (out_ptrs && outlet_num > 0 && outlet_num <= declared_sig_outs)
-		{
-			io_pointer = (vDouble *) out_ptrs[outlet_num - 1];
-			if (io_pointer)
-			{
-				for (i = 0; i < vec_size >> 1; i++)
-				{
-					*io_pointer = F64_VEC_ADD_OP (*io_pointer, *in1++);
-					io_pointer++;
-				}
-			}
-		}
-	}
-}
-
-#endif
 
 void hoa_sig_out_free(t_hoa_sig_out *x)
 {

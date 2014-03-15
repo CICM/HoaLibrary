@@ -23,6 +23,9 @@ typedef struct _hoa_sig_in
 	
 	t_symbol*	comment;
 	long		extra;
+	double		value_min;
+	double		value_max;
+	double		value_default;
 	
 } t_hoa_sig_in;
 
@@ -52,6 +55,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_sig_in, extra);
 	CLASS_ATTR_ACCESSORS(c, "extra", 0, hoa_sig_in_setattr_extra);
 	CLASS_ATTR_LABEL	(c, "extra", 0, "param index");
+	CLASS_ATTR_SAVE		(c, "extra", 0);
 	
 	CLASS_ATTR_SYM		(c, "comment", 0, t_hoa_sig_in, comment);
 	CLASS_ATTR_ACCESSORS(c, "comment", 0, hoa_sig_in_setattr_comment);
@@ -84,20 +88,14 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 	
 	x->extra = 0;
 	x->comment = gensym("");
+	x->value_default = 0.0f;
 	
 	attr_args_process(x, ac, av);
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	x->parent_mode = HoaProcessor_Get_Mode(hoaprocessor_parent);
+	x->inlet_num = HoaProcessor_Get_Sigin_Index(hoaprocessor_parent, x->parent_patcher_index, inlet_num, x->extra);
 	
-	if (x->parent_mode == gensym("post") || x->parent_mode == gensym("out"))
-	{
-		x->inlet_num = (inlet_num > 0) ? inlet_num : x->parent_patcher_index;
-	}
-	else if (x->parent_mode == gensym("no"))
-	{
-		x->inlet_num = (inlet_num > 0) ? inlet_num : 1;
-	}
+	object_post((t_object*)x, "inlet_real_index = %ld", x->inlet_num);
 	
 	x->valid = 0;
 	
@@ -171,6 +169,6 @@ void hoa_sig_in_perform64(t_hoa_sig_in *x, t_object *dsp64, double **ins, long n
 	else
 	{
 		for (i = 0; i < vec_size; i++)
-			*out1++ = 0;
+			*out1++ = x->value_default;
 	}
 }

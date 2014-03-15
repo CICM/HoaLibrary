@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C229BCB18D38C5F007DBBAE /* hoa.process~.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C229BCA18D38C5F007DBBAE /* hoa.process~.h */; };
 		2C6657C118C8D2A200014011 /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6657C018C8D2A200014011 /* HoaCommon.max.h */; };
 		2C6657C518C8D50800014011 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */; };
 		2C6657C618C8D50800014011 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C6657C318C8D50800014011 /* hoa.max.cpp */; };
@@ -85,6 +86,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C229BCA18D38C5F007DBBAE /* hoa.process~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "hoa.process~.h"; sourceTree = "<group>"; };
 		2C6657BE18C8D18200014011 /* MaxHoaCommon.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoaCommon.xcconfig; path = ../MaxHoaCommon.xcconfig; sourceTree = "<group>"; };
 		2C6657C018C8D2A200014011 /* HoaCommon.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.max.h; path = ../HoaCommon.max.h; sourceTree = "<group>"; };
 		2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max_commonsyms.h; path = ../../hoa.max_commonsyms.h; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				8FCDF88118D252640019E1CE /* hoa.process~.cpp */,
+				2C229BCA18D38C5F007DBBAE /* hoa.process~.h */,
 				2C6657C018C8D2A200014011 /* HoaCommon.max.h */,
 				2C6657C218C8D50800014011 /* hoa.max_commonsyms.h */,
 				2C6657C318C8D50800014011 /* hoa.max.cpp */,
@@ -312,6 +315,7 @@
 				8FCDF86218D250600019E1CE /* Meter.h in Headers */,
 				8FCDF86D18D250600019E1CE /* Vector.h in Headers */,
 				8FCDF87018D250600019E1CE /* HoaDefs.h in Headers */,
+				2C229BCB18D38C5F007DBBAE /* hoa.process~.h in Headers */,
 				8FCDF84618D250600019E1CE /* Rotate.h in Headers */,
 				8FCDF86618D250600019E1CE /* Planewaves.h in Headers */,
 				8FCDF83318D250600019E1CE /* Decoder.h in Headers */,
@@ -525,6 +529,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = "$(SRCROOT)/../../buildsCommon";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(C74SUPPORT)/msp-includes\"",
@@ -569,6 +574,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = "$(SRCROOT)/../../buildsCommon";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(C74SUPPORT)/msp-includes\"",
