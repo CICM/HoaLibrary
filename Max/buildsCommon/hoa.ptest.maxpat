@@ -151,7 +151,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 218.0, 179.0, 236.0, 18.0 ],
+					"patching_rect" : [ 217.0, 179.0, 236.0, 18.0 ],
 					"text" : "buffer foo"
 				}
 
@@ -207,7 +207,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 112.75, 140.0, 43.0, 20.0 ],
+					"patching_rect" : [ 73.75, 140.0, 43.0, 20.0 ],
 					"text" : "sig~ 2"
 				}
 

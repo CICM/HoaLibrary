@@ -37,8 +37,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 352.0, 375.0, 50.0, 20.0 ],
-					"presentation_rect" : [ 356.0, 373.0, 0.0, 0.0 ]
+					"patching_rect" : [ 352.0, 375.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -435,7 +434,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 220.0, 332.0, 56.0, 20.0 ],
-					"sig" : 0.0
+					"sig" : 1.16
 				}
 
 			}
@@ -1327,9 +1326,9 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
-			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ]
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

@@ -128,7 +128,7 @@ void hoa_processor_free(t_hoa_processor *x);
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
 void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, void *previous, void *previousindex);
-void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv);
+t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv);
 
 void hoa_processor_bang(t_hoa_processor *x);
 void hoa_processor_int(t_hoa_processor *x, long n);
@@ -306,7 +306,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// load a single instance to query io informations
 	
-	hoa_processor_loadpatch(x, 0, patch_name_entered, ac, av);
+	t_hoa_err loaded_patch_err = hoa_processor_loadpatch(x, 0, patch_name_entered, ac, av);
 	
 	hoa_processor_get_number_of_hoa_inlets(x->patch_space_ptrs[0]->the_patch, x, &x->patch_ins, &x->extra_ins, &x->patch_sig_ins, &x->extra_sig_ins);
 	hoa_processor_get_number_of_hoa_outlets(x->patch_space_ptrs[0]->the_patch, x, &x->patch_outs, &x->extra_outs, &x->patch_sig_outs, &x->extra_sig_outs);
@@ -410,7 +410,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Load patches and initialise it for all harmonics
 	
-	if (patch_name_entered)
+	if (patch_name_entered && loaded_patch_err == HOA_ERR_NONE)
 	{
 		if (x->f_mode == hoa_sym_process_mode_no || x->f_mode == hoa_sym_process_mode_post)
 		{
@@ -552,7 +552,7 @@ void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, vo
 	ATOMIC_DECREMENT_BARRIER(&x->patch_is_loading);
 }
 
-void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv)
+t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv)
 {
 	t_patchspace *patch_space_ptr = 0;
 	t_object *previous;
@@ -575,7 +575,7 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 	{
 		object_error((t_object*)x, "patch is loading in another thread");
 		hoa_processor_loadexit(x, 0, 0, 0);
-		return;
+		return HOA_ERR_FAIL;
 	}
 	
 	// Find a free patch if no index is given
@@ -591,9 +591,9 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 	
 	if (index >= MAX_NUM_PATCHES) 
 	{
-		object_error((t_object*)x, "slot out of range");
+		object_error((t_object*)x, "max number of patcher loaded exceeded");
 		hoa_processor_loadexit(x, 0, 0, 0);
-		return;
+		return HOA_ERR_FAIL;
 	}
 		
 	// Create patchspaces up until the last allocated index (if necessary) and store the pointer
@@ -625,9 +625,9 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 	// if filetype does not exists
 	if (locatefile_extended(filename, &patch_path, &type, &filetypelist, 1))
 	{
-		object_error((t_object*)x, "no patcher %s", filename);
+		object_error((t_object*)x, "patcher \"%s\" not found !", filename);
 		hoa_processor_loadexit(x, 1, previous, previousindex);
-		return;
+		return HOA_ERR_FILE_NOT_FOUND;
 	}
 	
 	// Check the number of rarguments (only up to 16 allowed right now)
@@ -647,7 +647,7 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 	{
 		object_error((t_object*)x, "error loading %s", filename);
 		hoa_processor_loadexit(x, 1, previous, previousindex);
-		return;
+		return HOA_ERR_FAIL;
 	}
 	
 	// Check that it is a patcher that has loaded
@@ -657,7 +657,7 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 		object_error((t_object*)x, "%s is not a patcher file", filename);
 		freeobject((t_object *)p);
 		hoa_processor_loadexit(x, 1, previous, previousindex);
-		return;
+		return HOA_ERR_FAIL;
 	}
 	
 	// Change the window name to : "patchname (index) [band arg]" (if mode no or post)
@@ -717,6 +717,8 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_nam
 	// Return to previous state
 		
 	hoa_processor_loadexit(x, 1, previous, previousindex);
+	
+	return HOA_ERR_NONE;
 }
 
 // ========================================================================================================================================== //

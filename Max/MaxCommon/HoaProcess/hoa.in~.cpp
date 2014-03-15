@@ -55,6 +55,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_sig_in, extra);
 	CLASS_ATTR_ACCESSORS(c, "extra", 0, hoa_sig_in_setattr_extra);
 	CLASS_ATTR_LABEL	(c, "extra", 0, "param index");
+	CLASS_ATTR_INVISIBLE(c, "extra", 1);
 	CLASS_ATTR_SAVE		(c, "extra", 0);
 	
 	CLASS_ATTR_SYM		(c, "comment", 0, t_hoa_sig_in, comment);
@@ -95,8 +96,6 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
 	x->inlet_num = HoaProcessor_Get_Sigin_Index(hoaprocessor_parent, x->parent_patcher_index, inlet_num, x->extra);
 	
-	object_post((t_object*)x, "inlet_real_index = %ld", x->inlet_num);
-	
 	x->valid = 0;
 	
 	declared_sig_ins = HoaProcessor_Get_Declared_Sigins(hoaprocessor_parent);
@@ -131,6 +130,7 @@ t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_in *x, void *attr, long ac, t_ato
 
 void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num)
 {
+	/*
 	x->valid = 0;
 	x->inlet_num = inlet_num;
 	
@@ -138,6 +138,7 @@ void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num)
 		x->valid = 1;
 	else
 		x->valid = 0;
+	*/
 }
 
 void hoa_sig_in_assist(t_hoa_sig_in *x, void *b, long m, long a, char *s)

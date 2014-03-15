@@ -26,7 +26,7 @@ extern "C"
 
 #include "hoa.max_commonsyms.h"
 
-#define MAX_CHANNELS 256
+#define MAX_CHANNELS SYS_MAXSIGS
 
 #define HOA_UI_BORDERTHICKNESS 1
 #define HOA_UI_CORNERSIZE 8
@@ -47,6 +47,8 @@ typedef enum {
 	HOA_ERR_NONE			=					-1,
 	HOA_ERR_OUT_OF_MEMORY	=					-2,
 	HOA_ERR_NOT_IMPLEMENTED =					-3,
+	HOA_ERR_FAIL			=					-4,
+	HOA_ERR_FILE_NOT_FOUND  =					-5,
 } e_hoa_err_type;
 
 /**
