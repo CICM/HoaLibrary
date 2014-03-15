@@ -533,6 +533,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = "$(SRCROOT)/../../buildsCommon";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(C74SUPPORT)/msp-includes\"",
@@ -577,6 +578,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = "$(SRCROOT)/../../buildsCommon";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(C74SUPPORT)/msp-includes\"",
