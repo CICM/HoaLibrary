@@ -12,14 +12,14 @@
 ;
 #X msg 181 -94 \; pd dsp 1;
 #X msg 181 -56 \; pd dsp 0;
-#X obj -60 -84 hoa.scope~ @size 147 147 @fontname Helvetica @fontweight
+#X obj -60 -84 hoa.2d.scope~ @size 147 147 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 3 @gain 1 @interval 100 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj -59 105 hoa.meter~ @size 147 147 @fontname Helvetica @fontweight
+#X obj -59 105 hoa.2d.meter~ @size 147 147 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send Àb% @channels
-8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation Anti-Clockwise
-@vectors Energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
+8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation anti-clockwise
+@vectors energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
 0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;

@@ -32,27 +32,27 @@
 ;
 #X text 6 -515 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X obj -310 -124 hoa.meter~ @size 129 129 @fontname Helvetica @fontweight
+#X obj -310 -124 hoa.2d.meter~ @size 129 129 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send êÿ @channels
-8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation Clockwise
-@vectors Energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
-0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation anti-clockwise
+@vectors energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7
+0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X msg -78 -463 \; pd dsp 1;
 #X msg -16 -463 \; pd dsp 0;
-#X obj -71 -124 hoa.meter~ @size 129 129 @fontname Helvetica @fontweight
+#X obj -71 -124 hoa.2d.meter~ @size 129 129 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send êÿ @channels
-8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation Clockwise
-@vectors Energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
-0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation anti-clockwise
+@vectors energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7
+0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 169 -124 hoa.meter~ @size 141 141 @fontname Helvetica @fontweight
+#X obj 169 -124 hoa.2d.meter~ @size 141 141 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send êÿ @channels
-8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation Clockwise
-@vectors Energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
-0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation anti-clockwise
+@vectors energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7
+0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X obj -10 -314 +~ 1;
@@ -110,12 +110,12 @@ and car (or 1) to use cartesian corrdinates (abscissa and ordinate).
 #X obj -71 -150 hoa.2d.decoder~ 3 0 8;
 #X obj -71 9 hoa.dac~ 1:8 --------;
 #X obj 169 -209 hoa.2d.map~ 3 1 @mode 1;
-#X obj 169 -184 hoa.optim~ 3 ----------;
 #X obj 169 -150 hoa.2d.decoder~ 3 0 8 -;
 #X text -558 -483 hoa.2d.map~ is an ambisonics encoder that uses fractionnal
 orders and amplitude variation to simulate sources distances. First
 argument is the order and second argument is the number of sources.
 ;
+#X obj 169 -184 hoa.2d.optim~ 3 -------;
 #X connect 1 0 57 0;
 #X connect 2 0 59 0;
 #X connect 3 0 4 0;
@@ -129,7 +129,6 @@ argument is the order and second argument is the number of sources.
 #X connect 8 0 62 2;
 #X connect 9 0 57 0;
 #X connect 10 0 57 0;
-#X connect 11 0 57 1;
 #X connect 12 0 7 0;
 #X connect 13 0 8 0;
 #X connect 14 0 62 0;
@@ -195,26 +194,26 @@ argument is the order and second argument is the number of sources.
 #X connect 60 6 61 6;
 #X connect 60 7 33 7;
 #X connect 60 7 61 7;
-#X connect 62 0 63 0;
-#X connect 62 1 63 1;
-#X connect 62 2 63 2;
-#X connect 62 3 63 3;
-#X connect 62 4 63 4;
-#X connect 62 5 63 5;
-#X connect 62 6 63 6;
-#X connect 63 0 64 0;
-#X connect 63 1 64 1;
-#X connect 63 2 64 2;
-#X connect 63 3 64 3;
-#X connect 63 4 64 4;
-#X connect 63 5 64 5;
-#X connect 63 6 64 6;
-#X connect 64 0 34 0;
-#X connect 64 1 34 1;
-#X connect 64 2 34 2;
-#X connect 64 3 34 3;
-#X connect 64 4 34 4;
-#X connect 64 5 34 5;
-#X connect 64 6 34 6;
-#X connect 64 7 34 7;
+#X connect 62 0 65 0;
+#X connect 62 1 65 1;
+#X connect 62 2 65 2;
+#X connect 62 3 65 3;
+#X connect 62 4 65 4;
+#X connect 62 5 65 5;
+#X connect 62 6 65 6;
+#X connect 63 0 34 0;
+#X connect 63 1 34 1;
+#X connect 63 2 34 2;
+#X connect 63 3 34 3;
+#X connect 63 4 34 4;
+#X connect 63 5 34 5;
+#X connect 63 6 34 6;
+#X connect 63 7 34 7;
+#X connect 65 0 63 0;
+#X connect 65 1 63 1;
+#X connect 65 2 63 2;
+#X connect 65 3 63 3;
+#X connect 65 4 63 4;
+#X connect 65 5 63 5;
+#X connect 65 6 63 6;
 #X coords 0 569 1 568 100 60 0;

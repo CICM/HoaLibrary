@@ -15,6 +15,9 @@ namespace Hoa2D
         m_channels_peaks    = new double[m_number_of_channels];
 		m_channels_azimuth_width = new double[m_number_of_channels];
 		m_channels_azimuth_mapped = new double[m_number_of_channels];
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
+            m_channels_peaks[i] = 0;
+        m_offset = 0;
 		computeAngles();
     }
     
@@ -36,20 +39,26 @@ namespace Hoa2D
 		computeAngles();
 	}
 	
+    void Meter::setChannelsOffset(double offset)
+    {
+        m_offset = wrap_twopi(offset);
+        computeAngles();
+    }
+    
 	void Meter::computeAngles()
 	{
 		double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
         for(int i = 0; i < m_number_of_channels; i++)
         {
-			curAngle = getChannelAzimuth(i);
+			curAngle = wrap_twopi(getChannelAzimuth(i) + m_offset);
             if (i != 0)
-                prevAngle = getChannelAzimuth(i-1);
+                prevAngle = wrap_twopi(getChannelAzimuth(i-1) + m_offset);
             else
-                prevAngle = getChannelAzimuth(m_number_of_channels-1);
+                prevAngle = wrap_twopi(getChannelAzimuth(m_number_of_channels-1) + m_offset);
             if (i != m_number_of_channels-1)
-                nextAngle = getChannelAzimuth(i+1);
+                nextAngle = wrap_twopi(getChannelAzimuth(i+1) + m_offset);
             else
-                nextAngle = getChannelAzimuth(0);
+                nextAngle = wrap_twopi(getChannelAzimuth(0) + m_offset);
             
             prevPortion = (curAngle - prevAngle);
             nextPortion = (nextAngle - curAngle);
