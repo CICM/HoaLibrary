@@ -12,14 +12,14 @@ the number of channels (inputs) \, @mode value (int or sym) set the
 decomposition mode.;
 #X msg 422 -112 \; pd dsp 1;
 #X msg 422 -74 \; pd dsp 0;
-#X obj 127 97 hoa.scope~ @size 171 171 @fontname Helvetica @fontweight
+#X obj 127 97 hoa.2d.scope~ @size 171 171 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
 #X obj 127 -220 osc~ 220;
 #X obj 127 24 hoa.2d.projector~ 4 10 --;
 #X obj 127 -174 hoa.2d.encoder~ 4 -------;
-#X obj 127 -143 hoa.scope~ @size 153 153 @fontname Helvetica @fontweight
+#X obj 127 -143 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;

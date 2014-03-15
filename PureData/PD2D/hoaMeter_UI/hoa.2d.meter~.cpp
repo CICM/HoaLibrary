@@ -14,24 +14,19 @@ typedef struct  _hoa_meter
     
     Hoa2D::Meter*   f_meter;
     Hoa2D::Vector*  f_vector;
+    
     t_float*        f_signals;
     t_float         f_vector_coords[4];
     long            f_ramp;
+	int             f_startclock;
+	long            f_interval;
     
-	int			f_startclock;
-	long        f_interval;
-    
-    t_symbol*   f_vector_type;
-    
-    long        f_number_of_channels;
-	float       f_offset_of_channels;
-	t_symbol*   f_clockwise;
+    t_symbol*       f_vector_type;
+    t_symbol*       f_clockwise;
+    int*            f_over_leds;
 	
-	float		f_angles_of_channels[MAX_SPEAKER];
-    long		f_over_leds_preserved[MAX_SPEAKER];
-	
-	t_rgba		f_color_background;
-	t_rgba		f_color_border_box;
+    t_rgba          f_color_bg;
+    t_rgba          f_color_bd;
 	t_rgba		f_color_cold_signal;
 	t_rgba		f_color_tepid_signal;
 	t_rgba		f_color_warm_signal;
@@ -41,10 +36,13 @@ typedef struct  _hoa_meter
 	t_rgba		f_color_energy_vector;
 	t_rgba		f_color_velocity_vector;
 	
-	float		f_radius_global;
-	float		f_radius_circle;
+    double      f_radius;
+    double      f_center;
+	double		f_radius_center;
     
 	t_clock*	f_clock;
+    void*       f_attrs;
+    
 } t_hoa_meter;
 
 t_eclass *hoa_meter_class;
@@ -58,8 +56,11 @@ void hoa_meter_perform(t_hoa_meter *x, t_object *d, float **ins, long ni, float 
 void hoa_meter_tick(t_hoa_meter *x);
 
 t_pd_err hoa_meter_notify(t_hoa_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_pd_err channels_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv);
 t_pd_err channels_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv);
+t_pd_err angles_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv);
 t_pd_err angles_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv);
+t_pd_err offset_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv);
 t_pd_err offset_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv);
 t_pd_err vectors_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv);
 t_pd_err rotation_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv);
@@ -107,23 +108,23 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
     CLASS_ATTR_INVISIBLE            (c, "send", 1);
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225. 225.");
 	
-    CLASS_ATTR_LONG                 (c, "channels", 0 , t_hoa_meter, f_number_of_channels);
-    CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
+    CLASS_ATTR_LONG                 (c, "channels", 0 , t_hoa_meter, f_attrs);
+    CLASS_ATTR_ACCESSORS            (c, "channels", channels_get, channels_set);
 	CLASS_ATTR_ORDER                (c, "channels", 0, "1");
 	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_SAVE                 (c, "channels", 1);
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "8");
     CLASS_ATTR_STYLE                (c, "channels", 1, "number");
     
-    CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_meter, f_angles_of_channels, f_number_of_channels, MAX_SPEAKER);
-	CLASS_ATTR_ACCESSORS            (c, "angles", NULL, angles_set);
+    CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_meter, f_attrs, f_attrs, MAX_SPEAKER);
+	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
     CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 135 180 225 270 315");
     
-    CLASS_ATTR_FLOAT                (c, "offset", 0, t_hoa_meter, f_offset_of_channels);
-    CLASS_ATTR_ACCESSORS            (c, "offset", NULL, offset_set);
+    CLASS_ATTR_FLOAT                (c, "offset", 0, t_hoa_meter, f_attrs);
+    CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
 	CLASS_ATTR_ORDER                (c, "offset", 0, "3");
 	CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
@@ -145,7 +146,7 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 	CLASS_ATTR_DEFAULT              (c, "vectors", 0, "Energy");
 	CLASS_ATTR_SAVE                 (c, "vectors", 1);
     CLASS_ATTR_STYLE                (c, "vectors", 1, "menu");
-    CLASS_ATTR_ITEMS                (c, "vectors", 1, "none Energy Velocity Both");
+    CLASS_ATTR_ITEMS                (c, "vectors", 1, "none energy velocity both");
     
     CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_meter, f_interval);
 	CLASS_ATTR_ORDER                (c, "interval", 0, "5");
@@ -155,18 +156,18 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
 	CLASS_ATTR_STYLE                (c, "interval", 1, "number");
     
-    CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoa_meter, f_color_background);
+    CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoa_meter, f_color_bg);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 1, "color");
     
-    CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoa_meter, f_color_border_box);
+    CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoa_meter, f_color_bd);
 	CLASS_ATTR_CATEGORY				(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
     CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.7 0.7 0.7 1.");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 1, "color");
     
 	CLASS_ATTR_RGBA                 (c, "coldcolor", 0, t_hoa_meter, f_color_cold_signal);
@@ -226,11 +227,11 @@ void *hoa_meter_new(t_symbol *s, int argc, t_atom *argv)
     
 	x = (t_hoa_meter *)eobj_new(hoa_meter_class);
     
-    x->f_number_of_channels = 4;
     x->f_ramp = 0;
-    x->f_meter  = new Hoa2D::Meter(x->f_number_of_channels);
-    x->f_vector = new Hoa2D::Vector(x->f_number_of_channels);
+    x->f_meter  = new Hoa2D::Meter(4);
+    x->f_vector = new Hoa2D::Vector(4);
     x->f_signals = new t_float[MAX_SPEAKER * SYS_MAXBLKSIZE];
+    x->f_over_leds = new int[MAX_CHANNELS];
     
     x->f_clock = clock_new(x,(t_method)hoa_meter_tick);
 	x->f_startclock = 0;
@@ -259,16 +260,32 @@ t_hoa_err hoa_getinfos(t_hoa_meter* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_meter_getdrawparams(t_hoa_meter *x, t_object *patcherview, t_edrawparams *params)
 {
-    params->d_boxfillcolor = x->f_color_background;
-    params->d_bordercolor = x->f_color_border_box;
+    params->d_boxfillcolor = x->f_color_bg;
+    params->d_bordercolor = x->f_color_bd;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
 }
 
 void hoa_meter_oksize(t_hoa_meter *x, t_rect *newrect)
 {
-    newrect->width = pd_clip_min(newrect->width, 30.);
-    newrect->height = pd_clip_min(newrect->height, 30.);
+    newrect->width = pd_clip_min(newrect->width, 20.);
+    newrect->height = pd_clip_min(newrect->height, 20.);
+}
+
+t_pd_err channels_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv)
+{
+    argc[0] = 1;
+    argv[0] = (t_atom *)malloc(sizeof(t_atom));
+    if(argv[0] && argc[0])
+    {
+        atom_setfloat(argv[0], x->f_meter->getNumberOfChannels());
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    return 0;
 }
 
 t_pd_err channels_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
@@ -291,18 +308,34 @@ t_pd_err channels_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
                 for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
                 {
                     atom_setfloat(av+i, x->f_meter->getChannelAzimuth(i) / HOA_2PI * 360.);
-                    x->f_over_leds_preserved[i] = 0;
+                    x->f_over_leds[i] = 0;
                 }
                 angles_set(x, NULL, x->f_meter->getNumberOfChannels(), av);
                 
                 eobj_resize_inputs((t_ebox *)x, x->f_meter->getNumberOfChannels());
                 
-                x->f_number_of_channels = x->f_meter->getNumberOfChannels();
                 canvas_resume_dsp(dspState);
             }
         }
     }
     return NULL;
+}
+
+t_pd_err angles_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv)
+{
+    argc[0] = x->f_meter->getNumberOfChannels();
+    argv[0] = (t_atom *)malloc(sizeof(t_atom) * x->f_meter->getNumberOfChannels());
+    if(argv[0] && argc[0])
+    {
+        for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
+            atom_setfloat(argv[0]+i, x->f_meter->getChannelAzimuth(i) / HOA_2PI * 360.);
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    return 0;
 }
 
 t_pd_err angles_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
@@ -322,11 +355,6 @@ t_pd_err angles_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
         x->f_meter->setChannelsAzimuth(angles);
         x->f_vector->setChannelsAzimuth(angles);
     }
-    for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
-    {
-        x->f_angles_of_channels[i] = x->f_meter->getChannelAzimuth(i) / HOA_2PI * 360.;
-    }
-    x->f_number_of_channels = x->f_meter->getNumberOfChannels();
 
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_background_layer);
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_leds_layer);
@@ -336,13 +364,29 @@ t_pd_err angles_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
     return 0;
 }
 
+t_pd_err offset_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv)
+{
+    argc[0] = 1;
+    argv[0] = (t_atom *)malloc(sizeof(t_atom));
+    if(argv[0] && argc[0])
+    {
+        atom_setfloat(argv[0], x->f_meter->getChannelsOffset());
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    return 0;
+}
+
 t_pd_err offset_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
 {
     if(argc && argv && atom_gettype(argv) == A_FLOAT)
     {
         x->f_vector->setChannelsOffset(atom_getfloat(argv) / 360 * HOA_2PI);
+        x->f_meter->setChannelsOffset(atom_getfloat(argv) / 360 * HOA_2PI);
     }
-    x->f_offset_of_channels = x->f_vector->getChannelsOffset() / HOA_2PI * 360.;
     
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_background_layer);
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_leds_layer);
@@ -359,40 +403,24 @@ t_pd_err vectors_set(t_hoa_meter *x, void *attr, long argc, t_atom *argv)
         if(atom_gettype(argv) == A_SYM)
         {
             if(atom_getsym(argv) == hoa_sym_energy)
-            {
                 x->f_vector_type = hoa_sym_energy;
-            }
             else if(atom_getsym(argv) == hoa_sym_velocity)
-            {
                 x->f_vector_type = hoa_sym_velocity;
-            }
             else if(atom_getsym(argv) == hoa_sym_both)
-            {
                 x->f_vector_type = hoa_sym_both;
-            }
             else
-            {
                 x->f_vector_type = hoa_sym_none;
-            }
         }
         else if(atom_gettype(argv) == A_FLOAT)
         {
             if(atom_getlong(argv) == 1)
-            {
                 x->f_vector_type = hoa_sym_energy;
-            }
             else if(atom_getlong(argv) == 2)
-            {
                 x->f_vector_type = hoa_sym_velocity;
-            }
             else if(atom_getlong(argv) == 3)
-            {
                 x->f_vector_type = hoa_sym_both;
-            }
             else
-            {
                 x->f_vector_type = hoa_sym_none;
-            }
         }
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_vector_layer);
     }
@@ -460,12 +488,12 @@ void hoa_meter_tick(t_hoa_meter *x)
     {
         peak = x->f_meter->getChannelEnergy(i);
         if(peak >= 0.)
-            x->f_over_leds_preserved[i] = 1000;
+            x->f_over_leds[i] = 1000;
         else
-            x->f_over_leds_preserved[i] -= x->f_interval;
+            x->f_over_leds[i] -= x->f_interval;
         
-        if(x->f_over_leds_preserved[i] < 0)
-            x->f_over_leds_preserved[i] = 0;
+        if(x->f_over_leds[i] < 0)
+            x->f_over_leds[i] = 0;
     }
     
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_leds_layer);
@@ -483,6 +511,7 @@ void hoa_meter_free(t_hoa_meter *x)
     delete x->f_meter;
     delete x->f_vector;
     delete [] x->f_signals;
+    delete [] x->f_over_leds;
 }
 
 void hoa_meter_assist(t_hoa_meter *x, void *b, long m, long a, char *s)
@@ -506,12 +535,11 @@ t_pd_err hoa_meter_notify(t_hoa_meter *x, t_symbol *s, t_symbol *msg, void *send
 void hoa_meter_paint(t_hoa_meter *x, t_object *view)
 {
 	t_rect rect;
-    float led_width;
 	ebox_get_rect_for_view((t_ebox *)x, &rect);
 	
-    led_width = 0.49 * rect.width / 18.;
-	x->f_radius_global = led_width * 18.;
-	x->f_radius_circle = led_width * 4.;
+    x->f_center = rect.width * .5;
+	x->f_radius = x->f_center * 0.95;
+	x->f_radius_center = x->f_radius / 5.;
 	
 	draw_background(x, view, &rect);
     draw_leds(x, view, &rect);
@@ -526,56 +554,55 @@ void draw_background(t_hoa_meter *x,  t_object *view, t_rect *rect)
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_background_layer, rect->width, rect->height);
     
-    black = rgba_addContrast(x->f_color_background, -0.14);
-    white = rgba_addContrast(x->f_color_background, 0.06);
+    black = rgba_addContrast(x->f_color_bg, -0.14);
+    white = rgba_addContrast(x->f_color_bg, 0.06);
     
 	if (g)
 	{
         egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         egraphics_set_matrix(g, &transform);
+       
+        egraphics_rotate(g, -HOA_PI2);
         
 		egraphics_set_line_width(g, 1.);
 
-		egraphics_set_color_rgba(g, &x->f_color_background);
-		egraphics_arc(g, 0.f, 0.f, x->f_radius_global, 0., HOA_2PI);
+		egraphics_set_color_rgba(g, &x->f_color_bg);
+		egraphics_arc(g, 0.f, 0.f, x->f_radius, 0., HOA_2PI);
 		egraphics_fill(g);
 
-		egraphics_set_color_rgba(g, &x->f_color_background);
-		egraphics_arc(g, 0.f, 0.f, x->f_radius_circle, 0., HOA_2PI);
+		egraphics_set_color_rgba(g, &x->f_color_bg);
+		egraphics_arc(g, 0.f, 0.f, x->f_radius_center, 0., HOA_2PI);
 		egraphics_fill(g);
 		
         egraphics_set_color_rgba(g, &white);
         egraphics_set_line_width(g, 1.f);
-        egraphics_arc(g, 1, 1, x->f_radius_global,  0., HOA_2PI);
+        egraphics_arc(g, 1, 1, x->f_radius,  0., HOA_2PI);
         egraphics_stroke(g);
-        egraphics_arc(g, 1, 1, x->f_radius_circle,  0., HOA_2PI);
+        egraphics_arc(g, 1, 1, x->f_radius_center,  0., HOA_2PI);
         egraphics_stroke(g);
         
         egraphics_set_color_rgba(g, &black);
         egraphics_set_line_width(g, 1.f);
-        egraphics_arc(g, 0.f, 0.f, x->f_radius_global,  0., HOA_2PI);
+        egraphics_arc(g, 0.f, 0.f, x->f_radius,  0., HOA_2PI);
         egraphics_stroke(g);
-        egraphics_arc(g, 0.f, 0.f, x->f_radius_circle,  0., HOA_2PI);
+        egraphics_arc(g, 0.f, 0.f, x->f_radius_center,  0., HOA_2PI);
         egraphics_stroke(g);
         
-        if(x->f_number_of_channels != 1)
+        if(x->f_meter->getNumberOfChannels() != 1)
         {
-            double offset = x->f_offset_of_channels / 360. * HOA_2PI + HOA_PI2;
-            if(x->f_clockwise == hoa_sym_clockwise)
-                offset = -offset - HOA_PI;
-            for(i = 0; i < x->f_number_of_channels; i++)
+            for(i = 0; i < x->f_meter->getNumberOfChannels(); i++)
             {
-                angle = x->f_meter->getChannelAzimuthMapped(i) - x->f_meter->getChannelWidth(i) * 0.5f + offset;
+                angle = x->f_meter->getChannelAzimuthMapped(i) - x->f_meter->getChannelWidth(i) * 0.5f;
                 if(x->f_clockwise == hoa_sym_clockwise)
-                    angle = -angle + HOA_PI;
+                    angle = -angle;
                 egraphics_set_line_width(g, 1.f);
                
                 coso = cosf(angle);
                 sino = sinf(angle);
-                x1 = x->f_radius_circle * coso;
-                y1 = x->f_radius_circle * sino;
-                x2 = x->f_radius_global * coso;
-                y2 = x->f_radius_global * sino;
+                x1 = x->f_radius_center * coso;
+                y1 = x->f_radius_center * sino;
+                x2 = x->f_radius * coso;
+                y2 = x->f_radius * sino;
                 if(isInsideRad(angle, HOA_PI4, HOA_PI + HOA_PI4))
                 {
                     egraphics_move_to(g, x1 - 0.5, y1 - 0.5);
@@ -609,9 +636,8 @@ void draw_leds(t_hoa_meter *x, t_object *view, t_rect *rect)
     float j, h, dB;
     float angle_start, angle, angle_end, radius, center_x, center_y;
     float led_width = 0.49 * rect->width / 18.;
-    float offset = x->f_offset_of_channels / 360. * HOA_2PI + HOA_PI2;
     
-    t_rgba black = rgba_addContrast(x->f_color_background, -0.14);
+    t_rgba black = rgba_addContrast(x->f_color_bg, -0.14);
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_leds_layer, rect->width, rect->height);
     
 	if (g)
@@ -620,11 +646,12 @@ void draw_leds(t_hoa_meter *x, t_object *view, t_rect *rect)
         for(i = 0; i < x->f_meter->getNumberOfChannels(); i++)
         {
             if(x->f_clockwise != hoa_sym_clockwise)
-                angle   = x->f_meter->getChannelAzimuthMapped(i) + offset;
+                angle   = x->f_meter->getChannelAzimuthMapped(i) + HOA_PI2;
             else
-                angle   = -x->f_meter->getChannelAzimuthMapped(i) + offset;
-            center_x    = pd_abscissa(x->f_radius_global - h, angle);
-            center_y    = -pd_ordinate(x->f_radius_global - h, angle);
+                angle   = -x->f_meter->getChannelAzimuthMapped(i) + HOA_PI2;
+            
+            center_x    = pd_abscissa(x->f_radius - h, angle);
+            center_y    = -pd_ordinate(x->f_radius - h, angle);
             
             angle_start = angle - x->f_meter->getChannelWidth(i) * 0.5f;
             angle_end   = angle + x->f_meter->getChannelWidth(i) * 0.5f;
@@ -655,7 +682,7 @@ void draw_leds(t_hoa_meter *x, t_object *view, t_rect *rect)
                     egraphics_stroke(g);
                 }
             }
-            if(x->f_over_leds_preserved[i])
+            if(x->f_over_leds[i])
             {
                 radius    = (4.) * led_width;
                 egraphics_set_color_rgba(g, &x->f_color_over_signal);
@@ -686,12 +713,12 @@ void draw_vectors(t_hoa_meter *x, t_object *view, t_rect *rect)
             egraphics_set_color_rgba(g, &x->f_color_energy_vector);
             if(x->f_clockwise == hoa_sym_anticlock)
             {
-                x1 = x->f_vector_coords[2] * x->f_radius_circle * 0.85;
-                y1 = x->f_vector_coords[3] * x->f_radius_circle * 0.85;
+                x1 = x->f_vector_coords[2] * x->f_radius_center * 0.85;
+                y1 = x->f_vector_coords[3] * x->f_radius_center * 0.85;
             }
             else
             {
-                double rad = radius(x->f_vector_coords[2], x->f_vector_coords[3]) * x->f_radius_circle * 0.85;
+                double rad = radius(x->f_vector_coords[2], x->f_vector_coords[3]) * x->f_radius_center * 0.85;
                 double ang = -azimuth(x->f_vector_coords[2], x->f_vector_coords[3]);
                 x1 = abscissa(rad, ang);
                 y1 = ordinate(rad, ang);
@@ -704,17 +731,17 @@ void draw_vectors(t_hoa_meter *x, t_object *view, t_rect *rect)
             egraphics_set_color_rgba(g, &x->f_color_velocity_vector);
             if(x->f_clockwise == hoa_sym_anticlock)
             {
-                x1 = x->f_vector_coords[0] * x->f_radius_circle * 0.85;
-                y1 = x->f_vector_coords[1] * x->f_radius_circle * 0.85;
+                x1 = x->f_vector_coords[0] * x->f_radius_center * 0.85;
+                y1 = x->f_vector_coords[1] * x->f_radius_center * 0.85;
             }
             else
             {
-                double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1]) * x->f_radius_circle * 0.85;
+                double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1]) * x->f_radius_center * 0.85;
                 double ang = -azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
                 x1 = abscissa(rad, ang);
                 y1 = ordinate(rad, ang);
             }
-            egraphics_arc(g, x1, y1, size, 0., HOA_2PI);
+            egraphics_arc(g, x1, y1, size, 0., HOA_PI);
             egraphics_fill(g);
 		}
         

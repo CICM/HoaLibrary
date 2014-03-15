@@ -17,8 +17,8 @@
 #X obj -103 156 c.prepend set;
 #X obj -103 -214 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 1 @max 250 @minmax 1 250 @decimal 6 @bgcolor 0.75 0.75
-0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+(null) @min 1 @max 250 @minmax 1 250 @decimal 6 @bgcolor 0.76 0.76
+0.76 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -103 -258 c.loadmess set 16;
 #X obj 246 129 c.preset @size 121 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor

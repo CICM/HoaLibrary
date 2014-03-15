@@ -148,7 +148,6 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_channel_refs   = new double[MAX_CHANNELS];
     x->f_channel_radius = new double[MAX_CHANNELS];
     x->f_out                    = listout(x);
-    //x->f_defer                  = clock_new(x, (t_method)hoa_space_do_channels_set);
 
     flags = 0
     | EBOX_GROWLINK
@@ -240,14 +239,14 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_edrawparam
 {
     params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
-	params->d_cornersize = HOA_UI_CORNERSIZE;
+	params->d_borderthickness = 1;
+	params->d_cornersize = 8;
 }
 
 void hoa_space_oksize(t_hoa_space *x, t_rect *newrect)
 {
-    newrect->width = pd_clip_min(newrect->width, 30.);
-    newrect->height = pd_clip_min(newrect->height, 30.);
+    newrect->width = pd_clip_min(newrect->width, 20.);
+    newrect->height = pd_clip_min(newrect->height, 20.);
 }
 
 /************************************************************************************/
@@ -371,18 +370,18 @@ void draw_space(t_hoa_space *x, t_object *view, t_rect *rect)
         abscissa = Hoa::abscissa(x->f_channel_radius[0], angle);
         ordinate = Hoa::ordinate(x->f_channel_radius[0], angle);
         egraphics_move_to(g, abscissa, ordinate);
-        for(i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+        for(i = 1; i < NUMBEROFCIRCLEPOINTS_UI2; i++)
 		{
-            index1 = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI * x->f_number_of_channels;
+            index1 = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI2 * x->f_number_of_channels;
             index2 = index1+1;
             
-            mu = (double)index1 / (double)x->f_number_of_channels * (double)NUMBEROFCIRCLEPOINTS_UI;
-            mu = (double)(i - mu) / ((double)NUMBEROFCIRCLEPOINTS_UI / (double)x->f_number_of_channels);
+            mu = (double)index1 / (double)x->f_number_of_channels * (double)NUMBEROFCIRCLEPOINTS_UI2;
+            mu = (double)(i - mu) / ((double)NUMBEROFCIRCLEPOINTS_UI2 / (double)x->f_number_of_channels);
             if(index2 >= x->f_number_of_channels)
                 index2 = 0;
             
             radius = cosine_interpolation(x->f_channel_radius[index1], x->f_channel_radius[index2], mu);
-            angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI * HOA_2PI + HOA_PI;
+            angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI2 * HOA_2PI + HOA_PI;
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             egraphics_line_to(g, abscissa, ordinate);

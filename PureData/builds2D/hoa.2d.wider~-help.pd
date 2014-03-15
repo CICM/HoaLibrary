@@ -2,7 +2,7 @@
 #X obj 0 0 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.wider~ 3
 12 0 18 -204280 -1 0;
 #X obj 112 127 noise~;
-#X obj 112 230 hoa.scope~ @size 201 201 @fontname Helvetica @fontweight
+#X obj 112 230 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
@@ -10,11 +10,11 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 #X msg 5 383 \; pd dsp 0;
 #X obj 393 159 line~;
 #X msg 393 139 \$1 20;
-#X obj 112 471 hoa.meter~ @size 202 202 @fontname Helvetica @fontweight
+#X obj 112 471 hoa.2d.meter~ @size 202 202 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send à$ @channels
 16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
-292.5 315 337.5 @offset 0 @rotation Anti-Clockwise @vectors Energy
-@interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor
+292.5 315 337.5 @offset 0 @rotation anti-clockwise @vectors energy
+@interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor
 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
 1 0 0 0.8;

@@ -25,11 +25,11 @@
 #X obj 165 -255 delread~ del_proj5 200;
 #X obj 178 -233 delread~ del_proj6 100;
 #X obj -107 -322 *~;
-#X obj -236 -268 hoa.scope~ @size 135 135 @fontname Helvetica @fontweight
+#X obj -236 -268 hoa.2d.scope~ @size 135 135 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 1 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 113 -99 hoa.scope~ @size 153 153 @fontname Helvetica @fontweight
+#X obj 113 -99 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 1 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;

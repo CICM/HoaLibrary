@@ -6,7 +6,6 @@
 
 #include "../Hoa2D.pd.h"
 
-
 typedef struct  _hoa_scope
 {
 	t_edspbox   j_box;
@@ -148,7 +147,7 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
     
     x->f_order      = 1;
 	x->f_startclock = 0;
-	x->f_scope      = new Hoa2D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI);
+	x->f_scope      = new Hoa2D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI2);
     x->f_order      = x->f_scope->getOrder();
     x->f_signals    = new t_float[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
     x->f_index      = 0;
@@ -377,7 +376,7 @@ void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect)
 
 void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
 {
-    int pathLength = 0;
+    long pathLength = 0;
 	t_pt beginCoord;
     t_matrix transform;
     t_rgba shadcolor = {0.4, 0.4, 0.4, 1.};
@@ -433,7 +432,8 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
                 }
             }
         }
-        egraphics_stroke(g);
+        if(pathLength)
+            egraphics_stroke(g);
         
         egraphics_set_color_rgba(g, &x->f_color_nh);
         pathLength = 0;
@@ -467,7 +467,8 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
                 }
             }
         }
-        egraphics_stroke(g);
+        if(pathLength)
+            egraphics_stroke(g);
         
 		ebox_end_layer((t_ebox *)x, hoa_sym_harmonics_layer);
 	}

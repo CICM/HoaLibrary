@@ -1,4 +1,4 @@
-#N canvas 487 113 774 563 10;
+#N canvas 315 150 774 563 10;
 #X obj -555 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.meter~
 3 12 0 18 -204280 -1 0;
 #X text -550 -414 A circular meter with sound field descriptor;
@@ -53,11 +53,11 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -432 -236 hoa.2d.decoder~ 3 irregular 5 --------;
 #X obj -432 -198 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
-@channels 5 @angles 0 30 110 250 330 @offset 0 @rotation Anti-Clockwise
-@vectors energy @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
-0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
-0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+@channels 5 @angles 0 30 110 250 330 @offset 0 @rotation clockwise
+@vectors energy @interval 50 @bgcolor 0.758847 0.758847 0.758847 1
+@bdcolor 0.699562 0.699562 0.699562 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
+0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
+1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X text -550 -393 hoa.2d.meter~ displays the peak levels for a circurlar
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
