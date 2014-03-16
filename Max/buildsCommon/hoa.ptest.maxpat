@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 526.0, 276.0, 741.0, 345.0 ],
+		"rect" : [ 706.0, 44.0, 708.0, 315.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -27,8 +27,21 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.ptest (1) [1 4294967295]",
+		"title" : "hoa.ptest (1) [0 0]",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 184.0, 246.0, 51.0, 20.0 ],
+					"text" : "hoa.out"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -152,7 +165,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 217.0, 179.0, 236.0, 18.0 ],
-					"text" : "buffer foo"
+					"text" : "bang"
 				}
 
 			}
@@ -180,7 +193,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 218.0, 122.0, 236.0, 18.0 ],
-					"text" : "buffer foo"
+					"text" : "bang"
 				}
 
 			}
@@ -237,19 +250,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 184.0, 68.0, 43.0, 20.0 ],
 					"text" : "hoa.in"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 184.0, 247.0, 51.0, 20.0 ],
-					"text" : "hoa.out"
 				}
 
 			}
