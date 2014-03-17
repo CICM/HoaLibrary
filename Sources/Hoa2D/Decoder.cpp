@@ -371,13 +371,13 @@ namespace Hoa2D
         
         for(i = 0; i < m_vector_size; i++)
         {
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+i+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + i, 1);
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + i, m_vector_size, m_linear_vector_left + i, 1);
             outputs[0][i] = m_linear_vector_left[i];
         }
         
         for(i = 0; i < m_vector_size; i++)
         {
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+i, m_vector_size, m_linear_vector_right + i, 1);
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + i + m_vector_size * m_impulses_size, m_vector_size, m_linear_vector_right + i, 1);
             outputs[1][i] = m_linear_vector_right[i];
         }
         

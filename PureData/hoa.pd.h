@@ -4,8 +4,8 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_MAX
-#define DEF_HOA_MAX
+#ifndef DEF_HOA_PD
+#define DEF_HOA_PD
 
 extern "C"
 {
