@@ -53,7 +53,7 @@ namespace Hoa2D
 					recallSlot(sourcesManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(sourcesManager, groupIndex);
+					storeGroupAtNextSlot(sourcesManager, groupIndex);
 			}
 		}
 	}

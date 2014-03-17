@@ -77,6 +77,7 @@ void hoa_map_trajectory(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_bang(t_hoa_map *x);
 void hoa_map_infos(t_hoa_map *x);
 void hoa_map_clear_all(t_hoa_map *x);
+void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 
 /* Paint Methods */
 void hoa_map_paint(t_hoa_map *x, t_object *view);
@@ -131,6 +132,7 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     eclass_addmethod(c, (method) hoa_map_key,              "key",             A_CANT,     0);
 	eclass_addmethod(c, (method) hoa_map_popup,            "popup",           A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_save,             "save",            A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_read,             "write",            A_GIMME,    0);
     
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
@@ -275,6 +277,14 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         if(a == 2)
             sprintf(s,"(List) Infos");
     }
+}
+
+void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
+{
+    post(s->s_name);
+    post("");
+    postatom(ac, av);
+    post("");
 }
 
 void hoa_map_doread(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv)
@@ -695,8 +705,6 @@ void hoa_map_save(t_hoa_map *x, t_binbuf *d)
 {
     hoa_map_source_save(x, d);
     hoa_map_group_save(x, d);
-    hoa_map_slot_save(x, d);
-    hoa_map_trajectory_save(x, d);
 }
 
 void hoa_map_source_save(t_hoa_map *x, t_binbuf *d)
@@ -1205,7 +1213,7 @@ void hoa_map_bang(t_hoa_map *x)
         {
             atom_setlong(av, i);
             atom_setlong(av+2, x->f_source_manager->sourceGetMute(i));
-            outlet_list(x->f_out_sources, 0L, 3, av);
+            outlet_list(x->f_out_sources, &s_list, 3, av);
         }
     }
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
@@ -1214,7 +1222,7 @@ void hoa_map_bang(t_hoa_map *x)
         {
             atom_setlong(av, i);
             atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
-            outlet_list(x->f_out_groups, 0L, 4, av);
+            outlet_list(x->f_out_groups, &s_list, 4, av);
         }
     }
     if(x->f_output_mode == hoa_sym_polar)
@@ -1227,7 +1235,7 @@ void hoa_map_bang(t_hoa_map *x)
                 atom_setlong(av, i);
                 atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
                 atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
-                outlet_list(x->f_out_sources, 0L, 4, av);
+                outlet_list(x->f_out_sources, &s_list, 4, av);
             }
         }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
@@ -1237,7 +1245,7 @@ void hoa_map_bang(t_hoa_map *x)
                 atom_setlong(av, i);
                 atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
                 atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
-                outlet_list(x->f_out_groups, 0L, 4, av);
+                outlet_list(x->f_out_groups, &s_list, 4, av);
             }
         }
         
@@ -1252,7 +1260,7 @@ void hoa_map_bang(t_hoa_map *x)
                 atom_setlong(av, i);
                 atom_setfloat(av+2,x->f_source_manager->sourceGetAbscissa(i));
                 atom_setfloat(av+3,x->f_source_manager->sourceGetOrdinate(i));
-                outlet_list(x->f_out_sources, 0L, 4, av);
+                outlet_list(x->f_out_sources, &s_list, 4, av);
             }
         }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
@@ -1262,7 +1270,7 @@ void hoa_map_bang(t_hoa_map *x)
                 atom_setlong(av, i);
                 atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
                 atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
-                outlet_list(x->f_out_groups, 0L, 4, av);
+                outlet_list(x->f_out_groups, &s_list, 4, av);
             }
         }
     }
@@ -1288,7 +1296,7 @@ void hoa_map_infos(t_hoa_map *x)
     atom_setsym(avNumber, hoa_sym_source);
     atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfSource);
-    outlet_list(x->f_out_infos, 0L, 3, avNumber);
+    outlet_list(x->f_out_infos, &s_list, 3, avNumber);
     
     avIndex = new t_atom[numberOfSource+2];
     atom_setsym(avIndex, hoa_sym_source);
@@ -1312,7 +1320,7 @@ void hoa_map_infos(t_hoa_map *x)
         {
             atom_setlong(avMute+2, i);
             atom_setlong(avMute+3, x->f_source_manager->sourceGetMute(i));
-            outlet_list(x->f_out_infos, 0L, 4, avMute);
+            outlet_list(x->f_out_infos, &s_list, 4, avMute);
         }
     }
     
@@ -1347,11 +1355,11 @@ void hoa_map_infos(t_hoa_map *x)
             {
                 atom_setlong(avSource+3+k,x->f_source_manager->groupGetSourceIndex(i, k));
             }
-            outlet_list(x->f_out_infos, 0L, x->f_source_manager->groupGetNumberOfSources(i)+3, avSource);
+            outlet_list(x->f_out_infos, &s_list, x->f_source_manager->groupGetNumberOfSources(i)+3, avSource);
             free(avSource);
         }
     }
-    outlet_list(x->f_out_infos, 0L, numberOfGroups+2, avIndex);
+    outlet_list(x->f_out_infos, &s_list, numberOfGroups+2, avIndex);
     free(avIndex);
     
     atom_setsym(avMute, hoa_sym_group);
@@ -1362,7 +1370,7 @@ void hoa_map_infos(t_hoa_map *x)
         {
             atom_setlong(avMute+2, i);
             atom_setlong(avMute+3, x->f_source_manager->groupGetMute(i));
-            outlet_list(x->f_out_infos, 0L, 4, avMute);
+            outlet_list(x->f_out_infos, &s_list, 4, avMute);
         }
     }
 
@@ -1378,7 +1386,7 @@ void hoa_map_infos(t_hoa_map *x)
     atom_setsym(avNumber, hoa_sym_slot);
     atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfSlots);
-    outlet_list(x->f_out_infos, 0L, 3, avNumber);
+    outlet_list(x->f_out_infos, &s_list, 3, avNumber);
 
     avIndex = new t_atom[numberOfSlots+2];
     atom_setsym(avIndex, hoa_sym_slot);
@@ -1391,7 +1399,7 @@ void hoa_map_infos(t_hoa_map *x)
             j++;
         }
     }
-    outlet_list(x->f_out_infos, 0L, numberOfSlots+2, avIndex);
+    outlet_list(x->f_out_infos, &s_list, numberOfSlots+2, avIndex);
     free(avIndex);    
 }
 
@@ -1931,7 +1939,7 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
 	if (x->f_index_of_selected_source != -1)
     {
         if(modifiers == EMOD_SHIFT)
-            x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - HOA_PI2);
+            x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y));
         else if(modifiers == EMOD_ALT)
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
         else

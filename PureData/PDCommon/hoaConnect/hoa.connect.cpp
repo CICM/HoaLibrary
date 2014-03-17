@@ -1,33 +1,10 @@
-/**
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.re Guillot, CICM - Université Paris 8
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This file is part of HOA LIBRARY.
- *
- * HOA LIBRARY is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-extern "C"
-{
-#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
-}
+#include "../HoaCommon.pd.h"
 
 typedef struct _hoa_connect
 {
@@ -41,16 +18,19 @@ void hoa_connect_bang(t_hoa_connect *x);
 
 t_eclass *hoa_connect_class;
 
+t_hoa_err hoa_getinfos(t_hoa_connect* x, t_hoa_boxinfos* boxinfos);
+
 extern "C" void setup_hoa0x2econnect(void)
 {
     t_eclass* c;
     
     c = eclass_new("hoa.connect", (method)hoa_connect_new, (method)hoa_connect_free, (short)sizeof(t_hoa_connect), 0, A_GIMME, 0);
+    
+    hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_connect_bang,          "bang",             A_CANT, 0);
     
     eclass_register(CLASS_OBJ, c);
     hoa_connect_class = c;
-    hoa_post();
 }
 
 void *hoa_connect_new(t_symbol *s, long argc, t_atom *argv)
@@ -58,6 +38,16 @@ void *hoa_connect_new(t_symbol *s, long argc, t_atom *argv)
 	t_hoa_connect *x = (t_hoa_connect *)eobj_new(hoa_connect_class);
     
     return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_connect* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_STANDARD;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = 0;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 void hoa_connect_bang(t_hoa_connect *x)
@@ -68,6 +58,7 @@ void hoa_connect_bang(t_hoa_connect *x)
     t_gobj *y = NULL;
     t_gobj *list[256];
     t_outconnect *oc;
+    
     for(y = eobj_getcanvas(x)->gl_list; y; y = y->g_next)
     {
         if(strncmp(eobj_getclassname(y)->s_name, "hoa.", 4) == 0 && glist_isselected(eobj_getcanvas(x), y))
@@ -112,6 +103,7 @@ void hoa_connect_bang(t_hoa_connect *x)
         }
         canvas_fixlinesfor(eobj_getcanvas(x), (t_text *)list[i]);
     }
+    canvas_dirty(eobj_getcanvas(x), 1);
 }
 
 void hoa_connect_free(t_hoa_connect *x)
