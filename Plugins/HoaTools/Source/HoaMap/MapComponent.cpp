@@ -23,7 +23,6 @@ MapEditor::MapEditor(SourcesManager* aSourceManager, AudioProcessor* aProcessor)
     m_selected          = 0;
 }
 
-
 MapEditor::~MapEditor()
 {
     ;

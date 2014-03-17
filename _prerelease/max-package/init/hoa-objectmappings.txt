@@ -12,3 +12,5 @@ max objectfile hoa.!=~ hoa.notequals~;
 max objectfile hoa.!/~ hoa.rdiv~;
 max objectfile hoa.!-~ hoa.rminus~;
 max objectfile hoa.-~ hoa.minus~;
+max objectfile hoa.2d.process~ hoa.process~;
+max objectfile hoa.3d.process~ hoa.process~;
