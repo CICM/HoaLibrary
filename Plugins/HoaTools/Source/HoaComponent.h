@@ -10,6 +10,14 @@
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 
+class HoaComponentListener
+{
+public:
+    HoaComponentListener(){};
+    virtual ~HoaComponentListener(){};
+    virtual void componentHasBeenClicked(Component* component){};
+};
+
 class HoaProcessor
 {
 private:

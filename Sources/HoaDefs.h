@@ -11,6 +11,7 @@
 #include <vector>
 #include <map>
 #include <stdio.h>
+#include <assert.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
