@@ -30,6 +30,9 @@ namespace Hoa2D{};
 #include "SourcesPreset.h"
 #include "SourcesTrajectory.h"
 #include "ChannelManager.h"
+#include "Kits.h"
+
+using namespace Hoa2D;
 
 #endif
 

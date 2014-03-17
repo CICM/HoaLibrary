@@ -104,7 +104,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_recomposer_dsp64,	"dsp64",            A_CANT, 0);
 	class_addmethod(c, (method)hoa_recomposer_assist,   "assist",           A_CANT, 0);
     class_addmethod(c, (method)hoa_recomposer_angle,    "angles",           A_GIMME,0);
-    class_addmethod(c, (method)hoa_recomposer_wide,     "directivities",    A_GIMME,0);
+    class_addmethod(c, (method)hoa_recomposer_wide,     "wide",             A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_float,    "float",            A_FLOAT,0);
     
     CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_recomposer, f_mode);

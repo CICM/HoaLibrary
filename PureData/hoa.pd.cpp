@@ -8,42 +8,26 @@
 
 void hoa_print_credit()
 {
-    if(gensym("hoa_print_credits")->s_thing == NULL)
-    {
-		t_object* print;
-		t_atom* sym = (t_atom*) malloc( sizeof(t_atom));
-        post("HoaLibrary");
-        post(_sym_credit_line1->s_name);
-        post(_sym_hoa_version->s_name);
-        post(_sym_credit_line1->s_name);
-		atom_setsym(sym, gensym("HoaLibrary"));
-        /*
-		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
-		atom_setsym(sym, _sym_credit_line1);
-		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		atom_setsym(sym, _sym_hoa_version);
-		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
-		atom_setsym(sym, _sym_credit_line2);
-		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		gensym("hoa_print_credits")->s_thing = print;
-		freeobject(print);
-		free(sym);
-         */
-    }
+    erouter_add_libary(gensym("HOA"), "HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 2.0");
 }
 
-t_hoa_err hoa_initclass(t_class* c, method hoa_getinfos_method)
+int hoa_method_true(void *x)
 {
-    /*
+    return 1;
+}
+
+t_hoa_err hoa_initclass(t_eclass* c, method hoa_getinfos_method)
+{
+    
 	hoa_print_credit();
 	
-	class_addmethod(c, (method)method_true, "is_hoa", A_CANT, 0);
+	eclass_addmethod(c, (method)hoa_method_true, "is_hoa", A_CANT, 0);
 
 	if (hoa_getinfos_method)
-		class_addmethod(c, (method)hoa_getinfos_method, "hoa_getinfos", A_CANT, 0);
+		eclass_addmethod(c, (method)hoa_getinfos_method, "hoa_getinfos", A_CANT, 0);
 	else
-		class_addmethod(c, (method)hoa_not_implemented_method, "hoa_getinfos", A_CANT, 0);
-	*/
+		eclass_addmethod(c, (method)hoa_not_implemented_method, "hoa_getinfos", A_CANT, 0);
+	
 	return HOA_ERR_NONE;
 }
 
@@ -52,9 +36,16 @@ t_hoa_err hoa_not_implemented_method()
 	return HOA_ERR_NOT_IMPLEMENTED;
 }
 
-long object_is_hoa(t_object* o)
+long object_is_hoa(t_object* z)
 {
-	//return (long) object_method(o, _sym_is_hoa, 0, NULL);
+    rmethod nrmethod = NULL;
+    nrmethod = (rmethod)zgetfn((t_pd *)z, _sym_is_hoa);
+    if(nrmethod)
+    {
+        return (long)nrmethod((t_pd *)z);
+    }
+    else
+        return 0;
 }
 
 void hoa_boxinfos_init(t_hoa_boxinfos* boxinfos)

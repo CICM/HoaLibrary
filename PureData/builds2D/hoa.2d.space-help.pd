@@ -1,0 +1,78 @@
+#N canvas 343 82 598 661 10;
+#X obj -168 -348 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
+3 12 0 18 -204280 -1 0;
+#X msg -103 -191 channels \$1;
+#X msg -103 184 1 0.714482 0.645385 0.645385 1 1 0.645385 0.692838
+1 0.723817 0.647754 1 1 0.714482 0.645385 0.651617;
+#X text -95 -236 Number of channels;
+#X text 31 -225 Coefficients;
+#X text -103 257 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -103 241 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -166 -326 A GUI to design ambisonic space;
+#X obj 23 -250 loadbang;
+#X msg 23 -202 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
+0.0343521 0.0879706 0.0634424;
+#X obj -103 156 c.prepend set;
+#X obj -103 -214 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max 250 @minmax 1 250 @decimal 6 @bgcolor 0.76 0.76
+0.76 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -103 -258 c.loadmess set 16;
+#X obj 246 129 c.preset @size 121 41 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
+0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
+[ @index 0 @spacepreset hoa.2d.space list 0.268812 0.308778 0.42228
+0.568753 0.788201 0.80421 0.876024 0.907126 1 0.103335 0.134466 0.255546
+0.394962 0.394665 0.397036 0.343979 @index 1 @spacepreset hoa.2d.space
+list 0.532779 0.588845 0.684887 0 0 0 0.0445425 0.0978753 0.143325
+0.0625148 0.030905 0.034628 0.0435662 0.501465 0.549832 0.479624 @index
+2 @spacepreset hoa.2d.space list 0 0 0 0 0 0 1 0 0 0 0 0.0100281 0.00180078
+0.451538 1 0 @index 3 @spacepreset hoa.2d.space list 0 0.00669422 1
+0 0 0 1 0 0 0 1 0.0100281 0.00180078 0.451538 1 0 @index 4 @spacepreset
+hoa.2d.space list 0.931365 0.0690971 0 0 0.930903 0.705041 0 0 0.930903
+0.0784322 0.00236926 0.420463 0.962103 0.0690971 0 0.00623167 @index
+5 @spacepreset hoa.2d.space list 1 0.714482 0.645385 0.645385 1 1 0.645385
+0.692838 1 0.723817 0.647754 1 1 0.714482 0.645385 0.651617 ];
+#X msg 246 89 inter \$1;
+#X obj 246 61 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 246 35 line;
+#X msg 246 8 1 \, 6 6000;
+#X text 216 -151 1 - Click and drag to;
+#X text 216 -141 set the coefficients.;
+#X text 216 -121 2 - Hold shift and click;
+#X text 216 -111 and drag to increase or;
+#X text 216 -91 coefficients together.;
+#X text 216 -101 decrease all the;
+#X text 216 -61 click and drag to compute;
+#X text 216 -51 a rotation of the coefficients;
+#X text 244 -23 Preset :;
+#X obj -141 -214 c.bang @size 17 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X obj -103 -133 hoa.2d.space @size 269 269 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive hoaspace @send (null)
+@presetname spacepreset @channels 16 @minmax 0 1 @bgcolor 0.76 0.76
+0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.272711 0.434756 0.545421 0.25
+@ptcolor 0 0 0 1;
+#X text 216 -71 3 - Hold alt and;
+#X text -166 -306 hoa.2d.space allows you to draw spatial filtering
+and apply gains to the virtual microphones signals. It sould be used
+with the hoa.space~ object in the plane wave domain.;
+#X connect 1 0 28 0;
+#X connect 8 0 9 0;
+#X connect 9 0 28 0;
+#X connect 10 0 2 0;
+#X connect 11 0 1 0;
+#X connect 12 0 11 0;
+#X connect 14 0 13 0;
+#X connect 15 0 14 0;
+#X connect 16 0 15 0;
+#X connect 17 0 16 0;
+#X connect 27 0 28 0;
+#X connect 28 0 10 0;

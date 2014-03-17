@@ -1,0 +1,131 @@
+#N canvas 535 59 582 797 10;
+#X obj 0 0 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.wider~ 3
+12 0 18 -204280 -1 0;
+#X obj 112 127 noise~;
+#X obj 112 230 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X msg 5 339 \; pd dsp 1;
+#X msg 5 383 \; pd dsp 0;
+#X obj 393 159 line~;
+#X msg 393 139 \$1 20;
+#X obj 112 471 hoa.2d.meter~ @size 202 202 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send à$ @channels
+16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
+292.5 315 337.5 @offset 0 @rotation anti-clockwise @vectors energy
+@interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor
+0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
+1 0 0 0.8;
+#X text 67 739 Eliott Paris Â© 2012-2013 CICM / Universite Paris 8
+;
+#X text 67 723 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text 454 122 between 0 and 1;
+#X text 454 110 Widen value;
+#X text 2 22 A fractional ambisonic orders simulator;
+#X obj 393 116 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.7 0.7 0.7 1
+@bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 295 126 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 295 148 hoa.pi 0;
+#X obj 295 103 c.loadmess 0;
+#X obj 112 687 hoa.dac~ 1:16 -------------------;
+#X obj 393 93 c.loadmess 0.175;
+#X obj 112 442 hoa.2d.decoder~ 7 ambisonic 16 --;
+#X obj 112 174 hoa.2d.encoder~ 7 -------------;
+#X obj 112 200 hoa.2d.wider~ 7 -----------------;
+#X text 4 40 hoa.2d.wider~ can be used to wide the diffusion of a localised
+sound. The order depending signals are weighted and appear in a logarithmic
+way to have linear changes.;
+#X connect 1 0 20 0;
+#X connect 5 0 21 15;
+#X connect 6 0 5 0;
+#X connect 13 0 6 0;
+#X connect 14 0 15 0;
+#X connect 15 0 20 1;
+#X connect 16 0 14 0;
+#X connect 18 0 13 0;
+#X connect 19 0 7 0;
+#X connect 19 0 17 0;
+#X connect 19 1 7 1;
+#X connect 19 1 17 1;
+#X connect 19 2 7 2;
+#X connect 19 2 17 2;
+#X connect 19 3 7 3;
+#X connect 19 3 17 3;
+#X connect 19 4 7 4;
+#X connect 19 4 17 4;
+#X connect 19 5 7 5;
+#X connect 19 5 17 5;
+#X connect 19 6 7 6;
+#X connect 19 6 17 6;
+#X connect 19 7 7 7;
+#X connect 19 7 17 7;
+#X connect 19 8 7 8;
+#X connect 19 8 17 8;
+#X connect 19 9 7 9;
+#X connect 19 9 17 9;
+#X connect 19 10 7 10;
+#X connect 19 10 17 10;
+#X connect 19 11 7 11;
+#X connect 19 11 17 11;
+#X connect 19 12 7 12;
+#X connect 19 12 17 12;
+#X connect 19 13 7 13;
+#X connect 19 13 17 13;
+#X connect 19 14 7 14;
+#X connect 19 14 17 14;
+#X connect 19 15 7 15;
+#X connect 19 15 17 15;
+#X connect 20 0 21 0;
+#X connect 20 1 21 1;
+#X connect 20 2 21 2;
+#X connect 20 3 21 3;
+#X connect 20 4 21 4;
+#X connect 20 5 21 5;
+#X connect 20 6 21 6;
+#X connect 20 7 21 7;
+#X connect 20 8 21 8;
+#X connect 20 9 21 9;
+#X connect 20 10 21 10;
+#X connect 20 11 21 11;
+#X connect 20 12 21 12;
+#X connect 20 13 21 13;
+#X connect 20 14 21 14;
+#X connect 21 0 2 0;
+#X connect 21 0 19 0;
+#X connect 21 1 2 1;
+#X connect 21 1 19 1;
+#X connect 21 2 2 2;
+#X connect 21 2 19 2;
+#X connect 21 3 2 3;
+#X connect 21 3 19 3;
+#X connect 21 4 2 4;
+#X connect 21 4 19 4;
+#X connect 21 5 2 5;
+#X connect 21 5 19 5;
+#X connect 21 6 2 6;
+#X connect 21 6 19 6;
+#X connect 21 7 2 7;
+#X connect 21 7 19 7;
+#X connect 21 8 2 8;
+#X connect 21 8 19 8;
+#X connect 21 9 2 9;
+#X connect 21 9 19 9;
+#X connect 21 10 2 10;
+#X connect 21 10 19 10;
+#X connect 21 11 2 11;
+#X connect 21 11 19 11;
+#X connect 21 12 2 12;
+#X connect 21 12 19 12;
+#X connect 21 13 2 13;
+#X connect 21 13 19 13;
+#X connect 21 14 2 14;
+#X connect 21 14 19 14;
+#X coords 0 797 1 796 100 60 0;

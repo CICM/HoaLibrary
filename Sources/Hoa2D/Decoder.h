@@ -128,7 +128,7 @@ namespace Hoa2D
         //! Set the azimuth of a channel.
         /** Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
          
-            @param     index		The index of the loudspeaker.
+            @param     index		The index of the channel.
             @param     azimuth		The azimuth.
          
             @see    setChannelsAzimtuh
@@ -401,7 +401,7 @@ namespace Hoa2D
         //! Set the azimuth of a channel for the irregular decoding mode.
         /** Set the azimuth of a channel for the irregular decoding mode. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
          
-            @param     index		The index of the loudspeaker.
+            @param     index		The index of the channel.
             @param     azimuth		The azimuth.
          
             @see    setChannelsAzimtuh
@@ -491,7 +491,7 @@ namespace Hoa2D
         //! Retrieve the abscissa of a channel.
 		/** Retrieve the abscissa of a channel. The abscissa is between -1 and 1, -1 is the left of the soundfield, 0 is the center of the soundfield and 1 is the right of the soundfield. The maximum index must be the number of channels - 1.
          
-            @param     index    The index of the loudspeaker.
+            @param     index    The index of the channel.
             @return    The abscissa of the channel if the channel exists, otherwise the function generates an error.
          
             @see getChannelAzimuth

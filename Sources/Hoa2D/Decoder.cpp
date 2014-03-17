@@ -358,33 +358,39 @@ namespace Hoa2D
     
     void DecoderBinaural::process(const float* const* inputs, float** outputs)
 	{
-		const float* input;
-        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+        unsigned int i;
+        for(i = 0; i < m_number_of_harmonics; i++)
         {
-            input = inputs[i];
-            for(unsigned int j = 0; j < m_vector_size; j++)
-            {
-                m_input_matrix[i*m_vector_size+j] = input[j];
-            }
+            cblas_scopy(m_vector_size, inputs[i], 1,  m_input_matrix+i*m_vector_size, 1);
         }
+        
         cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulses_size * 2), m_vector_size, m_number_of_harmonics, 1.,
                     m_impulses_matrix, m_number_of_harmonics,
                     m_input_matrix,  m_vector_size,
                     0., m_result_matrix,  m_vector_size);
         
-        for(unsigned int j = 0; j < m_vector_size; j++)
+        for(i = 0; i < m_vector_size; i++)
         {
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);
-            
-            outputs[0][j] = m_linear_vector_left[j];
-            outputs[1][j] = m_linear_vector_right[j];
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + i, m_vector_size, m_linear_vector_left + i, 1);
+            outputs[0][i] = m_linear_vector_left[i];
         }
+        
+        for(i = 0; i < m_vector_size; i++)
+        {
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + i + m_vector_size * m_impulses_size, m_vector_size, m_linear_vector_right + i, 1);
+            outputs[1][i] = m_linear_vector_right[i];
+        }
+        
         cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
         cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
         
+#ifdef __APPLE__
+        vDSP_vclr(m_linear_vector_left + m_impulses_size - 1, 1, m_vector_size);
+        vDSP_vclr(m_linear_vector_right + m_impulses_size - 1, 1, m_vector_size);
+#else
         memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
         memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+#endif
 	}
 	
 	void DecoderBinaural::process(const double* const* inputs, double** outputs)

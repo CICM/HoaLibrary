@@ -23,7 +23,8 @@ namespace Hoa2D
         double*         m_channels_peaks;
 		double*			m_channels_azimuth_mapped;
 		double*			m_channels_azimuth_width;
-
+        double          m_offset;
+        
 		void computeAngles();
     public:
         
@@ -56,6 +57,23 @@ namespace Hoa2D
 		 @see    setChannelAzimuth
          */
 		void setChannelsAzimuth(double* azimuth);
+        
+        //! Set the offset of the channels.
+		/**	Set the azimuth offset of the channels in radian.
+         
+         @param     offset		An azimuth value.
+         */
+		void setChannelsOffset(double offset);
+        
+        //! Get the offset of the channels.
+        /**	Retreive the azimuth offset of the channels in radian.
+         
+         @return    The offset of the channels.
+         */
+		double getChannelsOffset() const
+        {
+            return m_offset;
+        }
         
 		//! Get the mapped azimuth of a given channel.
         /**

@@ -9,24 +9,24 @@
 
 extern "C"
 {
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-#include "ext_common.h"
-#include "jpatcher_api.h"
-#include "jgraphics.h"
-#include "jpatcher_syms.h"
-#include "ext_dictionary.h"
-#include "buffer.h"
-#include "ext_globalsymbol.h"
-#include "commonsyms.h"
-#include "ext_parameter.h"
-#include "jpatcher_syms.h"
+#include <ext.h>
+#include <ext_obex.h>
+#include <z_dsp.h>
+#include <ext_common.h>
+#include <jpatcher_api.h>
+#include <jgraphics.h>
+#include <jpatcher_syms.h>
+#include <ext_dictionary.h>
+#include <buffer.h>
+#include <ext_globalsymbol.h>
+#include <commonsyms.h>
+#include <ext_parameter.h>
+#include <jpatcher_syms.h>
 }
 
 #include "hoa.max_commonsyms.h"
 
-#define MAX_CHANNELS 256
+#define MAX_CHANNELS SYS_MAXSIGS
 
 #define HOA_UI_BORDERTHICKNESS 1
 #define HOA_UI_CORNERSIZE 8
@@ -47,6 +47,8 @@ typedef enum {
 	HOA_ERR_NONE			=					-1,
 	HOA_ERR_OUT_OF_MEMORY	=					-2,
 	HOA_ERR_NOT_IMPLEMENTED =					-3,
+	HOA_ERR_FAIL			=					-4,
+	HOA_ERR_FILE_NOT_FOUND  =					-5,
 } e_hoa_err_type;
 
 /**

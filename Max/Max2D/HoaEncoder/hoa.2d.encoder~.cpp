@@ -10,7 +10,7 @@ typedef struct _hoa_encoder
 {
 	t_pxobject      f_ob;
     double*         f_signals;
-    Hoa2D::Encoder* f_encoder;
+    Encoder*        f_encoder;
 } t_hoa_encoder;
 
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);

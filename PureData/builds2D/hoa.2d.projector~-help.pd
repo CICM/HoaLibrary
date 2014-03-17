@@ -1,0 +1,130 @@
+#N canvas 425 58 764 658 10;
+#X obj -255 -480 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.projector~
+3 12 0 18 -204280 -1 0;
+#X obj -92 -341 hoa.pi 2;
+#X obj -92 -360 loadbang;
+#X obj -236 -339 osc~ 220;
+#X msg 330 -80 \; pd dsp 1;
+#X msg 330 -42 \; pd dsp 0;
+#X text -116 144 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -116 128 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -236 -102 delwrite~ del_proj1 1000;
+#X obj -224 -80 delwrite~ del_proj2 1000;
+#X obj -212 -58 delwrite~ del_proj3 1000;
+#X obj -199 -38 delwrite~ del_proj4 1000;
+#X obj -187 -16 delwrite~ del_proj5 1000;
+#X obj -175 6 delwrite~ del_proj6 1000;
+#X obj -162 28 delwrite~ del_proj7 1000;
+#X obj -150 48 delwrite~ del_proj8 1000;
+#X obj -138 70 delwrite~ del_proj9 1000;
+#X obj -125 92 delwrite~ del_proj10 1000;
+#X obj 152 -277 delread~ del_proj4 300;
+#X obj 126 -319 delread~ del_proj2 600;
+#X obj 165 -255 delread~ del_proj5 200;
+#X obj 178 -233 delread~ del_proj6 100;
+#X obj -107 -322 *~;
+#X obj -236 -268 hoa.2d.scope~ @size 135 135 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 1 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 113 -99 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 1 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 191 -211 delread~ del_proj7 150;
+#X obj 204 -191 delread~ del_proj8 380;
+#X obj 217 -169 delread~ del_proj9 570;
+#X obj 230 -147 delread~ del_proj10 800;
+#X text -252 -458 A plane wave projector;
+#X text 128 -428 Sound field transformations have differents behavior
+in the plane domain compared to the ambisonic domain.;
+#X text 128 -398 Here \, we apply differents delay lines on each signal.
+;
+#X text 127 -379 Look to hoa.recomposer~ and hoa.space~ for futher
+informations and soundfield transformations.;
+#X obj 113 -341 delread~ del_proj1 30;
+#X obj 139 -297 delread~ del_proj3 10;
+#X obj -107 -381 phasor~ 0.8;
+#X obj -236 -125 hoa.2d.projector~ 4 10;
+#X obj -236 -291 hoa.2d.encoder~ 4 ----;
+#X obj 113 -122 hoa.2d.recomposer~ 4 10 -;
+#X obj 113 64 hoa.2d.decoder~ 4 0 10 --;
+#X obj 113 97 hoa.dac~ 1:10 -----------;
+#X text -253 -438 hoa.2d.projector~ discretizes the ambisonic soundfield
+into an array of virtual loudspeakers and gives a access to the plane
+wave domain. Use hoa.recomposer~ to come back to harmonics domain.
+;
+#X connect 1 0 22 1;
+#X connect 2 0 1 0;
+#X connect 3 0 37 0;
+#X connect 18 0 38 3;
+#X connect 19 0 38 1;
+#X connect 20 0 38 4;
+#X connect 21 0 38 5;
+#X connect 22 0 37 1;
+#X connect 25 0 38 6;
+#X connect 26 0 38 7;
+#X connect 27 0 38 8;
+#X connect 28 0 38 9;
+#X connect 33 0 38 0;
+#X connect 34 0 38 2;
+#X connect 35 0 22 0;
+#X connect 36 0 8 0;
+#X connect 36 1 9 0;
+#X connect 36 2 10 0;
+#X connect 36 3 11 0;
+#X connect 36 4 12 0;
+#X connect 36 5 13 0;
+#X connect 36 6 14 0;
+#X connect 36 7 15 0;
+#X connect 36 8 16 0;
+#X connect 36 9 17 0;
+#X connect 37 0 23 0;
+#X connect 37 0 36 0;
+#X connect 37 1 23 1;
+#X connect 37 1 36 1;
+#X connect 37 2 23 2;
+#X connect 37 2 36 2;
+#X connect 37 3 23 3;
+#X connect 37 3 36 3;
+#X connect 37 4 23 4;
+#X connect 37 4 36 4;
+#X connect 37 5 23 5;
+#X connect 37 5 36 5;
+#X connect 37 6 23 6;
+#X connect 37 6 36 6;
+#X connect 37 7 23 7;
+#X connect 37 7 36 7;
+#X connect 37 8 23 8;
+#X connect 37 8 36 8;
+#X connect 38 0 24 0;
+#X connect 38 0 39 0;
+#X connect 38 1 24 1;
+#X connect 38 1 39 1;
+#X connect 38 2 24 2;
+#X connect 38 2 39 2;
+#X connect 38 3 24 3;
+#X connect 38 3 39 3;
+#X connect 38 4 24 4;
+#X connect 38 4 39 4;
+#X connect 38 5 24 5;
+#X connect 38 5 39 5;
+#X connect 38 6 24 6;
+#X connect 38 6 39 6;
+#X connect 38 7 24 7;
+#X connect 38 7 39 7;
+#X connect 38 8 24 8;
+#X connect 38 8 39 8;
+#X connect 39 0 40 0;
+#X connect 39 1 40 1;
+#X connect 39 2 40 2;
+#X connect 39 3 40 3;
+#X connect 39 4 40 4;
+#X connect 39 5 40 5;
+#X connect 39 6 40 6;
+#X connect 39 7 40 7;
+#X connect 39 8 40 8;
+#X connect 39 9 40 9;
+#X coords 0 658 1 657 100 60 0;

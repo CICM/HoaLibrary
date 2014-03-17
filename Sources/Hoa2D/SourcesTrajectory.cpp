@@ -53,7 +53,7 @@ namespace Hoa2D
 					recallSlot(sourcesManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(sourcesManager, groupIndex);
+					storeGroupAtNextSlot(sourcesManager, groupIndex);
 			}
 		}
 	}
@@ -75,9 +75,9 @@ namespace Hoa2D
 	
 	void SourcesTrajectory::erase(double fractionnalValueBegin, double fractionnalValueEnd)
 	{
-		long anIndexBegin = clip_minmax(fractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();
-		long anIndexEnd = clip_minmax(fractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();
-		for(long i = anIndexBegin; i < anIndexEnd; i++)
+		long indexBegin = clip_minmax(fractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();
+		long indexEnd = clip_minmax(fractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();
+		for(long i = indexBegin; i < indexEnd; i++)
 		{
 			deleteSlot(i);
 		}

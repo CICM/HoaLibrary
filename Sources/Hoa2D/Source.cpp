@@ -54,21 +54,21 @@ namespace Hoa2D
 	void Source::setCoordinatesCartesian(double abscissa, double ordinate)
 	{
 		setRadius(radius(abscissa, ordinate));
-		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
+		seAzimuth(azimuth(abscissa, ordinate));
 	}
 	
 	void Source::setAbscissa(double abscissa)
 	{
 		double ordinate = getOrdinate();
 		setRadius(radius(abscissa, ordinate));
-		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
+		seAzimuth(azimuth(abscissa, ordinate));
 	}
 	
 	void Source::setOrdinate(double ordinate)
 	{
 		double abscissa = getAbscissa();
 		setRadius(radius(abscissa, ordinate));
-		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
+		seAzimuth(azimuth(abscissa, ordinate));
 	}
 	
 	void Source::setColor(double red, double green, double blue, double alpha)

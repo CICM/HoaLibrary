@@ -156,14 +156,14 @@ namespace Hoa2D
 			@return		The abscissa of the source.
 			@see setAbscissa, setCoordinatesCartesian
          */
-		double			getAbscissa()		const {return abscissa(m_radius, m_azimuth + HOA_PI2);}
+		double			getAbscissa()		const {return abscissa(m_radius, m_azimuth);}
 		
 		//! Get the ordinate of the source.
 		/**
 			@return		The ordinate of the source.
 			@see setOrdinate, setCoordinatesCartesian
          */
-		double			getOrdinate()		const {return ordinate(m_radius, m_azimuth + HOA_PI2);}
+		double			getOrdinate()		const {return ordinate(m_radius, m_azimuth);}
 		
 		//! Get the color of the source.
 		/**

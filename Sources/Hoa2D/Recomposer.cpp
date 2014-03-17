@@ -73,11 +73,11 @@ namespace Hoa2D
     
     void Recomposer::processFisheye(const float* inputs, float* outputs)
 	{
-		m_encoders[0]->process(inputs[0], m_harmonics_float);
+		m_encoders[0]->process(inputs[0], outputs);
         for(unsigned int i = 1; i < m_number_of_channels; i++)
         {
             m_encoders[i]->process(inputs[i], m_harmonics_float);
-            cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
+            cblas_saxpy(m_number_of_harmonics, 1., m_harmonics_float, 1, outputs, 1);
         }
 	}
 	

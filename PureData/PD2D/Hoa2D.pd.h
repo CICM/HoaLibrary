@@ -4,8 +4,8 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_2D_MAX
-#define DEF_HOA_2D_MAX
+#ifndef DEF_HOA_2D_PD
+#define DEF_HOA_2D_PD
 
 
 #include "../hoa.pd.h"

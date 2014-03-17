@@ -4,18 +4,18 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_MAX
-#define DEF_HOA_MAX
+#ifndef DEF_HOA_PD
+#define DEF_HOA_PD
 
 extern "C"
 {
-#include "../../CicmWrapper/Sources/cicm_wrapper.h"
+#include "../ThirdParty/PureData/Sources/cicm_wrapper.h"
 #include "hoa.pd_commonsyms.h"
 }
 
 
 #define MAX_CHANNELS 256
-
+#define SYS_MAXBLKSIZE 8192
 #define HOA_UI_BORDERTHICKNESS 1
 #define HOA_UI_CORNERSIZE 8
 
@@ -80,8 +80,9 @@ long object_is_hoa(t_object* o);
 
 void hoa_boxinfos_init(t_hoa_boxinfos* boxinfos);
 
+int hoa_method_true(void *x);
 t_hoa_err hoa_not_implemented_method();
-t_hoa_err hoa_initclass(t_class* c, method hoabox_getinfos);
+t_hoa_err hoa_initclass(t_eclass* c, method hoabox_getinfos);
 
 
 #endif

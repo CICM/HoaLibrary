@@ -28,10 +28,28 @@ static t_symbol* hoa_sym_float 						= gensym("float");
 static t_symbol* hoa_sym_int 						= gensym("int");
 static t_symbol* hoa_sym_list 						= gensym("list");
 static t_symbol* hoa_sym_anything					= gensym("anything");
+static t_symbol* hoa_sym_dspchain					= gensym("dspchain");
 static t_symbol* hoa_sym_dynlet_begin 				= gensym("dynlet_begin");
 static t_symbol* hoa_sym_dynlet_end 				= gensym("dynlet_end");
 static t_symbol* hoa_sym_start						= gensym("start");
 static t_symbol* hoa_sym_stop 						= gensym("stop");
+static t_symbol* hoa_sym_front 						= gensym("front");
+
+// hoa.process
+static t_symbol* hoa_sym_getassoc					= gensym("getassoc");
+static t_symbol* hoa_sym_setassoc 					= gensym("setassoc");
+static t_symbol* hoa_sym_HoaProcessor 				= gensym("___HoaProcessor~___");				// Capitals must stay here
+static t_symbol* hoa_sym_HoaProcessorPatchIndex 	= gensym("___HoaProcessorPatchIndex___");		// Capitals must stay here
+static t_symbol* hoa_sym_sigin 						= gensym("hoa.in~");
+static t_symbol* hoa_sym_sigout 					= gensym("hoa.out~");
+static t_symbol* hoa_sym_in 						= gensym("hoa.in");
+static t_symbol* hoa_sym_out 						= gensym("hoa.out");
+static t_symbol* hoa_sym_args 						= gensym("args");
+static t_symbol* hoa_sym_process_mode_no			= gensym("no");
+static t_symbol* hoa_sym_process_mode_post 			= gensym("post");
+static t_symbol* hoa_sym_process_mode_out 			= gensym("out");
+static t_symbol* hoa_sym_attr_extra 				= gensym("extra");
+static t_symbol* hoa_sym_out_message 				= gensym("out_message");
 
 // Trigo
 static t_symbol* hoa_sym_cartesian 					= gensym("cartesian");
@@ -52,6 +70,8 @@ static t_symbol* hoa_sym_bgcolor 					= gensym("bgcolor");
 static t_symbol* hoa_sym_bdcolor 					= gensym("bdcolor");
 
 // Patchers
+static t_symbol* hoa_sym_patcher 					= gensym("patcher");
+static t_symbol* hoa_sym_bpatcher 					= gensym("bpatcher");
 static t_symbol* hoa_sym_jpatcher 					= gensym("jpatcher");
 static t_symbol* hoa_sym_noedit 					= gensym("noedit");
 static t_symbol* hoa_sym_vis 						= gensym("vis");

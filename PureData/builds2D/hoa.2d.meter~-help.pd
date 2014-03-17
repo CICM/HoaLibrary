@@ -1,0 +1,99 @@
+#N canvas 315 150 774 563 10;
+#X obj -555 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.meter~
+3 12 0 18 -204280 -1 0;
+#X text -550 -414 A circular meter with sound field descriptor;
+#X msg -537 -107 \; pd dsp 1;
+#X msg -537 -70 \; pd dsp 0;
+#X obj -113 -357 hoa.pi 2;
+#X obj -113 -386 loadbang;
+#X obj -207 -325 *~;
+#X text -448 72 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text -448 56 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -58 -176 s hoameter;
+#X obj -165 -247 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max 64 @minmax 1 64 @decimal 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -165 -214 channels \$1;
+#X obj -58 -247 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min -360 @max 360 @minmax -360 360 @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -58 -214 offset \$1;
+#X text -61 -278 Offset of;
+#X text -61 -268 channels;
+#X text 29 -268 channels;
+#X text 29 -278 Rotation of;
+#X msg 32 -214 rotation \$1;
+#X obj 32 -248 c.menu @size 100 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items Anti-Clockwise Clockwise @states 0 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -207 -354 phasor~ 0.3;
+#X obj -94 -46 s hoameter;
+#X text -161 -268 channels;
+#X text -161 -278 Number of;
+#X obj -178 -128 c.menu @size 100 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items none energy velocity both @states 0 0 0 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -178 -94 vectors \$1;
+#X text -161 -158 Vectors to;
+#X text -161 -148 display;
+#X text 22 -182 Angles;
+#X msg -33 -144 angles 0 15 90 270 345;
+#X msg -1 -91 angles 0 30 110 250 330;
+#X obj -492 -275 r hoadec;
+#X obj -18 -46 s hoadec;
+#X obj -165 -304 c.loadmess 5;
+#X obj -432 -329 noise~;
+#X obj -432 -297 hoa.2d.encoder~ 3 --------------------;
+#X obj -432 -236 hoa.2d.decoder~ 3 irregular 5 --------;
+#X obj -432 -198 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
+@channels 5 @angles 0 30 110 250 330 @offset 0 @rotation clockwise
+@vectors energy @interval 50 @bgcolor 0.758847 0.758847 0.758847 1
+@bdcolor 0.699562 0.699562 0.699562 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
+0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
+1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+#X text -550 -393 hoa.2d.meter~ displays the peak levels for a circurlar
+array of loudspeakers. It computes and displays the energy and velocity
+vectors.;
+#X msg -18 -118 angles 0 72 144 -144 -72;
+#X obj -178 -174 c.loadmess 1;
+#X connect 4 0 6 1;
+#X connect 5 0 4 0;
+#X connect 6 0 35 1;
+#X connect 10 0 11 0;
+#X connect 11 0 9 0;
+#X connect 12 0 13 0;
+#X connect 13 0 9 0;
+#X connect 18 0 9 0;
+#X connect 19 0 18 0;
+#X connect 20 0 6 0;
+#X connect 24 0 25 0;
+#X connect 25 0 21 0;
+#X connect 29 0 21 0;
+#X connect 29 0 32 0;
+#X connect 30 0 21 0;
+#X connect 30 0 32 0;
+#X connect 31 0 36 0;
+#X connect 33 0 10 0;
+#X connect 34 0 35 0;
+#X connect 35 0 36 0;
+#X connect 35 1 36 1;
+#X connect 35 2 36 2;
+#X connect 35 3 36 3;
+#X connect 35 4 36 4;
+#X connect 35 5 36 5;
+#X connect 35 6 36 6;
+#X connect 36 0 37 0;
+#X connect 36 1 37 1;
+#X connect 36 2 37 2;
+#X connect 36 3 37 3;
+#X connect 36 4 37 4;
+#X connect 39 0 21 0;
+#X connect 39 0 32 0;
+#X connect 40 0 24 0;
