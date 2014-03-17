@@ -8,7 +8,7 @@
 #define _HOA_LOGO_COMPONENT_
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../HoaComponent.h"
+#include "PluginProcessor.h"
 
 class HoaLogoComponent : public Component
 {

@@ -10,6 +10,7 @@
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 
+/*
 class HoaComponentListener
 {
 public:
@@ -67,8 +68,8 @@ public:
     double getOffsetOfChannels(){return m_offset_of_channels;};
     double getAzimuthOfChannel(long index){return m_azimuth_of_channels[(int)clip_minmax(index, 0, 255)];};
     
-    Meter*				getMeter(){return m_meter;};
-	SourcesManager*     getSourcesManager() const {return m_hoa_manager->getSourcesManager();}
+    Meter*				getMeter(){return m_meter;}
+	SourcesManager*     getSourcesManager() const {return m_hoa_manager;}
 };
-
+*/
 #endif

@@ -9,13 +9,13 @@
 
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
+#include "PluginProcessor.h"
 #include "HoaLookAndFeel.h"
 
 class HoaMapComponent : public Component
 {
 private:
-    SourcesManager* m_sources_manager;
-    AudioProcessor* m_processor;
+    HoaToolsAudioProcessor* m_processor;
     
     double          m_sources_size;
     long            m_souce_selected;
@@ -32,7 +32,7 @@ private:
     
     HoaLookAndFeel          LookAndFeel;
 public:
-    HoaMapComponent(SourcesManager* aSourceManager, AudioProcessor* aProcessor);
+    HoaMapComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaMapComponent();
     
     void paint(Graphics& g);

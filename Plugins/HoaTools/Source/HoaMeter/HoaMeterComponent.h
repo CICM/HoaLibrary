@@ -9,14 +9,15 @@
 
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
+#include "PluginProcessor.h"
 
 class HoaMeterComponent : public Component, public Timer
 {
 private:
-    Meter*  m_meter;
+	HoaToolsAudioProcessor* m_processor;
 
 public:
-    HoaMeterComponent(Meter * aMeter);
+    HoaMeterComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaMeterComponent();
     
     void paint (Graphics&);

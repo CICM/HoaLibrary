@@ -9,13 +9,13 @@
 
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
-#include "../HoaComponent.h"
+#include "PluginProcessor.h"
 
-class HoaSettingsComponent : public Component, public ComboBoxListener, public TextEditorListener
+class HoaSettingsComponent : public Component, public ComboBox::Listener, public TextEditor::Listener
 {
 private:
     HoaComponentListener*   m_master;
-    HoaProcessor*           m_processor;
+    HoaToolsAudioProcessor* m_processor;
     Label*                  m_label_settings;
     ComboBox*               m_optimization;
     Label*                  m_label_optimization;
@@ -38,14 +38,13 @@ private:
     // Menus
     // Etc...
 public:
-    HoaSettingsComponent(HoaComponentListener* master, HoaProcessor* processor);
+    HoaSettingsComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaSettingsComponent();
     
     void paint(Graphics&);
     void mouseDown(const MouseEvent &event);
     void comboBoxChanged(ComboBox* aComboBox);
     void textEditorReturnKeyPressed(TextEditor&);
-    
 };
 
 

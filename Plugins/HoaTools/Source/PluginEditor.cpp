@@ -8,14 +8,13 @@
 #include "PluginEditor.h"
 
 
-HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter, HoaProcessor* aHoaProcessor): AudioProcessorEditor(ownerFilter)
+HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter) : AudioProcessorEditor(ownerFilter)
 {
     m_processor = ownerFilter;
-    m_hoa_processor = aHoaProcessor;
     
-    m_map       = new HoaMapComponent(this, m_hoa_processor);
-    m_meter     = new HoaMeterComponent(this, m_hoa_processor->getMeter());
-    m_settings  = new HoaSettingsComponent(this,m_hoa_processor);
+    m_map       = new HoaMapComponent(this, m_processor);
+    m_meter     = new HoaMeterComponent(this, m_processor);
+    m_settings  = new HoaSettingsComponent(this, m_processor);
     m_infos     = new HoaInfosComponent(this);
     m_logo      = new HoaLogoComponent();
     
@@ -84,7 +83,3 @@ void HoaToolsAudioProcessorEditor::paint(Graphics& g)
     g.setColour(Colours::grey);
     g.drawLine(500, 124, 625, 124, 2.5);
 }
-
-
-
-

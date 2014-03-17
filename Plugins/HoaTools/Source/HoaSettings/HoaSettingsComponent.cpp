@@ -8,7 +8,7 @@
 
 static char hoa_settings_label[] = "Settings";
 
-HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaProcessor* processor)
+HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor)
 {
     m_master    = master;
     m_processor = processor;
@@ -24,7 +24,7 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaProc
     m_optimization->addItem("Maxre", 2);
     m_optimization->addItem("Inphase", 3);
     m_optimization->addListener(this);
-    m_optimization->setSelectedId(m_processor->getOptimization() + 1);
+    m_optimization->setSelectedId(m_processor->getOptimMode() + 1);
     
     m_label_optimization = new Label();
     m_label_optimization->setText("Optimization", juce::dontSendNotification);
@@ -85,7 +85,7 @@ void HoaSettingsComponent::comboBoxChanged(ComboBox* aComboBox)
 {
     if(aComboBox == m_optimization)
     {
-        m_processor->setOptimization(m_optimization->getSelectedId() - 1);
+        m_processor->setOptimMode(static_cast<Optim::Mode>(m_optimization->getSelectedId() - 1));
     }
 }
 
@@ -203,12 +203,3 @@ void HoaSettingsComponent::textEditorReturnKeyPressed(TextEditor &textedit)
     }
     repaint();
 }
-
-    
-    
-
-
-
-
-
-

@@ -8,7 +8,7 @@
 #define _HOA_INFOS_COMPONENT_
 
 #include <JuceHeader.h>
-#include "../HoaComponent.h"
+#include "PluginProcessor.h"
 
 class HoaInfosComponent : public Component
 {

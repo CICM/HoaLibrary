@@ -12,11 +12,9 @@
 /***************************** EDITOR ***********************************************/
 /************************************************************************************/
 
-HoaMapComponent::HoaMapComponent(SourcesManager* aSourceManager, AudioProcessor* aProcessor)
+HoaMapComponent::HoaMapComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor)
 {
-    m_sources_manager   = aSourceManager;
-    m_processor         = aProcessor;
-    
+    m_processor         = processor;    
     m_souce_selected    = -1;
     m_group_selected    = -1;
     m_sources_size      = 15.;
@@ -37,11 +35,11 @@ void HoaMapComponent::mouseMove(const MouseEvent &event)
     m_selected          = 0;
     m_souce_selected    = -1;
     m_group_selected    = -1;
-    for (int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+    for (int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
     {
-        if(m_sources_manager->sourceGetExistence(i))
+        if(m_processor->sourceGetExistence(i))
         {
-            point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
+            point.setXY(m_processor->sourceGetAbscissa(i) * m_processor->getZoom(), m_processor->sourceGetOrdinate(i) * m_processor->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 m_souce_selected = i;
@@ -51,11 +49,11 @@ void HoaMapComponent::mouseMove(const MouseEvent &event)
             }
         }
     }
-    for (int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    for (int i = 0; i < m_processor->getMaximumIndexOfGroup(); i++)
     {
-        if(m_sources_manager->groupGetExistence(i))
+        if(m_processor->groupGetExistence(i))
         {
-            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
+            point.setXY(m_processor->groupGetAbscissa(i) * m_processor->getZoom(), m_processor->groupGetOrdinate(i) * m_processor->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 m_group_selected = i;
@@ -100,9 +98,9 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
     {
         m_drag_mode = 5;
     }
-    for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+    for (int i = 0; i < m_processor->getNumberOfSources(); i++)
     {
-        point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
+        point.setXY(m_processor->sourceGetAbscissa(i) * m_processor->getZoom(), m_processor->sourceGetOrdinate(i) * m_processor->getZoom());
         if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
         {
             if(event.mods.isRightButtonDown())
@@ -112,7 +110,7 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
                 Popup.addItem(1, String("Source Menu"), false);
                 Popup.addSeparator();
                 Popup.addItem(2, String("Remove source"));
-                if(m_sources_manager->sourceGetMute(i))
+                if(m_processor->sourceGetMute(i))
                     Popup.addItem(3, String("Unmute source"));
                 else
                     Popup.addItem(3, String("Mute source"));
@@ -120,18 +118,18 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
                 const int choice = Popup.show();
                 if(choice == 2)
                 {
-                    m_sources_manager->sourceRemove(i);
+                    m_processor->sourceRemove(i);
                 }
                 else if(choice == 3)
                 {
                     m_processor->beginParameterChangeGesture(i*3+3);
-                    if(m_sources_manager->sourceGetMute(i))
+                    if(m_processor->sourceGetMute(i))
                     {
-                        m_sources_manager->sourceSetMute(i, 0);
+                        m_processor->sourceSetMute(i, 0);
                     }
                     else
                     {
-                        m_sources_manager->sourceSetMute(i, 1);
+                        m_processor->sourceSetMute(i, 1);
                     }
                     m_processor->endParameterChangeGesture(i*3+3);
                 }
@@ -146,11 +144,11 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
         }
     }
     
-    for (int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    for (int i = 0; i < m_processor->getMaximumIndexOfGroup(); i++)
     {
-        if(m_sources_manager->groupGetExistence(i))
+        if(m_processor->groupGetExistence(i))
         {
-            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
+            point.setXY(m_processor->groupGetAbscissa(i) * m_processor->getZoom(), m_processor->groupGetOrdinate(i) * m_processor->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 if(event.mods.isRightButtonDown())
@@ -161,40 +159,40 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
                     Popup.addSeparator();
                     Popup.addItem(2, String("Remove group"));
                     Popup.addItem(3, String("Remove group and sources"));
-                    if(m_sources_manager->groupGetMute(i) || m_sources_manager->groupGetIfSourceMuted(i) == 1)
+                    if(m_processor->groupGetMute(i) || m_processor->groupGetIfSourceMuted(i) == 1)
                         Popup.addItem(4, String("Unmute group"));
-                    if(!m_sources_manager->groupGetMute(i))
+                    if(!m_processor->groupGetMute(i))
                         Popup.addItem(5, String("Mute group"));
                     
                     const int choice = Popup.show();
                     if(choice == 2)
                     {
-                        m_sources_manager->groupRemove(i);
+                        m_processor->groupRemove(i);
                     }
                     else if(choice == 3)
                     {
-                        m_sources_manager->groupRemoveWithSources(i);
+                        m_processor->groupRemoveWithSources(i);
                     }
                     else if(choice == 4)
                     {
-                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        for(int i = 0; i < m_processor->getNumberOfSources(); i++)
                         {
                             m_processor->beginParameterChangeGesture(i*3+3);
                         }
-                        m_sources_manager->groupSetMute(i, 0);
-                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        m_processor->groupSetMute(i, 0);
+                        for(int i = 0; i < m_processor->getNumberOfSources(); i++)
                         {
                             m_processor->endParameterChangeGesture(i*3+3);
                         }
                     }
                     else if(choice == 5)
                     {
-                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        for(int i = 0; i < m_processor->getNumberOfSources(); i++)
                         {
                             m_processor->beginParameterChangeGesture(i*3+3);
                         }
-                        m_sources_manager->groupSetMute(i, 1);
-                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        m_processor->groupSetMute(i, 1);
+                        for(int i = 0; i < m_processor->getNumberOfSources(); i++)
                         {
                             m_processor->endParameterChangeGesture(i*3+3);
                         }
@@ -222,11 +220,11 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
         const int choice = Popup.show();
         if(choice == 2)
         {
-            m_sources_manager->sourceNewCartesian(mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+            m_processor->sourceNewCartesian(mouse.getX() / m_processor->getZoom(), mouse.getY() / m_processor->getZoom());
         }
         else if(choice == 3)
         {
-            m_sources_manager->clearAll();
+            m_processor->clearAll();
         }
     }
     m_selected  = 1;
@@ -250,23 +248,23 @@ void HoaMapComponent::mouseDrag(const MouseEvent &event)
         
         if (m_drag_mode == 1)
         {
-            m_sources_manager->sourceSetRadius(m_souce_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
+            m_processor->sourceSetRadius(m_souce_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_processor->getZoom());
         }
         else if(m_drag_mode == 2)
         {
-            m_sources_manager->sourceSetAzimuth(m_souce_selected, mouse.getAngleToPoint(Point<float>(0., 0.)));
+            m_processor->sourceSetAzimuth(m_souce_selected, mouse.getAngleToPoint(Point<float>(0., 0.)));
         }
         else if(m_drag_mode == 3)
         {
-            m_sources_manager->sourceSetAbscissa(m_souce_selected, mouse.getX() / m_sources_manager->getZoom());
+            m_processor->sourceSetAbscissa(m_souce_selected, mouse.getX() / m_processor->getZoom());
         }
         else if(m_drag_mode == 4)
         {
-            m_sources_manager->sourceSetOrdinate(m_souce_selected, mouse.getY() / m_sources_manager->getZoom());
+            m_processor->sourceSetOrdinate(m_souce_selected, mouse.getY() / m_processor->getZoom());
         }
         else
         {
-            m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+            m_processor->sourceSetCartesian(m_souce_selected, mouse.getX() / m_processor->getZoom(), mouse.getY() / m_processor->getZoom());
         }
         m_processor->endParameterChangeGesture(m_souce_selected*3);
         repaint();
@@ -276,27 +274,27 @@ void HoaMapComponent::mouseDrag(const MouseEvent &event)
     {
         if (m_drag_mode == 1)
         {
-            m_sources_manager->groupSetRelativeRadius(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
+            m_processor->groupSetRelativeRadius(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_processor->getZoom());
         }
         else if(m_drag_mode == 2)
         {
-            m_sources_manager->groupSetRelativeAzimuth(m_group_selected, mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
+            m_processor->groupSetRelativeAzimuth(m_group_selected, mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
         }
         else if(m_drag_mode == 3)
         {
-            m_sources_manager->groupSetAbscissa(m_group_selected, mouse.getX() / m_sources_manager->getZoom());
+            m_processor->groupSetAbscissa(m_group_selected, mouse.getX() / m_processor->getZoom());
         }
         else if(m_drag_mode == 4)
         {
-            m_sources_manager->groupSetOrdinate(m_group_selected, mouse.getY() / m_sources_manager->getZoom());
+            m_processor->groupSetOrdinate(m_group_selected, mouse.getY() / m_processor->getZoom());
         }
         else if(m_drag_mode == 5)
         {
-            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
+            m_processor->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_processor->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + HOA_PI2);
         }
         else
         {
-            m_sources_manager->groupSetCartesian(m_group_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+            m_processor->groupSetCartesian(m_group_selected, mouse.getX() / m_processor->getZoom(), mouse.getY() / m_processor->getZoom());
         }
         repaint();
         return;
@@ -313,7 +311,7 @@ void HoaMapComponent::mouseWheelMove(const MouseEvent& event, const MouseWheelDe
 {
     if(event.mods.isShiftDown())
     {
-        m_sources_manager->setZoom(m_sources_manager->getZoom() + wheel.deltaY);
+        m_processor->setZoom(m_processor->getZoom() + wheel.deltaY);
         repaint();
     }
 }
@@ -323,20 +321,20 @@ void HoaMapComponent::mouseUp(const MouseEvent &event)
     if(m_selected)
     {
         float center = getWidth() * 0.5;
-        long groupIndex = m_sources_manager->groupGetNextIndex();
-        for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+        long groupIndex = m_processor->groupGetNextIndex();
+        for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
         {
-            if(m_sources_manager->sourceGetExistence(i))
+            if(m_processor->sourceGetExistence(i))
             {
-                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
-                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+                float source_x = m_processor->sourceGetAbscissa(i) * m_processor->getZoom() * center + center;
+                float source_y = -m_processor->sourceGetOrdinate(i) * m_processor->getZoom() * center + center;
                 if(m_selection.contains(source_x, source_y))
                 {
-                    m_sources_manager->groupSetSource(groupIndex, i);
+                    m_processor->groupSetSource(groupIndex, i);
                 }
             }
         }
-        m_sources_manager->groupClean();
+        m_processor->groupClean();
     }
     m_selected = 0;
     repaint();
@@ -346,14 +344,14 @@ void HoaMapComponent::paint(Graphics& g)
 {
     float center = getWidth() /2.;
     
-    if(center / m_sources_manager->getZoom() > center / MIN_ZOOM * m_sources_manager->getZoom() - 5)
+    if(center / m_processor->getZoom() > center / MIN_ZOOM * m_processor->getZoom() - 5)
     {
 		Path P;
 		PathStrokeType pathStrokeType = PathStrokeType(1);
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, 0, 0, HOA_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 4, center / MIN_ZOOM * m_processor->getZoom() - 4, 0, 0, HOA_2PI);
         g.strokePath(P, pathStrokeType);
         P.clear();
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, 0, 0, HOA_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 5, center / MIN_ZOOM * m_processor->getZoom() - 5, 0, 0, HOA_2PI);
         g.reduceClipRegion (P, AffineTransform::identity);
     }
     
@@ -369,7 +367,7 @@ void HoaMapComponent::draw_background(Graphics& g)
     
     for(int i = 1; i <= 5; i++)
     {
-        float width = center * (i / 5.) * m_sources_manager->getZoom();
+        float width = center * (i / 5.) * m_processor->getZoom();
         float start = center - width;
         g.setColour(Colours::white);
         g.drawEllipse(start + 0.5, start + 0.5, width * 2., width * 2., 2.);
@@ -377,7 +375,7 @@ void HoaMapComponent::draw_background(Graphics& g)
         g.drawEllipse(start, start, width * 2., width * 2., 1.);
     }
     
-    float ecart = m_sources_manager->getZoom() * center;
+    float ecart = m_processor->getZoom() * center;
     if(ecart < 10. && ecart >= 5.)
         ecart *= 2.;
     else if(ecart < 5. && ecart > 2.5)
@@ -406,24 +404,24 @@ void HoaMapComponent::draw_sources(Graphics& g)
 {
     float source_thickness = 1.;
     float center = getWidth() * 0.5;
-    for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
     {
-        if(m_sources_manager->sourceGetExistence(i))
+        if(m_processor->sourceGetExistence(i))
         {
             g.setColour(Colour(0xff444444));
-            float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
-            float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+            float source_x = m_processor->sourceGetAbscissa(i) * m_processor->getZoom() * center + center;
+            float source_y = -m_processor->sourceGetOrdinate(i) * m_processor->getZoom() * center + center;
             
             g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
             
             if (i == m_souce_selected)
             {
                 source_thickness *= 1.5;
-                for(int j = 0; j < m_sources_manager->sourceGetNumberOfGroups(i); j++)
+                for(int j = 0; j < m_processor->sourceGetNumberOfGroups(i); j++)
                 {
-                    int group_index = m_sources_manager->sourceGetGroupIndex(i, j);
-                    float group_x = m_sources_manager->groupGetAbscissa(group_index) * m_sources_manager->getZoom() * center + center;
-                    float group_y = -m_sources_manager->groupGetOrdinate(group_index) * m_sources_manager->getZoom() * center + center;
+                    int group_index = m_processor->sourceGetGroupIndex(i, j);
+                    float group_x = m_processor->groupGetAbscissa(group_index) * m_processor->getZoom() * center + center;
+                    float group_y = -m_processor->groupGetOrdinate(group_index) * m_processor->getZoom() * center + center;
                     g.drawLine(source_x, source_y, group_x, group_y);
                 }
                 
@@ -435,7 +433,7 @@ void HoaMapComponent::draw_sources(Graphics& g)
                 source_thickness = 1.;
             }            
             
-            if(m_sources_manager->sourceGetMute(i))
+            if(m_processor->sourceGetMute(i))
             {
                 g.setColour(Colours::red);
                 g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
@@ -457,23 +455,23 @@ void HoaMapComponent::draw_groups(Graphics& g)
 {
     float group_thickness = 1.;
     float center = getWidth() * 0.5;
-    for(int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    for(int i = 0; i < m_processor->getMaximumIndexOfGroup(); i++)
     {
-        if(m_sources_manager->groupGetExistence(i))
+        if(m_processor->groupGetExistence(i))
         {
             g.setColour(Colour(0xff444444));
-            float group_x = m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
-            float group_y = -m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+            float group_x = m_processor->groupGetAbscissa(i) * m_processor->getZoom() * center + center;
+            float group_y = -m_processor->groupGetOrdinate(i) * m_processor->getZoom() * center + center;
             
             g.fillEllipse(group_x - m_sources_size * 0.15, group_y - m_sources_size * 0.15, m_sources_size * 0.3, m_sources_size * 0.3);
             if (i == m_group_selected)
             {
                 group_thickness *= 1.5;
-                for(int j = 0; j < m_sources_manager->groupGetNumberOfSources(i); j++)
+                for(int j = 0; j < m_processor->groupGetNumberOfSources(i); j++)
                 {
-                    int source_index = m_sources_manager->groupGetSourceIndex(i, j);
-                    float source_x = m_sources_manager->sourceGetAbscissa(source_index) * m_sources_manager->getZoom() * center + center;
-                    float source_y = -m_sources_manager->sourceGetOrdinate(source_index) * m_sources_manager->getZoom() * center + center;
+                    int source_index = m_processor->groupGetSourceIndex(i, j);
+                    float source_x = m_processor->sourceGetAbscissa(source_index) * m_processor->getZoom() * center + center;
+                    float source_y = -m_processor->sourceGetOrdinate(source_index) * m_processor->getZoom() * center + center;
                     g.drawLine(group_x, group_y, source_x, source_y);
                 }
                 
@@ -485,7 +483,7 @@ void HoaMapComponent::draw_groups(Graphics& g)
                 group_thickness = 1.;
             }
             
-            if(m_sources_manager->groupGetMute(i))
+            if(m_processor->groupGetMute(i))
             {
                 g.setColour(Colours::red);
                 g.drawEllipse(group_x - m_sources_size * 0.5, group_y - m_sources_size * 0.5, m_sources_size , m_sources_size, group_thickness);
@@ -512,12 +510,12 @@ void HoaMapComponent::draw_selection(Graphics& g)
         g.fillRect(m_selection);
         
         g.setColour(Colour::fromFloatRGBA(0., 1., 0., 0.5));
-        for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
         {
-            if(m_sources_manager->sourceGetExistence(i))
+            if(m_processor->sourceGetExistence(i))
             {
-                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
-                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+                float source_x = m_processor->sourceGetAbscissa(i) * m_processor->getZoom() * center + center;
+                float source_y = -m_processor->sourceGetOrdinate(i) * m_processor->getZoom() * center + center;
                 if(m_selection.contains(source_x, source_y))
                 {                    
                     g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, 1.);

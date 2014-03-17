@@ -21,7 +21,6 @@ class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public ComboB
 {
 private:
     HoaToolsAudioProcessor* m_processor;
-    HoaProcessor*           m_hoa_processor;
 
     HoaMapComponent*        m_map;
     HoaMeterComponent*      m_meter;
@@ -33,7 +32,7 @@ private:
     HoaLookAndFeel          LookAndFeel;
     Font                    HoaFont;
 public:
-    HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter, HoaProcessor* aHoaProcessor);
+    HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter);
     ~HoaToolsAudioProcessorEditor();
 
     void paint(Graphics& g);
