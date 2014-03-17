@@ -76,6 +76,8 @@ void *hoa_in_new(t_symbol *s, short ac, t_atom *av)
 
     x->out = outlet_new((t_object *)x, NULL);
 	
+	x->inlet_num = 1;
+	
 	x->extra = 0;
 	x->comment = gensym("");
 	
@@ -84,15 +86,10 @@ void *hoa_in_new(t_symbol *s, short ac, t_atom *av)
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
 	x->parent_mode = HoaProcessor_Get_Mode(hoaprocessor_parent);
 	
-	if (x->parent_mode == gensym("post") || x->parent_mode == gensym("out"))
-	{
-		//x->inlet_num = x->parent_patcher_index;
-		x->inlet_num = 1;
-	}
-	else if (x->parent_mode == gensym("no"))
-	{
-		x->inlet_num = 1;
-	}
+	long in = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*)x);
+		
+	if (in > 0)
+		x->inlet_num = in;
 	
     return (x);
 }
