@@ -101,22 +101,6 @@ __inline void ***HoaProcessor_Get_Outptrs_Ptr(void *HoaProcessor_Object, long in
 		return 0;
 }
 
-__inline long HoaProcessor_Get_Sigout_Index(void *HoaProcessor_Object, long patchIndex, long outIndexRequest, long extraOutIndexRequest)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
-		return (long) mess3((t_object *)HoaProcessor_Object, gensym("get_sigout_index"), patchIndex, outIndexRequest, extraOutIndexRequest);
-	else
-		return 0;
-}
-
-__inline long HoaProcessor_Get_Sigin_Index(void *HoaProcessor_Object, long patchIndex, long inIndexRequest, long extraInIndexRequest)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
-		return (long) mess3((t_object *)HoaProcessor_Object, gensym("get_sigin_index"), patchIndex, inIndexRequest, extraInIndexRequest);
-	else
-		return 0;
-}
-
 __inline long HoaProcessor_Get_IO_Index(void *HoaProcessor_Object, long patchIndex, t_object* io)
 {
 	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)

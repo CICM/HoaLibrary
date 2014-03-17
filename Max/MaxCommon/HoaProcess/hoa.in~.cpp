@@ -94,7 +94,8 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 	attr_args_process(x, ac, av);
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	x->inlet_num = HoaProcessor_Get_Sigin_Index(hoaprocessor_parent, x->parent_patcher_index, inlet_num, x->extra);
+	//x->inlet_num = HoaProcessor_Get_Sigin_Index(hoaprocessor_parent, x->parent_patcher_index, inlet_num, x->extra);
+	x->inlet_num = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*) x);
 	
 	x->valid = 0;
 	
