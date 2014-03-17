@@ -13,7 +13,6 @@ typedef struct _hoa_out
 {
     t_object	x_obj;
 	long outlet_num;
-	void* s_outlet;
 	t_object *parent_processor;
 	long parent_patcher_index;
 	
@@ -78,9 +77,12 @@ void *hoa_out_new(t_symbol *s, short ac, t_atom *av)
 	
 	x->parent_processor = (t_object*) hoaprocessor_parent;
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	//x->outlet_num = x->parent_patcher_index;
 	x->outlet_num = 1;
-	x->s_outlet = NULL;
+	
+	long out = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*)x);
+	
+	if (out > 0)
+		x->outlet_num = out;
 		
     return (x);
 }
@@ -112,7 +114,7 @@ void hoa_out_bang(t_hoa_out *x)
 {
 	t_args_struct args;
 	args.msg = hoa_sym_bang;
-	args.index = x->parent_patcher_index;
+	args.index = x->outlet_num;
 	args.argc = 0;
 	args.argv = NULL;
 	object_method(x->parent_processor, hoa_sym_out_message, &args);
@@ -122,7 +124,7 @@ void hoa_out_int(t_hoa_out *x, long n)
 {
 	t_args_struct args;
 	args.msg = hoa_sym_int;
-	args.index = x->parent_patcher_index;
+	args.index = x->outlet_num;
 	args.argc = 1;
 	args.argv = (t_atom*) malloc(sizeof(t_atom));
 	atom_setfloat(args.argv, n);
@@ -133,7 +135,7 @@ void hoa_out_float(t_hoa_out *x, double f)
 {
 	t_args_struct args;
 	args.msg = hoa_sym_float;
-	args.index = x->parent_patcher_index;
+	args.index = x->outlet_num;
 	args.argc = 1;
 	args.argv = (t_atom*) malloc(sizeof(t_atom));
 	atom_setfloat(args.argv, f);
@@ -144,7 +146,7 @@ void hoa_out_list(t_hoa_out *x, t_symbol *s, short argc, t_atom *argv)
 {
 	t_args_struct args;
 	args.msg = hoa_sym_list;
-	args.index = x->parent_patcher_index;
+	args.index = x->outlet_num;
 	args.argc = argc;
 	args.argv = argv;
 	object_method(x->parent_processor, hoa_sym_out_message, &args);
@@ -154,7 +156,7 @@ void hoa_out_anything(t_hoa_out *x, t_symbol *s, short argc, t_atom *argv)
 {
 	t_args_struct args;
 	args.msg = s;
-	args.index = x->parent_patcher_index;
+	args.index = x->outlet_num;
 	args.argc = argc;
 	args.argv = argv;
 	object_method(x->parent_processor, hoa_sym_out_message, &args);

@@ -117,6 +117,14 @@ __inline long HoaProcessor_Get_Sigin_Index(void *HoaProcessor_Object, long patch
 		return 0;
 }
 
+__inline long HoaProcessor_Get_IO_Index(void *HoaProcessor_Object, long patchIndex, t_object* io)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (long) mess2((t_object *)HoaProcessor_Object, gensym("get_io_index"), patchIndex, io);
+	else
+		return 0;
+}
+
 //////////////////////////////////////////////// State Queries ////////////////////////////////////////////////
 
 
