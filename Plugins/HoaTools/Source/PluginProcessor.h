@@ -12,20 +12,27 @@
 #include "HoaComponent.h"
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 
+class HoaComponentListener
+{
+public:
+    HoaComponentListener(){};
+    virtual ~HoaComponentListener(){};
+    virtual void componentHasBeenClicked(Component* component){};
+};
+
 enum
 {
     gui_mode_map = 0,
     gui_mode_meter,
 };
 
-class HoaToolsAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
+class HoaToolsAudioProcessor  : public AudioProcessor, public KitSources, public ChangeBroadcaster
 {
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaToolsAudioProcessor)
     
     long                        m_gui;
-    HoaProcessor*               m_processor;
-    
+	
 public:
     HoaToolsAudioProcessor();
     ~HoaToolsAudioProcessor();
@@ -52,7 +59,7 @@ public:
     float getParameterDefaultValue (int parameterIndex);
     const String getParameterName (int index);
     const String getParameterText (int index);
-    String getParameterLabel(int index) const;
+    String getParameterLabel(int index);
     bool isParameterAutomatable (int index) const;
     bool isMetaParameter(int index) const;
     
@@ -74,8 +81,6 @@ public:
 
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
-	
-	SourcesManager*     getSourcesManager() const {return m_processor->getSourcesManager();}
 };
 
 #endif  // PLUGINPROCESSOR_H_INCLUDED

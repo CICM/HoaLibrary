@@ -80,7 +80,8 @@ void *hoa_sig_out_new(t_symbol *s, long ac, t_atom *av)
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
 	
-	x->outlet_num = HoaProcessor_Get_Sigout_Index(hoaprocessor_parent, x->parent_patcher_index, outlet_num, x->extra);
+	//x->outlet_num = HoaProcessor_Get_Sigout_Index(hoaprocessor_parent, x->parent_patcher_index, outlet_num, x->extra);
+	x->outlet_num = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*)x);
 	
 	//object_post((t_object*)x, "inlet_real_index = %ld", x->outlet_num);
 	

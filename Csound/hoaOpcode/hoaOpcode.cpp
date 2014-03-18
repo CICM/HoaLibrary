@@ -1,7 +1,7 @@
 
+#include "../../Sources/Hoa2D/Hoa2D.h"
 #include "../../ThirdParty/Csound/csdl.h"
 #include "../../ThirdParty/Csound/pstream.h"
-#include "../../Sources/Hoa2D/Hoa2D.h"
 
 using namespace Hoa2D;
 
@@ -20,6 +20,7 @@ static int lowpr_set(CSOUND *csound, LOWPR *p)
     p->okf = 0.0;
     p->okr = 0.0;
     p->k = 0.0;
+   // p->encoder = new Encoder(1);
     return OK;
 }
 
@@ -60,10 +61,11 @@ static int lowpr(CSOUND *csound, LOWPR *p)
     p->ynm1 = ynm1;
     p->ynm2 = ynm2;             /* And save */
     
+    // p->encoder->process(<#const float input#>, <#float *outputs#>)
     return OK;
 }
 
-static OENTRY localops[] = { "lowres",   sizeof(LOWPR), 0, 5, "a", Str("akko"), (SUBR)lowpr_set, NULL,   (SUBR)lowpr };
+static OENTRY localops[] = { "xxx",   sizeof(LOWPR), 0, 5, "a", Str("akko"), (SUBR)lowpr_set, NULL,   (SUBR)lowpr };
 
 int lowpassr_init_(CSOUND *csound)
 {

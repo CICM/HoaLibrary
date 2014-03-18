@@ -115,8 +115,8 @@ namespace Hoa2D
         m_decoder->setNumberOfChannels(m_number_of_channels);
         
         m_meter     = new Meter(m_number_of_channels);
-        m_sources   = new SourcesManager();
-        m_sources->sourceNewPolar(1., 0.);
+		
+		sourceNewPolar(1., 0.);
         m_lines->setRadiusDirect(0, 1.);
         m_lines->setAzimuthDirect(0, 0.);
         
@@ -305,7 +305,7 @@ namespace Hoa2D
             m_lines_vector = new float[m_number_of_sources * 2];
             
         }
-        if(m_sources->getNumberOfSources() != m_number_of_sources)
+        if(getNumberOfSources() != m_number_of_sources)
         {
             ;
         }
@@ -317,7 +317,6 @@ namespace Hoa2D
         delete m_optim;
         delete m_decoder;
         delete m_meter;
-        delete m_sources;
         
         delete [] m_lines_vector;
         delete [] m_inputs_double;

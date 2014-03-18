@@ -20,7 +20,7 @@ namespace Hoa2D
     //! The kit to spatialize points sources.
     /** The KitSources is an all-in-one class that owns a Map, an Optim, a DecoderMulti, a Meter and a SourcesManager and that can be used to spatialize several sources. It allows to dynamicaly change the classes parameters.
      */
-    class KitSources
+    class KitSources : public SourcesManager
     {
         
     private:
@@ -84,7 +84,6 @@ namespace Hoa2D
         Optim*          m_optim;
         DecoderMulti*   m_decoder;
         Meter*          m_meter;
-        SourcesManager* m_sources;
         PolarLines*     m_lines;
         
         double*         m_inputs_double;
@@ -124,15 +123,6 @@ namespace Hoa2D
         {
             return m_order;
         }
-		
-		//! Get the SourcesManager object.
-        /**
-		 * @return The SourcesManager object.
-         */
-		SourcesManager* getSourcesManager() const
-		{
-			return m_sources;
-		}
         
         //! Set the number of sources.
 		/**	Set the number of sources. The change will operate during the post process call to avoid conflicts during the process.
@@ -166,6 +156,50 @@ namespace Hoa2D
 		inline unsigned int getNumberOfChannels() const
         {
             return m_number_of_channels;
+        }
+		
+		//! Get the mapped azimuth of a given channel.
+        /**
+         *
+         * @param     index		The index of the channel.
+         * @return				The mapped azimuth.
+		 * @see getChannelAzimuth, getChannelAzimuthMapped
+         */
+        double getChannelAzimuthMapped(unsigned int index) const
+		{
+			return m_meter->getChannelAzimuthMapped(index);
+		}
+		
+		//! Get the width of a given channel.
+        /**
+         *
+         * @param     index		The index of the channel.
+         * @return				The channel width.
+		 * @see getChannelAzimuth, getChannelAzimuthMapped
+         */
+        double getChannelWidth(unsigned int index) const
+		{
+			return m_meter->getChannelAzimuthMapped(index);
+		}
+		
+		//! Retrieve the peak value of a given channel.
+        /**
+         * @param		index		The index of the channel.
+		 * @see getChannelEnergy
+         */
+        inline double getChannelPeak(unsigned int index) const
+        {
+            return m_meter->getChannelPeak(index);
+        }
+        
+		//! Retrieve the energy of a given channel.
+        /**
+         * @param		index		The index of the channel.
+		 * @see getChannelPeak
+         */
+        inline double getChannelEnergy(unsigned int index) const
+        {
+            return m_meter->getChannelEnergy(index);
         }
         
         //! Set the decoding mode.

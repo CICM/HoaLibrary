@@ -189,9 +189,6 @@ t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
 void hoa_processor_output_typed_message(void* outletptr, t_args_struct *args);
 
-void* hoa_processor_query_sigin_index(t_hoa_processor *x, long patchIndex, long inIndexRequest, long extraInIndexRequest);
-void* hoa_processor_query_sigout_index(t_hoa_processor *x, long patchIndex, long outIndexRequest, long extraOutIndexRequest);
-
 void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object* io);
 
 // ========================================================================================================================================== //
@@ -236,8 +233,6 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_processor_out_message,				"out_message",			A_CANT, 0); // used to receive a message from a hoa.out object
 	class_addmethod(c, (method)hoa_processor_query_io_index,			"get_io_index",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_sigin_index,			"get_sigin_index",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_sigout_index,		"get_sigout_index",		A_CANT, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -405,14 +400,10 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	for (i = 0; i < x->declared_sig_outs; i++)
 		x->sig_outs[i] = 0;
 	
-	// Make non-signal outlets first
 	
-	if (x->declared_outs)
-	{
-		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
-		for (i = x->declared_outs - 1; i >= 0; i--)
-			x->out_table[i] = outlet_new((t_object *)x, 0);
-	}
+	// io schema :
+	// ins : instance in (mixed sig/ctrl) -- mixed extra sig / extra ctrl
+	// outs : instance sig outs -- instance ctrl outs -- extra sig -- extra ctrl
 	
 	// Make non-signal inlets
 	
@@ -424,21 +415,49 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	}
 	
 	// Make signal ins
+	
 	x->num_proxies = max(x->declared_sig_ins, x->declared_ins);
 	
 	dsp_setup((t_pxobject *) x, x->num_proxies);
 	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
 	
+	
+	// Make non-signal extra outlets
+	
+	if (x->declared_outs)
+	{
+		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
+		
+		if (x->io_infos.extra_outs_maxindex)
+			for (i = x->declared_outs - 1; i >= (x->declared_outs - x->io_infos.extra_outs_maxindex); i--)
+				x->out_table[i] = outlet_new((t_object *)x, 0);
+	}
+	
+	// Make signal extra outlets
+	
+	if (x->declared_sig_outs && x->io_infos.extra_sig_outs_maxindex)
+	{
+		for (i = 0; i < x->io_infos.extra_sig_outs_maxindex; i++)
+			outlet_new((t_object *)x, "signal");
+	}
+	
+	// Make non-signal extra outlets
+	
+	if (x->declared_outs)
+	{
+		for (i = x->declared_outs - x->io_infos.extra_outs_maxindex - 1; i >= 0; i--)
+			x->out_table[i] = outlet_new((t_object *)x, 0);
+	}
+	
 	// Make signal outs
 	
-	for (i = 0; i < x->declared_sig_outs; i++)
+	for (i = 0; i < x->declared_sig_outs - x->io_infos.extra_sig_outs_maxindex; i++)
 		outlet_new((t_object *)x, "signal");
+	
 	
 	// Initialise patcher symbol
 	
 	object_obex_lookup(x, gensym("#P"), &x->parent_patch);									// store reference to parent patcher
-
-	//x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
 	
 	// Load patches and initialise all instances
 	
@@ -547,7 +566,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	
 	if (m == ASSIST_INLET)
 	{
-		if (inlet < x->instance_ins && inlet < x->instance_sig_ins)
+		if (a < x->instance_ins && a < x->instance_sig_ins)
 		{
 			if (x->f_mode == hoa_sym_process_mode_post)
 			{
@@ -565,7 +584,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 				sprintf(s,"(signal, messages) Channel %ld", inlet);
 			}
 		}
-		else if (inlet < x->instance_sig_ins)
+		else if (a < x->instance_sig_ins)
 		{
 			if (x->f_mode == hoa_sym_process_mode_post)
 			{
@@ -583,12 +602,26 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 				sprintf(s,"(signal) Channel %ld", inlet);
 			}
 		}
-		else if (inlet < x->instance_ins)
+		else if (a < x->instance_ins)
 		{
-			;
+			if (x->f_mode == hoa_sym_process_mode_post)
+			{
+				if (x->f_object_type == HOA_OBJECT_2D)
+					sprintf(s,"(messages) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
+				else if (x->f_object_type == HOA_OBJECT_3D)
+					sprintf(s,"(messages) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
+			}
+			else if (x->f_mode == hoa_sym_process_mode_no)
+			{
+				sprintf(s,"(messages) Send to all instances");
+			}
+			else if (x->f_mode == hoa_sym_process_mode_out)
+			{
+				sprintf(s,"(messages) Channel %ld", inlet);
+			}
 		}
 		else
-			sprintf(s,"(signal) Extra In %ld", a - x->instance_sig_ins);
+			sprintf(s,"(signal) Extra In %ld", inlet - x->instance_sig_ins);
 		
 	}
 	else if (m == ASSIST_OUTLET && a >= x->instance_sig_outs)
@@ -1299,7 +1332,7 @@ void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg)
 	//post("hoa_processor_subpatcher");
 	
 	 if (arg && (long) arg != 1) 
-		if (!NOGOOD(arg))								// arg might be good but not a valid object pointer
+		if (!NOGOOD(arg))										// arg might be good but not a valid object pointer
 			if (ob_sym(arg) == hoa_sym_dspchain)				// don't report subpatchers to dspchain
 				return 0;
 
@@ -1313,7 +1346,6 @@ void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg)
 void hoa_processor_parentpatcher(t_hoa_processor *x, t_patcher **parent)
 {
 	//post("hoa_processor_parentpatcher");
-	
 	*parent = x->parent_patch;
 }
 
@@ -1402,40 +1434,6 @@ void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index)
 		return 0;
 }
 
-void* hoa_processor_query_sigin_index(t_hoa_processor *x, long patchIndex, long inIndexRequest, long extraInIndexRequest)
-{
-	long sigin_index = -1; // invalid
-	
-	//post("query ins -- patchIndex = %ld, indexRequest = %ld, extraIndexRequest = %ld", patchIndex, inIndexRequest, extraInIndexRequest);
-	
-	if (x->instance_sig_ins > 0 && (extraInIndexRequest <= 0 || extraInIndexRequest > x->io_infos.extra_sig_ins_maxindex))
-		sigin_index = patchIndex;
-	else
-		sigin_index = x->instance_sig_ins + extraInIndexRequest;
-	
-	if (sigin_index < 1 || sigin_index > x->declared_sig_ins)
-		sigin_index = -1;
-	
-	//post("query ins -- sigin_index = %ld", sigin_index);
-	
-	return (void*) sigin_index;
-}
-
-void* hoa_processor_query_sigout_index(t_hoa_processor *x, long patchIndex, long outIndexRequest, long extraOutIndexRequest)
-{
-	long sigout_index = -1;
-	
-	if (x->instance_sig_outs > 0 && (extraOutIndexRequest <= 0 || extraOutIndexRequest > x->io_infos.extra_sig_outs_maxindex))
-		sigout_index = patchIndex;
-	else
-		sigout_index = x->instance_sig_outs + extraOutIndexRequest;
-	
-	if (sigout_index < 1 || sigout_index > x->declared_sig_outs)
-		sigout_index = -1;
-	
-	return (void*) sigout_index;
-}
-
 void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object* io)
 {
 	long io_index = -1;
@@ -1444,7 +1442,8 @@ void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object
 	
 	t_symbol* objclassname = object_classname(io);
 	
-	if (objclassname == hoa_sym_in)
+	if (objclassname == hoa_sym_in || (objclassname == hoa_sym_out) ||
+		(objclassname == hoa_sym_sigin) || (objclassname == hoa_sym_sigout))
 	{
 		ac = extra = 0;
 		av = NULL;
@@ -1456,37 +1455,48 @@ void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object
 		
 		//post("query ins -- patchIndex = %ld, extra = %ld", patchIndex, extra);
 		
-		if (patchIndex < x->instance_ins && x->instance_ins > 0 && (extra <= 0 || extra > x->io_infos.extra_ins_maxindex))
-			io_index = patchIndex;
-		else
-			io_index = x->instance_ins + extra;
-		
-		if (io_index < 1 || io_index > x->declared_ins)
-			io_index = -1;
+		if (objclassname == hoa_sym_in)
+		{
+			if (patchIndex < x->instance_ins && x->instance_ins > 0 && (extra <= 0 || extra > x->io_infos.extra_ins_maxindex))
+				io_index = patchIndex;
+			else
+				io_index = x->instance_ins + extra;
+			
+			if (io_index < 1 || io_index > x->declared_ins)
+				io_index = -1;
+		}
+		else if (objclassname == hoa_sym_out)
+		{
+			if (patchIndex < x->instance_outs && x->instance_outs > 0 && (extra <= 0 || extra > x->io_infos.extra_outs_maxindex))
+				io_index = patchIndex;
+			else
+				io_index = x->instance_outs + extra;
+			
+			if (io_index < 1 || io_index > x->declared_outs)
+				io_index = -1;
+		}
+		else if(objclassname == hoa_sym_sigin)
+		{
+			if (x->instance_sig_ins > 0 && (extra <= 0 || extra > x->io_infos.extra_sig_ins_maxindex))
+				io_index = patchIndex;
+			else
+				io_index = x->instance_sig_ins + extra;
+			
+			if (io_index < 1 || io_index > x->declared_sig_ins)
+				io_index = -1;
+		}
+		else if(objclassname == hoa_sym_sigout)
+		{
+			if (x->instance_sig_outs > 0 && (extra <= 0 || extra > x->io_infos.extra_sig_outs_maxindex))
+				io_index = patchIndex;
+			else
+				io_index = x->instance_sig_outs + extra;
+			
+			if (io_index < 1 || io_index > x->declared_sig_outs)
+				io_index = -1;
+		}
 		
 		//post("query ins -- io_index = %ld", io_index);
-	}
-	else if (objclassname == hoa_sym_out)
-	{
-		ac = extra = 0;
-		av = NULL;
-		
-		object_attr_getvalueof(io, hoa_sym_attr_extra, &ac, &av);
-		
-		if (ac && av)
-			extra = atom_getlong(av);
-		
-		object_post((t_object*)io,"query outs -- patchIndex = %ld, extra = %ld", patchIndex, extra);
-		
-		if (patchIndex < x->instance_outs && x->instance_outs > 0 && (extra <= 0 || extra > x->io_infos.extra_outs_maxindex))
-			io_index = patchIndex;
-		else
-			io_index = x->instance_outs + extra;
-		
-		if (io_index < 1 || io_index > x->declared_outs)
-			io_index = -1;
-		
-		object_post((t_object*)io, "query outs -- io_index = %ld", io_index);
 	}
 	
 	return (void*) io_index;

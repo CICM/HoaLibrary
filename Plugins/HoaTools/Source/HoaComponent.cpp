@@ -6,6 +6,7 @@
 
 #include "HoaComponent.h"
 
+/*
 #define MIN_ZOOM 0.05
 
 HoaProcessor::HoaProcessor()
@@ -95,42 +96,10 @@ void HoaProcessor::setAzimuthOfChannel(long index, double anAngle)
 
 void HoaProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
 {
-	/*
-    m_map->setSamplingRate(aSampleRate);
-    m_map->setVectorSize(aVectorSize);
-    m_map->setRamp(aVectorSize);
-    m_rotate->setSamplingRate(aSampleRate);
-    m_rotate->setVectorSize(aVectorSize);
-    m_rotate->setAzimuth(m_offset_of_channels / 360. * HOA_2PI + HOA_PI2);
-    m_optim->setSamplingRate(aSampleRate);
-    m_optim->setVectorSize(aVectorSize);
-    m_decoder->setSamplingRate(aSampleRate);
-    m_decoder->setVectorSize(aVectorSize);
-    m_meter->setSamplingRate(aSampleRate);
-    m_meter->setVectorSize(aVectorSize);
-    for(int i = 0; i < 64; i++)
-    {
-        m_harmonics_matrix[i] = new float[aVectorSize];
-    }
-	*/
 }
 
 void HoaProcessor::process(float** iovector)
 {
-	/*
-    m_map->process(iovector, m_harmonics_matrix);
-    m_rotate->process(m_harmonics_matrix);
-    m_optim->process(m_harmonics_matrix);
-    m_decoder->process(m_harmonics_matrix, iovector);
-    m_meter->process(iovector);
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-        m_map->setMuted(i, m_sources_manager->sourceGetMute(i));
-    }
-    m_rotate->setAzimuth(m_offset_of_channels / 360. * HOA_2PI + HOA_PI2);
-    m_optim->setOptimMode(m_optimization);
-	*/
 }
 
 void HoaProcessor::postProcess()
@@ -144,10 +113,8 @@ void HoaProcessor::postProcess()
 	m_optimization = m_hoa_manager->getOptimMode();
 	m_offset_of_channels = radToDeg(m_hoa_manager->getChannelsOffset());
 	
-	/*
     if(m_number_of_channels != m_meter->getNumberOfChannels())
         m_meter->setNumberOfChannels(m_number_of_channels);
-	*/
 }
 
 void HoaProcessor::releaseResources()
@@ -157,6 +124,7 @@ void HoaProcessor::releaseResources()
         free(m_harmonics_matrix[i]);
     }
 }
+*/
 
 
 
