@@ -286,8 +286,8 @@ void HoaLookAndFeel::drawTextEditorOutline (Graphics& g, int width, int height, 
 void HoaLookAndFeel::drawComboBox (Graphics& g, int width, int height, const bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, ComboBox& box)
 {
     g.fillAll(box.findColour (ComboBox::backgroundColourId));
-    g.setColour(Colours::black);
-    g.drawRoundedRectangle(0, 0, width, height, 5., 1.);
+    g.setColour(Colours::grey);
+	g.drawRect(0, 0, width, height, 1);
     g.drawLine(buttonX, buttonY, buttonX, buttonH);
     const float arrowX = 0.3f;
     const float arrowH = 0.2f;
@@ -313,6 +313,46 @@ Font HoaLookAndFeel::getComboBoxFont (ComboBox& box)
     Font f (jmin (15.0f, box.getHeight() * 0.85f));
     f.setHorizontalScale (0.9f);
     return f;
+}
+
+void HoaLookAndFeel::drawLabel (Graphics& g, Label& label)
+{
+    g.fillAll (label.findColour (Label::backgroundColourId));
+	
+    if (! label.isBeingEdited())
+    {
+		if (label.isEditable())
+		{
+			g.fillAll (Colours::white);
+			g.setColour(Colours::grey);
+			g.drawRect(label.getLocalBounds(), 1);
+		}
+		
+        const float alpha = label.isEnabled() ? 1.0f : 0.5f;
+        const Font font (getLabelFont (label));
+		
+        g.setColour (label.findColour (Label::textColourId).withMultipliedAlpha (alpha));
+        g.setFont (font);
+        g.drawFittedText (label.getText(),
+                          label.getHorizontalBorderSize(),
+                          label.getVerticalBorderSize(),
+                          label.getWidth() - 2 * label.getHorizontalBorderSize(),
+                          label.getHeight() - 2 * label.getVerticalBorderSize(),
+                          label.getJustificationType(),
+                          jmax (1, (int) (label.getHeight() / font.getHeight())),
+                          label.getMinimumHorizontalScale());
+    }
+	else if ( label.isBeingEdited() )
+    {
+		g.fillAll (Colours::white);
+		g.setColour(Colours::grey);
+		g.drawRect(label.getLocalBounds(), 2);
+    }
+    else if (label.isEnabled())
+    {
+        //g.setColour (label.findColour (Label::outlineColourId));
+		//g.drawRect (label.getLocalBounds());
+    }
 }
 
 //==============================================================================

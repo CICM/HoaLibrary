@@ -28,8 +28,7 @@ private:
     HoaLogoComponent*       m_logo;
     Component*              m_front_component;
     
-    HoaLookAndFeel          LookAndFeel;
-    Font                    HoaFont;
+    HoaLookAndFeel*          m_lookAndFeel;
 public:
     HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter);
     ~HoaToolsAudioProcessorEditor();

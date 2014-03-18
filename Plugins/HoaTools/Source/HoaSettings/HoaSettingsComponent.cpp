@@ -26,8 +26,8 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     m_optim_value->setEditableText(false);
     m_optim_value->setJustificationType(Justification::centredLeft);
     m_optim_value->addItem("Basic", 1);
-    m_optim_value->addItem("Maxre", 2);
-    m_optim_value->addItem("Inphase", 3);
+    m_optim_value->addItem("MaxRe", 2);
+    m_optim_value->addItem("InPhase", 3);
     m_optim_value->addListener(this);
     m_optim_value->setSelectedId(m_processor->getOptimMode() + 1);
 
@@ -40,7 +40,7 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     m_decoder_value->setEditableText(false);
     m_decoder_value->setJustificationType(Justification::centredLeft);
     m_decoder_value->addItem("Ambisonic", 1);
-    m_decoder_value->addItem("Irregulier", 2);
+    m_decoder_value->addItem("Irregular", 2);
     m_decoder_value->addItem("Binaural", 3);
     m_decoder_value->addListener(this);
     m_decoder_value->setSelectedId(m_processor->getDecodingMode() + 1);
@@ -110,11 +110,15 @@ HoaSettingsComponent::~HoaSettingsComponent()
     m_channels_azimuth_values.clear();
 }
 
-void HoaSettingsComponent::comboBoxChanged(ComboBox* aComboBox)
+void HoaSettingsComponent::comboBoxChanged(ComboBox* comboBox)
 {
-    if(aComboBox == m_optim_value)
+    if(comboBox == m_optim_value)
     {
         m_processor->setOptimMode(static_cast<Optim::Mode>(m_optim_value->getSelectedId() - 1));
+    }
+	else if(comboBox == m_decoder_value)
+    {
+        m_processor->setDecodingMode(static_cast<DecoderMulti::Mode>(m_decoder_value->getSelectedId() - 1));
     }
 }
 
@@ -124,10 +128,6 @@ void HoaSettingsComponent::mouseDown(const MouseEvent &event)
     {
         m_master->componentHasBeenClicked(this);
 		return;
-    }
-    else
-    {
-        
     }
 }
 

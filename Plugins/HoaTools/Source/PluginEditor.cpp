@@ -17,6 +17,9 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_settings  = new HoaSettingsComponent(this, m_processor);
     m_infos     = new HoaInfosComponent(this);
     m_logo      = new HoaLogoComponent();
+	
+	m_lookAndFeel = new HoaLookAndFeel();
+	setLookAndFeel(m_lookAndFeel);
     
     addAndMakeVisible(m_map);
     m_map->setSize(495, 495);
