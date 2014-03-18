@@ -1,0 +1,18 @@
+#N canvas 416 190 951 572 10;
+#X obj -31 -20 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.pi 3 12
+0 18 -204280 -1 0;
+#X text -28 2 A good pi number;
+#X text 124 474 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X text -31 25 hoa.pi is for people that never remember more than 4
+decimals or want to initialize a good Pi number.;
+#X obj 285 126 sig~ 1;
+#X msg 320 159 load GUI;
+#X obj 87 203 hoa.process~ 1 GUI;
+#X msg 272 235 show 1;
+#X msg 272 265 show 2;
+#X obj 166 140 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 315 256;
+#X connect 7 0 6 0;
+#X connect 8 0 6 0;
+#X connect 9 0 6 0;
