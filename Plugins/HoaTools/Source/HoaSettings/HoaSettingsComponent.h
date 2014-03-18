@@ -47,10 +47,6 @@ public:
     void comboBoxChanged(ComboBox* aComboBox);
 	
 	void labelTextChanged (Label* label);
-	
-private:
-	bool is_string_int(const String str);
-	bool is_string_float(const String str);
 };
 
 

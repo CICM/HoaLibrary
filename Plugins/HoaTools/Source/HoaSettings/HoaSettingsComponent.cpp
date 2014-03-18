@@ -161,16 +161,16 @@ void HoaSettingsComponent::paint(Graphics& g)
         
         g.setColour(Colours::black);
         addAndMakeVisible(m_optim_value);
-        m_optim_value->setBounds(getWidth() * 0.5, 60, getWidth() * 0.5 - 10, 14);
+        m_optim_value->setBounds(getWidth() * 0.5, 60, getWidth() * 0.5 - 10, 20);
         
         addAndMakeVisible(m_optim_label);
-        m_optim_label->setBounds(10, 60, getWidth() * 0.5 - 10, 14);
+        m_optim_label->setBounds(10, 60, getWidth() * 0.5 - 10, 20);
         
+		addAndMakeVisible(m_decoder_label);
+        m_decoder_label->setBounds(10, 85, getWidth() * 0.5 - 10, 20);
+		
         addAndMakeVisible(m_decoder_value);
-        m_decoder_value->setBounds(getWidth() * 0.5, 80, getWidth() * 0.5 - 10, 14);
-        
-        addAndMakeVisible(m_decoder_label);
-        m_decoder_label->setBounds(10, 80, getWidth() * 0.5 - 10, 14);
+        m_decoder_value->setBounds(getWidth() * 0.5, 85, getWidth() * 0.5 - 10, 20);
         
         g.setColour(Colours::grey);
         g.drawLine(0, 130, 495, 130);
@@ -207,37 +207,58 @@ void HoaSettingsComponent::paint(Graphics& g)
     }
 }
 
-bool HoaSettingsComponent::is_string_int( const String str )
-{
-	return str.containsOnly ("+-0123456789");
-}
-
-bool HoaSettingsComponent::is_string_float( const String str )
-{
-	return str.containsOnly ("+-0123456789.");
-}
-
 void HoaSettingsComponent::labelTextChanged (Label* label)
 {
-	String text = label->getText();
+	double value = label->getText().getDoubleValue();
 	
-	if (label == m_number_of_channels_value)
+	if (label == m_number_of_sources_value)
 	{
-		double number = text.getDoubleValue();
+		value = clip_minmax(value, 1, 32);
+		label->setText(String( (int)value), juce::dontSendNotification);
+		m_processor->setNumberOfSources(value);
+	}
+	else if (label == m_number_of_channels_value)
+	{
+		value = clip_minmax(value, 2, 32);
+		label->setText(String( (int)value), juce::dontSendNotification);
+		m_processor->setNumberOfChannels(value);
 		
-		if (number > 1 && number < 32)
+		for (int i = 0; i < m_channels_azimuth_values.size(); i++)
 		{
-			label->setText(String(number), juce::dontSendNotification);
+			m_channels_azimuth_values[i]->removeListener(this);
+			removeChildComponent(m_channels_azimuth_values[i]);
 		}
-		else
+		
+		m_channels_azimuth_values.clear();
+		
+		for (int i = 0; i < value; i++)
 		{
-			label->setText(String(m_processor->getNumberOfChannels()), juce::dontSendNotification);
+			Label* newLabel = new Label();
+			newLabel->setEditable(true, false, false);
+			newLabel->setText(String(0), juce::dontSendNotification);
+			newLabel->addListener(this);
+			m_channels_azimuth_values.push_back(newLabel);
 		}
 	}
+	else if (label == m_offset_value)
+	{
+		value = wrap(value, -180, 180);
+		label->setText(String(value), juce::dontSendNotification);
+		m_processor->setChannelsOffset(degToRad(value));
+	}
+	else
+	{
+		for (int i = 0; i < m_channels_azimuth_values.size(); i++)
+		{
+			if (label == m_channels_azimuth_values[i])
+			{
+				value = wrap(value, -180, 180);
+				label->setText(String(value), juce::dontSendNotification);
+				m_processor->setChannelAzimuth(i, degToRad(value));
+				return;
+			}
+		}
+	}
+	
+	repaint();
 }
-
-
-
-
-
-
