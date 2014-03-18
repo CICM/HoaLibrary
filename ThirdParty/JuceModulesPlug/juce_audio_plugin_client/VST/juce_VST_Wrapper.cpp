@@ -302,7 +302,9 @@ public:
 
         setNumInputs (numInChans);
         setNumOutputs (numOutChans);
-
+		setNumberOfInputs(0, numInChans);
+		setNumberOfOutputs(0, numOutChans);
+		
         canProcessReplacing (true);
 
         isSynth ((JucePlugin_IsSynth) != 0);
@@ -311,6 +313,16 @@ public:
         programsAreChunks (true);
 
         activePlugins.add (this);
+    }
+	
+	void setNumberOfInputs(AudioProcessor* Nope, long aNumberOfInputs)
+    {
+        newnumInChans = aNumberOfInputs;
+    }
+    
+    void setNumberOfOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
+    {
+        newnumOutChans = aNumberOfOutputs;
     }
 
     ~JuceVSTWrapper()
@@ -652,6 +664,9 @@ public:
 
             midiEvents.clear();
         }
+		setNumInputs(newnumInChans);
+        setNumOutputs(newnumOutChans);
+        cEffect.numParams = filter->getNumParameters();
     }
 
     //==============================================================================
@@ -1416,6 +1431,7 @@ private:
     VSTMidiEventList outgoingEvents;
     VstSpeakerArrangementType speakerIn, speakerOut;
     int numInChans, numOutChans;
+	int newnumInChans, newnumOutChans;
     bool isProcessing, isBypassed, hasShutdown, firstProcessCallback;
     bool shouldDeleteEditor, useNSView;
     HeapBlock<float*> channels;

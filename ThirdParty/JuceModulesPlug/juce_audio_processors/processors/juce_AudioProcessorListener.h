@@ -54,6 +54,13 @@ public:
     virtual void audioProcessorParameterChanged (AudioProcessor* processor,
                                                  int parameterIndex,
                                                  float newValue) = 0;
+	
+	
+	
+	virtual void setNumberOfInputs(AudioProcessor* processor, long aNumberOfInputs){};
+    virtual void setNumberOfOutputs(AudioProcessor* processor, long aNumberOfOutputs){};
+	
+	
 
     /** Called to indicate that something else in the plugin has changed, like its
         program, number of parameters, etc.

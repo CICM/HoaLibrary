@@ -25,6 +25,7 @@ void HoaInfosComponent::mouseDown(const MouseEvent &event)
     if(getWidth() < 125)
     {
         m_master->componentHasBeenClicked(this);
+		return;
     }
     else
     {

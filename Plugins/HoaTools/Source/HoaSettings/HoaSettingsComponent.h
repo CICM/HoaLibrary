@@ -10,8 +10,9 @@
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 #include "PluginProcessor.h"
+#include "HoaTextEditor.h"
 
-class HoaSettingsComponent : public Component, public ComboBox::Listener, public TextEditor::Listener
+class HoaSettingsComponent : public Component, public ComboBox::Listener, public TextEditor::Listener, public KeyListener
 {
 private:
     HoaComponentListener*   m_master;
@@ -23,7 +24,7 @@ private:
     Label*                  m_label_decoder;
     TextEditor*             m_sources;
     Label*                  m_label_sources;
-    TextEditor*             m_loudspeakers;
+    TextEditor*				m_loudspeakers;
     Label*                  m_label_loudspeakers;
     TextEditor*             m_offset;
     Label*                  m_label_offset;
@@ -45,6 +46,9 @@ public:
     void mouseDown(const MouseEvent &event);
     void comboBoxChanged(ComboBox* aComboBox);
     void textEditorReturnKeyPressed(TextEditor&);
+	
+	bool keyPressed (const KeyPress& key, Component* originatingComponent);
+	bool keyStateChanged (bool isKeyDown, Component* originatingComponent);
 };
 
 

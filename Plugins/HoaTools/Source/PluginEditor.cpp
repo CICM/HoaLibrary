@@ -44,11 +44,11 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
 
 HoaToolsAudioProcessorEditor::~HoaToolsAudioProcessorEditor()
 {
+	delete m_map;
+    delete m_meter;
     delete m_logo;
     delete m_infos;
     delete m_settings;
-    delete m_map;
-    delete m_meter;
 }
 
 void HoaToolsAudioProcessorEditor::componentHasBeenClicked(Component* component)

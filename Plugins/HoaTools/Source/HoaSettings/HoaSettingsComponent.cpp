@@ -16,7 +16,7 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     
     m_label_settings = new Label();
     m_label_settings->setText("Settings", juce::dontSendNotification);
-    
+   
     m_optimization = new ComboBox();
     m_optimization->setEditableText(false);
     m_optimization->setJustificationType(Justification::centredLeft);
@@ -47,7 +47,9 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     m_label_sources->setText("Number of Sources", juce::dontSendNotification);
     
     m_loudspeakers = new TextEditor();
-    // codition de numbres
+	m_loudspeakers->addListener(this);
+    
+	// condition de nombres
     
     m_label_loudspeakers = new Label();
     m_label_loudspeakers->setText("Number of Loudspeakers", juce::dontSendNotification);
@@ -60,12 +62,14 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     
     m_label_angle = new Label();
     m_label_angle->setText("Angle", juce::dontSendNotification);
-    
-    m_loudspeakers->addListener(this);
+	
+	
+	addAndMakeVisible(m_loudspeakers);
 }
 
 HoaSettingsComponent::~HoaSettingsComponent()
 {
+	m_loudspeakers->removeListener(this);
     delete m_label_settings;
     delete m_optimization;
     delete m_label_optimization;
@@ -94,6 +98,7 @@ void HoaSettingsComponent::mouseDown(const MouseEvent &event)
     if(getWidth() < 125)
     {
         m_master->componentHasBeenClicked(this);
+		return;
     }
     else
     {
@@ -104,7 +109,7 @@ void HoaSettingsComponent::mouseDown(const MouseEvent &event)
 void HoaSettingsComponent::paint(Graphics& g)
 {
     int nouveaunombre = 35;
-    
+	
     g.setColour(Colours::black);
     if(getWidth() < 125)
     {
@@ -118,10 +123,12 @@ void HoaSettingsComponent::paint(Graphics& g)
     }
     else
     {
+		
+		m_processor->setNumberOfChannels(8);
+		
         addAndMakeVisible(m_label_settings);
         m_label_settings->setBounds(5, 10, getWidth() * 0.5 - 10, 14);
 
-        
         g.setColour(Colours::darkgrey);
         g.drawLine(0, 50, 495, 50);
         
@@ -151,9 +158,9 @@ void HoaSettingsComponent::paint(Graphics& g)
         addAndMakeVisible(m_label_loudspeakers);
         m_label_loudspeakers->setBounds(80, 190, getWidth() * 0.5 - 10, 20);
         
-        addAndMakeVisible(m_loudspeakers);
-        m_loudspeakers->setBounds(280, 190, 40, 20);
         
+        m_loudspeakers->setBounds(280, 190, 40, 20);
+		
         addAndMakeVisible(m_label_offset);
         m_label_offset->setBounds(80, 230, getWidth() * 0.5 - 10, 20);
         
@@ -176,10 +183,25 @@ void HoaSettingsComponent::paint(Graphics& g)
     }
 }
 
+
+bool HoaSettingsComponent::keyPressed (const KeyPress& key, Component* originatingComponent)
+{
+	//m_loudspeakers->setText("fredy");
+	return 0;
+}
+
+bool HoaSettingsComponent::keyStateChanged (bool isKeyDown, Component* originatingComponent)
+{
+	m_loudspeakers->setText("zozo");
+	return false;
+}
+
 void HoaSettingsComponent::textEditorReturnKeyPressed(TextEditor &textedit)
 {
     size = getWidth();
-  
+	
+	m_loudspeakers->setText("jojo");
+
     if(&textedit == m_loudspeakers)
     {
         String text;
@@ -198,8 +220,8 @@ void HoaSettingsComponent::textEditorReturnKeyPressed(TextEditor &textedit)
             for (int i = m_angles.size(); i >= textNum; i--)
                 m_angles.pop_back();
         }
-        
-        repaint();
+		
+		//m_processor->setNumberOfChannels(textNum);
     }
     repaint();
 }

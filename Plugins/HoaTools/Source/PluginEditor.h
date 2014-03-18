@@ -15,9 +15,8 @@
 #include "HoaSettings/HoaSettingsComponent.h"
 #include "HoaLogo/HoaLogoComponent.h"
 #include "PluginProcessor.h"
-#include "HoaComponent.h"
 
-class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public ComboBoxListener, public ButtonListener, public ValueListener, public HoaComponentListener
+class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public HoaComponentListener
 {
 private:
     HoaToolsAudioProcessor* m_processor;
@@ -37,9 +36,6 @@ public:
 
     void paint(Graphics& g);
     void componentHasBeenClicked(Component* component);
-    void comboBoxChanged(ComboBox* aComboBox);
-    void buttonClicked(Button* aButton);
-    void valueChanged(Value& aValue);
 };
 
 

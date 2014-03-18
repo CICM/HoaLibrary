@@ -12,6 +12,7 @@
 
 HoaMeterComponent::HoaMeterComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor)
 {
+	m_master = master;
     m_processor = processor;
     startTimer(20);
 }
@@ -19,6 +20,15 @@ HoaMeterComponent::HoaMeterComponent(HoaComponentListener* master, HoaToolsAudio
 HoaMeterComponent::~HoaMeterComponent()
 {
     ;
+}
+
+void HoaMeterComponent::mouseDown(const MouseEvent &event)
+{
+    if(getWidth() < 125)
+    {
+        m_master->componentHasBeenClicked(this);
+		return;
+    }
 }
 
 void HoaMeterComponent::timerCallback()
@@ -34,7 +44,7 @@ void HoaMeterComponent::paint(Graphics& g)
     float led_width = 0.5 / 16. * getWidth();
     
     //m_processor->processEnergy();
-    
+    /*
     g.setColour(Colours::grey);
     g.drawEllipse(0.2 * getWidth(), 0.2 * getWidth(), 0.6 * getWidth(), 0.6 * getWidth(), getWidth() * 0.4);
     g.addTransform(AffineTransform::fromTargetPoints(-center, center, 0, 0, center, center, getWidth(), 0,  center, -center, getWidth(), getWidth()));
@@ -76,7 +86,16 @@ void HoaMeterComponent::paint(Graphics& g)
             }
         }
     }
+	*/
 }
 
+void HoaMeterComponent::mouseMove(const MouseEvent &event)
+{
+	;
+}
 
+void HoaMeterComponent::mouseDrag(const MouseEvent &event)
+{
+	;
+}
 
