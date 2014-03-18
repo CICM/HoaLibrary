@@ -1,0 +1,28 @@
+#N canvas 363 229 1036 297 10;
+#X obj -381 -127 loadbang;
+#X obj -381 -44 print GUI loaded;
+#X obj -144 -71 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -231 78 print~;
+#X obj 3 10 osc~ 0.1;
+#X msg -261 -64 1;
+#X obj -273 27 metro 20;
+#X obj -228 -121 inlet~;
+#X msg 194 69 \$1;
+#X msg 183 137 0;
+#X obj 197 100 c.prepend set;
+#X obj -122 -3 outlet~;
+#X obj -124 -35 print inlet 1;
+#X obj -18 -121 inlet~ @extra 1;
+#X obj -157 -114 inlet;
+#X obj 102 -121 inlet @extra 1;
+#X obj -148 100 outlet~ @extra 1;
+#X connect 0 0 1 0;
+#X connect 0 0 5 0;
+#X connect 2 0 12 0;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 7 0 3 0;
+#X connect 8 0 10 0;
+#X connect 10 0 9 0;
+#X connect 14 0 2 0;

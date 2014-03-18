@@ -76,7 +76,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
    
     if (!(d = binbuf_via_atoms(argc,argv)))
 		return NULL;
-    
+
     x = (t_hoa_decoder *)eobj_new(hoa_decoder_class);
     if (x)
 	{
