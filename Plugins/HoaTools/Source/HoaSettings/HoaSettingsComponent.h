@@ -12,32 +12,32 @@
 #include "PluginProcessor.h"
 #include "HoaTextEditor.h"
 
-class HoaSettingsComponent : public Component, public ComboBox::Listener, public TextEditor::Listener, public KeyListener
+class HoaSettingsComponent : public Component, public ComboBox::Listener, public Label::Listener
 {
 private:
     HoaComponentListener*   m_master;
     HoaToolsAudioProcessor* m_processor;
+	
     Label*                  m_label_settings;
-    ComboBox*               m_optimization;
-    Label*                  m_label_optimization;
-    ComboBox*               m_decoder;
-    Label*                  m_label_decoder;
-    TextEditor*             m_sources;
-    Label*                  m_label_sources;
-    TextEditor*				m_loudspeakers;
-    Label*                  m_label_loudspeakers;
-    TextEditor*             m_offset;
-    Label*                  m_label_offset;
-    Label*                  m_label_angle;
+	
+    Label*                  m_optim_label;
+	ComboBox*               m_optim_value;
+	
+    Label*                  m_decoder_label;
+	ComboBox*               m_decoder_value;
+	
+	Label*                  m_number_of_sources_label;
+    Label*					m_number_of_sources_value;
+	
+	Label*                  m_number_of_channels_label;
+    Label*					m_number_of_channels_value;
+	
+	Label*                  m_offset_label;
+    Label*					m_offset_value;
+	
+    Label*					m_channels_azimuth_label;
+    std::vector<Label*>		m_channels_azimuth_values;
     
-    std::vector<TextEditor*>  m_angles;
-    int size;
-    //TextEditor**             m_angles;
-    
-    
-    // Boites nombres
-    // Menus
-    // Etc...
 public:
     HoaSettingsComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaSettingsComponent();
@@ -45,10 +45,12 @@ public:
     void paint(Graphics&);
     void mouseDown(const MouseEvent &event);
     void comboBoxChanged(ComboBox* aComboBox);
-    void textEditorReturnKeyPressed(TextEditor&);
 	
-	bool keyPressed (const KeyPress& key, Component* originatingComponent);
-	bool keyStateChanged (bool isKeyDown, Component* originatingComponent);
+	void labelTextChanged (Label* label);
+	
+private:
+	bool is_string_int(const String str);
+	bool is_string_float(const String str);
 };
 
 

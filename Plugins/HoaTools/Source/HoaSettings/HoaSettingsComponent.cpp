@@ -12,84 +12,109 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
 {
     m_master    = master;
     m_processor = processor;
-    size = 1;
     
     m_label_settings = new Label();
     m_label_settings->setText("Settings", juce::dontSendNotification);
    
-    m_optimization = new ComboBox();
-    m_optimization->setEditableText(false);
-    m_optimization->setJustificationType(Justification::centredLeft);
-    m_optimization->addItem("Basic", 1);
-    m_optimization->addItem("Maxre", 2);
-    m_optimization->addItem("Inphase", 3);
-    m_optimization->addListener(this);
-    m_optimization->setSelectedId(m_processor->getOptimMode() + 1);
-    
-    m_label_optimization = new Label();
-    m_label_optimization->setText("Optimization", juce::dontSendNotification);
 
-    m_decoder = new ComboBox();
-    m_decoder->setEditableText(false);
-    m_decoder->setJustificationType(Justification::centredLeft);
-    m_decoder->addItem("Ambisonic", 1);
-    m_decoder->addItem("Irregulier", 2);
-    m_decoder->addItem("Binoral", 3);
-    m_decoder->addListener(this);
-    m_decoder->setSelectedId(m_processor->getDecodingMode() + 1);
-    
-    m_label_decoder = new Label();
-    m_label_decoder->setText("Decoding Mode", juce::dontSendNotification);
-    
-    m_sources = new TextEditor();
-    
-    m_label_sources = new Label();
-    m_label_sources->setText("Number of Sources", juce::dontSendNotification);
-    
-    m_loudspeakers = new TextEditor();
-	m_loudspeakers->addListener(this);
-    
-	// condition de nombres
-    
-    m_label_loudspeakers = new Label();
-    m_label_loudspeakers->setText("Number of Loudspeakers", juce::dontSendNotification);
-    
-    
-    m_offset = new TextEditor();
-    
-    m_label_offset = new Label();
-    m_label_offset->setText("Offset", juce::dontSendNotification);
-    
-    m_label_angle = new Label();
-    m_label_angle->setText("Angle", juce::dontSendNotification);
+	// -- optimization
+	
+	m_optim_label = new Label();
+    m_optim_label->setText("Optimization", juce::dontSendNotification);
+	
+    m_optim_value = new ComboBox();
+    m_optim_value->setEditableText(false);
+    m_optim_value->setJustificationType(Justification::centredLeft);
+    m_optim_value->addItem("Basic", 1);
+    m_optim_value->addItem("Maxre", 2);
+    m_optim_value->addItem("Inphase", 3);
+    m_optim_value->addListener(this);
+    m_optim_value->setSelectedId(m_processor->getOptimMode() + 1);
+
+	// -- decoder
+	
+	m_decoder_label = new Label();
+    m_decoder_label->setText("Decoding Mode", juce::dontSendNotification);
+	
+    m_decoder_value = new ComboBox();
+    m_decoder_value->setEditableText(false);
+    m_decoder_value->setJustificationType(Justification::centredLeft);
+    m_decoder_value->addItem("Ambisonic", 1);
+    m_decoder_value->addItem("Irregulier", 2);
+    m_decoder_value->addItem("Binaural", 3);
+    m_decoder_value->addListener(this);
+    m_decoder_value->setSelectedId(m_processor->getDecodingMode() + 1);
 	
 	
-	addAndMakeVisible(m_loudspeakers);
+    // -- sources
+	
+	m_number_of_sources_label = new Label();
+    m_number_of_sources_label->setText("Number of Sources", juce::dontSendNotification);
+	
+    m_number_of_sources_value = new Label();
+	m_number_of_sources_value->setEditable(true, false, false);
+    m_number_of_sources_value->setText(String(m_processor->getNumberOfSources()), juce::dontSendNotification);
+	m_number_of_sources_value->addListener(this);
+	
+	// -- channels
+	
+	m_number_of_channels_label = new Label();
+    m_number_of_channels_label->setText("Number of Loudspeakers", juce::dontSendNotification);
+	
+    m_number_of_channels_value = new Label();
+	m_number_of_channels_value->setEditable(true, false, false);
+	m_number_of_channels_value->setText(String(m_processor->getNumberOfChannels()), juce::dontSendNotification);
+	m_number_of_channels_value->addListener(this);
+    
+    
+	// -- offset -- //
+	
+	m_offset_label = new Label();
+    m_offset_label->setText("Offset", juce::dontSendNotification);
+	
+    m_offset_value = new Label();
+	m_offset_value->setEditable(true, false, false);
+	m_offset_value->setText(String(m_processor->getChannelsOffset()), juce::dontSendNotification);
+    m_offset_value->addListener(this);
+	
+	// -- channels angles -- //
+	
+    m_channels_azimuth_label = new Label();
+    m_channels_azimuth_label->setText("Angle of Loudspeakers", juce::dontSendNotification);
+	
+	for (int i = 0; i < m_processor->getNumberOfChannels(); i++)
+	{
+		Label* newLabel = new Label();
+		newLabel->setEditable(true, false, false);
+		newLabel->setText(String(0), juce::dontSendNotification);
+		newLabel->addListener(this);
+		m_channels_azimuth_values.push_back(newLabel);
+	}
 }
 
 HoaSettingsComponent::~HoaSettingsComponent()
 {
-	m_loudspeakers->removeListener(this);
+	//m_number_of_channels_value->removeListener(this);
     delete m_label_settings;
-    delete m_optimization;
-    delete m_label_optimization;
-    delete m_decoder;
-    delete m_label_decoder;
-    delete m_sources;
-    delete m_label_sources;
-    delete m_loudspeakers;
-    delete m_label_loudspeakers;
-    delete m_offset;
-    delete m_label_offset;
-    delete m_label_angle;
-    m_angles.clear();
+    delete m_optim_value;
+    delete m_optim_label;
+    delete m_decoder_value;
+    delete m_decoder_label;
+    delete m_number_of_sources_value;
+    delete m_number_of_sources_label;
+    delete m_number_of_channels_value;
+    delete m_number_of_channels_label;
+    delete m_offset_value;
+    delete m_offset_label;
+    delete m_channels_azimuth_label;
+    m_channels_azimuth_values.clear();
 }
 
 void HoaSettingsComponent::comboBoxChanged(ComboBox* aComboBox)
 {
-    if(aComboBox == m_optimization)
+    if(aComboBox == m_optim_value)
     {
-        m_processor->setOptimMode(static_cast<Optim::Mode>(m_optimization->getSelectedId() - 1));
+        m_processor->setOptimMode(static_cast<Optim::Mode>(m_optim_value->getSelectedId() - 1));
     }
 }
 
@@ -108,18 +133,20 @@ void HoaSettingsComponent::mouseDown(const MouseEvent &event)
 
 void HoaSettingsComponent::paint(Graphics& g)
 {
-    int nouveaunombre = 35;
-	
-    g.setColour(Colours::black);
     if(getWidth() < 125)
     {
+		g.setColour(Colours::black);
         g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
         removeChildComponent(m_label_settings);
-        removeChildComponent(m_optimization);
-        removeChildComponent(m_label_optimization);
-        removeChildComponent(m_decoder);
-        removeChildComponent(m_label_decoder);
-        
+        removeChildComponent(m_optim_value);
+        removeChildComponent(m_optim_label);
+        removeChildComponent(m_decoder_value);
+        removeChildComponent(m_decoder_label);
+		
+		/*
+        for (int i = 0; i < m_channels_azimuth_values.size(); i++)
+            removeChildComponent(m_channels_azimuth_values[i]);
+		*/
     }
     else
     {
@@ -133,95 +160,84 @@ void HoaSettingsComponent::paint(Graphics& g)
         g.drawLine(0, 50, 495, 50);
         
         g.setColour(Colours::black);
-        addAndMakeVisible(m_optimization);
-        m_optimization->setBounds(getWidth() * 0.5, 60, getWidth() * 0.5 - 10, 14);
+        addAndMakeVisible(m_optim_value);
+        m_optim_value->setBounds(getWidth() * 0.5, 60, getWidth() * 0.5 - 10, 14);
         
-        addAndMakeVisible(m_label_optimization);
-        m_label_optimization->setBounds(10, 60, getWidth() * 0.5 - 10, 14);
+        addAndMakeVisible(m_optim_label);
+        m_optim_label->setBounds(10, 60, getWidth() * 0.5 - 10, 14);
         
-        addAndMakeVisible(m_decoder);
-        m_decoder->setBounds(getWidth() * 0.5, 80, getWidth() * 0.5 - 10, 14);
+        addAndMakeVisible(m_decoder_value);
+        m_decoder_value->setBounds(getWidth() * 0.5, 80, getWidth() * 0.5 - 10, 14);
         
-        addAndMakeVisible(m_label_decoder);
-        m_label_decoder->setBounds(10, 80, getWidth() * 0.5 - 10, 14);
+        addAndMakeVisible(m_decoder_label);
+        m_decoder_label->setBounds(10, 80, getWidth() * 0.5 - 10, 14);
         
         g.setColour(Colours::grey);
         g.drawLine(0, 130, 495, 130);
     
         g.setColour(Colours::black);
-        addAndMakeVisible(m_label_sources);
-        m_label_sources->setBounds(80, 150, getWidth() * 0.5 - 10, 20);
+        addAndMakeVisible(m_number_of_sources_label);
+        m_number_of_sources_label->setBounds(80, 150, getWidth() * 0.5 - 10, 20);
         
-        addAndMakeVisible(m_sources);
-        m_sources->setBounds(280, 150, 40, 20);
+        addAndMakeVisible(m_number_of_sources_value);
+        m_number_of_sources_value->setBounds(280, 150, 40, 20);
 
-        addAndMakeVisible(m_label_loudspeakers);
-        m_label_loudspeakers->setBounds(80, 190, getWidth() * 0.5 - 10, 20);
+        addAndMakeVisible(m_number_of_channels_label);
+        m_number_of_channels_label->setBounds(80, 190, getWidth() * 0.5 - 10, 20);
         
-        
-        m_loudspeakers->setBounds(280, 190, 40, 20);
+        addAndMakeVisible(m_number_of_channels_value);
+        m_number_of_channels_value->setBounds(280, 190, 40, 20);
 		
-        addAndMakeVisible(m_label_offset);
-        m_label_offset->setBounds(80, 230, getWidth() * 0.5 - 10, 20);
+        addAndMakeVisible(m_offset_label);
+        m_offset_label->setBounds(80, 230, getWidth() * 0.5 - 10, 20);
         
-        addAndMakeVisible(m_offset);
-        m_offset->setBounds(280, 230, 40, 20);
+        addAndMakeVisible(m_offset_value);
+        m_offset_value->setBounds(280, 230, 40, 20);
 
-        addAndMakeVisible(m_label_angle);
-        m_label_angle->setBounds(10, 320, getWidth() * 0.5 - 10, 20);
+        addAndMakeVisible(m_channels_azimuth_label);
+        m_channels_azimuth_label->setBounds(10, 320, getWidth() * 0.5 - 10, 20);
         
-        for (int i = 0; i < m_angles.size(); i++)
+        for (int i = 0; i < m_channels_azimuth_values.size(); i++)
         {
             int index_line = i / 12;
             int index_column = i - index_line * 12;
-            m_angles[i]->setBounds(index_column * 45 + 2.5, index_line * 25 + 340, 40, 20);
-            addAndMakeVisible(m_angles[i]);
-            
+			addAndMakeVisible(m_channels_azimuth_values[i]);
+            m_channels_azimuth_values[i]->setBounds(index_column * 45 + 2.5, index_line * 25 + 340, 40, 20);
         }
-        
-        g.drawLine(0, 0, size, getHeight());
     }
 }
 
-
-bool HoaSettingsComponent::keyPressed (const KeyPress& key, Component* originatingComponent)
+bool HoaSettingsComponent::is_string_int( const String str )
 {
-	//m_loudspeakers->setText("fredy");
-	return 0;
+	return str.containsOnly ("+-0123456789");
 }
 
-bool HoaSettingsComponent::keyStateChanged (bool isKeyDown, Component* originatingComponent)
+bool HoaSettingsComponent::is_string_float( const String str )
 {
-	m_loudspeakers->setText("zozo");
-	return false;
+	return str.containsOnly ("+-0123456789.");
 }
 
-void HoaSettingsComponent::textEditorReturnKeyPressed(TextEditor &textedit)
+void HoaSettingsComponent::labelTextChanged (Label* label)
 {
-    size = getWidth();
+	String text = label->getText();
 	
-	m_loudspeakers->setText("jojo");
-
-    if(&textedit == m_loudspeakers)
-    {
-        String text;
-        long textNum;
-        text = textedit.getText();
-        
-        //textNum = text.getIntValue();
-        
-        textNum = 8;
-        
-        if (textNum > 1 && textNum <= 32)
-        {
-            for (int i = m_angles.size(); i <= textNum; i++)
-                m_angles.push_back(new TextEditor());
-            
-            for (int i = m_angles.size(); i >= textNum; i--)
-                m_angles.pop_back();
-        }
+	if (label == m_number_of_channels_value)
+	{
+		double number = text.getDoubleValue();
 		
-		//m_processor->setNumberOfChannels(textNum);
-    }
-    repaint();
+		if (number > 1 && number < 32)
+		{
+			label->setText(String(number), juce::dontSendNotification);
+		}
+		else
+		{
+			label->setText(String(m_processor->getNumberOfChannels()), juce::dontSendNotification);
+		}
+	}
 }
+
+
+
+
+
+
