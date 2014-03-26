@@ -13,19 +13,17 @@
               companyEmail="cicm.mshparisnord@gmail.com">
   <MAINGROUP id="G6OL0W" name="HoaTools">
     <GROUP id="{D43CAFB0-F501-182F-1AB8-1CC0205CEC70}" name="plugSources">
-      <FILE id="NeNcwf" name="HoaComponent.cpp" compile="1" resource="0"
-            file="Source/HoaComponent.cpp"/>
-      <FILE id="KmWSHT" name="HoaComponent.h" compile="0" resource="0" file="Source/HoaComponent.h"/>
       <GROUP id="{E8B263BB-D85D-1C7A-B402-386C31B3CB5E}" name="HoaMap">
-        <FILE id="TrOwD4" name="MapComponent.cpp" compile="1" resource="0"
-              file="Source/HoaMap/MapComponent.cpp"/>
-        <FILE id="NcpAOK" name="MapComponent.h" compile="0" resource="0" file="Source/HoaMap/MapComponent.h"/>
+        <FILE id="M62wBU" name="HoaMapComponent.cpp" compile="1" resource="0"
+              file="Source/HoaMap/HoaMapComponent.cpp"/>
+        <FILE id="erBb99" name="HoaMapComponent.h" compile="0" resource="0"
+              file="Source/HoaMap/HoaMapComponent.h"/>
       </GROUP>
       <GROUP id="{08D54373-E3F7-5F77-0C86-258A567618B2}" name="HoaMeter">
-        <FILE id="FNZy3P" name="MeterComponent.cpp" compile="1" resource="0"
-              file="Source/HoaMeter/MeterComponent.cpp"/>
-        <FILE id="om2kpi" name="MeterComponent.h" compile="0" resource="0"
-              file="Source/HoaMeter/MeterComponent.h"/>
+        <FILE id="IEA6Zn" name="HoaMeterComponent.cpp" compile="1" resource="0"
+              file="Source/HoaMeter/HoaMeterComponent.cpp"/>
+        <FILE id="gnMbmR" name="HoaMeterComponent.h" compile="0" resource="0"
+              file="Source/HoaMeter/HoaMeterComponent.h"/>
       </GROUP>
       <GROUP id="{9ECA9341-DCD3-35E1-6296-09FF0AF46FD1}" name="HoaInfos">
         <FILE id="U5160n" name="HoaInfosComponent.cpp" compile="1" resource="0"
@@ -44,6 +42,11 @@
               file="Source/HoaSettings/HoaSettingsComponent.cpp"/>
         <FILE id="g77sai" name="HoaSettingsComponent.h" compile="0" resource="0"
               file="Source/HoaSettings/HoaSettingsComponent.h"/>
+      </GROUP>
+      <GROUP id="{425E6C2F-9C87-801D-5AB2-28EC1FDE7029}" name="HoaTextEditor">
+        <FILE id="bnSP0X" name="HoaTextEditor.cpp" compile="1" resource="0"
+              file="Source/HoaTextEditor/HoaTextEditor.cpp"/>
+        <FILE id="PojWWf" name="HoaTextEditor.h" compile="0" resource="0" file="Source/HoaTextEditor/HoaTextEditor.h"/>
       </GROUP>
       <FILE id="l4VDUs" name="HoaLookAndFeel.cpp" compile="1" resource="0"
             file="Source/HoaLookAndFeel.cpp"/>

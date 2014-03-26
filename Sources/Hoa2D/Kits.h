@@ -158,6 +158,20 @@ namespace Hoa2D
             return m_number_of_channels;
         }
 		
+		
+		//! Set the azimuth of a given channel.
+        /** Set the azimuth of a given channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
+         *
+         * @param     index		The index of the channel.
+         * @param     azimuth		The azimuth.
+		 * @see getChannelAzimuth
+         */
+		void setChannelAzimuth(unsigned int index, double azimuth)
+		{
+			m_meter->setChannelAzimuth(index, azimuth);
+			m_decoder->setChannelAzimuth(index, azimuth);
+		}
+		
 		//! Get the mapped azimuth of a given channel.
         /**
          *

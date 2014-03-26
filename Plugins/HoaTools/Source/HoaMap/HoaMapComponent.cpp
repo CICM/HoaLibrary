@@ -14,7 +14,8 @@
 
 HoaMapComponent::HoaMapComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor)
 {
-    m_processor         = processor;    
+    m_processor         = processor;
+	m_master			= master;
     m_souce_selected    = -1;
     m_group_selected    = -1;
     m_sources_size      = 15.;
@@ -35,6 +36,7 @@ void HoaMapComponent::mouseMove(const MouseEvent &event)
     m_selected          = 0;
     m_souce_selected    = -1;
     m_group_selected    = -1;
+	
     for (int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
     {
         if(m_processor->sourceGetExistence(i))
@@ -70,6 +72,12 @@ void HoaMapComponent::mouseMove(const MouseEvent &event)
 
 void HoaMapComponent::mouseDown(const MouseEvent &event)
 {
+	if(getWidth() < 125)
+    {
+        m_master->componentHasBeenClicked(this);
+		return;
+    }
+	
     Point<float> point;
     Point<float> mouse = event.getPosition().toFloat();
     Point<float> rect  = mouse;

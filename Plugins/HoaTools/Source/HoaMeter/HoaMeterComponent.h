@@ -15,12 +15,16 @@ class HoaMeterComponent : public Component, public Timer
 {
 private:
 	HoaToolsAudioProcessor* m_processor;
+	HoaComponentListener*	m_master;
 
 public:
     HoaMeterComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaMeterComponent();
     
     void paint (Graphics&);
+    void mouseMove(const MouseEvent &event);
+    void mouseDown(const MouseEvent &event);
+    void mouseDrag(const MouseEvent &event);
     void timerCallback();
 };
 

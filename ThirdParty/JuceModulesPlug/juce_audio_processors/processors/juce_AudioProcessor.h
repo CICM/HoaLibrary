@@ -524,6 +524,22 @@ public:
 
     /** Called by the host to rename a program. */
     virtual void changeProgramName (int index, const String& newName) = 0;
+	
+	
+	
+	void setNumberOfInputs(long aNumberOfInputs)
+    {
+        for (int i = listeners.size(); --i >= 0;)
+            if (AudioProcessorListener* l = getListenerLocked (i))
+                l->setNumberOfInputs(this, aNumberOfInputs);
+    }
+
+    void setNumberOfOutputs(long aNumberOfOutputs)
+    {
+        for (int i = listeners.size(); --i >= 0;)
+            if (AudioProcessorListener* l = getListenerLocked (i))
+                l->setNumberOfOutputs(this, aNumberOfOutputs);
+    }
 
     //==============================================================================
     /** The host will call this method when it wants to save the filter's internal state.

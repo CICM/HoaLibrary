@@ -9,7 +9,6 @@
 
 #include <JuceHeader.h>
 #include "HoaLookAndFeel.h"
-#include "HoaComponent.h"
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 
 class HoaComponentListener

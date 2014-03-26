@@ -16,6 +16,7 @@ class HoaMapComponent : public Component
 {
 private:
     HoaToolsAudioProcessor* m_processor;
+	HoaComponentListener*	m_master;
     
     double          m_sources_size;
     long            m_souce_selected;

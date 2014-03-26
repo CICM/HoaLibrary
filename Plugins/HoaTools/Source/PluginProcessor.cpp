@@ -202,8 +202,6 @@ void HoaToolsAudioProcessor::numChannelsChanged()
     {
         setNumberOfChannels(getNumOutputChannels());
     }
-	
-    //m_processor->postProcess();
     
     Editor = getActiveEditor();
     if(Editor)
@@ -218,7 +216,8 @@ void HoaToolsAudioProcessor::numChannelsChanged()
 
 void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    //m_processor->prepareToPlay(sampleRate, samplesPerBlock);
+	setSampleRate(sampleRate);
+	setVectorSize(samplesPerBlock);
 }
 
 void HoaToolsAudioProcessor::releaseResources()
@@ -229,11 +228,12 @@ void HoaToolsAudioProcessor::releaseResources()
 void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     //m_processor->process(buffer.getArrayOfChannels());
-	/*
-    setNumberOfInputs(m_processor->getNumberOfSources());
-    setNumberOfOutputs(m_processor->getNumberOfChannels());
-	*/
-    //m_processor->postProcess();
+	
+	//process(buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
+	
+	applyChanges();
+	setNumberOfInputs(getNumberOfSources());
+	setNumberOfOutputs(getNumberOfChannels());
 }
 
 /************************************************************************************/
@@ -269,10 +269,8 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
             setOptimMode((Optim::Mode)xmlState->getIntAttribute("Optimization"));
             setZoom(xmlState->getDoubleAttribute("Zoom"));
             
-			/*
-            setNumberOfInputs(m_processor->getNumberOfSources());
-            setNumberOfOutputs(m_processor->getNumberOfChannels());
-			*/
+            setNumberOfInputs(getNumberOfSources());
+            setNumberOfOutputs(getNumberOfChannels());
         }
     }
 }

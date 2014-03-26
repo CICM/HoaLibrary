@@ -104,6 +104,10 @@ public:
                                ComboBox& box);
 
     virtual Font getComboBoxFont (ComboBox& box);
+	
+	//==============================================================================
+	
+	virtual void drawLabel (Graphics& g, Label& label);
 
     //==============================================================================
     virtual void drawLinearSlider (Graphics& g,
