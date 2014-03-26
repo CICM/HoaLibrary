@@ -1,4 +1,4 @@
-#N canvas 315 150 774 563 10;
+#N canvas 106 100 774 563 10;
 #X obj -555 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.meter~
 3 12 0 18 -204280 -1 0;
 #X text -550 -414 A circular meter with sound field descriptor;
@@ -50,7 +50,6 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -165 -304 c.loadmess 5;
 #X obj -432 -329 noise~;
 #X obj -432 -297 hoa.2d.encoder~ 3 --------------------;
-#X obj -432 -236 hoa.2d.decoder~ 3 irregular 5 --------;
 #X obj -432 -198 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
 @channels 5 @angles 0 30 110 250 330 @offset 0 @rotation clockwise
@@ -63,6 +62,8 @@ array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
 #X msg -18 -118 angles 0 72 144 -144 -72;
 #X obj -178 -174 c.loadmess 1;
+#X obj -432 -236 hoa.2d.decoder~ 3 irregular 5 @angles 0 30 110 250
+330, f 38;
 #X connect 4 0 6 1;
 #X connect 5 0 4 0;
 #X connect 6 0 35 1;
@@ -79,21 +80,21 @@ vectors.;
 #X connect 29 0 32 0;
 #X connect 30 0 21 0;
 #X connect 30 0 32 0;
-#X connect 31 0 36 0;
+#X connect 31 0 40 0;
 #X connect 33 0 10 0;
 #X connect 34 0 35 0;
-#X connect 35 0 36 0;
-#X connect 35 1 36 1;
-#X connect 35 2 36 2;
-#X connect 35 3 36 3;
-#X connect 35 4 36 4;
-#X connect 35 5 36 5;
-#X connect 35 6 36 6;
-#X connect 36 0 37 0;
-#X connect 36 1 37 1;
-#X connect 36 2 37 2;
-#X connect 36 3 37 3;
-#X connect 36 4 37 4;
-#X connect 39 0 21 0;
-#X connect 39 0 32 0;
-#X connect 40 0 24 0;
+#X connect 35 0 40 0;
+#X connect 35 1 40 1;
+#X connect 35 2 40 2;
+#X connect 35 3 40 3;
+#X connect 35 4 40 4;
+#X connect 35 5 40 5;
+#X connect 35 6 40 6;
+#X connect 38 0 21 0;
+#X connect 38 0 32 0;
+#X connect 39 0 24 0;
+#X connect 40 0 36 0;
+#X connect 40 1 36 1;
+#X connect 40 2 36 2;
+#X connect 40 3 36 3;
+#X connect 40 4 36 4;

@@ -6,84 +6,85 @@
 
 #include "../HoaCommon.pd.h"
 
-typedef enum {
-	HOA_OBJECT_AMBI_2D      =	0,
-	HOA_OBJECT_AMBI_3D      =	1,
-	HOA_OBJECT_PLANEWAVES   =	2,
-}e_hoa_object_mode;
-
-typedef struct _vinlet
+extern "C"
 {
-    t_object x_obj;
-    t_canvas *x_canvas;
-    t_inlet *x_inlet;
-    int x_bufsize;
-    t_float *x_buf;         /* signal buffer; zero if not a signal */
-    t_float *x_endbuf;
-    t_float *x_fill;
-    t_float *x_read;
-    int x_hop;
-    /* if not reblocking, the next slot communicates the parent's inlet
-     signal from the prolog to the DSP routine: */
-    t_signal *x_directsignal;
-    
-    t_resample x_updown;
-} t_vinlet;
+#include "../../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
+}
 
-typedef struct _voutlet
+typedef struct _hoa_in
 {
-    t_object x_obj;
-    t_canvas *x_canvas;
-    t_outlet *x_parentoutlet;
-    int x_bufsize;
-    t_sample *x_buf;         /* signal buffer; zero if not a signal */
-    t_sample *x_endbuf;
-    t_sample *x_empty;       /* next to read out of buffer in epilog code */
-    t_sample *x_write;       /* next to write in to buffer */
-    int x_hop;              /* hopsize */
-    /* vice versa from the inlet, if we don't block, this holds the
-     parent's outlet signal, valid between the prolog and the dsp setup
-     routines.  */
-    t_signal *x_directsignal;
-    /* and here's a flag indicating that we aren't blocked but have to
-     do a copy (because we're switched). */
-    char x_justcopyout;
-    t_resample x_updown;
-} t_voutlet;
+    t_eobj  f_obj;
+    int     f_extra;
+} t_hoa_in;
+
+typedef struct _hoa_out
+{
+    t_eobj  f_obj;
+    t_outlet *f_outlet;
+    int    f_extra;
+} t_hoa_out;
+
+typedef struct _hoa_in_tilde
+{
+    t_edspobj   f_obj;
+    t_sample*   f_signal;
+    int         f_extra;
+} t_hoa_in_tilde;
+
+typedef struct _hoa_out_tilde
+{
+    t_edspobj   f_obj;
+    t_sample*   f_signal;
+    int         f_extra;
+} t_hoa_out_tilde;
 
 typedef struct _hoa_process
 {
     t_edspobj           f_obj;
-    e_hoa_object_mode   f_mode;
+    char                f_mode;
     
     Hoa2D::Ambisonic*   f_ambi_2d;
-    Hoa3D::Ambisonic*   f_ambi_3d;
     Hoa2D::Planewaves*  f_planewaves;
     
+    long                f_target;
+    
     t_canvas**          f_canvas;
-    int                 f_ninlets;
-    t_vinlet***         f_inlets;
-    int                 f_ninlets_sig;
-    t_vinlet***         f_inlets_sig;
-    int**               f_inlets_sig_index;
+    long                f_ncanvas;
     
-    int                 f_ninlets_extra;
-    t_vinlet***         f_inlets_extra;
-    int                 f_ninlets_sig_extra;
-    t_vinlet***         f_inlets_sig_extra;
-    int**               f_inlets_sig_extra_index;
+    char                f_have_inlets_instance;
+    long                f_max_inlets_extra;
+    char                f_have_outlets_instance;
+    long                f_max_outlets_extra;
     
-    int                 f_noutlets;
-    t_voutlet***        f_outlets;
-    int                 f_noutlets_sig;
-    t_voutlet***        f_outlets_sig;
-    int**               f_outlets_sig_index;
+    char                f_have_inlets_instance_sig;
+    long                f_max_inlets_extra_sig;
+    char                f_have_outlets_instance_sig;
+    long                f_max_outlets_extra_sig;
     
-    int                 f_noutlets_extra;
-    t_voutlet***        f_outlets_extra;
-    int                 f_noutlets_sig_extra;
-    t_voutlet***        f_outlets_sig_extra;
-    int**               f_outlets_sig_extra_index;
+    
+    long*               f_ninlets_instance;
+    t_hoa_in***         f_inlets_instance;
+    long*               f_ninlets_extra;
+    t_hoa_in***         f_inlets_extra;
+    
+    long*               f_noutlets_instance;
+    t_hoa_out***        f_outlets_instance;
+    long*               f_noutlets_extra;
+    t_hoa_out***        f_outlets_extra;
+    
+    long*               f_ninlets_instance_sig;
+    t_hoa_in_tilde***   f_inlets_instance_sig;
+    long*               f_ninlets_extra_sig;
+    t_hoa_in_tilde***   f_inlets_extra_sig;
+    
+    long*               f_noutlets_instance_sig;
+    t_hoa_out_tilde***  f_outlets_instance_sig;
+    long*               f_noutlets_extra_sig;
+    t_hoa_out_tilde***  f_outlets_extra_sig;
+    
+    t_dspcontext**      f_dsp_context;
+    
+    t_sample**          f_outlets_signals;
 } t_hoa_process;
 
 t_eclass *hoa_process_class;
@@ -93,29 +94,43 @@ void hoa_process_free(t_hoa_process *x);
 long hoa_process_get_number_of_inputs(t_hoa_process *x);
 long hoa_process_get_number_of_outputs(t_hoa_process *x);
 
-void hoa_process_dsp(t_hoa_process *x, t_signal **sp);
+void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_process_perform(t_hoa_process *x, t_object *dsp, float **inps, long ni, float **outs, long no, long sf, long f,void *up);
+
 void hoa_process_load(t_hoa_process *x, t_eattr *attr, long argc, t_atom* argv);
 void hoa_process_click(t_hoa_process *x);
 void hoa_process_open(t_hoa_process *x, float f);
+void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv);
+
+void hoa_process_bang(t_hoa_process *x);
 void hoa_process_float(t_hoa_process *x, float f);
+void hoa_process_symbol(t_hoa_process *x, t_symbol* s);
+void hoa_process_list(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv);
+void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv);
+
 
 t_hoa_err hoa_getinfos(t_hoa_process* x, t_hoa_boxinfos* boxinfos);
 
-void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s);
+void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* argv);
 
 extern "C" void setup_hoa0x2eprocess_tilde(void)
 {
     t_eclass* c;
-    c = eclass_new("hoa.process~", (method)hoa_process_new, (method)hoa_process_free, (short)sizeof(t_hoa_process), 0, A_GIMME, 0);
+    c = eclass_new("hoa.process~", (method)hoa_process_new, (method)hoa_process_free, (short)sizeof(t_hoa_process), CLASS_NOINLET, A_GIMME, 0);
     class_addcreator((t_newmethod)hoa_process_new, gensym("hoa.2d.process~"), A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_process_new, gensym("hoa.3d.process~"), A_GIMME, 0);
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
-    class_addmethod((t_class *)c, (t_method)hoa_process_dsp, gensym("dsp"), A_CANT, 0);
-    eclass_addmethod(c, (method)hoa_process_click,  "click",    A_CANT, 0);
-    eclass_addmethod(c, (method)hoa_process_open,   "open",     A_FLOAT, 0);
-    eclass_addmethod(c, (method)hoa_process_float,  "float",    A_FLOAT, 0);
+    eclass_addmethod(c, (method)hoa_process_dsp,        "dsp",      A_CANT, 0);    
+    eclass_addmethod(c, (method)hoa_process_click,      "click",    A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_process_open,       "open",     A_FLOAT, 0);
+    eclass_addmethod(c, (method)hoa_process_target,     "target",   A_GIMME, 0);
+    
+    eclass_addmethod(c, (method)hoa_process_bang,       "bang",     A_CANT,  0);
+    eclass_addmethod(c, (method)hoa_process_float,      "float",    A_FLOAT, 0);
+    eclass_addmethod(c, (method)hoa_process_symbol,     "symbol",   A_SYMBOL,0);
+    eclass_addmethod(c, (method)hoa_process_list,       "list",     A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_process_anything,   "anything", A_GIMME, 0);
     
     eclass_register(CLASS_OBJ, c);
     hoa_process_class = c;
@@ -125,10 +140,11 @@ void *hoa_process_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_process *x = NULL;
 	int	argument = 1;
+    t_outlet *outlet;
     
-    if(argc < 1 || atom_gettype(argv) != A_LONG || atom_gettype(argv+1) != A_SYM)
+    if(argc < 3 || atom_gettype(argv) != A_LONG || atom_gettype(argv+1) != A_SYM || atom_gettype(argv+2) != A_SYM)
     {
-        error("%s needs at least two arguments, an integer and a symbol.", s->s_name);
+        error("%s needs at least 3 arguments, an integer and two symbol.", s->s_name);
         return NULL;
     }
     
@@ -139,47 +155,299 @@ void *hoa_process_new(t_symbol *s, long argc, t_atom *argv)
         if(argument < 1)
             argument = 1;
         
+        x->f_target = -1;
         if(argc > 2 && atom_gettype(argv+2) == A_SYM && atom_getsym(argv+2) == gensym("planewaves"))
         {
-            x->f_mode = HOA_OBJECT_PLANEWAVES;
+            x->f_mode = 1;
             x->f_planewaves = new Hoa2D::Planewaves(argument);
+            x->f_ncanvas = x->f_planewaves->getNumberOfChannels();
         
-        }
-        else if(argc > 2 && atom_gettype(argv+2) == A_SYM && s == gensym("hoa.3d.process~"))
-        {
-            x->f_mode = HOA_OBJECT_AMBI_3D;
-            x->f_ambi_3d = new Hoa3D::Ambisonic(argument);
         }
         else
         {
-            x->f_mode = HOA_OBJECT_AMBI_2D;
+            x->f_mode = 0;
             x->f_ambi_2d = new Hoa2D::Ambisonic(argument);
+            x->f_ncanvas = x->f_ambi_2d->getNumberOfHarmonics();
         }
-        hoa_process_load_canvas(x, atom_getsym(argv+1));
+        hoa_process_load_canvas(x, atom_getsym(argv+1), argc - 3, argv + 3);
         
-        if(x->f_ninlets_sig)
-            eobj_dspsetup(x, x->f_ambi_2d->getNumberOfHarmonics() + x->f_ninlets_sig_extra, 2);
-        else
-            eobj_dspsetup(x, x->f_ninlets_sig_extra, 2);
+        if(x->f_ncanvas == 0)
+        {
+            eobj_dspsetup(x, 1, 0);
+            return x;
+        }
+        
+        x->f_have_inlets_instance = 0;
+        x->f_max_inlets_extra = 0;
+        x->f_have_outlets_instance = 0;
+        x->f_max_outlets_extra = 0;
+        
+        x->f_have_inlets_instance_sig = 0;
+        x->f_max_inlets_extra_sig = 0;
+        x->f_have_outlets_instance_sig = 0;
+        x->f_max_outlets_extra_sig = 0;
+        
+        for(int i = 0; i < x->f_ncanvas; i++)
+        {
+            // Control //
+            if(x->f_ninlets_instance[i] > 0)
+                x->f_have_inlets_instance = 1;
+            for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+            {
+                if(x->f_inlets_extra[i][j]->f_extra > x->f_max_inlets_extra)
+                    x->f_max_inlets_extra = x->f_inlets_extra[i][j]->f_extra;
+            }
+            
+            if(x->f_noutlets_instance[i] > 0)
+                x->f_have_outlets_instance = 1;
+            for(int j = 0; j < x->f_noutlets_extra[i]; j++)
+            {
+                if(x->f_outlets_extra[i][j]->f_extra > x->f_max_outlets_extra)
+                    x->f_max_outlets_extra = x->f_outlets_extra[i][j]->f_extra;
+            }
+            
+            // Signal //
+            if(x->f_ninlets_instance_sig[i] > 0)
+                x->f_have_inlets_instance_sig = 1;
+            for(int j = 0; j < x->f_ninlets_extra_sig[i]; j++)
+            {
+                if(x->f_inlets_extra_sig[i][j]->f_extra > x->f_max_inlets_extra_sig)
+                    x->f_max_inlets_extra_sig = x->f_inlets_extra_sig[i][j]->f_extra;
+            }
+            
+            if(x->f_noutlets_instance_sig[i] > 0)
+                x->f_have_outlets_instance_sig = 1;
+            for(int j = 0; j < x->f_noutlets_extra_sig[i]; j++)
+            {
+                if(x->f_outlets_extra_sig[i][j]->f_extra > x->f_max_outlets_extra_sig)
+                    x->f_max_outlets_extra_sig = x->f_outlets_extra_sig[i][j]->f_extra;
+            }
+        }
+        
+        eobj_dspsetup(x, x->f_have_inlets_instance_sig * x->f_ncanvas + x->f_max_inlets_extra_sig, x->f_have_outlets_instance_sig * x->f_ncanvas + x->f_max_outlets_extra_sig);
+        
+        // Inlet signal intance //
+        if(x->f_have_inlets_instance && !x->f_have_inlets_instance_sig)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                eobj_proxynew(x);
+            }
+        }
+        
+        // Inlet control extra //
+        for(int i = x->f_max_inlets_extra_sig; i < x->f_max_inlets_extra; i++)
+        {
+            eobj_proxynew(x);
+        }
+        
+        if(x->f_have_outlets_instance)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                outlet = outlet_new((t_object *)x, &s_anything);
+                for(int j = 0; j < x->f_noutlets_instance[i]; j++)
+                    x->f_outlets_instance[i][j]->f_outlet = outlet;
+            }
+        }
+        
+        for(int i = 0; i < x->f_max_outlets_extra; i++)
+        {
+            outlet = outlet_new((t_object *)x, &s_anything);
+            for(int j = 0; j < x->f_ncanvas; j++)
+            {
+                for(int k = 0; k < x->f_noutlets_extra[j]; k++)
+                {
+                    if(x->f_outlets_extra[j][k]->f_extra == (i + 1))
+                    {
+                        x->f_outlets_extra[j][k]->f_outlet = outlet;
+                    }
+                }
+            }
+        }
+        
+        x->f_outlets_signals = new t_sample*[x->f_have_outlets_instance_sig * x->f_ncanvas + x->f_max_outlets_extra_sig];
+        for(int i = 0 ; i < x->f_have_outlets_instance_sig * x->f_ncanvas + x->f_max_outlets_extra_sig; i++)
+        {
+            x->f_outlets_signals[i] = new t_sample[8192];
+        }
+
+        x->f_target = -1;
 	}
     
     
 	return x;
 }
 
-long hoa_process_get_number_of_inputs(t_hoa_process *x)
+void hoa_process_free(t_hoa_process *x)
 {
-    if(x->f_mode == HOA_OBJECT_PLANEWAVES)
+    eobj_dspfree(x);
+    
+    for(int i = 0 ; i < x->f_have_outlets_instance_sig * x->f_ncanvas + x->f_max_outlets_extra_sig; i++)
     {
-        return x->f_planewaves->getNumberOfChannels();
+        delete [] x->f_outlets_signals[i];
     }
+    
+    delete [] x->f_outlets_signals;
+    
+    for(int i = 0; i < x->f_ncanvas; i++)
+    {
+        if(x->f_canvas[i])
+        {
+            x->f_canvas[i]->gl_owner = eobj_getcanvas(x);
+            canvas_free(x->f_canvas[i]);
+            my_ugen_currentcontext = NULL;
+            
+            my_ugen_currentcontext = x->f_dsp_context[i];
+            ugen_free_graph(x->f_dsp_context[i]);
+            
+            delete [] x->f_inlets_instance[i];
+            delete [] x->f_inlets_extra[i];
+            
+            delete [] x->f_outlets_instance[i];
+            delete [] x->f_outlets_extra[i];
+            
+            delete [] x->f_inlets_instance_sig[i];
+            delete [] x->f_inlets_extra_sig[i];
+            
+            delete [] x->f_outlets_instance_sig[i];
+            delete [] x->f_outlets_extra_sig[i];
+        }
+    }
+    delete [] x->f_canvas;
+    
+    delete [] x->f_dsp_context;
+    
+    delete [] x->f_ninlets_instance;
+    delete [] x->f_ninlets_extra;
+    delete [] x->f_inlets_instance;
+    delete [] x->f_inlets_extra;
+    
+    delete [] x->f_noutlets_instance;
+    delete [] x->f_noutlets_extra;
+    delete [] x->f_outlets_instance;
+    delete [] x->f_outlets_extra;
+    
+    delete [] x->f_ninlets_instance_sig;
+    delete [] x->f_ninlets_extra_sig;
+    delete [] x->f_inlets_instance_sig;
+    delete [] x->f_inlets_extra_sig;
+    
+    delete [] x->f_noutlets_instance_sig;
+    delete [] x->f_noutlets_extra_sig;
+    delete [] x->f_outlets_instance_sig;
+    delete [] x->f_outlets_extra_sig;
+    
+    if(x->f_mode)
+        delete x->f_planewaves;
     else
-        return 0;
+        delete x->f_ambi_2d;
 }
 
-long hoa_process_get_number_of_outputs(t_hoa_process *x)
+t_dspcontext* canvas_getdspcontext(t_canvas *x, int toplevel, t_signal **sp)
 {
-    return 0;
+    t_linetraverser t;
+    t_outconnect *oc;
+    t_gobj *y;
+    t_object *ob;
+    t_symbol *dspsym = gensym("dsp");
+    t_dspcontext *dc;
+    
+    dc = ugen_start_graph(toplevel, sp,
+                          obj_nsiginlets(&x->gl_obj),
+                          obj_nsigoutlets(&x->gl_obj));
+    
+    for (y = x->gl_list; y; y = y->g_next)
+        if ((ob = pd_checkobject(&y->g_pd)) && zgetfn(&y->g_pd, dspsym))
+            ugen_add(dc, ob);
+    
+    linetraverser_start(&t, x);
+    while((oc = linetraverser_next(&t)))
+        if (obj_issignaloutlet(t.tr_ob, t.tr_outno))
+            ugen_connect(dc, t.tr_ob, t.tr_outno, t.tr_ob2, t.tr_inno);
+    
+    return dc;
+}
+
+void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
+{
+    int inc = 0;
+    
+    if(x->f_have_inlets_instance_sig)
+    {
+        for(int i = 0; i < x->f_ncanvas; i++)
+        {
+            for(int j = 0; j < x->f_ninlets_instance_sig[i]; j++)
+            {
+                x->f_inlets_instance_sig[i][j]->f_signal = eobj_getsignalinput(x, inc);
+            }
+            inc++;
+        }
+    }
+    
+    for(int i = 0; i < x->f_max_inlets_extra_sig; i++)
+    {
+        for(int j = 0; j < x->f_ncanvas; j++)
+        {
+            for(int k = 0; k < x->f_ninlets_extra_sig[j]; k++)
+            {
+                if(x->f_inlets_extra_sig[j][k]->f_extra == (i+1))
+                {
+                    x->f_inlets_extra_sig[j][k]->f_signal = eobj_getsignalinput(x, inc);
+                }
+            }
+        }
+        inc++;
+    }
+    
+    inc  = 0;
+    if(x->f_have_outlets_instance_sig)
+    {
+        for(int i = 0; i < x->f_ncanvas; i++)
+        {
+            for(int j = 0; j < x->f_noutlets_instance_sig[i]; j++)
+            {
+                x->f_outlets_instance_sig[i][j]->f_signal = x->f_outlets_signals[inc];
+            }
+            inc++;
+        }
+    }
+    
+    for(int i = 0; i < x->f_max_outlets_extra_sig; i++)
+    {
+        for(int j = 0; j < x->f_ncanvas; j++)
+        {
+            for(int k = 0; k < x->f_noutlets_extra_sig[j]; k++)
+            {
+                if(x->f_outlets_extra_sig[j][k]->f_extra == (i+1))
+                {
+                    x->f_outlets_extra_sig[j][k]->f_signal = x->f_outlets_signals[inc];
+                }
+            }
+        }
+        inc++;
+    }
+    
+    for(int i = 0; i < x->f_ncanvas; i++)
+    {
+        if(x->f_canvas[i] && x->f_dsp_context[i])
+        {
+            my_ugen_currentcontext = x->f_dsp_context[i];
+            ugen_done_graph(x->f_dsp_context[i]);
+            my_ugen_currentcontext = NULL;
+        }
+    }
+    
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_process_perform, 0, NULL);
+}
+
+void hoa_process_perform(t_hoa_process *x, t_object *dsp, float **inps, long ni, float **outs, long nouts, long sampleframe, long f,void *up)
+{
+    for(int i = 0; i < nouts; i++)
+    {
+        memcpy(outs[i], x->f_outlets_signals[i], sampleframe * sizeof(float));
+        memset(x->f_outlets_signals[i], 0, sampleframe * sizeof(float));
+    }
 }
 
 t_hoa_err hoa_getinfos(t_hoa_process* x, t_hoa_boxinfos* boxinfos)
@@ -202,245 +470,473 @@ void hoa_process_click(t_hoa_process *x)
 
 void hoa_process_open(t_hoa_process *x, float f)
 {
-    if(f >= 0 && f <= 2)
+    if(x->f_mode == 1)
+        canvas_vis(x->f_canvas[(int)pd_clip_minmax(f, 0, x->f_ncanvas - 1)], 1);
+    else
     {
-        canvas_vis(x->f_canvas[0], (int)f);
+        f = pd_clip_minmax(f, -x->f_ambi_2d->getOrder(), x->f_ambi_2d->getOrder());
+        if(x->f_target < 0)
+            canvas_vis(x->f_canvas[(int)(-f * 2 - 1)], 1);
+        else
+            canvas_vis(x->f_canvas[(int)(f * 2)], 1);
+    }
+}
+
+void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
+{
+    if(argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
+        x->f_target = -1;
+    else if(argc && argv && atom_gettype(argv) == A_FLOAT)
+    {
+        if(x->f_mode == 1)
+            x->f_target = pd_clip_minmax(atom_getfloat(argv), 0, x->f_ncanvas - 1);
+        else
+        {
+            x->f_target = pd_clip_minmax(atom_getfloat(argv), -x->f_ambi_2d->getOrder(), x->f_ambi_2d->getOrder());
+            if(x->f_target < 0)
+                x->f_target = -x->f_target * 2 - 1;
+            else
+                x->f_target *= 2;
+        }
+    }
+}
+
+void hoa_process_bang(t_hoa_process *x)
+{
+    int extra;
+    int index = eobj_getproxy(x);
+    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    {
+        for(int i = 0; i < x->f_ninlets_instance[index]; i++)
+            pd_bang((t_pd *)x->f_inlets_instance[index][i]);
+    }
+    else
+    {
+        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+            extra = index - (x->f_ncanvas - 1);
+        else
+            extra = index;
+        if(x->f_target == -1)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+                {
+                    if(x->f_inlets_extra[i][j]->f_extra == extra)
+                    {
+                        pd_bang((t_pd *)x->f_inlets_extra[i][j]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int j = 0; j < x->f_ninlets_extra[x->f_target]; j++)
+            {
+                if(x->f_inlets_extra[x->f_target][j]->f_extra == extra)
+                {
+                    pd_bang((t_pd *)x->f_inlets_extra[x->f_target][j]);
+                }
+            }
+        }
     }
 }
 
 void hoa_process_float(t_hoa_process *x, float f)
 {
-    t_atom av;
-    atom_setfloat(&av, f);
-    pd_typedmess((t_pd *)x->f_inlets[0][0], &s_float, 1, &av);
-}
+    int extra;
+    int index = eobj_getproxy(x);
 
-void hoa_process_dsp(t_hoa_process *x, t_signal **sp)
-{
-    post("hi");
-}
-
-void hoa_process_free(t_hoa_process *x)
-{
-    eobj_dspfree(x);
-    for(int i = 0; i < 0; i++)
+    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
     {
-        if(x->f_canvas[i])
-            canvas_free(x->f_canvas[i]);
+        for(int i = 0; i < x->f_ninlets_instance[index]; i++)
+        {
+            pd_float((t_pd *)x->f_inlets_instance[index][i], f);
+        }
     }
-    
-    delete [] x->f_canvas;
-    
-}
-
-void canvas_addtolist(t_canvas *x)
-{
-    x->gl_next = canvas_list;
-    canvas_list = x;
-}
-
-void canvas_takeofflist(t_canvas *x)
-{
-    if (x == canvas_list) canvas_list = x->gl_next;
     else
     {
-        t_canvas *z;
+        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+            extra = index - (x->f_ncanvas - 1);
+        else
+            extra = index;
+        if(x->f_target < 0)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+                {
+                    if(x->f_inlets_extra[i][j]->f_extra == extra)
+                    {
+                        pd_float((t_pd *)x->f_inlets_extra[i][j], f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int j = 0; j < x->f_ninlets_extra[x->f_target]; j++)
+            {
+                if(x->f_inlets_extra[x->f_target][j]->f_extra == extra)
+                {
+                    pd_float((t_pd *)x->f_inlets_extra[x->f_target][j], f);
+                }
+            }
+        }
+    }
+}
+
+void hoa_process_symbol(t_hoa_process *x, t_symbol* s)
+{
+    int extra;
+    int index = eobj_getproxy(x);
+    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    {
+        for(int i = 0; i < x->f_ninlets_instance[index]; i++)
+            pd_symbol((t_pd *)x->f_inlets_instance[index][i], s);
+    }
+    else
+    {
+        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+            extra = index - (x->f_ncanvas - 1);
+        else
+            extra = index;
+        if(x->f_target == -1)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+                {
+                    if(x->f_inlets_extra[i][j]->f_extra == extra)
+                    {
+                        pd_symbol((t_pd *)x->f_inlets_extra[i][j], s);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int j = 0; j < x->f_ninlets_extra[x->f_target]; j++)
+            {
+                if(x->f_inlets_extra[x->f_target][j]->f_extra == extra)
+                {
+                    pd_symbol((t_pd *)x->f_inlets_extra[x->f_target][j], s);
+                }
+            }
+        }
+    }
+}
+
+void hoa_process_list(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
+{
+    int extra;
+    int index = eobj_getproxy(x);
+    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    {
+        for(int i = 0; i < x->f_ninlets_instance[index]; i++)
+            pd_list((t_pd *)x->f_inlets_instance[index][i], s, argc, argv);
+    }
+    else
+    {
+        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+            extra = index - (x->f_ncanvas - 1);
+        else
+            extra = index;
+        if(x->f_target == -1)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+                {
+                    if(x->f_inlets_extra[i][j]->f_extra == extra)
+                    {
+                        pd_list((t_pd *)x->f_inlets_extra[i][j], s, argc, argv);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int j = 0; j < x->f_ninlets_extra[x->f_target]; j++)
+            {
+                if(x->f_inlets_extra[x->f_target][j]->f_extra == extra)
+                {
+                    pd_list((t_pd *)x->f_inlets_extra[x->f_target][j], s, argc, argv);
+                }
+            }
+        }
+    }
+}
+
+void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
+{
+    int extra;
+    int index = eobj_getproxy(x);
+    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    {
+        for(int i = 0; i < x->f_ninlets_instance[index]; i++)
+            pd_typedmess((t_pd *)x->f_inlets_instance[index][i], s, argc, argv);
+    }
+    else
+    {
+        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+            extra = index - (x->f_ncanvas - 1);
+        else
+            extra = index;
+        if(x->f_target == -1)
+        {
+            for(int i = 0; i < x->f_ncanvas; i++)
+            {
+                for(int j = 0; j < x->f_ninlets_extra[i]; j++)
+                {
+                    if(x->f_inlets_extra[i][j]->f_extra == extra)
+                    {
+                        pd_typedmess((t_pd *)x->f_inlets_extra[i][j], s, argc, argv);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int j = 0; j < x->f_ninlets_extra[x->f_target]; j++)
+            {
+                if(x->f_inlets_extra[x->f_target][j]->f_extra == extra)
+                {
+                    pd_typedmess((t_pd *)x->f_inlets_extra[x->f_target][j], s, argc, argv);
+                }
+            }
+        }
+    }
+}
+
+void hoa_process_get_io(t_hoa_process *x, int index)
+{
+    t_gobj *y;
+    t_hoa_in *inlet;
+    t_hoa_out *outlet;
+    t_hoa_in_tilde *inlet_sig;
+    t_hoa_out_tilde *outlet_sig;
+    
+    x->f_ninlets_extra[index] = 0;
+    x->f_ninlets_instance[index] = 0;
+    x->f_noutlets_extra[index] = 0;
+    x->f_noutlets_instance[index] = 0;
+    
+    x->f_ninlets_extra_sig[index] = 0;
+    x->f_ninlets_instance_sig[index] = 0;
+    x->f_noutlets_extra_sig[index] = 0;
+    x->f_noutlets_instance_sig[index] = 0;
+    
+    for(y = x->f_canvas[index]->gl_list; y; y = y->g_next)
+    {
+        if(eobj_getclassname(y) == gensym("hoa.in"))
+        {
+            inlet = (t_hoa_in *)y;
+            if(inlet->f_extra)
+                x->f_ninlets_extra[index]++;
+            else
+                x->f_ninlets_instance[index]++;
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.out"))
+        {
+            outlet = (t_hoa_out *)y;
+            if(outlet->f_extra)
+                x->f_noutlets_extra[index]++;
+            else
+                x->f_noutlets_instance[index]++;
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.in~"))
+        {
+            inlet_sig = (t_hoa_in_tilde *)y;
+            if(inlet_sig->f_extra)
+                x->f_ninlets_extra_sig[index]++;
+            else
+                x->f_ninlets_instance_sig[index]++;
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.out~"))
+        {
+            outlet_sig = (t_hoa_out_tilde *)y;
+            if(outlet_sig->f_extra)
+                x->f_noutlets_extra_sig[index]++;
+            else
+                x->f_noutlets_instance_sig[index]++;
+        }
+    }
+    
+    x->f_inlets_instance[index] = new t_hoa_in*[x->f_ninlets_instance[index]];
+    x->f_inlets_extra[index]    = new t_hoa_in*[x->f_ninlets_extra[index]];
+    
+    x->f_outlets_instance[index] = new t_hoa_out*[x->f_ninlets_instance[index]];
+    x->f_outlets_extra[index]    = new t_hoa_out*[x->f_ninlets_extra[index]];
+    
+    x->f_inlets_instance_sig[index] = new t_hoa_in_tilde*[x->f_ninlets_instance_sig[index]];
+    x->f_inlets_extra_sig[index]    = new t_hoa_in_tilde*[x->f_ninlets_extra_sig[index]];
+    
+    x->f_outlets_instance_sig[index] = new t_hoa_out_tilde*[x->f_noutlets_instance_sig[index]];
+    x->f_outlets_extra_sig[index]    = new t_hoa_out_tilde*[x->f_noutlets_extra_sig[index]];
+    
+    x->f_ninlets_extra[index] = 0;
+    x->f_ninlets_instance[index] = 0;
+    x->f_noutlets_extra[index] = 0;
+    x->f_noutlets_instance[index] = 0;
+    
+    x->f_ninlets_extra_sig[index] = 0;
+    x->f_ninlets_instance_sig[index] = 0;
+    x->f_noutlets_extra_sig[index] = 0;
+    x->f_noutlets_instance_sig[index] = 0;
+    
+    for(y = x->f_canvas[index]->gl_list; y; y = y->g_next)
+    {
+        if(eobj_getclassname(y) == gensym("hoa.in"))
+        {
+            inlet = (t_hoa_in *)y;
+            if(inlet->f_extra)
+                x->f_inlets_extra[index][x->f_ninlets_extra[index]++] = inlet;
+            else
+                x->f_inlets_instance[index][x->f_ninlets_instance[index]++] = inlet;
+            
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.out"))
+        {
+            outlet = (t_hoa_out *)y;
+            if(outlet->f_extra)
+                x->f_outlets_extra[index][x->f_noutlets_extra[index]++] = outlet;
+            else
+                x->f_outlets_instance[index][x->f_noutlets_instance[index]++] = outlet;
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.in~"))
+        {
+            inlet_sig = (t_hoa_in_tilde *)y;
+            if(inlet_sig->f_extra)
+                x->f_inlets_extra_sig[index][x->f_ninlets_extra_sig[index]++] = inlet_sig;
+            else
+                x->f_inlets_instance_sig[index][x->f_ninlets_instance_sig[index]++] = inlet_sig;
+        }
+        else if(eobj_getclassname(y) == gensym("hoa.out~"))
+        {
+            outlet_sig = (t_hoa_out_tilde *)y;
+            if(outlet_sig->f_extra)
+                x->f_outlets_extra_sig[index][x->f_noutlets_extra_sig[index]++] = outlet_sig;
+            else
+                x->f_outlets_instance_sig[index][x->f_noutlets_instance_sig[index]++] = outlet_sig;
+        }
+    }
+    
+}
+
+static void canvas_removetolist(t_canvas *x)
+{
+    t_canvas *z;
+    if (x == canvas_list)
+        canvas_list = x->gl_next;
+    else
+    {
         for (z = canvas_list; z->gl_next != x; z = z->gl_next)
             ;
         z->gl_next = x->gl_next;
     }
 }
 
-void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s)
+void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* argv)
 {
     int fd;
     t_atom av;
-    char* name;
-    int size;
     char dirbuf[MAXPDSTRING], *nameptr;
-    int number_of_canvas = 0;
-    t_gobj *y;
-    t_vinlet* inlet;
-    t_voutlet* outlet;
-    t_atom *argv;
-    long    argc;
-    if(x->f_mode == HOA_OBJECT_PLANEWAVES)
-        number_of_canvas = x->f_planewaves->getNumberOfChannels();
-    else if(x->f_mode == HOA_OBJECT_AMBI_3D)
-        number_of_canvas = x->f_ambi_3d->getNumberOfHarmonics();
-    else
-        number_of_canvas = x->f_ambi_2d->getNumberOfHarmonics();
+    int ncnv;
+    // Memory allocation for all the canvas, the inlets and the outlets
+    x->f_canvas         = new t_canvas*[x->f_ncanvas];
+    x->f_dsp_context    = new t_dspcontext*[x->f_ncanvas];
     
-    x->f_canvas     = new t_canvas*[number_of_canvas];
+    x->f_ninlets_instance    = new long[x->f_ncanvas];
+    x->f_inlets_instance    = new t_hoa_in**[x->f_ncanvas];
     
-    x->f_inlets     = new t_vinlet**[number_of_canvas];
-    x->f_inlets_sig = new t_vinlet**[number_of_canvas];
-    x->f_inlets_extra       = new t_vinlet**[number_of_canvas];
-    x->f_inlets_sig_extra   = new t_vinlet**[number_of_canvas];
+    x->f_ninlets_extra       = new long[x->f_ncanvas];
+    x->f_inlets_extra       = new t_hoa_in**[x->f_ncanvas];
     
-    x->f_outlets    = new t_voutlet**[number_of_canvas];
-    x->f_outlets_sig = new t_voutlet**[number_of_canvas];
-    x->f_outlets_extra       = new t_voutlet**[number_of_canvas];
-    x->f_outlets_sig_extra   = new t_voutlet**[number_of_canvas];
-    x->f_outlets_sig_extra_index = new int*[number_of_canvas];
+    x->f_noutlets_instance   = new long[x->f_ncanvas];
+    x->f_outlets_instance   = new t_hoa_out**[x->f_ncanvas];
     
-    for(int i = 0; i < number_of_canvas; i++)
+    x->f_noutlets_extra      = new long[x->f_ncanvas];
+    x->f_outlets_extra      = new t_hoa_out**[x->f_ncanvas];
+    
+    x->f_ninlets_instance_sig    = new long[x->f_ncanvas];
+    x->f_inlets_instance_sig    = new t_hoa_in_tilde**[x->f_ncanvas];
+    
+    x->f_ninlets_extra_sig       = new long[x->f_ncanvas];
+    x->f_inlets_extra_sig       = new t_hoa_in_tilde**[x->f_ncanvas];
+    
+    x->f_noutlets_instance_sig   = new long[x->f_ncanvas];
+    x->f_outlets_instance_sig   = new t_hoa_out_tilde**[x->f_ncanvas];
+    
+    x->f_noutlets_extra_sig      = new long[x->f_ncanvas];
+    x->f_outlets_extra_sig      = new t_hoa_out_tilde**[x->f_ncanvas];
+    
+    
+    for(int i = 0; i < x->f_ncanvas; i++)
+    {
         x->f_canvas[i] = NULL;
-    
+        x->f_dsp_context[i] = NULL;
+    }
+    ncnv = x->f_ncanvas;
+    x->f_ncanvas = 0;
+    // Location of the file
     if((fd = canvas_open(canvas_getcurrent(), s->s_name, ".pd", dirbuf, &nameptr, MAXPDSTRING, 0)) >= 0)
     {
-        for(int i = 0; i < number_of_canvas; i++)
+        
+        // Allocation of each canvas
+        for(int i = 0; i < ncnv; i++)
         {
-            x->f_canvas[i] = (t_canvas *)glob_evalfile(NULL, gensym(nameptr), gensym(dirbuf));
+            x->f_canvas[i] = NULL;
+            // Setting the name arguments of the canvas, later we'll put the right arg for
+            atom_setfloat(&av, i);
+            canvas_setargs(1, &av);
+            
+            // Load the canvas
+            int dspstate = canvas_suspend_dsp();
+            t_pd *boundx = s__X.s_thing;
+            s__X.s_thing = 0;
+            binbuf_evalfile(gensym(nameptr), gensym(dirbuf));
+            while (( (t_pd *)x->f_canvas[i] != s__X.s_thing) && s__X.s_thing)
+            {
+                x->f_canvas[i] = (t_canvas *)s__X.s_thing;
+                vmess((t_pd *)x->f_canvas[i], gensym("pop"), "i", 1);
+            }
+            canvas_resume_dsp(dspstate);
+            s__X.s_thing = boundx;
+            
+            // If the canvas is loaded
             if(x->f_canvas[i])
             {
-                atom_setfloat(&av, i);
-                canvas_setargs(1, &av);
-                x->f_canvas[i]->gl_owner = eobj_getcanvas(x);
-                canvas_vis(x->f_canvas[i], 0);
-                canvas_takeofflist(x->f_canvas[i]);
+                // Creation a binbuf to give the argument to the canvas, later we'll set the right args
+                x->f_canvas[i]->gl_obj.te_binbuf = binbuf_new();
+                binbuf_addv(x->f_canvas[i]->gl_obj.te_binbuf, "f", (float)i);
+                binbuf_addv(x->f_canvas[i]->gl_obj.te_binbuf, "f", (float)ncnv);
+                binbuf_add(x->f_canvas[i]->gl_obj.te_binbuf, argc, argv);
                 
-                x->f_ninlets        = 0;
-                x->f_noutlets       = 0;
-                x->f_ninlets_sig    = 0;
-                x->f_noutlets_sig   = 0;
-                x->f_ninlets_extra      = 0;
-                x->f_ninlets_sig_extra  = 0;
-                x->f_noutlets_extra      = 0;
-                x->f_noutlets_sig_extra  = 0;
+                x->f_canvas[i]->gl_owner = eobj_getcanvas(x);   // Set the owner of the canvas
                 
-                for(y = x->f_canvas[i]->gl_list; y; y = y->g_next)
-                {
-                    if(eobj_getclassname(y) == gensym("inlet"))
-                    {
-                        inlet = (t_vinlet *)y;
-                        binbuf_gettext(inlet->x_obj.te_binbuf, &name, &size);
-                        if(size && name)
-                        {
-                            binbuf_get_attribute(inlet->x_obj.te_binbuf, gensym("@extra"), &argc, &argv);
-                            if(!strncmp(name, "inlet~", 6))
-                            {
-                                if(argc && argv)
-                                    x->f_ninlets_sig_extra++;
-                                else
-                                    x->f_ninlets_sig++;
-                            }
-                            else
-                            {
-                                if(argc && argv)
-                                    x->f_ninlets_extra++;
-                                else
-                                    x->f_ninlets++;
-                            }
-                        }
-                    }
-                    else if(eobj_getclassname(y) == gensym("outlet"))
-                    {
-                        outlet = (t_voutlet *)y;
-                        binbuf_get_attribute(outlet->x_obj.te_binbuf, gensym("@extra"), &argc, &argv);
-                        if(!strncmp(name, "outlet~", 6))
-                        {
-                            if(argc && argv)
-                                x->f_noutlets_sig_extra++;
-                            else
-                                x->f_noutlets_sig++;
-                        }
-                        else
-                        {
-                            if(argc && argv)
-                                x->f_noutlets_extra++;
-                            else
-                                x->f_noutlets++;
-                        }
-                    }
-                }
-                x->f_inlets[i]      = new t_vinlet*[x->f_ninlets];
-                x->f_inlets_sig[i]  = new t_vinlet*[x->f_ninlets_sig];
-                x->f_inlets_extra[i]      = new t_vinlet*[x->f_ninlets_extra];
-                x->f_inlets_sig_extra[i]  = new t_vinlet*[x->f_ninlets_sig_extra];
+                canvas_vis(x->f_canvas[i], 0);                  // Hide the canvas
+                canvas_removetolist(x->f_canvas[i]);
+                canvas_loadbang(x->f_canvas[i]);                // Send loadbang
                 
-                x->f_outlets[i]      = new t_voutlet*[x->f_noutlets];
-                x->f_outlets_sig[i]  = new t_voutlet*[x->f_noutlets_sig];
-                x->f_outlets_extra[i]      = new t_voutlet*[x->f_noutlets_extra];
-                x->f_outlets_sig_extra[i]  = new t_voutlet*[x->f_noutlets_sig_extra];
-                
-                x->f_ninlets        = 0;
-                x->f_noutlets       = 0;
-                x->f_ninlets_sig    = 0;
-                x->f_noutlets_sig   = 0;
-                x->f_ninlets_extra      = 0;
-                x->f_ninlets_sig_extra  = 0;
-                x->f_noutlets_extra      = 0;
-                x->f_noutlets_sig_extra  = 0;
-                
-                for(y = x->f_canvas[i]->gl_list; y; y = y->g_next)
-                {
-                    if(eobj_getclassname(y) == gensym("inlet"))
-                    {
-                        inlet = (t_vinlet *)y;
-                        binbuf_gettext(inlet->x_obj.te_binbuf, &name, &size);
-                        if(size && name)
-                        {
-                            binbuf_get_attribute(inlet->x_obj.te_binbuf, gensym("@extra"), &argc, &argv);
-                            if(!strncmp(name, "inlet~", 6))
-                            {
-                                if(argc && argv)
-                                    x->f_inlets_sig_extra[i][x->f_ninlets_sig_extra++] = inlet;
-                                else
-                                    x->f_inlets_sig[i][x->f_ninlets_sig++] = inlet;
-                            }
-                            else
-                            {
-                                if(argc && argv)
-                                    x->f_inlets_extra[i][x->f_ninlets_extra++] = inlet;
-                                else
-                                    x->f_inlets[i][x->f_ninlets++] = inlet;
-                            }
-                        }
-                    }
-                    else if(eobj_getclassname(y) == gensym("outlet"))
-                    {
-                        outlet = (t_voutlet *)y;
-                        binbuf_gettext(outlet->x_obj.te_binbuf, &name, &size);
-                        if(size && name)
-                        {
-                            binbuf_get_attribute(outlet->x_obj.te_binbuf, gensym("@extra"), &argc, &argv);
-                            if(!strncmp(name, "outlet~", 6))
-                            {
-                                if(argc && argv)
-                                    x->f_outlets_sig_extra[i][x->f_noutlets_sig_extra++] = outlet;
-                                else
-                                    x->f_outlets_sig[i][x->f_noutlets_sig++] = outlet;
-                            }
-                            else
-                            {
-                                if(argc && argv)
-                                    x->f_outlets_extra[i][x->f_noutlets_extra++] = outlet;
-                                else
-                                    x->f_outlets[i][x->f_noutlets++] = outlet;
-                            }
-                        }
-                        
-                    }
-                }
-                post("nombre d'inlets controle %i", x->f_ninlets);
-                post("nombre d'inlets signal %i", x->f_ninlets_sig);
-                post("nombre d'inlets controle extra %i", x->f_ninlets_extra);
-                post("nombre d'inlets signal extra %i", x->f_ninlets_sig_extra);
-                
-                post("nombre d'outlets controle %i", x->f_noutlets);
-                post("nombre d'outlets signal %i", x->f_noutlets_sig);
-                post("nombre d'outlets controle extra %i", x->f_noutlets_extra);
-                post("nombre d'outlets signal extra %i", x->f_noutlets_sig_extra);
+                // Retrieve inlets and outlets of the canvas
+                hoa_process_get_io(x, i);
+                x->f_dsp_context[i] = canvas_getdspcontext(x->f_canvas[i], 1, 0);
+                my_ugen_currentcontext = NULL;
+                x->f_ncanvas++;
             }
             else
             {
                 canvas_setcurrent(eobj_getcanvas(x));
+                pd_error(x, "error while loading canvas.");
                 return;
             }
         }
     }
-    
+    else
+    {
+        pd_error(x, "error while loading canvas.");
+    }
     canvas_setcurrent(eobj_getcanvas(x));
 }
 

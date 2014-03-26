@@ -1,0 +1,14 @@
+#N canvas 285 70 1036 297 10;
+#X obj -97 -60 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 74 256;
+#X obj -97 60 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 74 256;
+#X obj 13 -60 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj -94 -6 hoa.process~ 2 io planewaves;
+#X obj 14 60 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X connect 0 0 3 0;
+#X connect 2 0 3 1;
+#X connect 3 0 1 0;
+#X connect 3 1 4 0;

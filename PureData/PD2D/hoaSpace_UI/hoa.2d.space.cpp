@@ -75,7 +75,6 @@ extern "C" void setup_hoa0x2e2d0x2espace(void)
 	eclass_addmethod(c, (method)hoa_space_mouse_down,      "mousedown",      A_CANT, 0);
     eclass_addmethod(c, (method)hoa_space_mouse_move,      "mousemove",      A_CANT, 0);
 	eclass_addmethod(c, (method)hoa_space_mouse_drag,      "mousedrag",      A_CANT, 0);
-    eclass_addmethod(c, (method)hoa_space_mouse_down,      "mouseup",        A_CANT, 0);
     eclass_addmethod(c, (method)hoa_space_preset,          "preset",         A_CANT, 0);
     eclass_addmethod(c, (method)hoa_space_list,            "list",           A_GIMME, 0);
     
@@ -157,7 +156,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     
     ebox_attrprocess_viabinbuf(x, d);
     ebox_ready((t_ebox *)x);
-    
+
     return (x);
 }
 
@@ -350,7 +349,7 @@ double cosine_interpolation(double y1, double y2, float mu)
 void draw_space(t_hoa_space *x, t_object *view, t_rect *rect)
 {
     int i, index1, index2;
-    double angle, radius, abscissa, ordinate, mu;
+    double angle, radius, abscissa, ordinate, mu, diff, ratio;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_space_layer, rect->width, rect->height);
     
 	if (g)
@@ -361,14 +360,15 @@ void draw_space(t_hoa_space *x, t_object *view, t_rect *rect)
 		egraphics_set_line_width(g, 2);
         egraphics_set_color_rgba(g, &x->f_color_sp);
 		
+        diff = x->f_minmax[1] - x->f_minmax[0];
+        ratio = x->f_radius / 5.;
         for(i = 0; i < x->f_number_of_channels; i++)
 		{
-            x->f_channel_radius[i] = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5.;
+            x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
         }
         
-        angle    = HOA_PI;
-        abscissa = Hoa::abscissa(x->f_channel_radius[0], angle);
-        ordinate = Hoa::ordinate(x->f_channel_radius[0], angle);
+        abscissa = Hoa::abscissa(x->f_channel_radius[0], 0);
+        ordinate = Hoa::ordinate(x->f_channel_radius[0], 0);
         egraphics_move_to(g, abscissa, ordinate);
         for(i = 1; i < NUMBEROFCIRCLEPOINTS_UI2; i++)
 		{
@@ -381,7 +381,7 @@ void draw_space(t_hoa_space *x, t_object *view, t_rect *rect)
                 index2 = 0;
             
             radius = cosine_interpolation(x->f_channel_radius[index1], x->f_channel_radius[index2], mu);
-            angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI2 * HOA_2PI + HOA_PI;
+            angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI2 * HOA_2PI;
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             egraphics_line_to(g, abscissa, ordinate);
@@ -410,9 +410,9 @@ void draw_points(t_hoa_space *x, t_object *view, t_rect *rect)
         
         for(i = 0; i < x->f_number_of_channels; i++)
 		{
-            radius = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5. - 3.5;
+            radius = x->f_channel_radius[i] - 3.5;
             angle  = (double)(i + 1.) / (double)x->f_number_of_channels * HOA_2PI;
-            angle += HOA_PI - HOA_2PI / (double)x->f_number_of_channels;
+            angle -= HOA_2PI / (double)x->f_number_of_channels;
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             egraphics_arc(g, abscissa, ordinate, 3., 0., HOA_2PI);
@@ -456,8 +456,8 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         x->f_mode = 2;
         rad  = radius(mouse.x, mouse.y);
         x->f_value_ref   = (rad - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
-        x->f_value_ref  += x->f_minmax[0];
         x->f_value_ref  *= (x->f_minmax[1] - x->f_minmax[0]);
+        x->f_value_ref  += x->f_minmax[0];
         x->f_value_ref   = clip_minmax(x->f_value_ref, x->f_minmax[0], x->f_minmax[1]);
         memcpy(x->f_channel_refs, x->f_channel_values, x->f_number_of_channels * sizeof(double));
     }
@@ -498,20 +498,20 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     {
         radius  = Hoa::radius(mouse.x, mouse.y);
         inc     = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
-        inc    += x->f_minmax[0];
         inc    *= (x->f_minmax[1] - x->f_minmax[0]);
+        inc    += x->f_minmax[0];
         inc     = inc - x->f_value_ref;
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = clip_minmax(x->f_channel_refs[i] + inc, x->f_minmax[0], x->f_minmax[1]);
     }
     else
     {
-        angle   = wrap_twopi(azimuth(mouse.x, mouse.y) - HOA_PI + (HOA_PI / (double)x->f_number_of_channels));
+        angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (HOA_PI / (double)x->f_number_of_channels));
         radius  = Hoa::radius(mouse.x, mouse.y);
         index   = angle / HOA_2PI * x->f_number_of_channels;
         value   = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
-        value  += x->f_minmax[0];
         value  *= (x->f_minmax[1] - x->f_minmax[0]);
+        value  += x->f_minmax[0];
         value   = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
         x->f_channel_values[index] = value;
     }

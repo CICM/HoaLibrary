@@ -1,16 +1,15 @@
-#N canvas 343 82 598 661 10;
+#N canvas 63 104 924 657 10;
 #X obj -168 -348 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
 3 12 0 18 -204280 -1 0;
 #X msg -103 -191 channels \$1;
-#X msg -103 184 1 0.714482 0.645385 0.645385 1 1 0.645385 0.692838
-1 0.723817 0.647754 1 1 0.714482 0.645385 0.651617;
+#X msg -103 184 1 0.991783 0.99132 0.848228 0.0306693 0.0306693 0.0137424
+0 0 0.017797 0.0343521 0.0879706 0.0634424 0 0 0;
 #X text -95 -236 Number of channels;
 #X text 31 -225 Coefficients;
 #X text -103 257 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
 #X text -103 241 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text -166 -326 A GUI to design ambisonic space;
 #X obj 23 -250 loadbang;
 #X msg 23 -202 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
 0.0343521 0.0879706 0.0634424;
@@ -61,18 +60,29 @@ normal @fontslant roman @fontsize 11 @receive hoaspace @send (null)
 0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.272711 0.434756 0.545421 0.25
 @ptcolor 0 0 0 1;
 #X text 216 -71 3 - Hold alt and;
+#X obj 460 44 hoa.process~ 16 hoa.gain~ planewaves;
+#X obj 468 -68 sig~ 1;
+#X obj 439 115 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
 #X text -166 -306 hoa.2d.space allows you to draw spatial filtering
 and apply gains to the virtual microphones signals. It sould be used
-with the hoa.space~ object in the plane wave domain.;
-#X connect 1 0 28 0;
-#X connect 8 0 9 0;
-#X connect 9 0 28 0;
-#X connect 10 0 2 0;
-#X connect 11 0 1 0;
-#X connect 12 0 11 0;
+the plane wave domain., f 80;
+#X text -166 -326 A GUI to design plane wave domain;
+#X connect 1 0 27 0;
+#X connect 7 0 8 0;
+#X connect 8 0 27 0;
+#X connect 9 0 2 0;
+#X connect 10 0 1 0;
+#X connect 11 0 10 0;
+#X connect 13 0 12 0;
 #X connect 14 0 13 0;
 #X connect 15 0 14 0;
 #X connect 16 0 15 0;
-#X connect 17 0 16 0;
-#X connect 27 0 28 0;
-#X connect 28 0 10 0;
+#X connect 26 0 27 0;
+#X connect 27 0 9 0;
+#X connect 27 0 29 16;
+#X connect 29 0 31 0;
+#X connect 30 0 29 1;
+#X connect 30 0 29 0;

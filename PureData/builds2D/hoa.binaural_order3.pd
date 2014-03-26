@@ -12,6 +12,7 @@
 #X obj -22 128 block~ 256 1 1;
 #X obj -22 78 c.prepend set;
 #X obj -22 15 c.patcherargs 256 @pinna small;
+#X obj 444 41 inlet;
 #X connect 0 0 8 0;
 #X connect 0 1 9 0;
 #X connect 1 0 0 0;
@@ -24,3 +25,4 @@
 #X connect 11 0 10 0;
 #X connect 12 0 11 0;
 #X connect 12 1 0 0;
+#X connect 13 0 0 0;
