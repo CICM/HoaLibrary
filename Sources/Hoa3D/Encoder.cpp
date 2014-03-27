@@ -33,7 +33,7 @@ namespace Hoa3D
             max = 0.;
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
             {
-                phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI;
+				phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI;
                 phi = wrap_twopi(phi);
                 
                 m_azimuth_matrix[j][i] = spherical_harmonics_azimuth(band, argument, phi);
