@@ -131,6 +131,8 @@ typedef struct _hoa_processor
 
 void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv);
 void hoa_processor_free(t_hoa_processor *x);
+
+t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_class);
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
 t_max_err hoa_processor_notify(t_hoa_processor *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
@@ -549,6 +551,7 @@ t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_clas
 	t_box *b;
 	t_object *io;
 	t_symbol* comment = hoa_sym_nothing;
+	int extra_index_exist = 0;
 	
 	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
 	{
@@ -557,12 +560,19 @@ t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_clas
 			io = jbox_get_object(b);
 			
 			if (extra_index == object_attr_getlong(io, gensym("extra")))
+			{
+				extra_index_exist = 1;
+				
 				comment = object_attr_getsym(io, gensym("comment"));
-			
-			if (comment != hoa_sym_nothing)
-				break;
+				
+				if (comment != hoa_sym_nothing)
+					break;
+			}
 		}
     }
+	
+	if (!extra_index_exist)
+		comment = gensym("does nothing");
 	
 	return comment;
 }
@@ -700,10 +710,22 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	// check if there is an extra comment
 	
 	if (is_extra_ctrl)
+	{
 		ctrl_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_in : hoa_sym_out);
+		
+		// if extra doesn't match explicitly an inlet/outlet in the patch
+		if (ctrl_extra_comment == gensym("does nothing"))
+			is_extra_ctrl = 0;
+	}
 	
 	if (is_extra_sig)
+	{
 		sig_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_sigin : hoa_sym_sigout);
+		
+		// if extra doesn't match explicitly an inlet/outlet in the patch
+		if (sig_extra_comment == gensym("does nothing"))
+			is_extra_sig = 0;
+	}
 	
 	
 	if ( (is_instance_sig && is_instance_ctrl) || (is_extra_sig && is_extra_ctrl) )
@@ -735,7 +757,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	}
 	else
 	{
-		sprintf(s,"does nothing");
+		sprintf(s,"nothing here !");
 	}
 	
 	post("inlet %ld : instance_sig = %ld, instance_ctrl = %ld, extra_sig = %ld, extra_ctrl = %ld", inlet, is_instance_sig, is_instance_ctrl, is_extra_sig, is_extra_ctrl);
