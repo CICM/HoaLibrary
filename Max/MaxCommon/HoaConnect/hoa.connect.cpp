@@ -35,7 +35,7 @@ void connect_free(t_connect *x);
 void connect_bang(t_connect *x);
 void connect_assist(t_connect *x, void *b, long m, long a, char *s);
 void connect_attach(t_connect *x);
-void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_max_err connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 t_max_err connect_setattr_zerocolor(t_connect *x, void *attr, long argc, t_atom *argv);
 t_max_err connect_setattr_poscolor(t_connect *x, void *attr, long argc, t_atom *argv);
@@ -353,7 +353,7 @@ void connect_connect(t_patcher *p, t_object *send, int outlet, t_object *receive
 	object_method_typed(p , hoa_sym_connect, 4, msg, &rv);
 }
 
-void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	int i, j, k, tabcheck;
 	if (msg == hoa_sym_attr_modified && sender == x->f_patcherview)
@@ -437,6 +437,8 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 			x->f_nbSelected = 0;
 		}
 	}
+	
+	return MAX_ERR_NONE;
 }
 
 short is_obj_hoa_exotic(t_object *obj)

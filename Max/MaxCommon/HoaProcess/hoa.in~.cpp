@@ -78,7 +78,6 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 {
     t_hoa_sig_in *x = (t_hoa_sig_in *)object_alloc(hoa_sig_in_class);
 	void *hoaprocessor_parent = Get_HoaProcessor_Object();
-	long declared_sig_ins;
 	long inlet_num = 0;
 
     dsp_setup((t_pxobject *)x, 1);
@@ -91,21 +90,15 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 	x->comment = gensym("");
 	x->value_default = 0.0f;
 	
-	attr_args_process(x, ac, av);
+	attr_args_process(x, ac, av); // must call this before the IO index query
 	
-	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	//x->inlet_num = HoaProcessor_Get_Sigin_Index(hoaprocessor_parent, x->parent_patcher_index, inlet_num, x->extra);
-	x->inlet_num = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*) x);
-	
-	x->valid = 0;
-	
-	declared_sig_ins = HoaProcessor_Get_Declared_Sigins(hoaprocessor_parent);
+	x->declared_sig_ins = HoaProcessor_Get_Declared_Sigins(hoaprocessor_parent);
 	x->sig_ins = (double**) HoaProcessor_Get_Sigins(hoaprocessor_parent);
 	
-	if (x->inlet_num <= declared_sig_ins && x->inlet_num >= 1)
-		x->valid = 1;
-		
-	x->declared_sig_ins = declared_sig_ins;
+	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
+	x->inlet_num = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*) x);
+	
+	x->valid = (x->inlet_num <= x->declared_sig_ins && x->inlet_num > 0);
 	
     return (x);
 }
