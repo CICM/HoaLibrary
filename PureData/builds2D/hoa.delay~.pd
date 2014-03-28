@@ -29,7 +29,7 @@
 #X obj 254 229 delread~ \$0-hoa.delay 1;
 #X obj 7 229 delread~ \$0-hoa.delay 1;
 #X obj 22 70 phasor~ 0.5;
-#N canvas 580 165 450 300 sel~ 1;
+#N canvas 580 165 450 300 sel~ 0;
 #X obj 73 20 c.loadmess 1;
 #X obj 92 141 samphold~;
 #X obj 92 165 snapshot~;
@@ -41,7 +41,7 @@
 #X obj 92 261 outlet;
 #X obj 153 261 outlet;
 #X obj 155 232 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
+-262144 -1 -1 256.501 256;
 #X obj 73 109 metro 5;
 #X connect 0 0 11 0;
 #X connect 1 0 2 0;

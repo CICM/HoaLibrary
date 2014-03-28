@@ -14,9 +14,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 10 @interval 20 @bgcolor 0.758847 0.758847 0.758847 1 @bdcolor
 0.699562 0.699562 0.699562 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
 #X text -252 -541 A plane wave projector;
-#X text 80 -333 Sound field transformations have differents behavior
+#X text 80 -313 Sound field transformations have differents behavior
 in the plane domain compared to the ambisonic domain.;
-#X text 80 -303 Here \, we apply differents delay lines on each signal.
+#X text 80 -283 Here \, we apply differents delay lines on each signal.
 ;
 #X obj -41 -464 phasor~ 0.8;
 #X obj -236 -433 hoa.soundgrain;
@@ -37,30 +37,50 @@ normal @fontslant roman @fontsize 11 @receive (null) @send hoadelproj
 #X text -253 -521 hoa.2d.projector~ discretizes the ambisonic soundfield
 into an array of virtual loudspeakers and gives a access to the plane
 waves domain. Use hoa.recomposer~ to come back to harmonics domain.
-;
+, f 72;
 #X obj -26 -443 c.loadmess;
 #X obj -17 -346 r hoadelproj;
 #X obj -236 -405 c.gain~ @size 127 12 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X msg 214 -422 inter \$1;
-#X obj 214 -450 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 214 -409 inter \$1;
+#X obj 214 -433 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 214 -476 line;
-#X msg 214 -503 1 \, 6 6000;
+#X obj 214 -455 line;
 #X obj 214 -382 c.preset @size 121 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
 0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
-[ ];
+[ @index 0 @hoadelpreset hoa.2d.space list 1 1 1 1 1 1 1 1 1 1 @index
+1 @hoadelpreset hoa.2d.space list 92.5173 1937.78 2108.48 1390.73 1
+3000 3000 3000 3000 2335.39 @index 2 @hoadelpreset hoa.2d.space list
+1882.71 61.5205 59.4307 1953.11 813.017 2917.27 184.399 252.658 2269.49
+146.736 @index 3 @hoadelpreset hoa.2d.space list 3000 2666.9 2664.81
+3000 3000 3000 2789.78 2858.03 3000 2752.11 @index 4 @hoadelpreset
+hoa.2d.space list 1 1 1 3000 1 1 1 1 1 1 @index 5 @hoadelpreset hoa.2d.space
+list 1 1 1 3000 3000 3000 3000 1 1 1 @index 6 @hoadelpreset hoa.2d.space
+list 3000 1 3000 1 1 1 1 3000 1 3000 @index 7 @hoadelpreset hoa.2d.space
+list 1387.1 3000 1613.9 1387.1 1613.9 1 1 1 1387.1 1613.9 @index 8
+@hoadelpreset hoa.2d.space list 1 84.1164 3000 1387.1 1 1 3000 1 1387.1
+3000 @index 9 @hoadelpreset hoa.2d.space list 1 84.1164 3000 3000 3000
+1 1 3000 3000 3000 @index 10 @hoadelpreset hoa.2d.space list 3000 88.6911
+81.6861 2914.74 3000 3000 88.6911 1 2912.31 3000 @index 11 @hoadelpreset
+hoa.2d.space list 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94
+88.6592 2.05962 2912.34 ];
+#X msg 214 -479 1 \, 12 12000;
+#X msg 294 -479 12 \, 1 12000;
+#X text 212 -503 Interpolations;
+#X obj 102 -2 c.prepend set;
+#X msg 102 20 1 1 1 1 1 1 1 1 1 1;
 #X connect 1 0 6 1;
 #X connect 6 0 20 1;
 #X connect 11 0 6 0;
 #X connect 12 0 25 0;
 #X connect 14 0 13 0;
+#X connect 15 0 33 0;
 #X connect 16 0 17 0;
 #X connect 16 1 17 1;
 #X connect 16 2 17 2;
@@ -121,8 +141,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 #X connect 23 0 1 0;
 #X connect 24 0 16 10;
 #X connect 25 0 20 0;
-#X connect 26 0 30 0;
+#X connect 26 0 29 0;
 #X connect 27 0 26 0;
 #X connect 28 0 27 0;
-#X connect 29 0 28 0;
+#X connect 30 0 28 0;
+#X connect 31 0 28 0;
+#X connect 33 0 34 0;
 #X coords 0 697 1 696 100 60 0;

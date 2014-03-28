@@ -142,6 +142,7 @@
 			);
 			name = iterator;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;

@@ -3,7 +3,7 @@
 -1 -1;
 #X obj -546 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -631 120 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -546 107 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
 #X obj -419 144 sig~ 1;
 #X obj -618 447 c.number~ @size 53 17 @fontname Helvetica @fontweight
@@ -25,29 +25,46 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 #X obj -369 144 sig~ 2;
 #X obj -325 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X msg -403 286 open 2;
-#X obj -305 277 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -318 144 sig~ 2;
+#X obj -366 449 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
 #X obj -275 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
+#X obj -268 144 sig~ 2;
 #X msg -117 292 \; pd dsp 1;
 #X msg -117 327 \; pd dsp 0;
-#X obj -318 144 sig~ 3;
-#X obj -268 144 sig~ 4;
-#X obj -680 344 hoa.process~ 2 processtest planewaves;
-#X obj -306 392 osc~ 0.1;
-#X connect 2 0 18 0;
-#X connect 3 0 18 0;
+#X msg -403 286 open 2;
+#X obj -513 123 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -483 123 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -252 475 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -312 485 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -463 146 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -493 93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj -122 475 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -182 485 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -679 345 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo
+;
+#X connect 0 0 26 2;
+#X connect 2 0 26 0;
+#X connect 3 0 26 0;
 #X connect 7 0 9 0;
 #X connect 8 0 3 0;
-#X connect 9 0 18 1;
-#X connect 10 0 16 0;
-#X connect 11 0 18 0;
-#X connect 13 0 17 0;
-#X connect 16 0 18 2;
-#X connect 17 0 18 3;
-#X connect 18 0 4 0;
-#X connect 18 1 5 0;
-#X connect 19 0 6 0;
+#X connect 9 0 26 1;
+#X connect 10 0 11 0;
+#X connect 11 0 26 2;
+#X connect 13 0 14 0;
+#X connect 17 0 26 0;
+#X connect 18 0 26 1;
+#X connect 23 0 26 2;
+#X connect 26 0 4 0;
+#X connect 26 1 5 0;
