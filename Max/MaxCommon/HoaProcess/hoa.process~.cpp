@@ -183,6 +183,8 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
 void *hoa_processor_query_mode(t_hoa_processor *x);
+void *hoa_processor_query_is_2D(t_hoa_processor *x);
+void *hoa_processor_query_number_of_instances(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
@@ -209,7 +211,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,	   0);
 	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_DEFLONG, 0);
 	
-	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);  // plante pour l'instant !!
+	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",		A_CANT, 0);
 	
@@ -222,7 +224,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target,				"target",				A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_is_2D,				"is_2D",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_number_of_instances,	"get_number_of_instance", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
@@ -1651,6 +1655,16 @@ void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 void *hoa_processor_query_mode(t_hoa_processor *x)
 {
 	return (void *) x->f_mode;
+}
+
+void *hoa_processor_query_number_of_instances(t_hoa_processor *x)
+{
+	return (void *) (x->patch_spaces_allocated);
+}
+
+void *hoa_processor_query_is_2D(t_hoa_processor *x)
+{
+	return (void *) (x->f_object_type == HOA_OBJECT_2D);
 }
 
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)
