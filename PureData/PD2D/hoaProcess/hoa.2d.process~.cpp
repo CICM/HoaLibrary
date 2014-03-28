@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../HoaCommon.pd.h"
+#include "../Hoa2D.pd.h"
 
 extern "C"
 {
@@ -113,11 +113,11 @@ t_hoa_err hoa_getinfos(t_hoa_process* x, t_hoa_boxinfos* boxinfos);
 
 void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* argv);
 
-extern "C" void setup_hoa0x2eprocess_tilde(void)
+extern "C" void setup_hoa0x2e2d0x2eprocess_tilde(void)
 {
     t_eclass* c;
-    c = eclass_new("hoa.process~", (method)hoa_process_new, (method)hoa_process_free, (short)sizeof(t_hoa_process), CLASS_NOINLET, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_process_new, gensym("hoa.2d.process~"), A_GIMME, 0);
+    c = eclass_new("hoa.2d.process~", (method)hoa_process_new, (method)hoa_process_free, (short)sizeof(t_hoa_process), CLASS_NOINLET, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_process_new, gensym("hoa.process~"), A_GIMME, 0);
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
@@ -887,8 +887,11 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
         for(int i = 0; i < ncnv; i++)
         {
             x->f_canvas[i] = NULL;
-            // Setting the name arguments of the canvas, later we'll put the right arg for
-            atom_setfloat(&av, i);
+            if(x->f_mode)
+                atom_setfloat(&av, i);
+            else
+                atom_setfloat(&av, x->f_ambi_2d->getHarmonicArgument(i));
+            
             canvas_setargs(1, &av);
             
             // Load the canvas

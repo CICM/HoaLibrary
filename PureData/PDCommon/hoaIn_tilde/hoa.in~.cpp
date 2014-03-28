@@ -20,6 +20,7 @@ void hoa_intilde_free(t_hoa_in_tilde *x);
 
 void hoa_intilde_dsp(t_hoa_in_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_intilde_perform(t_hoa_in_tilde *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_intilde_perform_zero(t_hoa_in_tilde *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
 
 t_hoa_err hoa_getinfos(t_hoa_in_tilde* x, t_hoa_boxinfos* boxinfos);
 
@@ -81,13 +82,18 @@ void hoa_intilde_dsp(t_hoa_in_tilde *x, t_object *dsp, short *count, double samp
 {
     if(x->f_signal)
         object_method(dsp, gensym("dsp_add"), x, (method)hoa_intilde_perform, 0, NULL);
-    
+    else
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_intilde_perform_zero, 0, NULL);
 }
 
 void hoa_intilde_perform(t_hoa_in_tilde *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-    memcpy(ins[0], x->f_signal, sf * sizeof(t_sample));
-    //post("inlet sig %ld", (long)ins[0]);
+    memcpy(outs[0], x->f_signal, sf * sizeof(t_sample));
+}
+
+void hoa_intilde_perform_zero(t_hoa_in_tilde *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
+{
+    memset(outs[0], 0, sf * sizeof(t_sample));
 }
 
 
