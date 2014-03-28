@@ -32,12 +32,31 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 83.5, 57.0, 212.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "grainsize",
+						"extra" : 3
+					}
+,
+					"text" : "hoa.in @extra 3 @comment grainsize"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-3",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 212.0, 24.0, 43.0, 20.0 ],
+					"patching_rect" : [ 476.0, 86.0, 43.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"comment" : "",
 						"extra" : 0
@@ -55,7 +74,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 262.0, 175.0, 51.0, 20.0 ],
+					"patching_rect" : [ 327.0, 175.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"comment" : "",
 						"extra" : 0
@@ -73,12 +92,12 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 107.0, 175.0, 110.0, 20.0 ],
+					"patching_rect" : [ 107.0, 175.0, 207.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : ""
+						"comment" : "result"
 					}
 ,
-					"text" : "hoa.out~ @extra 1"
+					"text" : "hoa.out~ @extra 1 @comment result"
 				}
 
 			}
@@ -127,13 +146,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 323.0, 24.0, 95.0, 20.0 ],
+					"patching_rect" : [ 327.0, 24.0, 192.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
-						"extra" : 1
+						"comment" : "wider",
+						"extra" : 4
 					}
 ,
-					"text" : "hoa.in @extra 1"
+					"text" : "hoa.in @extra 4 @comment wider"
 				}
 
 			}
@@ -146,13 +165,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 83.5, 24.0, 102.0, 20.0 ],
+					"patching_rect" : [ 83.5, 24.0, 219.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
+						"comment" : "grainsize",
 						"extra" : 3
 					}
 ,
-					"text" : "hoa.in~ @extra 3"
+					"text" : "hoa.in~ @extra 3 @comment grainsize"
 				}
 
 			}
@@ -164,13 +183,13 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 323.0, 175.0, 103.0, 20.0 ],
+					"patching_rect" : [ 388.0, 175.0, 230.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
+						"comment" : "(sum var)",
 						"extra" : 1
 					}
 ,
-					"text" : "hoa.out @extra 1"
+					"text" : "hoa.out @extra 1 @comment \"(sum var)\""
 				}
 
 			}

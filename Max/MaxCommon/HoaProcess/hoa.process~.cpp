@@ -152,9 +152,7 @@ void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, doub
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
 void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 
-long hoa_processor_linkinlets_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x);
-long hoa_processor_unlinkinlets_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x);
 
 void hoa_processor_init_io_infos(t_io_infos* io_infos);
@@ -546,49 +544,62 @@ void hoa_processor_free(t_hoa_processor *x)
 	delete x->f_ambi3D;
 }
 
+t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_class)
+{
+	t_box *b;
+	t_object *io;
+	t_symbol* comment = hoa_sym_nothing;
+	
+	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
+	{
+		if (jbox_get_maxclass(b) == object_class)
+		{
+			io = jbox_get_object(b);
+			
+			if (extra_index == object_attr_getlong(io, gensym("extra")))
+				comment = object_attr_getsym(io, gensym("comment"));
+			
+			if (comment != hoa_sym_nothing)
+				break;
+		}
+    }
+	
+	return comment;
+}
+
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	long 	inlet = a + 1;
+	long		inlet = a + 1;
+	int			extra_index = 0;
+	int			is_extra_sig, is_extra_ctrl, is_instance_sig, is_instance_ctrl;
 	
-	int		is_extra = 0;
-	int		extra_index = 0;
+	char		sig_basis_text[50];
+	char		ctrl_basis_text[50];
+	t_symbol*	sig_extra_comment = hoa_sym_nothing;
+	t_symbol*	ctrl_extra_comment = hoa_sym_nothing;
 	
-	int		is_sig = 0;
-	int		is_ctrl = 0;
 	
-	int		is_extra_sig, is_extra_ctrl, is_instance_sig, is_instance_ctrl;
 	is_extra_sig = is_extra_ctrl = is_instance_sig = is_instance_ctrl = 0;
 	
-	//char	io_sig_text[1024];
-	//char 	io_text[1024];
-	//char	extra_comment_text[1024];
-	
-	char	sig_basis_text[50];
-	char	ctrl_basis_text[50];
-	
-	post("assist : a = %ld, instance_ins = %ld, instance_sig_ins = %ld", a, x->instance_ins, x->instance_sig_ins);
-	
-	// check if "a" match an extra outlet + check if io is sig or/and ctrl
+	// check if "a" match an extra io + check if io is sig or/and ctrl
 	
 	if ( m == ASSIST_INLET && (x->extra_ins || x->extra_sig_ins))
 	{
-		if (inlet > max(x->instance_ins, x->instance_sig_ins))
+		int max_instance = max(x->instance_ins, x->instance_sig_ins);
+		
+		if (inlet > max_instance)
 		{
-			if (inlet > x->instance_ins)
+			extra_index = inlet - max_instance;
+			
+			if (inlet <= x->instance_ins + x->extra_ins)
 			{
-				extra_index = inlet - (long)max(x->instance_ins, x->instance_sig_ins);
+				is_extra_ctrl = 1;
 				sprintf(ctrl_basis_text,"Extra in %i", extra_index);
-				
-				if (extra_index <= x->instance_ins + x->extra_ins)
-					is_extra_ctrl = 1;
 			}
-			if (inlet > x->instance_sig_ins)
+			if (inlet <= x->instance_sig_ins + x->extra_sig_ins)
 			{
-				extra_index = inlet - (long)max(x->instance_ins, x->instance_sig_ins);
+				is_extra_sig = 1;
 				sprintf(sig_basis_text,"Extra in %i", extra_index);
-				
-				if (extra_index <= x->instance_sig_ins + x->extra_sig_ins)
-					is_extra_sig = 1;
 			}
 		}
 	}
@@ -609,7 +620,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		}
 	}
 	
-	// --
+	// check if "a" match an instance io + check if io is sig or/and ctrl
 	
 	if (!is_extra_ctrl || !is_extra_sig)
 	{
@@ -686,17 +697,41 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		}
 	}
 	
-	if ( (is_instance_sig && is_instance_ctrl) || (is_extra_sig && is_extra_ctrl) || (is_instance_sig && is_extra_ctrl) )
+	// check if there is an extra comment
+	
+	if (is_extra_ctrl)
+		ctrl_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_in : hoa_sym_out);
+	
+	if (is_extra_sig)
+		sig_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_sigin : hoa_sym_sigout);
+	
+	
+	if ( (is_instance_sig && is_instance_ctrl) || (is_extra_sig && is_extra_ctrl) )
 	{
-		sprintf(s,"(signal, messages) %s", sig_basis_text);
+		if (sig_extra_comment == hoa_sym_nothing && ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal, messages) %s", sig_basis_text);
+		else if (sig_extra_comment == ctrl_extra_comment)
+			sprintf(s,"(signal, messages) %s : %s", sig_basis_text, sig_extra_comment->s_name);
+		else if (sig_extra_comment != hoa_sym_nothing && ctrl_extra_comment != hoa_sym_nothing)
+			sprintf(s,"(signal) %s : %s, (messages) %s : %s", sig_basis_text, sig_extra_comment->s_name, ctrl_basis_text, ctrl_extra_comment->s_name);
+		else if (sig_extra_comment != hoa_sym_nothing && ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal) %s : %s, (messages) %s", sig_basis_text, sig_extra_comment->s_name, ctrl_basis_text);
+		else if (sig_extra_comment == hoa_sym_nothing && ctrl_extra_comment != hoa_sym_nothing)
+			sprintf(s,"(signal) %s, (messages) %s : %s", sig_basis_text, ctrl_basis_text, ctrl_extra_comment->s_name);
 	}
 	else if ( (is_instance_sig || is_extra_sig) && !is_instance_ctrl && !is_extra_ctrl)
 	{
-		sprintf(s,"(signal) %s", sig_basis_text);
+		if (sig_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal) %s", sig_basis_text);
+		else
+			sprintf(s,"(signal) %s, %s", sig_basis_text, sig_extra_comment->s_name);
 	}
 	else if ( (is_instance_ctrl || is_extra_ctrl) && !is_instance_sig && !is_extra_sig)
 	{
-		sprintf(s,"(messages) %s", ctrl_basis_text);
+		if (ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(messages) %s", ctrl_basis_text);
+		else
+			sprintf(s,"(messages) %s, %s", ctrl_basis_text, ctrl_extra_comment->s_name);
 	}
 	else
 	{
@@ -704,198 +739,6 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	}
 	
 	post("inlet %ld : instance_sig = %ld, instance_ctrl = %ld, extra_sig = %ld, extra_ctrl = %ld", inlet, is_instance_sig, is_instance_ctrl, is_extra_sig, is_extra_ctrl);
-	
-	
-	// if io is instance io retrive name + check if io is sig or/and ctrl
-	/*
-	if (!is_extra)
-	{
-		if (x->f_mode == hoa_sym_ambisonics)
-		{
-			int hIndex = a;
-			if (m == ASSIST_OUTLET)
-				hIndex = a - x->declared_sig_outs;
-			
-			if (x->f_object_type == HOA_OBJECT_2D)
-				sprintf(basis_text,"%s", x->f_ambi2D->getHarmonicsName(hIndex).c_str());
-			else if (x->f_object_type == HOA_OBJECT_3D)
-				sprintf(basis_text,"%s", x->f_ambi3D->getHarmonicsName(hIndex).c_str());
-			
-			if ( m == ASSIST_INLET)
-			{
-				if (x->instance_sig_ins >= x->instance_ins && x->num_proxies != 0)
-					is_sig = 1;
-				if (x->instance_ins >= x->instance_sig_ins && x->num_proxies != 0)
-					is_ctrl = 1;
-			}
-			else
-			{
-				if (inlet <= x->declared_sig_outs)
-					is_sig = 1;
-				else if (inlet <= x->declared_sig_outs + x->declared_outs)
-					is_ctrl = 1;
-			}
-		}
-		else if (x->f_mode == hoa_sym_planewaves)
-		{
-			if ( m == ASSIST_INLET)
-			{
-				sprintf(basis_text,"Channel %ld", inlet);
-				
-				if (x->instance_sig_ins >= x->instance_ins && x->num_proxies != 0)
-					is_sig = 1;
-				if (x->instance_ins >= x->instance_sig_ins && x->num_proxies != 0)
-					is_ctrl = 1;
-			}
-			else if ( m == ASSIST_OUTLET )
-			{
-				if (inlet <= x->declared_sig_outs)
-				{
-					sprintf(basis_text,"Channel %ld", inlet);
-					is_sig = 1;
-				}
-				else if (inlet <= x->declared_sig_outs + x->declared_outs)
-				{
-					sprintf(basis_text,"Channel %ld", inlet);
-					is_ctrl = 1;
-				}
-			}
-		}
-	}
-	*/
-	
-	/*
-	if (is_sig && is_ctrl)
-	{
-		sprintf(s,"(signal, messages) %s", basis_text);
-	}
-	else if (is_sig && !is_ctrl)
-	{
-		sprintf(s,"(signal) %s", basis_text);
-	}
-	else if (!is_sig && is_ctrl)
-	{
-		sprintf(s,"(messages) %s", basis_text);
-	}
-	else
-	{
-		sprintf(s,"does nothing");
-	}
-	*/
-	
-	
-	/*
-	if (x->f_mode == hoa_sym_ambisonics)
-	{
-		if ( (m == ASSIST_INLET && (a < x->instance_ins || a < x->instance_sig_ins)) )
-		{
-			if (x->f_object_type == HOA_OBJECT_2D)
-				sprintf(basis_text,"%s", x->f_ambi2D->getHarmonicsName(a).c_str());
-			else if (x->f_object_type == HOA_OBJECT_3D)
-				sprintf(basis_text,"%s", x->f_ambi3D->getHarmonicsName(a).c_str());
-		}
-		else if (m == ASSIST_INLET) // extra in
-		{
-			sprintf(basis_text,"Extra %ld", inlet - (long)max(x->instance_ins, x->instance_sig_ins));
-		}
-		else if (m == ASSIST_OUTLET) // extra out
-		{
-			if (a < x->declared_sig_outs)
-			{
-				sprintf(basis_text,"Extra %ld", inlet - x->declared_sig_outs);
-			}
-		}
-	}
-	else if (x->f_mode == hoa_sym_planewaves)
-	{
-		if ( (m == ASSIST_INLET && (a < x->instance_ins || a < x->instance_sig_ins)) )
-		{
-			sprintf(basis_text,"Channel %ld", inlet);
-		}
-		else
-		{
-			sprintf(basis_text,"Extra %ld", inlet);
-		}
-	}
-	*/
-	
-	
-	/*
-	if (m == ASSIST_INLET)
-	{
-		if (a < x->instance_ins && a < x->instance_sig_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(signal, messages) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(signal, messages) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(signal, messages) Channel %ld", inlet);
-			}
-		}
-		else if (a < x->instance_sig_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(signal) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(signal) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(signal) Channel %ld", inlet);
-			}
-		}
-		else if (a < x->instance_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(messages) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(messages) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(messages) Channel %ld", inlet);
-			}
-		}
-		else
-			sprintf(s,"(signal) Extra In %ld", inlet - x->instance_sig_ins);
-		
-	}
-	else if (m == ASSIST_OUTLET && a >= x->instance_sig_outs)
-	{
-		sprintf(s,"(signal) Extra Out %ld", a - x->instance_sig_outs);
-	}
-	*/
-	
-	/*
-	if (m == ASSIST_INLET && a >= x->instance_sig_ins)
-	{
-		sprintf(s,"(signal) Extra In %ld", a - x->instance_sig_ins);
-	}
-	else if (m == ASSIST_OUTLET && a >= x->instance_sig_outs)
-	{
-		sprintf(s,"(signal) Extra Out %ld", a - x->instance_sig_outs);
-	}
-	else if (x->f_mode == hoa_sym_ambisonics)
-	{
-		if (x->f_object_type == HOA_OBJECT_2D)
-			sprintf(s,"(signal) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-		else if (x->f_object_type == HOA_OBJECT_3D)
-			sprintf(s,"(signal) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-	}
-	else if (x->f_mode == hoa_sym_planewaves)
-	{
-		sprintf(s,"(Signal) Channel %ld", a+1);
-	}
-	*/
 }
 
 // ========================================================================================================================================== //

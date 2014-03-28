@@ -877,11 +877,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 7,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "", "", "", "" ],
 					"patching_rect" : [ 220.0, 485.0, 272.0, 20.0 ],
-					"text" : "hoa.2d.process~ 1 hoa.ptestio ambisonics args 1"
+					"text" : "hoa.2d.process~ 1 hoa.ptestio ambisonics args 4"
 				}
 
 			}
@@ -1113,9 +1113,9 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
 			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-36::obj-35" : [ "[5]", "Level", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
