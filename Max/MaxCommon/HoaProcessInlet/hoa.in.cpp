@@ -142,6 +142,18 @@ void hoa_in_assist(t_hoa_in *x, void *b, long m, long a, char *s)
 {
     if (m == ASSIST_INLET)
 		sprintf(s,"Dummy");
-    else 
-		sprintf(s,"Input %i", 1);
+    else
+	{
+		if (x->extra > 0)
+		{
+			if (x->comment != hoa_sym_nothing)
+				sprintf(s,"(messages) hoa.process~ extra input, %s", x->comment->s_name);
+			else
+				sprintf(s,"(messages) hoa.process~ extra input");
+		}
+		else
+		{
+			sprintf(s,"(messages) hoa.process~ instance input");
+		}
+	}
 }

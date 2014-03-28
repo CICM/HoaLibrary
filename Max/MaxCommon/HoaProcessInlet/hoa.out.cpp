@@ -89,7 +89,17 @@ void *hoa_out_new(t_symbol *s, short ac, t_atom *av)
 
 void hoa_out_assist(t_hoa_out *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"Send Messages Out of a hoa.process~ object");
+    if (x->extra > 0)
+	{
+		if (x->comment != hoa_sym_nothing)
+			sprintf(s,"(messages) hoa.process~ extra output, %s", x->comment->s_name);
+		else
+			sprintf(s,"(messages) hoa.process~ extra output");
+	}
+	else
+	{
+		sprintf(s,"(messages) hoa.process~ instance output");
+	}
 }
 
 t_max_err hoa_out_setattr_extra(t_hoa_out *x, void *attr, long ac, t_atom *av)

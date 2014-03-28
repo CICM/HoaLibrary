@@ -51,7 +51,8 @@ static t_symbol* hoa_sym_process_mode_post 			= gensym("post");
 static t_symbol* hoa_sym_process_mode_out 			= gensym("out");
 static t_symbol* hoa_sym_ambisonics					= gensym("ambisonics");
 static t_symbol* hoa_sym_planewaves					= gensym("planewaves");
-static t_symbol* hoa_sym_attr_extra 				= gensym("extra");
+static t_symbol* hoa_sym_extra						= gensym("extra");
+static t_symbol* hoa_sym_comment					= gensym("comment");
 static t_symbol* hoa_sym_out_message 				= gensym("out_message");
 
 // Trigo

@@ -29,7 +29,6 @@ t_class *hoa_sig_out_class;
 void *hoa_sig_out_new(t_symbol *s, long ac, t_atom *av);
 void hoa_sig_out_free(t_hoa_sig_out *x);
 void hoa_sig_out_assist(t_hoa_sig_out *x, void *b, long m, long a, char *s);
-void hoa_sig_out_int(t_hoa_sig_out *x, long intin);
 
 void hoa_sig_out_dsp64 (t_hoa_sig_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_sig_out_perform64 (t_hoa_sig_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userextra);
@@ -45,7 +44,6 @@ int C74_EXPORT main(void)
 	hoa_initclass(c, (method)NULL);
 	class_addmethod(c, (method)hoa_sig_out_dsp64, "dsp64", A_CANT, 0);
     class_addmethod(c, (method)hoa_sig_out_assist, "assist", A_CANT, 0);
-	class_addmethod(c, (method)hoa_sig_out_int, "int", A_LONG, 0);
     
 	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_sig_out, extra);
 	CLASS_ATTR_ACCESSORS(c, "extra", 0, hoa_sig_in_setattr_extra);
@@ -79,15 +77,11 @@ void *hoa_sig_out_new(t_symbol *s, long ac, t_atom *av)
     dsp_setup((t_pxobject *)x, 1);
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	
-	//x->outlet_num = HoaProcessor_Get_Sigout_Index(hoaprocessor_parent, x->parent_patcher_index, outlet_num, x->extra);
 	x->outlet_num = HoaProcessor_Get_IO_Index(hoaprocessor_parent, x->parent_patcher_index, (t_object*)x);
-	
-	//object_post((t_object*)x, "inlet_real_index = %ld", x->outlet_num);
 	
 	x->outptrs_ptr = HoaProcessor_Get_Outptrs_Ptr(hoaprocessor_parent, Get_HoaProcessor_Patch_Index(hoaprocessor_parent));
 	x->declared_sig_outs = HoaProcessor_Get_Declared_Sigouts(hoaprocessor_parent);
-		
+	
     return (x);
 }
 
@@ -112,12 +106,17 @@ t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_out *x, void *attr, long ac, t_at
 
 void hoa_sig_out_assist(t_hoa_sig_out *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"(signal) Output %ld of hoa.process, %s", x->outlet_num, x->comment->s_name);
-}
-
-void hoa_sig_out_int (t_hoa_sig_out *x, long intin)
-{
-	x->outlet_num = intin;
+	if (x->extra > 0)
+	{
+		if (x->comment != hoa_sym_nothing)
+			sprintf(s,"(signal) hoa.process~ extra output, %s", x->comment->s_name);
+		else
+			sprintf(s,"(signal) hoa.process~ extra output");
+	}
+	else
+	{
+		sprintf(s,"(signal) hoa.process~ instance output");
+	}
 }
 
 void hoa_sig_out_dsp64(t_hoa_sig_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
