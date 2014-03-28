@@ -91,8 +91,6 @@ typedef struct _hoa_processor
 	long last_vec_size;
 	long last_samp_rate;
 	
-	int		f_last_opened_instance;
-	
 	// IO Variables
 	
 	long mode_default_numins;
@@ -169,7 +167,6 @@ void hoa_processor_wclose(t_hoa_processor *x, long index);
 void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 
 short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_hoa_processor *x);
-long hoa_processor_setsubassoc_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x);
 void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p);
 void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg);
@@ -257,14 +254,14 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 {	
 	t_hoa_processor *x = (t_hoa_processor*)object_alloc(hoa_processor_class);
 	
-	t_symbol *patch_name_entered = 0;
+	t_symbol *patch_name_entered = NULL;
 	t_symbol *tempsym;
-	int first_int = 1;
 	long i;
+	int first_int = 1;
+	x->f_mode = hoa_sym_ambisonics;
 	short ac = 0;
 	t_atom av[MAX_ARGS];
 	long number_of_instances_to_load = 0;
-	x->f_mode = hoa_sym_ambisonics;
 	
 	x->patch_spaces_allocated = 0;
 	x->target_index = 0;
@@ -284,10 +281,8 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	x->f_object_type = HOA_OBJECT_2D;
 	if (s == gensym("hoa.3d.process~"))
 		x->f_object_type = HOA_OBJECT_3D;
-	else if (s == gensym("hoa.3d.process~"))
-	{
-		object_error((t_object*)x, "hoa.plug~ is deprecated please update your patch for the hoa.process~");
-	}
+	else if (s == gensym("hoa.plug~"))
+		object_error((t_object*)x, "hoa.plug~ is deprecated please take a look at the hoa.process~ object");
 
 	// Check the order or the number of instances :
 	if (argc && atom_gettype(argv) == A_LONG)
@@ -339,24 +334,11 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	// load a single instance to query io informations
 	
 	t_io_infos io_infos;
-	hoa_processor_init_io_infos(&io_infos);
-	
 	t_hoa_err loaded_patch_err = hoa_processor_get_patch_filename_io_context(x, patch_name_entered, &io_infos);
 	
-	if (loaded_patch_err == HOA_ERR_NONE)
-	{
-		post("ins = %ld, ins_maxindex = %ld, extra_ins = %ld, extra_ins_maxindex = %ld",
-			 io_infos.ins, io_infos.ins_maxindex, io_infos.extra_ins, io_infos.extra_ins_maxindex);
-		
-		post("outs = %ld, outs_maxindex = %ld, extra_outs = %ld, extra_outs_maxindex = %ld",
-			 io_infos.outs, io_infos.outs_maxindex, io_infos.extra_outs, io_infos.extra_outs_maxindex);
-		
-		post("sig_ins = %ld, sig_ins_maxindex = %ld, extra_sig_ins = %ld, extra_sig_ins_maxindex = %ld",
-			 io_infos.sig_ins, io_infos.sig_ins_maxindex, io_infos.extra_sig_ins, io_infos.extra_sig_ins_maxindex);
-		
-		post("sig_outs = %ld, sig_outs_maxindex = %ld, extra_sig_outs = %ld, extra_sig_outs_maxindex = %ld",
-			 io_infos.sig_outs, io_infos.sig_outs_maxindex, io_infos.extra_sig_outs, io_infos.extra_sig_outs_maxindex);
-	}
+	if (loaded_patch_err != HOA_ERR_NONE)
+		return x;
+	
 	
 	// default io config depends on object type (2d/3d) and mode :
 	
@@ -759,8 +741,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	{
 		sprintf(s,"nothing here !");
 	}
-	
+/*
 	post("inlet %ld : instance_sig = %ld, instance_ctrl = %ld, extra_sig = %ld, extra_ctrl = %ld", inlet, is_instance_sig, is_instance_ctrl, is_extra_sig, is_extra_ctrl);
+*/
 }
 
 // ========================================================================================================================================== //
@@ -1250,7 +1233,6 @@ t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symb
 	t_fourcc filetypelist = 'JSON';
 	
 	short patch_path;
-	short saveloadupdate;
 	char filename[MAX_FILENAME_CHARS];
 	t_patcher *p;
 	
@@ -1263,6 +1245,13 @@ t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symb
 	t_atom* av;
 	
 	hoa_processor_init_io_infos(io_infos);
+	
+	if (!patch_name_in)
+	{
+		//object_warn((t_object*)x, "no patch name entered");
+		hoa_processor_loadexit(x, 0, 0, 0);
+		return HOA_ERR_FILE_NOT_FOUND;
+	}
 	
 	// Check that this object is not loading in another thread
 	
@@ -1506,8 +1495,6 @@ void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *a
 	if (x->patch_space_ptrs[index]->the_patch)
 		mess0((t_object *)x->patch_space_ptrs[index]->the_patch, hoa_sym_front);		// this will always do the right thing
 	
-	x->f_last_opened_instance = index + 1;
-	
 	t_atom patch;
 	atom_setobj(&patch, x->patch_space_ptrs[index]->the_patch);
 	defer_low(x, (method)hoa_processor_attach_patcherview, NULL, 1, &patch);
@@ -1565,19 +1552,6 @@ short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_h
 	}
 	
 	return (0);
-}
-
-long hoa_processor_setsubassoc_it(t_hoa_processor *x, t_object *obj)
-{
-	t_object *assoc;
-	object_method(jbox_get_object(obj), hoa_sym_getassoc, &assoc);
-	if (!assoc)
-		object_method(jbox_get_object(obj), hoa_sym_setassoc, x);
-	
-	object_post((t_object*)obj, "setsubassoc");
-	
-	//object_method(p, hoa_sym_noedit, 1);
-	return 0;
 }
 
 short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x)
