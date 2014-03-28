@@ -378,6 +378,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)
 {
+	// planewaves : 1) (nbchannels | current index), mode, (Patcher Arguments), (Patcher Attributs)
     if (m == ASSIST_OUTLET) 
 	{
 		switch (a)
@@ -395,7 +396,7 @@ void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char 
 				sprintf(s,"Ambisonic Order");
 				break;
 			case 4:
-				sprintf(s,"Mode (no, post, out)");
+				sprintf(s,"Mode (ambisonics, planewaves)");
 				break;
 			case 5:
 				sprintf(s,"Mute Status");

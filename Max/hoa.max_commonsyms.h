@@ -34,6 +34,7 @@ static t_symbol* hoa_sym_dynlet_end 				= gensym("dynlet_end");
 static t_symbol* hoa_sym_start						= gensym("start");
 static t_symbol* hoa_sym_stop 						= gensym("stop");
 static t_symbol* hoa_sym_front 						= gensym("front");
+static t_symbol* hoa_sym_iterate 					= gensym("iterate");
 
 // hoa.process
 static t_symbol* hoa_sym_getassoc					= gensym("getassoc");
@@ -48,6 +49,8 @@ static t_symbol* hoa_sym_args 						= gensym("args");
 static t_symbol* hoa_sym_process_mode_no			= gensym("no");
 static t_symbol* hoa_sym_process_mode_post 			= gensym("post");
 static t_symbol* hoa_sym_process_mode_out 			= gensym("out");
+static t_symbol* hoa_sym_ambisonics					= gensym("ambisonics");
+static t_symbol* hoa_sym_planewaves					= gensym("planewaves");
 static t_symbol* hoa_sym_attr_extra 				= gensym("extra");
 static t_symbol* hoa_sym_out_message 				= gensym("out_message");
 
