@@ -11,6 +11,7 @@ typedef struct _hoa_thisprocess
 {
     t_eobj      j_box;
     t_canvas*   f_canvas;
+    
     t_outlet*   f_out_hoa;
 	t_outlet*   f_out_args;
     t_outlet*   f_out_attrs;
