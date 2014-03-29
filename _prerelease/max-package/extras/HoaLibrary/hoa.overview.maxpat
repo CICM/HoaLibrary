@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 6,
 			"architecture" : "x64"
 		}
 ,
@@ -94,7 +94,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 208.78125, 20.75, 73.0, 20.0 ],
-					"text" : "version 1.3",
+					"text" : "version 2.0",
 					"textcolor" : [ 0.9404, 0.940544, 0.940332, 1.0 ],
 					"varname" : "autohelp_top_title[4]"
 				}
@@ -111,7 +111,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 209.78125, 21.75, 73.0, 20.0 ],
-					"text" : "version 1.1",
+					"text" : "version 2.0",
 					"textcolor" : [ 0.424631, 0.424696, 0.4246, 0.21 ],
 					"varname" : "autohelp_top_title[5]"
 				}
@@ -445,7 +445,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 6,
 							"architecture" : "x64"
 						}
 ,
@@ -775,14 +775,13 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"offset" : [ -4000.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 6,
 							"architecture" : "x64"
 						}
 ,
@@ -1528,7 +1527,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 6,
 											"architecture" : "x64"
 										}
 ,
@@ -2853,14 +2852,14 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "objectdesc.txt",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1

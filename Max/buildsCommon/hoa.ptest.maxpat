@@ -37,6 +37,11 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 184.0, 246.0, 51.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 0
+					}
+,
 					"text" : "hoa.out"
 				}
 
@@ -179,6 +184,11 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 369.0, 68.0, 43.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 0
+					}
+,
 					"text" : "hoa.in"
 				}
 
@@ -229,26 +239,17 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-7",
-					"maxclass" : "number",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "int", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 98.0, 200.0, 50.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 184.0, 68.0, 43.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 0
+					}
+,
 					"text" : "hoa.in"
 				}
 
@@ -368,15 +369,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-6", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-7", 0 ]
 				}
 
 			}
