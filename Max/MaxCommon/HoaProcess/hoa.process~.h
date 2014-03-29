@@ -142,6 +142,22 @@ __inline t_symbol *HoaProcessor_Get_Mode (void *HoaProcessor_Object)
 	return 0;
 }
 
+__inline long HoaProcessor_Get_Number_Of_Instances (void *HoaProcessor_Object)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (long) mess0((t_object *)HoaProcessor_Object, gensym("get_number_of_instance"));
+	
+	return 0;
+}
+
+__inline long HoaProcessor_Is_2D (void *HoaProcessor_Object)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess0((t_object *)HoaProcessor_Object, gensym("is_2D"));
+	
+	return 0;
+}
+
 __inline long HoaProcessor_Get_PatcherArgs (void *HoaProcessor_Object, long index, long *argc, t_atom **argv)
 {
 	if (HoaProcessorIsValid(HoaProcessor_Object))

@@ -14,12 +14,15 @@ typedef struct _hoa_thisprocess
     t_object x_obj;
 	
 	// outlets
-	void *out_index, *out_harmonicBand, *out_harmonicArgument, *out_order, *out_mode, *out_mute, *out_patcherArgs, *out_patcherAttr;
+	void *out_index, *out_harmonicBand, *out_harmonicArgument, *out_order, *out_mode, *out_mute, *out_patcherArgs, *out_patcherAttr, *out_instance_infos;
 	
 	long index;
 	
 	void *hoaProcessor_parent;
-	Hoa3D::Ambisonic   *f_ambisonic;
+	
+	int					f_order;
+	Hoa2D::Ambisonic   *f_ambi2D;
+	Hoa3D::Ambisonic   *f_ambi3D;
 	
 	t_args_struct object_args;
 	long object_nAttrs;
@@ -61,23 +64,20 @@ int C74_EXPORT main(void)
 
 void *hoa_thisprocess_new(t_symbol *s, short argc, t_atom *argv)
 {
-	int order;
     t_hoa_thisprocess *x = (t_hoa_thisprocess *) object_alloc(hoa_thisprocess_class);
-    
-	x->out_patcherAttr		= outlet_new(x, NULL);
-	x->out_patcherArgs		= outlet_new(x, NULL);
+	
 	x->out_mute				= intout(x);
-	x->out_mode				= outlet_new(x, NULL);
-	x->out_order			= intout(x);
-	x->out_harmonicArgument = intout(x);
-	x->out_harmonicBand		= intout(x);
-    x->out_index			= intout(x);
+	x->out_patcherAttr		= listout(x);
+	x->out_patcherArgs		= listout(x);
+	x->out_mode				= listout(x);
+	x->out_instance_infos	= listout(x);
 	
 	x->hoaProcessor_parent = Get_HoaProcessor_Object();
-	order = HoaProcessor_Get_Ambisonic_Order(x->hoaProcessor_parent);
+	x->f_order = HoaProcessor_Get_Ambisonic_Order(x->hoaProcessor_parent);
 	x->index = Get_HoaProcessor_Patch_Index(x->hoaProcessor_parent);
 	
-	x->f_ambisonic = new Hoa3D::Ambisonic(order);
+	x->f_ambi3D = new Hoa3D::Ambisonic(x->f_order);
+	x->f_ambi2D = new Hoa2D::Ambisonic(x->f_order);
 	
 	hoa_args_setup(argc, argv, &x->object_nAttrs, &x->object_args, &x->object_attrs);
 	
@@ -294,6 +294,13 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 	if (!x->hoaProcessor_parent || x->index <= 0)
 		return;
 	
+	t_symbol*	mode = HoaProcessor_Get_Mode(x->hoaProcessor_parent);
+	int			is_2D;
+	
+	// output mute state first
+	
+	outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
+	
 	long ac = 0;
 	t_atom *av = NULL;
 	t_hoa_err err = HoaProcessor_Get_PatcherArgs(x->hoaProcessor_parent, x->index, &ac, &av);
@@ -307,7 +314,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 		
 		hoa_args_setup(ac, av, &patcher_nAttrs, &patcher_args, &patcher_attrs);
 		
-		// output attributes
+		// output patcher attributes
 		
 		if (patcher_nAttrs > 0 || x->object_nAttrs > 0)
 		{
@@ -343,7 +350,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 			
 		}
 		
-		// output arguments
+		// output patcher arguments
 		
 		if (patcher_args.argc > 0 || x->object_args.argc > 0)
 		{
@@ -354,7 +361,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 			for (i = 0; i < args_processed.argc; i++)
 				args_processed.argv[i] = ( i < patcher_args.argc) ? patcher_args.argv[i] : x->object_args.argv[i];
 			
-			outlet_list(x->out_patcherArgs, gensym("list"), args_processed.argc, args_processed.argv);
+			outlet_list(x->out_patcherArgs, NULL, args_processed.argc, args_processed.argv);
 			
 			// free patcher_args
 			if(patcher_args.argv)
@@ -368,49 +375,74 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 		if (av) free(av);
 	}
 	
-	outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
-	outlet_anything(x->out_mode, HoaProcessor_Get_Mode(x->hoaProcessor_parent), 0, NULL);
-	outlet_int(x->out_order, HoaProcessor_Get_Ambisonic_Order (x->hoaProcessor_parent));
-	outlet_int(x->out_harmonicArgument, x->f_ambisonic->getHarmonicArgument(x->index-1));
-	outlet_int(x->out_harmonicBand, x->f_ambisonic->getHarmonicBand(x->index-1));
-	outlet_int(x->out_index, x->index);
+	mode = HoaProcessor_Get_Mode(x->hoaProcessor_parent);
+	is_2D = HoaProcessor_Is_2D(x->hoaProcessor_parent);
+	
+	// output process mode info (ambisonics/planewave + 2d/3d)
+	
+	av = new t_atom[2];
+	atom_setsym(av, is_2D ? gensym("2d") : gensym("3d"));
+	atom_setsym(av+1, mode);
+	outlet_list(x->out_mode, NULL, 2, av);
+	delete [] av;
+	
+	// output process instance info
+	
+	if (mode == hoa_sym_ambisonics)
+	{
+		if (is_2D)
+		{
+			av = new t_atom[2];
+			atom_setlong( av , x->f_ambi2D->getHarmonicArgument(x->index-1));	// Harmonic Argument
+			atom_setlong(av+1, x->f_order);										// Ambisonic Order
+			outlet_list(x->out_instance_infos, NULL, 2, av);
+			delete [] av;
+		}
+		else
+		{
+			av = new t_atom[3];
+			atom_setlong( av , x->f_ambi3D->getHarmonicArgument(x->index-1));	// Harmonic Argument
+			atom_setlong(av+1, x->f_ambi3D->getHarmonicBand(x->index-1));		// Harmonic Band
+			atom_setlong(av+2, x->f_order);										// Ambisonic Order
+			outlet_list(x->out_instance_infos, NULL, 3, av);
+			delete [] av;
+		}
+	}
+	else if (mode == hoa_sym_planewaves)
+	{
+		av = new t_atom[2];
+		atom_setlong( av , x->index);											// Channel Index
+		atom_setlong(av+1, x->f_order);											// Number of Channel
+		outlet_list(x->out_instance_infos, NULL, 2, av);
+		delete [] av;
+	}
 }
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)
 {
-	// planewaves : 1) (nbchannels | current index), mode, (Patcher Arguments), (Patcher Attributs)
     if (m == ASSIST_OUTLET) 
 	{
 		switch (a)
 		{
 			case 0:
-				sprintf(s,"Index");
+				sprintf(s,"(list) instance informations");
 				break;
 			case 1:
-				sprintf(s,"Harmonic Band");
+				sprintf(s,"(list) process mode");
 				break;
 			case 2:
-				sprintf(s,"Harmonic Argument");
+				sprintf(s,"(list) normal arguments");
 				break;
 			case 3:
-				sprintf(s,"Ambisonic Order");
+				sprintf(s,"(list) attributes arguments");
 				break;
 			case 4:
-				sprintf(s,"Mode (ambisonics, planewaves)");
-				break;
-			case 5:
-				sprintf(s,"Mute Status");
-				break;
-			case 6:
-				sprintf(s,"Patcher Arguments");
-				break;
-			case 7:
-				sprintf(s,"Patcher Attributs");
+				sprintf(s,"(int) mute status");
 				break;
 		}
 	}
     else 
 	{
-		sprintf(s,"Set Mute, Bang for Report");
+		sprintf(s,"(int) set mute, (bang) for report");
     }
 }

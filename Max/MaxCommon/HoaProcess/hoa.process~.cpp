@@ -13,7 +13,7 @@ t_class *hoa_processor_class;
 
 #define SIG_SIZE sizeof(double)
 #define MAX_NUM_PATCHES 4096
-#define MAX_ARGS 16
+#define MAX_ARGS 50
 
 ////////////////////////////// Structure for patch and related data //////////////////////////////
 
@@ -91,8 +91,6 @@ typedef struct _hoa_processor
 	long last_vec_size;
 	long last_samp_rate;
 	
-	int		f_last_opened_instance;
-	
 	// IO Variables
 	
 	long mode_default_numins;
@@ -131,10 +129,9 @@ typedef struct _hoa_processor
 
 void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv);
 void hoa_processor_free(t_hoa_processor *x);
-void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
-t_max_err hoa_processor_notify(t_hoa_processor *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void hoa_processor_attach_patcherview(t_hoa_processor *x, t_symbol *s, long ac, t_atom* av);
+t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_class);
+void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
 void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, void *previous, void *previousindex);
 t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv);
@@ -152,9 +149,7 @@ void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, doub
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
 void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 
-long hoa_processor_linkinlets_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x);
-long hoa_processor_unlinkinlets_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x);
 
 void hoa_processor_init_io_infos(t_io_infos* io_infos);
@@ -169,7 +164,6 @@ void hoa_processor_wclose(t_hoa_processor *x, long index);
 void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 
 short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_hoa_processor *x);
-long hoa_processor_setsubassoc_it(t_hoa_processor *x, t_object *obj);
 short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x);
 void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p);
 void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg);
@@ -189,6 +183,8 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
 void *hoa_processor_query_mode(t_hoa_processor *x);
+void *hoa_processor_query_is_2D(t_hoa_processor *x);
+void *hoa_processor_query_number_of_instances(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
@@ -210,13 +206,12 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_assist,					"assist",				A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_notify,					"notify",				A_CANT, 0);
 
 	class_addmethod(c, (method)hoa_processor_open,						"open",					A_DEFLONG, 0);
 	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,	   0);
 	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_DEFLONG, 0);
 	
-	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);  // plante pour l'instant !!
+	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",		A_CANT, 0);
 	
@@ -229,7 +224,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target,				"target",				A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_is_2D,				"is_2D",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_number_of_instances,	"get_number_of_instance", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
@@ -257,14 +254,14 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 {	
 	t_hoa_processor *x = (t_hoa_processor*)object_alloc(hoa_processor_class);
 	
-	t_symbol *patch_name_entered = 0;
+	t_symbol *patch_name_entered = NULL;
 	t_symbol *tempsym;
-	int first_int = 1;
 	long i;
+	int first_int = 1;
+	x->f_mode = hoa_sym_ambisonics;
 	short ac = 0;
 	t_atom av[MAX_ARGS];
 	long number_of_instances_to_load = 0;
-	x->f_mode = hoa_sym_ambisonics;
 	
 	x->patch_spaces_allocated = 0;
 	x->target_index = 0;
@@ -284,10 +281,8 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	x->f_object_type = HOA_OBJECT_2D;
 	if (s == gensym("hoa.3d.process~"))
 		x->f_object_type = HOA_OBJECT_3D;
-	else if (s == gensym("hoa.3d.process~"))
-	{
-		object_error((t_object*)x, "hoa.plug~ is deprecated please update your patch for the hoa.process~");
-	}
+	else if (s == gensym("hoa.plug~"))
+		object_error((t_object*)x, "hoa.plug~ is deprecated please take a look at the hoa.process~ object");
 
 	// Check the order or the number of instances :
 	if (argc && atom_gettype(argv) == A_LONG)
@@ -339,24 +334,11 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	// load a single instance to query io informations
 	
 	t_io_infos io_infos;
-	hoa_processor_init_io_infos(&io_infos);
-	
 	t_hoa_err loaded_patch_err = hoa_processor_get_patch_filename_io_context(x, patch_name_entered, &io_infos);
 	
-	if (loaded_patch_err == HOA_ERR_NONE)
-	{
-		post("ins = %ld, ins_maxindex = %ld, extra_ins = %ld, extra_ins_maxindex = %ld",
-			 io_infos.ins, io_infos.ins_maxindex, io_infos.extra_ins, io_infos.extra_ins_maxindex);
-		
-		post("outs = %ld, outs_maxindex = %ld, extra_outs = %ld, extra_outs_maxindex = %ld",
-			 io_infos.outs, io_infos.outs_maxindex, io_infos.extra_outs, io_infos.extra_outs_maxindex);
-		
-		post("sig_ins = %ld, sig_ins_maxindex = %ld, extra_sig_ins = %ld, extra_sig_ins_maxindex = %ld",
-			 io_infos.sig_ins, io_infos.sig_ins_maxindex, io_infos.extra_sig_ins, io_infos.extra_sig_ins_maxindex);
-		
-		post("sig_outs = %ld, sig_outs_maxindex = %ld, extra_sig_outs = %ld, extra_sig_outs_maxindex = %ld",
-			 io_infos.sig_outs, io_infos.sig_outs_maxindex, io_infos.extra_sig_outs, io_infos.extra_sig_outs_maxindex);
-	}
+	if (loaded_patch_err != HOA_ERR_NONE)
+		return x;
+	
 	
 	// default io config depends on object type (2d/3d) and mode :
 	
@@ -414,7 +396,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	
 	// io schema :
-	// ins : instance in (mixed sig/ctrl) -- mixed extra sig / extra ctrl
+	// ins : instance in (mixed sig/ctrl) -- extra (mixed sig/ctrl)
 	// outs : instance sig outs -- extra sig -- instance ctrl outs -- extra ctrl
 	
 	// Make non-signal inlets
@@ -477,34 +459,25 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	return (x);
 }
 
-void hoa_processor_attach_patcherview(t_hoa_processor *x, t_symbol *s, long ac, t_atom* av)
-{
-	if (ac && av && atom_gettype(av) == A_OBJ)
-	{
-		t_object* patcher = (t_object*) atom_getobj(av);
-		t_object *pv = object_attr_getobj(patcher, hoa_sym_firstview);
-		object_attach_byptr_register(x, pv, CLASS_BOX);
-	}
-}
-
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = x->f_object_type;
 	
 	if (x->f_mode == hoa_sym_ambisonics)
 	{
-		if (x->f_object_type == HOA_OBJECT_2D)
-			boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_ambi2D->getNumberOfHarmonics();
-		else if (x->f_object_type == HOA_OBJECT_3D)
-			boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_ambi3D->getNumberOfHarmonics();
+		boxinfos->autoconnect_inputs = (long) max(x->instance_sig_ins, x->instance_ins);
+		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_ins, x->instance_ins);
 		
-		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_inputs ? HOA_CONNECT_TYPE_AMBISONICS : HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = boxinfos->autoconnect_outputs ? HOA_CONNECT_TYPE_AMBISONICS : HOA_CONNECT_TYPE_STANDARD;
 	}
 	else if (x->f_mode == hoa_sym_planewaves)
 	{
-		boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_order;
-		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
-		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_inputs = (long) max(x->instance_sig_ins, x->instance_ins);
+		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_ins, x->instance_ins);
+		
+		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_inputs ? HOA_CONNECT_TYPE_PLANEWAVES : HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = boxinfos->autoconnect_outputs ? HOA_CONNECT_TYPE_PLANEWAVES : HOA_CONNECT_TYPE_STANDARD;
 	}
 	return HOA_ERR_NONE;
 }
@@ -546,49 +519,70 @@ void hoa_processor_free(t_hoa_processor *x)
 	delete x->f_ambi3D;
 }
 
+t_symbol* get_extra_comment(t_patcher* p, int extra_index, t_symbol* object_class)
+{
+	t_box *b;
+	t_object *io;
+	t_symbol* comment = hoa_sym_nothing;
+	int extra_index_exist = 0;
+	
+	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
+	{
+		if (jbox_get_maxclass(b) == object_class)
+		{
+			io = jbox_get_object(b);
+			
+			if (extra_index == object_attr_getlong(io, hoa_sym_extra))
+			{
+				extra_index_exist = 1;
+				
+				comment = object_attr_getsym(io, hoa_sym_comment);
+				
+				if (comment != hoa_sym_nothing)
+					break;
+			}
+		}
+    }
+	
+	if (!extra_index_exist)
+		comment = gensym("does nothing");
+	
+	return comment;
+}
+
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	long 	inlet = a + 1;
+	long		inlet = a + 1;
+	int			extra_index = 0;
+	int			is_extra_sig, is_extra_ctrl, is_instance_sig, is_instance_ctrl;
 	
-	int		is_extra = 0;
-	int		extra_index = 0;
+	char		sig_basis_text[50];
+	char		ctrl_basis_text[50];
+	t_symbol*	sig_extra_comment = hoa_sym_nothing;
+	t_symbol*	ctrl_extra_comment = hoa_sym_nothing;
 	
-	int		is_sig = 0;
-	int		is_ctrl = 0;
 	
-	int		is_extra_sig, is_extra_ctrl, is_instance_sig, is_instance_ctrl;
 	is_extra_sig = is_extra_ctrl = is_instance_sig = is_instance_ctrl = 0;
 	
-	//char	io_sig_text[1024];
-	//char 	io_text[1024];
-	//char	extra_comment_text[1024];
-	
-	char	sig_basis_text[50];
-	char	ctrl_basis_text[50];
-	
-	post("assist : a = %ld, instance_ins = %ld, instance_sig_ins = %ld", a, x->instance_ins, x->instance_sig_ins);
-	
-	// check if "a" match an extra outlet + check if io is sig or/and ctrl
+	// check if "a" match an extra io + check if io is sig or/and ctrl
 	
 	if ( m == ASSIST_INLET && (x->extra_ins || x->extra_sig_ins))
 	{
-		if (inlet > max(x->instance_ins, x->instance_sig_ins))
+		int max_instance = max(x->instance_ins, x->instance_sig_ins);
+		
+		if (inlet > max_instance)
 		{
-			if (inlet > x->instance_ins)
+			extra_index = inlet - max_instance;
+			
+			if (inlet <= x->instance_ins + x->extra_ins)
 			{
-				extra_index = inlet - (long)max(x->instance_ins, x->instance_sig_ins);
-				sprintf(ctrl_basis_text,"Extra in %i", extra_index);
-				
-				if (extra_index <= x->instance_ins + x->extra_ins)
-					is_extra_ctrl = 1;
+				is_extra_ctrl = 1;
+				sprintf(ctrl_basis_text,"Extra %i", extra_index);
 			}
-			if (inlet > x->instance_sig_ins)
+			if (inlet <= x->instance_sig_ins + x->extra_sig_ins)
 			{
-				extra_index = inlet - (long)max(x->instance_ins, x->instance_sig_ins);
-				sprintf(sig_basis_text,"Extra in %i", extra_index);
-				
-				if (extra_index <= x->instance_sig_ins + x->extra_sig_ins)
-					is_extra_sig = 1;
+				is_extra_sig = 1;
+				sprintf(sig_basis_text,"Extra %i", extra_index);
 			}
 		}
 	}
@@ -598,18 +592,18 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		{
 			is_extra_sig = 1;
 			extra_index = inlet - x->instance_sig_outs;
-			sprintf(sig_basis_text,"Extra out %i", extra_index);
+			sprintf(sig_basis_text,"Extra %i", extra_index);
 		}
 		
 		if ( inlet > x->declared_sig_outs + x->instance_outs)
 		{
 			is_extra_ctrl = 1;
 			extra_index = inlet - (x->declared_sig_outs + x->instance_outs);
-			sprintf(ctrl_basis_text,"Extra out %i", extra_index);
+			sprintf(ctrl_basis_text,"Extra %i", extra_index);
 		}
 	}
 	
-	// --
+	// check if "a" match an instance io + check if io is sig or/and ctrl
 	
 	if (!is_extra_ctrl || !is_extra_sig)
 	{
@@ -686,216 +680,62 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		}
 	}
 	
-	if ( (is_instance_sig && is_instance_ctrl) || (is_extra_sig && is_extra_ctrl) || (is_instance_sig && is_extra_ctrl) )
+	// check if there is an extra comment
+	
+	if (is_extra_ctrl)
 	{
-		sprintf(s,"(signal, messages) %s", sig_basis_text);
+		ctrl_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_in : hoa_sym_out);
+		
+		// if extra doesn't match explicitly an inlet/outlet in the patch
+		if (ctrl_extra_comment == gensym("does nothing"))
+			is_extra_ctrl = 0;
+	}
+	
+	if (is_extra_sig)
+	{
+		sig_extra_comment = get_extra_comment(x->patch_space_ptrs[0]->the_patch, extra_index, (m == ASSIST_INLET) ? hoa_sym_sigin : hoa_sym_sigout);
+		
+		// if extra doesn't match explicitly an inlet/outlet in the patch
+		if (sig_extra_comment == gensym("does nothing"))
+			is_extra_sig = 0;
+	}
+	
+	// enough, it's time to construct our assist string !
+	
+	if ( (is_instance_sig && is_instance_ctrl) || (is_extra_sig && is_extra_ctrl) )
+	{
+		if (sig_extra_comment == hoa_sym_nothing && ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal, messages) %s", sig_basis_text);
+		else if (sig_extra_comment == ctrl_extra_comment)
+			sprintf(s,"(signal, messages) %s : %s", sig_basis_text, sig_extra_comment->s_name);
+		else if (sig_extra_comment != hoa_sym_nothing && ctrl_extra_comment != hoa_sym_nothing)
+			sprintf(s,"(signal) %s : %s, (messages) %s : %s", sig_basis_text, sig_extra_comment->s_name, ctrl_basis_text, ctrl_extra_comment->s_name);
+		else if (sig_extra_comment != hoa_sym_nothing && ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal) %s : %s, (messages) %s", sig_basis_text, sig_extra_comment->s_name, ctrl_basis_text);
+		else if (sig_extra_comment == hoa_sym_nothing && ctrl_extra_comment != hoa_sym_nothing)
+			sprintf(s,"(signal) %s, (messages) %s : %s", sig_basis_text, ctrl_basis_text, ctrl_extra_comment->s_name);
 	}
 	else if ( (is_instance_sig || is_extra_sig) && !is_instance_ctrl && !is_extra_ctrl)
 	{
-		sprintf(s,"(signal) %s", sig_basis_text);
+		if (sig_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(signal) %s", sig_basis_text);
+		else
+			sprintf(s,"(signal) %s, %s", sig_basis_text, sig_extra_comment->s_name);
 	}
 	else if ( (is_instance_ctrl || is_extra_ctrl) && !is_instance_sig && !is_extra_sig)
 	{
-		sprintf(s,"(messages) %s", ctrl_basis_text);
+		if (ctrl_extra_comment == hoa_sym_nothing)
+			sprintf(s,"(messages) %s", ctrl_basis_text);
+		else
+			sprintf(s,"(messages) %s, %s", ctrl_basis_text, ctrl_extra_comment->s_name);
 	}
 	else
 	{
-		sprintf(s,"does nothing");
+		sprintf(s,"nothing here !");
 	}
-	
+/*
 	post("inlet %ld : instance_sig = %ld, instance_ctrl = %ld, extra_sig = %ld, extra_ctrl = %ld", inlet, is_instance_sig, is_instance_ctrl, is_extra_sig, is_extra_ctrl);
-	
-	
-	// if io is instance io retrive name + check if io is sig or/and ctrl
-	/*
-	if (!is_extra)
-	{
-		if (x->f_mode == hoa_sym_ambisonics)
-		{
-			int hIndex = a;
-			if (m == ASSIST_OUTLET)
-				hIndex = a - x->declared_sig_outs;
-			
-			if (x->f_object_type == HOA_OBJECT_2D)
-				sprintf(basis_text,"%s", x->f_ambi2D->getHarmonicsName(hIndex).c_str());
-			else if (x->f_object_type == HOA_OBJECT_3D)
-				sprintf(basis_text,"%s", x->f_ambi3D->getHarmonicsName(hIndex).c_str());
-			
-			if ( m == ASSIST_INLET)
-			{
-				if (x->instance_sig_ins >= x->instance_ins && x->num_proxies != 0)
-					is_sig = 1;
-				if (x->instance_ins >= x->instance_sig_ins && x->num_proxies != 0)
-					is_ctrl = 1;
-			}
-			else
-			{
-				if (inlet <= x->declared_sig_outs)
-					is_sig = 1;
-				else if (inlet <= x->declared_sig_outs + x->declared_outs)
-					is_ctrl = 1;
-			}
-		}
-		else if (x->f_mode == hoa_sym_planewaves)
-		{
-			if ( m == ASSIST_INLET)
-			{
-				sprintf(basis_text,"Channel %ld", inlet);
-				
-				if (x->instance_sig_ins >= x->instance_ins && x->num_proxies != 0)
-					is_sig = 1;
-				if (x->instance_ins >= x->instance_sig_ins && x->num_proxies != 0)
-					is_ctrl = 1;
-			}
-			else if ( m == ASSIST_OUTLET )
-			{
-				if (inlet <= x->declared_sig_outs)
-				{
-					sprintf(basis_text,"Channel %ld", inlet);
-					is_sig = 1;
-				}
-				else if (inlet <= x->declared_sig_outs + x->declared_outs)
-				{
-					sprintf(basis_text,"Channel %ld", inlet);
-					is_ctrl = 1;
-				}
-			}
-		}
-	}
-	*/
-	
-	/*
-	if (is_sig && is_ctrl)
-	{
-		sprintf(s,"(signal, messages) %s", basis_text);
-	}
-	else if (is_sig && !is_ctrl)
-	{
-		sprintf(s,"(signal) %s", basis_text);
-	}
-	else if (!is_sig && is_ctrl)
-	{
-		sprintf(s,"(messages) %s", basis_text);
-	}
-	else
-	{
-		sprintf(s,"does nothing");
-	}
-	*/
-	
-	
-	/*
-	if (x->f_mode == hoa_sym_ambisonics)
-	{
-		if ( (m == ASSIST_INLET && (a < x->instance_ins || a < x->instance_sig_ins)) )
-		{
-			if (x->f_object_type == HOA_OBJECT_2D)
-				sprintf(basis_text,"%s", x->f_ambi2D->getHarmonicsName(a).c_str());
-			else if (x->f_object_type == HOA_OBJECT_3D)
-				sprintf(basis_text,"%s", x->f_ambi3D->getHarmonicsName(a).c_str());
-		}
-		else if (m == ASSIST_INLET) // extra in
-		{
-			sprintf(basis_text,"Extra %ld", inlet - (long)max(x->instance_ins, x->instance_sig_ins));
-		}
-		else if (m == ASSIST_OUTLET) // extra out
-		{
-			if (a < x->declared_sig_outs)
-			{
-				sprintf(basis_text,"Extra %ld", inlet - x->declared_sig_outs);
-			}
-		}
-	}
-	else if (x->f_mode == hoa_sym_planewaves)
-	{
-		if ( (m == ASSIST_INLET && (a < x->instance_ins || a < x->instance_sig_ins)) )
-		{
-			sprintf(basis_text,"Channel %ld", inlet);
-		}
-		else
-		{
-			sprintf(basis_text,"Extra %ld", inlet);
-		}
-	}
-	*/
-	
-	
-	/*
-	if (m == ASSIST_INLET)
-	{
-		if (a < x->instance_ins && a < x->instance_sig_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(signal, messages) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(signal, messages) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(signal, messages) Channel %ld", inlet);
-			}
-		}
-		else if (a < x->instance_sig_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(signal) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(signal) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(signal) Channel %ld", inlet);
-			}
-		}
-		else if (a < x->instance_ins)
-		{
-			if (x->f_mode == hoa_sym_ambisonics)
-			{
-				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(s,"(messages) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(s,"(messages) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-			}
-			else if (x->f_mode == hoa_sym_planewaves)
-			{
-				sprintf(s,"(messages) Channel %ld", inlet);
-			}
-		}
-		else
-			sprintf(s,"(signal) Extra In %ld", inlet - x->instance_sig_ins);
-		
-	}
-	else if (m == ASSIST_OUTLET && a >= x->instance_sig_outs)
-	{
-		sprintf(s,"(signal) Extra Out %ld", a - x->instance_sig_outs);
-	}
-	*/
-	
-	/*
-	if (m == ASSIST_INLET && a >= x->instance_sig_ins)
-	{
-		sprintf(s,"(signal) Extra In %ld", a - x->instance_sig_ins);
-	}
-	else if (m == ASSIST_OUTLET && a >= x->instance_sig_outs)
-	{
-		sprintf(s,"(signal) Extra Out %ld", a - x->instance_sig_outs);
-	}
-	else if (x->f_mode == hoa_sym_ambisonics)
-	{
-		if (x->f_object_type == HOA_OBJECT_2D)
-			sprintf(s,"(signal) %s", x->f_ambi2D->getHarmonicsName(a).c_str());
-		else if (x->f_object_type == HOA_OBJECT_3D)
-			sprintf(s,"(signal) %s", x->f_ambi3D->getHarmonicsName(a).c_str());
-	}
-	else if (x->f_mode == hoa_sym_planewaves)
-	{
-		sprintf(s,"(Signal) Channel %ld", a+1);
-	}
-	*/
+*/
 }
 
 // ========================================================================================================================================== //
@@ -1078,48 +918,6 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	return HOA_ERR_NONE;
 }
 
-t_max_err hoa_processor_notify(t_hoa_processor *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
-{
-	//post("notify msg = %s", msg->s_name);
-	
-	if (msg == hoa_sym_attr_modified)
-	{
-		t_symbol *attrname;
-		attrname = (t_symbol *)object_method(data, hoa_sym_getname);
-		
-		//post("attrname = %s", attrname->s_name);
-		
-		if (attrname == gensym("title"))
-		{
-			t_object* pv = NULL;
-			long patchindex = -1;
-			int dirty = 0;
-			t_patchspace *patch_space_ptr;
-			
-			for (int i=0; i<x->patch_spaces_allocated; i++)
-			{
-				pv = object_attr_getobj(x->patch_space_ptrs[i]->the_patch, hoa_sym_firstview);
-				if (pv == sender)
-				{
-					patchindex = i;
-				};
-			}
-			if (patchindex >= 0)
-			{
-				dirty = jpatcher_get_dirty(x->patch_space_ptrs[patchindex]->the_patch);
-				//post("instance %ld - title modified", patchindex);
-				if (dirty)
-				{
-					patch_space_ptr = x->patch_space_ptrs[patchindex];
-					hoa_processor_loadpatch (x, patchindex, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
-					hoa_processor_open(x, patchindex + 1);
-				}
-			}
-		}
-	}
-	return MAX_ERR_NONE;
-}
-
 // ========================================================================================================================================== //
 // Messages in passed on to the patcher via the "in" objects / Voice targeting
 // ========================================================================================================================================== //
@@ -1138,12 +936,12 @@ void hoa_processor_bang(t_hoa_processor *x)
 	if (target_index)
 	{
 		hoa_processor_target(x, target_index, index, hoa_sym_bang, 0, 0);
-		post("hoa_processor_target target_index = %ld", target_index);
+		//post("hoa_processor_target target_index = %ld", target_index);
 	}
 	else
 	{
 		outlet_bang(x->in_table[index]);
-		post("outlet_bang");
+		//post("outlet_bang");
 	}
 }
 
@@ -1241,7 +1039,7 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 		{
 			io = (t_inout *) jbox_get_object(b);
 			
-			post("hoa_processor_targetinlets io->s_index = %ld, args->index = %ld", io->s_index, args->index);
+			//post("hoa_processor_targetinlets io->s_index = %ld, args->index = %ld", io->s_index, args->index);
 			
 			if (io->s_index == args->index)
 				hoa_processor_output_typed_message(io->s_obj.o_outlet, args);
@@ -1385,19 +1183,17 @@ t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symb
 	t_fourcc filetypelist = 'JSON';
 	
 	short patch_path;
-	short saveloadupdate;
 	char filename[MAX_FILENAME_CHARS];
 	t_patcher *p;
 	
-	// for io
-	
-	t_box *b;
-	t_object *io;
-	t_symbol* objclassname;
-	long ac, extra;
-	t_atom* av;
-	
 	hoa_processor_init_io_infos(io_infos);
+	
+	if (!patch_name_in)
+	{
+		//object_warn((t_object*)x, "no patch name entered");
+		hoa_processor_loadexit(x, 0, 0, 0);
+		return HOA_ERR_FILE_NOT_FOUND;
+	}
 	
 	// Check that this object is not loading in another thread
 	
@@ -1420,11 +1216,8 @@ t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symb
 		return HOA_ERR_FILE_NOT_FOUND;
 	}
 	
-	// Load the patch (don't interrupt dsp)
-	
-	//saveloadupdate = dsp_setloadupdate(false);
+	// Load the patch
 	p = (t_patcher*) intload(filename, patch_path, 0, 0, NULL, false);
-	//dsp_setloadupdate(saveloadupdate);
 	
 	// Check something has loaded
 	
@@ -1447,52 +1240,9 @@ t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symb
 	
 	// no error, so we can check our IO context
 	
-	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
-	{
-		objclassname = jbox_get_maxclass(b);
-		
-		if (objclassname == hoa_sym_sigin || objclassname == hoa_sym_in ||
-			objclassname == hoa_sym_sigout || objclassname == hoa_sym_out)
-		{
-			ac = extra = 0;
-			av = NULL;
-			io = jbox_get_object(b);
-			
-			object_attr_getvalueof(io, hoa_sym_attr_extra, &ac, &av);
-			
-			if (ac && av)
-				extra = atom_getlong(av);
-			
-			if (objclassname == hoa_sym_sigin)
-			{
-				if (extra > 0) io_infos->extra_sig_ins++;
-				else io_infos->sig_ins++;
-				
-				io_infos->extra_sig_ins_maxindex = max(extra, io_infos->extra_sig_ins_maxindex);
-			}
-			else if (objclassname == hoa_sym_in)
-			{
-				if (extra > 0) io_infos->extra_ins++;
-				else io_infos->ins++;
-				
-				io_infos->extra_ins_maxindex = max(extra, io_infos->extra_ins_maxindex);
-			}
-			else if (objclassname == hoa_sym_sigout)
-			{
-				if (extra > 0) io_infos->extra_sig_outs++;
-				else io_infos->sig_outs++;
-				
-				io_infos->extra_sig_outs_maxindex = max(extra, io_infos->extra_sig_outs_maxindex);
-			}
-			else if (objclassname == hoa_sym_out)
-			{
-				if (extra > 0) io_infos->extra_outs++;
-				else io_infos->outs++;
-				
-				io_infos->extra_outs_maxindex = max(extra, io_infos->extra_outs_maxindex);
-			}
-		}
-    }
+	hoa_processor_get_patch_io_context(p, io_infos);
+	
+	object_free((t_object *)p);
 	
 	hoa_processor_loadexit(x, 0, 0, 0);
 	return HOA_ERR_NONE;
@@ -1503,8 +1253,7 @@ short hoa_processor_get_patch_io_context(t_patcher *p, t_io_infos* io_infos)
 	t_box *b;
 	t_object *io;
 	t_symbol* objclassname;
-	long ac, extra;
-	t_atom* av;
+	long extra;
 	
 	hoa_processor_init_io_infos(io_infos);
 	
@@ -1515,14 +1264,10 @@ short hoa_processor_get_patch_io_context(t_patcher *p, t_io_infos* io_infos)
 		if (objclassname == hoa_sym_sigin || objclassname == hoa_sym_in ||
 			objclassname == hoa_sym_sigout || objclassname == hoa_sym_out)
 		{
-			ac = extra = 0;
-			av = NULL;
+			extra = 0;
 			io = jbox_get_object(b);
 			
-			object_attr_getvalueof(io, hoa_sym_attr_extra, &ac, &av);
-			
-			if (ac && av)
-				extra = atom_getlong(av);
+			extra = object_attr_getlong(io, hoa_sym_extra);
 			
 			if (objclassname == hoa_sym_sigin)
 			{
@@ -1570,14 +1315,9 @@ short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x)
 		if (jbox_get_maxclass(b) == hoa_sym_in) 
 		{
 			io = (t_inout *) jbox_get_object(b);
-			
-			//object_post((t_object*)io, "io->s_index = %ld", io->s_index);
-			
+						
 			if (io->s_index <= x->declared_ins)
-			{
-				//post("link inlet with index %ld", io->s_index);
 				outlet_add(x->in_table[io->s_index - 1], (struct inlet *)io->s_obj.o_outlet);
-			}
 		}
     }
 	return 0;
@@ -1640,12 +1380,6 @@ void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *a
 	
 	if (x->patch_space_ptrs[index]->the_patch)
 		mess0((t_object *)x->patch_space_ptrs[index]->the_patch, hoa_sym_front);		// this will always do the right thing
-	
-	x->f_last_opened_instance = index + 1;
-	
-	t_atom patch;
-	atom_setobj(&patch, x->patch_space_ptrs[index]->the_patch);
-	defer_low(x, (method)hoa_processor_attach_patcherview, NULL, 1, &patch);
 }
 
 void hoa_processor_wclose(t_hoa_processor *x, long index)
@@ -1702,55 +1436,20 @@ short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_h
 	return (0);
 }
 
-long hoa_processor_setsubassoc_it(t_hoa_processor *x, t_object *obj)
-{
-	t_object *assoc;
-	object_method(jbox_get_object(obj), hoa_sym_getassoc, &assoc);
-	if (!assoc)
-		object_method(jbox_get_object(obj), hoa_sym_setassoc, x);
-	
-	object_post((t_object*)obj, "setsubassoc");
-	
-	//object_method(p, hoa_sym_noedit, 1);
-	return 0;
-}
-
 short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x)
 {
 	t_object *assoc;
 	object_method(p, hoa_sym_getassoc, &assoc);
 	if (!assoc)
-	{
 		object_method(p, hoa_sym_setassoc, x);
-		post("found %s", object_classname(assoc)->s_name);
-	}
+	object_method(p, hoa_sym_noedit, 1);
 	
-	object_post((t_object*)p, "setsubassoc");
-		
-	//object_method(p, hoa_sym_noedit, 1);
 	return 0;
 }
 
 void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)
 {
-	//post("hoa_processor_pupdate");
-	
 	t_patchspace *patch_space_ptr;
-	
-	/*
-	// reload all the patches
-	
-	for (int i = 0; i < x->patch_spaces_allocated; i++)
-	{
-		patch_space_ptr = x->patch_space_ptrs[i];
-		hoa_processor_loadpatch (x, i, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
-		post("pupdate patch %ld", i);
-	}
-	*/
-	//post("pupdate patch_spaces_allocated = %ld", x->patch_spaces_allocated);
-	//object_post((t_object*)b,"pupdate patch_spaces_allocated = %ld", x->patch_spaces_allocated);
-	
-	//hoa_processor_open(x, x->f_last_opened_instance);
 	
 	// Reload the patcher when it's updated
 	
@@ -1758,17 +1457,12 @@ void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->the_patch == p)
-		{
 			hoa_processor_loadpatch (x, i, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
-			post("pupdate patch %ld", i);
-		}
 	}
 }
 
 void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg)
 {
-	//post("hoa_processor_subpatcher");
-	
 	if (arg && (long) arg != 1)
 		if (!OB_INVALID(arg))										// arg might be good but not a valid object pointer
 			if (object_classname(arg) == hoa_sym_dspchain)				// don't report subpatchers to dspchain
@@ -1776,25 +1470,13 @@ void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg)
 	
 	if (index < x->patch_spaces_allocated)
 		if (x->patch_space_ptrs[index]->patch_valid) return x->patch_space_ptrs[index]->the_patch;		// the indexed patcher
-	
-	/*
-	 if (arg && (long) arg != 1) 
-		if (!NOGOOD(arg))										// arg might be good but not a valid object pointer
-			if (ob_sym(arg) == hoa_sym_dspchain)				// don't report subpatchers to dspchain
-				return 0;
 
-	if (index < x->patch_spaces_allocated)
-		if (x->patch_space_ptrs[index]->patch_valid) return x->patch_space_ptrs[index]->the_patch;		// the indexed patcher
-	 */
 	return 0;
 }
 
-
 void hoa_processor_parentpatcher(t_hoa_processor *x, t_patcher **parent)
 {
-	//post("hoa_processor_parentpatcher");
 	*parent = x->parent_patch;
-	//object_obex_lookup(x, gensym("#P"), parent);
 }
 
 // ========================================================================================================================================== //
@@ -1888,21 +1570,14 @@ void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index)
 void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object* io)
 {
 	long io_index = -1;
-	long ac, extra;
-	t_atom* av;
+	long extra;
 	
 	t_symbol* objclassname = object_classname(io);
 	
 	if (objclassname == hoa_sym_in || (objclassname == hoa_sym_out) ||
 		(objclassname == hoa_sym_sigin) || (objclassname == hoa_sym_sigout))
 	{
-		ac = extra = 0;
-		av = NULL;
-		
-		object_attr_getvalueof(io, hoa_sym_attr_extra, &ac, &av);
-		
-		if (ac && av)
-			extra = atom_getlong(av);
+		extra = object_attr_getlong(io, hoa_sym_extra);
 		
 		//post("query ins -- patchIndex = %ld, extra = %ld", patchIndex, extra);
 		
@@ -1911,13 +1586,9 @@ void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object
 			if ( extra > 0 && extra <= x->extra_ins)
 			{
 				if (x->instance_ins >= x->instance_sig_ins)
-				{
 					io_index = x->instance_ins + extra;
-				}
 				else if (x->instance_ins < x->instance_sig_ins)
-				{
 					io_index = x->instance_sig_ins + extra;
-				}
 			}
 			else
 				io_index = patchIndex;
@@ -1928,9 +1599,7 @@ void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object
 		else if (objclassname == hoa_sym_out)
 		{
 			if ( extra > 0 && extra <= x->extra_outs)
-			{
 				io_index = x->instance_outs + extra;
-			}
 			else
 				io_index = patchIndex;
 			
@@ -1942,31 +1611,12 @@ void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object
 			if ( extra > 0 && extra <= x->extra_sig_ins)
 			{
 				if (x->instance_sig_ins >= x->instance_ins)
-				{
 					io_index = x->instance_sig_ins + extra;
-				}
 				else if (x->instance_sig_ins < x->instance_ins)
-				{
 					io_index = x->instance_ins + extra;
-				}
 			}
 			else
 				io_index = patchIndex;
-			
-			object_post((t_object*)io,"query ins -- io_index = %ld", io_index);
-			
-			/*
-			
-			if ( extra > 0 && extra <= x->extra_sig_ins)
-			{
-				io_index = x->instance_sig_ins + extra;
-			}
-			else
-				io_index = patchIndex;
-			
-			if (io_index < 1 || io_index > x->declared_sig_ins)
-				io_index = -1;
-			*/
 		}
 		else if(objclassname == hoa_sym_sigout)
 		{
@@ -2005,6 +1655,16 @@ void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 void *hoa_processor_query_mode(t_hoa_processor *x)
 {
 	return (void *) x->f_mode;
+}
+
+void *hoa_processor_query_number_of_instances(t_hoa_processor *x)
+{
+	return (void *) (x->patch_spaces_allocated);
+}
+
+void *hoa_processor_query_is_2D(t_hoa_processor *x)
+{
+	return (void *) (x->f_object_type == HOA_OBJECT_2D);
 }
 
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)

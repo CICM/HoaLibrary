@@ -31,6 +31,19 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-16",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 630.0, 459.0, 83.0, 20.0 ],
+					"text" : "hoa.process~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -877,11 +890,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 8,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "", "", "", "" ],
+					"numinlets" : 8,
+					"numoutlets" : 12,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "", "", "", "", "" ],
 					"patching_rect" : [ 220.0, 485.0, 272.0, 20.0 ],
-					"text" : "hoa.2d.process~ 1 hoa.ptestio ambisonics args 1"
+					"text" : "hoa.3d.process~ 1 hoa.ptestio ambisonics args 6"
 				}
 
 			}
@@ -1114,8 +1127,8 @@
  ],
 		"parameters" : 		{
 			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
+			"obj-36::obj-35" : [ "[5]", "Level", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

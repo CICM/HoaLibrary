@@ -31,6 +31,48 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-5",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 237.0, 283.0, 47.0, 18.0 ],
+					"text" : "open 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-4",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 224.0, 253.0, 47.0, 18.0 ],
+					"text" : "open 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 556.0, 272.0, 60.0, 20.0 ],
+					"text" : "hoa.pdev"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-72",
 					"maxclass" : "number~",
 					"mode" : 2,
@@ -68,7 +110,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 166.0, 382.0, 56.0, 20.0 ],
-					"sig" : 0.54
+					"sig" : 0.0
 				}
 
 			}
@@ -79,7 +121,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 280.5, 296.0, 20.0, 20.0 ]
+					"patching_rect" : [ 329.0, 296.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -104,8 +146,8 @@
 					"id" : "obj-14",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 8,
-					"outlettype" : [ "int", "int", "int", "int", "", "int", "", "" ],
+					"numoutlets" : 5,
+					"outlettype" : [ "list", "list", "list", "list", "int" ],
 					"patching_rect" : [ 380.5, 216.0, 357.0, 20.0 ],
 					"text" : "hoa.thisprocess~ 23 fred 0.4 @buffer foo 43 grzegr 54 @pos 1. 2"
 				}
@@ -120,8 +162,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
-					"patching_rect" : [ 166.0, 337.0, 345.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.pdev ambisonics args 1 44. @name tango"
+					"patching_rect" : [ 166.0, 337.0, 365.0, 20.0 ],
+					"text" : "hoa.2d.process~ 3 hoa.pdev planewaves args 1 44. @name tango"
 				}
 
 			}
@@ -150,6 +192,24 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-1", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-5", 0 ]
 				}
 
 			}
