@@ -38,6 +38,30 @@ typedef struct _hoa_out_tilde
     int         f_extra;
 } t_hoa_out_tilde;
 
+typedef struct _hoa_thisprocess
+{
+    t_eobj      j_box;
+    char        f_nit;
+    
+    t_outlet*   f_out_hoa_args;
+    t_outlet*   f_out_hoa_mode;
+	t_outlet*   f_out_args;
+    t_outlet*   f_out_attrs;
+    t_outlet*   f_out_mute;
+    
+    t_atom      f_hoa_args[3];
+    t_atom      f_hoa_mode[2];
+    
+    t_atom*     f_args;
+    long        f_argc;
+    
+    long        f_n_attrs;
+    t_symbol**  f_attr_name;
+    t_atom*     f_attr_vals[256];
+    long        f_attr_size[256];
+    double      f_time;
+} t_hoa_thisprocess;
+
 typedef struct _hoa_process
 {
     t_edspobj           f_obj;
@@ -142,9 +166,9 @@ void *hoa_process_new(t_symbol *s, long argc, t_atom *argv)
 	int	argument = 1;
     t_outlet *outlet;
     
-    if(argc < 3 || atom_gettype(argv) != A_LONG || atom_gettype(argv+1) != A_SYM || atom_gettype(argv+2) != A_SYM)
+    if(argc < 2 || atom_gettype(argv) != A_LONG || atom_gettype(argv+1) != A_SYM)
     {
-        error("%s needs at least 3 arguments, an integer and two symbol.", s->s_name);
+        error("%s needs at least 2 arguments, an integer and one symbol.", s->s_name);
         return NULL;
     }
     
@@ -437,7 +461,7 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
             my_ugen_currentcontext = NULL;
         }
     }
-    
+
     object_method(dsp, gensym("dsp_add"), x, (method)hoa_process_perform, 0, NULL);
 }
 
@@ -505,17 +529,17 @@ void hoa_process_bang(t_hoa_process *x)
 {
     int extra;
     int index = eobj_getproxy(x);
-    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    if((x->f_have_inlets_instance || x->f_have_inlets_instance_sig) && index < x->f_ncanvas)
     {
         for(int i = 0; i < x->f_ninlets_instance[index]; i++)
             pd_bang((t_pd *)x->f_inlets_instance[index][i]);
     }
     else
     {
-        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+        if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
-            extra = index;
+            extra = index + 1;
         if(x->f_target == -1)
         {
             for(int i = 0; i < x->f_ncanvas; i++)
@@ -547,7 +571,7 @@ void hoa_process_float(t_hoa_process *x, float f)
     int extra;
     int index = eobj_getproxy(x);
 
-    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    if((x->f_have_inlets_instance || x->f_have_inlets_instance_sig) && index < x->f_ncanvas)
     {
         for(int i = 0; i < x->f_ninlets_instance[index]; i++)
         {
@@ -556,10 +580,10 @@ void hoa_process_float(t_hoa_process *x, float f)
     }
     else
     {
-        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+        if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
-            extra = index;
+            extra = index + 1;
         if(x->f_target < 0)
         {
             for(int i = 0; i < x->f_ncanvas; i++)
@@ -590,17 +614,17 @@ void hoa_process_symbol(t_hoa_process *x, t_symbol* s)
 {
     int extra;
     int index = eobj_getproxy(x);
-    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    if((x->f_have_inlets_instance || x->f_have_inlets_instance_sig) && index < x->f_ncanvas)
     {
         for(int i = 0; i < x->f_ninlets_instance[index]; i++)
             pd_symbol((t_pd *)x->f_inlets_instance[index][i], s);
     }
     else
     {
-        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+        if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
-            extra = index;
+            extra = index + 1;
         if(x->f_target == -1)
         {
             for(int i = 0; i < x->f_ncanvas; i++)
@@ -631,17 +655,17 @@ void hoa_process_list(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
 {
     int extra;
     int index = eobj_getproxy(x);
-    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    if((x->f_have_inlets_instance || x->f_have_inlets_instance_sig) && index < x->f_ncanvas)
     {
         for(int i = 0; i < x->f_ninlets_instance[index]; i++)
             pd_list((t_pd *)x->f_inlets_instance[index][i], s, argc, argv);
     }
     else
     {
-        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+        if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
-            extra = index;
+            extra = index + 1;
         if(x->f_target == -1)
         {
             for(int i = 0; i < x->f_ncanvas; i++)
@@ -672,17 +696,18 @@ void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
 {
     int extra;
     int index = eobj_getproxy(x);
-    if((x->f_have_inlets_instance || x->f_have_outlets_instance_sig) && index < x->f_ncanvas)
+    
+    if((x->f_have_inlets_instance || x->f_have_inlets_instance_sig) && index < x->f_ncanvas)
     {
         for(int i = 0; i < x->f_ninlets_instance[index]; i++)
             pd_typedmess((t_pd *)x->f_inlets_instance[index][i], s, argc, argv);
     }
     else
     {
-        if(x->f_have_inlets_instance || x->f_have_outlets_instance_sig)
+        if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
-            extra = index;
+            extra = index + 1;
         if(x->f_target == -1)
         {
             for(int i = 0; i < x->f_ncanvas; i++)
@@ -705,6 +730,61 @@ void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
                     pd_typedmess((t_pd *)x->f_inlets_extra[x->f_target][j], s, argc, argv);
                 }
             }
+        }
+    }
+}
+
+void hoa_process_get_thisprocess(t_hoa_process *x, int index, long argc, t_atom* argv)
+{
+    int i, offset;
+    t_gobj *y;
+    t_hoa_thisprocess *tp;
+    for(y = x->f_canvas[index]->gl_list; y; y = y->g_next)
+    {
+        if(eobj_getclassname(y) == gensym("hoa.thisprocess~"))
+        {
+            tp = (t_hoa_thisprocess *)y;
+            atom_setsym(tp->f_hoa_mode, gensym("2d"));
+            if(x->f_mode == 1)
+                atom_setsym(tp->f_hoa_mode+1, gensym("planewaves"));
+            else
+                atom_setsym(tp->f_hoa_mode+1, gensym("harmonics"));
+            
+            if(x->f_mode)
+            {
+                atom_setfloat(tp->f_hoa_args, index);
+                atom_setfloat(tp->f_hoa_args+1, x->f_planewaves->getNumberOfChannels());
+            }
+            else
+            {
+                atom_setfloat(tp->f_hoa_args, x->f_ambi_2d->getHarmonicArgument(index));
+                atom_setfloat(tp->f_hoa_args+1, x->f_ambi_2d->getOrder());
+            }
+            
+            if(tp->f_argc < atoms_get_attributes_offset(argc, argv))
+            {
+                free(tp->f_args);
+                tp->f_argc = atoms_get_attributes_offset(argc, argv);
+                tp->f_args = (t_atom *)calloc(tp->f_argc, sizeof(t_atom));
+            }
+            
+            offset = atoms_get_attributes_offset(argc, argv);
+            for(i = 0; i < offset; i++)
+            {
+                tp->f_args[i] = argv[i];
+            }
+            
+            for(i = 0; i < tp->f_n_attrs; i++)
+            {
+                if(atoms_has_attribute(argc-offset, argv+offset, tp->f_attr_name[i]))
+                {
+                    free(tp->f_attr_vals[i]);
+                    tp->f_attr_size[i] = 0;
+                    atoms_get_attribute(argc-offset, argv+offset, tp->f_attr_name[i], &tp->f_attr_size[i], &tp->f_attr_vals[i]);
+                }
+            }
+            tp->f_nit = 1;
+               
         }
     }
 }
@@ -824,7 +904,7 @@ void hoa_process_get_io(t_hoa_process *x, int index)
     
 }
 
-static void canvas_removetolist(t_canvas *x)
+static void canvas_removefromlist(t_canvas *x)
 {
     t_canvas *z;
     if (x == canvas_list)
@@ -910,16 +990,12 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
             // If the canvas is loaded
             if(x->f_canvas[i])
             {
-                // Creation a binbuf to give the argument to the canvas, later we'll set the right args
-                x->f_canvas[i]->gl_obj.te_binbuf = binbuf_new();
-                binbuf_addv(x->f_canvas[i]->gl_obj.te_binbuf, "f", (float)i);
-                binbuf_addv(x->f_canvas[i]->gl_obj.te_binbuf, "f", (float)ncnv);
-                binbuf_add(x->f_canvas[i]->gl_obj.te_binbuf, argc, argv);
+                hoa_process_get_thisprocess(x, i, argc, argv);
                 
                 x->f_canvas[i]->gl_owner = eobj_getcanvas(x);   // Set the owner of the canvas
                 
                 canvas_vis(x->f_canvas[i], 0);                  // Hide the canvas
-                canvas_removetolist(x->f_canvas[i]);
+                canvas_removefromlist(x->f_canvas[i]);          // Remove canvas from top level
                 canvas_loadbang(x->f_canvas[i]);                // Send loadbang
                 
                 // Retrieve inlets and outlets of the canvas

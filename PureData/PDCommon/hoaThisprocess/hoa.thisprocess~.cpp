@@ -10,18 +10,22 @@
 typedef struct _hoa_thisprocess
 {
     t_eobj      j_box;
-    t_canvas*   f_canvas;
+    char        f_nit;
     
-    t_outlet*   f_out_hoa;
+    t_outlet*   f_out_hoa_args;
+    t_outlet*   f_out_hoa_mode;
 	t_outlet*   f_out_args;
     t_outlet*   f_out_attrs;
-    t_outlet*   f_out_done;
+    t_outlet*   f_out_mute;
+    
+    t_atom      f_hoa_args[3];
+    t_atom      f_hoa_mode[2];
     
     t_atom*     f_args;
     long        f_argc;
     
     long        f_n_attrs;
-    t_symbol*   f_attr_name[256];
+    t_symbol**  f_attr_name;
     t_atom*     f_attr_vals[256];
     long        f_attr_size[256];
     double      f_time;
@@ -36,10 +40,10 @@ void hoa_thisprocess_click(t_hoa_thisprocess *x);
 
 t_hoa_err hoa_getinfos(t_hoa_thisprocess* x, t_hoa_boxinfos* boxinfos);
 
-extern "C" void setup_hoa0x2ethisprocess(void)
+extern "C" void setup_hoa0x2ethisprocess_tilde(void)
 {
     t_eclass* c;
-    c = eclass_new("hoa.thisprocess", (method)hoa_thisprocess_new, (method)hoa_thisprocess_free, (short)sizeof(t_hoa_thisprocess), 0, A_GIMME, 0);
+    c = eclass_new("hoa.thisprocess~", (method)hoa_thisprocess_new, (method)hoa_thisprocess_free, (short)sizeof(t_hoa_thisprocess), 0, A_GIMME, 0);
     
     hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_thisprocess_bang,       "bang",     A_CANT, 0);
@@ -57,6 +61,7 @@ void *hoa_thisprocess_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_hoa_thisprocess *)eobj_new(hoa_thisprocess_class);
     if(x)
     {
+        x->f_nit = 0;
         // ARGUMENTS //
         x->f_argc = atoms_get_attributes_offset(argc, argv);
         x->f_args = (t_atom *)calloc(x->f_argc, sizeof(t_atom));
@@ -66,16 +71,18 @@ void *hoa_thisprocess_new(t_symbol *s, long argc, t_atom *argv)
         }
         
         // ATTRIBUTES //
-        x->f_n_attrs = atoms_get_nattributes(argc-x->f_argc, argv+x->f_argc);
+        x->f_n_attrs = atoms_get_keys(argc-x->f_argc, argv+x->f_argc, &x->f_attr_name);
         for(i = 0; i < x->f_n_attrs; i++)
         {
             atoms_get_attribute(argc-x->f_argc, argv+x->f_argc, x->f_attr_name[i], &x->f_attr_size[i], &x->f_attr_vals[i]);
         }
         
-        x->f_out_hoa    = listout(x);
-        x->f_out_args   = listout(x);
-        x->f_out_attrs  = listout(x);
-        x->f_out_done   = bangout(x);
+        x->f_out_hoa_args = listout(x);
+        x->f_out_hoa_mode = anythingout(x);
+        x->f_out_args     = anythingout(x);
+        x->f_out_attrs    = anythingout(x);
+        //x->f_out_mute       = floatout(x);
+        
         x->f_time = clock_getsystime();
     }
     
@@ -91,60 +98,26 @@ void hoa_thisprocess_click(t_hoa_thisprocess *x)
 
 void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 {
-    int i, size = 0, ac = 0;
-    t_binbuf *b = NULL;
-    t_atom  *av = NULL;
-    t_atom  *argv = NULL;
-    long argc = 0;
-    
-    if(x->f_canvas)
+    char        attr_char[MAXPDSTRING];
+    for(int i = 0; i < x->f_n_attrs; i++)
     {
-        b = x->f_canvas->gl_obj.te_binbuf;
-		
-        if(b)
-        {
-            size = binbuf_get_attributes_offset(b);
-            if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("pd"))
-                size--;
-        }
-        if(size > 0 && size >= x->f_argc)
-        {
-			outlet_list(x->f_out_args, &s_list, size, av);
-        }
-        else if(size > 0)
-        {
-			for(i = 0; i < size; i++)
-				x->f_args[i] = av[i];
-			outlet_list(x->f_out_args, &s_list, x->f_argc, x->f_args);
-        }
-		else
-		{
-			outlet_list(x->f_out_args, &s_list,x->f_argc, x->f_args);
-		}
-		for(i = 0; i < x->f_n_attrs; i++)
-		{
-			if(size > 0 && ac && av)
-				atoms_get_attribute(ac, av, x->f_attr_name[i], &argc, &argv);
-			if(argc && argv)
-			{
-				outlet_anything(x->f_out_attrs, gensym(x->f_attr_name[i]->s_name+1), argc, argv);
-				free(argv);
-				argc = 0;
-			}
-			else
-			{
-				outlet_anything(x->f_out_attrs, gensym(x->f_attr_name[i]->s_name+1), x->f_attr_size[i], x->f_attr_vals[i]);
-			}
-		}
+        sprintf(attr_char, "%s", x->f_attr_name[i]->s_name+1);
+        outlet_anything(x->f_out_attrs, gensym(attr_char), x->f_attr_size[i], x->f_attr_vals[i]);
     }
-    else
-    {
+    
+    if(x->f_argc && x->f_args)
         outlet_list(x->f_out_args, &s_list, x->f_argc, x->f_args);
-        for(i = 0; i < x->f_n_attrs; i++)
-            outlet_list(x->f_out_attrs, &s_list, x->f_attr_size[i], x->f_attr_vals[i]);
+    if(x->f_nit)
+    {
+        outlet_list(x->f_out_hoa_mode,  &s_list, 2, x->f_hoa_mode);
+        if(atom_getsym(x->f_hoa_mode) == gensym("2d"))
+            outlet_list(x->f_out_hoa_args, &s_list, 2, x->f_hoa_args);
+        else if(atom_getsym(x->f_hoa_mode) == gensym("3d") && atom_getsym(x->f_hoa_mode+1) == gensym("planewaves"))
+            outlet_list(x->f_out_hoa_args, &s_list, 2, x->f_hoa_args);
+        else
+            outlet_list(x->f_out_hoa_args, &s_list, 3, x->f_hoa_args);
     }
-    
-    outlet_bang(x->f_out_done);
+    outlet_symbol(x->f_out_attrs, gensym("done"));
 }
 
 
@@ -161,6 +134,7 @@ void hoa_thisprocess_free(t_hoa_thisprocess *x)
                 free(x->f_attr_vals[i]);
         }
     }
+    free(x->f_attr_name);
     eobj_free(x);
 }
 
