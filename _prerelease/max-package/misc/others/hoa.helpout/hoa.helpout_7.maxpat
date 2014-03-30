@@ -1199,6 +1199,7 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-35",
+									"linecount" : 4,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1206,8 +1207,9 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 168.0, 202.0, 136.0, 19.0 ],
 									"presentation" : 1,
+									"presentation_linecount" : 3,
 									"presentation_rect" : [ 6.0, 29.370811, 155.0, 19.0 ],
-									"text" : "45. 135. 225. 315."
+									"text" : "0. 22.5 45. 67.5 90. 112.5 135. 157.5 180. 202.5 225. 247.5 270. 292.5 315. 337.5"
 								}
 
 							}
@@ -2408,8 +2410,8 @@
 					"destination" : [ "obj-89", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 861.5, 219.0, 937.5, 219.0 ],
-					"source" : [ "obj-15", 2 ]
+					"midpoints" : [ 818.0, 219.0, 937.5, 219.0 ],
+					"source" : [ "obj-15", 1 ]
 				}
 
 			}

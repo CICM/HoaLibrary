@@ -1101,7 +1101,7 @@
 									"patching_rect" : [ 168.0, 202.0, 136.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 6.0, 29.370811, 155.0, 19.0 ],
-									"text" : "45. 135. 225. 315."
+									"text" : "0. 30 110.180. 250. 330."
 								}
 
 							}
@@ -2115,7 +2115,7 @@
 					"numinlets" : 5,
 					"numoutlets" : 6,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 52.75, 364.5, 94.0, 20.0 ],
+					"patching_rect" : [ 52.75, 364.5, 110.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ],
 						"autoconnect" : 1,
@@ -2311,8 +2311,8 @@
 					"destination" : [ "obj-89", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 861.5, 219.0, 937.5, 219.0 ],
-					"source" : [ "obj-15", 2 ]
+					"midpoints" : [ 818.0, 210.0, 937.5, 210.0 ],
+					"source" : [ "obj-15", 1 ]
 				}
 
 			}

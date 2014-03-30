@@ -9,6 +9,7 @@
 		}
 ,
 		"rect" : [ 266.0, 103.0, 1025.0, 648.0 ],
+		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1117,6 +1118,7 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-35",
+									"linecount" : 2,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1124,8 +1126,9 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 168.0, 202.0, 136.0, 19.0 ],
 									"presentation" : 1,
+									"presentation_linecount" : 2,
 									"presentation_rect" : [ 6.0, 29.370811, 155.0, 19.0 ],
-									"text" : "45. 135. 225. 315."
+									"text" : "0. 45. 90. 135. 180. 225. 270. 315."
 								}
 
 							}
@@ -2322,8 +2325,8 @@
 					"destination" : [ "obj-89", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 861.5, 219.0, 937.5, 219.0 ],
-					"source" : [ "obj-15", 2 ]
+					"midpoints" : [ 818.0, 208.0, 937.5, 208.0 ],
+					"source" : [ "obj-15", 1 ]
 				}
 
 			}
