@@ -7,7 +7,7 @@
 // based on dynamicdsp~ Copyright 2010 Alex Harker. All rights reserved.
 
 #include "../HoaCommon.max.h"
-#include "hoa.process~.h"
+#include "../HoaProcessSuite.h"
 
 t_class *hoa_processor_class;
 

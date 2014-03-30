@@ -17,8 +17,8 @@ typedef struct  _connect
 	
 	t_object**	f_objects;
 	
+    Hoa2D::Ambisonic* f_ambi2D;
 	Hoa3D::Ambisonic* f_ambi3D;
-	Hoa2D::Ambisonic* f_ambi2D;
 	
 	t_jrgba		f_color_zero;
 	t_jrgba		f_color_positiv;

@@ -24,7 +24,7 @@ void *record_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_object *x;
 	t_atom arguments[2];
-	int order = 4;
+	int order = 1;
 	if(atom_gettype(argv) == A_LONG)
 		order = atom_getlong(argv);
 	else if(atom_gettype(argv) == A_FLOAT)
@@ -32,9 +32,17 @@ void *record_new(t_symbol *s, int argc, t_atom *argv)
 
 	if(order < 1)
 		order = 1;
+    
+    int is2D = 1;
+    
+    if (s == gensym("hoa.3d.record~"))
+        is2D = 0;
+    
+    int number_of_channels = is2D ? (order * 2 + 1) : ( (order+1)*(order+1) );
 	
-	atom_setlong(arguments, order * 2 + 1);
-	switch (order * 2 + 1) 
+	atom_setlong(arguments, number_of_channels);
+    
+	switch (number_of_channels)
 	{
 		case 9:
 			atom_setlong(arguments+1, 181440);
