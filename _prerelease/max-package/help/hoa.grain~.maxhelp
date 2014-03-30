@@ -82,7 +82,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 43.0625, 288.5, 127.0, 33.0 ],
-					"text" : "dblclick on hoa.plug~ to see how it works.",
+					"text" : "dblclick on hoa.process~ to see how it works.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[2]"
 				}
@@ -327,7 +327,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 19.0, 370.0, 221.125, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.grain~ no"
+					"text" : "hoa.process~ 7 hoa.grain~ no"
 				}
 
 			}
@@ -1159,7 +1159,7 @@
 						"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 					}
 ,
-					"text" : "hoa.decoder~ 7"
+					"text" : "hoa.2d.decoder~ 7"
 				}
 
 			}
@@ -1529,7 +1529,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.process~.maxref.xml",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../_prerelease/max-package/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -1557,11 +1557,11 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

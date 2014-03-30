@@ -288,7 +288,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 15.0, 240.0, 222.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -314,7 +314,7 @@
 										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7 16"
+									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
 							}
@@ -1132,11 +1132,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

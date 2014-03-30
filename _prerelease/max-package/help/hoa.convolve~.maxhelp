@@ -1282,7 +1282,7 @@
 													"fontsize" : 12.0,
 													"groups_parameters" : [ "group", 0, 6, 0, 1, 2, 3, 4, 5, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 													"id" : "obj-1",
-													"maxclass" : "hoa.map",
+													"maxclass" : "hoa.2d.map",
 													"numinlets" : 1,
 													"numoutlets" : 3,
 													"outlettype" : [ "list", "list", "list" ],
@@ -2075,7 +2075,7 @@
 										"ramp" : 100.0
 									}
 ,
-									"text" : "hoa.map~ 3 6"
+									"text" : "hoa.2d.map~ 3 6"
 								}
 
 							}
@@ -2648,7 +2648,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.map~.mxo",
+				"name" : "hoa.2d.map~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -2660,11 +2660,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.map.mxo",
+				"name" : "hoa.2d.map.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -2672,11 +2672,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

@@ -83,7 +83,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.record~", "@obj-desc", "A", "custom", "record~", "object", "for", "ambisonics" ],
+									"args" : [ "@obj-name", "hoa.2d.record~", "@obj-desc", "A", "custom", "record~", "object", "for", "ambisonics" ],
 									"id" : "obj-10",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -119,7 +119,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 76.0, 493.0, 33.0 ],
-									"text" : "hoa.record~ creates an sfrecord~ object with the best arguments to record an ambisonic soundfield. The limit defined by Max is 15 inputs, then the maximum order can be 7.",
+									"text" : "hoa.2d.record~ creates an sfrecord~ object with the best arguments to record an ambisonic soundfield. The limit defined by Max is 15 inputs, then the maximum order can be 7.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -340,7 +340,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 300.0, 240.0, 225.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -424,7 +424,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 165.0, 405.0, 224.0, 19.0 ],
-									"text" : "hoa.record~ 7"
+									"text" : "hoa.2d.record~ 7"
 								}
 
 							}
@@ -466,7 +466,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 15.0, 240.0, 225.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -1176,7 +1176,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

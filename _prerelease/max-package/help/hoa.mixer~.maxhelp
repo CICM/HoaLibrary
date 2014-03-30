@@ -176,7 +176,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-17",
-					"maxclass" : "hoa.scope~",
+					"maxclass" : "hoa.2d.scope~",
 					"numinlets" : 15,
 					"numoutlets" : 0,
 					"order" : 7,
@@ -1330,7 +1330,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 24.0, 225.0, 250.0, 19.0 ],
-					"text" : "hoa.encoder~ 7 split"
+					"text" : "hoa.2d.encoder~ 7 split"
 				}
 
 			}
@@ -1344,7 +1344,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 24.0, 285.0, 250.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.mixer~ post"
+					"text" : "hoa.process~ 7 hoa.mixer~ post"
 				}
 
 			}
@@ -1877,7 +1877,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.process~.maxref.xml",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../_prerelease/max-package/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -1905,11 +1905,11 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -1917,7 +1917,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

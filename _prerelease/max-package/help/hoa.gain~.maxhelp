@@ -2636,7 +2636,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-55",
-									"maxclass" : "hoa.scope~",
+									"maxclass" : "hoa.2d.scope~",
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
@@ -2651,7 +2651,7 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-45",
 									"loudspeakers" : 15,
-									"maxclass" : "hoa.meter~",
+									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 15,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
@@ -3000,7 +3000,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 39.75, 148.0, 256.02948, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -3026,7 +3026,7 @@
 										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7"
+									"text" : "hoa.2d.decoder~ 7"
 								}
 
 							}
@@ -4280,11 +4280,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -4296,11 +4296,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
  ]

@@ -64,7 +64,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 330.0, 360.0, 160.0, 32.0 ],
-					"text" : "Take a look inside hoa.plug~ to see how it works."
+					"text" : "Take a look inside hoa.process~ to see how it works."
 				}
 
 			}
@@ -124,7 +124,7 @@
 						"optim" : "inPhase"
 					}
 ,
-					"text" : "hoa.optim~ 7 inPhase"
+					"text" : "hoa.2d.optim~ 7 inPhase"
 				}
 
 			}
@@ -256,7 +256,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 615.0, 268.0, 208.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.all no"
+					"text" : "hoa.process~ 7 hoa.all no"
 				}
 
 			}
@@ -2094,7 +2094,7 @@
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-15",
 					"loudspeakers" : 16,
-					"maxclass" : "hoa.meter~",
+					"maxclass" : "hoa.2d.meter~",
 					"numinlets" : 16,
 					"numoutlets" : 2,
 					"outlettype" : [ "list", "list" ],
@@ -2114,7 +2114,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 7.0, 360.0, 227.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.mirror~ post"
+					"text" : "hoa.process~ 7 hoa.mirror~ post"
 				}
 
 			}
@@ -2128,7 +2128,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 7.0, 390.0, 242.0, 19.0 ],
-					"text" : "hoa.rotate~ 7"
+					"text" : "hoa.2d.rotate~ 7"
 				}
 
 			}
@@ -2154,7 +2154,7 @@
 						"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 					}
 ,
-					"text" : "hoa.decoder~ 7 16"
+					"text" : "hoa.2d.decoder~ 7 16"
 				}
 
 			}
@@ -2352,7 +2352,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 7.0, 292.0, 227.0, 19.0 ],
-					"text" : "hoa.encoder~ 7"
+					"text" : "hoa.2d.encoder~ 7"
 				}
 
 			}
@@ -3670,7 +3670,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.process~.maxref.xml",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../_prerelease/max-package/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -3705,7 +3705,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -3713,19 +3713,19 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.rotate~.mxo",
+				"name" : "hoa.2d.rotate~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -3733,7 +3733,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.optim~.mxo",
+				"name" : "hoa.2d.optim~.mxo",
 				"type" : "iLaX"
 			}
  ]
