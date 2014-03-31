@@ -180,17 +180,16 @@ void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index);
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index);
 void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state);
 
-t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
 void *hoa_processor_query_mode(t_hoa_processor *x);
 void *hoa_processor_query_is_2D(t_hoa_processor *x);
 void *hoa_processor_query_number_of_instances(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
-
-void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
 void hoa_processor_output_typed_message(void* outletptr, t_args_struct *args);
-
 void* hoa_processor_query_io_index(t_hoa_processor *x, long patchIndex, t_object* io);
+void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
+
+t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 
 // ========================================================================================================================================== //
 // Main
@@ -573,13 +572,13 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		if (inlet > max_instance)
 		{
 			extra_index = inlet - max_instance;
-			
-			if (inlet <= x->instance_ins + x->extra_ins)
+            
+			if (inlet <= max_instance + x->extra_ins)
 			{
 				is_extra_ctrl = 1;
 				sprintf(ctrl_basis_text,"Extra %i", extra_index);
 			}
-			if (inlet <= x->instance_sig_ins + x->extra_sig_ins)
+			if (inlet <= max_instance + x->extra_sig_ins)
 			{
 				is_extra_sig = 1;
 				sprintf(sig_basis_text,"Extra %i", extra_index);
