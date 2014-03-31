@@ -349,7 +349,7 @@ t_hoa_err hoa_getinfos(t_meter* x, t_hoa_boxinfos* boxinfos)
 	boxinfos->object_type = HOA_OBJECT_2D;
 	boxinfos->autoconnect_inputs    = x->f_meter->getNumberOfChannels();
 	boxinfos->autoconnect_outputs   = 0;
-	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_PLANEWAVES;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
 }
