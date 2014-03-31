@@ -867,13 +867,13 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 		{
 			harmonic_band = x->f_ambi2D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi2D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index+1, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
 			harmonic_band = x->f_ambi3D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi3D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index+1, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
 		}
 	}
 	else
