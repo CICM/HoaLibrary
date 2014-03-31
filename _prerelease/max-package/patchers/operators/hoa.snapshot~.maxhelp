@@ -206,7 +206,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 15.0, 65.0, 561.0, 34.0 ],
 					"presentation_rect" : [ 11.0, 65.0, 0.0, 0.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the interval time in ms\"",
+					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the interval time in ms\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[5]"
 				}
@@ -433,7 +433,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "float", "float", "float" ],
 					"patching_rect" : [ 387.1875, 235.0, 215.0, 22.0 ],
-					"text" : "hoa.plug~ 3 hoa.snapshot~ out 0"
+					"text" : "hoa.2d.process~ 3 hoa.snapshot~ out 0"
 				}
 
 			}
@@ -447,7 +447,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "float", "float", "float" ],
 					"patching_rect" : [ 15.0, 217.0, 235.0, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.snapshot~ no 1000"
+					"text" : "hoa.2d.process~ 1 hoa.snapshot~ no 1000"
 				}
 
 			}
@@ -523,7 +523,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.snaphot~", "@obj-desc", "hoa.plug~", "version", "of", "the", "vanilla", "snapshot~", "object" ],
+					"args" : [ "@obj-name", "hoa.snaphot~", "@obj-desc", "hoa.2d.process~", "version", "of", "the", "vanilla", "snapshot~", "object" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -733,7 +733,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -747,7 +747,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.2d.process~.mxo",
 				"type" : "iLaX"
 			}
  ]

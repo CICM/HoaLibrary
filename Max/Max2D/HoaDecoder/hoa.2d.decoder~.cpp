@@ -173,7 +173,7 @@ t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
 	boxinfos->autoconnect_inputs = x->f_decoder->getNumberOfHarmonics();
 	boxinfos->autoconnect_outputs = x->f_decoder->getNumberOfChannels();
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
-	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_PLANEWAVES;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
 }
 

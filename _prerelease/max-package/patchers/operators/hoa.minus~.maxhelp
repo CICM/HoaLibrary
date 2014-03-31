@@ -115,7 +115,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9.0, 58.0, 561.0, 34.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the right value of -~\"",
+					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the right value of -~\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -383,7 +383,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 351.9375, 212.0, 266.5, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.-~ post 2"
+					"text" : "hoa.2d.process~ 1 hoa.-~ post 2"
 				}
 
 			}
@@ -470,7 +470,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 59.4375, 362.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.name1~ no"
+					"text" : "hoa.2d.process~ 1 hoa.name1~ no"
 				}
 
 			}
@@ -484,7 +484,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 239.4375, 362.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.name2~ no"
+					"text" : "hoa.2d.process~ 1 hoa.name2~ no"
 				}
 
 			}
@@ -498,7 +498,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 147.4375, 417.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.-~ post"
+					"text" : "hoa.2d.process~ 1 hoa.-~ post"
 				}
 
 			}
@@ -586,7 +586,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 15.0, 212.0, 169.0, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.-~ no 10"
+					"text" : "hoa.2d.process~ 1 hoa.-~ no 10"
 				}
 
 			}
@@ -662,7 +662,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.-~", "@obj-desc", "hoa.plug~", "version", "of", "the", "vanilla", "-~", "object" ],
+					"args" : [ "@obj-name", "hoa.-~", "@obj-desc", "hoa.2d.process~", "version", "of", "the", "vanilla", "-~", "object" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -956,7 +956,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -984,7 +984,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.2d.process~.mxo",
 				"type" : "iLaX"
 			}
  ]

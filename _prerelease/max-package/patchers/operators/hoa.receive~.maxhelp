@@ -199,7 +199,7 @@
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"patching_rect" : [ 18.0, 286.5, 275.0, 22.0 ],
-					"text" : "hoa.plug~ 8 hoa.send~ out @name tango"
+					"text" : "hoa.2d.process~ 8 hoa.send~ out @name tango"
 				}
 
 			}
@@ -241,7 +241,7 @@
 					"numoutlets" : 9,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 531.0, 224.5, 191.571426, 22.0 ],
-					"text" : "hoa.plug~ 4 hoa.all no"
+					"text" : "hoa.2d.process~ 4 hoa.all no"
 				}
 
 			}
@@ -310,7 +310,7 @@
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 531.0, 278.5, 170.0, 38.0 ],
-					"text" : "hoa.plug~ 8 hoa.receive~ out @name tango"
+					"text" : "hoa.2d.process~ 8 hoa.receive~ out @name tango"
 				}
 
 			}
@@ -323,7 +323,7 @@
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"patching_rect" : [ 18.0, 478.0, 275.0, 22.0 ],
-					"text" : "hoa.plug~ 8 hoa.send~ out @name charlie"
+					"text" : "hoa.2d.process~ 8 hoa.send~ out @name charlie"
 				}
 
 			}
@@ -415,7 +415,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9.0, 58.0, 561.0, 34.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you should use @name attribute to set the object-name",
+					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you should use @name attribute to set the object-name",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -507,7 +507,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.receive~", "@obj-desc", "hoa.plug~", "version", "of", "the", "vanilla", "receive~", "object" ],
+					"args" : [ "@obj-name", "hoa.receive~", "@obj-desc", "hoa.2d.process~", "version", "of", "the", "vanilla", "receive~", "object" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -1087,7 +1087,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -1115,7 +1115,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.2d.process~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
