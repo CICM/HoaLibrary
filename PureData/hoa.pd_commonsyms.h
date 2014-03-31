@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_PD_COMMONSYMS
 #define DEF_HOA_PD_COMMONSYMS
 
-#include "../../CicmWrapper/Sources/cicm_wrapper.h"
+#include "../ThirdParty/PureData/Sources/cicm_wrapper.h"
 
 // Hoa
 static t_symbol* hoa_sym_hoa_getinfos				= gensym("hoa_getinfos");

@@ -15,8 +15,6 @@ int C74_EXPORT main(void)
 	t_class *c;
 
 	c = class_new("hoa.play~", (method)play_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
-	class_alias(c, gensym("hoa.2d.play~"));
-	class_alias(c, gensym("hoa.3d.play~"));
 	hoa_initclass(c, NULL);
 	class_register(CLASS_BOX, c);
 	play_class = c;

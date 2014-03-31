@@ -64,7 +64,7 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.3d.scope~", (method)hoa_scope_new, (method)hoa_scope_free, sizeof(t_hoa_scope), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	
+
     class_dspinitjbox(c);
     jucebox_initclass(c, (method)hoa_scope_paint,  JBOX_COLOR | JBOX_FIXWIDTH);
     hoa_initclass(c, (method)hoa_getinfos);

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255B918D1D01400A3A730 /* Hoa3D.max.h */; };
-		2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */; };
 		2C9255BE18D1D0EB00A3A730 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9255BD18D1D0EB00A3A730 /* MaxAudioAPI.framework */; };
 		2C9255D918D1D11B00A3A730 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255C018D1D11B00A3A730 /* Ambisonic.cpp */; };
 		2C9255DA18D1D11B00A3A730 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255C118D1D11B00A3A730 /* Ambisonic.h */; };
@@ -208,7 +207,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.3d.encoder~" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -235,7 +234,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

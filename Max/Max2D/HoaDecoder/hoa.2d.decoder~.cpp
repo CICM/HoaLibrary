@@ -27,6 +27,7 @@ void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, double *
 void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void send_configuration(t_hoa_decoder *x);
+void reconnect_outlets(t_hoa_decoder *x);
 
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 
@@ -172,7 +173,7 @@ t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
 	boxinfos->autoconnect_inputs = x->f_decoder->getNumberOfHarmonics();
 	boxinfos->autoconnect_outputs = x->f_decoder->getNumberOfChannels();
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
-	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_PLANEWAVES;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
 }
 
@@ -510,14 +511,14 @@ void send_configuration(t_hoa_decoder *x)
             {
                 object = jpatchline_get_box2(line);
                 t_symbol* classname = object_classname(jbox_get_object(object));
-                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.vector~"))
+                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.gain~"))
                 {
                     object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
                     object_method_typed(jbox_get_object(object), gensym("angles"), x->f_decoder->getNumberOfChannels(), argv, NULL);
                     object_method_typed(jbox_get_object(object), gensym("offset"), 1, &offset, NULL);
+                    reconnect_outlets(x);
+                    break;
                 }
-                else if(classname == gensym("hoa.gain~"))
-                    object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
             }
         }
         
@@ -525,9 +526,40 @@ void send_configuration(t_hoa_decoder *x)
     }
 }
 
-
-
-
-
-
-
+void reconnect_outlets(t_hoa_decoder *x)
+{
+	t_object *patcher;
+	t_object *decoder;
+    t_object *object;
+    t_object *line;
+	t_max_err err;
+    
+	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+	err = object_obex_lookup(x, gensym("#B"), (t_object **)&decoder);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+    for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if (jpatchline_get_box1(line) == decoder)
+        {
+            object = jpatchline_get_box2(line);
+            
+            for(int i = 0; jbox_getinlet((t_jbox *)object, i) != NULL && i < x->f_decoder->getNumberOfChannels(); i++)
+            {
+                t_atom msg[4];
+                t_atom rv;
+                
+                atom_setobj(msg, decoder);
+                atom_setlong(msg + 1, i);
+                atom_setobj(msg + 2, object);
+                atom_setlong(msg + 3, i);
+                
+                object_method_typed(patcher , hoa_sym_connect, 4, msg, &rv);
+            }
+        }
+    }
+}
