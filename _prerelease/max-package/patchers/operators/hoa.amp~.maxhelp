@@ -3,15 +3,16 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 103.0, 124.0, 760.0, 279.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
-		"default_fontsize" : 14.0,
+		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
 		"gridonopen" : 0,
@@ -37,20 +38,20 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 135.0, 116.0, 50.0, 22.0 ]
+					"patching_rect" : [ 151.0, 115.625, 50.0, 22.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-19",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 135.0, 146.0, 56.0, 20.0 ],
+					"patching_rect" : [ 151.0, 145.625, 50.0, 18.0 ],
 					"text" : "time $1"
 				}
 
@@ -58,13 +59,13 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-18",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 275.4375, 146.0, 61.0, 20.0 ],
+					"patching_rect" : [ 286.4375, 145.625, 54.0, 18.0 ],
 					"text" : "10 2000"
 				}
 
@@ -72,13 +73,13 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-11",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 204.4375, 146.0, 53.0, 20.0 ],
+					"patching_rect" : [ 220.4375, 145.625, 47.0, 18.0 ],
 					"text" : "0 2000"
 				}
 
@@ -93,8 +94,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 9.0, 58.0, 561.0, 34.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the default output value and initial ramp time\"",
+					"patching_rect" : [ 9.0, 58.0, 594.0, 33.0 ],
+					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the default output value and initial ramp time\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -117,14 +118,14 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"hidden" : 1,
 					"id" : "obj-32",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 9.0, 116.0, 82.0, 22.0 ],
+					"patching_rect" : [ 25.0, 115.625, 72.0, 20.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -132,44 +133,14 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
-					"id" : "obj-3",
-					"maxclass" : "number~",
-					"mode" : 2,
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 215.0, 237.0, 75.0, 22.0 ],
-					"sig" : 0.0
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 14.0,
-					"id" : "obj-9",
-					"maxclass" : "number~",
-					"mode" : 2,
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 112.0, 237.0, 75.0, 22.0 ],
-					"sig" : 0.0
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-7",
 					"maxclass" : "number~",
 					"mode" : 2,
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 9.0, 237.0, 75.0, 22.0 ],
+					"patching_rect" : [ 25.0, 229.625, 73.0, 20.0 ],
 					"sig" : 0.0
 				}
 
@@ -177,14 +148,14 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-12",
 					"maxclass" : "number~",
 					"mode" : 1,
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 9.0, 146.0, 56.0, 22.0 ],
+					"patching_rect" : [ 25.0, 145.625, 55.0, 20.0 ],
 					"sig" : 1.0
 				}
 
@@ -199,34 +170,34 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 68.5, 146.0, 50.0, 22.0 ]
+					"patching_rect" : [ 84.5, 145.625, 50.0, 22.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"id" : "obj-14",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "signal", "signal", "signal" ],
-					"patching_rect" : [ 9.0, 188.0, 225.0, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.amp~ no 10 1000"
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 25.0, 187.625, 280.0, 20.0 ],
+					"text" : "hoa.2d.process~ 1 hoa.amp~ planewaves 10 1000"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-8",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 476.9375, 199.0, 91.0, 22.0 ],
+					"patching_rect" : [ 476.9375, 199.0, 80.0, 20.0 ],
 					"text" : "turn dac~ on",
 					"textcolor" : [ 0.326531, 0.326531, 0.326531, 1.0 ]
 				}
@@ -289,7 +260,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.amp~", "@obj-desc", "hoa.plug~", "utility", "abstraction", "to", "control", "amplitude" ],
+					"args" : [ "@obj-name", "hoa.amp~", "@obj-desc", "hoa.2d.process~", "utility", "abstraction", "to", "control", "amplitude" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -317,10 +288,10 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
+					"destination" : [ "obj-14", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 213.9375, 176.5, 18.5, 176.5 ],
+					"midpoints" : [ 229.9375, 176.125, 295.5, 176.125 ],
 					"source" : [ "obj-11", 0 ]
 				}
 
@@ -336,20 +307,11 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
+					"destination" : [ "obj-14", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 78.0, 176.5, 18.5, 176.5 ],
+					"midpoints" : [ 94.0, 176.125, 295.5, 176.125 ],
 					"source" : [ "obj-13", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-14", 2 ]
 				}
 
 			}
@@ -364,29 +326,20 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-9", 0 ],
+					"destination" : [ "obj-14", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-14", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 284.9375, 176.5, 18.5, 176.5 ],
+					"midpoints" : [ 295.9375, 176.125, 295.5, 176.125 ],
 					"source" : [ "obj-18", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
+					"destination" : [ "obj-14", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 144.5, 176.5, 18.5, 176.5 ],
+					"midpoints" : [ 160.5, 176.125, 295.5, 176.125 ],
 					"source" : [ "obj-19", 0 ]
 				}
 
@@ -412,27 +365,43 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
-				"type" : "TEXT",
+				"name" : "hoa.2d.scope~.svg",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
+				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
 				"type" : "iLaX"
 			}
  ]

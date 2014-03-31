@@ -151,7 +151,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9.0, 58.0, 561.0, 60.0 ],
-					"text" : "to perform operation within hoa.plug~ on two signals, you need to name each one differently before to send it to the operators. \nhoa.name1~ will prepend signal by \"sig1\" symbol.\nhoa.name2~ will prepend signal by \"sig2\" symbol.",
+					"text" : "to perform operation within hoa.2d.process~ on two signals, you need to name each one differently before to send it to the operators. \nhoa.name1~ will prepend signal by \"sig1\" symbol.\nhoa.name2~ will prepend signal by \"sig2\" symbol.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -286,7 +286,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 337.4375, 199.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.name1~ no"
+					"text" : "hoa.2d.process~ 1 hoa.name1~ no"
 				}
 
 			}
@@ -300,7 +300,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 517.4375, 199.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.name2~ no"
+					"text" : "hoa.2d.process~ 1 hoa.name2~ no"
 				}
 
 			}
@@ -314,7 +314,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 425.4375, 254.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.*~ post"
+					"text" : "hoa.2d.process~ 1 hoa.*~ post"
 				}
 
 			}
@@ -390,7 +390,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.name2~", "@obj-desc", "hoa.plug~", "utility", "to", "name", "a", "signal" ],
+					"args" : [ "@obj-name", "hoa.name2~", "@obj-desc", "hoa.2d.process~", "utility", "to", "name", "a", "signal" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -557,7 +557,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -585,7 +585,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.2d.process~.mxo",
 				"type" : "iLaX"
 			}
  ]

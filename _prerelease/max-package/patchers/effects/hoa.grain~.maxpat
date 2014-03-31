@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 493.0, 161.0, 531.0, 480.0 ],
@@ -28,15 +29,21 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-6",
-					"maxclass" : "message",
-					"numinlets" : 2,
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 110.5, 42.0, 18.0 ],
-					"text" : "signal"
+					"patching_rect" : [ 75.0, 15.0, 95.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 1
+					}
+,
+					"text" : "hoa.in @extra 1"
 				}
 
 			}
@@ -231,11 +238,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-32",
 					"maxclass" : "newobj",
-					"numinlets" : 6,
-					"numoutlets" : 6,
-					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 15.0, 45.0, 319.0, 20.0 ],
-					"text" : "route signal size delay feedback rarefaction"
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 75.0, 45.0, 259.0, 20.0 ],
+					"text" : "route size delay feedback rarefaction"
 				}
 
 			}
@@ -252,8 +259,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 30.0, 44.0, 793.0, 670.0 ],
@@ -288,8 +296,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 6,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 69.0, 145.0, 640.0, 480.0 ],
@@ -962,7 +971,7 @@
 									"maxclass" : "inlet",
 									"numinlets" : 0,
 									"numoutlets" : 1,
-									"outlettype" : [ "" ],
+									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 162.0, 25.0, 25.0, 25.0 ]
 								}
 
@@ -1585,12 +1594,19 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-23",
-					"maxclass" : "outlet",
+					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 393.0, 25.0, 25.0 ]
+					"patching_rect" : [ 15.0, 393.0, 58.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : ""
+					}
+,
+					"text" : "hoa.out~"
 				}
 
 			}
@@ -1714,8 +1730,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -1952,37 +1969,46 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-11",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 345.0, 45.0, 79.0, 20.0 ],
-					"text" : "patcherargs"
+					"numoutlets" : 5,
+					"outlettype" : [ "list", "list", "list", "list", "int" ],
+					"patching_rect" : [ 345.0, 45.0, 102.0, 20.0 ],
+					"text" : "hoa.thisprocess~"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-1",
-					"maxclass" : "inlet",
-					"numinlets" : 0,
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 1,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 15.0, 25.0, 25.0 ]
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 15.0, 15.0, 58.0, 33.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 1
+					}
+,
+					"text" : "hoa.in~ @extra 1"
 				}
 
 			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-32", 0 ],
+					"destination" : [ "obj-22", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 24.5, 42.0, 24.5, 42.0 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -2011,6 +2037,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-12", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-32", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -2127,7 +2162,7 @@
 					"destination" : [ "obj-14", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-32", 1 ]
+					"source" : [ "obj-32", 0 ]
 				}
 
 			}
@@ -2136,7 +2171,7 @@
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-32", 2 ]
+					"source" : [ "obj-32", 1 ]
 				}
 
 			}
@@ -2146,7 +2181,7 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"midpoints" : [ 264.5, 157.0, 264.5, 157.0 ],
-					"source" : [ "obj-32", 4 ]
+					"source" : [ "obj-32", 3 ]
 				}
 
 			}
@@ -2156,16 +2191,7 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"midpoints" : [ 204.5, 127.0, 204.5, 127.0 ],
-					"source" : [ "obj-32", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-6", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-32", 0 ]
+					"source" : [ "obj-32", 2 ]
 				}
 
 			}
@@ -2216,15 +2242,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-22", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-6", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-30", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2251,7 +2268,23 @@
 
 			}
  ],
-		"dependency_cache" : [  ]
+		"dependency_cache" : [ 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
+			}
+ ]
 	}
 
 }

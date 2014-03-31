@@ -36,7 +36,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 11.0, 81.0, 200.0, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.nothing~ no 1"
+					"text" : "hoa.2d.process~ 1 hoa.nothing~ no 1"
 				}
 
 			}
@@ -72,7 +72,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.nothing~", "@obj-desc", "hoa.plug~", "dummy/default", "abstraction" ],
+					"args" : [ "@obj-name", "hoa.nothing~", "@obj-desc", "hoa.2d.process~", "dummy/default", "abstraction" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -107,7 +107,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",

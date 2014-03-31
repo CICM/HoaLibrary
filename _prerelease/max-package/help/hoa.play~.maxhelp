@@ -83,7 +83,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.play~", "@obj-desc", "A", "custom", "sfplay~", "object", "for", "ambisonics." ],
+									"args" : [ "@obj-name", "hoa.2d.play~", "@obj-desc", "A", "custom", "sfplay~", "object", "for", "ambisonics." ],
 									"id" : "obj-6",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -118,7 +118,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 76.0, 517.0, 20.0 ],
-									"text" : "hoa.play~ creates an sfplay~ object with the best arguments to play an ambisonic soundfield.",
+									"text" : "hoa.2d.play~ creates an sfplay~ object with the best arguments to play an ambisonic soundfield.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -374,7 +374,7 @@
 										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7 16"
+									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
 							}
@@ -389,7 +389,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "bang" ],
 									"patching_rect" : [ 10.0, 156.0, 235.5, 19.0 ],
 									"save" : [ "#N", "sfplay~", "", 15, 120960, 0, "", ";" ],
-									"text" : "hoa.play~ 7"
+									"text" : "hoa.2d.play~ 7"
 								}
 
 							}
@@ -434,7 +434,7 @@
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.connect 7 16"
+									"text" : "hoa.connect"
 								}
 
 							}
@@ -1093,7 +1093,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

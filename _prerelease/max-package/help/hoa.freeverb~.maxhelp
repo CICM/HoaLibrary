@@ -968,7 +968,7 @@
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.connect 7 16"
+									"text" : "hoa.connect"
 								}
 
 							}
@@ -982,7 +982,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 30.0, 228.5, 329.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -1716,7 +1716,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -1732,7 +1732,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -1740,11 +1740,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

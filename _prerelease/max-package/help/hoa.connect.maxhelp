@@ -188,7 +188,7 @@
 										"ramp" : 20.0
 									}
 ,
-									"text" : "hoa.recomposer~ 7 16"
+									"text" : "hoa.2d.recomposer~ 7 16"
 								}
 
 							}
@@ -202,7 +202,7 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 255.0, 307.0, 254.0, 19.0 ],
-									"text" : "hoa.projector~ 7 16"
+									"text" : "hoa.2d.projector~ 7 16"
 								}
 
 							}
@@ -638,7 +638,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 12.294642, 336.0, 235.0, 19.0 ],
-									"text" : "hoa.plug~ 7 hoa.all post"
+									"text" : "hoa.process~ 7 hoa.all post"
 								}
 
 							}
@@ -665,7 +665,7 @@
 										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7 16"
+									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
 							}
@@ -692,7 +692,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 12.294642, 257.0, 235.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -709,7 +709,7 @@
 										"poscolor" : [ 1.0, 0.5, 0.5, 1.0 ]
 									}
 ,
-									"text" : "hoa.connect 7 16"
+									"text" : "hoa.connect"
 								}
 
 							}
@@ -1866,7 +1866,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 121.0, 344.0, 208.0, 19.0 ],
-									"text" : "hoa.plug~ 7 hoa.all post"
+									"text" : "hoa.process~ 7 hoa.all post"
 								}
 
 							}
@@ -1893,7 +1893,7 @@
 										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7"
+									"text" : "hoa.2d.decoder~ 7"
 								}
 
 							}
@@ -2012,7 +2012,7 @@
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.connect 7 16"
+									"text" : "hoa.connect"
 								}
 
 							}
@@ -2039,7 +2039,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 28.9375, 274.0, 208.0, 19.0 ],
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.2d.encoder~ 7"
 								}
 
 							}
@@ -2259,7 +2259,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.process~.maxref.xml",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -2287,7 +2287,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -2295,19 +2295,19 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.projector~.mxo",
+				"name" : "hoa.2d.projector~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.recomposer~.mxo",
+				"name" : "hoa.2d.recomposer~.mxo",
 				"type" : "iLaX"
 			}
  ]

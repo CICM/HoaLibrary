@@ -911,7 +911,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9.0, 58.0, 561.0, 33.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the initial cutoff frequency\"",
+					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the initial cutoff frequency\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -969,7 +969,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 21.9375, 296.0, 221.0, 22.0 ],
-					"text" : "hoa.plug~ 3 hoa.highpass~ out 0"
+					"text" : "hoa.2d.process~ 3 hoa.highpass~ out 0"
 				}
 
 			}
@@ -1045,7 +1045,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.highpass~", "@obj-desc", "hoa.plug~", "version", "of", "a", "onepole~", "based", "highpass", "filter" ],
+					"args" : [ "@obj-name", "hoa.highpass~", "@obj-desc", "hoa.2d.process~", "version", "of", "a", "onepole~", "based", "highpass", "filter" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -1271,7 +1271,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
+				"name" : "hoa.2d.process~.maxref.xml",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../docs/refpages/hoa-ref",
 				"type" : "TEXT",
@@ -1320,7 +1320,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.2d.process~.mxo",
 				"type" : "iLaX"
 			}
  ]
