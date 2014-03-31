@@ -132,7 +132,6 @@ void hoa_process_symbol(t_hoa_process *x, t_symbol* s);
 void hoa_process_list(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv);
 void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv);
 
-
 t_hoa_err hoa_getinfos(t_hoa_process* x, t_hoa_boxinfos* boxinfos);
 
 void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* argv);
@@ -305,8 +304,9 @@ void *hoa_process_new(t_symbol *s, long argc, t_atom *argv)
 
 void hoa_process_free(t_hoa_process *x)
 {
-    eobj_dspfree(x);
+    int state = canvas_suspend_dsp();
     
+    signal_cleanup();
     for(int i = 0 ; i < x->f_have_outlets_instance_sig * x->f_ncanvas + x->f_max_outlets_extra_sig; i++)
     {
         delete [] x->f_outlets_signals[i];
@@ -320,10 +320,7 @@ void hoa_process_free(t_hoa_process *x)
         {
             x->f_canvas[i]->gl_owner = eobj_getcanvas(x);
             canvas_free(x->f_canvas[i]);
-            my_ugen_currentcontext = NULL;
-            
-            my_ugen_currentcontext = x->f_dsp_context[i];
-            ugen_free_graph(x->f_dsp_context[i]);
+            dsp_context_free(x->f_dsp_context[i]);
             
             delete [] x->f_inlets_instance[i];
             delete [] x->f_inlets_extra[i];
@@ -366,37 +363,20 @@ void hoa_process_free(t_hoa_process *x)
         delete x->f_planewaves;
     else
         delete x->f_ambi_2d;
-}
-
-t_dspcontext* canvas_getdspcontext(t_canvas *x, int toplevel, t_signal **sp)
-{
-    t_linetraverser t;
-    t_outconnect *oc;
-    t_gobj *y;
-    t_object *ob;
-    t_symbol *dspsym = gensym("dsp");
-    t_dspcontext *dc;
-    
-    dc = ugen_start_graph(toplevel, sp,
-                          obj_nsiginlets(&x->gl_obj),
-                          obj_nsigoutlets(&x->gl_obj));
-    
-    for (y = x->gl_list; y; y = y->g_next)
-        if ((ob = pd_checkobject(&y->g_pd)) && zgetfn(&y->g_pd, dspsym))
-            ugen_add(dc, ob);
-    
-    linetraverser_start(&t, x);
-    while((oc = linetraverser_next(&t)))
-        if (obj_issignaloutlet(t.tr_ob, t.tr_outno))
-            ugen_connect(dc, t.tr_ob, t.tr_outno, t.tr_ob2, t.tr_inno);
-    
-    return dc;
+    eobj_dspfree(x);
+    canvas_resume_dsp(state);
 }
 
 void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
     int inc = 0;
     
+    signal_cleanup();
+    for(int i = 0; i < x->f_ncanvas; i++)
+    {
+        dsp_context_removecanvas(x->f_dsp_context[i]);
+    }
+
     if(x->f_have_inlets_instance_sig)
     {
         for(int i = 0; i < x->f_ncanvas; i++)
@@ -404,6 +384,7 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
             for(int j = 0; j < x->f_ninlets_instance_sig[i]; j++)
             {
                 x->f_inlets_instance_sig[i][j]->f_signal = eobj_getsignalinput(x, inc);
+                memset(eobj_getsignalinput(x, inc), 0, maxvectorsize * sizeof(t_sample));
             }
             inc++;
         }
@@ -418,6 +399,7 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
                 if(x->f_inlets_extra_sig[j][k]->f_extra == (i+1))
                 {
                     x->f_inlets_extra_sig[j][k]->f_signal = eobj_getsignalinput(x, inc);
+                    memset(eobj_getsignalinput(x, inc), 0, maxvectorsize * sizeof(t_sample));
                 }
             }
         }
@@ -427,6 +409,7 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
     inc  = 0;
     if(x->f_have_outlets_instance_sig)
     {
+        memset(x->f_outlets_signals[inc], 0, maxvectorsize * sizeof(t_sample));
         for(int i = 0; i < x->f_ncanvas; i++)
         {
             for(int j = 0; j < x->f_noutlets_instance_sig[i]; j++)
@@ -439,6 +422,7 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
     
     for(int i = 0; i < x->f_max_outlets_extra_sig; i++)
     {
+        memset(x->f_outlets_signals[inc], 0, maxvectorsize * sizeof(t_sample));
         for(int j = 0; j < x->f_ncanvas; j++)
         {
             for(int k = 0; k < x->f_noutlets_extra_sig[j]; k++)
@@ -456,12 +440,11 @@ void hoa_process_dsp(t_hoa_process *x, t_object *dsp, short *count, double sampl
     {
         if(x->f_canvas[i] && x->f_dsp_context[i])
         {
-            my_ugen_currentcontext = x->f_dsp_context[i];
-            ugen_done_graph(x->f_dsp_context[i]);
-            my_ugen_currentcontext = NULL;
+            dsp_context_addcanvas(x->f_dsp_context[i], x->f_canvas[i]);
+            dsp_context_compile(x->f_dsp_context[i]);
         }
     }
-
+    
     object_method(dsp, gensym("dsp_add"), x, (method)hoa_process_perform, 0, NULL);
 }
 
@@ -923,6 +906,8 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     t_atom av;
     char dirbuf[MAXPDSTRING], *nameptr;
     int ncnv;
+    int state = canvas_suspend_dsp();
+    
     // Memory allocation for all the canvas, the inlets and the outlets
     x->f_canvas         = new t_canvas*[x->f_ncanvas];
     x->f_dsp_context    = new t_dspcontext*[x->f_ncanvas];
@@ -993,15 +978,13 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
                 hoa_process_get_thisprocess(x, i, argc, argv);
                 
                 x->f_canvas[i]->gl_owner = eobj_getcanvas(x);   // Set the owner of the canvas
-                
                 canvas_vis(x->f_canvas[i], 0);                  // Hide the canvas
                 canvas_removefromlist(x->f_canvas[i]);          // Remove canvas from top level
                 canvas_loadbang(x->f_canvas[i]);                // Send loadbang
                 
                 // Retrieve inlets and outlets of the canvas
                 hoa_process_get_io(x, i);
-                x->f_dsp_context[i] = canvas_getdspcontext(x->f_canvas[i], 1, 0);
-                my_ugen_currentcontext = NULL;
+                x->f_dsp_context[i] = dsp_context_new();
                 x->f_ncanvas++;
             }
             else
@@ -1017,5 +1000,6 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
         pd_error(x, "error while loading canvas.");
     }
     canvas_setcurrent(eobj_getcanvas(x));
+    canvas_resume_dsp(state);
 }
 

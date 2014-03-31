@@ -80,9 +80,7 @@ t_hoa_err hoa_getinfos(t_hoa_out_tilde* x, t_hoa_boxinfos* boxinfos)
 void hoa_out_tilde_dsp(t_hoa_out_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
     if(x->f_signal)
-    {
         object_method(dsp, gensym("dsp_add"), x, (method)hoa_out_tilde_perform, 0, NULL);
-    }
     
 }
 
