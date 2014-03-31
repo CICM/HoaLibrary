@@ -54,7 +54,6 @@
 		4BCB76C118D707CE000E5110 /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BCB769318D707CE000E5110 /* HoaMath.h */; };
 		4BCB76C218D707CE000E5110 /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BCB769418D707CE000E5110 /* HoaUtils.h */; };
 		59FB02F817A7FAA9001E977D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FB02F717A7FAA9001E977D /* Accelerate.framework */; };
-		8F26F11E17E45D1C005FCB97 /* hoaOpcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F26F11D17E45D1C005FCB97 /* hoaOpcode.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,9 +103,8 @@
 		4BCB769218D707CE000E5110 /* HoaDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaDefs.h; path = ../../Sources/HoaDefs.h; sourceTree = "<group>"; };
 		4BCB769318D707CE000E5110 /* HoaMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaMath.h; path = ../../Sources/HoaMath.h; sourceTree = "<group>"; };
 		4BCB769418D707CE000E5110 /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaUtils.h; path = ../../Sources/HoaUtils.h; sourceTree = "<group>"; };
-		5913846F15DAA36D0029AD16 /* hoaOpcode.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = hoaOpcode.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		5913846F15DAA36D0029AD16 /* HoaEnc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = HoaEnc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		59FB02F717A7FAA9001E977D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		8F26F11D17E45D1C005FCB97 /* hoaOpcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoaOpcode.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +172,6 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
-				8F26F11D17E45D1C005FCB97 /* hoaOpcode.cpp */,
 				4BCB766618D707CE000E5110 /* Hoa.h */,
 				4BCB766718D707CE000E5110 /* Hoa2D */,
 				4BCB769218D707CE000E5110 /* HoaDefs.h */,
@@ -188,7 +185,7 @@
 		5913847015DAA36D0029AD16 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5913846F15DAA36D0029AD16 /* hoaOpcode.dylib */,
+				5913846F15DAA36D0029AD16 /* HoaEnc.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,9 +228,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5913846E15DAA36D0029AD16 /* hoaOpcode */ = {
+		5913846E15DAA36D0029AD16 /* HoaEnc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoaOpcode" */;
+			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "HoaEnc" */;
 			buildPhases = (
 				5913846B15DAA36D0029AD16 /* Sources */,
 				5913846C15DAA36D0029AD16 /* Frameworks */,
@@ -243,9 +240,9 @@
 			);
 			dependencies = (
 			);
-			name = hoaOpcode;
+			name = HoaEnc;
 			productName = pd1;
-			productReference = 5913846F15DAA36D0029AD16 /* hoaOpcode.dylib */;
+			productReference = 5913846F15DAA36D0029AD16 /* HoaEnc.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -256,7 +253,7 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoaOpcode" */;
+			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "HoaEnc" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -268,7 +265,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5913846E15DAA36D0029AD16 /* hoaOpcode */,
+				5913846E15DAA36D0029AD16 /* HoaEnc */,
 			);
 		};
 /* End PBXProject section */
@@ -279,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BCB76B618D707CE000E5110 /* SourcesManager.cpp in Sources */,
-				8F26F11E17E45D1C005FCB97 /* hoaOpcode.cpp in Sources */,
 				4BCB76AC18D707CE000E5110 /* Recomposer.cpp in Sources */,
 				4BCB769618D707CE000E5110 /* Ambisonic.cpp in Sources */,
 				4BCB76B018D707CE000E5110 /* Scope.cpp in Sources */,
@@ -339,6 +335,11 @@
 		5913847515DAA36D0029AD16 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = NO;
+				CLANG_WARN_ENUM_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
@@ -355,7 +356,7 @@
 					dynamic_lookup,
 				);
 				PRELINK_LIBS = "";
-				PRODUCT_NAME = hoaOpcode;
+				PRODUCT_NAME = HoaEnc;
 				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include";
 			};
 			name = Release;
@@ -363,7 +364,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoaOpcode" */ = {
+		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "HoaEnc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847215DAA36D0029AD16 /* Release */,
@@ -371,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoaOpcode" */ = {
+		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "HoaEnc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847515DAA36D0029AD16 /* Release */,
