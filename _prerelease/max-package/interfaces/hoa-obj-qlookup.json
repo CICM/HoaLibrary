@@ -1,5 +1,5 @@
 {
-  "hoa.scope~": {
+  "hoa.2d.scope~": {
     "category": [
       "MSP U/I"
     ],
@@ -9,12 +9,12 @@
       "category": [
         "High Order Ambisonics Library"
       ],
-      "action": "hoa.scope~",
-      "pic": "hoa.scope~.svg"
+      "action": "hoa.2d.scope~",
+      "pic": "hoa.2d.scope~.svg"
     }
   },
 
-  "hoa.meter~": {
+  "hoa.2d.meter~": {
     "category": [
       "MSP U/I"
     ],
@@ -24,12 +24,12 @@
       "category": [
         "High Order Ambisonics Library"
       ],
-      "action": "hoa.meter~",
-      "pic": "hoa.meter~.svg"
+      "action": "hoa.2d.meter~",
+      "pic": "hoa.2d.meter~.svg"
     }
   },
 
-  "hoa.map": {
+  "hoa.2d.map": {
     "category": [
       "U/I"
     ],
@@ -39,12 +39,12 @@
       "category": [
         "High Order Ambisonics Library"
       ],
-      "action": "hoa.map",
-      "pic": "hoa.map.svg"
+      "action": "hoa.2d.map",
+      "pic": "hoa.2d.map.svg"
     }
   },
 
-  "hoa.recomposer": {
+  "hoa.2d.recomposer": {
     "category": [
       "U/I"
     ],
@@ -55,7 +55,7 @@
         "High Order Ambisonics Library"
       ],
       "action": "hoa.recomposer",
-      "pic": "hoa.recomposer.svg"
+      "pic": "hoa.2d.recomposer.svg"
     }
   },
 
@@ -74,7 +74,7 @@
     }
   },
 
-  "hoa.space": {
+  "hoa.2d.space": {
     "category": [
       "U/I"
     ],
@@ -84,22 +84,14 @@
       "category": [
         "High Order Ambisonics Library"
       ],
-      "action": "hoa.space",
-      "pic": "hoa.space.svg"
+      "action": "hoa.2d.space",
+      "pic": "hoa.2d.space.svg"
     }
   },
 
   "hoa.connect": {
     "digest": "Utility to connect the hoa objects together",
     "module": "max",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-
-  "hoa.convolve~": {
-    "digest": "An ambisonic zero latency convolution external",
-    "module": "msp",
     "category": [
       "High Order Ambisonics Library"
     ]
@@ -113,7 +105,7 @@
     ]
   },
 
-  "hoa.decoder~": {
+  "hoa.2d.decoder~": {
     "digest": "An ambisonic decoder",
     "module": "msp",
     "category": [
@@ -121,7 +113,7 @@
     ]
   },
 
-  "hoa.encoder~": {
+  "hoa.2d.encoder~": {
     "digest": "An ambisonic Encoder",
     "module": "msp",
     "category": [
@@ -129,23 +121,7 @@
     ]
   },
 
-  "hoa.freeverb~": {
-    "digest": "An ambisonic Freeverb",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-
-  "hoa.gigaverb~": {
-    "digest": "An ambisonic Gigaverb",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-
-  "hoa.map~": {
+  "hoa.2d.map~": {
     "digest": "An ambisonic multisource spatializer",
     "module": "msp",
     "category": [
@@ -153,7 +129,7 @@
     ]
   },
   
-  "hoa.optim~": {
+  "hoa.2d.optim~": {
     "digest": "An ambisonic optimization external",
     "module": "msp",
     "category": [
@@ -168,6 +144,7 @@
       "High Order Ambisonics Library"
     ]
   },
+
   "hoa.pi~": {
     "digest": "Output PI value (signal version)",
     "module": "msp",
@@ -184,7 +161,7 @@
     ]
   },
   
-  "hoa.plug~": {
+  "hoa.process~": {
     "digest": "A patcher that duplicates patcher for hoa process",
     "module": "msp",
     "category": [
@@ -192,7 +169,7 @@
     ]
   },
 
-  "hoa.projector~": {
+  "hoa.2d.projector~": {
     "digest": "An ambisonic projection external",
     "module": "msp",
     "category": [
@@ -200,7 +177,7 @@
     ]
   },
 
-  "hoa.recomposer~": {
+  "hoa.2d.recomposer~": {
     "digest": "Fisheye operation in the plane wave domain",
     "module": "msp",
     "category": [
@@ -216,7 +193,7 @@
     ]
   },
 
-  "hoa.rotate~": {
+  "hoa.2d.rotate~": {
     "digest": "An ambisonic soundfield rotation external",
     "module": "msp",
     "category": [
@@ -224,15 +201,7 @@
     ]
   },
 
-  "hoa.space~": {
-    "digest": "A planewave soundfield gain",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-
-  "hoa.vector~": {
+  "hoa.2d.vector~": {
     "digest": "A Soundfield Energy and Velocity calculator",
     "module": "msp",
     "category": [
@@ -240,7 +209,7 @@
     ]
   },
 
-  "hoa.wider~": {
+  "hoa.2d.wider~": {
     "digest": "A fractional ambisonic order simulator",
     "module": "msp",
     "category": [
