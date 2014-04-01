@@ -37,6 +37,7 @@ void hoa_thisprocess_free(t_hoa_thisprocess *x);
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_loadbang(t_hoa_thisprocess *x);
 void hoa_thisprocess_bang(t_hoa_thisprocess *x);
+void hoa_thisprocess_dobang(t_hoa_thisprocess *x);
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s);
 
 long hoa_get_number_of_attributes(long ac, t_atom *av);
@@ -52,7 +53,7 @@ int C74_EXPORT main(void)
 	hoa_initclass(c, (method)NULL);
 	
 	class_addmethod(c, (method)hoa_thisprocess_assist,			"assist",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
+	//class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
 	
@@ -256,7 +257,7 @@ void hoa_process_attrs(t_hoa_thisprocess *x, long patcher_nAttrs, t_attr_struct 
 		attr_index++;
 	}
 	
-	// The same with patcher attrs :
+	// The same of patcher attrs :
 	for (i = 0; i < patcher_nAttrs; i++)
 	{
 		attrSym = attrs_patcher[i].msg;
@@ -289,6 +290,11 @@ void hoa_process_attrs(t_hoa_thisprocess *x, long patcher_nAttrs, t_attr_struct 
 }
 
 void hoa_thisprocess_bang(t_hoa_thisprocess *x)
+{
+    defer_low(x, (method)hoa_thisprocess_dobang, NULL, 0, NULL);
+}
+
+void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 {
 	// object must be in a hoa.process~ object
 	if (!x->hoaProcessor_parent || x->index <= 0)
@@ -328,7 +334,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 			
 			// output done message to indicate that the attributes have been processed
 			
-			outlet_anything(x->out_patcherAttr, gensym("done"), 0, NULL);
+			outlet_anything(x->out_patcherAttr, hoa_sym_done, 0, NULL);
 			
 			// free patcher_attrs
 			
@@ -381,29 +387,29 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 	// output process mode info (ambisonics/planewave + 2d/3d)
 	
 	av = new t_atom[2];
-	atom_setsym(av, is_2D ? gensym("2d") : gensym("3d"));
+	atom_setsym(av, is_2D ? hoa_sym_2d : hoa_sym_3d);
 	atom_setsym(av+1, mode);
 	outlet_list(x->out_mode, NULL, 2, av);
 	delete [] av;
 	
 	// output process instance info
 	
-	if (mode == hoa_sym_ambisonics)
+	if (mode == hoa_sym_harmonics)
 	{
 		if (is_2D)
 		{
 			av = new t_atom[2];
-			atom_setlong( av , x->f_ambi2D->getHarmonicArgument(x->index-1));	// Harmonic Argument
-			atom_setlong(av+1, x->f_order);										// Ambisonic Order
+            atom_setlong( av , x->f_order);										// Ambisonic Order
+			atom_setlong(av+1, x->f_ambi2D->getHarmonicArgument(x->index-1));	// Harmonic Argument
 			outlet_list(x->out_instance_infos, NULL, 2, av);
 			delete [] av;
 		}
 		else
 		{
 			av = new t_atom[3];
-			atom_setlong( av , x->f_ambi3D->getHarmonicArgument(x->index-1));	// Harmonic Argument
+            atom_setlong( av , x->f_order);										// Ambisonic Order
 			atom_setlong(av+1, x->f_ambi3D->getHarmonicBand(x->index-1));		// Harmonic Band
-			atom_setlong(av+2, x->f_order);										// Ambisonic Order
+			atom_setlong(av+2, x->f_ambi3D->getHarmonicArgument(x->index-1));	// Harmonic Argument
 			outlet_list(x->out_instance_infos, NULL, 3, av);
 			delete [] av;
 		}
@@ -411,8 +417,8 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 	else if (mode == hoa_sym_planewaves)
 	{
 		av = new t_atom[2];
-		atom_setlong( av , x->index);											// Channel Index
-		atom_setlong(av+1, x->f_order);											// Number of Channel
+		atom_setlong( av , x->f_order);											// Number of Channel
+        atom_setlong(av+1, x->index);											// Channel Index
 		outlet_list(x->out_instance_infos, NULL, 2, av);
 		delete [] av;
 	}

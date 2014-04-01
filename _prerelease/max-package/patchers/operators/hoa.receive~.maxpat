@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 505.0, 363.0, 236.0, 321.0 ],
@@ -29,13 +30,21 @@
 		"title" : "hoa.receive~ (-4)",
 		"boxes" : [ 			{
 				"box" : 				{
-					"comment" : "",
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-10",
-					"maxclass" : "inlet",
-					"numinlets" : 0,
+					"maxclass" : "newobj",
+					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 8.0, 4.0, 25.0, 25.0 ]
+					"patching_rect" : [ 8.0, 4.0, 95.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "",
+						"extra" : 1
+					}
+,
+					"text" : "hoa.in @extra 1"
 				}
 
 			}
@@ -62,7 +71,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 41.0, 284.5, 130.0, 18.0 ],
+					"patching_rect" : [ 78.0, 281.0, 130.0, 18.0 ],
 					"text" : "hoa_signal_tango-4"
 				}
 
@@ -153,26 +162,34 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 71.0, 60.0, 85.0, 20.0 ],
-					"text" : "patcherargs"
+					"numoutlets" : 5,
+					"outlettype" : [ "list", "list", "list", "list", "int" ],
+					"patching_rect" : [ 71.0, 60.0, 107.0, 20.0 ],
+					"text" : "hoa.thisprocess~"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"color" : [ 0.5, 0.5, 0.5, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-1",
-					"maxclass" : "outlet",
+					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 8.0, 281.0, 25.0, 25.0 ]
+					"patching_rect" : [ 8.0, 281.0, 58.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : ""
+					}
+,
+					"text" : "hoa.out~"
 				}
 
 			}
@@ -214,7 +231,7 @@
 					"destination" : [ "obj-9", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 17.5, 195.25, 161.5, 195.25 ],
+					"midpoints" : [ 17.5, 195.25, 198.5, 195.25 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -260,7 +277,7 @@
 					"destination" : [ "obj-5", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-4", 1 ]
+					"source" : [ "obj-4", 3 ]
 				}
 
 			}
@@ -300,6 +317,19 @@
 					"source" : [ "obj-8", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

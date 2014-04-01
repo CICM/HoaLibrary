@@ -36,6 +36,11 @@ static t_symbol* hoa_sym_stop 						= gensym("stop");
 static t_symbol* hoa_sym_front 						= gensym("front");
 static t_symbol* hoa_sym_iterate 					= gensym("iterate");
 
+// common messages
+static t_symbol* hoa_sym_done						= gensym("done");
+static t_symbol* hoa_sym_2d							= gensym("2d");
+static t_symbol* hoa_sym_3d							= gensym("3d");
+
 // hoa.process
 static t_symbol* hoa_sym_getassoc					= gensym("getassoc");
 static t_symbol* hoa_sym_setassoc 					= gensym("setassoc");
@@ -50,6 +55,7 @@ static t_symbol* hoa_sym_process_mode_no			= gensym("no");
 static t_symbol* hoa_sym_process_mode_post 			= gensym("post");
 static t_symbol* hoa_sym_process_mode_out 			= gensym("out");
 static t_symbol* hoa_sym_ambisonics					= gensym("ambisonics");
+static t_symbol* hoa_sym_harmonics					= gensym("harmonics");
 static t_symbol* hoa_sym_planewaves					= gensym("planewaves");
 static t_symbol* hoa_sym_extra						= gensym("extra");
 static t_symbol* hoa_sym_comment					= gensym("comment");
@@ -80,7 +86,8 @@ static t_symbol* hoa_sym_jpatcher 					= gensym("jpatcher");
 static t_symbol* hoa_sym_noedit 					= gensym("noedit");
 static t_symbol* hoa_sym_vis 						= gensym("vis");
 static t_symbol* hoa_sym_invis 						= gensym("invis");
-static t_symbol* hoa_sym_P 							= gensym("#P");
+static t_symbol* hoa_sym_pound_P 					= gensym("#P");
+static t_symbol* hoa_sym_pound_B 					= gensym("#B");
 static t_symbol* hoa_sym_selectbox 					= gensym("selectbox");
 static t_symbol* hoa_sym_insertboxtext 				= gensym("insertboxtext");
 static t_symbol* hoa_sym_gettextptr 				= gensym("gettextptr");

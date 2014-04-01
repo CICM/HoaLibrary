@@ -257,7 +257,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	t_symbol *tempsym;
 	long i;
 	int first_int = 1;
-	x->f_mode = hoa_sym_ambisonics;
+	x->f_mode = hoa_sym_harmonics;
 	short ac = 0;
 	t_atom av[MAX_ARGS];
 	long number_of_instances_to_load = 0;
@@ -328,7 +328,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Initialise patcher symbol
 	
-	object_obex_lookup(x, gensym("#P"), &x->parent_patch);									// store reference to parent patcher
+	object_obex_lookup(x, _sym_pound_P, &x->parent_patch);									// store reference to parent patcher
 	
 	// load a single instance to query io informations
 	
@@ -338,10 +338,9 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (loaded_patch_err != HOA_ERR_NONE)
 		return x;
 	
-	
 	// default io config depends on object type (2d/3d) and mode :
 	
-	if (x->f_mode == hoa_sym_ambisonics)
+	if (x->f_mode == hoa_sym_harmonics)
 	{
 		if (x->f_object_type == HOA_OBJECT_2D)
 			x->mode_default_numins = x->mode_default_numouts = x->f_ambi2D->getNumberOfHarmonics();
@@ -437,7 +436,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	if (patch_name_entered && loaded_patch_err == HOA_ERR_NONE)
 	{
-		if (x->f_mode == hoa_sym_ambisonics)
+		if (x->f_mode == hoa_sym_harmonics)
 		{
 			if (x->f_object_type == HOA_OBJECT_2D)
 				number_of_instances_to_load = x->f_ambi2D->getNumberOfHarmonics();
@@ -462,7 +461,7 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = x->f_object_type;
 	
-	if (x->f_mode == hoa_sym_ambisonics)
+	if (x->f_mode == hoa_sym_harmonics)
 	{
 		boxinfos->autoconnect_inputs = (long) max(x->instance_sig_ins, x->instance_ins);
 		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_ins, x->instance_ins);
@@ -611,7 +610,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		{
 			is_instance_ctrl = 1;
 			
-			if (x->f_mode == hoa_sym_ambisonics)
+			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
 					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
@@ -629,7 +628,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		{
 			is_instance_ctrl = 1;
 			
-			if (x->f_mode == hoa_sym_ambisonics)
+			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
 					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a - x->declared_sig_outs ).c_str());
@@ -647,7 +646,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		{
 			is_instance_sig = 1;
 			
-			if (x->f_mode == hoa_sym_ambisonics)
+			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
 					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
@@ -665,7 +664,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		{
 			is_instance_sig = 1;
 			
-			if (x->f_mode == hoa_sym_ambisonics)
+			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
 					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
@@ -714,19 +713,19 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 		else if (sig_extra_comment == hoa_sym_nothing && ctrl_extra_comment != hoa_sym_nothing)
 			sprintf(s,"(signal) %s, (messages) %s : %s", sig_basis_text, ctrl_basis_text, ctrl_extra_comment->s_name);
 	}
-	else if ( (is_instance_sig || is_extra_sig) && !is_instance_ctrl && !is_extra_ctrl)
+	else if ( (is_instance_sig || is_extra_sig) && (!is_instance_ctrl && !is_extra_ctrl))
 	{
 		if (sig_extra_comment == hoa_sym_nothing)
 			sprintf(s,"(signal) %s", sig_basis_text);
 		else
-			sprintf(s,"(signal) %s, %s", sig_basis_text, sig_extra_comment->s_name);
+			sprintf(s,"%s", sig_extra_comment->s_name);
 	}
-	else if ( (is_instance_ctrl || is_extra_ctrl) && !is_instance_sig && !is_extra_sig)
+	else if ( (is_instance_ctrl || is_extra_ctrl) && (!is_instance_sig && !is_extra_sig))
 	{
 		if (ctrl_extra_comment == hoa_sym_nothing)
 			sprintf(s,"(messages) %s", ctrl_basis_text);
 		else
-			sprintf(s,"(messages) %s, %s", ctrl_basis_text, ctrl_extra_comment->s_name);
+            sprintf(s,"%s", ctrl_extra_comment->s_name);
 	}
 	else
 	{
@@ -861,19 +860,19 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	
 	// Change the window name to : "patchname (index) [band arg]" (if mode no or post)
 	
-	if (x->f_mode == hoa_sym_ambisonics)
+	if (x->f_mode == hoa_sym_harmonics)
 	{
 		if (x->f_object_type == HOA_OBJECT_2D)
 		{
 			harmonic_band = x->f_ambi2D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi2D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index+1, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
 			harmonic_band = x->f_ambi3D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi3D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index+1, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
 		}
 	}
 	else
@@ -907,6 +906,8 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
 	
 	// The patch is valid and ready to go
+    
+    //object_method(patch_space_ptr->the_patch, gensym("loadbang"));
 	
 	patch_space_ptr->patch_valid = 1;
 	

@@ -413,7 +413,7 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
             x->f_channel_radius[i] = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5.;
         }
         
-        angle    = HOA_PI;
+        angle    = 0;
         abscissa = Hoa::abscissa(x->f_channel_radius[0], angle);
         ordinate = Hoa::ordinate(x->f_channel_radius[0], angle);
         jgraphics_move_to(g, abscissa, ordinate);
@@ -428,7 +428,7 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
                 index2 = 0;
             
             radius = cosine_interpolation(x->f_channel_radius[index1], x->f_channel_radius[index2], mu);
-            angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI * HOA_2PI + HOA_PI;
+			angle  = (double)i / (double)NUMBEROFCIRCLEPOINTS_UI * HOA_2PI;
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             jgraphics_line_to(g, abscissa, ordinate);
@@ -459,7 +459,7 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
 		{
             radius = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5. - 3.5;
             angle  = (double)(i + 1.) / (double)x->f_number_of_channels * HOA_2PI;
-            angle += HOA_PI - HOA_2PI / (double)x->f_number_of_channels;
+            angle -= HOA_2PI / (double)x->f_number_of_channels;
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             jgraphics_arc(g, abscissa, ordinate, 3., 0., HOA_2PI);
@@ -497,7 +497,7 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     if(modifiers == 148 || modifiers == 21) // ctrl : rotation
     {
         x->f_mode = 1;
-        x->f_angle_ref = wrap_twopi(azimuth(mouse.x, mouse.y) - HOA_PI + (HOA_PI / (double)x->f_number_of_channels));
+		x->f_angle_ref = wrap_twopi(azimuth(mouse.x, mouse.y));
         memcpy(x->f_channel_refs, x->f_channel_values, x->f_number_of_channels * sizeof(double));
     }
     else if(modifiers == 18) // shift : gain
@@ -527,7 +527,7 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     
     if(x->f_mode == 1) // ctrl : rotation
     {
-        angle   = wrap_twopi(azimuth(mouse.x, mouse.y) - HOA_PI + (HOA_PI / (double)x->f_number_of_channels));
+		angle   = wrap_twopi(azimuth(mouse.x, mouse.y));
         inc     = x->f_angle_ref - angle;
         for(int i = 0; i < x->f_number_of_channels; i++)
         {
@@ -555,7 +555,7 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     }
     else
     {
-        angle   = wrap_twopi(azimuth(mouse.x, mouse.y) - HOA_PI + (HOA_PI / (double)x->f_number_of_channels));
+		angle   = wrap_twopi(azimuth(mouse.x, mouse.y));
         radius  = Hoa::radius(mouse.x, mouse.y);
         index   = angle / HOA_2PI * x->f_number_of_channels;
         value   = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
