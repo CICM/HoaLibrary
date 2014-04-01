@@ -14,4 +14,13 @@
 
 using namespace Hoa2D;
 
+extern "C" void setup_hoa0x2econnect(void);
+extern "C" void setup_hoa0x2edac_tilde(void);
+extern "C" void setup_hoa0x2ein(void);
+extern "C" void setup_hoa0x2ein_tilde(void);
+extern "C" void setup_hoa0x2eout(void);
+extern "C" void setup_hoa0x2eout_tilde(void);
+extern "C" void setup_hoa0x2epi(void);
+extern "C" void setup_hoa0x2ethisprocess_tilde(void);
+
 #endif

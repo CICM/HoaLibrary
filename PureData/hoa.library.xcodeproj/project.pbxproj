@@ -1,0 +1,769 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		59FB02F817A7FAA9001E977D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FB02F717A7FAA9001E977D /* Accelerate.framework */; };
+		8F189F3518EB0DBE00348D89 /* hoa.pd_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */; };
+		8F189F3618EB0DBE00348D89 /* hoa.pd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F3318EB0DBE00348D89 /* hoa.pd.cpp */; };
+		8F189F3718EB0DBE00348D89 /* hoa.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3418EB0DBE00348D89 /* hoa.pd.h */; };
+		8F189F8218EB0E2C00348D89 /* Hoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3918EB0E2C00348D89 /* Hoa.h */; };
+		8F189F8318EB0E2C00348D89 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F3B18EB0E2C00348D89 /* Ambisonic.cpp */; };
+		8F189F8418EB0E2C00348D89 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3C18EB0E2C00348D89 /* Ambisonic.h */; };
+		8F189F8518EB0E2C00348D89 /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F3D18EB0E2C00348D89 /* BinauralMatrix2D.cpp */; };
+		8F189F8618EB0E2C00348D89 /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F3E18EB0E2C00348D89 /* ChannelManager.cpp */; };
+		8F189F8718EB0E2C00348D89 /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3F18EB0E2C00348D89 /* ChannelManager.h */; };
+		8F189F8818EB0E2C00348D89 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4018EB0E2C00348D89 /* Decoder.cpp */; };
+		8F189F8918EB0E2C00348D89 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4118EB0E2C00348D89 /* Decoder.h */; };
+		8F189F8A18EB0E2C00348D89 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4218EB0E2C00348D89 /* Encoder.cpp */; };
+		8F189F8B18EB0E2C00348D89 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4318EB0E2C00348D89 /* Encoder.h */; };
+		8F189F8C18EB0E2C00348D89 /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4418EB0E2C00348D89 /* Hoa2D.h */; };
+		8F189F8D18EB0E2C00348D89 /* Kits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4518EB0E2C00348D89 /* Kits.cpp */; };
+		8F189F8E18EB0E2C00348D89 /* Kits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4618EB0E2C00348D89 /* Kits.h */; };
+		8F189F8F18EB0E2C00348D89 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4718EB0E2C00348D89 /* Map.cpp */; };
+		8F189F9018EB0E2C00348D89 /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4818EB0E2C00348D89 /* Map.h */; };
+		8F189F9118EB0E2C00348D89 /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4918EB0E2C00348D89 /* Meter.cpp */; };
+		8F189F9218EB0E2C00348D89 /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4A18EB0E2C00348D89 /* Meter.h */; };
+		8F189F9318EB0E2C00348D89 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4B18EB0E2C00348D89 /* Optim.cpp */; };
+		8F189F9418EB0E2C00348D89 /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4C18EB0E2C00348D89 /* Optim.h */; };
+		8F189F9518EB0E2C00348D89 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4D18EB0E2C00348D89 /* Planewaves.cpp */; };
+		8F189F9618EB0E2C00348D89 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F4E18EB0E2C00348D89 /* Planewaves.h */; };
+		8F189F9718EB0E2C00348D89 /* Projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F4F18EB0E2C00348D89 /* Projector.cpp */; };
+		8F189F9818EB0E2C00348D89 /* Projector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5018EB0E2C00348D89 /* Projector.h */; };
+		8F189F9918EB0E2C00348D89 /* Recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5118EB0E2C00348D89 /* Recomposer.cpp */; };
+		8F189F9A18EB0E2C00348D89 /* Recomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5218EB0E2C00348D89 /* Recomposer.h */; };
+		8F189F9B18EB0E2C00348D89 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5318EB0E2C00348D89 /* Rotate.cpp */; };
+		8F189F9C18EB0E2C00348D89 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5418EB0E2C00348D89 /* Rotate.h */; };
+		8F189F9D18EB0E2C00348D89 /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5518EB0E2C00348D89 /* Scope.cpp */; };
+		8F189F9E18EB0E2C00348D89 /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5618EB0E2C00348D89 /* Scope.h */; };
+		8F189F9F18EB0E2C00348D89 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5718EB0E2C00348D89 /* Source.cpp */; };
+		8F189FA018EB0E2C00348D89 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5818EB0E2C00348D89 /* Source.h */; };
+		8F189FA118EB0E2C00348D89 /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5918EB0E2C00348D89 /* SourcesGroup.cpp */; };
+		8F189FA218EB0E2C00348D89 /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5A18EB0E2C00348D89 /* SourcesGroup.h */; };
+		8F189FA318EB0E2C00348D89 /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5B18EB0E2C00348D89 /* SourcesManager.cpp */; };
+		8F189FA418EB0E2C00348D89 /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5C18EB0E2C00348D89 /* SourcesManager.h */; };
+		8F189FA518EB0E2C00348D89 /* SourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5D18EB0E2C00348D89 /* SourcesPreset.cpp */; };
+		8F189FA618EB0E2C00348D89 /* SourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F5E18EB0E2C00348D89 /* SourcesPreset.h */; };
+		8F189FA718EB0E2C00348D89 /* SourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F5F18EB0E2C00348D89 /* SourcesTrajectory.cpp */; };
+		8F189FA818EB0E2C00348D89 /* SourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6018EB0E2C00348D89 /* SourcesTrajectory.h */; };
+		8F189FA918EB0E2C00348D89 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6118EB0E2C00348D89 /* Vector.cpp */; };
+		8F189FAA18EB0E2C00348D89 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6218EB0E2C00348D89 /* Vector.h */; };
+		8F189FAB18EB0E2C00348D89 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6318EB0E2C00348D89 /* Wider.cpp */; };
+		8F189FAC18EB0E2C00348D89 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6418EB0E2C00348D89 /* Wider.h */; };
+		8F189FAD18EB0E2C00348D89 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6618EB0E2C00348D89 /* Ambisonic.cpp */; };
+		8F189FAE18EB0E2C00348D89 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6718EB0E2C00348D89 /* Ambisonic.h */; };
+		8F189FAF18EB0E2C00348D89 /* BinauralMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6818EB0E2C00348D89 /* BinauralMatrix.cpp */; };
+		8F189FB018EB0E2C00348D89 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6918EB0E2C00348D89 /* Decoder.cpp */; };
+		8F189FB118EB0E2C00348D89 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6A18EB0E2C00348D89 /* Decoder.h */; };
+		8F189FB218EB0E2C00348D89 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6B18EB0E2C00348D89 /* Encoder.cpp */; };
+		8F189FB318EB0E2C00348D89 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6C18EB0E2C00348D89 /* Encoder.h */; };
+		8F189FB418EB0E2C00348D89 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6D18EB0E2C00348D89 /* Hoa3D.h */; };
+		8F189FB518EB0E2C00348D89 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F6E18EB0E2C00348D89 /* Map.cpp */; };
+		8F189FB618EB0E2C00348D89 /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F6F18EB0E2C00348D89 /* Map.h */; };
+		8F189FB718EB0E2C00348D89 /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7018EB0E2C00348D89 /* Meter.cpp */; };
+		8F189FB818EB0E2C00348D89 /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7118EB0E2C00348D89 /* Meter.h */; };
+		8F189FB918EB0E2C00348D89 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7218EB0E2C00348D89 /* Optim.cpp */; };
+		8F189FBA18EB0E2C00348D89 /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7318EB0E2C00348D89 /* Optim.h */; };
+		8F189FBB18EB0E2C00348D89 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7418EB0E2C00348D89 /* Planewaves.cpp */; };
+		8F189FBC18EB0E2C00348D89 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7518EB0E2C00348D89 /* Planewaves.h */; };
+		8F189FBD18EB0E2C00348D89 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7618EB0E2C00348D89 /* Rotate.cpp */; };
+		8F189FBE18EB0E2C00348D89 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7718EB0E2C00348D89 /* Rotate.h */; };
+		8F189FBF18EB0E2C00348D89 /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7818EB0E2C00348D89 /* Scope.cpp */; };
+		8F189FC018EB0E2C00348D89 /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7918EB0E2C00348D89 /* Scope.h */; };
+		8F189FC118EB0E2C00348D89 /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7A18EB0E2C00348D89 /* Tools.h */; };
+		8F189FC218EB0E2C00348D89 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7B18EB0E2C00348D89 /* Vector.cpp */; };
+		8F189FC318EB0E2C00348D89 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7C18EB0E2C00348D89 /* Vector.h */; };
+		8F189FC418EB0E2C00348D89 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189F7D18EB0E2C00348D89 /* Wider.cpp */; };
+		8F189FC518EB0E2C00348D89 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7E18EB0E2C00348D89 /* Wider.h */; };
+		8F189FC618EB0E2C00348D89 /* HoaDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7F18EB0E2C00348D89 /* HoaDefs.h */; };
+		8F189FC718EB0E2C00348D89 /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F8018EB0E2C00348D89 /* HoaMath.h */; };
+		8F189FC818EB0E2C00348D89 /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F8118EB0E2C00348D89 /* HoaUtils.h */; };
+		8F18A00918EB0E6400348D89 /* hoa.2d.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */; };
+		8F18A00A18EB0E6400348D89 /* hoa.2d.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */; };
+		8F18A00B18EB0E6400348D89 /* hoa.2d.map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */; };
+		8F18A00C18EB0E6400348D89 /* hoa.2d.map~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */; };
+		8F18A00D18EB0E6400348D89 /* hoa.2d.meter~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */; };
+		8F18A00E18EB0E6400348D89 /* hoa.2d.optim~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */; };
+		8F18A00F18EB0E6400348D89 /* hoa.2d.process~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00218EB0E6400348D89 /* hoa.2d.process~.cpp */; };
+		8F18A01018EB0E6400348D89 /* hoa.2d.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */; };
+		8F18A01118EB0E6400348D89 /* hoa.2d.recomposer~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */; };
+		8F18A01218EB0E6400348D89 /* hoa.2d.rotate~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */; };
+		8F18A01318EB0E6400348D89 /* hoa.2d.scope~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */; };
+		8F18A01418EB0E6400348D89 /* hoa.2d.space.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */; };
+		8F18A01518EB0E6400348D89 /* hoa.2d.wider~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */; };
+		8F18A01718EB0EA400348D89 /* Hoa2D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */; };
+		8F18A01A18EB0F2600348D89 /* HoaCommon.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */; };
+		8F18A02318EB0F3A00348D89 /* hoa.connect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */; };
+		8F18A02418EB0F3A00348D89 /* hoa.dac~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */; };
+		8F18A02518EB0F3A00348D89 /* hoa.in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */; };
+		8F18A02618EB0F3A00348D89 /* hoa.in~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */; };
+		8F18A02718EB0F3A00348D89 /* hoa.out.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */; };
+		8F18A02818EB0F3A00348D89 /* hoa.out~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */; };
+		8F18A02918EB0F3A00348D89 /* hoa.pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */; };
+		8F18A02A18EB0F3A00348D89 /* hoa.thisprocess~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */; };
+		8F26F18B17E76274005FCB97 /* hoa.library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F26F18A17E76273005FCB97 /* hoa.library.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5913846F15DAA36D0029AD16 /* hoa.library.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = hoa.library.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
+		59FB02F717A7FAA9001E977D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoa.pd_commonsyms.h; sourceTree = "<group>"; };
+		8F189F3318EB0DBE00348D89 /* hoa.pd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.pd.cpp; sourceTree = "<group>"; };
+		8F189F3418EB0DBE00348D89 /* hoa.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoa.pd.h; sourceTree = "<group>"; };
+		8F189F3918EB0E2C00348D89 /* Hoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa.h; sourceTree = "<group>"; };
+		8F189F3B18EB0E2C00348D89 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8F189F3C18EB0E2C00348D89 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		8F189F3D18EB0E2C00348D89 /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
+		8F189F3E18EB0E2C00348D89 /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
+		8F189F3F18EB0E2C00348D89 /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
+		8F189F4018EB0E2C00348D89 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		8F189F4118EB0E2C00348D89 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8F189F4218EB0E2C00348D89 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		8F189F4318EB0E2C00348D89 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		8F189F4418EB0E2C00348D89 /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
+		8F189F4518EB0E2C00348D89 /* Kits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kits.cpp; sourceTree = "<group>"; };
+		8F189F4618EB0E2C00348D89 /* Kits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kits.h; sourceTree = "<group>"; };
+		8F189F4718EB0E2C00348D89 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8F189F4818EB0E2C00348D89 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8F189F4918EB0E2C00348D89 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		8F189F4A18EB0E2C00348D89 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8F189F4B18EB0E2C00348D89 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8F189F4C18EB0E2C00348D89 /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8F189F4D18EB0E2C00348D89 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8F189F4E18EB0E2C00348D89 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8F189F4F18EB0E2C00348D89 /* Projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projector.cpp; sourceTree = "<group>"; };
+		8F189F5018EB0E2C00348D89 /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
+		8F189F5118EB0E2C00348D89 /* Recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recomposer.cpp; sourceTree = "<group>"; };
+		8F189F5218EB0E2C00348D89 /* Recomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomposer.h; sourceTree = "<group>"; };
+		8F189F5318EB0E2C00348D89 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		8F189F5418EB0E2C00348D89 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		8F189F5518EB0E2C00348D89 /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
+		8F189F5618EB0E2C00348D89 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		8F189F5718EB0E2C00348D89 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
+		8F189F5818EB0E2C00348D89 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		8F189F5918EB0E2C00348D89 /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
+		8F189F5A18EB0E2C00348D89 /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
+		8F189F5B18EB0E2C00348D89 /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
+		8F189F5C18EB0E2C00348D89 /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
+		8F189F5D18EB0E2C00348D89 /* SourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesPreset.cpp; sourceTree = "<group>"; };
+		8F189F5E18EB0E2C00348D89 /* SourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesPreset.h; sourceTree = "<group>"; };
+		8F189F5F18EB0E2C00348D89 /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
+		8F189F6018EB0E2C00348D89 /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
+		8F189F6118EB0E2C00348D89 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		8F189F6218EB0E2C00348D89 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8F189F6318EB0E2C00348D89 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		8F189F6418EB0E2C00348D89 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+		8F189F6618EB0E2C00348D89 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8F189F6718EB0E2C00348D89 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		8F189F6818EB0E2C00348D89 /* BinauralMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix.cpp; sourceTree = "<group>"; };
+		8F189F6918EB0E2C00348D89 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		8F189F6A18EB0E2C00348D89 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8F189F6B18EB0E2C00348D89 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		8F189F6C18EB0E2C00348D89 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		8F189F6D18EB0E2C00348D89 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
+		8F189F6E18EB0E2C00348D89 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8F189F6F18EB0E2C00348D89 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8F189F7018EB0E2C00348D89 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		8F189F7118EB0E2C00348D89 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8F189F7218EB0E2C00348D89 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8F189F7318EB0E2C00348D89 /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8F189F7418EB0E2C00348D89 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8F189F7518EB0E2C00348D89 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8F189F7618EB0E2C00348D89 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		8F189F7718EB0E2C00348D89 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		8F189F7818EB0E2C00348D89 /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
+		8F189F7918EB0E2C00348D89 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		8F189F7A18EB0E2C00348D89 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		8F189F7B18EB0E2C00348D89 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		8F189F7C18EB0E2C00348D89 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8F189F7D18EB0E2C00348D89 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		8F189F7E18EB0E2C00348D89 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+		8F189F7F18EB0E2C00348D89 /* HoaDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaDefs.h; sourceTree = "<group>"; };
+		8F189F8018EB0E2C00348D89 /* HoaMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaMath.h; sourceTree = "<group>"; };
+		8F189F8118EB0E2C00348D89 /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaUtils.h; sourceTree = "<group>"; };
+		8F189FCA18EB0E3C00348D89 /* cicm_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cicm_wrapper.h; sourceTree = "<group>"; };
+		8F189FCC18EB0E3C00348D89 /* ebox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ebox.h; sourceTree = "<group>"; };
+		8F189FCD18EB0E3C00348D89 /* ebox_attr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_attr.c; sourceTree = "<group>"; };
+		8F189FCE18EB0E3C00348D89 /* ebox_basic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_basic.c; sourceTree = "<group>"; };
+		8F189FCF18EB0E3C00348D89 /* ebox_draw.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_draw.c; sourceTree = "<group>"; };
+		8F189FD018EB0E3C00348D89 /* ebox_handle.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_handle.c; sourceTree = "<group>"; };
+		8F189FD118EB0E3C00348D89 /* ebox_patcher.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_patcher.c; sourceTree = "<group>"; };
+		8F189FD218EB0E3C00348D89 /* ebox_window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ebox_window.c; sourceTree = "<group>"; };
+		8F189FD418EB0E3C00348D89 /* eclass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eclass.h; sourceTree = "<group>"; };
+		8F189FD518EB0E3C00348D89 /* eclass_attrgetter.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_attrgetter.c; sourceTree = "<group>"; };
+		8F189FD618EB0E3C00348D89 /* eclass_attrnew.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_attrnew.c; sourceTree = "<group>"; };
+		8F189FD718EB0E3C00348D89 /* eclass_attroptions.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_attroptions.c; sourceTree = "<group>"; };
+		8F189FD818EB0E3C00348D89 /* eclass_attrsetter.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_attrsetter.c; sourceTree = "<group>"; };
+		8F189FD918EB0E3C00348D89 /* eclass_basic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_basic.c; sourceTree = "<group>"; };
+		8F189FDA18EB0E3C00348D89 /* eclass_widget.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eclass_widget.c; sourceTree = "<group>"; };
+		8F189FDC18EB0E3C00348D89 /* d_ugen.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_ugen.c; sourceTree = "<group>"; };
+		8F189FDD18EB0E3C00348D89 /* d_ugen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_ugen.h; sourceTree = "<group>"; };
+		8F189FDE18EB0E3C00348D89 /* d_ugen2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_ugen2.c; sourceTree = "<group>"; };
+		8F189FDF18EB0E3C00348D89 /* d_ugen2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_ugen2.h; sourceTree = "<group>"; };
+		8F189FE018EB0E3C00348D89 /* eboxflag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eboxflag.h; sourceTree = "<group>"; };
+		8F189FE118EB0E3C00348D89 /* ecommon.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ecommon.c; sourceTree = "<group>"; };
+		8F189FE218EB0E3C00348D89 /* ecommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ecommon.h; sourceTree = "<group>"; };
+		8F189FE318EB0E3C00348D89 /* g_canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = g_canvas.h; sourceTree = "<group>"; };
+		8F189FE418EB0E3C00348D89 /* m_imp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = m_imp.h; sourceTree = "<group>"; };
+		8F189FE518EB0E3C00348D89 /* m_pd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
+		8F189FE618EB0E3C00348D89 /* efft.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = efft.c; sourceTree = "<group>"; };
+		8F189FE718EB0E3C00348D89 /* efft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = efft.h; sourceTree = "<group>"; };
+		8F189FE918EB0E3C00348D89 /* egraphics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = egraphics.c; sourceTree = "<group>"; };
+		8F189FEA18EB0E3C00348D89 /* egraphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = egraphics.h; sourceTree = "<group>"; };
+		8F189FEB18EB0E3C00348D89 /* egraphics_color.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = egraphics_color.c; sourceTree = "<group>"; };
+		8F189FEC18EB0E3C00348D89 /* egraphics_forms.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = egraphics_forms.c; sourceTree = "<group>"; };
+		8F189FED18EB0E3C00348D89 /* egraphics_matrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = egraphics_matrix.c; sourceTree = "<group>"; };
+		8F189FEE18EB0E3C00348D89 /* egraphics_text.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = egraphics_text.c; sourceTree = "<group>"; };
+		8F189FF018EB0E3C00348D89 /* eobj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eobj.h; sourceTree = "<group>"; };
+		8F189FF118EB0E3C00348D89 /* eobj_basic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eobj_basic.c; sourceTree = "<group>"; };
+		8F189FF218EB0E3C00348D89 /* eobj_dsp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eobj_dsp.c; sourceTree = "<group>"; };
+		8F189FF318EB0E3C00348D89 /* eobj_handle.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eobj_handle.c; sourceTree = "<group>"; };
+		8F189FF418EB0E3C00348D89 /* eobj_proxy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eobj_proxy.c; sourceTree = "<group>"; };
+		8F189FF518EB0E3C00348D89 /* eobj_router.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = eobj_router.c; sourceTree = "<group>"; };
+		8F189FF618EB0E3C00348D89 /* epd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = epd.h; sourceTree = "<group>"; };
+		8F189FF718EB0E3C00348D89 /* epd_max.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = epd_max.h; sourceTree = "<group>"; };
+		8F189FF918EB0E3C00348D89 /* epopup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = epopup.c; sourceTree = "<group>"; };
+		8F189FFA18EB0E3C00348D89 /* epopup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
+		8F189FFB18EB0E3C00348D89 /* estruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
+		8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.decoder~.cpp"; path = "PD2D/hoaDecoder/hoa.2d.decoder~.cpp"; sourceTree = "<group>"; };
+		8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.encoder~.cpp"; path = "PD2D/hoaEncoder/hoa.2d.encoder~.cpp"; sourceTree = "<group>"; };
+		8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.map.cpp; path = PD2D/hoaMap_UI/hoa.2d.map.cpp; sourceTree = "<group>"; };
+		8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.map~.cpp"; path = "PD2D/hoaMap/hoa.2d.map~.cpp"; sourceTree = "<group>"; };
+		8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.meter~.cpp"; path = "PD2D/hoaMeter_UI/hoa.2d.meter~.cpp"; sourceTree = "<group>"; };
+		8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.optim~.cpp"; path = "PD2D/hoaOptim/hoa.2d.optim~.cpp"; sourceTree = "<group>"; };
+		8F18A00218EB0E6400348D89 /* hoa.2d.process~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.process~.cpp"; path = "PD2D/hoaProcess/hoa.2d.process~.cpp"; sourceTree = "<group>"; };
+		8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.projector~.cpp"; path = "PD2D/hoaProjector/hoa.2d.projector~.cpp"; sourceTree = "<group>"; };
+		8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.recomposer~.cpp"; path = "PD2D/hoaRecomposer/hoa.2d.recomposer~.cpp"; sourceTree = "<group>"; };
+		8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.rotate~.cpp"; path = "PD2D/hoaRotate/hoa.2d.rotate~.cpp"; sourceTree = "<group>"; };
+		8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.scope~.cpp"; path = "PD2D/hoaScope_UI/hoa.2d.scope~.cpp"; sourceTree = "<group>"; };
+		8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.space.cpp; path = PD2D/hoaSpace_UI/hoa.2d.space.cpp; sourceTree = "<group>"; };
+		8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.wider~.cpp"; path = "PD2D/hoaWider/hoa.2d.wider~.cpp"; sourceTree = "<group>"; };
+		8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.pd.h; path = PD2D/Hoa2D.pd.h; sourceTree = "<group>"; };
+		8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.pd.h; path = PDCommon/HoaCommon.pd.h; sourceTree = "<group>"; };
+		8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.connect.cpp; path = PDCommon/hoaConnect/hoa.connect.cpp; sourceTree = "<group>"; };
+		8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.dac~.cpp"; path = "PDCommon/hoaDac/hoa.dac~.cpp"; sourceTree = "<group>"; };
+		8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.in.cpp; path = PDCommon/hoaIn/hoa.in.cpp; sourceTree = "<group>"; };
+		8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.in~.cpp"; path = "PDCommon/hoaIn_tilde/hoa.in~.cpp"; sourceTree = "<group>"; };
+		8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.out.cpp; path = PDCommon/hoaOut/hoa.out.cpp; sourceTree = "<group>"; };
+		8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.out~.cpp"; path = "PDCommon/hoaOut_tilde/hoa.out~.cpp"; sourceTree = "<group>"; };
+		8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.pi.cpp; path = PDCommon/hoaPi/hoa.pi.cpp; sourceTree = "<group>"; };
+		8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.thisprocess~.cpp"; path = "PDCommon/hoaThisprocess/hoa.thisprocess~.cpp"; sourceTree = "<group>"; };
+		8F26F18A17E76273005FCB97 /* hoa.library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.library.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5913846C15DAA36D0029AD16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59FB02F817A7FAA9001E977D /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5913846415DAA36D0029AD16 = {
+			isa = PBXGroup;
+			children = (
+				8F26F18A17E76273005FCB97 /* hoa.library.cpp */,
+				8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */,
+				8F189F3318EB0DBE00348D89 /* hoa.pd.cpp */,
+				8F189F3418EB0DBE00348D89 /* hoa.pd.h */,
+				8F189FC918EB0E3C00348D89 /* CicmWrapper */,
+				8F189F3818EB0E2C00348D89 /* HoaLibrary */,
+				8F5B7C1918EB02E10038743B /* PD2D */,
+				8F18A01818EB0EFE00348D89 /* PDCommon */,
+				59FB02F717A7FAA9001E977D /* Accelerate.framework */,
+				5913847015DAA36D0029AD16 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5913847015DAA36D0029AD16 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5913846F15DAA36D0029AD16 /* hoa.library.pd_darwin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F189F3818EB0E2C00348D89 /* HoaLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				8F189F3918EB0E2C00348D89 /* Hoa.h */,
+				8F189F3A18EB0E2C00348D89 /* Hoa2D */,
+				8F189F6518EB0E2C00348D89 /* Hoa3D */,
+				8F189F7F18EB0E2C00348D89 /* HoaDefs.h */,
+				8F189F8018EB0E2C00348D89 /* HoaMath.h */,
+				8F189F8118EB0E2C00348D89 /* HoaUtils.h */,
+			);
+			name = HoaLibrary;
+			path = ../Sources;
+			sourceTree = "<group>";
+		};
+		8F189F3A18EB0E2C00348D89 /* Hoa2D */ = {
+			isa = PBXGroup;
+			children = (
+				8F189F3B18EB0E2C00348D89 /* Ambisonic.cpp */,
+				8F189F3C18EB0E2C00348D89 /* Ambisonic.h */,
+				8F189F3D18EB0E2C00348D89 /* BinauralMatrix2D.cpp */,
+				8F189F3E18EB0E2C00348D89 /* ChannelManager.cpp */,
+				8F189F3F18EB0E2C00348D89 /* ChannelManager.h */,
+				8F189F4018EB0E2C00348D89 /* Decoder.cpp */,
+				8F189F4118EB0E2C00348D89 /* Decoder.h */,
+				8F189F4218EB0E2C00348D89 /* Encoder.cpp */,
+				8F189F4318EB0E2C00348D89 /* Encoder.h */,
+				8F189F4418EB0E2C00348D89 /* Hoa2D.h */,
+				8F189F4518EB0E2C00348D89 /* Kits.cpp */,
+				8F189F4618EB0E2C00348D89 /* Kits.h */,
+				8F189F4718EB0E2C00348D89 /* Map.cpp */,
+				8F189F4818EB0E2C00348D89 /* Map.h */,
+				8F189F4918EB0E2C00348D89 /* Meter.cpp */,
+				8F189F4A18EB0E2C00348D89 /* Meter.h */,
+				8F189F4B18EB0E2C00348D89 /* Optim.cpp */,
+				8F189F4C18EB0E2C00348D89 /* Optim.h */,
+				8F189F4D18EB0E2C00348D89 /* Planewaves.cpp */,
+				8F189F4E18EB0E2C00348D89 /* Planewaves.h */,
+				8F189F4F18EB0E2C00348D89 /* Projector.cpp */,
+				8F189F5018EB0E2C00348D89 /* Projector.h */,
+				8F189F5118EB0E2C00348D89 /* Recomposer.cpp */,
+				8F189F5218EB0E2C00348D89 /* Recomposer.h */,
+				8F189F5318EB0E2C00348D89 /* Rotate.cpp */,
+				8F189F5418EB0E2C00348D89 /* Rotate.h */,
+				8F189F5518EB0E2C00348D89 /* Scope.cpp */,
+				8F189F5618EB0E2C00348D89 /* Scope.h */,
+				8F189F5718EB0E2C00348D89 /* Source.cpp */,
+				8F189F5818EB0E2C00348D89 /* Source.h */,
+				8F189F5918EB0E2C00348D89 /* SourcesGroup.cpp */,
+				8F189F5A18EB0E2C00348D89 /* SourcesGroup.h */,
+				8F189F5B18EB0E2C00348D89 /* SourcesManager.cpp */,
+				8F189F5C18EB0E2C00348D89 /* SourcesManager.h */,
+				8F189F5D18EB0E2C00348D89 /* SourcesPreset.cpp */,
+				8F189F5E18EB0E2C00348D89 /* SourcesPreset.h */,
+				8F189F5F18EB0E2C00348D89 /* SourcesTrajectory.cpp */,
+				8F189F6018EB0E2C00348D89 /* SourcesTrajectory.h */,
+				8F189F6118EB0E2C00348D89 /* Vector.cpp */,
+				8F189F6218EB0E2C00348D89 /* Vector.h */,
+				8F189F6318EB0E2C00348D89 /* Wider.cpp */,
+				8F189F6418EB0E2C00348D89 /* Wider.h */,
+			);
+			path = Hoa2D;
+			sourceTree = "<group>";
+		};
+		8F189F6518EB0E2C00348D89 /* Hoa3D */ = {
+			isa = PBXGroup;
+			children = (
+				8F189F6618EB0E2C00348D89 /* Ambisonic.cpp */,
+				8F189F6718EB0E2C00348D89 /* Ambisonic.h */,
+				8F189F6818EB0E2C00348D89 /* BinauralMatrix.cpp */,
+				8F189F6918EB0E2C00348D89 /* Decoder.cpp */,
+				8F189F6A18EB0E2C00348D89 /* Decoder.h */,
+				8F189F6B18EB0E2C00348D89 /* Encoder.cpp */,
+				8F189F6C18EB0E2C00348D89 /* Encoder.h */,
+				8F189F6D18EB0E2C00348D89 /* Hoa3D.h */,
+				8F189F6E18EB0E2C00348D89 /* Map.cpp */,
+				8F189F6F18EB0E2C00348D89 /* Map.h */,
+				8F189F7018EB0E2C00348D89 /* Meter.cpp */,
+				8F189F7118EB0E2C00348D89 /* Meter.h */,
+				8F189F7218EB0E2C00348D89 /* Optim.cpp */,
+				8F189F7318EB0E2C00348D89 /* Optim.h */,
+				8F189F7418EB0E2C00348D89 /* Planewaves.cpp */,
+				8F189F7518EB0E2C00348D89 /* Planewaves.h */,
+				8F189F7618EB0E2C00348D89 /* Rotate.cpp */,
+				8F189F7718EB0E2C00348D89 /* Rotate.h */,
+				8F189F7818EB0E2C00348D89 /* Scope.cpp */,
+				8F189F7918EB0E2C00348D89 /* Scope.h */,
+				8F189F7A18EB0E2C00348D89 /* Tools.h */,
+				8F189F7B18EB0E2C00348D89 /* Vector.cpp */,
+				8F189F7C18EB0E2C00348D89 /* Vector.h */,
+				8F189F7D18EB0E2C00348D89 /* Wider.cpp */,
+				8F189F7E18EB0E2C00348D89 /* Wider.h */,
+			);
+			path = Hoa3D;
+			sourceTree = "<group>";
+		};
+		8F189FC918EB0E3C00348D89 /* CicmWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FCA18EB0E3C00348D89 /* cicm_wrapper.h */,
+				8F189FCB18EB0E3C00348D89 /* ebox */,
+				8F189FD318EB0E3C00348D89 /* eclass */,
+				8F189FDB18EB0E3C00348D89 /* ecommon */,
+				8F189FE618EB0E3C00348D89 /* efft.c */,
+				8F189FE718EB0E3C00348D89 /* efft.h */,
+				8F189FE818EB0E3C00348D89 /* egraphics */,
+				8F189FEF18EB0E3C00348D89 /* eobj */,
+				8F189FF618EB0E3C00348D89 /* epd.h */,
+				8F189FF718EB0E3C00348D89 /* epd_max.h */,
+				8F189FF818EB0E3C00348D89 /* epopup */,
+				8F189FFB18EB0E3C00348D89 /* estruct.h */,
+			);
+			name = CicmWrapper;
+			path = ../ThirdParty/PureData/Sources;
+			sourceTree = "<group>";
+		};
+		8F189FCB18EB0E3C00348D89 /* ebox */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FCC18EB0E3C00348D89 /* ebox.h */,
+				8F189FCD18EB0E3C00348D89 /* ebox_attr.c */,
+				8F189FCE18EB0E3C00348D89 /* ebox_basic.c */,
+				8F189FCF18EB0E3C00348D89 /* ebox_draw.c */,
+				8F189FD018EB0E3C00348D89 /* ebox_handle.c */,
+				8F189FD118EB0E3C00348D89 /* ebox_patcher.c */,
+				8F189FD218EB0E3C00348D89 /* ebox_window.c */,
+			);
+			path = ebox;
+			sourceTree = "<group>";
+		};
+		8F189FD318EB0E3C00348D89 /* eclass */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FD418EB0E3C00348D89 /* eclass.h */,
+				8F189FD518EB0E3C00348D89 /* eclass_attrgetter.c */,
+				8F189FD618EB0E3C00348D89 /* eclass_attrnew.c */,
+				8F189FD718EB0E3C00348D89 /* eclass_attroptions.c */,
+				8F189FD818EB0E3C00348D89 /* eclass_attrsetter.c */,
+				8F189FD918EB0E3C00348D89 /* eclass_basic.c */,
+				8F189FDA18EB0E3C00348D89 /* eclass_widget.c */,
+			);
+			path = eclass;
+			sourceTree = "<group>";
+		};
+		8F189FDB18EB0E3C00348D89 /* ecommon */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FDC18EB0E3C00348D89 /* d_ugen.c */,
+				8F189FDD18EB0E3C00348D89 /* d_ugen.h */,
+				8F189FDE18EB0E3C00348D89 /* d_ugen2.c */,
+				8F189FDF18EB0E3C00348D89 /* d_ugen2.h */,
+				8F189FE018EB0E3C00348D89 /* eboxflag.h */,
+				8F189FE118EB0E3C00348D89 /* ecommon.c */,
+				8F189FE218EB0E3C00348D89 /* ecommon.h */,
+				8F189FE318EB0E3C00348D89 /* g_canvas.h */,
+				8F189FE418EB0E3C00348D89 /* m_imp.h */,
+				8F189FE518EB0E3C00348D89 /* m_pd.h */,
+			);
+			path = ecommon;
+			sourceTree = "<group>";
+		};
+		8F189FE818EB0E3C00348D89 /* egraphics */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FE918EB0E3C00348D89 /* egraphics.c */,
+				8F189FEA18EB0E3C00348D89 /* egraphics.h */,
+				8F189FEB18EB0E3C00348D89 /* egraphics_color.c */,
+				8F189FEC18EB0E3C00348D89 /* egraphics_forms.c */,
+				8F189FED18EB0E3C00348D89 /* egraphics_matrix.c */,
+				8F189FEE18EB0E3C00348D89 /* egraphics_text.c */,
+			);
+			path = egraphics;
+			sourceTree = "<group>";
+		};
+		8F189FEF18EB0E3C00348D89 /* eobj */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FF018EB0E3C00348D89 /* eobj.h */,
+				8F189FF118EB0E3C00348D89 /* eobj_basic.c */,
+				8F189FF218EB0E3C00348D89 /* eobj_dsp.c */,
+				8F189FF318EB0E3C00348D89 /* eobj_handle.c */,
+				8F189FF418EB0E3C00348D89 /* eobj_proxy.c */,
+				8F189FF518EB0E3C00348D89 /* eobj_router.c */,
+			);
+			path = eobj;
+			sourceTree = "<group>";
+		};
+		8F189FF818EB0E3C00348D89 /* epopup */ = {
+			isa = PBXGroup;
+			children = (
+				8F189FF918EB0E3C00348D89 /* epopup.c */,
+				8F189FFA18EB0E3C00348D89 /* epopup.h */,
+			);
+			path = epopup;
+			sourceTree = "<group>";
+		};
+		8F18A01818EB0EFE00348D89 /* PDCommon */ = {
+			isa = PBXGroup;
+			children = (
+				8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */,
+				8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */,
+				8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */,
+				8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */,
+				8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */,
+				8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */,
+				8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */,
+				8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */,
+				8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */,
+			);
+			name = PDCommon;
+			sourceTree = "<group>";
+		};
+		8F5B7C1918EB02E10038743B /* PD2D */ = {
+			isa = PBXGroup;
+			children = (
+				8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */,
+				8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */,
+				8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */,
+				8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */,
+				8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */,
+				8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */,
+				8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */,
+				8F18A00218EB0E6400348D89 /* hoa.2d.process~.cpp */,
+				8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */,
+				8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */,
+				8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */,
+				8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */,
+				8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */,
+				8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */,
+			);
+			name = PD2D;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5913846D15DAA36D0029AD16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F189FAC18EB0E2C00348D89 /* Wider.h in Headers */,
+				8F189FC018EB0E2C00348D89 /* Scope.h in Headers */,
+				8F18A01718EB0EA400348D89 /* Hoa2D.pd.h in Headers */,
+				8F189F8E18EB0E2C00348D89 /* Kits.h in Headers */,
+				8F189F9E18EB0E2C00348D89 /* Scope.h in Headers */,
+				8F18A01A18EB0F2600348D89 /* HoaCommon.pd.h in Headers */,
+				8F189F9018EB0E2C00348D89 /* Map.h in Headers */,
+				8F189FC718EB0E2C00348D89 /* HoaMath.h in Headers */,
+				8F189FC618EB0E2C00348D89 /* HoaDefs.h in Headers */,
+				8F189FB418EB0E2C00348D89 /* Hoa3D.h in Headers */,
+				8F189FC118EB0E2C00348D89 /* Tools.h in Headers */,
+				8F189F8B18EB0E2C00348D89 /* Encoder.h in Headers */,
+				8F189FAE18EB0E2C00348D89 /* Ambisonic.h in Headers */,
+				8F189F8218EB0E2C00348D89 /* Hoa.h in Headers */,
+				8F189FA018EB0E2C00348D89 /* Source.h in Headers */,
+				8F189FA818EB0E2C00348D89 /* SourcesTrajectory.h in Headers */,
+				8F189FBA18EB0E2C00348D89 /* Optim.h in Headers */,
+				8F189FC318EB0E2C00348D89 /* Vector.h in Headers */,
+				8F189F9A18EB0E2C00348D89 /* Recomposer.h in Headers */,
+				8F189FC818EB0E2C00348D89 /* HoaUtils.h in Headers */,
+				8F189F8718EB0E2C00348D89 /* ChannelManager.h in Headers */,
+				8F189F8C18EB0E2C00348D89 /* Hoa2D.h in Headers */,
+				8F189FA418EB0E2C00348D89 /* SourcesManager.h in Headers */,
+				8F189FAA18EB0E2C00348D89 /* Vector.h in Headers */,
+				8F189F9418EB0E2C00348D89 /* Optim.h in Headers */,
+				8F189FA618EB0E2C00348D89 /* SourcesPreset.h in Headers */,
+				8F189F9618EB0E2C00348D89 /* Planewaves.h in Headers */,
+				8F189F3518EB0DBE00348D89 /* hoa.pd_commonsyms.h in Headers */,
+				8F189F8418EB0E2C00348D89 /* Ambisonic.h in Headers */,
+				8F189FB618EB0E2C00348D89 /* Map.h in Headers */,
+				8F189F3718EB0DBE00348D89 /* hoa.pd.h in Headers */,
+				8F189F9818EB0E2C00348D89 /* Projector.h in Headers */,
+				8F189FBC18EB0E2C00348D89 /* Planewaves.h in Headers */,
+				8F189FBE18EB0E2C00348D89 /* Rotate.h in Headers */,
+				8F189FB318EB0E2C00348D89 /* Encoder.h in Headers */,
+				8F189FB818EB0E2C00348D89 /* Meter.h in Headers */,
+				8F189FA218EB0E2C00348D89 /* SourcesGroup.h in Headers */,
+				8F189F9C18EB0E2C00348D89 /* Rotate.h in Headers */,
+				8F189FB118EB0E2C00348D89 /* Decoder.h in Headers */,
+				8F189F9218EB0E2C00348D89 /* Meter.h in Headers */,
+				8F189FC518EB0E2C00348D89 /* Wider.h in Headers */,
+				8F189F8918EB0E2C00348D89 /* Decoder.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5913846E15DAA36D0029AD16 /* hoa.library */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.library" */;
+			buildPhases = (
+				5913846B15DAA36D0029AD16 /* Sources */,
+				5913846C15DAA36D0029AD16 /* Frameworks */,
+				5913846D15DAA36D0029AD16 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hoa.library;
+			productName = pd1;
+			productReference = 5913846F15DAA36D0029AD16 /* hoa.library.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5913846615DAA36D0029AD16 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.library" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5913846415DAA36D0029AD16;
+			productRefGroup = 5913847015DAA36D0029AD16 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5913846E15DAA36D0029AD16 /* hoa.library */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5913846B15DAA36D0029AD16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F189FA318EB0E2C00348D89 /* SourcesManager.cpp in Sources */,
+				8F18A02318EB0F3A00348D89 /* hoa.connect.cpp in Sources */,
+				8F18A01518EB0E6400348D89 /* hoa.2d.wider~.cpp in Sources */,
+				8F189F9318EB0E2C00348D89 /* Optim.cpp in Sources */,
+				8F189FA918EB0E2C00348D89 /* Vector.cpp in Sources */,
+				8F189F3618EB0DBE00348D89 /* hoa.pd.cpp in Sources */,
+				8F189FA718EB0E2C00348D89 /* SourcesTrajectory.cpp in Sources */,
+				8F189FB718EB0E2C00348D89 /* Meter.cpp in Sources */,
+				8F18A01118EB0E6400348D89 /* hoa.2d.recomposer~.cpp in Sources */,
+				8F18A00A18EB0E6400348D89 /* hoa.2d.encoder~.cpp in Sources */,
+				8F189FC218EB0E2C00348D89 /* Vector.cpp in Sources */,
+				8F189F8618EB0E2C00348D89 /* ChannelManager.cpp in Sources */,
+				8F189FB518EB0E2C00348D89 /* Map.cpp in Sources */,
+				8F189F9D18EB0E2C00348D89 /* Scope.cpp in Sources */,
+				8F189F9718EB0E2C00348D89 /* Projector.cpp in Sources */,
+				8F18A00C18EB0E6400348D89 /* hoa.2d.map~.cpp in Sources */,
+				8F189F8318EB0E2C00348D89 /* Ambisonic.cpp in Sources */,
+				8F189F9B18EB0E2C00348D89 /* Rotate.cpp in Sources */,
+				8F189F9518EB0E2C00348D89 /* Planewaves.cpp in Sources */,
+				8F189F8D18EB0E2C00348D89 /* Kits.cpp in Sources */,
+				8F18A00B18EB0E6400348D89 /* hoa.2d.map.cpp in Sources */,
+				8F18A01018EB0E6400348D89 /* hoa.2d.projector~.cpp in Sources */,
+				8F189FAB18EB0E2C00348D89 /* Wider.cpp in Sources */,
+				8F18A00918EB0E6400348D89 /* hoa.2d.decoder~.cpp in Sources */,
+				8F26F18B17E76274005FCB97 /* hoa.library.cpp in Sources */,
+				8F189FA118EB0E2C00348D89 /* SourcesGroup.cpp in Sources */,
+				8F189FB218EB0E2C00348D89 /* Encoder.cpp in Sources */,
+				8F18A02618EB0F3A00348D89 /* hoa.in~.cpp in Sources */,
+				8F18A02718EB0F3A00348D89 /* hoa.out.cpp in Sources */,
+				8F189FBB18EB0E2C00348D89 /* Planewaves.cpp in Sources */,
+				8F18A00D18EB0E6400348D89 /* hoa.2d.meter~.cpp in Sources */,
+				8F18A02818EB0F3A00348D89 /* hoa.out~.cpp in Sources */,
+				8F18A02A18EB0F3A00348D89 /* hoa.thisprocess~.cpp in Sources */,
+				8F18A01418EB0E6400348D89 /* hoa.2d.space.cpp in Sources */,
+				8F18A02518EB0F3A00348D89 /* hoa.in.cpp in Sources */,
+				8F189F9F18EB0E2C00348D89 /* Source.cpp in Sources */,
+				8F18A02418EB0F3A00348D89 /* hoa.dac~.cpp in Sources */,
+				8F189F9118EB0E2C00348D89 /* Meter.cpp in Sources */,
+				8F189FBD18EB0E2C00348D89 /* Rotate.cpp in Sources */,
+				8F189F9918EB0E2C00348D89 /* Recomposer.cpp in Sources */,
+				8F189FC418EB0E2C00348D89 /* Wider.cpp in Sources */,
+				8F189FAD18EB0E2C00348D89 /* Ambisonic.cpp in Sources */,
+				8F189FAF18EB0E2C00348D89 /* BinauralMatrix.cpp in Sources */,
+				8F18A01218EB0E6400348D89 /* hoa.2d.rotate~.cpp in Sources */,
+				8F189F8F18EB0E2C00348D89 /* Map.cpp in Sources */,
+				8F18A02918EB0F3A00348D89 /* hoa.pi.cpp in Sources */,
+				8F18A00E18EB0E6400348D89 /* hoa.2d.optim~.cpp in Sources */,
+				8F18A01318EB0E6400348D89 /* hoa.2d.scope~.cpp in Sources */,
+				8F189FBF18EB0E2C00348D89 /* Scope.cpp in Sources */,
+				8F189FA518EB0E2C00348D89 /* SourcesPreset.cpp in Sources */,
+				8F18A00F18EB0E6400348D89 /* hoa.2d.process~.cpp in Sources */,
+				8F189F8818EB0E2C00348D89 /* Decoder.cpp in Sources */,
+				8F189F8A18EB0E2C00348D89 /* Encoder.cpp in Sources */,
+				8F189FB018EB0E2C00348D89 /* Decoder.cpp in Sources */,
+				8F189F8518EB0E2C00348D89 /* BinauralMatrix2D.cpp in Sources */,
+				8F189FB918EB0E2C00348D89 /* Optim.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5913847215DAA36D0029AD16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support";
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5913847515DAA36D0029AD16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = NO_PUB;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
+				INSTALL_PATH = $SRCROOT/../../builds2D;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRELINK_LIBS = "";
+				PRODUCT_NAME = hoa.library;
+				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5913847215DAA36D0029AD16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5913847515DAA36D0029AD16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5913846615DAA36D0029AD16 /* Project object */;
+}

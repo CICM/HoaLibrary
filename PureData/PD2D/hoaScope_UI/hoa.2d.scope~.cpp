@@ -59,7 +59,8 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
 	t_eclass *c;
 
 	c = eclass_new("hoa.2d.scope~", (method)hoa_scope_new, (method)hoa_scope_free, (short)sizeof(t_hoa_scope), 0L, A_GIMME, 0);
-
+    class_addcreator((t_newmethod)hoa_scope_new, gensym("hoa.scope~"), A_GIMME);
+    
     eclass_dspinit(c);
     eclass_init(c, 0);
 	hoa_initclass(c, (method)hoa_getinfos);

@@ -63,7 +63,8 @@ extern "C" void setup_hoa0x2e2d0x2espace(void)
 {
     t_eclass* c;
     c = eclass_new("hoa.2d.space", (method)hoa_space_new, (method)hoa_space_free, sizeof(t_hoa_space), 0L, A_GIMME, 0);
-
+    class_addcreator((t_newmethod)hoa_space_new, gensym("hoa.space"), A_GIMME);
+    
     eclass_init(c, 0);
     hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_space_assist,          "assist",         A_CANT,	0);

@@ -33,6 +33,7 @@ extern "C" void setup_hoa0x2e2d0x2eoptim_tilde(void)
     t_eclass* c;
     
     c = eclass_new("hoa.2d.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (short)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_optim_new, gensym("hoa.optim~"), A_GIMME);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

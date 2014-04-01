@@ -40,6 +40,7 @@ extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
     t_eclass* c;
     
     c = eclass_new("hoa.2d.decoder~", (method)hoa_decoder_new, (method)hoa_decoder_free, (short)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_decoder_new, gensym("hoa.decoder~"), A_GIMME);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
@@ -123,7 +124,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         x->f_number_of_channels = x->f_decoder->getNumberOfChannels();
         x->f_decoder->setSampleRate(sys_getsr());
         x->f_decoder->setVectorSize(sys_getblksize());
-        
+    
         eobj_dspsetup(x, x->f_decoder->getNumberOfHarmonics(), x->f_decoder->getNumberOfChannels());
         x->f_ins = new t_float[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_outs= new t_float[MAX_CHANNELS * SYS_MAXBLKSIZE];

@@ -29,6 +29,7 @@ extern "C" void setup_hoa0x2e2d0x2ewider_tilde(void)
 {
     t_eclass* c;
     c = eclass_new("hoa.2d.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_wider_new, gensym("hoa.wider~"), A_GIMME);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

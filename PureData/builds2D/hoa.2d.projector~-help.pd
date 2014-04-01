@@ -1,4 +1,5 @@
 #N canvas 425 58 722 697 10;
+#X declare -lib hoa.library;
 #X obj -255 -563 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.projector~
 3 12 0 18 -204280 -1 0;
 #X obj -26 -424 hoa.pi 2;
@@ -24,10 +25,9 @@ in the plane domain compared to the ambisonic domain.;
 #X obj 329 -562 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 102 -255 hoa.2d.space @size 249 249 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send hoadelproj
-@presetname hoadelpreset @channels 10 @minmax 1 3000 @bgcolor 0.76
-0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.27 0.43 0.54 0.25 @ptcolor
-0 0 0 1;
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @channels 10 @minmax 1 3000 @bgcolor 0.76 0.76 0.76 1 @bdcolor
+0.7 0.7 0.7 1 @spcolor 0.27 0.43 0.54 0.25 @ptcolor 0 0 0 1;
 #X obj -236 -278 hoa.2d.recomposer~ 4 10 -----------------;
 #X obj -236 8 hoa.2d.decoder~ 4 ambisonic 10 ----------;
 #X obj -236 41 hoa.dac~ 1:10 ---------------------------;
@@ -75,6 +75,7 @@ hoa.2d.space list 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94
 #X obj 102 -2 c.prepend set;
 #X msg 102 20 1 1 1 1 1 1 1 1 1 1;
 #X obj -236 -316 hoa.2d.process~ 10 hoa.delay~ planewaves, f 37;
+#X obj 253 95 declare -lib hoa.library;
 #X connect 1 0 6 1;
 #X connect 6 0 19 1;
 #X connect 11 0 6 0;

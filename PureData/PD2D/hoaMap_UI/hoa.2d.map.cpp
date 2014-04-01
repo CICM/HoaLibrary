@@ -9,7 +9,7 @@
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
 
-typedef struct  _hoamap
+typedef struct  _hoa_map
 {
 	t_ebox          j_box;
 	t_rect          rect;
@@ -105,6 +105,7 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
 	t_eclass *c;
     
 	c = eclass_new("hoa.2d.map", (method)hoa_map_new, (method)hoa_map_free, sizeof(t_hoa_map), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_map_new, gensym("hoa.map"), A_GIMME);
     
     eclass_init(c, 0);
     

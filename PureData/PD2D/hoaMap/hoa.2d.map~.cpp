@@ -6,7 +6,7 @@
 
 #include "../Hoa2D.pd.h"
 
-class PolarLines
+class MapPolarLines
 {
     
 private:
@@ -18,8 +18,8 @@ private:
     unsigned int m_number_of_sources;
     
 public:
-    PolarLines(unsigned int numberOfSources);
-    ~PolarLines();
+    MapPolarLines(unsigned int numberOfSources);
+    ~MapPolarLines();
     
     inline unsigned int getNumberOfSources() const
     {
@@ -52,7 +52,7 @@ public:
     void process(float* vector);
 };
 
-typedef struct _hoa_map
+typedef struct _hoa_map_tilde
 {
     t_edspobj       f_ob;
     Hoa2D::Map*     f_map;
@@ -61,47 +61,48 @@ typedef struct _hoa_map
     
 	t_symbol*       f_mode;
     double          f_ramp;
-    PolarLines*     f_lines;
+    MapPolarLines*  f_lines;
     float*          f_lines_vector;
-} t_hoa_map;
+} t_hoa_map_tilde;
 
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_map_free(t_hoa_map *x);
-void hoa_map_list(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv);
+void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_map_tilde_free(t_hoa_map_tilde *x);
+void hoa_map_tilde_list(t_hoa_map_tilde *x, t_symbol *s, long argc, t_atom *argv);
 
-void hoa_map_dsp(t_hoa_map *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_map_tilde_dsp(t_hoa_map_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 
-void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_tilde_perform_multisources(t_hoa_map_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void hoa_map_perform(t_hoa_map *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_tilde_perform(t_hoa_map_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 
-t_pd_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
-t_pd_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+t_pd_err mode_set(t_hoa_map_tilde *x, t_object *attr, long argc, t_atom *argv);
+t_pd_err ramp_set(t_hoa_map_tilde *x, t_object *attr, long argc, t_atom *argv);
 
-t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_map_tilde* x, t_hoa_boxinfos* boxinfos);
 
-t_eclass *hoa_map_class;
+t_eclass *hoa_map_tilde_class;
 
 extern "C" void setup_hoa0x2e2d0x2emap_tilde(void)
 {
     t_eclass* c;
     
-    c = eclass_new("hoa.2d.map~", (method)hoa_map_new, (method)hoa_map_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.2d.map~", (method)hoa_map_tilde_new, (method)hoa_map_tilde_free, (short)sizeof(t_hoa_map_tilde), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_map_tilde_new, gensym("hoa.map~"), A_GIMME);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
-	eclass_addmethod(c, (method)hoa_map_dsp,     "dsp",      A_CANT, 0);
-    eclass_addmethod(c, (method)hoa_map_list,    "list",     A_GIMME, 0);
+	eclass_addmethod(c, (method)hoa_map_tilde_dsp,     "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_map_tilde_list,    "list",     A_GIMME, 0);
     
-    CLASS_ATTR_SYMBOL           (c, "mode", 0, t_hoa_map, f_mode);
+    CLASS_ATTR_SYMBOL           (c, "mode", 0, t_hoa_map_tilde, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "mode", 0, "Coordinates Types");
 	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
 	CLASS_ATTR_SAVE				(c, "mode", 1);
     
-    CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map, f_ramp);
+    CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map_tilde, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
@@ -109,12 +110,12 @@ extern "C" void setup_hoa0x2e2d0x2emap_tilde(void)
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
     
     eclass_register(CLASS_OBJ, c);
-    hoa_map_class = c;
+    hoa_map_tilde_class = c;
 }
 
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv)
 {
-    t_hoa_map *x = NULL;
+    t_hoa_map_tilde *x = NULL;
     t_binbuf *d;
     int	order = 1;
     int numberOfSources = 1;
@@ -122,7 +123,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
     if (!(d = binbuf_via_atoms(argc,argv)))
 		return NULL;
     
-    x = (t_hoa_map *)eobj_new(hoa_map_class);
+    x = (t_hoa_map_tilde *)eobj_new(hoa_map_tilde_class);
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -133,7 +134,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
         x->f_ramp       = 100;
         x->f_mode       = hoa_sym_polar;
 		x->f_map        = new Hoa2D::Map(order, numberOfSources);
-		x->f_lines      = new PolarLines(x->f_map->getNumberOfSources());
+		x->f_lines      = new MapPolarLines(x->f_map->getNumberOfSources());
         x->f_lines->setRamp(0.1 * sys_getsr());
         for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
         {
@@ -160,7 +161,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_map_tilde* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_2D;
 	
@@ -175,7 +176,7 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
+void hoa_map_tilde_list(t_hoa_map_tilde *x, t_symbol* s, long argc, t_atom* argv)
 {
     if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
     {
@@ -200,7 +201,7 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
     }
 }
 
-t_pd_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+t_pd_err mode_set(t_hoa_map_tilde *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
@@ -222,7 +223,7 @@ t_pd_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
     return 0;
 }
 
-t_pd_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+t_pd_err ramp_set(t_hoa_map_tilde *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
@@ -236,17 +237,17 @@ t_pd_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
     return 0;
 }
 
-void hoa_map_dsp(t_hoa_map *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_map_tilde_dsp(t_hoa_map_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
 	
     if(x->f_map->getNumberOfSources() == 1)
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_perform, 0, NULL);
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_tilde_perform, 0, NULL);
     else
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_perform_multisources, 0, NULL);
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_tilde_perform_multisources, 0, NULL);
 }
 
-void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_map_tilde_perform_multisources(t_hoa_map_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int nsources = x->f_map->getNumberOfSources();
     for(int i = 0; i < numins; i++)
@@ -269,7 +270,7 @@ void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, float **ins, lo
     }
 }
 
-void hoa_map_perform(t_hoa_map *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_map_tilde_perform(t_hoa_map_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -292,7 +293,7 @@ void hoa_map_perform(t_hoa_map *x, t_object *dsp64, float **ins, long numins, fl
 
 }
 
-void hoa_map_free(t_hoa_map *x)
+void hoa_map_tilde_free(t_hoa_map_tilde *x)
 {
 	eobj_dspfree(x);
 	delete x->f_lines;
@@ -302,7 +303,7 @@ void hoa_map_free(t_hoa_map *x)
 	delete [] x->f_lines_vector;
 }
 
-PolarLines::PolarLines(unsigned int numberOfSources)
+MapPolarLines::MapPolarLines(unsigned int numberOfSources)
 {
     assert(numberOfSources > 0);
     m_number_of_sources = numberOfSources;
@@ -312,19 +313,19 @@ PolarLines::PolarLines(unsigned int numberOfSources)
     m_values_step   = new float[m_number_of_sources * 2];
 }
 
-PolarLines::~PolarLines()
+MapPolarLines::~MapPolarLines()
 {
     delete [] m_values_old;
     delete [] m_values_new;
     delete [] m_values_step;
 }
 
-void PolarLines::setRamp(unsigned int ramp)
+void MapPolarLines::setRamp(unsigned int ramp)
 {
     m_ramp = clip_min(ramp, (long)1);
 }
 
-void PolarLines::setRadius(unsigned int index, double radius)
+void MapPolarLines::setRadius(unsigned int index, double radius)
 {
     assert(index < m_number_of_sources);
     m_values_new[index]  = radius;
@@ -332,7 +333,7 @@ void PolarLines::setRadius(unsigned int index, double radius)
     m_counter = 0;
 }
 
-void PolarLines::setAzimuth(unsigned int index, double azimuth)
+void MapPolarLines::setAzimuth(unsigned int index, double azimuth)
 {
     assert(index < m_number_of_sources);
     m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
@@ -362,7 +363,7 @@ void PolarLines::setAzimuth(unsigned int index, double azimuth)
     m_counter = 0;
 }
 
-void PolarLines::setRadiusDirect(unsigned int index, double radius)
+void MapPolarLines::setRadiusDirect(unsigned int index, double radius)
 {
     assert(index < m_number_of_sources);
     m_values_old[index] = m_values_new[index] = radius;
@@ -370,7 +371,7 @@ void PolarLines::setRadiusDirect(unsigned int index, double radius)
     m_counter = 0;
 }
 
-void PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
+void MapPolarLines::setAzimuthDirect(unsigned int index, double azimuth)
 {
     assert(index < m_number_of_sources);
     m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
@@ -378,7 +379,7 @@ void PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
     m_counter = 0;
 }
 
-void PolarLines::process(float* vector)
+void MapPolarLines::process(float* vector)
 {
     cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
     if(m_counter++ >= m_ramp)
