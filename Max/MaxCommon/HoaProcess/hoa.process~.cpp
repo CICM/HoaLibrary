@@ -906,8 +906,6 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
 	
 	// The patch is valid and ready to go
-    
-    //object_method(patch_space_ptr->the_patch, gensym("loadbang"));
 	
 	patch_space_ptr->patch_valid = 1;
 	
@@ -1050,8 +1048,26 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
+    if (x->f_mode == hoa_sym_harmonics)
+    {
+        if (x->f_object_type == HOA_OBJECT_2D)
+        {
+            ;
+        }
+        else if (x->f_object_type == HOA_OBJECT_3D)
+        {
+            ;
+        }
+    }
+    else if (x->f_mode == hoa_sym_planewaves)
+    {
+        
+    }
+    
+    /*
 	long target_index = argc ? atom_getlong(argv) : 0;
 	x->target_index = target_index;
+    */
 }
 
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
