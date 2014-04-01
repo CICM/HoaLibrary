@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 61.0, 70.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2078,13 +2078,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-3",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 443.5, 261.5, 230.0, 45.0 ],
-									"text" : "hoa.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"patching_rect" : [ 443.5, 261.5, 228.0, 58.0 ],
+									"text" : "hoa.2d.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -2145,7 +2145,7 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 421.0, 244.066666, 19.0 ],
-									"text" : "hoa.process~ 16 hoa.space~ planewaves"
+									"text" : "hoa.2d.process~ 16 hoa.space~ planewaves"
 								}
 
 							}
@@ -2381,7 +2381,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u862006598"
+									"varname" : "u495002963"
 								}
 
 							}
@@ -6653,13 +6653,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-3",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 443.5, 261.5, 230.0, 45.0 ],
-									"text" : "hoa.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"patching_rect" : [ 443.5, 261.5, 228.0, 58.0 ],
+									"text" : "hoa.2d.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -6775,8 +6775,8 @@
 									"numinlets" : 17,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 443.5, 421.0, 244.066666, 19.0 ],
-									"text" : "hoa.process~ 16 hoa.space~ planewaves"
+									"patching_rect" : [ 443.5, 421.0, 241.933334, 19.0 ],
+									"text" : "hoa.2d.process~ 16 hoa.space~ planewaves"
 								}
 
 							}
@@ -7473,7 +7473,7 @@
 									"destination" : [ "obj-15", 16 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 31.5, 564.0, 307.25, 564.0, 307.25, 411.0, 678.066666, 411.0 ],
+									"midpoints" : [ 31.5, 564.0, 307.25, 564.0, 307.25, 411.0, 675.933334, 411.0 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
@@ -8567,7 +8567,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 61.0, 70.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -10755,13 +10755,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-3",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 406.0, 235.5, 228.0, 45.0 ],
-									"text" : "hoa.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"patching_rect" : [ 406.0, 235.5, 228.0, 58.0 ],
+									"text" : "hoa.2d.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -10878,7 +10878,7 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 406.0, 395.0, 241.933334, 19.0 ],
-									"text" : "hoa.process~ 16 hoa.space~ planewaves"
+									"text" : "hoa.2d.process~ 16 hoa.space~ planewaves"
 								}
 
 							}
