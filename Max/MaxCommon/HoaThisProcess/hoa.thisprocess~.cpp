@@ -37,6 +37,7 @@ void hoa_thisprocess_free(t_hoa_thisprocess *x);
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_loadbang(t_hoa_thisprocess *x);
 void hoa_thisprocess_bang(t_hoa_thisprocess *x);
+void hoa_thisprocess_dobang(t_hoa_thisprocess *x);
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s);
 
 long hoa_get_number_of_attributes(long ac, t_atom *av);
@@ -52,7 +53,7 @@ int C74_EXPORT main(void)
 	hoa_initclass(c, (method)NULL);
 	
 	class_addmethod(c, (method)hoa_thisprocess_assist,			"assist",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
+	//class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
 	
@@ -289,6 +290,11 @@ void hoa_process_attrs(t_hoa_thisprocess *x, long patcher_nAttrs, t_attr_struct 
 }
 
 void hoa_thisprocess_bang(t_hoa_thisprocess *x)
+{
+    defer_low(x, (method)hoa_thisprocess_dobang, NULL, 0, NULL);
+}
+
+void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 {
 	// object must be in a hoa.process~ object
 	if (!x->hoaProcessor_parent || x->index <= 0)

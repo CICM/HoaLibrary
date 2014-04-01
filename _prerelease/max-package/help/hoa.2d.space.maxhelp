@@ -2381,7 +2381,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u495002963"
+									"varname" : "u478002993"
 								}
 
 							}
@@ -8592,14 +8592,26 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 0,
+									"patching_rect" : [ 326.0, 195.0, 82.0, 19.0 ],
+									"text" : "hoa.granular~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
 									"id" : "obj-4",
-									"linecount" : 4,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 16.0, 633.0, 304.0, 56.0 ],
-									"text" : "0.466691 0.470029 0.567369 0.713097 0.797741 0.786659 0.875039 0.957856 0.949073 0.883187 0.808614 0.720639 0.626982 0.578489 0.525714 0.489939"
+									"patching_rect" : [ 16.0, 633.0, 304.0, 17.0 ],
+									"text" : "1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1."
 								}
 
 							}
@@ -10745,8 +10757,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 546.0, 194.0, 126.0, 19.0 ],
-									"text" : "buffer~ space 1000"
+									"patching_rect" : [ 546.0, 194.0, 103.0, 19.0 ],
+									"text" : "buffer~ spac 1000"
 								}
 
 							}
@@ -10761,7 +10773,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 406.0, 235.5, 228.0, 58.0 ],
-									"text" : "hoa.2d.process~ 7 hoa.granular~ ambisonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"text" : "hoa.2d.process~ 7 hoa.granular~ harmonics args @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}

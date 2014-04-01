@@ -906,6 +906,8 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
 	
 	// The patch is valid and ready to go
+    
+    //object_method(patch_space_ptr->the_patch, gensym("loadbang"));
 	
 	patch_space_ptr->patch_valid = 1;
 	
