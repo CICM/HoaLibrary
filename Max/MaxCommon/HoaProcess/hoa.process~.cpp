@@ -157,10 +157,9 @@ short hoa_processor_get_patch_io_context(t_patcher *p, t_io_infos* io_infos);
 t_hoa_err hoa_processor_get_patch_filename_io_context(t_hoa_processor *x, t_symbol *patch_name_in, t_io_infos* io_infos);
 
 void hoa_processor_dblclick(t_hoa_processor *x);
-void hoa_processor_open(t_hoa_processor *x, long index);
+void hoa_processor_open(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
-void hoa_processor_pclose(t_hoa_processor *x);
-void hoa_processor_wclose(t_hoa_processor *x, long index);
+void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 
 short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_hoa_processor *x);
@@ -206,9 +205,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_assist,					"assist",				A_CANT, 0);
 
-	class_addmethod(c, (method)hoa_processor_open,						"open",					A_DEFLONG, 0);
-	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,	   0);
-	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_open,						"open",					A_GIMME,  0);
+	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,   0);
+	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_GIMME,  0);
 	
 	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",			A_CANT, 0);
@@ -858,7 +857,7 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 		return HOA_ERR_FAIL;
 	}
 	
-	// Change the window name to : "patchname (index) [band arg]" (if mode no or post)
+	// Change the window name to : "patchname [band arg]" (if mode no or post)
 	
 	if (x->f_mode == hoa_sym_harmonics)
 	{
@@ -866,13 +865,13 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 		{
 			harmonic_band = x->f_ambi2D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi2D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
 			harmonic_band = x->f_ambi3D->getHarmonicBand(index);
 			harmonic_argument = x->f_ambi3D->getHarmonicArgument(index);
-			snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
+			snprintf(windowname, 256, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
 		}
 	}
 	else
@@ -906,8 +905,6 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
 	
 	// The patch is valid and ready to go
-    
-    //object_method(patch_space_ptr->the_patch, gensym("loadbang"));
 	
 	patch_space_ptr->patch_valid = 1;
 	
@@ -928,10 +925,8 @@ void hoa_processor_bang(t_hoa_processor *x)
 	long index = proxy_getinlet((t_object *)x);	
 	long target_index = x->target_index;
 	
-	if (index >= x->declared_ins)
-	{
+	if (index >= x->declared_ins || target_index == -1)
 		return;
-	}
 
 	if (target_index)
 	{
@@ -950,7 +945,7 @@ void hoa_processor_int(t_hoa_processor *x, long n)
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
 	
-	if (index >= x->declared_ins)
+	if (index >= x->declared_ins || target_index == -1)
 		return;		
 	
 	if (target_index)
@@ -968,7 +963,7 @@ void hoa_processor_float(t_hoa_processor *x, double f)
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
 	
-	if (index >= x->declared_ins)
+	if (index >= x->declared_ins || target_index == -1)
 		return;
 	
 	if (target_index)
@@ -986,7 +981,7 @@ void hoa_processor_list(t_hoa_processor *x, t_symbol *s, short argc, t_atom *arg
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
 	
-	if (index >= x->declared_ins)
+	if (index >= x->declared_ins || target_index == -1)
 		return;
 	
 	if (target_index)
@@ -1000,7 +995,7 @@ void hoa_processor_anything(t_hoa_processor *x, t_symbol *s, short argc, t_atom 
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
 	
-	if (index >= x->declared_ins)
+	if (index >= x->declared_ins || target_index == -1)
 		return;		
 	
 	if (target_index)
@@ -1039,8 +1034,6 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 		{
 			io = (t_inout *) jbox_get_object(b);
 			
-			//post("hoa_processor_targetinlets io->s_index = %ld, args->index = %ld", io->s_index, args->index);
-			
 			if (io->s_index == args->index)
 				hoa_processor_output_typed_message(io->s_obj.o_outlet, args);
 		}
@@ -1050,8 +1043,75 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-	long target_index = argc ? atom_getlong(argv) : 0;
-	x->target_index = target_index;
+    long target_arg, target_band;
+    target_arg = target_band = 0;
+    
+    if (argc && argv)
+    {
+        if (atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
+        {
+            x->target_index = 0;
+        }
+        else if (atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("none"))
+        {
+            x->target_index = -1;
+        }
+        else if (atom_gettype(argv) == A_LONG)
+        {
+            if (x->f_mode == hoa_sym_harmonics)
+            {
+                if (x->f_object_type == HOA_OBJECT_2D)
+                {
+                    target_arg = atom_getlong(argv);
+                    if (target_arg < 0)
+                        x->target_index = abs(target_arg) * 2;
+                    else
+                        x->target_index = target_arg * 2 + 1;
+                    
+                    // bad target target none
+                    if (x->target_index <= 0 || x->target_index > x->patch_spaces_allocated)
+                    {
+                        object_warn((t_object *)x, "target [%ld] doesn't match any patcher instance", target_arg);
+                        x->target_index = -1;
+                    }
+                }
+                else if (x->f_object_type == HOA_OBJECT_3D)
+                {
+                    long target_arg_index = 0;
+                    target_band = atom_getlong(argv);
+                    
+                    if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                        target_arg = atom_getlong(argv+1);
+                    
+                    if (target_arg < 0)
+                        target_arg_index = abs(target_arg) * 2 - 1;
+                    else
+                        target_arg_index = target_arg * 2;
+                    
+                    x->target_index = (long)pow(target_band, 2) + 1;
+                    x->target_index += target_arg_index;
+                    
+                    // bad target target none
+                    if (target_band < 0 || target_band > x->f_order || target_arg < -target_band || target_arg > target_band)
+                    {
+                        object_warn((t_object *)x, "target [%ld, %ld] doesn't match any patcher instance", target_band, target_arg);
+                        x->target_index = -1;
+                    }
+                }
+            }
+            else if (x->f_mode == hoa_sym_planewaves)
+            {
+                x->target_index = atom_getlong(argv);
+                
+                // bad target target none
+                if (x->target_index <= 0 || x->target_index > x->patch_spaces_allocated)
+                {
+                    object_warn((t_object *)x, "target (%ld) doesn't match any patcher instance", x->target_index);
+                    x->target_index = -1;
+                }
+            }
+        }
+    }
 }
 
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
@@ -1350,25 +1410,83 @@ short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x)
 
 void hoa_processor_dblclick(t_hoa_processor *x)
 {
-	long i;
-	
-	for (i = 0; i < x->patch_spaces_allocated; i++)
+    t_atom a;
+	for (int i = 0; i < x->patch_spaces_allocated; i++)
 	{
 		if (x->patch_space_ptrs[i]->the_patch)
 		{
-			hoa_processor_open(x, i + 1);
+            atom_setlong (&a, i + 1);
+            hoa_processor_open(x, NULL, 1, &a);
 			break;
 		}
 	}
 }
 
-void hoa_processor_open(t_hoa_processor *x, long index)
+void hoa_processor_open(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
+    long index, arg, band;
+    index = arg = band = 0;
 	t_atom a;
-	atom_setlong (&a, index - 1);
+
+    if (argc && argv && atom_gettype(argv) == A_LONG)
+    {
+        if (x->f_mode == hoa_sym_harmonics)
+        {
+            if (x->f_object_type == HOA_OBJECT_2D)
+            {
+                arg = atom_getlong(argv);
+                if (arg < 0)
+                    index = abs(arg) * 2;
+                else
+                    index = arg * 2 + 1;
+                
+                // bad target target none
+                if (index <= 0 || index > x->patch_spaces_allocated)
+                {
+                    object_error((t_object *)x, "open [%ld] doesn't match any patcher instance", arg);
+                    index = -1;
+                }
+            }
+            else if (x->f_object_type == HOA_OBJECT_3D)
+            {
+                long arg_index = 0;
+                band = atom_getlong(argv);
+                
+                if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                    arg = atom_getlong(argv+1);
+                
+                if (arg < 0)
+                    arg_index = abs(arg) * 2 - 1;
+                else
+                    arg_index = arg * 2;
+                
+                index = (long)pow(band, 2) + 1;
+                index += arg_index;
+                
+                // bad target target none
+                if (band < 0 || band > x->f_order || arg < -band || arg > band)
+                {
+                    object_error((t_object *)x, "open [%ld, %ld] doesn't match any patcher instance", band, arg);
+                    index = -1;
+                }
+            }
+        }
+        else if (x->f_mode == hoa_sym_planewaves)
+        {
+            index = atom_getlong(argv);
+            
+            // bad target target none
+            if (index <= 0 || index > x->patch_spaces_allocated)
+            {
+                object_error((t_object *)x, "no patcher instance (%ld)", index);
+                index = -1;
+            }
+        }
+    }
+    
+    atom_setlong (&a, index - 1);
 	
-	if (index < 1) return;
-	if (index > x->patch_spaces_allocated) return;
+	if (index < 1 || index > x->patch_spaces_allocated) return;
 	if (!x->patch_space_ptrs[index - 1]->patch_valid) return;
 	
 	defer(x,(method)hoa_processor_doopen, 0L, 1, &a);
@@ -1382,6 +1500,77 @@ void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *a
 		mess0((t_object *)x->patch_space_ptrs[index]->the_patch, hoa_sym_front);		// this will always do the right thing
 }
 
+void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
+{
+    long index, arg, band;
+    index = arg = band = 0;
+	t_atom a;
+    
+    if (argc && argv && atom_gettype(argv) == A_LONG)
+    {
+        if (x->f_mode == hoa_sym_harmonics)
+        {
+            if (x->f_object_type == HOA_OBJECT_2D)
+            {
+                arg = atom_getlong(argv);
+                if (arg < 0)
+                    index = abs(arg) * 2;
+                else
+                    index = arg * 2 + 1;
+                
+                // bad target target none
+                if (index <= 0 || index > x->patch_spaces_allocated)
+                {
+                    object_error((t_object *)x, "wclose [%ld] doesn't match any patcher instance", arg);
+                    index = -1;
+                }
+            }
+            else if (x->f_object_type == HOA_OBJECT_3D)
+            {
+                long arg_index = 0;
+                band = atom_getlong(argv);
+                
+                if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                    arg = atom_getlong(argv+1);
+                
+                if (arg < 0)
+                    arg_index = abs(arg) * 2 - 1;
+                else
+                    arg_index = arg * 2;
+                
+                index = (long)pow(band, 2) + 1;
+                index += arg_index;
+                
+                // bad target target none
+                if (band < 0 || band > x->f_order || arg < -band || arg > band)
+                {
+                    object_error((t_object *)x, "wclose [%ld, %ld] doesn't match any patcher instance", band, arg);
+                    index = -1;
+                }
+            }
+        }
+        else if (x->f_mode == hoa_sym_planewaves)
+        {
+            index = atom_getlong(argv);
+            
+            // bad target target none
+            if (index <= 0 || index > x->patch_spaces_allocated)
+            {
+                object_error((t_object *)x, "no patcher instance (%ld)", index);
+                index = -1;
+            }
+        }
+    }
+    
+    atom_setlong (&a, index - 1);
+	
+	if (index < 1 || index > x->patch_spaces_allocated) return;
+	if (!x->patch_space_ptrs[index - 1]->patch_valid) return;
+	
+	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
+}
+
+/*
 void hoa_processor_wclose(t_hoa_processor *x, long index)
 {
 	t_atom a;
@@ -1389,6 +1578,7 @@ void hoa_processor_wclose(t_hoa_processor *x, long index)
 	
 	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
 }
+*/
 
 void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
