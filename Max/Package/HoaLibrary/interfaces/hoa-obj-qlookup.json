@@ -1,0 +1,219 @@
+{
+  "hoa.2d.scope~": {
+    "category": [
+      "MSP U/I"
+    ],
+    "digest": "An ambisonic harmonic scope.",
+    "module": "hoa",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.2d.scope~",
+      "pic": "hoa.2d.scope~.svg"
+    }
+  },
+
+  "hoa.2d.meter~": {
+    "category": [
+      "MSP U/I"
+    ],
+    "digest": "An ambisonic meter~ and descriptor.",
+    "module": "msp",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.2d.meter~",
+      "pic": "hoa.2d.meter~.svg"
+    }
+  },
+
+  "hoa.2d.map": {
+    "category": [
+      "U/I"
+    ],
+    "digest": "A Graphical User Interface tool to spatialize ponctual source on a 2D plan",
+    "module": "hoa",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.2d.map",
+      "pic": "hoa.2d.map.svg"
+    }
+  },
+
+  "hoa.2d.recomposer": {
+    "category": [
+      "U/I"
+    ],
+    "digest": "A Graphical User Interface to manipulate virtual microphones",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.recomposer",
+      "pic": "hoa.2d.recomposer.svg"
+    }
+  },
+
+  "hoa.gain~": {
+    "category": [
+      "U/I"
+    ],
+    "digest": "A multichannel gain GUI",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.gain~",
+      "pic": "hoa.gain~.svg"
+    }
+  },
+
+  "hoa.2d.space": {
+    "category": [
+      "U/I"
+    ],
+    "digest": "A Graphical User Interface to design ambisonic space",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.2d.space",
+      "pic": "hoa.2d.space.svg"
+    }
+  },
+
+  "hoa.connect": {
+    "digest": "Utility to connect the hoa objects together",
+    "module": "max",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.dac~": {
+    "digest": "A custom dac~ object with mathlab syntax",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.decoder~": {
+    "digest": "An ambisonic decoder",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.encoder~": {
+    "digest": "An ambisonic Encoder",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.map~": {
+    "digest": "An ambisonic multisource spatializer",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+  
+  "hoa.2d.optim~": {
+    "digest": "An ambisonic optimization external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.pi": {
+    "digest": "Output PI value",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.pi~": {
+    "digest": "Output PI value (signal version)",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.play~": {
+    "digest": "hoa version of the sfplay~ vanilla object",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+  
+  "hoa.process~": {
+    "digest": "A patcher that duplicates patcher for hoa process",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.projector~": {
+    "digest": "An ambisonic projection external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.recomposer~": {
+    "digest": "Fisheye operation in the plane wave domain",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.record~": {
+    "digest": "hoa version of the sfrecord~ vanilla object",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.rotate~": {
+    "digest": "An ambisonic soundfield rotation external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.vector~": {
+    "digest": "A Soundfield Energy and Velocity calculator",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.2d.wider~": {
+    "digest": "A fractional ambisonic order simulator",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  }
+}

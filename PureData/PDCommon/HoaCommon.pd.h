@@ -22,5 +22,6 @@ extern "C" void setup_hoa0x2eout(void);
 extern "C" void setup_hoa0x2eout_tilde(void);
 extern "C" void setup_hoa0x2epi(void);
 extern "C" void setup_hoa0x2ethisprocess_tilde(void);
+extern "C" void setup_hoa0x2epi_tilde(void);
 
 #endif

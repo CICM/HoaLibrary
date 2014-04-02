@@ -742,7 +742,7 @@ void draw_vectors(t_hoa_meter *x, t_object *view, t_rect *rect)
                 x1 = abscissa(rad, ang);
                 y1 = ordinate(rad, ang);
             }
-            egraphics_arc(g, x1, y1, size, 0., HOA_PI);
+            egraphics_arc(g, x1, y1, size, 0., HOA_2PI);
             egraphics_fill(g);
 		}
         

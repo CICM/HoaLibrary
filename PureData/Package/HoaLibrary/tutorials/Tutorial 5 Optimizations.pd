@@ -1,0 +1,160 @@
+#N canvas 0 22 1440 852 10;
+#X obj 533 148 hoa.scope~ @patching_rect [ 533 148 171 171 ] @size
+[ 171 171 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 3 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 534 349 hoa.meter~ @patching_rect [ 534 349 170 170 ] @size
+[ 170 170 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval [ 50 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X obj 533 44 sig~ 1;
+#X obj 533 70 hoa.encoder~ 3 -------------;
+#X obj 534 326 hoa.decoder~ 3 0 8 ---------;
+#X obj 533 112 hoa.optim~ 3 ---------------;
+#X obj 534 537 bng 171 250 50 0 empty empty empty 17 7 2 10 -128992
+-258113 -4160;
+#X obj 616 632 cnv 2 2 2 empty opera ° 0 0 1 26 -128992 -62784 0;
+#X obj 600 612 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 620 604 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 641 621 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 627 622 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 614 649 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 637 643 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 592 636 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 610 623 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 601 649 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 627 652 cnv 2 2 2 empty opera2 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 642 596 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 600 572 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 618 686 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 667 661 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 682 615 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 562 603 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 558 675 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 646 563 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 571 631 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 657 679 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 588 666 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 550 637 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 658 632 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#X obj 606 696 cnv 2 2 2 empty opera3 ° 0 0 1 26 -128992 -128992 0
+;
+#N canvas 378 243 450 300 dispo 0;
+#X obj 102 300 s opera2;
+#X msg 112 243 color 11 11;
+#X msg 73 209 color 11 16;
+#X msg 141 276 color 11 11;
+#X obj 139 345 s opera3;
+#X msg 143 318 color 11 13;
+#X msg 245 278 mode inPhase;
+#X msg 245 230 mode basic;
+#X msg 245 254 mode maxRe;
+#X obj 1 1 vradio 15 1 0 3 empty empty empty 0 -8 0 10 -262144 -1 -1
+0;
+#X obj 160 144 sel 0 1 2;
+#X obj 271 330 s scope;
+#X text 20 -1 Basic;
+#X text 20 14 maxRe;
+#X text 19 29 inPhase;
+#X obj 32 256 s opera;
+#X msg 12 156 color 11 11;
+#X msg 51 183 color 11 18;
+#X obj 143 105 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 167 50 loadbang;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 4 0;
+#X connect 5 0 4 0;
+#X connect 6 0 11 0;
+#X connect 7 0 11 0;
+#X connect 8 0 11 0;
+#X connect 9 0 10 0;
+#X connect 10 0 7 0;
+#X connect 10 0 1 0;
+#X connect 10 0 3 0;
+#X connect 10 0 17 0;
+#X connect 10 1 8 0;
+#X connect 10 1 2 0;
+#X connect 10 1 3 0;
+#X connect 10 2 6 0;
+#X connect 10 2 2 0;
+#X connect 10 2 5 0;
+#X connect 16 0 15 0;
+#X connect 17 0 15 0;
+#X connect 18 0 16 0;
+#X connect 18 0 1 0;
+#X connect 18 0 3 0;
+#X connect 19 0 18 0;
+#X coords 0 -1 1 1 65 46 2 0 0;
+#X restore 743 147 pd dispo;
+#X obj 533 90 r scope;
+#X msg 744 221 \; pd dsp 1;
+#X msg 743 276 \; pd dsp 0;
+#X msg 744 221 \; pd dsp 1;
+#X msg 743 276 \; pd dsp 0;
+#X msg 744 221 \; pd dsp 1;
+#X msg 743 276 \; pd dsp 0;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 3 1 5 1;
+#X connect 3 2 5 2;
+#X connect 3 3 5 3;
+#X connect 3 4 5 4;
+#X connect 3 5 5 5;
+#X connect 3 6 5 6;
+#X connect 4 0 1 0;
+#X connect 4 1 1 1;
+#X connect 4 2 1 2;
+#X connect 4 3 1 3;
+#X connect 4 4 1 4;
+#X connect 4 5 1 5;
+#X connect 4 6 1 6;
+#X connect 4 7 1 7;
+#X connect 5 0 0 0;
+#X connect 5 0 4 0;
+#X connect 5 1 0 1;
+#X connect 5 1 4 1;
+#X connect 5 2 0 2;
+#X connect 5 2 4 2;
+#X connect 5 3 0 3;
+#X connect 5 3 4 3;
+#X connect 5 4 0 4;
+#X connect 5 4 4 4;
+#X connect 5 5 0 5;
+#X connect 5 5 4 5;
+#X connect 5 6 0 6;
+#X connect 5 6 4 6;
+#X connect 33 0 5 0;

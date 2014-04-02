@@ -1,0 +1,122 @@
+#N canvas 274 26 955 759 10;
+#X obj -276 -364 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.recomposer~
+3 12 0 18 -204280 -1 0;
+#X text -272 -341 A plane wave recomposer to harmonics domain;
+#X text 355 -33 Fisheye factor between 0 and 1;
+#X text 282 -346 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text 282 -362 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -272 -284 First argument is the order \, second argument is
+the number of channels (inputs) \, @mode value (int or sym) set the
+decomposition mode.;
+#X msg 422 -112 \; pd dsp 1;
+#X msg 422 -74 \; pd dsp 0;
+#X obj 127 97 hoa.2d.scope~ @size 171 171 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 127 24 hoa.2d.projector~ 4 10 --;
+#X obj 127 -174 hoa.2d.encoder~ 4 -------;
+#X obj 127 -143 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 370 -197 hoa.connect;
+#X obj 370 -216 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 124 325 hoa.dac~ 1:10 --------------;
+#X obj -36 -9 c.menu @size 100 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items fixe fisheye free @states 0 0 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 59 23 mode \$1;
+#X obj 274 -204 hoa.pi 0.8;
+#X obj 274 -248 c.loadmess;
+#X obj 127 63 hoa.2d.recomposer~ 4 10 ----;
+#X obj 292 -33 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -272 -189 fixe : without any "effect" and the soundfield is
+kept intact \, fisheye (to apply a fisheye.;
+#X text -271 -140 fisheye : the sound field is squeezed (around 0 degrees
+following the fisheye factor).;
+#X text -272 -225 There's 3 modes : free (that allows you to change
+angle and direcvity figures of "virtual microphones");
+#X text -269 -97 free : that allows you to change angle and direcvity
+figures of "virtual microphones" \, the sound field is deformed by
+the simulation of virtual microphones with an irregular repartition
+over the circle and eclectic directivities.;
+#X text -273 -321 hoa.2D.recomposer~ recomposes a plane wave decomposition
+into circular harmonics.;
+#X obj 292 31 line~;
+#X msg 292 2 \$1 200;
+#X obj 127 -220 hoa.soundrone;
+#X obj 124 292 hoa.2d.decoder~ 4 0 10 -----;
+#X connect 9 0 19 0;
+#X connect 9 1 19 1;
+#X connect 9 2 19 2;
+#X connect 9 3 19 3;
+#X connect 9 4 19 4;
+#X connect 9 5 19 5;
+#X connect 9 6 19 6;
+#X connect 9 7 19 7;
+#X connect 9 8 19 8;
+#X connect 9 9 19 9;
+#X connect 10 0 9 0;
+#X connect 10 0 11 0;
+#X connect 10 1 9 1;
+#X connect 10 1 11 1;
+#X connect 10 2 9 2;
+#X connect 10 2 11 2;
+#X connect 10 3 9 3;
+#X connect 10 3 11 3;
+#X connect 10 4 9 4;
+#X connect 10 4 11 4;
+#X connect 10 5 9 5;
+#X connect 10 5 11 5;
+#X connect 10 6 9 6;
+#X connect 10 6 11 6;
+#X connect 10 7 9 7;
+#X connect 10 7 11 7;
+#X connect 10 8 9 8;
+#X connect 10 8 11 8;
+#X connect 13 0 12 0;
+#X connect 15 1 16 0;
+#X connect 16 0 19 0;
+#X connect 17 0 10 1;
+#X connect 18 0 17 0;
+#X connect 19 0 8 0;
+#X connect 19 0 29 0;
+#X connect 19 1 8 1;
+#X connect 19 1 29 1;
+#X connect 19 2 8 2;
+#X connect 19 2 29 2;
+#X connect 19 3 8 3;
+#X connect 19 3 29 3;
+#X connect 19 4 8 4;
+#X connect 19 4 29 4;
+#X connect 19 5 8 5;
+#X connect 19 5 29 5;
+#X connect 19 6 8 6;
+#X connect 19 6 29 6;
+#X connect 19 7 8 7;
+#X connect 19 7 29 7;
+#X connect 19 8 8 8;
+#X connect 19 8 29 8;
+#X connect 20 0 27 0;
+#X connect 26 0 19 10;
+#X connect 27 0 26 0;
+#X connect 28 0 10 0;
+#X connect 29 0 14 0;
+#X connect 29 1 14 1;
+#X connect 29 2 14 2;
+#X connect 29 3 14 3;
+#X connect 29 4 14 4;
+#X connect 29 5 14 5;
+#X connect 29 6 14 6;
+#X connect 29 7 14 7;
+#X connect 29 8 14 8;
+#X connect 29 9 14 9;
+#X coords 0 759 1 758 100 60 0;
