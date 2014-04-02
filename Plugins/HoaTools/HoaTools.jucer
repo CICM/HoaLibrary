@@ -61,6 +61,8 @@
       <FILE id="UZip9c" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <GROUP id="{5572EC5E-B1AB-D57B-4721-30D82FC0255F}" name="ressources">
+      <FILE id="wMirc1" name="hoa.icon_02_transp.png" compile="0" resource="1"
+            file="../../Ressources/hoa.icon_02_transp.png"/>
       <FILE id="WfvfTQ" name="icon-gear-256.png" compile="0" resource="1"
             file="ressources/icon-gear-256.png"/>
       <FILE id="wO4ODB" name="icon-info-256.png" compile="0" resource="1"

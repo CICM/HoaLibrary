@@ -593,6 +593,7 @@
 		A3EEF5301869DEB6E1404EEE = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_RelativeRectangle.h"; path = "../../../../ThirdParty/JuceModulesPlug/juce_gui_basics/positioning/juce_RelativeRectangle.h"; sourceTree = "SOURCE_ROOT"; };
 		A43512E7603DC7F23DFD8D89 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_KeyListener.h"; path = "../../../../ThirdParty/JuceModulesPlug/juce_gui_basics/keyboard/juce_KeyListener.h"; sourceTree = "SOURCE_ROOT"; };
 		A54BDB64B245A64E2108B974 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_AppleRemote.h"; path = "../../../../ThirdParty/JuceModulesPlug/juce_gui_extra/misc/juce_AppleRemote.h"; sourceTree = "SOURCE_ROOT"; };
+		A59AC2ECA54054A37D72B4C2 = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hoa.icon_02_transp.png"; path = "../../../../Ressources/hoa.icon_02_transp.png"; sourceTree = "SOURCE_ROOT"; };
 		A5BA424C2B5E702B46C82BE8 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_RelativePoint.h"; path = "../../../../ThirdParty/JuceModulesPlug/juce_gui_basics/positioning/juce_RelativePoint.h"; sourceTree = "SOURCE_ROOT"; };
 		A5C29B47D0AB80EA3CA7A4FB = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_PluginListComponent.cpp"; path = "../../../../ThirdParty/JuceModulesPlug/juce_audio_processors/scanning/juce_PluginListComponent.cpp"; sourceTree = "SOURCE_ROOT"; };
 		A5C9BAD719D9297ACBA27DD1 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HoaTextEditor.cpp; path = ../../Source/HoaTextEditor/HoaTextEditor.cpp; sourceTree = "SOURCE_ROOT"; };
@@ -925,6 +926,7 @@
 					A3D38C8A9C839B0075D678B9,
 					88E8849624C8E818EC15860B, ); name = plugSources; sourceTree = "<group>"; };
 		DE07E3B9ED48734FAF4DF863 = {isa = PBXGroup; children = (
+					A59AC2ECA54054A37D72B4C2,
 					0700DEB2693FDB75748A2081,
 					6CCD90564851B2BD825EC326,
 					8A04028B87F374A21C17D6A7, ); name = ressources; sourceTree = "<group>"; };

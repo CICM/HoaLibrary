@@ -81,8 +81,8 @@ void HoaMeterComponent::draw_background(Graphics& g)
     }
     
     g.setColour(Colours::white);
-    g.drawEllipse((int)(m_center - m_radius + 1.), (int)(m_center - m_radius + 1.), m_radius * 2., m_radius * 2., 4.);
-    g.drawEllipse((int)(m_center - m_radius_center + 1.), (int)(m_center - m_radius_center + 1.), m_radius_center * 2., m_radius_center * 2., 4.);
+    g.drawEllipse((int)(m_center - m_radius + 1.), (int)(m_center - m_radius + 1.), m_radius * 2., m_radius * 2., 3.);
+    g.drawEllipse((int)(m_center - m_radius_center + 1.), (int)(m_center - m_radius_center + 1.), m_radius_center * 2., m_radius_center * 2., 3.);
     
     g.setColour(Colours::black);
     g.drawEllipse((int)(m_center - m_radius), (int)(m_center - m_radius), m_radius * 2., m_radius * 2., 4.);

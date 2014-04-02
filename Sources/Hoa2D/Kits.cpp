@@ -113,20 +113,20 @@ namespace Hoa2D
         m_decoder   = new DecoderMulti(m_order);
         m_decoder->setDecodingMode(m_decoding_mode);
         m_decoder->setNumberOfChannels(m_number_of_channels);
-        
         m_meter     = new Meter(m_number_of_channels);
 		
 		sourceNewPolar(1., 0.);
         m_lines->setRadiusDirect(0, 1.);
         m_lines->setAzimuthDirect(0, 0.);
         
-        m_inputs_double     = new double[1];
-        m_outputs_double    = new double[1];
-        m_harmonics_double  = new double[1];
-        m_inputs_float      = new float[1];
-        m_outputs_float     = new float[1];
-        m_harmonics_float   = new float[1];
-        m_lines_vector      = new float[m_number_of_sources * 2];
+        
+        m_inputs_double     = new double[8192 * 64];
+        m_outputs_double    = new double[8192 * 64];
+        m_harmonics_double  = new double[8192 * 64];
+        m_inputs_float      = new float[8192 * 64];
+        m_outputs_float     = new float[8192 * 64];
+        m_harmonics_float   = new float[8192 * 64];
+        m_lines_vector      = new float[2 * 64];
     }
     
     void KitSources::setOrder(unsigned int order)
@@ -177,19 +177,6 @@ namespace Hoa2D
     {
         m_vector_size = vectorSize;
         m_decoder->setVectorSize(vectorSize);
-        delete [] m_inputs_double;
-        delete [] m_outputs_double;
-        delete [] m_harmonics_double;
-        delete [] m_inputs_float;
-        delete [] m_outputs_float;
-        delete [] m_harmonics_float;
-
-        m_inputs_double     = new double[m_vector_size * m_map->getNumberOfSources()];
-        m_outputs_double    = new double[m_vector_size * m_decoder->getNumberOfChannels()];
-        m_harmonics_double  = new double[m_vector_size * (m_map->getOrder() * 2 + 1)];
-        m_inputs_float      = new float[m_vector_size * m_map->getNumberOfSources()];
-        m_outputs_float     = new float[m_vector_size * m_decoder->getNumberOfChannels()];
-        m_harmonics_float   = new float[m_vector_size * (m_map->getOrder() * 2 + 1)];
     }
     
     void KitSources::process(const float** ins, float** outs)
@@ -197,6 +184,7 @@ namespace Hoa2D
         int numins  = m_map->getNumberOfSources();
         int numouts = m_decoder->getNumberOfChannels();
         int nharmo  = m_map->getOrder() * 2 + 1;
+        
         for(int i = 0; i < numins; i++)
         {
             cblas_scopy(m_vector_size, ins[i], 1, m_inputs_float+i, numins);
@@ -304,10 +292,6 @@ namespace Hoa2D
             m_lines    = new PolarLines(m_number_of_sources);
             m_lines_vector = new float[m_number_of_sources * 2];
             
-        }
-        if(getNumberOfSources() != m_number_of_sources)
-        {
-            ;
         }
     }
 	

@@ -15,6 +15,9 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     
     m_settings_icon = ImageCache::getFromMemory(BinaryData::icongear256_png, BinaryData::icongear256_pngSize);
     
+    m_setting_label = new Label();
+    m_setting_label->setText("Settings", juce::dontSendNotification);
+    
     m_label_settings = new Label();
     m_label_settings->setText("Settings", juce::dontSendNotification);
    
@@ -193,16 +196,17 @@ void HoaSettingsComponent::paint(Graphics& g)
 {
     if(getWidth() < PLUG_MENU_WIDTH)
     {
-		g.setColour(Colours::black);
-        //g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
-        g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::bottomLeft, 0);
         removeChildComponent(m_label_settings);
         removeChildComponent(m_optim_value);
         removeChildComponent(m_optim_label);
         removeChildComponent(m_decoder_value);
         removeChildComponent(m_decoder_label);
 		
-        g.drawImage(m_settings_icon, 0, 0, PLUG_MENU_WIDTH, PLUG_MENU_WIDTH, 0, 0, m_settings_icon.getWidth(), m_settings_icon.getHeight());
+        addAndMakeVisible(m_setting_label);
+        m_setting_label->setBounds(7, 80, getWidth() * 1.2, 60);
+        
+        
+        g.drawImage(m_settings_icon, 25, 25, PLUG_MENU_WIDTH, PLUG_MENU_WIDTH, 0, 0, m_settings_icon.getWidth() * 1.8, m_settings_icon.getHeight() * 1.8);
     }
     else
     {

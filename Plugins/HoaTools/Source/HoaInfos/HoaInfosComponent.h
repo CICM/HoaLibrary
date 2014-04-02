@@ -15,6 +15,9 @@ class HoaInfosComponent : public Component
 private:
     HoaComponentListener*   m_master;
     
+    Image                   m_info_icon;
+    Label*                  m_info_label;
+    
 
 public:
     HoaInfosComponent(HoaComponentListener* master);

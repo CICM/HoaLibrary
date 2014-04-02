@@ -19,6 +19,7 @@ private:
     HoaToolsAudioProcessor* m_processor;
     
     Image                   m_settings_icon;
+    Label*                  m_setting_label;
 	
     Label*                  m_label_settings;
 	

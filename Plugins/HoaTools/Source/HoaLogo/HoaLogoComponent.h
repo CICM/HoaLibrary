@@ -14,6 +14,8 @@ class HoaLogoComponent : public Component
 {
 private:
     
+    Image                   m_logo_icon;
+    Label*                  m_logo_label;
 
 public:
     HoaLogoComponent();
