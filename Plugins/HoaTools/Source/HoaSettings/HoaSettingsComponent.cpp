@@ -13,6 +13,8 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     m_master    = master;
     m_processor = processor;
     
+    m_settings_icon = ImageCache::getFromMemory(BinaryData::icongear256_png, BinaryData::icongear256_pngSize);
+    
     m_label_settings = new Label();
     m_label_settings->setText("Settings", juce::dontSendNotification);
    
@@ -56,6 +58,16 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
     m_number_of_sources_value->setText(String(m_processor->getNumberOfSources()), juce::dontSendNotification);
 	m_number_of_sources_value->addListener(this);
 	
+    // -- ordre
+    
+    m_ordre_label = new Label();
+    m_ordre_label->setText("Order", juce::dontSendNotification);
+	
+    m_ordre_value = new Label();
+	m_ordre_value->setEditable(true, false, false);
+	m_ordre_value->setText(String(m_processor->getOrder()), juce::dontSendNotification);
+	m_ordre_value->addListener(this);
+
 	// -- channels
 	
 	m_number_of_channels_label = new Label();
@@ -102,6 +114,8 @@ HoaSettingsComponent::~HoaSettingsComponent()
     delete m_decoder_label;
     delete m_number_of_sources_value;
     delete m_number_of_sources_label;
+    delete m_ordre_label;
+    delete m_ordre_value;
     delete m_number_of_channels_value;
     delete m_number_of_channels_label;
     delete m_offset_value;
@@ -115,16 +129,60 @@ void HoaSettingsComponent::comboBoxChanged(ComboBox* comboBox)
     if(comboBox == m_optim_value)
     {
         m_processor->setOptimMode(static_cast<Optim::Mode>(m_optim_value->getSelectedId() - 1));
+        
     }
 	else if(comboBox == m_decoder_value)
     {
         m_processor->setDecodingMode(static_cast<DecoderMulti::Mode>(m_decoder_value->getSelectedId() - 1));
+        m_number_of_channels_value->setText(String((int)m_processor->getNumberOfChannels()), juce::dontSendNotification);
+        
+        // Ajouter des boites //
+        for (int i = m_channels_azimuth_values.size(); i < m_processor->getNumberOfChannels(); i++)
+		{
+            m_channels_azimuth_values.push_back(new Label());
+			m_channels_azimuth_values[i]->setEditable(true, false, false);
+			m_channels_azimuth_values[i]->setText(String(0), juce::dontSendNotification);
+			m_channels_azimuth_values[i]->addListener(this);
+		}
+        
+        // Supprimer des boites //
+		for (int i = m_channels_azimuth_values.size(); i > m_processor->getNumberOfChannels(); i--)
+		{
+            m_channels_azimuth_values[i-1]->removeListener(this);
+			removeChildComponent(m_channels_azimuth_values[i-1]);
+            m_channels_azimuth_values.pop_back();
+		}
+        
+        for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+            m_channels_azimuth_values[i]->setText(String((int)3.14), juce::dontSendNotification);
+        
+        m_master->componentRedrawMeter();
+        
+        if(m_processor->getDecodingMode() == DecoderMulti::Binaural)
+        {
+            m_offset_value->setEnabled(0);
+            m_number_of_channels_value->setEnabled(0);
+            for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+                m_channels_azimuth_values[i]->setEnabled(0);
+        }
+        else if(m_processor->getDecodingMode() == DecoderMulti::Regular)
+        {
+            m_number_of_channels_value->setEnabled(1);
+            for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+                m_channels_azimuth_values[i]->setEnabled(0);
+        }
+        else if(m_processor->getDecodingMode() == DecoderMulti::Irregular)
+        {
+            m_number_of_channels_value->setEnabled(1);
+            for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+                m_channels_azimuth_values[i]->setEnabled(1);
+        }
     }
 }
 
 void HoaSettingsComponent::mouseDown(const MouseEvent &event)
 {
-    if(getWidth() < 125)
+    if(getWidth() < PLUG_MENU_WIDTH)
     {
         m_master->componentHasBeenClicked(this);
 		return;
@@ -133,20 +191,18 @@ void HoaSettingsComponent::mouseDown(const MouseEvent &event)
 
 void HoaSettingsComponent::paint(Graphics& g)
 {
-    if(getWidth() < 125)
+    if(getWidth() < PLUG_MENU_WIDTH)
     {
 		g.setColour(Colours::black);
-        g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
+        //g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
+        g.drawText(hoa_settings_label, 0, 0, getWidth(), getWidth(), Justification::bottomLeft, 0);
         removeChildComponent(m_label_settings);
         removeChildComponent(m_optim_value);
         removeChildComponent(m_optim_label);
         removeChildComponent(m_decoder_value);
         removeChildComponent(m_decoder_label);
 		
-		/*
-        for (int i = 0; i < m_channels_azimuth_values.size(); i++)
-            removeChildComponent(m_channels_azimuth_values[i]);
-		*/
+        g.drawImage(m_settings_icon, 0, 0, PLUG_MENU_WIDTH, PLUG_MENU_WIDTH, 0, 0, m_settings_icon.getWidth(), m_settings_icon.getHeight());
     }
     else
     {
@@ -181,18 +237,24 @@ void HoaSettingsComponent::paint(Graphics& g)
         
         addAndMakeVisible(m_number_of_sources_value);
         m_number_of_sources_value->setBounds(280, 150, 40, 20);
+        
+        addAndMakeVisible(m_ordre_label);
+        m_ordre_label->setBounds(80, 190, getWidth() * 0.5 - 10, 20);
+        
+        addAndMakeVisible(m_ordre_value);
+        m_ordre_value->setBounds(280, 190, 40, 20);
 
         addAndMakeVisible(m_number_of_channels_label);
-        m_number_of_channels_label->setBounds(80, 190, getWidth() * 0.5 - 10, 20);
+        m_number_of_channels_label->setBounds(80, 230, getWidth() * 0.5 - 10, 20);
         
         addAndMakeVisible(m_number_of_channels_value);
-        m_number_of_channels_value->setBounds(280, 190, 40, 20);
+        m_number_of_channels_value->setBounds(280, 230, 40, 20);
 		
         addAndMakeVisible(m_offset_label);
-        m_offset_label->setBounds(80, 230, getWidth() * 0.5 - 10, 20);
+        m_offset_label->setBounds(80, 270, getWidth() * 0.5 - 10, 20);
         
         addAndMakeVisible(m_offset_value);
-        m_offset_value->setBounds(280, 230, 40, 20);
+        m_offset_value->setBounds(280, 270, 40, 20);
 
         addAndMakeVisible(m_channels_azimuth_label);
         m_channels_azimuth_label->setBounds(10, 320, getWidth() * 0.5 - 10, 20);
@@ -207,44 +269,53 @@ void HoaSettingsComponent::paint(Graphics& g)
     }
 }
 
+
 void HoaSettingsComponent::labelTextChanged (Label* label)
 {
 	double value = label->getText().getDoubleValue();
 	
 	if (label == m_number_of_sources_value)
 	{
-		value = clip_minmax(value, 1, 32);
-		label->setText(String( (int)value), juce::dontSendNotification);
-		m_processor->setNumberOfSources(value);
+		m_processor->setNumberOfSources(clip_minmax(value, 1, 32));
+        m_number_of_sources_value->setText(String((int)m_processor->getNumberOfSources()), juce::dontSendNotification);
+        m_master->componentRedrawMap();
 	}
+    else if(label == m_ordre_value)
+    {
+        m_processor->setOrder(clip_minmax(value, 2, 64));
+        m_ordre_value->setText(String((int)m_processor->getOrder()), juce::dontSendNotification);
+    }
 	else if (label == m_number_of_channels_value)
 	{
-		value = clip_minmax(value, 2, 32);
-		label->setText(String( (int)value), juce::dontSendNotification);
-		m_processor->setNumberOfChannels(value);
-		
-		for (int i = 0; i < m_channels_azimuth_values.size(); i++)
+		m_processor->setNumberOfChannels(clip_minmax(value, 2, 32));
+        m_number_of_channels_value->setText(String((int)m_processor->getNumberOfChannels()), juce::dontSendNotification);
+        
+        // Ajouter des boites //
+        for (int i = m_channels_azimuth_values.size(); i < m_processor->getNumberOfChannels(); i++)
 		{
-			m_channels_azimuth_values[i]->removeListener(this);
-			removeChildComponent(m_channels_azimuth_values[i]);
+            m_channels_azimuth_values.push_back(new Label());
+			m_channels_azimuth_values[i]->setEditable(true, false, false);
+			m_channels_azimuth_values[i]->setText(String(0), juce::dontSendNotification);
+			m_channels_azimuth_values[i]->addListener(this);
 		}
-		
-		m_channels_azimuth_values.clear();
-		
-		for (int i = 0; i < value; i++)
+        
+        // Supprimer des boites //
+		for (int i = m_channels_azimuth_values.size(); i > m_processor->getNumberOfChannels(); i--)
 		{
-			Label* newLabel = new Label();
-			newLabel->setEditable(true, false, false);
-			newLabel->setText(String(0), juce::dontSendNotification);
-			newLabel->addListener(this);
-			m_channels_azimuth_values.push_back(newLabel);
+			m_channels_azimuth_values[i-1]->removeListener(this);
+			removeChildComponent(m_channels_azimuth_values[i-1]);
+            m_channels_azimuth_values.pop_back();
 		}
+        
+        for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+            m_channels_azimuth_values[i]->setText(String((int)3.14), juce::dontSendNotification);
+        
+        m_master->componentRedrawMeter();
 	}
 	else if (label == m_offset_value)
 	{
-		value = wrap(value, -180, 180);
-		label->setText(String(value), juce::dontSendNotification);
-		m_processor->setChannelsOffset(degToRad(value));
+        m_processor->setChannelsOffset(degToRad(value));
+		m_offset_value->setText(String((float)radToDeg(m_processor->getChannelsOffset())), juce::dontSendNotification);
 	}
 	else
 	{
@@ -252,13 +323,12 @@ void HoaSettingsComponent::labelTextChanged (Label* label)
 		{
 			if (label == m_channels_azimuth_values[i])
 			{
-				value = wrap(value, -180, 180);
-				label->setText(String(value), juce::dontSendNotification);
 				m_processor->setChannelAzimuth(i, degToRad(value));
+                m_channels_azimuth_values[i]->setText(String((float)radToDeg(0.5)), juce::dontSendNotification);
 				return;
 			}
 		}
 	}
-	
+    
 	repaint();
 }

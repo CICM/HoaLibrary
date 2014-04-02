@@ -19,7 +19,7 @@ HoaLogoComponent::~HoaLogoComponent()
 void HoaLogoComponent::paint(Graphics& g)
 {
     g.setColour(Colours::black);
-    g.drawText("HOA COOL", 0, 0, getWidth() * 0.75, getWidth() * 0.75, Justification::centred, 0);
+    g.drawText("HOA", 0, 0, getWidth() * 0.75, getWidth() * 0.75, Justification::centred, 0);
 }
 
 

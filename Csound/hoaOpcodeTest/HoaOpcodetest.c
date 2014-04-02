@@ -1,99 +1,66 @@
 
-//#include "../../Sources/Hoa2D/Hoa2D.h"
-#include "../../ThirdParty/Csound/csdl.h"
-#include "../../ThirdParty/Csound/pstream.h"
+#include "csdl.h"
+#include "pstream.h"
 
-//using namespace Hoa2D;
-
-typedef struct {
+/**
+typedef struct
+{
     OPDS    h;
-    
-    MYFLT   **outlets;
-    MYFLT   *input, *azimuth, *order;
+    MYFLT   *inlet;
+    MYFLT   *outlet;
+    int somme, valeur;
 
-    //Encoder* encoder;
-    
-} HoaEnc;
-
-typedef struct {
-    OPDS    h;
-    
-    MYFLT   **outlets;
-    MYFLT   **inlets, *order;
-    
-    //DecoderRegular* decoder;
-    
-} HoaDec;
+} TESTE;
 
 
-
-static int hoaenc_set(CSOUND *csound, HoaEnc *p)
+static int teste_set(CSOUND *csound,TESTE *p)
 {
-    
-    //p->encoder = new Encoder(*p->order);
-    
+    p->valeur = (int)*p->inlet;
+    p->somme = 2;
+
     return OK;
 }
 
-static int hoadec_set(CSOUND *csound, HoaDec *p)
+ 
+ 
+static int teste(CSOUND *csound,TESTE *p)
 {
-
+    int resultat = p->valeur + p->somme;
     
-    int order = *p->order;
-    
-    /*
-    int numberOfChannels = *csound->GetNchnls();
-    if (numberOfChannels > order * 2 + 1)
-        *csound->ErrorMsg("Invalide order");
-    */
-    
-    int numberOfChannels = order * 2 + 2;
-    
-    //p->decoder = new DecoderRegular(order, numberOfChannels);
+    resultat = *p->outlet;
     
     return OK;
 }
-
-static int hoaenc(CSOUND *csound, HoaEnc *p)
-{
-    
-    
-    //*p->outlets = *new MYFLT*[64];
-    
-
-    const double input = *p->input;
-    const double azimuth = *p->azimuth;
-    //float output[] = *p->outlets[];
-    
-    //p->encoder->setAzimuth(azimuth);
-    //p->encoder->process(input, *p->outlets);
-    
-    return OK;
-}
-/*
-static int hoadec(CSOUND *csound, HoaDec *p)
-{
-    *p->inlets = *new MYFLT*[64];
-    *p->outlets = *new MYFLT*[64];
-    
-    p->decoder->process(*p->inlets, *p->outlets);
-    
-    return OK;
-}*/
 
 static OENTRY localops[] =
 {
-    {"HoaEnc", sizeof(HoaEnc), 0, 5, "a", "aki", (SUBR)hoaenc_set, NULL, (SUBR)hoaenc}
-    //{"HoaDec", sizeof(HoaDec), 0, 5, "a[]", "a[]i", (SUBR)hoadec_set, NULL, (SUBR)hoadec},
+    //{"teste",  sizeof(TESTE), CW, 3, "k",  "k",(SUBR)teste_set, (SUBR)teste}
+    {"teste",  sizeof(TESTE), 3, "k",  "k", NULL, NULL, teste}
 };
 
+LINKAGE
+*/
+
+typedef struct
+{
+    OPDS h;
+    MYFLT *ar, *asig;
     
-int hoaenc_init_(CSOUND *csound)
+} NEGATE;
+
+static int negate(CSOUND *csound, NEGATE *p)
 {
-    return csound->AppendOpcodes(csound, &(localops[0]),(int) (sizeof(localops) / sizeof(OENTRY)));
-}
-int hoadec_init_(CSOUND *csound)
-{
-    return csound->AppendOpcodes(csound, &(localops[0]),(int) (sizeof(localops) / sizeof(OENTRY)));
+    int n, nsmps = csound->ksmps;
+    MYFLT *ar = p->ar;
+    MYFLT *as = p->asig;
+    for (n=0; n<nsmps; n++) {
+        ar[n] = - as[nn]
+    }
+    return OK;
 }
 
+static OENTRY localopst [] = {
+    { "negate", sizeof(NEGATE), 4, "d". "a", NULL, NULL, negate };
+}x
+
+LINKAGE

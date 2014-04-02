@@ -17,8 +17,9 @@
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
 
-//#include "../../../Sources/Hoa2D/Hoa2D.h"
 #define BUILD_AU_CARBON_UI 0
+
+#define PLUG_MENU_WIDTH 125
 
 // [END_USER_CODE_SECTION]
 

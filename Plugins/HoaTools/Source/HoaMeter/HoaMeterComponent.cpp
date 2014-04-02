@@ -38,56 +38,118 @@ void HoaMeterComponent::timerCallback()
 
 void HoaMeterComponent::paint(Graphics& g)
 {
-	
-    Path P;
-    float center  = getWidth() * 0.5;
-    float led_width = 0.5 / 16. * getWidth();
+    m_center = getWidth() * .5;
+	m_radius = m_center * 0.95;
+	m_radius_center = m_radius / 5.;
+
+	draw_background(g);
+    draw_leds(g);
+}
+
+void HoaMeterComponent::draw_background(Graphics& g)
+{
+    int i;
+    float coso, sino, angle, x1, y1, x2, y2;
     
-    //m_processor->processEnergy();
-    /*
-    g.setColour(Colours::grey);
-    g.drawEllipse(0.2 * getWidth(), 0.2 * getWidth(), 0.6 * getWidth(), 0.6 * getWidth(), getWidth() * 0.4);
-    g.addTransform(AffineTransform::fromTargetPoints(-center, center, 0, 0, center, center, getWidth(), 0,  center, -center, getWidth(), getWidth()));
-    
-    for(int i = 0; i < m_processor->getNumberOfChannels(); i++)
+    if(m_processor->getNumberOfMeterChannels() != 1)
     {
-        float angle_start = m_processor->getChannelAzimuthMapped(i) - m_processor->getChannelWidth(i) / 2. + 0.025 * getWidth() / 498.;
-        float angle_end   = m_processor->getChannelAzimuthMapped(i) + m_processor->getChannelWidth(i) / 2. - 0.025 * getWidth() / 498.;
-        
-        for(float j = 11, dB = -34.5; j > -2; j--, dB += 3.)
+        for(i = 0; i < m_processor->getNumberOfMeterChannels(); i++)
         {
-            float center_x  = led_width * (2 - (j / 11.)) * cos(m_processor->getChannelAzimuthMapped(i));
-            float center_y  = led_width * (2 - (j / 11.)) * sin(m_processor->getChannelAzimuthMapped(i));
+
+            angle = m_processor->getChannelAzimuthMapped(i) - m_processor->getChannelWidth(i) * 0.5f;
             
-            float radius    = (j + 3.33) * led_width;
+            coso = cosf(angle);
+            sino = sinf(angle);
+            x1 = m_radius_center * coso;
+            y1 = m_radius_center * sino;
+            x2 = m_radius * coso;
+            y2 = m_radius * sino;
+            
+            g.setColour(Colours::white);
+            if(isInsideRad(angle, HOA_PI4, HOA_PI + HOA_PI4))
+            {
+                g.drawLine(x1 + m_center - 1., y1 + m_center - 1., x2 + m_center, y2 + m_center);
+            }
+            else
+            {
+                g.drawLine(x1 + m_center + 1., y1 + m_center + 1., x2 + m_center, y2 + m_center);
+            }
+            
+            g.setColour(Colours::black);
+            g.drawLine(x1 + m_center, y1 + m_center, x2 + m_center, y2 + m_center);
+        }
+    }
+    
+    g.setColour(Colours::white);
+    g.drawEllipse((int)(m_center - m_radius + 1.), (int)(m_center - m_radius + 1.), m_radius * 2., m_radius * 2., 4.);
+    g.drawEllipse((int)(m_center - m_radius_center + 1.), (int)(m_center - m_radius_center + 1.), m_radius_center * 2., m_radius_center * 2., 4.);
+    
+    g.setColour(Colours::black);
+    g.drawEllipse((int)(m_center - m_radius), (int)(m_center - m_radius), m_radius * 2., m_radius * 2., 4.);
+    g.drawEllipse((int)(m_center - m_radius_center), (int)(m_center - m_radius_center), m_radius_center * 2., m_radius_center * 2., 4.);
+}
+
+void HoaMeterComponent::draw_leds(Graphics& g)
+{
+    int i;
+    float j, dB;
+    float angle_start, angle, angle_end, radius, center_x, center_y;
+    float led_width = 0.49 * getWidth() / 18.;
+    float h = led_width * 17.;
+   
+	Path p;
+    
+    for(i = 0; i < m_processor->getNumberOfMeterChannels(); i++)
+    {
+        angle   = m_processor->getChannelAzimuthMapped(i) + HOA_PI2;
+        
+        center_x    = Hoa::abscissa(m_radius - h, angle);
+        center_y    = -Hoa::ordinate(m_radius - h, angle);
+        
+        angle_start = angle - m_processor->getChannelWidth(i) * 0.5f;
+        angle_end   = angle + m_processor->getChannelWidth(i) * 0.5f;
+        
+        
+        for(j = 11, dB = -34.5; j > -1; j--, dB += 3.)
+        {
+            radius    = (j + 5.) * led_width;
             if(m_processor->getChannelEnergy(i) > dB)
             {
                 if(j > 8)
                     g.setColour(Colours::green);
                 else if(j > 5)
-                    g.setColour(Colours::yellowgreen);
+                    g.setColour(Colours::greenyellow);
                 else if(j > 2)
                     g.setColour(Colours::yellow);
-                else if(j > -1)
-                    g.setColour(Colours::orange);
                 else
-                    g.setColour(Colours::red);
-                 P.addCentredArc(center_x, center_y, radius, radius, HOA_PI2, angle_start, angle_end, 1);
+                    g.setColour(Colours::orange);
                 
-                g.strokePath(P, PathStrokeType(led_width - getWidth() / 166., PathStrokeType::mitered, PathStrokeType::rounded));
-                P.clear();
+                p.addCentredArc(center_x + getWidth() * 0.5f, center_y + getWidth() * 0.5f, radius, radius, HOA_2PI, angle_start, angle_end, 1);
+                g.strokePath(p, PathStrokeType(3, PathStrokeType::mitered, PathStrokeType::rounded));
+                p.clear();
             }
             else if(j != -1)
             {
-                g.setColour(Colours::darkgrey);
-                P.addCentredArc(center_x, center_y, radius, radius, HOA_PI2, angle_start, angle_end, 1);
-                g.strokePath(P, PathStrokeType(led_width  - getWidth() / 166., PathStrokeType::mitered, PathStrokeType::rounded));
-                P.clear();
+                g.setColour(Colours::grey);
+                p.addCentredArc(center_x + m_center, center_y + m_center, radius, radius, HOA_2PI, angle_start, angle_end, 1);
+                g.strokePath(p, PathStrokeType(3, PathStrokeType::mitered, PathStrokeType::rounded));
+                p.clear();
             }
         }
+       /*
+        if(x->f_over_leds[i])
+        {
+            radius    = (4.) * led_width;
+            egraphics_set_color_rgba(g, &x->f_color_over_signal);
+            egraphics_set_line_width(g, led_width - pd_clip_min(360. / getWidth(), 2.));
+            egraphics_arc(g, center_x + getWidth() * 0.5f, center_y + getWidth() * 0.5f, radius, angle_start, angle_end);
+            egraphics_stroke(g);
+        }
+        */
+     
     }
-	*/
-}
+};
+
 
 void HoaMeterComponent::mouseMove(const MouseEvent &event)
 {
@@ -98,4 +160,6 @@ void HoaMeterComponent::mouseDrag(const MouseEvent &event)
 {
 	;
 }
+
+
 

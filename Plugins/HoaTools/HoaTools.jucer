@@ -60,6 +60,14 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="UZip9c" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
+    <GROUP id="{5572EC5E-B1AB-D57B-4721-30D82FC0255F}" name="ressources">
+      <FILE id="WfvfTQ" name="icon-gear-256.png" compile="0" resource="1"
+            file="ressources/icon-gear-256.png"/>
+      <FILE id="wO4ODB" name="icon-info-256.png" compile="0" resource="1"
+            file="ressources/icon-info-256.png"/>
+      <FILE id="GgeSA5" name="icon-info-black-256.png" compile="0" resource="1"
+            file="ressources/icon-info-black-256.png"/>
+    </GROUP>
     <GROUP id="{3112C40A-D591-50D1-6D0F-4EA8359AC24F}" name="Hoa">
       <FILE id="gu7KSw" name="Hoa.h" compile="0" resource="0" file="../../Sources/Hoa.h"/>
       <FILE id="H8sYc0" name="HoaDefs.h" compile="0" resource="0" file="../../Sources/HoaDefs.h"/>

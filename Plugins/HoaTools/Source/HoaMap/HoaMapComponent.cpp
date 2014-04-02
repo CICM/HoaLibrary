@@ -70,6 +70,7 @@ void HoaMapComponent::mouseMove(const MouseEvent &event)
     setMouseCursor(MouseCursor::NormalCursor);
 }
 
+
 void HoaMapComponent::mouseDown(const MouseEvent &event)
 {
 	if(getWidth() < 125)
@@ -115,30 +116,19 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
             {
                 PopupMenu Popup;
                 Popup.setLookAndFeel(&LookAndFeel);
-                Popup.addItem(1, String("Source Menu"), false);
-                Popup.addSeparator();
-                Popup.addItem(2, String("Remove source"));
                 if(m_processor->sourceGetMute(i))
-                    Popup.addItem(3, String("Unmute source"));
+                    Popup.addItem(1, String("Unmute source"));
                 else
-                    Popup.addItem(3, String("Mute source"));
+                    Popup.addItem(1, String("Mute source"));
                 
                 const int choice = Popup.show();
-                if(choice == 2)
-                {
-                    m_processor->sourceRemove(i);
-                }
-                else if(choice == 3)
+                if(choice == 1)
                 {
                     m_processor->beginParameterChangeGesture(i*3+3);
                     if(m_processor->sourceGetMute(i))
-                    {
                         m_processor->sourceSetMute(i, 0);
-                    }
                     else
-                    {
                         m_processor->sourceSetMute(i, 1);
-                    }
                     m_processor->endParameterChangeGesture(i*3+3);
                 }
             }
@@ -163,47 +153,32 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
                 {
                     PopupMenu Popup;
                     Popup.setLookAndFeel(&LookAndFeel);
-                    Popup.addItem(1, String("Group Menu"), false);
-                    Popup.addSeparator();
-                    Popup.addItem(2, String("Remove group"));
-                    Popup.addItem(3, String("Remove group and sources"));
+                    Popup.addItem(1, String("Remove group"));
                     if(m_processor->groupGetMute(i) || m_processor->groupGetIfSourceMuted(i) == 1)
-                        Popup.addItem(4, String("Unmute group"));
+                        Popup.addItem(2, String("Unmute group"));
                     if(!m_processor->groupGetMute(i))
-                        Popup.addItem(5, String("Mute group"));
+                        Popup.addItem(3, String("Mute group"));
                     
                     const int choice = Popup.show();
-                    if(choice == 2)
+                    if(choice == 1)
                     {
                         m_processor->groupRemove(i);
                     }
-                    else if(choice == 3)
-                    {
-                        m_processor->groupRemoveWithSources(i);
-                    }
-                    else if(choice == 4)
+                    else if(choice == 2)
                     {
                         for(int i = 0; i < m_processor->getNumberOfSources(); i++)
-                        {
                             m_processor->beginParameterChangeGesture(i*3+3);
-                        }
                         m_processor->groupSetMute(i, 0);
                         for(int i = 0; i < m_processor->getNumberOfSources(); i++)
-                        {
                             m_processor->endParameterChangeGesture(i*3+3);
-                        }
                     }
-                    else if(choice == 5)
+                    else if(choice == 3)
                     {
                         for(int i = 0; i < m_processor->getNumberOfSources(); i++)
-                        {
                             m_processor->beginParameterChangeGesture(i*3+3);
-                        }
                         m_processor->groupSetMute(i, 1);
                         for(int i = 0; i < m_processor->getNumberOfSources(); i++)
-                        {
                             m_processor->endParameterChangeGesture(i*3+3);
-                        }
                     }
                 }
                 else
@@ -216,25 +191,7 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
             }
         }
     }
-    if(event.mods.isRightButtonDown())
-    {
-        PopupMenu Popup;
-        Popup.setLookAndFeel(&LookAndFeel);
-        Popup.addItem(1, String("Menu"), false);
-        Popup.addSeparator();
-        Popup.addItem(2, String("Add source"));
-        Popup.addItem(3, String("Clear all"));
-        
-        const int choice = Popup.show();
-        if(choice == 2)
-        {
-            m_processor->sourceNewCartesian(mouse.getX() / m_processor->getZoom(), mouse.getY() / m_processor->getZoom());
-        }
-        else if(choice == 3)
-        {
-            m_processor->clearAll();
-        }
-    }
+    
     m_selected  = 1;
     m_selection.setPosition(rect);
     m_selection.setWidth(0);
@@ -243,6 +200,7 @@ void HoaMapComponent::mouseDown(const MouseEvent &event)
     repaint();
     setMouseCursor(MouseCursor::NormalCursor);
 }
+
 void HoaMapComponent::mouseDrag(const MouseEvent &event)
 {    
     Point<float> source;
@@ -412,50 +370,47 @@ void HoaMapComponent::draw_sources(Graphics& g)
 {
     float source_thickness = 1.;
     float center = getWidth() * 0.5;
-    for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i < m_processor->getNumberOfSources(); i++)
     {
-        if(m_processor->sourceGetExistence(i))
+        g.setColour(Colour(0xff444444));
+        float source_x = m_processor->sourceGetAbscissa(i) * m_processor->getZoom() * center + center;
+        float source_y = -m_processor->sourceGetOrdinate(i) * m_processor->getZoom() * center + center;
+        
+        g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
+        
+        if (i == m_souce_selected)
         {
-            g.setColour(Colour(0xff444444));
-            float source_x = m_processor->sourceGetAbscissa(i) * m_processor->getZoom() * center + center;
-            float source_y = -m_processor->sourceGetOrdinate(i) * m_processor->getZoom() * center + center;
-            
-            g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
-            
-            if (i == m_souce_selected)
+            source_thickness *= 1.5;
+            for(int j = 0; j < m_processor->sourceGetNumberOfGroups(i); j++)
             {
-                source_thickness *= 1.5;
-                for(int j = 0; j < m_processor->sourceGetNumberOfGroups(i); j++)
-                {
-                    int group_index = m_processor->sourceGetGroupIndex(i, j);
-                    float group_x = m_processor->groupGetAbscissa(group_index) * m_processor->getZoom() * center + center;
-                    float group_y = -m_processor->groupGetOrdinate(group_index) * m_processor->getZoom() * center + center;
-                    g.drawLine(source_x, source_y, group_x, group_y);
-                }
-                
-                g.setColour(Colour(0xff444444).withAlpha(0.5f));
-                g.fillEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size, m_sources_size);
-            }
-            else
-            {
-                source_thickness = 1.;
-            }            
-            
-            if(m_processor->sourceGetMute(i))
-            {
-                g.setColour(Colours::red);
-                g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
-                g.drawLine(source_x + abscissa(m_sources_size * 0.5, HOA_PI2 / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI2 / 2.), source_x + abscissa(m_sources_size * 0.5, HOA_PI2 * 5. / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI * 5. / 4.));
-            }
-            else
-            {
-                g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
+                int group_index = m_processor->sourceGetGroupIndex(i, j);
+                float group_x = m_processor->groupGetAbscissa(group_index) * m_processor->getZoom() * center + center;
+                float group_y = -m_processor->groupGetOrdinate(group_index) * m_processor->getZoom() * center + center;
+                g.drawLine(source_x, source_y, group_x, group_y);
             }
             
-            g.setFont(11);
-            g.setColour(Colours::black);
-            g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
+            g.setColour(Colour(0xff444444).withAlpha(0.5f));
+            g.fillEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size, m_sources_size);
         }
+        else
+        {
+            source_thickness = 1.;
+        }
+        
+        if(m_processor->sourceGetMute(i))
+        {
+            g.setColour(Colours::red);
+            g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
+            g.drawLine(source_x + abscissa(m_sources_size * 0.5, HOA_PI2 / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI2 / 2.), source_x + abscissa(m_sources_size * 0.5, HOA_PI2 * 5. / 2.), source_y + ordinate(m_sources_size * 0.5, HOA_PI * 5. / 4.));
+        }
+        else
+        {
+            g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
+        }
+        
+        g.setFont(11);
+        g.setColour(Colours::black);
+        g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
     }
 }
 

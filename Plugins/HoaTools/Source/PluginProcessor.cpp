@@ -229,7 +229,7 @@ void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
 {
     //m_processor->process(buffer.getArrayOfChannels());
 	
-	//process(buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
+    //process((const float**)buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
 	
 	applyChanges();
 	setNumberOfInputs(getNumberOfSources());

@@ -22,7 +22,7 @@ HoaInfosComponent::~HoaInfosComponent()
 
 void HoaInfosComponent::mouseDown(const MouseEvent &event)
 {
-    if(getWidth() < 125)
+    if(getWidth() < PLUG_MENU_WIDTH)
     {
         m_master->componentHasBeenClicked(this);
 		return;
@@ -36,10 +36,14 @@ void HoaInfosComponent::mouseDown(const MouseEvent &event)
 void HoaInfosComponent::paint(Graphics& g)
 {
     g.setColour(Colours::black);
-    if(getWidth() < 125)
+    if(getWidth() < PLUG_MENU_WIDTH)
+    {
         g.drawText(hoa_infos_label, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
+    }
     else
+    {
         g.drawText(hoa_infos_text, 0, 0, getWidth(), getWidth(), Justification::centred, 0);
+    }
 }
 
 
