@@ -28,13 +28,15 @@ private:
     HoaLogoComponent*       m_logo;
     Component*              m_front_component;
     
-    HoaLookAndFeel*          m_lookAndFeel;
+    HoaLookAndFeel*         m_lookAndFeel;
 public:
     HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter);
     ~HoaToolsAudioProcessorEditor();
 
     void paint(Graphics& g);
     void componentHasBeenClicked(Component* component);
+    void componentRedrawMap();
+    void componentRedrawMeter();
 };
 
 

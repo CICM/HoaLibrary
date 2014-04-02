@@ -6,7 +6,14 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4B51370718E1DF1F0057ED72 /* HoaOpcodetest.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B51370618E1DF1F0057ED72 /* HoaOpcodetest.c */; };
+		4B51371118E1E8FA0057ED72 /* CsoundLib64.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51371018E1E8FA0057ED72 /* CsoundLib64.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		4B51370618E1DF1F0057ED72 /* HoaOpcodetest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HoaOpcodetest.c; sourceTree = "<group>"; };
+		4B51371018E1E8FA0057ED72 /* CsoundLib64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib64.framework; path = ../../../../../../Library/Frameworks/CsoundLib64.framework; sourceTree = "<group>"; };
 		5913846F15DAA36D0029AD16 /* HoaEnc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = HoaEnc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -15,6 +22,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B51371118E1E8FA0057ED72 /* CsoundLib64.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -24,6 +32,8 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
+				4B51370618E1DF1F0057ED72 /* HoaOpcodetest.c */,
+				4B51371018E1E8FA0057ED72 /* CsoundLib64.framework */,
 				5913847015DAA36D0029AD16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,6 +106,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B51370718E1DF1F0057ED72 /* HoaOpcodetest.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,19 +156,22 @@
 				DSTROOT = /;
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PREPROCESSOR_DEFINITIONS = NO_PUB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(LOCAL_LIBRARY_DIR)/Frameworks/",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = USE_DOUBLE;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = /Library/Frameworks/CsoundLib64.framework/Headers;
 				INSTALL_PATH = $SRCROOT/../builds;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks/";
 				OTHER_LDFLAGS = (
-					"-undefined",
-					dynamic_lookup,
+					"-framework",
+					CsoundLib64,
 				);
 				PRELINK_LIBS = "";
 				PRODUCT_NAME = HoaEnc;
-				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include";
+				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include /Library/Frameworks/CsoundLib64.framework/Headers";
 			};
 			name = Release;
 		};

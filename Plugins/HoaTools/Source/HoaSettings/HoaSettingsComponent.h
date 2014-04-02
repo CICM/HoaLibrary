@@ -17,6 +17,9 @@ class HoaSettingsComponent : public Component, public ComboBox::Listener, public
 private:
     HoaComponentListener*   m_master;
     HoaToolsAudioProcessor* m_processor;
+    
+    Image                   m_settings_icon;
+    Label*                  m_setting_label;
 	
     Label*                  m_label_settings;
 	
@@ -28,6 +31,9 @@ private:
 	
 	Label*                  m_number_of_sources_label;
     Label*					m_number_of_sources_value;
+    
+    Label*                  m_ordre_label;
+    Label*					m_ordre_value;
 	
 	Label*                  m_number_of_channels_label;
     Label*					m_number_of_channels_value;

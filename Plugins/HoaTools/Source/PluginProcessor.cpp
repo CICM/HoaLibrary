@@ -9,8 +9,7 @@
 
 HoaToolsAudioProcessor::HoaToolsAudioProcessor() : KitSources(1)
 {
-    //m_kitSources         = new KitSources(1);
-    m_gui               = gui_mode_map;
+    m_gui = gui_mode_map;
 }
 
 HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
@@ -209,6 +208,8 @@ void HoaToolsAudioProcessor::numChannelsChanged()
     bool state = isSuspended();
     if(state)
         suspendProcessing(true);
+     
+    applyChanges();
     updateHostDisplay();
     if(state)
         suspendProcessing(false);
@@ -218,6 +219,7 @@ void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBloc
 {
 	setSampleRate(sampleRate);
 	setVectorSize(samplesPerBlock);
+    applyChanges();
 }
 
 void HoaToolsAudioProcessor::releaseResources()
@@ -227,13 +229,14 @@ void HoaToolsAudioProcessor::releaseResources()
 
 void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    //m_processor->process(buffer.getArrayOfChannels());
-	
-	//process(buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
-	
-	applyChanges();
-	setNumberOfInputs(getNumberOfSources());
-	setNumberOfOutputs(getNumberOfChannels());
+    if(getNumOutputChannels() >= getNumberOfChannels() && getNumInputChannels() >= getNumberOfSources())
+        process((const float**)buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
+	else
+    {
+        applyChanges();
+        setNumberOfInputs(getNumberOfSources());
+        setNumberOfOutputs(getNumberOfChannels());
+    }
 }
 
 /************************************************************************************/
