@@ -1,24 +1,27 @@
-#N canvas 84 122 1174 752 10;
-#X obj -208 -348 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
-3 12 0 18 -204280 -1 0;
-#X msg -143 -191 channels \$1;
-#X msg -143 184 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-#X text -135 -236 Number of channels;
-#X text -9 -225 Coefficients;
-#X text -143 257 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -143 241 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#N canvas 76 45 1174 752 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -208 -368 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
+3 12 0 18 -228856 -1 0;
+#X msg -143 -141 channels \$1;
+#X msg -143 234 1 1 1 1 0.978533 1 1 1 1 1 1 1 1 1 0.990163 0.910512
 ;
-#X obj -17 -250 loadbang;
-#X msg -17 -202 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
+#X text -135 -186 Number of channels;
+#X text -9 -175 Coefficients;
+#X text -149 345 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -149 329 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -17 -200 loadbang;
+#X msg -17 -152 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
 0.0343521 0.0879706 0.0634424;
-#X obj -143 156 c.prepend set;
-#X obj -143 -214 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -143 206 c.prepend set;
+#X obj -143 -164 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max 250 @minmax 1 250 @decimal 6 @bgcolor 0.76 0.76
 0.76 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -143 -258 c.loadmess set 16;
-#X obj 206 129 c.preset @size 121 41 @fontname Helvetica @fontweight
+#X obj -143 -208 c.loadmess set 16;
+#X obj 206 179 c.preset @size 121 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
 0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
@@ -34,88 +37,85 @@ hoa.2d.space list 0.931365 0.0690971 0 0 0.930903 0.705041 0 0 0.930903
 0.0784322 0.00236926 0.420463 0.962103 0.0690971 0 0.00623167 @index
 5 @spacepreset hoa.2d.space list 1 0.714482 0.645385 0.645385 1 1 0.645385
 0.692838 1 0.723817 0.647754 1 1 0.714482 0.645385 0.651617 ];
-#X msg 206 89 inter \$1;
-#X obj 206 61 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 206 139 inter \$1;
+#X obj 206 111 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 206 35 line;
-#X msg 206 8 1 \, 6 6000;
-#X text 176 -151 1 - Click and drag to;
-#X text 176 -141 set the coefficients.;
-#X text 176 -121 2 - Hold shift and click;
-#X text 176 -111 and drag to increase or;
-#X text 176 -91 coefficients together.;
-#X text 176 -101 decrease all the;
-#X text 176 -61 click and drag to compute;
-#X text 176 -51 a rotation of the coefficients;
-#X text 204 -23 Preset :;
-#X obj -181 -214 c.bang @size 17 17 @fontname Helvetica @fontweight
+#X obj 206 85 line;
+#X msg 206 58 1 \, 6 6000;
+#X text 176 -101 1 - Click and drag to;
+#X text 176 -91 set the coefficients.;
+#X text 176 -71 2 - Hold shift and click;
+#X text 176 -61 and drag to increase or;
+#X text 176 -41 coefficients together.;
+#X text 176 -51 decrease all the;
+#X text 176 -11 click and drag to compute;
+#X text 176 -1 a rotation of the coefficients;
+#X text 204 27 Preset :;
+#X obj -181 -164 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
-#X obj -143 -133 hoa.2d.space @size 269 269 @fontname Helvetica @fontweight
+#X obj -143 -83 hoa.2d.space @size 269 269 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoaspacer @send hoaspaces
 @presetname spacepreset @channels 16 @minmax 0 1 @bgcolor 0.76 0.76
 0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.272711 0.434756 0.545421 0.25
 @ptcolor 0 0 0 1;
-#X text 176 -71 3 - Hold alt and;
-#X text -206 -306 hoa.2d.space allows you to draw spatial filtering
-and apply gains to the virtual microphones signals. It sould be used
-the plane wave domain., f 80;
-#X text -206 -326 A GUI to design plane wave domain;
-#X obj 378 -317 hoa.connect;
-#X obj 378 -344 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X text 176 -21 3 - Hold alt and;
+#X text -206 -346 A GUI to design plane wave domain;
+#X obj 378 -345 hoa.connect;
+#X obj 378 -364 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 420 16 hoa.2d.projector~ 7 16 ---------;
-#X obj 420 -286 hoa.soundcoat;
-#X obj 420 -197 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
+#X obj 420 -4 hoa.2d.projector~ 7 16 ---------;
+#X obj 420 -306 hoa.soundcoat;
+#X obj 420 -217 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 420 106 hoa.2d.recomposer~ 7 16 --------;
-#X obj 420 328 hoa.binaural_order7 @pinna small;
-#X obj 420 354 hoa.dac~ 1:2 -------------------;
-#X obj 611 43 r hoaspaces;
-#X obj 420 -255 c.gain~ @size 150 10 @fontname Helvetica @fontweight
+#X obj 420 86 hoa.2d.recomposer~ 7 16 --------;
+#X obj 420 308 hoa.binaural_order7 @pinna small;
+#X obj 420 334 hoa.dac~ 1:2 -------------------;
+#X obj 611 23 r hoaspaces;
+#X obj 420 -275 c.gain~ @size 150 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X text 626 65 Spatial;
-#X text 626 75 filetring;
-#X obj 420 128 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
+#X text 626 45 Spatial;
+#X text 626 55 filetring;
+#X obj 420 108 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X msg 677 -237 size \$1;
-#X obj 347 -278 r hoagrain;
-#X obj 677 -206 s hoagrain;
-#X obj 677 -264 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 677 -257 size \$1;
+#X obj 347 -298 r hoagrain;
+#X obj 677 -226 s hoagrain;
+#X obj 677 -284 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg 683 166 \; pd dsp 1;
-#X msg 683 201 \; pd dsp 0;
-#X obj 767 -264 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 683 146 \; pd dsp 1;
+#X msg 683 181 \; pd dsp 0;
+#X obj 767 -284 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg 767 -237 delay \$1;
-#X obj 677 -86 s hoagrain;
-#X obj 677 -144 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 767 -257 delay \$1;
+#X obj 677 -106 s hoagrain;
+#X obj 677 -164 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 767 -144 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 767 -164 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg 677 -117 feedback \$1;
-#X msg 767 -117 rarefaction \$1;
-#X obj 677 -292 c.loadmess 20;
-#X obj 767 -292 c.loadmess 5000;
-#X obj 767 -172 c.loadmess 0.4;
-#X obj 677 -172 c.loadmess 0.8;
-#X obj 420 64 hoa.2d.process~ 16 hoa.amp~ planewaves, f 32;
+#X msg 677 -137 feedback \$1;
+#X msg 767 -137 rarefaction \$1;
+#X obj 677 -312 c.loadmess 20;
+#X obj 767 -312 c.loadmess 5000;
+#X obj 767 -192 c.loadmess 0.4;
+#X obj 677 -192 c.loadmess 0.8;
+#X obj 420 44 hoa.2d.process~ 16 hoa.amp~ planewaves, f 32;
 #N canvas 237 132 503 391 hoa_grain_env 0;
 #N canvas 0 22 546 367 hoa_uzi 0;
 #X obj 367 183 + 1;
@@ -169,10 +169,15 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 10 0 2 0;
 #X connect 11 0 0 0;
 #X connect 11 1 9 0;
-#X restore 463 -317 pd hoa_grain_env;
-#X obj 462 -337 table \$0-hoa_grain_array 512;
-#X obj 420 -237 hoa.2d.process~ 7 hoa.grain~ harmonics \$0-hoa_grain_array
+#X restore 463 -337 pd hoa_grain_env;
+#X obj 462 -357 table \$0-hoa_grain_array 512;
+#X obj 420 -257 hoa.2d.process~ 7 hoa.grain~ harmonics \$0-hoa_grain_array
 , f 32;
+#X obj 182 334 declare -lib HoaLibrary/hoa.library;
+#X obj 182 313 declare -lib hoa.library;
+#X text -206 -326 hoa.2d.space allows you to draw spatial filtering
+and apply gains to the plane waves signals. It sould be used the plane
+wave domain., f 80;
 #X connect 1 0 27 0;
 #X connect 7 0 8 0;
 #X connect 8 0 27 0;
@@ -185,114 +190,114 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 16 0 15 0;
 #X connect 26 0 27 0;
 #X connect 27 0 9 0;
-#X connect 32 0 31 0;
-#X connect 33 0 61 0;
-#X connect 33 1 61 1;
-#X connect 33 2 61 2;
-#X connect 33 3 61 3;
-#X connect 33 4 61 4;
-#X connect 33 5 61 5;
-#X connect 33 6 61 6;
-#X connect 33 7 61 7;
-#X connect 33 8 61 8;
-#X connect 33 9 61 9;
-#X connect 33 10 61 10;
-#X connect 33 11 61 11;
-#X connect 33 12 61 12;
-#X connect 33 13 61 13;
-#X connect 33 14 61 14;
-#X connect 33 15 61 15;
-#X connect 34 0 40 0;
+#X connect 31 0 30 0;
+#X connect 32 0 60 0;
+#X connect 32 1 60 1;
+#X connect 32 2 60 2;
+#X connect 32 3 60 3;
+#X connect 32 4 60 4;
+#X connect 32 5 60 5;
+#X connect 32 6 60 6;
+#X connect 32 7 60 7;
+#X connect 32 8 60 8;
+#X connect 32 9 60 9;
+#X connect 32 10 60 10;
+#X connect 32 11 60 11;
+#X connect 32 12 60 12;
+#X connect 32 13 60 13;
+#X connect 32 14 60 14;
+#X connect 32 15 60 15;
+#X connect 33 0 39 0;
+#X connect 35 0 36 0;
+#X connect 35 0 42 0;
+#X connect 35 1 36 1;
+#X connect 35 1 42 1;
+#X connect 35 2 36 2;
+#X connect 35 2 42 2;
+#X connect 35 3 36 3;
+#X connect 35 3 42 3;
+#X connect 35 4 36 4;
+#X connect 35 4 42 4;
+#X connect 35 5 36 5;
+#X connect 35 5 42 5;
+#X connect 35 6 36 6;
+#X connect 35 6 42 6;
+#X connect 35 7 36 7;
+#X connect 35 7 42 7;
+#X connect 35 8 36 8;
+#X connect 35 8 42 8;
+#X connect 35 9 36 9;
+#X connect 35 9 42 9;
+#X connect 35 10 36 10;
+#X connect 35 10 42 10;
+#X connect 35 11 36 11;
+#X connect 35 11 42 11;
+#X connect 35 12 36 12;
+#X connect 35 12 42 12;
+#X connect 35 13 36 13;
+#X connect 35 13 42 13;
+#X connect 35 14 36 14;
+#X connect 35 14 42 14;
 #X connect 36 0 37 0;
-#X connect 36 0 43 0;
 #X connect 36 1 37 1;
-#X connect 36 1 43 1;
-#X connect 36 2 37 2;
-#X connect 36 2 43 2;
-#X connect 36 3 37 3;
-#X connect 36 3 43 3;
-#X connect 36 4 37 4;
-#X connect 36 4 43 4;
-#X connect 36 5 37 5;
-#X connect 36 5 43 5;
-#X connect 36 6 37 6;
-#X connect 36 6 43 6;
-#X connect 36 7 37 7;
-#X connect 36 7 43 7;
-#X connect 36 8 37 8;
-#X connect 36 8 43 8;
-#X connect 36 9 37 9;
-#X connect 36 9 43 9;
-#X connect 36 10 37 10;
-#X connect 36 10 43 10;
-#X connect 36 11 37 11;
-#X connect 36 11 43 11;
-#X connect 36 12 37 12;
-#X connect 36 12 43 12;
-#X connect 36 13 37 13;
-#X connect 36 13 43 13;
-#X connect 36 14 37 14;
-#X connect 36 14 43 14;
-#X connect 37 0 38 0;
-#X connect 37 1 38 1;
-#X connect 39 0 61 16;
-#X connect 40 0 64 0;
-#X connect 44 0 46 0;
-#X connect 45 0 64 0;
-#X connect 47 0 44 0;
-#X connect 50 0 51 0;
-#X connect 51 0 46 0;
+#X connect 38 0 60 16;
+#X connect 39 0 63 0;
+#X connect 43 0 45 0;
+#X connect 44 0 63 0;
+#X connect 46 0 43 0;
+#X connect 49 0 50 0;
+#X connect 50 0 45 0;
+#X connect 52 0 54 0;
 #X connect 53 0 55 0;
-#X connect 54 0 56 0;
-#X connect 55 0 52 0;
-#X connect 56 0 52 0;
-#X connect 57 0 47 0;
-#X connect 58 0 50 0;
-#X connect 59 0 54 0;
-#X connect 60 0 53 0;
-#X connect 61 0 36 0;
-#X connect 61 1 36 1;
-#X connect 61 2 36 2;
-#X connect 61 3 36 3;
-#X connect 61 4 36 4;
-#X connect 61 5 36 5;
-#X connect 61 6 36 6;
-#X connect 61 7 36 7;
-#X connect 61 8 36 8;
-#X connect 61 9 36 9;
-#X connect 61 10 36 10;
-#X connect 61 11 36 11;
-#X connect 61 12 36 12;
-#X connect 61 13 36 13;
-#X connect 61 14 36 14;
-#X connect 61 15 36 15;
-#X connect 64 0 35 0;
-#X connect 64 0 33 0;
-#X connect 64 1 35 1;
-#X connect 64 1 33 1;
-#X connect 64 2 35 2;
-#X connect 64 2 33 2;
-#X connect 64 3 35 3;
-#X connect 64 3 33 3;
-#X connect 64 4 35 4;
-#X connect 64 4 33 4;
-#X connect 64 5 35 5;
-#X connect 64 5 33 5;
-#X connect 64 6 35 6;
-#X connect 64 6 33 6;
-#X connect 64 7 35 7;
-#X connect 64 7 33 7;
-#X connect 64 8 35 8;
-#X connect 64 8 33 8;
-#X connect 64 9 35 9;
-#X connect 64 9 33 9;
-#X connect 64 10 35 10;
-#X connect 64 10 33 10;
-#X connect 64 11 35 11;
-#X connect 64 11 33 11;
-#X connect 64 12 35 12;
-#X connect 64 12 33 12;
-#X connect 64 13 35 13;
-#X connect 64 13 33 13;
-#X connect 64 14 35 14;
-#X connect 64 14 33 14;
+#X connect 54 0 51 0;
+#X connect 55 0 51 0;
+#X connect 56 0 46 0;
+#X connect 57 0 49 0;
+#X connect 58 0 53 0;
+#X connect 59 0 52 0;
+#X connect 60 0 35 0;
+#X connect 60 1 35 1;
+#X connect 60 2 35 2;
+#X connect 60 3 35 3;
+#X connect 60 4 35 4;
+#X connect 60 5 35 5;
+#X connect 60 6 35 6;
+#X connect 60 7 35 7;
+#X connect 60 8 35 8;
+#X connect 60 9 35 9;
+#X connect 60 10 35 10;
+#X connect 60 11 35 11;
+#X connect 60 12 35 12;
+#X connect 60 13 35 13;
+#X connect 60 14 35 14;
+#X connect 60 15 35 15;
+#X connect 63 0 34 0;
+#X connect 63 0 32 0;
+#X connect 63 1 34 1;
+#X connect 63 1 32 1;
+#X connect 63 2 34 2;
+#X connect 63 2 32 2;
+#X connect 63 3 34 3;
+#X connect 63 3 32 3;
+#X connect 63 4 34 4;
+#X connect 63 4 32 4;
+#X connect 63 5 34 5;
+#X connect 63 5 32 5;
+#X connect 63 6 34 6;
+#X connect 63 6 32 6;
+#X connect 63 7 34 7;
+#X connect 63 7 32 7;
+#X connect 63 8 34 8;
+#X connect 63 8 32 8;
+#X connect 63 9 34 9;
+#X connect 63 9 32 9;
+#X connect 63 10 34 10;
+#X connect 63 10 32 10;
+#X connect 63 11 34 11;
+#X connect 63 11 32 11;
+#X connect 63 12 34 12;
+#X connect 63 12 32 12;
+#X connect 63 13 34 13;
+#X connect 63 13 32 13;
+#X connect 63 14 34 14;
+#X connect 63 14 32 14;

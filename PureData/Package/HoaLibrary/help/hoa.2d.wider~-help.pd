@@ -1,15 +1,17 @@
 #N canvas 535 59 582 797 10;
-#X obj 0 0 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.wider~ 3
-12 0 18 -204280 -1 0;
-#X obj 112 230 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj 0 -40 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.wider~
+3 12 0 18 -228856 -1 0;
+#X obj 122 210 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X msg 5 339 \; pd dsp 1;
-#X msg 5 383 \; pd dsp 0;
-#X obj 393 159 line~;
-#X msg 393 139 \$1 20;
-#X obj 112 471 hoa.2d.meter~ @size 202 202 @fontname Helvetica @fontweight
+#X msg 15 319 \; pd dsp 1;
+#X msg 15 363 \; pd dsp 0;
+#X obj 403 139 line~;
+#X msg 403 119 \$1 20;
+#X obj 122 451 hoa.2d.meter~ @size 202 202 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send à$ @channels
 16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
 292.5 315 337.5 @offset 0 @rotation anti-clockwise @vectors energy
@@ -17,32 +19,34 @@ normal @fontslant roman @fontsize 11 @receive (null) @send à$ @channels
 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
 1 0 0 0.8;
-#X text 67 739 Eliott Paris Â© 2012-2013 CICM / Universite Paris 8
+#X text 77 719 Eliott Paris Â© 2012-2013 CICM / Universite Paris 8
 ;
-#X text 67 723 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text 77 703 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text 454 122 between 0 and 1;
-#X text 454 110 Widen value;
-#X text 2 22 A fractional ambisonic orders simulator;
-#X obj 393 116 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text 464 102 between 0 and 1;
+#X text 464 90 Widen value;
+#X text 2 -18 A fractional ambisonic orders simulator;
+#X obj 403 96 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.7 0.7 0.7 1
 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 295 126 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 305 106 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 295 148 hoa.pi 0;
-#X obj 295 103 c.loadmess 0;
-#X obj 112 687 hoa.dac~ 1:16 -------------------;
-#X obj 393 93 c.loadmess 0.175;
-#X obj 112 442 hoa.2d.decoder~ 7 ambisonic 16 --;
-#X obj 112 174 hoa.2d.encoder~ 7 -------------;
-#X obj 112 200 hoa.2d.wider~ 7 -----------------;
-#X text 4 40 hoa.2d.wider~ can be used to wide the diffusion of a localised
+#X obj 305 128 hoa.pi 0;
+#X obj 305 83 c.loadmess 0;
+#X obj 122 667 hoa.dac~ 1:16 -------------------;
+#X obj 403 73 c.loadmess 0.175;
+#X obj 122 422 hoa.2d.decoder~ 7 ambisonic 16 --;
+#X obj 122 154 hoa.2d.encoder~ 7 -------------;
+#X obj 122 180 hoa.2d.wider~ 7 -----------------;
+#X obj 122 107 hoa.soundrone;
+#X text 4 0 hoa.2d.wider~ can be used to wide the diffusion of a localised
 sound. The order depending signals are weighted and appear in a logarithmic
 way to have linear changes.;
-#X obj 112 127 hoa.soundrone;
+#X obj 356 24 declare -lib HoaLibrary/hoa.library;
+#X obj 356 3 declare -lib hoa.library;
 #X connect 4 0 20 15;
 #X connect 5 0 4 0;
 #X connect 12 0 5 0;
@@ -127,5 +131,5 @@ way to have linear changes.;
 #X connect 20 13 18 13;
 #X connect 20 14 1 14;
 #X connect 20 14 18 14;
-#X connect 22 0 19 0;
+#X connect 21 0 19 0;
 #X coords 0 797 1 796 100 60 0;

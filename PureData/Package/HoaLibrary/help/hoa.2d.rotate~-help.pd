@@ -1,13 +1,15 @@
 #N canvas 333 63 570 591 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
 #X obj -166 -512 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.rotate~
 3 12 0 18 -228856 -1 0;
 #X obj 267 -287 hoa.pi 2;
 #X obj 267 -306 loadbang;
 #X obj 252 -268 *~;
 #X obj 252 -331 phasor~ 0.1;
-#X text -120 49 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+#X text -150 49 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
-#X text -120 33 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text -150 33 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X msg 145 -147 \; pd dsp 1;
 #X msg 145 -109 \; pd dsp 0;
@@ -52,6 +54,8 @@ the ambisonic sound field. The last inlet set the angle of the rotation.
 #X obj -136 -398 hoa.soundgrain;
 #X obj 189 -373 hoa.pi;
 #X text -163 -490 An ambisonic sound field rotation external;
+#X obj 162 40 declare -lib HoaLibrary/hoa.library;
+#X obj 162 19 declare -lib hoa.library;
 #X connect 1 0 3 1;
 #X connect 2 0 1 0;
 #X connect 3 0 11 0;
