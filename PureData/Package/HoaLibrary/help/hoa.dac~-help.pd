@@ -1,0 +1,17 @@
+#N canvas 136 124 561 376 10;
+#X obj -325 -556 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.dac~ 3
+12 0 18 -228856 -1 0;
+#X text -324 -231 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X text -322 -534 A custom dac~ with matlab syntax;
+#X text -324 -513 hoa.dac~ facilitates the routing of large array of
+loudspeakers.;
+#X text -320 -411 Channels 1 to 8 :;
+#X text -320 -351 Channels 16 to 1 :;
+#X obj -321 -261 hoa.dac~ 9:16 10 22 6:1 ------------------;
+#X text -320 -291 Channels 9 to 16 \, 10 \, 22 and 6 to 1 :;
+#X text -320 -471 Channels 1 2 :;
+#X obj -321 -321 hoa.dac~ 16:1 ----------------------------;
+#X obj -321 -381 hoa.dac~ 1:8 -----------------------------;
+#X obj -321 -441 hoa.dac~ 1 2 -----------------------------;
+#X coords 0 376 1 375 100 60 0;

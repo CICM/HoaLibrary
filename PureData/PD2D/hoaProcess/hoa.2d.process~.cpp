@@ -9,6 +9,7 @@
 extern "C"
 {
 #include "../../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
+extern t_symbol *sys_libdir;
 }
 
 typedef struct _hoa_in
@@ -944,8 +945,11 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     }
     ncnv = x->f_ncanvas;
     x->f_ncanvas = 0;
+    
     // Location of the file
-    if((fd = canvas_open(canvas_getcurrent(), s->s_name, ".pd", dirbuf, &nameptr, MAXPDSTRING, 0)) >= 0)
+    fd = canvas_open(canvas_getcurrent(), s->s_name, ".pd", dirbuf, &nameptr, MAXPDSTRING, 0);
+
+    if(fd >= 0)
     {
         
         // Allocation of each canvas

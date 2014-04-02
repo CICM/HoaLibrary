@@ -1,0 +1,681 @@
+#N canvas 320 53 732 757 10;
+#X obj -610 -440 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -204280 -1 0;
+#X text -499 247 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -499 231 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -252 -154 Mousewheel and alt to change the zoom.;
+#X text -605 -419 A GUI to spatialize sources on a map.;
+#X obj -579 -322 hoa.2d.map @size 288 288 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.51
+sources_parameters source 0 -0.83061 0.966776 0 0.2 0.2 0.2 1 (null)
+source 1 -0.966776 -0.953159 0 0.2 0.2 0.2 1 (null) source 2 0.912309
+-0.925926 0 0.2 0.2 0.2 1 (null) source 3 0.939542 0.885076 0 0.2 0.2
+0.2 1 (null) groups_parameters group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null)
+;
+#X obj -559 193 hoa.dac~ 1 2 -----------------------------------;
+#X obj -579 -347 c.loadmess;
+#X msg -242 -105 \; pd dsp 1;
+#X msg -242 -70 \; pd dsp 0;
+#X text -605 -398 hoa.2d.map allows you to spatialize several sources
+on a plane. You can add and remove sources \, change coordinates \,
+add description and create groups., f 90;
+#X obj -559 106 freeverb~;
+#X obj -519 106 freeverb~;
+#X obj -478 106 freeverb~;
+#X obj -437 106 freeverb~;
+#X obj -397 106 freeverb~;
+#X obj -357 106 freeverb~;
+#X obj -316 106 freeverb~;
+#X obj -30 -406 hoa.connect;
+#X obj -30 -431 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -559 -22 c.loadmess 1;
+#X msg -174 75 roomsize 0.8;
+#X text -254 -349 To move source or group \, click on it and drag it.
+Click and drag with alt to change the radius. Click and drag with shift
+to change the angle.;
+#X text -253 -297 To create source \, right-click or click with cmd
+on a "free" zone then select "Add source" in the popup menu. To remove
+source \, idem and select "Remove source".;
+#X text -252 -243 To create group \, drag select a set of sources \,
+when mouse up the group will be created. To remove group \, right-click
+or click with cmd on group then select "Remove group".;
+#X text -254 -192 To mute source or group \, right-click or click with
+cmd on it and select "Mute" or "Unmute".;
+#N canvas 153 23 1155 646 messages 0;
+#X msg -518 -122 zoom \$1;
+#X text -531 -173 Set the zoom;
+#X obj -96 13 send map_mes;
+#X msg -196 -83 source 0 pol 1 3.14;
+#X msg -150 -59 group 0 car 0.5 0.5;
+#X text -202 -216 Display source or group and set coordinates with
+"source" or "group" message followed by an integer for the index \,
+the type of coordinates and one or two floating values for coordinates.
+The coordinates types accepted are "polar" (or "pol") \, "cartesian"
+(or "car") \, "radius" \, "angle" \, "abscissa" \, "ordinate". The
+polar type is followed by the radius then the angle and the cartesian
+type is followed by the abscissa then the ordinate. Exemple : "source
+0 car 1 0.".;
+#X text 196 -216 Set descriptions with "source" or "group" message
+followed by an integer for the index \, the "description" message and
+everything you want for the description. Set "remove" instead of the
+description to remove the description. Exemple : "source 0 description
+Jimi Hendrix".;
+#X obj 195 -77 send map_mes;
+#X msg -50 -83 source 1 abscissa 2.5;
+#X msg -18 -58 group 0 angle 1.14;
+#X text 199 -40 Set colors with "source" or "group" message followed
+by an integer for the index \, the "color" message and four floating
+values for red \, green \, blue and alpha (ok... there's no alpha).
+Exemple : "source 0 color 1 0.2 0.6 1;
+#X obj 207 92 send map_mes;
+#X msg 207 41 source 1 color 0.7 0 0.6 1;
+#X obj -38 176 send map_mes;
+#X text -184 39 Mute with the "mute" message".;
+#X msg -44 144 source 1 mute \$1;
+#X msg -121 88 source 0 mute \$1;
+#X msg 32 123 group 0 mute \$1;
+#X text 197 129 Remove a source or group with the "remove" message".
+Note that remove will also remove coordinates \, descriptions \, color
+and send a message to hoa.2D.map~ to mute the source (exept for groups).
+;
+#X obj 210 242 send map_mes;
+#X msg 210 191 group 1 remove;
+#X msg 232 214 source 3 remove;
+#X msg -331 -121 clear;
+#X msg -50 -30 source 3 car 0.2 -0.7;
+#X text -194 214 Create a group with the "group" message followed by
+an integer for the group index \, "set" message and a list of intergers
+\, the indexs of source to put in the group. Exemple : "group 0 set
+1 2 3 4".;
+#X msg -181 292 group 1 set 0 1 3;
+#X obj -181 332 send map_mes;
+#X text -71 290 (create the source 3 before);
+#X text 305 191 (create the group 1 before);
+#X text 328 213 (create the source 3 before);
+#X text -441 -149 Bang to output;
+#X obj -518 -152 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -436 -122 c.bang @size 17 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X obj 32 96 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -121 66 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -44 116 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X msg 195 -128 source 1 description Jimi Hendrix;
+#X msg 217 -105 group 1 description Band of Gypsys;
+#X msg 229 64 group 1 color 0.2 0.9 0 1;
+#X obj -518 -68 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@bgcolor 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.34
+sources_parameters source 0 -0.00159255 -0.999999 0 0.2 0.2 0.2 1 (null)
+source 1 2.5 1.29412 0 0.7 0 0.6 1 Jimi_Hendrix_ source 2 -1.4902 0.392157
+0 0.2 0.2 0.2 1 (null) source 3 0.2 -0.7 0 0.2 0.2 0.2 1 (null) groups_parameters
+group 0 3 0 2 3 0 0.2 0.2 0.2 1 (null) group 1 3 0 1 3 0 0.2 0.9 0
+1 Band_of_Gypsys_;
+#X obj -534 -270 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -204280 -1 0;
+#X text -529 -249 A GUI to spatialize sources on a map.;
+#X text 52 -250 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 52 -266 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -531 -225 Manage hoa.2d.map with messages.;
+#X text -332 -146 Clear all;
+#X connect 0 0 39 0;
+#X connect 3 0 2 0;
+#X connect 4 0 2 0;
+#X connect 8 0 2 0;
+#X connect 9 0 2 0;
+#X connect 12 0 11 0;
+#X connect 15 0 13 0;
+#X connect 16 0 13 0;
+#X connect 17 0 13 0;
+#X connect 20 0 19 0;
+#X connect 21 0 19 0;
+#X connect 22 0 39 0;
+#X connect 23 0 2 0;
+#X connect 25 0 26 0;
+#X connect 31 0 0 0;
+#X connect 32 0 39 0;
+#X connect 33 0 17 0;
+#X connect 34 0 16 0;
+#X connect 35 0 15 0;
+#X connect 36 0 7 0;
+#X connect 37 0 7 0;
+#X connect 38 0 11 0;
+#X restore -98 -98 pd messages;
+#N canvas 91 83 1139 646 slots 0;
+#X obj -584 -328 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.46 sources_parameters
+source 0 1.1758 -0.811053 0 0.2 0.2 0.2 1 (null) source 1 -0.0859105
+-0.323257 0 0.2 0.2 0.2 1 (null) source 2 0.993065 0.724548 0 0.2 0.2
+0.2 1 (null) groups_parameters group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null)
+;
+#X msg -188 -366 slot store \$1;
+#X msg -74 -361 slot storeagain;
+#X obj -188 -190 send map_slot;
+#X msg -60 -309 slot storenext;
+#X msg -48 -271 slot storeend;
+#X text -65 -289 Store at new end slot;
+#X msg -25 -216 slot storeempty;
+#X obj 164 -278 send map_slot;
+#X text 150 -430 Copy a slot in another;
+#X msg 164 -332 slot copy \$1 \$1;
+#X obj 164 -353 pack 0 0;
+#X msg 354 -365 slot insert \$1;
+#X msg 332 -307 slot renumber;
+#X text 270 -235 Remove a slot;
+#X msg 173 -174 slot delete \$1;
+#X msg 284 -175 slot remove \$1;
+#X text 382 -202 Remove all slots;
+#X obj 173 -128 send map_slot;
+#X obj 173 95 send map_slot;
+#X obj 173 20 pack 0 0;
+#X msg 173 41 slot storesource \$1 \$1;
+#X text 180 -29 Slot;
+#X obj 352 20 pack 0 0;
+#X text 354 -29 Slot;
+#X msg 352 41 slot storesource \$1 \$1;
+#X msg -241 -63 slot \$1;
+#X text -253 -139 Recall a slot and interpolate;
+#X text -253 -124 between two consecutives slots;
+#X obj -241 -43 send map_slot;
+#X text -61 -124 between two consecutives slots;
+#X obj -42 -41 send map_slot;
+#X msg -42 -61 slot recall 0 2 \$1;
+#X obj -580 85 send map_slot;
+#X text -583 -1 Save presets in text file;
+#X text -61 -139 Recall a slot and interpolate;
+#X obj -206 87 send map_slot;
+#X text -209 27 hoa.2d.map needs an absolute path. Here is an example.
+;
+#X msg 395 -175 slot clear;
+#X obj -188 -394 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -52 -249 Store the first empty slot;
+#X text -67 -234 (store at new end slot if need);
+#X text -92 -398 Store again the last;
+#X text -92 -381 slot stored (overwrite);
+#X text -71 -327 (overwrite if need);
+#X text -71 -341 Store the next slot;
+#X obj -241 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -171 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -42 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 164 -377 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 209 -407 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 354 -392 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 322 -435 Insert a slot at index;
+#X text 325 -418 and increase nexts;
+#X text -211 -433 Store a preset at;
+#X text -205 -416 a defined slot;
+#X text 334 -325 0 \, 1 \, 2 \, 3...;
+#X text 331 -341 Renumber slots;
+#X obj 173 -207 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 149 -247 Remove a slot and;
+#X text 157 -230 decrease nexts;
+#X obj 284 -207 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 173 -7 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 216 -37 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 164 -94 Store a source at;
+#X text 175 -78 a defined slot;
+#X text 217 -57 Source;
+#X text 324 -94 Store a source at;
+#X text 335 -78 a defined slot;
+#X obj 352 -7 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 396 -37 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 400 -58 Group;
+#X text -209 11 Read presets from a text file;
+#X msg -206 58 slot read /Users/Pierre/Desktop/2001_A_Space_Odyssey.pd
+;
+#X msg -580 55 slot write /Users/Pierre/Desktop/2001_A_Space_Odyssey.pd
+;
+#X text -583 14 hoa.2d.map needs an absolute path. Here is an example
+but this is my name therefore it won't work...;
+#X text -600 -412 Important \, Pure Data can't manage very large data
+while copying \, cutting and saving of object. Therefore \, the presets
+are no more saved with the patcher to avoid crashes.;
+#X obj -610 -490 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -204280 -1 0;
+#X text -605 -469 A GUI to spatialize sources on a map.;
+#X text -32 -470 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -32 -486 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -608 -447 Record and manage presets with the slot message.
+;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 0;
+#X connect 7 0 3 0;
+#X connect 10 0 8 0;
+#X connect 11 0 10 0;
+#X connect 12 0 8 0;
+#X connect 13 0 8 0;
+#X connect 15 0 18 0;
+#X connect 16 0 18 0;
+#X connect 20 0 21 0;
+#X connect 21 0 19 0;
+#X connect 23 0 25 0;
+#X connect 25 0 19 0;
+#X connect 26 0 29 0;
+#X connect 32 0 31 0;
+#X connect 38 0 18 0;
+#X connect 39 0 1 0;
+#X connect 46 0 26 0;
+#X connect 47 0 26 0;
+#X connect 48 0 32 0;
+#X connect 49 0 11 0;
+#X connect 50 0 11 1;
+#X connect 51 0 12 0;
+#X connect 58 0 15 0;
+#X connect 61 0 16 0;
+#X connect 62 0 20 0;
+#X connect 63 0 20 1;
+#X connect 69 0 23 0;
+#X connect 70 0 23 1;
+#X connect 73 0 36 0;
+#X connect 74 0 33 0;
+#X restore -98 -73 pd slots;
+#N canvas 189 106 1208 632 trajectories 0;
+#X obj -610 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -204280 -1 0;
+#X text -605 -423 A GUI to spatialize sources on a map.;
+#X obj -590 133 send map_slot;
+#X obj -196 117 send map_slot;
+#X text -199 43 hoa.map needs an absolute path. Here is an example.
+;
+#X text 198 -345 1 - Set "trajectory record 1";
+#X obj -198 -278 send map_traj;
+#X text 198 -331 2 - Draw the trajectory of a source or a group;
+#X text 198 -316 2 (bis) - Set "record 0" (for safety);
+#X obj -193 -160 send map_traj;
+#X obj -193 -216 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg -193 -192 trajectory \$1;
+#X msg -198 -310 trajectory record \$1;
+#X text 198 -301 3 - Replay with floats between 0 and 1;
+#X text 198 -286 4 - Rewind to 0;
+#X text 198 -272 5 - Set "limit 1";
+#X obj -190 -13 send map_traj;
+#X text -196 -132 (5) When a trajectory is recorded \, you can overwrite
+it with another source or group. To limit the lenght of the new trajectory
+to the lenght of previous trajectory set "limit 1".;
+#X msg -190 -45 trajectory limit \$1;
+#X text -201 -378 (1 \, 2bis and 6) Set "record 1" to enable the recording.
+Then draw your trajectory.;
+#X text 198 -258 6 - Set "record 1";
+#X text 198 -244 7 - Overwrite the trajectory with another source or
+another group;
+#X text 198 -216 8 - Rewind to 0;
+#X text -197 -249 (3 \, 4 and 8) Use values between 0 and 1 to play/rewind
+the trajectory.;
+#X text 240 -374 How to record trajectories;
+#X text 198 -202 9 - (record \, play and rewind to inifite);
+#X obj 237 -72 send map_traj;
+#X msg 237 -104 trajectory erase;
+#X text 234 -125 Erase all the trajectory.;
+#X text 233 -47 Erase a part of the trajectory. For example "erasepart
+0 0.1" to erase the beginning of the trajectory;
+#X obj 237 70 send map_traj;
+#X msg 237 38 trajectory erasepart \$1 \$2;
+#X obj 237 10 pack 0 0;
+#X obj 237 -13 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 300 -15 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X msg -590 81 trajectory write /Users/Pierre/Desktop/The_Graduate.pd
+;
+#X msg -196 74 trajectory read /Users/Pierre/Desktop/The_Graduate.pd
+;
+#X obj -584 -302 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_traj @send (null)
+@bgcolor 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.312488
+sources_parameters source 0 -1.89874 1.51472 0 0.2 0.2 0.2 1 (null)
+groups_parameters;
+#X obj -198 -337 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -190 -75 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X text -608 -401 Record and manage trajectories with the trajectory
+message.;
+#X text -600 -366 Important \, Pure Data can't manage very large data
+while copying \, cutting and saving of object. Therefore \, the trajectories
+are no more saved with the patcher to avoid crashes.;
+#X text -30 -426 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -30 -442 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -593 25 Save trajectory in a text file;
+#X text -199 27 Read trajectories from a text file;
+#X text -593 40 hoa.map needs an absolute path. Here is an example
+but this is my name therefore it won't work...;
+#X connect 10 0 11 0;
+#X connect 11 0 9 0;
+#X connect 12 0 6 0;
+#X connect 18 0 16 0;
+#X connect 27 0 26 0;
+#X connect 31 0 30 0;
+#X connect 32 0 31 0;
+#X connect 33 0 32 0;
+#X connect 34 0 32 1;
+#X connect 35 0 2 0;
+#X connect 36 0 3 0;
+#X connect 38 0 12 0;
+#X connect 39 0 18 0;
+#X restore -98 -48 pd trajectories;
+#N canvas 161 119 804 672 outputs 0;
+#X obj -540 -463 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -204280 -1 0;
+#X text -535 -442 A GUI to spatialize sources on a map.;
+#X text -480 141 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -480 125 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -504 45 send map_outs_sources;
+#X obj -357 47 send map_outs_groups;
+#X msg -382 -326 getinfo;
+#X obj -27 -403 receive map_outs_sources;
+#X text -305 -381 Change the coordinates type;
+#X obj -27 -370 route 0 1;
+#X obj -31 -145 receive map_outs_groups;
+#X obj -210 48 route source group slot;
+#X obj -210 22 route list;
+#X obj -504 -287 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode cartesian @zoom 0.312488
+sources_parameters source 0 -2.09075 -1.23738 0 0.2 0.2 0.2 1 (null)
+source 1 2.08808 -0.565355 0 0.2 0.2 0.2 1 (null) source 2 -0.210674
+2.10141 0 0.2 0.2 0.2 1 (null) groups_parameters group 0 2 0 1 0 0.2
+0.2 0.2 1 (null) group 1 2 1 2 0 0.2 0.2 0.2 1 (null);
+#X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X text -537 -416 hoa.2d.map outputs.;
+#X text -529 -372 Outputs sources;
+#X text -541 -356 and groups coordinates;
+#X msg -265 -330 outputmode \$1;
+#X obj -263 -356 c.menu @size 85 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items polar cartesian @states 0 0 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -394 -360 Output general;
+#X text -390 -345 informations;
+#X obj 26 49 c.prepend set;
+#X msg 26 81 cartesian -0.00133376 -0.901368;
+#X obj -31 19 route mute;
+#X obj -31 81 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X text 38 -107 Route group by index;
+#X obj 30 -213 c.prepend set;
+#X msg 30 -181 cartesian -2.09075 -1.23738;
+#X obj -27 -243 route mute;
+#X obj -27 -181 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj 55 -303 c.prepend set;
+#X msg 55 -271 cartesian 2.08808 -0.565355;
+#X obj -2 -333 route mute;
+#X obj -2 -271 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj 51 -52 c.prepend set;
+#X msg 51 -20 cartesian 0.938703 0.76803;
+#X obj -6 -82 route mute;
+#X obj -6 -20 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -31 -109 route 0 1;
+#X text 39 -370 Route source by index;
+#X obj -120 126 print slot;
+#X obj -165 99 print group;
+#X obj -210 74 print source;
+#X connect 6 0 13 0;
+#X connect 7 0 9 0;
+#X connect 9 0 29 0;
+#X connect 9 1 33 0;
+#X connect 10 0 39 0;
+#X connect 11 0 43 0;
+#X connect 11 1 42 0;
+#X connect 11 2 41 0;
+#X connect 12 0 11 0;
+#X connect 13 0 4 0;
+#X connect 13 1 5 0;
+#X connect 13 2 12 0;
+#X connect 14 0 13 0;
+#X connect 18 0 13 0;
+#X connect 19 1 18 0;
+#X connect 22 0 23 0;
+#X connect 24 0 25 0;
+#X connect 24 1 22 0;
+#X connect 27 0 28 0;
+#X connect 29 0 30 0;
+#X connect 29 1 27 0;
+#X connect 31 0 32 0;
+#X connect 33 0 34 0;
+#X connect 33 1 31 0;
+#X connect 35 0 36 0;
+#X connect 37 0 38 0;
+#X connect 37 1 35 0;
+#X connect 39 0 24 0;
+#X connect 39 1 37 0;
+#X restore -98 -23 pd outputs;
+#X obj -559 157 hoa.binaural_order3 256 @pinna large -----------;
+#X obj -559 68 hoa.2d.optim~ 3 -------------------------;
+#X obj -559 33 hoa.2d.map~ 3 4 -------------------------;
+#N canvas 284 119 577 458 hoa.rhythm 0;
+#X msg 231 -105 0;
+#X obj 158 21 *~ 0;
+#X msg 211 -33 0;
+#X obj 204 -105 + 1;
+#X obj 179 -104 f;
+#X obj 8 21 *~ 0;
+#X msg 61 -33 0;
+#X obj 54 -105 + 1;
+#X obj 29 -104 f;
+#X msg 81 -105 0;
+#X obj 29 -82 sel 0 4;
+#X obj 61 -56 delay 3;
+#X obj -112 57 *~ 0;
+#X msg -59 -13 0;
+#X obj -66 -85 + 1;
+#X obj -91 -84 f;
+#X msg -39 -85 0;
+#X obj -91 -62 sel 0 6;
+#X obj -62 231 *~ 0;
+#X msg -9 177 0;
+#X obj -9 154 delay 1;
+#X obj -16 105 + 1;
+#X obj -41 106 f;
+#X msg 11 105 0;
+#X obj -41 128 sel 0 2;
+#X obj -62 200 osc~ 0.05;
+#X obj -112 11 phasor~ 0.1;
+#X obj -59 -36 delay 3;
+#X obj -112 32 +~ 0.2;
+#X obj 56 -9 osc~ 3.7;
+#X obj 211 -59 delay 5;
+#X obj -32 32 +~ 0.2;
+#X obj 61 18 abs~;
+#X obj 191 -166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 145 -194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj 179 -82 sel 1 3 8;
+#X obj 29 -138 metro 120;
+#X msg -91 -13 0.8;
+#X msg 29 -33 0.8;
+#X obj 136 -66 noise~;
+#X obj 144 -12 lop~ 200;
+#X msg 179 -33 4;
+#X msg -41 177 0.7;
+#X obj 120 105 outlet~;
+#X obj 180 105 outlet~;
+#X obj 180 145 outlet~;
+#X obj 120 145 outlet~;
+#X obj 351 -46 inlet;
+#X connect 0 0 4 0;
+#X connect 1 0 44 0;
+#X connect 2 0 1 1;
+#X connect 3 0 4 1;
+#X connect 4 0 3 0;
+#X connect 4 0 35 0;
+#X connect 5 0 43 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 1;
+#X connect 8 0 7 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 0 38 0;
+#X connect 10 0 11 0;
+#X connect 10 1 9 0;
+#X connect 11 0 6 0;
+#X connect 12 0 46 0;
+#X connect 13 0 12 1;
+#X connect 14 0 15 1;
+#X connect 15 0 14 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 17 0 37 0;
+#X connect 17 0 27 0;
+#X connect 17 1 16 0;
+#X connect 18 0 45 0;
+#X connect 19 0 18 1;
+#X connect 20 0 19 0;
+#X connect 21 0 22 1;
+#X connect 22 0 21 0;
+#X connect 22 0 24 0;
+#X connect 23 0 22 0;
+#X connect 24 0 42 0;
+#X connect 24 0 20 0;
+#X connect 24 1 23 0;
+#X connect 25 0 18 0;
+#X connect 26 0 28 0;
+#X connect 27 0 13 0;
+#X connect 28 0 12 0;
+#X connect 29 0 32 0;
+#X connect 30 0 2 0;
+#X connect 31 0 5 0;
+#X connect 32 0 31 0;
+#X connect 33 0 36 1;
+#X connect 34 0 36 0;
+#X connect 35 0 41 0;
+#X connect 35 0 30 0;
+#X connect 35 1 41 0;
+#X connect 35 1 30 0;
+#X connect 35 2 0 0;
+#X connect 36 0 4 0;
+#X connect 36 0 8 0;
+#X connect 36 0 15 0;
+#X connect 36 0 22 0;
+#X connect 37 0 12 1;
+#X connect 38 0 5 1;
+#X connect 39 0 40 0;
+#X connect 40 0 1 0;
+#X connect 41 0 1 1;
+#X connect 42 0 18 1;
+#X connect 47 0 34 0;
+#X restore -559 1 pd hoa.rhythm ---------------------------;
+#X obj -282 124 hoa.process~ 7 zaza ambisonic;
+#X connect 5 0 32 0;
+#X connect 7 0 5 0;
+#X connect 11 0 30 0;
+#X connect 12 0 30 1;
+#X connect 13 0 30 2;
+#X connect 14 0 30 3;
+#X connect 15 0 30 4;
+#X connect 16 0 30 5;
+#X connect 17 0 30 6;
+#X connect 19 0 18 0;
+#X connect 20 0 33 0;
+#X connect 21 0 17 0;
+#X connect 21 0 16 0;
+#X connect 21 0 15 0;
+#X connect 21 0 14 0;
+#X connect 21 0 13 0;
+#X connect 21 0 12 0;
+#X connect 21 0 11 0;
+#X connect 30 0 6 0;
+#X connect 30 1 6 1;
+#X connect 31 0 11 0;
+#X connect 31 1 12 0;
+#X connect 31 2 13 0;
+#X connect 31 3 14 0;
+#X connect 31 4 15 0;
+#X connect 31 5 16 0;
+#X connect 31 6 17 0;
+#X connect 32 0 31 0;
+#X connect 32 1 31 1;
+#X connect 32 2 31 2;
+#X connect 32 3 31 3;
+#X connect 32 4 31 4;
+#X connect 32 5 31 5;
+#X connect 32 6 31 6;
+#X connect 33 0 32 0;
+#X connect 33 1 32 1;
+#X connect 33 2 32 2;
+#X connect 33 3 32 3;
+#X coords 0 757 1 756 85 60 0;

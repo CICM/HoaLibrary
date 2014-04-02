@@ -31,7 +31,7 @@ extern "C" void setup_hoa0x2ein(void)
     c = eclass_new("hoa.in", (method)hoa_in_new, (method)hoa_in_free, (short)sizeof(t_hoa_in), CLASS_NOINLET, A_GIMME, 0);
     
     hoa_initclass(c, (method)hoa_getinfos);
-    
+    class_sethelpsymbol((t_class *)c, gensym("help/hoa.io"));
     eclass_addmethod(c, (method)hoa_in_bang,       "bang",     A_CANT,  0);
     eclass_addmethod(c, (method)hoa_in_float,      "float",    A_FLOAT, 0);
     eclass_addmethod(c, (method)hoa_in_symbol,     "symbol",   A_SYMBOL,0);

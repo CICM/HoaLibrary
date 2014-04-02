@@ -1,0 +1,49 @@
+#N canvas 439 231 618 572 10;
+#X obj -100 141 hoa.scope~ @patching_rect [ -100 141 300 300 ] @size
+[ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj -100 60 sig~ 1;
+#X obj -100 95 matrix~ 1 15 0 **************************************
+;
+#X msg -175 238 \; pd dsp 1;
+#X msg -175 272 \; pd dsp 0;
+#X msg -40 61 clear \, 0 \$1 1;
+#X obj -40 44 hradio 15 1 0 15 empty empty empty 0 -8 0 10 -262144
+-1 -1 14;
+#X text -38 29 0;
+#X text -24 29 -1;
+#X text -6 29 1;
+#X text 6 29 -2;
+#X text 24 29 2;
+#X text 36 29 -3;
+#X text 54 29 3;
+#X text 66 29 -4;
+#X text 84 29 4;
+#X text 96 29 -5;
+#X text 114 29 5;
+#X text 126 29 -6;
+#X text 144 29 6;
+#X text 156 29 -7;
+#X text 174 29 7;
+#X text -40 8 Harmonic Index :;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 2 1 0 1;
+#X connect 2 2 0 2;
+#X connect 2 3 0 3;
+#X connect 2 4 0 4;
+#X connect 2 5 0 5;
+#X connect 2 6 0 6;
+#X connect 2 7 0 7;
+#X connect 2 8 0 8;
+#X connect 2 9 0 9;
+#X connect 2 10 0 10;
+#X connect 2 11 0 11;
+#X connect 2 12 0 12;
+#X connect 2 13 0 13;
+#X connect 2 14 0 14;
+#X connect 5 0 2 0;
+#X connect 6 0 5 0;
