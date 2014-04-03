@@ -8,7 +8,13 @@
 
 HoaLogoComponent::HoaLogoComponent()
 {
-    ;
+
+
+    m_logo_icon = ImageCache::getFromMemory(BinaryData::hoa_icon_02_transp_png, BinaryData::hoa_icon_02_transp_pngSize);
+    m_logo_label = new Label();
+    m_logo_label->setText("HoaLibrary", juce::dontSendNotification);
+    
+    
 }
 
 HoaLogoComponent::~HoaLogoComponent()
@@ -18,8 +24,19 @@ HoaLogoComponent::~HoaLogoComponent()
 
 void HoaLogoComponent::paint(Graphics& g)
 {
-    g.setColour(Colours::black);
-    g.drawText("HOA COOL", 0, 0, getWidth() * 0.75, getWidth() * 0.75, Justification::centred, 0);
+
+    //g.drawText("Hoa", 10, 30, getWidth() * 0.75, getWidth() * 0.75, Justification::bottomLeft, 0);
+    
+    g.drawImage(m_logo_icon, 0, 0, PLUG_MENU_WIDTH, PLUG_MENU_WIDTH, 0, 0, m_logo_icon.getWidth(), m_logo_icon.getHeight());
+    
+    g.setColour(Colours::blue);
+    addAndMakeVisible(m_logo_label);
+    m_logo_label->setBounds(7, 80, getWidth() * 1.2, 60);
+    
+    
+
+    
+   
 }
 
 

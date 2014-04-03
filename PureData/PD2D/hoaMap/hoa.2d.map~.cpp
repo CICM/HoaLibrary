@@ -67,6 +67,7 @@ typedef struct _hoa_map_tilde
 
 void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_map_tilde_free(t_hoa_map_tilde *x);
+void hoa_map_tilde_float(t_hoa_map_tilde *x, float f);
 void hoa_map_tilde_list(t_hoa_map_tilde *x, t_symbol *s, long argc, t_atom *argv);
 
 void hoa_map_tilde_dsp(t_hoa_map_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
@@ -94,6 +95,7 @@ extern "C" void setup_hoa0x2e2d0x2emap_tilde(void)
     hoa_initclass(c, (method)hoa_getinfos);
 	eclass_addmethod(c, (method)hoa_map_tilde_dsp,     "dsp",      A_CANT, 0);
     eclass_addmethod(c, (method)hoa_map_tilde_list,    "list",     A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_map_tilde_float,   "float",    A_FLOAT, 0);
     
     CLASS_ATTR_SYMBOL           (c, "mode", 0, t_hoa_map_tilde, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
@@ -176,9 +178,14 @@ t_hoa_err hoa_getinfos(t_hoa_map_tilde* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
+void hoa_map_tilde_float(t_hoa_map_tilde *x, float f)
+{
+    
+}
+
 void hoa_map_tilde_list(t_hoa_map_tilde *x, t_symbol* s, long argc, t_atom* argv)
 {
-    if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
+    if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM && x->f_mode == hoa_sym_free)
     {
         int index = atom_getlong(argv);
         if(index < 0 || index >= x->f_map->getNumberOfSources())

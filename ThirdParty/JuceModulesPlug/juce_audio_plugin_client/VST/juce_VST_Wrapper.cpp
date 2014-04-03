@@ -302,8 +302,6 @@ public:
 
         setNumInputs (numInChans);
         setNumOutputs (numOutChans);
-		setNumberOfInputs(0, numInChans);
-		setNumberOfOutputs(0, numOutChans);
 		
         canProcessReplacing (true);
 
@@ -317,12 +315,12 @@ public:
 	
 	void setNumberOfInputs(AudioProcessor* Nope, long aNumberOfInputs)
     {
-        newnumInChans = aNumberOfInputs;
+        numInChans = aNumberOfInputs;
     }
     
     void setNumberOfOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
     {
-        newnumOutChans = aNumberOfOutputs;
+        numOutChans = aNumberOfOutputs;
     }
 
     ~JuceVSTWrapper()
@@ -569,9 +567,9 @@ public:
             const int numIn = numInChans;
             const int numOut = numOutChans;
 
-            if (filter->isSuspended())
+            if(filter->isSuspended() || numIn != cEffect.numInputs || numOut != cEffect.numOutputs)
             {
-                for (int i = 0; i < numOut; ++i)
+                for (int i = 0; i < cEffect.numOutputs; ++i)
                     FloatVectorOperations::clear (outputs[i], numSamples);
             }
             else
@@ -618,9 +616,11 @@ public:
                 }
 
                 // copy back any temp channels that may have been used..
+                /*
                 for (i = 0; i < numOut; ++i)
                     if (const float* const chan = tempChannels.getUnchecked(i))
                         memcpy (outputs[i], chan, sizeof (float) * (size_t) numSamples);
+                 */
             }
         }
 
@@ -664,8 +664,9 @@ public:
 
             midiEvents.clear();
         }
-		setNumInputs(newnumInChans);
-        setNumOutputs(newnumOutChans);
+        
+		setNumInputs(numInChans);
+        setNumOutputs(numOutChans);
         cEffect.numParams = filter->getNumParameters();
     }
 
@@ -1431,7 +1432,7 @@ private:
     VSTMidiEventList outgoingEvents;
     VstSpeakerArrangementType speakerIn, speakerOut;
     int numInChans, numOutChans;
-	int newnumInChans, newnumOutChans;
+	//int newnumInChans, newnumOutChans;
     bool isProcessing, isBypassed, hasShutdown, firstProcessCallback;
     bool shouldDeleteEditor, useNSView;
     HeapBlock<float*> channels;

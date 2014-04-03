@@ -1,0 +1,27 @@
+#N canvas 136 124 686 323 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -325 -799 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.connect
+3 12 0 18 -228856 -1 0;
+#X text -287 -529 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X obj 105 -597 hoa.connect;
+#X obj 105 -616 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 105 -655 key;
+#X obj 105 -636 sel 32;
+#X text -322 -777 A connector for hoa objects;
+#X text -324 -756 hoa.connect hepls to connect the hoa objects together.
+;
+#X obj -298 -710 hoa.2d.encoder~ 7 ---------------------------;
+#X obj -298 -659 hoa.2d.decoder~ 7 ambisonic 16 --------------;
+#X obj -298 -606 hoa.dac~ 1:16 -------------------------------;
+#X text 57 -719 Select the objects you want to connect;
+#X obj 136 -512 declare -lib HoaLibrary/hoa.library;
+#X obj 136 -533 declare -lib hoa.library;
+#X text 57 -709 then bang hoa.connect. In this example \,;
+#X text 57 -699 we use the space key to generate the bang.;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X coords 0 323 1 322 100 60 0;

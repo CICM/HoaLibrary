@@ -6,7 +6,7 @@
 
 #include "../Hoa2D.pd.h"
 
-class PolarLines
+class RecomPolarLines
 {
     
 private:
@@ -18,8 +18,8 @@ private:
     unsigned int m_number_of_sources;
     
 public:
-    PolarLines(unsigned int numberOfSources);
-    ~PolarLines();
+    RecomPolarLines(unsigned int numberOfSources);
+    ~RecomPolarLines();
     
     inline unsigned int getNumberOfSources() const
     {
@@ -56,18 +56,19 @@ public:
 typedef struct _hoa_recomposer
 {
     t_edspobj               f_ob;
-    t_symbol*               f_mode;
+    int                     f_mode;
     double                  f_ramp;
     
 	t_float*                f_ins;
     t_float*                f_outs;
     float*                  f_lines_vector;
     Hoa2D::Recomposer*      f_recomposer;
-    PolarLines*             f_lines;
+    RecomPolarLines*        f_lines;
 } t_hoa_recomposer;
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_recomposer_free(t_hoa_recomposer *x);
+void hoa_recomposer_float(t_hoa_recomposer *x, float f);
 
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
@@ -79,6 +80,7 @@ void hoa_recomposer_dsp(t_hoa_recomposer *x, t_object *dsp, short *count, double
 void hoa_recomposer_perform_fixe(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void hoa_recomposer_perform_fisheye(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_recomposer_perform_fisheye_offset(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void hoa_recomposer_perform_free(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
@@ -101,28 +103,18 @@ extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
 	eclass_addmethod(c, (method)hoa_recomposer_dsp,     "dsp",      A_CANT, 0);
     eclass_addmethod(c, (method)hoa_recomposer_angle,   "angle",    A_GIMME,0);
     eclass_addmethod(c, (method)hoa_recomposer_wide,    "wide",     A_GIMME,0);
-    
-    CLASS_ATTR_SYMBOL           (c, "mode", 0, t_hoa_recomposer, f_mode);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Planewaves");
-    CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
-	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
-    CLASS_ATTR_ORDER            (c, "mode", 0, "1");
-    CLASS_ATTR_DEFAULT          (c, "mode", 0, "fixe");
-    CLASS_ATTR_SAVE             (c, "mode", 1);
+    eclass_addmethod(c, (method)hoa_recomposer_float,   "float",    A_FLOAT,0);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_recomposer, f_ramp);
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"ramp", NULL, ramp_set);
     CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
-    CLASS_ATTR_DEFAULT          (c,"ramp", 0, "100");
+    CLASS_ATTR_DEFAULT          (c,"ramp", 0, "20");
     CLASS_ATTR_SAVE             (c,"ramp", 1);
     
     eclass_register(CLASS_OBJ, c);
     hoa_recomposer_class = c;
-    
-    hoa_sym_fixe       = gensym("fixe");
-    hoa_sym_fisheye    = gensym("fisheye");
 }
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
@@ -146,24 +138,49 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 			numberOfLoudspeakers = atom_getlong(argv+1);
         if(numberOfLoudspeakers < order * 2 + 1)
             numberOfLoudspeakers = order * 2 + 1;
-		
+        if(atom_gettype(argv+2) == A_SYM)
+        {
+            if(atom_getsym(argv+2) == gensym("free"))
+                x->f_mode = 2;
+            else if(atom_getsym(argv+2) == gensym("fisheye"))
+                x->f_mode = 1;
+            else
+                x->f_mode = 0;
+        }
+        else
+        {
+            x->f_mode = 0;
+        }
         x->f_ramp       = 100;
-        x->f_mode       = hoa_sym_fixe;
+        
         
 		x->f_recomposer = new Hoa2D::Recomposer(order, numberOfLoudspeakers);
-        x->f_lines      = new PolarLines(x->f_recomposer->getNumberOfChannels());
-        x->f_lines->setRamp(0.1 * sys_getsr());
-		for (int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
+        if(x->f_mode == 1)
         {
-            x->f_lines->setRadiusDirect(i, x->f_recomposer->getWideningValue(i));
-            x->f_lines->setAzimuthDirect(i, x->f_recomposer->getAzimuth(i));
+            x->f_lines      = new RecomPolarLines(1);
+            x->f_lines->setRamp(0.1 * sys_getsr());
+            x->f_lines->setRadius(0, 0);
+            eobj_dspsetup(x, x->f_recomposer->getNumberOfChannels() + 1, x->f_recomposer->getNumberOfHarmonics());
         }
-        
-        eobj_dspsetup(x, x->f_recomposer->getNumberOfChannels() + 1, x->f_recomposer->getNumberOfHarmonics());
+        else if(x->f_mode == 2)
+        {
+            x->f_lines      = new RecomPolarLines(x->f_recomposer->getNumberOfChannels());
+            x->f_lines->setRamp(0.1 * sys_getsr());
+            for (int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
+            {
+                x->f_lines->setRadiusDirect(i, x->f_recomposer->getWideningValue(i));
+                x->f_lines->setAzimuthDirect(i, x->f_recomposer->getAzimuth(i));
+            }
+            eobj_dspsetup(x, x->f_recomposer->getNumberOfChannels(), x->f_recomposer->getNumberOfHarmonics());
+            x->f_lines_vector   = new float[x->f_recomposer->getNumberOfChannels() * 2];
+        }
+        else
+        {
+            eobj_dspsetup(x, x->f_recomposer->getNumberOfChannels(), x->f_recomposer->getNumberOfHarmonics());
+        }
         
 		x->f_ins            = new t_float[x->f_recomposer->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_outs           = new t_float[x->f_recomposer->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
-        x->f_lines_vector   = new float[x->f_recomposer->getNumberOfChannels() * 2];
         
         ebox_attrprocess_viabinbuf(x, d);
 	}
@@ -181,9 +198,15 @@ t_hoa_err hoa_getinfos(t_hoa_recomposer* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
+void hoa_recomposer_float(t_hoa_recomposer *x, float f)
+{
+    if(x->f_mode == 1)
+        x->f_lines->setRadius(0, pd_clip_minmax(f, 0., 1.));
+}
+
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac && av && x->f_mode == hoa_sym_free)
+    if(ac && av && x->f_mode == 2)
     {
         for(int i = 0; i < x->f_recomposer->getNumberOfChannels() && i < ac; i++)
         {
@@ -195,7 +218,7 @@ void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
 
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac && av && x->f_mode == hoa_sym_free)
+    if(ac && av && x->f_mode == 2)
     {
         for(int i = 0; i < x->f_recomposer->getNumberOfChannels() && i < ac; i++)
         {
@@ -207,25 +230,34 @@ void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 
 void hoa_recomposer_dsp(t_hoa_recomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
-    if(x->f_mode == hoa_sym_fixe)
+    if(x->f_mode == 0)
+    {
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_recomposer_perform_fixe, 0, NULL);
-    else if(x->f_mode == hoa_sym_fisheye)
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_recomposer_perform_fisheye, 0, NULL);
-    else if(x->f_mode == hoa_sym_free)
+    }
+    else if(x->f_mode == 1)
+    {
+        x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
+        if(count[x->f_recomposer->getNumberOfChannels()])
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_recomposer_perform_fisheye, 0, NULL);
+        else
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_recomposer_perform_fisheye_offset, 0, NULL);
+    }
+    else if(x->f_mode == 2)
+    {
+        x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_recomposer_perform_free, 0, NULL);
+    }
 }
 
 void hoa_recomposer_perform_fixe(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int numberOfChannels = x->f_recomposer->getNumberOfChannels();
-    for(int i = 0; i < numberOfChannels && i < numins; i++)
+    for(int i = 0; i < numins; i++)
     {
-        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numberOfChannels);
+        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
     }
     for(int i = 0; i < sampleframes; i++)
     {
-        x->f_recomposer->processFixe(x->f_ins + numberOfChannels * i, x->f_outs + numouts * i);
+        x->f_recomposer->processFixe(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
@@ -243,6 +275,24 @@ void hoa_recomposer_perform_fisheye(t_hoa_recomposer *x, t_object *dsp64, float 
     for(int i = 0; i < sampleframes; i++)
     {
         x->f_recomposer->setFisheye(ins[numberOfChannels][i]);
+        x->f_recomposer->processFisheye(x->f_ins + numberOfChannels * i, x->f_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_recomposer_perform_fisheye_offset(t_hoa_recomposer *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    int numberOfChannels = x->f_recomposer->getNumberOfChannels();
+    for(int i = 0; i < numberOfChannels && i < numins; i++)
+    {
+        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numberOfChannels);
+    }
+    for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_recomposer->setFisheye(x->f_lines->processOne());
         x->f_recomposer->processFisheye(x->f_ins + numberOfChannels * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -279,72 +329,12 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
 {
 	eobj_dspfree(x);
 	delete x->f_recomposer;
-    delete x->f_lines;
-    delete [] x->f_lines_vector;
+    if(x->f_mode != 0)
+        delete x->f_lines;
+    if(x->f_mode == 2)
+        delete [] x->f_lines_vector;
     delete [] x->f_ins;
 	delete [] x->f_outs;
-}
-
-t_pd_err mode_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
-{
-    if(argc && argv)
-    {
-        if(atom_gettype(argv) == A_SYM)
-        {
-            if(atom_getsym(argv) == hoa_sym_fixe && x->f_mode != hoa_sym_fixe)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_fixe;
-                canvas_resume_dsp(dspState);
-            }
-            else if(atom_getsym(argv) == hoa_sym_fisheye && x->f_mode != hoa_sym_fisheye)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_fisheye;
-                x->f_lines->setRadiusDirect(0, 0.);
-                canvas_resume_dsp(dspState);
-            }
-            else if(atom_getsym(argv) == hoa_sym_free && x->f_mode != hoa_sym_free)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_free;
-                for(int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
-                {
-                    x->f_lines->setRadiusDirect(i, 1);
-                    x->f_lines->setAzimuthDirect(i, (double)i / (double)x->f_recomposer->getNumberOfChannels() * HOA_2PI);
-                }
-                canvas_resume_dsp(dspState);
-            }
-        }
-        else if(atom_gettype(argv) == A_LONG)
-        {
-            if(atom_getlong(argv) == 0 && x->f_mode != hoa_sym_fixe)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_fixe;
-                canvas_resume_dsp(dspState);
-            }
-            else if(atom_getlong(argv) == 1 && x->f_mode != hoa_sym_fisheye)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_fisheye;
-                x->f_lines->setRadiusDirect(0, 0.);
-                canvas_resume_dsp(dspState);
-            }
-            else if(atom_getlong(argv) == 1 && x->f_mode != hoa_sym_free)
-            {
-                int dspState = canvas_suspend_dsp();
-                x->f_mode = hoa_sym_free;
-                for(int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
-                {
-                    x->f_lines->setRadiusDirect(i, 1);
-                    x->f_lines->setAzimuthDirect(i, (double)i / (double)x->f_recomposer->getNumberOfChannels() * HOA_2PI);
-                    canvas_resume_dsp(dspState);
-                }
-            }
-        }
-    }
-    return 0;
 }
 
 t_pd_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
@@ -361,7 +351,7 @@ t_pd_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
     return 0;
 }
 
-PolarLines::PolarLines(unsigned int numberOfSources)
+RecomPolarLines::RecomPolarLines(unsigned int numberOfSources)
 {
     assert(numberOfSources > 0);
     m_number_of_sources = numberOfSources;
@@ -371,19 +361,19 @@ PolarLines::PolarLines(unsigned int numberOfSources)
     m_values_step   = new float[m_number_of_sources * 2];
 }
 
-PolarLines::~PolarLines()
+RecomPolarLines::~RecomPolarLines()
 {
     delete [] m_values_old;
     delete [] m_values_new;
     delete [] m_values_step;
 }
 
-void PolarLines::setRamp(unsigned int ramp)
+void RecomPolarLines::setRamp(unsigned int ramp)
 {
     m_ramp = clip_min(ramp, (long)1);
 }
 
-void PolarLines::setRadius(unsigned int index, double radius)
+void RecomPolarLines::setRadius(unsigned int index, double radius)
 {
     assert(index < m_number_of_sources);
     m_values_new[index]  = radius;
@@ -391,7 +381,7 @@ void PolarLines::setRadius(unsigned int index, double radius)
     m_counter = 0;
 }
 
-void PolarLines::setAzimuth(unsigned int index, double azimuth)
+void RecomPolarLines::setAzimuth(unsigned int index, double azimuth)
 {
     assert(index < m_number_of_sources);
     m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
@@ -419,7 +409,7 @@ void PolarLines::setAzimuth(unsigned int index, double azimuth)
     m_counter = 0;
 }
 
-void PolarLines::setRadiusDirect(unsigned int index, double radius)
+void RecomPolarLines::setRadiusDirect(unsigned int index, double radius)
 {
     assert(index < m_number_of_sources);
     m_values_old[index] = m_values_new[index] = radius;
@@ -427,7 +417,7 @@ void PolarLines::setRadiusDirect(unsigned int index, double radius)
     m_counter = 0;
 }
 
-void PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
+void RecomPolarLines::setAzimuthDirect(unsigned int index, double azimuth)
 {
     assert(index < m_number_of_sources);
     m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
@@ -435,7 +425,7 @@ void PolarLines::setAzimuthDirect(unsigned int index, double azimuth)
     m_counter = 0;
 }
 
-void PolarLines::process(float* vector)
+void RecomPolarLines::process(float* vector)
 {
     cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
     if(m_counter++ >= m_ramp)
@@ -447,7 +437,7 @@ void PolarLines::process(float* vector)
     cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
 }
 
-float PolarLines::processOne()
+float RecomPolarLines::processOne()
 {
     m_values_old[0] += m_values_step[0];
     if(m_counter++ >= m_ramp)

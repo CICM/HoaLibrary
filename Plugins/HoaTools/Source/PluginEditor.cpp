@@ -72,6 +72,16 @@ void HoaToolsAudioProcessorEditor::componentHasBeenClicked(Component* component)
     }
 }
 
+void HoaToolsAudioProcessorEditor::componentRedrawMap()
+{
+    m_map->repaint();
+}
+
+void HoaToolsAudioProcessorEditor::componentRedrawMeter()
+{
+    m_meter->repaint();
+}
+
 void HoaToolsAudioProcessorEditor::paint(Graphics& g)
 {
     g.setColour(Colours::lightgrey);
@@ -83,6 +93,8 @@ void HoaToolsAudioProcessorEditor::paint(Graphics& g)
     g.drawLine(499., 1., 498., getHeight() - 2., 2.5);
     g.setColour(Colours::grey);
     g.drawLine(500, 374, 625, 374, 2.5);
+    g.setColour(Colours::grey);
+    g.drawLine(500, 250, 625, 250, 2.5);
     g.setColour(Colours::grey);
     g.drawLine(500, 124, 625, 124, 2.5);
 }

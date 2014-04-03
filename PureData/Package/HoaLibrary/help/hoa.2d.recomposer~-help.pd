@@ -1,0 +1,168 @@
+#N canvas 274 26 829 769 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -316 -364 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.recomposer~
+3 12 0 18 -228856 -1 0;
+#X text -312 -341 A plane wave recomposer to harmonics domain;
+#X text 210 -67 Fisheye factor between 0 and 1;
+#X text -304 358 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -304 342 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X msg -272 232 \; pd dsp 1;
+#X msg -272 270 \; pd dsp 0;
+#X obj -69 86 hoa.2d.scope~ @size 189 189 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj -69 -154 hoa.2d.scope~ @size 171 171 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 253 -343 hoa.connect;
+#X obj 253 -362 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -144 -235 c.loadmess;
+#X obj 244 -45 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 244 19 line~;
+#X msg 244 -10 \$1 200;
+#X obj -309 -221 hoa.soundrone;
+#X obj -69 52 hoa.2d.recomposer~ 4 10 fisheye;
+#X obj -72 281 hoa.2d.decoder~ 4 0 10 --------;
+#X obj -72 314 hoa.dac~ 1:10 -----------------;
+#X obj -69 23 hoa.2d.projector~ 4 10 -----;
+#X obj -309 -195 hoa.2d.encoder~ 4 ----------;
+#X text -313 -321 hoa.2D.recomposer~ recomposes a plane wave sound
+field into the circular harmonics domain.;
+#X text -312 -284 1st argument is the order;
+#X text -312 -274 2nd argument is the number of channels;
+#X obj -69 -222 hoa.soundgrain;
+#X obj 171 -222 hoa.soundcoat;
+#X obj 96 -235 c.loadmess;
+#X obj -69 -195 hoa.2d.encoder~ 4 ----------;
+#X obj 335 -235 c.loadmess;
+#X obj 171 -195 hoa.2d.encoder~ 4 ----------;
+#X obj -144 -215 hoa.pi 0.4;
+#X obj 96 -215 hoa.pi 1;
+#X obj 335 -215 hoa.pi 1.6;
+#X obj 76 366 declare -lib HoaLibrary/hoa.library;
+#X obj 76 345 declare -lib hoa.library;
+#X text -312 -264 3nd argument is the mode : fixe (defaullt) or fisheye
+;
+#X text -290 -23 fixe mode :;
+#X text -290 -2 The sound field is just;
+#X text -290 8 recomposed into the;
+#X text -290 18 circular harmonics domain;
+#X text -290 28 without any effect.;
+#X text -290 57 fisheye mode :;
+#X text -290 78 The sound field can be;
+#X text -290 88 compressed to the front.;
+#X connect 10 0 9 0;
+#X connect 11 0 30 0;
+#X connect 12 0 14 0;
+#X connect 13 0 16 10;
+#X connect 14 0 13 0;
+#X connect 15 0 20 0;
+#X connect 16 0 7 0;
+#X connect 16 0 17 0;
+#X connect 16 1 7 1;
+#X connect 16 1 17 1;
+#X connect 16 2 7 2;
+#X connect 16 2 17 2;
+#X connect 16 3 7 3;
+#X connect 16 3 17 3;
+#X connect 16 4 7 4;
+#X connect 16 4 17 4;
+#X connect 16 5 7 5;
+#X connect 16 5 17 5;
+#X connect 16 6 7 6;
+#X connect 16 6 17 6;
+#X connect 16 7 7 7;
+#X connect 16 7 17 7;
+#X connect 16 8 7 8;
+#X connect 16 8 17 8;
+#X connect 17 0 18 0;
+#X connect 17 1 18 1;
+#X connect 17 2 18 2;
+#X connect 17 3 18 3;
+#X connect 17 4 18 4;
+#X connect 17 5 18 5;
+#X connect 17 6 18 6;
+#X connect 17 7 18 7;
+#X connect 17 8 18 8;
+#X connect 17 9 18 9;
+#X connect 19 0 16 0;
+#X connect 19 1 16 1;
+#X connect 19 2 16 2;
+#X connect 19 3 16 3;
+#X connect 19 4 16 4;
+#X connect 19 5 16 5;
+#X connect 19 6 16 6;
+#X connect 19 7 16 7;
+#X connect 19 8 16 8;
+#X connect 19 9 16 9;
+#X connect 20 0 8 0;
+#X connect 20 0 19 0;
+#X connect 20 1 8 1;
+#X connect 20 1 19 1;
+#X connect 20 2 8 2;
+#X connect 20 2 19 2;
+#X connect 20 3 8 3;
+#X connect 20 3 19 3;
+#X connect 20 4 8 4;
+#X connect 20 4 19 4;
+#X connect 20 5 8 5;
+#X connect 20 5 19 5;
+#X connect 20 6 8 6;
+#X connect 20 6 19 6;
+#X connect 20 7 8 7;
+#X connect 20 7 19 7;
+#X connect 20 8 8 8;
+#X connect 20 8 19 8;
+#X connect 24 0 27 0;
+#X connect 25 0 29 0;
+#X connect 26 0 31 0;
+#X connect 27 0 8 0;
+#X connect 27 0 19 0;
+#X connect 27 1 8 1;
+#X connect 27 1 19 1;
+#X connect 27 2 8 2;
+#X connect 27 2 19 2;
+#X connect 27 3 8 3;
+#X connect 27 3 19 3;
+#X connect 27 4 8 4;
+#X connect 27 4 19 4;
+#X connect 27 5 8 5;
+#X connect 27 5 19 5;
+#X connect 27 6 8 6;
+#X connect 27 6 19 6;
+#X connect 27 7 8 7;
+#X connect 27 7 19 7;
+#X connect 27 8 8 8;
+#X connect 27 8 19 8;
+#X connect 28 0 32 0;
+#X connect 29 0 8 0;
+#X connect 29 0 19 0;
+#X connect 29 1 8 1;
+#X connect 29 1 19 1;
+#X connect 29 2 8 2;
+#X connect 29 2 19 2;
+#X connect 29 3 8 3;
+#X connect 29 3 19 3;
+#X connect 29 4 8 4;
+#X connect 29 4 19 4;
+#X connect 29 5 8 5;
+#X connect 29 5 19 5;
+#X connect 29 6 8 6;
+#X connect 29 6 19 6;
+#X connect 29 7 8 7;
+#X connect 29 7 19 7;
+#X connect 29 8 8 8;
+#X connect 29 8 19 8;
+#X connect 30 0 20 1;
+#X connect 31 0 27 1;
+#X connect 32 0 29 1;
+#X coords 0 769 1 768 100 60 0;

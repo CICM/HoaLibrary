@@ -17,6 +17,8 @@ public:
     HoaComponentListener(){};
     virtual ~HoaComponentListener(){};
     virtual void componentHasBeenClicked(Component* component){};
+    virtual void componentRedrawMap(){};
+    virtual void componentRedrawMeter(){};
 };
 
 enum

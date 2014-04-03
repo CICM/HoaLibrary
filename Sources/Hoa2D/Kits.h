@@ -157,6 +157,16 @@ namespace Hoa2D
         {
             return m_number_of_channels;
         }
+        
+        //! Retrieve the number of channels.
+		/** Retrieve the number of channels of the planewave class.
+         
+         @return The number of channels.
+         */
+		inline unsigned int getNumberOfMeterChannels() const
+        {
+            return m_meter->getNumberOfChannels();
+        }
 		
 		
 		//! Set the azimuth of a given channel.
@@ -193,7 +203,7 @@ namespace Hoa2D
          */
         double getChannelWidth(unsigned int index) const
 		{
-			return m_meter->getChannelAzimuthMapped(index);
+			return m_meter->getChannelWidth(index);
 		}
 		
 		//! Retrieve the peak value of a given channel.

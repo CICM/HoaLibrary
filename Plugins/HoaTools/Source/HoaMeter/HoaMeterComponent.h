@@ -13,10 +13,19 @@
 
 class HoaMeterComponent : public Component, public Timer
 {
+    
 private:
 	HoaToolsAudioProcessor* m_processor;
 	HoaComponentListener*	m_master;
 
+    double                  m_center;
+    double                  m_radius;
+    double                  m_radius_center;
+    
+    
+    void draw_background(Graphics& g);
+    void draw_leds(Graphics& g);
+    
 public:
     HoaMeterComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaMeterComponent();
