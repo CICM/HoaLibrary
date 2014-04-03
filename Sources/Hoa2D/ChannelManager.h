@@ -23,24 +23,24 @@ namespace Hoa2D
 		private:
 			
 			double  m_azimuth;
-			double  m_directivity;
+			double  m_wideningValue;
 			bool    m_isSelected;
 			double  m_fisheyeStartAzimuth;
 			double  m_fisheyeEndAzimuth;
 			
 		public:
 
-			Channel(double azimuth = 0.0f, double directivity = 1.0f)
+			Channel(double azimuth = 0.0f, double wideningValue = 1.0f)
 			{
 				setAzimuth(azimuth);
 				m_fisheyeEndAzimuth = m_fisheyeStartAzimuth = m_azimuth;
-				setDirectivity(directivity);
+				setWideningValue(wideningValue);
 				m_isSelected = false;
 			}
 			~Channel() {}
 			
 			bool   isSelected()			const {return m_isSelected;}
-			double getDirectivity()		const {return m_directivity;}
+			double getWideningValue()		const {return m_wideningValue;}
 			double getFisheyeStartAzimuth() const { return m_fisheyeStartAzimuth; }
 			double getAbscissa()		const {return abscissa(1.0f, m_azimuth);}
 			double getOrdinate()		const {return ordinate(1.0f, m_azimuth);}
@@ -48,7 +48,7 @@ namespace Hoa2D
 			
 			void setAzimuth(const double angle) { m_azimuth = wrap_twopi(angle); }
 			void rotateAzimuth(const double deltaAzimuth) { m_azimuth = wrap_twopi(m_azimuth + deltaAzimuth); }
-			void setDirectivity(const double widerValue) { m_directivity = clip_minmax(widerValue, 0, 1); }
+			void setWideningValue(const double widerValue) { m_wideningValue = clip_minmax(widerValue, 0, 1); }
 			void setFisheyeStartAzimuth() { m_fisheyeStartAzimuth = m_azimuth; }
 			void setFisheyeStartAzimuth(const double radian) { m_fisheyeStartAzimuth = wrap_twopi(radian); }
 			void setFisheyeEndAngle() { m_fisheyeEndAzimuth = m_azimuth; }
@@ -98,7 +98,7 @@ namespace Hoa2D
 		/**
 		 @param     azimuths	An array of azimuth values in radians.
 		 @param     size		The size of the array.
-		 @see setAzimuth, setDirectivity
+		 @see setAzimuth, setWideningValue
          */
 		void setAzimuthList(double* azimuths, long size);
 		
@@ -111,32 +111,32 @@ namespace Hoa2D
          */
 		void resetAzimuth(const int index = -1);
 		
-		//! Set one or each channel directivity value.
+		//! Set one or each channel wideningValue value.
 		/**
 		 If you want to reset all of the channels azimuth value, pass -1 in the index parameter.
          
-		 @param     index			The index of the channel (pass -1 to reset all of them).
-		 @param     directivity		The new directivity value (between 0 and 1).
-		 @see resetDirectivity, setDirectivityList
+		 @param     index				The index of the channel (pass -1 to reset all of them).
+		 @param     wideningValue		The new widening value (between 0 and 1).
+		 @see resetWideningValue, setWideningValueList
          */
-		void setDirectivity(const int index, const double directivity);
+		void setWideningValue(const int index, const double wideningValue);
 		
-		//! Set several channel directivity value with a list.
+		//! Set several channel wideningValue value with a list.
 		/**
-		 @param     directivities	An array of directivity (between 0 and 1).
+		 @param     wideningValues	An array of widening values (between 0 and 1).
 		 @param     size			The size of the array.
-		 @see setDirectivity, resetDirectivity
+		 @see setWideningValue, resetWideningValue
          */
-		void setDirectivityList(double* directivities, long size);
+		void setWideningValueList(double* wideningValues, long size);
 		
-		//! Reset one or each channel directivity to 1.
+		//! Reset one or each channel wideningValue to 1.
 		/**
-		 If you want to reset all of the channels directivity value, pass -1 in the index parameter.
+		 If you want to reset all of the channels wideningValue value, pass -1 in the index parameter.
          
 		 @param     index		The index of the channel (pass -1 to reset all of them).
-		 @see setDirectivity, setDirectivityList
+		 @see setWideningValue, setWideningValueList
          */
-		void resetDirectivity(const int index = -1);
+		void resetWideningValue(const int index = -1);
 		
 		//! Set the selected state of one or each channel.
 		/**
@@ -271,17 +271,17 @@ namespace Hoa2D
 			return m_channels[index]->isSelected();
 		}
 		
-		//! Retrieve the directivity value of a channel.
+		//! Retrieve the wideningValue value of a channel.
 		/**
 		 @param     index		The index of the channel.
-		 @return    The directivity value of the channel.
-		 @see setDirectivity
+		 @return    The wideningValue value of the channel.
+		 @see setWideningValue
          */
-		inline double getDirectivity(const int index)	const
+		inline double getWideningValue(const int index)	const
 		{
 			if (!isInside(index, 0, m_channels.size()))
 				return 0;
-			return m_channels[index]->getDirectivity();
+			return m_channels[index]->getWideningValue();
 		}
 		
 		//! Retrieve the fisheye start azimuth value of a channel.

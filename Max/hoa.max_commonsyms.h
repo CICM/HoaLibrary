@@ -72,6 +72,7 @@ static t_symbol* hoa_sym_ordinate 					= gensym("ordinate");
 static t_symbol* hoa_sym_radius 					= gensym("radius");
 static t_symbol* hoa_sym_angle 						= gensym("angle");
 static t_symbol* hoa_sym_angles						= gensym("angles");
+static t_symbol* hoa_sym_wide						= gensym("wide");
 static t_symbol* hoa_sym_directivities				= gensym("directivities");
 
 // Paint
@@ -111,6 +112,8 @@ static t_symbol* hoa_sym_color 						= gensym("color");
 
 // recomposer
 static t_symbol* hoa_sym_channels					= gensym("channels");
+static t_symbol* hoa_sym_fixe						= gensym("fixe");
+static t_symbol* hoa_sym_fisheye					= gensym("fisheye");
 
 // Layers
 static t_symbol* hoa_sym_background_layer 			= gensym("background_layer");
