@@ -113,6 +113,7 @@ void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
             atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
 		}
 	}
+    
 	x->f_number_of_channels = count;
     dsp_setup((t_pxobject *)x, x->f_number_of_channels);
 	x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
@@ -168,6 +169,24 @@ void hoa_dac_list(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 
 void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 {
+    /*
+    long inletnum = proxy_getinlet((t_object*)x);
+    
+    t_jbox* dac = NULL;
+    void *inletptr = NULL;
+    t_max_err err;
+    
+    err = object_obex_lookup(x->f_dac, gensym("#B"), (t_object **)&dac);
+	if (err != MAX_ERR_NONE)
+		return;
+    
+    if (dac)
+        inletptr = jbox_getinlet(dac, inletnum);
+    
+    if (inletptr)
+        object_method(inletptr, gensym("set"), argc, argv);
+    */
+    
 	/*
 	long inletnum = proxy_getinlet((t_object*)x);
 	post("set message in inlet %ld", inletnum);
@@ -179,7 +198,7 @@ void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 	inletnum2 = proxy_getinlet((t_object*)x->f_dac);
 	post("inletnum2 %ld", inletnum2);
 	*/
-	object_method_typed(x->f_dac, gensym("set"), argc, argv, NULL);
+	//object_method_typed(x->f_dac, gensym("set"), argc, argv, NULL);
 }
 
 void hoa_dac_assist(t_hoa_dac *x, void *b, long m, long a, char *s)
