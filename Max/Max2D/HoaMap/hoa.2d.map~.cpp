@@ -83,8 +83,9 @@ void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long num
 void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+void hoa_map_cartesian(t_hoa_map *x);
+void hoa_map_polar(t_hoa_map *x);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
@@ -97,23 +98,15 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.2d.map~", (method)hoa_map_new, (method)hoa_map_free, (long)sizeof(t_hoa_map), 0L, A_GIMME, 0);
 	
-	class_alias(c, gensym("hoa.map~"));
-	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_map_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_map_cartesian,   "cartesian",A_NOTHING, 0);
+	class_addmethod(c, (method)hoa_map_polar,		"polar",	A_NOTHING, 0);
 	class_addmethod(c, (method)hoa_map_int,         "int",		A_LONG, 0);
     class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_map_assist,      "assist",	A_CANT, 0);
-	
-	CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_map, f_mode);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "mode", 0, "Coordinates Types");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "polar cartesian");
-	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
-	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
-	CLASS_ATTR_SAVE				(c, "mode", 1);
     
     CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
@@ -133,20 +126,31 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	t_hoa_map *x = NULL;
 	int	order = 1;
     int numberOfSources = 1;
-    
+    t_symbol* temp_mode;
     x = (t_hoa_map *)object_alloc(hoa_map_class);
 	if (x)
-	{		
+	{
+		x->f_ramp       = 100;
+        x->f_mode       = hoa_sym_polar;
+		
 		if(atom_gettype(argv) == A_LONG)
 			order = clip_min(atom_getlong(argv), 0);
         if(argc > 1 && atom_gettype(argv+1) == A_LONG)
-            numberOfSources = clip_minmax(atom_getlong(argv+1), 1, 254);
-
-        x->f_ramp       = 100;
-        x->f_mode       = hoa_sym_polar;
+            numberOfSources = clip_minmax(atom_getlong(argv+1), 1, MAX_CHANNELS);
+		
+		if(argc > 2 && atom_gettype(argv) == A_SYM)
+		{
+			temp_mode = atom_getsym(argv);
+			if(temp_mode == hoa_sym_cartesian)
+				x->f_mode = hoa_sym_cartesian;
+			else if(temp_mode == hoa_sym_polar)
+				x->f_mode = hoa_sym_polar;
+		}
+		
 		x->f_map        = new Hoa2D::Map(order, numberOfSources);
 		x->f_lines      = new PolarLines(x->f_map->getNumberOfSources());
         x->f_lines->setRamp(0.1 * sys_getsr());
+		
         for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
         {
             x->f_lines->setRadiusDirect(i, 1);
@@ -237,26 +241,14 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
     }
 }
 
-t_max_err mode_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+void hoa_map_cartesian(t_hoa_map *x)
 {
-    if(argc && argv)
-    {
-        if(atom_gettype(argv) == A_SYM)
-        {
-            if(atom_getsym(argv) == hoa_sym_cartesian || atom_getsym(argv) == hoa_sym_car)
-                x->f_mode = hoa_sym_cartesian;
-            else if(atom_getsym(argv) == hoa_sym_polar || atom_getsym(argv) == hoa_sym_pol)
-                x->f_mode = hoa_sym_polar;
-        }
-        else if(atom_gettype(argv) == A_LONG)
-        {
-            if(atom_getlong(argv) == 0)
-                x->f_mode = hoa_sym_polar;
-            else
-                x->f_mode = hoa_sym_cartesian;
-        }
-    }
-    return MAX_ERR_NONE;
+	x->f_mode = hoa_sym_cartesian;
+}
+
+void hoa_map_polar(t_hoa_map *x)
+{
+	x->f_mode = hoa_sym_polar;
 }
 
 t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
@@ -428,24 +420,24 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         if(x->f_map->getNumberOfSources() == 1)
         {
             if(a == 0)
-                sprintf(s,"(Signal) Source 0");
+                sprintf(s,"(signal) Source 0");
             else if(a == 1)
-                sprintf(s,"(Signal or float) Radius or Abscissa");
+				sprintf(s,"(signal/float) %s", (x->f_mode == hoa_sym_polar) ? "Radius" : "Abscissa");
 			else if(a == 2)
-                sprintf(s,"(Signal or float) Azimuth or Ordinate");
+				sprintf(s,"(signal/float) %s", (x->f_mode == hoa_sym_polar) ? "Azimuth" : "Ordinate");
         }
         else
         {
             if(a == 0)
-                sprintf(s,"(Signal or messages) Input 0 and sources messages");
+                sprintf(s,"(signal/messages) Input 0 and sources messages");
             else
-                sprintf(s,"(Signal or float) Input %ld", a);
+                sprintf(s,"(Signal/float) Input %ld", a);
         }
         
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_map->getHarmonicsName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_map->getHarmonicsName(a).c_str());
 	}
 }
 
