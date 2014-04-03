@@ -71,7 +71,7 @@ typedef struct _io_infos
 	
 } t_io_infos;
 
-////////////////////////////////////// The object structure //////////////////////////////////////
+////////////////////////////////////// The hoa_processor structure //////////////////////////////////////
 
 typedef struct _hoa_processor
 {
@@ -279,8 +279,10 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	x->f_object_type = HOA_OBJECT_2D;
 	if (s == gensym("hoa.3d.process~"))
 		x->f_object_type = HOA_OBJECT_3D;
+    /*
 	else if (s == gensym("hoa.plug~"))
 		object_error((t_object*)x, "hoa.plug~ is deprecated please take a look at the hoa.process~ object");
+    */
 
 	// Check the order or the number of instances :
 	if (argc && atom_gettype(argv) == A_LONG)
@@ -300,25 +302,22 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		tempsym = atom_getsym(argv);
-		if (tempsym == hoa_sym_planewaves)
-			x->f_mode = tempsym;
-		argc--; argv++;
+		if (tempsym == hoa_sym_planewaves || tempsym == hoa_sym_harmonics)
+        {
+            x->f_mode = tempsym;
+            argc--; argv++;
+        }
 	}
 	
 	// Get arguments to patch that is being loaded if there are any
-	if (argc && atom_gettype(argv) == A_SYM) 
+	if (argc)
 	{
-		tempsym = atom_getsym(argv);
-		argc--; argv++;
-		if (tempsym == hoa_sym_args) 
-		{				
-			ac = argc;
-			if (ac > MAX_ARGS)
-				ac = MAX_ARGS;
-			for (i = 0; i < ac; i++, argv++)
-				av[i] = *argv;
-			ac = i;
-		}
+        ac = argc;
+        if (ac > MAX_ARGS)
+            ac = MAX_ARGS;
+        for (i = 0; i < ac; i++, argv++)
+            av[i] = *argv;
+        ac = i;
 	}
 	
 	x->f_order = first_int;
@@ -463,7 +462,7 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 	if (x->f_mode == hoa_sym_harmonics)
 	{
 		boxinfos->autoconnect_inputs = (long) max(x->instance_sig_ins, x->instance_ins);
-		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_ins, x->instance_ins);
+		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_outs, x->instance_outs);
 		
 		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_inputs ? HOA_CONNECT_TYPE_AMBISONICS : HOA_CONNECT_TYPE_STANDARD;
 		boxinfos->autoconnect_outputs_type = boxinfos->autoconnect_outputs ? HOA_CONNECT_TYPE_AMBISONICS : HOA_CONNECT_TYPE_STANDARD;
@@ -471,7 +470,7 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 	else if (x->f_mode == hoa_sym_planewaves)
 	{
 		boxinfos->autoconnect_inputs = (long) max(x->instance_sig_ins, x->instance_ins);
-		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_ins, x->instance_ins);
+		boxinfos->autoconnect_outputs = (long) max(x->instance_sig_outs, x->instance_outs);
 		
 		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_inputs ? HOA_CONNECT_TYPE_PLANEWAVES : HOA_CONNECT_TYPE_STANDARD;
 		boxinfos->autoconnect_outputs_type = boxinfos->autoconnect_outputs ? HOA_CONNECT_TYPE_PLANEWAVES : HOA_CONNECT_TYPE_STANDARD;

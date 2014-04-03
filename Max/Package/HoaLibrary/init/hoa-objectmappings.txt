@@ -33,6 +33,5 @@ max objectfile hoa.3d.play~ hoa.play~;
 max objectfile hoa.2d.record~ hoa.record~;
 max objectfile hoa.3d.record~ hoa.record~;
 
-max objectfile hoa.plug~ hoa.process~;
 max objectfile hoa.2d.process~ hoa.process~;
 max objectfile hoa.3d.process~ hoa.process~;
