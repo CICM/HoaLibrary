@@ -31,7 +31,6 @@ int C74_EXPORT main(void)
 	t_class *c;
 	
 	c = class_new("hoa.2d.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (long)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.projector~"));
 	
     hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_projector_dsp64,		"dsp64",	A_CANT, 0);

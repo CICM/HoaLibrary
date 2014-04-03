@@ -90,15 +90,11 @@ t_hoa_err hoa_getinfos(t_hoa_recomposer* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_recomposer_class;
 
-t_symbol* hoa_sym_fixe       = gensym("fixe");
-t_symbol* hoa_sym_fisheye    = gensym("fisheye");
-
 int C74_EXPORT main(void)
 {
 	t_class *c;
 	
 	c = class_new("hoa.2d.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (long)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.recomposer~"));
 	
     hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_recomposer_dsp64,	"dsp64",            A_CANT, 0);
@@ -106,15 +102,6 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)hoa_recomposer_angle,    "angles",           A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_wide,     "wide",             A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_float,    "float",            A_FLOAT,0);
-    
-    CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_recomposer, f_mode);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Planewaves");
-    CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "fixe fisheye free");
-	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
-    CLASS_ATTR_ORDER            (c, "mode", 0, "1");
-    CLASS_ATTR_DEFAULT          (c, "mode", 0, "fixe");
-    CLASS_ATTR_SAVE             (c, "mode", 1);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_recomposer, f_ramp);
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
@@ -138,21 +125,31 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 	t_hoa_recomposer *x = NULL;
 	int	order = 1;
     int numberOfLoudspeakers = 4;
+	t_symbol* temp_mode;
+	
     x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
 	if (x)
-	{		
-		if(atom_gettype(argv) == A_LONG)
+	{
+		x->f_ramp       = 100;
+        x->f_mode       = hoa_sym_fixe;
+		
+		if(argc && atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		if(order < 1)
             order = 1;
-        if(atom_gettype(argv+1) == A_LONG)
+		
+        if(argc > 1 && atom_gettype(argv+1) == A_LONG)
 			numberOfLoudspeakers = atom_getlong(argv+1);
         if(numberOfLoudspeakers < order * 2 + 1)
             numberOfLoudspeakers = order * 2 + 1;
 		
-        x->f_ramp       = 100;
-        x->f_mode       = hoa_sym_fixe;
-        
+		if (argc > 2 && atom_gettype(argv+2) == A_SYM)
+		{
+			temp_mode = atom_getsym(argv+2);
+			if (temp_mode == hoa_sym_fisheye || temp_mode == hoa_sym_free)
+				x->f_mode = temp_mode;
+		}
+		
 		x->f_recomposer = new Hoa2D::Recomposer(order, numberOfLoudspeakers);
         x->f_lines      = new PolarLines(x->f_recomposer->getNumberOfChannels());
         x->f_lines->setRamp(0.1 * sys_getsr());
@@ -162,7 +159,7 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
             x->f_lines->setAzimuthDirect(i, x->f_recomposer->getAzimuth(i));
         }
         
-		dsp_setup((t_pxobject *)x, x->f_recomposer->getNumberOfChannels() + 1);
+		dsp_setup((t_pxobject *)x, x->f_recomposer->getNumberOfChannels() + (x->f_mode == hoa_sym_fisheye));
 		for (int i = 0; i < x->f_recomposer->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
@@ -308,11 +305,11 @@ void hoa_recomposer_perform64_free(t_hoa_recomposer *x, t_object *dsp64, double 
 void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_OUTLET)
-        sprintf(s,"(Signal) %s", x->f_recomposer->getHarmonicsName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_recomposer->getHarmonicsName(a).c_str());
     else if(a == x->f_recomposer->getNumberOfChannels())
-        sprintf(s,"(Signal or float) Fisheye factor");
+        sprintf(s,"(signal/float) Fisheye factor");
     else
-        sprintf(s,"(Signal) %s", x->f_recomposer->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_recomposer->getChannelName(a).c_str());
 }
 
 
@@ -324,62 +321,6 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
     delete [] x->f_lines_vector;
     delete [] x->f_ins;
 	delete [] x->f_outs;
-}
-
-t_max_err mode_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
-{
-    if(argc && argv)
-    {
-        if(atom_gettype(argv) == A_SYM)
-        {
-            if(atom_getsym(argv) == hoa_sym_fixe && x->f_mode != hoa_sym_fixe)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_fixe;
-            }
-            else if(atom_getsym(argv) == hoa_sym_fisheye && x->f_mode != hoa_sym_fisheye)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_fisheye;
-                x->f_lines->setRadiusDirect(0, 0.);
-            }
-            else if(atom_getsym(argv) == hoa_sym_free && x->f_mode != hoa_sym_free)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_free;
-                for(int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
-                {
-                    x->f_lines->setRadiusDirect(i, 1);
-                    x->f_lines->setAzimuthDirect(i, (double)i / (double)x->f_recomposer->getNumberOfChannels() * HOA_2PI);
-                }
-            }
-        }
-        else if(atom_gettype(argv) == A_LONG)
-        {
-            if(atom_getlong(argv) == 0 && x->f_mode != hoa_sym_fixe)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_fixe;
-            }
-            else if(atom_getlong(argv) == 1 && x->f_mode != hoa_sym_fisheye)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_fisheye;
-                x->f_lines->setRadiusDirect(0, 0.);
-            }
-            else if(atom_getlong(argv) == 1 && x->f_mode != hoa_sym_free)
-            {
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
-                x->f_mode = hoa_sym_free;
-                for(int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
-                {
-                    x->f_lines->setRadiusDirect(i, 1);
-                    x->f_lines->setAzimuthDirect(i, (double)i / (double)x->f_recomposer->getNumberOfChannels() * HOA_2PI);
-                }
-            }
-        }
-    }
-    return MAX_ERR_NONE;
 }
 
 t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
