@@ -8,8 +8,9 @@
 
 typedef struct _pi 
 {	
-	t_pxobject  p_ob;
-	double      p_value;
+	t_pxobject  f_ob;
+	double      f_value;
+    double      f_phase;
 } t_pi;
 
 void pi_int(t_pi *x, long n);
@@ -46,12 +47,13 @@ int C74_EXPORT main(void)
 void *pi_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_pi *x = (t_pi *)object_alloc(pi_class);
-	x->p_value = 1.;
+	x->f_value = 1.0f;
+    x->f_phase = 1.0f;
     
 	if (atom_gettype(argv) == A_LONG)
-		x->p_value = atom_getlong(argv);
+		x->f_value = atom_getlong(argv);
 	else if (atom_gettype(argv) == A_FLOAT)
-		x->p_value = atom_getfloat(argv);
+		x->f_value = atom_getfloat(argv);
     
     dsp_setup((t_pxobject *)x, 2);
     outlet_new(x, "signal");
@@ -72,48 +74,60 @@ void pi_dsp64(t_pi *x, t_object *dsp64, short *count, double samplerate, long ma
 
 void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i;
-    for(i = 0; i < sampleframes; i++)
+    for(int i = 0; i < sampleframes; i++)
     {
-        x->p_value = ins[0][i];
+        x->f_value = ins[0][i];
         outs[0][i] = HOA_PI * ins[0][i];
     }
 }
 
 void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i;
-    for(i = 0; i < sampleframes; i++)
-        outs[0][i] = HOA_PI * x->p_value * ins[1][i];
+    for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_phase = wrap(ins[1][i], 0.0f, 1.0f);
+        outs[0][i] = HOA_PI * x->f_value * x->f_phase;
+    }
 }
 
 void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i;
-    for(i = 0; i < sampleframes; i++)
-        outs[0][i] = HOA_PI * x->p_value;
+    for(int i = 0; i < sampleframes; i++)
+        outs[0][i] = HOA_PI * x->f_value * x->f_phase;
 }
 
 void pi_assist(t_pi *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_OUTLET)
-		sprintf(s,"(signal/float) \u03C0 Multiplication Result");
+		sprintf(s,"(signal) \u03C0 Result");
 	else
     {
         if(a)
-            sprintf(s,"(signal/float) This * \u03C0 * Multiplier");
+            sprintf(s,"(signal/float) \u03C0 Phase");
         else
-            sprintf(s,"(signal/float) This * \u03C0");
+            sprintf(s,"(signal/float) \u03C0 Multiplier");
     }
 }
 
 void pi_int(t_pi *x, long n)
 {
-	x->p_value = n;
+    if (proxy_getinlet((t_object*)x))
+        x->f_phase = n != 0;
+    else
+    {
+        x->f_value = n;
+        x->f_phase = 1;
+    }
 }
 
 
 void pi_float(t_pi *x, double n) 
 {
-	x->p_value = n;
+    if (proxy_getinlet((t_object*)x))
+        x->f_phase = wrap(n, 0.0f, 1.0f);
+    else
+    {
+        x->f_value = n;
+        x->f_phase = 1;
+    }
 }
