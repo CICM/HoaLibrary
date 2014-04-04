@@ -286,7 +286,7 @@ source 2 -0.0298518 0.772667 0 0.2 0.2 0.2 1 (null) source 3 -2.36561
 #X connect 37 0 7 0;
 #X connect 38 0 11 0;
 #X restore -98 -98 pd messages;
-#N canvas 91 83 1139 646 slots 0;
+#N canvas 314 70 1139 646 slots 1;
 #X obj -584 -328 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_slot @send (null)
 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
@@ -424,6 +424,9 @@ are no more saved with the patcher to avoid crashes.;
 ;
 #X text -608 -447 Record and manage presets with the slot message.
 ;
+#X msg -324 -310 slot read;
+#X msg -323 -242 slot write;
+#X msg -324 -280 slot write test1.pd;
 #X connect 1 0 3 0;
 #X connect 2 0 3 0;
 #X connect 4 0 3 0;
@@ -457,6 +460,9 @@ are no more saved with the patcher to avoid crashes.;
 #X connect 70 0 23 1;
 #X connect 73 0 36 0;
 #X connect 74 0 33 0;
+#X connect 82 0 0 0;
+#X connect 83 0 0 0;
+#X connect 84 0 0 0;
 #X restore -98 -73 pd slots;
 #N canvas 189 106 1208 632 trajectories 0;
 #X obj -610 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map

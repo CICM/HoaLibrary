@@ -53,7 +53,6 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2espace();
     setup_hoa0x2e2d0x2ewider_tilde();
 
-    var = sys_externlist;
     var = sys_searchpath;
     while (var)
     {
