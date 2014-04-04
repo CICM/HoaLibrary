@@ -522,7 +522,6 @@ void send_configuration(t_hoa_decoder *x)
                     object_method_typed(jbox_get_object(object), hoa_sym_angles, x->f_decoder->getNumberOfChannels(), argv, NULL);
                     object_method_typed(jbox_get_object(object), gensym("offset"), 1, &offset, NULL);
                     reconnect_outlets(x);
-                    break;
                 }
             }
         }

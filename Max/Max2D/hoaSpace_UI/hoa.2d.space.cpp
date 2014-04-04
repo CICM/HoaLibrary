@@ -163,7 +163,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_channel_values = new double[MAX_CHANNELS];
     x->f_channel_refs   = new double[MAX_CHANNELS];
     x->f_channel_radius = new double[MAX_CHANNELS];
-    x->f_out        = listout(x);
+    x->f_out			= listout(x);
 
 	attr_dictionary_process(x, d);
 	jbox_ready((t_jbox *)x);
@@ -321,13 +321,13 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
     t_jrgba black, white;
     
     black = white = x->f_color_bg;
-    black.red = clip_min(black.red - contrast_black, 0.);
+    black.red   = clip_min(black.red - contrast_black, 0.);
     black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue = clip_min(black.blue - contrast_black, 0.);
+    black.blue  = clip_min(black.blue - contrast_black, 0.);
     
-    white.red = clip_max(white.red + contrast_white, 1.);
+    white.red   = clip_max(white.red + contrast_white, 1.);
     white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue = clip_max(white.blue + contrast_white, 1.);
+    white.blue  = clip_max(white.blue + contrast_white, 1.);
     
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, rect->width, rect->height);
     

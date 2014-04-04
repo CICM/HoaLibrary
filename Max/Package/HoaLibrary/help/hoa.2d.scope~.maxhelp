@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 837.0, 680.0 ],
+						"rect" : [ 100.0, 126.0, 837.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -74,13 +74,42 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
+									"id" : "obj-26",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 70.0, 471.0, 20.0 ],
+									"text" : "hoa.2d.scope~ displays the harmonics of an ambisonic sound field on a circle.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[15]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"id" : "obj-27",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 70.0, 483.0, 20.0 ],
+									"rounded" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
 									"id" : "obj-24",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 603.0, 334.5, 190.0, 33.0 ],
-									"presentation_rect" : [ 599.0, 330.5, 0.0, 0.0 ],
 									"text" : "To help you to have a better visualisation of low sound fiels",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -97,7 +126,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 603.0, 386.0, 81.0, 20.0 ],
-									"presentation_rect" : [ 476.0, 414.5, 0.0, 0.0 ],
 									"text" : "Refresh Rate",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -115,7 +143,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 603.0, 277.5, 190.0, 47.0 ],
-									"presentation_rect" : [ 249.0, 458.0, 0.0, 0.0 ],
 									"text" : "The number of harmonics, so in this case the number of input, is equal in 2-D to (order * 2 +1).",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -211,36 +238,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 422.0, 22.0, 52.0, 23.0 ],
 									"text" : "bgcolor 0.93 0.93 0.92 1."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-35",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 69.0, 425.0, 20.0 ],
-									"text" : "hoa.2d.scope~ displays the harmonics of an ambisonic sound field on a circle.",
-									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[1]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-37",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 69.0, 483.0, 20.0 ],
-									"rounded" : 15,
-									"shadow" : -1
 								}
 
 							}
@@ -1292,7 +1289,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 837.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 837.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1438,6 +1435,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-46",
 									"maxclass" : "newobj",
 									"numinlets" : 0,
@@ -1576,6 +1574,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-2",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -1612,12 +1611,12 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"maxclass" : "hoa.2d.scope~",
-									"nhcolor" : [ 0.473213, 0.493383, 0.476849, 1.0 ],
+									"nhcolor" : [ 0.780831, 0.255017, 0.306868, 1.0 ],
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 31.0, 222.0, 344.0, 344.0 ],
-									"phcolor" : [ 0.833867, 0.854333, 0.832624, 1.0 ]
+									"phcolor" : [ 0.172856, 0.484034, 0.854333, 0.8 ]
 								}
 
 							}
@@ -1631,8 +1630,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 39.0, 100.0, 222.0, 20.0 ],
-									"text" : "Custom colors :",
-									"underline" : 1
+									"text" : "Custom colors :"
 								}
 
 							}
@@ -1644,7 +1642,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 28.0, 94.0, 273.0, 37.0 ],
+									"patching_rect" : [ 28.0, 94.0, 240.0, 32.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -1918,7 +1916,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-2", 0 ],
 									"disabled" : 0,
-									"hidden" : 0,
+									"hidden" : 1,
 									"midpoints" : [ 508.5, 109.0, 508.5, 109.0 ],
 									"source" : [ "obj-46", 0 ]
 								}

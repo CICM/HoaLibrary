@@ -72,13 +72,32 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"args" : [ "@size", 0 ],
-									"id" : "obj-25",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpcredit.maxpat",
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-3",
+									"linecount" : 2,
+									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 655.0, 548.0, 23.0 ]
+									"patching_rect" : [ 61.949997, 231.0, 200.0, 33.0 ],
+									"text" : "The azimuth position. (0 -  2*pi) can be set with signal or float values",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"id" : "obj-5",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 61.949997, 231.0, 200.0, 33.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -87,29 +106,41 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
-									"id" : "obj-61",
+									"id" : "obj-18",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.949997, 231.0, 202.0, 33.0 ],
-									"text" : "The azimuth position. (0 -  2*pi) can be set with signal or float values",
+									"patching_rect" : [ 7.0, 67.5, 483.0, 33.0 ],
+									"text" : "hoa.2d.encoder~ creates the circular harmonics of a signal depending of a given order \n(arg 1) and a position on a circle given in radians (last inlet).",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[2]"
+									"varname" : "autohelp_top_description[3]"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-9",
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"id" : "obj-2",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.949997, 231.0, 202.0, 33.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 7.0, 67.5, 483.0, 33.0 ],
+									"rounded" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@size", 0 ],
+									"id" : "obj-25",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 655.0, 548.0, 23.0 ]
 								}
 
 							}
@@ -142,37 +173,6 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-60",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 62.0, 483.0, 33.0 ],
-									"text" : "hoa.2d.encoder~ creates the circular harmonics of a signal depending of a given order \n(arg 1) and a position on a circle given in radians (last inlet).",
-									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[1]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-31",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 62.0, 483.0, 33.0 ],
-									"rounded" : 15,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"args" : [ "@module", 3, "@noise", 1, "@vol", 80 ],
 									"border" : 1,
 									"id" : "obj-55",
@@ -181,7 +181,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 39.75, 106.0, 218.0, 87.0 ]
+									"patching_rect" : [ 39.75, 121.0, 218.0, 87.0 ]
 								}
 
 							}

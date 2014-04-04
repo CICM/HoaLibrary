@@ -80,7 +80,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 494.0, 96.0, 72.0, 20.0 ],
-									"presentation_rect" : [ 493.0, 98.0, 0.0, 0.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -95,7 +94,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 494.0, 158.0, 59.0, 19.0 ],
-									"presentation_rect" : [ 493.0, 160.0, 0.0, 0.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -111,7 +109,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 494.0, 188.0, 66.0, 20.0 ],
-									"presentation_rect" : [ 493.0, 190.0, 0.0, 0.0 ],
 									"sig" : 0.0
 								}
 
@@ -302,14 +299,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-31",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 78.0, 483.0, 33.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 10.0, 78.0, 483.0, 32.0 ],
+									"rounded" : 0
 								}
 
 							}
