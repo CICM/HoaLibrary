@@ -230,7 +230,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         }
         
         binbuf_get_attribute(d, hoa_sym_sources_parameters, &ac, &av);
-        if (av && ac)
+        if(av && ac)
         {
             hoa_map_parameters_sources(x, ac, av);
             
@@ -748,15 +748,15 @@ void hoa_map_source_save(t_hoa_map *x, t_binbuf *d)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            binbuf_addv(d, "sfff", hoa_sym_source, i,
-                        x->f_source_manager->sourceGetAbscissa(i),
-                        x->f_source_manager->sourceGetOrdinate(i));
+            binbuf_addv(d, "sfff", hoa_sym_source, (float)i,
+                        (float)x->f_source_manager->sourceGetAbscissa(i),
+                        (float)x->f_source_manager->sourceGetOrdinate(i));
             
-            binbuf_addv(d, "fffff", x->f_source_manager->sourceGetMute(i),
-                        x->f_source_manager->sourceGetColor(i)[0],
-                        x->f_source_manager->sourceGetColor(i)[1],
-                        x->f_source_manager->sourceGetColor(i)[2],
-                        x->f_source_manager->sourceGetColor(i)[3]);
+            binbuf_addv(d, "fffff", (float)x->f_source_manager->sourceGetMute(i),
+                        (float)x->f_source_manager->sourceGetColor(i)[0],
+                        (float)x->f_source_manager->sourceGetColor(i)[1],
+                        (float)x->f_source_manager->sourceGetColor(i)[2],
+                        (float)x->f_source_manager->sourceGetColor(i)[3]);
             
             if(x->f_source_manager->sourceGetDescription(i).size())
                 binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(i).c_str()));
@@ -780,16 +780,16 @@ void hoa_map_group_save(t_hoa_map *x, t_binbuf *d)
         if(x->f_source_manager->groupGetExistence(i))
         {
             long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
-            binbuf_addv(d, "sff", hoa_sym_group, i, numberOfsource);
-            
+            binbuf_addv(d, "sff", hoa_sym_group, (float)i, (float)numberOfsource);
+          
             for(j = 0; j < numberOfsource; j++)
-                binbuf_addv(d, "f", x->f_source_manager->groupGetSourceIndex(i, j));
+                binbuf_addv(d, "f", (float)x->f_source_manager->groupGetSourceIndex(i, j));
                             
-            binbuf_addv(d, "fffff", x->f_source_manager->groupGetMute(i),
-                        x->f_source_manager->groupGetColor(i)[0],
-                        x->f_source_manager->groupGetColor(i)[1],
-                        x->f_source_manager->groupGetColor(i)[2],
-                        x->f_source_manager->groupGetColor(i)[3]);
+            binbuf_addv(d, "fffff", (float)x->f_source_manager->groupGetMute(i),
+                        (float)x->f_source_manager->groupGetColor(i)[0],
+                        (float)x->f_source_manager->groupGetColor(i)[1],
+                        (float)x->f_source_manager->groupGetColor(i)[2],
+                        (float)x->f_source_manager->groupGetColor(i)[3]);
             
             if(x->f_source_manager->groupGetDescription(i).size())
                 binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(i).c_str()));
@@ -818,14 +818,14 @@ void hoa_map_slot_save(t_hoa_map *x, t_binbuf *d)
                 if(temporySourceManager->sourceGetExistence(k))
                 {
                     binbuf_addv(d, "sfff", hoa_sym_source, (float)k,
-                                temporySourceManager->sourceGetAbscissa(k),
-                                temporySourceManager->sourceGetOrdinate(k));
+                                (float)temporySourceManager->sourceGetAbscissa(k),
+                                (float)temporySourceManager->sourceGetOrdinate(k));
                     
-                    binbuf_addv(d, "fffff", temporySourceManager->sourceGetMute(k),
-                                temporySourceManager->sourceGetColor(k)[0],
-                                temporySourceManager->sourceGetColor(k)[1],
-                                temporySourceManager->sourceGetColor(k)[2],
-                                temporySourceManager->sourceGetColor(k)[3]);
+                    binbuf_addv(d, "fffff", (float)temporySourceManager->sourceGetMute(k),
+                                (float)temporySourceManager->sourceGetColor(k)[0],
+                                (float)temporySourceManager->sourceGetColor(k)[1],
+                                (float)temporySourceManager->sourceGetColor(k)[2],
+                                (float)temporySourceManager->sourceGetColor(k)[3]);
                     
                     if(x->f_source_manager->sourceGetDescription(k).size())
                         binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(k).c_str()));
@@ -841,13 +841,13 @@ void hoa_map_slot_save(t_hoa_map *x, t_binbuf *d)
                     long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
                     binbuf_addv(d, "sff", hoa_sym_group, (float)k, (float)numberOfsource);
                     for(long l = 0; l < numberOfsource; l++)
-                        binbuf_addv(d, "f", temporySourceManager->groupGetSourceIndex(k, l));
+                        binbuf_addv(d, "f", (float)temporySourceManager->groupGetSourceIndex(k, l));
                     
-                    binbuf_addv(d, "fffff", temporySourceManager->groupGetMute(k),
-                                temporySourceManager->groupGetColor(k)[0],
-                                temporySourceManager->groupGetColor(k)[1],
-                                temporySourceManager->groupGetColor(k)[2],
-                                temporySourceManager->groupGetColor(k)[3]);
+                    binbuf_addv(d, "fffff", (float)temporySourceManager->groupGetMute(k),
+                                (float)temporySourceManager->groupGetColor(k)[0],
+                                (float)temporySourceManager->groupGetColor(k)[1],
+                                (float)temporySourceManager->groupGetColor(k)[2],
+                                (float)temporySourceManager->groupGetColor(k)[3]);
                      
                      if(x->f_source_manager->groupGetDescription(k).size())
                          binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(k).c_str()));
@@ -881,14 +881,14 @@ void hoa_map_trajectory_save(t_hoa_map *x, t_binbuf *d)
                 if(temporySourceManager->sourceGetExistence(k))
                 {
                     binbuf_addv(d, "sfff", hoa_sym_source, (float)k,
-                                temporySourceManager->sourceGetAbscissa(k),
-                                temporySourceManager->sourceGetOrdinate(k));
+                                (float)temporySourceManager->sourceGetAbscissa(k),
+                                (float)temporySourceManager->sourceGetOrdinate(k));
                     
-                    binbuf_addv(d, "fffff", temporySourceManager->sourceGetMute(k),
-                                temporySourceManager->sourceGetColor(k)[0],
-                                temporySourceManager->sourceGetColor(k)[1],
-                                temporySourceManager->sourceGetColor(k)[2],
-                                temporySourceManager->sourceGetColor(k)[3]);
+                    binbuf_addv(d, "fffff", (float)temporySourceManager->sourceGetMute(k),
+                                (float)temporySourceManager->sourceGetColor(k)[0],
+                                (float)temporySourceManager->sourceGetColor(k)[1],
+                                (float)temporySourceManager->sourceGetColor(k)[2],
+                                (float)temporySourceManager->sourceGetColor(k)[3]);
                     
                     if(x->f_source_manager->sourceGetDescription(k).size())
                         binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(k).c_str()));
@@ -904,13 +904,13 @@ void hoa_map_trajectory_save(t_hoa_map *x, t_binbuf *d)
                     long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
                     binbuf_addv(d, "sff", hoa_sym_group, (float)k, (float)numberOfsource);
                     for(long l = 0; l < numberOfsource; l++)
-                        binbuf_addv(d, "f", temporySourceManager->groupGetSourceIndex(k, l));
+                        binbuf_addv(d, "f", (float)temporySourceManager->groupGetSourceIndex(k, l));
                     
-                    binbuf_addv(d, "fffff", temporySourceManager->groupGetMute(k),
-                                temporySourceManager->groupGetColor(k)[0],
-                                temporySourceManager->groupGetColor(k)[1],
-                                temporySourceManager->groupGetColor(k)[2],
-                                temporySourceManager->groupGetColor(k)[3]);
+                    binbuf_addv(d, "fffff", (float)temporySourceManager->groupGetMute(k),
+                                (float)temporySourceManager->groupGetColor(k)[0],
+                                (float)temporySourceManager->groupGetColor(k)[1],
+                                (float)temporySourceManager->groupGetColor(k)[2],
+                                (float)temporySourceManager->groupGetColor(k)[3]);
                     
                     if(x->f_source_manager->groupGetDescription(k).size())
                         binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(k).c_str()));
@@ -931,32 +931,35 @@ void hoa_map_parameters_sources(t_hoa_map *x, short ac, t_atom *av)
     {
         for(long i = 0; i < ac; i++)
         {
-            if(ac > i+9
-               && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source
+            if(ac > i+9)
+            {
+                if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source
                && atom_gettype(av+i+1) == A_LONG
                && atom_gettype(av+i+2) == A_FLOAT
                && atom_gettype(av+i+3) == A_FLOAT)
-            {
-                index = atom_getlong(av+i+1);
-                x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+2), atom_getfloat(av+i+3));
-                
-                // Mute //
-                if(atom_gettype(av+i+4) == A_FLOAT)
-                   x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+4));
-                
-                // Color //
-                if(atom_gettype(av+i+5) == A_FLOAT
-                   && atom_gettype(av+i+6) == A_FLOAT
-                   && atom_gettype(av+i+7) == A_FLOAT
-                   && atom_gettype(av+i+8) == A_FLOAT)
-                    x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                
-                // Description //
-                if(atom_gettype(av+i+9) == A_SYM && atom_getsym(av+i+9) != gensym("(null)"))
                 {
-                    x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+9)->s_name)->s_name);
+                    index = atom_getlong(av+i+1);
+                
+                    x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+2), atom_getfloat(av+i+3));
+                    
+                    // Mute //
+                    if(atom_gettype(av+i+4) == A_FLOAT)
+                        x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+4));
+                    
+                    // Color //
+                    if(atom_gettype(av+i+5) == A_FLOAT
+                       && atom_gettype(av+i+6) == A_FLOAT
+                       && atom_gettype(av+i+7) == A_FLOAT
+                       && atom_gettype(av+i+8) == A_FLOAT)
+                        x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
+                    
+                    // Description //
+                    if(atom_gettype(av+i+9) == A_SYM && atom_getsym(av+i+9) != gensym("(null)"))
+                    {
+                        x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+9)->s_name)->s_name);
+                    }
+                    i += 9;
                 }
-                i += 9;
             }
         }
     }
@@ -993,7 +996,7 @@ void hoa_map_parameters_groups(t_hoa_map *x, short ac, t_atom *av)
 void hoa_map_parameters_slots(t_hoa_map *x, short ac, t_atom *av)
 {
     SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    temporySourceManager = new SourcesManager(1. / (double)MIN_ZOOM - 5.);
     
     if(ac && av && temporySourceManager)
     {
@@ -1041,7 +1044,7 @@ void hoa_map_parameters_slots(t_hoa_map *x, short ac, t_atom *av)
 void hoa_map_parameters_trajectory(t_hoa_map *x, short ac, t_atom *av)
 {
     SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    temporySourceManager = new SourcesManager(1. / (double)MIN_ZOOM - 5.);
     if(ac && av && temporySourceManager)
     {
         long slotIndex = -1;
@@ -1059,7 +1062,8 @@ void hoa_map_parameters_trajectory(t_hoa_map *x, short ac, t_atom *av)
                 temporySourceManager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 temporySourceManager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
                 temporySourceManager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
+                if(atom_getsym(av+i+9) != gensym("(null)"))
+                    temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
             }
             if(atom_getsym(av+i) == hoa_sym_group)
             {
@@ -1071,7 +1075,8 @@ void hoa_map_parameters_trajectory(t_hoa_map *x, short ac, t_atom *av)
                 if(atom_getlong(av+i+3+numberOfsource) == 1)
                     temporySourceManager->groupSetMute(atom_getlong(av+i+1), 1);
                 temporySourceManager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
-                temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
+                if(atom_getsym(av+i+8+numberOfsource) != gensym("(null)"))
+                    temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
             }
         }
         x->f_source_trajectory->storeSourceManagerAtSlot(temporySourceManager, slotIndex);
