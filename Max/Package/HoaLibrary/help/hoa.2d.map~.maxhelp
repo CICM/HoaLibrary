@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1078.0, 469.0 ],
+						"rect" : [ 4.0, 126.0, 1078.0, 469.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -317,7 +317,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.2d.map~", "@obj-desc", "An", "ambisonic", "multisource", "spatializer" ],
+									"args" : [ "@obj-name", "hoa.2d.map~", "@obj-desc", "An ambisonic multisource spatializer" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -792,7 +792,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 4.0, 126.0, 1078.0, 469.0 ],
+						"rect" : [ 0.0, 26.0, 1078.0, 469.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4026,7 +4026,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.2d.map~", "@obj-desc", "An", "ambisonic", "multisource", "spatializer" ],
+									"args" : [ "@obj-name", "hoa.2d.map~", "@obj-desc", "An ambisonic multisource spatializer" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -4047,7 +4047,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 2.5, 67.5, 529.0, 33.0 ],
-									"text" : "hoa.2d.map~ is a tool that encodes several sources in the circular harmonics domain. It's easy to use and works with hoa.2d.map. You should look at hoa.2d.map's help for futher informations",
+									"text" : "hoa.2d.map~ is a tool that encodes several sources in the circular harmonics domain. It's easy to use and works with hoa.2d.map. You could look at hoa.2d.map's help for futher informations",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}

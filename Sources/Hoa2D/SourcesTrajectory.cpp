@@ -26,18 +26,49 @@ namespace Hoa2D
 	
 	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* sourcesManager, long sourceIndex)
 	{
+		/*
 		if(m_recording)
 		{
 			if(m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot())
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeSourceAtNextSlot(sourcesManager, sourceIndex);
+					SourcesManager* tempSourcesManager = new SourcesManager(-1, 0);
+					SourcesPreset*	tempSourcesPreset = new SourcesPreset();
+					
+					// copy de l'etat du slot avant de bouger la source dans tempSourcesManager
+					recallSlot(tempSourcesManager, m_last_slot_stored);
+					
+					// on copy l'état dans un slot vierge
+					tempSourcesPreset->storeSourceManagerAtSlot(tempSourcesManager, 0);
+					
+					// on copy nouvelle position de la source
+					tempSourcesPreset->storeSourceAtSlot(sourcesManager, 0, sourceIndex);
+					
+					// on rappel l'état actuel pour update de tout
+					tempSourcesPreset->recallSlot(sourcesManager, 0);
+					
+					storeSourceManagerAtNextSlot(sourcesManager);
+					
 					recallSlot(sourcesManager, m_last_slot_stored);
+					
 				}
 				else
-					storeSourceAtNextSlot(sourcesManager, sourceIndex);
+					storeSourceManagerAtNextSlot(sourcesManager);
+				
 			}
+		}
+		*/
+		
+		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
+		{
+			if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
+			{
+				storeSourceAtNextSlot(sourcesManager, sourceIndex);
+				recallSlot(sourcesManager, m_last_slot_stored);
+			}
+			else
+				storeSourceAtNextSlot(sourcesManager, sourceIndex);
 		}
 	}
 	
@@ -45,16 +76,13 @@ namespace Hoa2D
 	{
 		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
 		{
-			if(m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot())
+			if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 			{
-				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
-				{
-					storeGroupAtNextSlot(sourcesManager, groupIndex);
-					recallSlot(sourcesManager, m_last_slot_stored);
-				}
-				else
-					storeGroupAtNextSlot(sourcesManager, groupIndex);
+				storeGroupAtNextSlot(sourcesManager, groupIndex);
+				recallSlot(sourcesManager, m_last_slot_stored);
 			}
+			else
+				storeGroupAtNextSlot(sourcesManager, groupIndex);
 		}
 	}
 	

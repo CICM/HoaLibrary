@@ -463,11 +463,24 @@ void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *
 
 void hoamap_tick(t_hoamap *x)
 {
+	if(x->f_index_of_selected_source != -1)
+	{
+		x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
+		post("record source");
+	}
+    else if(x->f_index_of_selected_group != -1)
+	{
+		//x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
+		post("record group %ld", x->f_index_of_selected_group);
+	}
+	clock_fdelay(x->f_clock, 20);
+	/*
     if(x->f_index_of_selected_source != -1)
         x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
     else if(x->f_index_of_selected_group != -1)
         x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
     clock_fdelay(x->f_clock, 100);
+	*/
 }
 
 /**********************************************************/
@@ -564,7 +577,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 
 void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
+    if(ac > 1 && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
         if(atom_getsym(av+1) == hoa_sym_set)
         {
@@ -723,19 +736,18 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         if(atom_gettype(av) == A_SYM)
         {
             t_symbol *sym = atom_getsym(av);
-            if(sym == hoa_sym_record)
+            if(sym == hoa_sym_record && ac > 1 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT))
                 x->f_source_trajectory->setRecording(atom_getlong(av+1));
-            else if(sym == hoa_sym_limit)
+            else if(sym == hoa_sym_limit && ac > 1 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT))
                 x->f_source_trajectory->setLimited(atom_getlong(av+1));
             else if(sym == hoa_sym_erase)
                 x->f_source_trajectory->erase();
-            else if(sym == hoa_sym_erasepart)
+            else if(sym == hoa_sym_erasepart && ac > 2 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT) && (atom_gettype(av+2) == A_LONG || atom_gettype(av+2) == A_FLOAT))
                 x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
             else if(sym == hoa_sym_read)
             {
                 t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : hoa_sym_nothing;
-                defer( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
-                //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+                defer( (t_object *)x,(method)hoamap_doread, sym, 0, NULL);
             }
             else if(sym == hoa_sym_write)
             {
@@ -847,8 +859,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
     long ac = 0;
 	double* color;
     
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    SourcesManager* temporySourceManager = new SourcesManager(1./MIN_ZOOM - 5.);
     if(temporySourceManager)
     {
         ac = 0;
@@ -924,6 +935,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                 }
             }
             
+			dictionary_chuckentry(d, hoa_sym_slots_parameters);
             dictionary_appendatoms(d, hoa_sym_slots_parameters, ac, av);
             free(av);
         }
@@ -937,8 +949,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
     long ac = 0;
 	double* color;
 
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    SourcesManager* temporySourceManager = new SourcesManager(1./MIN_ZOOM - 5.);
     if(temporySourceManager)
     {
         ac = 0;
@@ -1063,7 +1074,7 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
 void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
 {
     SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    temporySourceManager = new SourcesManager(1./MIN_ZOOM - 5.);
     if(ac && av && temporySourceManager)
     {
         long slotIndex = -1;
@@ -1104,7 +1115,7 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
 void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
 {
     SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
+    temporySourceManager = new SourcesManager(1./MIN_ZOOM - 5.);
     if(ac && av && temporySourceManager)
     {
         long slotIndex = -1;
@@ -2428,7 +2439,7 @@ void textfield_select(t_textfield *x)
 void textfield_doselect(t_textfield *x)
 {
 	t_object *p = NULL;
-	object_obex_lookup(x,hoa_sym_P, &p);
+	object_obex_lookup(x, hoa_sym_pound_P, &p);
 	if (p) {
 		t_atom rv;
 		long ac = 1;
@@ -2489,7 +2500,7 @@ void textfield_paint(t_textfield *x, t_object *view)
     jbox_get_rect_for_view((t_object*) x, view, &rect);
     if(x->j_patcher == NULL)
     {
-        object_obex_lookup(x,hoa_sym_P, &x->j_patcher);
+        object_obex_lookup(x, hoa_sym_pound_P, &x->j_patcher);
         object_attach_byptr_register(x, x->j_patcher, CLASS_NOBOX);
     }
     if(x->j_patcherview == NULL)

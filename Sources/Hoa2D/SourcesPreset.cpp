@@ -81,6 +81,7 @@ namespace Hoa2D
 		{
 			if(sourcesManagerDestination->getExistence() == 0)
 				sourcesManagerDestination->setExistence(1);
+			
 			if(sourcesManagerSource->getMaximumIndexOfGroup() >= groupIndex && groupIndex >= 0 && sourcesManagerSource->groupGetExistence(groupIndex) == 1)
 			{
 				for(long j = 0; j < sourcesManagerSource->groupGetNumberOfSources(groupIndex); j++)
