@@ -492,14 +492,29 @@ void hoa_process_open(t_hoa_process *x, float f)
 
 void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
 {
+    if(argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("none"))
+        x->f_target = -2;
     if(argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
         x->f_target = -1;
     else if(argc && argv && atom_gettype(argv) == A_FLOAT)
     {
         if(x->f_mode == 1)
-            x->f_target = pd_clip_minmax(atom_getfloat(argv), 0, x->f_ncanvas - 1);
+        {
+            if(atom_getfloat(argv) < 1 || atom_getfloat(argv) > x->f_ncanvas)
+            {
+                object_error(x, "hoa.process~ target must be between 1 and %i", (int)x->f_ncanvas);
+                return;
+            }
+            x->f_target = atom_getfloat(argv) - 1;
+        }
         else
         {
+            if(atom_getfloat(argv) < -x->f_ambi_2d->getOrder() || atom_getfloat(argv) > x->f_ambi_2d->getOrder())
+            {
+                object_error(x, "hoa.process~ target must be between %i and %i", (int)-x->f_ambi_2d->getOrder(), x->f_ambi_2d->getOrder());
+                return;
+            }
+            
             x->f_target = pd_clip_minmax(atom_getfloat(argv), -x->f_ambi_2d->getOrder(), x->f_ambi_2d->getOrder());
             if(x->f_target < 0)
                 x->f_target = -x->f_target * 2 - 1;
@@ -520,6 +535,9 @@ void hoa_process_bang(t_hoa_process *x)
     }
     else
     {
+        if(x->f_target == -2)
+            return;
+        
         if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
@@ -564,6 +582,9 @@ void hoa_process_float(t_hoa_process *x, float f)
     }
     else
     {
+        if(x->f_target == -2)
+            return;
+        
         if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
@@ -605,6 +626,9 @@ void hoa_process_symbol(t_hoa_process *x, t_symbol* s)
     }
     else
     {
+        if(x->f_target == -2)
+            return;
+        
         if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
@@ -646,6 +670,9 @@ void hoa_process_list(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
     }
     else
     {
+        if(x->f_target == -2)
+            return;
+        
         if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
@@ -688,6 +715,9 @@ void hoa_process_anything(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
     }
     else
     {
+        if(x->f_target == -2)
+            return;
+        
         if(x->f_have_inlets_instance || x->f_have_inlets_instance_sig)
             extra = index - (x->f_ncanvas - 1);
         else
@@ -736,13 +766,13 @@ void hoa_process_get_thisprocess(t_hoa_process *x, int index, long argc, t_atom*
             
             if(x->f_mode)
             {
-                atom_setfloat(tp->f_hoa_args, index);
-                atom_setfloat(tp->f_hoa_args+1, x->f_planewaves->getNumberOfChannels());
+                atom_setfloat(tp->f_hoa_args, x->f_planewaves->getNumberOfChannels());
+                atom_setfloat(tp->f_hoa_args+1, index+1);
             }
             else
             {
-                atom_setfloat(tp->f_hoa_args, x->f_ambi_2d->getHarmonicArgument(index));
-                atom_setfloat(tp->f_hoa_args+1, x->f_ambi_2d->getOrder());
+                atom_setfloat(tp->f_hoa_args, x->f_ambi_2d->getOrder());
+                atom_setfloat(tp->f_hoa_args+1, x->f_ambi_2d->getHarmonicArgument(index));
             }
             
             if(tp->f_argc < atoms_get_attributes_offset(argc, argv))
@@ -957,7 +987,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
         {
             x->f_canvas[i] = NULL;
             if(x->f_mode)
-                atom_setfloat(&av, i);
+                atom_setfloat(&av, i+1);
             else
                 atom_setfloat(&av, x->f_ambi_2d->getHarmonicArgument(i));
             

@@ -1,0 +1,75 @@
+@trajectory_parameters slot 0 source 0 -1.46032 1.5619 0 0.2 0.2 0.2
+1 (null) slot 1 source 0 -1.46032 1.5619 0 0.2 0.2 0.2 1 (null) slot
+2 source 0 -0.393651 1.73968 0 0.2 0.2 0.2 1 (null) slot 3 source 0
+0.673016 1.84127 0 0.2 0.2 0.2 1 (null) slot 4 source 0 1.00317 1.68889
+0 0.2 0.2 0.2 1 (null) slot 5 source 0 1.81587 0.698413 0 0.2 0.2 0.2
+1 (null) slot 6 source 0 1.73968 0.31746 0 0.2 0.2 0.2 1 (null) slot
+7 source 0 1.33333 -0.393651 0 0.2 0.2 0.2 1 (null) slot 8 source 0
+0.87619 -0.749206 0 0.2 0.2 0.2 1 (null) slot 9 source 0 -0.190476
+-0.825397 0 0.2 0.2 0.2 1 (null) slot 10 source 0 -0.520635 -0.571429
+0 0.2 0.2 0.2 1 (null) slot 11 source 0 -0.419048 -0.393651 0 0.2 0.2
+0.2 1 (null) slot 12 source 0 0.368254 0.368254 0 0.2 0.2 0.2 1 (null)
+slot 13 source 0 0.647619 0.596825 0 0.2 0.2 0.2 1 (null) slot 14 source
+0 0.698413 0.87619 0 0.2 0.2 0.2 1 (null) slot 15 source 0 0.0380952
+1.40952 0 0.2 0.2 0.2 1 (null) slot 16 source 0 -0.698413 1.51111 0
+0.2 0.2 0.2 1 (null) slot 17 source 0 -1.33333 1.00317 0 0.2 0.2 0.2
+1 (null) slot 18 source 0 -1.51111 -0.165079 0 0.2 0.2 0.2 1 (null)
+slot 19 source 0 -1.05397 -1.30794 0 0.2 0.2 0.2 1 (null) slot 20 source
+0 0.342857 -1.48571 0 0.2 0.2 0.2 1 (null) slot 21 source 0 1.23175
+-1.10476 0 0.2 0.2 0.2 1 (null) slot 22 source 0 1.53651 -0.215873
+0 0.2 0.2 0.2 1 (null) slot 23 source 0 1.23175 0.520635 0 0.2 0.2
+0.2 1 (null) slot 24 source 0 0.31746 0.87619 0 0.2 0.2 0.2 1 (null)
+slot 25 source 0 -0.0888889 0.190476 0 0.2 0.2 0.2 1 (null) slot 26
+source 0 0.0888889 -0.72381 0 0.2 0.2 0.2 1 (null) slot 27 source 0
+1.07937 -1.89206 0 0.2 0.2 0.2 1 (null) slot 28 source 0 0.901587 -2.32381
+0 0.2 0.2 0.2 1 (null) slot 29 source 0 -0.673016 -2.27302 0 0.2 0.2
+0.2 1 (null) slot 30 source 0 -1.66349 -1.33333 0 0.2 0.2 0.2 1 (null)
+slot 31 source 0 -1.73968 -0.850794 0 0.2 0.2 0.2 1 (null) slot 32
+source 0 -1.43492 -0.495238 0 0.2 0.2 0.2 1 (null) slot 33 source 0
+-0.926984 -0.368254 0 0.2 0.2 0.2 1 (null) slot 34 source 0 -0.698413
+-0.342857 0 0.2 0.2 0.2 1 (null) slot 35 source 0 -0.266667 -0.342857
+0 0.2 0.2 0.2 1 (null) slot 36 source 0 0.0126985 -0.342857 0 0.2 0.2
+0.2 1 (null) slot 37 source 0 0.31746 -0.342857 0 0.2 0.2 0.2 1 (null)
+slot 38 source 0 0.647619 -0.342857 0 0.2 0.2 0.2 1 (null) slot 39
+source 0 0.926984 -0.266667 0 0.2 0.2 0.2 1 (null) slot 40 source 0
+1.23175 -0.114286 0 0.2 0.2 0.2 1 (null) slot 41 source 0 1.43492 0.165079
+0 0.2 0.2 0.2 1 (null) slot 42 source 0 1.30794 0.926984 0 0.2 0.2
+0.2 1 (null) slot 43 source 0 -0.8 1.35873 0 0.2 0.2 0.2 1 (null) slot
+44 source 0 -1.46032 -0.0380952 0 0.2 0.2 0.2 1 (null) slot 45 source
+0 0.393651 -1.6127 0 0.2 0.2 0.2 1 (null) slot 46 source 0 2.4 -2.50159
+0 0.2 0.2 0.2 1 (null) slot 47 source 0 2.19683 -0.393651 0 0.2 0.2
+0.2 1 (null) slot 48 source 0 1.53651 0.72381 0 0.2 0.2 0.2 1 (null)
+slot 49 source 0 0.368254 0.749206 0 0.2 0.2 0.2 1 (null) slot 50 source
+0 -0.368254 -1.05397 0 0.2 0.2 0.2 1 (null) slot 51 source 0 -0.673016
+-1.81587 0 0.2 0.2 0.2 1 (null) slot 52 source 0 -2.01905 -1.15556
+0 0.2 0.2 0.2 1 (null) slot 53 source 0 -1.89206 0.850794 0 0.2 0.2
+0.2 1 (null) slot 54 source 0 -0.8 1.20635 0 0.2 0.2 0.2 1 (null) slot
+55 source 0 0.749206 0.495238 0 0.2 0.2 0.2 1 (null) slot 56 source
+0 1.89206 0.0380952 0 0.2 0.2 0.2 1 (null) slot 57 source 0 1.94286
+1.10476 0 0.2 0.2 0.2 1 (null) slot 58 source 0 1.38413 1.6381 0 0.2
+0.2 0.2 1 (null) slot 59 source 0 0.393651 1.84127 0 0.2 0.2 0.2 1
+(null) slot 60 source 0 -0.31746 0.673016 0 0.2 0.2 0.2 1 (null) slot
+61 source 0 0.190476 -0.292063 0 0.2 0.2 0.2 1 (null) slot 62 source
+0 0.8 -0.774603 0 0.2 0.2 0.2 1 (null) slot 63 source 0 1.10476 -1.23175
+0 0.2 0.2 0.2 1 (null) slot 64 source 0 0.495238 -1.48571 0 0.2 0.2
+0.2 1 (null) slot 65 source 0 -1.43492 -1.05397 0 0.2 0.2 0.2 1 (null)
+slot 66 source 0 -1.66349 0.0380952 0 0.2 0.2 0.2 1 (null) slot 67
+source 0 -0.31746 0.368254 0 0.2 0.2 0.2 1 (null) slot 68 source 0
+0.926984 -0.825397 0 0.2 0.2 0.2 1 (null) slot 69 source 0 0.647619
+-1.73968 0 0.2 0.2 0.2 1 (null) slot 70 source 0 -1.25714 -0.0888889
+0 0.2 0.2 0.2 1 (null) slot 71 source 0 -0.850794 1.00317 0 0.2 0.2
+0.2 1 (null) slot 72 source 0 0.72381 0.520635 0 0.2 0.2 0.2 1 (null)
+slot 73 source 0 0.774603 -0.72381 0 0.2 0.2 0.2 1 (null) slot 74 source
+0 -0.977778 0.393651 0 0.2 0.2 0.2 1 (null) slot 75 source 0 -0.825397
+1.66349 0 0.2 0.2 0.2 1 (null) slot 76 source 0 0.596825 1.68889 0
+0.2 0.2 0.2 1 (null) slot 77 source 0 1.15556 1.46032 0 0.2 0.2 0.2
+1 (null) slot 78 source 0 1.51111 1.5873 0 0.2 0.2 0.2 1 (null) slot
+79 source 0 1.79048 1.86667 0 0.2 0.2 0.2 1 (null) slot 80 source 0
+1.76508 2.4 0 0.2 0.2 0.2 1 (null) slot 81 source 0 0.87619 2.90794
+0 0.2 0.2 0.2 1 (null) slot 82 source 0 0.139683 2.67937 0 0.2 0.2
+0.2 1 (null) slot 83 source 0 -0.24127 2.32381 0 0.2 0.2 0.2 1 (null)
+slot 84 source 0 -0.266667 1.84127 0 0.2 0.2 0.2 1 (null) slot 85 source
+0 0.520635 1.10476 0 0.2 0.2 0.2 1 (null) slot 86 source 0 1.25714
+0.419048 0 0.2 0.2 0.2 1 (null) slot 87 source 0 1.66349 -0.520635
+0 0.2 0.2 0.2 1 (null) slot 88 source 0 1.05397 -1.23175 0 0.2 0.2
+0.2 1 (null) 

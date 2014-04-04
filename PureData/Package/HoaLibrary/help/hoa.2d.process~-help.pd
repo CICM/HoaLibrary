@@ -1,70 +1,102 @@
-#N canvas 534 24 1076 565 10;
-#X obj -626 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#N canvas 54 44 1076 565 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -183 -390 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -546 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj -103 -390 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -546 107 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -103 -446 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -419 144 sig~ 1;
-#X obj -618 447 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj 24 -409 sig~ 1;
+#X obj -175 -226 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -548 447 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -105 -226 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -478 447 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -35 -226 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -376 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj -416 93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#X obj 67 -440 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
-#X obj -369 144 sig~ 2;
-#X obj -325 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj 27 -480 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 74 -409 sig~ 2;
+#X obj 118 -440 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -318 144 sig~ 2;
-#X obj -366 449 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj 125 -409 sig~ 2;
+#X obj 77 -224 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -275 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj 168 -440 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -268 144 sig~ 2;
-#X msg -117 292 \; pd dsp 1;
-#X msg -117 327 \; pd dsp 0;
-#X msg -403 286 open 2;
-#X obj -513 123 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj 175 -409 sig~ 2;
+#X msg -134 -181 \; pd dsp 1;
+#X msg -134 -146 \; pd dsp 0;
+#X msg 40 -387 open 2;
+#X obj -70 -430 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -483 123 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -40 -430 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -252 475 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj 131 -188 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -312 485 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -20 -407 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -463 146 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -50 -480 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -493 93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj -122 475 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj -182 485 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj -679 345 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo
+#X obj -236 -328 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo
 ;
-#X connect 0 0 26 2;
-#X connect 2 0 26 0;
-#X connect 3 0 26 0;
+#X obj -695 -563 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.process~
+3 12 0 18 -228856 -1 0;
+#X obj -111 -541 hoa.connect;
+#X obj -111 -562 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -25 -538 declare -lib HoaLibrary/hoa.library;
+#X obj -25 -559 declare -lib hoa.library;
+#X text -693 -541 A multi-patcher for circular harmonics and plane
+waves;
+#X text -365 -541 domains;
+#X text -693 -522 hoa.process~ helps the creation of processing in
+the circular harmonics and plane waves domains by instantiating several
+instances of a patcher.;
+#X text -690 -417 2nd argument is the name of the patcher to instantiate.
+;
+#X text -690 -467 1st argument is the order if you use hoa.process~
+in the circular harmonics domain or the number of channels if you use
+it in the plane waves domain.;
+#X text -690 -397 3rd argument is the domain \, harmonics (default)
+or planewaves. Note that if you use hoa.process~ in the harmonics domain
+\, it instantiates 2 * order + 1 times the partcher (the number of
+harmonics) and if you use it in the plane waves domain \, it instanctiates
+the patcher as many times as the number of channels.;
+#X text -686 -31 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -686 -47 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -690 -307 Extra arguments and attributes are sent to object
+hoa.this.process~ if there is one inside the patcher. You should look
+at the help.;
+#X text -690 -257 The number of inlets and outlets depends on the inlet
+and outlet configuration of the patcher. You should look at the help.
+;
+#X text -690 -207 Important: If you edit the patcher \, you have recreate
+hoa.process~ to reflect the changes.;
+#X connect 0 0 23 2;
+#X connect 2 0 23 0;
+#X connect 3 0 23 0;
 #X connect 7 0 9 0;
 #X connect 8 0 3 0;
-#X connect 9 0 26 1;
+#X connect 9 0 23 1;
 #X connect 10 0 11 0;
-#X connect 11 0 26 2;
+#X connect 11 0 23 2;
 #X connect 13 0 14 0;
-#X connect 17 0 26 0;
-#X connect 18 0 26 1;
-#X connect 23 0 26 2;
-#X connect 26 0 4 0;
-#X connect 26 1 5 0;
+#X connect 17 0 23 0;
+#X connect 18 0 23 1;
+#X connect 22 0 23 2;
+#X connect 23 0 4 0;
+#X connect 23 1 5 0;
+#X connect 26 0 25 0;

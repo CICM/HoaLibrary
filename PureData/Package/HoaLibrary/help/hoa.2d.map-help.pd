@@ -12,11 +12,10 @@
 #X obj -579 -322 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
-@sources_parameters source 0 -0.141768 -2.04241 0 0.2 0.2 0.2 1 (null)
-source 1 2.10325 -0.325368 0 0.2 0.2 0.2 1 (null) source 2 -0.328639
-1.99896 0 0.2 0.2 0.2 1 (null) source 3 -2.22655 -0.224886 0 0.2 0.2
-0.2 1 (null) @groups_parameters group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null)
-;
+@sources_parameters source 0 -1.71429 1.53651 0 0 0 0 0 (null) source
+1 1.84127 1.53651 0 0 0 0 0 (null) source 2 -1.94286 -1.46032 0 0 0
+0 0 (null) source 3 1.00317 -1.46032 0 0 0 0 0 (null) @groups_parameters
+group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null);
 #X obj -579 -347 c.loadmess;
 #X msg -242 -105 \; pd dsp 1;
 #X msg -242 -70 \; pd dsp 0;
@@ -249,11 +248,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -518 -68 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
-@zoom 0.35 @sources_parameters source 0 -1.84943 -2.06754 1 0.2 0.2
-0.2 1 (null) source 1 0.993429 -0.632624 0 0.7 0 0.6 1 Jimi_Hendrix_
-source 2 -0.0298518 0.772667 0 0.2 0.2 0.2 1 (null) source 3 -2.36561
-2.30265 0 0.2 0.2 0.2 1 (null) @groups_parameters group 0 3 0 1 2 0
-0.2 0.2 0.2 1 (null);
+@zoom 0.35 @sources_parameters source 0 1.5619 1.23175 0 0.2 0.2 0.2
+1 (null) source 1 -1.5619 0.926984 0 0.2 0.2 0.2 1 (null) source 2
+-0.0888889 -1.51111 0 0.2 0.2 0.2 1 (null) @groups_parameters group
+0 3 0 1 2 0 0.2 0.2 0.2 1 (null);
 #X obj -534 -270 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
 3 12 0 18 -228856 -1 0;
 #X text -529 -249 A GUI to spatialize sources on a map.;
@@ -286,144 +284,147 @@ source 2 -0.0298518 0.772667 0 0.2 0.2 0.2 1 (null) source 3 -2.36561
 #X connect 37 0 7 0;
 #X connect 38 0 11 0;
 #X restore -98 -98 pd messages;
-#N canvas 91 83 1139 646 slots 0;
-#X obj -584 -328 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+#N canvas 136 30 1139 646 slots 0;
+#X obj -624 -328 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_slot @send (null)
 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
-@zoom 0.35 @sources_parameters source 0 -1.43492 -1.13016 0 0.2 0.2
-0.2 1 (null) source 1 1.33333 1.46032 0 0.2 0.2 0.2 1 (null) source
-2 -1.25714 1.28254 0 0.2 0.2 0.2 1 (null) @groups_parameters group
+@zoom 0.35 @sources_parameters source 0 1.99922 -0.00726522 0 0 0 0
+0 (null) source 1 0.750493 -0.297662 0 0.2 0.2 0.2 1 (null) source
+2 0.415032 1.37853 0 0.2 0.2 0.2 1 (null) @groups_parameters group
 0 3 0 1 2 0 0.2 0.2 0.2 1 (null);
-#X msg -188 -366 slot store \$1;
-#X msg -74 -361 slot storeagain;
-#X obj -188 -190 send map_slot;
-#X msg -60 -309 slot storenext;
-#X msg -48 -271 slot storeend;
-#X text -65 -289 Store at new end slot;
-#X msg -25 -216 slot storeempty;
-#X obj 164 -278 send map_slot;
-#X text 150 -430 Copy a slot in another;
-#X msg 164 -332 slot copy \$1 \$1;
-#X obj 164 -353 pack 0 0;
-#X msg 354 -365 slot insert \$1;
-#X msg 332 -307 slot renumber;
-#X text 270 -235 Remove a slot;
-#X msg 173 -174 slot delete \$1;
-#X msg 284 -175 slot remove \$1;
-#X text 382 -202 Remove all slots;
-#X obj 173 -128 send map_slot;
-#X obj 173 95 send map_slot;
-#X obj 173 20 pack 0 0;
-#X msg 173 41 slot storesource \$1 \$1;
-#X text 180 -29 Slot;
-#X obj 352 20 pack 0 0;
-#X text 354 -29 Slot;
-#X msg 352 41 slot storesource \$1 \$1;
-#X msg -241 -63 slot \$1;
-#X text -253 -139 Recall a slot and interpolate;
-#X text -253 -124 between two consecutives slots;
-#X obj -241 -43 send map_slot;
-#X text -61 -124 between two consecutives slots;
-#X obj -42 -41 send map_slot;
-#X msg -42 -61 slot recall 0 2 \$1;
-#X obj -580 85 send map_slot;
-#X text -583 -1 Save presets in text file;
-#X text -61 -139 Recall a slot and interpolate;
-#X obj -206 87 send map_slot;
-#X text -209 27 hoa.2d.map needs an absolute path. Here is an example.
-;
-#X msg 395 -175 slot clear;
-#X obj -188 -394 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg -228 -366 slot store \$1;
+#X msg -114 -361 slot storeagain;
+#X obj -228 -190 send map_slot;
+#X msg -100 -309 slot storenext;
+#X msg -88 -271 slot storeend;
+#X text -105 -289 Store at new end slot;
+#X msg -65 -216 slot storeempty;
+#X obj 124 -278 send map_slot;
+#X text 110 -430 Copy a slot in another;
+#X msg 124 -332 slot copy \$1 \$1;
+#X obj 124 -353 pack 0 0;
+#X msg 314 -365 slot insert \$1;
+#X msg 292 -307 slot renumber;
+#X text 230 -235 Remove a slot;
+#X msg 133 -174 slot delete \$1;
+#X msg 244 -175 slot remove \$1;
+#X text 342 -202 Remove all slots;
+#X obj 133 -128 send map_slot;
+#X obj 133 95 send map_slot;
+#X obj 133 20 pack 0 0;
+#X msg 133 41 slot storesource \$1 \$1;
+#X text 140 -29 Slot;
+#X obj 312 20 pack 0 0;
+#X text 314 -29 Slot;
+#X msg 312 41 slot storesource \$1 \$1;
+#X msg -251 -63 slot \$1;
+#X text -263 -139 Recall a slot and interpolate;
+#X text -263 -124 between two consecutives slots;
+#X obj -251 -43 send map_slot;
+#X text -71 -124 between two consecutives slots;
+#X obj -52 -41 send map_slot;
+#X msg -52 -61 slot recall 0 2 \$1;
+#X obj -512 101 send map_slot;
+#X text -435 31 Save presets in text file;
+#X text -71 -139 Recall a slot and interpolate;
+#X obj -246 107 send map_slot;
+#X msg 355 -175 slot clear;
+#X obj -228 -394 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text -52 -249 Store the first empty slot;
-#X text -67 -234 (store at new end slot if need);
-#X text -92 -398 Store again the last;
-#X text -92 -381 slot stored (overwrite);
-#X text -71 -327 (overwrite if need);
-#X text -71 -341 Store the next slot;
-#X obj -241 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text -92 -249 Store the first empty slot;
+#X text -107 -234 (store at new end slot if need);
+#X text -132 -398 Store again the last;
+#X text -132 -381 slot stored (overwrite);
+#X text -111 -327 (overwrite if need);
+#X text -111 -341 Store the next slot;
+#X obj -251 -97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -171 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -181 -97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -42 -97 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -52 -97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 164 -377 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 124 -377 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 209 -407 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 169 -407 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 354 -392 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 314 -392 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 322 -435 Insert a slot at index;
-#X text 325 -418 and increase nexts;
-#X text -211 -433 Store a preset at;
-#X text -205 -416 a defined slot;
-#X text 334 -325 0 \, 1 \, 2 \, 3...;
-#X text 331 -341 Renumber slots;
-#X obj 173 -207 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text 282 -435 Insert a slot at index;
+#X text 285 -418 and increase nexts;
+#X text -251 -433 Store a preset at;
+#X text -245 -416 a defined slot;
+#X text 294 -325 0 \, 1 \, 2 \, 3...;
+#X text 291 -341 Renumber slots;
+#X obj 133 -207 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 149 -247 Remove a slot and;
-#X text 157 -230 decrease nexts;
-#X obj 284 -207 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text 109 -247 Remove a slot and;
+#X text 117 -230 decrease nexts;
+#X obj 244 -207 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 173 -7 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 133 -7 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 216 -37 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 176 -37 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 164 -94 Store a source at;
-#X text 175 -78 a defined slot;
-#X text 217 -57 Source;
-#X text 324 -94 Store a source at;
-#X text 335 -78 a defined slot;
-#X obj 352 -7 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text 124 -94 Store a source at;
+#X text 135 -78 a defined slot;
+#X text 177 -57 Source;
+#X text 284 -94 Store a source at;
+#X text 295 -78 a defined slot;
+#X obj 312 -7 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 396 -37 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 356 -37 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 400 -58 Group;
-#X text -209 11 Read presets from a text file;
-#X msg -206 58 slot read /Users/Pierre/Desktop/2001_A_Space_Odyssey.pd
-;
-#X msg -580 55 slot write /Users/Pierre/Desktop/2001_A_Space_Odyssey.pd
-;
-#X text -583 14 hoa.2d.map needs an absolute path. Here is an example
-but this is my name therefore it won't work...;
-#X text -600 -412 Important \, Pure Data can't manage very large data
+#X text 360 -58 Group;
+#X text -249 31 Read presets from a text file;
+#X text -640 -412 Important \, Pure Data can't manage very large data
 while copying \, cutting and saving of object. Therefore \, the presets
 are no more saved with the patcher to avoid crashes.;
-#X obj -610 -490 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -204280 -1 0;
-#X text -605 -469 A GUI to spatialize sources on a map.;
-#X text -32 -470 Eliott Paris © 2012-2013 CICM / Universite Paris
+#X obj -650 -490 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -228856 -1 0;
+#X text -645 -469 A GUI to spatialize sources on a map.;
+#X text -72 -470 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
-#X text -32 -486 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text -72 -486 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text -608 -447 Record and manage presets with the slot message.
+#X text -648 -447 Record and manage presets with the slot message.
 ;
+#X msg -363 -242 slot write;
+#X msg -364 -280 slot write test1.pd;
+#X msg -363 -310 slot read test1.pd;
+#X msg -512 31 slot write;
+#X msg -482 61 slot write hoa.map_example2.preset;
+#X msg -246 58 slot read;
+#X msg -165 51 slot read hoa.map_example.preset;
+#X text -638 -46 Without any argument \, the write and read messages
+open a dialog window. With only the file name \, the object look into
+your path preferences to find the file or save the file in the patcher
+directory. You can also use an absolute path.;
 #X connect 1 0 3 0;
 #X connect 2 0 3 0;
 #X connect 4 0 3 0;
@@ -441,116 +442,122 @@ are no more saved with the patcher to avoid crashes.;
 #X connect 25 0 19 0;
 #X connect 26 0 29 0;
 #X connect 32 0 31 0;
-#X connect 38 0 18 0;
-#X connect 39 0 1 0;
+#X connect 37 0 18 0;
+#X connect 38 0 1 0;
+#X connect 45 0 26 0;
 #X connect 46 0 26 0;
-#X connect 47 0 26 0;
-#X connect 48 0 32 0;
-#X connect 49 0 11 0;
-#X connect 50 0 11 1;
-#X connect 51 0 12 0;
-#X connect 58 0 15 0;
-#X connect 61 0 16 0;
-#X connect 62 0 20 0;
-#X connect 63 0 20 1;
-#X connect 69 0 23 0;
-#X connect 70 0 23 1;
-#X connect 73 0 36 0;
-#X connect 74 0 33 0;
+#X connect 47 0 32 0;
+#X connect 48 0 11 0;
+#X connect 49 0 11 1;
+#X connect 50 0 12 0;
+#X connect 57 0 15 0;
+#X connect 60 0 16 0;
+#X connect 61 0 20 0;
+#X connect 62 0 20 1;
+#X connect 68 0 23 0;
+#X connect 69 0 23 1;
+#X connect 78 0 0 0;
+#X connect 79 0 0 0;
+#X connect 80 0 0 0;
+#X connect 81 0 33 0;
+#X connect 82 0 33 0;
+#X connect 83 0 36 0;
+#X connect 84 0 36 0;
 #X restore -98 -73 pd slots;
 #N canvas 189 106 1208 632 trajectories 0;
-#X obj -610 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -204280 -1 0;
-#X text -605 -423 A GUI to spatialize sources on a map.;
-#X obj -590 133 send map_slot;
-#X obj -196 117 send map_slot;
-#X text -199 43 hoa.map needs an absolute path. Here is an example.
-;
-#X text 198 -345 1 - Set "trajectory record 1";
-#X obj -198 -278 send map_traj;
-#X text 198 -331 2 - Draw the trajectory of a source or a group;
-#X text 198 -316 2 (bis) - Set "record 0" (for safety);
-#X obj -193 -160 send map_traj;
-#X obj -193 -216 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj -630 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
+3 12 0 18 -228856 -1 0;
+#X text -625 -423 A GUI to spatialize sources on a map.;
+#X text 178 -345 1 - Set "trajectory record 1";
+#X obj -218 -278 send map_traj;
+#X text 178 -331 2 - Draw the trajectory of a source or a group;
+#X text 178 -316 2 (bis) - Set "record 0" (for safety);
+#X obj -213 -160 send map_traj;
+#X obj -213 -216 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
-#X msg -193 -192 trajectory \$1;
-#X msg -198 -310 trajectory record \$1;
-#X text 198 -301 3 - Replay with floats between 0 and 1;
-#X text 198 -286 4 - Rewind to 0;
-#X text 198 -272 5 - Set "limit 1";
-#X obj -190 -13 send map_traj;
-#X text -196 -132 (5) When a trajectory is recorded \, you can overwrite
+#X msg -213 -192 trajectory \$1;
+#X msg -218 -310 trajectory record \$1;
+#X text 178 -301 3 - Replay with floats between 0 and 1;
+#X text 178 -286 4 - Rewind to 0;
+#X text 178 -272 5 - Set "limit 1";
+#X obj -210 -13 send map_traj;
+#X text -216 -132 (5) When a trajectory is recorded \, you can overwrite
 it with another source or group. To limit the lenght of the new trajectory
 to the lenght of previous trajectory set "limit 1".;
-#X msg -190 -45 trajectory limit \$1;
-#X text -201 -378 (1 \, 2bis and 6) Set "record 1" to enable the recording.
+#X msg -210 -45 trajectory limit \$1;
+#X text -221 -378 (1 \, 2bis and 6) Set "record 1" to enable the recording.
 Then draw your trajectory.;
-#X text 198 -258 6 - Set "record 1";
-#X text 198 -244 7 - Overwrite the trajectory with another source or
+#X text 178 -258 6 - Set "record 1";
+#X text 178 -244 7 - Overwrite the trajectory with another source or
 another group;
-#X text 198 -216 8 - Rewind to 0;
-#X text -197 -249 (3 \, 4 and 8) Use values between 0 and 1 to play/rewind
+#X text 178 -216 8 - Rewind to 0;
+#X text -217 -249 (3 \, 4 and 8) Use values between 0 and 1 to play/rewind
 the trajectory.;
-#X text 240 -374 How to record trajectories;
-#X text 198 -202 9 - (record \, play and rewind to inifite);
-#X obj 237 -72 send map_traj;
-#X msg 237 -104 trajectory erase;
-#X text 234 -125 Erase all the trajectory.;
-#X text 233 -47 Erase a part of the trajectory. For example "erasepart
+#X text 220 -374 How to record trajectories;
+#X text 178 -202 9 - (record \, play and rewind to inifite);
+#X obj 217 -72 send map_traj;
+#X msg 217 -104 trajectory erase;
+#X text 214 -125 Erase all the trajectory.;
+#X text 213 -47 Erase a part of the trajectory. For example "erasepart
 0 0.1" to erase the beginning of the trajectory;
-#X obj 237 70 send map_traj;
-#X msg 237 38 trajectory erasepart \$1 \$2;
-#X obj 237 10 pack 0 0;
-#X obj 237 -13 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#X obj 217 70 send map_traj;
+#X msg 217 38 trajectory erasepart \$1 \$2;
+#X obj 217 10 pack 0 0;
+#X obj 217 -13 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
-#X obj 300 -15 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#X obj 280 -15 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
-#X msg -590 81 trajectory write /Users/Pierre/Desktop/The_Graduate.pd
-;
-#X msg -196 74 trajectory read /Users/Pierre/Desktop/The_Graduate.pd
-;
-#X obj -584 -302 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
-;
-#X obj -198 -337 c.toggle @size 15 15 @fontname Helvetica @fontweight
+#X obj -604 -302 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_traj @send (null)
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
+@zoom 0.35 @sources_parameters source 0 1.35467 0.193522 0 0.2 0.2
+0.2 1 (null);
+#X obj -218 -337 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X obj -190 -75 c.toggle @size 15 15 @fontname Helvetica @fontweight
+#X obj -210 -75 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X text -608 -401 Record and manage trajectories with the trajectory
+#X text -628 -401 Record and manage trajectories with the trajectory
 message.;
-#X text -600 -366 Important \, Pure Data can't manage very large data
+#X text -620 -366 Important \, Pure Data can't manage very large data
 while copying \, cutting and saving of object. Therefore \, the trajectories
 are no more saved with the patcher to avoid crashes.;
-#X text -30 -426 Eliott Paris © 2012-2013 CICM / Universite Paris
+#X text -50 -426 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
-#X text -30 -442 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text -50 -442 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text -593 25 Save trajectory in a text file;
-#X text -199 27 Read trajectories from a text file;
-#X text -593 40 hoa.map needs an absolute path. Here is an example
-but this is my name therefore it won't work...;
-#X connect 10 0 11 0;
-#X connect 11 0 9 0;
-#X connect 12 0 6 0;
-#X connect 18 0 16 0;
-#X connect 27 0 26 0;
-#X connect 31 0 30 0;
-#X connect 32 0 31 0;
-#X connect 33 0 32 0;
-#X connect 34 0 32 1;
-#X connect 35 0 2 0;
-#X connect 36 0 3 0;
-#X connect 38 0 12 0;
-#X connect 39 0 18 0;
+#X text -613 55 Save trajectory in a text file;
+#X text -219 57 Read trajectories from a text file;
+#X obj -610 133 send map_traj;
+#X obj -216 117 send map_traj;
+#X text -618 -46 Without any argument \, the write and read messages
+open a dialog window. With only the file name \, the object look into
+your path preferences to find the file or save the file in the patcher
+directory. You can also use an absolute path.;
+#X msg -610 81 trajectory write;
+#X msg -216 74 trajectory read;
+#X msg -86 74 trajectory read hoa.map_traj1.preset;
+#X connect 7 0 8 0;
+#X connect 8 0 6 0;
+#X connect 9 0 3 0;
+#X connect 15 0 13 0;
+#X connect 24 0 23 0;
+#X connect 28 0 27 0;
+#X connect 29 0 28 0;
+#X connect 30 0 29 0;
+#X connect 31 0 29 1;
+#X connect 33 0 9 0;
+#X connect 34 0 15 0;
+#X connect 44 0 41 0;
+#X connect 45 0 42 0;
+#X connect 46 0 42 0;
 #X restore -98 -48 pd trajectories;
 #N canvas 161 119 804 672 outputs 0;
 #X obj -540 -463 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -204280 -1 0;
+3 12 0 18 -228856 -1 0;
 #X text -535 -442 A GUI to spatialize sources on a map.;
 #X text -480 141 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
