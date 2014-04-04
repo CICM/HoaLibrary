@@ -1,4 +1,4 @@
-#N canvas 531 419 600 316 10;
+#N canvas 179 190 600 316 10;
 #X obj 28 55 hoa.in~;
 #X obj 28 238 hoa.out~;
 #X obj 145 -22 c.loadmess;
@@ -6,24 +6,41 @@
 #X obj 91 238 hoa.out~;
 #X obj 28 147 freeverb~, f 11;
 #X obj 81 55 hoa.in;
-#X obj 145 12 c.patcherargs @wet 1 @dry 0 @room size 0.8 @damping 0.5
-;
 #X obj 28 201 *~;
 #X obj 91 201 *~;
-#X obj 115 167 line~;
-#X obj 185 167 line~;
 #X obj 139 88 route width;
 #X obj 139 116 clip 0 1;
+#X msg 116 138 \$1 20;
+#X obj 115 167 line~ 1;
+#X obj 185 167 line~ 0;
+#X msg 166 138 \$1 20;
+#X obj 309 112 c.meter~ @size 17 85 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6
+0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 359 112 c.meter~ @size 17 85 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6
+0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 145 12 c.patcherargs @wet 1 @dry 0 @roomsize 0.8 @damping 0.5
+@width 1;
 #X connect 0 0 5 0;
-#X connect 2 0 7 0;
-#X connect 3 0 12 0;
-#X connect 5 0 8 0;
-#X connect 5 1 9 0;
+#X connect 0 0 15 0;
+#X connect 2 0 17 0;
+#X connect 3 0 9 0;
+#X connect 5 0 7 0;
+#X connect 5 1 8 0;
 #X connect 6 0 5 0;
-#X connect 7 1 12 0;
-#X connect 8 0 1 0;
-#X connect 9 0 4 0;
-#X connect 10 0 8 1;
-#X connect 11 0 9 1;
-#X connect 12 0 13 0;
-#X connect 12 1 5 0;
+#X connect 7 0 1 0;
+#X connect 8 0 4 0;
+#X connect 9 0 10 0;
+#X connect 9 1 5 0;
+#X connect 10 0 11 0;
+#X connect 10 0 14 0;
+#X connect 11 0 12 0;
+#X connect 12 0 7 1;
+#X connect 13 0 8 1;
+#X connect 14 0 13 0;
+#X connect 17 1 9 0;

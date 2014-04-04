@@ -74,7 +74,7 @@ field into the plane waves domain. Use hoa.recomposer~ to come back
 to harmonics domain., f 72;
 #X obj 255 94 declare -lib HoaLibrary/hoa.library;
 #X obj 255 73 declare -lib hoa.library;
-#X text 80 -313 Sound field transformations have differents behavior
+#X text 80 -323 Sound field transformations have differents behavior
 in the plane waves domain compared to the circular harmonics domain.
 ;
 #X obj -236 -278 hoa.2d.recomposer~ 4 10 -------------;

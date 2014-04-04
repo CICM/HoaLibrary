@@ -14,7 +14,7 @@ namespace Hoa2D
 		setMaximumRadius(maximumLimitValue);
 		m_zoom = 1.;
 	}
-	
+
 	void SourcesManager::setExistence(bool state)
 	{
 		m_exist = state;
@@ -24,43 +24,43 @@ namespace Hoa2D
 			m_groups.clear();
 		}
 	}
-	
+
 	void SourcesManager::clearAll()
 	{
-		
+
 		for(int i = 0; i <= getMaximumIndexOfSource(); i++)
 			sourceRemove(i);
 		for(int i = 0; i <= getMaximumIndexOfGroup(); i++)
 			groupRemove(i);
 	}
-	
+
 	bool SourcesManager::getExistence()
 	{
 		return m_exist;
 	}
-	
+
 	void SourcesManager::setMaximumRadius(double limitValue)
 	{
 		m_maximum_radius = limitValue;
 		for(int i = 0; i < m_groups.size(); i++)
 			m_groups[i]->setMaximumRadius(m_maximum_radius);
 	}
-	
+
 	void SourcesManager::setZoom(double aZoom)
 	{
 		m_zoom = clip_minmax(aZoom, 1. / m_maximum_radius, 1.);
 	}
-	
+
 	double SourcesManager::getZoom()
 	{
 		return m_zoom;
 	}
-	
+
 	double SourcesManager::getLimitMaximum()
 	{
 		return m_maximum_radius;
 	}
-	
+
 	long SourcesManager::getMaximumIndexOfSource()
 	{
 		long index = 0;
@@ -71,7 +71,7 @@ namespace Hoa2D
 		}
 		return  index;
 	}
-	
+
 	long SourcesManager::getNumberOfSources()
 	{
 		long numberOfSources = 0;
@@ -82,12 +82,12 @@ namespace Hoa2D
 		}
 		return  numberOfSources;
 	}
-	
+
 	long SourcesManager::getMaximumIndexOfGroup()
 	{
 		return  m_groups.size();
 	}
-	
+
 	long SourcesManager::getNumberOfGroups()
 	{
 		long numberOfGroups = 0;
@@ -98,11 +98,11 @@ namespace Hoa2D
 		}
 		return  numberOfGroups;
 	}
-	
+
 	/*******************************************************************************/
 	/*********************************  SOURCES ************************************/
 	/*******************************************************************************/
-	
+
 	void SourcesManager::sourceRemove(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -112,7 +112,7 @@ namespace Hoa2D
 			for(int i = 0; i < numberOfGroups; i++)
 			{
 				indexOfGroup = m_sources[index]->getGroupIndex(i);
-				
+
 				if(indexOfGroup >= 0 && indexOfGroup <= getMaximumIndexOfGroup())
 				{
 					if(groupGetExistence(indexOfGroup))
@@ -126,7 +126,7 @@ namespace Hoa2D
 			m_sources[index]->setMute(0);
 		}
 	}
-	
+
 	void SourcesManager::sourceNewPolar(double radius, double azimuth)
 	{
 		for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
@@ -138,7 +138,7 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	void SourcesManager::sourceNewCartesian(double abscissa, double ordinate)
 	{
 		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
@@ -150,13 +150,13 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	void SourcesManager::sourceSetPolar(long index, double radius, double azimuth)
 	{
 		sourceSetRadius(index, radius);
 		sourceSetAzimuth(index, azimuth);
 	}
-	
+
 	void SourcesManager::sourceSetRadius(long index, double radius)
 	{
 		if(index >= m_sources.size())
@@ -165,7 +165,7 @@ namespace Hoa2D
 			{
 				m_sources.push_back(new Source(0));
 				m_sources[i]->setMaximumRadius(m_maximum_radius);
-				
+
 			}
 			m_sources.push_back(new Source(1));
 			m_sources[index]->setMaximumRadius(m_maximum_radius);
@@ -184,7 +184,7 @@ namespace Hoa2D
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
-	
+
 	void SourcesManager::sourceSetAzimuth(long index, double azimuth)
 	{
 		if(index >= m_sources.size())
@@ -211,13 +211,13 @@ namespace Hoa2D
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
-	
+
 	void SourcesManager::sourceSetCartesian(long index, double abscissa, double ordinate)
 	{
 		sourceSetAbscissa(index, abscissa);
 		sourceSetOrdinate(index, ordinate);
 	}
-	
+
 	void SourcesManager::sourceSetAbscissa(long index, double abscissa)
 	{
 		if(index >= m_sources.size())
@@ -244,7 +244,7 @@ namespace Hoa2D
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
-	
+
 	void SourcesManager::sourceSetOrdinate(long index, double ordinate)
 	{
 		if(index >= m_sources.size())
@@ -271,7 +271,7 @@ namespace Hoa2D
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
-	
+
 	void SourcesManager::sourceSetColor(long index, double red, double green, double blue, double alpha)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -279,7 +279,7 @@ namespace Hoa2D
 			m_sources[index]->setColor(red, green, blue, alpha);
 		}
 	}
-	
+
 	void SourcesManager::sourceSetDescription(long index, std::string description)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -305,7 +305,7 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	void SourcesManager::sourceSetMute(long index, bool state)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -322,57 +322,57 @@ namespace Hoa2D
 			checkMute();
 		}
 	}
-	
+
 	/******************************************************************************/
-	
+
 	double SourcesManager::sourceGetRadius(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getRadius();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double SourcesManager::sourceGetAzimuth(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getAzimuth();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double SourcesManager::sourceGetAbscissa(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getAbscissa();
-		
+
 		return NULL;
 	}
-	
+
 	double SourcesManager::sourceGetOrdinate(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getOrdinate();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double* SourcesManager::sourceGetColor(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getColor();
-		
+
 		return NULL;
 	}
-	
+
 	std::string SourcesManager::sourceGetDescription(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
 			return m_sources[index]->getDescription();
-		
+
 		return NULL;
 	}
-	
+
 	long SourcesManager::sourceGetExistence(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -381,7 +381,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::sourceGetNumberOfGroups(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -390,7 +390,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::sourceGetGroupIndex(long sourceIndex, long groupIndex)
 	{
 		if(sourceIndex < m_sources.size() && sourceIndex >= 0)
@@ -399,7 +399,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::sourceGetMute(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -408,11 +408,11 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	/*******************************************************************************/
 	/**********************************  GROUP  ************************************/
 	/*******************************************************************************/
-	
+
 	void SourcesManager::groupSetSource(long groupIndex, long sourceIndex)
 	{
 		if(groupIndex >= m_groups.size())
@@ -421,7 +421,7 @@ namespace Hoa2D
 			{
 				m_groups.push_back(new SourcesGroup(this, 0));
 				m_groups[i]->setMaximumRadius(m_maximum_radius);
-				
+
 			}
 			m_groups.push_back(new SourcesGroup(this, 0));
 			m_groups[groupIndex]->setMaximumRadius(m_maximum_radius);
@@ -444,7 +444,7 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	void SourcesManager::groupRemoveSource(long groupIndex, long sourceIndex)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -456,7 +456,7 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	void SourcesManager::groupSetPolar(long groupIndex, double radius, double azimuth)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -464,7 +464,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setCoordinatesPolar(radius, azimuth);
 		}
 	}
-	
+
 	void SourcesManager::groupSetRadius(long groupIndex, double radius)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -472,7 +472,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setRadius(radius);
 		}
 	}
-	
+
 	void SourcesManager::groupSetAzimuth(long groupIndex, double azimuth)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -480,7 +480,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->seAzimuth(azimuth);
 		}
 	}
-	
+
 	void SourcesManager::groupSetCartesian(long groupIndex, double abscissa, double ordinate)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -488,7 +488,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setCoordinatesCartesian(abscissa, ordinate);
 		}
 	}
-	
+
 	void SourcesManager::groupSetAbscissa(long groupIndex, double abscissa)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -496,7 +496,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setAbscissa(abscissa);
 		}
 	}
-	
+
 	void SourcesManager::groupSetOrdinate(long groupIndex, double ordinate)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -504,7 +504,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setOrdinate(ordinate);
 		}
 	}
-	
+
 	void SourcesManager::groupSetRelativePolar(long groupIndex, double radius, double azimuth)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -512,7 +512,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setRelativeCoordinatesPolar(radius, azimuth);
 		}
 	}
-	
+
 	void SourcesManager::groupSetRelativeRadius(long groupIndex, double radius)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -520,7 +520,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setRelativeRadius(radius);
 		}
 	}
-	
+
 	void SourcesManager::groupSetRelativeAzimuth(long groupIndex, double azimuth)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -528,7 +528,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setRelativeAzimuth(azimuth);
 		}
 	}
-	
+
 	void SourcesManager::groupSetColor(long groupIndex, double red, double green, double blue, double alpha)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -536,7 +536,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setColor(red, green, blue, alpha);
 		}
 	}
-	
+
 	void SourcesManager::groupSetDescription(long groupIndex, std::string description)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -544,7 +544,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setDescription(description);
 		}
 	}
-	
+
 	void SourcesManager::groupRemove(long groupIndex)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -552,7 +552,7 @@ namespace Hoa2D
 			for(int i = 0; i < m_sources.size(); i++)
 			{
 				m_sources[i]->removeGroup(groupIndex);
-				
+
 			}
 			for(int i = 0; i < m_sources.size(); i++)
 			{
@@ -564,7 +564,7 @@ namespace Hoa2D
 			m_groups[groupIndex]->setMute(0);
 		}
 	}
-	
+
 	void SourcesManager::groupRemoveWithSources(long groupIndex)
 	{
 		for(int i = 0; i < getMaximumIndexOfSource(); i++)
@@ -575,7 +575,7 @@ namespace Hoa2D
 		}
 		groupRemove(groupIndex);
 	}
-	
+
 	void SourcesManager::groupSetMute(long groupIndex, long aValue)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -590,58 +590,58 @@ namespace Hoa2D
 		}
 		checkMute();
 	}
-	
-	
+
+
 	/******************************************************************************/
-	
+
 	double SourcesManager::groupGetRadius(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getRadius();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double SourcesManager::groupGetAzimuth(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getAzimuth();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double SourcesManager::groupGetAbscissa(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getAbscissa();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double SourcesManager::groupGetOrdinate(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getOrdinate();
-		
-		return NULL;
+
+		return 0;
 	}
-	
+
 	double* SourcesManager::groupGetColor(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getColor();
-		
+
 		return NULL;
 	}
-	
+
 	std::string SourcesManager::groupGetDescription(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getDescription();
-		
+
 		return NULL;
 	}
-	
+
 	long SourcesManager::groupGetExistence(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
@@ -650,7 +650,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::groupGetNumberOfSources(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
@@ -659,7 +659,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::groupGetSourceIndex(long groupIndex, long sourceIndex)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
@@ -668,7 +668,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	long SourcesManager::groupGetMute(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
@@ -677,7 +677,7 @@ namespace Hoa2D
 		}
 		return 0;
 	}
-	
+
 	bool SourcesManager::groupGetIfSourceMuted(long index)
 	{
 		if(index < m_groups.size() && index >= 0)
@@ -692,7 +692,7 @@ namespace Hoa2D
 		}
 		return false;
 	}
-	
+
 	long SourcesManager::groupGetNextIndex()
 	{
 		if(getNumberOfGroups() != 0)
@@ -707,7 +707,7 @@ namespace Hoa2D
 		}
 		return getMaximumIndexOfGroup();
 	}
-	
+
 	void SourcesManager::groupClean()
 	{
 		for(int i = 0; i <= getNumberOfGroups(); i++)
@@ -736,7 +736,7 @@ namespace Hoa2D
 				}
 			}
 		}
-		
+
 		for(int i = 0; i < getNumberOfGroups(); i++)
 		{
 			if(groupGetExistence(i))
@@ -748,9 +748,9 @@ namespace Hoa2D
 			}
 		}
 	}
-	
+
 	/************************************/
-	
+
 	SourcesManager::~SourcesManager()
 	{
 		m_sources.clear();

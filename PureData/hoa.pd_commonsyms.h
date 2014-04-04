@@ -65,10 +65,10 @@ static t_symbol* hoa_sym_startdrag					= gensym("startdrag");
 // Map
 static t_symbol* hoa_sym_source 					= gensym("source");
 static t_symbol* hoa_sym_group 						= gensym("group");
-static t_symbol* hoa_sym_trajectory_parameters 		= gensym("trajectory_parameters");
-static t_symbol* hoa_sym_slots_parameters 			= gensym("slots_parameters");
-static t_symbol* hoa_sym_sources_parameters 		= gensym("sources_parameters");
-static t_symbol* hoa_sym_groups_parameters 			= gensym("groups_parameters");
+static t_symbol* hoa_sym_trajectory_parameters 		= gensym("@trajectory_parameters");
+static t_symbol* hoa_sym_slots_parameters 			= gensym("@slots_parameters");
+static t_symbol* hoa_sym_sources_parameters 		= gensym("@sources_parameters");
+static t_symbol* hoa_sym_groups_parameters 			= gensym("@groups_parameters");
 static t_symbol* hoa_sym_slot 						= gensym("slot");
 static t_symbol* hoa_sym_trajectory 				= gensym("trajectory");
 static t_symbol* hoa_sym_remove 					= gensym("remove");

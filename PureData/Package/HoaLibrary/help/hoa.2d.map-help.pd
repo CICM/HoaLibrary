@@ -1,39 +1,32 @@
-#N canvas 320 53 732 757 10;
+#N canvas 404 75 732 757 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
 #X obj -610 -440 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -204280 -1 0;
+3 12 0 18 -228856 -1 0;
 #X text -499 247 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
 #X text -499 231 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X text -252 -154 Mousewheel and alt to change the zoom.;
 #X text -605 -419 A GUI to spatialize sources on a map.;
-#X obj -579 -322 hoa.2d.map @size 288 288 @fontname Helvetica @fontweight
+#X obj -579 -322 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.51
-sources_parameters source 0 -0.83061 0.966776 0 0.2 0.2 0.2 1 (null)
-source 1 -0.966776 -0.953159 0 0.2 0.2 0.2 1 (null) source 2 0.912309
--0.925926 0 0.2 0.2 0.2 1 (null) source 3 0.939542 0.885076 0 0.2 0.2
-0.2 1 (null) groups_parameters group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null)
+0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
+@sources_parameters source 0 -0.141768 -2.04241 0 0.2 0.2 0.2 1 (null)
+source 1 2.10325 -0.325368 0 0.2 0.2 0.2 1 (null) source 2 -0.328639
+1.99896 0 0.2 0.2 0.2 1 (null) source 3 -2.22655 -0.224886 0 0.2 0.2
+0.2 1 (null) @groups_parameters group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null)
 ;
-#X obj -559 193 hoa.dac~ 1 2 -----------------------------------;
 #X obj -579 -347 c.loadmess;
 #X msg -242 -105 \; pd dsp 1;
 #X msg -242 -70 \; pd dsp 0;
 #X text -605 -398 hoa.2d.map allows you to spatialize several sources
 on a plane. You can add and remove sources \, change coordinates \,
 add description and create groups., f 90;
-#X obj -559 106 freeverb~;
-#X obj -519 106 freeverb~;
-#X obj -478 106 freeverb~;
-#X obj -437 106 freeverb~;
-#X obj -397 106 freeverb~;
-#X obj -357 106 freeverb~;
-#X obj -316 106 freeverb~;
 #X obj -30 -406 hoa.connect;
 #X obj -30 -431 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj -559 -22 c.loadmess 1;
-#X msg -174 75 roomsize 0.8;
 #X text -254 -349 To move source or group \, click on it and drag it.
 Click and drag with alt to change the radius. Click and drag with shift
 to change the angle.;
@@ -45,6 +38,140 @@ when mouse up the group will be created. To remove group \, right-click
 or click with cmd on group then select "Remove group".;
 #X text -254 -192 To mute source or group \, right-click or click with
 cmd on it and select "Mute" or "Unmute".;
+#X obj -559 33 hoa.2d.map~ 3 4 -------------------------;
+#N canvas 284 119 577 458 hoa.rhythm 0;
+#X msg 231 -105 0;
+#X obj 158 21 *~ 0;
+#X msg 211 -33 0;
+#X obj 204 -105 + 1;
+#X obj 179 -104 f;
+#X obj 8 21 *~ 0;
+#X msg 61 -33 0;
+#X obj 54 -105 + 1;
+#X obj 29 -104 f;
+#X msg 81 -105 0;
+#X obj 29 -82 sel 0 4;
+#X obj 61 -56 delay 3;
+#X obj -112 57 *~ 0;
+#X msg -59 -13 0;
+#X obj -66 -85 + 1;
+#X obj -91 -84 f;
+#X msg -39 -85 0;
+#X obj -91 -62 sel 0 6;
+#X obj -62 231 *~ 0;
+#X msg -9 177 0;
+#X obj -9 154 delay 1;
+#X obj -16 105 + 1;
+#X obj -41 106 f;
+#X msg 11 105 0;
+#X obj -41 128 sel 0 2;
+#X obj -62 200 osc~ 0.05;
+#X obj -112 11 phasor~ 0.1;
+#X obj -59 -36 delay 3;
+#X obj -112 32 +~ 0.2;
+#X obj 56 -9 osc~ 3.7;
+#X obj 211 -59 delay 5;
+#X obj -32 32 +~ 0.2;
+#X obj 61 18 abs~;
+#X obj 191 -166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 145 -194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj 179 -82 sel 1 3 8;
+#X obj 29 -138 metro 120;
+#X msg -91 -13 0.8;
+#X msg 29 -33 0.8;
+#X obj 136 -66 noise~;
+#X obj 144 -12 lop~ 200;
+#X msg 179 -33 4;
+#X msg -41 177 0.7;
+#X obj 120 105 outlet~;
+#X obj 180 105 outlet~;
+#X obj 180 145 outlet~;
+#X obj 120 145 outlet~;
+#X obj 351 -46 inlet;
+#X connect 0 0 4 0;
+#X connect 1 0 44 0;
+#X connect 2 0 1 1;
+#X connect 3 0 4 1;
+#X connect 4 0 3 0;
+#X connect 4 0 35 0;
+#X connect 5 0 43 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 1;
+#X connect 8 0 7 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 0 38 0;
+#X connect 10 0 11 0;
+#X connect 10 1 9 0;
+#X connect 11 0 6 0;
+#X connect 12 0 46 0;
+#X connect 13 0 12 1;
+#X connect 14 0 15 1;
+#X connect 15 0 14 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 17 0 37 0;
+#X connect 17 0 27 0;
+#X connect 17 1 16 0;
+#X connect 18 0 45 0;
+#X connect 19 0 18 1;
+#X connect 20 0 19 0;
+#X connect 21 0 22 1;
+#X connect 22 0 21 0;
+#X connect 22 0 24 0;
+#X connect 23 0 22 0;
+#X connect 24 0 42 0;
+#X connect 24 0 20 0;
+#X connect 24 1 23 0;
+#X connect 25 0 18 0;
+#X connect 26 0 28 0;
+#X connect 27 0 13 0;
+#X connect 28 0 12 0;
+#X connect 29 0 32 0;
+#X connect 30 0 2 0;
+#X connect 31 0 5 0;
+#X connect 32 0 31 0;
+#X connect 33 0 36 1;
+#X connect 34 0 36 0;
+#X connect 35 0 41 0;
+#X connect 35 0 30 0;
+#X connect 35 1 41 0;
+#X connect 35 1 30 0;
+#X connect 35 2 0 0;
+#X connect 36 0 4 0;
+#X connect 36 0 8 0;
+#X connect 36 0 15 0;
+#X connect 36 0 22 0;
+#X connect 37 0 12 1;
+#X connect 38 0 5 1;
+#X connect 39 0 40 0;
+#X connect 40 0 1 0;
+#X connect 41 0 1 1;
+#X connect 42 0 18 1;
+#X connect 47 0 34 0;
+#X restore -559 1 pd hoa.rhythm ---------------------------;
+#X obj -559 113 hoa.process~ 3 hoa.freeverb~ ambisonic ---------;
+#X obj -559 157 hoa.binaural_order3 256 @pinna large -------------------
+;
+#X obj -559 193 hoa.dac~ 1 2 -------------------------------------------
+;
+#X msg -274 71 roomsize \$1;
+#X obj -274 39 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -183 40 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -183 72 damping \$1;
+#X obj -106 176 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj -559 68 hoa.2d.optim~ 3 inPhase -----------------;
 #N canvas 153 23 1155 646 messages 0;
 #X msg -518 -122 zoom \$1;
 #X text -531 -173 Set the zoom;
@@ -119,16 +246,16 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg 195 -128 source 1 description Jimi Hendrix;
 #X msg 217 -105 group 1 description Band of Gypsys;
 #X msg 229 64 group 1 color 0.2 0.9 0 1;
-#X obj -518 -68 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+#X obj -518 -68 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
-@bgcolor 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.34
-sources_parameters source 0 -0.00159255 -0.999999 0 0.2 0.2 0.2 1 (null)
-source 1 2.5 1.29412 0 0.7 0 0.6 1 Jimi_Hendrix_ source 2 -1.4902 0.392157
-0 0.2 0.2 0.2 1 (null) source 3 0.2 -0.7 0 0.2 0.2 0.2 1 (null) groups_parameters
-group 0 3 0 2 3 0 0.2 0.2 0.2 1 (null) group 1 3 0 1 3 0 0.2 0.9 0
-1 Band_of_Gypsys_;
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
+@zoom 0.35 @sources_parameters source 0 -1.84943 -2.06754 1 0.2 0.2
+0.2 1 (null) source 1 0.993429 -0.632624 0 0.7 0 0.6 1 Jimi_Hendrix_
+source 2 -0.0298518 0.772667 0 0.2 0.2 0.2 1 (null) source 3 -2.36561
+2.30265 0 0.2 0.2 0.2 1 (null) @groups_parameters group 0 3 0 1 2 0
+0.2 0.2 0.2 1 (null);
 #X obj -534 -270 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -204280 -1 0;
+3 12 0 18 -228856 -1 0;
 #X text -529 -249 A GUI to spatialize sources on a map.;
 #X text 52 -250 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
@@ -160,13 +287,13 @@ group 0 3 0 2 3 0 0.2 0.2 0.2 1 (null) group 1 3 0 1 3 0 0.2 0.9 0
 #X connect 38 0 11 0;
 #X restore -98 -98 pd messages;
 #N canvas 91 83 1139 646 slots 0;
-#X obj -584 -328 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.46 sources_parameters
-source 0 1.1758 -0.811053 0 0.2 0.2 0.2 1 (null) source 1 -0.0859105
--0.323257 0 0.2 0.2 0.2 1 (null) source 2 0.993065 0.724548 0 0.2 0.2
-0.2 1 (null) groups_parameters group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null)
-;
+#X obj -584 -328 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_slot @send (null)
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar
+@zoom 0.35 @sources_parameters source 0 -1.43492 -1.13016 0 0.2 0.2
+0.2 1 (null) source 1 1.33333 1.46032 0 0.2 0.2 0.2 1 (null) source
+2 -1.25714 1.28254 0 0.2 0.2 0.2 1 (null) @groups_parameters group
+0 3 0 1 2 0 0.2 0.2 0.2 1 (null);
 #X msg -188 -366 slot store \$1;
 #X msg -74 -361 slot storeagain;
 #X obj -188 -190 send map_slot;
@@ -382,11 +509,10 @@ the trajectory.;
 ;
 #X msg -196 74 trajectory read /Users/Pierre/Desktop/The_Graduate.pd
 ;
-#X obj -584 -302 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive map_traj @send (null)
-@bgcolor 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode polar @zoom 0.312488
-sources_parameters source 0 -1.89874 1.51472 0 0.2 0.2 0.2 1 (null)
-groups_parameters;
+#X obj -584 -302 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
+;
 #X obj -198 -337 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
@@ -439,13 +565,10 @@ but this is my name therefore it won't work...;
 #X obj -31 -145 receive map_outs_groups;
 #X obj -210 48 route source group slot;
 #X obj -210 22 route list;
-#X obj -504 -287 hoa.2d.map @size 300 300 @fontname Helvetica @fontweight
+#X obj -504 -287 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode cartesian @zoom 0.312488
-sources_parameters source 0 -2.09075 -1.23738 0 0.2 0.2 0.2 1 (null)
-source 1 2.08808 -0.565355 0 0.2 0.2 0.2 1 (null) source 2 -0.210674
-2.10141 0 0.2 0.2 0.2 1 (null) groups_parameters group 0 2 0 1 0 0.2
-0.2 0.2 1 (null) group 1 2 1 2 0 0.2 0.2 0.2 1 (null);
+0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
+;
 #X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
@@ -523,159 +646,41 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 39 0 24 0;
 #X connect 39 1 37 0;
 #X restore -98 -23 pd outputs;
-#X obj -559 157 hoa.binaural_order3 256 @pinna large -----------;
-#X obj -559 68 hoa.2d.optim~ 3 -------------------------;
-#X obj -559 33 hoa.2d.map~ 3 4 -------------------------;
-#N canvas 284 119 577 458 hoa.rhythm 0;
-#X msg 231 -105 0;
-#X obj 158 21 *~ 0;
-#X msg 211 -33 0;
-#X obj 204 -105 + 1;
-#X obj 179 -104 f;
-#X obj 8 21 *~ 0;
-#X msg 61 -33 0;
-#X obj 54 -105 + 1;
-#X obj 29 -104 f;
-#X msg 81 -105 0;
-#X obj 29 -82 sel 0 4;
-#X obj 61 -56 delay 3;
-#X obj -112 57 *~ 0;
-#X msg -59 -13 0;
-#X obj -66 -85 + 1;
-#X obj -91 -84 f;
-#X msg -39 -85 0;
-#X obj -91 -62 sel 0 6;
-#X obj -62 231 *~ 0;
-#X msg -9 177 0;
-#X obj -9 154 delay 1;
-#X obj -16 105 + 1;
-#X obj -41 106 f;
-#X msg 11 105 0;
-#X obj -41 128 sel 0 2;
-#X obj -62 200 osc~ 0.05;
-#X obj -112 11 phasor~ 0.1;
-#X obj -59 -36 delay 3;
-#X obj -112 32 +~ 0.2;
-#X obj 56 -9 osc~ 3.7;
-#X obj 211 -59 delay 5;
-#X obj -32 32 +~ 0.2;
-#X obj 61 18 abs~;
-#X obj 191 -166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj 145 -194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
-#X obj 179 -82 sel 1 3 8;
-#X obj 29 -138 metro 120;
-#X msg -91 -13 0.8;
-#X msg 29 -33 0.8;
-#X obj 136 -66 noise~;
-#X obj 144 -12 lop~ 200;
-#X msg 179 -33 4;
-#X msg -41 177 0.7;
-#X obj 120 105 outlet~;
-#X obj 180 105 outlet~;
-#X obj 180 145 outlet~;
-#X obj 120 145 outlet~;
-#X obj 351 -46 inlet;
-#X connect 0 0 4 0;
-#X connect 1 0 44 0;
-#X connect 2 0 1 1;
-#X connect 3 0 4 1;
-#X connect 4 0 3 0;
-#X connect 4 0 35 0;
-#X connect 5 0 43 0;
-#X connect 6 0 5 1;
-#X connect 7 0 8 1;
-#X connect 8 0 7 0;
-#X connect 8 0 10 0;
-#X connect 9 0 8 0;
-#X connect 10 0 38 0;
-#X connect 10 0 11 0;
-#X connect 10 1 9 0;
-#X connect 11 0 6 0;
-#X connect 12 0 46 0;
-#X connect 13 0 12 1;
-#X connect 14 0 15 1;
-#X connect 15 0 14 0;
-#X connect 15 0 17 0;
-#X connect 16 0 15 0;
-#X connect 17 0 37 0;
+#X obj -151 277 declare -lib HoaLibrary/hoa.library;
+#X obj -151 256 declare -lib hoa.library;
+#X connect 5 0 17 0;
+#X connect 6 0 5 0;
+#X connect 11 0 10 0;
+#X connect 12 0 18 0;
 #X connect 17 0 27 0;
-#X connect 17 1 16 0;
-#X connect 18 0 45 0;
-#X connect 19 0 18 1;
-#X connect 20 0 19 0;
-#X connect 21 0 22 1;
-#X connect 22 0 21 0;
-#X connect 22 0 24 0;
+#X connect 17 1 27 1;
+#X connect 17 2 27 2;
+#X connect 17 3 27 3;
+#X connect 17 4 27 4;
+#X connect 17 5 27 5;
+#X connect 17 6 27 6;
+#X connect 18 0 17 0;
+#X connect 18 1 17 1;
+#X connect 18 2 17 2;
+#X connect 18 3 17 3;
+#X connect 19 0 20 0;
+#X connect 19 1 20 1;
+#X connect 19 2 20 2;
+#X connect 19 3 20 3;
+#X connect 19 4 20 4;
+#X connect 19 5 20 5;
+#X connect 19 6 20 6;
+#X connect 20 0 21 0;
+#X connect 20 1 21 1;
+#X connect 22 0 19 7;
 #X connect 23 0 22 0;
-#X connect 24 0 42 0;
-#X connect 24 0 20 0;
-#X connect 24 1 23 0;
-#X connect 25 0 18 0;
-#X connect 26 0 28 0;
-#X connect 27 0 13 0;
-#X connect 28 0 12 0;
-#X connect 29 0 32 0;
-#X connect 30 0 2 0;
-#X connect 31 0 5 0;
-#X connect 32 0 31 0;
-#X connect 33 0 36 1;
-#X connect 34 0 36 0;
-#X connect 35 0 41 0;
-#X connect 35 0 30 0;
-#X connect 35 1 41 0;
-#X connect 35 1 30 0;
-#X connect 35 2 0 0;
-#X connect 36 0 4 0;
-#X connect 36 0 8 0;
-#X connect 36 0 15 0;
-#X connect 36 0 22 0;
-#X connect 37 0 12 1;
-#X connect 38 0 5 1;
-#X connect 39 0 40 0;
-#X connect 40 0 1 0;
-#X connect 41 0 1 1;
-#X connect 42 0 18 1;
-#X connect 47 0 34 0;
-#X restore -559 1 pd hoa.rhythm ---------------------------;
-#X obj -282 124 hoa.process~ 7 zaza ambisonic;
-#X connect 5 0 32 0;
-#X connect 7 0 5 0;
-#X connect 11 0 30 0;
-#X connect 12 0 30 1;
-#X connect 13 0 30 2;
-#X connect 14 0 30 3;
-#X connect 15 0 30 4;
-#X connect 16 0 30 5;
-#X connect 17 0 30 6;
-#X connect 19 0 18 0;
-#X connect 20 0 33 0;
-#X connect 21 0 17 0;
-#X connect 21 0 16 0;
-#X connect 21 0 15 0;
-#X connect 21 0 14 0;
-#X connect 21 0 13 0;
-#X connect 21 0 12 0;
-#X connect 21 0 11 0;
-#X connect 30 0 6 0;
-#X connect 30 1 6 1;
-#X connect 31 0 11 0;
-#X connect 31 1 12 0;
-#X connect 31 2 13 0;
-#X connect 31 3 14 0;
-#X connect 31 4 15 0;
-#X connect 31 5 16 0;
-#X connect 31 6 17 0;
-#X connect 32 0 31 0;
-#X connect 32 1 31 1;
-#X connect 32 2 31 2;
-#X connect 32 3 31 3;
-#X connect 32 4 31 4;
-#X connect 32 5 31 5;
-#X connect 32 6 31 6;
-#X connect 33 0 32 0;
-#X connect 33 1 32 1;
-#X connect 33 2 32 2;
-#X connect 33 3 32 3;
+#X connect 24 0 25 0;
+#X connect 25 0 19 7;
+#X connect 27 0 19 0;
+#X connect 27 1 19 1;
+#X connect 27 2 19 2;
+#X connect 27 3 19 3;
+#X connect 27 4 19 4;
+#X connect 27 5 19 5;
+#X connect 27 6 19 6;
 #X coords 0 757 1 756 85 60 0;

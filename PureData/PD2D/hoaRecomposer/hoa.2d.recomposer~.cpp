@@ -117,6 +117,32 @@ extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
     hoa_recomposer_class = c;
 }
 
+int hoa_recomposer_tilde_attr_to_args(t_hoa_recomposer* x, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+    atoms_get_attribute(ac, av, gensym("@mode"), &argc, &argv);
+    if(argc && argv)
+    {
+        if(atom_gettype(argv) == A_SYM)
+        {
+            if(atom_getsym(argv+2) == gensym("free"))
+                x->f_mode = 2;
+            else if(atom_getsym(argv+2) == gensym("fisheye"))
+                x->f_mode = 1;
+            else
+                x->f_mode = 0;
+        }
+        else
+        {
+            x->f_mode = pd_clip_minmax(atom_getlong(argv), 0, 2);
+        }
+        object_error(x, "hoa.recomposer~ attribute @mode is deprecated, please use the argument.");
+        return 1;
+    }
+    return 0;
+}
+
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_recomposer *x = NULL;
@@ -130,15 +156,15 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
     
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
+		if(argc && argv && atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		if(order < 1)
             order = 1;
-        if(atom_gettype(argv+1) == A_LONG)
+        if(argc > 1 && atom_gettype(argv+1) == A_LONG)
 			numberOfLoudspeakers = atom_getlong(argv+1);
         if(numberOfLoudspeakers < order * 2 + 1)
             numberOfLoudspeakers = order * 2 + 1;
-        if(atom_gettype(argv+2) == A_SYM)
+        if(argc > 2 && atom_gettype(argv+2) == A_SYM)
         {
             if(atom_getsym(argv+2) == gensym("free"))
                 x->f_mode = 2;
@@ -148,9 +174,10 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
                 x->f_mode = 0;
         }
         else
-        {
             x->f_mode = 0;
-        }
+        
+        hoa_recomposer_tilde_attr_to_args(x, argc, argv);
+        
         x->f_ramp       = 100;
         
         

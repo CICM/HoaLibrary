@@ -6,9 +6,6 @@
 #X text -550 -444 A circular meter with sound field descriptor;
 #X msg -537 -137 \; pd dsp 1;
 #X msg -537 -100 \; pd dsp 0;
-#X obj -113 -387 hoa.pi 2;
-#X obj -113 -416 loadbang;
-#X obj -207 -355 *~;
 #X text -448 42 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
 #X text -448 26 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -33,7 +30,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items Anti-Clockwise Clockwise @states 0 0 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -207 -384 phasor~ 0.3;
+#X obj -207 -374 phasor~ 0.3;
 #X obj -94 -76 s hoameter;
 #X text -161 -298 channels;
 #X text -161 -308 Number of;
@@ -55,8 +52,8 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -432 -228 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
 @channels 5 @angles 0 30 110 250 330 @offset 0 @rotation clockwise
-@vectors velocity @interval 50 @bgcolor 0.758847 0.758847 0.758847
-1 @bdcolor 0.699562 0.699562 0.699562 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
+@vectors energy @interval 50 @bgcolor 0.758847 0.758847 0.758847 1
+@bdcolor 0.699562 0.699562 0.699562 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X text -550 -423 hoa.2d.meter~ displays the peak levels for a circurlar
@@ -71,38 +68,37 @@ vectors.;
 -1;
 #X obj -116 45 declare -lib HoaLibrary/hoa.library;
 #X obj -116 24 declare -lib hoa.library;
-#X connect 4 0 6 1;
-#X connect 5 0 4 0;
-#X connect 6 0 35 1;
-#X connect 10 0 11 0;
-#X connect 11 0 9 0;
-#X connect 12 0 13 0;
-#X connect 13 0 9 0;
-#X connect 18 0 9 0;
-#X connect 19 0 18 0;
-#X connect 20 0 6 0;
-#X connect 24 0 25 0;
-#X connect 25 0 21 0;
-#X connect 29 0 21 0;
-#X connect 29 0 32 0;
-#X connect 30 0 21 0;
-#X connect 30 0 32 0;
-#X connect 31 0 40 0;
-#X connect 33 0 10 0;
-#X connect 34 0 35 0;
-#X connect 35 0 40 0;
-#X connect 35 1 40 1;
-#X connect 35 2 40 2;
-#X connect 35 3 40 3;
-#X connect 35 4 40 4;
-#X connect 35 5 40 5;
-#X connect 35 6 40 6;
-#X connect 38 0 21 0;
-#X connect 38 0 32 0;
-#X connect 39 0 24 0;
-#X connect 40 0 36 0;
-#X connect 40 1 36 1;
-#X connect 40 2 36 2;
-#X connect 40 3 36 3;
-#X connect 40 4 36 4;
-#X connect 42 0 41 0;
+#X obj -207 -353 hoa.pi~ 2;
+#X connect 7 0 8 0;
+#X connect 8 0 6 0;
+#X connect 9 0 10 0;
+#X connect 10 0 6 0;
+#X connect 15 0 6 0;
+#X connect 16 0 15 0;
+#X connect 17 0 42 1;
+#X connect 21 0 22 0;
+#X connect 22 0 18 0;
+#X connect 26 0 18 0;
+#X connect 26 0 29 0;
+#X connect 27 0 18 0;
+#X connect 27 0 29 0;
+#X connect 28 0 37 0;
+#X connect 30 0 7 0;
+#X connect 31 0 32 0;
+#X connect 32 0 37 0;
+#X connect 32 1 37 1;
+#X connect 32 2 37 2;
+#X connect 32 3 37 3;
+#X connect 32 4 37 4;
+#X connect 32 5 37 5;
+#X connect 32 6 37 6;
+#X connect 35 0 18 0;
+#X connect 35 0 29 0;
+#X connect 36 0 21 0;
+#X connect 37 0 33 0;
+#X connect 37 1 33 1;
+#X connect 37 2 33 2;
+#X connect 37 3 33 3;
+#X connect 37 4 33 4;
+#X connect 39 0 38 0;
+#X connect 42 0 32 1;

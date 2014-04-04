@@ -5,7 +5,7 @@
 3 12 0 18 -228856 -1 0;
 #X obj 122 210 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
-7 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+7 @gain 5 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
 #X msg 15 319 \; pd dsp 1;
 #X msg 15 363 \; pd dsp 0;

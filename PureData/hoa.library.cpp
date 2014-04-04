@@ -64,6 +64,8 @@ extern "C" void setup_hoa0x2elibrary(void)
             namelist_append_files(sys_searchpath, path);
             sprintf(path, "%s/clippings", var->nl_string);
             namelist_append_files(sys_searchpath, path);
+            sprintf(path, "%s/dependencies", var->nl_string);
+            namelist_append_files(sys_searchpath, path);
             return;
         }
         else if(access(path, O_RDONLY) != -1)
@@ -71,6 +73,8 @@ extern "C" void setup_hoa0x2elibrary(void)
             sprintf(path, "%s/HoaLibrary/patchers", var->nl_string);
             namelist_append_files(sys_searchpath, path);
             sprintf(path, "%s/HoaLibrary/clippings", var->nl_string);
+            namelist_append_files(sys_searchpath, path);
+            sprintf(path, "%s/HoaLibrary/dependencies", var->nl_string);
             namelist_append_files(sys_searchpath, path);
             return;
         }

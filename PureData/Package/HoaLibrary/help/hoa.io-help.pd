@@ -1,4 +1,4 @@
-#N canvas 0 22 1434 677 10;
+#N canvas 0 27 1434 677 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
 #X obj -293 56 hoa.in;
@@ -214,6 +214,8 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X text 823 5 to the hoa.in~ extra 2;
 #X text 823 15 The extra inlet 3 \, send the messages;
 #X text 823 25 to the hoa.in extra 3;
+#X msg 594 -136 \; pd dsp 1;
+#X msg 658 -136 \; pd dsp 0;
 #X connect 0 0 10 0;
 #X connect 0 0 30 0;
 #X connect 7 0 12 0;

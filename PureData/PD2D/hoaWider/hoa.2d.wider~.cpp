@@ -17,9 +17,11 @@ typedef struct _hoa_wider
 
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_wider_free(t_hoa_wider *x);
+void hoa_wider_float(t_hoa_wider *x, float f);
 
 void hoa_wider_dsp(t_hoa_wider *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_wider_perform_offset(t_hoa_wider *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
 
 t_eclass *hoa_wider_class;
 
@@ -34,6 +36,7 @@ extern "C" void setup_hoa0x2e2d0x2ewider_tilde(void)
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
 	eclass_addmethod(c, (method)hoa_wider_dsp,       "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_wider_float,    "float",    A_FLOAT, 0);
     
     eclass_register(CLASS_OBJ, c);
     hoa_wider_class = c;
@@ -72,9 +75,17 @@ t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
+void hoa_wider_float(t_hoa_wider *x, float f)
+{
+    x->f_wider->setWideningValue(f);
+}
+
 void hoa_wider_dsp(t_hoa_wider *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    object_method(dsp, gensym("dsp_add"), x, (method)hoa_wider_perform, 0, NULL);
+    if(count[x->f_wider->getNumberOfHarmonics()])
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_wider_perform, 0, NULL);
+    else
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_wider_perform_offset, 0, NULL);
 }
 
 void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long numins, float **outs, long numouts, long sampleframes, long f,void *up)
@@ -86,6 +97,22 @@ void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long numins, 
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_wider->setWideningValue(ins[numins-1][i]);
+        x->f_wider->process(x->f_ins + (numins - 1) * i, x->f_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_wider_perform_offset(t_hoa_wider *x, t_object *dsp, float **ins, long numins, float **outs, long numouts, long sampleframes, long f,void *up)
+{
+	for(int i = 0; i < numins - 1; i++)
+    {
+        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins - 1);
+    }
+	for(int i = 0; i < sampleframes; i++)
+    {
         x->f_wider->process(x->f_ins + (numins - 1) * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)

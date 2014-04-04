@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <math.h>
 #include <string>
+#include <assert.h>
 
 #ifdef __APPLE__
 
@@ -30,6 +31,10 @@
 #include <mkl.h>
 #include <mkl_cblas.h>
 
+#endif
+
+#ifdef _LINUX
+#include <cblas.h>
 #endif
 
 #define HOA_PI  (3.141592653589793238462643383279502884)

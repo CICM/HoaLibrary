@@ -60,6 +60,8 @@ field into the circular harmonics domain.;
 #X text -290 57 fisheye mode :;
 #X text -290 78 The sound field can be;
 #X text -290 88 compressed to the front.;
+#X text -290 98 With fisheye \, the object;
+#X text -290 108 has one additionnal inlet.;
 #X connect 10 0 9 0;
 #X connect 11 0 30 0;
 #X connect 12 0 14 0;
