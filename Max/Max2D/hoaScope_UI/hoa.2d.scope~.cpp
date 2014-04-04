@@ -379,7 +379,6 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
     
 	if (g)
 	{
-        jgraphics_rotate(g, HOA_PI);
 		jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_line_width(g, 1);
