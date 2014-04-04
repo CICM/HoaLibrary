@@ -1,0 +1,61 @@
+#N canvas 314 100 755 575 10;
+#X obj 286 15 hoa.in extra 1;
+#X obj 15 10 c.loadmess;
+#X obj 15 91 hoa.thisprocess~ This is a jazz example @artist Albert
+Ayler @album My name is Albert Ayler @song Summertime;
+#X obj 253 155 c.prepend set;
+#X msg 253 296 This is a rock example;
+#X obj 372 155 route artist album song;
+#X obj 372 236 c.prepend set;
+#X msg 372 276 Jimi Hendrix;
+#X msg 417 256 Electric Ladyland;
+#X msg 462 236 Voodoo Chile;
+#X obj 417 216 c.prepend set;
+#X obj 462 196 c.prepend set;
+#X obj 507 176 c.prepend set;
+#X text 548 216 done when complete.;
+#X text 386 130 Attrs output;
+#X text 266 130 Args output;
+#X text 35 62 hoa.thisprocess~ with defaut arguments and attributes
+;
+#X obj 106 405 c.prepend set;
+#X obj 229 431 c.prepend set;
+#X msg 229 496;
+#X obj 324 431 c.prepend set;
+#X text 363 466 done when complete.;
+#X text 243 380 Attrs output;
+#X text 119 380 Args output;
+#X obj 229 405 route song;
+#X obj 20 341 hoa.thisprocess~ @song;
+#X text 35 322 hoa.thisprocess~ without defaut arguments and attributes
+;
+#X text 393 359 Note that you should add the key of the attribute to
+retreive it.;
+#X msg 106 526;
+#X msg 324 466 done;
+#X msg 507 216 done;
+#X text 9 270 Send a bang to output.;
+#X obj 20 297 c.bang @size 17 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X text 86 10 Load bang;
+#X connect 1 0 2 0;
+#X connect 2 2 3 0;
+#X connect 2 3 5 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 5 1 10 0;
+#X connect 5 2 11 0;
+#X connect 5 3 12 0;
+#X connect 6 0 7 0;
+#X connect 10 0 8 0;
+#X connect 11 0 9 0;
+#X connect 12 0 30 0;
+#X connect 17 0 28 0;
+#X connect 18 0 19 0;
+#X connect 20 0 29 0;
+#X connect 24 0 18 0;
+#X connect 24 1 20 0;
+#X connect 25 2 17 0;
+#X connect 25 3 24 0;
+#X connect 32 0 25 0;

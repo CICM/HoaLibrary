@@ -18,7 +18,6 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2espace(void);
 extern "C" void setup_hoa0x2e2d0x2erotate_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void);
-extern "C" void setup_hoa0x2e2d0x2eprocess_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2eprojector_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2eoptim_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void);

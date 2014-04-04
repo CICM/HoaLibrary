@@ -36,6 +36,7 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2eout_tilde();
     setup_hoa0x2epi();
     setup_hoa0x2epi_tilde();
+    setup_hoa0x2eprocess_tilde();
     setup_hoa0x2ethisprocess_tilde();
     
     // HOA 2D //
@@ -45,7 +46,6 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2emap_tilde();
     setup_hoa0x2e2d0x2emeter_tilde();
     setup_hoa0x2e2d0x2eoptim_tilde();
-    setup_hoa0x2e2d0x2eprocess_tilde();
     setup_hoa0x2e2d0x2eprojector_tilde();
     setup_hoa0x2e2d0x2erecomposer_tilde();
     setup_hoa0x2e2d0x2erotate_tilde();
