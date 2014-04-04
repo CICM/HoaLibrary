@@ -93,9 +93,6 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
 #X text 583 325 instance.;
-#X text 572 420 The hoa.io configuration of this patch is example made
-to show all the behaviors of the hoa.io. You would prefer to look at
-the real uses presented in the hoa.process~ help.;
 #X obj 892 111 sig~ 1.5;
 #X obj 704 211 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
@@ -216,6 +213,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X text 823 25 to the hoa.in extra 3;
 #X msg 594 -136 \; pd dsp 1;
 #X msg 658 -136 \; pd dsp 0;
+#X text 572 420 The hoa.io configuration of this patch is an example
+made to show all the behaviors of the hoa.io. You would prefer to look
+at the real uses of hoa.process~.;
 #X connect 0 0 10 0;
 #X connect 0 0 30 0;
 #X connect 7 0 12 0;
@@ -229,31 +229,31 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 20 0 16 0;
 #X connect 20 0 23 0;
 #X connect 21 0 22 0;
-#X connect 21 0 100 0;
+#X connect 21 0 99 0;
 #X connect 24 0 17 0;
 #X connect 24 0 25 0;
-#X connect 32 0 46 0;
-#X connect 33 0 46 1;
-#X connect 34 0 46 0;
-#X connect 35 0 46 1;
-#X connect 36 0 46 2;
-#X connect 37 0 46 2;
-#X connect 43 0 46 4;
-#X connect 46 0 38 0;
-#X connect 46 1 39 0;
-#X connect 46 2 40 0;
-#X connect 46 3 44 0;
-#X connect 46 4 45 0;
-#X connect 46 5 65 0;
-#X connect 46 6 66 0;
-#X connect 46 7 67 0;
-#X connect 46 8 80 0;
-#X connect 46 11 103 0;
-#X connect 64 0 46 3;
-#X connect 77 0 32 0;
-#X connect 78 0 33 0;
-#X connect 79 0 37 0;
-#X connect 98 0 46 3;
-#X connect 99 0 98 0;
-#X connect 101 0 46 5;
-#X connect 103 0 102 0;
+#X connect 32 0 45 0;
+#X connect 33 0 45 1;
+#X connect 34 0 45 0;
+#X connect 35 0 45 1;
+#X connect 36 0 45 2;
+#X connect 37 0 45 2;
+#X connect 42 0 45 4;
+#X connect 45 0 38 0;
+#X connect 45 1 39 0;
+#X connect 45 2 40 0;
+#X connect 45 3 43 0;
+#X connect 45 4 44 0;
+#X connect 45 5 64 0;
+#X connect 45 6 65 0;
+#X connect 45 7 66 0;
+#X connect 45 8 79 0;
+#X connect 45 11 102 0;
+#X connect 63 0 45 3;
+#X connect 76 0 32 0;
+#X connect 77 0 33 0;
+#X connect 78 0 37 0;
+#X connect 97 0 45 3;
+#X connect 98 0 97 0;
+#X connect 100 0 45 5;
+#X connect 102 0 101 0;
