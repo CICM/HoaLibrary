@@ -67,7 +67,7 @@ namespace Hoa2D
 			m_channels[index]->setAzimuth(m_defaultAzimuths[index]);
 	}
 	
-	void ChannelManager::resetDirectivity(const int index)
+	void ChannelManager::resetWideningValue(const int index)
 	{
 		if (!isInside(index, -1, m_channels.size()))
 			return;
@@ -75,10 +75,10 @@ namespace Hoa2D
 		if(index == -1)
 		{
 			for (int i = 0; i < m_channels.size(); i++)
-				m_channels[i]->setDirectivity(1);
+				m_channels[i]->setWideningValue(1);
 		}
 		else
-			m_channels[index]->setDirectivity(1);
+			m_channels[index]->setWideningValue(1);
 	}
 	
 	void ChannelManager::setAzimuthList(double* angles, long size)
@@ -101,13 +101,13 @@ namespace Hoa2D
 			m_channels[index]->setAzimuth(angle);
 	}
 	
-	void ChannelManager::setDirectivityList(double* directivities, long size)
+	void ChannelManager::setWideningValueList(double* wideningValues, long size)
 	{
 		for (int i=0; i < size && i < m_channels.size(); i++)
-			m_channels[i]->setDirectivity(directivities[i]);
+			m_channels[i]->setWideningValue(wideningValues[i]);
 	}
 	
-	void ChannelManager::setDirectivity(const int index, double widerValue)
+	void ChannelManager::setWideningValue(const int index, double widerValue)
 	{
 		if (!isInside(index, -1, m_channels.size()))
 			return;
@@ -115,10 +115,10 @@ namespace Hoa2D
 		if (index == -1)
 		{
 			for (int i=0; i < m_channels.size(); i++)
-				m_channels[i]->setDirectivity(widerValue);
+				m_channels[i]->setWideningValue(widerValue);
 		}
 		else
-			m_channels[index]->setDirectivity(widerValue);
+			m_channels[index]->setWideningValue(widerValue);
 	}
 	
 	void ChannelManager::setSelected(const int index, int _selectedState)

@@ -271,12 +271,12 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER                (c, "hotcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "hotcolor", 0, "1. 0.6 0. 0.8");
 	
-	CLASS_ATTR_RGBA                 (c, "overcolor", 0, t_meter, f_color_over);
-    CLASS_ATTR_CATEGORY             (c, "overcolor", 0, "Color");
-    CLASS_ATTR_STYLE                (c, "overcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "overcolor", 0, "Overload Signal Color");
-	CLASS_ATTR_ORDER                (c, "overcolor", 0, "8");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overcolor", 0, "1. 0. 0. 0.8");
+	CLASS_ATTR_RGBA                 (c, "overloadcolor", 0, t_meter, f_color_over);
+    CLASS_ATTR_CATEGORY             (c, "overloadcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "overloadcolor", 0, "rgba");
+	CLASS_ATTR_LABEL                (c, "overloadcolor", 0, "Overload Signal Color");
+	CLASS_ATTR_ORDER                (c, "overloadcolor", 0, "8");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overloadcolor", 0, "1. 0. 0. 0.8");
 	
 	CLASS_ATTR_RGBA                 (c, "energycolor", 0, t_meter, f_color_energy);
     CLASS_ATTR_CATEGORY             (c, "energycolor", 0, "Color");
@@ -548,7 +548,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
 		}
-		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor") || name == gensym("numleds"))
+		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overloadcolor") || name == gensym("numleds"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
@@ -651,7 +651,7 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
             jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
             jgraphics_set_matrix(g, &transform);
             
-            white.alpha = 0.5;
+            white.alpha = 0.6;
 			
             // skelton separators and leds bg:
             for(i = 0; i < x->f_number_of_channels; i++)
@@ -1043,6 +1043,9 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 {
 	double pointSize = rect->width*0.02;
 	double maxRadius = (x->f_rayonInt-pointSize-1);
+	if (pointSize > maxRadius)
+		return;
+	
 	double vecX, vecY;
 	t_jmatrix transform;
 	t_jpattern *pattern = NULL;
@@ -1053,11 +1056,11 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 		
-		if (x->f_drawvector == 1 || x->f_drawvector == 3)
+		if (x->f_drawvector == 2 || x->f_drawvector == 3)
 		{
 			vecX = x->f_vector_coords[0] * maxRadius;
 			vecY = x->f_vector_coords[1] * maxRadius;
-			
+			/*
 			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
 													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
 			
@@ -1069,15 +1072,21 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 												  x->f_color_velocity.alpha);
 			
 			jgraphics_set_source(g, pattern);
+			*/
+			
+			jgraphics_set_source_jrgba(g, &x->f_color_velocity);
 			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
-			jgraphics_fill(g);
+			jgraphics_fill_preserve(g);
+			jgraphics_set_source_rgba(g, 0.2, 0.2, 0.2, 1.);
+			jgraphics_stroke(g);
 		}
 		
-		if (x->f_drawvector == 2 || x->f_drawvector == 3)
+		if (x->f_drawvector == 1 || x->f_drawvector == 3)
 		{
 			vecX = x->f_vector_coords[2] * maxRadius;
 			vecY = x->f_vector_coords[3] * maxRadius;
 			
+			/*
 			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
 													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
 			
@@ -1089,8 +1098,13 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 												  x->f_color_energy.alpha);
 			
 			jgraphics_set_source(g, pattern);
+			*/
+			
+			jgraphics_set_source_jrgba(g, &x->f_color_energy);
 			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
-			jgraphics_fill(g);
+			jgraphics_fill_preserve(g);
+			jgraphics_set_source_rgba(g, 0.2, 0.2, 0.2, 1.);
+			jgraphics_stroke(g);
 		}
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_vectors_layer);

@@ -8,7 +8,7 @@
 
 #define MAX_UI_CHANNELS 64
 #define MIN_UI_CHANNELS 3
-#define DEF_UI_CHANNELS 8
+#define DEF_UI_CHANNELS 4
 
 typedef struct  _hoa_recomposer
 {
@@ -54,7 +54,7 @@ typedef struct  _hoa_recomposer
     double      f_last_mouseDragRadius;
     
     // draw utility
-    double      f_mic_radius;
+    double      f_channel_radius;
 	double		f_mic_size;
     
     // outlets
@@ -97,7 +97,7 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
 
 void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
 void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void hoa_recomposer_directivity(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
 void hoa_recomposer_nb_hp(t_hoa_recomposer *x, int v);
 
 // msg-out methods
@@ -127,7 +127,6 @@ int C74_EXPORT main()
 	t_class *c;
 	
 	c = class_new("hoa.2d.recomposer", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
-	class_alias(c, gensym("hoa.recomposer"));
 	
 	hoa_initclass(c, NULL);
 	
@@ -143,8 +142,8 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) hoa_recomposer_notify,          "notify",        A_CANT,   0);
 	class_addmethod(c, (method) hoa_recomposer_bang,            "bang",                 0L,0);
     class_addmethod(c, (method) hoa_recomposer_set,             "set",           A_GIMME,  0);
-    class_addmethod(c, (method) hoa_recomposer_angles,          "angles",         A_GIMME,  0);
-    class_addmethod(c, (method) hoa_recomposer_directivity,            "directivities",          A_GIMME,  0);
+    class_addmethod(c, (method) hoa_recomposer_angles,          "angles",        A_GIMME,  0);
+    class_addmethod(c, (method) hoa_recomposer_wide,			"wide",			 A_GIMME,  0);
     class_addmethod(c, (method) hoa_recomposer_reset,           "reset",         A_GIMME,  0);
 	class_addmethod(c, (method) hoa_recomposer_anything,        "anything",      A_GIMME,  0);
 	class_addmethod(c, (method) hoa_recomposer_mousedown,       "mousedown",     A_CANT,   0);
@@ -185,11 +184,11 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER			(c, "chacolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "chacolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA				(c, "selmiccolor", 0, t_hoa_recomposer, f_color_channel_point_selected);
-	CLASS_ATTR_STYLE			(c, "selmiccolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "selmiccolor", 0, "Selected channel Color");
-	CLASS_ATTR_ORDER			(c, "selmiccolor", 0, "5");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmiccolor", 0, "0.86 0.86 0.86 1.");
+    CLASS_ATTR_RGBA				(c, "selchacolor", 0, t_hoa_recomposer, f_color_channel_point_selected);
+	CLASS_ATTR_STYLE			(c, "selchacolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "selchacolor", 0, "Selected Channel Color");
+	CLASS_ATTR_ORDER			(c, "selchacolor", 0, "5");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchacolor", 0, "0.86 0.86 0.86 1.");
     
     CLASS_ATTR_RGBA				(c, "channelshapecolor", 0, t_hoa_recomposer, f_color_channel_shape);
 	CLASS_ATTR_STYLE			(c, "channelshapecolor", 0, "rgba");
@@ -302,12 +301,12 @@ void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s
 {
 	if (m == ASSIST_INLET)
 	{
-		sprintf(s,"(list) Set Channels Directivities and Angles");
+		sprintf(s,"(list) Set Channels Widening values and Angles");
 	}
 	else
 	{
 		if (a == 0)
-			sprintf(s,"(list) Channels Directivities and Angles");
+			sprintf(s,"(list) Channels Widening values and Angles");
 		else if (a == 1)
 			sprintf(s,"Infos output");
 	}
@@ -325,7 +324,7 @@ void hoa_recomposer_preset(t_hoa_recomposer *x)
     for(int i = 0; i < x->f_number_of_channels; i++)
     {
         binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_angles, i, (float)x->f_channels->getAzimuth(i));
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_directivities, i, (float)x->f_channels->getDirectivity(i));
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_wide, i, (float)x->f_channels->getWideningValue(i));
     }
 }
 
@@ -337,7 +336,7 @@ t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
         for (i = index = 0; (index < x->f_number_of_channels) && (i <= ac); index++, i+=3)
         {
 			x->f_channels->setAzimuth(index, azimuth(atom_getfloat(av+i), atom_getfloat(av+i+1)));
-            x->f_channels->setDirectivity(index, atom_getfloat(av+i+2));
+            x->f_channels->setWideningValue(index, atom_getfloat(av+i+2));
         }
         
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
@@ -362,7 +361,7 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
             {
                 atom_setfloat(*av+i, x->f_channels->getAbscissa(index) );
                 atom_setfloat(*av+i+1, x->f_channels->getOrdinate(index) );
-                atom_setfloat(*av+i+2, x->f_channels->getDirectivity(index) );
+                atom_setfloat(*av+i+2, x->f_channels->getWideningValue(index) );
             }
 		}
         else
@@ -374,7 +373,7 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
             {
                 atom_setfloat(*av+i, x->f_channels->getAbscissa(index) );
                 atom_setfloat(*av+i+1, x->f_channels->getOrdinate(index) );
-                atom_setfloat(*av+i+2, x->f_channels->getDirectivity(index) );
+                atom_setfloat(*av+i+2, x->f_channels->getWideningValue(index) );
             }
         }
     }
@@ -385,11 +384,10 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
 
 void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    // "reset" | "reset angle" | "reset angle 1" | "reset wide" | "reset wide 1"
     if (ac == 0)
     {
         x->f_channels->resetAzimuth();
-        x->f_channels->resetDirectivity();
+        x->f_channels->resetWideningValue();
     }
     else if (ac >= 1 && atom_gettype(av) == A_SYM)
     {
@@ -400,7 +398,7 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
                 for(int i = 1; i < ac ; i++)
                 {
                     if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
-                        x->f_channels->resetAzimuth(atom_getlong(av + i));
+                        x->f_channels->resetAzimuth(atom_getlong(av + i) - 1);
                 }
             }
             else
@@ -408,19 +406,19 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
                 x->f_channels->resetAzimuth();
             }
         }
-        else if (atom_getsym(av) == hoa_sym_directivities)
+        else if (atom_getsym(av) == hoa_sym_wide)
         {
             if (ac >= 2)
             {
                 for(int i = 1; i < ac ; i++)
                 {
                     if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
-                        x->f_channels->resetDirectivity(atom_getlong(av + i));
+                        x->f_channels->resetWideningValue(atom_getlong(av + i) - 1);
                 }
             }
             else
             {
-                x->f_channels->resetDirectivity();
+                x->f_channels->resetWideningValue();
             }
         }
     }
@@ -434,7 +432,7 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
 
 void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 {
-    int isSet = (s == gensym("set")) ? 1 : 0;
+    int isSet = (s == hoa_sym_set) ? 1 : 0;
     t_symbol *name = atom_getsym(av);
     if (!isSet) name = s;
 	
@@ -445,7 +443,7 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
             if (atom_gettype(av+isSet) == A_LONG) // index + angle
             {
                 long index;
-                if (!isInside(index = atom_getlong(av+isSet), 0, x->f_channels->getNumberOfChannels())) return;
+                if (!isInside(index = atom_getlong(av+isSet) - 1, -1, x->f_channels->getNumberOfChannels() - 1 )) return;
                 if ( ac >= 2+isSet )
                     x->f_channels->setAzimuth(index, atom_getfloat(av+1+isSet));
             }
@@ -463,14 +461,14 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 				delete [] list;
             }
         }
-        else if ( name == hoa_sym_directivities )
+        else if ( name == hoa_sym_wide )
         {
             if (atom_gettype(av+isSet) == A_LONG) // index + wide
             {
                 long index;
-                index = atom_getlong(av+isSet);
+                index = atom_getlong(av+isSet) - 1;
                 if ( ac >= 2+isSet )
-                    x->f_channels->setDirectivity(index, atom_getfloat(av+1+isSet));                
+                    x->f_channels->setWideningValue(index, atom_getfloat(av+1+isSet));
             }
             else
             {
@@ -482,7 +480,7 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
                         list[i] = atom_getfloat(av + i + isSet);
                     } else list[i] = 0;
                 }
-                x->f_channels->setDirectivityList(list, ac);
+                x->f_channels->setWideningValueList(list, ac);
 				delete [] list;
             }
         }
@@ -502,7 +500,7 @@ void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av
     hoa_recomposer_output(x);
 }
 
-void hoa_recomposer_directivity(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 {
     hoa_recomposer_set(x, s, ac, av); // notifying in set method
     hoa_recomposer_output(x);
@@ -573,16 +571,16 @@ void hoa_recomposer_output(t_hoa_recomposer *x)
     outlet_list(x->f_outlet_infos, NULL, 2, av_right);
     
     // angles of channels
-    for (int i=0; i<channels; i++) {
+    for (int i=0; i<channels; i++)
         atom_setfloat(av_left+i, x->f_channels->getAzimuth(i));
-    }
+	
     outlet_anything(x->f_out, hoa_sym_angles, channels, av_left);
     
     // wider values of channels
-    for (int i=0; i<channels; i++) {
-        atom_setfloat(av_left+i, x->f_channels->getDirectivity(i));
-    }
-    outlet_anything(x->f_out, hoa_sym_directivities, channels, av_left);
+    for (int i=0; i<channels; i++)
+        atom_setfloat(av_left+i, x->f_channels->getWideningValue(i));
+	
+    outlet_anything(x->f_out, hoa_sym_wide, channels, av_left);
 	delete [] av_left;
 }
 
@@ -601,7 +599,7 @@ t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg,
              jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
              jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
          }
-         else if(name == gensym("miccolor") || name == gensym("selmiccolor"))
+         else if(name == gensym("chacolor") || name == gensym("selchacolor"))
          {
              jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
          }
@@ -633,7 +631,7 @@ void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view)
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
-    x->f_mic_radius = rect.width * 0.46;
+    x->f_channel_radius = rect.width * 0.46;
 	x->f_mic_size = rect.width * 0.025;
 	draw_background(x, view, &rect);
     draw_channels_shape(x, view, &rect);
@@ -650,7 +648,7 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
     int colorFactor;
     t_jrgba shadLight, shadDark;
     t_jmatrix transform;
-    double mic_angle = HOA_2PI / x->f_channels->getNumberOfChannels();
+    double channel_azimuth = HOA_2PI / x->f_channels->getNumberOfChannels();
     
     shadLight = shadDark = x->f_color_inner_circle;
     shadDark.red = clip_min(shadDark.red - 0.05, 0);
@@ -673,7 +671,7 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
 	{
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_source_jrgba(g, &x->f_color_inner_circle);
-		jgraphics_arc(g, w*0.5, w*0.5, x->f_mic_radius,  0., HOA_2PI);
+		jgraphics_arc(g, w*0.5, w*0.5, x->f_channel_radius,  0., HOA_2PI);
 		jgraphics_fill(g);
         
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
@@ -683,22 +681,22 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
         
         for (int i=0; i < x->f_channels->getNumberOfChannels(); i++)
 		{
-            jgraphics_rotate(g, mic_angle*i);
-            jgraphics_translate(g, 0, x->f_mic_radius);
+            jgraphics_rotate(g, channel_azimuth*i);
+            jgraphics_translate(g, 0, x->f_channel_radius);
             jgraphics_arc(g, 0, 0, x->f_mic_size*1.4, 0, HOA_2PI);
             jgraphics_set_source_jrgba(g, &x->f_color_inner_circle);
             jgraphics_fill(g);
-            jgraphics_translate(g, 0, -x->f_mic_radius);
-            jgraphics_rotate(g, -mic_angle*i);
+            jgraphics_translate(g, 0, -x->f_channel_radius);
+            jgraphics_rotate(g, -channel_azimuth*i);
             
-            jgraphics_rotate(g, mic_angle*i);
-            jgraphics_translate(g, 0, x->f_mic_radius);
+            jgraphics_rotate(g, channel_azimuth*i);
+            jgraphics_translate(g, 0, x->f_channel_radius);
             jgraphics_move_to(g, 0, -x->f_mic_size*0.8);
             jgraphics_line_to(g, 0, x->f_mic_size*0.8);
             jgraphics_set_source_jrgba(g, &HpMarkerColor);
             jgraphics_stroke(g);
-            jgraphics_translate(g, 0, -x->f_mic_radius);
-            jgraphics_rotate(g, -mic_angle*i);
+            jgraphics_translate(g, 0, -x->f_channel_radius);
+            jgraphics_rotate(g, -channel_azimuth*i);
         }
 
 		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
@@ -710,12 +708,12 @@ void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
 	int numChannels = x->f_number_of_channels;
-    double mic_angle;
+    double channel_azimuth;
     
     t_jrgba overChannelColor = x->f_color_channel_point_selected;
-    overChannelColor.red -= 0.1;
-    overChannelColor.green -= 0.1;
-    overChannelColor.blue -= 0.1;
+    overChannelColor.red = clip_minmax(overChannelColor.red - 0.1, 0., 1.);
+	overChannelColor.green = clip_minmax(overChannelColor.green - 0.1, 0., 1.);
+	overChannelColor.blue = clip_minmax(overChannelColor.blue - 0.1, 0., 1.);
     
     t_jmatrix transform;
 
@@ -728,10 +726,10 @@ void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 		for(int i=numChannels-1; i>=0; i--)
 		{
             jgraphics_set_source_jrgba(g, x->f_channels->isSelected(i) ? &x->f_color_channel_point_selected : ( (x->f_last_mouseMoveOverChannel == i) ? &overChannelColor : &x->f_color_channel_point) );
-            mic_angle = x->f_channels->getAzimuth(i);
+            channel_azimuth = x->f_channels->getAzimuth(i);
             
-            jgraphics_rotate(g, mic_angle);
-            jgraphics_translate(g, 0, x->f_mic_radius);
+            jgraphics_rotate(g, channel_azimuth);
+            jgraphics_translate(g, 0, x->f_channel_radius);
             //-- rotated and translated
             
             // head of the mic :
@@ -743,8 +741,8 @@ void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect)
             jgraphics_stroke(g);
             
             //-- inverse rotation and translate
-            jgraphics_translate(g, 0, -x->f_mic_radius);
-            jgraphics_rotate(g, -mic_angle);
+            jgraphics_translate(g, 0, -x->f_channel_radius);
+            jgraphics_rotate(g, -channel_azimuth);
 		}
             
 		jbox_end_layer((t_object*)x, view, hoa_sym_channels_layer);
@@ -756,7 +754,7 @@ void draw_channels_text(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
 	int numChannels = x->f_number_of_channels;
-    double mic_angle;
+    double channel_azimuth;
 
     t_jfont *jf;
 	t_jtextlayout *jtl;
@@ -775,11 +773,11 @@ void draw_channels_text(t_hoa_recomposer *x, t_object *view, t_rect *rect)
         {
             jtextlayout_settextcolor(jtl, (x->f_channels->isSelected(i) || x->f_last_mouseMoveOverChannel == i) ? &x->f_color_channel_point_text_sel : &x->f_color_channel_point_text);
 			
-			mic_angle = HOA_2PI - x->f_channels->getAzimuth(i) + HOA_PI;
-            x1 = long(abscissa(x->f_mic_radius, mic_angle) + (w*0.5))+0.5;
-            y1 = long(ordinate(x->f_mic_radius, mic_angle) + (w*0.5))+0.5;
+			channel_azimuth = HOA_2PI - x->f_channels->getAzimuth(i) + HOA_PI;
+            x1 = long(abscissa(x->f_channel_radius, channel_azimuth) + (w*0.5))+0.5;
+            y1 = long(ordinate(x->f_channel_radius, channel_azimuth) + (w*0.5))+0.5;
 			
-            sprintf(text,"%i", i);
+            sprintf(text,"%i", i+1);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
             jtextlayout_draw(jtl, g);
         }
@@ -793,7 +791,7 @@ void computeRepresentation(t_hoa_recomposer *x, int index)
 {
 	x->f_encoder->setAzimuth(0);
 	x->f_encoder->process(10., x->f_harmonicsValues);
-	x->f_wider->setWideningValue(x->f_channels->getDirectivity(index));
+	x->f_wider->setWideningValue(x->f_channels->getWideningValue(index));
 	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_scope->process(x->f_harmonicsValues);
 }
@@ -802,7 +800,7 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_color_channel_shape;
-	double factor = (x->f_mic_radius*0.92);
+	double factor = (x->f_channel_radius*0.92);
 	int breakIndex = 0;
 	double rotation = 0;
 	
@@ -821,10 +819,11 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
         
         for (int i = 0; i < x->f_number_of_channels; i++)
 		{
-			computeRepresentation(x, i);
-			
 			rotation = x->f_channels->getAzimuth(i);
 			jgraphics_rotate(g, rotation);
+			
+			breakIndex = 0;
+			computeRepresentation(x, i);
 			
 			jgraphics_move_to(g, x->f_scope->getAbscissa(0) * factor, x->f_scope->getOrdinate(0) * factor);
 			
@@ -871,8 +870,8 @@ void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 1);
         jgraphics_set_dash(g, dashes, 2, 0);
         
-        cartFisheyeDest.x = abscissa(x->f_mic_radius, x->f_fisheye_azimuth);
-        cartFisheyeDest.y = ordinate(x->f_mic_radius, x->f_fisheye_azimuth);
+        cartFisheyeDest.x = abscissa(x->f_channel_radius, x->f_fisheye_azimuth);
+        cartFisheyeDest.y = ordinate(x->f_channel_radius, x->f_fisheye_azimuth);
         cartFisheyeDest.x = (cartFisheyeDest.x + (w*0.5));
         cartFisheyeDest.y = ( (w - cartFisheyeDest.y) - (w*0.5) );
         
@@ -881,8 +880,8 @@ void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect)
             if (x->f_channels->isSelected(i))
             {
                 micAngle = x->f_channels->getAzimuth(i);
-				cart.x = abscissa(x->f_mic_radius, micAngle);
-                cart.y = ordinate(x->f_mic_radius, micAngle);
+				cart.x = abscissa(x->f_channel_radius, micAngle);
+                cart.y = ordinate(x->f_channel_radius, micAngle);
                 cart.x = (cart.x + (w*0.5));
                 cart.y = ( (w - cart.y) - (w*0.5) );
                 jgraphics_move_to(g, cartFisheyeDest.x, cartFisheyeDest.y);
@@ -1010,7 +1009,7 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     {
         double fisheyeAngle = x->f_channels->getFisheyeDestAzimuth();
         double factor = isInsideRad(angleDrag, fisheyeAngle - HOA_PI2, fisheyeAngle + HOA_PI2) ? 1 : -1;
-        double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_mic_radius;
+        double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_channel_radius;
         x->f_channels->setFisheyeStepWithDelta(-2, radiusDelta);
         hoa_recomposer_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_fisheye_layer);
@@ -1025,12 +1024,12 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
         {
             double micAngle = x->f_channels->getAzimuth(x->f_last_mouseDownOverChannel);
             double factor = isInsideRad(angleDrag, micAngle-HOA_PI2, micAngle+HOA_PI2) ? 1 : -1;
-            double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_mic_radius;
+            double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_channel_radius;
 			
 			for (int i=0; i < x->f_number_of_channels; i++)
 			{
 				if (x->f_channels->isSelected(i))
-					x->f_channels->setDirectivity( i, x->f_channels->getDirectivity(i) + radiusDelta);
+					x->f_channels->setWideningValue( i, x->f_channels->getWideningValue(i) + radiusDelta);
 			}
         }
         else // => simply rotate
@@ -1053,7 +1052,7 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
 
 void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    x->f_last_mouseDragRadius = x->f_mic_radius;
+    x->f_last_mouseDragRadius = x->f_channel_radius;
     x->f_last_mouseUp = pt;
     int isMouseUpOverAChannel = -1;
     isMouseUpOverAChannel = isPointOverAChannel(x, &pt);
@@ -1245,7 +1244,7 @@ int isPointOverAChannel(t_hoa_recomposer *x, t_pt *pt)
 	for(int i = x->f_number_of_channels-1; i >= 0; i--)
     {
 		if ( Hoa::isInsideRad(_azimuth, x->f_channels->getAzimuth(i) - chanSize, x->f_channels->getAzimuth(i) + chanSize) &&
-			Hoa::isInside(_radius, x->f_mic_radius - x->f_mic_size, x->f_mic_radius + x->f_mic_size))
+			Hoa::isInside(_radius, x->f_channel_radius - x->f_mic_size, x->f_channel_radius + x->f_mic_size))
 		{
 			return i;
 		}
@@ -1257,8 +1256,8 @@ bool isChannelInsideRect(t_hoa_recomposer *x, int micIndex, t_rect rectSelection
 {
     double w = x->rect.width;
     t_pt micPoint;
-    micPoint.x = abscissa(x->f_mic_radius, x->f_channels->getAzimuth(micIndex));
-    micPoint.y = ordinate(x->f_mic_radius, x->f_channels->getAzimuth(micIndex));
+    micPoint.x = abscissa(x->f_channel_radius, x->f_channels->getAzimuth(micIndex));
+    micPoint.y = ordinate(x->f_channel_radius, x->f_channels->getAzimuth(micIndex));
     micPoint.x = (micPoint.x + (w*0.5));
     micPoint.y = ( (w - micPoint.y) - (w*0.5) );
     return jgraphics_ptinrect(micPoint, rectSelection);
