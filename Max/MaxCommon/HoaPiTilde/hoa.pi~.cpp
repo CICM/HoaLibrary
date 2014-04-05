@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.pi~.cpp
+ @name      hoa.pi~
+ @realname  hoa.pi~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ π signal constant.
+ 
+ @description
+ <o>hoa.pi~</o> is for people that never remember more than 4 decimals or want to initialize a good π number.
+ 
+ @discussion
+ <o>hoa.pi~</o> is for people that never remember more than 4 decimals or want to initialize a good π number.
+ 
+ @tag ambisonics, hoa objects, maths, msp
+ 
+ @seealso hoa.pi
+ */
+
 #include "HoaCommon.max.h"
 
 typedef struct _pi 
@@ -32,11 +54,19 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.pi~", (method)pi_new, (method)dsp_free, sizeof(t_pi), 0L, A_GIMME, 0);
 	
 	hoa_initclass(c, NULL);
-	
-    class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
-    class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
+    
 	class_addmethod(c, (method)pi_dsp64,	"dsp64",    A_CANT, 0);
+    class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
+	
+    // @method int @digest Set π multiplier or phase
+	// @description The <m>int</m> message set pi multiplier in the first inlet, the phase in the second one.
+	// @marg 0 @name value @optional 0 @type int
+    class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
+    
+    // @method float @digest Set π multiplier or phase
+	// @description The <m>float</m> message set pi multiplier in the first inlet, the phase in the second one.
+	// @marg 0 @name value @optional 0 @type float
+	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
 	
     class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -47,16 +77,23 @@ int C74_EXPORT main(void)
 void *pi_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_pi *x = (t_pi *)object_alloc(pi_class);
-	x->f_value = 1.0f;
-    x->f_phase = 1.0f;
     
-	if (atom_gettype(argv) == A_LONG)
-		x->f_value = atom_getlong(argv);
-	else if (atom_gettype(argv) == A_FLOAT)
-		x->f_value = atom_getfloat(argv);
-    
-    dsp_setup((t_pxobject *)x, 2);
-    outlet_new(x, "signal");
+    if (x)
+    {
+        // @arg 0 @name float @optional 1 @type float @digest π multiplier
+		// @description First argument is the π multiplier
+        
+        x->f_value = 1.0f;
+        x->f_phase = 1.0f;
+        
+        if (atom_gettype(argv) == A_LONG)
+            x->f_value = atom_getlong(argv);
+        else if (atom_gettype(argv) == A_FLOAT)
+            x->f_value = atom_getfloat(argv);
+        
+        dsp_setup((t_pxobject *)x, 2);
+        outlet_new(x, "signal");
+    }
     
 	return(x);
 }
@@ -98,14 +135,15 @@ void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, do
 
 void pi_assist(t_pi *x, void *b, long m, long a, char *s)
 {
+    // @out 0 @type signal @digest output result
 	if (m == ASSIST_OUTLET)
 		sprintf(s,"(signal) \u03C0 Result");
 	else
     {
         if(a)
-            sprintf(s,"(signal/float) \u03C0 Phase");
+            sprintf(s,"(signal/float) \u03C0 Phase");       // @in 1 @type signal/float @digest set phase (wrapped between 0. and 1.)
         else
-            sprintf(s,"(signal/float) \u03C0 Multiplier");
+            sprintf(s,"(signal/float) \u03C0 Multiplier");  // @in 0 @type signal/float @digest set π multiplier
     }
 }
 

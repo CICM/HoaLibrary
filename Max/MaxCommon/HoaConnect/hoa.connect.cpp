@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.connect.cpp
+ @name      hoa.connect
+ @realname  hoa.connect
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ automatically connect several hoa objects together.
+ 
+ @description
+ <o>hoa.connect</o> could be used to automatically connect several hoa objects together and to color patchlines
+ 
+ @discussion
+ <o>hoa.connect</o> could be used to automatically connect several hoa objects together and to color patchlines
+ 
+ @tag ambisonics, hoa objects, script
+ 
+ @seealso hoa.process~
+ */
+
 #include "HoaCommon.max.h"
 
 #define CONNECT_MAX_TAB 100
@@ -55,9 +77,12 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)NULL);
 	
-	class_addmethod(c, (method)connect_notify,	"notify",	A_CANT, 0);
-	class_addmethod(c, (method)connect_bang,	"bang",		A_CANT,	0);
     class_addmethod(c, (method)connect_assist,	"assist",	A_CANT,	0);
+	class_addmethod(c, (method)connect_notify,	"notify",	A_CANT, 0);
+    
+    // @method bang @digest trigger autoconnection and color
+	// @description The <m>bang</m> message connect all of the appropriate selected hoa objects together
+	class_addmethod(c, (method)connect_bang,	"bang",		A_CANT,	0);
 	
 	CLASS_STICKY_ATTR		(c, "category", 0, "Behavior");
 	CLASS_ATTR_RGBA			(c, "zhcolor", 0, t_connect, f_color_zero);
@@ -134,6 +159,7 @@ void connect_attach(t_connect *x)
 
 void connect_assist(t_connect *x, void *b, long m, long a, char *s)
 {
+    // @in 0 @type bang @digest bang to connect objects and color patchlines
     sprintf(s, "(bang) Select objects you want to connect, then bang me to connect them");
 }
 

@@ -18,5 +18,9 @@
   OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <root>
-  <module>hoa-ref</module>
+	<module>jit-ref</module>
+	<module>m4l-ref</module>
+	<module>max-ref</module>
+	<module>msp-ref</module>
+	<module>hoa-ref</module>
 </root>
