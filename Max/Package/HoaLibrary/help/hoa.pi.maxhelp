@@ -219,6 +219,10 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
 									"patching_rect" : [ 22.0, 158.0, 68.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"outonload" : 1
+									}
+,
 									"text" : "hoa.pi 0.25"
 								}
 
