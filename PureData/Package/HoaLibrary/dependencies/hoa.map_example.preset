@@ -1,9 +1,0 @@
-@slots_parameters slot 0 source 0 -2.18836 2.23069 0 0 0 0 0 (null)
-source 1 0.529101 1.82434 0 0.2 0.2 0.2 1 (null) source 2 -1.35026
--0.359788 0 0.2 0.2 0.2 1 (null) group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null)
-slot 1 source 0 2.87488 1.22473 0 0 0 0 0 (null) source 1 1.50598 -1.15767
-0 0.2 0.2 0.2 1 (null) source 2 0.157131 1.38851 0 0.2 0.2 0.2 1 (null)
-group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null) slot 2 source 0 0.260958 -2.45287
-0 0 0 0 0 (null) source 1 -0.749206 1.40952 0 0.2 0.2 0.2 1 (null)
-source 2 0.926984 1.35873 0 0.2 0.2 0.2 1 (null) group 0 3 0 1 2 0
-0.2 0.2 0.2 1 (null) 

@@ -1,0 +1,93 @@
+#N canvas 262 41 1174 752 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -208 -368 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
+3 12 0 18 -228856 -1 0;
+#X text -149 345 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -149 329 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -206 -346 A GUI to design plane wave domain;
+#X obj 378 -345 hoa.connect;
+#X obj 378 -364 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 420 -306 hoa.soundcoat;
+#X obj 420 -217 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+3 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 722 1 r hoaspaces;
+#X obj 420 -275 c.gain~ @size 150 10 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
+0.5 1 @kncolor 0.5 0.5 0.5 1;
+#X text 737 23 Spatial;
+#X text 737 33 filetring;
+#X obj 347 -298 r hoagrain;
+#X msg 683 146 \; pd dsp 1;
+#X msg 683 181 \; pd dsp 0;
+#X obj 182 334 declare -lib HoaLibrary/hoa.library;
+#X obj 182 313 declare -lib hoa.library;
+#X text -206 -326 hoa.2d.space allows you to draw spatial filtering
+and apply gains to the plane waves signals. It sould be used the plane
+wave domain., f 80;
+#X obj 417 288 hoa.dac~ 1:8 -------------------;
+#X obj 420 -257 hoa.encoder~ 3, f 32;
+#X obj 417 240 hoa.binaural_order3 @pinna small;
+#X obj 420 -6 hoa.2d.process~ 3 hoa.rm.diffuser~ harmonics, f 37;
+#X obj 420 33 hoa.2d.scope~ @size 195 195 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+3 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 646 -54 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 608 -298 hoa.pi~ 2;
+#X obj 606 -325 phasor~ 0.3;
+#X msg 727 -58 diffusion \$1;
+#X obj 716 -104 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 341 -30 open 3;
+#X connect 5 0 4 0;
+#X connect 6 0 9 0;
+#X connect 9 0 19 0;
+#X connect 12 0 19 0;
+#X connect 19 0 7 0;
+#X connect 19 0 21 0;
+#X connect 19 1 7 1;
+#X connect 19 1 21 1;
+#X connect 19 2 7 2;
+#X connect 19 2 21 2;
+#X connect 19 3 7 3;
+#X connect 19 3 21 3;
+#X connect 19 4 7 4;
+#X connect 19 4 21 4;
+#X connect 19 5 7 5;
+#X connect 19 5 21 5;
+#X connect 19 6 7 6;
+#X connect 19 6 21 6;
+#X connect 20 0 18 0;
+#X connect 20 1 18 7;
+#X connect 21 0 20 0;
+#X connect 21 0 22 0;
+#X connect 21 1 22 1;
+#X connect 21 1 20 1;
+#X connect 21 2 22 2;
+#X connect 21 2 20 2;
+#X connect 21 3 22 3;
+#X connect 21 3 20 3;
+#X connect 21 4 22 4;
+#X connect 21 4 20 4;
+#X connect 21 5 22 5;
+#X connect 21 5 20 5;
+#X connect 21 6 22 6;
+#X connect 21 6 20 6;
+#X connect 23 0 21 7;
+#X connect 24 0 19 1;
+#X connect 25 0 24 1;
+#X connect 26 0 21 7;
+#X connect 27 0 26 0;
+#X connect 28 0 21 0;

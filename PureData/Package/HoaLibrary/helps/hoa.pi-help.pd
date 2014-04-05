@@ -1,0 +1,42 @@
+#N canvas 112 23 636 253 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj 41 137 hoa.pi 0.25;
+#X obj 145 136 hoa.pi 0.5;
+#X obj 231 137 hoa.pi 1;
+#X obj 1 1 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.pi 3 12 0 18
+-228856 -1 0;
+#X text 4 23 A good pi number;
+#X text 19 202 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X obj 145 107 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 145 167 c.number @size 71 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 41 167 c.number @size 75 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 231 167 c.number @size 73 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 231 107 c.bang @size 17 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X text 1 46 hoa.pi is for people that never remember more than 4 decimals
+or want to initialize a good Pi number.;
+#X obj 41 109 c.loadmess;
+#X obj 360 68 declare -lib HoaLibrary/hoa.library;
+#X obj 360 47 declare -lib hoa.library;
+#X connect 0 0 8 0;
+#X connect 1 0 7 0;
+#X connect 2 0 9 0;
+#X connect 6 0 1 0;
+#X connect 10 0 2 0;
+#X connect 12 0 0 0;
+#X coords 0 253 1 252 100 60 0;
