@@ -910,6 +910,8 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	// Return to previous state
 		
 	hoa_processor_loadexit(x, 1, previous, previousindex);
+    
+    //object_method(patch_space_ptr->the_patch, gensym("loadbang")); // useless (intload() func do it for us)
 	
 	return HOA_ERR_NONE;
 }

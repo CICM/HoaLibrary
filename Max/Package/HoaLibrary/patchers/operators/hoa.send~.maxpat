@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 402.0, 200.0, 370.0, 354.0 ],
+		"rect" : [ 1005.0, 390.0, 370.0, 354.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -87,12 +87,11 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-35",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 144.0, 295.0, 132.0, 31.0 ],
+					"patching_rect" : [ 144.0, 295.0, 194.0, 18.0 ],
 					"text" : "hoa_signal_hoaTango0"
 				}
 
@@ -106,8 +105,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 223.0, 141.0, 20.0 ],
-					"text" : "sprintf hoa_signal_%s%i"
+					"patching_rect" : [ 129.0, 223.0, 148.0, 20.0 ],
+					"text" : "sprintf hoa_signal_%s_%i"
 				}
 
 			}
@@ -148,8 +147,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 186.0, 60.0, 20.0 ],
-					"text" : "pack s 0"
+					"patching_rect" : [ 129.0, 186.0, 110.0, 20.0 ],
+					"text" : "pak s 0"
 				}
 
 			}
@@ -226,7 +225,7 @@
 					"destination" : [ "obj-27", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-12", 0 ]
+					"source" : [ "obj-12", 1 ]
 				}
 
 			}
@@ -253,7 +252,7 @@
 					"destination" : [ "obj-35", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 138.5, 249.5, 266.5, 249.5 ],
+					"midpoints" : [ 138.5, 249.5, 328.5, 249.5 ],
 					"source" : [ "obj-34", 0 ]
 				}
 
@@ -322,19 +321,6 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}

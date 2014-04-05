@@ -2337,6 +2337,7 @@
 , 			{
 				"box" : 				{
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"gain" : 10.0,
 					"hidden" : 1,
 					"id" : "obj-33",
 					"maxclass" : "hoa.2d.scope~",
@@ -3131,6 +3132,69 @@
 					"hidden" : 0,
 					"midpoints" : [ 774.5, 366.0, 156.0, 366.0, 156.0, 351.0, 62.25, 351.0 ],
 					"source" : [ "obj-89", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 15 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 15 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 14 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 14 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 13 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 13 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 12 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 12 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 11 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 11 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 10 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 10 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 9 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 9 ]
 				}
 
 			}

@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 134.0, 145.0, 770.0, 663.0 ],
+						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -119,14 +119,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 631.5, 215.0, 130.0, 47.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -185,7 +185,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 473.0, 127.0, 293.0, 60.0 ],
+									"patching_rect" : [ 468.5, 127.0, 293.0, 60.0 ],
 									"text" : "First attribute of irregular mode is the number of channels. It knows the standard : 1. (mono), 2. (stereo), 3. (Dolby surround), 4. (Quadriphonie), 5.1, 6.1, 7.1., 8., .. (default : 5.1).",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -195,14 +195,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-61",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 473.0, 127.0, 293.0, 60.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 468.5, 127.0, 293.0, 60.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -2378,14 +2378,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-20",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 599.3125, 47.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -3297,14 +3297,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 467.5, 125.0, 250.0, 47.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -3318,7 +3318,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 374.032288, 261.0, 84.0 ],
+									"patching_rect" : [ 447.5, 373.935425, 261.0, 84.0 ],
 									"text" : "Note that Kemar mannequins are not humans and every heads are differents thus binaural resittution doesn't work for everybody. Optimization can be useless for a binaural decoding and can create artefacts like unwanted filtering. ",
 									"textcolor" : [ 0.301961, 0.301961, 0.301961, 1.0 ]
 								}
@@ -3358,14 +3358,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-61",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 447.5, 220.5, 258.0, 60.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -5570,14 +5570,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-20",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 595.3125, 33.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 6.4375, 67.5, 600.0, 33.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -5835,14 +5835,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-5",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 374.032288, 258.0, 84.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 447.5, 374.032288, 261.0, 83.903137 ],
+									"rounded" : 0
 								}
 
 							}
@@ -6363,7 +6363,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
+						"rect" : [ 134.0, 145.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6464,21 +6464,22 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 419.0, 360.0, 302.0, 58.0 ],
-									"text" : "Note that maxRe or inPhase optimization should allows to have more flexibilty regarding to the loudspeakers repartition. In most case, it still should be more efficient than using the irregular mode."
+									"text" : "Note that maxRe or inPhase optimization should allows to have more flexibilty regarding to the loudspeakers repartition. In most case, it still should be more efficient than using the irregular mode.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-6",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 419.0, 360.0, 302.0, 58.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -6537,7 +6538,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 530.0, 192.0, 213.0, 32.0 ],
-									"text" : "Initialization of number of loudspeakers is a slow and expensif process."
+									"text" : "Initialization of number of loudspeakers is a slow and expensif process.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
@@ -6575,14 +6577,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-61",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 456.0, 126.0, 302.0, 47.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 456.0, 126.0, 303.0, 47.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -6704,14 +6706,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-20",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 625.3125, 47.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 6.4375, 67.5, 617.0, 47.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -6720,7 +6722,6 @@
 									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 2,
 									"id" : "obj-19",
 									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 16,
@@ -6970,14 +6971,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-5",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 530.0, 192.0, 210.0, 32.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"patching_rect" : [ 530.0, 192.0, 213.0, 32.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -7971,21 +7972,22 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 433.0, 210.0, 45.0 ],
-									"text" : "Note that if you change mode or number of loudspeaker, objects turn dsp off."
+									"text" : "Note that if you change mode or number of loudspeaker, objects turn dsp off.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-10",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 433.0, 210.0, 45.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -8000,21 +8002,22 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 496.5, 210.0, 32.0 ],
-									"text" : "For futher informations of each mode, please look at tabs."
+									"text" : "For futher informations of each mode, please look at tabs.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-7",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 496.5, 210.0, 32.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -8029,7 +8032,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 337.0, 210.0, 84.0 ],
-									"text" : "The default mode is ambisonics for an array of  2 * order  + 2 loudspeakers. The default binaural pinnasize is small and the default irregular configuration is 5.1 standard multicanal configuration.\n"
+									"text" : "The default mode is ambisonics for an array of  2 * order  + 2 loudspeakers. The default binaural pinnasize is small and the default irregular configuration is 5.1 standard multicanal configuration.\n",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
@@ -8067,14 +8071,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-61",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 511.25, 127.0, 224.0, 87.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -8240,14 +8244,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-20",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 595.3125, 33.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
@@ -8505,14 +8509,14 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 									"id" : "obj-5",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 337.0, 210.0, 84.0 ],
-									"rounded" : 15,
-									"shadow" : -1
+									"rounded" : 0
 								}
 
 							}
