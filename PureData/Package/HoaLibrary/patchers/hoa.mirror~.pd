@@ -1,0 +1,56 @@
+#N canvas 231 107 814 638 10;
+#X obj 57 205 hoa.in~;
+#X obj 57 331 hoa.out~;
+#X obj -55 -15 c.loadmess;
+#X text -63 205 Receive the signal;
+#X text -56 332 Output the signal;
+#X obj 57 289 *~;
+#X obj 163 41 hoa.in extra 1;
+#X text 256 41 Extra 1 Receive the inlet messages.;
+#X obj 163 206 *;
+#X text 172 -5 This hoa.processing applies a mirror effect on the sound
+field.;
+#X obj -55 113 unpack;
+#X obj 50 57 route done;
+#X obj 163 116 clip -1 1;
+#X obj -55 32 hoa.thisprocess~ 0;
+#X obj 15 56 f 0;
+#X msg 163 229 \$1 20;
+#N canvas 0 22 450 300 print.domain.error 0;
+#X obj 6 54 hoa.mode.sel;
+#X obj 7 214 print hoa.syn.encoder~;
+#X msg 7 163 only valid in the circular harmonics domain.;
+#X obj 6 24 inlet;
+#X obj 6 133 sel 0 1;
+#X connect 0 0 4 0;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 4 2 2 0;
+#X restore -20 88 pd print.domain.error;
+#X obj -22 136 < 0;
+#X obj 163 250 line~ 1;
+#X obj 163 175 spigot;
+#X text 246 184 To hide the original sound field and reveal only the
+"mirror" sound field \, the polarity of the negative harmonics is inverted.
+;
+#X text 246 154 To reveal the "mirror" of the sound field \, the negative
+harmonics are disabled.;
+#X text 246 224 Thus \, multiply the negative harmonics allows to hide
+and reveal the original sound field and its mirror image.;
+#X connect 0 0 5 0;
+#X connect 2 0 13 0;
+#X connect 5 0 1 0;
+#X connect 6 0 12 0;
+#X connect 8 0 15 0;
+#X connect 10 1 17 0;
+#X connect 11 0 14 0;
+#X connect 12 0 19 0;
+#X connect 13 0 10 0;
+#X connect 13 1 16 0;
+#X connect 13 2 14 0;
+#X connect 13 3 11 0;
+#X connect 14 0 12 0;
+#X connect 15 0 18 0;
+#X connect 17 0 19 1;
+#X connect 18 0 5 1;
+#X connect 19 0 8 0;
