@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1440.0, 759.0 ],
+		"rect" : [ 0.0, 44.0, 1440.0, 806.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1440.0, 733.0 ],
+						"rect" : [ 0.0, 70.0, 1440.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -94,7 +94,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1246.400146, 499.0, 115.0, 141.0 ],
+									"patching_rect" : [ 1246.400146, 499.0, 118.0, 141.0 ],
 									"text" : "The 3 extra messages outlets.\nEach one outputs the messages received by the corresponding extra hoa.out. Then, middle extra messages is useless.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -159,7 +159,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 1033.280029, 453.0, 56.0, 20.0 ],
-									"presentation_rect" : [ 1046.800049, 429.0, 0.0, 0.0 ],
 									"sig" : 0.0
 								}
 
@@ -199,8 +198,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1091.600098, 395.0, 50.0, 18.0 ],
-									"presentation_rect" : [ 1025.600098, 427.0, 0.0, 0.0 ]
+									"patching_rect" : [ 1091.600098, 395.0, 50.0, 18.0 ]
 								}
 
 							}
@@ -213,8 +211,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1159.23999, 395.0, 50.0, 18.0 ],
-									"presentation_rect" : [ 1151.600098, 427.0, 0.0, 0.0 ]
+									"patching_rect" : [ 1159.23999, 395.0, 50.0, 18.0 ]
 								}
 
 							}
@@ -242,7 +239,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 980.960022, 427.0, 56.0, 20.0 ],
-									"presentation_rect" : [ 1042.400024, 395.0, 0.0, 0.0 ],
 									"sig" : 0.0
 								}
 
@@ -272,7 +268,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 1242.560059, 322.0, 56.0, 20.0 ],
-									"sig" : -0.7
+									"sig" : 0.0
 								}
 
 							}
@@ -301,7 +297,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 1138.400024, 293.0, 56.0, 20.0 ],
-									"sig" : 2.5
+									"sig" : 0.0
 								}
 
 							}
@@ -381,8 +377,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1051.080078, 322.0, 50.0, 20.0 ],
-									"presentation_rect" : [ 1042.0, 255.0, 0.0, 0.0 ]
+									"patching_rect" : [ 1051.080078, 322.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -397,8 +392,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 1033.280029, 293.0, 56.0, 20.0 ],
-									"presentation_rect" : [ 1024.199951, 226.0, 0.0, 0.0 ],
-									"sig" : 12.0
+									"sig" : 0.0
 								}
 
 							}
@@ -412,8 +406,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 948.440002, 322.0, 50.0, 20.0 ],
-									"presentation_rect" : [ 883.0, 228.0, 0.0, 0.0 ]
+									"patching_rect" : [ 948.440002, 322.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -427,8 +420,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 844.0, 322.0, 50.0, 20.0 ],
-									"presentation_rect" : [ 823.0, 228.0, 0.0, 0.0 ]
+									"patching_rect" : [ 844.0, 322.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -443,8 +435,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 928.640015, 293.0, 56.0, 20.0 ],
-									"presentation_rect" : [ 877.0, 257.0, 0.0, 0.0 ],
-									"sig" : 1.1
+									"sig" : 0.0
 								}
 
 							}
@@ -459,8 +450,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 824.0, 293.0, 56.0, 20.0 ],
-									"presentation_rect" : [ 806.0, 257.0, 0.0, 0.0 ],
-									"sig" : 0.38
+									"sig" : 0.0
 								}
 
 							}
@@ -475,7 +465,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 844.0, 499.0, 110.0, 114.0 ],
-									"presentation_rect" : [ 856.0, 358.0, 0.0, 0.0 ],
 									"text" : "The 3 instance signal outlets, one for each instance.\nEach instance has two hoa.out~\nthat sums the signals of the hoa.in~.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -492,7 +481,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1091.600098, 153.0, 327.0, 74.0 ],
-									"presentation_rect" : [ 1092.0, 152.0, 0.0, 0.0 ],
 									"text" : "The 3 extra signal and messages inlets.\nThe extra inlet 1, send the messages to the hoa.in extra 1 and the signal to the hoa.in~ extra 1.\nThe extra inlet 2, send the signal to the hoa.in~ extra 2.\nThe extra inlet 3, send the messages to the hoa.in extra 3",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -509,7 +497,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 823.0, 153.0, 244.0, 60.0 ],
-									"presentation_rect" : [ 823.0, 153.0, 0.0, 0.0 ],
 									"text" : "The 3 instance signal and messages inlets, one for each instance.\nThe messages are sent to the hoa.in.\nThe signals are sent to the hoa.in~.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -526,7 +513,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 823.0, 102.0, 384.0, 33.0 ],
-									"presentation_rect" : [ 823.0, 100.0, 0.0, 0.0 ],
 									"text" : "The hoa.io configuration of this patch inside a hoa.process~ in planewaves mode with 3 instance.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -602,11 +588,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-34",
-									"linecount" : 8,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 13.0, 563.0, 260.0, 114.0 ],
+									"patching_rect" : [ 13.0, 563.0, 264.0, 100.0 ],
 									"text" : "With the above hoa.io configuration, the hoa.process~ have one inlet per instance, that send messages to the two hoa.in and the signal to the two hoa.in~, and two outlet per instance, the first one outputs the sum of the signal received by the hoa.out~ and the second one outputs the message received by the hoa.out.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -623,7 +609,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 13.0, 499.0, 260.0, 33.0 ],
-									"presentation_rect" : [ 13.0, 394.0, 0.0, 0.0 ],
 									"text" : "hoa.out~ and hoa.out have separated parent outlets for signal or other messages.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -639,7 +624,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 200.0, 278.0, 47.0 ],
+									"patching_rect" : [ 10.0, 200.0, 280.0, 47.0 ],
 									"text" : "hoa.in~ and hoa.in share the same parent inlet but the signal is routed to the hoa.in~ and the other messages are routed to hoa.in.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -1358,7 +1343,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 117.0, 278.0, 60.0 ],
-									"presentation_rect" : [ 12.0, 98.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -1456,7 +1440,7 @@
 									"destination" : [ "obj-78", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 1095.100037, 386.0, 1132.100098, 386.0 ],
+									"midpoints" : [ 1095.100036, 386.0, 1132.100098, 386.0 ],
 									"source" : [ "obj-12", 5 ]
 								}
 
@@ -1771,7 +1755,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1440.0, 733.0 ],
+						"rect" : [ 0.0, 26.0, 1440.0, 780.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,

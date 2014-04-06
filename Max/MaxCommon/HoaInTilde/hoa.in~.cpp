@@ -6,6 +6,28 @@
 
 // based on dynamic.in~ Copyright 2010 Alex Harker. All rights reserved.
 
+/**
+ @file      hoa.in~.cpp
+ @name      hoa.in~
+ @realname  hoa.in~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ signal inlet for a patcher loaded by hoa.process~
+ 
+ @description
+ <o>hoa.in~</o> defines a signal inlet for a patcher loaded by hoa.process~
+ 
+ @discussion
+ <o>hoa.in~</o> defines a signal inlet for a patcher loaded by hoa.process~
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso hoa.process~, hoa.in, hoa.out~, hoa.out
+ */
+
 #include "../HoaCommon.max.h"
 #include "../HoaProcessSuite.h"
 
@@ -122,6 +144,9 @@ t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_in *x, void *attr, long ac, t_ato
 
 void hoa_sig_in_assist(t_hoa_sig_in *x, void *b, long m, long a, char *s)
 {
+    // @in 0 @type nothing @digest useless input.
+    // @in 0 @type signal @digest output signal from a hoa.process~ object's inlet
+    
     if (m == ASSIST_OUTLET)
 		if (x->extra > 0)
 		{

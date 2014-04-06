@@ -1,6 +1,10 @@
 max oblist "hoa objects" hoa.connect;
 max oblist "hoa objects" hoa.dac~;
 max oblist "hoa objects" hoa.gain~;
+max oblist "hoa objects" hoa.in;
+max oblist "hoa objects" hoa.in~;
+max oblist "hoa objects" hoa.out;
+max oblist "hoa objects" hoa.out~;
 max oblist "hoa objects" hoa.pi;
 max oblist "hoa objects" hoa.pi~;
 max oblist "hoa objects" hoa.play~;

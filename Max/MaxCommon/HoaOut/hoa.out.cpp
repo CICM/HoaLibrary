@@ -6,6 +6,28 @@
 
 // based on dynamic.out~ Copyright 2010 Alex Harker. All rights reserved.
 
+/**
+ @file      hoa.out.cpp
+ @name      hoa.out
+ @realname  hoa.out
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ message outlet for a patcher loaded by hoa.process~
+ 
+ @description
+ <o>hoa.out</o> defines a message outlet for a patcher loaded by hoa.process~
+ 
+ @discussion
+ <o>hoa.out</o> defines a message outlet for a patcher loaded by hoa.process~
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso hoa.process~, hoa.out~, hoa.in~, hoa.in
+ */
+
 #include "../HoaCommon.max.h"
 #include "../HoaProcessSuite.h"
 
@@ -89,6 +111,8 @@ void *hoa_out_new(t_symbol *s, short ac, t_atom *av)
 
 void hoa_out_assist(t_hoa_out *x, void *b, long m, long a, char *s)
 {
+    // @in 0 @type message @digest output messages to a hoa.process~ object's outlet
+    
     if (x->extra > 0)
 	{
 		if (x->comment != hoa_sym_nothing)

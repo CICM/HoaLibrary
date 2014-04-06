@@ -65,7 +65,7 @@
 			</description>
 		</method>
 		<method name="list">
-			<arg name="value" optional="0" type="list" />
+			<arg name="inputmode" optional="0" type="list" />
 			<digest>
 				Enable/disable audio processing
 			</digest>

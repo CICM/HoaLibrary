@@ -4,6 +4,28 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
+/**
+ @file      hoa.in.cpp
+ @name      hoa.in
+ @realname  hoa.in
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ message inlet for a patcher loaded by hoa.process~
+ 
+ @description
+ <o>hoa.in</o> defines a message inlet for a patcher loaded by hoa.process~
+ 
+ @discussion
+ <o>hoa.in</o> defines a message inlet for a patcher loaded by hoa.process~
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso hoa.process~, hoa.in~, hoa.out~, hoa.out
+ */
+
 #include "../HoaCommon.max.h"
 #include "../HoaProcessSuite.h"
 
@@ -140,6 +162,9 @@ void hoa_in_anything(t_hoa_in *x, t_symbol *s, short argc, t_atom *argv)
 
 void hoa_in_assist(t_hoa_in *x, void *b, long m, long a, char *s)
 {
+    // @in 0 @type nothing @digest useless input
+    // @out 0 @type messages @digest output messages received from a hoa.process~ input
+    
     if (m == ASSIST_INLET)
 		sprintf(s,"Dummy");
     else

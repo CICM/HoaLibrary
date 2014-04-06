@@ -3,6 +3,10 @@
 <refpage name='hoa.connect.maxref.xml'/>
 <refpage name='hoa.dac~.maxref.xml'/>
 <refpage name='hoa.gain~.maxref.xml'/>
+<refpage name='hoa.in.maxref.xml'/>
+<refpage name='hoa.in~.maxref.xml'/>
+<refpage name='hoa.out.maxref.xml'/>
+<refpage name='hoa.out~.maxref.xml'/>
 <refpage name='hoa.pi.maxref.xml'/>
 <refpage name='hoa.pi~.maxref.xml'/>
 <refpage name='hoa.play~.maxref.xml'/>
