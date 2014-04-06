@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.play~.cpp
+ @name      hoa.play~
+ @realname  hoa.play~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ an ambisonic <o>sfplay~</o> object
+ 
+ @description
+ <o>hoa.play~</o> is a wrapped <o>sfplay~</o> object
+ 
+ @discussion
+ <o>hoa.play~</o> is a wrapped <o>sfplay~</o> object
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso hoa.record~, sfplay~, sfrecord~
+ */
+
 #include "HoaCommon.max.h"
 
 t_class *play_class;
@@ -22,6 +44,9 @@ int C74_EXPORT main(void)
 
 void *play_new(t_symbol *s, int argc, t_atom *argv)
 {
+    // @arg 0 @ambisonic-order @optional 0 @type int @digest The ambisonic order
+    // @description The ambisonic order, must be at least equal to 1
+    
 	t_object *x;
 	t_atom arguments[1];
 	int order = 1;

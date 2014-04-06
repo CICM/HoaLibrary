@@ -21,7 +21,7 @@
  @discussion
  <o>hoa.connect</o> could be used to automatically connect several hoa objects together and to color patchlines
  
- @tag ambisonics, hoa objects, script
+ @category ambisonics, hoa objects, script
  
  @seealso hoa.process~
  */

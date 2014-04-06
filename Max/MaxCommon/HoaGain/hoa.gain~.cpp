@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.gain~.cpp
+ @name      hoa.gain~
+ @realname  hoa.gain~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A multichannel <o>gain~</o> object.
+ 
+ @description
+ <o>hoa.gain~</o> is a multichannel exponential scaling volume slider. hoa.gain~ is a slider that scales signals. it can also make a smooth transition as you move from one value of the slider to the next.
+ 
+ @discussion
+ <o>hoa.gain~</o> is a multichannel exponential scaling volume slider. hoa.gain~ is a slider that scales signals. it can also make a smooth transition as you move from one value of the slider to the next.
+ 
+ @category ambisonics, hoa objects, GUI, msp
+ 
+ @seealso gain~, hoa.process~, hoa.amp~
+ */
+
 #include "HoaCommon.max.h"
 #include "Line.h"
 
@@ -132,13 +154,42 @@ int C74_EXPORT main()
 	
 	hoa_initclass(c, (method)hoa_getinfos);
     
+    class_addmethod (c, (method) hoaGain_assist,              "assist",               A_CANT, 0);
+    class_addmethod (c, (method) hoaGain_paint,               "paint",                A_CANT, 0);
+    
+    // @method signal @digest The inputs signals to be scaled by the slider.
+	// @description The inputs signals to be scaled by the slider.
 	class_addmethod (c, (method) hoaGain_dsp64,               "dsp64",                A_CANT, 0);
-	class_addmethod (c, (method) hoaGain_paint,               "paint",                A_CANT, 0);
+    
+    // @method int @digest Set the value of the slider
+	// @description The <m>int</m> method sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider's value out the right outlet.
+    // @marg 0 @name value @optional 0 @type int
 	class_addmethod (c, (method) hoaGain_int,                 "int",                  A_LONG, 0);
+    
+    // @method float @digest Set the value of the slider
+	// @description The <m>float</m> method sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider's value out the right outlet.
+    // @marg 0 @name value @optional 0 @type int
 	class_addmethod (c, (method) hoaGain_float,               "float",                A_FLOAT, 0);
+    
+    // @method contextvalue @digest Set the value of the slider with DeciBels, Amplitude or MIDI value type.
+    // @description Set the value of the slider with DeciBels, Amplitude or MIDI value type.
+    // @marg 0 @name inputmode @optional 0 @type int @description 0 = DeciBels, 1 = 1mplitude, 2 = MIDI.
+    // @marg 1 @name value @optional 0 @type float @description The slider value
     class_addmethod (c, (method) hoaGain_contextValue,        "contextvalue", A_LONG, A_FLOAT, 0);
+    
+    // @method bang @digest Send current value out right outlet.
+    // @description The <m>bang</m> message send current value out right outlet.
 	class_addmethod (c, (method) hoaGain_bang,                "bang",                         0);
+    
+    // @method set @digest Set the value of the slider without outputting slider value.
+    // @description The word set, followed by a number, sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, but does not output the slider's value out the right outlet.
+    // @marg 1 @name value @optional 0 @type float @description The slider value
 	class_addmethod (c, (method) hoaGain_set,                 "set",                  A_GIMME, 0);
+    class_addmethod (c, (method) hoaGain_tometer,             "anything",             A_GIMME, 0);
+    
+    // @method (mouse) @digest click and drag to set the slider outlet.
+    // @description The <m>bang</m> Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet.
+    
 	class_addmethod (c, (method) hoaGain_getdrawparams,       "getdrawparams",        A_CANT, 0);
     class_addmethod (c, (method) hoaGain_mousedoubleclick,    "mousedoubleclick",     A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_mousedown,           "mousedown",            A_CANT, 0);
@@ -146,11 +197,9 @@ int C74_EXPORT main()
 	class_addmethod (c, (method) hoaGain_mouseup,             "mouseup",              A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_getvalueof,          "getvalueof",           A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_setvalueof,          "setvalueof",           A_CANT, 0);
-	class_addmethod (c, (method) hoaGain_assist,              "assist",               A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_preset,              "preset",                       0);
 	class_addmethod (c, (method) hoaGain_notify,              "notify",               A_CANT, 0); 
 	class_addmethod (c, (method) hoaGain_oksize,              "oksize",               A_CANT, 0);
-    class_addmethod (c, (method) hoaGain_tometer,             "anything",             A_GIMME, 0);
     
 	CLASS_ATTR_DEFAULT(c,"patching_rect",0, "0. 0. 200. 30.");
 	
@@ -320,7 +369,10 @@ long hoaGain_oksize(t_hoaGain *x, t_rect *newrect)
 
 void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
 {
-	if (m==ASSIST_INLET)
+    // @in 0 @loop 1 @type signal @digest input signals to be scaled.
+    // @in 1 @type float @digest slider value.
+    
+	if (m == ASSIST_INLET)
     {
         if (a != x->f_numberOfChannels)
             sprintf(s,"(signal) Audio Signal to be scaled (ch %ld)", a+1);
@@ -341,8 +393,13 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
                     break;
             }
         }
-	} 
-	else {
+	}
+    
+    // @out 0 @loop 1 @type signal @digest output corresponding input scaled signal.
+    // @out 1 @type float @digest output slider value.
+    
+	else
+    {
 		if (a != x->f_numberOfChannels)
             sprintf(s,"(signal) Scaled Signal (ch %ld)", a+1);
         else

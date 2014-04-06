@@ -1,4 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <root>
 <refpage name='hoa.connect.maxref.xml'/>
+<refpage name='hoa.dac~.maxref.xml'/>
+<refpage name='hoa.gain~.maxref.xml'/>
+<refpage name='hoa.pi.maxref.xml'/>
+<refpage name='hoa.pi~.maxref.xml'/>
+<refpage name='hoa.play~.maxref.xml'/>
+<refpage name='hoa.record~.maxref.xml'/>
 </root>

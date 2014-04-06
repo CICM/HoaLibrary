@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.dac~.cpp
+ @name      hoa.dac~
+ @realname  hoa.dac~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ automatically connect several hoa objects together.
+ 
+ @description
+ <o>hoa.dac~</o> is a wrapped <o>dac~</o> object (Digital-To-Analog-Converter) through which you will route all signals from MSP out to your computer speakers or audio hardware to be audible to the human ear. It also gives you access to the Audio Status window which controls your audio settings and hardware. Unlike <o>dac~</o> object, you can use a mathLab syntax to set channel routing. ex : "1:16" produce "1 2 3 ... 16"
+ 
+ @discussion
+ <o>hoa.dac~</o> is a wrapped <o>dac~</o> object (Digital-To-Analog-Converter) through which you will route all signals from MSP out to your computer speakers or audio hardware to be audible to the human ear. It also gives you access to the Audio Status window which controls your audio settings and hardware. Unlike <o>dac~</o> object, you can use a mathLab syntax to set channel routing. ex : "1:16" produce "1 2 3 ... 16"
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso dac~, adc~, adstatus, ezdac~
+ */
+
 #include "HoaCommon.max.h"
 
 typedef struct _hoa_dac
@@ -41,17 +63,43 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+    // @method signal @digest Function depends on inlet
+	// @description The <m>signal</m> A signal coming into an inlet of dac~ is sent to the audio output channel corresponding to the inlet. The signal must be between -1 and 1 to avoid clipping by the DAC.
 	class_addmethod(c, (method)hoa_dac_dsp64,		"dsp64",		A_CANT,  0);
 	class_addmethod(c, (method)hoa_dac_assist,		"assist",		A_CANT,	 0);
+    
+    // @method (mouse) @digest Double-click to open the Audio Status window
 	class_addmethod(c, (method)hoa_dac_dblclick,	"dblclick",		A_CANT,  0);
+    
+    // @method int @digest Enable/disable audio processing
+	// @description A non-zero number turns on audio processing in all loaded patches. 0 turns off audio processing in all loaded patches.
+    // @marg 0 on/off-flag @optional 0 @type int
 	class_addmethod(c, (method)hoa_dac_int,			"int",			A_LONG,  0);
+    
+    // @method list @digest Enable/disable audio processing
+	// @description List comprised of integers, sets the logical output channels for each signal inlet in order from left to right.
+    // @marg 0 output-channel-designation @optional 0 @type list
 	class_addmethod(c, (method)hoa_dac_list,		"list",			A_GIMME, 0);
 	//class_addmethod(c, (method)hoa_dac_set,			"set",			A_GIMME, 0); // Todo : proxy_setinlet() ??
     
+    // @method start @digest Turns on audio processing in all loaded patches.
+	// @description Turns on audio processing in all loaded patches.
 	class_addmethod(c, (method)hoa_dac_start,		"start",		A_NOTHING,  0);
+    
+    // @method stop @digest Turns off audio processing in all loaded patches.
+	// @description Turns off audio processing in all loaded patches.
 	class_addmethod(c, (method)hoa_dac_stop,		"stop",			A_NOTHING,  0);
+    
+    // @method startwindow @digest Enable audio processing in local patch and subpatches only.
+	// @description Turns on audio processing only in the patch in which this <o>hoa.dac~</o> is located, and in subpatches of that patch. Turns off audio processing in all other patches.
 	class_addmethod(c, (method)hoa_dac_startwindow,	"startwindow",	A_NOTHING,  0);
+    
+    // @method open @digest Opens the Audio Status window.
+	// @description Opens the Audio Status window.
 	class_addmethod(c, (method)hoa_dac_open,		"open",			A_NOTHING,  0);
+    
+    // @method wclose @digest Close the Audio Status window.
+	// @description Close the Audio Status window.
 	class_addmethod(c, (method)hoa_dac_wclose,		"wclose",		A_NOTHING,  0);
 
 	class_dspinit(c);
@@ -70,53 +118,60 @@ void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
 
     x = (t_hoa_dac *)object_alloc(hoa_dac_class);
     
-    if (argc && atom_gettype(argv) == A_SYM)
+    if (x)
     {
-        char *dac_bus_name = atom_getsym(argv)->s_name;
-        if (isalpha(dac_bus_name[0])) // only works if the first letter isn't a number
+        // @arg 0 @name outputs @optional 1 @type int/symbol @digest Output routing or/and bus name
+        // @description You can create a <o>hoa.dac~</o> object that uses one or more audio output channel numbers between 1 and 512. These numbers refer to logical channels and can be dynamically reassigned to physical device channels of a particular driver using either the Audio Status window, its I/O Mappings subwindow, or an adstatus object with an output keyword argument. Arguments, If the computer's built-in audio hardware is being used, there will be two input channels available. Other audio drivers and/or devices may have more than two channels. If no argument is typed in, dac~ will have two inlets, for input channels 1 and 2.
+        // If a symbol is provided as the first argument to a dac~ object, then it will get an independent control section in the Max mixer. If two dac~ instances in a patcher hierarchy have the same name they will be on the same "bus" and share controls.
+        
+        if (argc && atom_gettype(argv) == A_SYM)
         {
-            symPrepend = 1;
-            atom_setsym(channels, atom_getsym(argv));
+            char *dac_bus_name = atom_getsym(argv)->s_name;
+            if (isalpha(dac_bus_name[0])) // only works if the first letter isn't a number
+            {
+                symPrepend = 1;
+                atom_setsym(channels, atom_getsym(argv));
+            }
         }
+        
+        for(i = 0; i < (argc-symPrepend); i++)
+        {
+            if(atom_gettype(argv+i+symPrepend) == A_SYM)
+            {
+                min = atoi(atom_getsym(argv+i+symPrepend)->s_name);
+                if (min < 10)
+                    max = atoi(atom_getsym(argv+i+symPrepend)->s_name+2);
+                else if (min < 100)
+                    max = atoi(atom_getsym(argv+i+symPrepend)->s_name+3);
+                else if (min < 1000)
+                    max = atoi(atom_getsym(argv+i+symPrepend)->s_name+4);
+                else
+                    max = atoi(atom_getsym(argv+i+symPrepend)->s_name+5);
+                if (max > min)
+                {
+                    for(j = min; j <= max; j++)
+                    {
+                        atom_setlong(channels + symPrepend + count++, j);
+                    }
+                }
+                else
+                {
+                    for(j = min; j >= max; j--)
+                    {
+                        atom_setlong(channels + symPrepend + count++, j);
+                    }
+                }
+            }	
+            else if(atom_gettype(argv + symPrepend + i) == A_LONG)
+            {
+                atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
+            }
+        }
+        
+        x->f_number_of_channels = count;
+        dsp_setup((t_pxobject *)x, x->f_number_of_channels);
+        x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
     }
-    
-	for(i = 0; i < (argc-symPrepend); i++)
-	{
-		if(atom_gettype(argv+i+symPrepend) == A_SYM)
-		{
-			min = atoi(atom_getsym(argv+i+symPrepend)->s_name);
-			if (min < 10)
-				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+2);
-			else if (min < 100)
-				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+3);
-			else if (min < 1000)
-				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+4);
-			else
-				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+5);
-			if (max > min) 
-			{
-				for(j = min; j <= max; j++)
-				{
-					atom_setlong(channels + symPrepend + count++, j);
-				}
-			}
-			else 
-			{
-				for(j = min; j >= max; j--)
-				{
-					atom_setlong(channels + symPrepend + count++, j);
-				}
-			}
-		}	
-		else if(atom_gettype(argv + symPrepend + i) == A_LONG)
-		{
-            atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
-		}
-	}
-    
-	x->f_number_of_channels = count;
-    dsp_setup((t_pxobject *)x, x->f_number_of_channels);
-	x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
 	
 	return x;
 }
@@ -203,6 +258,7 @@ void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 
 void hoa_dac_assist(t_hoa_dac *x, void *b, long m, long a, char *s)
 {
+    // @in 0 @loop 1 @type signal @digest input channel and incoming messages.
 	object_method(x->f_dac, gensym("assist"), b, m, a, s);
 }
 

@@ -117,6 +117,10 @@
 		<o>hoa.connect</o> could be used to automatically connect several hoa objects together and to color patchlines
 			</description>
 		</entry>
+		<entry name ="Keywords:">
+			<description>
+			</description>
+		</entry>
 	</misc>
 
 </c74object>
