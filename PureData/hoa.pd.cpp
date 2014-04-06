@@ -23,7 +23,7 @@ t_hoa_err hoa_initclass(t_eclass* c, method hoa_getinfos_method)
 	
 	eclass_addmethod(c, (method)hoa_method_true, "is_hoa", A_CANT, 0);
 
-    sprintf(help, "help/%s", c->c_class.c_name->s_name);
+    sprintf(help, "helps/%s", c->c_class.c_name->s_name);
     class_sethelpsymbol((t_class *)c, gensym(help));
     
 	if (hoa_getinfos_method)

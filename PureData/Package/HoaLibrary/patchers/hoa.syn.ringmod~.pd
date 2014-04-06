@@ -1,0 +1,65 @@
+#N canvas 317 64 771 461 10;
+#X obj 27 391 hoa.out~;
+#X obj -55 -15 c.loadmess;
+#X text 1 283 Receive the signal;
+#X text 3 413 Output the signal;
+#X text 257 86 Input messages selector;
+#X obj -18 55 hoa.mode.sel;
+#X obj -55 81 hoa.args.map;
+#X obj 27 349 *~;
+#X obj 128 331 osc~ 1;
+#X obj 128 309 line~;
+#X msg 128 287 \$1 20;
+#X obj 14 105 + 1;
+#X obj 14 140 / 1;
+#X obj 163 41 hoa.in extra 1;
+#X text 256 41 Extra 1 Receive the inlet messages.;
+#X text 179 331 Simple ring modulation;
+#X obj 174 191 list split;
+#X obj 202 215 unpack;
+#X obj 128 206 *;
+#X text 17 190 factor;
+#X text 13 180 instance;
+#X obj 14 160 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 263 203 float : The value \, that control the frequency of
+the ring modulation \, is multiplied by a factor depending on the intance.
+The factor is 1 for the highest harmonic and decreases toward 0 for
+the lower harmonics.;
+#X obj 221 114 sel done;
+#X obj 27 305 hoa.in~ extra 1;
+#X obj -55 32 hoa.thisprocess~ 20;
+#X obj 128 87 route float list;
+#X obj 127 56 f 20;
+#X text -44 11 Default arguments;
+#X text 266 144 list : The item corresponding to the instance is selected
+and control the frequency of the ring modulation (mostly used in the
+plane waves domain).;
+#X text 172 -5 This hoa.processing synthesizes a sound field with ring
+modulation.;
+#X connect 1 0 25 0;
+#X connect 5 0 6 1;
+#X connect 6 0 16 1;
+#X connect 6 0 12 1;
+#X connect 6 1 11 0;
+#X connect 7 0 0 0;
+#X connect 8 0 7 1;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 18 1;
+#X connect 12 0 21 0;
+#X connect 13 0 26 0;
+#X connect 16 1 17 0;
+#X connect 17 0 10 0;
+#X connect 18 0 10 0;
+#X connect 23 0 27 0;
+#X connect 24 0 7 0;
+#X connect 25 0 6 0;
+#X connect 25 1 5 0;
+#X connect 25 2 27 0;
+#X connect 25 3 26 0;
+#X connect 26 0 18 0;
+#X connect 26 1 16 0;
+#X connect 26 2 23 0;
+#X connect 27 0 26 0;

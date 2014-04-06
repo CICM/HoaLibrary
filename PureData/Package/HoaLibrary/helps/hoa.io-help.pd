@@ -1,0 +1,259 @@
+#N canvas 0 27 1434 677 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj -293 56 hoa.in;
+#X obj -330 -169 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.io 3 12
+0 18 -228856 -1 0;
+#X text -309 416 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X obj 232 -145 declare -lib HoaLibrary/hoa.library;
+#X obj 232 -166 declare -lib hoa.library;
+#X text -327 -147 hoa.in \, hoa.out \, hoa.in~ and hoa.out~;
+#X text -328 -125 The inlet and outlet to use in the hoa.process~'s
+patchers;
+#X obj -146 56 hoa.in~;
+#X obj -223 56 hoa.in;
+#X obj -223 155 hoa.out;
+#X obj -293 155 hoa.out;
+#X obj -146 156 hoa.out~;
+#X obj -112 100 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj -46 56 hoa.in~;
+#X obj -46 156 hoa.out~;
+#X obj -12 100 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 348 100 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 468 100 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 97 56 hoa.in extra 1;
+#X obj 97 156 hoa.out extra 1;
+#X obj 314 56 hoa.in~ extra 1;
+#X obj 207 56 hoa.in extra 3;
+#X obj 207 156 hoa.out extra 4;
+#X obj 314 156 hoa.out~ extra 1;
+#X obj 434 56 hoa.in~ extra 2;
+#X obj 434 156 hoa.out~ extra 2;
+#X text -294 -8 hoa.in~ and hoa.in share the same parent inlet but
+the signal is routed to the hoa.in~ and the other messages are routed
+to hoa.in.;
+#X text -325 252 With the above hoa.io configuration \, the hoa.process~
+have one inlet per instance \, that send messages to the two hoa.in
+and the signal to the two hoa.in~ \, and two outlet per instance \,
+the first one outputs the sum of the signal received by the hoa.out~
+and the second one outputs the message received by the hoa.out.;
+#X text 126 -8 hoa.in~ and hoa.in with the same extra argument share
+the same parent inlet but the signal is routed to the hoa.in~ and the
+other messages are routed to hoa.in.;
+#X obj 129 100 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -281 100 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -211 100 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 566 119 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 631 95 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 607 141 sig~ 1;
+#X obj 678 121 sig~ 2;
+#X obj 749 91 sig~ 3;
+#X obj 703 65 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 607 211 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 639 241 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 671 271 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X text 583 325 instance.;
+#X obj 892 111 sig~ 1.5;
+#X obj 704 211 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 736 241 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 607 173 hoa.2d.process~ 3 hoa.ioexample~ planewaves ----------------
+;
+#X text 583 295 The 3 instance;
+#X text 583 305 signal outlets \,;
+#X text 583 315 one for each;
+#X text 583 335 Each instance;
+#X text 583 345 have two hoa.out~;
+#X text 583 355 that sum the;
+#X text 583 365 signals of the;
+#X text 583 375 hoa.in~.;
+#X text 696 295 The 2 extra;
+#X text 696 305 signal outlets.;
+#X text 696 325 outputs the;
+#X text 696 335 sum of the;
+#X text 696 345 signals received;
+#X text 696 375 extra hoa.out~;
+#X text 696 315 Each one;
+#X text 696 355 by the;
+#X text 696 365 corresponding;
+#X obj 821 141 sig~ 0.333333;
+#X obj 769 211 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 801 241 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 834 271 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 803 325 instance.;
+#X text 803 295 The 3 instance;
+#X text 803 315 one for each;
+#X text 803 305 messages outlets \,;
+#X text 803 335 Each one outputs;
+#X text 803 345 the messages;
+#X text 803 355 received by the;
+#X text 803 365 hoa.out~ of;
+#X text 803 375 its instance.;
+#X obj 566 94 c.loadmess 1;
+#X obj 631 64 c.loadmess 2;
+#X obj 703 34 c.loadmess 3;
+#X obj 866 220 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 553 -95 The hoa.io configuration of this patch inside a hoa.process~
+in planewaves mode with 3 instance.;
+#X text -325 -98 hoa.io without arguments create an inlet for each
+instance of the process. You can have several hoa.io without arguments
+in a patcher but they will share the same parent inlet and outlet.
+;
+#X text 126 203 hoa.out~ and hoa.out with the same extra argument have
+separated parent outlets for signal or other messages.;
+#X text -294 203 hoa.out~ and hoa.out have separated parent outlets
+for signal or other messages.;
+#X text 115 -98 hoa.io with the argument extra and a number (or default
+1) create an extra inlet or outlet that will be shared by all the instances.
+You can have several hoa.io with the same extra argument in a patcher
+but they will share the same parent inlet and outlet.;
+#X text 115 252 With the above hoa.io configuration \, the hoa.process~
+have 3 extra inlets and 6 extra outlets \, 2 for the signal and 4 for
+the messages. The extra hoa.in~ receives the signals from the extra
+inlets 1 and 2 of the hoa.process~ and the extra hoa.in receives the
+messages from the extra inlets 1 and 3 (note that if you target the
+hoa.process~ only the target instace receive the messages). The extra
+signal outlets output the sum of the extra hoa.out~ of all the instances
+that correspond to their index. The extra message outlet 1 outputs
+the messages received by the hoa.out extra 1 of all the instance and
+the extra message outlet 4 outputs the messages received by the hoa.out
+extra 4 of all the instance. Note that the messages sent to the extra
+inlet 2 are not received because there is no hoa.in extra 2 and the
+extra messages outlets 2 and 3 are useless because there are no hoa.out
+extra 2 and 3;
+#X text 916 325 outputs the;
+#X text 916 315 Each one;
+#X text 916 345 by the;
+#X text 916 355 corresponding;
+#X text 916 295 The 4 extra;
+#X text 916 305 messages outlets.;
+#X text 916 335 messages received;
+#X text 916 365 extra hoa.out.;
+#X text 916 375 Then \, extra messages;
+#X text 916 385 outlet 2 and 3 are;
+#X text 916 395 useless.;
+#X obj 801 119 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 801 67 c.loadmess 69;
+#X msg 227 102;
+#X msg 964 104 set Année érotique;
+#X msg 964 219 Année érotique;
+#X msg 964 194 set \$1 \$2;
+#X text 583 -55 The 3 instance signal and messages;
+#X text 583 -45 inlets \, one for each instance.;
+#X text 583 -35 The messages are sent to the hoa.in.;
+#X text 583 -25 The signals are sent to the hoa.in~.;
+#X text 823 -55 The 3 extra signal and messages;
+#X text 823 -45 inlets.;
+#X text 823 -35 The extra inlet 1 \, send the messages;
+#X text 823 -25 to the hoa.in extra 1 and the signal;
+#X text 823 -15 to the hoa.in~ extra 1;
+#X text 823 -5 The extra inlet 2 \, send the signal;
+#X text 823 5 to the hoa.in~ extra 2;
+#X text 823 15 The extra inlet 3 \, send the messages;
+#X text 823 25 to the hoa.in extra 3;
+#X msg 594 -136 \; pd dsp 1;
+#X msg 658 -136 \; pd dsp 0;
+#X text 572 420 The hoa.io configuration of this patch is an example
+made to show all the behaviors of the hoa.io. You would prefer to look
+at the real uses of hoa.process~.;
+#X connect 0 0 10 0;
+#X connect 0 0 30 0;
+#X connect 7 0 12 0;
+#X connect 7 0 11 0;
+#X connect 8 0 9 0;
+#X connect 8 0 31 0;
+#X connect 13 0 15 0;
+#X connect 13 0 14 0;
+#X connect 18 0 29 0;
+#X connect 18 0 19 0;
+#X connect 20 0 16 0;
+#X connect 20 0 23 0;
+#X connect 21 0 22 0;
+#X connect 21 0 99 0;
+#X connect 24 0 17 0;
+#X connect 24 0 25 0;
+#X connect 32 0 45 0;
+#X connect 33 0 45 1;
+#X connect 34 0 45 0;
+#X connect 35 0 45 1;
+#X connect 36 0 45 2;
+#X connect 37 0 45 2;
+#X connect 42 0 45 4;
+#X connect 45 0 38 0;
+#X connect 45 1 39 0;
+#X connect 45 2 40 0;
+#X connect 45 3 43 0;
+#X connect 45 4 44 0;
+#X connect 45 5 64 0;
+#X connect 45 6 65 0;
+#X connect 45 7 66 0;
+#X connect 45 8 79 0;
+#X connect 45 11 102 0;
+#X connect 63 0 45 3;
+#X connect 76 0 32 0;
+#X connect 77 0 33 0;
+#X connect 78 0 37 0;
+#X connect 97 0 45 3;
+#X connect 98 0 97 0;
+#X connect 100 0 45 5;
+#X connect 102 0 101 0;

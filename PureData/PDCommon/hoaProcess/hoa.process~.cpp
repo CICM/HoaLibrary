@@ -516,7 +516,7 @@ void hoa_process_open(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
             object_error(x, "hoa.process~ open band index must be between 0 and %i", (int)x->f_ambi_3d->getOrder());
             return;
         }
-        if(index < -band || index > band)
+        if(index < (int)-band || index > band)
         {
             object_error(x, "hoa.process~ open argument index must be between %i and %i for the band %i", (int)-x->f_ambi_3d->getOrder(), (int)x->f_ambi_3d->getOrder(), (int)x->f_ambi_3d->getOrder());
             return;
@@ -525,7 +525,7 @@ void hoa_process_open(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
             index = -index * 2 - 1;
         else
             index = index * 2;
-        index += (band + 1) * (band + 1);
+        index += band * band;
         canvas_vis(x->f_canvas[index], 1);
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode > 1)
@@ -542,7 +542,8 @@ void hoa_process_open(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode == 0)
     {
         index = atom_getfloat(argv);
-        if(index < -x->f_ambi_2d->getOrder() || index > x->f_ambi_2d->getOrder())
+
+        if(index < (int)-x->f_ambi_2d->getOrder() || index > x->f_ambi_2d->getOrder())
         {
             object_error(x, "hoa.process~ open index must be between %i and %i", (int)-x->f_ambi_2d->getOrder(), x->f_ambi_2d->getOrder());
             return;
@@ -584,7 +585,7 @@ void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
             index = -index * 2 - 1;
         else
             index = index * 2;
-        index += (band + 1) * (band + 1);
+        index += band * band;
         x->f_target = index;
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode > 1)
