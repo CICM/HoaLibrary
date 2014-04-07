@@ -10,3 +10,4 @@ max oblist "hoa objects" hoa.pi~;
 max oblist "hoa objects" hoa.play~;
 max oblist "hoa objects" hoa.process~;
 max oblist "hoa objects" hoa.record~;
+max oblist "hoa objects" hoa.thisprocess~;

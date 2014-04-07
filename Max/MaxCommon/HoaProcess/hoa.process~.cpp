@@ -18,10 +18,10 @@
  patcher loader for multichannel processing.
  
  @description
- <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane weve processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
+ <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
  
  @discussion
-  <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane weve processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
+  <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
  
  @category ambisonics, hoa objects, msp
  

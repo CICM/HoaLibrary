@@ -6,6 +6,28 @@
 
 // based on dynamic.this~ Copyright 2010 Alex Harker. All rights reserved.
 
+/**
+ @file      hoa.thisprocess~.cpp
+ @name      hoa.thisprocess~
+ @realname  hoa.thisprocess~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ Control <o>hoa.process~</o> voice allocation, muting, argument and attributes.
+ 
+ @description
+ Use the <o>hoa.thisprocess~</o> object to control <o>hoa.process~</o> voice allocation, muting, argument and attributes. When placed inside a patcher loaded by a <o>hoa.process~</o> object, it send and receive messages from the <o>hoa.process~</o> object that loads it.
+ 
+ @discussion
+ Use the <o>hoa.thisprocess~</o> object to control <o>hoa.process~</o> voice allocation, muting, argument and attributes. When placed inside a patcher loaded by a <o>hoa.process~</o> object, it send and receive messages from the <o>hoa.process~</o> object that loads it.
+ 
+ @category ambisonics, hoa objects, msp
+ 
+ @seealso hoa.thisprocess~, hoa.in~, hoa.in, hoa.out, hoa.out~, thispoly~, poly~, thispatcher, patcher
+ */
+
 #include "../HoaCommon.max.h"
 #include "../HoaProcessSuite.h"
 
@@ -54,7 +76,28 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_thisprocess_assist,			"assist",	A_CANT, 0);
 	//class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
+    
+    // @method mute @digest Disable DSP processing for this patcher instance.
+	// @description Turns off signal processing for this specific instance. Argument is the mute state, 0 means unmuted, others value means muted
+    // @marg 1 @name on/off-flag @optional 0 @type int
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
+    
+     // @method bang @digest Report the instance informations in a right to left outputting order.
+	 // @description Output instance informations in a right to left outputting order. <br/><br/>
+     // <ul>
+     // <li> mute state (0/1). </li>
+     // <li> patcher attributes. </li>
+     // <li> patcher arguments. </li>
+     // <li> process context and mode. ex : "2d harmonics". </li>
+     // <li>
+     // process instance informations depending on the current mode. <br/><br/>
+     // <ul>
+     // <li> In <b>planewaves</b> mode (2d/3d). It will be (number-of-channels, instance-channel)</li>
+     // <li> In 2d <b>harmonics</b> mode, it will be a list with (ambisonic-order, harmonic-index) </li>
+     // <li> In 3d <b>harmonics</b> mode, it will be a list with (ambisonic-order, harmonic-band, harmonic-index) </li>
+     // </ul>
+     // </li>
+     // </ul>
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
 	
 	class_register(CLASS_BOX, c);
@@ -296,7 +339,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 
 void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 {
-	// object must be in a hoa.process~ object
+	// object must be in a hoa.thisprocess~ object
 	if (!x->hoaProcessor_parent || x->index <= 0)
 		return;
 	
