@@ -1,6 +1,6 @@
-#N canvas 89 69 1287 776 10;
-#X declare HoaLibrary/hoa.library;
-#X declare hoa.library;
+#N canvas 436 77 1287 776 10;
+#X declare -lib hoa.library;
+#X declare -lib hoa.library/hoa.library;
 #X obj -354 -643 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.library
 3 12 0 18 -204280 -1 0;
 #X text 224 -640 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -30,7 +30,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @channels 8 @minmax 0 1 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5
 0.5 0.5 1 @spcolor 0.27 0.43 0.54 0.25 @ptcolor 0 0 0 1;
 #X obj 70 -313 hoa.delay~ 3 post ************;
-#X obj -127 -227 hoa.recomposer~ 3 8 **********, f 34;
+#X obj -127 -227 hoa.recomposer~ 3 8 **********;
 #X obj -127 -279 hoa.space~ 8 *****************;
 #X obj -127 -379 hoa.projector~ 3 8 ***********;
 #X obj -127 -450 hoa.grain~ 3 no **************;
@@ -90,8 +90,8 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 -1 -1;
 #X obj 823 -586 key;
 #X obj 823 -567 sel 32;
-#X obj -207 84 declare HoaLibrary/hoa.library;
-#X obj -207 63 declare hoa.library;
+#X obj -207 63 declare -lib hoa.library;
+#X obj -207 84 declare -lib hoa.library/hoa.library;
 #X connect 4 0 22 1;
 #X connect 5 0 22 0;
 #X connect 7 0 9 0;
