@@ -183,6 +183,7 @@ namespace Hoa2D
         float*          m_impulses_matrix;
         float*          m_harmonics_vector;
         float*          m_channels_vector;
+        double*         m_channels_vector_double;
         unsigned int    m_number_of_virtual_channels;
         unsigned int    m_sample_rate;
         unsigned int    m_vector_size;
@@ -197,6 +198,11 @@ namespace Hoa2D
         float*          m_result_matrix_right;
         float*          m_linear_vector_left;
         float*          m_linear_vector_right;
+        
+        // Sample by sample
+        float**         m_channels_inputs_right;
+        float**         m_channels_inputs_left;
+        int             m_index;
         
         const float**   m_impulses_vector;
         PinnaSize       m_pinna_size;
@@ -283,7 +289,7 @@ namespace Hoa2D
         };
         
         //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
             @param     inputs	The input samples.
             @param     outputs  The output array that contains samples destinated to channels.
@@ -291,12 +297,28 @@ namespace Hoa2D
 		void process(const float* const* inputs, float** outputs);
 		
         //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
             @param     input    The input samples.
             @param     outputs  The output array that contains samples destinated to channels.
          */
 		void process(const double* const* inputs, double** outputs);
+        
+        //! This method performs the binaural decoding with single precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     inputs	The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const float* inputs, float* outputs);
+		
+        //! This method performs the binaural decoding with double precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     input    The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const double* inputs, double* outputs);
         
     };
     
@@ -487,7 +509,6 @@ namespace Hoa2D
                 return m_decoder_binaural->getChannelAzimuth(index);
         }
         
-		
         //! Retrieve the abscissa of a channel.
 		/** Retrieve the abscissa of a channel. The abscissa is between -1 and 1, -1 is the left of the soundfield, 0 is the center of the soundfield and 1 is the right of the soundfield. The maximum index must be the number of channels - 1.
          
@@ -546,10 +567,32 @@ namespace Hoa2D
         };
         
         //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample samples. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     inputs	The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		inline void processBinaural(const float* inputs, float* outputs)
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+        
+        //! This method performs the binaural decoding with double precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample samples. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     inputs	The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		inline void processBinaural(const double* inputs, double* outputs)
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+        
+        //! This method performs the binaural decoding with single precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
             @param     inputs	The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
+            @param     outputs  The output matrix that contains samples destinated to channels.
          */
 		inline void processBinaural(const float* const* inputs, float** outputs)
         {
@@ -560,7 +603,7 @@ namespace Hoa2D
 		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
          
             @param     inputs	The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
+            @param     outputs  The output matrix that contains samples destinated to channels.
          */
 		inline void processBinaural(const double* const* inputs, double** outputs)
         {
@@ -568,10 +611,10 @@ namespace Hoa2D
         }
         
         //! This method performs the decoding depending of the mode with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
             @param     inputs	The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
+            @param     outputs  The output matrix that contains samples destinated to channels.
          */
 		inline void processRegular(const float* inputs, float* outputs)
         {

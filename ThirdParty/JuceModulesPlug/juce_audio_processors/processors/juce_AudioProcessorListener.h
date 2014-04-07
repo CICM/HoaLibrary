@@ -57,8 +57,8 @@ public:
 	
 	
 	
-	virtual void setNumberOfInputs(AudioProcessor* processor, long aNumberOfInputs){};
-    virtual void setNumberOfOutputs(AudioProcessor* processor, long aNumberOfOutputs){};
+	virtual void setNumberOfChannelsInputs(AudioProcessor* processor, long aNumberOfInputs){};
+    virtual void setNumberOfChannelsOutputs(AudioProcessor* processor, long aNumberOfOutputs){};
 	
 	
 

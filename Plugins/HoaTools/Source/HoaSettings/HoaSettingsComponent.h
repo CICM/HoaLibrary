@@ -19,35 +19,29 @@ private:
     HoaToolsAudioProcessor* m_processor;
     
     Image                   m_settings_icon;
-    Label*                  m_setting_label;
 	
-    Label*                  m_label_settings;
-	
-    Label*                  m_optim_label;
-	ComboBox*               m_optim_value;
-	
+    Label*                  m_order_label;
+    Label*					m_order_value;
     Label*                  m_decoder_label;
 	ComboBox*               m_decoder_value;
-	
+    Label*                  m_optim_label;
+	ComboBox*               m_optim_value;
 	Label*                  m_number_of_sources_label;
     Label*					m_number_of_sources_value;
-    
-    Label*                  m_ordre_label;
-    Label*					m_ordre_value;
-	
 	Label*                  m_number_of_channels_label;
     Label*					m_number_of_channels_value;
-	
 	Label*                  m_offset_label;
     Label*					m_offset_value;
 	
     Label*					m_channels_azimuth_label;
     std::vector<Label*>		m_channels_azimuth_values;
+    std::vector<Label*>		m_channels_azimuth_labels;
     
 public:
     HoaSettingsComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaSettingsComponent();
     
+    void updated();
     void paint(Graphics&);
     void mouseDown(const MouseEvent &event);
     void comboBoxChanged(ComboBox* aComboBox);

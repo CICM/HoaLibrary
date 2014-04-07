@@ -16,9 +16,7 @@ class HoaComponentListener
 public:
     HoaComponentListener(){};
     virtual ~HoaComponentListener(){};
-    virtual void componentHasBeenClicked(Component* component){};
-    virtual void componentRedrawMap(){};
-    virtual void componentRedrawMeter(){};
+    virtual void componentHasBeenClicked(Component* component) = 0;
 };
 
 enum
@@ -32,8 +30,9 @@ class HoaToolsAudioProcessor  : public AudioProcessor, public KitSources, public
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaToolsAudioProcessor)
     
-    long                        m_gui;
-	
+    long    m_gui;
+	bool    m_has_been_updated;
+    
 public:
     HoaToolsAudioProcessor();
     ~HoaToolsAudioProcessor();
@@ -41,8 +40,8 @@ public:
     void numChannelsChanged();
     void prepareToPlay(double sampleRate, int samplesPerBlock);
     void releaseResources();
-    void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages);
-
+    void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages){};
+    void processBlock(float** inputs, float** outputs);
     AudioProcessorEditor* createEditor();
     bool hasEditor() const;
     long getGui(){return m_gui;};

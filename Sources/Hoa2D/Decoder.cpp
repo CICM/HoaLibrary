@@ -227,8 +227,20 @@ namespace Hoa2D
         m_impulses_vector   = new const float*[m_number_of_virtual_channels];
         m_harmonics_vector  = new float[m_number_of_harmonics];
         m_channels_vector   = new float[m_number_of_virtual_channels];
+        m_channels_vector_double = new double[m_number_of_virtual_channels];
         m_decoder           = new DecoderRegular(m_order, m_number_of_virtual_channels);
         
+        // Sample by sample //
+        m_channels_inputs_left = new float*[m_number_of_virtual_channels];
+        m_channels_inputs_right= new float*[m_number_of_virtual_channels];
+        
+        for(int i = 0; i < m_number_of_virtual_channels; i++)
+        {
+            m_channels_inputs_left[i]   = NULL;
+            m_channels_inputs_right[i]  = NULL;
+        }
+        
+        // Other
         m_channels_azimuth[0] = HOA_PI2;
         m_channels_azimuth[1] = HOA_PI + HOA_PI2;
     }
@@ -276,6 +288,20 @@ namespace Hoa2D
             if(m_impulses_matrix)
                 delete [] m_impulses_matrix;
             
+            // Sample by sample
+            for(int i = 0; i < m_number_of_virtual_channels; i++)
+            {
+                if(m_channels_inputs_left[i])
+                    delete [] m_channels_inputs_left[i];
+                if(m_channels_inputs_right[i])
+                    delete [] m_channels_inputs_right[i];
+                
+                m_channels_inputs_left[i]   = new float[m_impulses_size * 2 - 1];
+                m_channels_inputs_right[i]  = new float[m_impulses_size * 2 - 1];
+            }
+            m_index = m_impulses_size;
+            
+            // Other
             m_impulses_matrix = new float[m_impulses_size * 2 * m_number_of_harmonics];
             
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
@@ -353,6 +379,58 @@ namespace Hoa2D
             m_result_matrix_left    = m_result_matrix;
             m_result_matrix_right   = m_result_matrix + m_vector_size  * m_impulses_size;
             m_matrix_allocated = 1;
+        }
+    }
+    
+    void DecoderBinaural::process(const float* inputs, float* outputs)
+	{
+        m_decoder->process(inputs, m_channels_vector);
+       
+        --m_index;
+        m_channels_inputs_left[0][m_index] = m_channels_vector[0];
+        outputs[1] = outputs[0] = cblas_sdot(m_impulses_size, m_channels_inputs_left[0]+m_index, 1, m_impulses_vector[0], 1);
+        for(int i = 1; i < m_number_of_virtual_channels; i++)
+        {
+            m_channels_inputs_left[i][m_index] = m_channels_vector[i];
+            m_channels_inputs_right[i][m_index] = m_channels_vector[i];
+            outputs[0] += cblas_sdot(m_impulses_size, m_channels_inputs_left[i]+m_index, 1, m_impulses_vector[m_number_of_virtual_channels - i], 1);
+            outputs[1] += cblas_sdot(m_impulses_size, m_channels_inputs_right[i]+m_index, 1, m_impulses_vector[i], 1);
+        }
+        if(m_index <= 0)
+        {
+            m_index = m_impulses_size;
+            cblas_scopy(m_impulses_size, m_channels_inputs_left[0], 1, m_channels_inputs_left[0]+m_impulses_size, 1);
+            for(int i = 1; i < m_number_of_virtual_channels; i++)
+            {
+                cblas_scopy(m_impulses_size, m_channels_inputs_left[i], 1, m_channels_inputs_left[i]+m_impulses_size, 1);
+                cblas_scopy(m_impulses_size, m_channels_inputs_right[i], 1, m_channels_inputs_right[i]+m_impulses_size, 1);
+            }
+        }
+    }
+    
+    void DecoderBinaural::process(const double* inputs, double* outputs)
+	{
+        m_decoder->process(inputs, m_channels_vector_double);
+        
+        --m_index;
+        m_channels_inputs_left[0][m_index] = m_channels_vector_double[0];
+        outputs[1] = outputs[0] = cblas_sdot(m_impulses_size, m_channels_inputs_left[0]+m_index, 1, m_impulses_vector[0], 1);
+        for(int i = 1; i < m_number_of_virtual_channels; i++)
+        {
+            m_channels_inputs_left[i][m_index] = m_channels_vector_double[i];
+            m_channels_inputs_right[i][m_index] = m_channels_vector_double[i];
+            outputs[0] += cblas_sdot(m_impulses_size, m_channels_inputs_left[i]+m_index, 1, m_impulses_vector[m_number_of_virtual_channels - i], 1);
+            outputs[1] += cblas_sdot(m_impulses_size, m_channels_inputs_right[i]+m_index, 1, m_impulses_vector[i], 1);
+        }
+        if(m_index <= 0)
+        {
+            m_index = m_impulses_size;
+            cblas_scopy(m_impulses_size, m_channels_inputs_left[0], 1, m_channels_inputs_left[0]+m_impulses_size, 1);
+            for(int i = 1; i < m_number_of_virtual_channels; i++)
+            {
+                cblas_scopy(m_impulses_size, m_channels_inputs_left[i], 1, m_channels_inputs_left[i]+m_impulses_size, 1);
+                cblas_scopy(m_impulses_size, m_channels_inputs_right[i], 1, m_channels_inputs_right[i]+m_impulses_size, 1);
+            }
         }
     }
     
@@ -439,6 +517,8 @@ namespace Hoa2D
         delete [] m_impulses_vector;
         delete [] m_harmonics_vector;
         delete [] m_channels_vector;
+        delete [] m_channels_vector_double;
+        
         if(m_impulses_matrix)
             delete [] m_impulses_matrix;
         if(m_input_matrix)
@@ -453,6 +533,15 @@ namespace Hoa2D
         if(m_linear_vector_right)
             delete [] m_linear_vector_right;
         m_linear_vector_right = NULL;
+        
+        // Sample by sample
+        for(int i = 0; i < m_number_of_virtual_channels; i++)
+        {
+            if(m_channels_inputs_left[i])
+                delete [] m_channels_inputs_left[i];
+            if(m_channels_inputs_right[i])
+                delete [] m_channels_inputs_right[i];
+        }
 	}
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -524,19 +613,13 @@ namespace Hoa2D
     
     void DecoderMulti::setSampleRate(unsigned int sampleRate)
     {
-        if(m_mode == Binaural)
-        {
-            m_decoder_binaural->setSampleRate(sampleRate);
-        }
+        m_decoder_binaural->setSampleRate(sampleRate);
         m_sample_rate = sampleRate;
     }
     
     void DecoderMulti::setVectorSize(unsigned int vectorSize)
     {
-        if(m_mode == Binaural)
-        {
-            m_decoder_binaural->setVectorSize(vectorSize);
-        }
+        m_decoder_binaural->setVectorSize(vectorSize);
         m_vector_size = vectorSize;
     }
 	

@@ -128,6 +128,8 @@ public:
     */
     virtual void processBlock (AudioSampleBuffer& buffer,
                                MidiBuffer& midiMessages) = 0;
+    
+    virtual void processBlock(float** inputs, float** outputs) = 0;
 
     /** Renders the next block when the processor is being bypassed.
         The default implementation of this method will pass-through any incoming audio, but
@@ -531,14 +533,14 @@ public:
     {
         for (int i = listeners.size(); --i >= 0;)
             if (AudioProcessorListener* l = getListenerLocked (i))
-                l->setNumberOfInputs(this, aNumberOfInputs);
+                l->setNumberOfChannelsInputs(this, aNumberOfInputs);
     }
 
     void setNumberOfOutputs(long aNumberOfOutputs)
     {
         for (int i = listeners.size(); --i >= 0;)
             if (AudioProcessorListener* l = getListenerLocked (i))
-                l->setNumberOfOutputs(this, aNumberOfOutputs);
+                l->setNumberOfChannelsOutputs(this, aNumberOfOutputs);
     }
 
     //==============================================================================

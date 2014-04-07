@@ -6,8 +6,6 @@
 
 #include "HoaInfosComponent.h"
 
-static char hoa_infos_label[] = "Infos";
-
 static char hoa_infos_text[] = "HOA Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering";
 
 HoaInfosComponent::HoaInfosComponent(HoaComponentListener* master)
@@ -16,8 +14,6 @@ HoaInfosComponent::HoaInfosComponent(HoaComponentListener* master)
     
     m_info_icon = ImageCache::getFromMemory(BinaryData::iconinfoblack256_png, BinaryData::iconinfoblack256_pngSize);
     m_info_label = new Label();
-    m_info_label->setText("Info", juce::dontSendNotification);
-
 }
 
 HoaInfosComponent::~HoaInfosComponent()
