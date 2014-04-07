@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 137.0, 95.0, 908.0, 689.0 ],
+		"rect" : [ 100.0, 100.0, 908.0, 689.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 137.0, 121.0, 908.0, 663.0 ],
+						"rect" : [ 0.0, 26.0, 908.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1440,7 +1440,7 @@
 									"destination" : [ "obj-78", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 1095.100037, 386.0, 1132.100098, 386.0 ],
+									"midpoints" : [ 1095.100036, 386.0, 1132.100098, 386.0 ],
 									"source" : [ "obj-12", 5 ]
 								}
 
@@ -10771,7 +10771,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 70.5, 626.0, 33.0 ],
+									"patching_rect" : [ 10.0, 70.5, 628.0, 33.0 ],
 									"text" : "The \"no\" mode means that hoa.process~ splits the inputs to all the subpatchs. It could be seen like a tool to facilitate the creation of new kind of encoders. It's really useful to create diffused soundfields.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -11085,7 +11085,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 117.0, 256.0, 45.0 ],
+									"patching_rect" : [ 10.0, 117.0, 259.0, 45.0 ],
 									"text" : "Use the target message to select voice(s) to receive future messages and the open message to open patcher instance(s) in new window.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -12687,7 +12687,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 908.0, 663.0 ],
+						"rect" : [ 100.0, 126.0, 908.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12709,6 +12709,145 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-33",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 399.0, 427.0, 159.0, 18.0 ],
+									"text" : "0 0 0 0 0 0 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-29",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 600.0, 513.0, 71.0, 18.0 ],
+									"presentation_rect" : [ 596.5, 513.0, 0.0, 0.0 ],
+									"text" : "mutemap 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-67",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 654.708313, 443.0, 106.0, 24.0 ],
+									"text" : "Mute all voices"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-66",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 648.708313, 390.0, 96.0, 24.0 ],
+									"text" : "Mute voice 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-27",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 634.5, 443.0, 20.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-28",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 634.5, 468.0, 69.0, 18.0 ],
+									"text" : "mute all $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-46",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 626.5, 390.0, 20.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-47",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 626.5, 417.5, 64.0, 18.0 ],
+									"text" : "mute 1 $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-26",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 393.0, 327.0, 37.0, 18.0 ],
+									"text" : "open"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-21",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 7,
+									"outlettype" : [ "", "", "", "", "", "", "" ],
+									"patching_rect" : [ 387.0, 382.0, 207.0, 20.0 ],
+									"text" : "hoa.2d.process~ 3 hoa.all harmonics"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -12891,7 +13030,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.process~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.process~", "@obj-desc", "A patcher that duplicates patcher for hoa process." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -12922,12 +13061,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-34",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 626.0, 47.0 ],
-									"text" : "hoa.process~ helps the modularization of patches for ambisonic process. Number of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode pre, no or post encoding.",
+									"patching_rect" : [ 10.0, 73.5, 614.0, 60.0 ],
+									"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. Number of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode pre, no or post encoding.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -12942,7 +13081,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 626.0, 47.0 ],
+									"patching_rect" : [ 10.0, 73.5, 614.0, 60.0 ],
 									"rounded" : 0
 								}
 
@@ -13079,7 +13218,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 675.0, 90.0, 99.0, 19.0 ],
+									"patching_rect" : [ 675.0, 90.0, 74.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -13642,10 +13781,55 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-33", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-21", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-22", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-26", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-28", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-28", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-29", 0 ]
 								}
 
 							}
@@ -13664,6 +13848,24 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-47", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-46", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-47", 0 ]
 								}
 
 							}
