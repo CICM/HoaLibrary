@@ -45,7 +45,7 @@
 
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg name="float" optional="1" type="float">
+		<objarg name="multiplier" optional="1" type="float">
 			<digest>
 				π multiplier
 			</digest>

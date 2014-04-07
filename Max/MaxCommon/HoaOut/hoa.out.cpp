@@ -65,10 +65,29 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)NULL);
     class_addmethod(c, (method)hoa_out_assist,			"assist",			A_CANT,	 0);
+    
+    // @method bang @digest output bang message in the corresponding hoa.process~ object's message outlet
+	// @description The <m>bang</m> output bang message in the corresponding hoa.process~ object's message outlet
 	class_addmethod(c, (method)hoa_out_bang,			"bang",						 0);
+    
+    // @method int @digest output int message in the corresponding hoa.process~ object's message outlet
+	// @description The <m>int</m> output int message in the corresponding hoa.process~ object's message outlet
+	// @marg 0 @name number @optional 0 @type int
 	class_addmethod(c, (method)hoa_out_int,				"int",				A_LONG,	 0);
+    
+    // @method float @digest output int message in the corresponding hoa.process~ object's message outlet
+	// @description The <m>float</m> output int message in the corresponding hoa.process~ object's message outlet
+	// @marg 0 @name number @optional 0 @type float
 	class_addmethod(c, (method)hoa_out_float,			"float",			A_FLOAT, 0);
+    
+    // @method list @digest output a list in the corresponding hoa.process~ object's message outlet
+	// @description The <m>list</m> output a list in the corresponding hoa.process~ object's message outlet
+	// @marg 0 @name va-args @optional 0 @type list
 	class_addmethod(c, (method)hoa_out_list,			"list",				A_GIMME, 0);
+    
+    // @method anything @digest output a message in the corresponding hoa.process~ object's message outlet
+	// @description The <m>list</m> output a message in the corresponding hoa.process~ object's message outlet
+	// @marg 0 @name anything @optional 0 @type symbol
 	class_addmethod(c, (method)hoa_out_anything,		"anything",			A_GIMME, 0);
 	
 	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_out, extra);

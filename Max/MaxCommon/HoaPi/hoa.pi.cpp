@@ -94,7 +94,7 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
     x = (t_pi *)object_alloc(pi_class);
     if (x)
 	{
-        // @arg 0 @name float @optional 1 @type float @digest π multiplier
+        // @arg 0 @name multiplier @optional 1 @type float @digest π multiplier
 		// @description First argument is the π multiplier
         
         x->f_value = 1.;

@@ -592,11 +592,38 @@
 <!-- id="seealso_section" -->
   </xsl:template>
 
+  <xsl:template name="replace-string">
+    <xsl:param name="text"/>
+    <xsl:param name="replace"/>
+    <xsl:param name="with"/>
+    <xsl:choose>
+      <xsl:when test="contains($text,$replace)">
+        <xsl:value-of select="substring-before($text,$replace)"/>
+        <xsl:value-of select="$with"/>
+        <xsl:call-template name="replace-string">
+          <xsl:with-param name="text" select="substring-after($text,$replace)"/>
+          <xsl:with-param name="replace" select="$replace"/>
+          <xsl:with-param name="with" select="$with"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <xsl:template name="docurl">
     <xsl:param name="linkname"/>
     <xsl:param name="linktype"/>
     <xsl:param name="linkmodule"/>
     
+    <xsl:variable name="escapedname">
+      <xsl:call-template name="replace-string">
+        <xsl:with-param name="text" select="$linkname"/>
+        <xsl:with-param name="replace" select="' '" />
+        <xsl:with-param name="with" select="'%20'"/>
+      </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="module">
       <xsl:if test="$linkmodule">
         <xsl:choose>
@@ -605,11 +632,7 @@
             <xsl:value-of select="$linkmodule" /><xsl:text>/</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:choose>
-              <xsl:when test="$linkmodule='max'">max-tut/</xsl:when>
-              <xsl:when test="$linkmodule='msp'">msp-tut/</xsl:when>
-              <xsl:when test="$linkmodule='jitter'">jit-tut/</xsl:when>
-            </xsl:choose>
+		    <xsl:value-of select="$linkmodule" /><xsl:text>-tut/</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:if>
@@ -629,7 +652,7 @@
         <xsl:otherwise>.maxtut.xml</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:value-of select="concat($baseloc, $module, $linkname, $suffix)"/>
+    <xsl:value-of select="concat($baseloc, $module, $escapedname, $suffix)"/>
   </xsl:template>
   
   <xsl:template match="link">

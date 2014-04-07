@@ -14,6 +14,21 @@
     }
   },
 
+  "hoa.3d.scope~": {
+    "category": [
+      "MSP U/I"
+    ],
+    "digest": "An ambisonic harmonic scope for 3-D.",
+    "module": "hoa",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.3d.scope~",
+      "pic": "hoa.3d.scope~.svg"
+    }
+  },
+
   "hoa.2d.meter~": {
     "category": [
       "MSP U/I"
