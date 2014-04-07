@@ -35,8 +35,7 @@ public:
 
     void paint(Graphics& g);
     void componentHasBeenClicked(Component* component);
-    void componentRedrawMap();
-    void componentRedrawMeter();
+    void processorHasBeenUpdated();
 };
 
 

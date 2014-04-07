@@ -313,12 +313,12 @@ public:
         activePlugins.add (this);
     }
 	
-	void setNumberOfInputs(AudioProcessor* Nope, long aNumberOfInputs)
+	void setNumberOfChannelsInputs(AudioProcessor* Nope, long aNumberOfInputs)
     {
         numInChans = aNumberOfInputs;
     }
     
-    void setNumberOfOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
+    void setNumberOfChannelsOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
     {
         numOutChans = aNumberOfOutputs;
     }
@@ -534,140 +534,19 @@ public:
 
     void processReplacing (float** inputs, float** outputs, VstInt32 numSamples)
     {
-        if (firstProcessCallback)
+        if(filter->isSuspended())
         {
-            firstProcessCallback = false;
-
-            // if this fails, the host hasn't called resume() before processing
-            jassert (isProcessing);
-
-            // (tragically, some hosts actually need this, although it's stupid to have
-            //  to do it here..)
-            if (! isProcessing)
-                resume();
-
-            filter->setNonRealtime (getCurrentProcessLevel() == 4 /* kVstProcessLevelOffline */);
-
-           #if JUCE_WINDOWS
-            if (GetThreadPriority (GetCurrentThread()) <= THREAD_PRIORITY_NORMAL
-                  && GetThreadPriority (GetCurrentThread()) >= THREAD_PRIORITY_LOWEST)
-                filter->setNonRealtime (true);
-           #endif
+            for (int i = 0; i < cEffect.numOutputs; ++i)
+                FloatVectorOperations::clear (outputs[i], numSamples);
         }
+        else
+            filter->processBlock(inputs, outputs);
 
-       #if JUCE_DEBUG && ! JucePlugin_ProducesMidiOutput
-        const int numMidiEventsComingIn = midiEvents.getNumEvents();
-       #endif
-
-        jassert (activePlugins.contains (this));
-
-        {
-            const ScopedLock sl (filter->getCallbackLock());
-
-            const int numIn = numInChans;
-            const int numOut = numOutChans;
-
-            if(filter->isSuspended() || numIn != cEffect.numInputs || numOut != cEffect.numOutputs)
-            {
-                for (int i = 0; i < cEffect.numOutputs; ++i)
-                    FloatVectorOperations::clear (outputs[i], numSamples);
-            }
-            else
-            {
-                int i;
-                for (i = 0; i < numOut; ++i)
-                {
-                    float* chan = tempChannels.getUnchecked(i);
-
-                    if (chan == nullptr)
-                    {
-                        chan = outputs[i];
-
-                        // if some output channels are disabled, some hosts supply the same buffer
-                        // for multiple channels - this buggers up our method of copying the
-                        // inputs over the outputs, so we need to create unique temp buffers in this case..
-                        for (int j = i; --j >= 0;)
-                        {
-                            if (outputs[j] == chan)
-                            {
-                                chan = new float [blockSize * 2];
-                                tempChannels.set (i, chan);
-                                break;
-                            }
-                        }
-                    }
-
-                    if (i < numIn && chan != inputs[i])
-                        memcpy (chan, inputs[i], sizeof (float) * (size_t) numSamples);
-
-                    channels[i] = chan;
-                }
-
-                for (; i < numIn; ++i)
-                    channels[i] = inputs[i];
-
-                {
-                    AudioSampleBuffer chans (channels, jmax (numIn, numOut), numSamples);
-
-                    if (isBypassed)
-                        filter->processBlockBypassed (chans, midiEvents);
-                    else
-                        filter->processBlock (chans, midiEvents);
-                }
-
-                // copy back any temp channels that may have been used..
-                /*
-                for (i = 0; i < numOut; ++i)
-                    if (const float* const chan = tempChannels.getUnchecked(i))
-                        memcpy (outputs[i], chan, sizeof (float) * (size_t) numSamples);
-                 */
-            }
-        }
-
-        if (! midiEvents.isEmpty())
-        {
-           #if JucePlugin_ProducesMidiOutput
-            const int numEvents = midiEvents.getNumEvents();
-
-            outgoingEvents.ensureSize (numEvents);
-            outgoingEvents.clear();
-
-            const juce::uint8* midiEventData;
-            int midiEventSize, midiEventPosition;
-            MidiBuffer::Iterator i (midiEvents);
-
-            while (i.getNextEvent (midiEventData, midiEventSize, midiEventPosition))
-            {
-                jassert (midiEventPosition >= 0 && midiEventPosition < numSamples);
-
-                outgoingEvents.addEvent (midiEventData, midiEventSize, midiEventPosition);
-            }
-
-            sendVstEventsToHost (outgoingEvents.events);
-           #elif JUCE_DEBUG
-            /*  This assertion is caused when you've added some events to the
-                midiMessages array in your processBlock() method, which usually means
-                that you're trying to send them somewhere. But in this case they're
-                getting thrown away.
-
-                If your plugin does want to send midi messages, you'll need to set
-                the JucePlugin_ProducesMidiOutput macro to 1 in your
-                JucePluginCharacteristics.h file.
-
-                If you don't want to produce any midi output, then you should clear the
-                midiMessages array at the end of your processBlock() method, to
-                indicate that you don't want any of the events to be passed through
-                to the output.
-            */
-            jassert (midiEvents.getNumEvents() <= numMidiEventsComingIn);
-           #endif
-
-            midiEvents.clear();
-        }
         
-		setNumInputs(numInChans);
+        setNumInputs(numInChans);
         setNumOutputs(numOutChans);
         cEffect.numParams = filter->getNumParameters();
+        ioChanged();
     }
 
     //==============================================================================

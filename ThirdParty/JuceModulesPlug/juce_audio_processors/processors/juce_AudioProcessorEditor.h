@@ -51,7 +51,7 @@ public:
     //==============================================================================
     /** Returns a pointer to the processor that this editor represents. */
     AudioProcessor* getAudioProcessor() const noexcept        { return owner; }
-
+    virtual void processorHasBeenUpdated() = 0;
 
 private:
     //==============================================================================

@@ -7,7 +7,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-HoaToolsAudioProcessor::HoaToolsAudioProcessor() : KitSources(1)
+HoaToolsAudioProcessor::HoaToolsAudioProcessor() : KitSources()
 {
     m_gui = gui_mode_map;
 }
@@ -191,8 +191,6 @@ const String HoaToolsAudioProcessor::getParameterText (int index)
 
 void HoaToolsAudioProcessor::numChannelsChanged()
 {
-    AudioProcessorEditor* Editor = NULL;
-    
     if(getNumInputChannels() < getNumberOfSources())
     {
         setNumberOfSources(getNumInputChannels());
@@ -201,25 +199,33 @@ void HoaToolsAudioProcessor::numChannelsChanged()
     {
         setNumberOfChannels(getNumOutputChannels());
     }
+    if(isSuspended())
+    {
+        if(applyChanges())
+        {
+            setNumberOfInputs(getNumberOfSources());
+            setNumberOfOutputs(getNumberOfChannels());
+        }
+    }
     
-    Editor = getActiveEditor();
-    if(Editor)
-        Editor->repaint();
-    bool state = isSuspended();
-    if(state)
-        suspendProcessing(true);
-     
-    applyChanges();
+    if(getActiveEditor())
+        getActiveEditor()->processorHasBeenUpdated();
+    
     updateHostDisplay();
-    if(state)
-        suspendProcessing(false);
 }
 
 void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
 	setSampleRate(sampleRate);
 	setVectorSize(samplesPerBlock);
-    applyChanges();
+    if(applyChanges())
+    {
+        setNumberOfInputs(getNumberOfSources());
+        setNumberOfOutputs(getNumberOfChannels());
+        updateHostDisplay();
+        if(getActiveEditor())
+            getActiveEditor()->processorHasBeenUpdated();
+    }
 }
 
 void HoaToolsAudioProcessor::releaseResources()
@@ -227,15 +233,19 @@ void HoaToolsAudioProcessor::releaseResources()
     
 }
 
-void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void HoaToolsAudioProcessor::processBlock(float** inputs, float** outputs)
 {
     if(getNumOutputChannels() >= getNumberOfChannels() && getNumInputChannels() >= getNumberOfSources())
-        process((const float**)buffer.getArrayOfChannels(), buffer.getArrayOfChannels());
-	else
     {
-        applyChanges();
+        process((const float**)inputs, outputs);
+    }
+    if(applyChanges())
+    {
         setNumberOfInputs(getNumberOfSources());
         setNumberOfOutputs(getNumberOfChannels());
+        updateHostDisplay();
+        if(getActiveEditor())
+            getActiveEditor()->processorHasBeenUpdated();
     }
 }
 
@@ -271,9 +281,6 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
             setChannelsOffset(xmlState->getIntAttribute("OffsetOfChannels"));
             setOptimMode((Optim::Mode)xmlState->getIntAttribute("Optimization"));
             setZoom(xmlState->getDoubleAttribute("Zoom"));
-            
-            setNumberOfInputs(getNumberOfSources());
-            setNumberOfOutputs(getNumberOfChannels());
         }
     }
 }

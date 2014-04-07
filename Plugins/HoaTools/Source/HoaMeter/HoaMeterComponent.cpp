@@ -50,43 +50,30 @@ void HoaMeterComponent::draw_background(Graphics& g)
 {
     int i;
     float coso, sino, angle, x1, y1, x2, y2;
-    
-    if(m_processor->getNumberOfMeterChannels() != 1)
+    float thickness  = 3;
+    if(getWidth() < PLUG_MENU_WIDTH)
+        thickness = 1;
+    if(m_processor->getNumberOfChannels() != 1)
     {
-        for(i = 0; i < m_processor->getNumberOfMeterChannels(); i++)
+        for(i = 0; i < m_processor->getNumberOfChannels(); i++)
         {
-
             angle = m_processor->getChannelAzimuthMapped(i) - m_processor->getChannelWidth(i) * 0.5f;
             
-            coso = cosf(angle);
-            sino = sinf(angle);
+            coso = cosf(angle - HOA_PI2);
+            sino = sinf(angle - HOA_PI2);
             x1 = m_radius_center * coso;
             y1 = m_radius_center * sino;
             x2 = m_radius * coso;
             y2 = m_radius * sino;
             
-            g.setColour(Colours::white);
-            if(isInsideRad(angle, HOA_PI4, HOA_PI + HOA_PI4))
-            {
-                g.drawLine(x1 + m_center - 1., y1 + m_center - 1., x2 + m_center, y2 + m_center);
-            }
-            else
-            {
-                g.drawLine(x1 + m_center + 1., y1 + m_center + 1., x2 + m_center, y2 + m_center);
-            }
-            
             g.setColour(Colours::black);
-            g.drawLine(x1 + m_center, y1 + m_center, x2 + m_center, y2 + m_center);
+            g.drawLine(x1 + m_center, y1 + m_center, x2 + m_center, y2 + m_center, thickness);
         }
     }
     
-    g.setColour(Colours::white);
-    g.drawEllipse((int)(m_center - m_radius + 1.), (int)(m_center - m_radius + 1.), m_radius * 2., m_radius * 2., 3.);
-    g.drawEllipse((int)(m_center - m_radius_center + 1.), (int)(m_center - m_radius_center + 1.), m_radius_center * 2., m_radius_center * 2., 3.);
-    
     g.setColour(Colours::black);
-    g.drawEllipse((int)(m_center - m_radius), (int)(m_center - m_radius), m_radius * 2., m_radius * 2., 4.);
-    g.drawEllipse((int)(m_center - m_radius_center), (int)(m_center - m_radius_center), m_radius_center * 2., m_radius_center * 2., 4.);
+    g.drawEllipse((int)(m_center - m_radius), (int)(m_center - m_radius), m_radius * 2., m_radius * 2., thickness);
+    g.drawEllipse((int)(m_center - m_radius_center), (int)(m_center - m_radius_center), m_radius_center * 2., m_radius_center * 2., thickness);
 }
 
 void HoaMeterComponent::draw_leds(Graphics& g)
@@ -95,16 +82,19 @@ void HoaMeterComponent::draw_leds(Graphics& g)
     float j, dB;
     float angle_start, angle, angle_end, radius, center_x, center_y;
     float led_width = 0.49 * getWidth() / 18.;
-    float h = led_width * 17.;
-   
+    float h = led_width * 18.;
+    float thickness  = led_width - 2;
+    if(getWidth() < PLUG_MENU_WIDTH)
+        thickness = led_width - 1;
+    
 	Path p;
     
-    for(i = 0; i < m_processor->getNumberOfMeterChannels(); i++)
+    for(i = 0; i < m_processor->getNumberOfChannels(); i++)
     {
-        angle   = m_processor->getChannelAzimuthMapped(i) + HOA_PI2;
+        angle   = -m_processor->getChannelAzimuthMapped(i) ;
         
         center_x    = Hoa::abscissa(m_radius - h, angle);
-        center_y    = -Hoa::ordinate(m_radius - h, angle);
+        center_y    = Hoa::ordinate(m_radius - h, angle);
         
         angle_start = angle - m_processor->getChannelWidth(i) * 0.5f;
         angle_end   = angle + m_processor->getChannelWidth(i) * 0.5f;
@@ -124,42 +114,20 @@ void HoaMeterComponent::draw_leds(Graphics& g)
                 else
                     g.setColour(Colours::orange);
                 
-                p.addCentredArc(center_x + getWidth() * 0.5f, center_y + getWidth() * 0.5f, radius, radius, HOA_2PI, angle_start, angle_end, 1);
-                g.strokePath(p, PathStrokeType(3, PathStrokeType::mitered, PathStrokeType::rounded));
+                p.addCentredArc(center_x + m_center, center_y + m_center, radius, radius, HOA_2PI, angle_start, angle_end, 1);
+                g.strokePath(p, PathStrokeType(thickness, PathStrokeType::beveled, PathStrokeType::butt));
                 p.clear();
             }
             else if(j != -1)
             {
                 g.setColour(Colours::grey);
                 p.addCentredArc(center_x + m_center, center_y + m_center, radius, radius, HOA_2PI, angle_start, angle_end, 1);
-                g.strokePath(p, PathStrokeType(3, PathStrokeType::mitered, PathStrokeType::rounded));
+                g.strokePath(p, PathStrokeType(thickness, PathStrokeType::beveled, PathStrokeType::butt));
                 p.clear();
             }
-        }
-       /*
-        if(x->f_over_leds[i])
-        {
-            radius    = (4.) * led_width;
-            egraphics_set_color_rgba(g, &x->f_color_over_signal);
-            egraphics_set_line_width(g, led_width - pd_clip_min(360. / getWidth(), 2.));
-            egraphics_arc(g, center_x + getWidth() * 0.5f, center_y + getWidth() * 0.5f, radius, angle_start, angle_end);
-            egraphics_stroke(g);
-        }
-        */
-     
+        }     
     }
 };
-
-
-void HoaMeterComponent::mouseMove(const MouseEvent &event)
-{
-	;
-}
-
-void HoaMeterComponent::mouseDrag(const MouseEvent &event)
-{
-	;
-}
 
 
 

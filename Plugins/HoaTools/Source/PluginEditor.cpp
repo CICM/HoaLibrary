@@ -68,18 +68,21 @@ void HoaToolsAudioProcessorEditor::componentHasBeenClicked(Component* component)
         m_front_component->setSize(124, 124);
         m_front_component->setBounds(x, y, 124, 124);
         m_front_component = component;
+        
+        if(component == m_settings)
+            m_settings->updated();
+        
         repaint();
     }
 }
 
-void HoaToolsAudioProcessorEditor::componentRedrawMap()
+void HoaToolsAudioProcessorEditor::processorHasBeenUpdated()
 {
+    m_settings->updated();
+    m_settings->repaint();
     m_map->repaint();
-}
-
-void HoaToolsAudioProcessorEditor::componentRedrawMeter()
-{
     m_meter->repaint();
+    repaint();
 }
 
 void HoaToolsAudioProcessorEditor::paint(Graphics& g)

@@ -31,9 +31,7 @@ public:
     ~HoaMeterComponent();
     
     void paint (Graphics&);
-    void mouseMove(const MouseEvent &event);
     void mouseDown(const MouseEvent &event);
-    void mouseDrag(const MouseEvent &event);
     void timerCallback();
 };
 

@@ -74,6 +74,7 @@ namespace Hoa2D
         unsigned int        m_order;
         unsigned int        m_number_of_sources;
         unsigned int        m_number_of_channels;
+        
         DecoderMulti::Mode  m_decoding_mode;
         Optim::Mode         m_optim_mode;
         double              m_offset;
@@ -89,10 +90,21 @@ namespace Hoa2D
         double*         m_inputs_double;
         double*         m_outputs_double;
         double*         m_harmonics_double;
+        double          m_channels_azimuth_mapped[64];
+        double          m_channels_azimuth[64];
+        double          m_channels_width[64];
+        
         float*          m_inputs_float;
         float*          m_outputs_float;
         float*          m_harmonics_float;
+        float*          m_outputs_float_bin[2];
+        float*          m_harmonics_float_bin[64];
         float*          m_lines_vector;
+   
+    protected :
+        //unsigned int        m_max_number_of_sources;
+        //unsigned int        m_max_number_of_channels;
+        
     public:
         
         //! The sources kit constructor.
@@ -100,7 +112,7 @@ namespace Hoa2D
          
             @param     order				The order.
          */
-		KitSources(unsigned int order);
+		KitSources();
 		
         //! The sources kit destructor.
         /**	The sources kit destructor free the memory.
@@ -123,7 +135,7 @@ namespace Hoa2D
         {
             return m_order;
         }
-        
+          
         //! Set the number of sources.
 		/**	Set the number of sources. The change will operate during the post process call to avoid conflicts during the process.
          
@@ -157,17 +169,6 @@ namespace Hoa2D
         {
             return m_number_of_channels;
         }
-        
-        //! Retrieve the number of channels.
-		/** Retrieve the number of channels of the planewave class.
-         
-         @return The number of channels.
-         */
-		inline unsigned int getNumberOfMeterChannels() const
-        {
-            return m_meter->getNumberOfChannels();
-        }
-		
 		
 		//! Set the azimuth of a given channel.
         /** Set the azimuth of a given channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field.
@@ -178,8 +179,26 @@ namespace Hoa2D
          */
 		void setChannelAzimuth(unsigned int index, double azimuth)
 		{
-			m_meter->setChannelAzimuth(index, azimuth);
-			m_decoder->setChannelAzimuth(index, azimuth);
+            m_decoder->setChannelAzimuth(index,azimuth);
+			m_meter->setChannelAzimuth(index, m_decoder->getChannelAzimuth(index));
+            for(int i = 0; i < m_meter->getNumberOfChannels(); i++)
+            {
+                m_channels_azimuth[i] = m_meter->getChannelAzimuth(i);
+                m_channels_azimuth_mapped[i] = m_meter->getChannelAzimuthMapped(i);
+                m_channels_width[i] = m_meter->getChannelWidth(i);
+            }
+		}
+        
+        //! Get the mapped azimuth of a given channel.
+        /**
+         *
+         * @param     index		The index of the channel.
+         * @return				The mapped azimuth.
+		 * @see getChannelAzimuth, getChannelAzimuthMapped
+         */
+        double getChannelAzimuth(unsigned int index) const
+		{
+			return m_channels_azimuth[index];
 		}
 		
 		//! Get the mapped azimuth of a given channel.
@@ -191,7 +210,7 @@ namespace Hoa2D
          */
         double getChannelAzimuthMapped(unsigned int index) const
 		{
-			return m_meter->getChannelAzimuthMapped(index);
+			return m_channels_azimuth_mapped[index];
 		}
 		
 		//! Get the width of a given channel.
@@ -203,7 +222,7 @@ namespace Hoa2D
          */
         double getChannelWidth(unsigned int index) const
 		{
-			return m_meter->getChannelWidth(index);
+			return m_channels_width[index];
 		}
 		
 		//! Retrieve the peak value of a given channel.
@@ -213,7 +232,10 @@ namespace Hoa2D
          */
         inline double getChannelPeak(unsigned int index) const
         {
-            return m_meter->getChannelPeak(index);
+            if(index < m_meter->getNumberOfChannels())
+                return m_meter->getChannelPeak(index);
+            else
+                return 0;
         }
         
 		//! Retrieve the energy of a given channel.
@@ -223,7 +245,10 @@ namespace Hoa2D
          */
         inline double getChannelEnergy(unsigned int index) const
         {
-            return m_meter->getChannelEnergy(index);
+            if(index < m_meter->getNumberOfChannels())
+                return m_meter->getChannelEnergy(index);
+            else
+                return -90.;
         }
         
         //! Set the decoding mode.
@@ -314,7 +339,7 @@ namespace Hoa2D
             return m_vector_size;
         }
 
-        void applyChanges();
+        bool applyChanges();
         
         void releaseResources();
         

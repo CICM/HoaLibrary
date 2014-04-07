@@ -1,210 +1,242 @@
-#N canvas 436 77 1287 776 10;
-#X declare -lib hoa.library;
-#X declare -lib hoa.library/hoa.library;
-#X obj -354 -643 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.library
+#N canvas 148 22 1287 831 10;
+#X declare HoaLibrary/hoa.library;
+#X declare hoa.library;
+#X obj -354 -628 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.library
 3 12 0 18 -204280 -1 0;
-#X text 224 -640 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text 224 -625 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 & Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X text -351 -621 High Order Ambisonics Library;
-#X text -347 -601 Hoa Library allows musicians and composers to synthesize
+#X text -351 -606 High Order Ambisonics Library;
+#X text -347 -586 Hoa Library allows musicians and composers to synthesize
 \, transform and render sound fields in a creative and artistic way.
 This library facilitates the understanding and the appropriation of
 key concepts of ambisonics. Thanks to original graphical interfaces
 a lot of new signal processing are allowed like diffuse sound field
-synthesis \, perspective distorsion or spatial filtering.;
-#X obj 792 -411 phasor~ 1.33;
-#X obj 639 -411 phasor~ 1;
-#X obj 300 -151 hoa.2d.scope~ @size 184 184 @fontname Helvetica @fontweight
+synthesis \, perspective distorsion or spatial filtering., f 90;
+#X obj 792 -396 phasor~ 1.33;
+#X obj 639 -396 phasor~ 1;
+#X obj 303 -276 hoa.2d.scope~ @size 183 183 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
-3 @gain 1 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+3 @gain 5 @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 247 -580 hoa.pi 2;
-#X obj 262 -558 phasor~ 0.2;
-#X obj 247 -536 *~;
-#X obj 609 -613 hoa.2d.map @size 184 184 @fontname Helvetica @fontweight
+#X obj 247 -485 hoa.pi 2;
+#X obj 262 -463 phasor~ 0.2;
+#X obj 247 -441 *~;
+#X obj 609 -598 hoa.2d.map @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @outputmode polar @zoom 0.35 sources_parameters
-groups_parameters;
-#X obj -336 -487 hoa.2d.space @size 184 184 @fontname Helvetica @fontweight
+0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @outputmode polar @zoom 0.35;
+#X obj -336 -472 hoa.2d.space @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @channels 8 @minmax 0 1 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5
 0.5 0.5 1 @spcolor 0.27 0.43 0.54 0.25 @ptcolor 0 0 0 1;
-#X obj 70 -313 hoa.delay~ 3 post ************;
-#X obj -127 -227 hoa.recomposer~ 3 8 **********;
-#X obj -127 -279 hoa.space~ 8 *****************;
-#X obj -127 -379 hoa.projector~ 3 8 ***********;
-#X obj -127 -450 hoa.grain~ 3 no **************;
-#X obj 70 -380 hoa.ringmod~ 3 post **********;
-#X obj 70 -505 hoa.encoder~ 3 ***************;
-#X obj 441 -488 hoa.pi 2;
-#X obj 426 -445 *~;
-#X obj 639 -274 hoa.freeverb~ 3 **********;
-#X obj 639 -369 hoa.map~ 3 2 *************;
-#X obj 70 -559 noise~;
-#X obj 480 -319 hoa.pi 0.25;
-#X obj 480 -348 loadbang;
-#X obj 247 -603 loadbang;
-#X msg -226 -131 \; pd dsp 1;
-#X msg -227 -94 \; pd dsp 0;
-#X obj 609 -643 loadbang;
-#X obj 69 -125 hoa.decoder~ 3 ambisonic 8 ---;
-#X obj -127 -476 *~ 0.3;
-#X obj 441 -512 loadbang;
-#X obj 426 -467 phasor~ -0.5;
-#X obj 303 -480 osc~ 330;
-#X obj -336 -509 loadbang;
-#X msg 689 -137 wet \$1;
-#X obj 689 -170 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 639 -259 hoa.freeverb~ 3 **********;
+#X obj 639 -354 hoa.map~ 3 2 *************;
+#X obj 247 -508 loadbang;
+#X msg -226 -116 \; pd dsp 1;
+#X msg -227 -79 \; pd dsp 0;
+#X obj 609 -628 loadbang;
+#X obj -336 -494 loadbang;
+#X msg 689 -122 wet \$1;
+#X obj 689 -155 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 1 256;
-#X obj 816 -170 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 816 -155 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0.5 256;
-#X msg 816 -137 damp \$1;
-#X obj 753 -168 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+#X msg 816 -122 damp \$1;
+#X obj 753 -153 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 1 256;
-#X msg 753 -135 size \$1;
-#X obj 689 -227 loadbang;
-#X msg 689 -202 1;
-#X msg 816 -198 0.5;
-#X obj 70 -530 *~ 0.01;
-#X obj 303 -448 *~ 0.15;
-#X obj -127 -502 osc~ 440;
-#X obj 69 -103 hoa.2d.meter~ @size 183 183 @fontname Helvetica @fontweight
+#X msg 753 -120 size \$1;
+#X obj 689 -212 loadbang;
+#X msg 689 -187 1;
+#X msg 816 -183 0.5;
+#X obj 70 -78 hoa.2d.meter~ @size 213 213 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 8 @angles 0 45 90 135 180 225 270 315 @offset 0 @rotation anti-clockwise
 @vectors none @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
 0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 69 -152 hoa.optim~ 3 @mode inPhase ---;
-#X obj 456 -438 c.loadmess 0.7;
-#X obj 456 -404 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 303 -373 hoa.wider~ 3 ************;
-#X obj 301 -225 hoa.rotate~ 3 ****************;
-#X obj 303 -414 hoa.encoder~ 3 ******;
-#X obj 70 87 hoa.dac~ 1:8 -----------------;
-#X obj 823 -528 hoa.connect;
-#X obj 823 -547 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 303 -310 hoa.rotate~ 3 ****************;
+#X obj 71 142 hoa.dac~ 1:8 -----------------, f 34;
+#X obj 823 -513 hoa.connect;
+#X obj 823 -532 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 823 -586 key;
-#X obj 823 -567 sel 32;
-#X obj -207 63 declare -lib hoa.library;
-#X obj -207 84 declare -lib hoa.library/hoa.library;
-#X connect 4 0 22 1;
-#X connect 5 0 22 0;
+#X obj 823 -571 key;
+#X obj 823 -552 sel 32;
+#X obj -207 99 declare HoaLibrary/hoa.library;
+#X obj -207 78 declare hoa.library;
+#X obj 70 -298 hoa.process~ 3 hoa.fx.delay~ 3, f 35;
+#X obj 70 -365 hoa.process~ 3 hoa.fx.ringmod~;
+#X obj -127 -364 hoa.projector~ 3 8 **********;
+#X obj -164 -125 hoa.space~ 8;
+#X obj -127 -202 hoa.recomposer~ 3 8 *********;
+#X obj -127 -478 hoa.soundcoat;
+#N canvas 237 132 503 391 hoa_grain_env 0;
+#X obj 270 148 / 256;
+#X obj 270 193 * 1;
+#X obj 270 247 * 0.5;
+#X obj 270 219 sin;
+#X obj 270 271 + 0.5;
+#X obj 271 8 c.loadmess;
+#X obj 270 120 t f f;
+#X obj 270 299 pack;
+#X obj 306 166 hoa.pi 1;
+#X obj 270 169 - 0.5;
+#X obj 271 32 t b b;
+#X obj 270 323 tabwrite \$0-hoa_grain_array;
+#X obj 270 76 until;
+#X obj 270 97 f;
+#X obj 297 98 + 1;
+#X msg 270 55 512;
+#X connect 0 0 9 0;
+#X connect 1 0 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 7 0;
+#X connect 5 0 10 0;
+#X connect 6 0 0 0;
+#X connect 6 1 7 1;
+#X connect 7 0 11 0;
+#X connect 8 0 1 1;
+#X connect 9 0 1 0;
+#X connect 10 0 15 0;
+#X connect 10 1 8 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 13 0 6 0;
+#X connect 14 0 13 1;
+#X connect 15 0 12 0;
+#X restore -344 -188 pd hoa_grain_env;
+#X obj -345 -208 table \$0-hoa_grain_array 512;
+#X obj -127 -435 hoa.process~ 3 hoa.syn.grain~ harmonics \$0-hoa_grain_array
+@size 20 @delay 4000 @feedback 0.9, f 29;
+#X obj 70 -110 hoa.decoder~ 3 ambisonic 8 ***, f 35;
+#X obj 303 -421 hoa.soundrone;
+#X obj 456 -411 osc~ 0.1;
+#X obj 456 -384 *~;
+#X obj 480 -341 hoa.pi~ 2;
+#X obj 482 -366 phasor~ 0.3;
+#X obj 303 -348 hoa.wider~ 3 *************;
+#X obj 303 -385 hoa.encoder~ 3 *******;
+#X obj 70 -410 hoa.encoder~ 3, f 26;
+#X obj 432 -164 hoa.optim~ 3 inPhase *********, f 35;
+#X connect 4 0 13 1;
+#X connect 5 0 13 0;
 #X connect 7 0 9 0;
 #X connect 8 0 9 1;
-#X connect 9 0 18 1;
-#X connect 10 0 22 0;
-#X connect 11 0 14 0;
-#X connect 13 0 49 0;
-#X connect 13 1 49 1;
-#X connect 13 2 49 2;
-#X connect 13 3 49 3;
-#X connect 13 4 49 4;
-#X connect 13 5 49 5;
-#X connect 13 6 49 6;
-#X connect 14 0 13 0;
-#X connect 14 1 13 1;
-#X connect 14 2 13 2;
-#X connect 14 3 13 3;
-#X connect 14 4 13 4;
-#X connect 14 5 13 5;
-#X connect 14 6 13 6;
-#X connect 14 7 13 7;
-#X connect 15 0 14 0;
-#X connect 15 1 14 1;
-#X connect 15 2 14 2;
-#X connect 15 3 14 3;
-#X connect 15 4 14 4;
-#X connect 15 5 14 5;
-#X connect 15 6 14 6;
-#X connect 15 7 14 7;
-#X connect 18 0 17 0;
-#X connect 18 1 17 1;
-#X connect 18 2 17 2;
-#X connect 18 3 17 3;
-#X connect 18 4 17 4;
-#X connect 18 5 17 5;
-#X connect 18 6 17 6;
-#X connect 19 0 20 1;
-#X connect 20 0 54 1;
-#X connect 23 0 45 0;
-#X connect 24 0 53 7;
-#X connect 25 0 24 0;
-#X connect 26 0 7 0;
-#X connect 29 0 10 0;
-#X connect 30 0 48 0;
-#X connect 30 0 55 0;
-#X connect 30 1 48 1;
-#X connect 30 1 55 1;
-#X connect 30 2 48 2;
-#X connect 30 2 55 2;
-#X connect 30 3 48 3;
-#X connect 30 3 55 3;
-#X connect 30 4 48 4;
-#X connect 30 4 55 4;
-#X connect 30 5 48 5;
-#X connect 30 5 55 5;
-#X connect 30 6 48 6;
-#X connect 30 6 55 6;
-#X connect 30 7 48 7;
-#X connect 30 7 55 7;
-#X connect 32 0 19 0;
-#X connect 33 0 20 0;
-#X connect 34 0 46 0;
-#X connect 35 0 11 0;
-#X connect 37 0 36 0;
-#X connect 38 0 39 0;
-#X connect 40 0 41 0;
-#X connect 42 0 43 0;
-#X connect 42 0 44 0;
-#X connect 43 0 37 0;
-#X connect 43 0 40 0;
-#X connect 44 0 38 0;
-#X connect 45 0 18 0;
-#X connect 46 0 54 0;
-#X connect 47 0 31 0;
-#X connect 49 0 30 0;
-#X connect 49 1 30 1;
-#X connect 49 2 30 2;
-#X connect 49 3 30 3;
-#X connect 49 4 30 4;
-#X connect 49 5 30 5;
-#X connect 49 6 30 6;
-#X connect 50 0 51 0;
-#X connect 51 0 52 7;
-#X connect 52 0 53 0;
-#X connect 52 1 53 1;
-#X connect 52 2 53 2;
-#X connect 52 3 53 3;
-#X connect 52 4 53 4;
-#X connect 52 5 53 5;
-#X connect 52 6 53 6;
-#X connect 53 0 6 0;
-#X connect 53 0 49 0;
-#X connect 53 1 6 1;
-#X connect 53 1 49 1;
-#X connect 53 2 6 2;
-#X connect 53 2 49 2;
-#X connect 53 3 49 3;
-#X connect 53 3 6 3;
-#X connect 53 4 49 4;
-#X connect 53 4 6 4;
-#X connect 53 5 49 5;
-#X connect 53 5 6 5;
-#X connect 53 6 49 6;
-#X connect 53 6 6 6;
-#X connect 54 0 52 0;
-#X connect 54 1 52 1;
-#X connect 54 2 52 2;
-#X connect 54 3 52 3;
-#X connect 54 4 52 4;
-#X connect 54 5 52 5;
-#X connect 54 6 52 6;
-#X connect 57 0 56 0;
-#X connect 58 0 59 0;
-#X connect 59 0 57 0;
-#X coords 0 776 1 775 100 60 0;
+#X connect 9 0 54 1;
+#X connect 10 0 13 0;
+#X connect 14 0 7 0;
+#X connect 17 0 10 0;
+#X connect 18 0 11 0;
+#X connect 20 0 19 0;
+#X connect 21 0 22 0;
+#X connect 23 0 24 0;
+#X connect 25 0 26 0;
+#X connect 25 0 27 0;
+#X connect 26 0 20 0;
+#X connect 26 0 23 0;
+#X connect 27 0 21 0;
+#X connect 29 0 6 0;
+#X connect 29 0 55 0;
+#X connect 29 1 6 1;
+#X connect 29 1 55 1;
+#X connect 29 2 6 2;
+#X connect 29 2 55 2;
+#X connect 29 3 6 3;
+#X connect 29 3 55 3;
+#X connect 29 4 6 4;
+#X connect 29 4 55 4;
+#X connect 29 5 6 5;
+#X connect 29 5 55 5;
+#X connect 29 6 6 6;
+#X connect 29 6 55 6;
+#X connect 32 0 31 0;
+#X connect 33 0 34 0;
+#X connect 34 0 32 0;
+#X connect 37 0 46 0;
+#X connect 37 1 46 1;
+#X connect 37 2 46 2;
+#X connect 37 3 46 3;
+#X connect 37 4 46 4;
+#X connect 37 5 46 5;
+#X connect 37 6 46 6;
+#X connect 38 0 37 0;
+#X connect 38 1 37 1;
+#X connect 38 2 37 2;
+#X connect 38 3 37 3;
+#X connect 38 4 37 4;
+#X connect 38 5 37 5;
+#X connect 38 6 37 6;
+#X connect 39 0 41 0;
+#X connect 39 1 41 1;
+#X connect 39 2 41 2;
+#X connect 39 3 41 3;
+#X connect 39 4 41 4;
+#X connect 39 5 41 5;
+#X connect 39 6 41 6;
+#X connect 39 7 41 7;
+#X connect 41 0 46 0;
+#X connect 41 1 46 1;
+#X connect 41 2 46 2;
+#X connect 41 3 46 3;
+#X connect 41 4 46 4;
+#X connect 41 5 46 5;
+#X connect 41 6 46 6;
+#X connect 42 0 45 0;
+#X connect 45 0 39 0;
+#X connect 45 1 39 1;
+#X connect 45 2 39 2;
+#X connect 45 3 39 3;
+#X connect 45 4 39 4;
+#X connect 45 5 39 5;
+#X connect 45 6 39 6;
+#X connect 46 0 28 0;
+#X connect 46 0 30 0;
+#X connect 46 1 28 1;
+#X connect 46 1 30 1;
+#X connect 46 2 28 2;
+#X connect 46 2 30 2;
+#X connect 46 3 28 3;
+#X connect 46 3 30 3;
+#X connect 46 4 28 4;
+#X connect 46 4 30 4;
+#X connect 46 5 28 5;
+#X connect 46 5 30 5;
+#X connect 46 6 28 6;
+#X connect 46 6 30 6;
+#X connect 46 7 28 7;
+#X connect 46 7 30 7;
+#X connect 47 0 53 0;
+#X connect 48 0 49 0;
+#X connect 48 0 49 1;
+#X connect 49 0 52 7;
+#X connect 50 0 29 7;
+#X connect 51 0 50 1;
+#X connect 52 0 29 0;
+#X connect 52 1 29 1;
+#X connect 52 2 29 2;
+#X connect 52 3 29 3;
+#X connect 52 4 29 4;
+#X connect 52 5 29 5;
+#X connect 52 6 29 6;
+#X connect 53 0 52 0;
+#X connect 53 1 52 1;
+#X connect 53 2 52 2;
+#X connect 53 3 52 3;
+#X connect 53 4 52 4;
+#X connect 53 5 52 5;
+#X connect 53 6 52 6;
+#X connect 54 0 38 0;
+#X connect 54 1 38 1;
+#X connect 54 2 38 2;
+#X connect 54 3 38 3;
+#X connect 54 4 38 4;
+#X connect 54 5 38 5;
+#X connect 54 6 38 6;
+#X connect 55 0 46 0;
+#X connect 55 1 46 1;
+#X connect 55 2 46 2;
+#X connect 55 3 46 3;
+#X connect 55 4 46 4;
+#X connect 55 5 46 5;
+#X connect 55 6 46 6;
+#X coords 0 831 1 830 100 60 0;
