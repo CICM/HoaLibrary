@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.recomposer~.cpp
+ @name      hoa.2d.recomposer~
+ @realname  hoa.2d.recomposer~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ Recomposes a plane wave decomposition into circular harmonics
+ 
+ @description
+ <o>hoa.2d.recomposer~</o> recomposes a plane wave decomposition into circular harmonics. There's three modes, <b>fixe</b> (default), <b>fisheye</b> and <b>free</b>. The <o>hoa.2d.recomposer~</o> can be controlled either by message or with the help of its dedicated graphical user interface <o>hoa.2d.recomposer</o>.
+ 
+ @discussion
+ <o>hoa.2d.recomposer~</o> recomposes a plane wave decomposition into circular harmonics. There's three modes, <b>fixe</b> (default), <b>fisheye</b> and <b>free</b>. The <o>hoa.2d.recomposer~</o> can be controlled either by message or with the help of its dedicated graphical user interface <o>hoa.2d.recomposer</o>.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.projector~, hoa.2d.recomposer, hoa.2d.space, hoa.amp~, hoa.delay~, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.decoder~, hoa.process~, hoa.2d.meter~, hoa.2d.scope~
+ */
+
 #include "../Hoa2D.max.h"
 
 class PolarLines
@@ -97,10 +119,22 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.2d.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (long)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of plane wave signals to be recomposed, fisheye factor.
+	// @description Array of plane wave signals to be recomposed, fisheye factor in the last inlet in <b>fisheye</b> mode.
 	class_addmethod(c, (method)hoa_recomposer_dsp64,	"dsp64",            A_CANT, 0);
 	class_addmethod(c, (method)hoa_recomposer_assist,   "assist",           A_CANT, 0);
+	
+	// @method angles @digest Set the angles of channels.
+	// @description Set the angles of channels. Angles are in radians, wrapped between 0. and 2π.
     class_addmethod(c, (method)hoa_recomposer_angle,    "angles",           A_GIMME,0);
+	
+	// @method wide @digest Set the widening value of channels.
+	// @description Set the widening value of channels. Widening value is clipped between 0. (omnidirectional) and 1. (directional).
     class_addmethod(c, (method)hoa_recomposer_wide,     "wide",             A_GIMME,0);
+	
+	// @method float @digest Set the fisheye factor in the last inlet (only in <b>fisheye</b> mode).
+	// @description Set the fisheye factor in the last inlet (only in <b>fisheye</b> mode).
     class_addmethod(c, (method)hoa_recomposer_float,    "float",            A_FLOAT,0);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_recomposer, f_ramp);
@@ -110,18 +144,30 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
     CLASS_ATTR_DEFAULT          (c,"ramp", 0, "100");
     CLASS_ATTR_SAVE             (c,"ramp", 1);
+	// @description Ramp time in millisecond.
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_recomposer_class = c;
-    
-    hoa_sym_fixe       = gensym("fixe");
-    hoa_sym_fisheye    = gensym("fisheye");
 	return 0;
 }
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
+	// @arg 1 @name number-of-channels @optional 0 @type int @digest The number of channels
+	// @description Second argument sets the number of channels.
+	
+	// @arg 2 @name mode @optional 1 @type symbol @digest The recomposition mode
+	// @description The third argument to <o>hoa.2d.recomposer~</o> object sets the recomposition mode. There is three modes :
+	// <ul>
+	// <li>In <b>fixe</b> mode the <o>hoa.2d.recomposer~</o> object simply recomposes a plane wave decomposition into circular harmonics</li>
+	// <li><o>hoa.2d.recomposer~</o>, used in <b>fisheye</b> mode, allows you to perform an operation similar to the visual "fisheye" effect by distorsion of the sound field perspective to the front of the scene.</li>
+	// <li>used in <b>free</b> mode, <o>hoa.2d.recomposer~</o> allows you to change the angles and the widening value for each channels. You can set these values directly with messages or with the use of the <o>hoa.2d.recomposer</o> GUI.</li>
+	// </ul>
+	
 	t_hoa_recomposer *x = NULL;
 	int	order = 1;
     int numberOfLoudspeakers = 4;

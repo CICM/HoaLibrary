@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.vector~.cpp
+ @name      hoa.2d.vector~
+ @realname  hoa.2d.vector~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A soundfield energy and velocity vectors calculator.
+ 
+ @description
+ <o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
+ 
+ @discussion
+ <o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.meter~, hoa.2d.scope~, hoa.2d.decoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_vector 
@@ -42,6 +64,9 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.2d.vector~", (method)hoa_vector_new, (method)hoa_vector_free, (long)sizeof(t_hoa_vector), 0L, A_GIMME, 0);
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of channels signals.
+	// @description Array of channels signals.
 	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
     
@@ -52,6 +77,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
     CLASS_ATTR_SAVE                 (c, "channels", 0);
+	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE               (c, "offset", 0, t_hoa_vector, f_attrs);
 	CLASS_ATTR_CATEGORY             (c, "offset", 0, "Planewaves");
@@ -60,6 +86,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
     CLASS_ATTR_ORDER                (c, "offset", 0, "2");
     CLASS_ATTR_SAVE                 (c, "offset", 0);
+	// @description The offset of the channels.
     
     CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_vector, f_attrs, f_attrs, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "angles", 0, "Planewaves");
@@ -68,6 +95,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER                (c, "angles", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "angles", 0);
 	CLASS_ATTR_DEFAULT              (c, "angles", 0, "0. 90. 180. 270.");
+	// @description The angles of the channels. Angles are in degree wrapped between 0. and 360.
     
     class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -78,6 +106,9 @@ int C74_EXPORT main(void)
 
 void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name number-of-channels @optional 0 @type int @digest The number of channels
+	// @description First argument sets the number of channels.
+	
 	t_hoa_vector *x = NULL;
     t_dictionary *d = NULL;
     t_dictionary *attr = NULL;
