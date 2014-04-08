@@ -50,9 +50,9 @@ float HoaToolsAudioProcessor::getParameter(int index)
     if((index + 1) % 3 == 0)
         return sourceGetMute(index / 3);
     else if((index + 2) % 3 == 0)
-        return sourceGetOrdinate(index / 3) / 10. - 0.5;
+        return sourceGetOrdinate(index / 3) / 20. + 0.5;
     else
-        return sourceGetAbscissa(index / 3) / 10. - 0.5;
+        return sourceGetAbscissa(index / 3) / 20. +  0.5;
 }
 
 void HoaToolsAudioProcessor::setParameter(int index, float newValue)
@@ -191,62 +191,47 @@ const String HoaToolsAudioProcessor::getParameterText (int index)
 
 void HoaToolsAudioProcessor::numChannelsChanged()
 {
-    if(getNumInputChannels() < getNumberOfSources())
+    if(getNumInputChannels() >= getNumberOfSources() && getNumOutputChannels() >= getNumberOfChannels())
     {
-        setNumberOfSources(getNumInputChannels());
+        suspendProcessing(false);
+        if(getActiveEditor())
+            getActiveEditor()->processorHasBeenUpdated();
     }
-    if(getNumOutputChannels() < getNumberOfChannels())
-    {
-        setNumberOfChannels(getNumOutputChannels());
-    }
+}
+
+void HoaToolsAudioProcessor::applySettingChanges()
+{
     if(isSuspended())
     {
-        if(applyChanges())
-        {
-            setNumberOfInputs(getNumberOfSources());
-            setNumberOfOutputs(getNumberOfChannels());
-        }
+        applyChanges();
+        setNumberOfInputs(getNumberOfSources());
+        setNumberOfOutputs(getNumberOfChannels());
     }
-    
-    if(getActiveEditor())
-        getActiveEditor()->processorHasBeenUpdated();
-    
-    updateHostDisplay();
+    else
+    {
+        suspendProcessing(true);
+    }
 }
 
 void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
 	setSampleRate(sampleRate);
 	setVectorSize(samplesPerBlock);
-    if(applyChanges())
+}
+
+void HoaToolsAudioProcessor::processBlock(int numins, int numouts, float** inputs, float** outputs, int size)
+{
+    if(isSuspended())
     {
-        setNumberOfInputs(getNumberOfSources());
-        setNumberOfOutputs(getNumberOfChannels());
-        updateHostDisplay();
-        if(getActiveEditor())
-            getActiveEditor()->processorHasBeenUpdated();
+        for(int i = 0; i < numouts; i++)
+            memset(outputs, 0, size * sizeof(float));
+        
+        applySettingChanges();
     }
-}
-
-void HoaToolsAudioProcessor::releaseResources()
-{
-    
-}
-
-void HoaToolsAudioProcessor::processBlock(float** inputs, float** outputs)
-{
-    if(getNumOutputChannels() >= getNumberOfChannels() && getNumInputChannels() >= getNumberOfSources())
-    {
+    else if(numouts >= getNumberOfChannels() && numins >= getNumberOfSources())
         process((const float**)inputs, outputs);
-    }
-    if(applyChanges())
-    {
-        setNumberOfInputs(getNumberOfSources());
-        setNumberOfOutputs(getNumberOfChannels());
-        updateHostDisplay();
-        if(getActiveEditor())
-            getActiveEditor()->processorHasBeenUpdated();
-    }
+    else
+         applySettingChanges();
 }
 
 /************************************************************************************/
@@ -281,6 +266,7 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
             setChannelsOffset(xmlState->getIntAttribute("OffsetOfChannels"));
             setOptimMode((Optim::Mode)xmlState->getIntAttribute("Optimization"));
             setZoom(xmlState->getDoubleAttribute("Zoom"));
+            applySettingChanges();
         }
     }
 }

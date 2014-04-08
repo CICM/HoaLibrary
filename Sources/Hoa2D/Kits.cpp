@@ -210,6 +210,7 @@ namespace Hoa2D
         for(int i = 0; i < numins; i++)
         {
             cblas_scopy(m_vector_size, ins[i], 1, m_inputs_float+i, numins);
+            m_map->setMute(i, sourceGetMute(i));
         }
         
         if(m_decoder->getDecodingMode() == DecoderMulti::Regular)

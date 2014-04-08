@@ -126,10 +126,7 @@ public:
         processBlock() method to send out an asynchronous message. You could also use
         the AsyncUpdater class in a similar way.
     */
-    virtual void processBlock (AudioSampleBuffer& buffer,
-                               MidiBuffer& midiMessages) = 0;
-    
-    virtual void processBlock(float** inputs, float** outputs) = 0;
+    virtual void processBlock(int numins, int nuouts, float** inputs, float** outputs, int size) = 0;
 
     /** Renders the next block when the processor is being bypassed.
         The default implementation of this method will pass-through any incoming audio, but
