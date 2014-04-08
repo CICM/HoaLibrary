@@ -1482,8 +1482,9 @@ $(document).ready(function () {
 							} else {
 								var mySrc = '../tutorials/'+myCatFolder+$(this).find('example').attr('name');
 							}
-							if($(this).find('example')[0]) {
+							if($(this).find('example')[0] || $(this).find('img')[0]) {
 								$('#tutlist').append('<table><tr><td><img class="illustration" src="'+mySrc+'"></td></tr><tr><td class="tutCaption" alt=""></td></tr></table>');
+
 							} else {
 								$('#tutlist').append('<div class="textIllContainer"><div class="textIllustration" alt="">'+$(this).text()+'</div></div>');
 							}
@@ -1728,8 +1729,9 @@ $(document).ready(function () {
 		objString = objString.replace(/<\/liveapi_children>/g, '</table>');
 		objString = objString.replace(/<liveapi_child[ ]+name="([^"]*)"[ ]+gso="([^"]*)"[ ]+type="([^"]*)"[ ]*>/g, function(wholematch, myName, myAccess, myType) {
 			var accessArray = []
-			for(var i=0; i<myAccess.length; i++) {
-				switch (myAccess[i]) {
+			var myAccessChars = myAccess.split(''); // Array-like character access is only in ecmascript 5, IE 7 doesn't like it, so we force an array here
+			for(var i=0; i<myAccessChars.length; i++) {
+				switch (myAccessChars[i]) {
 					case "g":
 						accessArray.push('get');
 						break;
@@ -1766,9 +1768,10 @@ $(document).ready(function () {
 		objString = objString.replace(/<liveapi_properties>/g, '<table class="lomTable"><tr><td class="lomHeader">Properties</td><td class="lomHeader">&nbsp;</td><td class="lomHeader">&nbsp;</td><td class="lomHeader">&nbsp;</td></tr><tr><td class="italic lomKey lomName">Name</td><td class="italic lomKey lomType">Type</td><td class="italic lomKey lomAccess">Access</td><td class="italic lomKey lomDesc">Description</td></tr>');
 		objString = objString.replace(/<\/liveapi_properties>/g, '</table>');
 		objString = objString.replace(/<liveapi_property[ ]+name="([^"]*)"[ ]+gso="([^"]*)"[ ]+type="([^"]*)"[ ]*>/g, function(wholematch, myName, myAccess, myType) {
-			var accessArray = []
-			for(var i=0; i<myAccess.length; i++) {
-				switch (myAccess[i]) {
+			var accessArray = [];
+			var myAccessChars = myAccess.split(''); // Array-like character access is only in ecmascript 5, IE 7 doesn't like it, so we force an array here
+			for(var i=0; i<myAccessChars.length; i++) {
+				switch (myAccessChars[i]) {
 					case "g":
 						accessArray.push('get');
 						break;
@@ -2814,7 +2817,7 @@ $(document).ready(function () {
 		//newStr = newStr.replace(new RegExp( "</o>", "g" ), '</a>');
 		newStr = oldStr.replace(new RegExp("<m>", "g"), '<a class="m" href="">');
 		newStr = newStr.replace(new RegExp("</m>", "g"), '</a>');
-		newStr = oldStr.replace(new RegExp("&lt;p", "g"), ' LTP_STANDIN ');
+		newStr = oldStr.replace(new RegExp("&lt;p", "g"), 'LTP_STANDIN');
 		
 		// We don't really need this since documents are currently found by name, not by module
 		// Leaving in, but there was a nasty little bug with single v. double quotes that was breaking

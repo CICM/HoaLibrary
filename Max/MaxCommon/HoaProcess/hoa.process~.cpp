@@ -6,6 +6,28 @@
 
 // based on dynamicdsp~ Copyright 2010 Alex Harker. All rights reserved.
 
+/**
+ @file      hoa.process~.cpp
+ @name      hoa.process~
+ @realname  hoa.process~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ patcher loader for multichannel processing.
+ 
+ @description
+ <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
+ 
+ @discussion
+  <o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
+ 
+ @category ambisonics, hoa objects, msp
+ 
+ @seealso hoa.in~, hoa.in, hoa.out, hoa.out~, hoa.thisprocess~, poly~, patcher
+ */
+
 #include "../HoaCommon.max.h"
 #include "../HoaProcessSuite.h"
 
@@ -145,6 +167,9 @@ void hoa_processor_target(t_hoa_processor *x, long target_index, long index, t_s
 short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args);
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 
+void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_mutemap(t_hoa_processor *x, long n);
+
 void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
 void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
@@ -202,24 +227,81 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+    // @method signal @digest output signal in the corresponding <o>hoa.in~</o> object in the loaded patch.
+	// @description Output signal in the corresponding <o>hoa.in~</o> object in the loaded patches.
 	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_assist,					"assist",				A_CANT, 0);
-
+    
+    // @method open @digest open a patcher instance for viewing.
+	// @description The word open, followed by a number, opens the specified instance of the patcher (depending on the process mode). You can view the activity of any instance of the patcher up to the number of loaded instances. With no arguments, the open message opens the instance that is currently the target (see the <m>target</m> message).
+    // @marg 0 @name instance-index @optional 1 @type int
 	class_addmethod(c, (method)hoa_processor_open,						"open",					A_GIMME,  0);
+    
+    // @method wclose @digest close a numbered patcher instance's window.
+	// @description Closes the window for the numbered instance specified by the argument (depending on the process mode).
+    // @marg 0 @name instance-index @optional 1 @type int
+    class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_GIMME,  0);
+    
+    // @method (mouse) @digest double-click to open a display window to view loaded patch contents.
+	// @description Double-clicking on the <o>hoa.process~</o> opens a display window of the instance that is currently the target.
 	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,   0);
-	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_GIMME,  0);
+    
+    // @method target @digest target messages to a specific loaded instance.
+	// @description The hoa.process~ instance that will receive subsequent messages
+    // (other than messages specifically used by the hoa.process~ object itself) arriving at the hoa.process~ object's inlets.
+    // Targeted messages only works for <o>hoa.in</o> objects that have an <b>extra</b> attribute set.
+    // The target numbering/arguments depends on the current mode and the number of loaded instances.
+    // <ul>
+    // <li> In <m>planewaves</m> mode (2d/3d), the message <b>target 1</b> will target the first instance corresponding to the first channel.</li>
+    // <li> In 2d <m>harmonics</m> mode, target argument correspond to the harmonic index, the harmonics index go to <b>-order</b> to <b>order</b>.</li>
+    // <li> In 3d <m>harmonics</m> mode, the <m>target</m> message takes two arguments. First one is the ambisonic band (between 0 and the <b>order</b>), the second one correspond to the harmonic index (from <b>-order</b> to <b>order</b>).</li>
+    // </ul>
+    // The message <b>target all</b> will target messages to all of the loaded instances.
+    // The message <b>target none</b> disable input to all instances.
+    // @marg 0 @name instance-index @optional 0 @type int/symbol
+    // @marg 1 @name instance-index-bis @optional 1 @type int
+    class_addmethod(c, (method)hoa_processor_user_target,				"target",				A_GIMME, 0);
 	
-	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
+    // @method bang @digest Send a <m>bang</m> message to the patcher loaded into the <o>hoa.process~</o> object.
+	// @description Sends a <m>bang</m> to the patcher loaded into the <o>hoa.process~</o> object. The result of the message is determined by the loaded patcher.
+	class_addmethod(c, (method)hoa_processor_bang,						"bang",							 0);
+    
+    // @method int @digest Send a <m>int</m> message to the patcher loaded into the <o>hoa.process~</o> object.
+	// @description Sends a <m>int</m> to the patcher loaded into the <o>hoa.process~</o> object. The result of the message is determined by the loaded patcher.
+	// @marg 0 @name number @optional 0 @type int
+	class_addmethod(c, (method)hoa_processor_int,						"int",					A_LONG,  0);
+    
+    // @method float @digest Send a <m>float</m> message to the patcher loaded into the <o>hoa.process~</o> object.
+	// @description Sends a <m>float</m> to the patcher loaded into the <o>hoa.process~</o> object. The result of the message is determined by the loaded patcher.
+	// @marg 0 @name number @optional 0 @type float
+	class_addmethod(c, (method)hoa_processor_float,						"float",				A_FLOAT, 0);
+    
+    // @method list @digest Send a <m>list</m> message to the patcher loaded into the <o>hoa.process~</o> object.
+	// @description Sends a <m>float</m> to the patcher loaded into the <o>hoa.process~</o> object. The result of the message is determined by the loaded patcher.
+	// @marg 0 @name message @optional 0 @type list
+	class_addmethod(c, (method)hoa_processor_list,						"list",					A_GIMME, 0);
+    
+    // @method anything @digest Send a message to the patcher loaded into the <o>hoa.process~</o> object.
+	// @description Sends a message to the patcher loaded into the <o>hoa.process~</o> object. The result of the message is determined by the loaded patcher.
+	// @marg 0 @name message @optional 0 @type list
+	class_addmethod(c, (method)hoa_processor_anything,					"anything",				A_GIMME, 0);
+    
+    // @method mute @digest Mute processing for a patcher instance.
+	// @description Turns off signal processing for the specified instance of a patcher loaded by the <o>hoa.process~</o> object and sends a bang message to the <o>hoa.thisprocess~</o> object for the specified instance.
+    // Mute target numbering works like <m>target</m> method (see the <m>target</m> message).
+    // Sending a 0 as the last argument turns the patcher instance on. The message mute all 1 mutes all instances, and mute all 0 turns on signal processing for all instances of the patcher.
+	// @marg 0 @name instance-index @optional 0 @type int
+    // @marg 1 @name on/off-flag @optional 0 @type int
+    class_addmethod(c, (method)hoa_processor_user_mute,					"mute",                 A_GIMME, 0);
+    
+    // @method mutemap @digest Report mutes out of a specified <o>hoa.process~</o> message outlet.
+	// @description Report voice mutes out of a specified <o>hoa.process~</o> message outlet
+	// @marg 0 @name outlet-number @optional 0 @type int
+    class_addmethod(c, (method)hoa_processor_mutemap,					"mutemap",              A_LONG, 0);
+    
+    class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",		A_CANT, 0);
-	
-	class_addmethod(c, (method)hoa_processor_bang,						"bang",							 0);
-	class_addmethod(c, (method)hoa_processor_int,						"int",					A_LONG,  0);
-	class_addmethod(c, (method)hoa_processor_float,						"float",				A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_processor_list,						"list",					A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_anything,					"anything",				A_GIMME, 0);
-	
-	class_addmethod(c, (method)hoa_processor_user_target,				"target",				A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_is_2D,				"is_2D",				A_CANT, 0);
@@ -232,7 +314,6 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr,			"get_outptrs_ptr",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_get_patch_on,		"get_patch_on",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_set_patch_on,		"set_patch_on",			A_CANT, 0);
-	
 	class_addmethod(c, (method)hoa_processor_out_message,				"out_message",			A_CANT, 0); // used to receive a message from a hoa.out object
 	class_addmethod(c, (method)hoa_processor_query_io_index,			"get_io_index",			A_CANT, 0);
 	
@@ -249,7 +330,25 @@ int C74_EXPORT main(void)
 
 
 void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
-{	
+{
+    // @arg 0 @name ambisonic-order/number-of-channels @optional 0 @type int @digest the ambisonic order or the number of channels.
+    // @description First argument is the ambisonic order or the number of channels depending on the third argument (process mode : harmonics/planewaves).
+    // In planewaves mode (2d/3d) the number of instances will be equal to the number of channel specified by this argument.
+    // In harmonics mode, the number of instances will be equal to the number of harmonics depending on the order of decomposition.
+    // In 2d it will be equal to (ambisonic-order*2 + 1), in 2d to ((ambisonic-order+1)*(ambisonic-order+1))
+    
+    // @arg 1 @name patcher-name @optional 0 @type symbol @digest Name of a patcher to be loaded.
+    // @description The second argument must specify the name of a patcher to be loaded which already exists and is in the Max search path.
+    
+    // @arg 2 @name process-mode @optional 0 @type symbol @digest process mode.
+    // @description can be <b>harmonics</b>/<b>planewaves</b>. Use the <b>harmonics</b> mode to work in the Ambisonics domain, <b>planewaves</b> if your process is in the planewave domain.
+    
+    // @arg 3 @name list-of-argument-values @optional 1 @type float/int/symbol @digest argument to send to the loaded patches.
+    // @description Argument to be sent to the loaded patches. These arguments can be retrieve by (#1, #2... patcher system) or/and with the help of the <o>hoa.thisprocess~</o> object.
+    
+    // @arg 4 @name attribute-keys-and-list-of-argument-values @optional 1 @type float/int/symbol @digest attributes to send to the loaded patches.
+    // @description Attributes to be sent to the loaded patches. These arguments can be retrieve with the help of the <o>hoa.thisprocess~</o> object.
+    
 	t_hoa_processor *x = (t_hoa_processor*)object_alloc(hoa_processor_class);
 	
 	t_symbol *patch_name_entered = NULL;
@@ -1115,6 +1214,142 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
     }
 }
 
+void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
+{
+    long target_arg, target_band;
+    int state = 0;
+    int index = -1;
+    target_arg = target_band = 0;
+    
+    t_box *b;
+    t_object* thisprocess;
+    t_patcher* patch;
+    
+    if (argc && argv)
+    {
+        if (atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
+        {
+            index = 0;
+            
+            if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                state = atom_getlong(argv+1) != 0;
+        }
+        else if (atom_gettype(argv) == A_LONG)
+        {
+            if (x->f_mode == hoa_sym_harmonics)
+            {
+                if (x->f_object_type == HOA_OBJECT_2D)
+                {
+                    target_arg = atom_getlong(argv);
+                    if (target_arg < 0)
+                        index = abs(target_arg) * 2;
+                    else
+                        index = target_arg * 2 + 1;
+                    
+                    // bad target target none
+                    if (index <= 0 || index > x->patch_spaces_allocated)
+                    {
+                        object_warn((t_object *)x, "mute [%ld] doesn't match any patcher instance", target_arg);
+                        index = -1;
+                    }
+                    
+                    if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                        state = atom_getlong(argv+1) != 0;
+                }
+                else if (x->f_object_type == HOA_OBJECT_3D)
+                {
+                    long target_arg_index = 0;
+                    target_band = atom_getlong(argv);
+                    
+                    if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                        target_arg = atom_getlong(argv+1);
+                    
+                    if (target_arg < 0)
+                        target_arg_index = abs(target_arg) * 2 - 1;
+                    else
+                        target_arg_index = target_arg * 2;
+                    
+                    index = (long)pow(target_band, 2) + 1;
+                    index += target_arg_index;
+                    
+                    // bad target target none
+                    if (target_band < 0 || target_band > x->f_order || target_arg < -target_band || target_arg > target_band)
+                    {
+                        object_warn((t_object *)x, "mute [%ld, %ld] doesn't match any patcher instance", target_band, target_arg);
+                        index = -1;
+                    }
+                    
+                    if (argc > 2 && atom_gettype(argv+2) == A_LONG)
+                        state = atom_getlong(argv+2) != 0;
+                }
+            }
+            else if (x->f_mode == hoa_sym_planewaves)
+            {
+                index = atom_getlong(argv);
+                
+                // bad target target none
+                if (index <= 0 || index > x->patch_spaces_allocated)
+                {
+                    object_warn((t_object *)x, "mute (%ld) doesn't match any patcher instance", x->target_index);
+                    index = -1;
+                }
+                
+                if (argc > 1 && atom_gettype(argv+1) == A_LONG)
+                    state = atom_getlong(argv+1) != 0;
+            }
+        }
+    }
+    
+    // mute patch(es) and send bang to hoa.thisprocess~ object(s)
+    
+    if (index == 0)
+    {
+        for (int i=0; i<x->patch_spaces_allocated; i++)
+        {
+            hoa_processor_client_set_patch_on(x, i+1, !state);
+            patch = x->patch_space_ptrs[index]->the_patch;
+            
+            for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
+            {
+                if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
+                {
+                    thisprocess = (t_object *) jbox_get_object(b);
+                    object_method(thisprocess, hoa_sym_bang);
+                }
+            }
+        }
+    }
+    else if (index > 0 && index <= x->patch_spaces_allocated)
+    {
+        hoa_processor_client_set_patch_on(x, index, !state);
+        patch = x->patch_space_ptrs[index-1]->the_patch;
+        
+        for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
+        {
+            if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
+            {
+                thisprocess = (t_object *) jbox_get_object(b);
+                object_method(thisprocess, hoa_sym_bang);
+            }
+        }
+    }
+    
+    // Todo : notify corresponding thisprocess~
+}
+
+// report muted instance info as a list in a specied message outlet
+void hoa_processor_mutemap(t_hoa_processor *x, long n)
+{
+    int outlet_index = n;
+    if (outlet_index < 1 || outlet_index > x->declared_outs) return;
+    
+    t_atom list[x->patch_spaces_allocated];
+    for (int i=0; i<x->patch_spaces_allocated; i++)
+        atom_setlong(list+i, x->patch_space_ptrs[i]->patch_on);
+    
+    outlet_list(x->out_table[outlet_index-1], NULL, x->patch_spaces_allocated, list);
+}
+
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
 {
 	long index = args->index;
@@ -1411,13 +1646,12 @@ short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x)
 
 void hoa_processor_dblclick(t_hoa_processor *x)
 {
-    t_atom a;
 	for (int i = 0; i < x->patch_spaces_allocated; i++)
 	{
 		if (x->patch_space_ptrs[i]->the_patch)
 		{
-            atom_setlong (&a, i + 1);
-            hoa_processor_open(x, NULL, 1, &a);
+            // open the current target instance
+            hoa_processor_open(x, NULL, 0, NULL);
 			break;
 		}
 	}
@@ -1483,6 +1717,10 @@ void hoa_processor_open(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *a
                 index = -1;
             }
         }
+    }
+    else
+    {
+        index = clip_min(x->target_index, 1);
     }
     
     atom_setlong (&a, index - 1);
@@ -1570,16 +1808,6 @@ void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom 
 	
 	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
 }
-
-/*
-void hoa_processor_wclose(t_hoa_processor *x, long index)
-{
-	t_atom a;
-	atom_setlong (&a, index - 1);
-	
-	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
-}
-*/
 
 void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {

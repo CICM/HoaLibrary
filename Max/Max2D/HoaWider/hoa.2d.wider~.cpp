@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.wider~.cpp
+ @name      hoa.2d.wider~
+ @realname  hoa.2d.wider~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A fractional ambisonic orders simulator
+ 
+ @description
+ <o>hoa.2d.wider~</o> can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.
+ 
+ @discussion
+ <o>hoa.2d.wider~</o> can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.rotate~, hoa.2d.encoder~, hoa.2d.decoder~, hoa.2d.map~, hoa.process~, hoa.2d.space, hoa.2d.recomposer, hoa.2d.meter~, hoa.2d.scope~
+ */
+
 #include "Hoa2D.max.h"
 
 typedef struct _hoa_wider 
@@ -36,13 +58,21 @@ int C74_EXPORT main(void)
 	t_class *c;
 	
 	c = class_new("hoa.2d.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
-	class_alias(c, gensym("hoa.wider~"));
 
     hoa_initclass(c, (method)hoa_getinfos);
-	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_wider_int,		"int",		A_LONG, 0);
+	
+	// @method signal @digest Array of circular harmonic signals to be processed, widening value.
+	// @description Array of circular harmonic signals to be processes. Set the widening value in the last inlet at signal rate. The widening value is clipped between 0. and 1.
 	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_wider_assist,	"assist",	A_CANT, 0);
+	
+	// @method float @digest Set the widening value.
+	// @description Set the widening value in the last inlet at control rate. The widening value is clipped between 0. and 1.
+	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
+	
+	// @method int @digest Set the widening value.
+	// @description Set the widening value in the last inlet at control rate. The widening value is clipped between 0. and 1.
+	class_addmethod(c, (method)hoa_wider_int,		"int",		A_LONG, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -53,6 +83,9 @@ int C74_EXPORT main(void)
 
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
 	t_hoa_wider *x = NULL;
 	int	order = 1;
     x = (t_hoa_wider *)object_alloc(hoa_wider_class);

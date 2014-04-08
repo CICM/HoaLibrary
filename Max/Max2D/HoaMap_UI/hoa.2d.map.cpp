@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.map.cpp
+ @name      hoa.2d.map
+ @realname  hoa.2d.map
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A graphic user interface to spatialize sources on a plane.
+ 
+ @description
+ <o>hoa.2d.map</o> allows you to spatialize several sources on a plane. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.2d.map</o> is dedicated to control the <o>hoa.2d.map~</o> object.
+ 
+ @discussion
+ <o>hoa.2d.map</o> allows you to spatialize several sources on a plane. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.2d.map</o> is dedicated to control the <o>hoa.2d.map~</o> object.
+ 
+ @category ambisonics, hoa objects, audio, GUI, MSP
+ 
+ @seealso hoa.2d.map~, hoa.2d.space, hoa.2d.recomposer, hoa.2d.meter~, hoa.2d.scope~, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.decoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 #define MAX_ZOOM 1.
@@ -133,7 +155,6 @@ int C74_EXPORT main()
 	t_class *c;
     
 	c = class_new("hoa.2d.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
-	class_alias(c, gensym("hoa.map"));
 	
 	hoa_initclass(c, NULL);
 	
@@ -144,18 +165,46 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) hoamap_paint,            "paint",			A_CANT,	0);
 	class_addmethod(c, (method) hoamap_getdrawparams,    "getdrawparams",	A_CANT, 0);
 	class_addmethod(c, (method) hoamap_notify,           "notify",			A_CANT, 0);
-    
     class_addmethod(c, (method) hoamap_jsave,            "jsave",			A_CANT, 0);
     
+	// @method bang @digest Output current sources values.
+	// @description The <m>bang</m> Output current sources values.
     class_addmethod(c, (method) hoamap_bang,             "bang",			A_CANT, 0);
+	
+	// @method getinfo @digest Report informations in the rightmost outlet.
+	// @description The <m>getinfo</m> message report informations in the rightmost outlet.
     class_addmethod(c, (method) hoamap_infos,            "getinfo",					0);
     
+	// @method source @digest Send source relative instructions.
+	// @description The <m>source</m> message send source relative instructions like their position, color, add a description, mute them...
+	// @marg 0 @name source-index @optional 0 @type int
+	// @marg 1 @name modifier-message @optional 0 @type symbol
+	// @marg 2 @name message-arguments @optional 0 @type float/int/symbol
     class_addmethod(c, (method) hoamap_source,           "source",			A_GIMME,0);
+	
+	// @method group @digest Send group relative instructions.
+	// @description The <m>group</m> message send group relative instructions like their position, color, add a description, mute them...
+	// @marg 0 @name group-index @optional 0 @type int
+	// @marg 1 @name modifier-message @optional 0 @type symbol
+	// @marg 2 @name message-arguments @optional 0 @type float/int/symbol
     class_addmethod(c, (method) hoamap_group,            "group",			A_GIMME,0);
+	
+	// @method slot @digest Send slot relative instructions.
+	// @description The <m>slot</m> message send slot relative instructions. The slot system is an embeded preset/pattr system.
+	// see the <o>preset</o> and the <o>pattrstorage</o> object and the <o>hoa.2d.map</o> help patch for more infos about supported messages.
     class_addmethod(c, (method) hoamap_slot,             "slot",			A_GIMME,0);
+	
+	// @method trajectory @digest Send trajectory relative instructions.
+	// @description The <m>trajectory</m> message send trajectory relative instructions. The slot system is an embeded preset/pattr system.
+	// see the <o>preset</o> and the <o>pattrstorage</o> object and the <o>hoa.2d.map</o> help patch for more infos about supported messages.
     class_addmethod(c, (method) hoamap_trajectory,       "trajectory",		A_GIMME,0);
+	
+	// @method clear @digest Remove all sources and groups.
+	// @description The <m>clear</m> message remove all sources and groups.
     class_addmethod(c, (method) hoamap_clear_all,        "clear",			A_NOTHING ,0);
     
+	// @method (mouse) @digest Click and drag the sources to set their position. Right-click to make appear contextual setting menu, use the mouse-weel to zoom. Movement can be restricted to the azimuth if you press alt key while you are dragging a source or a group, or restricted to the radius if
+	// @description The <m>clear</m> message remove all sources and groups.
     class_addmethod(c, (method) hoamap_mousedown,        "mousedown",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mousedrag,        "mousedrag",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mouseup,          "mouseup",			A_CANT, 0);
@@ -166,9 +215,11 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoamap_key,              "key",				A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
-	
+	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
+	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
+	// @exclude hoa.2d.map
     
     /* Colors */
 	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_color_bg);
@@ -177,6 +228,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.75 0.75 0.75 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.2d.map</o> object
     
     CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_color_bd);
 	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
@@ -184,6 +236,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.2d.map</o> object
     
     CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
@@ -191,6 +244,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "selcolor", 0, "Selection Color");
 	CLASS_ATTR_ORDER			(c, "selcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selcolor", 0, "0.36 0.37 0.7 0.5");
+	// @description Sets the RGBA values for the selection in a <o>hoa.2d.map</o> object
 	
     /* Behavior */
 	CLASS_ATTR_LONG				(c,"outputmode", 0, t_hoamap, f_output_mode);
@@ -200,6 +254,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT          (c,"outputmode", 0,  "0");
     CLASS_ATTR_SAVE             (c,"outputmode", 1);
     CLASS_ATTR_ORDER			(c,"outputmode", 0, "1");
+	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
     
 	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
@@ -208,6 +263,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
     CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
     CLASS_ATTR_SAVE             (c,"zoom", 1);
+	// @description Sets the zoom factor
 
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;

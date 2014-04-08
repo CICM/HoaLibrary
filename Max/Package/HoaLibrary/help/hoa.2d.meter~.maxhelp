@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 76.0, 62.0, 850.0, 713.0 ],
+		"rect" : [ 100.0, 100.0, 850.0, 713.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -1323,7 +1323,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 76.0, 88.0, 850.0, 687.0 ],
+						"rect" : [ 100.0, 126.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1640,7 +1640,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 73.0, 558.0, 33.0 ],
-									"text" : "hoa.2d.meter~ displays the peak levels for a circurlar array of loudspeakers. It computes and displays the energy and velocity vectors.",
+									"text" : "hoa.2d.meter~ displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -7284,9 +7284,9 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
+			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
 			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
 			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
-			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
 			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
 		}
 ,

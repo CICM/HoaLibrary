@@ -64,6 +64,9 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.out~", (method) hoa_sig_out_new, (method)hoa_sig_out_free, sizeof(t_hoa_sig_out), NULL, A_GIMME, 0);
 	
 	hoa_initclass(c, (method)NULL);
+    
+    // @method signal @digest output signal in the corresponding hoa.process~ object's signal outlet
+	// @description output signal in the corresponding hoa.process~ object's signal outlet
 	class_addmethod(c, (method)hoa_sig_out_dsp64, "dsp64", A_CANT, 0);
     class_addmethod(c, (method)hoa_sig_out_assist, "assist", A_CANT, 0);
     

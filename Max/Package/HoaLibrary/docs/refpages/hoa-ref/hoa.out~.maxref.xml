@@ -39,6 +39,15 @@
 
 	<!--MESSAGES-->
 	<methodlist>
+		<method name="signal">
+			<arglist />
+			<digest>
+				output signal in the corresponding hoa.process~ object's signal outlet
+			</digest>
+			<description>
+				output signal in the corresponding hoa.process~ object's signal outlet
+			</description>
+		</method>
 	</methodlist>
 
 	<!--ATTRIBUTES-->

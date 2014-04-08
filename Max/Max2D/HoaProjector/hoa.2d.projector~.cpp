@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.projector~.cpp
+ @name      hoa.2d.projector~
+ @realname  hoa.2d.projector~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ An ambisonics projection external
+ 
+ @description
+ <o>hoa.2d.projector~</o> discretizes the ambisonic soundfield into an array of channels and gives an access to a new sound domain.
+ 
+ @discussion
+ <o>hoa.2d.projector~</o> discretizes the ambisonic soundfield into an array of channels and gives an access to a new sound domain.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.recomposer~, hoa.2d.recomposer, hoa.2d.space, hoa.amp~, hoa.delay~, hoa.2d.wider~, hoa.2d.encoder~, hoa.2d.decoder~, hoa.process~, hoa.2d.meter~, hoa.2d.scope~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_projector 
@@ -33,6 +55,9 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.2d.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (long)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of circular harmonic signals to be projected.
+	// @description Array of circular harmonic signals to be projected.
 	class_addmethod(c, (method)hoa_projector_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_projector_assist,    "assist",	A_CANT, 0);
 	
@@ -45,6 +70,12 @@ int C74_EXPORT main(void)
 
 void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
+	// @arg 1 @name number-of-channels @optional 0 @type int @digest The number of channels
+	// @description Second argument sets the number of channels.
+	
 	t_hoa_projector *x = NULL;
 	int	order = 1;
     int numberOfLoudspeakers = 4;
