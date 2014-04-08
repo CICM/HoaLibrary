@@ -82,6 +82,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "outonload",  0, "1");
 	CLASS_ATTR_DEFAULT			(c, "outonload",  0, "0");
 	CLASS_ATTR_SAVE				(c, "outonload",  1);
+    // @description If the <b>outonload</b> is checked, <o>hoa.pi</o> object will send value at loadbang time. 
 	
 	class_register(CLASS_BOX, c);
 	pi_class = c;

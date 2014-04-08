@@ -93,6 +93,8 @@
 				Description
 			</digest>
 			<description>
+				Sets a description to the outlet which will be shown in the assist outlet of the <o>hoa.process~</o> that load this <o>hoa.out</o>.
+				Only works if the <m>extra</m> parameter is greater than 0.
 			</description>
 			<attributelist>
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Description" />

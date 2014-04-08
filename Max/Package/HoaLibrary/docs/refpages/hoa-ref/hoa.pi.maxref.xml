@@ -102,6 +102,7 @@
 				Output value on load
 			</digest>
 			<description>
+				If the <b>outonload</b> is checked, <o>hoa.pi</o> object will send value at loadbang time.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />

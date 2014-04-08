@@ -56,6 +56,7 @@
 				negative harmonics color
 			</digest>
 			<description>
+				Sets the RGBA values for the negative harmonics color of the ambisonic domain patchlines
 			</description>
 			<attributelist>
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="negative harmonics color" />
@@ -68,6 +69,7 @@
 				positive harmonics color
 			</digest>
 			<description>
+				Sets the RGBA values for the positive harmonics color of the ambisonic domain patchlines
 			</description>
 			<attributelist>
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="positive harmonics color" />
@@ -80,6 +82,7 @@
 				planewaves signals color
 			</digest>
 			<description>
+				Sets the RGBA values for the planewaves signals color of the planewaves domain patchlines
 			</description>
 			<attributelist>
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="planewaves signals color" />
@@ -92,6 +95,7 @@
 				zero harmonics color
 			</digest>
 			<description>
+				Sets the RGBA values for the zero harmonics color of the ambisonic domain patchlines
 			</description>
 			<attributelist>
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="zero harmonics color" />
