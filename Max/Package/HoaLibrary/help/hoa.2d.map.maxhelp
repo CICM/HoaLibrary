@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 21.0, 58.0, 1001.0, 757.0 ],
+		"rect" : [ 100.0, 100.0, 1001.0, 757.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -2100,7 +2100,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 21.0, 84.0, 1001.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4992,7 +4992,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
+						"rect" : [ 100.0, 126.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5804,166 +5804,6 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"hidden" : 1,
-									"id" : "obj-46",
-									"maxclass" : "newobj",
-									"numinlets" : 0,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"patcher" : 									{
-										"fileversion" : 1,
-										"appversion" : 										{
-											"major" : 6,
-											"minor" : 1,
-											"revision" : 6,
-											"architecture" : "x64"
-										}
-,
-										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 0,
-										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 0,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"boxanimatetime" : 200,
-										"imprint" : 0,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"boxes" : [ 											{
-												"box" : 												{
-													"id" : "obj-10",
-													"maxclass" : "button",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "bang" ],
-													"patching_rect" : [ 50.0, 160.0, 20.0, 20.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"fontname" : "Arial",
-													"fontsize" : 11.595187,
-													"id" : "obj-23",
-													"maxclass" : "newobj",
-													"numinlets" : 2,
-													"numoutlets" : 2,
-													"outlettype" : [ "bang", "" ],
-													"patching_rect" : [ 50.0, 130.0, 41.0, 19.0 ],
-													"text" : "sel 32"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"fontname" : "Arial",
-													"fontsize" : 11.595187,
-													"id" : "obj-17",
-													"maxclass" : "newobj",
-													"numinlets" : 0,
-													"numoutlets" : 4,
-													"outlettype" : [ "int", "int", "int", "int" ],
-													"patching_rect" : [ 50.0, 100.0, 59.5, 19.0 ],
-													"text" : "key"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-45",
-													"maxclass" : "outlet",
-													"numinlets" : 1,
-													"numoutlets" : 0,
-													"patching_rect" : [ 50.0, 240.0, 25.0, 25.0 ]
-												}
-
-											}
- ],
-										"lines" : [ 											{
-												"patchline" : 												{
-													"destination" : [ "obj-45", 0 ],
-													"disabled" : 0,
-													"hidden" : 0,
-													"source" : [ "obj-10", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-23", 0 ],
-													"disabled" : 0,
-													"hidden" : 0,
-													"midpoints" : [ 59.5, 121.0, 59.5, 121.0 ],
-													"source" : [ "obj-17", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-10", 0 ],
-													"disabled" : 0,
-													"hidden" : 0,
-													"midpoints" : [ 59.5, 151.0, 59.5, 151.0 ],
-													"source" : [ "obj-23", 0 ]
-												}
-
-											}
- ]
-									}
-,
-									"patching_rect" : [ 767.25, 204.5, 51.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"description" : "",
-										"digest" : "",
-										"fontface" : 0,
-										"fontname" : "Arial",
-										"fontsize" : 12.0,
-										"globalpatchername" : "",
-										"tags" : ""
-									}
-,
-									"text" : "p key32"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"hidden" : 1,
-									"id" : "obj-10",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 767.25, 226.5, 74.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
-										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-										"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-									}
-,
-									"text" : "hoa.connect"
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
@@ -6140,16 +5980,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-45", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"midpoints" : [ 776.75, 217.5, 776.75, 217.5 ],
-									"source" : [ "obj-46", 0 ]
 								}
 
 							}
@@ -6346,7 +6176,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 793.0, 315.0, 70.0, 19.0 ],
+									"patching_rect" : [ 853.0, 360.0, 70.0, 19.0 ],
 									"text" : "loadmess 2"
 								}
 
@@ -6362,7 +6192,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 793.0, 345.0, 100.0, 19.0 ]
+									"patching_rect" : [ 853.0, 390.0, 100.0, 19.0 ]
 								}
 
 							}
@@ -6374,7 +6204,7 @@
 									"name" : "hoa.helpcredit.maxpat",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 105.0, 621.0, 548.0, 23.0 ]
+									"patching_rect" : [ 205.733307, 694.0, 548.0, 23.0 ]
 								}
 
 							}
@@ -6385,7 +6215,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 434.733307, 518.0, 45.0, 45.0 ]
+									"patching_rect" : [ 494.733307, 563.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -6397,7 +6227,7 @@
 									"name" : "hoa.helpout_3.maxpat",
 									"numinlets" : 7,
 									"numoutlets" : 0,
-									"patching_rect" : [ 424.733307, 438.0, 329.0, 132.0 ]
+									"patching_rect" : [ 484.733307, 483.0, 329.0, 132.0 ]
 								}
 
 							}
@@ -6410,7 +6240,7 @@
 									"numinlets" : 7,
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 424.733307, 376.0, 329.0, 19.0 ],
+									"patching_rect" : [ 484.733307, 421.0, 329.0, 19.0 ],
 									"text" : "hoa.2d.optim~ 3"
 								}
 
@@ -6425,7 +6255,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 15.0, 217.0, 58.0, 19.0 ],
+									"patching_rect" : [ 75.0, 275.0, 58.0, 19.0 ],
 									"text" : "loadbang"
 								}
 
@@ -6439,7 +6269,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 219.625, 273.0, 19.0 ],
+									"patching_rect" : [ 333.200012, 249.625, 273.0, 19.0 ],
 									"text" : "To change zoom, use alt and mouse wheel.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6454,7 +6284,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 219.625, 300.0, 19.0 ],
+									"patching_rect" : [ 333.200012, 249.625, 300.0, 19.0 ],
 									"rounded" : 0
 								}
 
@@ -6469,7 +6299,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 646.200012, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 646.200012, 127.5, 300.0, 45.0 ],
 									"text" : "To change source or group color or description, right click on it and select \"Set color\" or \"Set description\". A picker color or a textfield will appear to edit it.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6484,7 +6314,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 646.200012, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 646.200012, 127.5, 300.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -6499,7 +6329,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 646.200012, 168.0, 300.0, 32.0 ],
+									"patching_rect" : [ 646.200012, 198.0, 300.0, 32.0 ],
 									"text" : "To mute source or  group, right click on it and select \"Mute\" or \"Unmute\".",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6514,7 +6344,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 646.200012, 168.0, 300.0, 45.0 ],
+									"patching_rect" : [ 646.200012, 198.0, 300.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -6529,7 +6359,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 15.0, 174.0, 300.0, 58.0 ],
+									"patching_rect" : [ 15.0, 204.0, 300.0, 58.0 ],
 									"text" : "To move group, click on it and drag it. Click and drag with shift to change the radius. Click and drag with ctrl (alt for win) to change angle. Click and drag with both to change the both.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6544,7 +6374,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 15.0, 168.0, 300.0, 70.625 ],
+									"patching_rect" : [ 15.0, 198.0, 300.0, 70.625 ],
 									"rounded" : 0
 								}
 
@@ -6559,7 +6389,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 168.0, 300.0, 45.0 ],
+									"patching_rect" : [ 333.200012, 198.0, 300.0, 45.0 ],
 									"text" : "To create group, drag select a set of sources, when mouse up the group will be created. To remove group, right click on group then select \"Remove group\".",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6574,7 +6404,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 168.0, 300.0, 45.0 ],
+									"patching_rect" : [ 333.200012, 198.0, 300.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -6589,7 +6419,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 333.200012, 127.5, 300.0, 45.0 ],
 									"text" : "To create source, right click on a \"free\" zone then select \"Add source\" in the popup menu. To remove source , right click on a source then select \"Remove source\".",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -6606,7 +6436,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
-									"patching_rect" : [ 15.0, 256.625, 300.0, 300.0 ],
+									"patching_rect" : [ 75.0, 301.625, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, -0.92317, -0.389659, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.997143, 0.055602, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.566744, 1.018177, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.594784, -0.907274, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.2d.map",
 									"zoom" : 0.522812
@@ -9803,7 +9633,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 424.733307, 267.0, 329.0, 19.0 ],
+									"patching_rect" : [ 484.733307, 312.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -9830,7 +9660,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 424.733307, 318.0, 329.0, 19.0 ],
+									"patching_rect" : [ 484.733307, 363.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"ramp" : 100.0
 									}
@@ -9849,7 +9679,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 15.0, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 15.0, 127.5, 300.0, 45.0 ],
 									"text" : "To move source, click on it and drag it. Click and drag with shift on source to change radius. Click and drag with ctrl (alt for win) to change angle.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -9864,7 +9694,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 15.0, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 15.0, 127.5, 300.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -10075,7 +9905,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 643.0, 75.0, 99.0, 19.0 ],
+									"patching_rect" : [ 643.0, 75.0, 74.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -10096,7 +9926,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 333.200012, 112.5, 300.0, 45.0 ],
+									"patching_rect" : [ 333.200012, 127.5, 300.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -10152,7 +9982,7 @@
 									"destination" : [ "obj-2", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 24.5, 566.0, 324.0, 566.0, 324.0, 305.0, 434.233307, 305.0 ],
+									"midpoints" : [ 84.5, 611.0, 384.0, 611.0, 384.0, 350.0, 494.233307, 350.0 ],
 									"source" : [ "obj-18", 0 ]
 								}
 
@@ -10302,7 +10132,7 @@
 									"destination" : [ "obj-3", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 843.0, 369.5, 744.233307, 369.5 ],
+									"midpoints" : [ 903.0, 414.5, 804.233307, 414.5 ],
 									"source" : [ "obj-34", 1 ]
 								}
 

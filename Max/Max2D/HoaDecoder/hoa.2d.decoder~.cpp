@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.decoder~.cpp
+ @name      hoa.2d.decoder~
+ @realname  hoa.2d.decoder~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ An ambisonic 2d decoder.
+ 
+ @description
+ <o>hoa.2d.decoder~</o> decodes an ambisonics soundfield for several loudspeakers configuration or for headphones. First argument is the ambisonic order of decomposition.
+ 
+ @discussion
+<o>hoa.2d.decoder~</o> decodes an ambisonics soundfield for several loudspeakers configuration or for headphones. First argument is the ambisonic order of decomposition.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.meter~, hoa.2d.scope~, hoa.dac~, hoa.vector~, hoa.2d.map~, hoa.2d.encoder~, hoa.3d.decoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_decoder 
@@ -49,9 +71,12 @@ int C74_EXPORT main(void)
 	t_class *c;
 	
 	c = class_new("hoa.2d.decoder~", (method)hoa_decoder_new, (method)hoa_decoder_free, (long)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.decoder~"));
 	
     hoa_initclass(c, (method)hoa_getinfos);
+    
+    // @method signal @digest Array of circular harmonic signals to decode for an array of loudspeakers
+	// @description Array of circular harmonic signals to decode for an array of loudspeakers
+	// @marg 0 @name encoding-signal @optional 0 @type signal
 	class_addmethod(c, (method)hoa_decoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_decoder_assist,		"assist",	A_CANT, 0);
     
@@ -60,6 +85,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_STYLE_LABEL      (c, "autoconnect", 0, "onoff", "Auto connection");
     CLASS_ATTR_ORDER            (c, "autoconnect", 0, "1");
     CLASS_ATTR_SAVE             (c, "autoconnect", 1);
+    // @description If the <m>autoconnect</m> attribute is checked, connected objects like the <o>hoa.2d.meter~</o>, <o>hoa.2d.vector~</o>, <o>hoa.dac~</o> or <o>hoa.gain~</o> will be notified of changes and adapt their behavior accordingly.
     
     CLASS_ATTR_SYM              (c, "mode", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Planewaves");
@@ -68,6 +94,12 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "mode", mode_get, mode_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
+    // @description There is three decoding <m>mode</m> :
+    // <ul>
+    // <li><b>Ambisonics</b> : for a regular loudspeakers repartition over a circular array.</li>
+    // <li><b>Binaural</b> : for headphones.</li>
+    // <li><b>Irregular</b> : for an irregular loudspeakers repartition over a circular array.</li>
+    // </ul>
     
     CLASS_ATTR_LONG             (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "channels", 0, "Planewaves");
@@ -76,6 +108,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "4");
     CLASS_ATTR_ORDER            (c, "channels", 0, "2");
     CLASS_ATTR_SAVE             (c, "channels", 0);
+    // @description The number of Channels. In <b>ambisonic</b> <m>mode</m>, the number of channels must be equal or higher to the number of harmonics : (order *2 + 1), (default : order * 2 + 2).
     
     CLASS_ATTR_DOUBLE           (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Planewaves");
@@ -84,6 +117,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT          (c, "offset", 0, "0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
     CLASS_ATTR_SAVE             (c, "offset", 0);
+    // @description The number of Channels. In <b>ambisonic</b> <m>mode</m>, the number of channels must be equal or higher to the number of harmonics : (order *2 + 1), (default : order * 2 + 2).
     
     CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr, f_attr, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Planewaves");
@@ -91,6 +125,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "angles", angles_get, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "4");
 	CLASS_ATTR_SAVE             (c, "angles", 0);
+    // @description Angles of each channel. The angles of channel are only settable in <b>irregular</b> <m>mode</m>. Each angle are in degrees and is wrapped between 0. and 360. So you can also set an angle with a negative value. ex : angles for a 5.1 loudspeakers restitution system can be setted either by the "angles 0 30 110 250 330" or by "angles 0 30 110 -110 -30".
     
     CLASS_ATTR_SYM              (c, "pinna", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "pinna", 0, "Planewaves");
@@ -99,6 +134,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "pinna", pinna_get, pinna_set);
     CLASS_ATTR_ORDER            (c, "pinna", 0, "5");
     CLASS_ATTR_SAVE             (c, "pinna", 1);
+    // @description The pinna size to use for the binaural restitution. The <m>pinna</m> message followed by the <b>symbol</b> <b>small</b> or <b>large</b> set the pinna size of the HRTF responses for the binaural restitution. Choose the one that suits you best.
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -109,6 +145,9 @@ int C74_EXPORT main(void)
 
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 {
+    // @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+    
 	t_hoa_decoder *x = NULL;
     t_dictionary *d = NULL;
     t_dictionary *attr = NULL;

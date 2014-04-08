@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 134.0, 119.0, 770.0, 689.0 ],
+		"rect" : [ 100.0, 100.0, 770.0, 689.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -6363,7 +6363,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 134.0, 145.0, 770.0, 663.0 ],
+						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7900,7 +7900,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
+						"rect" : [ 100.0, 126.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7922,6 +7922,22 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpargs.js",
+									"id" : "obj-17",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "hoa.2d.decoder~" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 402.4375, 294.0, 152.0, 41.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"args" : [ "@size", 0 ],
 									"id" : "obj-13",
@@ -7971,7 +7987,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 433.0, 210.0, 45.0 ],
+									"patching_rect" : [ 441.75, 493.0, 210.0, 45.0 ],
 									"text" : "Note that if you change mode or number of loudspeaker, objects turn dsp off.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -7986,7 +8002,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 433.0, 210.0, 45.0 ],
+									"patching_rect" : [ 441.75, 493.0, 210.0, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -8001,7 +8017,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 496.5, 210.0, 32.0 ],
+									"patching_rect" : [ 441.75, 556.5, 210.0, 32.0 ],
 									"text" : "For futher informations of each mode, please look at tabs.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -8016,7 +8032,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 496.5, 210.0, 32.0 ],
+									"patching_rect" : [ 441.75, 556.5, 210.0, 32.0 ],
 									"rounded" : 0
 								}
 
@@ -8031,7 +8047,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 337.0, 210.0, 84.0 ],
+									"patching_rect" : [ 441.75, 397.0, 210.0, 84.0 ],
 									"text" : "The default mode is ambisonics for an array of  2 * order  + 2 loudspeakers. The default binaural pinnasize is small and the default irregular configuration is 5.1 standard multicanal configuration.\n",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -8164,7 +8180,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 516.75, 264.0, 85.0, 19.0 ],
+									"patching_rect" : [ 516.75, 253.0, 85.0, 19.0 ],
 									"text" : "prepend mode"
 								}
 
@@ -8515,7 +8531,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.75, 337.0, 210.0, 84.0 ],
+									"patching_rect" : [ 441.75, 397.0, 210.0, 84.0 ],
 									"rounded" : 0
 								}
 
@@ -8908,7 +8924,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 526.25, 288.0, 382.532287, 288.0 ],
+									"midpoints" : [ 526.25, 279.0, 382.532287, 279.0 ],
 									"source" : [ "obj-36", 0 ]
 								}
 
@@ -8918,7 +8934,7 @@
 									"destination" : [ "obj-36", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 566.75, 252.0, 526.25, 252.0 ],
+									"midpoints" : [ 566.75, 247.0, 526.25, 247.0 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -9516,6 +9532,13 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "helpargs.js",
+				"bootpath" : "/Applications/Max 6.1/Cycling '74/help-resources",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{

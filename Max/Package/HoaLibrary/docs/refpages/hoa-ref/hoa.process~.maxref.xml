@@ -173,10 +173,12 @@
 				The hoa.process~ instance that will receive subsequent messages
 				(other than messages specifically used by the hoa.process~ object itself) arriving at the hoa.process~ object's inlets.
 				Targeted messages only works for <o>hoa.in</o> objects that have an <b>extra</b> attribute set.
-				The target numbering/arguments depends on the current mode and the number of loded instances.
-				In <m>planewaves</m> mode (2d/3d), the message <b>target 1</b> will target the first instance corresponding to the first channel.
-				In 2d <m>harmonics</m> mode, target argument correspond to the harmonic index, the harmonics index go to <b>-order</b> to <b>order</b>.
-				In 3d <m>harmonics</m> mode, the <m>target</m> message takes two arguments. First one is the ambisonic band (between 0 and the <b>order</b>), the second one correspond to the harmonic index (from <b>-order</b> to <b>order</b>).
+				The target numbering/arguments depends on the current mode and the number of loaded instances.
+				<ul>
+				<li> In <m>planewaves</m> mode (2d/3d), the message <b>target 1</b> will target the first instance corresponding to the first channel.</li>
+				<li> In 2d <m>harmonics</m> mode, target argument correspond to the harmonic index, the harmonics index go to <b>-order</b> to <b>order</b>.</li>
+				<li> In 3d <m>harmonics</m> mode, the <m>target</m> message takes two arguments. First one is the ambisonic band (between 0 and the <b>order</b>), the second one correspond to the harmonic index (from <b>-order</b> to <b>order</b>).</li>
+				</ul>
 				The message <b>target all</b> will target messages to all of the loaded instances.
 				The message <b>target none</b> disable input to all instances.
 			</description>

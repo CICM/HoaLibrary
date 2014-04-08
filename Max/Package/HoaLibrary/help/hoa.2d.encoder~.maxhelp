@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 102.0, 68.0, 617.0, 721.0 ],
+		"rect" : [ 100.0, 100.0, 617.0, 721.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 102.0, 94.0, 617.0, 695.0 ],
+						"rect" : [ 100.0, 126.0, 617.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -72,6 +72,22 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"border" : 0,
+									"filename" : "helpargs.js",
+									"id" : "obj-9",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "hoa.2d.encoder~" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 273.5, 285.0, 153.5, 41.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
@@ -80,7 +96,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 61.949997, 231.0, 200.0, 33.0 ],
+									"patching_rect" : [ 61.949997, 231.0, 201.0, 33.0 ],
 									"text" : "The azimuth position. (0 -  2*pi) can be set with signal or float values",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -194,7 +210,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
-									"patching_rect" : [ 283.5, 331.0, 225.0, 225.0 ]
+									"patching_rect" : [ 283.5, 360.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -207,7 +223,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 368.75, 567.0, 32.5, 17.0 ],
+									"patching_rect" : [ 534.75, 548.0, 32.5, 17.0 ],
 									"text" : "stop"
 								}
 
@@ -221,7 +237,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 291.0, 567.0, 72.0, 17.0 ],
+									"patching_rect" : [ 521.0, 522.0, 72.0, 17.0 ],
 									"text" : "startwindow"
 								}
 
@@ -735,7 +751,7 @@
 									"destination" : [ "obj-40", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 378.25, 597.0, 252.0, 597.0 ],
+									"midpoints" : [ 544.25, 597.0, 252.0, 597.0 ],
 									"source" : [ "obj-13", 0 ]
 								}
 
@@ -943,7 +959,7 @@
 									"destination" : [ "obj-20", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 252.449997, 318.0, 499.0, 318.0 ],
+									"midpoints" : [ 252.449997, 347.0, 499.0, 347.0 ],
 									"source" : [ "obj-34", 14 ]
 								}
 
@@ -954,7 +970,7 @@
 									"destination" : [ "obj-20", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 237.935711, 318.0, 484.285714, 318.0 ],
+									"midpoints" : [ 237.935711, 347.0, 484.285714, 347.0 ],
 									"source" : [ "obj-34", 13 ]
 								}
 
@@ -965,7 +981,7 @@
 									"destination" : [ "obj-20", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 223.421426, 318.0, 469.571429, 318.0 ],
+									"midpoints" : [ 223.421426, 347.0, 469.571429, 347.0 ],
 									"source" : [ "obj-34", 12 ]
 								}
 
@@ -976,7 +992,7 @@
 									"destination" : [ "obj-20", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 208.90714, 318.0, 454.857143, 318.0 ],
+									"midpoints" : [ 208.90714, 347.0, 454.857143, 347.0 ],
 									"source" : [ "obj-34", 11 ]
 								}
 
@@ -987,7 +1003,7 @@
 									"destination" : [ "obj-20", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 194.392855, 318.0, 440.142857, 318.0 ],
+									"midpoints" : [ 194.392855, 347.0, 440.142857, 347.0 ],
 									"source" : [ "obj-34", 10 ]
 								}
 
@@ -998,7 +1014,7 @@
 									"destination" : [ "obj-20", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 179.878569, 318.0, 425.428571, 318.0 ],
+									"midpoints" : [ 179.878569, 347.0, 425.428571, 347.0 ],
 									"source" : [ "obj-34", 9 ]
 								}
 
@@ -1009,7 +1025,7 @@
 									"destination" : [ "obj-20", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 165.364284, 318.0, 410.714286, 318.0 ],
+									"midpoints" : [ 165.364284, 347.0, 410.714286, 347.0 ],
 									"source" : [ "obj-34", 8 ]
 								}
 
@@ -1020,7 +1036,7 @@
 									"destination" : [ "obj-20", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 150.849998, 318.0, 396.0, 318.0 ],
+									"midpoints" : [ 150.849998, 347.0, 396.0, 347.0 ],
 									"source" : [ "obj-34", 7 ]
 								}
 
@@ -1031,7 +1047,7 @@
 									"destination" : [ "obj-20", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 136.335713, 318.0, 381.285714, 318.0 ],
+									"midpoints" : [ 136.335713, 347.0, 381.285714, 347.0 ],
 									"source" : [ "obj-34", 6 ]
 								}
 
@@ -1042,7 +1058,7 @@
 									"destination" : [ "obj-20", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 121.821427, 318.0, 366.571429, 318.0 ],
+									"midpoints" : [ 121.821427, 347.0, 366.571429, 347.0 ],
 									"source" : [ "obj-34", 5 ]
 								}
 
@@ -1053,7 +1069,7 @@
 									"destination" : [ "obj-20", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 107.307142, 318.0, 351.857143, 318.0 ],
+									"midpoints" : [ 107.307142, 347.0, 351.857143, 347.0 ],
 									"source" : [ "obj-34", 4 ]
 								}
 
@@ -1064,7 +1080,7 @@
 									"destination" : [ "obj-20", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 92.792856, 318.0, 337.142857, 318.0 ],
+									"midpoints" : [ 92.792856, 347.0, 337.142857, 347.0 ],
 									"source" : [ "obj-34", 3 ]
 								}
 
@@ -1075,7 +1091,7 @@
 									"destination" : [ "obj-20", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 78.278571, 318.0, 322.428571, 318.0 ],
+									"midpoints" : [ 78.278571, 347.0, 322.428571, 347.0 ],
 									"source" : [ "obj-34", 2 ]
 								}
 
@@ -1086,7 +1102,7 @@
 									"destination" : [ "obj-20", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 63.764285, 318.0, 307.714286, 318.0 ],
+									"midpoints" : [ 63.764285, 347.0, 307.714286, 347.0 ],
 									"source" : [ "obj-34", 1 ]
 								}
 
@@ -1097,7 +1113,7 @@
 									"destination" : [ "obj-20", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 49.25, 318.0, 293.0, 318.0 ],
+									"midpoints" : [ 49.25, 347.0, 293.0, 347.0 ],
 									"source" : [ "obj-34", 0 ]
 								}
 
@@ -1135,7 +1151,7 @@
 									"destination" : [ "obj-40", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 300.5, 597.0, 252.0, 597.0 ],
+									"midpoints" : [ 530.5, 597.0, 252.0, 597.0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -1262,6 +1278,13 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "helpargs.js",
+				"bootpath" : "/Applications/Max 6.1/Cycling '74/help-resources",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{

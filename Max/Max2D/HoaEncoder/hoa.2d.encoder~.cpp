@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.encoder~.cpp
+ @name      hoa.2d.encoder~
+ @realname  hoa.2d.encoder~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ An ambisonic 2d encoder.
+ 
+ @description
+ <o>hoa.2d.encoder~</o> creates the circular harmonics of a signal depending of a given order (arg 1) and a position on a circle given in radians (right inlet).
+ 
+ @discussion
+ <o>hoa.2d.encoder~</o> creates the circular harmonics of a signal depending of a given order (arg 1) and a position on a circle given in radians (right inlet).
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.map~, hoa.2d.decoder~, hoa.3d.encoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_encoder 
@@ -33,11 +55,22 @@ int C74_EXPORT main(void)
 	t_class *c;
 	
 	c = class_new("hoa.2d.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L,A_GIMME,0);
-    class_alias(c, gensym("hoa.encoder~"));
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method float @digest Set the azimuth of the encoding in radians
+	// @description The <m>float</m> method sets the azimuth of the encoding in radians (between 0. and 2π).
+	// @marg 0 @name azimuth @optional 0 @type float
 	class_addmethod(c, (method)hoa_encoder_float,		"float",	A_FLOAT, 0);
+	
+	// @method int @digest Set the azimuth of the encoding in radians
+	// @description The <m>int</m> method sets the azimuth of the encoding in radians (between 0 and 2π).
+	// @marg 0 @name azimuth @optional 0 @type int
 	class_addmethod(c, (method)hoa_encoder_int,         "int",		A_LONG, 0);
+	
+	// @method signal @digest Signal to encode / azimuth of the encoding in radians.
+	// @description In the left inlet, the signal to encode. In The right inlet : set the azimuth of the encoding in radians
+	// @marg 0 @name encoding-signal @optional 0 @type signal
 	class_addmethod(c, (method)hoa_encoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_encoder_assist,      "assist",	A_CANT, 0);
 	
@@ -50,6 +83,8 @@ int C74_EXPORT main(void)
 
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
 	t_hoa_encoder *x = NULL;
 	int	order = 1;
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);

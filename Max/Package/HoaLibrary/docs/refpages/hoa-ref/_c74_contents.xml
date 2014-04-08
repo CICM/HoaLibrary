@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <root>
+<refpage name='hoa.2d.decoder~.maxref.xml'/>
+<refpage name='hoa.2d.encoder~.maxref.xml'/>
+<refpage name='hoa.2d.map~.maxref.xml'/>
+<refpage name='hoa.2d.map.maxref.xml'/>
 <refpage name='hoa.connect.maxref.xml'/>
 <refpage name='hoa.dac~.maxref.xml'/>
 <refpage name='hoa.gain~.maxref.xml'/>

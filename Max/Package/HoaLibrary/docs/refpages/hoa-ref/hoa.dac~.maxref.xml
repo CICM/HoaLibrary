@@ -56,7 +56,7 @@
 			</description>
 		</method>
 		<method name="int">
-			<arg name="instance-index" optional="0" type="int" />
+			<arg name="source-index" optional="0" type="int" />
 			<digest>
 				Enable/disable audio processing
 			</digest>
@@ -65,7 +65,7 @@
 			</description>
 		</method>
 		<method name="list">
-			<arg name="va-args" optional="0" type="list" />
+			<arg name="group-index" optional="0" type="list" />
 			<digest>
 				Enable/disable audio processing
 			</digest>

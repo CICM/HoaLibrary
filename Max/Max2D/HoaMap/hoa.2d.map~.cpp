@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.map~.cpp
+ @name      hoa.2d.map~
+ @realname  hoa.2d.map~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A ambisonic multisource spatializer.
+ 
+ @description
+ <o>hoa.2d.map~</o> is a tool that encodes several sources in the circular harmonics domain with distance compensation and muting system. It's easy to use and works with <o>hoa.2d.map</o>. You could look at <o>hoa.2d.map</o>'s help for futher informations.
+ 
+ @discussion
+ <o>hoa.2d.map~</o> is a tool that encodes several sources in the circular harmonics domain with distance compensation and muting system. It's easy to use and works with <o>hoa.2d.map</o>. You could look at <o>hoa.2d.map</o>'s help for futher informations.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.map, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.scope~, hoa.2d.decoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 class PolarLines
@@ -100,11 +122,35 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+	// @method signal @digest Sources signals to encode.
+	// @description If you have only one source, the first signal inlet is for the source to encode, the two others ones are to control source position with signal rate. if you have more than one single source to spatialize, all of the inputs represent a signal to encode and coordonates are given with messages.
+	// @marg 0 @name encoding-signals @optional 0 @type signal
 	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
+	
+	// @method float @digest Set single source coordinate with messages depending on the mode.
+	// @description Set single source coordinate with messages depending on the mode.
+	// @marg 0 @name coord @optional 0 @type float
 	class_addmethod(c, (method)hoa_map_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_map_cartesian,   "cartesian",A_NOTHING, 0);
-	class_addmethod(c, (method)hoa_map_polar,		"polar",	A_NOTHING, 0);
+	
+	// @method float @digest Set single source coordinate with messages depending on the mode.
+	// @description Set single source coordinate with messages depending on the mode.
+	// @marg 0 @name coord @optional 0 @type float
 	class_addmethod(c, (method)hoa_map_int,         "int",		A_LONG, 0);
+	
+	// @method cartesian @digest Swith the input mode to cartesian (default).
+	// @description The <m>cartesian</m> message swith the input mode to cartesian
+	class_addmethod(c, (method)hoa_map_cartesian,   "cartesian",A_NOTHING, 0);
+	
+	// @method polar @digest Swith the input mode to polar.
+	// @description The <m>polar</m> message swith the input mode to polar
+	class_addmethod(c, (method)hoa_map_polar,		"polar",	A_NOTHING, 0);
+	
+	// @method list @digest Send source messages like coordinates and mute state.
+	// @description Send source messages like coordinates and mute state. The list must be formatted like this : source-index input-mode radius/abscissa azimuth/ordinate to set source positions or like this : source-index 'mute' mute-state to set the mute state of a source.
+	// marg 0 @name source-index @optional 0 @type int
+	// marg 1 @name input-mode/mute @optional 0 @type symbol
+	// marg 2 @name coord-1/mute-state @optional 0 @type float/int
+	// marg 3 @name coord-2 @optional 0 @type float
     class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_map_assist,      "assist",	A_CANT, 0);
     
@@ -114,6 +160,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
 	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
+	// @description The ramp time in milliseconds.
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -123,6 +170,13 @@ int C74_EXPORT main(void)
 
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
+	// @arg 1 @name number-of-sources @optional 0 @type int @digest The number of sources
+	// @description Second argument is the number of sources to spatialize.
+	// If there is a single source, <o>hoa.2d.map~</o> object owns 3 inlets, the first one correspond to the signal to encode, the two other ones are usefull  to control source position at signal rate. If you have more than one source to spatialize, the number of signal inlets will equal to the number of sources to encode, and coordinates will be given with messages.
+	
 	t_hoa_map *x = NULL;
 	int	order = 1;
     int numberOfSources = 1;
