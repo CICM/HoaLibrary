@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonics projection external
+ A 2d ambisonic projection external
  
  @description
  <o>hoa.2d.projector~</o> discretizes the ambisonic soundfield into an array of channels and gives an access to a new sound domain.

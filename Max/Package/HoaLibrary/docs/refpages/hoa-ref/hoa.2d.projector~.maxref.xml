@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.projector~" module="hoa">
 
 	<digest>
-		An ambisonics projection external
+		A 2d ambisonic projection external
 	</digest>
 
 	<description>

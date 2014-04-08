@@ -203,8 +203,8 @@ int C74_EXPORT main()
 	// @description The <m>clear</m> message remove all sources and groups.
     class_addmethod(c, (method) hoamap_clear_all,        "clear",			A_NOTHING ,0);
     
-	// @method (mouse) @digest Click and drag the sources to set their position. Right-click to make appear contextual setting menu, use the mouse-weel to zoom. Movement can be restricted to the azimuth if you press alt key while you are dragging a source or a group, or restricted to the radius if
-	// @description The <m>clear</m> message remove all sources and groups.
+	// @method (mouse) @digest Change sources or group position, set zoom factor.
+	// @description Click and drag the sources to set their position. Right-click to make appear contextual setting menu, use the mouse-weel to zoom. Movement can be restricted to the azimuth if you press <b>alt</b> key while you are dragging a source or a group, or restricted to the radius with <b>shift</b> key. Press <b>cmd+a</b> to create a group containing all existing sources.
     class_addmethod(c, (method) hoamap_mousedown,        "mousedown",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mousedrag,        "mousedrag",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mouseup,          "mouseup",			A_CANT, 0);

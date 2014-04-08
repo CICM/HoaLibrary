@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.map~" module="hoa">
 
 	<digest>
-		A ambisonic multisource spatializer.
+		A ambisonic multisource 2d spatializer.
 	</digest>
 
 	<description>

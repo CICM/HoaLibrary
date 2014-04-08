@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A graphic user interface to spatialize sources on a plane.
+ A 2d ambisonic sound field rotation external
  
  @description
  <o>hoa.2d.rotate~</o> applies a rotation on the ambisonic sound field.

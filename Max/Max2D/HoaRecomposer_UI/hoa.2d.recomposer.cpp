@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.recomposer.cpp
+ @name      hoa.2d.recomposer
+ @realname  hoa.2d.recomposer
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A Graphical User Interface to manipulate channels in 2d.
+ 
+ @description
+ <o>hoa.2d.recomposer</o> helps you to set angle and widening value of channels to warp the sound field. It is mainly dedicated to the control of the <o>hoa.2d.recomposer~</o> processor object.
+ 
+ @discussion
+ <o>hoa.2d.recomposer</o> helps you to set angle and widening value of channels to warp the sound field. It is mainly dedicated to the control of the <o>hoa.2d.recomposer~</o> processor object.
+ 
+ @category ambisonics, hoa objects, GUI
+ 
+ @seealso  hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.process~, hoa.amp~, hoa.delay~, hoa.gain~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~, hoa.2d.wider~
+ */
+
 #include "../Hoa2D.max.h"
 
 #define MAX_UI_CHANNELS 64
@@ -23,6 +45,7 @@ typedef struct  _hoa_recomposer
     t_jrgba		f_color_channel_point_selected;
 	t_jrgba		f_color_selection;
     t_jrgba		f_color_channel_shape;
+	t_jrgba		f_color_channel_shape_selected;
     t_jrgba     f_color_channel_point_text;
     t_jrgba     f_color_channel_point_text_sel;
 	t_jrgba     f_color_fisheye;
@@ -133,19 +156,66 @@ int C74_EXPORT main()
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
+	
 	class_addmethod(c, (method) hoa_recomposer_assist,          "assist",        A_CANT,	0);
-    class_addmethod(c, (method) hoa_recomposer_preset,          "preset",                  0);
-    class_addmethod(c, (method) hoa_recomposer_getvalueof,      "getvalueof",    A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_setvalueof,      "setvalueof",    A_CANT,   0);
+    class_addmethod(c, (method) hoa_recomposer_preset,          "preset",					0);
+    class_addmethod(c, (method) hoa_recomposer_getvalueof,      "getvalueof",    A_CANT,	0);
+	class_addmethod(c, (method) hoa_recomposer_setvalueof,      "setvalueof",    A_CANT,	0);
 	class_addmethod(c, (method) hoa_recomposer_paint,           "paint",         A_CANT,	0);
-	class_addmethod(c, (method) hoa_recomposer_getdrawparams,   "getdrawparams", A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_notify,          "notify",        A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_getdrawparams,   "getdrawparams", A_CANT,	0);
+	class_addmethod(c, (method) hoa_recomposer_notify,          "notify",        A_CANT,	0);
+	
+	// @method bang @digest Output current values.
+	// @description The <m>bang</m> message report current values.
 	class_addmethod(c, (method) hoa_recomposer_bang,            "bang",                 0L,0);
+	
+	// @method set @digest Set angle or widening value for one or more channels without output.
+	// @description The word <m>set</m> followed by the symbol <b>wide</b> sets the widening value.
+	// The word <m>set</m> followed by the symbol <b>angles</b> sets angles values.
+	// Second argument is the index of the channel. Pass 0 if you want to set all of the channels.
+	// last argument is the value. <b>angles</b> are in radian, wrapped between 0. and 2π. <b>wide</b> is clipped between 0. and 1.
+	// @marg 0 @name wide/angles @optional 0 @type symbol
+	// @marg 1 @name channel-index @optional 0 @type int
+	// @marg 2 @name value @optional 0 @type float
     class_addmethod(c, (method) hoa_recomposer_set,             "set",           A_GIMME,  0);
+	
+	// @method angles @digest Set angle value for one or more channels and trigger output.
+	// @description The word <m>angles</m> followed by an index and a float set a specific channel angle.
+	// The word <m>angles</m> followed by a list of float set several channel angles.
+	// @marg 0 @name channel-index/list @optional 0 @type int/list
+	// @marg 1 @name value @optional 0 @type float
     class_addmethod(c, (method) hoa_recomposer_angles,          "angles",        A_GIMME,  0);
+	
+	// @method wide @digest Set widening value for one or more channels and trigger output.
+	// @description The word <m>wide</m> followed by an index and a float set a specific channel widening value. Pass 0 to set all widening values.
+	// The word <m>wide</m> followed by a list of float set widening value for a list of channel.
+	// @marg 0 @name channel-index/list @optional 0 @type int/list
+	// @marg 1 @name value @optional 0 @type float
     class_addmethod(c, (method) hoa_recomposer_wide,			"wide",			 A_GIMME,  0);
+	
+	// @method reset @digest Reset angle and widening value of one or more channels and trigger output.
+	// @description Without argument, the word <m>reset</m> will reset all of the angles and widening values of channels to default.
+	// The word <m>reset</m> followed by the symbol <m>wide</m> will reset all widening value to 1. To reset specific channels widening values pass their index as a list of int as second argument.
+	// The word <m>reset</m> followed by the symbol <m>angle</m> will reset all angles to default. To reset specific channels angles pass their index as a list of int as second argument.
+	// @marg 0 @name wide/angles @optional 1 @type symbol
+	// @marg 1 @name channel-index @optional 1 @type list
     class_addmethod(c, (method) hoa_recomposer_reset,           "reset",         A_GIMME,  0);
 	class_addmethod(c, (method) hoa_recomposer_anything,        "anything",      A_GIMME,  0);
+	
+	// @method (mouse) @digest Click and drag to change angles and widening values of the channels.
+	// @description Click and drag the channel points select them and to set their angles and widening values.
+	// <ul>
+	// <li> <b>drag</b> to move selected channels angles</li>
+	// <li> <b>shift+drag</b> to change selected channels' widening value </li>
+	// <li> <b>cmd+a</b> to select All (<b>ctrl+a</b> for win)</li>
+	// <li> <b>cmd+drag</b> to do a rectangular selection (<b>ctrl+drag</b> for win)</li>
+	// <li> <b>cmd+click</b> on a channel to change this channel selection state (<b>cmd+click</b> for win)</li>
+	// <li> <b>ctrl+move</b> to have a preview of the fisheye effect (<b>alt+move</b> for win).</li>
+	// <li> <b>ctrl+click</b> lock fisheye start and destination angles value for the selected channels (<b>alt+click</b> for win).</li>
+	// <li> <b>ctrl+drag</b> apply a "fisheye effect" to the selected channels (drag from/to fisheye point from/to center of the circle) (<b>alt+drag</b> for win)</li>
+	// <li> double-click on a channel to set it to the closest default channel angle.</li>
+	// <li> Press <b>cmd</b> key when you drag to activate magnetism on the currently dragged channel</li>
+	// </ul>
 	class_addmethod(c, (method) hoa_recomposer_mousedown,       "mousedown",     A_CANT,   0);
 	class_addmethod(c, (method) hoa_recomposer_mousedrag,       "mousedrag",     A_CANT,   0);
 	class_addmethod(c, (method) hoa_recomposer_mouseup,         "mouseup",       A_CANT,   0);
@@ -155,9 +225,11 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) hoa_recomposer_focuslost,       "focuslost",     A_CANT,   0);
     	
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
-	
+	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
+	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
+	// @exclude hoa.2d.map
 	
     CLASS_STICKY_CATEGORY(c, 0, "Color");
 	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoa_recomposer, f_color_bg);
@@ -165,60 +237,77 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.35 0.35 0.35 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_recomposer, f_color_bd);
 	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.2 0.2 0.2 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "circlecolor", 0, t_hoa_recomposer, f_color_inner_circle);
 	CLASS_ATTR_STYLE			(c, "circlecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "circlecolor", 0, "Circle Inner Color");
 	CLASS_ATTR_ORDER			(c, "circlecolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "circlecolor", 0, "0.2 0.2 0.2 1.");
+	// @description Sets the RGBA values for the inner circle color of the <o>hoa.2d.recomposer</o> object
 	
 	CLASS_ATTR_RGBA				(c, "chacolor", 0, t_hoa_recomposer, f_color_channel_point);
 	CLASS_ATTR_STYLE			(c, "chacolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "chacolor", 0, "Channels Color");
 	CLASS_ATTR_ORDER			(c, "chacolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "chacolor", 0, "0.5 0.5 0.5 1.");
+	// @description Sets the RGBA values for the channel point color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "selchacolor", 0, t_hoa_recomposer, f_color_channel_point_selected);
 	CLASS_ATTR_STYLE			(c, "selchacolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selchacolor", 0, "Selected Channel Color");
 	CLASS_ATTR_ORDER			(c, "selchacolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchacolor", 0, "0.86 0.86 0.86 1.");
+	// @description Sets the RGBA values for the selected channel point color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "channelshapecolor", 0, t_hoa_recomposer, f_color_channel_shape);
 	CLASS_ATTR_STYLE			(c, "channelshapecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "channelshapecolor", 0, "Channel Shape color");
 	CLASS_ATTR_ORDER			(c, "channelshapecolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "channelshapecolor", 0, "0.4 0.4 0.4 0.3");
+	// @description Sets the RGBA values for the channel shape color of the <o>hoa.2d.recomposer</o> object
+	
+	CLASS_ATTR_RGBA				(c, "selchannelshapecolor", 0, t_hoa_recomposer, f_color_channel_shape_selected);
+	CLASS_ATTR_STYLE			(c, "selchannelshapecolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "selchannelshapecolor", 0, "Channel Shape color");
+	CLASS_ATTR_ORDER			(c, "selchannelshapecolor", 0, "6");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchannelshapecolor", 0, "0.4 0.4 0.8 0.3");
+	// @description Sets the RGBA values for the selected channel shape color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "fisheyecolor", 0, t_hoa_recomposer, f_color_fisheye);
 	CLASS_ATTR_STYLE			(c, "fisheyecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "fisheyecolor", 0, "FishEye color");
 	CLASS_ATTR_ORDER			(c, "fisheyecolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "fisheyecolor", 0, "0.69 0.18 0.18 1.");
+	// @description Sets the RGBA values for the fisheye color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "rectselectcolor", 0, t_hoa_recomposer, f_color_selection);
 	CLASS_ATTR_STYLE			(c, "rectselectcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "rectselectcolor", 0, "Rect Selection color");
 	CLASS_ATTR_ORDER			(c, "rectselectcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "rectselectcolor", 0, "0.39 0.52 0.8 1.");
+	// @description Sets the RGBA values for the rectangular selection color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "channeltextcolor", 0, t_hoa_recomposer, f_color_channel_point_text);
 	CLASS_ATTR_STYLE			(c, "channeltextcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "channeltextcolor", 0, "Channels text color");
 	CLASS_ATTR_ORDER			(c, "channeltextcolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "channeltextcolor", 0, "0.9 0.9 0.9 1.");
+	// @description Sets the RGBA values for the channel text color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "selchanneltextcolor", 0, t_hoa_recomposer, f_color_channel_point_text_sel);
 	CLASS_ATTR_STYLE			(c, "selchanneltextcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selchanneltextcolor", 0, "Selected Channels text color");
 	CLASS_ATTR_ORDER			(c, "selchanneltextcolor", 0, "10");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchanneltextcolor", 0, "0.4 0.4 0.4 1.");
+	// @description Sets the RGBA values for the selected channel text color of the <o>hoa.2d.recomposer</o> object
     CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_LONG				(c, "channels",0, t_hoa_recomposer, f_number_of_channels);
@@ -227,6 +316,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ACCESSORS		(c, "channels", NULL, set_numberOfChannels);
 	CLASS_ATTR_LABEL			(c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"channels",0,"8");
+	// @description Sets the number of channels.
 	
 	class_register(CLASS_BOX, c);
 	hoa_recomposer_class = c;
@@ -611,7 +701,7 @@ t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg,
          {
              jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
          }
-         else if(name == gensym("channelshapecolor"))
+         else if(name == gensym("channelshapecolor") || name == gensym("selchannelshapecolor"))
          {
              jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
          }
@@ -800,6 +890,7 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_color_channel_shape;
+	t_jrgba harmonicsFillColorSel = x->f_color_channel_shape_selected;
 	double factor = (x->f_channel_radius*0.92);
 	int breakIndex = 0;
 	double rotation = 0;
@@ -809,6 +900,7 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_harmonics_layer, rect->width, rect->height);
     
     harmonicsFillColor.alpha = clip_min(x->f_color_channel_shape.alpha - 0.2, 0);
+	harmonicsFillColorSel.alpha = clip_min(x->f_color_channel_shape.alpha - 0.2, 0);
     
 	if (g)
 	{
@@ -842,9 +934,9 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 					jgraphics_line_to(g, x->f_scope->getAbscissa(j) * factor, x->f_scope->getOrdinate(j) * factor );
 			
 			jgraphics_close_path(g);
-			jgraphics_set_source_jrgba(g, &harmonicsFillColor);
+			jgraphics_set_source_jrgba(g, x->f_channels->isSelected(i) ? &harmonicsFillColorSel : &harmonicsFillColor);
 			jgraphics_fill_preserve(g);
-			jgraphics_set_source_jrgba(g, &x->f_color_channel_shape);
+			jgraphics_set_source_jrgba(g, x->f_channels->isSelected(i) ? &x->f_color_channel_shape_selected : &x->f_color_channel_shape);
 			jgraphics_stroke(g);
 			
 			jgraphics_rotate(g, -rotation);
@@ -984,6 +1076,7 @@ void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     
     x->f_last_mouseDownOverChannel = isMouseDownOverAChannel;
     jmouse_setcursor(patcherview, (t_object *)x, (x->f_last_mouseMoveOverChannel != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_redraw((t_jbox *)x);
@@ -1069,6 +1162,7 @@ void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt,
     
     x->f_last_mouseUpOverChannel = isMouseUpOverAChannel;
     jmouse_setcursor(patcherview, (t_object *)x, (x->f_last_mouseMoveOverChannel != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_redraw((t_jbox *)x);    
@@ -1157,6 +1251,7 @@ long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode
     {
 		x->f_channels->setSelected(-1, 1); // tout selectionné
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_redraw((t_jbox *)x);
         filter = 1;

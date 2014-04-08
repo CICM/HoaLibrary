@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.vector~" module="hoa">
 
 	<digest>
-		A soundfield energy and velocity vectors calculator.
+		A soundfield energy and velocity vectors calculator for 2d.
 	</digest>
 
 	<description>

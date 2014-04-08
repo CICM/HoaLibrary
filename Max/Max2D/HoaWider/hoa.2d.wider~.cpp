@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A fractional ambisonic orders simulator
+ A fractional ambisonic orders simulator for 2d
  
  @description
  <o>hoa.2d.wider~</o> can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.

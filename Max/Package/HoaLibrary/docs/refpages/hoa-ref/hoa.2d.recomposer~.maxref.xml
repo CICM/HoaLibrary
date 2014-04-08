@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.recomposer~" module="hoa">
 
 	<digest>
-		Recomposes a plane wave decomposition into circular harmonics
+		Recomposes a 2d plane wave decomposition into circular harmonics
 	</digest>
 
 	<description>

@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A ambisonic multisource spatializer.
+ A ambisonic multisource 2d spatializer.
  
  @description
  <o>hoa.2d.map~</o> is a tool that encodes several sources in the circular harmonics domain with distance compensation and muting system. It's easy to use and works with <o>hoa.2d.map</o>. You could look at <o>hoa.2d.map</o>'s help for futher informations.

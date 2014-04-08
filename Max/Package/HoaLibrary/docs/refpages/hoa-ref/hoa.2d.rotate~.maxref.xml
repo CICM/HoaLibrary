@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.rotate~" module="hoa">
 
 	<digest>
-		A graphic user interface to spatialize sources on a plane.
+		A 2d ambisonic sound field rotation external
 	</digest>
 
 	<description>
