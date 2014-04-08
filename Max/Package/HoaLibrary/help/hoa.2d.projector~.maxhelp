@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 147.0, 86.0, 742.0, 706.0 ],
+		"rect" : [ 100.0, 100.0, 742.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 147.0, 112.0, 742.0, 680.0 ],
+						"rect" : [ 100.0, 126.0, 742.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -322,7 +322,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 8.0, 69.0, 483.0, 33.0 ],
-									"text" : "hoa.2d.projector~ discretizes the ambisonic soundfield into an array of channels \nand gives a access to a new sound domain.",
+									"text" : "hoa.2d.projector~ discretizes the ambisonic soundfield into an array of channels \nand gives an access to a new sound domain.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}

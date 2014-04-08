@@ -12710,6 +12710,22 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"border" : 0,
+									"filename" : "helpargs.js",
+									"id" : "obj-36",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "hoa.process~" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 457.5, 554.0, 438.0, 101.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-33",
@@ -12732,7 +12748,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 600.0, 513.0, 71.0, 18.0 ],
-									"presentation_rect" : [ 596.5, 513.0, 0.0, 0.0 ],
 									"text" : "mutemap 1"
 								}
 
@@ -13066,7 +13081,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 73.5, 614.0, 60.0 ],
-									"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. Number of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode pre, no or post encoding.",
+									"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. \nNumber of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode harmonics/planewaves.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -14156,6 +14171,13 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/operators",
 				"patcherrelativepath" : "../patchers/operators",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "helpargs.js",
+				"bootpath" : "/Applications/Max 6.1/Cycling '74/help-resources",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{

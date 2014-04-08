@@ -153,6 +153,7 @@
 		<seealso name="hoa.2d.scope~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.vector~" />
+		<seealso name="hoa.2d.optim~" />
 		<seealso name="hoa.2d.map~" />
 		<seealso name="hoa.2d.encoder~" />
 		<seealso name="hoa.3d.decoder~" />

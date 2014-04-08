@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.optim~.cpp
+ @name      hoa.2d.optim~
+ @realname  hoa.2d.optim~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ An ambisonic signal optimization external
+ 
+ @description
+ <o>hoa.2d.optim~</o> weights the circular harmonics signals depending on the ambisonic optimization. It can be <b>basic</b> for no optimization, <b>maxRe</b> or <b>inPhase</b>.
+ 
+ @discussion
+ <o>hoa.2d.optim~</o> weights the circular harmonics signals depending on the ambisonic optimization. It can be <b>basic</b> for no optimization, <b>maxRe</b> or <b>inPhase</b>.
+ 
+ @category ambisonics, hoa objects, audio, msp
+ 
+ @seealso hoa.2d.decoder~, hoa.2d.map~, hoa.2d.scope~, hoa.2d.meter~, hoa.2d.wider~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_optim 
@@ -37,13 +59,24 @@ int C74_EXPORT main(void)
 	t_class *c;
 	
 	c = class_new("hoa.2d.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (long)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.optim~"));
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of circular harmonic signals to be optimized.
+	// @description Array of circular harmonic signals to be optimized.
 	class_addmethod(c, (method)hoa_optim_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_optim_assist,    "assist",	A_CANT, 0);
+	
+	// @method basic @digest Set the optimization mode to <b>basic</b>, does not apply any optimization.
+	// @description Set the optimization mode to <b>basic</b>. This is particulary suitable when the listener is ideally placed at the center of the loudspeaker arrangement
 	class_addmethod(c, (method)hoa_optim_basic,     "basic",	A_NOTHING, 0);
+	
+	// @method maxRe @digest Set the optimization mode to <b>maxRe</b>.
+	// @description Set the optimization mode to <b>maxRe</b>. This is particulary suitable when the audience is confined at the center of the restitution area.
     class_addmethod(c, (method)hoa_optim_maxre,     "maxRe",	A_NOTHING, 0);
+	
+	// @method maxRe @digest Set the optimization mode to <b>maxRe</b>.
+	// @description Set the optimization mode to <b>maxRe</b>. This is particulary suitable when the audience covers all of the restitution area.
     class_addmethod(c, (method)hoa_optim_inphase,   "inPhase",	A_NOTHING, 0);
     
 	class_dspinit(c);
@@ -55,6 +88,12 @@ int C74_EXPORT main(void)
 
 void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
+	// @arg 1 @name optimization-mode @optional 1 @type symbol @digest The optimization mode.
+	// @description The optimization mode can be <b>basic</b> for no optimization (default), <b>maxRe</b> or <b>inPhase</b>.
+	
 	t_hoa_optim *x = NULL;
 	int	order = 1;
     x = (t_hoa_optim *)object_alloc(hoa_optim_class);

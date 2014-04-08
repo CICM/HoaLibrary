@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, audio, MSP
  
- @seealso hoa.2d.meter~, hoa.2d.scope~, hoa.dac~, hoa.vector~, hoa.2d.map~, hoa.2d.encoder~, hoa.3d.decoder~
+ @seealso hoa.2d.meter~, hoa.2d.scope~, hoa.dac~, hoa.vector~, hoa.2d.optim~, hoa.2d.map~, hoa.2d.encoder~, hoa.3d.decoder~
  */
 
 #include "../Hoa2D.max.h"

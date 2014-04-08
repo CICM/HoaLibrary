@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.meter~.cpp
+ @name      hoa.2d.meter~
+ @realname  hoa.2d.meter~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A circular array of visual peak level indicators
+ 
+ @description
+ The <o>hoa.2d.meter~</o> object displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.
+ 
+ @discussion
+ The <o>hoa.2d.meter~</o> object displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.
+ 
+ @category ambisonics, hoa objects, audio, GUI, MSP
+ 
+ @seealso meter~, live.gain~, hoa.gain~, hoa.2d.scope~, hoa.2d.map, hoa.2d.space, hoa.2d.recomposer, hoa.2d.encoder~, hoa.2d.decoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 #define MAX_UI_CHANNELS 64
@@ -95,13 +117,16 @@ int C74_EXPORT main()
 	t_class *c;
     
 	c = class_new("hoa.2d.meter~", (method)meter_new, (method)meter_free, (short)sizeof(t_meter), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.meter~"));
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 	
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of signals to be visualize.
+	// @description Array of signals to be visualize.
+	// @marg 0 @name channel-signal @optional 0 @type signal
 	class_addmethod(c, (method) meter_dsp64,		 "dsp64",		  A_CANT, 0);
 	class_addmethod(c, (method) meter_assist,		 "assist",		  A_CANT, 0);
 	class_addmethod(c, (method) meter_paint,		 "paint",		  A_CANT, 0);
@@ -118,6 +143,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE_LABEL          (c, "drawledsbg", 0, "onoff", "Draw Leds Background");
 	CLASS_ATTR_DEFAULT              (c, "drawledsbg", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "drawledsbg", 1);
+	// @description Draw leds background ?
 	
 	CLASS_ATTR_LONG                 (c, "drawvector", 0, t_meter, f_drawvector);
 	CLASS_ATTR_ORDER                (c, "drawvector", 0, "2");
@@ -125,6 +151,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ENUMINDEX4           (c, "drawvector", 0, "none", "energy", "velocity", "both")
 	CLASS_ATTR_DEFAULT              (c, "drawvector", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "drawvector", 1);
+	// @description The vector to draw.
     
     CLASS_ATTR_LONG                 (c, "drawmborder", 0, t_meter, f_drawmborder);
 	CLASS_ATTR_ORDER                (c, "drawmborder", 0, "3");
@@ -132,6 +159,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ENUMINDEX4           (c, "drawmborder", 0, "none", "Circles", "Axes", "both")
 	CLASS_ATTR_DEFAULT              (c, "drawmborder", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "drawmborder", 1);
+	// @description The border to draw.
 	
 	CLASS_ATTR_DOUBLE               (c, "metersize", 0, t_meter, f_metersize);
 	CLASS_ATTR_ORDER                (c, "metersize", 0, "4");
@@ -139,12 +167,15 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "metersize", 0., 1);
 	CLASS_ATTR_DEFAULT              (c, "metersize", 0, "0.8");
 	CLASS_ATTR_SAVE                 (c, "metersize", 1);
+	// @description The size of the inner circle of the <o>hoa.2d.meter~</o>.
     
     CLASS_ATTR_LONG                 (c, "orientation", 0, t_meter, f_direction);
 	CLASS_ATTR_LABEL                (c, "orientation", 0, "Meter Fill Orientation");
     CLASS_ATTR_ORDER                (c, "orientation", 0, "5");
 	CLASS_ATTR_ENUMINDEX            (c, "orientation", 0, "inside outside");
     CLASS_ATTR_DEFAULT_SAVE_PAINT   (c,"orientation",0, "0");
+	// @description The filling orientation of the peak level indicators <o>hoa.2d.meter~</o>.
+	
     CLASS_STICKY_CATEGORY_CLEAR (c);
 	
     CLASS_STICKY_CATEGORY           (c, 0, "Behavior");
@@ -154,24 +185,29 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_SAVE                 (c, "channels", 1);
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
+	// @description The number of displayed channel and peak level indicators.
     
 	CLASS_ATTR_DOUBLE_VARSIZE       (c, "angles", ATTR_SET_DEFER_LOW, t_meter, f_azimuth_of_channels, f_number_of_channels, MAX_UI_CHANNELS);
 	CLASS_ATTR_ACCESSORS            (c, "angles", azimuths_of_channels_get, azimuths_of_channels_set);
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
     CLASS_ATTR_SAVE                 (c, "angles", 1);
+	// @description The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360., so you can also set the angles with negative values.
     
 	CLASS_ATTR_DOUBLE               (c, "offset", 0, t_meter, f_offset_of_channels);
 	CLASS_ATTR_ORDER                (c, "offset", 0, "3");
 	CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
+	CLASS_ATTR_FILTER_CLIP			(c, "offset", -180, 180);
 	CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
 	CLASS_ATTR_SAVE                 (c, "offset", 1);
+	// @description Display offset of channels and peak level indicators. the value is in degree, clipped between -180. and 180.
     
     CLASS_ATTR_LONG                 (c, "rotation", 0, t_meter, f_rotation);
     CLASS_ATTR_ORDER                (c, "rotation", 0, "4");
 	CLASS_ATTR_LABEL                (c, "rotation", 0, "Rotation of Channels");
 	CLASS_ATTR_ENUMINDEX            (c, "rotation", 0, "clockwise anti-clockwise");
     CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "rotation",0, "1");
+	// @description The rotation can either be <b>clockwise</b> or <b>anti-clockwise</b>
     
     CLASS_ATTR_LONG                 (c, "interval", 0, t_meter, f_interval);
 	CLASS_ATTR_ORDER                (c, "interval", 0, "5");
@@ -179,6 +215,8 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
 	CLASS_ATTR_DEFAULT              (c, "interval", 0, "50");
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
+	// @description The refresh interval time in milliseconds.
+	
     CLASS_STICKY_CATEGORY_CLEAR     (c);
 	
 	CLASS_ATTR_LONG                 (c, "dbperled", 0, t_meter, f_dbperled);
@@ -188,6 +226,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "dbperled", 1, 12);
 	CLASS_ATTR_DEFAULT              (c, "dbperled", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "dbperled", 1);
+	// @description Sets the amount of signal level in deciBels represented by each LED. By default each LED represents a 3dB change in volume from its neighboring LEDs.
 	
 	CLASS_ATTR_LONG                 (c, "nhotleds", 0, t_meter, f_nhotleds);
     CLASS_ATTR_CATEGORY             (c, "nhotleds", 0, "Value");
@@ -196,7 +235,8 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "nhotleds", 0, 20);
 	CLASS_ATTR_DEFAULT              (c, "nhotleds", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "nhotleds", 1);
-	
+	// @description Sets the total number "hot" warning LEDs displayed on the <o>hoa.2d.meter~</o> object (corresponding to the color set by the <b>hotcolor</b> message).
+
 	CLASS_ATTR_LONG                 (c, "ntepidleds", 0, t_meter, f_ntepidleds);
     CLASS_ATTR_CATEGORY             (c, "ntepidleds", 0, "Value");
 	CLASS_ATTR_ORDER                (c, "ntepidleds", 0, "6");
@@ -204,6 +244,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "ntepidleds", 0, 20);
 	CLASS_ATTR_DEFAULT              (c, "ntepidleds", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "ntepidleds", 1);
+	// @description Sets the total number "tepid" mid-range LEDs displayed on the <o>hoa.2d.meter~</o> object (corresponding to the color set by the <b>tepidcolor</b> message).
 	
 	CLASS_ATTR_LONG                 (c, "nwarmleds", 0, t_meter, f_nwarmleds);
     CLASS_ATTR_CATEGORY             (c, "nwarmleds", 0, "Value");
@@ -212,6 +253,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "nwarmleds", 0, 20);
 	CLASS_ATTR_DEFAULT              (c, "nwarmleds", 0, "3");
 	CLASS_ATTR_SAVE                 (c, "nwarmleds", 1);
+	// @description Sets the total number "warm" lower-mid-range LEDs displayed on the <o>hoa.2d.meter~</o> object (corresponding to the color set by the <b>warmcolor</b> message).
 	
 	CLASS_ATTR_LONG                 (c, "numleds", 0, t_meter, f_numleds);
     CLASS_ATTR_CATEGORY             (c, "numleds", 0, "Value");
@@ -220,7 +262,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_CLIP          (c, "numleds", 10, 20);
 	CLASS_ATTR_DEFAULT              (c, "numleds", 0, "12");
 	CLASS_ATTR_SAVE                 (c, "numleds", 1);
-    
+    // @description The word numleds, followed by a number between 10 and 20, sets the total number of LEDs displayed on the <o>hoa.2d.meter~</o> object. The range is 10-20 LEDs.
     
     CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_meter, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -228,6 +270,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.2d.meter~</o> object
     
     CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_meter, f_color_bd);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
@@ -235,6 +278,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.2d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "mbgcolor", 0, t_meter, f_color_mbg);
 	CLASS_ATTR_LABEL                (c, "mbgcolor", 0, "Meter Background Color");
@@ -242,6 +286,7 @@ int C74_EXPORT main()
     CLASS_ATTR_STYLE                (c, "mbgcolor", 0, "rgba");
 	CLASS_ATTR_ORDER                (c, "mbgcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "mbgcolor", 0, "0.61 0.61 0.61 1.");
+	// @description Sets the RGBA values for the filled circle background color of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "coldcolor", 0, t_meter, f_color_cold);
     CLASS_ATTR_CATEGORY             (c, "coldcolor", 0, "Color");
@@ -249,6 +294,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "coldcolor", 0, "Cold Signal Color");
 	CLASS_ATTR_ORDER                (c, "coldcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "coldcolor", 0, "0. 0.6 0. 0.8");
+	// @description Sets the RGBA values for the cold signal color of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "tepidcolor", 0, t_meter, f_color_tepid);
     CLASS_ATTR_CATEGORY             (c, "tepidcolor", 0, "Color");
@@ -256,6 +302,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "tepidcolor", 0, "Tepid Signal Color");
 	CLASS_ATTR_ORDER                (c, "tepidcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
+	// @description Sets the RGBA values for the LEDs color for the lower-middle of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "warmcolor", 0, t_meter, f_color_warm);
     CLASS_ATTR_CATEGORY             (c, "warmcolor", 0, "Color");
@@ -263,6 +310,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "warmcolor", 0, "Warm Signal Color");
 	CLASS_ATTR_ORDER                (c, "warmcolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "warmcolor", 0, ".85 .85 0. 0.8");
+	// @description Sets the RGBA values for the LEDs color for upper-middle "warm" range of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "hotcolor", 0, t_meter, f_color_hot);
     CLASS_ATTR_CATEGORY             (c, "hotcolor", 0, "Color");
@@ -270,6 +318,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "hotcolor", 0, "Hot Signal Color");
 	CLASS_ATTR_ORDER                (c, "hotcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "hotcolor", 0, "1. 0.6 0. 0.8");
+	// @description Sets the RGBA values for the LEDs color for the upper "hot" range of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "overloadcolor", 0, t_meter, f_color_over);
     CLASS_ATTR_CATEGORY             (c, "overloadcolor", 0, "Color");
@@ -277,6 +326,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "overloadcolor", 0, "Overload Signal Color");
 	CLASS_ATTR_ORDER                (c, "overloadcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overloadcolor", 0, "1. 0. 0. 0.8");
+	// @description Sets the RGBA values for the LEDs color for the "over" indicator of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "energycolor", 0, t_meter, f_color_energy);
     CLASS_ATTR_CATEGORY             (c, "energycolor", 0, "Color");
@@ -284,6 +334,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "energycolor", 0, "Energy Vector Color");
 	CLASS_ATTR_ORDER                (c, "energycolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "energycolor", 0, "0. 0. 1. 0.8");
+	// @description Sets the RGBA values for the energy vector color of the <o>hoa.2d.meter~</o> object
     
     CLASS_ATTR_RGBA                 (c, "velocitycolor", 0, t_meter, f_color_velocity);
     CLASS_ATTR_CATEGORY             (c, "velocitycolor", 0, "Color");
@@ -291,6 +342,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "velocitycolor", 0, "Velocity Vector Color");
 	CLASS_ATTR_ORDER                (c, "velocitycolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "velocitycolor", 0, "1. 0. 0. 0.8");
+	// @description Sets the RGBA values for the velocity vector color of the <o>hoa.2d.meter~</o> object
 	
 	class_register(CLASS_BOX, c);
 	meter_class = c;

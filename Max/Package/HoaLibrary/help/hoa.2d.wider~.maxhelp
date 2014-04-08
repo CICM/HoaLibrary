@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 217.0, 85.0, 523.0, 602.0 ],
+		"rect" : [ 100.0, 100.0, 523.0, 602.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 217.0, 111.0, 523.0, 576.0 ],
+						"rect" : [ 100.0, 126.0, 523.0, 576.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,22 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpargs.js",
+									"id" : "obj-3",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "hoa.2d.wider~" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 358.5, 329.0, 210.0, 55.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -118,7 +134,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 372.333374, 206.0, 98.0, 33.0 ],
+									"patching_rect" : [ 387.333374, 191.0, 98.0, 33.0 ],
 									"text" : "Fractional order\n(0 - 1)",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -137,7 +153,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 372.333374, 246.0, 50.0, 19.0 ]
+									"patching_rect" : [ 387.333374, 231.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -150,7 +166,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 372.333374, 279.0, 70.0, 19.0 ],
+									"patching_rect" : [ 387.333374, 264.0, 70.0, 19.0 ],
 									"text" : "pack 0. 100"
 								}
 
@@ -164,14 +180,14 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "bang" ],
-									"patching_rect" : [ 372.333374, 304.0, 36.0, 20.0 ],
+									"patching_rect" : [ 387.333374, 289.0, 36.0, 20.0 ],
 									"text" : "line~"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.2d.wider~", "@obj-desc", "A", "fractional", "ambisonic", "orders", "simulator." ],
+									"args" : [ "@obj-name", "hoa.2d.wider~", "@obj-desc", "A fractional ambisonic orders simulator." ],
 									"id" : "obj-11",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -390,7 +406,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 382.0, 163.0, 51.0, 19.0 ],
+									"patching_rect" : [ 421.0, 121.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -417,7 +433,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 382.0, 193.0, 74.0, 19.0 ],
+									"patching_rect" : [ 421.0, 151.0, 74.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -481,7 +497,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 372.333374, 206.0, 98.0, 33.0 ],
+									"patching_rect" : [ 387.333374, 191.0, 98.0, 33.0 ],
 									"rounded" : 0
 								}
 
@@ -828,7 +844,7 @@
 									"destination" : [ "obj-31", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 391.5, 184.0, 391.5, 184.0 ],
+									"midpoints" : [ 430.5, 142.0, 430.5, 142.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -847,6 +863,7 @@
 									"destination" : [ "obj-21", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 396.833374, 318.5, 341.500008, 318.5 ],
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -964,6 +981,13 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "helpargs.js",
+				"bootpath" : "/Applications/Max 6.1/Cycling '74/help-resources",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{

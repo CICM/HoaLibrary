@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.rotate~.cpp
+ @name      hoa.2d.rotate~
+ @realname  hoa.2d.rotate~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A graphic user interface to spatialize sources on a plane.
+ 
+ @description
+ <o>hoa.2d.rotate~</o> applies a rotation on the ambisonic sound field.
+ 
+ @discussion
+ <o>hoa.2d.rotate~</o> applies a rotation on the ambisonic sound field.
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.wider~, hoa.2d.encoder~, hoa.2d.decoder~, hoa.process~, hoa.mirror~, hoa.2d.space, hoa.2d.recomposer, hoa.2d.meter~, hoa.2d.scope~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct _hoa_rotate 
@@ -40,12 +62,20 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.2d.rotate~", (method)hoa_rotate_new, (method)hoa_rotate_free, (long)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
 	
-	class_alias(c, gensym("hoa.rotate~"));
 	hoa_initclass(c, (method)hoa_getinfos);
-	class_addmethod(c, (method)hoa_rotate_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_rotate_int,			"int",		A_LONG, 0);
+	
+	// @method signal @digest Array of circular harmonic signals to be rotated, rotation angle.
+	// @description Array of circular harmonic signals to be optimized. Set the angle of the rotation of the soundfield in radian in the last inlet at signal rate. The rotation angle is anti-clockwise and wrapped between 0. and 2π.
 	class_addmethod(c, (method)hoa_rotate_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_rotate_assist,		"assist",	A_CANT, 0);
+	
+	// @method float @digest Set the rotation angle.
+	// @description Set the angle of the rotation of the soundfield in radian in the last inlet at control rate. The rotation angle is anti-clockwise and wrapped between 0. and 2π.
+	class_addmethod(c, (method)hoa_rotate_float,		"float",	A_FLOAT, 0);
+	
+	// @method int @digest Set the rotation angle.
+	// @description Set the angle of the rotation of the soundfield in radian in the last inlet at control rate. The rotation angle is anti-clockwise and wrapped between 0. and 2π.
+	class_addmethod(c, (method)hoa_rotate_int,			"int",		A_LONG, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -56,8 +86,11 @@ int C74_EXPORT main(void)
 
 void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
 	t_hoa_rotate *x = NULL;
-	int	order = 4;
+	int	order = 1;
 
     x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
 	if (x)
