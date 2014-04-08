@@ -1124,12 +1124,11 @@ public:
 
             if (data.inputParameterChanges != nullptr)
                 processParameterChanges (*data.inputParameterChanges);
-            /*
+
             if (pluginInstance->isSuspended())
                 buffer.clear();
             else
                 pluginInstance->processBlock (buffer, midiBuffer);
-             */ 
         }
 
         for (int i = 0; i < numOutputChans; ++i)

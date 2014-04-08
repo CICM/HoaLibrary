@@ -120,9 +120,6 @@ void HoaSettingsComponent::comboBoxChanged(ComboBox* comboBox)
     
     if(m_processor->isSuspended())
         m_processor->applyChanges();
-    else
-        m_processor->suspendProcessing(1);
-    
     updated();
 }
 
@@ -152,9 +149,6 @@ void HoaSettingsComponent::labelTextChanged(Label* label)
     
     if(m_processor->isSuspended())
         m_processor->applyChanges();
-    else
-        m_processor->suspendProcessing(1);
-    
     updated();
 }
 

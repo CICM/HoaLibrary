@@ -37,13 +37,11 @@ public:
     HoaToolsAudioProcessor();
     ~HoaToolsAudioProcessor();
 
-    void applySettingChanges();
     void numChannelsChanged();
     void prepareToPlay(double sampleRate, int samplesPerBlock);
-    void releaseResources(){};
-    
-    void processBlock(int numins, int numouts, float** inputs, float** outputs, int size);
-    
+    void releaseResources();
+    void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages){};
+    void processBlock(float** inputs, float** outputs);
     AudioProcessorEditor* createEditor();
     bool hasEditor() const;
     long getGui(){return m_gui;};
@@ -70,7 +68,6 @@ public:
     bool isInputChannelStereoPair (int index) const;
     bool isOutputChannelStereoPair (int index) const;
 
-    
     bool acceptsMidi() const;
     bool producesMidi() const;
     bool silenceInProducesSilenceOut() const;

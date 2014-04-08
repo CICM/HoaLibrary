@@ -312,6 +312,16 @@ public:
 
         activePlugins.add (this);
     }
+	
+	void setNumberOfChannelsInputs(AudioProcessor* Nope, long aNumberOfInputs)
+    {
+        numInChans = aNumberOfInputs;
+    }
+    
+    void setNumberOfChannelsOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
+    {
+        numOutChans = aNumberOfOutputs;
+    }
 
     ~JuceVSTWrapper()
     {
@@ -330,6 +340,9 @@ public:
                 filter = nullptr;
 
                 jassert (editorComp == 0);
+
+                channels.free();
+                deleteTempChannels();
 
                 jassert (activePlugins.contains (this));
                 activePlugins.removeFirstMatchingValue (this);
@@ -518,22 +531,22 @@ public:
         for (int i = jmin (numIn, numOut); --i >= 0;)
             dest.addFrom (i, 0, processTempBuffer, i, 0, numSamples);
     }
-    
-    void setNumberOfChannelsInputs(AudioProcessor* Nope, long aNumberOfInputs)
-    {
-        numInChans = aNumberOfInputs;
-        suspend();
-    }
-    
-    void setNumberOfChannelsOutputs(AudioProcessor* Nope, long aNumberOfOutputs)
-    {
-        numOutChans = aNumberOfOutputs;
-        suspend();
-    }
 
-    void processReplacing(float** inputs, float** outputs, VstInt32 numSamples)
+    void processReplacing (float** inputs, float** outputs, VstInt32 numSamples)
     {
-        filter->processBlock(cEffect.numInputs, cEffect.numOutputs, inputs, outputs, numSamples);
+        if(filter->isSuspended())
+        {
+            for (int i = 0; i < cEffect.numOutputs; ++i)
+                FloatVectorOperations::clear (outputs[i], numSamples);
+        }
+        else
+            filter->processBlock(inputs, outputs);
+
+        
+        setNumInputs(numInChans);
+        setNumOutputs(numOutChans);
+        cEffect.numParams = filter->getNumParameters();
+        ioChanged();
     }
 
     //==============================================================================
@@ -545,6 +558,7 @@ public:
         if (filter != nullptr)
         {
             isProcessing = true;
+            channels.calloc ((size_t) (numInChans + numOutChans));
 
             double rate = getSampleRate();
             jassert (rate > 0);
@@ -556,12 +570,10 @@ public:
 
             firstProcessCallback = true;
 
-            setNumInputs(numInChans);
-            setNumOutputs(numOutChans);
-            ioChanged();
-            
             filter->setNonRealtime (getCurrentProcessLevel() == 4 /* kVstProcessLevelOffline */);
             filter->setPlayConfigDetails (numInChans, numOutChans, rate, blockSize);
+
+            deleteTempChannels();
 
             filter->prepareToPlay (rate, blockSize);
 
@@ -588,6 +600,9 @@ public:
             outgoingEvents.freeEvents();
 
             isProcessing = false;
+            channels.free();
+
+            deleteTempChannels();
         }
     }
 
@@ -750,11 +765,8 @@ public:
     void audioProcessorParameterChangeGestureBegin (AudioProcessor*, int index)   { beginEdit (index); }
     void audioProcessorParameterChangeGestureEnd   (AudioProcessor*, int index)   { endEdit   (index); }
 
-    void audioProcessorChanged(AudioProcessor*)
+    void audioProcessorChanged (AudioProcessor*)
     {
-        setNumInputs(numInChans);
-        setNumOutputs(numOutChans);
-        cEffect.numParams = filter->getNumParameters();
         setInitialDelay (filter->getLatencySamples());
         ioChanged();
         updateDisplay();
@@ -777,7 +789,8 @@ public:
         }
     };
 
-    bool setSpeakerArrangement (VstSpeakerArrangement* pluginInput, VstSpeakerArrangement* pluginOutput)
+    bool setSpeakerArrangement (VstSpeakerArrangement* pluginInput,
+                                VstSpeakerArrangement* pluginOutput)
     {
         short channelConfigs[][2] = { JucePlugin_PreferredChannelConfigurations };
 
@@ -1301,7 +1314,8 @@ private:
 	//int newnumInChans, newnumOutChans;
     bool isProcessing, isBypassed, hasShutdown, firstProcessCallback;
     bool shouldDeleteEditor, useNSView;
-
+    HeapBlock<float*> channels;
+    Array<float*> tempChannels;  // see note in processReplacing()
     AudioSampleBuffer processTempBuffer;
 
    #if JUCE_MAC
@@ -1358,6 +1372,18 @@ private:
    #else
     static void checkWhetherMessageThreadIsCorrect() {}
    #endif
+
+    //==============================================================================
+    void deleteTempChannels()
+    {
+        for (int i = tempChannels.size(); --i >= 0;)
+            delete[] (tempChannels.getUnchecked(i));
+
+        tempChannels.clear();
+
+        if (filter != nullptr)
+            tempChannels.insertMultiple (0, nullptr, filter->getNumInputChannels() + filter->getNumOutputChannels());
+    }
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceVSTWrapper)
 };
