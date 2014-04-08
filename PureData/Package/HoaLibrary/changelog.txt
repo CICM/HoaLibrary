@@ -1,0 +1,85 @@
+
+HoaLibrary for MaxMSP, Pure Data, Faust and VST
+
+------------------------ ------------------------
+		    PD Version 
+------------------------ ------------------------
+
+Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
+
+------------------------
+version beta 2.0.0
+------------------------
+Systems : 
+- Mac OsX (Pd 32 bit)
+- Windows (Pd 32 bit)
+
+Global Changes :
+
+- Attributes syntax : @key [ values... ] becomes @key values… (you still can use the old syntax but it's deprecated).
+- Float to signal : The float values in signal inlet are not converted to signal, thus some processing are now optimized with float (for example, hoa.rotate~ doesn't need to compute the rotation every sample).
+
+New objects :
+
+Removed objects :
+
+Modified objects : 
+
+- hoa.decoder~ : 
+
+The attribute "restitution" for irregular decoding mode has been removed (the projection mode is now automatic for a stereo decoding). 	
+The attribute "pinnae" becomes "pinna" (you still can use the old syntax but it's deprecated).
+The ambisonic mode and the irregular mode have the new attribute "offset".
+
+- hoa.map~ : 
+
+The attribute "mode" (cartesian or polar) becomes an argument (you still can use the old syntax but it's deprecated) because the mode shouldn't changed in real time.
+
+
+- hoa.map : Todo
+
+
+
+New Features:
+
+
+
+Dependencies : 
+
+Cblas (http://www.netlib.org/clapack/cblas/) 
+You can use Accelerate for Mac Os and Blas, Ipp or GSL for all platforms
+CICM Wrapper (https://github.com/CICM/CicmWrapper)
+
+------------------------
+version beta 1.0.0
+------------------------
+
+Systems : 
+- Mac OsX (Pd 32 bit)
+- Windows (Pd 32 bit)
+
+Objects :
+- hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
+- hoa.encoder~ : An ambisonic encoder.
+- hoa.map~ : An ambisonic sources spatializer.
+- hoa.delay~ : An ambisonic sound field delay.
+- hoa.freeverb~ : An implementation of the freeverb algorithm for ambisonics.
+- hoa.grain~ : An ambisonic granular synthesizer.
+- hoa.map : A GUI to spatialize sources on a map.
+- hoa.meter~ : A circular meter with sound field descriptor.
+- hoa.optim~ : An ambisonic sound field optimization.
+- hoa.pi : A good pi number.
+- hoa.projector~ : A plane wave decomposer.
+- hoa.recomposer~ : A plane wave recomposer to harmonics domain.
+- hoa.ringmod~ : An ambisonic sound field ring modulation.
+- hoa.rotate~ : An ambisonic sound field rotation external.
+- hoa.scope~ : An ambisonic harmonic scope.
+- hoa.space : A GUI to design ambisonic space.
+- hoa.space~ : A spatial filter.
+- hoa.wider~ : A fractional ambisonic orders simulator.
+
+Dependencies : 
+
+Cblas (http://www.netlib.org/clapack/cblas/) 
+You can use Accelerate for Mac Os and Ipp or GSL for all platforms.
+PdEnhanced (https://github.com/pierreguillot/PdEnhanced)

@@ -288,7 +288,7 @@ void HoaMapComponent::mouseUp(const MouseEvent &event)
     {
         float center = getWidth() * 0.5;
         long groupIndex = m_processor->groupGetNextIndex();
-        for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= m_processor->getMaximumIndexOfSource(); i++)
         {
             if(m_processor->sourceGetExistence(i))
             {
@@ -473,7 +473,7 @@ void HoaMapComponent::draw_selection(Graphics& g)
         g.fillRect(m_selection);
         
         g.setColour(Colour::fromFloatRGBA(0., 1., 0., 0.5));
-        for(int i = 0; i < m_processor->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= m_processor->getMaximumIndexOfSource(); i++)
         {
             if(m_processor->sourceGetExistence(i))
             {

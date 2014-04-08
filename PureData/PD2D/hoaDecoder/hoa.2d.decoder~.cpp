@@ -34,6 +34,7 @@ t_pd_err pinna_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
 t_eclass *hoa_decoder_class;
 
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
+void hoa_decoder_deprecated(t_hoa_decoder* x, t_symbol *s, long ac, t_atom* av);
 
 extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
 {
@@ -45,6 +46,8 @@ extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_decoder_dsp,           "dsp",          A_CANT,  0);
+    eclass_addmethod(c, (method)hoa_decoder_deprecated,    "pinnae",       A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_decoder_deprecated,    "restitution",  A_GIMME, 0);
     
     CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles",0, t_hoa_decoder, f_angles_of_channels, f_number_of_channels, MAX_CHANNELS);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
@@ -65,6 +68,32 @@ extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
     
     eclass_register(CLASS_OBJ, c);
     hoa_decoder_class = c;
+}
+
+void hoa_decoder_deprecated(t_hoa_decoder* x, t_symbol *s, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+    if(s == gensym("pinnae"))
+    {
+        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        pinna_set(x, NULL, ac, av);
+    }
+    if(s == gensym("restitution"))
+    {
+        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+    }
+    atoms_get_attribute(ac, av, gensym("@pinnae"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        pinna_set(x, NULL, argc, argv);
+        
+    }
+    if(atoms_has_attribute(ac, av, gensym("@restitution")))
+    {
+        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+    }
 }
 
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
@@ -121,6 +150,9 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
                 x->f_decoder->setNumberOfChannels(number_of_channels);
                 
         }
+        
+        hoa_decoder_deprecated(x, NULL, argc, argv);
+        
         x->f_number_of_channels = x->f_decoder->getNumberOfChannels();
         x->f_decoder->setSampleRate(sys_getsr());
         x->f_decoder->setVectorSize(sys_getblksize());

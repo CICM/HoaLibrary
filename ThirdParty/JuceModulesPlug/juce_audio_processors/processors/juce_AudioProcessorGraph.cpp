@@ -223,7 +223,7 @@ public:
 
         AudioSampleBuffer buffer (channels, totalChans, numSamples);
 
-        processor->processBlock (buffer, *sharedMidiBuffers.getUnchecked (midiBufferToUse));
+        //processor->processBlock (buffer, *sharedMidiBuffers.getUnchecked (midiBufferToUse));
     }
 
     const AudioProcessorGraph::Node::Ptr node;

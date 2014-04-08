@@ -84,9 +84,8 @@ void AudioProcessor::setPlayConfigDetails (const int newNumIns,
     {
         numInputChannels  = newNumIns;
         numOutputChannels = newNumOuts;
-
-        numChannelsChanged();
     }
+    numChannelsChanged();
 }
 
 void AudioProcessor::numChannelsChanged() {}
@@ -207,7 +206,6 @@ bool AudioProcessor::isMetaParameter (int) const            { return false; }
 
 void AudioProcessor::suspendProcessing (const bool shouldBeSuspended)
 {
-    const ScopedLock sl (callbackLock);
     suspended = shouldBeSuspended;
 }
 

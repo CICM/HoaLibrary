@@ -261,7 +261,7 @@ void Path::preallocateSpace (int numExtraCoordsToMakeSpaceFor)
 
 void Path::startNewSubPath (const float x, const float y)
 {
-    JUCE_CHECK_COORDS_ARE_VALID (x, y);
+    //JUCE_CHECK_COORDS_ARE_VALID (x, y);
 
     if (numElements == 0)
         bounds.reset (x, y);
@@ -282,7 +282,7 @@ void Path::startNewSubPath (const Point<float> start)
 
 void Path::lineTo (const float x, const float y)
 {
-    JUCE_CHECK_COORDS_ARE_VALID (x, y);
+    //JUCE_CHECK_COORDS_ARE_VALID (x, y);
 
     if (numElements == 0)
         startNewSubPath (0, 0);
