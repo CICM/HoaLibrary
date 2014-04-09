@@ -211,6 +211,7 @@ void HoaMapComponent::mouseDrag(const MouseEvent &event)
     if(m_souce_selected != -1)
     {
         m_processor->beginParameterChangeGesture(m_souce_selected*3);
+        m_processor->beginParameterChangeGesture(m_souce_selected*3+1);
         
         if (m_drag_mode == 1)
         {
@@ -232,7 +233,9 @@ void HoaMapComponent::mouseDrag(const MouseEvent &event)
         {
             m_processor->sourceSetCartesian(m_souce_selected, mouse.getX() / m_processor->getZoom(), mouse.getY() / m_processor->getZoom());
         }
+        
         m_processor->endParameterChangeGesture(m_souce_selected*3);
+        m_processor->endParameterChangeGesture(m_souce_selected*3+1);
         repaint();
         return;
     }
@@ -314,10 +317,10 @@ void HoaMapComponent::paint(Graphics& g)
     {
 		Path P;
 		PathStrokeType pathStrokeType = PathStrokeType(1);
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 4, center / MIN_ZOOM * m_processor->getZoom() - 4, 0, 0, HOA_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 4, center / MIN_ZOOM * m_processor->getZoom() - 4, 0, 0, HOA_2PI, 1);
         g.strokePath(P, pathStrokeType);
         P.clear();
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 5, center / MIN_ZOOM * m_processor->getZoom() - 5, 0, 0, HOA_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_processor->getZoom() - 5, center / MIN_ZOOM * m_processor->getZoom() - 5, 0, 0, HOA_2PI, 1);
         g.reduceClipRegion (P, AffineTransform::identity);
     }
     
@@ -331,16 +334,6 @@ void HoaMapComponent::draw_background(Graphics& g)
 {
     float center = getWidth() * 0.5;
     
-    for(int i = 1; i <= 5; i++)
-    {
-        float width = center * (i / 5.) * m_processor->getZoom();
-        float start = center - width;
-        g.setColour(Colours::white);
-        g.drawEllipse(start + 0.5, start + 0.5, width * 2., width * 2., 2.);
-        g.setColour(Colours::grey);
-        g.drawEllipse(start, start, width * 2., width * 2., 1.);
-    }
-    
     float ecart = m_processor->getZoom() * center;
     if(ecart < 10. && ecart >= 5.)
         ecart *= 2.;
@@ -348,6 +341,7 @@ void HoaMapComponent::draw_background(Graphics& g)
         ecart *= 4.;
     else if(ecart < 2.5)
         ecart *= 8.;
+    
     ecart = (int)ecart;
     
     for(float i = 0; i < center; i += ecart)
@@ -363,6 +357,16 @@ void HoaMapComponent::draw_background(Graphics& g)
         g.drawLine(0.,  center + i, getWidth(), center + i, 1.);
         g.drawLine(center - i,  0., center - i, getWidth(), 1.);
         g.drawLine(center + i,  0., center + i, getWidth(), 1.);
+    }
+    
+    for(int i = 1; i <= 5; i++)
+    {
+        float width = center * (i / 5.) * m_processor->getZoom();
+        float start = center - width;
+        g.setColour(Colours::white);
+        g.drawEllipse(start + 4.5, start + 4.5, width * 2. -8, width * 2. - 8, 2.);
+        g.setColour(Colours::grey);
+        g.drawEllipse(start+4, start+4, width * 2. -8, width * 2. -8, 1.);
     }
 }
 

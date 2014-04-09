@@ -268,6 +268,23 @@ namespace Hoa2D
             return m_decoding_mode;
         };
         
+        //! This method set the pinna size of binaural decoding.
+        /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
+         
+         @param     pinnaSize		The pinna size.
+        */
+        void setPinnaSize(DecoderBinaural::PinnaSize pinnaSize) {};
+        
+        //! Retrieve the pinna size of binaural decoding.
+        /** Retrieve the pinna size of binaural decoding.
+         
+         @return Retrieve the pinna size of binaural decoding.
+         */
+        DecoderBinaural::PinnaSize getPinnaSize() const
+        {
+            return m_decoder->getPinnaSize();
+        };
+        
         //! This method set the optimization mode.
         /**	The mode should be one of the 3 optimization modes, Basic, MaxRe or InPhase.         
             @param     mode The optimization mode.
