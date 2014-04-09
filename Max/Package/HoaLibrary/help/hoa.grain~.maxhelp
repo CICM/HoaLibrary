@@ -36,7 +36,7 @@
 					"name" : "hoa.helpcredit.maxpat",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 5.0, 469.0, 548.0, 23.0 ]
+					"patching_rect" : [ 5.0, 474.0, 548.0, 23.0 ]
 				}
 
 			}
@@ -50,7 +50,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0625, 232.0, 127.0, 33.0 ],
+					"patching_rect" : [ 121.0625, 244.0, 127.0, 33.0 ],
 					"text" : "hoa.grain~ needs the buffer~ \"livegrain\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[3]"
@@ -60,14 +60,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-9",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0625, 232.0, 123.0, 33.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 121.0625, 244.0, 127.0, 33.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -81,7 +81,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0625, 288.5, 141.0, 33.0 ],
+					"patching_rect" : [ 43.0625, 288.5, 144.0, 33.0 ],
 					"text" : "dblclick on hoa.process~ to see how it works.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[2]"
@@ -91,14 +91,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-4",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0625, 288.5, 123.0, 33.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 43.0625, 288.5, 144.0, 34.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -122,14 +122,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-31",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"rounded" : 0
 				}
 
 			}
@@ -308,7 +308,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 390.0, 445.0, 99.0, 19.0 ],
+					"patching_rect" : [ 390.0, 445.0, 74.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -329,8 +329,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 19.0, 370.0, 221.125, 19.0 ],
-					"text" : "hoa.process~ 7 hoa.grain~ no"
+					"patching_rect" : [ 19.0, 370.0, 221.0, 19.0 ],
+					"text" : "hoa.2d.process~ 7 hoa.grain~ harmonics"
 				}
 
 			}
@@ -558,7 +558,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 43.0625, 267.0, 66.0, 19.0 ],
+					"patching_rect" : [ 43.0625, 251.0, 66.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -1337,7 +1337,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1522,35 +1522,35 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.grain~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
 				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1

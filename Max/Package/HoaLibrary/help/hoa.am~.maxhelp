@@ -12,7 +12,7 @@
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
-		"default_fontsize" : 11.595187,
+		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
 		"gridonopen" : 0,
@@ -29,6 +29,64 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-12",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 403.0, 309.0, 47.0, 18.0 ],
+					"text" : "open 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-6",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 67.0, 483.0, 33.0 ],
+					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[5]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+					"id" : "obj-32",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 67.0, 483.0, 33.0 ],
+					"rounded" : 0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 430.0, 321.0, 56.0, 19.0 ],
+					"text" : "hoa.am~"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -279,14 +337,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-5",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 113.0, 287.5, 34.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 7.0, 113.0, 291.0, 33.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -422,37 +480,6 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 406.0, 20.5, 52.0, 23.0 ],
 					"text" : "bgcolor 0.93 0.93 0.92 1."
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"frgb" : 0.0,
-					"id" : "obj-21",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number.",
-					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-					"varname" : "autohelp_top_description[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-22",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"rounded" : 15,
-					"shadow" : -1
 				}
 
 			}
@@ -604,7 +631,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 515.0, 41.0, 99.0, 19.0 ],
+					"patching_rect" : [ 515.0, 41.0, 74.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -640,7 +667,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 30.0, 300.0, 329.0, 19.0 ],
-					"text" : "hoa.process~ 7 hoa.am~ ambisonics @freq 10 @factor 0.5"
+					"text" : "hoa.process~ 7 hoa.am~ harmonics @freq 10 @factor 0.5"
 				}
 
 			}
@@ -651,6 +678,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-14", 15 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -1050,35 +1086,35 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.am~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
 				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundcoat.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1086,20 +1122,20 @@
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundgrain.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.sounddrone.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1107,13 +1143,13 @@
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1

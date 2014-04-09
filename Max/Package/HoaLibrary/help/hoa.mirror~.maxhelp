@@ -63,7 +63,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 330.0, 360.0, 177.0, 32.0 ],
+					"patching_rect" : [ 321.0, 352.0, 177.0, 32.0 ],
 					"text" : "Take a look inside hoa.process~ to see how it works."
 				}
 
@@ -71,14 +71,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-50",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 326.0, 354.0, 170.0, 43.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 321.0, 352.0, 177.0, 32.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -171,14 +171,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-40",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 73.0, 483.0, 33.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"rounded" : 0
 				}
 
 			}
@@ -2092,7 +2092,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 7.0, 360.0, 227.0, 19.0 ],
-					"text" : "hoa.process~ 7 hoa.mirror~ post"
+					"text" : "hoa.2d.process~ 7 hoa.mirror~ harmonics"
 				}
 
 			}
@@ -2293,7 +2293,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 585.0, 90.0, 99.0, 19.0 ],
+					"patching_rect" : [ 585.0, 90.0, 74.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -2378,14 +2378,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-48",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 598.0, 170.0, 198.0, 62.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 598.0, 170.0, 192.0, 61.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -2560,7 +2560,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2842,7 +2842,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-14", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2992,7 +2992,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-44", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3142,7 +3142,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3319,7 +3319,7 @@
 					"destination" : [ "obj-15", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 239.357147, 486.0, 510.0, 486.0, 510.0, 345.0, 757.5, 345.0 ],
+					"midpoints" : [ 239.357147, 495.0, 510.0, 495.0, 510.0, 345.0, 757.5, 345.0 ],
 					"source" : [ "obj-8", 15 ]
 				}
 
@@ -3459,7 +3459,7 @@
 					"destination" : [ "obj-15", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 31.357143, 495.0, 510.0, 495.0, 510.0, 357.0, 549.366667, 357.0 ],
+					"midpoints" : [ 31.357143, 495.0, 510.0, 495.0, 510.0, 345.0, 549.366667, 345.0 ],
 					"source" : [ "obj-8", 1 ]
 				}
 
@@ -3469,7 +3469,7 @@
 					"destination" : [ "obj-15", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 16.5, 495.0, 510.0, 495.0, 510.0, 357.0, 534.5, 357.0 ],
+					"midpoints" : [ 16.5, 495.0, 510.0, 495.0, 510.0, 346.0, 534.5, 346.0 ],
 					"source" : [ "obj-8", 0 ]
 				}
 
@@ -3477,35 +3477,35 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.mirror~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
 				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1

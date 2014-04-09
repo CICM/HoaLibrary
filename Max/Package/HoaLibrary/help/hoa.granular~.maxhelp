@@ -30,6 +30,37 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-13",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
+					"text" : "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[7]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+					"id" : "obj-19",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
+					"rounded" : 0
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-8",
 					"local" : 1,
 					"maxclass" : "ezdac~",
@@ -73,7 +104,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 390.0, 401.0, 73.0, 19.0 ],
+					"patching_rect" : [ 380.0, 401.0, 73.0, 19.0 ],
 					"text" : "loadmess 0."
 				}
 
@@ -88,7 +119,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 380.0, 292.0, 79.0, 19.0 ],
+					"patching_rect" : [ 380.0, 273.0, 79.0, 19.0 ],
 					"text" : "loadmess 0.9"
 				}
 
@@ -132,7 +163,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 377.5, 401.0, 104.0, 20.0 ],
+					"patching_rect" : [ 380.0, 401.0, 104.0, 20.0 ],
 					"text" : "Rarefaction :",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
@@ -142,14 +173,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-37",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 377.5, 401.0, 104.0, 20.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 380.0, 401.0, 104.0, 20.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -165,7 +196,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 390.0, 431.0, 50.0, 19.0 ]
+					"patching_rect" : [ 380.0, 431.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -178,7 +209,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 390.0, 462.0, 81.0, 17.0 ],
+					"patching_rect" : [ 380.0, 462.0, 81.0, 17.0 ],
 					"text" : "rarefaction $1"
 				}
 
@@ -192,7 +223,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 367.5, 292.0, 104.0, 20.0 ],
+					"patching_rect" : [ 380.0, 293.5, 104.0, 20.0 ],
 					"text" : "Feedback :",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[5]"
@@ -202,14 +233,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-33",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 367.5, 292.0, 104.0, 20.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 380.0, 293.5, 104.0, 20.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -262,14 +293,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-23",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 377.5, 130.0, 104.0, 20.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"rounded" : 0
 				}
 
 			}
@@ -321,14 +352,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-21",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 259.0, 130.0, 104.0, 20.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 259.0, 130.0, 105.0, 19.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -371,7 +402,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 119.3125, 144.5, 116.0, 47.0 ],
+					"patching_rect" : [ 119.3125, 129.5, 116.0, 47.0 ],
 					"text" : "Attribute @name is the buffer name (default : livegrain)\n",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[2]"
@@ -381,14 +412,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-5",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 119.3125, 144.5, 116.0, 47.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 119.3125, 129.5, 116.0, 47.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -2369,37 +2400,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
-					"text" : "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field.",
-					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-					"varname" : "autohelp_top_description[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-31",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
-					"rounded" : 15,
-					"shadow" : -1
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"args" : [ "@obj-name", "hoa.granular~", "@obj-desc", "Another", "ambisonics", "granular", "synthesizer." ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
@@ -2573,7 +2573,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 468.0, 195.0, 99.0, 19.0 ],
+					"patching_rect" : [ 468.0, 195.0, 74.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -2590,13 +2590,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-14",
-					"linecount" : 3,
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 14.0, 281.0, 329.0, 45.0 ],
-					"text" : "hoa.process~ 7 hoa.granular~ ambisonics args @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
+					"patching_rect" : [ 14.0, 281.0, 329.0, 32.0 ],
+					"text" : "hoa.2d.process~ 7 hoa.granular~ harmonics @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
 				}
 
 			}
@@ -2762,7 +2762,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2885,7 +2885,7 @@
 					"destination" : [ "obj-14", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 399.5, 483.0, 354.0, 483.0, 354.0, 267.0, 23.5, 267.0 ],
+					"midpoints" : [ 389.5, 483.0, 354.0, 483.0, 354.0, 267.0, 23.5, 267.0 ],
 					"source" : [ "obj-39", 0 ]
 				}
 
@@ -2930,21 +2930,21 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.granular~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
 				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
@@ -2952,20 +2952,20 @@
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1

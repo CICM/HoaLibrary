@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 232.0, 49.0, 676.0, 750.0 ],
+		"rect" : [ 767.0, 81.0, 676.0, 750.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,7 +38,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 123.8125, 2.5, 50.0, 20.0 ],
+					"patching_rect" : [ 125.8125, 96.5, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"comment" : "",
 						"extra" : 0
@@ -197,7 +197,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 585.0, 190.0, 32.5, 20.0 ],
+					"patching_rect" : [ 436.0, 190.0, 32.5, 20.0 ],
 					"text" : "+ 1."
 				}
 
@@ -225,7 +225,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 525.0, 258.0, 32.5, 20.0 ],
+					"patching_rect" : [ 496.0, 231.0, 32.5, 20.0 ],
 					"text" : "+ 1"
 				}
 
@@ -267,7 +267,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "int" ],
-					"patching_rect" : [ 585.0, 247.0, 32.5, 20.0 ],
+					"patching_rect" : [ 436.0, 231.0, 32.5, 20.0 ],
 					"text" : "t b i"
 				}
 
@@ -281,7 +281,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 525.0, 301.0, 32.5, 20.0 ],
+					"patching_rect" : [ 496.0, 274.0, 32.5, 20.0 ],
 					"text" : "/ 1."
 				}
 
@@ -351,7 +351,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 585.0, 163.0, 32.5, 20.0 ],
+					"patching_rect" : [ 436.0, 163.0, 32.5, 20.0 ],
 					"text" : "* 2."
 				}
 
@@ -625,7 +625,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 525.0, 217.0, 116.0, 20.0 ],
+					"patching_rect" : [ 496.0, 190.0, 116.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -666,7 +666,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 525.0, 91.0, 79.0, 20.0 ],
+					"patching_rect" : [ 436.0, 104.0, 79.0, 20.0 ],
 					"text" : "unpack 0 0"
 				}
 
@@ -680,7 +680,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 596.0, 119.0, 45.0, 20.0 ],
+					"patching_rect" : [ 391.0, 136.0, 45.0, 20.0 ],
 					"text" : "Order"
 				}
 
@@ -695,7 +695,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 475.0, 119.0, 67.0, 33.0 ],
+					"patching_rect" : [ 552.0, 129.5, 67.0, 33.0 ],
 					"text" : "Harmonic number"
 				}
 
@@ -710,7 +710,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 585.0, 136.0, 50.0, 20.0 ]
+					"patching_rect" : [ 436.0, 136.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -724,7 +724,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 525.0, 136.0, 50.0, 20.0 ]
+					"patching_rect" : [ 496.0, 136.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -737,7 +737,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 525.0, 11.5, 60.0, 20.0 ],
+					"patching_rect" : [ 436.0, 5.0, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -753,7 +753,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "list", "list", "list", "list", "int" ],
-					"patching_rect" : [ 525.0, 38.5, 127.0, 33.0 ],
+					"patching_rect" : [ 436.0, 32.0, 127.0, 33.0 ],
 					"text" : "hoa.thisprocess~ @freq 10 @factor 0.5"
 				}
 
@@ -782,13 +782,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 2.5, 95.0, 20.0 ],
+					"patching_rect" : [ 15.0, 2.5, 484.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
+						"comment" : "(float/int) sets frequency in Hz, (factor) set the difuse factor",
 						"extra" : 1
 					}
 ,
-					"text" : "hoa.in @extra 1"
+					"text" : "hoa.in @extra 1 @comment \"(float/int) sets frequency in Hz, (factor) set the difuse factor\""
 				}
 
 			}
@@ -1114,7 +1114,7 @@
 					"destination" : [ "obj-50", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 534.5, 423.0, 238.3125, 423.0 ],
+					"midpoints" : [ 505.5, 423.0, 238.3125, 423.0 ],
 					"source" : [ "obj-48", 0 ]
 				}
 
@@ -1124,7 +1124,7 @@
 					"destination" : [ "obj-9", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 534.5, 336.0, 321.0, 336.0, 321.0, 267.0, 301.8125, 267.0 ],
+					"midpoints" : [ 505.5, 336.0, 321.0, 336.0, 321.0, 267.0, 301.8125, 267.0 ],
 					"source" : [ "obj-48", 0 ]
 				}
 
@@ -1161,7 +1161,7 @@
 					"destination" : [ "obj-55", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-51", 1 ]
+					"source" : [ "obj-51", 0 ]
 				}
 
 			}
@@ -1170,7 +1170,7 @@
 					"destination" : [ "obj-56", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-51", 0 ]
+					"source" : [ "obj-51", 1 ]
 				}
 
 			}
@@ -1215,7 +1215,7 @@
 					"destination" : [ "obj-16", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 615.5, 78.0, 61.5, 78.0 ],
+					"midpoints" : [ 526.5, 78.0, 61.5, 78.0 ],
 					"source" : [ "obj-58", 3 ]
 				}
 
@@ -1225,7 +1225,7 @@
 					"destination" : [ "obj-47", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 615.5, 78.0, 288.3125, 78.0 ],
+					"midpoints" : [ 526.5, 78.0, 288.3125, 78.0 ],
 					"source" : [ "obj-58", 3 ]
 				}
 
@@ -1321,23 +1321,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.out~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in~.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
