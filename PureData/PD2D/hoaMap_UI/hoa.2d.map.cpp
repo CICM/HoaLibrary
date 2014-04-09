@@ -68,6 +68,9 @@ void hoa_map_slot_save(t_hoa_map *x, t_binbuf *d);
 void hoa_map_trajectory_save(t_hoa_map *x, t_binbuf *d);
 void hoa_map_save(t_hoa_map *x, t_binbuf *d);
 
+void hoa_map_preset(t_hoa_map *x, t_binbuf *b);
+void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
+
 void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_write(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 
@@ -104,6 +107,8 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
 void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av);
 
+t_symbol *hoa_sym_sources_preset;
+
 extern "C" void setup_hoa0x2e2d0x2emap(void)
 {
 	t_eclass *c;
@@ -113,36 +118,39 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     
     eclass_init(c, 0);
     
-    eclass_addmethod(c, (method) hoa_map_assist,          "assist",           A_CANT,     0);
-	eclass_addmethod(c, (method) hoa_map_paint,           "paint",            A_CANT,     0);
-	eclass_addmethod(c, (method) hoa_map_getdrawparams,   "getdrawparams",    A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_oksize,          "oksize",           A_CANT,     0);
-	eclass_addmethod(c, (method) hoa_map_notify,          "notify",           A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_bang,            "bang",             A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_infos,           "getinfo",          A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_assist,          "assist",             A_CANT,    0);
+	eclass_addmethod(c, (method) hoa_map_paint,           "paint",              A_CANT,    0);
+	eclass_addmethod(c, (method) hoa_map_getdrawparams,   "getdrawparams",      A_CANT,    0);
+    eclass_addmethod(c, (method) hoa_map_oksize,          "oksize",             A_CANT,    0);
+	eclass_addmethod(c, (method) hoa_map_notify,          "notify",             A_CANT,    0);
+    eclass_addmethod(c, (method) hoa_map_bang,            "bang",               A_CANT,    0);
+    eclass_addmethod(c, (method) hoa_map_infos,           "getinfo",            A_CANT,    0);
     
-    eclass_addmethod(c, (method) hoa_map_source,           "source",           A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_group,            "group",            A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_slot,             "slot",             A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_trajectory,       "trajectory",       A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_clear_all,        "clear",            A_CANT ,    0);
+    eclass_addmethod(c, (method) hoa_map_source,           "source",            A_GIMME,   0);
+    eclass_addmethod(c, (method) hoa_map_group,            "group",             A_GIMME,   0);
+    eclass_addmethod(c, (method) hoa_map_slot,             "slot",              A_GIMME,   0);
+    eclass_addmethod(c, (method) hoa_map_trajectory,       "trajectory",        A_GIMME,   0);
+    eclass_addmethod(c, (method) hoa_map_clear_all,        "clear",             A_CANT ,   0);
     
-    eclass_addmethod(c, (method) hoa_map_mousedown,        "mousedown",       A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mousedrag,        "mousedrag",       A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mouseup,          "mouseup",         A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mouseenter,       "mouseenter",      A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mousemove,        "mousemove",       A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mouseleave,       "mouseleave",      A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mousewheel,       "mousewheel",      A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_key,              "key",             A_CANT,     0);
-	eclass_addmethod(c, (method) hoa_map_popup,            "popup",           A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_save,             "save",            A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_write,            "write",           A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_read,             "read",            A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_mousedown,        "mousedown",         A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mousedrag,        "mousedrag",         A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mouseup,          "mouseup",           A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mouseenter,       "mouseenter",        A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mousemove,        "mousemove",         A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mouseleave,       "mouseleave",        A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_mousewheel,       "mousewheel",        A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_key,              "key",               A_CANT,     0);
+	eclass_addmethod(c, (method) hoa_map_popup,            "popup",             A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_save,             "save",              A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_write,            "write",             A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_read,             "read",              A_GIMME,    0);
     
-    eclass_addmethod(c, (method) hoa_map_deprecated,        "bgcolor2",       A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_deprecated,        "bordercolor",    A_GIMME,    0);
-    eclass_addmethod(c, (method) hoa_map_deprecated,        "selcolor",    A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_preset,           "preset",            A_CANT,     0);
+    eclass_addmethod(c, (method) hoa_map_sources_preset,   "sources_preset",    A_GIMME,   0);
+    
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "bgcolor2",         A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "bordercolor",      A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "selcolor",         A_GIMME,    0);
     
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
@@ -179,6 +187,8 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     
     eclass_register(CLASS_BOX, c);
 	hoa_map_class = c;
+    
+    hoa_sym_sources_preset = gensym("sources_preset");
 }
 
 void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av)
@@ -498,7 +508,7 @@ void hoa_map_clear_all(t_hoa_map *x)
 
 void hoa_map_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac && av && atom_gettype(av)==A_LONG && atom_getlong(av)>=0 && atom_gettype(av+1) == A_SYM)
+    if(ac && av && atom_gettype(av)==A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
         if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
             x->f_source_manager->sourceSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
@@ -990,7 +1000,7 @@ void hoa_map_parameters_sources(t_hoa_map *x, short ac, t_atom *av)
 
     if(ac && av)
     {
-         hoa_map_syntax_deprecated(ac, av);
+        hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(ac > i+9)
@@ -2104,5 +2114,90 @@ long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifie
         filter = 1;
 	}
 	return filter;
+}
+
+void hoa_map_preset(t_hoa_map *x, t_binbuf *d)
+{
+    binbuf_addv(d, "s", hoa_sym_sources_preset);
+    for(int i = 0; i < 64; i++)
+    {
+        if(x->f_source_manager->sourceGetExistence(i))
+        {
+            binbuf_addv(d, "sffff", hoa_sym_source, (float)i, 1.f,
+                        (float)x->f_source_manager->sourceGetAbscissa(i),
+                        (float)x->f_source_manager->sourceGetOrdinate(i));
+            
+            binbuf_addv(d, "fffff", (float)x->f_source_manager->sourceGetMute(i),
+                        (float)x->f_source_manager->sourceGetColor(i)[0],
+                        (float)x->f_source_manager->sourceGetColor(i)[1],
+                        (float)x->f_source_manager->sourceGetColor(i)[2],
+                        (float)x->f_source_manager->sourceGetColor(i)[3]);
+            
+            if(x->f_source_manager->sourceGetDescription(i).size())
+                binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(i).c_str()));
+            else
+                binbuf_addv(d, "s", gensym("(null)"));
+        }
+        else
+        {
+            binbuf_addv(d, "sffff", hoa_sym_source, (float)i, 0.f, 0.f, 0.f);
+            binbuf_addv(d, "fffff", 0.f, 0.f, 0.f, 0.f, 0.f);
+            binbuf_addv(d, "s", gensym("(null)"));                
+        }
+    }
+}
+
+void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
+{
+    int index;
+    float exist;
+    
+    if(ac && av)
+    {
+        for(long i = 0; i < ac; i++)
+        {
+            if(ac > i+10)
+            {
+                if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source
+                   && atom_gettype(av+i+1) == A_LONG
+                   && atom_gettype(av+i+2) == A_FLOAT
+                   && atom_gettype(av+i+3) == A_FLOAT
+                   && atom_gettype(av+i+4) == A_FLOAT)
+                {
+                    index = atom_getlong(av+i+1);
+                    exist = atom_getfloat(av+i+2);
+                    if(exist == 1)
+                    {
+                        x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
+                        
+                        if(atom_gettype(av+i+4) == A_FLOAT)
+                            x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
+                        
+                        if(atom_gettype(av+i+6) == A_FLOAT
+                           && atom_gettype(av+i+7) == A_FLOAT
+                           && atom_gettype(av+i+8) == A_FLOAT
+                           && atom_gettype(av+i+9) == A_FLOAT)
+                            x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
+                        
+                        if(atom_gettype(av+i+10) == A_SYM && atom_getsym(av+i+10) != gensym("(null)"))
+                            x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+9)->s_name)->s_name);
+                        else
+                            x->f_source_manager->sourceSetDescription(index, "");
+                    }
+                    else
+                    {
+                        x->f_source_manager->sourceRemove(index);
+                    }
+                    
+                    i += 10;
+                }
+            }
+        }
+    }
+    ebox_notify((t_ebox *)x, NULL, hoa_sym_modified, NULL, NULL);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
+    ebox_redraw((t_ebox *)x);
+    hoa_map_bang(x);
 }
 
