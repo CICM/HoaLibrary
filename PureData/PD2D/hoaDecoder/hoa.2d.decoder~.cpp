@@ -74,25 +74,25 @@ void hoa_decoder_deprecated(t_hoa_decoder* x, t_symbol *s, long ac, t_atom* av)
 {
     t_atom* argv;
     long argc;
-    if(s == gensym("pinnae"))
+    if(s && s == gensym("pinnae"))
     {
-        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        object_error(x, "%s attribute @pinnae is deprecated, please use @pinna.", eobj_getclassname(x)->s_name);
         pinna_set(x, NULL, ac, av);
     }
-    if(s == gensym("restitution"))
+    if(s && s == gensym("restitution"))
     {
-        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+        object_error(x, "%s attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.", eobj_getclassname(x)->s_name);
     }
     atoms_get_attribute(ac, av, gensym("@pinnae"), &argc, &argv);
     if(argc && argv)
     {
-        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        object_error(x, "%s attribute @pinnae is deprecated, please use @pinna.", eobj_getclassname(x)->s_name);
         pinna_set(x, NULL, argc, argv);
         
     }
     if(atoms_has_attribute(ac, av, gensym("@restitution")))
     {
-        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+        object_error(x, "%s attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.", eobj_getclassname(x)->s_name);
     }
 }
 

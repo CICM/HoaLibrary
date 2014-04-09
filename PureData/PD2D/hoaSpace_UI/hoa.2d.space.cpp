@@ -59,6 +59,8 @@ t_pd_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
+void hoa_space_deprecated(t_hoa_space* x, t_symbol *s, long ac, t_atom* av);
+
 extern "C" void setup_hoa0x2e2d0x2espace(void)
 {
     t_eclass* c;
@@ -78,6 +80,11 @@ extern "C" void setup_hoa0x2e2d0x2espace(void)
 	eclass_addmethod(c, (method)hoa_space_mouse_drag,      "mousedrag",      A_CANT, 0);
     eclass_addmethod(c, (method)hoa_space_preset,          "preset",         A_CANT, 0);
     eclass_addmethod(c, (method)hoa_space_list,            "list",           A_GIMME, 0);
+    
+    eclass_addmethod(c, (method)hoa_space_deprecated,      "bordercolor",    A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_space_deprecated,      "circolor",       A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_space_deprecated,      "miccolor",       A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_space_deprecated,      "harmocolor",     A_GIMME, 0);
     
     CLASS_ATTR_INVISIBLE            (c, "fontname", 1);
     CLASS_ATTR_INVISIBLE            (c, "fontweight", 1);
@@ -133,6 +140,55 @@ extern "C" void setup_hoa0x2e2d0x2espace(void)
     hoa_space_class = c;
 }
 
+void hoa_space_deprecated(t_hoa_space* x, t_symbol *s, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+    if(s && s == gensym("bordercolor") && ac && av)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+    }
+    else if(s && s == gensym("circolor") && ac && av)
+    {
+        object_error(x, "%s attribute @circolor is deprecated.", eobj_getclassname(x)->s_name);
+    }
+    else if(s && s == gensym("miccolor") && ac && av)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("ptcolor"), ac, av);
+        object_error(x, "%s attribute @miccolor is deprecated, please use @ptcolor.", eobj_getclassname(x)->s_name);
+    }
+    else if(s && s == gensym("harmocolor") && ac && av)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("spcolor"), ac, av);
+        object_error(x, "%s attribute @harmocolor is deprecated, please use @spcolor.", eobj_getclassname(x)->s_name);
+    }
+
+    atoms_get_attribute(ac, av, gensym("@bordercolor"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+    }
+    atoms_get_attribute(ac, av, gensym("@circolor"), &argc, &argv);
+    if(argc && argv)
+    {
+         object_error(x, "%s attribute @circolor is deprecated.", eobj_getclassname(x)->s_name);
+    }
+    atoms_get_attribute(ac, av, gensym("@miccolor"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("ptcolor"), argc, argv);
+        object_error(x, "%s attribute @miccolor is deprecated, please use @ptcolor.", eobj_getclassname(x)->s_name);
+    }
+    atoms_get_attribute(ac, av, gensym("@harmocolor"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("spcolor"), ac, av);
+        object_error(x, "%s attribute @harmocolor is deprecated, please use @spcolor.", eobj_getclassname(x)->s_name);
+    }
+}
+
 void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
 {
     t_hoa_space *x = NULL;
@@ -154,6 +210,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     ;
     ebox_new((t_ebox *)x, flags);
     
+    hoa_space_deprecated(x, NULL, argc, argv);
     
     ebox_attrprocess_viabinbuf(x, d);
     ebox_ready((t_ebox *)x);

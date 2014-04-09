@@ -102,6 +102,8 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
+void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av);
+
 extern "C" void setup_hoa0x2e2d0x2emap(void)
 {
 	t_eclass *c;
@@ -137,6 +139,10 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     eclass_addmethod(c, (method) hoa_map_save,             "save",            A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_write,            "write",           A_GIMME,    0);
     eclass_addmethod(c, (method) hoa_map_read,             "read",            A_GIMME,    0);
+    
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "bgcolor2",       A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "bordercolor",    A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "selcolor",    A_GIMME,    0);
     
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
@@ -175,6 +181,55 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
 	hoa_map_class = c;
 }
 
+void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+
+    if(s && s == gensym("bordercolor") && ac && av)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+    }
+    if(s && s == gensym("bgcolor2"))
+        object_error(x, "%s attribute @bgcolor2 is deprecated.", eobj_getclassname(x)->s_name);
+    if(s && s == gensym("selcolor"))
+        object_error(x, "%s attribute @selcolor is deprecated.", eobj_getclassname(x)->s_name);
+    
+    atoms_get_attribute(ac, av, gensym("@bordercolor"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+    }
+    atoms_get_attribute(ac, av, gensym("@bgcolor2"), &argc, &argv);
+    if(argc && argv)
+        object_error(x, "%s attribute @bgcolor2 is deprecated.", eobj_getclassname(x)->s_name);
+    atoms_get_attribute(ac, av, gensym("@selcolor"), &argc, &argv);
+    if(argc && argv)
+        object_error(x, "%s attribute @selcolor is deprecated.", eobj_getclassname(x)->s_name);
+}
+
+void hoa_map_syntax_deprecated(int argc, t_atom *argv)
+{
+    for(int i = 0; i < argc; i++)
+    {
+        if(atom_gettype(argv+i) == A_SYM)
+        {
+            if(atom_getsym(argv+i) == gensym("trajectory_parameters"))
+                atom_setsym(argv+i, hoa_sym_trajectory_parameters);
+            else if(atom_getsym(argv+i) == gensym("slots_parameters"))
+                atom_setsym(argv+i, hoa_sym_slots_parameters);
+            else if(atom_getsym(argv+i) == gensym("sources_parameters"))
+                atom_setsym(argv+i, hoa_sym_sources_parameters);
+            else if(atom_getsym(argv+i) == gensym("groups_parameters"))
+                atom_setsym(argv+i, hoa_sym_groups_parameters);
+            else if(atom_getsym(argv+i) == gensym("s_nosymbol"))
+                atom_setsym(argv+i, gensym("(null)"));
+        }
+    }
+}
+
 void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_hoa_map *x =  NULL;
@@ -209,9 +264,12 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
        
         x->f_clock = clock_new(x,(t_method)hoa_map_tick);
     
+        hoa_map_deprecated(x, NULL, argc, argv);
+        hoa_map_syntax_deprecated(argc, argv);
+        
         ebox_attrprocess_viabinbuf(x, d);
         
-        binbuf_get_attribute(d, hoa_sym_trajectory_parameters, &ac, &av);
+        atoms_get_attribute(argc, argv, hoa_sym_trajectory_parameters, &ac, &av);
         if (av && ac)
         {
             hoa_map_parameters_trajectory(x, ac, av);
@@ -220,7 +278,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
             av = NULL;
         }
         
-        binbuf_get_attribute(d, hoa_sym_slots_parameters, &ac, &av);
+        atoms_get_attribute(argc, argv, hoa_sym_slots_parameters, &ac, &av);
         if (av && ac)
         {
             hoa_map_parameters_slots(x, ac, av);
@@ -229,7 +287,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
             av = NULL;
         }
         
-        binbuf_get_attribute(d, hoa_sym_sources_parameters, &ac, &av);
+        atoms_get_attribute(argc, argv, hoa_sym_sources_parameters, &ac, &av);
         if(av && ac)
         {
             hoa_map_parameters_sources(x, ac, av);
@@ -239,7 +297,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
             av = NULL;
         }
         
-        binbuf_get_attribute(d, hoa_sym_groups_parameters, &ac, &av);
+        atoms_get_attribute(argc, argv, hoa_sym_groups_parameters, &ac, &av);
         if (av && ac)
         {
             hoa_map_parameters_groups(x, ac, av);
@@ -310,6 +368,7 @@ void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
         if(x->f_read == 0 || x->f_read == 1)
         {
             binbuf_get_attribute(d, hoa_sym_slots_parameters, &ac, &av);
+            hoa_map_syntax_deprecated(ac, av);
             hoa_map_parameters_slots(x, ac, av);
             if (av && ac)
             {
@@ -323,6 +382,7 @@ void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
         if(x->f_read == 0 || x->f_read == 2)
         {
             binbuf_get_attribute(d, hoa_sym_trajectory_parameters, &ac, &av);
+            hoa_map_syntax_deprecated(ac, av);
             hoa_map_parameters_trajectory(x, ac, av);
             if (av && ac)
             {
@@ -417,6 +477,7 @@ void hoa_map_tick(t_hoa_map *x)
         x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
     else if(x->f_index_of_selected_group != -1)
         x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
+    //x->f_source_trajectory->recordInTrajectory(x->f_source_manager);
     clock_delay(x->f_clock, 100);
 }
 
@@ -929,6 +990,7 @@ void hoa_map_parameters_sources(t_hoa_map *x, short ac, t_atom *av)
 
     if(ac && av)
     {
+         hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(ac > i+9)
@@ -969,6 +1031,7 @@ void hoa_map_parameters_groups(t_hoa_map *x, short ac, t_atom *av)
 {
     if(ac && av)
     {
+         hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(atom_getsym(av+i) == hoa_sym_group)
@@ -1001,7 +1064,7 @@ void hoa_map_parameters_slots(t_hoa_map *x, short ac, t_atom *av)
     if(ac && av && temporySourceManager)
     {
         long slotIndex = -1;
-        
+         hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_slot)
@@ -1045,8 +1108,10 @@ void hoa_map_parameters_trajectory(t_hoa_map *x, short ac, t_atom *av)
 {
     SourcesManager* temporySourceManager = NULL;
     temporySourceManager = new SourcesManager(1. / (double)MIN_ZOOM - 5.);
+    
     if(ac && av && temporySourceManager)
     {
+         hoa_map_syntax_deprecated(ac, av);
         long slotIndex = -1;
         for(long i = 0; i < ac; i++)
         {
@@ -1102,7 +1167,7 @@ t_pd_err hoa_map_notify(t_hoa_map *x, t_symbol *s, t_symbol *msg, void *sender, 
 {
     if (msg == gensym("attr_modified"))
     {
-        if(s == gensym("bgcolor") || s == gensym("bgcolor2") )
+        if(s == gensym("bgcolor"))
         {
             ebox_invalidate_layer((t_ebox *)x, hoa_sym_background_layer);
         }

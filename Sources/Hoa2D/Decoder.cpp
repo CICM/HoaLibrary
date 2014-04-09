@@ -102,7 +102,10 @@ namespace Hoa2D
         
         // Get the optimal number of virtual channels
         // Always prefer the number of harmonics + 2
-        number_of_virutal_channels = (HOA_2PI / minimum_distance);
+        if(minimum_distance > 0)
+            number_of_virutal_channels = (HOA_2PI / minimum_distance);
+        else
+            number_of_virutal_channels = m_number_of_harmonics + 2;
         if(number_of_virutal_channels < m_number_of_harmonics + 2)
         {
             number_of_virutal_channels = m_number_of_harmonics + 2;
@@ -114,53 +117,103 @@ namespace Hoa2D
             m_decoder_matrix_float[i] = 0.;
         }
         
-        // Compute the decoding matrix for sorted channels
-        for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+        if(m_number_of_channels == 1)
         {
-            long   channel_index1 = 0, channel_index2 = 0;
-            double factor_index1 = 0, factor_index2 = 0;
-            
-            // Get the pair of real channels corresponding to the virtual channel
-            double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
-            
-            for(unsigned int j = 0; j < m_number_of_channels; j++)
+            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
             {
-                if(j < m_number_of_channels-1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
+                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+                m_encoder->setAzimuth(angle + m_offset);
+                m_encoder->process(1., m_harmonics_vector);
+                
+                m_decoder_matrix[0] += (0.5 / (double)(m_order + 1.));
+                for(unsigned int j = 1; j < m_number_of_harmonics; j++)
                 {
-                    channel_index1 = j;
-                    channel_index2 = j+1;
-                    
-                    // Get the factor for the pair of real channels
-                    double distance_index1 = angle - m_channels_azimuth[j];
-                    double distance_index2 = m_channels_azimuth[j+1] - angle;
-                    double distance_ratio = distance_index1 + distance_index2;
-                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
-                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
+                    m_decoder_matrix[j] += (m_harmonics_vector[j] / (double)(m_order + 1.));
                 }
-                else if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
+            }
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+            {
+                m_decoder_matrix_float[i] = m_decoder_matrix[i];
+            }
+        }
+        else if(m_number_of_channels == 2)
+        {
+            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+            {
+                double factor_index1 = 0, factor_index2 = 0;
+                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+                m_encoder->setAzimuth(angle + m_offset);
+                m_encoder->process(1., m_harmonics_vector);
+                
+                m_decoder_matrix[0] += (0.5 / (double)(m_order + 1.));
+                m_decoder_matrix[m_number_of_harmonics] += (0.5 / (double)(m_order + 1.));
+                
+                factor_index1 = fabs(cos(distance_radian(angle, m_channels_azimuth[0]) / HOA_PI * HOA_PI2));
+                factor_index2 = fabs(cos(distance_radian(angle, m_channels_azimuth[1]) / HOA_PI * HOA_PI2));
+                for(unsigned int j = 1; j < m_number_of_harmonics; j++)
                 {
-                    channel_index1 = m_number_of_channels-1;
-                    channel_index2 = 0;
-                        
-                    // Get the factor for the pair of real channels
-                    double distance_index1 = angle - m_channels_azimuth[m_number_of_channels-1];
-                    double distance_index2 = HOA_2PI - angle + m_channels_azimuth[0];
-                    double distance_ratio = distance_index1 + distance_index2;
-                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
-                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
+                    m_decoder_matrix[j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
+                    
+                    m_decoder_matrix[m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
                 }
             }
             
-            // Get the harmonics coefficients for virtual channel
-            m_encoder->setAzimuth(angle + m_offset);
-            m_encoder->process(1., m_harmonics_vector);
             
-            m_decoder_matrix[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
-            m_decoder_matrix[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
-            for(unsigned int j = 1; j < m_number_of_harmonics; j++)
+            for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
             {
-                m_decoder_matrix[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
-                m_decoder_matrix[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
+                m_decoder_matrix_float[i] = m_decoder_matrix[i];
+            }
+        }
+        else
+        {
+            // Compute the decoding matrix for sorted channels
+            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+            {
+                long   channel_index1 = 0, channel_index2 = 0;
+                double factor_index1 = 0, factor_index2 = 0;
+                
+                // Get the pair of real channels corresponding to the virtual channel
+                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+                
+                for(unsigned int j = 0; j < m_number_of_channels; j++)
+                {
+                    if(j < m_number_of_channels-1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
+                    {
+                        channel_index1 = j;
+                        channel_index2 = j+1;
+                        
+                        // Get the factor for the pair of real channels
+                        double distance_index1 = angle - m_channels_azimuth[j];
+                        double distance_index2 = m_channels_azimuth[j+1] - angle;
+                        double distance_ratio = distance_index1 + distance_index2;
+                        factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
+                        factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
+                    }
+                    else if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
+                    {
+                        channel_index1 = m_number_of_channels-1;
+                        channel_index2 = 0;
+                        
+                        // Get the factor for the pair of real channels
+                        double distance_index1 = angle - m_channels_azimuth[m_number_of_channels-1];
+                        double distance_index2 = HOA_2PI - angle + m_channels_azimuth[0];
+                        double distance_ratio = distance_index1 + distance_index2;
+                        factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
+                        factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
+                    }
+                }
+                
+                // Get the harmonics coefficients for virtual channel
+                m_encoder->setAzimuth(angle + m_offset);
+                m_encoder->process(1., m_harmonics_vector);
+                
+                m_decoder_matrix[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
+                m_decoder_matrix[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
+                for(unsigned int j = 1; j < m_number_of_harmonics; j++)
+                {
+                    m_decoder_matrix[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
+                    m_decoder_matrix[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
+                }
             }
             
             for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)

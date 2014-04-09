@@ -13,8 +13,8 @@
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode polar @zoom 0.35
 @sources_parameters source 0 -1.71429 1.53651 0 0 0 0 0 (null) source
-1 1.84127 1.53651 1 0 0 0 0 (null) source 2 -1.94286 -1.46032 1 0 0
-0 0 (null) source 3 1.00317 -1.46032 1 0 0 0 0 (null) @groups_parameters
+1 1.84127 1.53651 0 0 0 0 0 (null) source 2 -1.94286 -1.46032 0 0 0
+0 0 (null) source 3 1.00317 -1.46032 0 0 0 0 0 (null) @groups_parameters
 group 0 4 0 1 2 3 0 0.2 0.2 0.2 1 (null);
 #X obj -579 -347 c.loadmess;
 #X msg -242 -105 \; pd dsp 1;
@@ -150,7 +150,7 @@ cmd on it and select "Mute" or "Unmute".;
 #X connect 41 0 1 1;
 #X connect 42 0 18 1;
 #X connect 47 0 34 0;
-#X restore -421 -22 pd hoa.rhythm ---------------------------;
+#X restore -546 1 pd hoa.rhythm ---------------------------;
 #X obj -559 113 hoa.process~ 3 hoa.freeverb~ ambisonic ---------;
 #X obj -559 157 hoa.binaural_order3 256 @pinna large -------------------
 ;
@@ -655,7 +655,6 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X restore -98 -23 pd outputs;
 #X obj -151 277 declare -lib HoaLibrary/hoa.library;
 #X obj -151 256 declare -lib hoa.library;
-#X obj -445 -55 osc~ 220;
 #X connect 5 0 17 0;
 #X connect 6 0 5 0;
 #X connect 11 0 10 0;
@@ -667,6 +666,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 17 4 27 4;
 #X connect 17 5 27 5;
 #X connect 17 6 27 6;
+#X connect 18 0 17 0;
 #X connect 18 1 17 1;
 #X connect 18 2 17 2;
 #X connect 18 3 17 3;
@@ -675,5 +675,4 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 23 0 22 0;
 #X connect 24 0 25 0;
 #X connect 27 0 19 0;
-#X connect 34 0 17 0;
 #X coords 0 757 1 756 85 60 0;

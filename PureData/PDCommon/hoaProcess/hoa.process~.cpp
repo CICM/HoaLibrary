@@ -1140,14 +1140,14 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
             else
             {
                 canvas_setcurrent(eobj_getcanvas(x));
-                pd_error(x, "error while loading canvas.");
+                pd_error(x, "hoa.process~ : error while loading canvas.");
                 return;
             }
         }
     }
     else
     {
-        pd_error(x, "error while loading canvas.");
+        pd_error(x, "hoa.process~ : error while loading canvas.");
     }
     canvas_setcurrent(eobj_getcanvas(x));
     canvas_resume_dsp(state);

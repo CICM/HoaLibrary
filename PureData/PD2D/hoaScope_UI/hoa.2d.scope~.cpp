@@ -54,6 +54,8 @@ t_class *hoa_scope_class;
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
+void hoa_scope_deprecated(t_hoa_scope* x, t_symbol *s, long ac, t_atom* av);
+
 extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
 {
 	t_eclass *c;
@@ -70,6 +72,10 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
 	eclass_addmethod(c, (method)hoa_scope_notify,		"notify",		A_CANT, 0);
 	eclass_addmethod(c, (method)hoa_scope_getdrawparams,"getdrawparams", A_CANT, 0);
 	eclass_addmethod(c, (method)hoa_scope_oksize,		"oksize",		A_CANT, 0);
+    
+    eclass_addmethod(c, (method)hoa_scope_deprecated,   "drawcircle",	A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_scope_deprecated,   "drawangles",	A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_scope_deprecated,   "drawcontrib",	A_GIMME, 0);
 
     CLASS_ATTR_INVISIBLE            (c, "fontname", 1);
     CLASS_ATTR_INVISIBLE            (c, "fontweight", 1);
@@ -135,6 +141,22 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
     scope_class = c;
 }
 
+void hoa_scope_deprecated(t_hoa_scope* x, t_symbol *s, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+    
+    atoms_get_attribute(ac, av, gensym("@drawcircle"), &argc, &argv);
+    if((argc && argv) || (s && s == gensym("drawcircle")))
+        object_error(x, "%s attribute @drawcircle is deprecated.", eobj_getclassname(x)->s_name);
+    atoms_get_attribute(ac, av, gensym("@drawangles"), &argc, &argv);
+    if((argc && argv) || (s && s == gensym("drawangles")))
+        object_error(x, "%s attribute @drawangles is deprecated.", eobj_getclassname(x)->s_name);
+    atoms_get_attribute(ac, av, gensym("@drawcontrib"), &argc, &argv);
+    if((argc && argv) || (s && s == gensym("drawcontrib")))
+        object_error(x, "%s attribute @drawcontrib is deprecated.", eobj_getclassname(x)->s_name);
+}
+
 void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_hoa_scope *x =  NULL;
@@ -163,6 +185,8 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
     
     x->f_clock = clock_new(x,(t_method)hoa_scope_tick);
 	x->f_startclock = 0;
+    
+    hoa_scope_deprecated(x, NULL, argc, argv);
     
     ebox_attrprocess_viabinbuf(x, d);
 	ebox_ready((t_ebox *)x);
