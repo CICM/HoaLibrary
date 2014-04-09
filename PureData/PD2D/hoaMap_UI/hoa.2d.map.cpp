@@ -792,6 +792,8 @@ t_symbol* format_string(const char *s)
     
     sprintf(str, "%s", s);
     pch = strtok(str, " ,.-");
+    sprintf(desc, "%s", pch);
+    pch = strtok(NULL, " ,.-");
     if(pch != NULL)
     {
         sprintf(desc, "%s", pch);
@@ -804,6 +806,7 @@ t_symbol* format_string(const char *s)
         strcat(desc, "_");
         pch = strtok(NULL, " ,.-");
     }
+
     return gensym(desc);
 }
 
@@ -2156,10 +2159,10 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     {
         for(long i = 0; i < ac; i++)
         {
-            if(ac > i+10)
+            if(ac > i+11)
             {
                 if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source
-                   && atom_gettype(av+i+1) == A_LONG
+                   && atom_gettype(av+i+1) == A_FLOAT
                    && atom_gettype(av+i+2) == A_FLOAT
                    && atom_gettype(av+i+3) == A_FLOAT
                    && atom_gettype(av+i+4) == A_FLOAT)
@@ -2170,8 +2173,10 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
                     {
                         x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
                         
-                        if(atom_gettype(av+i+4) == A_FLOAT)
-                            x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
+                        if(atom_gettype(av+i+5) == A_FLOAT && atom_getfloat(av+i+5) == 0)
+                            x->f_source_manager->sourceSetMute(index, 0);
+                        else
+                            x->f_source_manager->sourceSetMute(index, 1);
                         
                         if(atom_gettype(av+i+6) == A_FLOAT
                            && atom_gettype(av+i+7) == A_FLOAT
@@ -2180,7 +2185,7 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
                             x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
                         
                         if(atom_gettype(av+i+10) == A_SYM && atom_getsym(av+i+10) != gensym("(null)"))
-                            x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+9)->s_name)->s_name);
+                            x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+10)->s_name)->s_name);
                         else
                             x->f_source_manager->sourceSetDescription(index, "");
                     }
