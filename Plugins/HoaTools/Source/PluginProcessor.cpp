@@ -7,6 +7,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#define DISTANCE_MAX 10
+
 HoaToolsAudioProcessor::HoaToolsAudioProcessor() : KitSources()
 {
     m_gui = gui_mode_map;
@@ -42,30 +44,53 @@ bool HoaToolsAudioProcessor::hasEditor() const
 
 int HoaToolsAudioProcessor::getNumParameters()
 {
+    // abscissa / ordinate / mute-state
     return getNumberOfSources() * 3;
 }
 
 float HoaToolsAudioProcessor::getParameter(int index)
 {
-    if((index + 1) % 3 == 0)
-        return sourceGetMute(index / 3);
-    else if((index + 2) % 3 == 0)
-        return sourceGetOrdinate(index / 3) / 10. - 0.5;
-    else
-        return sourceGetAbscissa(index / 3) / 10. - 0.5;
+    int param_index = index % 3;
+    int source_index = index / 3;
+    
+    switch (param_index)
+    {
+        case 0:
+            return Hoa::scale(sourceGetAbscissa(source_index), -DISTANCE_MAX, DISTANCE_MAX, 0, 1);
+            break;
+        case 1:
+            return Hoa::scale(sourceGetOrdinate(source_index), -DISTANCE_MAX, DISTANCE_MAX, 0, 1);
+            break;
+        case 2:
+            return sourceGetMute(source_index);
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 void HoaToolsAudioProcessor::setParameter(int index, float newValue)
 {
-    if((index + 1) % 3 == 0)
+    int param_index = index % 3;
+    int source_index = index / 3;
+    
+    switch (param_index)
     {
-        newValue += 0.5;
-        sourceSetMute(index / 3, newValue);
+        case 0:
+            sourceSetAbscissa(source_index, Hoa::scale(newValue, 0, 1, -DISTANCE_MAX, DISTANCE_MAX) );
+            break;
+        case 1:
+            sourceSetOrdinate(source_index, Hoa::scale(newValue, 0, 1, -DISTANCE_MAX, DISTANCE_MAX) );
+            break;
+        case 2:
+            sourceSetMute(source_index, newValue > 0.5);
+            break;
+        default:
+            break;
     }
-    else if((index + 2) % 3 == 0)
-        sourceSetOrdinate(index / 3, (newValue - 0.5) * 20.);
-    else
-        sourceSetAbscissa(index / 3, (newValue - 0.5) * 20.);
+    
+    // ??
     
     AudioProcessorEditor* Editor = NULL;
     Editor = getActiveEditor();
@@ -75,83 +100,99 @@ void HoaToolsAudioProcessor::setParameter(int index, float newValue)
 
 float HoaToolsAudioProcessor::getParameterMin(int index)
 {
-    if((index + 1) % 3 == 0)
-        return 0;
-    else if((index + 2) % 3 == 0)
-        return -10.;
-    else
-        return -10.;
+    return 0.;
 }
 
 float HoaToolsAudioProcessor::getParameterMax(int index)
 {
-    if((index + 1) % 3 == 0)
-        return 1;
-    else if((index + 2) % 3 == 0)
-        return 10.;
-    else
-        return 10.;
+    return 1;
 }
 
 float HoaToolsAudioProcessor::getParameterDefault(int index)
 {
-    if((index + 1) % 3 == 0)
-        return 0;
-    else if((index + 2) % 3 == 0)
-        return 0.;
+    int param_index = index % 3;
+    
+    if(param_index == 0 || param_index == 1)
+        return 0.5;
     else
-        return 0.;
+        return 0;
 }
 
 int HoaToolsAudioProcessor::getParameterNumSteps(int index)
 {
-    if((index + 1) % 3 == 0)
-        return 1;
-    else if((index + 2) % 3 == 0)
-        return 0.001;
+    int param_index = index % 3;
+    
+    if(param_index == 0 || param_index == 1)
+        return 1000;
     else
-        return 0.001;
+        return 0;
 }
 
 float HoaToolsAudioProcessor::getParameterDefaultValue (int index)
 {
-    if((index + 1) % 3 == 0)
-        return 0;
-    else if((index + 2) % 3 == 0)
-        return 0.;
+    int param_index = index % 3;
+    
+    if(param_index == 0 || param_index == 1)
+        return 0.5;
     else
-        return 0.;
+        return 0;
 }
 
 const String HoaToolsAudioProcessor::getParameterName (int index)
 {
+    int param_index = index % 3;
+    int source_index = index / 3;
     char text[256];
-    if((index + 1) % 3 == 0)
-        sprintf(text, "Mute     %i : ", index / 3 + 1);
-    else if((index + 2) % 3 == 0)
-        sprintf(text, "Ordinate %i : ", index / 3 + 1);
-    else
-        sprintf(text, "Abscissa %i : ", index / 3 + 1);
-       
+    
+    switch (param_index)
+    {
+        case 0:
+            sprintf(text, "Abscissa %i : ", source_index + 1);
+            break;
+        case 1:
+            sprintf(text, "Ordinate %i : ", source_index + 1);
+            break;
+        case 2:
+            sprintf(text, "Mute     %i : ", source_index + 1);
+            break;
+        default:
+            sprintf(text, "");
+            break;
+    }
+    
     return String(text);
 }
 
 String HoaToolsAudioProcessor::getParameterLabel(int index)
 {
+    int param_index = index % 3;
+    int source_index = index / 3;
     char text[256];
-    if((index + 1) % 3 == 0)
-    {
-        if (sourceGetMute(index / 3))
-            sprintf(text, "Muted");
-        else
-           sprintf(text, "Unmuted"); 
-        
-    }
-    else if((index + 2) % 3 == 0)
-        sprintf(text, "%f", sourceGetOrdinate(index / 3));
-    else
-        sprintf(text, "%f", sourceGetAbscissa(index / 3));
     
+    switch (param_index)
+    {
+        case 0:
+        {
+            sprintf(text, "%f", sourceGetAbscissa( source_index ));
+            break;
+        }
+        case 1:
+        {
+            sprintf(text, "%f", sourceGetOrdinate( source_index ));
+            break;
+        }
+        case 2:
+        {
+            if (sourceGetMute( source_index ))
+                sprintf(text, "Muted");
+            else
+                sprintf(text, "Unmuted");
+            break;
+        }
+        default:
+            sprintf(text, "");
+            break;
+    }
     return String(text);
 }
 
@@ -167,20 +208,34 @@ bool HoaToolsAudioProcessor::isMetaParameter(int index) const
 
 const String HoaToolsAudioProcessor::getParameterText (int index)
 {
+    int param_index = index % 3;
+    int source_index = index / 3;
     char text[256];
-    if((index + 1) % 3 == 0)
-    {
-        if (sourceGetMute(index / 3))
-            sprintf(text, "Muted");
-        else
-            sprintf(text, "Unmuted");
-        
-    }
-    else if((index + 2) % 3 == 0)
-        sprintf(text, "%f", sourceGetOrdinate(index / 3));
-    else
-        sprintf(text, "%f", sourceGetAbscissa(index / 3));
     
+    switch (param_index)
+    {
+        case 0:
+        {
+            sprintf(text, "%f", sourceGetAbscissa( source_index ));
+            break;
+        }
+        case 1:
+        {
+            sprintf(text, "%f", sourceGetOrdinate( source_index ));
+            break;
+        }
+        case 2:
+        {
+            if (sourceGetMute( source_index ))
+                sprintf(text, "Muted");
+            else
+                sprintf(text, "Unmuted");
+            break;
+        }
+        default:
+            sprintf(text, "");
+            break;
+    }
     return String(text);
 }
 

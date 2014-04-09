@@ -14,34 +14,69 @@ Systems :
 - Mac OsX (Pd 32 bit)
 - Windows (Pd 32 bit)
 
-Global Changes :
+### Global Changes :
 
-- Attributes syntax : @key [ values... ] becomes @key values… (you still can use the old syntax but it's deprecated).
-- Float to signal : The float values in signal inlet are not converted to signal, thus some processing are now optimized with float (for example, hoa.rotate~ doesn't need to compute the rotation every sample).
+# 3D 
 
-New objects :
+# hoa.process
 
-Removed objects :
+# All the 2d object are now prepended by "hoa.2d" but you still can use "hoa".
 
-Modified objects : 
+# You can use the c.preset object of Chocolate library with the GUIs.
 
-- hoa.decoder~ : 
+# The GUIs have all the new options of the CICM Wrapper. Attributes syntax : @key [ values... ] becomes @key values… (you still can use the old syntax but it's deprecated). Float to signal : The float values in signal inlet are not converted to signal, thus some processing are now optimized with float (for example, hoa.rotate~ doesn't need to compute the rotation every sample). See chocolate and coffee from CICM Wrapper for all the very good essential stuff !! ;) :) ~o~
 
-1. The attribute "restitution" for irregular decoding mode has been removed (the projection mode is now automatic for a stereo decoding). 	
-2. The attribute "pinnae" becomes "pinna" (you still can use the old syntax but it's deprecated).
-3. The ambisonic decoding and the irregular decoding have the new attribute "offset" that allows to apply an angular offset to all the channels (if you want to have the .
+# Tutorials
 
-- hoa.map~ : 
+# easy installer 
 
-The attribute "mode" (cartesian or polar) becomes an argument (you still can use the old syntax but it's deprecated) because the mode shouldn't changed in real time.
+### New objects :
 
+# hoa.connect : A connector for hoa objects.
 
-- hoa.map : Todo
+# hoa.dac~ : A custom dac~ with matlab syntax.
 
+# hoa.process~ : A multi-patcher for circular or spherical harmonics and plane waves domains.
 
+# hoa.in : A control inlet for hoa.process~ patchers.
 
-New Features:
+# hoa.in~ : A signal inlet for hoa.process~ patchers.
 
+# hoa.in : A control outlet for hoa.process~ patchers.
+
+# hoa.in : A signal outlet for hoa.process~ patchers.
+
+# hoa.pi~ : A good pi number for signal
+
+### Removed objects :
+
+# hoa.space~ :
+
+# hoa.ringmod~ :
+
+# hoa.grain~ :
+
+# hoa.freeverb~ :
+
+# hoa.delay~ :
+
+### Modified objects : 
+
+# hoa.decoder~ : The attribute "restitution" for irregular decoding mode has been removed (the projection mode is now automatic for a stereo decoding). The attribute "pinnae" becomes "pinna" (you still can use the old syntax but it's deprecated).The ambisonic decoding and the irregular decoding have the new attribute "offset" that allows to apply an angular offset to all the channels.
+
+# hoa.map : The attribute "bordercolor" becomes "bdcolor". If you save a patcher the old key will be replaced by the ones. The attribute "bgcolor2" and "selcolor" have been removed. The slots and trajectories are no more saved with the patcher. You have to save it in a file before. The save and write methods accept relative and absolute paths, look in the path preference folders and the patcher folder and open a dialog window if there's only a filename.
+
+# hoa.map~ : The attribute "mode" (cartesian or polar) becomes an argument (you still can use it but it's deprecated).
+
+# hoa.meter~ :The energy and velocity vectors are displayed as points. The attribute "loudspeakers" becomes "channels". If you save a patcher the old key will be replaced by the ones. The attribute "bordercolor" becomes "bdcolor". If you save a patcher the old key will be replaced by the ones. The attribute "mbgcolor" has been removed.
+
+# hoa.optim~ : The attribute "mode" (basic, maxRe or inPhase) becomes an argument (you still can use it but it's deprecated).
+
+# hoa.recomposer~ : The attribute "mode" (fixe, fisheye, free) becomes an argument (you still can use it but it's deprecated).
+
+# hoa.scope~ : The attributes "drawcircle", "drawangles" and "drawcontrib" have been removed.
+
+# hoa.space :The boundaries values of the list can be changed. The color attributes keys have changed (you still can use the olds ones but it's deprecated). If you save a patcher the old key will be replaced by the ones.
 
 
 Dependencies : 
@@ -49,6 +84,7 @@ Dependencies :
 Cblas (http://www.netlib.org/clapack/cblas/) 
 You can use Accelerate for Mac Os and Blas, Ipp or GSL for all platforms
 CICM Wrapper (https://github.com/CICM/CicmWrapper)
+
 
 ------------------------
 version beta 1.0.0

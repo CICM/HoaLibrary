@@ -29,13 +29,13 @@ t_hoa_err hoa_getinfos(t_hoa_pi_tilde* x, t_hoa_boxinfos* boxinfos);
 extern "C" void setup_hoa0x2epi_tilde(void)
 {
     t_eclass* c;
-    c = eclass_new("hoa.pi~", (method)hoa_pi_tilde_new,(method)NULL, sizeof(t_hoa_pi_tilde), CLASS_NOINLET, A_GIMME, 0);
+    c = eclass_new("hoa.pi~", (method)hoa_pi_tilde_new, (method)NULL, sizeof(t_hoa_pi_tilde), CLASS_NOINLET, A_GIMME, 0);
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
    
-    eclass_addmethod(c, (method)hoa_pi_tilde_float,    "float",      A_FLOAT, 0);
-    eclass_addmethod(c, (method)hoa_pi_tilde_dsp,       "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_pi_tilde_float,    "float",    A_FLOAT, 0);
+    eclass_addmethod(c, (method)hoa_pi_tilde_dsp,      "dsp",      A_CANT, 0);
     
     eclass_register(CLASS_OBJ, c);
     hoa_pi_tilde_class = c;
@@ -65,7 +65,9 @@ t_hoa_err hoa_getinfos(t_hoa_pi_tilde* x, t_hoa_boxinfos* boxinfos)
 void hoa_pi_tilde_float(t_hoa_pi_tilde *x, float n)
 {
     if(eobj_getproxy(x))
+    {
         x->p_phase = n;
+    }
     else
     {
         x->p_value = n;

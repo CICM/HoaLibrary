@@ -44,6 +44,12 @@ namespace Hoa2D
          */
 		void setLimited(bool isLimited);
 		
+        //! Record a source manager in trajectory
+		/**
+		 * @param     sourcesManager		A SourcesManager object pointer.
+         */
+        void recordInTrajectory(SourcesManager* sourcesManager);
+        
 		//! Record a source in trajectory
 		/**
 		 * @param     sourcesManager		A SourcesManager object pointer.

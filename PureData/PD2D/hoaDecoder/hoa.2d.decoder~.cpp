@@ -32,9 +32,12 @@ t_pd_err offset_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
 t_pd_err pinna_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
 
 t_eclass *hoa_decoder_class;
+t_eclass *hoa_binaural_alias;
 
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 void hoa_decoder_deprecated(t_hoa_decoder* x, t_symbol *s, long ac, t_atom* av);
+
+void *hoa_binaural_new(t_symbol *s, int argc, t_atom *argv);
 
 extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
 {
@@ -70,29 +73,42 @@ extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void)
     hoa_decoder_class = c;
 }
 
+extern "C" void setup_hoa0x2e2d0x2ebinaural(void)
+{
+	t_eclass *c;
+    
+	c = eclass_new("hoa.2d.binaural~", (method)hoa_binaural_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_binaural_new, gensym("hoa.binaural~"), A_GIMME);
+    
+	eclass_init(c, 0);
+    eclass_register(CLASS_BOX, c);
+	hoa_binaural_alias = c;
+}
+
 void hoa_decoder_deprecated(t_hoa_decoder* x, t_symbol *s, long ac, t_atom* av)
 {
     t_atom* argv;
     long argc;
-    if(s == gensym("pinnae"))
+    if(s && s == gensym("pinnae"))
     {
-        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        object_error(x, "%s attribute @pinnae is deprecated, please use @pinna.", eobj_getclassname(x)->s_name);
         pinna_set(x, NULL, ac, av);
     }
-    if(s == gensym("restitution"))
+    if(s && s == gensym("restitution"))
     {
-        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+        object_error(x, "%s attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.", eobj_getclassname(x)->s_name);
     }
     atoms_get_attribute(ac, av, gensym("@pinnae"), &argc, &argv);
     if(argc && argv)
     {
-        object_error(x, "hoa.map~ attribute @pinnae is deprecated, please use @pinna.");
+        object_error(x, "%s attribute @pinnae is deprecated, please use @pinna.", eobj_getclassname(x)->s_name);
         pinna_set(x, NULL, argc, argv);
+        argc = 0;free(argv);argv = NULL;
         
     }
     if(atoms_has_attribute(ac, av, gensym("@restitution")))
     {
-        object_error(x, "hoa.map~ attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.");
+        object_error(x, "%s attribute @restitution is deprecated. The projection restitution is now automatic for a stereo decoding and the panning restitution is used for the other irregular decoding.", eobj_getclassname(x)->s_name);
     }
 }
 
@@ -305,4 +321,132 @@ void hoa_decoder_free(t_hoa_decoder *x)
 	delete x->f_decoder;
     delete [] x->f_ins;
     delete [] x->f_outs;
+}
+
+void *hoa_binaural_new(t_symbol *s, int argc, t_atom *argv)
+{
+    int i;
+    t_canvas* realcnv;
+    t_canvas* newcnv;
+    t_atom av[7];
+    int order = 1;
+    int pinna = 0;
+    int block = 256;
+    long    n_argc;
+    t_atom* n_argv;
+    t_gobj *y = NULL;
+    t_gobj *binaural = NULL;
+    t_gobj **inlets = NULL;
+    t_gobj *outlets[2];
+    int inc, inc2;
+    
+    outlets[0] = NULL;
+    outlets[1] = NULL;
+    
+    if(argc && argv && atom_gettype(argv) == A_FLOAT)
+        order = atom_getfloat(argv);
+    if(order < 1)
+        order  = 1;
+    
+    atoms_get_attribute(argc, argv, gensym("@pinna"), &n_argc, &n_argv);
+    if(n_argc && n_argv)
+    {
+        if(atom_gettype(n_argv) == A_FLOAT && atom_getfloat(n_argv) != 0)
+            pinna = 1;
+        else if(atom_gettype(n_argv) == A_SYM && atom_getsym(n_argv) == gensym("large"))
+            pinna = 1;
+        free(n_argv);
+        n_argc = 0;
+    }
+    
+    atoms_get_attribute(argc, argv, gensym("@block"), &n_argc, &n_argv);
+    if(n_argc && n_argv)
+    {
+        if(atom_gettype(n_argv) == A_FLOAT)
+            block = atom_getfloat(n_argv);
+        free(n_argv);
+        n_argc = 0;
+    }
+    
+    realcnv = canvas_getcurrent();
+    newcnv = canvas_new(0, 0, 0, NULL);
+    newcnv->gl_owner = realcnv;
+    canvas_vis(newcnv, 0);
+    
+    inlets = new t_gobj*[order * 2 + 1];
+    if(!inlets)
+        return NULL;
+    
+    for(i = 0; i < order * 2 + 1; i++)
+    {
+        atom_setfloat(av, i * 50);
+        atom_setfloat(av+1, 10);
+        atom_setsym(av+2, gensym("inlet~"));
+        pd_typedmess((t_pd *)newcnv, gensym("obj"), 3, av);
+        inlets[i] = NULL;
+    }
+    
+    atom_setfloat(av, 0);
+    atom_setfloat(av+1, 100);
+    atom_setsym(av+2, gensym("hoa.2d.decoder~"));
+    atom_setfloat(av+3, order);
+    atom_setsym(av+4, gensym("binaural"));
+    atom_setsym(av+5, gensym("@pinna"));
+    if(!pinna)
+        atom_setsym(av+6, gensym("small"));
+    else
+        atom_setsym(av+6, gensym("large"));
+    pd_typedmess((t_pd *)newcnv, gensym("obj"), 7, av);
+    
+    atom_setfloat(av, 400);
+    atom_setfloat(av+1, 100);
+    atom_setsym(av+2, gensym("block~"));
+    atom_setfloat(av+3, block);
+    pd_typedmess((t_pd *)newcnv, gensym("obj"), 4, av);
+    
+    atom_setfloat(av, 0);
+    atom_setfloat(av+1, 200);
+    atom_setsym(av+2, gensym("outlet~"));
+    pd_typedmess((t_pd *)newcnv, gensym("obj"), 3, av);
+    
+    atom_setfloat(av, 100);
+    atom_setfloat(av+1, 200);
+    atom_setsym(av+2, gensym("outlet~"));
+    pd_typedmess((t_pd *)newcnv, gensym("obj"), 3, av);
+    
+    vmess((t_pd *)newcnv, gensym("pop"), "i", 1);
+    
+    inc = inc2 = 0;
+    for(y = newcnv->gl_list; y; y = y->g_next)
+    {
+        if(eobj_getclassname(y) == gensym("hoa.2d.decoder~"))
+        {
+            binaural = y;
+        }
+        else if (eobj_getclassname(y) == gensym("inlet"))
+        {
+            inlets[inc] = y;
+            inc++;
+        }
+        else if (eobj_getclassname(y) == gensym("outlet"))
+        {
+            outlets[inc2] = y;
+            inc2++;
+        }
+    }
+    if(inc != order * 2 +1 && inc2 != 2 && binaural == NULL)
+        return NULL;
+    
+    obj_connect((t_object *)binaural, 0, (t_object *)outlets[0], 0);
+    obj_connect((t_object *)binaural, 1, (t_object *)outlets[1], 0);
+    for(i = 0; i < order * 2 + 1; i++)
+    {
+        obj_connect((t_object *)inlets[i], 0, (t_object *)binaural, i);
+    }
+    
+    canvas_vis(newcnv, 0);
+    canvas_setcurrent(realcnv);
+    
+    delete [] inlets;
+	return newcnv;
 }

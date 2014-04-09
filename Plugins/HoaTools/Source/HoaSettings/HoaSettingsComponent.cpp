@@ -89,6 +89,20 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
         m_channels_azimuth_values[i]->addListener(this);
         m_channels_azimuth_labels.push_back(new Label());
 	}
+    
+    // -- Pinna
+    
+    m_pinna_label = new Label();
+    m_pinna_label->setText("Pinna", juce::dontSendNotification);
+    
+    
+    m_pinna_value = new ComboBox();
+    m_pinna_value->setEditableText(false);
+    m_pinna_value->setJustificationType(Justification::centredLeft);
+    m_pinna_value->addItem("Small", 1);
+    m_pinna_value->addItem("Large", 2);
+    m_pinna_value->addListener(this);
+    
     updated();
 }
 
@@ -109,6 +123,8 @@ HoaSettingsComponent::~HoaSettingsComponent()
     delete m_channels_azimuth_label;
     m_channels_azimuth_values.clear();
     m_channels_azimuth_labels.clear();
+    delete m_pinna_label;
+    delete m_pinna_value;
 }
 
 void HoaSettingsComponent::comboBoxChanged(ComboBox* comboBox)
@@ -201,6 +217,11 @@ void HoaSettingsComponent::updated()
         m_number_of_sources_value->setText(String((int)m_processor->getNumberOfSources()), juce::dontSendNotification);
         m_number_of_channels_value->setText(String((int)m_processor->getNumberOfChannels()), juce::dontSendNotification);
         m_offset_value->setText(String((float)radToDeg(m_processor->getChannelsOffset())), juce::dontSendNotification);
+        if(m_processor->getPinnaSize() == Hoa2D::DecoderBinaural::Small)
+            m_pinna_value->setSelectedId(1);
+        else
+            m_pinna_value->setSelectedId(2);
+            
         
         addAndMakeVisible(m_order_label);
         m_order_label->setBounds(x1, y, width, height);
@@ -227,52 +248,68 @@ void HoaSettingsComponent::updated()
         y += 40;
         
         if(m_processor->getDecodingMode() == Hoa2D::DecoderMulti::Binaural)
-            m_number_of_channels_value->setOpaque(1);
-        else
-            m_number_of_channels_value->setOpaque(0);
-        
-        addAndMakeVisible(m_number_of_channels_label);
-        m_number_of_channels_label->setBounds(x1, y, width, height);
-        addAndMakeVisible(m_number_of_channels_value);
-        m_number_of_channels_value->setBounds(x2, y, width, height);
-		y += 40;
-        
-        if(m_processor->getDecodingMode() == Hoa2D::DecoderMulti::Binaural)
-            m_offset_value->setOpaque(1);
-        else
-            m_offset_value->setOpaque(0);
-        
-        addAndMakeVisible(m_offset_label);
-        m_offset_label->setBounds(x1, y, width, height);
-        addAndMakeVisible(m_offset_value);
-        m_offset_value->setBounds(x2, y, width, height);
-        
-        y += 40;
-        addAndMakeVisible(m_channels_azimuth_label);
-        m_channels_azimuth_label->setBounds(x1, y, width, height);
-        y += 40;
-        int offset = (getWidth() - 10) / 8.;
-        for (int i = 0; i < m_channels_azimuth_values.size(); i++)
         {
-            int index_line = i / 8;
-            int index_column = i - index_line * 8;
-            if(m_processor->getDecodingMode() != Hoa2D::DecoderMulti::Irregular)
-                m_channels_azimuth_values[i]->setOpaque(1);
-            else
-                m_channels_azimuth_values[i]->setOpaque(0);
+            removeChildComponent(m_number_of_channels_label);
+            removeChildComponent(m_number_of_channels_value);
+            removeChildComponent(m_offset_value);
+            removeChildComponent(m_offset_label);
+            removeChildComponent(m_channels_azimuth_label);
             
-			addAndMakeVisible(m_channels_azimuth_values[i]);
-            m_channels_azimuth_values[i]->setText(String((float)m_processor->getChannelAzimuth(i) / HOA_2PI * 360), juce::dontSendNotification);
-            m_channels_azimuth_values[i]->setBounds(index_column * offset + 10, index_line * 50 + 25 + y, offset-10, 20);
+            for (int i = 0; i < m_channels_azimuth_values.size(); i++)
+                removeChildComponent(m_channels_azimuth_values[i]);
+            
+            for (int i = 0; i < m_channels_azimuth_labels.size(); i++)
+                removeChildComponent(m_channels_azimuth_labels[i]);
+            
+            addAndMakeVisible(m_pinna_label);
+            m_pinna_label->setBounds(x1, y, width, height);
+            addAndMakeVisible(m_pinna_value);
+            m_pinna_value->setBounds(x2, y, width, height);
         }
-        for (int i = 0; i < m_channels_azimuth_labels.size(); i++)
+        else
         {
-            int index_line = i / 8;
-            int index_column = i - index_line * 8;
-            addAndMakeVisible(m_channels_azimuth_labels[i]);
-            sprintf(label_String, "Ch. %i", i+1);
-            m_channels_azimuth_labels[i]->setText(label_String, juce::dontSendNotification);
-            m_channels_azimuth_labels[i]->setBounds(index_column * offset + 10, index_line * 50 + y, offset-10, 20);
+            removeChildComponent(m_pinna_label);
+            removeChildComponent(m_pinna_value);
+            
+            addAndMakeVisible(m_number_of_channels_label);
+            m_number_of_channels_label->setBounds(x1, y, width, height);
+            addAndMakeVisible(m_number_of_channels_value);
+            m_number_of_channels_value->setBounds(x2, y, width, height);
+            y += 40;
+            
+            addAndMakeVisible(m_offset_label);
+            m_offset_label->setBounds(x1, y, width, height);
+            addAndMakeVisible(m_offset_value);
+            m_offset_value->setBounds(x2, y, width, height);
+        
+            y += 40;
+            addAndMakeVisible(m_channels_azimuth_label);
+            m_channels_azimuth_label->setBounds(x1, y, width, height);
+            
+            y += 40;
+            int offset = (getWidth() - 10) / 8.;
+            for (int i = 0; i < m_channels_azimuth_values.size(); i++)
+            {
+                int index_line = i / 8;
+                int index_column = i - index_line * 8;
+                if(m_processor->getDecodingMode() != Hoa2D::DecoderMulti::Irregular)
+                    m_channels_azimuth_values[i]->setOpaque(1);
+                else
+                    m_channels_azimuth_values[i]->setOpaque(0);
+                
+                addAndMakeVisible(m_channels_azimuth_values[i]);
+                m_channels_azimuth_values[i]->setText(String((float)m_processor->getChannelAzimuth(i) / HOA_2PI * 360), juce::dontSendNotification);
+                m_channels_azimuth_values[i]->setBounds(index_column * offset + 10, index_line * 50 + 25 + y, offset-10, 20);
+            }
+            for (int i = 0; i < m_channels_azimuth_labels.size(); i++)
+            {
+                int index_line = i / 8;
+                int index_column = i - index_line * 8;
+                addAndMakeVisible(m_channels_azimuth_labels[i]);
+                sprintf(label_String, "Ch. %i", i+1);
+                m_channels_azimuth_labels[i]->setText(label_String, juce::dontSendNotification);
+                m_channels_azimuth_labels[i]->setBounds(index_column * offset + 10, index_line * 50 + y, offset-10, 20);
+            }
         }
     }
 }

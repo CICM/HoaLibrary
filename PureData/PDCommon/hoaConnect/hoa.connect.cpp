@@ -58,7 +58,8 @@ void hoa_connect_bang(t_hoa_connect *x)
     t_gobj *y = NULL;
     t_gobj *list[256];
     t_outconnect *oc;
-    
+    t_glist *cnv;
+    t_symbol* name;
     for(y = eobj_getcanvas(x)->gl_list; y; y = y->g_next)
     {
         if(strncmp(eobj_getclassname(y)->s_name, "hoa.", 4) == 0 && glist_isselected(eobj_getcanvas(x), y))
@@ -83,7 +84,42 @@ void hoa_connect_bang(t_hoa_connect *x)
                 list[index] = y;
                 index = pd_clip_max(index+1, 255);
             }
-            
+        }
+        else if(eobj_getclassname(y)  == gensym("canvas"))
+        {
+            cnv = (t_glist *)y;
+            if(cnv->gl_obj.te_binbuf && binbuf_getnatom(cnv->gl_obj.te_binbuf) && binbuf_getvec(cnv->gl_obj.te_binbuf))
+            {
+                if(atom_gettype(binbuf_getvec(cnv->gl_obj.te_binbuf)) == A_SYM)
+                    name = atom_getsym(binbuf_getvec(cnv->gl_obj.te_binbuf));
+                else
+                    name  = NULL;
+                
+                if(name && strncmp(name->s_name, "hoa.", 4) == 0 && glist_isselected(eobj_getcanvas(x), y))
+                {
+                    gobj_getrect(y, eobj_getcanvas(x), &nx1, &ny1, &nx2, &ny2);
+                    for(i = 0; i < index; i++)
+                    {
+                        gobj_getrect(list[i], eobj_getcanvas(x), &x1, &y1, &x2, &y2);
+                        if(ny1 < y1 || (ny1 == y1 && nx1 < x1))
+                        {
+                            for(j = index; j > i; j--)
+                            {
+                                list[j] = list[j-1];
+                            }
+                            list[i] = y;
+                            index = pd_clip_max(index+1, 255);
+                            break;
+                        }
+                    }
+                    if(i == index)
+                    {
+                        list[index] = y;
+                        index = pd_clip_max(index+1, 255);
+                    }
+                }
+                
+            }
         }
     }
     for(i = 0; i < index-1; i++)

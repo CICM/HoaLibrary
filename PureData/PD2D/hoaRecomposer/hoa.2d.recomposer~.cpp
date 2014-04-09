@@ -90,6 +90,7 @@ t_eclass *hoa_recomposer_class;
 
 t_symbol* hoa_sym_fixe       = gensym("fixe");
 t_symbol* hoa_sym_fisheye    = gensym("fisheye");
+void hoa_recomposer_deprecated(t_hoa_recomposer* x, t_symbol *s, long ac, t_atom* av);
 
 extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
 {
@@ -104,6 +105,7 @@ extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
     eclass_addmethod(c, (method)hoa_recomposer_angle,   "angle",    A_GIMME,0);
     eclass_addmethod(c, (method)hoa_recomposer_wide,    "wide",     A_GIMME,0);
     eclass_addmethod(c, (method)hoa_recomposer_float,   "float",    A_FLOAT,0);
+    eclass_addmethod(c, (method)hoa_recomposer_deprecated,"mode",   A_GIMME,0);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_recomposer, f_ramp);
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
@@ -117,10 +119,27 @@ extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
     hoa_recomposer_class = c;
 }
 
-int hoa_recomposer_tilde_attr_to_args(t_hoa_recomposer* x, long ac, t_atom* av)
+void hoa_recomposer_deprecated(t_hoa_recomposer* x, t_symbol *s, long ac, t_atom* av)
 {
     t_atom* argv;
     long argc;
+    if(s && s == gensym("mode") && ac && av)
+    {
+        if(atom_gettype(av) == A_SYM)
+        {
+            if(atom_getsym(av) == gensym("free"))
+                x->f_mode = 2;
+            else if(atom_getsym(av) == gensym("fisheye"))
+                x->f_mode = 1;
+            else
+                x->f_mode = 0;
+        }
+        else
+        {
+            x->f_mode = pd_clip_minmax(atom_getlong(av), 0, 2);
+        }
+        object_error(x, "%s attribute @mode is deprecated, please use it as an argument.", eobj_getclassname(x)->s_name);
+    }
     atoms_get_attribute(ac, av, gensym("@mode"), &argc, &argv);
     if(argc && argv)
     {
@@ -137,10 +156,9 @@ int hoa_recomposer_tilde_attr_to_args(t_hoa_recomposer* x, long ac, t_atom* av)
         {
             x->f_mode = pd_clip_minmax(atom_getlong(argv), 0, 2);
         }
-        object_error(x, "hoa.recomposer~ attribute @mode is deprecated, please use the argument.");
-        return 1;
+        object_error(x, "%s attribute @mode is deprecated, please use it as an argument.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
-    return 0;
 }
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
@@ -176,7 +194,7 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
         else
             x->f_mode = 0;
         
-        hoa_recomposer_tilde_attr_to_args(x, argc, argv);
+        hoa_recomposer_deprecated(x, NULL, argc, argv);
         
         x->f_ramp       = 100;
         

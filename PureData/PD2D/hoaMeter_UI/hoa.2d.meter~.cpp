@@ -85,6 +85,8 @@ t_symbol* hoa_sym_anticlock = gensym("anti-clockwise");
 t_symbol* hoa_sym_vector_layer = gensym("vectors_layer");
 t_symbol* hoa_sym_leds_layer = gensym("leds_layers");
 
+void hoa_meter_deprecated(t_hoa_meter* x, t_symbol *s, long ac, t_atom* av);
+
 extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 {
 	t_eclass *c;
@@ -101,6 +103,10 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 	eclass_addmethod(c, (method) hoa_meter_notify,          "notify",        A_CANT, 0);
     eclass_addmethod(c, (method) hoa_meter_getdrawparams,   "getdrawparams", A_CANT, 0);
     eclass_addmethod(c, (method) hoa_meter_oksize,          "oksize",        A_CANT, 0);
+    
+    eclass_addmethod(c, (method)hoa_meter_deprecated,   "loudspeakers",	A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_meter_deprecated,   "bordercolor",	A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_meter_deprecated,   "mbgcolor",     A_GIMME, 0);
     
 	CLASS_ATTR_INVISIBLE            (c, "fontname", 1);
     CLASS_ATTR_INVISIBLE            (c, "fontweight", 1);
@@ -217,6 +223,43 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 	hoa_meter_class = c;
 }
 
+void hoa_meter_deprecated(t_hoa_meter* x, t_symbol *s, long ac, t_atom* av)
+{
+    t_atom* argv;
+    long argc;
+    if(s && s == gensym("loudspeakers") && ac && av)
+    {
+        object_error(x, "%s attribute @loudspeakers is deprecated, please use @channels.", eobj_getclassname(x)->s_name);
+        channels_set(x, NULL, ac, av);
+    }
+    if(s && s == gensym("bordercolor") && ac && av)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+    }
+    
+    atoms_get_attribute(ac, av, gensym("@loudspeakers"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_error(x, "%s attribute @loudspeakers is deprecated, please use @channels.", eobj_getclassname(x)->s_name);
+        channels_set(x, NULL, argc, argv);
+        argc = 0;free(argv);argv = NULL;
+    }
+    atoms_get_attribute(ac, av, gensym("@bordercolor"), &argc, &argv);
+    if(argc && argv)
+    {
+        object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
+        object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
+    }
+
+    if((s && s == gensym("mbgcolor")) || atoms_has_attribute(ac, av, gensym("@mbgcolor")))
+    {
+        object_error(x, "%s attribute @mbgcolor is deprecated.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
+    }
+}
+
 void *hoa_meter_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_hoa_meter *x =  NULL;
@@ -243,6 +286,8 @@ void *hoa_meter_new(t_symbol *s, int argc, t_atom *argv)
     | EBOX_IGNORELOCKCLICK
     ;
 	ebox_new((t_ebox *)x, flags);
+    
+    hoa_meter_deprecated(x, s, argc, argv);
 	ebox_attrprocess_viabinbuf(x, d);
     
 	ebox_ready((t_ebox *)x);
