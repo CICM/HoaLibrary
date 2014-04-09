@@ -237,27 +237,26 @@ void hoa_meter_deprecated(t_hoa_meter* x, t_symbol *s, long ac, t_atom* av)
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
         object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
     }
-    if(s && s == gensym("mbgcolor"))
-    {
-        object_error(x, "%s attribute @mbgcolor is deprecated.", eobj_getclassname(x)->s_name);
-    }
     
     atoms_get_attribute(ac, av, gensym("@loudspeakers"), &argc, &argv);
     if(argc && argv)
     {
         object_error(x, "%s attribute @loudspeakers is deprecated, please use @channels.", eobj_getclassname(x)->s_name);
         channels_set(x, NULL, argc, argv);
+        argc = 0;free(argv);argv = NULL;
     }
     atoms_get_attribute(ac, av, gensym("@bordercolor"), &argc, &argv);
     if(argc && argv)
     {
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
         object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
-    atoms_get_attribute(ac, av, gensym("@mbgcolor"), &argc, &argv);
-    if(argc && argv)
+
+    if((s && s == gensym("mbgcolor")) || atoms_has_attribute(ac, av, gensym("@mbgcolor")))
     {
         object_error(x, "%s attribute @mbgcolor is deprecated.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
 }
 

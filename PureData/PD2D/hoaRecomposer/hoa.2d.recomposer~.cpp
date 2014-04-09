@@ -157,6 +157,7 @@ void hoa_recomposer_deprecated(t_hoa_recomposer* x, t_symbol *s, long ac, t_atom
             x->f_mode = pd_clip_minmax(atom_getlong(argv), 0, 2);
         }
         object_error(x, "%s attribute @mode is deprecated, please use it as an argument.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
 }
 

@@ -143,17 +143,11 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
 
 void hoa_scope_deprecated(t_hoa_scope* x, t_symbol *s, long ac, t_atom* av)
 {
-    t_atom* argv;
-    long argc;
-    
-    atoms_get_attribute(ac, av, gensym("@drawcircle"), &argc, &argv);
-    if((argc && argv) || (s && s == gensym("drawcircle")))
+    if(atoms_has_attribute(ac, av, gensym("@drawcircle")) || (s && s == gensym("drawcircle")))
         object_error(x, "%s attribute @drawcircle is deprecated.", eobj_getclassname(x)->s_name);
-    atoms_get_attribute(ac, av, gensym("@drawangles"), &argc, &argv);
-    if((argc && argv) || (s && s == gensym("drawangles")))
+    if(atoms_has_attribute(ac, av, gensym("@drawangles")) || (s && s == gensym("drawangles")))
         object_error(x, "%s attribute @drawangles is deprecated.", eobj_getclassname(x)->s_name);
-    atoms_get_attribute(ac, av, gensym("@drawcontrib"), &argc, &argv);
-    if((argc && argv) || (s && s == gensym("drawcontrib")))
+    if(atoms_has_attribute(ac, av, gensym("@drawcontrib")) || (s && s == gensym("drawcontrib")))
         object_error(x, "%s attribute @drawcontrib is deprecated.", eobj_getclassname(x)->s_name);
 }
 

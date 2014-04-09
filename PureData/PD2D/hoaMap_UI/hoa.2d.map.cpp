@@ -13,7 +13,6 @@ typedef struct  _hoa_map
 {
 	t_ebox          j_box;
 	t_rect          rect;
-    t_clock*        f_clock;
     
 	t_outlet*		f_out_sources;
     t_outlet*		f_out_groups;
@@ -49,7 +48,6 @@ t_eclass *hoa_map_class;
 
 void *hoa_map_new(t_symbol *s, int argc, t_atom *argv);
 void hoa_map_free(t_hoa_map *x);
-void hoa_map_tick(t_hoa_map *x);
 void hoa_map_getdrawparams(t_hoa_map *x, t_object *patcherview, t_edrawparams *params);
 void hoa_map_oksize(t_hoa_map *x, t_rect *newrect);
 void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s);
@@ -62,19 +60,10 @@ void hoa_map_parameters_groups(t_hoa_map *x, short ac, t_atom *av);
 void hoa_map_parameters_slots(t_hoa_map *x, short ac, t_atom *av);
 void hoa_map_parameters_trajectory(t_hoa_map *x, short ac, t_atom *av);
 
-void hoa_map_source_save(t_hoa_map *x, t_binbuf *d);
-void hoa_map_group_save(t_hoa_map *x, t_binbuf *d);
-void hoa_map_slot_save(t_hoa_map *x, t_binbuf *d);
-void hoa_map_trajectory_save(t_hoa_map *x, t_binbuf *d);
-void hoa_map_save(t_hoa_map *x, t_binbuf *d);
-
 void hoa_map_preset(t_hoa_map *x, t_binbuf *b);
 void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 
 void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
-void hoa_map_write(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
-
-void hoa_map_tick(t_hoa_map *x);
 
 void hoa_map_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
@@ -94,9 +83,7 @@ void draw_rect_selection(t_hoa_map *x,  t_object *view, t_rect *rect);
 void hoa_map_mousedown(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_map_mouseup(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_map_mouseenter(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_map_mousemove(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_map_mouseleave(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_map_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
 long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
@@ -128,21 +115,15 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     
     eclass_addmethod(c, (method) hoa_map_source,           "source",            A_GIMME,   0);
     eclass_addmethod(c, (method) hoa_map_group,            "group",             A_GIMME,   0);
-    eclass_addmethod(c, (method) hoa_map_slot,             "slot",              A_GIMME,   0);
-    eclass_addmethod(c, (method) hoa_map_trajectory,       "trajectory",        A_GIMME,   0);
     eclass_addmethod(c, (method) hoa_map_clear_all,        "clear",             A_CANT ,   0);
     
     eclass_addmethod(c, (method) hoa_map_mousedown,        "mousedown",         A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_mousedrag,        "mousedrag",         A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_mouseup,          "mouseup",           A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mouseenter,       "mouseenter",        A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_mousemove,        "mousemove",         A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_mouseleave,       "mouseleave",        A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_mousewheel,       "mousewheel",        A_CANT,     0);
     eclass_addmethod(c, (method) hoa_map_key,              "key",               A_CANT,     0);
 	eclass_addmethod(c, (method) hoa_map_popup,            "popup",             A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_save,             "save",              A_CANT,     0);
-    eclass_addmethod(c, (method) hoa_map_write,            "write",             A_GIMME,    0);
     eclass_addmethod(c, (method) hoa_map_read,             "read",              A_GIMME,    0);
     
     eclass_addmethod(c, (method) hoa_map_preset,           "preset",            A_CANT,     0);
@@ -151,6 +132,8 @@ extern "C" void setup_hoa0x2e2d0x2emap(void)
     eclass_addmethod(c, (method) hoa_map_deprecated,        "bgcolor2",         A_GIMME,    0);
     eclass_addmethod(c, (method) hoa_map_deprecated,        "bordercolor",      A_GIMME,    0);
     eclass_addmethod(c, (method) hoa_map_deprecated,        "selcolor",         A_GIMME,    0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "slot",             A_GIMME,   0);
+    eclass_addmethod(c, (method) hoa_map_deprecated,        "trajectory",       A_GIMME,   0);
     
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
@@ -196,6 +179,23 @@ void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av)
     t_atom* argv;
     long argc;
 
+    for(int i = 0; i < ac; i++)
+    {
+        if(atom_gettype(av+i) == A_SYM)
+        {
+            if(atom_getsym(av+i) == gensym("trajectory_parameters"))
+                atom_setsym(av+i, hoa_sym_trajectory_parameters);
+            else if(atom_getsym(av+i) == gensym("slots_parameters"))
+                atom_setsym(av+i, hoa_sym_slots_parameters);
+            else if(atom_getsym(av+i) == gensym("sources_parameters"))
+                atom_setsym(av+i, hoa_sym_sources_parameters);
+            else if(atom_getsym(av+i) == gensym("groups_parameters"))
+                atom_setsym(av+i, hoa_sym_groups_parameters);
+            else if(atom_getsym(av+i) == gensym("s_nosymbol"))
+                atom_setsym(av+i, gensym("(null)"));
+        }
+    }
+    
     if(s && s == gensym("bordercolor") && ac && av)
     {
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
@@ -211,13 +211,48 @@ void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av)
     {
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
         object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
     atoms_get_attribute(ac, av, gensym("@bgcolor2"), &argc, &argv);
     if(argc && argv)
+    {
         object_error(x, "%s attribute @bgcolor2 is deprecated.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
+    }
     atoms_get_attribute(ac, av, gensym("@selcolor"), &argc, &argv);
     if(argc && argv)
+    {
         object_error(x, "%s attribute @selcolor is deprecated.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
+    }
+    
+    atoms_get_attribute(ac, av, hoa_sym_trajectory_parameters, &ac, &av);
+    if (av && ac)
+    {
+        hoa_map_parameters_trajectory(x, ac, av);
+        argc = 0;free(argv);argv = NULL;
+    }
+    atoms_get_attribute(ac, av, hoa_sym_slots_parameters, &ac, &av);
+    if (av && ac)
+    {
+        object_error(x, "%s slots are no more saved within the canvas, please use the preset object.", eobj_getclassname(x)->s_name);
+        hoa_map_parameters_slots(x, ac, av);
+        argc = 0;free(argv);argv = NULL;
+    }
+    atoms_get_attribute(argc, argv, hoa_sym_sources_parameters, &ac, &av);
+    if(av && ac)
+    {
+        object_error(x, "%s sources are no more saved within the canvas, please use the preset object.", eobj_getclassname(x)->s_name);
+        hoa_map_parameters_sources(x, ac, av);
+        argc = 0;free(argv);argv = NULL;
+    }
+    atoms_get_attribute(argc, argv, hoa_sym_groups_parameters, &ac, &av);
+    if (av && ac)
+    {
+        object_error(x, "%s groups are no more saved within the canvas, please use the preset object.", eobj_getclassname(x)->s_name);
+        hoa_map_parameters_groups(x, ac, av);
+        argc = 0;free(argv);argv = NULL;
+    }
 }
 
 void hoa_map_syntax_deprecated(int argc, t_atom *argv)
@@ -245,8 +280,6 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
 	t_hoa_map *x =  NULL;
 	t_binbuf *d;
 	long flags;
-	t_atom *av = NULL;
-    long ac = 0;
     
 	if (!(d = binbuf_via_atoms(argc,argv)))
 		return NULL;
@@ -271,50 +304,11 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         x->f_out_sources    = listout(x);
         x->f_out_groups     = listout(x);
         x->f_out_infos      = listout(x);
-       
-        x->f_clock = clock_new(x,(t_method)hoa_map_tick);
-    
+        
         hoa_map_deprecated(x, NULL, argc, argv);
-        hoa_map_syntax_deprecated(argc, argv);
         
         ebox_attrprocess_viabinbuf(x, d);
         
-        atoms_get_attribute(argc, argv, hoa_sym_trajectory_parameters, &ac, &av);
-        if (av && ac)
-        {
-            hoa_map_parameters_trajectory(x, ac, av);
-            ac = 0;
-            free(av);
-            av = NULL;
-        }
-        
-        atoms_get_attribute(argc, argv, hoa_sym_slots_parameters, &ac, &av);
-        if (av && ac)
-        {
-            hoa_map_parameters_slots(x, ac, av);
-            ac = 0;
-            free(av);
-            av = NULL;
-        }
-        
-        atoms_get_attribute(argc, argv, hoa_sym_sources_parameters, &ac, &av);
-        if(av && ac)
-        {
-            hoa_map_parameters_sources(x, ac, av);
-            
-            ac = 0;
-            free(av);
-            av = NULL;
-        }
-        
-        atoms_get_attribute(argc, argv, hoa_sym_groups_parameters, &ac, &av);
-        if (av && ac)
-        {
-            hoa_map_parameters_groups(x, ac, av);
-            ac = 0;
-            free(av);
-            av = NULL;
-        }
         ebox_ready((t_ebox *)x);
     }
     
@@ -334,7 +328,6 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 void hoa_map_free(t_hoa_map *x)
 {
     ebox_free((t_ebox *)x);
-    clock_free(x->f_clock);
     delete x->f_source_manager;
     delete x->f_source_preset;
     delete x->f_source_trajectory;
@@ -413,60 +406,6 @@ void hoa_map_read(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     x->f_read = 0;
 }
 
-void hoa_map_write(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
-{
-    t_binbuf *d;
-    
-    d = binbuf_new();
-    if(!ac || !av || !d || atom_gettype(av) != A_SYM)
-        return;
-    
-    if(atom_getsym(av) == gensym(""))
-    {
-        object_error(x, "hoa.map write failed, write method needs a filename and a path.");
-        return;
-    }
-    
-    if(x->f_write == 1)
-    {
-        hoa_map_slot_save(x, d);
-    }
-    else if(x->f_write == 2)
-    {
-        hoa_map_trajectory_save(x, d);
-    }
-    else
-    {
-        hoa_map_slot_save(x, d);
-        hoa_map_trajectory_save(x, d);
-    }
-    
-    if(!binbuf_getnatom(d))
-    {
-        object_error(x, "hoa.map have nothing to write.");
-        return;
-    }
-    
-    if(binbuf_write(d, atom_getsym(av)->s_name, "", 0))
-    {
-        object_error(x, "%s: write failed", atom_getsym(av)->s_name);
-    }
-    else
-    {
-        if(x->f_write == 1)
-            post("hoa.map : write success slots in %s.", atom_getsym(av)->s_name);
-        else if(x->f_write == 2)
-            post("hoa.map : write success trajectories in %s.", atom_getsym(av)->s_name);
-        else
-            post("hoa.map : write success slots and trajectories in %s.", atom_getsym(av)->s_name);
-    }
-    if (d)
-    {
-        binbuf_free(d);
-    }
-    x->f_write = 0;
-}
-
 void hoa_map_getdrawparams(t_hoa_map *x, t_object *patcherview, t_edrawparams *params)
 {
     params->d_boxfillcolor = x->f_color_bg;
@@ -479,16 +418,6 @@ void hoa_map_oksize(t_hoa_map *x, t_rect *newrect)
 {
     newrect->width = pd_clip_min(newrect->width, 20.);
     newrect->height = pd_clip_min(newrect->height, 20.);
-}
-
-void hoa_map_tick(t_hoa_map *x)
-{
-    if(x->f_index_of_selected_source != -1)
-        x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
-    else if(x->f_index_of_selected_group != -1)
-        x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
-    //x->f_source_trajectory->recordInTrajectory(x->f_source_manager);
-    clock_delay(x->f_clock, 100);
 }
 
 /**********************************************************/
@@ -778,12 +707,6 @@ void hoa_map_trajectory(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 /*                  Preset et Pattr                       */
 /**********************************************************/
 
-void hoa_map_save(t_hoa_map *x, t_binbuf *d)
-{
-    hoa_map_source_save(x, d);
-    hoa_map_group_save(x, d);
-}
-
 t_symbol* format_string(const char *s)
 {
     char desc[MAXPDSTRING];
@@ -810,200 +733,12 @@ t_symbol* format_string(const char *s)
     return gensym(desc);
 }
 
-void hoa_map_source_save(t_hoa_map *x, t_binbuf *d)
-{
-    long i;
-    if(!x->f_source_manager->getNumberOfSources())
-        return;
-    
-    binbuf_addv(d, "s", hoa_sym_sources_parameters);
-    
-    for(i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
-    {
-        if(x->f_source_manager->sourceGetExistence(i))
-        {
-            binbuf_addv(d, "sfff", hoa_sym_source, (float)i,
-                        (float)x->f_source_manager->sourceGetAbscissa(i),
-                        (float)x->f_source_manager->sourceGetOrdinate(i));
-            
-            binbuf_addv(d, "fffff", (float)x->f_source_manager->sourceGetMute(i),
-                        (float)x->f_source_manager->sourceGetColor(i)[0],
-                        (float)x->f_source_manager->sourceGetColor(i)[1],
-                        (float)x->f_source_manager->sourceGetColor(i)[2],
-                        (float)x->f_source_manager->sourceGetColor(i)[3]);
-            
-            if(x->f_source_manager->sourceGetDescription(i).size())
-                binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(i).c_str()));
-            else
-                binbuf_addv(d, "s", gensym("(null)"));
-        }
-    }
-}
-
-void hoa_map_group_save(t_hoa_map *x, t_binbuf *d)
-{
-    long i, j;
-    
-    if(!x->f_source_manager->getNumberOfGroups())
-        return;
-    
-    binbuf_addv(d, "s", hoa_sym_groups_parameters);
-
-    for(i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
-            binbuf_addv(d, "sff", hoa_sym_group, (float)i, (float)numberOfsource);
-          
-            for(j = 0; j < numberOfsource; j++)
-                binbuf_addv(d, "f", (float)x->f_source_manager->groupGetSourceIndex(i, j));
-                            
-            binbuf_addv(d, "fffff", (float)x->f_source_manager->groupGetMute(i),
-                        (float)x->f_source_manager->groupGetColor(i)[0],
-                        (float)x->f_source_manager->groupGetColor(i)[1],
-                        (float)x->f_source_manager->groupGetColor(i)[2],
-                        (float)x->f_source_manager->groupGetColor(i)[3]);
-            
-            if(x->f_source_manager->groupGetDescription(i).size())
-                binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(i).c_str()));
-            else
-                binbuf_addv(d, "s", gensym("(null)"));
-        }
-    }
-}
-
-void hoa_map_slot_save(t_hoa_map *x, t_binbuf *d)
-{
-    SourcesManager* temporySourceManager = new SourcesManager();
-    
-    if(temporySourceManager == NULL || x->f_source_preset->getMaximumIndexOfSlot() < 0)
-        return;
-    
-    binbuf_addv(d, "s", hoa_sym_slots_parameters);
-    for(long j = 0; j <= x->f_source_preset->getMaximumIndexOfSlot(); j++)
-    {
-        if(x->f_source_preset->getSlotExistence(j))
-        {
-            binbuf_addv(d, "sf", hoa_sym_slot, (float)j);
-            x->f_source_preset->recallSlot(temporySourceManager, j);
-            for(long k = 0; k <= temporySourceManager->getMaximumIndexOfSource(); k++)
-            {
-                if(temporySourceManager->sourceGetExistence(k))
-                {
-                    binbuf_addv(d, "sfff", hoa_sym_source, (float)k,
-                                (float)temporySourceManager->sourceGetAbscissa(k),
-                                (float)temporySourceManager->sourceGetOrdinate(k));
-                    
-                    binbuf_addv(d, "fffff", (float)temporySourceManager->sourceGetMute(k),
-                                (float)temporySourceManager->sourceGetColor(k)[0],
-                                (float)temporySourceManager->sourceGetColor(k)[1],
-                                (float)temporySourceManager->sourceGetColor(k)[2],
-                                (float)temporySourceManager->sourceGetColor(k)[3]);
-                    
-                    if(x->f_source_manager->sourceGetDescription(k).size())
-                        binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(k).c_str()));
-                    else
-                        binbuf_addv(d, "s", gensym("(null)"));
-                }
-            }
-            
-            for(long k = 0; k <= temporySourceManager->getMaximumIndexOfGroup(); k++)
-            {
-                 if(temporySourceManager->groupGetExistence(k))
-                 {
-                    long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                    binbuf_addv(d, "sff", hoa_sym_group, (float)k, (float)numberOfsource);
-                    for(long l = 0; l < numberOfsource; l++)
-                        binbuf_addv(d, "f", (float)temporySourceManager->groupGetSourceIndex(k, l));
-                    
-                    binbuf_addv(d, "fffff", (float)temporySourceManager->groupGetMute(k),
-                                (float)temporySourceManager->groupGetColor(k)[0],
-                                (float)temporySourceManager->groupGetColor(k)[1],
-                                (float)temporySourceManager->groupGetColor(k)[2],
-                                (float)temporySourceManager->groupGetColor(k)[3]);
-                     
-                     if(x->f_source_manager->groupGetDescription(k).size())
-                         binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(k).c_str()));
-                     else
-                         binbuf_addv(d, "s", gensym("(null)"));
-                 }
-            }
-        }
-    }
-    
-    delete temporySourceManager;
-}
-
-void hoa_map_trajectory_save(t_hoa_map *x, t_binbuf *d)
-{
-    SourcesManager* temporySourceManager = new SourcesManager();
-    
-    if(temporySourceManager == NULL || x->f_source_trajectory->getMaximumIndexOfSlot() < 0)
-        return;
-    
-    binbuf_addv(d, "s", hoa_sym_trajectory_parameters);
-    
-    for(long j = 0; j <= x->f_source_trajectory->getMaximumIndexOfSlot(); j++)
-    {
-        if(x->f_source_trajectory->getSlotExistence(j))
-        {
-            binbuf_addv(d, "sf", hoa_sym_slot, (float)j);
-            x->f_source_trajectory->recallSlot(temporySourceManager, j);
-            for(long k = 0; k <= temporySourceManager->getMaximumIndexOfSource(); k++)
-            {
-                if(temporySourceManager->sourceGetExistence(k))
-                {
-                    binbuf_addv(d, "sfff", hoa_sym_source, (float)k,
-                                (float)temporySourceManager->sourceGetAbscissa(k),
-                                (float)temporySourceManager->sourceGetOrdinate(k));
-                    
-                    binbuf_addv(d, "fffff", (float)temporySourceManager->sourceGetMute(k),
-                                (float)temporySourceManager->sourceGetColor(k)[0],
-                                (float)temporySourceManager->sourceGetColor(k)[1],
-                                (float)temporySourceManager->sourceGetColor(k)[2],
-                                (float)temporySourceManager->sourceGetColor(k)[3]);
-                    
-                    if(x->f_source_manager->sourceGetDescription(k).size())
-                        binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(k).c_str()));
-                    else
-                        binbuf_addv(d, "s", gensym("(null)"));
-                }
-            }
-            
-            for(long k = 0; k <= temporySourceManager->getMaximumIndexOfGroup(); k++)
-            {
-                if(temporySourceManager->groupGetExistence(k))
-                {
-                    long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                    binbuf_addv(d, "sff", hoa_sym_group, (float)k, (float)numberOfsource);
-                    for(long l = 0; l < numberOfsource; l++)
-                        binbuf_addv(d, "f", (float)temporySourceManager->groupGetSourceIndex(k, l));
-                    
-                    binbuf_addv(d, "fffff", (float)temporySourceManager->groupGetMute(k),
-                                (float)temporySourceManager->groupGetColor(k)[0],
-                                (float)temporySourceManager->groupGetColor(k)[1],
-                                (float)temporySourceManager->groupGetColor(k)[2],
-                                (float)temporySourceManager->groupGetColor(k)[3]);
-                    
-                    if(x->f_source_manager->groupGetDescription(k).size())
-                        binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(k).c_str()));
-                    else
-                        binbuf_addv(d, "s", gensym("(null)"));
-                }
-            }
-        }
-    }
-    delete temporySourceManager;
-}
-
 void hoa_map_parameters_sources(t_hoa_map *x, short ac, t_atom *av)
 {
     int index;
 
     if(ac && av)
     {
-        hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(ac > i+9)
@@ -1044,7 +779,6 @@ void hoa_map_parameters_groups(t_hoa_map *x, short ac, t_atom *av)
 {
     if(ac && av)
     {
-         hoa_map_syntax_deprecated(ac, av);
         for(long i = 0; i < ac; i++)
         {
             if(atom_getsym(av+i) == hoa_sym_group)
@@ -1828,9 +1562,6 @@ void hoa_map_mousedown(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
         x->f_rect_selection.y = pt.y;
         x->f_rect_selection_exist = 1;
     }
-    
-    if(x->f_source_trajectory->getRecording())
-        clock_set(x->f_clock, 20);
 }
 
 void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
@@ -1979,9 +1710,6 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
 
 void hoa_map_mouseup(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    if(x->f_source_trajectory)
-        clock_unset(x->f_clock);
-     
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     
@@ -2039,11 +1767,6 @@ void hoa_map_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modif
 	}
 }
 
-void hoa_map_mouseenter(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    ;
-}
-
 void hoa_map_mousemove(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor;
@@ -2085,11 +1808,6 @@ void hoa_map_mousemove(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-}
-
-void hoa_map_mouseleave(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    ;
 }
 
 long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)

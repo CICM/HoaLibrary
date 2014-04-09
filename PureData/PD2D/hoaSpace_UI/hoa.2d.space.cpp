@@ -149,10 +149,6 @@ void hoa_space_deprecated(t_hoa_space* x, t_symbol *s, long ac, t_atom* av)
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), ac, av);
         object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
     }
-    else if(s && s == gensym("circolor") && ac && av)
-    {
-        object_error(x, "%s attribute @circolor is deprecated.", eobj_getclassname(x)->s_name);
-    }
     else if(s && s == gensym("miccolor") && ac && av)
     {
         object_attr_setvalueof((t_object *)x, gensym("ptcolor"), ac, av);
@@ -169,23 +165,26 @@ void hoa_space_deprecated(t_hoa_space* x, t_symbol *s, long ac, t_atom* av)
     {
         object_attr_setvalueof((t_object *)x, gensym("bdcolor"), argc, argv);
         object_error(x, "%s attribute @bordercolor is deprecated, please use @bdcolor.", eobj_getclassname(x)->s_name);
-    }
-    atoms_get_attribute(ac, av, gensym("@circolor"), &argc, &argv);
-    if(argc && argv)
-    {
-         object_error(x, "%s attribute @circolor is deprecated.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
     atoms_get_attribute(ac, av, gensym("@miccolor"), &argc, &argv);
     if(argc && argv)
     {
         object_attr_setvalueof((t_object *)x, gensym("ptcolor"), argc, argv);
         object_error(x, "%s attribute @miccolor is deprecated, please use @ptcolor.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
     atoms_get_attribute(ac, av, gensym("@harmocolor"), &argc, &argv);
     if(argc && argv)
     {
         object_attr_setvalueof((t_object *)x, gensym("spcolor"), ac, av);
         object_error(x, "%s attribute @harmocolor is deprecated, please use @spcolor.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
+    }
+    
+    if((s && s == gensym("circolor")) || atoms_has_attribute(ac, av, gensym("@circolor")))
+    {
+        object_error(x, "%s attribute @circolor is deprecated.", eobj_getclassname(x)->s_name);
     }
 }
 

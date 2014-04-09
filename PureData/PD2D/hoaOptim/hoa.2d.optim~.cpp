@@ -96,6 +96,7 @@ void hoa_optim_deprecated(t_hoa_optim* x, t_symbol *s, long ac, t_atom* av)
                 x->f_optim->setMode(Hoa2D::Optim::InPhase);
         }
         object_error(x, "%s attribute @mode is deprecated, please use it as an argument.", eobj_getclassname(x)->s_name);
+        argc = 0;free(argv);argv = NULL;
     }
 }
 
