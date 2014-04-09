@@ -75,11 +75,14 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL	(c, "extra", 0, "extra index");
 	CLASS_ATTR_INVISIBLE(c, "extra", 1);
 	CLASS_ATTR_SAVE		(c, "extra", 0);
+    // @description Defines an extra inlet. Extra inlet are added to the "normal" instance inlet and can be used to send messages to all instances.
 	
 	CLASS_ATTR_SYM		(c, "comment", 0, t_hoa_in, comment);
 	CLASS_ATTR_ACCESSORS(c, "comment", 0, hoa_in_setattr_comment);
 	CLASS_ATTR_LABEL	(c, "comment", 0, "Description");
 	CLASS_ATTR_SAVE		(c, "comment", 1);
+    // @description Sets a description to the inlet which will be shown in the assist inlet of the <o>hoa.process~</o> that load this <o>hoa.in</o>.
+    // Only works if the <m>extra</m> parameter is greater than 0.
     
 	class_register(CLASS_BOX, c);
 	hoa_in_class = c;

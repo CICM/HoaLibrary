@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.scope~.cpp
+ @name      hoa.2d.scope~
+ @realname  hoa.2d.scope~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A 2d ambisonic harmonic scope.
+ 
+ @description
+ <o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+ 
+ @discussion
+ <o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+ 
+ @category ambisonics, hoa objects, audio, GUI, MSP
+ 
+ @seealso hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~, hoa.2d.process~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct  _hoa_scope 
@@ -64,6 +86,9 @@ int C74_EXPORT main()
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
     
     hoa_initclass(c, (method)hoa_getinfos);
+	
+	// @method signal @digest Array of circular harmonic signals to be represented.
+	// @description Array of circular harmonic signals to be represented.
 	class_addmethod(c, (method)hoa_scope_dsp64,			"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,		"assist",		A_CANT,	0);
 	class_addmethod(c, (method)hoa_scope_paint,			"paint",		A_CANT,	0);
@@ -83,6 +108,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "order", 1);
 	CLASS_ATTR_DEFAULT              (c, "order", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "order", 1);
+	// @description The ambisonic order of decomposition. Will adapt the number of input accordingly.
     
     CLASS_ATTR_FLOAT                (c, "gain", 0, t_hoa_scope, f_gain);
 	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Behavior");
@@ -91,6 +117,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
 	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
+	// @description The <b>gain</b> factor can be used to offer a better visualisation of low sound fields.
 
 	CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
 	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Behavior");
@@ -99,6 +126,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
 	CLASS_ATTR_DEFAULT              (c, "interval", 0, "100");
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
+	// @description The refresh interval time in milliseconds.
 	
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_scope, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -106,6 +134,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.2d.scope~</o> object
     
     CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_scope, f_color_bd);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
@@ -113,6 +142,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.2d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_scope, f_color_ph);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
@@ -120,6 +150,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positive Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "phcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "phcolor", 0, "1. 0. 0. 1.");
+	// @description Sets the RGBA values for the positive harmonics color of the <o>hoa.2d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_hoa_scope, f_color_nh);
 	CLASS_ATTR_CATEGORY             (c, "nhcolor", 0, "Color");
@@ -127,6 +158,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negative Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "nhcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
+	// @description Sets the RGBA values for the negative harmonics color of the <o>hoa.2d.scope~</o> object
 	
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;

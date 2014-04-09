@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.optim~" module="hoa">
 
 	<digest>
-		An ambisonic signal optimization external
+		A 2d ambisonic signal optimization external.
 	</digest>
 
 	<description>

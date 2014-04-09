@@ -188,7 +188,7 @@ int C74_EXPORT main()
     class_addmethod (c, (method) hoaGain_tometer,             "anything",             A_GIMME, 0);
     
     // @method (mouse) @digest click and drag to set the slider outlet.
-    // @description The <m>bang</m> Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet.
+    // @description Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet. double-click to set the slider value to <m>defvaldb</m>
     
 	class_addmethod (c, (method) hoaGain_getdrawparams,       "getdrawparams",        A_CANT, 0);
     class_addmethod (c, (method) hoaGain_mousedoubleclick,    "mousedoubleclick",     A_CANT, 0);
@@ -209,18 +209,22 @@ int C74_EXPORT main()
 	CLASS_ATTR_ACCESSORS		(c, "interp",(method)NULL,(method)hoaGain_setattr_interp);
     CLASS_ATTR_LABEL			(c, "interp", 0, "Ramp Time (ms)");
     CLASS_ATTR_FILTER_MIN		(c, "interp", 0);
+    // @description Ramp time in milliseconds
 	
 	CLASS_ATTR_CHAR				(c,"relative", 0, t_hoaGain, j_relative);
 	CLASS_ATTR_LABEL			(c,"relative", 0, "Mousing Mode");
 	CLASS_ATTR_ENUMINDEX2		(c, "relative", 0, "Absolute", "Relative");
 	CLASS_ATTR_BASIC			(c, "relative", 0);
+    // @description Mousing can either be <b>absolute</b> or <b>relative</b>
     
     CLASS_ATTR_CHAR				(c,"inputmode", 0, t_hoaGain, f_inputMode);
 	CLASS_ATTR_LABEL			(c,"inputmode", 0, "Input Mode");
 	CLASS_ATTR_ENUMINDEX3		(c, "inputmode", 0, "DeciBels", "Amplitude", "Midi");
+    // @description Input mode can either be in <b>DeciBels</b>, <b>Amplitude</b> or <b>Midi</b>
     
     CLASS_ATTR_DOUBLE			(c, "defvaldb", 0, t_hoaGain, j_defaultValuedB);
     CLASS_ATTR_LABEL			(c, "defvaldb", 0, "Default Value (dB)");
+    // @description Default value in <b>DeciBels</b>, <b>Amplitude</b> or <b>Midi</b>
 	
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
@@ -229,6 +233,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_ENUMINDEX3		(c,"orientation", 0,"Automatic", "Horizontal", "Vertical");
 	CLASS_ATTR_CATEGORY			(c, "orientation", 0, "Appearance");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "orientation", 0, "0");
+    // @description Orientation can either be in <b>Automatic</b>, <b>Horizontal</b> or <b>Vertical</b>
 	
 	CLASS_STICKY_CATEGORY(c, 0, "Color");
     
@@ -238,25 +243,30 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE_LABEL		(c, "bgcolor", 0, "rgba", "Background Color");
 	class_parameter_register_default_color(c, gensym("bgcolor"), ps_control_text_bg);
 	CLASS_ATTR_BASIC			(c, "bgcolor", 0);
+    // @description Sets the RGBA values for the background color of the <o>hoa.gain~</o> object
 	
-	CLASS_ATTR_RGBA_LEGACY		(c,"bordercolor", "rgb2",0, t_hoaGain, j_frgba2);
-	CLASS_ATTR_ALIAS			(c,"bordercolor", "rgba2");
-	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bordercolor",0,"0.2 0.2 0.2 1.");
-	CLASS_ATTR_STYLE_LABEL		(c,"bordercolor",0,"rgba","Border Color");
-	class_parameter_register_default_color(c, gensym("bordercolor"), ps_control_bg);
+	CLASS_ATTR_RGBA_LEGACY		(c,"bdcolor", "rgb2",0, t_hoaGain, j_frgba2);
+	CLASS_ATTR_ALIAS			(c,"bdcolor", "rgba2");
+	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bdcolor",0,"0.2 0.2 0.2 1.");
+	CLASS_ATTR_STYLE_LABEL		(c,"bdcolor",0,"rgba","Border Color");
+	class_parameter_register_default_color(c, gensym("bdcolor"), ps_control_bg);
+    // @description Sets the RGBA values for the border color of the <o>hoa.gain~</o> object
     
     CLASS_ATTR_RGBA				(c, "knobcolor", 0, t_hoaGain, j_knobcolor);
     CLASS_ATTR_STYLE_LABEL      (c, "knobcolor", 0, "rgba","Knob Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "knobcolor", 0, "0.16 0.16 0.16 1");
+    // @description Sets the RGBA values for the knob color of the <o>hoa.gain~</o> object
     
     CLASS_ATTR_RGBA				(c, "intknobcolor", 0, t_hoaGain, j_intknobcolor);
     CLASS_ATTR_STYLE_LABEL      (c, "intknobcolor", 0, "rgba","Interior Knob Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "intknobcolor", 0, "0.9 0.9 0.9 1");
+    // @description Sets the RGBA values for the interior knob color of the <o>hoa.gain~</o> object
 	
 	CLASS_STICKY_CATEGORY_CLEAR(c);
-
+    
 	CLASS_ATTR_INVISIBLE(c, "color", 0);
 	CLASS_ATTR_ATTR_PARSE(c, "color","save", USESYM(long), 0, "0");
+    // @exclude hoa.gain~
 
 	CLASS_ATTR_DEFAULT_SAVE		(c,"relative",0,"0");
     CLASS_ATTR_DEFAULT_SAVE		(c,"defvaldb",0,"0");

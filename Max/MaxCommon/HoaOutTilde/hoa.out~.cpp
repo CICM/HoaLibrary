@@ -73,11 +73,14 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_sig_out, extra);
 	CLASS_ATTR_ACCESSORS(c, "extra", 0, hoa_sig_in_setattr_extra);
 	CLASS_ATTR_LABEL	(c, "extra", 0, "extra index");
-	
+	// @description Defines an extra outlet. Extra outlet are added to the "normal" instance outlet and can be used to receive signal from all instances.
+    
 	CLASS_ATTR_SYM		(c, "comment", 0, t_hoa_sig_out, comment);
 	CLASS_ATTR_ACCESSORS(c, "comment", 0, hoa_sig_in_setattr_comment);
 	CLASS_ATTR_LABEL	(c, "comment", 0, "Description");
 	CLASS_ATTR_SAVE		(c, "comment", 1);
+    // @description Sets a description to the outlet which will be shown in the assist outlet of the <o>hoa.process~</o> that load this <o>hoa.out~</o>.
+    // Only works if the <m>extra</m> parameter is greater than 0.
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);

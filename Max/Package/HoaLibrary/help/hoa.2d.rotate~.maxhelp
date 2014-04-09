@@ -576,7 +576,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.2d.rotate~", "@obj-desc", "An", "ambisonic", "sound", "field", "rotation", "external" ],
+									"args" : [ "@obj-name", "hoa.2d.rotate~", "@obj-desc", "An ambisonic sound field rotation external" ],
 									"id" : "obj-15",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -829,7 +829,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-8", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1029,7 +1029,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-1", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1213,7 +1213,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-1", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,

@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 8.0, 50.0, 1074.0, 696.0 ],
+		"rect" : [ 100.0, 100.0, 1074.0, 696.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 8.0, 76.0, 1074.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1074.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,21 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"attr" : "channeltextcolor",
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-14",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.75, 518.0, 212.0, 20.0 ],
+									"text_width" : 140.0
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -116,9 +131,10 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "list" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 216.5, 168.0, 368.0, 368.0 ],
+									"patching_rect" : [ 292.5, 187.0, 368.0, 368.0 ],
 									"rectselectcolor" : [ 0.386326, 0.519675, 0.8, 1.0 ],
-									"selchacolor" : [ 0.849944, 0.722178, 0.0, 1.0 ]
+									"selchacolor" : [ 0.849944, 0.722178, 0.0, 1.0 ],
+									"selchannelshapecolor" : [ 0.967048, 0.804247, 0.0, 0.7 ]
 								}
 
 							}
@@ -189,13 +205,14 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 305.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 299.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "channeltextcolor",
+									"attr" : "selchannelshapecolor",
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-3",
@@ -203,7 +220,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 334.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 328.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -217,7 +235,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 367.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 361.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -231,7 +250,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 400.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 394.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -245,7 +265,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 210.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 204.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -259,7 +280,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 241.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 235.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -273,7 +295,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 275.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 269.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -287,7 +310,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 431.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 425.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -301,7 +325,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 461.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 455.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -315,7 +340,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 32.75, 491.0, 150.0, 20.0 ]
+									"patching_rect" : [ 50.75, 485.0, 212.0, 20.0 ],
+									"text_width" : 140.0
 								}
 
 							}
@@ -325,7 +351,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 486.0, 194.125, 486.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 480.0, 272.125, 480.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-10", 0 ]
 								}
 
@@ -335,7 +361,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 516.0, 194.125, 516.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 510.0, 272.125, 510.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -345,7 +371,17 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 330.0, 194.125, 330.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 547.0, 272.125, 547.0, 272.125, 152.0, 302.0, 152.0 ],
+									"source" : [ "obj-14", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-18", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 60.25, 324.0, 272.125, 324.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
@@ -355,7 +391,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 360.0, 194.125, 360.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 354.0, 272.125, 354.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-3", 0 ]
 								}
 
@@ -365,7 +401,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 392.0, 194.125, 392.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 386.0, 272.125, 386.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-4", 0 ]
 								}
 
@@ -375,7 +411,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 425.0, 194.125, 425.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 419.0, 272.125, 419.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -385,7 +421,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 235.0, 194.125, 235.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 229.0, 272.125, 229.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -395,7 +431,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 267.0, 194.125, 267.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 261.0, 272.125, 261.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -405,7 +441,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 300.0, 194.125, 300.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 294.0, 272.125, 294.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -415,7 +451,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 42.25, 456.0, 194.125, 456.0, 194.125, 158.0, 226.0, 158.0 ],
+									"midpoints" : [ 60.25, 450.0, 272.125, 450.0, 272.125, 152.0, 302.0, 152.0 ],
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -556,7 +592,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 722.5, 366.5, 293.0, 114.0 ],
-									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected channels (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected channels (drag from/to ficheye point from/to center of the circle) (alt+drag for win)",
+									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected channels (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected channels (drag from/to fisheye point from/to center of the circle) (alt+drag for win)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
 
@@ -2145,7 +2181,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1074.0, 670.0 ],
+						"rect" : [ 100.0, 126.0, 1074.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2233,8 +2269,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 411.0, 119.0, 37.0, 18.0 ],
-									"text" : "reset"
+									"patching_rect" : [ 411.0, 119.0, 65.0, 18.0 ],
+									"text" : "reset wide"
 								}
 
 							}
@@ -6603,7 +6639,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 515.285767, 119.0, 99.0, 19.0 ],
+									"patching_rect" : [ 515.285767, 119.0, 74.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
 										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
@@ -8320,7 +8356,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u200005687"
+									"varname" : "u934000660"
 								}
 
 							}
@@ -8496,6 +8532,186 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-53",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 573.0, 264.0, 33.0 ],
+									"text" : "Press cmd key when you drag to activate magnetism on the currently dragged channel",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-51",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 526.0, 264.0, 33.0 ],
+									"text" : "double-click on a channel to set it to the closest default channel angle.",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-45",
+									"linecount" : 8,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 382.5, 293.0, 114.0 ],
+									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected channels (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected channels (drag from/to fisheye point from/to center of the circle) (alt+drag for win)",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-20",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 232.0, 228.0, 47.0 ],
+									"text" : "Change channel widening value :\n - shift+drag : change selected channels' widening value",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-12",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 184.0, 265.5, 33.0 ],
+									"text" : "Move channels :\n - drag : Move selected channels angles",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-18",
+									"linecount" : 5,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 294.0, 285.0, 74.0 ],
+									"text" : "Select channels :\n - cmd+a : select All (ctrl+a for win)\n - cmd+drag : rect selection (ctrl+drag for win)\n - cmd+click on a channel to change this channel selection state (ctrl+click for win)",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-6",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 184.0, 297.0, 35.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-7",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 232.0, 295.0, 48.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-5",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 294.0, 295.0, 76.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-16",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 382.5, 293.0, 114.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-22",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 526.0, 293.0, 35.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-23",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 724.5, 573.0, 293.0, 35.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -11809,158 +12025,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-23",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-22",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-53",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 572.0, 264.0, 33.0 ],
-									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-51",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 525.0, 264.0, 33.0 ],
-									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-45",
-									"linecount" : 9,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 381.5, 274.0, 127.0 ],
-									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected mics (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle) (alt+drag for win)",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-20",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 246.0, 268.0, 33.0 ],
-									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-12",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 198.0, 265.5, 33.0 ],
-									"text" : "Move Microphones :\n - drag : Move selected mics angles",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-18",
-									"linecount" : 5,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 293.0, 266.0, 74.0 ],
-									"text" : "Select Microphones :\n - cmd+a : select All (ctrl+a for win)\n - cmd+drag : rect selection (ctrl+drag for win)\n - cmd+click on a mic to change this mic selection state (ctrl+click for win)",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-6",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 198.0, 268.0, 34.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-7",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-8",
@@ -12207,34 +12271,6 @@
 									"patching_rect" : [ 7.0, 398.5, 329.0, 19.0 ],
 									"text" : "hoa.2d.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-5",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-16",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 381.5, 264.0, 131.0 ],
-									"rounded" : 6,
-									"shadow" : -1
 								}
 
 							}

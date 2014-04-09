@@ -70,7 +70,7 @@
 				click and drag to set the slider outlet.
 			</digest>
 			<description>
-				The <m>bang</m> Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet.
+				Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet. double-click to set the slider value to <m>defvaldb</m>
 			</description>
 		</method>
 		<method name="bang">
@@ -133,27 +133,29 @@
 
 	<!--ATTRIBUTES-->
 	<attributelist>
+		<attribute name="bdcolor" get="1" set="1" type="" size="1">
+			<digest>
+				Border Color
+			</digest>
+			<description>
+				Sets the RGBA values for the border color of the <o>hoa.gain~</o> object
+			</description>
+			<attributelist>
+				<attribute name="default" get="1" set="1" type="" size="1" value="0.2 0.2 0.2 1." />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Border Color" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
+			</attributelist>
+		</attribute>
 		<attribute name="bgcolor" get="1" set="1" type="" size="1">
 			<digest>
 				Background Color
 			</digest>
 			<description>
+				Sets the RGBA values for the background color of the <o>hoa.gain~</o> object
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="" size="1" value="0.35 0.35 0.35 1." />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Background Color" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
-			</attributelist>
-		</attribute>
-		<attribute name="bordercolor" get="1" set="1" type="" size="1">
-			<digest>
-				Border Color
-			</digest>
-			<description>
-			</description>
-			<attributelist>
-				<attribute name="default" get="1" set="1" type="" size="1" value="0.2 0.2 0.2 1." />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Border Color" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
@@ -175,6 +177,7 @@
 				Default Value (dB)
 			</digest>
 			<description>
+				Default value in <b>DeciBels</b>, <b>Amplitude</b> or <b>Midi</b>
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="float" size="1" value="0" />
@@ -199,6 +202,7 @@
 				Input Mode
 			</digest>
 			<description>
+				Input mode can either be in <b>DeciBels</b>, <b>Amplitude</b> or <b>Midi</b>
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="int" size="1" value="0" />
@@ -212,6 +216,7 @@
 				Ramp Time (ms)
 			</digest>
 			<description>
+				Ramp time in milliseconds
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="float" size="1" value="20" />
@@ -225,6 +230,7 @@
 				Interior Knob Color
 			</digest>
 			<description>
+				Sets the RGBA values for the interior knob color of the <o>hoa.gain~</o> object
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="" size="1" value="0.9 0.9 0.9 1" />
@@ -239,6 +245,7 @@
 				Knob Background Color
 			</digest>
 			<description>
+				Sets the RGBA values for the knob color of the <o>hoa.gain~</o> object
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="" size="1" value="0.16 0.16 0.16 1" />
@@ -275,6 +282,7 @@
 				Orientation
 			</digest>
 			<description>
+				Orientation can either be in <b>Automatic</b>, <b>Horizontal</b> or <b>Vertical</b>
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Appearance" />
@@ -314,6 +322,7 @@
 				Mousing Mode
 			</digest>
 			<description>
+				Mousing can either be <b>absolute</b> or <b>relative</b>
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="int" size="1" value="0" />

@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonic signal optimization external
+ A 2d ambisonic signal optimization external.
  
  @description
  <o>hoa.2d.optim~</o> weights the circular harmonics signals depending on the ambisonic optimization. It can be <b>basic</b> for no optimization, <b>maxRe</b> or <b>inPhase</b>.

@@ -32,10 +32,10 @@
 		<method name="(mouse)">
 			<arglist />
 			<digest>
-				Click and drag the sources to set their position. Right-click to make appear contextual setting menu, use the mouse-weel to zoom. Movement can be restricted to the azimuth if you press alt key while you are dragging a source or a group, or restricted to the radius if
+				Change sources or group position, set zoom factor.
 			</digest>
 			<description>
-				The <m>clear</m> message remove all sources and groups.
+				Click and drag the sources to set their position. Right-click to make appear contextual setting menu, use the mouse-weel to zoom. Movement can be restricted to the azimuth if you press <b>alt</b> key while you are dragging a source or a group, or restricted to the radius with <b>shift</b> key. Press <b>cmd+a</b> to create a group containing all existing sources.
 			</description>
 		</method>
 		<method name="bang">

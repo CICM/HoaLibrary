@@ -4,6 +4,28 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+/**
+ @file      hoa.2d.space.cpp
+ @name      hoa.2d.space
+ @realname  hoa.2d.space
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A graphic user interface to design 2d ambisonic space
+ 
+ @description
+ <o>hoa.2d.space</o> is a circular array of slider allowing you to draw and set channel dependant coefficients that can transform your ambisonic soundfields mainly in the plane wave domain.
+ 
+ @discussion
+ <o>hoa.2d.space</o> is a circular array of slider allowing you to draw and set channel dependant coefficients that can transform your ambisonic soundfields mainly in the plane wave domain.
+ 
+ @category ambisonics, hoa objects, GUI
+ 
+ @seealso  hoa.2d.process~, hoa.amp~, hoa.delay~, hoa.gain~, hoa.2d.recomposer, hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~
+ */
+
 #include "../Hoa2D.max.h"
 
 typedef struct  _hoa_space
@@ -65,7 +87,6 @@ int C74_EXPORT main()
 	t_class *c;
     
 	c = class_new("hoa.2d.space", (method)hoa_space_new, (method)hoa_space_free, (short)sizeof(t_hoa_space), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.space"));
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
@@ -74,7 +95,20 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)hoa_space_assist,          "assist",         A_CANT,	0);
 	class_addmethod(c, (method)hoa_space_paint,           "paint",          A_CANT,	0);
 	class_addmethod(c, (method)hoa_space_notify,          "notify",         A_CANT, 0);
+	
+	// @method bang @digest Output current values.
+	// @description The <m>bang</m> message report current values.
     class_addmethod(c, (method)hoa_space_output,          "bang",           A_CANT, 0);
+	
+	// @method list @digest set slider values.
+	// @description Sets slider values with a <m>list</m>.
+	// Set all the coefficients with a list of float. Set one coefficient with an index and a float.
+	class_addmethod(c, (method)hoa_space_list,            "list",           A_GIMME, 0);
+	
+	// @method (mouse) @digest Click and drag to change slider values.
+	// @description Click and drag the sliders to set their value.
+	// Press <b>ctrl</b> key while you drag to make a rotation of the slider values.
+	// Press <b>shift</b> key while you drag to relatively increase or decrease all of the slider values.
 	class_addmethod(c, (method)hoa_space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_mouse_down,      "mousedown",      A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_move,      "mousemove",      A_CANT, 0);
@@ -83,11 +117,13 @@ int C74_EXPORT main()
     class_addmethod(c, (method)hoa_space_preset,          "preset",         0);
     class_addmethod(c, (method)hoa_space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_list,            "list",           A_GIMME, 0);
     
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
+	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
+	// @exclude hoa.2d.map
 	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	// @exclude hoa.2d.map
     
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_channels);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Planewaves");
@@ -96,6 +132,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
     CLASS_ATTR_SAVE                 (c, "channels", 1);
+	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_space, f_minmax, 2);
 	CLASS_ATTR_CATEGORY             (c, "minmax",   0, "Behavior");
@@ -104,6 +141,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER                (c, "minmax",   0, "1");
     CLASS_ATTR_DEFAULT              (c, "minmax",   0, "0. 1.");
     CLASS_ATTR_SAVE                 (c, "minmax",   1);
+	// @description The minimum and maximum values that the sliders can reach.
     
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -111,6 +149,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.2d.space</o> object
     
     CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_space, f_color_bd);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
@@ -118,6 +157,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "spcolor", 0, t_hoa_space, f_color_sp);
 	CLASS_ATTR_CATEGORY				(c, "spcolor", 0, "Color");
@@ -125,13 +165,15 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL				(c, "spcolor", 0, "Space Color");
     CLASS_ATTR_ORDER                (c, "spcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "spcolor", 0, "0. 0. 1. 0.25");
+	// @description Sets the RGBA values for the space color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "ptcolor", 0, t_hoa_space, f_color_pt);
 	CLASS_ATTR_CATEGORY				(c, "ptcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "ptcolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "ptcolor", 0, "Virtuals Microphones Color");
+	CLASS_ATTR_LABEL				(c, "ptcolor", 0, "Channel point Color");
     CLASS_ATTR_ORDER                (c, "ptcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "ptcolor", 0, "0. 0. 0. 1.");
+	// @description Sets the RGBA values for the channel point color of the <o>hoa.2d.space</o> object
 	
 	class_register(CLASS_BOX, c);
 	hoa_space_class = c;
