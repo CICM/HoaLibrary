@@ -37,6 +37,9 @@ private:
     std::vector<Label*>		m_channels_azimuth_values;
     std::vector<Label*>		m_channels_azimuth_labels;
     
+    Label*                  m_pinna_label;
+    ComboBox*               m_pinna_value;
+    
 public:
     HoaSettingsComponent(HoaComponentListener* master, HoaToolsAudioProcessor* processor);
     ~HoaSettingsComponent();
