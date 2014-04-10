@@ -476,11 +476,70 @@ void hoa_map_preset(t_hoamap *x)
 
 t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
 {
+	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_source_preset_data_"))
+	{
+		object_method(x, hoa_sym_source, NULL, ac, av);
+	}
 	return MAX_ERR_NONE;
 }
 
 t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 {
+	if(ac && av)
+    {
+		int limit = 0;
+		int exist;
+		double *color;
+		if(*ac && *av)
+        {
+			limit = *ac;
+            if(limit > MAX_NUMBER_OF_SOURCES * 11 + 1)
+                limit = MAX_NUMBER_OF_SOURCES * 11 + 1;
+		}
+		else
+        {
+			limit = *ac = MAX_NUMBER_OF_SOURCES * 11 + 1;
+			*av = (t_atom *)getbytes(*ac * sizeof(t_atom));
+        }
+		
+		t_atom *avptr = *av;
+		
+		atom_setsym(avptr++, gensym("_source_preset_data_"));
+		
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+		{
+			atom_setsym(avptr++, hoa_sym_source);
+			atom_setlong(avptr++, i);
+			exist = x->f_source_manager->sourceGetExistence(i);
+			atom_setlong(avptr++, exist);
+			
+			if(exist)
+			{
+				color = x->f_source_manager->sourceGetColor(i);
+				
+				atom_setfloat(avptr++, x->f_source_manager->sourceGetAbscissa(i));
+				atom_setfloat(avptr++, x->f_source_manager->sourceGetOrdinate(i));
+				atom_setlong(avptr++, x->f_source_manager->sourceGetMute(i));
+				atom_setfloat(avptr++, color[0]);
+				atom_setfloat(avptr++, color[1]);
+				atom_setfloat(avptr++, color[2]);
+				atom_setfloat(avptr++, color[3]);
+				atom_setsym(avptr++, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+			}
+			else
+			{
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setlong (avptr++, 0 );
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 1.);
+				atom_setsym(avptr++, hoa_sym_nothing);
+			}
+		}
+    }
+	
 	return MAX_ERR_NONE;
 }
 
@@ -1120,6 +1179,7 @@ void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 void hoamap_source_save(t_hoamap *x, t_dictionary *d)
 {
     t_atom *av;
+	double *color;
     long ac = x->f_source_manager->getNumberOfSources()*10;
     av = new t_atom[ac];
     if(av && ac)
@@ -1128,7 +1188,7 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-				double *color = x->f_source_manager->sourceGetColor(i);
+				color = x->f_source_manager->sourceGetColor(i);
                 atom_setsym(av+j, hoa_sym_source);
                 atom_setlong(av+j+1, i);
                 atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
