@@ -552,6 +552,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 28.0, 343.0, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, 1.157928, 0.681134, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -1.997993, 1.770948, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "john",
@@ -1679,6 +1680,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 22.0, 313.5, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, -0.712241, 1.711078, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.693815, 1.687105, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.75134, 0.335131, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.689772, 0.265885, 1, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.2d.map",
@@ -2100,7 +2102,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
+						"rect" : [ 100.0, 126.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2701,7 +2703,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 486.333344, 404.0, 75.0, 33.0 ],
-									"text" : "Indexes of groups",
+									"text" : "Index of groups",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[7]"
 								}
@@ -3096,6 +3098,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"outputmode" : 1,
+									"parameter_enable" : 0,
 									"patching_rect" : [ 15.0, 194.0, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, 1.485714, -1.047619, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -1.466667, -0.971429, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.0, 2.019048, 0, 0.2, 0.2, 0.2, 1.0, "" ]
 								}
@@ -4543,9 +4546,10 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 28.0, 313.0, 300.0, 300.0 ],
 									"slots_parameters" : [ "slot", 0, "source", 0, -1.514286, 1.438095, 0, 0.0, 0.351373, 0.651373, 1.0, "", "source", 1, 1.704762, 1.228571, 0, 0.2, 0.2, 0.2, 1.0, "Do", "source", 2, -0.361905, -1.885714, 0, 0.2, 0.2, 0.2, 1.0, "", "group", 0, 2, 0, 1, 0, 0.2, 0.2, 0.2, 1.0, "", "slot", 1, "source", 0, -1.590476, -1.780952, 0, 0.0, 0.351373, 0.651373, 1.0, "", "source", 1, 1.628572, -1.990476, 0, 0.2, 0.2, 0.2, 1.0, "Do", "source", 2, 0.171429, 1.580952, 0, 0.2, 0.2, 0.2, 1.0, "", "group", 0, 2, 0, 1, 0, 0.2, 0.2, 0.2, 1.0, "" ],
-									"sources_parameters" : [ "source", 0, -1.590476, -1.780952, 0, 0.0, 0.351373, 0.651373, 1.0, "", "source", 1, 1.628572, -1.990476, 0, 0.2, 0.2, 0.2, 1.0, "Do", "source", 2, 0.171429, 1.580952, 0, 0.2, 0.2, 0.2, 1.0, "" ]
+									"sources_parameters" : [ "source", 0, -1.585143, -1.555619, 0, 0.0, 0.351373, 0.651373, 1.0, "", "source", 1, 1.633905, -1.765143, 0, 0.2, 0.2, 0.2, 1.0, "Do", "source", 2, 0.134096, 1.338285, 0, 0.2, 0.2, 0.2, 1.0, "" ]
 								}
 
 							}
@@ -4992,7 +4996,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1001.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5739,6 +5743,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 22.0, 315.5, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, 0.717356, 0.696707, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -1.426667, 1.14, 0, 0.2, 0.2, 0.2, 1.0, "Jimi hendrix ", "source", 2, 0.773333, -1.166667, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -1.146667, -0.713333, 0, 1.0, 1.0, 1.0, 1.0, "" ],
 									"varname" : "hoa.2d.map",
@@ -6436,6 +6441,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 75.0, 301.625, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, -0.92317, -0.389659, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.997143, 0.055602, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.566744, 1.018177, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.594784, -0.907274, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.2d.map",
