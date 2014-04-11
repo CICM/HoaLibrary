@@ -28,6 +28,8 @@
 
 #include "../Hoa2D.max.h"
 
+#define MAX_NUMBER_OF_SOURCES 64
+
 class PolarLines
 {
     
@@ -151,8 +153,8 @@ int C74_EXPORT main(void)
 	// marg 1 @name input-mode/mute @optional 0 @type symbol
 	// marg 2 @name coord-1/mute-state @optional 0 @type float/int
 	// marg 3 @name coord-2 @optional 0 @type float
-    class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
-	class_addmethod(c, (method)hoa_map_assist,      "assist",	A_CANT, 0);
+    class_addmethod(c, (method)hoa_map_list,        "list",				A_GIMME, 0);
+	class_addmethod(c, (method)hoa_map_assist,      "assist",			A_CANT, 0);
     
     CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");

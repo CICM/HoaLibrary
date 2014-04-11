@@ -30,6 +30,7 @@
 
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
+#define MAX_NUMBER_OF_SOURCES 64
 
 typedef struct _textfield {
 	t_jbox			j_box;
@@ -149,6 +150,10 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
 
 t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos);
 
+void hoa_map_preset(t_hoamap *x);
+t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av);
+t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av);
+
 int C74_EXPORT main()
 {
     hoa_textfield_init();
@@ -213,6 +218,9 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_key,              "key",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_map_preset,      "preset",			0);
+    class_addmethod(c, (method)hoa_map_getvalueof,  "getvalueof",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_map_setvalueof,  "setvalueof",		A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	// @exclude hoa.2d.map
@@ -345,6 +353,194 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_ready(&x->j_box);
 	return (x);
+}
+
+void hoa_map_preset(t_hoamap *x)
+{
+	void* z;
+	long ac = 0;
+    t_atom *av;
+	double* color;
+	bool exist;
+	
+    if(!(z = gensym("_preset")->s_thing))
+        return;
+	
+	if(!x->f_source_manager->getExistence())
+		return;
+	
+	// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description, .. source / index ...
+	
+	ac = MAX_NUMBER_OF_SOURCES * 11 + 4;
+	av = (t_atom *)getbytes(ac * sizeof(t_atom));
+	
+	t_atom *avptr = av;
+	
+	atom_setobj(avptr++, x);
+    atom_setsym(avptr++, object_classname(x));
+	atom_setsym(avptr++, hoa_sym_source);
+	
+	atom_setsym(avptr++, gensym("_source_preset_data_"));
+	
+	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+	{
+		atom_setsym(avptr++, hoa_sym_source);
+		atom_setlong(avptr++, i);
+		exist = x->f_source_manager->sourceGetExistence(i);
+		atom_setlong(avptr++, exist);
+		
+		if(exist)
+		{
+			color = x->f_source_manager->sourceGetColor(i);
+			
+			atom_setfloat(avptr++, x->f_source_manager->sourceGetAbscissa(i));
+			atom_setfloat(avptr++, x->f_source_manager->sourceGetOrdinate(i));
+			atom_setlong(avptr++, x->f_source_manager->sourceGetMute(i));
+			atom_setfloat(avptr++, color[0]);
+			atom_setfloat(avptr++, color[1]);
+			atom_setfloat(avptr++, color[2]);
+			atom_setfloat(avptr++, color[3]);
+			atom_setsym(avptr++, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+		}
+		else
+		{
+			atom_setfloat(avptr++, 0.);
+			atom_setfloat(avptr++, 0.);
+			atom_setlong (avptr++, 0 );
+			atom_setfloat(avptr++, 0.);
+			atom_setfloat(avptr++, 0.);
+			atom_setfloat(avptr++, 0.);
+			atom_setfloat(avptr++, 1.);
+			atom_setsym(avptr++, hoa_sym_nothing);
+		}
+	}
+	
+	binbuf_insert(z, NULL, ac, av);
+	freebytes(av, ac * sizeof(t_atom));
+	
+	
+	// set group
+	
+	// group / index / exist / numberOfSource / srcIndex1, srcIndex2... / r / g / b / a / description, .. groupe / index ...
+
+	ac = MAX_NUMBER_OF_SOURCES * MAX_NUMBER_OF_SOURCES * 4 + 4;
+	av = (t_atom *)getbytes(ac * sizeof(t_atom));
+	
+	int av_counter = 0;
+	int number_of_sources = 0;
+	avptr = av;
+	
+	atom_setobj(avptr++, x);
+    atom_setsym(avptr++, object_classname(x));
+	atom_setsym(avptr++, hoa_sym_group);
+	
+	atom_setsym(avptr++, gensym("_group_preset_data_"));
+	av_counter = 1;
+	
+	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+	{
+		atom_setsym(avptr++, hoa_sym_group);
+		atom_setlong(avptr++, i);
+		exist = x->f_source_manager->groupGetExistence(i);
+		atom_setlong(avptr++, exist);
+		
+		av_counter += 3;
+		
+		if(exist)
+		{
+			number_of_sources = x->f_source_manager->groupGetNumberOfSources(i);
+			atom_setlong(avptr++, number_of_sources);
+			av_counter++;
+			
+			for(long j = 0; j < number_of_sources; j++)
+			{
+				atom_setlong(avptr++, x->f_source_manager->groupGetSourceIndex(i, j));
+				av_counter++;
+			}
+			
+			color = x->f_source_manager->groupGetColor(i);
+			atom_setfloat(avptr++, color[0]);
+			atom_setfloat(avptr++, color[1]);
+			atom_setfloat(avptr++, color[2]);
+			atom_setfloat(avptr++, color[3]);
+			av_counter += 4;
+			
+			atom_setsym(avptr++, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+			av_counter++;
+		}
+	}
+	
+	binbuf_insert(z, NULL, av_counter, av);
+	freebytes(av, ac * sizeof(t_atom));
+}
+
+t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
+{
+	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_source_preset_data_"))
+	{
+		object_method(x, hoa_sym_source, NULL, ac, av);
+	}
+	return MAX_ERR_NONE;
+}
+
+t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
+{
+	if(ac && av)
+    {
+		int limit = 0;
+		int exist;
+		double *color;
+		if(*ac && *av)
+        {
+			limit = *ac;
+            if(limit > MAX_NUMBER_OF_SOURCES * 11 + 1)
+                limit = MAX_NUMBER_OF_SOURCES * 11 + 1;
+		}
+		else
+        {
+			limit = *ac = MAX_NUMBER_OF_SOURCES * 11 + 1;
+			*av = (t_atom *)getbytes(*ac * sizeof(t_atom));
+        }
+		
+		t_atom *avptr = *av;
+		
+		atom_setsym(avptr++, gensym("_source_preset_data_"));
+		
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+		{
+			atom_setsym(avptr++, hoa_sym_source);
+			atom_setlong(avptr++, i);
+			exist = x->f_source_manager->sourceGetExistence(i);
+			atom_setlong(avptr++, exist);
+			
+			if(exist)
+			{
+				color = x->f_source_manager->sourceGetColor(i);
+				
+				atom_setfloat(avptr++, x->f_source_manager->sourceGetAbscissa(i));
+				atom_setfloat(avptr++, x->f_source_manager->sourceGetOrdinate(i));
+				atom_setlong(avptr++, x->f_source_manager->sourceGetMute(i));
+				atom_setfloat(avptr++, color[0]);
+				atom_setfloat(avptr++, color[1]);
+				atom_setfloat(avptr++, color[2]);
+				atom_setfloat(avptr++, color[3]);
+				atom_setsym(avptr++, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+			}
+			else
+			{
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setlong (avptr++, 0 );
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 0.);
+				atom_setfloat(avptr++, 1.);
+				atom_setsym(avptr++, hoa_sym_nothing);
+			}
+		}
+    }
+	
+	return MAX_ERR_NONE;
 }
 
 t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos)
@@ -556,20 +752,85 @@ void hoamap_clear_all(t_hoamap *x)
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac && av && atom_gettype(av)==A_LONG && atom_getlong(av)>=0 && atom_gettype(av+1) == A_SYM)
+	int index;
+	int exist;
+	
+	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_source_preset_data_"))
+	{
+		av++; ac--;
+		
+		// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description
+		
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES*11; i += 11)
+		{
+			if(i < ac && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
+			{
+				index = atom_getlong(av+i+1);
+				exist = atom_getlong(av+i+2);
+				
+				if(exist)
+				{
+					x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
+					x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
+					x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
+					x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i+10)->s_name);
+				}
+				else if (!exist && x->f_source_manager->sourceGetExistence(index))
+				{
+					x->f_source_manager->sourceRemove(index);
+					t_atom out_av[3];
+					atom_setlong(out_av, index);
+					atom_setsym(out_av+1, hoa_sym_mute);
+					atom_setlong(out_av+2, 1);
+					outlet_list(x->f_out_sources, 0L, 3, out_av);
+				}
+			}
+		}
+		
+		object_notify(x, hoa_sym_modified, NULL);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
+		hoamap_bang(x);
+		/*
+		 post("receive preset sym = %s", s->s_name);
+		 for (int i = 0; i<ac; i++)
+		 postatom(av+i);
+		 */
+	}
+	
+    else if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
         if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
-            x->f_source_manager->sourceSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+		{
+			x->f_source_manager->sourceSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_radius)
-            x->f_source_manager->sourceSetRadius(atom_getlong(av), atom_getfloat(av+2));
+		{
+			x->f_source_manager->sourceSetRadius(atom_getlong(av), atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_angle)
-            x->f_source_manager->sourceSetAzimuth(atom_getlong(av), atom_getfloat(av+2));
+		{
+			x->f_source_manager->sourceSetAzimuth(atom_getlong(av), atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
-            x->f_source_manager->sourceSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+		{
+			x->f_source_manager->sourceSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_abscissa)
-            x->f_source_manager->sourceSetAbscissa(atom_getlong(av), atom_getfloat(av+2));
+		{
+			x->f_source_manager->sourceSetAbscissa(atom_getlong(av), atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_ordinate)
+		{
             x->f_source_manager->sourceSetOrdinate(atom_getlong(av), atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_remove)
         {
             x->f_source_manager->sourceRemove(atom_getlong(av));
@@ -578,9 +839,13 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_sources, 0L, 3, av);
+			hoamap_bang(x);
         }
         else if(atom_getsym(av+1) == hoa_sym_mute)
-            x->f_source_manager->sourceSetMute(atom_getlong(av), atom_getlong(av+2));
+		{
+			x->f_source_manager->sourceSetMute(atom_getlong(av), atom_getlong(av+2));
+			hoamap_bang(x);
+		}
         else if(atom_getsym(av+1) == hoa_sym_description)
         {
             char description[250];
@@ -618,51 +883,125 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             }
             x->f_source_manager->sourceSetDescription(atom_getlong(av), description);
         }
-        else if(atom_getsym(av+1) == hoa_sym_color)
+        else if(atom_getsym(av+1) == hoa_sym_color && ac >= 5)
         {
             x->f_source_manager->sourceSetColor(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
         }
-        
+		
+		object_notify(x, hoa_sym_modified, NULL);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
     }
-    object_notify(x, hoa_sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-    jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
 }
 
 void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(ac > 1 && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
+	int index;
+	int exist;
+	
+	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_group_preset_data_"))
+	{
+		av++; ac--;
+		
+		// group / index / exist / numberOfSource / srcIndex1, srcIndex2... / r / g / b / a / description, .. groupe / index ...
+		
+		int i = 0;
+		int numberOfSource = 0;
+		
+		for ( i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+			x->f_source_manager->groupRemove(i);
+		
+		i = 0;
+		while (i < ac)
+		{
+			if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_group)
+			{
+				i++;
+				index = atom_getlong(av+i++);
+				exist = atom_getlong(av+i++);
+				
+				if(exist)
+				{
+					numberOfSource = atom_getlong(av+i++);
+					for(long j = 0; j < numberOfSource; j++)
+					{
+						x->f_source_manager->groupSetSource(index, atom_getlong(av+i++));
+					}
+					
+					x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i), atom_getfloat(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
+					i+=4;
+					
+					x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i++)->s_name);
+				}
+				else if (!exist && x->f_source_manager->groupGetExistence(index))
+				{
+					x->f_source_manager->groupRemove(index);
+					t_atom out_av[3];
+					atom_setlong(out_av, index);
+					atom_setsym(out_av+1, hoa_sym_mute);
+					atom_setlong(out_av+2, 1);
+					outlet_list(x->f_out_groups, 0L, 3, out_av);
+				}
+			}
+		}
+		
+		object_notify(x, hoa_sym_modified, NULL);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
+		hoamap_bang(x);
+	}
+    else if(ac > 1 && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
         if(atom_getsym(av+1) == hoa_sym_set)
         {
             x->f_source_manager->groupRemove(atom_getlong(av));
             for(int i = 2; i < ac; i++)
-            {
+			{
                 x->f_source_manager->groupSetSource(atom_getlong(av), atom_getlong(av+i));
-            }
+			}
         }        
         else if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
-            x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3) + HOA_PI2);
+		{
+			x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+		}
         else if(atom_getsym(av+1) == hoa_sym_radius)
+		{
             x->f_source_manager->groupSetRadius(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_angle)
-            x->f_source_manager->groupSetAzimuth(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
+		{
+            x->f_source_manager->groupSetAzimuth(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
+		{
             x->f_source_manager->groupSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+		}
         else if(atom_getsym(av+1) == hoa_sym_abscissa)
+		{
             x->f_source_manager->groupSetAbscissa(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_ordinate)
+		{
             x->f_source_manager->groupSetOrdinate(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_relpolar || atom_getsym(av+1) == hoa_sym_relativepolar)
+		{
             x->f_source_manager->groupSetRelativePolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+		}
         else if(atom_getsym(av+1) == hoa_sym_relradius || atom_getsym(av+1) == hoa_sym_relativeradius)
+		{
             x->f_source_manager->groupSetRelativeRadius(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_relangle || atom_getsym(av+1) == hoa_sym_relativeangle)
-            x->f_source_manager->groupSetRelativeAzimuth(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
+		{
+            x->f_source_manager->groupSetRelativeAzimuth(atom_getlong(av), atom_getfloat(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_mute)
+		{
             x->f_source_manager->groupSetMute(atom_getlong(av), atom_getlong(av+2));
+		}
         else if(atom_getsym(av+1) == hoa_sym_remove)
         {
             x->f_source_manager->groupRemove(atom_getlong(av));
@@ -713,13 +1052,13 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         {
             x->f_source_manager->groupSetColor(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
         }
+		
+		object_notify(x, hoa_sym_modified, NULL);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
+		hoamap_bang(x);
     }
-    
-    object_notify(x, hoa_sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-    jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);    
 }
 
 void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
@@ -840,6 +1179,7 @@ void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 void hoamap_source_save(t_hoamap *x, t_dictionary *d)
 {
     t_atom *av;
+	double *color;
     long ac = x->f_source_manager->getNumberOfSources()*10;
     av = new t_atom[ac];
     if(av && ac)
@@ -848,7 +1188,7 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-				double *color = x->f_source_manager->sourceGetColor(i);
+				color = x->f_source_manager->sourceGetColor(i);
                 atom_setsym(av+j, hoa_sym_source);
                 atom_setlong(av+j+1, i);
                 atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
@@ -2102,6 +2442,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+	int output = 1;
     t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
@@ -2176,6 +2517,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
 		jbox_redraw((t_jbox *)x);
+		output = 0;
     }
     
     x->f_cursor_position.x = cursor.x;
@@ -2185,7 +2527,9 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
+	
+	if (output)
+		hoamap_bang(x);
 }
 
 void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)

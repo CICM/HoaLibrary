@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 453.0, 102.0, 366.0, 379.0 ],
+		"rect" : [ 861.0, 196.0, 366.0, 379.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,13 +38,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 92.0, 15.0, 95.0, 20.0 ],
+					"patching_rect" : [ 92.0, 15.0, 287.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
+						"comment" : "(float/int) Mirror factor",
 						"extra" : 1
 					}
 ,
-					"text" : "hoa.in @extra 1"
+					"text" : "hoa.in @extra 1 @comment \"(float/int) Mirror factor\""
 				}
 
 			}
@@ -156,7 +156,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 237.0, 150.0, 32.5, 20.0 ],
+					"patching_rect" : [ 266.0, 154.5, 32.5, 20.0 ],
 					"text" : "< 0"
 				}
 
@@ -170,7 +170,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 237.0, 15.0, 60.0, 20.0 ],
+					"patching_rect" : [ 206.0, 13.0, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -184,7 +184,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 237.0, 75.0, 79.0, 20.0 ],
+					"patching_rect" : [ 206.0, 73.0, 79.0, 20.0 ],
 					"text" : "unpack 0 0"
 				}
 
@@ -198,7 +198,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 308.0, 103.0, 45.0, 20.0 ],
+					"patching_rect" : [ 153.0, 118.0, 45.0, 20.0 ],
 					"text" : "Order"
 				}
 
@@ -213,7 +213,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 103.0, 67.0, 33.0 ],
+					"patching_rect" : [ 290.0, 78.5, 67.0, 33.0 ],
 					"text" : "Harmonic number"
 				}
 
@@ -228,7 +228,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 297.0, 120.0, 50.0, 20.0 ]
+					"patching_rect" : [ 266.0, 118.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -242,7 +242,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 237.0, 120.0, 50.0, 20.0 ]
+					"patching_rect" : [ 206.0, 118.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -256,7 +256,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "list", "list", "list", "list", "int" ],
-					"patching_rect" : [ 237.0, 45.0, 102.0, 20.0 ],
+					"patching_rect" : [ 206.0, 43.0, 102.0, 20.0 ],
 					"text" : "hoa.thisprocess~"
 				}
 
@@ -370,7 +370,7 @@
 					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 246.5, 195.0, 54.5, 195.0 ],
+					"midpoints" : [ 275.5, 195.0, 54.5, 195.0 ],
 					"source" : [ "obj-3", 0 ]
 				}
 
@@ -380,7 +380,7 @@
 					"destination" : [ "obj-3", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-30", 0 ]
+					"source" : [ "obj-31", 0 ]
 				}
 
 			}
@@ -437,23 +437,6 @@
 					"source" : [ "obj-8", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.in~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.out~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
