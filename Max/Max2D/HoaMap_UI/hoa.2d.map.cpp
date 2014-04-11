@@ -362,6 +362,7 @@ void hoa_map_preset(t_hoamap *x)
     t_atom *av;
 	double* color;
 	bool exist;
+	t_atom *avptr;
 	
     if(!(z = gensym("_preset")->s_thing))
         return;
@@ -369,18 +370,18 @@ void hoa_map_preset(t_hoamap *x)
 	if(!x->f_source_manager->getExistence())
 		return;
 	
+	
 	// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description, .. source / index ...
+	
 	
 	ac = MAX_NUMBER_OF_SOURCES * 11 + 4;
 	av = (t_atom *)getbytes(ac * sizeof(t_atom));
-	
-	t_atom *avptr = av;
+	avptr = av;
 	
 	atom_setobj(avptr++, x);
     atom_setsym(avptr++, object_classname(x));
 	atom_setsym(avptr++, hoa_sym_source);
-	
-	atom_setsym(avptr++, gensym("_source_preset_data_"));
+	atom_setsym(avptr++, hoa_sym_source_preset_data);
 	
 	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 	{
@@ -419,66 +420,75 @@ void hoa_map_preset(t_hoamap *x)
 	freebytes(av, ac * sizeof(t_atom));
 	
 	
-	// set group
+	// group / index / exist / symbol(srcIndex1_srcIndex2_...) / r / g / b / a / description, .. groupe / index ...
 	
-	// group / index / exist / numberOfSource / srcIndex1, srcIndex2... / r / g / b / a / description, .. groupe / index ...
-
-	ac = MAX_NUMBER_OF_SOURCES * MAX_NUMBER_OF_SOURCES * 4 + 4;
+	
+	ac = MAX_NUMBER_OF_SOURCES * 9 + 4;
 	av = (t_atom *)getbytes(ac * sizeof(t_atom));
 	
-	int av_counter = 0;
 	int number_of_sources = 0;
 	avptr = av;
+	std::string temp_str = "";
+	char temp_char[4];
 	
 	atom_setobj(avptr++, x);
     atom_setsym(avptr++, object_classname(x));
 	atom_setsym(avptr++, hoa_sym_group);
 	
-	atom_setsym(avptr++, gensym("_group_preset_data_"));
-	av_counter = 1;
-	
+	atom_setsym(avptr++, hoa_sym_group_preset_data);
+		
 	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 	{
 		atom_setsym(avptr++, hoa_sym_group);
 		atom_setlong(avptr++, i);
 		exist = x->f_source_manager->groupGetExistence(i);
 		atom_setlong(avptr++, exist);
-		
-		av_counter += 3;
-		
+				
 		if(exist)
 		{
 			number_of_sources = x->f_source_manager->groupGetNumberOfSources(i);
-			atom_setlong(avptr++, number_of_sources);
-			av_counter++;
+			temp_str.clear();
 			
 			for(long j = 0; j < number_of_sources; j++)
 			{
-				atom_setlong(avptr++, x->f_source_manager->groupGetSourceIndex(i, j));
-				av_counter++;
+				if (j) temp_str.push_back(' ');
+				sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j));
+				temp_str += temp_char;
 			}
+			atom_setsym(avptr++, gensym(temp_str.c_str()));
 			
 			color = x->f_source_manager->groupGetColor(i);
 			atom_setfloat(avptr++, color[0]);
 			atom_setfloat(avptr++, color[1]);
 			atom_setfloat(avptr++, color[2]);
 			atom_setfloat(avptr++, color[3]);
-			av_counter += 4;
 			
 			atom_setsym(avptr++, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
-			av_counter++;
+		}
+		else
+		{
+			atom_setsym(avptr++, hoa_sym_nothing);
+			atom_setfloat(avptr++, 0);
+			atom_setfloat(avptr++, 0);
+			atom_setfloat(avptr++, 0);
+			atom_setfloat(avptr++, 0);
+			atom_setsym(avptr++, hoa_sym_nothing);
 		}
 	}
 	
-	binbuf_insert(z, NULL, av_counter, av);
+	binbuf_insert(z, NULL, ac, av);
 	freebytes(av, ac * sizeof(t_atom));
 }
 
 t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
 {
-	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_source_preset_data_"))
+	if ( (ac >= (MAX_NUMBER_OF_SOURCES * 11) + 1) && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
 	{
-		object_method(x, hoa_sym_source, NULL, ac, av);
+		object_method(x, hoa_sym_source, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 1), av);
+	}
+	if ((ac >= (MAX_NUMBER_OF_SOURCES * 11) + (MAX_NUMBER_OF_SOURCES * 9) + 2) && (av+(MAX_NUMBER_OF_SOURCES * 11) + 1) && atom_gettype(av+(MAX_NUMBER_OF_SOURCES * 11) + 1) == A_SYM && atom_getsym(av+(MAX_NUMBER_OF_SOURCES * 11) + 1) == hoa_sym_group_preset_data)
+	{
+		object_method(x, hoa_sym_group, NULL, ac - (MAX_NUMBER_OF_SOURCES * 9 + 1), av+(MAX_NUMBER_OF_SOURCES * 11 + 1));
 	}
 	return MAX_ERR_NONE;
 }
@@ -490,19 +500,26 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 		int limit = 0;
 		int exist;
 		double *color;
+		t_atom *avptr;
+		int number_of_sources = 0;
+		avptr = *av;
+		std::string temp_str = "";
+		char temp_char[4];
+		long max_ac = (MAX_NUMBER_OF_SOURCES * 11) + (MAX_NUMBER_OF_SOURCES * 9) + 2;
+		
 		if(*ac && *av)
         {
 			limit = *ac;
-            if(limit > MAX_NUMBER_OF_SOURCES * 11 + 1)
-                limit = MAX_NUMBER_OF_SOURCES * 11 + 1;
+            if(limit > max_ac)
+                limit = max_ac;
 		}
 		else
         {
-			limit = *ac = MAX_NUMBER_OF_SOURCES * 11 + 1;
+			limit = *ac = max_ac;
 			*av = (t_atom *)getbytes(*ac * sizeof(t_atom));
         }
 		
-		t_atom *avptr = *av;
+		avptr = *av;
 		
 		atom_setsym(avptr++, gensym("_source_preset_data_"));
 		
@@ -535,6 +552,49 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 				atom_setfloat(avptr++, 0.);
 				atom_setfloat(avptr++, 0.);
 				atom_setfloat(avptr++, 1.);
+				atom_setsym(avptr++, hoa_sym_nothing);
+			}
+		}
+		
+		// GROUPS :
+		
+		atom_setsym(avptr++, gensym("_group_preset_data_"));
+		
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+		{
+			atom_setsym(avptr++, hoa_sym_group);
+			atom_setlong(avptr++, i);
+			exist = x->f_source_manager->groupGetExistence(i);
+			atom_setlong(avptr++, exist);
+			
+			if(exist)
+			{
+				number_of_sources = x->f_source_manager->groupGetNumberOfSources(i);
+				temp_str.clear();
+				
+				for(long j = 0; j < number_of_sources; j++)
+				{
+					if (j) temp_str.push_back(' ');
+					sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j));
+					temp_str += temp_char;
+				}
+				atom_setsym(avptr++, gensym(temp_str.c_str()));
+				
+				color = x->f_source_manager->groupGetColor(i);
+				atom_setfloat(avptr++, color[0]);
+				atom_setfloat(avptr++, color[1]);
+				atom_setfloat(avptr++, color[2]);
+				atom_setfloat(avptr++, color[3]);
+				
+				atom_setsym(avptr++, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+			}
+			else
+			{
+				atom_setsym(avptr++, hoa_sym_nothing);
+				atom_setfloat(avptr++, 0);
+				atom_setfloat(avptr++, 0);
+				atom_setfloat(avptr++, 0);
+				atom_setfloat(avptr++, 0);
 				atom_setsym(avptr++, hoa_sym_nothing);
 			}
 		}
@@ -718,12 +778,12 @@ void hoamap_tick(t_hoamap *x)
 	if(x->f_index_of_selected_source != -1)
 	{
 		x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
-		post("record source");
+		//post("record source");
 	}
     else if(x->f_index_of_selected_group != -1)
 	{
 		//x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
-		post("record group %ld", x->f_index_of_selected_group);
+		//post("record group %ld", x->f_index_of_selected_group);
 	}
 	clock_fdelay(x->f_clock, 20);
 	/*
@@ -755,7 +815,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	int index;
 	int exist;
 	
-	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_source_preset_data_"))
+	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
 	{
 		av++; ac--;
 		
@@ -763,26 +823,35 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		
 		for(int i = 0; i < MAX_NUMBER_OF_SOURCES*11; i += 11)
 		{
-			if(i < ac && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
+			if( (i <= ac-11) && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
 			{
-				index = atom_getlong(av+i+1);
-				exist = atom_getlong(av+i+2);
-				
-				if(exist)
+				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
+					(atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
 				{
-					x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
-					x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
-					x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
-					x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i+10)->s_name);
-				}
-				else if (!exist && x->f_source_manager->sourceGetExistence(index))
-				{
-					x->f_source_manager->sourceRemove(index);
-					t_atom out_av[3];
-					atom_setlong(out_av, index);
-					atom_setsym(out_av+1, hoa_sym_mute);
-					atom_setlong(out_av+2, 1);
-					outlet_list(x->f_out_sources, 0L, 3, out_av);
+					index = atom_getlong(av+i+1);
+					exist = atom_getlong(av+i+2);
+					
+					if(exist &&
+					   atom_gettype(av+i+3) == A_FLOAT && atom_gettype(av+i+4) == A_FLOAT &&
+					   (atom_gettype(av+i+5) == A_FLOAT || atom_gettype(av+i+5) == A_LONG) &&
+					   atom_gettype(av+i+6) == A_FLOAT && atom_gettype(av+i+7) == A_FLOAT &&
+					   atom_gettype(av+i+8) == A_FLOAT && atom_gettype(av+i+9) == A_FLOAT &&
+					   atom_gettype(av+i+10) == A_SYM)
+					{
+						x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
+						x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
+						x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
+						x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i+10)->s_name);
+					}
+					else if (!exist && x->f_source_manager->sourceGetExistence(index))
+					{
+						x->f_source_manager->sourceRemove(index);
+						t_atom out_av[3];
+						atom_setlong(out_av, index);
+						atom_setsym(out_av+1, hoa_sym_mute);
+						atom_setlong(out_av+2, 1);
+						outlet_list(x->f_out_sources, 0L, 3, out_av);
+					}
 				}
 			}
 		}
@@ -792,11 +861,6 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
 		hoamap_bang(x);
-		/*
-		 post("receive preset sym = %s", s->s_name);
-		 for (int i = 0; i<ac; i++)
-		 postatom(av+i);
-		 */
 	}
 	
     else if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
@@ -900,48 +964,53 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	int index;
 	int exist;
 	
-	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_group_preset_data_"))
+	if ( ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("_group_preset_data_"))
 	{
 		av++; ac--;
 		
-		// group / index / exist / numberOfSource / srcIndex1, srcIndex2... / r / g / b / a / description, .. groupe / index ...
+		// group / index / exist / symbol(srcIndex1, srcIndex2...) / r / g / b / a / description, .. groupe / index ...
 		
-		int i = 0;
-		int numberOfSource = 0;
+		long sources_ac;
+		t_atom* sources_av;
 		
-		for ( i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
+		for ( int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 			x->f_source_manager->groupRemove(i);
 		
-		i = 0;
-		while (i < ac)
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES*9; i += 9)
 		{
-			if(atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_group)
+			if( (i <= ac-9) && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_group)
 			{
-				i++;
-				index = atom_getlong(av+i++);
-				exist = atom_getlong(av+i++);
-				
-				if(exist)
+				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
+					 (atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
 				{
-					numberOfSource = atom_getlong(av+i++);
-					for(long j = 0; j < numberOfSource; j++)
+					index = atom_getlong(av+i+1);
+					exist = atom_getlong(av+i+2);
+					
+					if(exist &&
+					   atom_gettype(av+i+3) == A_SYM &&
+					   atom_gettype(av+i+4) == A_FLOAT && atom_gettype(av+i+5) == A_FLOAT &&
+					   atom_gettype(av+i+6) == A_FLOAT && atom_gettype(av+i+7) == A_FLOAT &&
+					   atom_gettype(av+i+8) == A_SYM)
 					{
-						x->f_source_manager->groupSetSource(index, atom_getlong(av+i++));
+						sources_ac = 0;
+						sources_av = NULL;
+						atom_setparse(&sources_ac, &sources_av, atom_getsym(av+i+3)->s_name);
+						
+						if (sources_ac && sources_av)
+						{
+							for(long j = 0; j < sources_ac; j++)
+								if (atom_gettype(sources_av+j) == A_LONG)
+									x->f_source_manager->groupSetSource(index, atom_getlong(sources_av+j));
+						}
+						
+						x->f_source_manager->groupSetColor(index,
+														   atom_getfloat(av+i+4),
+														   atom_getfloat(av+i+5),
+														   atom_getfloat(av+i+6),
+														   atom_getfloat(av+i+7));
+						
+						x->f_source_manager->groupSetDescription(index, atom_getsym(av+i+8)->s_name);
 					}
-					
-					x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i), atom_getfloat(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
-					i+=4;
-					
-					x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i++)->s_name);
-				}
-				else if (!exist && x->f_source_manager->groupGetExistence(index))
-				{
-					x->f_source_manager->groupRemove(index);
-					t_atom out_av[3];
-					atom_setlong(out_av, index);
-					atom_setsym(out_av+1, hoa_sym_mute);
-					atom_setlong(out_av+2, 1);
-					outlet_list(x->f_out_groups, 0L, 3, out_av);
 				}
 			}
 		}
@@ -2426,6 +2495,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
         }
         jpopupmenu_destroy(popup);
+		object_notify(x, hoa_sym_modified, NULL);
     }
     
     if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1)
