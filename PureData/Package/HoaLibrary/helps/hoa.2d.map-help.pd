@@ -1,14 +1,7 @@
 #N canvas 248 42 837 726 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X obj -610 -471 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -228856 -1 0;
-#X text -544 216 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -544 200 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
 #X text -252 -185 Mousewheel and alt to change the zoom.;
-#X text -605 -450 A GUI to spatialize sources on a map.;
 #X obj -559 -303 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
@@ -16,7 +9,7 @@ polar @zoom 0.35;
 #X obj -559 -328 c.loadmess;
 #X msg -147 97 \; pd dsp 1;
 #X msg -147 132 \; pd dsp 0;
-#X text -605 -429 hoa.2d.map allows you to spatialize several sources
+#X text -609 -431 hoa.2d.map allows you to spatialize several sources
 on a plane. You can add and remove sources \, change coordinates \,
 add description and create groups., f 90;
 #X obj -30 -437 hoa.connect;
@@ -366,8 +359,6 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 39 0 24 0;
 #X connect 39 1 37 0;
 #X restore -248 -101 pd outputs;
-#X obj -213 214 declare -lib HoaLibrary/hoa.library;
-#X obj -213 193 declare -lib hoa.library;
 #X obj -42 46 c.preset @size 107 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
@@ -815,48 +806,54 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X connect 5 0 17 0;
-#X connect 6 0 5 0;
-#X connect 11 0 10 0;
-#X connect 12 0 18 0;
-#X connect 17 0 22 0;
-#X connect 17 1 22 1;
-#X connect 17 2 22 2;
-#X connect 17 3 22 3;
-#X connect 17 4 22 4;
-#X connect 17 5 22 5;
-#X connect 17 6 22 6;
-#X connect 18 0 17 0;
-#X connect 18 1 17 1;
-#X connect 18 2 17 2;
-#X connect 18 3 17 3;
-#X connect 19 0 41 7;
-#X connect 20 0 19 0;
-#X connect 21 0 40 0;
-#X connect 22 0 41 0;
-#X connect 22 1 41 1;
-#X connect 22 2 41 2;
-#X connect 22 3 41 3;
-#X connect 22 4 41 4;
-#X connect 22 5 41 5;
-#X connect 22 6 41 6;
-#X connect 28 0 27 0;
-#X connect 29 0 28 0;
-#X connect 30 0 32 2;
-#X connect 31 0 32 1;
-#X connect 32 0 29 0;
+#X obj -600 -458 c.patcherinfos;
+#X obj -595 -475 loadbang;
+#X obj -610 -475 hoa.help.header;
+#X obj -464 200 hoa.help.pub;
+#X connect 1 0 13 0;
+#X connect 2 0 1 0;
+#X connect 7 0 6 0;
+#X connect 8 0 14 0;
+#X connect 13 0 18 0;
+#X connect 13 1 18 1;
+#X connect 13 2 18 2;
+#X connect 13 3 18 3;
+#X connect 13 4 18 4;
+#X connect 13 5 18 5;
+#X connect 13 6 18 6;
+#X connect 14 0 13 0;
+#X connect 14 1 13 1;
+#X connect 14 2 13 2;
+#X connect 14 3 13 3;
+#X connect 15 0 35 7;
+#X connect 16 0 15 0;
+#X connect 17 0 34 0;
+#X connect 18 0 35 0;
+#X connect 18 1 35 1;
+#X connect 18 2 35 2;
+#X connect 18 3 35 3;
+#X connect 18 4 35 4;
+#X connect 18 5 35 5;
+#X connect 18 6 35 6;
+#X connect 22 0 21 0;
+#X connect 23 0 22 0;
+#X connect 24 0 26 2;
+#X connect 25 0 26 1;
+#X connect 26 0 23 0;
+#X connect 30 0 31 0;
+#X connect 30 1 31 1;
+#X connect 34 0 35 7;
+#X connect 35 0 30 0;
+#X connect 35 1 30 1;
+#X connect 35 2 30 2;
+#X connect 35 3 30 3;
+#X connect 35 4 30 4;
+#X connect 35 5 30 5;
+#X connect 35 6 30 6;
 #X connect 36 0 37 0;
-#X connect 36 1 37 1;
-#X connect 40 0 41 7;
-#X connect 41 0 36 0;
-#X connect 41 1 36 1;
-#X connect 41 2 36 2;
-#X connect 41 3 36 3;
-#X connect 41 4 36 4;
-#X connect 41 5 36 5;
-#X connect 41 6 36 6;
-#X connect 42 0 43 0;
-#X connect 43 0 41 7;
-#X connect 44 0 31 0;
-#X connect 45 0 32 0;
+#X connect 37 0 35 7;
+#X connect 38 0 25 0;
+#X connect 39 0 26 0;
+#X connect 40 0 42 0;
+#X connect 41 0 40 0;
 #X coords 0 726 1 725 85 60 0;

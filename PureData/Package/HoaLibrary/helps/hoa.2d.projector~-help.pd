@@ -1,48 +1,41 @@
 #N canvas 223 52 754 671 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X obj -255 -589 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.projector~
-3 12 0 18 -228856 -1 0;
-#X obj -26 -450 hoa.pi 2;
-#X msg 115 -458 \; pd dsp 1;
-#X msg 115 -420 \; pd dsp 0;
-#X text -69 27 Eliott Paris © 2012-2013 CICM / Universite Paris 8
-;
-#X text -69 11 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
-#X obj -41 -431 *~;
-#X obj -236 -281 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
+#X obj -237 -520 hoa.pi 2;
+#X msg -96 -528 \; pd dsp 1;
+#X msg -96 -490 \; pd dsp 0;
+#X obj -252 -501 *~;
+#X obj -447 -351 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 10 @interval 20 @bgcolor 0.758847 0.758847 0.758847 1 @bdcolor
 0.699562 0.699562 0.699562 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X text -252 -567 A plane wave projector;
-#X text 80 -299 Here \, we apply differents delay lines on each signal.
+#X text -131 -369 Here \, we apply differents delay lines on each signal.
 ;
-#X obj -41 -490 phasor~ 0.8;
-#X obj -236 -459 hoa.soundgrain;
-#X obj 329 -567 hoa.connect;
-#X obj 329 -588 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj -252 -560 phasor~ 0.8;
+#X obj -447 -529 hoa.soundgrain;
+#X obj 118 -637 hoa.connect;
+#X obj 118 -658 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 102 -281 hoa.2d.space @size 201 201 @fontname Helvetica @fontweight
+#X obj -109 -351 hoa.2d.space @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send hoadelproj
 @presetname hoadelpreset @channels 10 @minmax 1 3000 @bgcolor 0.76
 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.27 0.43 0.54 0.25 @ptcolor
 0 0 0 1;
-#X obj -236 -410 hoa.2d.encoder~ 4 ---------------;
-#X obj -236 -384 hoa.2d.projector~ 4 10 ----------;
-#X obj -26 -469 c.loadmess;
-#X obj -41 -362 r hoadelproj;
-#X obj -236 -431 c.gain~ @size 127 12 @fontname Helvetica @fontweight
+#X obj -447 -480 hoa.2d.encoder~ 4 ---------------;
+#X obj -447 -454 hoa.2d.projector~ 4 10 ----------;
+#X obj -237 -539 c.loadmess;
+#X obj -252 -432 r hoadelproj;
+#X obj -447 -501 c.gain~ @size 127 12 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X msg 214 -435 inter \$1;
-#X obj 214 -459 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 3 -505 inter \$1;
+#X obj 3 -529 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 214 -481 line;
-#X obj 214 -408 c.preset @size 121 41 @fontname Helvetica @fontweight
+#X obj 3 -551 line;
+#X obj 3 -478 c.preset @size 121 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
 0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
@@ -62,95 +55,99 @@ list 1387.1 3000 1613.9 1387.1 1613.9 1 1 1 1387.1 1613.9 @index 8
 81.6861 2914.74 3000 3000 88.6911 1 2912.31 3000 @index 11 @hoadelpreset
 hoa.2d.space list 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94
 88.6592 2.05962 2912.34 ];
-#X msg 214 -505 1 \, 12 12000;
-#X msg 294 -505 12 \, 1 12000;
-#X text 212 -529 Interpolations;
-#X obj 102 -68 c.prepend set;
-#X msg 102 -46 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94 88.6592
-2.05962 2912.34;
-#X text -253 -547 hoa.2d.projector~ discretizes the ambisonic sound
+#X msg 3 -575 1 \, 12 12000;
+#X msg 83 -575 12 \, 1 12000;
+#X text 1 -599 Interpolations;
+#X obj -109 -138 c.prepend set;
+#X msg -109 -116 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94
+88.6592 2.05962 2912.34;
+#X text -464 -617 hoa.2d.projector~ discretizes the ambisonic sound
 field into the plane waves domain. Use hoa.recomposer~ to come back
 to harmonics domain., f 72;
-#X obj 255 28 declare -lib HoaLibrary/hoa.library;
-#X obj 255 7 declare -lib hoa.library;
-#X text 80 -349 Sound field transformations have differents behavior
+#X text -131 -419 Sound field transformations have differents behavior
 in the plane waves domain compared to the circular harmonics domain.
 ;
-#X obj -236 -342 hoa.2d.process~ 10 hoa.fx.delay~ planewaves, f 33
+#X obj -447 -412 hoa.2d.process~ 10 hoa.fx.delay~ planewaves, f 33
 ;
-#X obj -236 -304 hoa.2d.recomposer~ 4 10 ---------;
-#X obj -236 -58 hoa.2d.decoder~ 4 ambisonic 10 --;
-#X obj -236 -25 hoa.dac~ 1:10 -------------------;
-#X connect 1 0 6 1;
-#X connect 6 0 15 1;
-#X connect 10 0 6 0;
-#X connect 11 0 19 0;
-#X connect 13 0 12 0;
-#X connect 14 0 27 0;
-#X connect 15 0 16 0;
-#X connect 15 1 16 1;
-#X connect 15 2 16 2;
-#X connect 15 3 16 3;
-#X connect 15 4 16 4;
-#X connect 15 5 16 5;
-#X connect 15 6 16 6;
-#X connect 15 7 16 7;
-#X connect 15 8 16 8;
-#X connect 16 0 33 0;
-#X connect 16 1 33 1;
-#X connect 16 2 33 2;
-#X connect 16 3 33 3;
-#X connect 16 4 33 4;
-#X connect 16 5 33 5;
-#X connect 16 6 33 6;
-#X connect 16 7 33 7;
-#X connect 16 8 33 8;
-#X connect 16 9 33 9;
-#X connect 17 0 1 0;
-#X connect 18 0 33 10;
-#X connect 19 0 15 0;
-#X connect 20 0 23 0;
-#X connect 21 0 20 0;
-#X connect 22 0 21 0;
-#X connect 24 0 22 0;
-#X connect 25 0 22 0;
+#X obj -447 -374 hoa.2d.recomposer~ 4 10 ---------;
+#X obj -447 -128 hoa.2d.decoder~ 4 ambisonic 10 --;
+#X obj -447 -95 hoa.dac~ 1:10 -------------------;
+#X obj -455 -642 c.patcherinfos;
+#X obj -450 -659 loadbang;
+#X obj -465 -659 hoa.help.header;
+#X obj -324 -44 hoa.help.pub;
+#X connect 0 0 3 1;
+#X connect 3 0 11 1;
+#X connect 6 0 3 0;
+#X connect 7 0 15 0;
+#X connect 9 0 8 0;
+#X connect 10 0 23 0;
+#X connect 11 0 12 0;
+#X connect 11 1 12 1;
+#X connect 11 2 12 2;
+#X connect 11 3 12 3;
+#X connect 11 4 12 4;
+#X connect 11 5 12 5;
+#X connect 11 6 12 6;
+#X connect 11 7 12 7;
+#X connect 11 8 12 8;
+#X connect 12 0 27 0;
+#X connect 12 1 27 1;
+#X connect 12 2 27 2;
+#X connect 12 3 27 3;
+#X connect 12 4 27 4;
+#X connect 12 5 27 5;
+#X connect 12 6 27 6;
+#X connect 12 7 27 7;
+#X connect 12 8 27 8;
+#X connect 12 9 27 9;
+#X connect 13 0 0 0;
+#X connect 14 0 27 10;
+#X connect 15 0 11 0;
+#X connect 16 0 19 0;
+#X connect 17 0 16 0;
+#X connect 18 0 17 0;
+#X connect 20 0 18 0;
+#X connect 21 0 18 0;
+#X connect 23 0 24 0;
 #X connect 27 0 28 0;
-#X connect 33 0 34 0;
-#X connect 33 1 34 1;
-#X connect 33 2 34 2;
-#X connect 33 3 34 3;
-#X connect 33 4 34 4;
-#X connect 33 5 34 5;
-#X connect 33 6 34 6;
-#X connect 33 7 34 7;
-#X connect 33 8 34 8;
-#X connect 33 9 34 9;
-#X connect 34 0 7 0;
-#X connect 34 0 35 0;
-#X connect 34 1 7 1;
-#X connect 34 1 35 1;
-#X connect 34 2 7 2;
-#X connect 34 2 35 2;
-#X connect 34 3 7 3;
-#X connect 34 3 35 3;
-#X connect 34 4 7 4;
-#X connect 34 4 35 4;
-#X connect 34 5 7 5;
-#X connect 34 5 35 5;
-#X connect 34 6 7 6;
-#X connect 34 6 35 6;
-#X connect 34 7 7 7;
-#X connect 34 7 35 7;
-#X connect 34 8 7 8;
-#X connect 34 8 35 8;
-#X connect 35 0 36 0;
-#X connect 35 1 36 1;
-#X connect 35 2 36 2;
-#X connect 35 3 36 3;
-#X connect 35 4 36 4;
-#X connect 35 5 36 5;
-#X connect 35 6 36 6;
-#X connect 35 7 36 7;
-#X connect 35 8 36 8;
-#X connect 35 9 36 9;
+#X connect 27 1 28 1;
+#X connect 27 2 28 2;
+#X connect 27 3 28 3;
+#X connect 27 4 28 4;
+#X connect 27 5 28 5;
+#X connect 27 6 28 6;
+#X connect 27 7 28 7;
+#X connect 27 8 28 8;
+#X connect 27 9 28 9;
+#X connect 28 0 4 0;
+#X connect 28 0 29 0;
+#X connect 28 1 4 1;
+#X connect 28 1 29 1;
+#X connect 28 2 4 2;
+#X connect 28 2 29 2;
+#X connect 28 3 4 3;
+#X connect 28 3 29 3;
+#X connect 28 4 4 4;
+#X connect 28 4 29 4;
+#X connect 28 5 4 5;
+#X connect 28 5 29 5;
+#X connect 28 6 4 6;
+#X connect 28 6 29 6;
+#X connect 28 7 4 7;
+#X connect 28 7 29 7;
+#X connect 28 8 4 8;
+#X connect 28 8 29 8;
+#X connect 29 0 30 0;
+#X connect 29 1 30 1;
+#X connect 29 2 30 2;
+#X connect 29 3 30 3;
+#X connect 29 4 30 4;
+#X connect 29 5 30 5;
+#X connect 29 6 30 6;
+#X connect 29 7 30 7;
+#X connect 29 8 30 8;
+#X connect 29 9 30 9;
+#X connect 31 0 33 0;
+#X connect 32 0 31 0;
 #X coords 0 671 1 670 100 60 0;
