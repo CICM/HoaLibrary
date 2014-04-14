@@ -62,9 +62,6 @@ typedef struct  _hoamap
 	void*		f_out_sources;
     void*		f_out_groups;
     void*		f_out_infos;
-	
-	long		f_preset_ac;
-	t_atom*		f_preset_av;
     
     t_object*   f_patcher;
     t_object*   f_colorpicker;
@@ -288,9 +285,6 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 
     x->f_patcher = NULL;
     x->f_colorpicker = NULL;
-	
-	x->f_preset_ac = (MAX_NUMBER_OF_SOURCES * 11) + (MAX_NUMBER_OF_SOURCES * 9) + 2; // source + group + messageIDs
-	x->f_preset_av = (t_atom*)getbytes( x->f_preset_ac * sizeof(t_atom));
     
 	attr_dictionary_process(x, d);
 	jbox_ready(&x->j_box);
@@ -330,8 +324,6 @@ void hoamap_free(t_hoamap *x)
         object_free(x->f_colorpicker);
     if(x->f_textfield)
         object_free(x->f_textfield);
-	
-	freebytes(x->f_preset_av, x->f_preset_ac * sizeof(t_atom));
 }
 
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
@@ -711,7 +703,9 @@ void hoa_map_preset(t_hoamap *x)
 	void* z;
 	double* color;
 	bool exist;
-	t_atom *avptr;
+	long ac;
+	t_atom* av;
+	t_atom* avptr;
 	
     if(!(z = gensym("_preset")->s_thing))
         return;
@@ -722,8 +716,9 @@ void hoa_map_preset(t_hoamap *x)
 	
 	// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description, .. source / index ...
 	
-	
-	avptr = x->f_preset_av;
+	ac = (MAX_NUMBER_OF_SOURCES * 11 + 4);
+	av = (t_atom*)getbytes(ac * sizeof(t_atom));
+	avptr = av;
 	
 	atom_setobj(avptr++, x);
     atom_setsym(avptr++, object_classname(x));
@@ -763,14 +758,14 @@ void hoa_map_preset(t_hoamap *x)
 		}
 	}
 	
-	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 4), x->f_preset_av);
+	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 4), av);
 	
 	// group / index / exist / symbol(srcIndex1_srcIndex2_...) / r / g / b / a / description, .. groupe / index ...
 
 	int number_of_sources = 0;
-	avptr = x->f_preset_av;
 	std::string temp_str = "";
 	char temp_char[4];
+	avptr = av;
 	
 	atom_setobj(avptr++, x);
     atom_setsym(avptr++, object_classname(x));
@@ -817,7 +812,8 @@ void hoa_map_preset(t_hoamap *x)
 		}
 	}
 	
-	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 9 + 4), x->f_preset_av);
+	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 9 + 4), av);
+	freebytes(av, ac * sizeof(t_atom));
 }
 
 t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
