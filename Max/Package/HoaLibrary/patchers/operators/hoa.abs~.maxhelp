@@ -38,7 +38,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 231.0, 235.0, 83.0, 20.0 ],
+					"patching_rect" : [ 233.0, 238.0, 83.0, 20.0 ],
 					"sig" : 0.0
 				}
 
@@ -53,7 +53,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 231.0, 152.0, 83.0, 20.0 ],
+					"patching_rect" : [ 233.0, 155.0, 83.0, 20.0 ],
 					"sig" : 0.0
 				}
 
@@ -68,7 +68,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 15.0, 235.0, 83.0, 20.0 ],
+					"patching_rect" : [ 17.0, 238.0, 83.0, 20.0 ],
 					"sig" : 0.0
 				}
 
@@ -83,7 +83,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 576.0, 71.0, 81.0, 20.0 ],
+					"patching_rect" : [ 648.0, 127.0, 81.0, 20.0 ],
 					"text" : "prepend help"
 				}
 
@@ -100,7 +100,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 416.4375, 105.0, 33.0, 16.0 ],
+					"patching_rect" : [ 418.4375, 108.0, 33.0, 16.0 ],
 					"text" : "abs~"
 				}
 
@@ -115,7 +115,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 576.0, 99.0, 53.0, 20.0 ],
+					"patching_rect" : [ 648.0, 155.0, 53.0, 20.0 ],
 					"text" : "pcontrol"
 				}
 
@@ -129,7 +129,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 103.0, 561.0, 20.0 ],
+					"patching_rect" : [ 17.0, 106.0, 561.0, 20.0 ],
 					"text" : "you can take a look at the original object to see more information about it : ",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
@@ -139,14 +139,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-31",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 103.0, 561.0, 20.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 17.0, 106.0, 591.0, 20.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -160,7 +160,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 65.0, 561.0, 33.0 ],
+					"patching_rect" : [ 17.0, 68.0, 594.0, 33.0 ],
 					"text" : "the hoa.2d.process~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you dont need to type any args.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[5]"
@@ -170,14 +170,14 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-27",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 65.0, 561.0, 34.0 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 17.0, 68.0, 591.0, 34.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -190,7 +190,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 15.0, 152.0, 65.0, 20.0 ],
+					"patching_rect" : [ 17.0, 155.0, 65.0, 20.0 ],
 					"text" : "cycle~ 0.1"
 				}
 
@@ -204,7 +204,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 15.0, 193.0, 235.0, 20.0 ],
+					"patching_rect" : [ 17.0, 196.0, 235.0, 20.0 ],
 					"text" : "hoa.2d.process~ 2 hoa.abs~ planewaves"
 				}
 
@@ -218,7 +218,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 482.5, 204.0, 78.0, 20.0 ],
+					"patching_rect" : [ 429.9375, 230.5, 78.0, 20.0 ],
 					"text" : "turn dac~ on",
 					"textcolor" : [ 0.326531, 0.326531, 0.326531, 1.0 ]
 				}
@@ -231,21 +231,21 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 430.0, 182.0, 44.0, 44.0 ]
+					"patching_rect" : [ 377.4375, 208.5, 44.0, 44.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"border" : 1,
+					"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-26",
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 424.0, 171.25, 149.5, 62.75 ],
-					"rounded" : 15,
-					"shadow" : -1
+					"patching_rect" : [ 371.4375, 202.0, 146.0, 56.0 ],
+					"rounded" : 0
 				}
 
 			}
@@ -259,7 +259,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 494.0, 13.0, 257.0, 32.0 ],
+					"patching_rect" : [ 496.0, 16.0, 257.0, 32.0 ],
 					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -273,7 +273,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 494.0, 13.0, 257.0, 32.0 ],
+					"patching_rect" : [ 496.0, 16.0, 257.0, 32.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -287,7 +287,7 @@
 					"name" : "hoa.helpheader.maxpat",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2.4375, 1.0, 483.0, 56.0 ]
+					"patching_rect" : [ 4.4375, 4.0, 483.0, 56.0 ]
 				}
 
 			}
@@ -301,7 +301,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 0,
-					"patching_rect" : [ 416.4375, 17.5, 52.0, 23.0 ],
+					"patching_rect" : [ 418.4375, 20.5, 52.0, 23.0 ],
 					"text" : "bgcolor 0.93 0.93 0.92 1."
 				}
 
@@ -364,21 +364,21 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.abs~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/operators",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1

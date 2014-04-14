@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 1041.0, 283.0, 263.0, 321.0 ],
+		"rect" : [ 568.0, 481.0, 263.0, 321.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -317,6 +317,19 @@
 					"source" : [ "obj-8", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

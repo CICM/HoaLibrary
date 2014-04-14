@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 1001.0, 757.0 ],
+		"rect" : [ 96.0, 47.0, 1001.0, 757.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -1303,7 +1303,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1001.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1334,7 +1334,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 486.333344, 698.0, 149.0, 19.0 ],
-									"presentation_rect" : [ 531.5, 673.0, 0.0, 0.0 ],
 									"text" : "Mute statut of the source 1"
 								}
 
@@ -1349,7 +1348,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 486.333344, 698.0, 149.0, 19.0 ],
-									"presentation_rect" : [ 531.5, 673.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -1362,8 +1360,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 456.0, 698.0, 20.0, 20.0 ],
-									"presentation_rect" : [ 461.0, 678.0, 0.0, 0.0 ]
+									"patching_rect" : [ 456.0, 698.0, 20.0, 20.0 ]
 								}
 
 							}
@@ -1377,7 +1374,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 456.0, 671.0, 66.0, 19.0 ],
-									"presentation_rect" : [ 461.0, 651.0, 0.0, 0.0 ],
 									"text" : "route mute"
 								}
 
@@ -2680,7 +2676,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1001.0, 731.0 ],
+						"rect" : [ 96.0, 73.0, 1001.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2711,7 +2707,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 486.0, 165.5, 229.0, 45.0 ],
+									"patching_rect" : [ 486.0, 165.5, 233.0, 45.0 ],
 									"text" : "To restore source and group at patch load, \nenable parameter mode and initial in the hoa.2d.map object inspector",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -2755,7 +2751,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 622.0, 395.0, 39.0, 17.0 ],
-									"presentation_rect" : [ 649.0, 402.0, 0.0, 0.0 ],
 									"text" : "linear"
 								}
 
@@ -2770,7 +2765,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 670.5, 395.0, 209.0, 20.0 ],
-									"presentation_rect" : [ 599.5, 340.5, 0.0, 0.0 ],
 									"text" : "you can also change the interpolation",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -2787,7 +2781,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 670.5, 395.0, 209.0, 20.0 ],
-									"presentation_rect" : [ 599.5, 340.5, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -2804,8 +2797,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 486.0, 426.0, 50.0, 19.0 ],
-									"presentation_rect" : [ 470.0, 410.5, 0.0, 0.0 ]
+									"patching_rect" : [ 486.0, 426.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -2834,7 +2826,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 138.5, 227.5, 274.5, 47.0 ],
-									"presentation_rect" : [ 138.5, 241.0, 0.0, 0.0 ],
 									"text" : "In this patch, preset and pattrstorage are binded together, so you can either use the preset object or the \"store\" message to store and recall slots.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -2851,7 +2842,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 138.5, 227.5, 274.5, 47.0 ],
-									"presentation_rect" : [ 138.5, 241.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -2880,7 +2870,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 353.5, 365.0, 72.0, 17.0 ],
-									"text" : "1, 14 12000"
+									"text" : "1, 14 20000"
 								}
 
 							}
@@ -2928,7 +2918,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u206000374"
+									"varname" : "u268000481"
 								}
 
 							}
@@ -8497,11 +8487,11 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ],
-			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
+			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
 			"obj-1::obj-1" : [ "hoa.2d.map[1]", "hoa.2d.map[1]", 0 ],
 			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ],
-			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ]
+			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
+			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
