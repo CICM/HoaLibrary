@@ -109,6 +109,8 @@ static t_symbol* hoa_sym_trajectory 				= gensym("trajectory");
 static t_symbol* hoa_sym_remove 					= gensym("remove");
 static t_symbol* hoa_sym_description 				= gensym("description");
 static t_symbol* hoa_sym_color 						= gensym("color");
+static t_symbol* hoa_sym_source_preset_data			= gensym("_source_preset_data_");
+static t_symbol* hoa_sym_group_preset_data			= gensym("_group_preset_data_");
 
 // recomposer
 static t_symbol* hoa_sym_channels					= gensym("channels");

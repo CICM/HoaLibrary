@@ -76,16 +76,6 @@
 				The <m>group</m> message send group relative instructions like their position, color, add a description, mute them...
 			</description>
 		</method>
-		<method name="slot">
-			<arglist />
-			<digest>
-				Send slot relative instructions.
-			</digest>
-			<description>
-				The <m>slot</m> message send slot relative instructions. The slot system is an embeded preset/pattr system.
-				see the <o>preset</o> and the <o>pattrstorage</o> object and the <o>hoa.2d.map</o> help patch for more infos about supported messages.
-			</description>
-		</method>
 		<method name="source">
 			<arg name="source-index" optional="0" type="int" />
 			<arg name="modifier-message" optional="0" type="symbol" />
@@ -95,16 +85,6 @@
 			</digest>
 			<description>
 				The <m>source</m> message send source relative instructions like their position, color, add a description, mute them...
-			</description>
-		</method>
-		<method name="trajectory">
-			<arglist />
-			<digest>
-				Send trajectory relative instructions.
-			</digest>
-			<description>
-				The <m>trajectory</m> message send trajectory relative instructions. The slot system is an embeded preset/pattr system.
-				see the <o>preset</o> and the <o>pattrstorage</o> object and the <o>hoa.2d.map</o> help patch for more infos about supported messages.
 			</description>
 		</method>
 	</methodlist>

@@ -11,7 +11,7 @@
 		"rect" : [ 333.0, 198.0, 773.0, 648.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 14.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -65,8 +65,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 262.0, 373.0, 180.0, 20.0 ],
-					"text" : "patching_rect 1. 1. 322. 32."
+					"patching_rect" : [ 311.0, 373.0, 204.0, 20.0 ],
+					"text" : "presentation_rect 1. 1. 322. 32."
 				}
 
 			}
@@ -79,8 +79,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 72.0, 373.0, 180.0, 20.0 ],
-					"text" : "patching_rect 1. 1. 543. 19."
+					"patching_rect" : [ 72.0, 373.0, 204.0, 20.0 ],
+					"text" : "presentation_rect 1. 1. 543. 19."
 				}
 
 			}
@@ -104,11 +104,13 @@
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
 					"id" : "obj-3",
-					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
+					"patching_rect" : [ 1.0, 1.0, 543.0, 19.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 2,
+					"presentation_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
 					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM | University Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -122,7 +124,9 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
+					"patching_rect" : [ 1.0, 1.0, 543.0, 19.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
