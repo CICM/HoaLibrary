@@ -410,7 +410,16 @@ void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 			for (i = 0; i < args_processed.argc; i++)
 				args_processed.argv[i] = ( i < patcher_args.argc) ? patcher_args.argv[i] : x->object_args.argv[i];
 			
-			outlet_list(x->out_patcherArgs, NULL, args_processed.argc, args_processed.argv);
+            if (args_processed.argc == 1)
+            {
+                if (atom_gettype(args_processed.argv) == A_FLOAT)
+                    outlet_float(x->out_patcherArgs, atom_getfloat(args_processed.argv));
+                
+                else if (atom_gettype(args_processed.argv) == A_LONG)
+                    outlet_int(x->out_patcherArgs, atom_getlong(args_processed.argv));
+            }
+            else
+                outlet_list(x->out_patcherArgs, NULL, args_processed.argc, args_processed.argv);
 			
 			// free patcher_args
 			if(patcher_args.argv)
