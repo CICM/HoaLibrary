@@ -597,9 +597,9 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     }
     else
     {
-		angle   = wrap_twopi(azimuth(mouse.x, mouse.y));
+		angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (0.5 / (x->f_number_of_channels) * HOA_2PI));
         radius  = Hoa::radius(mouse.x, mouse.y);
-        index   = angle / HOA_2PI * x->f_number_of_channels;
+        index   = (angle / HOA_2PI * x->f_number_of_channels);
         value   = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
         value  += x->f_minmax[0];
         value  *= (x->f_minmax[1] - x->f_minmax[0]);
@@ -607,11 +607,11 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         x->f_channel_values[index] = value;
     }
     
+	object_notify(x, hoa_sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
     jbox_redraw((t_jbox *)x);
     hoa_space_output(x);
-    object_notify(x, hoa_sym_modified, NULL);
 }
 
 void hoa_space_output(t_hoa_space *x)
@@ -635,6 +635,7 @@ t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
             for(int i = 0; i < x->f_number_of_channels; i++)
                 x->f_channel_values[i] = 0.;
             
+			object_notify(x, hoa_sym_modified, NULL);
             jbox_invalidate_layer((t_object*)x, NULL, hoa_sym_background_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
@@ -671,6 +672,7 @@ t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = clip_minmax(x->f_channel_values[i], x->f_minmax[0], x->f_minmax[1]);
         
+		object_notify(x, hoa_sym_modified, NULL);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
         jbox_redraw((t_jbox *)x);
