@@ -1,0 +1,14 @@
+hoa.2d.decoder~-help.pd hoa.2d.decoder~ An ambisonic decoder.;
+hoa.2d.encoder~-help.pd hoa.2d.encoder~ An ambisonic encoder.;
+hoa.map~-help hoa.map~ An ambisonic sources spatializer.;
+hoa.map-help hoa.map A GUI to spatialize sources on a map.;
+hoa.meter~-help A circular meter with sound field descriptor.;
+hoa.optim~-help An ambisonic sound field optimization.;
+hoa.pi-help A good pi number.;
+hoa.projector~-help A plane wave decomposer.;
+hoa.recomposer~-help A plane wave recomposer to harmonics domain.;
+hoa.rotate~-help An ambisonic sound field rotation external.;
+hoa.scope~-help An ambisonic harmonic scope.;
+hoa.space-help A GUI to design ambisonic space.;
+hoa.space~-help A spatial filter.;
+hoa.wider~-help A fractional ambisonic orders simulator.;

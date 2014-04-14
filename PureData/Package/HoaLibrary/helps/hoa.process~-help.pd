@@ -1,4 +1,4 @@
-#N canvas 138 187 1076 565 10;
+#N canvas 159 77 1209 677 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
 #X msg -134 -181 \; pd dsp 1;
@@ -47,4 +47,5 @@ or planewaves. Note that if you use hoa.process~ in the harmonics domain
 2D) or (order + 1) * (order + 1) (the number of harmonics in 3D) the
 partcher and if you use it in the plane waves domain \, it instanctiates
 the patcher as many times as the number of channels.;
+#X obj -207 -50 hoa.display.helps;
 #X connect 5 0 4 0;

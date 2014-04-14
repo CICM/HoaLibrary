@@ -6,8 +6,7 @@
 #X obj 27 349 *~;
 #X obj 128 309 line~;
 #X msg 128 287 \$1 20;
-#X obj 128 91 hoa.in extra 1;
-#X text 179 331 Simple ring modulation;
+#X text 189 391 Simple ring modulation;
 #X obj 27 305 hoa.in~ extra 1;
 #X obj -55 32 hoa.thisprocess~;
 #X obj -55 90 unpack 0 0;
@@ -31,28 +30,29 @@
 #X connect 3 0 2 0;
 #X connect 4 0 0 0;
 #X restore -24 68 pd print.domain.error;
-#X text 265 218 If index of the harmonic >= 0 \, the signal is multiplied
+#X text 193 315 If index of the harmonic >= 0 \, the signal is multiplied
 by cos(azimuth * index of the harmonic) else \, the signal is multiplied
 by sin(azimuth * abs(index of the harmonic)).;
 #X text 172 -5 This hoa.processing shows what performs the encoding
 of a signal in the circular harmonics domain.;
-#X connect 1 0 10 0;
+#X obj 128 91 hoa.in extra 2;
+#X connect 1 0 9 0;
 #X connect 4 0 0 0;
 #X connect 5 0 4 1;
 #X connect 6 0 5 0;
-#X connect 7 0 12 0;
-#X connect 9 0 4 0;
-#X connect 10 0 11 0;
-#X connect 10 1 21 0;
-#X connect 11 1 13 0;
-#X connect 11 1 18 0;
-#X connect 11 1 14 0;
-#X connect 12 0 15 0;
-#X connect 12 0 16 0;
-#X connect 13 0 12 1;
-#X connect 14 0 16 1;
-#X connect 15 0 17 0;
-#X connect 16 0 19 0;
-#X connect 17 0 6 0;
-#X connect 18 0 15 1;
-#X connect 19 0 6 0;
+#X connect 8 0 4 0;
+#X connect 9 0 10 0;
+#X connect 9 1 20 0;
+#X connect 10 1 12 0;
+#X connect 10 1 17 0;
+#X connect 10 1 13 0;
+#X connect 11 0 14 0;
+#X connect 11 0 15 0;
+#X connect 12 0 11 1;
+#X connect 13 0 15 1;
+#X connect 14 0 16 0;
+#X connect 15 0 18 0;
+#X connect 16 0 6 0;
+#X connect 17 0 14 1;
+#X connect 18 0 6 0;
+#X connect 23 0 11 0;

@@ -1,0 +1,15 @@
+#N canvas 179 190 711 471 10;
+#X obj 137 65 hoa.in~;
+#X obj 137 248 hoa.out~;
+#X obj 145 -22 c.loadmess;
+#X obj 190 65 hoa.in;
+#X obj 137 157 c.convolve~ buffer 1;
+#X obj 263 85 c.prepend set;
+#X obj 330 57 route wet dry;
+#X obj 145 12 hoa.thisprocess~ @wet 1 @dry 0 @normalize;
+#X connect 0 0 4 0;
+#X connect 2 0 7 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
+#X connect 7 2 5 0;

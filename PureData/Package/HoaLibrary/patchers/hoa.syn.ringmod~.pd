@@ -37,11 +37,12 @@ and control the frequency of the ring modulation (mostly used in the
 plane waves domain).;
 #X text 172 -5 This hoa.processing synthesizes a sound field with ring
 modulation.;
+#X obj 163 21 hoa.in extra 2;
 #X connect 1 0 25 0;
 #X connect 5 0 6 1;
-#X connect 6 0 16 1;
 #X connect 6 0 12 1;
 #X connect 6 1 11 0;
+#X connect 6 1 16 1;
 #X connect 7 0 0 0;
 #X connect 8 0 7 1;
 #X connect 9 0 8 0;
@@ -63,3 +64,4 @@ modulation.;
 #X connect 26 1 16 0;
 #X connect 26 2 23 0;
 #X connect 27 0 26 0;
+#X connect 31 0 26 0;
