@@ -25,7 +25,7 @@
  
  @category ambisonics, hoa objects, msp
  
- @seealso hoa.thisprocess~, hoa.in~, hoa.in, hoa.out, hoa.out~, thispoly~, poly~, thispatcher, patcher
+ @seealso hoa.process~, hoa.in~, hoa.in, hoa.out, hoa.out~, thispoly~, poly~, thispatcher, patcher
  */
 
 #include "../HoaCommon.max.h"
@@ -108,6 +108,12 @@ int C74_EXPORT main(void)
 
 void *hoa_thisprocess_new(t_symbol *s, short argc, t_atom *argv)
 {
+    // @arg 0 @name arguments @optional 1 @type int/float/symbol @digest default arguments
+    // @description A list of default arguments
+    
+    // @arg 1 @name attributes @optional 1 @type int/float/symbol @digest default attributes
+    // @description A list of default attributes
+    
     t_hoa_thisprocess *x = (t_hoa_thisprocess *) object_alloc(hoa_thisprocess_class);
 	
 	x->out_mute				= intout(x);
