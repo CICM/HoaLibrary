@@ -1,0 +1,64 @@
+#N canvas 54 218 738 451 10;
+#X declare -lib HoaLibrary/hoa.library;
+#X declare -lib hoa.library;
+#X obj 45 1 cnv 15 354 40 empty \$0-hoa.header hoa.2d.decoder~ 3 12
+0 18 -212212 -1 0;
+#X obj 436 384 declare -lib HoaLibrary/hoa.library;
+#X obj 436 363 declare -lib hoa.library;
+#X obj 483 312 s \$0-hoa.header;
+#X obj 449 5 inlet;
+#X obj 296 78 namecanvas \$0-r;
+#X msg 476 68 read hoa.objects.txt;
+#X obj 517 253 s \$0-r;
+#X msg 483 282 label \$1;
+#X obj 449 35 t s b;
+#X obj 476 91 text define -k \$0-hoa-2d-objs;
+#A set hoa.2d.decoder~-help.pd hoa.2d.decoder~ An ambisonic decoder.
+\; hoa.2d.encoder~-help.pd hoa.2d.encoder~ An ambisonic encoder. \;
+hoa.map~-help hoa.map~ An ambisonic sources spatializer. \; hoa.map-help
+hoa.map A GUI to spatialize sources on a map. \; hoa.meter~-help A
+circular meter with sound field descriptor. \; hoa.optim~-help An ambisonic
+sound field optimization. \; hoa.pi-help A good pi number. \; hoa.projector~-help
+A plane wave decomposer. \; hoa.recomposer~-help A plane wave recomposer
+to harmonics domain. \; hoa.rotate~-help An ambisonic sound field rotation
+external. \; hoa.scope~-help An ambisonic harmonic scope. \; hoa.space-help
+A GUI to design ambisonic space. \; hoa.space~-help A spatial filter.
+\; hoa.wider~-help A fractional ambisonic orders simulator. \;;
+#X obj 449 121 text search \$0-hoa-2d-objs;
+#X obj 449 150 text get \$0-hoa-2d-objs;
+#X obj 449 175 list split 1;
+#X obj 483 195 list split 1;
+#X obj 3 3 c.blackboard @size 40 37 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
+0 @bgcolor 0.802322 0.802322 0.802322 1 @bdcolor 0.802322 0.802322
+0.802322 1;
+#X msg 25 131 clear \, image 2 1 logo.gif;
+#X obj 189 88 metro 10;
+#X msg 189 60 1;
+#X obj 213 123 + 1;
+#X obj 189 123 f 0;
+#X obj 188 150 sel 100;
+#X msg 188 173 0;
+#X obj 517 225 c.prepend text 46 23;
+#X connect 4 0 9 0;
+#X connect 6 0 10 0;
+#X connect 8 0 3 0;
+#X connect 9 0 11 0;
+#X connect 9 1 6 0;
+#X connect 9 1 18 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 1 14 0;
+#X connect 13 1 8 0;
+#X connect 14 1 23 0;
+#X connect 16 0 15 0;
+#X connect 17 0 20 0;
+#X connect 17 0 16 0;
+#X connect 18 0 17 0;
+#X connect 19 0 20 1;
+#X connect 20 0 19 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 22 0 17 0;
+#X connect 23 0 7 0;
+#X coords 0 -1 1 1 400 42 2 0 0;

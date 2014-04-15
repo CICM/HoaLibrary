@@ -1,24 +1,18 @@
-#N canvas 427 110 792 623 10;
+#N canvas 374 96 735 607 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
-#X obj 176 -297 phasor~ -0.3;
-#X text -81 -293 source;
-#X text 210 -247 angle;
-#X msg -208 -136 \; pd dsp 1;
-#X msg -208 -101 \; pd dsp 0;
-#X text -108 203 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -108 187 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
-#X obj -79 168 hoa.dac~ 1:16 -----------------------------;
-#X obj 196 -226 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj 52 -373 phasor~ -0.3;
+#X text -205 -369 source;
+#X text 86 -323 angle;
+#X msg -332 -212 \; pd dsp 1;
+#X msg -332 -177 \; pd dsp 0;
+#X obj -203 92 hoa.dac~ 1:16 -----------------------------;
+#X obj 72 -302 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -79 -150 hoa.2d.decoder~ 7 ambisonics 16 -----------;
-#X obj -79 -117 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
+#X obj -203 -226 hoa.2d.decoder~ 7 ambisonics 16 -----------;
+#X obj -203 -193 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
 292.5 315 337.5 @offset 0 @rotation anti-clockwise @vectors none @interval
@@ -26,76 +20,75 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
 1 0 0 0.8;
-#X obj -79 -221 hoa.2d.encoder~ 7 -------------------------;
-#X obj -79 -268 hoa.soundgrain;
-#X obj -79 -239 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -203 -297 hoa.2d.encoder~ 7 -------------------------;
+#X obj -203 -344 hoa.soundgrain;
+#X obj -203 -315 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X obj 351 -231 hoa.connect;
-#X obj 351 -251 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 227 -307 hoa.connect;
+#X obj 227 -327 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 236 202 declare -lib HoaLibrary/hoa.library;
-#X obj 236 181 declare -lib hoa.library;
-#X text -250 -345 hoa.2d.encoder~ creates the circular harmonics of
+#X text -375 -401 hoa.2d.encoder~ creates the circular harmonics of
 a signal depending on a given order and an angle.;
-#X obj 176 -272 hoa.pi~ 2;
-#X obj -255 -412 c.patcherinfos;
-#X obj -255 -429 loadbang;
-#X obj -255 -389 hoa.display.helps;
-#X connect 0 0 19 1;
-#X connect 9 0 10 0;
+#X obj 52 -348 hoa.pi~ 2;
+#X obj -380 -428 c.patcherinfos;
+#X obj -380 -445 loadbang;
+#X obj -380 -445 hoa.help.header;
+#X obj -250 113 hoa.help.pub;
+#X connect 0 0 15 1;
+#X connect 7 0 8 0;
+#X connect 7 0 5 0;
+#X connect 7 1 8 1;
+#X connect 7 1 5 1;
+#X connect 7 2 5 2;
+#X connect 7 2 8 2;
+#X connect 7 3 5 3;
+#X connect 7 3 8 3;
+#X connect 7 4 5 4;
+#X connect 7 4 8 4;
+#X connect 7 5 5 5;
+#X connect 7 5 8 5;
+#X connect 7 6 5 6;
+#X connect 7 6 8 6;
+#X connect 7 7 5 7;
+#X connect 7 7 8 7;
+#X connect 7 8 5 8;
+#X connect 7 8 8 8;
+#X connect 7 9 5 9;
+#X connect 7 9 8 9;
+#X connect 7 10 5 10;
+#X connect 7 10 8 10;
+#X connect 7 11 5 11;
+#X connect 7 11 8 11;
+#X connect 7 12 5 12;
+#X connect 7 12 8 12;
+#X connect 7 13 5 13;
+#X connect 7 13 8 13;
+#X connect 7 14 5 14;
+#X connect 7 14 8 14;
+#X connect 7 15 5 15;
+#X connect 7 15 8 15;
 #X connect 9 0 7 0;
-#X connect 9 1 10 1;
 #X connect 9 1 7 1;
 #X connect 9 2 7 2;
-#X connect 9 2 10 2;
 #X connect 9 3 7 3;
-#X connect 9 3 10 3;
 #X connect 9 4 7 4;
-#X connect 9 4 10 4;
 #X connect 9 5 7 5;
-#X connect 9 5 10 5;
 #X connect 9 6 7 6;
-#X connect 9 6 10 6;
 #X connect 9 7 7 7;
-#X connect 9 7 10 7;
 #X connect 9 8 7 8;
-#X connect 9 8 10 8;
 #X connect 9 9 7 9;
-#X connect 9 9 10 9;
 #X connect 9 10 7 10;
-#X connect 9 10 10 10;
 #X connect 9 11 7 11;
-#X connect 9 11 10 11;
 #X connect 9 12 7 12;
-#X connect 9 12 10 12;
 #X connect 9 13 7 13;
-#X connect 9 13 10 13;
 #X connect 9 14 7 14;
-#X connect 9 14 10 14;
-#X connect 9 15 7 15;
-#X connect 9 15 10 15;
+#X connect 10 0 11 0;
 #X connect 11 0 9 0;
-#X connect 11 1 9 1;
-#X connect 11 2 9 2;
-#X connect 11 3 9 3;
-#X connect 11 4 9 4;
-#X connect 11 5 9 5;
-#X connect 11 6 9 6;
-#X connect 11 7 9 7;
-#X connect 11 8 9 8;
-#X connect 11 9 9 9;
-#X connect 11 10 9 10;
-#X connect 11 11 9 11;
-#X connect 11 12 9 12;
-#X connect 11 13 9 13;
-#X connect 11 14 9 14;
-#X connect 12 0 13 0;
-#X connect 13 0 11 0;
-#X connect 15 0 14 0;
-#X connect 19 0 11 1;
-#X connect 19 0 8 0;
-#X connect 20 0 22 0;
-#X connect 21 0 20 0;
-#X coords 0 623 1 622 100 60 0;
+#X connect 13 0 12 0;
+#X connect 15 0 9 1;
+#X connect 15 0 6 0;
+#X connect 16 0 18 0;
+#X connect 17 0 16 0;
+#X coords 0 607 1 606 100 60 0;

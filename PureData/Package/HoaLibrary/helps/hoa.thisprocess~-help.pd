@@ -1,13 +1,8 @@
 #N canvas 327 57 894 584 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X obj -350 -169 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.thisprocess~
-3 12 0 18 -228856 -1 0;
 #X text -329 296 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 & Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X obj 212 -145 declare -lib HoaLibrary/hoa.library;
-#X obj 212 -166 declare -lib hoa.library;
-#X text -347 -147 hoa.in \, hoa.out \, hoa.in~ and hoa.out~;
 #X msg 75 -121 \; pd dsp 1;
 #X msg 139 -121 \; pd dsp 0;
 #X text -348 -125 hoa.thisprocess~ retreive the configuration used
@@ -34,8 +29,6 @@ index;
 ;
 #X text 96 -52 The 3rd outlet outputs the pather arguments.;
 #X text 96 -32 The 4th outlet outputs the patcher attributes.;
-#X text -143 344 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
 #X msg 101 10 open 1;
 #X obj 101 50 hoa.2d.process~ 1 hoa.thisprocexample2~ planewaves This
 is a rock example @artist Jimi Hendrix @album Electric Ladyland @song
@@ -51,9 +44,15 @@ made to show how it works. You would prefer to look at the real uses
 of hoa.process~.;
 #X obj -339 270 hoa.3d.process~ 3 hoa.thisprocexample~ planewaves;
 #X obj -339 200 hoa.3d.process~ 1 hoa.thisprocexample~ harmonics;
-#X connect 11 0 10 0;
-#X connect 12 0 13 0;
-#X connect 16 0 35 0;
-#X connect 17 0 34 0;
-#X connect 27 0 28 0;
-#X connect 29 0 30 0;
+#X obj -342 -151 c.patcherinfos;
+#X obj -337 -168 loadbang;
+#X obj -352 -168 hoa.help.header;
+#X obj -113 344 hoa.help.pub;
+#X connect 7 0 6 0;
+#X connect 8 0 9 0;
+#X connect 12 0 30 0;
+#X connect 13 0 29 0;
+#X connect 22 0 23 0;
+#X connect 24 0 25 0;
+#X connect 31 0 33 0;
+#X connect 32 0 31 0;

@@ -5,22 +5,14 @@
 #X msg -134 -146 \; pd dsp 0;
 #X obj -236 -328 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo
 ;
-#X obj -695 -563 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.process~
-3 12 0 18 -228856 -1 0;
 #X obj -111 -541 hoa.connect;
 #X obj -111 -562 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -25 -538 declare -lib HoaLibrary/hoa.library;
-#X obj -25 -559 declare -lib hoa.library;
 #X text -690 -417 2nd argument is the name of the patcher to instantiate.
 ;
 #X text -690 -467 1st argument is the order if you use hoa.process~
 in the circular harmonics domain or the number of channels if you use
 it in the plane waves domain.;
-#X text -686 -31 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -686 -47 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
 #X text -690 -297 Extra arguments and attributes are sent to object
 hoa.this.process~ if there is one inside the patcher. You should look
 at the help.;
@@ -35,9 +27,6 @@ of hoa.process~.;
 #X text -240 -467 1st argument is the order if you use hoa.process~
 in the circular harmonics domain or the number of channels if you use
 it in the plane waves domain.;
-#X text -693 -541 A multi-patcher for circular or spherical harmonics
-and;
-#X text -355 -541 plane waves domains;
 #X text -693 -522 hoa.process~ helps the creation of processing in
 the circular or spherical harmonics and plane waves domains by instantiating
 several instances of a patcher.;
@@ -47,5 +36,10 @@ or planewaves. Note that if you use hoa.process~ in the harmonics domain
 2D) or (order + 1) * (order + 1) (the number of harmonics in 3D) the
 partcher and if you use it in the plane waves domain \, it instanctiates
 the patcher as many times as the number of channels.;
-#X obj -207 -50 hoa.display.helps;
-#X connect 5 0 4 0;
+#X obj -687 -549 c.patcherinfos;
+#X obj -682 -566 loadbang;
+#X obj -697 -566 hoa.help.header;
+#X obj -603 -100 hoa.help.pub;
+#X connect 4 0 3 0;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;

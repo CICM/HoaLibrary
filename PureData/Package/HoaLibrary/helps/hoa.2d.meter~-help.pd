@@ -1,104 +1,101 @@
 #N canvas 106 100 774 563 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X obj -555 -465 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.meter~
-3 12 0 18 -228856 -1 0;
-#X text -550 -444 A circular meter with sound field descriptor;
-#X msg -537 -137 \; pd dsp 1;
-#X msg -537 -100 \; pd dsp 0;
-#X text -448 42 Eliott Paris © 2012-2013 CICM / Universite Paris 8
-;
-#X text -448 26 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
-#X obj -58 -206 s hoameter;
-#X obj -165 -277 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg -547 -137 \; pd dsp 1;
+#X msg -547 -100 \; pd dsp 0;
+#X obj -68 -206 s hoameter;
+#X obj -175 -277 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max 64 @minmax 1 64 @decimal 0 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg -165 -244 channels \$1;
-#X obj -58 -277 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg -175 -244 channels \$1;
+#X obj -68 -277 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min -360 @max 360 @minmax -360 360 @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg -58 -244 offset \$1;
-#X text -61 -308 Offset of;
-#X text -61 -298 channels;
-#X text 29 -298 channels;
-#X text 29 -308 Rotation of;
-#X msg 32 -244 rotation \$1;
-#X obj 32 -278 c.menu @size 100 17 @fontname Helvetica @fontweight
+#X msg -68 -244 offset \$1;
+#X text -71 -308 Offset of;
+#X text -71 -298 channels;
+#X text 19 -298 channels;
+#X text 19 -308 Rotation of;
+#X msg 22 -244 rotation \$1;
+#X obj 22 -278 c.menu @size 100 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items Anti-Clockwise Clockwise @states 0 0 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -207 -374 phasor~ 0.3;
-#X obj -94 -76 s hoameter;
-#X text -161 -298 channels;
-#X text -161 -308 Number of;
-#X obj -178 -158 c.menu @size 100 17 @fontname Helvetica @fontweight
+#X obj -217 -374 phasor~ 0.3;
+#X obj -104 -76 s hoameter;
+#X text -171 -298 channels;
+#X text -171 -308 Number of;
+#X obj -188 -158 c.menu @size 100 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items none energy velocity both @states 0 0 0 0 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg -178 -124 vectors \$1;
-#X text -161 -188 Vectors to;
-#X text -161 -178 display;
-#X text 22 -212 Angles;
-#X msg -33 -174 angles 0 15 90 270 345;
-#X msg -1 -121 angles 0 30 110 250 330;
-#X obj -492 -305 r hoadec;
-#X obj -18 -76 s hoadec;
-#X obj -165 -334 c.loadmess 5;
-#X obj -432 -359 noise~;
-#X obj -432 -327 hoa.2d.encoder~ 3 --------------------;
-#X obj -432 -228 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
+#X msg -188 -124 vectors \$1;
+#X text -171 -188 Vectors to;
+#X text -171 -178 display;
+#X text 12 -212 Angles;
+#X msg -43 -174 angles 0 15 90 270 345;
+#X msg -11 -121 angles 0 30 110 250 330;
+#X obj -502 -305 r hoadec;
+#X obj -28 -76 s hoadec;
+#X obj -175 -334 c.loadmess 5;
+#X obj -442 -359 noise~;
+#X obj -442 -327 hoa.2d.encoder~ 3 --------------------;
+#X obj -442 -228 hoa.2d.meter~ @size 231 231 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
 @channels 5 @angles 0 30 110 250 330 @offset 0 @rotation clockwise
 @vectors energy @interval 50 @bgcolor 0.758847 0.758847 0.758847 1
 @bdcolor 0.699562 0.699562 0.699562 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X text -550 -423 hoa.2d.meter~ displays the peak levels for a circurlar
+#X text -560 -423 hoa.2d.meter~ displays the peak levels for a circurlar
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
-#X msg -18 -148 angles 0 72 144 -144 -72;
-#X obj -178 -204 c.loadmess 1;
-#X obj -432 -266 hoa.2d.decoder~ 3 irregular 5 @angles 0 30 110 250
+#X msg -28 -148 angles 0 72 144 -144 -72;
+#X obj -188 -204 c.loadmess 1;
+#X obj -442 -266 hoa.2d.decoder~ 3 irregular 5 @angles 0 30 110 250
 330, f 38;
-#X obj 5 -441 hoa.connect;
-#X obj 5 -461 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj -116 45 declare -lib HoaLibrary/hoa.library;
-#X obj -116 24 declare -lib hoa.library;
-#X obj -207 -353 hoa.pi~ 2;
-#X connect 7 0 8 0;
-#X connect 8 0 6 0;
-#X connect 9 0 10 0;
-#X connect 10 0 6 0;
-#X connect 15 0 6 0;
-#X connect 16 0 15 0;
-#X connect 17 0 42 1;
-#X connect 21 0 22 0;
-#X connect 22 0 18 0;
-#X connect 26 0 18 0;
-#X connect 26 0 29 0;
-#X connect 27 0 18 0;
-#X connect 27 0 29 0;
-#X connect 28 0 37 0;
-#X connect 30 0 7 0;
-#X connect 31 0 32 0;
-#X connect 32 0 37 0;
-#X connect 32 1 37 1;
-#X connect 32 2 37 2;
-#X connect 32 3 37 3;
-#X connect 32 4 37 4;
-#X connect 32 5 37 5;
-#X connect 32 6 37 6;
-#X connect 35 0 18 0;
-#X connect 35 0 29 0;
-#X connect 36 0 21 0;
-#X connect 37 0 33 0;
-#X connect 37 1 33 1;
-#X connect 37 2 33 2;
-#X connect 37 3 33 3;
-#X connect 37 4 33 4;
+#X obj -5 -441 hoa.connect;
+#X obj -5 -461 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -217 -353 hoa.pi~ 2;
+#X obj -424 40 hoa.help.pub;
+#X obj -550 -449 c.patcherinfos;
+#X obj -545 -466 loadbang;
+#X obj -560 -466 hoa.help.header;
+#X connect 3 0 4 0;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X connect 6 0 2 0;
+#X connect 11 0 2 0;
+#X connect 12 0 11 0;
+#X connect 13 0 36 1;
+#X connect 17 0 18 0;
+#X connect 18 0 14 0;
+#X connect 22 0 14 0;
+#X connect 22 0 25 0;
+#X connect 23 0 14 0;
+#X connect 23 0 25 0;
+#X connect 24 0 33 0;
+#X connect 26 0 3 0;
+#X connect 27 0 28 0;
+#X connect 28 0 33 0;
+#X connect 28 1 33 1;
+#X connect 28 2 33 2;
+#X connect 28 3 33 3;
+#X connect 28 4 33 4;
+#X connect 28 5 33 5;
+#X connect 28 6 33 6;
+#X connect 31 0 14 0;
+#X connect 31 0 25 0;
+#X connect 32 0 17 0;
+#X connect 33 0 29 0;
+#X connect 33 1 29 1;
+#X connect 33 2 29 2;
+#X connect 33 3 29 3;
+#X connect 33 4 29 4;
+#X connect 35 0 34 0;
+#X connect 36 0 28 1;
+#X connect 38 0 40 0;
 #X connect 39 0 38 0;
-#X connect 42 0 32 1;

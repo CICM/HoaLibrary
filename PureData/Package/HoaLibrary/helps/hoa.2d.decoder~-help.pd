@@ -1,50 +1,50 @@
-#N canvas 90 22 1346 674 10;
+#N canvas 105 57 1182 687 10;
 #X declare -lib HoaLibrary/hoa.library;
 #X declare -lib hoa.library;
-#X obj 245 -297 phasor~ -0.3;
-#X text 372 -372 Irregular mode is used for standart configurations
+#X obj 243 -304 phasor~ -0.3;
+#X text 370 -379 Irregular mode is used for standart configurations
 : mono (1) \, stereo (2) \, 3.1 (3) \, quadriphonie (4) \, 5.1 (5)
 \, 6.1 \, 7.1. The fourth argument is the irregular decoding mode :
 panning (default) or projection. You should use "inPhase" optimization
 to avoid artefact.;
-#X text -450 -379 1st argument is the order.;
-#X text -450 -323 3rd argument is the number of loudspeakers (minmum
+#X text -460 -396 1st argument is the order.;
+#X text -460 -340 3rd argument is the number of loudspeakers (minmum
 2 * order + 1 for ambisonic mode).;
-#X obj -4 -51 c.meter~ @size 9 71 @fontname Helvetica @fontweight normal
+#X obj -6 -58 c.meter~ @size 9 71 @fontname Helvetica @fontweight normal
 @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0
 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8;
-#X obj 245 -57 c.meter~ @size 9 71 @fontname Helvetica @fontweight
+#X obj 243 -64 c.meter~ @size 9 71 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0
 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8;
-#X obj -4 -266 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -6 -273 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X msg -76 -389 \; pd dsp 1;
-#X msg -76 -354 \; pd dsp 0;
-#X obj 377 -115 hoa.2d.decoder~ 7 irregular 5 @angles 0 30 110 250
+#X msg 94 -57 \; pd dsp 1;
+#X msg 94 -22 \; pd dsp 0;
+#X obj 375 -122 hoa.2d.decoder~ 7 irregular 5 @angles 0 30 110 250
 330, f 43;
-#X text -451 -414 hoa.2d.decoder~ decodes an ambisonic sound field
+#X text -461 -431 hoa.2d.decoder~ decodes an ambisonic sound field
 for several loudspeakers configurations or for headphones.;
-#X msg -446 -160 offset \$1;
-#X obj -446 -193 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg -448 -167 offset \$1;
+#X obj -448 -200 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text -449 -214 Offset of the loudspeakers in degrees;
-#X msg 375 -216 offset \$1;
-#X obj 375 -249 c.number @size 53 17 @fontname Helvetica @fontweight
+#X text -451 -221 Offset of the loudspeakers in degrees;
+#X msg 373 -223 offset \$1;
+#X obj 373 -256 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 372 -270 Offset of the loudspeakers in degrees;
-#X obj -365 -153 hoa.2d.optim~ 7 maxRe ---------------------;
-#X obj 377 -143 hoa.2d.optim~ 7 inPhase -------------------;
-#X obj -365 -67 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
+#X text 370 -277 Offset of the loudspeakers in degrees;
+#X obj -367 -160 hoa.2d.optim~ 7 maxRe ---------------------;
+#X obj 375 -150 hoa.2d.optim~ 7 inPhase -------------------;
+#X obj -367 -74 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 16 @angles 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270
 292.5 315 337.5 @offset 0 @rotation anti-clockwise @vectors energy
@@ -52,36 +52,33 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
 1 0 0 0.8;
-#X obj 377 -68 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
+#X obj 375 -75 hoa.2d.meter~ @size 261 261 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 5 @angles 0 30 110 250 330 @offset 0 @rotation anti-clockwise @vectors
 energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85
 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 475 -436 hoa.connect;
-#X obj 475 -456 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 534 -453 hoa.connect;
+#X obj 534 -473 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -4 -307 hoa.soundcoat;
-#X obj -365 -120 hoa.2d.decoder~ 7 ambisonic 16 ------------;
-#X text -38 77 Binaural mode is used for headphones. It uses the MIT
+#X obj -6 -314 hoa.soundcoat;
+#X obj -367 -127 hoa.2d.decoder~ 7 ambisonic 16 ------------;
+#X text -40 60 Binaural mode is used for headphones. It uses the MIT
 Hrtfs \, then the maximum order is 35 The fourth argument is the pinna
 size : small (default) or large.;
-#X text -38 117 Binaural decoding don't work with too small or too
+#X text -40 100 Binaural decoding don't work with too small or too
 big vector size \, 256 or 512 seem to be good values.;
-#X text -448 -284 Ambisonic decoding is used for a perfect circle of
+#X text -450 -291 Ambisonic decoding is used for a perfect circle of
 loudspeakers where all of them are to equal distance. The minimum number
 of loudspeakers is 2 * order + 1 (default : 2 * order + 2). The fourth
 argument is the offset of loudpeakers in degrees.;
-#X text -451 -364 2nd argument is the decoding mode : ambisonic or
+#X text -461 -381 2nd argument is the decoding mode : ambisonic or
 0 \, binaural or 1 (for headphones) \, irregular or 2 (for an irregular
 loudpspeakers array).;
-#X text -14 -381 Important : Unlike the GUI \, the argument are not
-saved with the object. You have write it in the box or to send a message.
-;
-#X obj 245 -275 hoa.pi~ 2;
-#X text 268 -91 This is an;
-#X text 268 -81 abstraction;
+#X obj 243 -282 hoa.pi~ 2;
+#X text 266 -98 This is an;
+#X text 266 -88 abstraction;
 #N canvas 0 22 450 300 (subpatch) 0;
 #X obj 0 10 inlet~;
 #X obj 50 10 inlet~;
@@ -119,14 +116,19 @@ saved with the object. You have write it in the box or to send a message.
 #X connect 14 0 15 14;
 #X connect 15 0 17 0;
 #X connect 15 1 18 0;
-#X restore -4 -84 hoa.2d.binaural~ 7 @block 256 @pinna small;
-#X obj -4 33 hoa.dac~ 1 2 -----------------------------;
-#X obj -4 -245 hoa.2d.encoder~ 7 ------------------------;
-#X obj -459 -485 c.patcherinfos;
-#X obj -459 -502 loadbang;
-#X obj -459 -462 hoa.display.helps;
-#X connect 0 0 30 1;
-#X connect 6 0 35 0;
+#X restore -6 -91 hoa.2d.binaural~ 7 @block 256 @pinna small;
+#X obj -6 26 hoa.dac~ 1 2 -----------------------------;
+#X obj -6 -252 hoa.2d.encoder~ 7 ------------------------;
+#X obj -451 -458 c.patcherinfos;
+#X obj -446 -475 loadbang;
+#X obj -461 -475 hoa.help.header;
+#X obj -44 150 hoa.help.pub;
+#X obj 265 -475 hoa.help.also;
+#X text -16 -388 Important : Unlike the GUI \, the argument are not
+saved with the object. You have to write it in the box or to send a
+message.;
+#X connect 0 0 29 1;
+#X connect 6 0 34 0;
 #X connect 9 0 20 0;
 #X connect 9 1 20 1;
 #X connect 9 2 20 2;
@@ -185,56 +187,56 @@ saved with the object. You have write it in the box or to send a message.
 #X connect 24 13 19 13;
 #X connect 24 14 19 14;
 #X connect 24 15 19 15;
-#X connect 30 0 35 1;
-#X connect 33 0 4 0;
-#X connect 33 0 34 0;
-#X connect 33 1 5 0;
-#X connect 33 1 34 1;
-#X connect 35 0 17 0;
-#X connect 35 0 18 0;
-#X connect 35 0 33 0;
-#X connect 35 1 17 1;
-#X connect 35 1 18 1;
-#X connect 35 1 33 1;
-#X connect 35 2 17 2;
-#X connect 35 2 18 2;
-#X connect 35 2 33 2;
-#X connect 35 3 17 3;
-#X connect 35 3 18 3;
-#X connect 35 3 33 3;
-#X connect 35 4 17 4;
-#X connect 35 4 18 4;
-#X connect 35 4 33 4;
-#X connect 35 5 17 5;
-#X connect 35 5 18 5;
-#X connect 35 5 33 5;
-#X connect 35 6 17 6;
-#X connect 35 6 18 6;
-#X connect 35 6 33 6;
-#X connect 35 7 17 7;
-#X connect 35 7 18 7;
-#X connect 35 7 33 7;
-#X connect 35 8 17 8;
-#X connect 35 8 18 8;
-#X connect 35 8 33 8;
-#X connect 35 9 17 9;
-#X connect 35 9 18 9;
-#X connect 35 9 33 9;
-#X connect 35 10 17 10;
-#X connect 35 10 18 10;
-#X connect 35 10 33 10;
-#X connect 35 11 17 11;
-#X connect 35 11 18 11;
-#X connect 35 11 33 11;
-#X connect 35 12 17 12;
-#X connect 35 12 18 12;
-#X connect 35 12 33 12;
-#X connect 35 13 17 13;
-#X connect 35 13 18 13;
-#X connect 35 13 33 13;
-#X connect 35 14 17 14;
-#X connect 35 14 18 14;
-#X connect 35 14 33 14;
-#X connect 36 0 38 0;
-#X connect 37 0 36 0;
-#X coords 0 674 1 673 100 60 0;
+#X connect 29 0 34 1;
+#X connect 32 0 4 0;
+#X connect 32 0 33 0;
+#X connect 32 1 5 0;
+#X connect 32 1 33 1;
+#X connect 34 0 17 0;
+#X connect 34 0 18 0;
+#X connect 34 0 32 0;
+#X connect 34 1 17 1;
+#X connect 34 1 18 1;
+#X connect 34 1 32 1;
+#X connect 34 2 17 2;
+#X connect 34 2 18 2;
+#X connect 34 2 32 2;
+#X connect 34 3 17 3;
+#X connect 34 3 18 3;
+#X connect 34 3 32 3;
+#X connect 34 4 17 4;
+#X connect 34 4 18 4;
+#X connect 34 4 32 4;
+#X connect 34 5 17 5;
+#X connect 34 5 18 5;
+#X connect 34 5 32 5;
+#X connect 34 6 17 6;
+#X connect 34 6 18 6;
+#X connect 34 6 32 6;
+#X connect 34 7 17 7;
+#X connect 34 7 18 7;
+#X connect 34 7 32 7;
+#X connect 34 8 17 8;
+#X connect 34 8 18 8;
+#X connect 34 8 32 8;
+#X connect 34 9 17 9;
+#X connect 34 9 18 9;
+#X connect 34 9 32 9;
+#X connect 34 10 17 10;
+#X connect 34 10 18 10;
+#X connect 34 10 32 10;
+#X connect 34 11 17 11;
+#X connect 34 11 18 11;
+#X connect 34 11 32 11;
+#X connect 34 12 17 12;
+#X connect 34 12 18 12;
+#X connect 34 12 32 12;
+#X connect 34 13 17 13;
+#X connect 34 13 18 13;
+#X connect 34 13 32 13;
+#X connect 34 14 17 14;
+#X connect 34 14 18 14;
+#X connect 34 14 32 14;
+#X connect 35 0 37 0;
+#X connect 36 0 35 0;
+#X coords 0 687 1 686 100 60 0;
