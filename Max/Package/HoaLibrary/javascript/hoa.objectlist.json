@@ -1,0 +1,80 @@
+{
+	"all": 
+	{
+    	"objects": [ 
+    	"hoa.2d.decoder~",
+		"hoa.2d.encoder~",
+		"hoa.2d.map~",
+		"hoa.2d.map",
+		"hoa.2d.meter~",
+		"hoa.2d.optim~",
+		"hoa.2d.projector~",
+		"hoa.2d.recomposer~",
+		"hoa.2d.recomposer",
+		"hoa.2d.rotate~",
+		"hoa.2d.scope~",
+		"hoa.2d.space",
+		"hoa.2d.vector~",
+		"hoa.2d.wider~",
+		"hoa.connect",
+		"hoa.dac~",
+		"hoa.gain~",
+		"hoa.in",
+		"hoa.in~",
+		"hoa.out",
+		"hoa.out~",
+		"hoa.pi",
+		"hoa.pi~",
+		"hoa.play~",
+		"hoa.process~",
+		"hoa.record~",
+		"hoa.thisprocess~"
+    	]
+    },
+
+	"2d": 
+	{
+    	"objects": [ 
+    	"hoa.2d.decoder~",
+		"hoa.2d.encoder~",
+		"hoa.2d.map~",
+		"hoa.2d.map",
+		"hoa.2d.meter~",
+		"hoa.2d.optim~",
+		"hoa.2d.projector~",
+		"hoa.2d.recomposer~",
+		"hoa.2d.recomposer",
+		"hoa.2d.rotate~",
+		"hoa.2d.scope~",
+		"hoa.2d.space",
+		"hoa.2d.vector~",
+		"hoa.2d.wider~"
+    	]
+    },
+
+    "3d": 
+	{
+    	"objects": [ 
+    	"hoa.3d.decoder~",
+		"hoa.3d.encoder~",
+		"hoa.3d.map~",
+		"hoa.3d.map",
+		"hoa.3d.meter~",
+		"hoa.3d.optim~",
+		"hoa.3d.scope~",
+		"hoa.3d.wider~"
+    	]
+    },
+
+    "GUI": 
+	{
+    	"objects": [
+		"hoa.2d.map",
+		"hoa.2d.meter~",
+		"hoa.2d.recomposer",
+		"hoa.2d.scope~",
+		"hoa.2d.space",
+		"hoa.gain~"
+    	]
+    }
+}
