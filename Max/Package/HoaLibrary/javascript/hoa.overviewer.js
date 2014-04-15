@@ -23,6 +23,16 @@ function anything()
 		var objects = d.get(arguments[0] + "::objects");
 		outlet(0, objects);
 	}
+	else if (messagename == "get_category_description_from_category_index") 
+	{
+		var index = arguments[0];
+		var keys = d.getkeys();
+		var desc = d.get(keys[index] + "::description");
+		if (desc)
+			outlet(0, "set", desc);
+		else
+			outlet(0, "set");
+	}
 	else if (messagename == "get_objectname_from_category_and_index") 
 	{
 		var category = arguments[0];
@@ -52,5 +62,10 @@ function anything()
 			outlet(0, "set", dict.get("description"));
 			dict.freepeer();
 		}
+		else
+		{
+			outlet(0, "set");
+			return;
+		};
 	};
 }

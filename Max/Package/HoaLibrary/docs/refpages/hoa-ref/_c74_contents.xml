@@ -27,4 +27,8 @@
 <refpage name='hoa.process~.maxref.xml'/>
 <refpage name='hoa.record~.maxref.xml'/>
 <refpage name='hoa.thisprocess~.maxref.xml'/>
+<refpage name='hoa.abs~.maxref.xml'/>
+<refpage name='hoa.amp~.maxref.xml'/>
+<refpage name='hoa.grain~.maxref.xml'/>
+<refpage name='hoa.granular~.maxref.xml'/>
 </root>

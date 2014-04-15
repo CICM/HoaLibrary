@@ -25,11 +25,13 @@
 		"hoa.out~",
 		"hoa.pi",
 		"hoa.pi~",
-		"hoa.play~",
+		"hoa.2d.play~",
+		"hoa.3d.play~",
 		"hoa.process~",
 		"hoa.record~",
 		"hoa.thisprocess~"
-    	]
+    	],
+    	"description" : "The HoaLibrary contains 2-D/3-D ambisonic and plane waves processing externals and abstractions, graphical user interfaces to visualize and control the sound field and various utilities that facilitate patching operations."
     },
 
 	"2d": 
@@ -49,7 +51,8 @@
 		"hoa.2d.space",
 		"hoa.2d.vector~",
 		"hoa.2d.wider~"
-    	]
+    	],
+    	"description" : "The 2-D ambisonic and planewaves objects"
     },
 
     "3d": 
@@ -63,7 +66,8 @@
 		"hoa.3d.optim~",
 		"hoa.3d.scope~",
 		"hoa.3d.wider~"
-    	]
+    	],
+    	"description" : "The 3-D ambisonic and planewaves objects"
     },
 
     "GUI": 
@@ -75,6 +79,55 @@
 		"hoa.2d.scope~",
 		"hoa.2d.space",
 		"hoa.gain~"
-    	]
+    	],
+    	"description" : "The Graphical User Interfaces"
+    },
+
+    "utilities": 
+	{
+    	"objects": [ 
+		"hoa.connect",
+		"hoa.dac~",
+		"hoa.gain~",
+		"hoa.in",
+		"hoa.in~",
+		"hoa.out",
+		"hoa.out~",
+		"hoa.pi",
+		"hoa.pi~",
+		"hoa.play~",
+		"hoa.process~",
+		"hoa.record~",
+		"hoa.thisprocess~"
+    	],
+    	"description" : "Various utility tools for multichannel patching and processing"
+    },
+
+    "process patches": 
+	{
+    	"objects": [
+    	"hoa.ringmod~",
+    	"hoa.decorrelation~",
+		"hoa.grain~",
+		"hoa.granular~",
+		"hoa.mirror~",
+		"hoa.mixer~"
+    	],
+    	"description" : "Examples of processing patches that can be loaded by a hoa.process~ object. You can obviously create your own."
+    },
+
+    "operators": 
+	{
+    	"objects": [
+    	"hoa.abs~",
+    	"hoa.amp~",
+		"hoa.highpass~",
+		"hoa.onepole~",
+		"hoa.receive",
+		"hoa.receive~",
+		"hoa.send",
+		"hoa.send~"
+    	],
+    	"description" : "Examples of utilitaries patches that can be loaded by a hoa.process~ object. You can obviously create your own."
     }
 }
