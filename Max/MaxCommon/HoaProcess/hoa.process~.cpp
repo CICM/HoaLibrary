@@ -1800,12 +1800,20 @@ void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom 
             }
         }
     }
-    
-    atom_setlong (&a, index - 1);
+    else if (argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
+    {
+        for (int i = 0; i < x->patch_spaces_allocated; i++)
+        {
+            atom_setlong (&a, i);
+            defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
+        }
+        return;
+    }
 	
 	if (index < 1 || index > x->patch_spaces_allocated) return;
 	if (!x->patch_space_ptrs[index - 1]->patch_valid) return;
 	
+    atom_setlong (&a, index - 1);
 	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
 }
 
