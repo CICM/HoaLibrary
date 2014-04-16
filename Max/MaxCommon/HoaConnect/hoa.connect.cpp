@@ -236,7 +236,9 @@ void make_patchline(t_connect *x)
 		{
 			obj1 = jbox_get_object(x->f_objects[i]);
 			if(object_is_hoa(obj1) || is_obj_hoa_exotic(obj1))
+            {
 				x->f_objects[valid_objects++] = x->f_objects[i]; // ! store BOX objects
+            }
 		}
 		
 		if (valid_objects > 1)

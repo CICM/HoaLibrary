@@ -273,7 +273,7 @@
 									"patching_rect" : [ 171.5, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 63.833328, 28.5, 63.0, 20.0 ],
-									"text" : "Index : 8",
+									"text" : "Index : 1",
 									"textjustification" : 1
 								}
 
@@ -380,7 +380,7 @@
 									"patching_rect" : [ 329.0, 202.0, 75.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 82.0, 0.5, 45.0, 20.0 ],
-									"text" : "12 / 9",
+									"text" : "1 / 8",
 									"textjustification" : 2
 								}
 
@@ -804,7 +804,7 @@
 									"patching_rect" : [ 171.5, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 63.833328, 28.5, 63.0, 20.0 ],
-									"text" : "Index : 8",
+									"text" : "Index : 0",
 									"textjustification" : 1
 								}
 
@@ -835,7 +835,7 @@
 									"patching_rect" : [ 44.0, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 0.833328, 28.5, 63.0, 20.0 ],
-									"text" : "Order : 8",
+									"text" : "Order : 7",
 									"textjustification" : 1
 								}
 
@@ -909,7 +909,7 @@
 									"patching_rect" : [ 329.0, 202.0, 75.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 82.0, 0.5, 45.0, 20.0 ],
-									"text" : "12 / 9",
+									"text" : "1 / 15",
 									"textjustification" : 2
 								}
 
@@ -969,7 +969,7 @@
 									"patching_rect" : [ 216.833328, 235.5, 162.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ -0.166672, 0.5, 109.0, 20.0 ],
-									"text" : "3d harmonics"
+									"text" : "2d harmonics"
 								}
 
 							}
@@ -1477,7 +1477,7 @@
 									"patching_rect" : [ 299.0, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 63.833328, 40.5, 63.0, 20.0 ],
-									"text" : "Index : 8",
+									"text" : "Index : 0",
 									"textjustification" : 2
 								}
 
@@ -1508,7 +1508,7 @@
 									"patching_rect" : [ 171.5, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ -0.166672, 40.5, 63.0, 20.0 ],
-									"text" : "Band : 8"
+									"text" : "Band : 0"
 								}
 
 							}
@@ -1538,7 +1538,7 @@
 									"patching_rect" : [ 44.0, 358.0, 69.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ -0.166672, 20.5, 127.0, 20.0 ],
-									"text" : "Order : 8",
+									"text" : "Order : 3",
 									"textjustification" : 1
 								}
 
@@ -1612,7 +1612,7 @@
 									"patching_rect" : [ 329.0, 202.0, 75.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 82.0, 0.5, 45.0, 20.0 ],
-									"text" : "12 / 9",
+									"text" : "1 / 16",
 									"textjustification" : 2
 								}
 
