@@ -328,7 +328,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 427.0, 294.0, 853.0, 602.0 ],
+										"rect" : [ 102.0, 177.0, 853.0, 602.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -2384,7 +2384,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 598.0, 170.0, 192.0, 61.0 ],
+					"patching_rect" : [ 598.0, 172.0, 192.0, 59.0 ],
 					"rounded" : 0
 				}
 

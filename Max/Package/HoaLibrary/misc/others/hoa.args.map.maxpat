@@ -1231,7 +1231,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "number of instances",
 					"id" : "obj-118",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
@@ -1242,7 +1242,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "voice index",
 					"id" : "obj-119",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
