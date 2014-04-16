@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 329.0, 133.0, 701.0, 645.0 ],
+		"rect" : [ 248.0, 95.0, 701.0, 645.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,9 +49,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
-						"palette_action" : "hoa.2d.scope~",
 						"palette_caption" : "hoa.2d.scope~",
-						"palette_category" : [ "HoaLib", "Interface", "Recent" ]
+						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
+						"palette_action" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -451,7 +451,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 345.0, 304.0, 665.0, 366.0 ],
+						"rect" : [ 264.0, 266.0, 665.0, 366.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -472,6 +472,20 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-10",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 214.0, 621.0, 75.0, 18.0 ],
+									"text" : "autowatch 1"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -619,7 +633,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 16.0, 682.5, 104.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"filename" : "hoa.overviewer",
+										"filename" : "hoa.overviewer.js",
 										"parameter_enable" : 0
 									}
 ,
@@ -769,7 +783,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
+									"tabs" : [ "hoa.2d.decoder~", "hoa.2d.encoder~", "hoa.2d.map~", "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.optim~", "hoa.2d.projector~", "hoa.2d.recomposer~", "hoa.2d.recomposer", "hoa.2d.rotate~", "hoa.2d.scope~", "hoa.2d.space", "hoa.2d.vector~", "hoa.2d.wider~", "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.2d.play~", "hoa.3d.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
 								}
 
 							}
@@ -806,6 +820,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-31", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-10", 0 ]
 								}
 
 							}

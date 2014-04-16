@@ -1,5 +1,5 @@
-inlets=1;
-outlets=1;
+inlets  = 1;
+outlets = 1;
 
 var d;
 
@@ -27,9 +27,14 @@ function anything()
 	{
 		var index = arguments[0];
 		var keys = d.getkeys();
-		var desc = d.get(keys[index] + "::description");
-		if (desc)
-			outlet(0, "set", desc);
+		if (keys[index]) 
+		{
+			var desc = d.get(keys[index] + "::description");
+			if (desc)
+				outlet(0, "set", desc);
+			else
+				outlet(0, "set");
+		}
 		else
 			outlet(0, "set");
 	}
@@ -45,6 +50,7 @@ function anything()
 	{
 		var category = arguments[0];
 		var index = arguments[1];
+
 		if (index < 0) 
 		{
 			outlet(0, "set");
