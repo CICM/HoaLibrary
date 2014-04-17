@@ -1,0 +1,106 @@
+#N canvas 250 120 659 684 10;
+#X msg -366 -152 \; pd dsp 1;
+#X msg -366 -117 \; pd dsp 0;
+#X obj -269 -388 hoa.soundgrain;
+#X obj -269 -359 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
+0.5 1 @kncolor 0.5 0.5 0.5 1;
+#X obj 192 -461 hoa.connect;
+#X obj 192 -481 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -380 -472 c.patcherinfos;
+#X obj -380 -489 loadbang;
+#X obj -380 -489 hoa.help.header;
+#X obj -315 123 hoa.help.pub;
+#X obj 36 -489 hoa.help.also;
+#X obj -269 40 hoa.2d.decoder~ 7 ambisonics 16;
+#X obj -269 72 hoa.dac~ 1:16 -----------------;
+#X obj -269 -168 hoa.2d.scope~ @size 189 189 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 10 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj -13 -284 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min -1 @max 1 @minmax -1 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -375 -445 hoa.fx.mirror~ reveals or hides the mirror image
+of the sound field.;
+#X obj -269 -224 hoa.2d.process~ 7 hoa.fx.mirror~ harmonics, f 31
+;
+#X obj -269 -341 hoa.2d.encoder~ 7 -----------;
+#X obj -14 -305 c.loadmess 0;
+#X obj -98 -372 hoa.pi~ 0.25;
+#X text -15 -251 1 : the orginal sound field;
+#X text -15 -231 0 : the orginal and the mirror sound fields;
+#X text -21 -211 -1 : the mirror sound field;
+#X connect 2 0 3 0;
+#X connect 3 0 17 0;
+#X connect 5 0 4 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 11 0 12 0;
+#X connect 11 1 12 1;
+#X connect 11 2 12 2;
+#X connect 11 3 12 3;
+#X connect 11 4 12 4;
+#X connect 11 5 12 5;
+#X connect 11 6 12 6;
+#X connect 11 7 12 7;
+#X connect 11 8 12 8;
+#X connect 11 9 12 9;
+#X connect 11 10 12 10;
+#X connect 11 11 12 11;
+#X connect 11 12 12 12;
+#X connect 11 13 12 13;
+#X connect 11 14 12 14;
+#X connect 11 15 12 15;
+#X connect 14 0 16 15;
+#X connect 16 0 11 0;
+#X connect 16 0 13 0;
+#X connect 16 1 11 1;
+#X connect 16 1 13 1;
+#X connect 16 2 11 2;
+#X connect 16 2 13 2;
+#X connect 16 3 11 3;
+#X connect 16 3 13 3;
+#X connect 16 4 11 4;
+#X connect 16 4 13 4;
+#X connect 16 5 11 5;
+#X connect 16 5 13 5;
+#X connect 16 6 11 6;
+#X connect 16 6 13 6;
+#X connect 16 7 11 7;
+#X connect 16 7 13 7;
+#X connect 16 8 11 8;
+#X connect 16 8 13 8;
+#X connect 16 9 11 9;
+#X connect 16 9 13 9;
+#X connect 16 10 11 10;
+#X connect 16 10 13 10;
+#X connect 16 11 11 11;
+#X connect 16 11 13 11;
+#X connect 16 12 11 12;
+#X connect 16 12 13 12;
+#X connect 16 13 11 13;
+#X connect 16 13 13 13;
+#X connect 16 14 11 14;
+#X connect 16 14 13 14;
+#X connect 17 0 16 0;
+#X connect 17 1 16 1;
+#X connect 17 2 16 2;
+#X connect 17 3 16 3;
+#X connect 17 4 16 4;
+#X connect 17 5 16 5;
+#X connect 17 6 16 6;
+#X connect 17 7 16 7;
+#X connect 17 8 16 8;
+#X connect 17 9 16 9;
+#X connect 17 10 16 10;
+#X connect 17 11 16 11;
+#X connect 17 12 16 12;
+#X connect 17 13 16 13;
+#X connect 17 14 16 14;
+#X connect 18 0 14 0;
+#X connect 19 0 17 1;
+#X coords 0 684 1 683 100 60 0;
