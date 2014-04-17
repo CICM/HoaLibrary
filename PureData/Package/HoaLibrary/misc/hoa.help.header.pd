@@ -1,10 +1,6 @@
 #N canvas 54 218 738 451 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
-#X obj 45 1 cnv 15 354 40 empty \$0-hoa.header hoa.2d.decoder~ 3 12
-0 18 -212212 -1 0;
-#X obj 436 384 declare -lib HoaLibrary/hoa.library;
-#X obj 436 363 declare -lib hoa.library;
+#X obj 45 1 cnv 15 354 40 empty \$0-hoa.header hoa.library 3 12 0 18
+-212212 -1 0;
 #X obj 483 312 s \$0-hoa.header;
 #X obj 449 5 inlet;
 #X obj 296 78 namecanvas \$0-r;
@@ -13,17 +9,27 @@
 #X msg 483 282 label \$1;
 #X obj 449 35 t s b;
 #X obj 476 91 text define -k \$0-hoa-2d-objs;
-#A set hoa.2d.decoder~-help.pd hoa.2d.decoder~ An ambisonic decoder.
-\; hoa.2d.encoder~-help.pd hoa.2d.encoder~ An ambisonic encoder. \;
-hoa.map~-help hoa.map~ An ambisonic sources spatializer. \; hoa.map-help
-hoa.map A GUI to spatialize sources on a map. \; hoa.meter~-help A
-circular meter with sound field descriptor. \; hoa.optim~-help An ambisonic
-sound field optimization. \; hoa.pi-help A good pi number. \; hoa.projector~-help
-A plane wave decomposer. \; hoa.recomposer~-help A plane wave recomposer
-to harmonics domain. \; hoa.rotate~-help An ambisonic sound field rotation
-external. \; hoa.scope~-help An ambisonic harmonic scope. \; hoa.space-help
-A GUI to design ambisonic space. \; hoa.space~-help A spatial filter.
-\; hoa.wider~-help A fractional ambisonic orders simulator. \;;
+#A set hoa.library-help.pd hoa.library High Order Ambisonics Library.
+\; hoa.2d.decoder~-help.pd hoa.2d.decoder~ An ambisonic decoder. \;
+hoa.2d.encoder~-help.pd hoa.2d.encoder~ An ambisonic encoder. \; hoa.2d.map-help.pd
+hoa.2d.map A GUI to spatialize sources on a map. \; hoa.2d.map~-help.pd
+hoa.2d.map~ An ambisonic sources spatializer. \; hoa.2d.meter~-help.pd
+hoa.2d.meter~ A circular meter with sound field descriptor. \; hoa.2d.optim~-help.pd
+hoa.2d.optim~ An ambisonic sound field optimization. \; hoa.2d.projector~-help.pd
+hoa.2d.projector~ A plane waves decomposer from circular harmonics
+domain. \; hoa.2d.recomposer~-help.pd hoa.2d.recomposer~ A plane waves
+recomposer to circular harmonics domain. \; hoa.2d.rotate~-help.pd
+hoa.2d.rotate~ An ambisonic sound field rotation. \; hoa.2d.scope~-help.pd
+hoa.2d.scope~ An ambisonic harmonics visualizer. \; hoa.2d.space-help.pd
+hoa.2d.space A GUI to design plane waves domain. \; hoa.2d.wider~-help.pd
+hoa.2d.wider~ An ambisonic fractional orders simulator. \; hoa.connect-help.pd
+hoa.connect A connector for hoa objects. \; hoa.dac~-help.pd hoa.dac~
+A custom dac~ with matlab syntax. \; hoa.io-help.pd hoa.io A set of
+inlet and outlet for hoa.process. \; hoa.pi-help.pd hoa.pi A good pi
+number. \; hoa.pi~-help.pd hoa.pi~ A good pi number for signal. \;
+hoa.process~-help.pd hoa.process~ A multi-patcher for harmonics and
+plane waves domains. \; hoa.thisprocess~-help.pd hoa.thisprocess~ A
+patcher informer for hoa.process. \;;
 #X obj 449 121 text search \$0-hoa-2d-objs;
 #X obj 449 150 text get \$0-hoa-2d-objs;
 #X obj 449 175 list split 1;
@@ -40,25 +46,25 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 #X obj 188 150 sel 100;
 #X msg 188 173 0;
 #X obj 517 225 c.prepend text 46 23;
-#X connect 4 0 9 0;
-#X connect 6 0 10 0;
-#X connect 8 0 3 0;
-#X connect 9 0 11 0;
-#X connect 9 1 6 0;
-#X connect 9 1 18 0;
-#X connect 11 0 12 0;
-#X connect 12 0 13 0;
-#X connect 13 1 14 0;
-#X connect 13 1 8 0;
-#X connect 14 1 23 0;
+#X connect 2 0 7 0;
+#X connect 4 0 8 0;
+#X connect 6 0 1 0;
+#X connect 7 0 9 0;
+#X connect 7 1 4 0;
+#X connect 7 1 16 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 1 12 0;
+#X connect 11 1 6 0;
+#X connect 12 1 21 0;
+#X connect 14 0 13 0;
+#X connect 15 0 18 0;
+#X connect 15 0 14 0;
 #X connect 16 0 15 0;
-#X connect 17 0 20 0;
-#X connect 17 0 16 0;
+#X connect 17 0 18 1;
 #X connect 18 0 17 0;
-#X connect 19 0 20 1;
-#X connect 20 0 19 0;
-#X connect 20 0 21 0;
-#X connect 21 0 22 0;
-#X connect 22 0 17 0;
-#X connect 23 0 7 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 15 0;
+#X connect 21 0 5 0;
 #X coords 0 -1 1 1 400 42 2 0 0;

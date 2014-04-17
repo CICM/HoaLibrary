@@ -1,6 +1,4 @@
 #N canvas 112 23 636 253 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj 41 137 hoa.pi 0.25;
 #X obj 145 136 hoa.pi 0.5;
 #X obj 231 137 hoa.pi 1;

@@ -1,6 +1,4 @@
 #N canvas 262 41 1174 752 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj -208 -368 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.space
 3 12 0 18 -228856 -1 0;
 #X text -149 345 Eliott Paris © 2012-2013 CICM / Universite Paris

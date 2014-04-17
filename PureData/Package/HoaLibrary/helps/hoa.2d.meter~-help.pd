@@ -1,6 +1,4 @@
-#N canvas 106 100 774 563 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
+#N canvas 106 100 774 589 10;
 #X msg -547 -137 \; pd dsp 1;
 #X msg -547 -100 \; pd dsp 0;
 #X obj -68 -206 s hoameter;
