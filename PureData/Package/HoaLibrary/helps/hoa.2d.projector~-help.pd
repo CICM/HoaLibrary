@@ -74,6 +74,7 @@ in the plane waves domain compared to the circular harmonics domain.
 #X obj -450 -659 loadbang;
 #X obj -465 -659 hoa.help.header;
 #X obj -324 -44 hoa.help.pub;
+#X obj -24 -658 hoa.help.also;
 #X connect 0 0 3 1;
 #X connect 3 0 11 1;
 #X connect 6 0 3 0;

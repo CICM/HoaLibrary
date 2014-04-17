@@ -24,7 +24,7 @@ Systems :
 
 # You can use the c.preset object of Chocolate library with the GUIs.
 
-# The GUIs have all the new options of the CICM Wrapper. Attributes syntax : @key [ values... ] becomes @key values… (you still can use the old syntax but it's deprecated). Float to signal : The float values in signal inlet are not converted to signal, thus some processing are now optimized with float (for example, hoa.rotate~ doesn't need to compute the rotation every sample). See chocolate and coffee from CICM Wrapper for all the very good essential stuff !! ;) :) ~o~
+# The GUIs have all the new options of the CICM Wrapper. Attributes syntax : @key [ values... ] becomes @key values… (you still can use the old syntax but it's deprecated). Float to signal : The float values in signal inlet are not converted to signal, thus some processing are now optimized with float (for example, hoa.rotate~ doesn't need to compute the rotation every sample). See chocolate and coffee from CICM Wrapper for all the changes.
 
 # Tutorials
 
@@ -64,7 +64,7 @@ Systems :
 
 # hoa.decoder~ : The attribute "restitution" for irregular decoding mode has been removed (the projection mode is now automatic for a stereo decoding). The attribute "pinnae" becomes "pinna" (you still can use the old syntax but it's deprecated).The ambisonic decoding and the irregular decoding have the new attribute "offset" that allows to apply an angular offset to all the channels.
 
-# hoa.map : The attribute "bordercolor" becomes "bdcolor". If you save a patcher the old key will be replaced by the ones. The attribute "bgcolor2" and "selcolor" have been removed. The slots and trajectories are no more saved with the patcher. You have to save it in a file before. The save and write methods accept relative and absolute paths, look in the path preference folders and the patcher folder and open a dialog window if there's only a filename.
+# hoa.map : The attribute "bordercolor" becomes "bdcolor". If you save a patcher the old key will be replaced by the ones. The attribute "bgcolor2" and "selcolor" have been removed. The slots and trajectories don't exist anymore, you have to use c.preset from the chocolate library.
 
 # hoa.map~ : The attribute "mode" (cartesian or polar) becomes an argument (you still can use it but it's deprecated).
 

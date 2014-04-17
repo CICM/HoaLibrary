@@ -47,6 +47,7 @@ depending on the optimization.;
 #X obj -260 -365 loadbang;
 #X obj -275 -365 hoa.help.header;
 #X obj -168 237 hoa.help.pub;
+#X obj 136 -365 hoa.help.also;
 #X connect 0 0 2 1;
 #X connect 1 0 0 0;
 #X connect 2 0 16 1;

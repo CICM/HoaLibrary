@@ -14,7 +14,7 @@ http://cicm.mshparisnord.org/
 Pure data (HoaLibrary beta v2.0) :
 ------------------------------------------------------------------------------------------
 
-This version is compatible with Pure Data 0.43.4 (32 bit) and higher.
+This version is compatible with Pure Data 0.45.4 (32 bit) and higher. The library is also compatible with Pure Data Extented.
 
 Installation:
 Copy the "HoaLibrary" folder in your Pure Data "package" folder and add "hoa.library" in startup preferences. In the help menu of Pure Data, the HoaLibrary folder constains informations, helps and tutorials.

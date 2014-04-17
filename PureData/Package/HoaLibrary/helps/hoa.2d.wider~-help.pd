@@ -40,6 +40,7 @@ way to have linear changes.;
 #X obj 14 -44 loadbang;
 #X obj -1 -44 hoa.help.header;
 #X obj 70 697 hoa.help.pub;
+#X obj 406 -44 hoa.help.also;
 #X connect 3 0 16 15;
 #X connect 4 0 3 0;
 #X connect 8 0 4 0;

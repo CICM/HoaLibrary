@@ -576,7 +576,7 @@ void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
             object_error(x, "hoa.process~ target band index must be between 0 and %i", (int)x->f_ambi_3d->getDecompositionOrder());
             return;
         }
-        if(index < -band || index > band)
+        if(index < (int)-band || index > band)
         {
             object_error(x, "hoa.process~ target argument index must be between %i and %i for the band %i", (int)-x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder());
             return;
@@ -602,7 +602,7 @@ void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode == 0)
     {
         index = atom_getfloat(argv);
-        if(index < -x->f_ambi_2d->getDecompositionOrder() || index > x->f_ambi_2d->getDecompositionOrder())
+        if(index < (int)-x->f_ambi_2d->getDecompositionOrder() || index > (int)x->f_ambi_2d->getDecompositionOrder())
         {
             object_error(x, "hoa.process~ target index must be between %i and %i", (int)-x->f_ambi_2d->getDecompositionOrder(), x->f_ambi_2d->getDecompositionOrder());
             return;

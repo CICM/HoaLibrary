@@ -1,54 +1,55 @@
-#N canvas 333 63 530 616 10;
-#X obj 197 -283 hoa.pi 2;
-#X obj 197 -302 loadbang;
-#X obj 182 -264 *~;
-#X obj 182 -327 phasor~ 0.1;
-#X msg 75 -143 \; pd dsp 1;
-#X msg 75 -105 \; pd dsp 0;
-#X obj -116 -181 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
+#N canvas 333 63 562 615 10;
+#X obj 197 -284 hoa.pi 2;
+#X obj 197 -303 loadbang;
+#X obj 182 -265 *~;
+#X obj 182 -328 phasor~ 0.1;
+#X msg 75 -144 \; pd dsp 1;
+#X msg 75 -106 \; pd dsp 0;
+#X obj -116 -182 hoa.2d.scope~ @size 153 153 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 4 @gain 5 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.5 0.5
 0.5 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj -116 7 hoa.dac~ 1:10 -----------;
-#X obj 182 -221 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -116 6 hoa.dac~ 1:10 -----------;
+#X obj 182 -222 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -77 -370 hoa.pi;
-#X obj -77 -423 c.loadmess 0;
-#X obj -77 -394 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -77 -371 hoa.pi;
+#X obj -77 -424 c.loadmess 0;
+#X obj -77 -395 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 119 -394 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 119 -395 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 119 -423 c.loadmess 1;
-#X obj 182 -354 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 119 -424 c.loadmess 1;
+#X obj 182 -355 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 182 -403 c.loadmess 0.1;
-#X text 189 -382 Speed of;
-#X text 189 -372 rotation;
-#X text 211 -262 Angle of;
-#X text 211 -252 rotation;
-#X text 211 -242 in radian;
-#X obj -206 -346 hoa.2d.encoder~ 4 ----;
-#X obj -10 -346 hoa.2d.encoder~ 4 ----;
-#X obj -116 -211 hoa.2d.rotate~ 4 --------;
-#X obj -116 -25 hoa.2d.decoder~ 4 0 10 --;
-#X text -235 -468 hoa.2d.rotate~ allows you to apply a rotation on
+#X obj 182 -404 c.loadmess 0.1;
+#X text 189 -383 Speed of;
+#X text 189 -373 rotation;
+#X text 211 -263 Angle of;
+#X text 211 -253 rotation;
+#X text 211 -243 in radian;
+#X obj -206 -347 hoa.2d.encoder~ 4 ----;
+#X obj -10 -347 hoa.2d.encoder~ 4 ----;
+#X obj -116 -212 hoa.2d.rotate~ 4 --------;
+#X obj -116 -26 hoa.2d.decoder~ 4 0 10 --;
+#X text -235 -469 hoa.2d.rotate~ allows you to apply a rotation on
 the ambisonic sound field. The last inlet set the angle of the rotation.
 ;
-#X obj -10 -394 hoa.soundrone;
-#X obj -206 -394 hoa.soundgrain;
-#X obj 119 -369 hoa.pi;
-#X obj -220 29 hoa.help.pub;
-#X obj -232 -492 c.patcherinfos;
-#X obj -227 -509 loadbang;
-#X obj -242 -511 hoa.help.header;
+#X obj -10 -395 hoa.soundrone;
+#X obj -206 -395 hoa.soundgrain;
+#X obj 119 -370 hoa.pi;
+#X obj -220 28 hoa.help.pub;
+#X obj -232 -493 c.patcherinfos;
+#X obj -227 -510 loadbang;
+#X obj -242 -512 hoa.help.header;
+#X obj 166 -512 hoa.help.also;
 #X connect 0 0 2 1;
 #X connect 1 0 0 0;
 #X connect 2 0 8 0;
@@ -112,4 +113,4 @@ the ambisonic sound field. The last inlet set the angle of the rotation.
 #X connect 28 0 22 1;
 #X connect 30 0 32 0;
 #X connect 31 0 30 0;
-#X coords 0 616 1 615 100 60 0;
+#X coords 0 615 1 614 100 60 0;

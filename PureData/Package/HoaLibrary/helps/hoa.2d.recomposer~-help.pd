@@ -55,6 +55,7 @@ field into the circular harmonics domain.;
 #X obj -450 -405 loadbang;
 #X obj -465 -405 hoa.help.header;
 #X obj -298 301 hoa.help.pub;
+#X obj -44 -405 hoa.help.also;
 #X connect 6 0 5 0;
 #X connect 7 0 26 0;
 #X connect 8 0 10 0;

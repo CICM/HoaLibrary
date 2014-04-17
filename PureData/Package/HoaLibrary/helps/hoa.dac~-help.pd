@@ -13,6 +13,7 @@ loudspeakers.;
 #X obj -314 -566 loadbang;
 #X obj -329 -566 hoa.help.header;
 #X obj -312 -240 hoa.help.pub;
+#X obj 96 -566 hoa.help.also;
 #X connect 9 0 11 0;
 #X connect 10 0 9 0;
 #X coords 0 395 1 394 100 60 0;
