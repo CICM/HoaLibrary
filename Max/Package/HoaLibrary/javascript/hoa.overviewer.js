@@ -1,40 +1,77 @@
-inlets=1;
-outlets=1;
+inlets  = 1;
+outlets = 1;
 
-var name = "pack";
-var dict;
-var shortDesc = "";
-var longDesc = "";
-/*
+var d;
+
 function init()
 {
-	dict = max.getrefdict(name);
-	if (typeof(dict) == "object") {
-		shortDesc = dict.get("digest");
-		longDesc = dict.get("description");
-		dict.freepeer();
-	}
-	
-	outlet(0, "name", name);
+	d = new Dict;
+	d.import_json("hoa.objectlist.json");
 }
-
 init();
-*/
 
 function anything()
 {
-	var a = arrayfromargs(messagename, arguments);
-	post("received message " + a + "\n");
-	myval = a;
-	name = a;
-	dict = max.getrefdict(name);
-	if (typeof(dict) == "object") {
-		shortDesc = dict.get("digest");
-		longDesc = dict.get("description");
-		dict.freepeer();
+	var args = arrayfromargs(messagename, arguments);
+
+	if (messagename == "getkeys") 
+	{
+		outlet(0, d.getkeys());
 	}
-	
-	outlet(0, "name", name);
-	outlet(0, "short", shortDesc);
-	outlet(0, "description", longDesc);
+	if (messagename == "objectlist") 
+	{
+		var objects = d.get(arguments[0] + "::objects");
+		outlet(0, objects);
+	}
+	else if (messagename == "get_category_description_from_category_index") 
+	{
+		var index = arguments[0];
+		var keys = d.getkeys();
+		if (keys[index]) 
+		{
+			var desc = d.get(keys[index] + "::description");
+			if (desc)
+				outlet(0, "set", desc);
+			else
+				outlet(0, "set");
+		}
+		else
+			outlet(0, "set");
+	}
+	else if (messagename == "get_objectname_from_category_and_index") 
+	{
+		var category = arguments[0];
+		var index = arguments[1];
+		var objects = d.get(arguments[0] + "::objects");
+		var object = objects[index];
+		outlet(0, object);
+	}
+	else if (messagename == "get_objectref_from_category_and_index") 
+	{
+		var category = arguments[0];
+		var index = arguments[1];
+
+		if (index < 0) 
+		{
+			outlet(0, "set");
+			return;
+		};
+
+		var objects = d.get(category + "::objects");
+		var objectName = objects[index];
+
+		var dict = max.getrefdict(objectName);
+
+		if (typeof(dict) == "object") 
+		{
+			//outlet(0, dict.get("digest"));
+			outlet(0, "set", dict.get("description"));
+			dict.freepeer();
+		}
+		else
+		{
+			outlet(0, "set");
+			return;
+		};
+	};
 }

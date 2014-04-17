@@ -65,7 +65,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 68.416656, 192.0, 83.0, 20.0 ],
+					"patching_rect" : [ 43.0, 192.0, 83.0, 20.0 ],
 					"text" : "hoa.mode.sel"
 				}
 
@@ -1224,14 +1224,14 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 6.0, 57.0, 25.0, 25.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "number of instances",
 					"id" : "obj-118",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
@@ -1242,7 +1242,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "voice index",
 					"id" : "obj-119",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
@@ -1345,7 +1345,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-55", 0 ],
+					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-116", 0 ]
@@ -1431,7 +1431,7 @@
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 196.916656, 174.5, 77.916656, 174.5 ],
+					"midpoints" : [ 196.916656, 174.5, 52.5, 174.5 ],
 					"source" : [ "obj-7", 1 ]
 				}
 

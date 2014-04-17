@@ -23,6 +23,22 @@
 
 	<!--ARGUMENTS-->
 	<objarglist>
+		<objarg name="arguments" optional="1" type="int/float/symbol">
+			<digest>
+				default arguments
+			</digest>
+			<description>
+				A list of default arguments
+			</description>
+		</objarg>
+		<objarg name="attributes" optional="1" type="int/float/symbol">
+			<digest>
+				default attributes
+			</digest>
+			<description>
+				A list of default attributes
+			</description>
+		</objarg>
 	</objarglist>
 
 	<!--MESSAGES-->
@@ -73,7 +89,7 @@
 
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.thisprocess~" />
+		<seealso name="hoa.process~" />
 		<seealso name="hoa.in~" />
 		<seealso name="hoa.in" />
 		<seealso name="hoa.out" />

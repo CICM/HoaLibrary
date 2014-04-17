@@ -1304,10 +1304,10 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
     
     if (index == 0)
     {
-        for (int i=0; i<x->patch_spaces_allocated; i++)
+        for (int i=0; i < x->patch_spaces_allocated; i++)
         {
             hoa_processor_client_set_patch_on(x, i+1, !state);
-            patch = x->patch_space_ptrs[index]->the_patch;
+            patch = x->patch_space_ptrs[i]->the_patch;
             
             for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
             {
@@ -1345,7 +1345,7 @@ void hoa_processor_mutemap(t_hoa_processor *x, long n)
     
     t_atom list[x->patch_spaces_allocated];
     for (int i=0; i<x->patch_spaces_allocated; i++)
-        atom_setlong(list+i, x->patch_space_ptrs[i]->patch_on);
+        atom_setlong(list+i, !x->patch_space_ptrs[i]->patch_on);
     
     outlet_list(x->out_table[outlet_index-1], NULL, x->patch_spaces_allocated, list);
 }
@@ -1800,12 +1800,20 @@ void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom 
             }
         }
     }
-    
-    atom_setlong (&a, index - 1);
+    else if (argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) == gensym("all"))
+    {
+        for (int i = 0; i < x->patch_spaces_allocated; i++)
+        {
+            atom_setlong (&a, i);
+            defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
+        }
+        return;
+    }
 	
 	if (index < 1 || index > x->patch_spaces_allocated) return;
 	if (!x->patch_space_ptrs[index - 1]->patch_valid) return;
 	
+    atom_setlong (&a, index - 1);
 	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
 }
 
