@@ -1,6 +1,4 @@
 #N canvas 136 124 613 395 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X text -324 -524 hoa.dac~ facilitates the routing of large array of
 loudspeakers.;
 #X text -320 -422 Channels 1 to 8 :;

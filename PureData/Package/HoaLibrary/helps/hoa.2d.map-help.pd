@@ -1,6 +1,4 @@
 #N canvas 248 42 837 726 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X text -252 -185 Mousewheel and alt to change the zoom.;
 #X obj -559 -303 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname

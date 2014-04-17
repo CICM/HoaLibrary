@@ -1,6 +1,4 @@
 #N canvas 159 77 1209 677 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X msg -134 -181 \; pd dsp 1;
 #X msg -134 -146 \; pd dsp 0;
 #X obj -236 -328 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo

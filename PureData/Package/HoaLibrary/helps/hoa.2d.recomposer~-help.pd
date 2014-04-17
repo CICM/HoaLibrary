@@ -1,6 +1,4 @@
 #N canvas 274 26 829 769 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X text 59 -107 Fisheye factor between 0 and 1;
 #X msg -423 192 \; pd dsp 1;
 #X msg -423 230 \; pd dsp 0;
