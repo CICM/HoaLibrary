@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../HoaCommon.pd.h"
+#include "HoaCommon.pd.h"
 
 typedef struct _hoa_in
 {

@@ -4,11 +4,11 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../HoaCommon.pd.h"
+#include "HoaCommon.pd.h"
 
 extern "C"
 {
-#include "../../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
+#include "../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
 }
 
 typedef struct _hoa_in

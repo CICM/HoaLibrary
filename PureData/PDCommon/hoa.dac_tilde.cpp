@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../HoaCommon.pd.h"
+#include "HoaCommon.pd.h"
 #define DEFDACBLKSIZE 64
 extern t_sample *sys_soundout;
 

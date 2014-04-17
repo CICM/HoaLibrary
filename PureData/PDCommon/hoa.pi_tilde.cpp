@@ -4,10 +4,10 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "../HoaCommon.pd.h"
+#include "HoaCommon.pd.h"
 
 typedef struct _hoa_pi_tilde
-{	
+{
 	t_edspobj   p_ob;
 	double      p_value;
     double      p_phase;
@@ -33,7 +33,7 @@ extern "C" void setup_hoa0x2epi_tilde(void)
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
-   
+    
     eclass_addmethod(c, (method)hoa_pi_tilde_float,    "float",    A_FLOAT, 0);
     eclass_addmethod(c, (method)hoa_pi_tilde_dsp,      "dsp",      A_CANT, 0);
     
@@ -83,7 +83,7 @@ void hoa_pi_tilde_dsp(t_hoa_pi_tilde *x, t_object *dsp64, short *count, double s
 		object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_pi_tilde_perform_phase, 0, NULL);
     else
 		object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_pi_tilde_perform_offset, 0, NULL);
-
+    
 }
 
 void hoa_pi_tilde_perform(t_hoa_pi_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -106,5 +106,4 @@ void hoa_pi_tilde_perform_offset(t_hoa_pi_tilde *x, t_object *dsp64, float **ins
     for(int i = 0; i < sampleframes; i++)
         outs[0][i] = HOA_PI * x->p_value * x->p_phase;
 }
-
 
