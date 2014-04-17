@@ -710,9 +710,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -728,9 +728,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a - x->declared_sig_outs ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicName( a - x->declared_sig_outs ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a - x->declared_sig_outs ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicName( a - x->declared_sig_outs ).c_str());
 			}
 			else
 			{
@@ -746,9 +746,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -764,9 +764,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -961,14 +961,14 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	{
 		if (x->f_object_type == HOA_OBJECT_2D)
 		{
-			harmonic_band = x->f_ambi2D->getHarmonicBand(index);
-			harmonic_argument = x->f_ambi2D->getHarmonicArgument(index);
+			harmonic_band = x->f_ambi2D->getHarmonicDegree(index);
+			harmonic_argument = x->f_ambi2D->getHarmonicOrder(index);
 			snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
-			harmonic_band = x->f_ambi3D->getHarmonicBand(index);
-			harmonic_argument = x->f_ambi3D->getHarmonicArgument(index);
+			harmonic_band = x->f_ambi3D->getHarmonicDegree(index);
+			harmonic_argument = x->f_ambi3D->getHarmonicOrder(index);
 			snprintf(windowname, 256, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
 		}
 	}
@@ -2075,7 +2075,7 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 {
-	long order = x->f_ambi2D->getOrder();
+	long order = x->f_ambi2D->getDecompositionOrder();
 	return (void *) order;
 }
 

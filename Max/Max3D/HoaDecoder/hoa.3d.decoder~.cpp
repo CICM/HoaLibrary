@@ -104,7 +104,7 @@ void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"(Signal) %s",x->f_decoder->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s",x->f_decoder->getHarmonicName(a).c_str());
 	else
 	{
 		sprintf(s,"(Signal) Channel %ld", a);

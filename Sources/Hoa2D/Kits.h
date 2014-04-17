@@ -131,7 +131,7 @@ namespace Hoa2D
             
             @return The order.
          */
-        unsigned int getOrder() const
+        unsigned int getDecompositionOrder() const
         {
             return m_order;
         }

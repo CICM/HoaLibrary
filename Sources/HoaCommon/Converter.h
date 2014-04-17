@@ -56,7 +56,7 @@ namespace Hoa
         //! Retrieve the decomposition order.
         /** Retrieve the decomposition order of an ambisonic class.
          */
-        inline unsigned int getOrder() const {return m_order;};
+        inline unsigned int getDecompositionOrder() const {return m_order;};
         
         //! Retrieve the number of inputs harmonics.
         /** Retrieve the number of inputs harmonics.
@@ -75,10 +75,10 @@ namespace Hoa
          
             @param     index	The global index of an harmonic.
             @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicBand()
-            @see       getHarmonicsName()
+            @see       getHarmonicDegree()
+            @see       getHarmonicName()
          */
-        inline int getHarmonicArgument(const unsigned int index) const
+        inline int getHarmonicOrder(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
             return m_harmonics_arguments[index];
@@ -91,10 +91,10 @@ namespace Hoa
          
             @param     index	The global index of an harmonic.
             @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicArgument()
-            @see       getHarmonicsName()
+            @see       getHarmonicOrder()
+            @see       getHarmonicName()
          */
-        inline unsigned int getHarmonicOrder(const unsigned int index) const
+        inline unsigned int getHarmonicDegree(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
             return m_harmonics_bands[index];
@@ -105,13 +105,13 @@ namespace Hoa
          
             @param     index	The global index of an harmonic.
             @return    The method returns a name for the harmonic that contains its band and its argument if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicBand()
-            @see       getHarmonicArgument()
+            @see       getHarmonicDegree()
+            @see       getHarmonicOrder()
          */
-        inline std::string getHarmonicsName(const unsigned int index) const
+        inline std::string getHarmonicName(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + int_to_string(getHarmonicBand(index)) + " " + int_to_string(getHarmonicArgument(index));
+            return "Harmonic " + int_to_string(getHarmonicDegree(index)) + " " + int_to_string(getHarmonicOrder(index));
         };
         
         //! This method performs the convertion with single precision.

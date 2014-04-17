@@ -192,7 +192,7 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
         x->f_order = 1;
     
 	x->f_scope = new Hoa2D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI);
-    x->f_order      = x->f_scope->getOrder();
+    x->f_order      = x->f_scope->getDecompositionOrder();
     x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
     x->f_index      = 0;
     
@@ -266,7 +266,7 @@ void hoa_scope_free(t_hoa_scope *x)
 
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"(Signal) %s", x->f_scope->getHarmonicsName(a).c_str());
+    sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
 t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
@@ -532,7 +532,7 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
 	if (ac && av && atom_gettype(av) == A_LONG)
     {
         order = atom_getlong(av);
-        if(order != x->f_scope->getOrder() && order > 0)
+        if(order != x->f_scope->getDecompositionOrder() && order > 0)
         {
             int dspState = sys_getdspobjdspstate((t_object*)x);
             if(dspState)
@@ -541,7 +541,7 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
             delete x->f_scope;
             delete [] x->f_signals;
             x->f_scope      = new Hoa2D::Scope(order, NUMBEROFCIRCLEPOINTS_UI);
-            x->f_order      = x->f_scope->getOrder();
+            x->f_order      = x->f_scope->getDecompositionOrder();
             x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
             
             object_obex_lookup(x, gensym("#B"), (t_object **)&b);

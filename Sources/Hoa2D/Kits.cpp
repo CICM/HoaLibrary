@@ -276,13 +276,13 @@ namespace Hoa2D
     {
         bool changed = 0;
     
-        if(m_order != m_map->getOrder() || m_map->getNumberOfSources() != m_number_of_sources)
+        if(m_order != m_map->getDecompositionOrder() || m_map->getNumberOfSources() != m_number_of_sources)
         {
             delete m_map;
             m_map       = new Map(m_order, m_number_of_sources);
             changed = 1;
         }
-        if(m_order != m_optim->getOrder())
+        if(m_order != m_optim->getDecompositionOrder())
         {
             delete m_optim;
             m_optim     = new Optim(m_order, m_optim_mode);
@@ -292,7 +292,7 @@ namespace Hoa2D
         {
             m_optim->setMode(m_optim_mode);
         }
-        if(m_order != m_decoder->getOrder())
+        if(m_order != m_decoder->getDecompositionOrder())
         {
             delete m_decoder;
             m_decoder   = new DecoderMulti(m_order);

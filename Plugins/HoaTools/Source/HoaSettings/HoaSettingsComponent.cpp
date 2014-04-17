@@ -20,7 +20,7 @@ HoaSettingsComponent::HoaSettingsComponent(HoaComponentListener* master, HoaTool
 	
     m_order_value = new Label();
 	m_order_value->setEditable(true, false, false);
-	m_order_value->setText(String(m_processor->getOrder()), juce::dontSendNotification);
+	m_order_value->setText(String(m_processor->getDecompositionOrder()), juce::dontSendNotification);
 	m_order_value->addListener(this);
     
 	// -- optimization
@@ -211,7 +211,7 @@ void HoaSettingsComponent::updated()
             m_channels_azimuth_labels.pop_back();
 		}
         
-        m_order_value->setText(String((int)m_processor->getOrder()), juce::dontSendNotification);
+        m_order_value->setText(String((int)m_processor->getDecompositionOrder()), juce::dontSendNotification);
         m_decoder_value->setSelectedId(m_processor->getDecodingMode() + 1);
         m_optim_value->setSelectedId(m_processor->getOptimMode() + 1);
         m_number_of_sources_value->setText(String((int)m_processor->getNumberOfSources()), juce::dontSendNotification);

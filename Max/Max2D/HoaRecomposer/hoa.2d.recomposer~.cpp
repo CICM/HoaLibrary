@@ -351,7 +351,7 @@ void hoa_recomposer_perform64_free(t_hoa_recomposer *x, t_object *dsp64, double 
 void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_OUTLET)
-        sprintf(s,"(signal) %s", x->f_recomposer->getHarmonicsName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_recomposer->getHarmonicName(a).c_str());
     else if(a == x->f_recomposer->getNumberOfChannels())
         sprintf(s,"(signal/float) Fisheye factor");
     else

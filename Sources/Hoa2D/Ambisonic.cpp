@@ -13,18 +13,18 @@ namespace Hoa2D
         m_order					= order;
         m_number_of_harmonics	= m_order * 2 + 1;
         
-        m_harmonics_arguments   = new long[m_number_of_harmonics];
-        m_harmonics_arguments[0] = 0;
+        m_harmonics_orders   = new long[m_number_of_harmonics];
+        m_harmonics_orders[0] = 0;
         for(int i = 1, j = 1; i <= m_order; i++, j += 2)
         {
-            m_harmonics_arguments[j] = -i;
-            m_harmonics_arguments[j+1] = i;
+            m_harmonics_orders[j] = -i;
+            m_harmonics_orders[j+1] = i;
         }
     }
     
     Ambisonic::~Ambisonic()
     {
-        delete [] m_harmonics_arguments;
+        delete [] m_harmonics_orders;
     }
 }
 
