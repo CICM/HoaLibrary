@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 319.0, 87.0, 636.0, 661.0 ],
+		"rect" : [ 59.0, 86.0, 636.0, 661.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -29,6 +29,33 @@
 		"tags" : "",
 		"title" : "hoa.pencoder~ (7)",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-29",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.help.process.infos.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 382.5, 525.0, 128.0, 62.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-25",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 465.5, 17.0, 159.0, 33.0 ],
+					"presentation_rect" : [ 346.5, 299.0, 0.0, 0.0 ],
+					"text" : "This patch only works in 2d harmonics mode !"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -52,7 +79,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 167.0, 235.0, 50.0, 20.0 ]
+					"patching_rect" : [ 168.0, 233.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -79,7 +106,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 80.0, 263.0, 43.0, 20.0 ],
+					"patching_rect" : [ 104.5, 295.0, 43.0, 20.0 ],
 					"text" : "abs 0."
 				}
 
@@ -163,8 +190,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 274.0, 17.0, 83.0, 20.0 ],
-					"text" : "Theta"
+					"patching_rect" : [ 274.0, 17.0, 65.0, 20.0 ],
+					"text" : "Azimuth"
 				}
 
 			}
@@ -372,7 +399,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 80.0, 77.0, 79.0, 20.0 ],
+					"patching_rect" : [ 44.5, 72.0, 79.0, 20.0 ],
 					"text" : "unpack 0 0"
 				}
 
@@ -386,7 +413,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 151.0, 105.0, 45.0, 20.0 ],
+					"patching_rect" : [ 44.5, 144.0, 45.0, 20.0 ],
 					"text" : "Order"
 				}
 
@@ -401,7 +428,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 105.0, 67.0, 33.0 ],
+					"patching_rect" : [ 132.5, 72.0, 67.0, 33.0 ],
 					"text" : "Harmonic number"
 				}
 
@@ -416,7 +443,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 140.0, 122.0, 50.0, 20.0 ]
+					"patching_rect" : [ 104.5, 117.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -430,7 +457,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 80.0, 122.0, 50.0, 20.0 ]
+					"patching_rect" : [ 44.5, 117.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -443,7 +470,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 80.0, 17.0, 60.0, 20.0 ],
+					"patching_rect" : [ 44.5, 12.0, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -458,7 +485,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "list", "list", "list", "list", "int" ],
-					"patching_rect" : [ 80.0, 47.0, 102.0, 20.0 ],
+					"patching_rect" : [ 44.5, 42.0, 102.0, 20.0 ],
 					"text" : "hoa.thisprocess~"
 				}
 
@@ -626,8 +653,8 @@
 					"destination" : [ "obj-17", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 89.5, 153.0, 176.5, 153.0 ],
-					"source" : [ "obj-30", 0 ]
+					"midpoints" : [ 114.0, 153.0, 176.5, 153.0 ],
+					"source" : [ "obj-31", 0 ]
 				}
 
 			}
@@ -636,7 +663,7 @@
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-30", 0 ]
+					"source" : [ "obj-31", 0 ]
 				}
 
 			}
@@ -756,23 +783,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.in.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.out~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in~.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
