@@ -344,7 +344,7 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_map->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_map->getHarmonicName(a).c_str());
 	}
 }
 

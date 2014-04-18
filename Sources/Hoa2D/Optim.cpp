@@ -30,15 +30,15 @@ namespace Hoa2D
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = cos(fabs((double)getHarmonicBand(i)) * HOA_PI / (double)(2. * m_order + 2));
+                m_harmonics[i] = cos(fabs((double)getHarmonicDegree(i)) * HOA_PI / (double)(2. * m_order + 2));
             }
         }
         else
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                temp1 = (long double)factorial(m_order) / (long double)factorial(m_order + getHarmonicBand(i) + 1.);
-                temp2 = (long double)factorial(m_order + 1.) / (long double)factorial(m_order - fabs(getHarmonicBand(i)));
+                temp1 = (long double)factorial(m_order) / (long double)factorial(m_order + getHarmonicDegree(i) + 1.);
+                temp2 = (long double)factorial(m_order + 1.) / (long double)factorial(m_order - fabs(getHarmonicDegree(i)));
                 m_harmonics[i] = temp1 * temp2;
             }
         }

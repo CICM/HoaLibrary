@@ -70,7 +70,7 @@ public:
     void postProcess();
     void releaseResources();
     
-    long getOrder(){return m_order;};
+    long getDecompositionOrder(){return m_order;};
     long getNumberOfSources(){return m_number_of_sources;};
     long getNumberOfHarmonics(){return m_number_of_harmonics;};
     long getNumberOfLoudspeakers(){return m_number_of_loudspeakers;};

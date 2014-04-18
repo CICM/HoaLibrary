@@ -13,14 +13,14 @@ namespace Hoa2D
 {
     //! The ambisonic class.
     /**
-     Most of the ambisonic classes inherit from this classe. It computes the number of harmonics, their arguments and their orders depending of the decomposition order. etc...
+     Most of the ambisonic classes inherit from this classe. It computes the number of harmonics, their degrees and their orders depending of the decomposition order. etc...
      */
     class Ambisonic
     {
     protected:
         unsigned int	m_order;
         unsigned int	m_number_of_harmonics;
-        long*           m_harmonics_arguments;
+        long*           m_harmonics_orders;
     
 public:
         //! The ambisonic constructor.
@@ -39,7 +39,7 @@ public:
             
             @return The order.
          */
-        unsigned int getOrder() const
+        unsigned int getDecompositionOrder() const
         {
             return m_order;
         }
@@ -54,47 +54,47 @@ public:
             return m_number_of_harmonics;
         }
         
-        //! Retrieve the argument of an harmonic.
-        /** The argument of an harmonic is in the range -order to order. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, there are the 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[argument].
+        //! Retrieve the order of an harmonic.
+        /** The order of an harmonic is in the range -order to order. The harmonics are sorted by their orders, from 0 to the decomposition order and, in each order, there are the 2 harmonics with the orders -order and order. For the first orders, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[order].
          
             @param     index	The index of an harmonic.
-            @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicBand()
-            @see       getHarmonicsName()
+            @return    The method returns the order of the harmonic if the harmonic exists, otherwise the function generates an error.
+            @see       getHarmonicDegree()
+            @see       getHarmonicName()
          */
-        long getHarmonicArgument(unsigned int index) const
+        long getHarmonicOrder(unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return m_harmonics_arguments[index];
+            return m_harmonics_orders[index];
         }
         
-        //! Retrieve the band of an harmonic.
-        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[argument].
+        //! Retrieve the order of an harmonic.
+        /** The orders of the harmonics are in the range 0 to the decomposition order. Each order contains 2 harmonics with the orders -order and order. For the first orders, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[order].
          
             @param     index	The index of an harmonic.
-            @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicArgument()
-            @see       getHarmonicsName()
+            @return    The method returns the order of the harmonic if the harmonic exists, otherwise the function generates an error.
+            @see       getHarmonicOrder()
+            @see       getHarmonicName()
          */
-        long getHarmonicBand(unsigned int index) const
+        long getHarmonicDegree(unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return abs(m_harmonics_arguments[index]);
+            return abs(m_harmonics_orders[index]);
         }
         
         //! Retrieve a name for an harmonic.
-        /** Retrieve a name for an harmonic in a std::string format that will be "harmonic argument".
+        /** Retrieve a name for an harmonic in a std::string format that will be "harmonic order".
          
             @param     index	The index of an harmonic.
-            @return    The method returns a name for the harmonic that contains its argument if the harmonic exists, otherwise the function generates an error.
+            @return    The method returns a name for the harmonic that contains its order if the harmonic exists, otherwise the function generates an error.
          
-            @see       getHarmonicBand()
-            @see       getHarmonicArgument()
+            @see       getHarmonicDegree()
+            @see       getHarmonicOrder()
          */
-        std::string getHarmonicsName(unsigned int index) const
+        std::string getHarmonicName(unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + int_to_string(getHarmonicArgument(index));
+            return "Harmonic " + int_to_string(getHarmonicOrder(index));
         }
     };
 }

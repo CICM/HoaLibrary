@@ -21,10 +21,10 @@ namespace Hoa2D
         }
         for(unsigned int i = 1; i < m_number_of_harmonics; i++)
         {
-            double minus =  clip_min(log((double)getHarmonicBand(i)), 0.);
+            double minus =  clip_min(log((double)getHarmonicDegree(i)), 0.);
             minus = -minus;
             
-            double dot	= clip_min(log((double)getHarmonicBand(i) + 1.), 0.);
+            double dot	= clip_min(log((double)getHarmonicDegree(i) + 1.), 0.);
             dot += minus;
             dot  = 1. / dot;
             

@@ -16,6 +16,7 @@
 #X obj -451 -799 loadbang;
 #X obj -466 -799 hoa.help.header;
 #X obj -420 -563 hoa.help.pub;
+#X obj -44 -799 hoa.help.also;
 #X connect 1 0 0 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;

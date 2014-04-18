@@ -43,40 +43,40 @@ namespace Hoa3D
         //! Retrieve the decomposition order.
         /** Retrieve the decomposition order of an ambisonic class.
          */
-        inline unsigned int getOrder() const {return m_order;};
+        inline unsigned int getDecompositionOrder() const {return m_order;};
         
         //! Retrieve the number of harmonics.
         /** Retrieve the number of harmonics of an ambisonic class.
          */
         inline unsigned int getNumberOfHarmonics() const {return m_number_of_harmonics;};
         
-        //! Retrieve the argument of an harmonic.
-        /** The argument of an harmonic is in the range -band to band. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 * band + 1 harmonics, sorted by their arguments in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. 
+        //! Retrieve the order of an harmonic.
+        /** The order of an harmonic is in the range -degree to degree. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 * band + 1 harmonics, sorted by their arguments in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration.
 			For the first bands, the harmonics arrangement is h[0, 0] h[1, 0] h[1, -1] h[1, 1] h[2, 0] h[2, -1] h[2, 1] h[2, -2] h[2, 2] etc.
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
             @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicBand()
-            @see       getHarmonicsName()
+            @see       getHarmonicDegree()
+            @see       getHarmonicName()
          */
-        inline int getHarmonicArgument(const unsigned int index) const
+        inline int getHarmonicOrder(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
             return m_harmonics_arguments[index];
         };
         
-        //! Retrieve the band of an harmonic.
-        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 * band + 1 harmonics in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration.
+        //! Retrieve the degree of an harmonic.
+        /** The degree of the harmonics are in the range 0 to the decomposition order. Each degree contains 2 * degree + 1 harmonics in the range -degree to degree. The harmonic input and output arrays in process method of ambisonic classes must have this configuration.
 			For the first bands, the harmonics arrangement is h[0, 0] h[1, 0] h[1, -1] h[1, 1] h[2, 0] h[2, -1] h[2, 1] h[2, -2] h[2, 2] etc.
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
             @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicArgument()
-            @see       getHarmonicsName()
+            @see       getHarmonicOrder()
+            @see       getHarmonicName()
          */
-        inline unsigned int getHarmonicBand(const unsigned int index) const
+        inline unsigned int getHarmonicDegree(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
             return m_harmonics_bands[index];
@@ -87,13 +87,13 @@ namespace Hoa3D
          
             @param     index	The global index of an harmonic.
             @return    The method returns a name for the harmonic that contains its band and its argument if the harmonic exists, otherwise the function generates an error.
-            @see       getHarmonicBand()
-            @see       getHarmonicArgument()
+            @see       getHarmonicDegree()
+            @see       getHarmonicOrder()
          */
-        inline std::string getHarmonicsName(const unsigned int index) const
+        inline std::string getHarmonicName(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + int_to_string(getHarmonicBand(index)) + " " + int_to_string(getHarmonicArgument(index));
+            return "Harmonic " + int_to_string(getHarmonicDegree(index)) + " " + int_to_string(getHarmonicOrder(index));
         };
     };
 }

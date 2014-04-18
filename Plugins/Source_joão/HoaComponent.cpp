@@ -177,7 +177,7 @@ void HoaProcessor::postProcess()
     {
         m_number_of_sources = m_sources_manager->getNumberOfSources();
     }
-    if(m_order != m_decoder->getOrder())
+    if(m_order != m_decoder->getDecompositionOrder())
     {
         delete m_map;
         delete m_rotate;

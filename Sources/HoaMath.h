@@ -158,8 +158,8 @@ namespace Hoa
         \f[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\f]
         with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
      
-	 @param     l    The band of the spherical harmonic.
-	 @param     m	The argument of the spherical harmonic.
+	 @param     l   The degree of the spherical harmonic.
+	 @param     m	The order of the spherical harmonic.
 	 @param     x    The cosinus of the elevation.
 	 @return    The function return the associated Legendre polynomial of x for l and m.
      

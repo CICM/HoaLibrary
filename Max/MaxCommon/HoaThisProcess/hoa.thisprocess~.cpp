@@ -470,7 +470,7 @@ void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 		{
 			av = new t_atom[2];
             atom_setlong( av , x->f_order);										// Ambisonic Order
-			atom_setlong(av+1, x->f_ambi2D->getHarmonicArgument(x->index-1));	// Harmonic Argument
+			atom_setlong(av+1, x->f_ambi2D->getHarmonicOrder(x->index-1));	// Harmonic Argument
 			outlet_list(x->out_instance_infos, NULL, 2, av);
 			delete [] av;
 		}
@@ -478,8 +478,8 @@ void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 		{
 			av = new t_atom[3];
             atom_setlong( av , x->f_order);										// Ambisonic Order
-			atom_setlong(av+1, x->f_ambi3D->getHarmonicBand(x->index-1));		// Harmonic Band
-			atom_setlong(av+2, x->f_ambi3D->getHarmonicArgument(x->index-1));	// Harmonic Argument
+			atom_setlong(av+1, x->f_ambi3D->getHarmonicDegree(x->index-1));		// Harmonic Band
+			atom_setlong(av+2, x->f_ambi3D->getHarmonicOrder(x->index-1));	// Harmonic Argument
 			outlet_list(x->out_instance_infos, NULL, 3, av);
 			delete [] av;
 		}

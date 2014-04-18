@@ -1,0 +1,28 @@
+#N canvas 176 470 898 350 10;
+#X obj 149 75 c.patcherinfos;
+#X msg 122 175 \; pd open \$1 \$2;
+#X obj 47 13 s \$0-zeze;
+#X obj 16 13 c.tab @size 100 18 @fontname Monaco @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @orientation 0 @toggle 0 @items hoa.overview @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @hocolor 0.5 0.5 0.5
+1 @secolor 0.35 0.35 0.35 1;
+#X obj 149 31 r \$0-zeze;
+#X obj 1 1 cnv 15 130 40 empty \$0-hoa.header empty 3 12 0 18 -212212
+-1 0;
+#X obj 149 51 bang;
+#X obj 115 95 t b s;
+#X obj 189 116 makefilename %s/..;
+#X obj 228 183 print;
+#X msg 79 125 hoa.library-help.pd;
+#X obj 122 148 pack s s;
+#X connect 0 1 7 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 6 0 0 0;
+#X connect 7 0 10 0;
+#X connect 7 1 8 0;
+#X connect 8 0 11 1;
+#X connect 10 0 11 0;
+#X connect 11 0 1 0;
+#X coords 0 -1 1 1 132 42 2 0 0;

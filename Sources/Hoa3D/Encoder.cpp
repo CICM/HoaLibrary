@@ -27,8 +27,8 @@ namespace Hoa3D
             double max;
             double theta;
             double phi;
-            int band     = getHarmonicBand(i);
-            int argument = getHarmonicArgument(i);
+            int band     = getHarmonicDegree(i);
+            int argument = getHarmonicOrder(i);
             
             max = 0.;
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)

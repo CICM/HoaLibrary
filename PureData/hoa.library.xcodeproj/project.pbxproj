@@ -82,28 +82,8 @@
 		8F189FC618EB0E2C00348D89 /* HoaDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F7F18EB0E2C00348D89 /* HoaDefs.h */; };
 		8F189FC718EB0E2C00348D89 /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F8018EB0E2C00348D89 /* HoaMath.h */; };
 		8F189FC818EB0E2C00348D89 /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F8118EB0E2C00348D89 /* HoaUtils.h */; };
-		8F18A00918EB0E6400348D89 /* hoa.2d.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */; };
-		8F18A00A18EB0E6400348D89 /* hoa.2d.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */; };
-		8F18A00B18EB0E6400348D89 /* hoa.2d.map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */; };
-		8F18A00C18EB0E6400348D89 /* hoa.2d.map~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */; };
-		8F18A00D18EB0E6400348D89 /* hoa.2d.meter~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */; };
-		8F18A00E18EB0E6400348D89 /* hoa.2d.optim~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */; };
-		8F18A01018EB0E6400348D89 /* hoa.2d.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */; };
-		8F18A01118EB0E6400348D89 /* hoa.2d.recomposer~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */; };
-		8F18A01218EB0E6400348D89 /* hoa.2d.rotate~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */; };
-		8F18A01318EB0E6400348D89 /* hoa.2d.scope~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */; };
-		8F18A01418EB0E6400348D89 /* hoa.2d.space.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */; };
-		8F18A01518EB0E6400348D89 /* hoa.2d.wider~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */; };
 		8F18A01718EB0EA400348D89 /* Hoa2D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */; };
 		8F18A01A18EB0F2600348D89 /* HoaCommon.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */; };
-		8F18A02318EB0F3A00348D89 /* hoa.connect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */; };
-		8F18A02418EB0F3A00348D89 /* hoa.dac~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */; };
-		8F18A02518EB0F3A00348D89 /* hoa.in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */; };
-		8F18A02618EB0F3A00348D89 /* hoa.in~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */; };
-		8F18A02718EB0F3A00348D89 /* hoa.out.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */; };
-		8F18A02818EB0F3A00348D89 /* hoa.out~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */; };
-		8F18A02918EB0F3A00348D89 /* hoa.pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */; };
-		8F18A02A18EB0F3A00348D89 /* hoa.thisprocess~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */; };
 		8F18A05E18EB188D00348D89 /* cicm_wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A02C18EB188D00348D89 /* cicm_wrapper.h */; };
 		8F18A05F18EB188D00348D89 /* ebox.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A02E18EB188D00348D89 /* ebox.h */; };
 		8F18A06018EB188D00348D89 /* ebox_attr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A02F18EB188D00348D89 /* ebox_attr.c */; };
@@ -147,8 +127,29 @@
 		8F18A08818EB188D00348D89 /* epopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A05C18EB188D00348D89 /* epopup.h */; };
 		8F18A08918EB188D00348D89 /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A05D18EB188D00348D89 /* estruct.h */; };
 		8F26F18B17E76274005FCB97 /* hoa.library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F26F18A17E76273005FCB97 /* hoa.library.cpp */; };
-		8F83C5EF18EF568700BA9AD1 /* hoa.process~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F83C5EE18EF568700BA9AD1 /* hoa.process~.cpp */; };
-		8FC0189F18EC0FA400963620 /* hoa.pi~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC0189E18EC0FA400963620 /* hoa.pi~.cpp */; };
+		8FB8EAA119006B53005FAF6A /* hoa.2d.decoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9519006B53005FAF6A /* hoa.2d.decoder_tilde.cpp */; };
+		8FB8EAA219006B53005FAF6A /* hoa.2d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9619006B53005FAF6A /* hoa.2d.encoder_tilde.cpp */; };
+		8FB8EAA319006B53005FAF6A /* hoa.2d.map_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9719006B53005FAF6A /* hoa.2d.map_gui.cpp */; };
+		8FB8EAA419006B53005FAF6A /* hoa.2d.map_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9819006B53005FAF6A /* hoa.2d.map_tilde.cpp */; };
+		8FB8EAA519006B53005FAF6A /* hoa.2d.meter_gui_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9919006B53005FAF6A /* hoa.2d.meter_gui_tilde.cpp */; };
+		8FB8EAA619006B53005FAF6A /* hoa.2d.optim_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9A19006B53005FAF6A /* hoa.2d.optim_tilde.cpp */; };
+		8FB8EAA719006B53005FAF6A /* hoa.2d.projector_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9B19006B53005FAF6A /* hoa.2d.projector_tilde.cpp */; };
+		8FB8EAA819006B53005FAF6A /* hoa.2d.recomposer_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9C19006B53005FAF6A /* hoa.2d.recomposer_tilde.cpp */; };
+		8FB8EAA919006B53005FAF6A /* hoa.2d.rotate_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9D19006B53005FAF6A /* hoa.2d.rotate_tilde.cpp */; };
+		8FB8EAAA19006B53005FAF6A /* hoa.2d.scope_gui_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9E19006B53005FAF6A /* hoa.2d.scope_gui_tilde.cpp */; };
+		8FB8EAAB19006B53005FAF6A /* hoa.2d.space_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EA9F19006B53005FAF6A /* hoa.2d.space_gui.cpp */; };
+		8FB8EAAC19006B53005FAF6A /* hoa.2d.wider_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAA019006B53005FAF6A /* hoa.2d.wider_tilde.cpp */; };
+		8FB8EAB919006CD9005FAF6A /* hoa.connect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAAD19006CD9005FAF6A /* hoa.connect.cpp */; };
+		8FB8EABB19006CD9005FAF6A /* hoa.dac_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAAF19006CD9005FAF6A /* hoa.dac_tilde.cpp */; };
+		8FB8EABC19006CD9005FAF6A /* hoa.in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB019006CD9005FAF6A /* hoa.in.cpp */; };
+		8FB8EABD19006CD9005FAF6A /* hoa.in_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB119006CD9005FAF6A /* hoa.in_tilde.cpp */; };
+		8FB8EABE19006CD9005FAF6A /* hoa.out.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB219006CD9005FAF6A /* hoa.out.cpp */; };
+		8FB8EABF19006CD9005FAF6A /* hoa.out_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB319006CD9005FAF6A /* hoa.out_tilde.cpp */; };
+		8FB8EAC019006CD9005FAF6A /* hoa.pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB419006CD9005FAF6A /* hoa.pi.cpp */; };
+		8FB8EAC119006CD9005FAF6A /* hoa.pi_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB519006CD9005FAF6A /* hoa.pi_tilde.cpp */; };
+		8FB8EAC219006CD9005FAF6A /* hoa.process_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB619006CD9005FAF6A /* hoa.process_tilde.cpp */; };
+		8FB8EAC319006CD9005FAF6A /* hoa.thisprocess_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8EAB719006CD9005FAF6A /* hoa.thisprocess_tilde.cpp */; };
+		8FB8EAC419006CD9005FAF6A /* HoaCommon.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB8EAB819006CD9005FAF6A /* HoaCommon.pd.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,28 +229,8 @@
 		8F189F7F18EB0E2C00348D89 /* HoaDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaDefs.h; sourceTree = "<group>"; };
 		8F189F8018EB0E2C00348D89 /* HoaMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaMath.h; sourceTree = "<group>"; };
 		8F189F8118EB0E2C00348D89 /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaUtils.h; sourceTree = "<group>"; };
-		8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.decoder~.cpp"; path = "PD2D/hoaDecoder/hoa.2d.decoder~.cpp"; sourceTree = "<group>"; };
-		8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.encoder~.cpp"; path = "PD2D/hoaEncoder/hoa.2d.encoder~.cpp"; sourceTree = "<group>"; };
-		8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.map.cpp; path = PD2D/hoaMap_UI/hoa.2d.map.cpp; sourceTree = "<group>"; };
-		8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.map~.cpp"; path = "PD2D/hoaMap/hoa.2d.map~.cpp"; sourceTree = "<group>"; };
-		8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.meter~.cpp"; path = "PD2D/hoaMeter_UI/hoa.2d.meter~.cpp"; sourceTree = "<group>"; };
-		8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.optim~.cpp"; path = "PD2D/hoaOptim/hoa.2d.optim~.cpp"; sourceTree = "<group>"; };
-		8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.projector~.cpp"; path = "PD2D/hoaProjector/hoa.2d.projector~.cpp"; sourceTree = "<group>"; };
-		8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.recomposer~.cpp"; path = "PD2D/hoaRecomposer/hoa.2d.recomposer~.cpp"; sourceTree = "<group>"; };
-		8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.rotate~.cpp"; path = "PD2D/hoaRotate/hoa.2d.rotate~.cpp"; sourceTree = "<group>"; };
-		8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.scope~.cpp"; path = "PD2D/hoaScope_UI/hoa.2d.scope~.cpp"; sourceTree = "<group>"; };
-		8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.space.cpp; path = PD2D/hoaSpace_UI/hoa.2d.space.cpp; sourceTree = "<group>"; };
-		8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.2d.wider~.cpp"; path = "PD2D/hoaWider/hoa.2d.wider~.cpp"; sourceTree = "<group>"; };
 		8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.pd.h; path = PD2D/Hoa2D.pd.h; sourceTree = "<group>"; };
 		8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.pd.h; path = PDCommon/HoaCommon.pd.h; sourceTree = "<group>"; };
-		8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.connect.cpp; path = PDCommon/hoaConnect/hoa.connect.cpp; sourceTree = "<group>"; };
-		8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.dac~.cpp"; path = "PDCommon/hoaDac/hoa.dac~.cpp"; sourceTree = "<group>"; };
-		8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.in.cpp; path = PDCommon/hoaIn/hoa.in.cpp; sourceTree = "<group>"; };
-		8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.in~.cpp"; path = "PDCommon/hoaIn_tilde/hoa.in~.cpp"; sourceTree = "<group>"; };
-		8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.out.cpp; path = PDCommon/hoaOut/hoa.out.cpp; sourceTree = "<group>"; };
-		8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.out~.cpp"; path = "PDCommon/hoaOut_tilde/hoa.out~.cpp"; sourceTree = "<group>"; };
-		8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.pi.cpp; path = PDCommon/hoaPi/hoa.pi.cpp; sourceTree = "<group>"; };
-		8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.thisprocess~.cpp"; path = "PDCommon/hoaThisprocess/hoa.thisprocess~.cpp"; sourceTree = "<group>"; };
 		8F18A02C18EB188D00348D89 /* cicm_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicm_wrapper.h; sourceTree = "<group>"; };
 		8F18A02E18EB188D00348D89 /* ebox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ebox.h; sourceTree = "<group>"; };
 		8F18A02F18EB188D00348D89 /* ebox_attr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_attr.c; sourceTree = "<group>"; };
@@ -293,8 +274,29 @@
 		8F18A05C18EB188D00348D89 /* epopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
 		8F18A05D18EB188D00348D89 /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
 		8F26F18A17E76273005FCB97 /* hoa.library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.library.cpp; sourceTree = "<group>"; };
-		8F83C5EE18EF568700BA9AD1 /* hoa.process~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.process~.cpp"; path = "PDCommon/hoaProcess/hoa.process~.cpp"; sourceTree = "<group>"; };
-		8FC0189E18EC0FA400963620 /* hoa.pi~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "hoa.pi~.cpp"; path = "PDCommon/hoaPi_tilde/hoa.pi~.cpp"; sourceTree = "<group>"; };
+		8FB8EA9519006B53005FAF6A /* hoa.2d.decoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.decoder_tilde.cpp; path = PD2D/hoa.2d.decoder_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9619006B53005FAF6A /* hoa.2d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.encoder_tilde.cpp; path = PD2D/hoa.2d.encoder_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9719006B53005FAF6A /* hoa.2d.map_gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.map_gui.cpp; path = PD2D/hoa.2d.map_gui.cpp; sourceTree = "<group>"; };
+		8FB8EA9819006B53005FAF6A /* hoa.2d.map_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.map_tilde.cpp; path = PD2D/hoa.2d.map_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9919006B53005FAF6A /* hoa.2d.meter_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.meter_gui_tilde.cpp; path = PD2D/hoa.2d.meter_gui_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9A19006B53005FAF6A /* hoa.2d.optim_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.optim_tilde.cpp; path = PD2D/hoa.2d.optim_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9B19006B53005FAF6A /* hoa.2d.projector_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.projector_tilde.cpp; path = PD2D/hoa.2d.projector_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9C19006B53005FAF6A /* hoa.2d.recomposer_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.recomposer_tilde.cpp; path = PD2D/hoa.2d.recomposer_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9D19006B53005FAF6A /* hoa.2d.rotate_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.rotate_tilde.cpp; path = PD2D/hoa.2d.rotate_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9E19006B53005FAF6A /* hoa.2d.scope_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.scope_gui_tilde.cpp; path = PD2D/hoa.2d.scope_gui_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EA9F19006B53005FAF6A /* hoa.2d.space_gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.space_gui.cpp; path = PD2D/hoa.2d.space_gui.cpp; sourceTree = "<group>"; };
+		8FB8EAA019006B53005FAF6A /* hoa.2d.wider_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.2d.wider_tilde.cpp; path = PD2D/hoa.2d.wider_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAAD19006CD9005FAF6A /* hoa.connect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.connect.cpp; path = PDCommon/hoa.connect.cpp; sourceTree = "<group>"; };
+		8FB8EAAF19006CD9005FAF6A /* hoa.dac_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.dac_tilde.cpp; path = PDCommon/hoa.dac_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB019006CD9005FAF6A /* hoa.in.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.in.cpp; path = PDCommon/hoa.in.cpp; sourceTree = "<group>"; };
+		8FB8EAB119006CD9005FAF6A /* hoa.in_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.in_tilde.cpp; path = PDCommon/hoa.in_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB219006CD9005FAF6A /* hoa.out.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.out.cpp; path = PDCommon/hoa.out.cpp; sourceTree = "<group>"; };
+		8FB8EAB319006CD9005FAF6A /* hoa.out_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.out_tilde.cpp; path = PDCommon/hoa.out_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB419006CD9005FAF6A /* hoa.pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.pi.cpp; path = PDCommon/hoa.pi.cpp; sourceTree = "<group>"; };
+		8FB8EAB519006CD9005FAF6A /* hoa.pi_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.pi_tilde.cpp; path = PDCommon/hoa.pi_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB619006CD9005FAF6A /* hoa.process_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.process_tilde.cpp; path = PDCommon/hoa.process_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB719006CD9005FAF6A /* hoa.thisprocess_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.thisprocess_tilde.cpp; path = PDCommon/hoa.thisprocess_tilde.cpp; sourceTree = "<group>"; };
+		8FB8EAB819006CD9005FAF6A /* HoaCommon.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.pd.h; path = PDCommon/HoaCommon.pd.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,16 +434,17 @@
 			isa = PBXGroup;
 			children = (
 				8F18A01918EB0F2600348D89 /* HoaCommon.pd.h */,
-				8F18A01B18EB0F3A00348D89 /* hoa.connect.cpp */,
-				8F18A01C18EB0F3A00348D89 /* hoa.dac~.cpp */,
-				8F18A01D18EB0F3A00348D89 /* hoa.in.cpp */,
-				8F18A01E18EB0F3A00348D89 /* hoa.in~.cpp */,
-				8F18A01F18EB0F3A00348D89 /* hoa.out.cpp */,
-				8F18A02018EB0F3A00348D89 /* hoa.out~.cpp */,
-				8F18A02118EB0F3A00348D89 /* hoa.pi.cpp */,
-				8FC0189E18EC0FA400963620 /* hoa.pi~.cpp */,
-				8F83C5EE18EF568700BA9AD1 /* hoa.process~.cpp */,
-				8F18A02218EB0F3A00348D89 /* hoa.thisprocess~.cpp */,
+				8FB8EAAD19006CD9005FAF6A /* hoa.connect.cpp */,
+				8FB8EAAF19006CD9005FAF6A /* hoa.dac_tilde.cpp */,
+				8FB8EAB019006CD9005FAF6A /* hoa.in.cpp */,
+				8FB8EAB119006CD9005FAF6A /* hoa.in_tilde.cpp */,
+				8FB8EAB219006CD9005FAF6A /* hoa.out.cpp */,
+				8FB8EAB319006CD9005FAF6A /* hoa.out_tilde.cpp */,
+				8FB8EAB419006CD9005FAF6A /* hoa.pi.cpp */,
+				8FB8EAB519006CD9005FAF6A /* hoa.pi_tilde.cpp */,
+				8FB8EAB619006CD9005FAF6A /* hoa.process_tilde.cpp */,
+				8FB8EAB719006CD9005FAF6A /* hoa.thisprocess_tilde.cpp */,
+				8FB8EAB819006CD9005FAF6A /* HoaCommon.pd.h */,
 			);
 			name = PDCommon;
 			sourceTree = "<group>";
@@ -547,19 +550,19 @@
 		8F5B7C1918EB02E10038743B /* PD2D */ = {
 			isa = PBXGroup;
 			children = (
+				8FB8EA9519006B53005FAF6A /* hoa.2d.decoder_tilde.cpp */,
+				8FB8EA9619006B53005FAF6A /* hoa.2d.encoder_tilde.cpp */,
+				8FB8EA9719006B53005FAF6A /* hoa.2d.map_gui.cpp */,
+				8FB8EA9819006B53005FAF6A /* hoa.2d.map_tilde.cpp */,
+				8FB8EA9919006B53005FAF6A /* hoa.2d.meter_gui_tilde.cpp */,
+				8FB8EA9A19006B53005FAF6A /* hoa.2d.optim_tilde.cpp */,
+				8FB8EA9B19006B53005FAF6A /* hoa.2d.projector_tilde.cpp */,
+				8FB8EA9C19006B53005FAF6A /* hoa.2d.recomposer_tilde.cpp */,
+				8FB8EA9D19006B53005FAF6A /* hoa.2d.rotate_tilde.cpp */,
+				8FB8EA9E19006B53005FAF6A /* hoa.2d.scope_gui_tilde.cpp */,
+				8FB8EA9F19006B53005FAF6A /* hoa.2d.space_gui.cpp */,
+				8FB8EAA019006B53005FAF6A /* hoa.2d.wider_tilde.cpp */,
 				8F18A01618EB0EA400348D89 /* Hoa2D.pd.h */,
-				8F189FFC18EB0E6400348D89 /* hoa.2d.decoder~.cpp */,
-				8F189FFD18EB0E6400348D89 /* hoa.2d.encoder~.cpp */,
-				8F189FFE18EB0E6400348D89 /* hoa.2d.map.cpp */,
-				8F189FFF18EB0E6400348D89 /* hoa.2d.map~.cpp */,
-				8F18A00018EB0E6400348D89 /* hoa.2d.meter~.cpp */,
-				8F18A00118EB0E6400348D89 /* hoa.2d.optim~.cpp */,
-				8F18A00318EB0E6400348D89 /* hoa.2d.projector~.cpp */,
-				8F18A00418EB0E6400348D89 /* hoa.2d.recomposer~.cpp */,
-				8F18A00518EB0E6400348D89 /* hoa.2d.rotate~.cpp */,
-				8F18A00618EB0E6400348D89 /* hoa.2d.scope~.cpp */,
-				8F18A00718EB0E6400348D89 /* hoa.2d.space.cpp */,
-				8F18A00818EB0E6400348D89 /* hoa.2d.wider~.cpp */,
 			);
 			name = PD2D;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				8F189FB318EB0E2C00348D89 /* Encoder.h in Headers */,
 				8F189FB818EB0E2C00348D89 /* Meter.h in Headers */,
 				8F189FA218EB0E2C00348D89 /* SourcesGroup.h in Headers */,
+				8FB8EAC419006CD9005FAF6A /* HoaCommon.pd.h in Headers */,
 				8F189F9C18EB0E2C00348D89 /* Rotate.h in Headers */,
 				8F189FB118EB0E2C00348D89 /* Decoder.h in Headers */,
 				8F189F9218EB0E2C00348D89 /* Meter.h in Headers */,
@@ -682,89 +686,89 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB8EABE19006CD9005FAF6A /* hoa.out.cpp in Sources */,
 				8F18A06A18EB188D00348D89 /* eclass_attrsetter.c in Sources */,
 				8F18A06818EB188D00348D89 /* eclass_attrnew.c in Sources */,
 				8F189FA318EB0E2C00348D89 /* SourcesManager.cpp in Sources */,
-				8F18A02318EB0F3A00348D89 /* hoa.connect.cpp in Sources */,
+				8FB8EAC319006CD9005FAF6A /* hoa.thisprocess_tilde.cpp in Sources */,
+				8FB8EAAC19006B53005FAF6A /* hoa.2d.wider_tilde.cpp in Sources */,
 				8F18A07718EB188D00348D89 /* efft.c in Sources */,
-				8F18A01518EB0E6400348D89 /* hoa.2d.wider~.cpp in Sources */,
 				8F189F9318EB0E2C00348D89 /* Optim.cpp in Sources */,
+				8FB8EAA819006B53005FAF6A /* hoa.2d.recomposer_tilde.cpp in Sources */,
 				8F189FA918EB0E2C00348D89 /* Vector.cpp in Sources */,
 				8F18A07B18EB188D00348D89 /* egraphics_color.c in Sources */,
 				8F18A08218EB188D00348D89 /* eobj_handle.c in Sources */,
 				8F18A06B18EB188D00348D89 /* eclass_basic.c in Sources */,
+				8FB8EAA619006B53005FAF6A /* hoa.2d.optim_tilde.cpp in Sources */,
 				8F189F3618EB0DBE00348D89 /* hoa.pd.cpp in Sources */,
 				8F18A06118EB188D00348D89 /* ebox_basic.c in Sources */,
 				8F189FA718EB0E2C00348D89 /* SourcesTrajectory.cpp in Sources */,
 				8F18A06218EB188D00348D89 /* ebox_draw.c in Sources */,
 				8F189FB718EB0E2C00348D89 /* Meter.cpp in Sources */,
+				8FB8EAA219006B53005FAF6A /* hoa.2d.encoder_tilde.cpp in Sources */,
+				8FB8EAB919006CD9005FAF6A /* hoa.connect.cpp in Sources */,
 				8F18A06418EB188D00348D89 /* ebox_patcher.c in Sources */,
-				8F18A01118EB0E6400348D89 /* hoa.2d.recomposer~.cpp in Sources */,
-				8F18A00A18EB0E6400348D89 /* hoa.2d.encoder~.cpp in Sources */,
 				8F189FC218EB0E2C00348D89 /* Vector.cpp in Sources */,
 				8F189F8618EB0E2C00348D89 /* ChannelManager.cpp in Sources */,
 				8F189FB518EB0E2C00348D89 /* Map.cpp in Sources */,
 				8F189F9D18EB0E2C00348D89 /* Scope.cpp in Sources */,
 				8F189F9718EB0E2C00348D89 /* Projector.cpp in Sources */,
 				8F18A08418EB188D00348D89 /* eobj_router.c in Sources */,
-				8F18A00C18EB0E6400348D89 /* hoa.2d.map~.cpp in Sources */,
 				8F18A08718EB188D00348D89 /* epopup.c in Sources */,
+				8FB8EAA919006B53005FAF6A /* hoa.2d.rotate_tilde.cpp in Sources */,
 				8F189F8318EB0E2C00348D89 /* Ambisonic.cpp in Sources */,
 				8F189F9B18EB0E2C00348D89 /* Rotate.cpp in Sources */,
 				8F189F9518EB0E2C00348D89 /* Planewaves.cpp in Sources */,
 				8F18A07918EB188D00348D89 /* egraphics.c in Sources */,
 				8F189F8D18EB0E2C00348D89 /* Kits.cpp in Sources */,
-				8F18A00B18EB0E6400348D89 /* hoa.2d.map.cpp in Sources */,
-				8F18A01018EB0E6400348D89 /* hoa.2d.projector~.cpp in Sources */,
 				8F189FAB18EB0E2C00348D89 /* Wider.cpp in Sources */,
-				8F18A00918EB0E6400348D89 /* hoa.2d.decoder~.cpp in Sources */,
 				8F18A06C18EB188D00348D89 /* eclass_widget.c in Sources */,
 				8F26F18B17E76274005FCB97 /* hoa.library.cpp in Sources */,
 				8F18A06D18EB188D00348D89 /* d_ugen.c in Sources */,
 				8F189FA118EB0E2C00348D89 /* SourcesGroup.cpp in Sources */,
 				8F189FB218EB0E2C00348D89 /* Encoder.cpp in Sources */,
-				8F18A02618EB0F3A00348D89 /* hoa.in~.cpp in Sources */,
 				8F18A07E18EB188D00348D89 /* egraphics_text.c in Sources */,
-				8F18A02718EB0F3A00348D89 /* hoa.out.cpp in Sources */,
 				8F18A06318EB188D00348D89 /* ebox_handle.c in Sources */,
+				8FB8EAC019006CD9005FAF6A /* hoa.pi.cpp in Sources */,
+				8FB8EAC119006CD9005FAF6A /* hoa.pi_tilde.cpp in Sources */,
 				8F189FBB18EB0E2C00348D89 /* Planewaves.cpp in Sources */,
-				8F18A00D18EB0E6400348D89 /* hoa.2d.meter~.cpp in Sources */,
 				8F18A07218EB188D00348D89 /* ecommon.c in Sources */,
-				8F18A02818EB0F3A00348D89 /* hoa.out~.cpp in Sources */,
-				8F18A02A18EB0F3A00348D89 /* hoa.thisprocess~.cpp in Sources */,
-				8F18A01418EB0E6400348D89 /* hoa.2d.space.cpp in Sources */,
+				8FB8EAA319006B53005FAF6A /* hoa.2d.map_gui.cpp in Sources */,
 				8F18A06018EB188D00348D89 /* ebox_attr.c in Sources */,
+				8FB8EAAA19006B53005FAF6A /* hoa.2d.scope_gui_tilde.cpp in Sources */,
 				8F18A08318EB188D00348D89 /* eobj_proxy.c in Sources */,
-				8F18A02518EB0F3A00348D89 /* hoa.in.cpp in Sources */,
 				8F189F9F18EB0E2C00348D89 /* Source.cpp in Sources */,
 				8F18A06518EB188D00348D89 /* ebox_window.c in Sources */,
-				8F83C5EF18EF568700BA9AD1 /* hoa.process~.cpp in Sources */,
-				8F18A02418EB0F3A00348D89 /* hoa.dac~.cpp in Sources */,
 				8F189F9118EB0E2C00348D89 /* Meter.cpp in Sources */,
 				8F18A08118EB188D00348D89 /* eobj_dsp.c in Sources */,
 				8F189FBD18EB0E2C00348D89 /* Rotate.cpp in Sources */,
+				8FB8EAC219006CD9005FAF6A /* hoa.process_tilde.cpp in Sources */,
+				8FB8EABD19006CD9005FAF6A /* hoa.in_tilde.cpp in Sources */,
 				8F189F9918EB0E2C00348D89 /* Recomposer.cpp in Sources */,
+				8FB8EAA419006B53005FAF6A /* hoa.2d.map_tilde.cpp in Sources */,
 				8F189FC418EB0E2C00348D89 /* Wider.cpp in Sources */,
+				8FB8EAA719006B53005FAF6A /* hoa.2d.projector_tilde.cpp in Sources */,
 				8F189FAD18EB0E2C00348D89 /* Ambisonic.cpp in Sources */,
 				8F189FAF18EB0E2C00348D89 /* BinauralMatrix.cpp in Sources */,
-				8F18A01218EB0E6400348D89 /* hoa.2d.rotate~.cpp in Sources */,
 				8F18A06918EB188D00348D89 /* eclass_attroptions.c in Sources */,
 				8F18A07D18EB188D00348D89 /* egraphics_matrix.c in Sources */,
+				8FB8EABB19006CD9005FAF6A /* hoa.dac_tilde.cpp in Sources */,
 				8F189F8F18EB0E2C00348D89 /* Map.cpp in Sources */,
-				8F18A02918EB0F3A00348D89 /* hoa.pi.cpp in Sources */,
-				8F18A00E18EB0E6400348D89 /* hoa.2d.optim~.cpp in Sources */,
 				8F18A08018EB188D00348D89 /* eobj_basic.c in Sources */,
-				8F18A01318EB0E6400348D89 /* hoa.2d.scope~.cpp in Sources */,
+				8FB8EAAB19006B53005FAF6A /* hoa.2d.space_gui.cpp in Sources */,
 				8F189FBF18EB0E2C00348D89 /* Scope.cpp in Sources */,
 				8F189FA518EB0E2C00348D89 /* SourcesPreset.cpp in Sources */,
 				8F189F8818EB0E2C00348D89 /* Decoder.cpp in Sources */,
+				8FB8EAA519006B53005FAF6A /* hoa.2d.meter_gui_tilde.cpp in Sources */,
 				8F18A06718EB188D00348D89 /* eclass_attrgetter.c in Sources */,
 				8F189F8A18EB0E2C00348D89 /* Encoder.cpp in Sources */,
+				8FB8EABF19006CD9005FAF6A /* hoa.out_tilde.cpp in Sources */,
+				8FB8EABC19006CD9005FAF6A /* hoa.in.cpp in Sources */,
+				8FB8EAA119006B53005FAF6A /* hoa.2d.decoder_tilde.cpp in Sources */,
 				8F189FB018EB0E2C00348D89 /* Decoder.cpp in Sources */,
 				8F18A07C18EB188D00348D89 /* egraphics_forms.c in Sources */,
 				8F189F8518EB0E2C00348D89 /* BinauralMatrix2D.cpp in Sources */,
 				8F189FB918EB0E2C00348D89 /* Optim.cpp in Sources */,
-				8FC0189F18EC0FA400963620 /* hoa.pi~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -116,6 +116,7 @@ argument is the order and second argument is the number of sources.
 #X obj -566 -490 loadbang;
 #X obj -581 -490 hoa.help.header;
 #X obj -316 71 hoa.help.pub;
+#X obj -164 -490 hoa.help.also;
 #X connect 0 0 1 0;
 #X connect 1 0 43 0;
 #X connect 1 0 51 2;

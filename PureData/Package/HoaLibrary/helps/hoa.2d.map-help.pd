@@ -808,6 +808,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -595 -475 loadbang;
 #X obj -610 -475 hoa.help.header;
 #X obj -464 200 hoa.help.pub;
+#X obj -194 -475 hoa.help.also;
 #X connect 1 0 13 0;
 #X connect 2 0 1 0;
 #X connect 7 0 6 0;

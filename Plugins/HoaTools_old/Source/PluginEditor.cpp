@@ -72,7 +72,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_order_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
     m_order_menu->setBounds(581, 5, 50, 12);
     m_order_menu->setRange(0, 64, 1);
-    m_order = (int)m_hoa_processor->getOrder();
+    m_order = (int)m_hoa_processor->getDecompositionOrder();
     m_order_menu->getValueObject().referTo(m_order);
     m_order.addListener(this);
     

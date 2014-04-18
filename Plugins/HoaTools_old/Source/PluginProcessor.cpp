@@ -238,7 +238,7 @@ void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
 {
     XmlElement xml("HoaToolsSettings");
     
-    xml.setAttribute("Order", (int)m_processor->getOrder());    
+    xml.setAttribute("Order", (int)m_processor->getDecompositionOrder());    
     xml.setAttribute("NumberOfSources", (int)m_processor->getNumberOfSources());
     xml.setAttribute("NumberOfLoudspeakers", (int)m_processor->getNumberOfLoudspeakers());
     xml.setAttribute("OffsetOfLoudspeakers", (int)m_processor->getOffsetOfLoudspeakers());

@@ -28,6 +28,7 @@ or want to initialize a good Pi number.;
 #X obj 10 19 c.patcherinfos;
 #X obj 15 2 loadbang;
 #X obj 0 2 hoa.help.header;
+#X obj 416 2 hoa.help.also;
 #X connect 0 0 5 0;
 #X connect 1 0 4 0;
 #X connect 2 0 6 0;
