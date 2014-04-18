@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 459.0, 78.0, 850.0, 687.0 ],
+						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -693,7 +693,6 @@
 										"description" : "",
 										"digest" : "",
 										"tags" : "",
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -915,7 +914,6 @@
 									"bgcolor" : [ 0.760784, 0.760784, 0.760784, 1.0 ],
 									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 3,
 									"id" : "obj-25",
 									"interval" : 20,
 									"maxclass" : "hoa.2d.meter~",
@@ -1378,7 +1376,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
+						"rect" : [ 459.0, 78.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7339,10 +7337,10 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
+			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
 			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
 			"obj-30::obj-19" : [ "flonum", "flonum", 0 ],
-			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ]
+			"obj-30::obj-28" : [ "umenu", "umenu", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

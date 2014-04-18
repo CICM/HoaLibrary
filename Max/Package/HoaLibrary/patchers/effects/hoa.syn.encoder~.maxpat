@@ -50,7 +50,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 465.5, 17.0, 159.0, 33.0 ],
-					"presentation_rect" : [ 346.5, 299.0, 0.0, 0.0 ],
 					"text" : "This patch only works in 2d harmonics mode !"
 				}
 
@@ -64,7 +63,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 388.5, 62.0, 75.0, 20.0 ],
+					"patching_rect" : [ 365.0, 119.0, 75.0, 20.0 ],
 					"text" : "loadmess 0."
 				}
 
@@ -149,7 +148,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 274.0, 122.0, 50.0, 20.0 ]
+					"patching_rect" : [ 274.0, 143.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -367,7 +366,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 274.0, 72.0, 80.0, 20.0 ],
+					"patching_rect" : [ 274.0, 93.0, 80.0, 20.0 ],
 					"text" : "route int float"
 				}
 
@@ -496,17 +495,18 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 274.0, 42.0, 95.0, 20.0 ],
+					"patching_rect" : [ 274.0, 42.0, 166.0, 33.0 ],
 					"saved_object_attributes" : 					{
-						"comment" : "",
+						"comment" : "(float) Azimuth in radian",
 						"extra" : 2
 					}
 ,
-					"text" : "hoa.in @extra 2"
+					"text" : "hoa.in @extra 2 @comment \"(float) Azimuth in radian\""
 				}
 
 			}
@@ -516,7 +516,6 @@
 					"destination" : [ "obj-32", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 283.5, 69.0, 283.5, 69.0 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -783,6 +782,44 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "hoa.help.process.infos.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
+				"patcherrelativepath" : "../helputility",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.args.map.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.mode.sel.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}
