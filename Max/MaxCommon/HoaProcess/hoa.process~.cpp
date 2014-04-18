@@ -1314,7 +1314,8 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
                 if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
                 {
                     thisprocess = (t_object *) jbox_get_object(b);
-                    object_method(thisprocess, hoa_sym_bang);
+                    //object_method(thisprocess, hoa_sym_bang);
+                    object_method(thisprocess, gensym("mutechange"));
                 }
             }
         }
@@ -1329,7 +1330,8 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
             if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
             {
                 thisprocess = (t_object *) jbox_get_object(b);
-                object_method(thisprocess, hoa_sym_bang);
+                //object_method(thisprocess, hoa_sym_bang);
+                object_method(thisprocess, gensym("mutechange"));
             }
         }
     }

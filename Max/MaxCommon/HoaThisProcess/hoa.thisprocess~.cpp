@@ -56,6 +56,7 @@ t_class *hoa_thisprocess_class;
 
 void *hoa_thisprocess_new(t_symbol *s, short argc, t_atom *argv);
 void hoa_thisprocess_free(t_hoa_thisprocess *x);
+void hoa_thisprocess_mutechange(t_hoa_thisprocess *x);
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_loadbang(t_hoa_thisprocess *x);
 void hoa_thisprocess_bang(t_hoa_thisprocess *x);
@@ -99,6 +100,8 @@ int C74_EXPORT main(void)
      // </li>
      // </ul>
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
+    
+    class_addmethod(c, (method)hoa_thisprocess_mutechange,		"mutechange", A_CANT, 0);
 	
 	class_register(CLASS_BOX, c);
 	hoa_thisprocess_class = c;
@@ -215,6 +218,15 @@ void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_ato
 	arg_val = atom_getlong(argv);
 	
 	HoaProcessor_Set_Patch_On (x->hoaProcessor_parent, x->index, !arg_val);
+	outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
+}
+
+void hoa_thisprocess_mutechange(t_hoa_thisprocess *x)
+{
+    // object must be in a hoa.process~ object
+	if (!x->hoaProcessor_parent || x->index <= 0)
+		return;
+	
 	outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 }
 
@@ -345,7 +357,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 
 void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 {
-	// object must be in a hoa.thisprocess~ object
+	// object must be in a hoa.process~ object
 	if (!x->hoaProcessor_parent || x->index <= 0)
 		return;
 	
@@ -383,7 +395,7 @@ void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 			
 			// output done message to indicate that the attributes have been processed
 			
-			outlet_anything(x->out_patcherAttr, hoa_sym_done, 0, NULL);
+			//outlet_anything(x->out_patcherAttr, hoa_sym_done, 0, NULL);
 			
 			// free patcher_attrs
 			
@@ -480,6 +492,11 @@ void hoa_thisprocess_dobang(t_hoa_thisprocess *x)
 		outlet_list(x->out_instance_infos, NULL, 2, av);
 		delete [] av;
 	}
+    
+    
+    // output done message to indicate that all values have been sent
+    
+    outlet_anything(x->out_patcherAttr, hoa_sym_done, 0, NULL);
 }
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)
