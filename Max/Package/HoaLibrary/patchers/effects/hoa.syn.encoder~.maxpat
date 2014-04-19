@@ -27,7 +27,6 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.pencoder~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-29",

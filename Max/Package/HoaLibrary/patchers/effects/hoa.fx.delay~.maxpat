@@ -27,7 +27,6 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.delay~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -52,7 +51,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 197.84967, 385.994659, 67.0, 20.0 ],
-					"presentation_rect" : [ 197.84967, 387.994659, 0.0, 0.0 ],
 					"text" : "Delay time"
 				}
 
@@ -67,7 +65,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 286.84967, 385.994659, 58.65033, 20.0 ],
-					"presentation_rect" : [ 286.0, 385.328827, 0.0, 0.0 ],
 					"text" : "Window"
 				}
 
@@ -96,8 +93,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 370.0, 413.328827, 50.0, 20.0 ],
-					"presentation_rect" : [ 389.077271, 416.328827, 0.0, 0.0 ]
+					"patching_rect" : [ 370.0, 413.328827, 50.0, 20.0 ]
 				}
 
 			}
@@ -111,8 +107,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 275.077271, 413.328827, 50.0, 20.0 ],
-					"presentation_rect" : [ 275.154541, 413.328827, 0.0, 0.0 ]
+					"patching_rect" : [ 275.077271, 413.328827, 50.0, 20.0 ]
 				}
 
 			}
@@ -2140,6 +2135,44 @@
 					"source" : [ "obj-8", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "hoa.help.process.infos.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
+				"patcherrelativepath" : "../helputility",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.args.map.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.mode.sel.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

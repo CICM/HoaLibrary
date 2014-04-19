@@ -27,7 +27,6 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.mirror~ (-3)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-9",
