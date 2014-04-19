@@ -1470,7 +1470,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 64.0, 342.999969, 329.0, 32.0 ],
+									"patching_rect" : [ 64.0, 342.999969, 330.0, 32.0 ],
 									"text" : "hoa.process~ 7 hoa.fx.ringmod~ harmonics @freq 10 @factor 0.5"
 								}
 
@@ -1485,7 +1485,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 483.0, 33.0 ],
+									"patching_rect" : [ 7.0, 68.0, 486.0, 33.0 ],
 									"text" : "hoa.fx.ringmod~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[5]"
@@ -2049,7 +2049,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 64.0, 296.0, 308.333344, 19.0 ],
+									"patching_rect" : [ 64.0, 296.0, 309.266663, 19.0 ],
 									"text" : "hoa.2d.encoder~ 7"
 								}
 
@@ -2423,7 +2423,7 @@
 									"destination" : [ "obj-13", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 463.5, 328.499985, 383.5, 328.499985 ],
+									"midpoints" : [ 463.5, 328.499985, 384.5, 328.499985 ],
 									"source" : [ "obj-36", 0 ]
 								}
 
@@ -2452,7 +2452,7 @@
 									"destination" : [ "obj-13", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 561.5, 328.499985, 383.5, 328.499985 ],
+									"midpoints" : [ 561.5, 328.499985, 384.5, 328.499985 ],
 									"source" : [ "obj-9", 0 ]
 								}
 
