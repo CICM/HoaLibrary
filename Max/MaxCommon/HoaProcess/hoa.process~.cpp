@@ -169,6 +169,7 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
 
 void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_processor_mutemap(t_hoa_processor *x, long n);
+short hoa_processor_send_mutechange(t_patcher *p, t_args_struct *args);
 
 void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
@@ -1307,7 +1308,12 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
         for (int i=0; i < x->patch_spaces_allocated; i++)
         {
             hoa_processor_client_set_patch_on(x, i+1, !state);
+            hoa_processor_patcher_descend(x->patch_space_ptrs[i]->the_patch, (t_intmethod)hoa_processor_send_mutechange, x, x);
+            /*
+            hoa_processor_client_set_patch_on(x, i+1, !state);
             patch = x->patch_space_ptrs[i]->the_patch;
+            
+            hoa_processor_patcher_descend(patch, (t_intmethod)hoa_processor_send_mutechange, x, x);
             
             for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
             {
@@ -1318,10 +1324,14 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
                     object_method(thisprocess, gensym("mutechange"));
                 }
             }
+            */
         }
     }
     else if (index > 0 && index <= x->patch_spaces_allocated)
     {
+        hoa_processor_client_set_patch_on(x, index, !state);
+        hoa_processor_patcher_descend(x->patch_space_ptrs[index-1]->the_patch, (t_intmethod)hoa_processor_send_mutechange, x, x);
+        /*
         hoa_processor_client_set_patch_on(x, index, !state);
         patch = x->patch_space_ptrs[index-1]->the_patch;
         
@@ -1334,9 +1344,27 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
                 object_method(thisprocess, gensym("mutechange"));
             }
         }
+         */
     }
     
     // Todo : notify corresponding thisprocess~
+}
+
+// - send a "mutechange" message to all hoa.thisprocess~ objects in the patch
+short hoa_processor_send_mutechange(t_patcher *p, t_args_struct *args)
+{
+	t_box *b;
+	t_object* thisprocess;
+    
+	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
+    {
+        if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
+        {
+            thisprocess = (t_object *) jbox_get_object(b);
+            object_method(thisprocess, gensym("mutechange"));
+        }
+    }
+	return (0);
 }
 
 // report muted instance info as a list in a specied message outlet
