@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 440.0, 183.0, 740.0, 548.0 ],
+		"rect" : [ 694.0, 169.0, 740.0, 548.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -3721,18 +3721,17 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 15.0, 15.0, 58.0, 33.0 ],
+					"patching_rect" : [ 15.0, 386.0, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"comment" : "",
-						"extra" : 1
+						"extra" : 0
 					}
 ,
-					"text" : "hoa.in~ @extra 1"
+					"text" : "hoa.in~"
 				}
 
 			}
