@@ -45,6 +45,8 @@ void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **
 void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
+t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos);
+
 t_class *pi_class;
 
 int C74_EXPORT main(void)
@@ -53,7 +55,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.pi~", (method)pi_new, (method)dsp_free, sizeof(t_pi), 0L, A_GIMME, 0);
 	
-	hoa_initclass(c, NULL);
+	hoa_initclass(c, (method)hoa_getinfos);
     
 	class_addmethod(c, (method)pi_dsp64,	"dsp64",    A_CANT, 0);
     class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
@@ -96,6 +98,16 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
     }
     
 	return(x);
+}
+
+t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_STANDARD;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = 0;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 
