@@ -5804,7 +5804,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 14.0, 485.0, 225.0, 19.0 ],
-									"text" : "hoa.plug~ 7 hoa.amp~ no 0."
+									"text" : "hoa.plug~ 7 hoa.fx.gain~ no 0."
 								}
 
 							}
@@ -7369,7 +7369,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.amp~.maxpat",
+				"name" : "hoa.fx.gain~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
 				"patcherrelativepath" : "../../../patchers/operators",
 				"type" : "JSON",

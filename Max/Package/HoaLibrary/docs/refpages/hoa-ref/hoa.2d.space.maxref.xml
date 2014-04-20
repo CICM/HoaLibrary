@@ -176,7 +176,7 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.2d.process~" />
-		<seealso name="hoa.amp~" />
+		<seealso name="hoa.fx.gain~" />
 		<seealso name="hoa.delay~" />
 		<seealso name="hoa.gain~" />
 		<seealso name="hoa.2d.recomposer" />

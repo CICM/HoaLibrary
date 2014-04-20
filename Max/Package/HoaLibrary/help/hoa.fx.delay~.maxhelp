@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 75.0, 68.0, 925.0, 655.0 ],
+		"rect" : [ 738.0, 100.0, 925.0, 655.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 75.0, 94.0, 925.0, 629.0 ],
+						"rect" : [ 0.0, 26.0, 925.0, 629.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -80,7 +80,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 666.5, 177.0, 139.0, 20.0 ],
-									"presentation_rect" : [ 666.5, 172.0, 0.0, 0.0 ],
 									"text" : "A list of feedback values",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -97,7 +96,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 666.5, 177.0, 139.0, 20.0 ],
-									"presentation_rect" : [ 666.5, 172.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -143,8 +141,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 666.5, 216.0, 187.5, 20.0 ],
-									"presentation_rect" : [ 662.5, 194.0, 0.0, 0.0 ]
+									"patching_rect" : [ 666.5, 216.0, 187.5, 20.0 ]
 								}
 
 							}
@@ -1377,7 +1374,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 925.0, 629.0 ],
+						"rect" : [ 738.0, 126.0, 925.0, 629.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1409,7 +1406,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 448.0, 335.0, 71.0, 33.0 ],
-									"presentation_rect" : [ 447.5, 338.0, 0.0, 0.0 ],
 									"text" : "set delays with a list",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -1426,7 +1422,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 448.0, 335.0, 71.0, 33.0 ],
-									"presentation_rect" : [ 447.5, 338.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 

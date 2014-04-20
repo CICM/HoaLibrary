@@ -69,7 +69,7 @@
 		<seealso name="hoa.2d.recomposer~" />
 		<seealso name="hoa.2d.recomposer" />
 		<seealso name="hoa.2d.space" />
-		<seealso name="hoa.amp~" />
+		<seealso name="hoa.fx.gain~" />
 		<seealso name="hoa.delay~" />
 		<seealso name="hoa.2d.wider~" />
 		<seealso name="hoa.2d.encoder~" />

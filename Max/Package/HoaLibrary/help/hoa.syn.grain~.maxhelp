@@ -47,7 +47,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 181.0, 103.0, 569.0, 661.0 ],
+						"rect" : [ 0.0, 26.0, 569.0, 661.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -78,7 +78,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 481.0, 184.0, 61.0, 20.0 ],
-									"presentation_rect" : [ 479.0, 185.0, 0.0, 0.0 ],
 									"text" : "0 to 5000"
 								}
 
@@ -443,13 +442,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-14",
-									"linecount" : 2,
+									"linecount" : 4,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 455.5, 199.0, 32.0 ],
-									"text" : "hoa.2d.process~ 8 hoa.syn.grain~ planewaves"
+									"patching_rect" : [ 7.0, 455.5, 199.0, 58.0 ],
+									"text" : "hoa.2d.process~ 8 hoa.syn.grain~ planewaves @name livegrain @size 100. @delay 5000 @feedback 0. @rarefaction 0."
 								}
 
 							}
@@ -1151,7 +1150,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 569.0, 661.0 ],
+						"rect" : [ 181.0, 103.0, 569.0, 661.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1337,13 +1336,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-14",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 42.0, 427.5, 221.0, 32.0 ],
-									"text" : "hoa.2d.process~ 7 hoa.syn.grain~ harmonics"
+									"patching_rect" : [ 42.0, 425.5, 239.625, 45.0 ],
+									"text" : "hoa.2d.process~ 7 hoa.syn.grain~ harmonics @name livegrain @size 100. @delay 5000 @feedback 0. @rarefaction 0."
 								}
 
 							}
@@ -1383,7 +1382,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 41.875, 544.5, 221.125, 19.0 ],
+									"patching_rect" : [ 42.32, 538.5, 240.146423, 19.0 ],
 									"text" : "hoa.dac~ 1:16"
 								}
 
@@ -1397,7 +1396,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 41.5, 492.5, 221.5, 19.0 ],
+									"patching_rect" : [ 41.5, 492.5, 241.024994, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -1825,7 +1824,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 294.0, 195.0, 231.0, 223.0 ],
+										"rect" : [ 475.0, 272.0, 231.0, 223.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2413,7 +2412,7 @@
 									"destination" : [ "obj-12", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 370.75, 517.5, 253.5, 517.5 ],
+									"midpoints" : [ 370.75, 517.5, 272.966423, 517.5 ],
 									"source" : [ "obj-13", 0 ]
 								}
 
@@ -2593,7 +2592,7 @@
 									"destination" : [ "obj-12", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 291.5, 517.5, 253.5, 517.5 ],
+									"midpoints" : [ 291.5, 517.5, 272.966423, 517.5 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -2780,7 +2779,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
+						"rect" : [ 0.0, 26.0, 569.0, 661.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2800,7 +2799,6 @@
 						"digest" : "",
 						"tags" : "",
 						"showontab" : 1,
-						"visible" : 1,
 						"boxes" : [  ],
 						"lines" : [  ]
 					}

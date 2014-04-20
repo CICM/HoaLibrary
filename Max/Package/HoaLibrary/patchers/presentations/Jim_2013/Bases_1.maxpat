@@ -1224,7 +1224,7 @@
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 14.0, 160.0, 225.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.amp~ no 0."
+					"text" : "hoa.plug~ 7 hoa.fx.gain~ no 0."
 				}
 
 			}
@@ -1615,7 +1615,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.amp~.maxpat",
+				"name" : "hoa.fx.gain~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../../SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",

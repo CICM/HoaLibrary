@@ -53,7 +53,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ -165.0, 185.0, 74.0, 20.0 ],
-					"presentation_rect" : [ -170.0, 252.0, 0.0, 0.0 ],
 					"text" : "prepend set"
 				}
 
@@ -69,7 +68,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ -165.0, 129.0, 60.0, 20.0 ],
-					"presentation_rect" : [ -170.0, 129.0, 0.0, 0.0 ],
 					"text" : "loadbang"
 				}
 
@@ -85,7 +83,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ -165.0, 159.0, 64.0, 18.0 ],
-					"presentation_rect" : [ -170.0, 159.0, 0.0, 0.0 ],
 					"text" : "\"Beta 2.0\""
 				}
 
@@ -131,7 +128,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 431.0, 158.0625, 72.0 ],
+					"patching_rect" : [ -165.0, 431.0, 161.0, 72.0 ],
 					"text" : "\"hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.\""
 				}
 
@@ -432,7 +429,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 604.375, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 649.0625, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -890,7 +887,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.recomposer", "hoa.2d.scope~", "hoa.2d.space", "hoa.gain~" ]
+									"tabs" : [ "hoa.2d.decoder~", "hoa.2d.encoder~", "hoa.2d.map~", "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.optim~", "hoa.2d.projector~", "hoa.2d.recomposer~", "hoa.2d.recomposer", "hoa.2d.rotate~", "hoa.2d.scope~", "hoa.2d.space", "hoa.2d.vector~", "hoa.2d.wider~", "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.2d.play~", "hoa.3d.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
 								}
 
 							}

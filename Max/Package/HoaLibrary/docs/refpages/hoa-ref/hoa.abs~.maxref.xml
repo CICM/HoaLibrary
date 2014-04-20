@@ -42,7 +42,7 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="abs~" />
-		<seealso name="hoa.amp~" />
+		<seealso name="hoa.fx.gain~" />
 		<seealso name="hoa.process~" />
 		<seealso name="hoa.in" />
 		<seealso name="hoa.out" />

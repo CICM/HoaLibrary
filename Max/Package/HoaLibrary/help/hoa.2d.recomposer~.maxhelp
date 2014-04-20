@@ -2778,7 +2778,7 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 9.166687, 396.0, 328.333313, 19.0 ],
-									"text" : "hoa.2d.process~ 16 hoa.amp~ planewaves 1."
+									"text" : "hoa.2d.process~ 16 hoa.fx.gain~ planewaves 1."
 								}
 
 							}
@@ -4059,7 +4059,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.amp~.maxpat",
+				"name" : "hoa.fx.gain~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/operators",
 				"patcherrelativepath" : "../patchers/operators",
 				"type" : "JSON",

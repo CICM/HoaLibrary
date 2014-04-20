@@ -120,7 +120,7 @@
 	{
     	"objects": [
     	"hoa.abs~",
-    	"hoa.amp~",
+    	"hoa.fx.gain~",
 		"hoa.highpass~",
 		"hoa.onepole~",
 		"hoa.receive",
