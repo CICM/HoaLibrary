@@ -14,11 +14,11 @@
  
  @description
  <o>hoa.fx.delay~</o> allows you to delay the different harmonics or channels signals.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion
  <o>hoa.fx.delay~</o> allows you to delay the different harmonics or channels signals.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @category ambisonics, hoa objects, audio, MSP, abstraction
  

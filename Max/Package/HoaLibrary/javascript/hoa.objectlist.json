@@ -44,6 +44,7 @@
 		"hoa.2d.meter~",
 		"hoa.2d.optim~",
 		"hoa.2d.projector~",
+		"hoa.2d.process~",
 		"hoa.2d.recomposer~",
 		"hoa.2d.recomposer",
 		"hoa.2d.rotate~",
@@ -64,6 +65,7 @@
 		"hoa.3d.map",
 		"hoa.3d.meter~",
 		"hoa.3d.optim~",
+		"hoa.3d.process~",
 		"hoa.3d.scope~",
 		"hoa.3d.wider~"
     	],

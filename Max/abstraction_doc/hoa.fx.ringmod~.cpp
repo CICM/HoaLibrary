@@ -14,11 +14,11 @@
  
  @description
  <o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion
  <o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @category ambisonics, hoa objects, audio, MSP, abstraction
  

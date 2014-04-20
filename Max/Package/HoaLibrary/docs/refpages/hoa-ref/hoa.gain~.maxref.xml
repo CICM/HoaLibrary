@@ -111,7 +111,7 @@
 			</description>
 		</method>
 		<method name="set">
-			<arg name="" optional="-65" type="" />
+			<arg name="" optional="0" type="" />
 			<arg name="value" optional="0" type="float" />
 			<digest>
 				Set the value of the slider without outputting slider value.

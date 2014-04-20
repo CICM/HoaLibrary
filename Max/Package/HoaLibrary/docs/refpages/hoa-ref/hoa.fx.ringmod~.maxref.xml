@@ -11,7 +11,7 @@
 
 	<description>
 		<o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.
-		This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+		This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
 	</description>
 
 	<!--METADATA-->
@@ -63,7 +63,7 @@
 	<!--DISCUSSION-->
 	<discussion>
 		<o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.
-		This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+		This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
 	</discussion>
 
 	<!--SEEALSO-->
@@ -82,7 +82,7 @@
 		<entry name ="More details">
 			<description>
 		<o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.
-		This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+		This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
 			</description>
 		</entry>
 		<entry name ="Keywords:">

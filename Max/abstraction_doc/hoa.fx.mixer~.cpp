@@ -14,11 +14,11 @@
  
  @description
  <o>hoa.fx.mixer~</o> helps to understand ambisonics and the behavior of the circular or spherical harmonics.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion
  <o>hoa.fx.mixer~</o> helps to understand ambisonics and the behavior of the circular or spherical harmonics.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @category ambisonics, hoa objects, audio, MSP, abstraction
  

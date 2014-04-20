@@ -14,11 +14,11 @@
  
  @description
  <o>hoa.syn.decorrelation~</o> allows you to generate a diffuse sound field with signal decorrelation.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion
  <o>hoa.syn.decorrelation~</o> allows you to generate a diffuse sound field with signal decorrelation.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @category ambisonics, hoa objects, audio, MSP, abstraction
  

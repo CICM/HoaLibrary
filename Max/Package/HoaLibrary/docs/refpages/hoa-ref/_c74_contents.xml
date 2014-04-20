@@ -35,6 +35,12 @@
 <refpage name='hoa.fx.mirror~.maxref.xml'/>
 <refpage name='hoa.fx.mixer~.maxref.xml'/>
 <refpage name='hoa.fx.ringmod~.maxref.xml'/>
+<refpage name='hoa.highpass~.maxref.xml'/>
+<refpage name='hoa.onepole~.maxref.xml'/>
+<refpage name='hoa.receive.maxref.xml'/>
+<refpage name='hoa.receive~.maxref.xml'/>
+<refpage name='hoa.send.maxref.xml'/>
+<refpage name='hoa.send~.maxref.xml'/>
 <refpage name='hoa.syn.decorrelation~.maxref.xml'/>
 <refpage name='hoa.syn.delay~.maxref.xml'/>
 <refpage name='hoa.syn.grain~.maxref.xml'/>

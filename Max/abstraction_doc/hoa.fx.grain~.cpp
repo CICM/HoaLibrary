@@ -15,12 +15,12 @@
  @description
  <o>hoa.fx.grain~</o> create a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains.
  In "harmonics" mode, parameters are scaled depending to the orders to generate a granular sound field.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion
  <o>hoa.fx.grain~</o> create a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains.
  In "harmonics" mode, parameters are scaled depending to the orders to generate a granular sound field.
- This patcher require to be loaded by a <o>hoa.process~</o> object to work.
+ This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @category ambisonics, hoa objects, audio, MSP, abstraction
  
