@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 867.0, 756.0 ],
+						"rect" : [ 40.0, 70.0, 867.0, 756.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -114,26 +114,19 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.853045, 0.853045, 0.853045, 1.0 ],
+									"border" : 1.0,
+									"bordercolor" : [ 0.378792, 0.378792, 0.378792, 0.5 ],
 									"id" : "obj-13",
 									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 329.09494, 671.5, 44.0, 44.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"id" : "obj-21",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 327.09494, 669.5, 48.75, 48.0 ],
-									"rounded" : 0
+									"offgradcolor1" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
+									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
+									"patching_rect" : [ 318.09494, 670.5, 45.0, 45.0 ]
 								}
 
 							}
@@ -1980,7 +1973,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 40.0, 70.0, 867.0, 756.0 ],
+						"rect" : [ 0.0, 26.0, 867.0, 756.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2062,26 +2055,19 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.853045, 0.853045, 0.853045, 1.0 ],
+									"border" : 1.0,
+									"bordercolor" : [ 0.378792, 0.378792, 0.378792, 0.5 ],
 									"id" : "obj-20",
 									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 693.0, 44.0, 44.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"id" : "obj-21",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 328.75, 691.0, 48.75, 48.0 ],
-									"rounded" : 0
+									"offgradcolor1" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
+									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
+									"patching_rect" : [ 330.5, 698.5, 45.0, 45.0 ]
 								}
 
 							}
@@ -3540,26 +3526,19 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.853045, 0.853045, 0.853045, 1.0 ],
+									"border" : 1.0,
+									"bordercolor" : [ 0.378792, 0.378792, 0.378792, 0.5 ],
 									"id" : "obj-7",
 									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 693.0, 44.0, 44.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"id" : "obj-9",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 328.75, 691.0, 48.75, 48.0 ],
-									"rounded" : 0
+									"offgradcolor1" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
+									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
+									"patching_rect" : [ 330.5, 698.5, 45.0, 45.0 ]
 								}
 
 							}
@@ -4957,21 +4936,21 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
-				"patcherrelativepath" : "../misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
