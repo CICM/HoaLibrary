@@ -117,6 +117,13 @@ static t_symbol* hoa_sym_channels					= gensym("channels");
 static t_symbol* hoa_sym_fixe						= gensym("fixe");
 static t_symbol* hoa_sym_fisheye					= gensym("fisheye");
 
+// decoder
+static t_symbol* hoa_sym_ambisonic					= gensym("ambisonic");
+static t_symbol* hoa_sym_irregular					= gensym("irregular");
+static t_symbol* hoa_sym_binaural					= gensym("binaural");
+static t_symbol* hoa_sym_offset						= gensym("offset");
+static t_symbol* hoa_sym_pinna						= gensym("pinna");
+
 // Layers
 static t_symbol* hoa_sym_background_layer 			= gensym("background_layer");
 static t_symbol* hoa_sym_sources_layer 				= gensym("sources_layer");
