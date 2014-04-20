@@ -128,7 +128,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 431.0, 161.0, 72.0 ],
+					"patching_rect" : [ -165.0, 431.0, 164.0, 72.0 ],
 					"text" : "\"hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.\""
 				}
 
@@ -153,9 +153,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
-						"palette_caption" : "hoa.2d.scope~",
 						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
-						"palette_action" : "hoa.2d.scope~"
+						"palette_action" : "hoa.2d.scope~",
+						"palette_caption" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -426,10 +426,12 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 649.0625, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 642.0625, 40.0 ],
+					"text" : "hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.",
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -847,7 +849,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 1.0,
 									"spacing_y" : 0.0,
-									"tabs" : [ "all", "2d", "3d", "GUI", "utilities", "process patches", "operators" ]
+									"tabs" : [ "all", "2d", "3d", "GUI", "utilities", "fx patches", "synth patches", "operators" ]
 								}
 
 							}

@@ -6,7 +6,7 @@
 <c74object name="hoa.dac~" module="hoa">
 
 	<digest>
-		automatically connect several hoa objects together.
+		A custom <o>dac~</o> object with MathLab syntax.
 	</digest>
 
 	<description>
@@ -40,7 +40,7 @@
 				Output routing or/and bus name
 			</digest>
 			<description>
-				You can create a <o>hoa.dac~</o> object that uses one or more audio output channel numbers between 1 and 512. These numbers refer to logical channels and can be dynamically reassigned to physical device channels of a particular driver using either the Audio Status window, its I/O Mappings subwindow, or an adstatus object with an output keyword argument. Arguments, If the c
+				You can create a <o>hoa.dac~</o> object that uses one or more audio output channel numbers between 1 and 512. These numbers refer to logical channels and can be dynamically reassigned to physical device channels of a particular driver using either the Audio Status window, its I/O Mappings subwindow, or an adstatus object with an output keyword argument. Arguments, If the compu
 			</description>
 		</objarg>
 	</objarglist>

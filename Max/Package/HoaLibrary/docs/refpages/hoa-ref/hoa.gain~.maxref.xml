@@ -111,7 +111,7 @@
 			</description>
 		</method>
 		<method name="set">
-			<arg name="" optional="0" type="" />
+			<arg name="" optional="-65" type="" />
 			<arg name="value" optional="0" type="float" />
 			<digest>
 				Set the value of the slider without outputting slider value.
@@ -352,7 +352,7 @@
 	<seealsolist>
 		<seealso name="gain~" />
 		<seealso name="hoa.process~" />
-		<seealso name="hoa.fx.gain~" />
+		<seealso name="hoa.amp~" />
 	</seealsolist>
 
 	<misc name = "Discussion">

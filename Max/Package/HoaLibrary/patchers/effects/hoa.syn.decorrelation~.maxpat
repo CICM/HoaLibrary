@@ -570,7 +570,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 192.8125, 537.0, 24.0, 20.0 ],
+					"patching_rect" : [ 161.8125, 537.0, 24.0, 20.0 ],
 					"text" : "t 0"
 				}
 
@@ -694,10 +694,10 @@
 					"id" : "obj-19",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 192.8125, 492.0, 54.0, 20.0 ],
-					"text" : "gate 2"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 161.8125, 492.0, 46.0, 20.0 ],
+					"text" : "gate 3"
 				}
 
 			}
@@ -710,8 +710,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 278.8125, 315.0, 79.6875, 20.0 ],
-					"text" : "<= 0."
+					"patching_rect" : [ 278.8125, 306.0, 79.6875, 20.0 ],
+					"text" : "< 0."
 				}
 
 			}
@@ -2058,7 +2058,7 @@
 					"destination" : [ "obj-19", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 24.5, 452.0, 237.3125, 452.0 ],
+					"midpoints" : [ 24.5, 452.0, 198.3125, 452.0 ],
 					"source" : [ "obj-13", 0 ]
 				}
 
@@ -2140,7 +2140,18 @@
 					"destination" : [ "obj-103", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [ 184.8125, 524.0, 237.3125, 524.0 ],
 					"source" : [ "obj-19", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-105", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 198.3125, 562.0, 237.3125, 562.0 ],
+					"source" : [ "obj-19", 2 ]
 				}
 
 			}
@@ -2203,6 +2214,7 @@
 					"destination" : [ "obj-105", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [ 171.3125, 563.5, 237.3125, 563.5 ],
 					"source" : [ "obj-23", 0 ]
 				}
 
@@ -2241,7 +2253,7 @@
 					"destination" : [ "obj-19", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 301.8125, 434.0, 202.3125, 434.0 ],
+					"midpoints" : [ 301.8125, 434.0, 171.3125, 434.0 ],
 					"source" : [ "obj-27", 1 ]
 				}
 
@@ -2289,6 +2301,16 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-34", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-20", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 601.5, 337.0, 301.8125, 337.0 ],
+					"source" : [ "obj-35", 0 ]
 				}
 
 			}
@@ -2607,44 +2629,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.args.map.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../../misc/others",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.mode.sel.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../../misc/others",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.help.process.infos.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
-				"patcherrelativepath" : "../helputility",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.in.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.out~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.in~.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
