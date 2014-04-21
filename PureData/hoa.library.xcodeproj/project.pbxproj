@@ -318,7 +318,7 @@
 				8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */,
 				8F189F3318EB0DBE00348D89 /* hoa.pd.cpp */,
 				8F189F3418EB0DBE00348D89 /* hoa.pd.h */,
-				8F18A02B18EB188D00348D89 /* Sources */,
+				8F18A02B18EB188D00348D89 /* CicmWrapper */,
 				8F189F3818EB0E2C00348D89 /* HoaLibrary */,
 				8F5B7C1918EB02E10038743B /* PD2D */,
 				8F18A01818EB0EFE00348D89 /* PDCommon */,
@@ -449,7 +449,7 @@
 			name = PDCommon;
 			sourceTree = "<group>";
 		};
-		8F18A02B18EB188D00348D89 /* Sources */ = {
+		8F18A02B18EB188D00348D89 /* CicmWrapper */ = {
 			isa = PBXGroup;
 			children = (
 				8F18A02C18EB188D00348D89 /* cicm_wrapper.h */,
@@ -465,7 +465,7 @@
 				8F18A05A18EB188D00348D89 /* epopup */,
 				8F18A05D18EB188D00348D89 /* estruct.h */,
 			);
-			name = Sources;
+			name = CicmWrapper;
 			path = ../ThirdParty/PureData/Sources;
 			sourceTree = "<group>";
 		};

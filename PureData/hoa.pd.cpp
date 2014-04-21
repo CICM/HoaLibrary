@@ -6,11 +6,6 @@
 
 #include "hoa.pd.h"
 
-void hoa_print_credit()
-{
-    erouter_add_libary(gensym("HOA"), "HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 2.0");
-}
-
 int hoa_method_true(void *x)
 {
     return 1;
@@ -19,7 +14,6 @@ int hoa_method_true(void *x)
 t_hoa_err hoa_initclass(t_eclass* c, method hoa_getinfos_method)
 {
     char help[MAXPDSTRING];
-	hoa_print_credit();
 	
 	eclass_addmethod(c, (method)hoa_method_true, "is_hoa", A_CANT, 0);
 

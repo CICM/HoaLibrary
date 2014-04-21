@@ -3,7 +3,7 @@
 #X obj -559 -303 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
-polar @zoom 0.35;
+polar @zoom 0.4;
 #X obj -559 -328 c.loadmess;
 #X msg -147 97 \; pd dsp 1;
 #X msg -147 132 \; pd dsp 0;
@@ -149,12 +149,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -559 37 hoa.2d.optim~ 3 inPhase -----------------;
-#N canvas 153 23 1155 646 messages 0;
+#N canvas 153 23 1155 646 messages 1;
 #X msg -518 -122 zoom \$1;
 #X text -531 -173 Set the zoom;
 #X obj -96 13 send map_mes;
-#X msg -196 -83 source 0 pol 1 3.14;
-#X msg -150 -59 group 0 car 0.5 0.5;
 #X text -202 -216 Display source or group and set coordinates with
 "source" or "group" message followed by an integer for the index \,
 the type of coordinates and one or two floating values for coordinates.
@@ -169,8 +167,6 @@ everything you want for the description. Set "remove" instead of the
 description to remove the description. Exemple : "source 0 description
 Jimi Hendrix".;
 #X obj 195 -77 send map_mes;
-#X msg -50 -83 source 1 abscissa 2.5;
-#X msg -18 -58 group 0 angle 1.14;
 #X text 199 -40 Set colors with "source" or "group" message followed
 by an integer for the index \, the "color" message and four floating
 values for red \, green \, blue and alpha (ok... there's no alpha).
@@ -179,9 +175,6 @@ Exemple : "source 0 color 1 0.2 0.6 1;
 #X msg 207 41 source 1 color 0.7 0 0.6 1;
 #X obj -38 176 send map_mes;
 #X text -184 39 Mute with the "mute" message".;
-#X msg -44 144 source 1 mute \$1;
-#X msg -121 88 source 0 mute \$1;
-#X msg 32 123 group 0 mute \$1;
 #X text 197 129 Remove a source or group with the "remove" message".
 Note that remove will also remove coordinates \, descriptions \, color
 and send a message to hoa.2D.map~ to mute the source (exept for groups).
@@ -195,7 +188,6 @@ and send a message to hoa.2D.map~ to mute the source (exept for groups).
 an integer for the group index \, "set" message and a list of intergers
 \, the indexs of source to put in the group. Exemple : "group 0 set
 1 2 3 4".;
-#X msg -181 292 group 1 set 0 1 3;
 #X obj -181 332 send map_mes;
 #X text -71 290 (create the source 3 before);
 #X text 305 191 (create the group 1 before);
@@ -227,55 +219,47 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 @outputmode polar @zoom 0.35;
-#X obj -534 -270 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -228856 -1 0;
-#X text -529 -249 A GUI to spatialize sources on a map.;
-#X text 52 -250 Eliott Paris © 2012-2013 CICM / Universite Paris 8
-;
-#X text 52 -266 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
-#X text -531 -225 Manage hoa.2d.map with messages.;
 #X text -332 -146 Clear all;
-#X connect 0 0 39 0;
-#X connect 3 0 2 0;
-#X connect 4 0 2 0;
-#X connect 8 0 2 0;
-#X connect 9 0 2 0;
-#X connect 12 0 11 0;
-#X connect 15 0 13 0;
-#X connect 16 0 13 0;
-#X connect 17 0 13 0;
-#X connect 20 0 19 0;
-#X connect 21 0 19 0;
-#X connect 22 0 39 0;
-#X connect 23 0 2 0;
-#X connect 25 0 26 0;
-#X connect 31 0 0 0;
-#X connect 32 0 39 0;
-#X connect 33 0 17 0;
-#X connect 34 0 16 0;
-#X connect 35 0 15 0;
-#X connect 36 0 7 0;
-#X connect 37 0 7 0;
-#X connect 38 0 11 0;
+#X msg -196 -83 source 1 pol 1 3.14;
+#X msg -50 -83 source 2 abscissa 2.5;
+#X msg -18 -58 group 1 angle 1.14;
+#X msg -150 -59 group 1 car 0.5 0.5;
+#X msg -181 292 group 1 set 1 2 3;
+#X msg 32 123 group 1 mute \$1;
+#X msg -121 88 source 1 mute \$1;
+#X msg -44 144 source 2 mute \$1;
+#X connect 0 0 31 0;
+#X connect 8 0 7 0;
+#X connect 13 0 12 0;
+#X connect 14 0 12 0;
+#X connect 15 0 31 0;
+#X connect 16 0 2 0;
+#X connect 23 0 0 0;
+#X connect 24 0 31 0;
+#X connect 25 0 38 0;
+#X connect 26 0 39 0;
+#X connect 27 0 40 0;
+#X connect 28 0 5 0;
+#X connect 29 0 5 0;
+#X connect 30 0 7 0;
+#X connect 33 0 2 0;
+#X connect 34 0 2 0;
+#X connect 35 0 2 0;
+#X connect 36 0 2 0;
+#X connect 37 0 18 0;
+#X connect 38 0 9 0;
+#X connect 39 0 9 0;
+#X connect 40 0 9 0;
 #X restore -249 -149 pd messages;
 #N canvas 161 119 804 672 outputs 0;
-#X obj -540 -463 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.2d.map
-3 12 0 18 -228856 -1 0;
-#X text -535 -442 A GUI to spatialize sources on a map.;
-#X text -480 141 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -480 125 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-;
-#X obj -504 45 send map_outs_sources;
-#X obj -357 47 send map_outs_groups;
+#X obj -504 -5 send map_outs_sources;
+#X obj -395 -32 send map_outs_groups;
 #X msg -382 -326 getinfo;
 #X obj -27 -403 receive map_outs_sources;
 #X text -305 -381 Change the coordinates type;
 #X obj -27 -370 route 0 1;
 #X obj -31 -145 receive map_outs_groups;
-#X obj -210 48 route source group slot;
-#X obj -210 22 route list;
+#X obj -285 22 route list;
 #X obj -504 -287 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
@@ -283,7 +267,6 @@ polar @zoom 0.35;
 #X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
-#X text -537 -416 hoa.2d.map outputs.;
 #X text -529 -372 Outputs sources;
 #X text -541 -356 and groups coordinates;
 #X msg -265 -330 outputmode \$1;
@@ -324,398 +307,86 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 0.5 0.5 1;
 #X obj -31 -109 route 0 1;
 #X text 39 -370 Route source by index;
-#X obj -120 126 print slot;
-#X obj -165 99 print group;
-#X obj -210 74 print source;
-#X connect 6 0 13 0;
-#X connect 7 0 9 0;
-#X connect 9 0 29 0;
-#X connect 9 1 33 0;
-#X connect 10 0 39 0;
-#X connect 11 0 43 0;
-#X connect 11 1 42 0;
-#X connect 11 2 41 0;
-#X connect 12 0 11 0;
-#X connect 13 0 4 0;
-#X connect 13 1 5 0;
-#X connect 13 2 12 0;
-#X connect 14 0 13 0;
-#X connect 18 0 13 0;
-#X connect 19 1 18 0;
-#X connect 22 0 23 0;
-#X connect 24 0 25 0;
-#X connect 24 1 22 0;
+#X obj -233 99 print group;
+#X obj -285 74 print source;
+#X obj -285 48 route source group;
+#X connect 2 0 8 0;
+#X connect 3 0 5 0;
+#X connect 5 0 23 0;
+#X connect 5 1 27 0;
+#X connect 6 0 33 0;
+#X connect 7 0 37 0;
+#X connect 8 0 0 0;
+#X connect 8 1 1 0;
+#X connect 8 2 7 0;
+#X connect 9 0 8 0;
+#X connect 12 0 8 0;
+#X connect 13 1 12 0;
+#X connect 16 0 17 0;
+#X connect 18 0 19 0;
+#X connect 18 1 16 0;
+#X connect 21 0 22 0;
+#X connect 23 0 24 0;
+#X connect 23 1 21 0;
+#X connect 25 0 26 0;
 #X connect 27 0 28 0;
+#X connect 27 1 25 0;
 #X connect 29 0 30 0;
-#X connect 29 1 27 0;
 #X connect 31 0 32 0;
-#X connect 33 0 34 0;
+#X connect 31 1 29 0;
+#X connect 33 0 18 0;
 #X connect 33 1 31 0;
-#X connect 35 0 36 0;
-#X connect 37 0 38 0;
+#X connect 37 0 36 0;
 #X connect 37 1 35 0;
-#X connect 39 0 24 0;
-#X connect 39 1 37 0;
 #X restore -248 -101 pd outputs;
-#X obj -42 46 c.preset @size 107 41 @fontname Helvetica @fontweight
+#X obj -42 46 c.preset @size 102 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
 0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
-[ @index 0 @hoamapexample hoa.2d.map sources_preset source 0 1 1.28105
-0.96732 0 0.2 0.2 0.2 1 Click source 1 1 1.54248 -1.38562 0 0.2 0.2
-0.2 1 Crack source 2 1 -1.43791 0.96732 0 0.2 0.2 0.2 1 Boom source
-3 1 -1.43791 -1.22876 0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0 0 0
-(null) source 5 0 0 0 0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0 (null)
-source 7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null) source
-9 0 0 0 0 0 0 0 0 (null) source 10 0 0 0 0 0 0 0 0 (null) source 11
-0 0 0 0 0 0 0 0 (null) source 12 0 0 0 0 0 0 0 0 (null) source 13 0
-0 0 0 0 0 0 0 (null) source 14 0 0 0 0 0 0 0 0 (null) source 15 0 0
-0 0 0 0 0 0 (null) source 16 0 0 0 0 0 0 0 0 (null) source 17 0 0 0
-0 0 0 0 0 (null) source 18 0 0 0 0 0 0 0 0 (null) source 19 0 0 0 0
-0 0 0 0 (null) source 20 0 0 0 0 0 0 0 0 (null) source 21 0 0 0 0 0
-0 0 0 (null) source 22 0 0 0 0 0 0 0 0 (null) source 23 0 0 0 0 0 0
-0 0 (null) source 24 0 0 0 0 0 0 0 0 (null) source 25 0 0 0 0 0 0 0
-0 (null) source 26 0 0 0 0 0 0 0 0 (null) source 27 0 0 0 0 0 0 0 0
-(null) source 28 0 0 0 0 0 0 0 0 (null) source 29 0 0 0 0 0 0 0 0 (null)
-source 30 0 0 0 0 0 0 0 0 (null) source 31 0 0 0 0 0 0 0 0 (null) source
-32 0 0 0 0 0 0 0 0 (null) source 33 0 0 0 0 0 0 0 0 (null) source 34
-0 0 0 0 0 0 0 0 (null) source 35 0 0 0 0 0 0 0 0 (null) source 36 0
-0 0 0 0 0 0 0 (null) source 37 0 0 0 0 0 0 0 0 (null) source 38 0 0
-0 0 0 0 0 0 (null) source 39 0 0 0 0 0 0 0 0 (null) source 40 0 0 0
-0 0 0 0 0 (null) source 41 0 0 0 0 0 0 0 0 (null) source 42 0 0 0 0
-0 0 0 0 (null) source 43 0 0 0 0 0 0 0 0 (null) source 44 0 0 0 0 0
-0 0 0 (null) source 45 0 0 0 0 0 0 0 0 (null) source 46 0 0 0 0 0 0
-0 0 (null) source 47 0 0 0 0 0 0 0 0 (null) source 48 0 0 0 0 0 0 0
-0 (null) source 49 0 0 0 0 0 0 0 0 (null) source 50 0 0 0 0 0 0 0 0
-(null) source 51 0 0 0 0 0 0 0 0 (null) source 52 0 0 0 0 0 0 0 0 (null)
-source 53 0 0 0 0 0 0 0 0 (null) source 54 0 0 0 0 0 0 0 0 (null) source
-55 0 0 0 0 0 0 0 0 (null) source 56 0 0 0 0 0 0 0 0 (null) source 57
-0 0 0 0 0 0 0 0 (null) source 58 0 0 0 0 0 0 0 0 (null) source 59 0
-0 0 0 0 0 0 0 (null) source 60 0 0 0 0 0 0 0 0 (null) source 61 0 0
-0 0 0 0 0 0 (null) source 62 0 0 0 0 0 0 0 0 (null) source 63 0 0 0
-0 0 0 0 0 (null) @index 1 @hoamapexample hoa.2d.map sources_preset
-source 0 1 0.592396 -1.49193 0 0.2 0.2 0.2 1 Click source 1 1 -1.74549
--1.11914 0 0.2 0.2 0.2 1 Crack source 2 1 1.31444 1.1294 0 0.2 0.2
-0.2 1 Boom source 3 1 -0.80279 1.71259 0 0.2 0.2 0.2 1 Flam source
-4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0 0 0 0 0 0 (null) source 6 0
-0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0
-0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0 0 (null) source 10 0 0 0 0
-0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0 (null) source 12 0 0 0 0 0
-0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null) source 14 0 0 0 0 0 0
-0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source 16 0 0 0 0 0 0 0
-0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18 0 0 0 0 0 0 0 0
-(null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0 0 0 0 0 0 0 0 (null)
-source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0 0 0 0 0 0 0 (null) source
-23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0 0 0 0 0 0 (null) source 25
-0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0 0 0 0 0 (null) source 27 0
-0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0 0 0 0 (null) source 29 0 0
-0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0 0 0 (null) source 31 0 0 0
-0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0 0 (null) source 33 0 0 0 0
-0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0 (null) source 35 0 0 0 0 0
-0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null) source 37 0 0 0 0 0 0
-0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source 39 0 0 0 0 0 0 0
-0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41 0 0 0 0 0 0 0 0
-(null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0 0 0 0 0 0 0 0 (null)
-source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0 0 0 0 0 0 0 (null) source
-46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0 0 0 0 0 0 (null) source 48
-0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0 0 0 0 0 (null) source 50 0
-0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0 0 0 0 (null) source 52 0 0
-0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0 0 0 (null) source 54 0 0 0
-0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0 0 (null) source 56 0 0 0 0
-0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0 (null) source 58 0 0 0 0 0
-0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null) source 60 0 0 0 0 0 0
-0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source 62 0 0 0 0 0 0 0
-0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 2 @hoamapexample hoa.2d.map
-sources_preset source 0 1 0 0 0 0.2 0.2 0.2 1 Click source 1 1 1.91568
-1.13915 0 0.2 0.2 0.2 1 Crack source 2 1 0.701111 -1.2832 0 0.2 0.2
-0.2 1 Boom source 3 1 2.48809 -1.08371 0 0.2 0.2 0.2 1 Flam source
-4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0 0 0 0 0 0 (null) source 6 0
-0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0
-0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0 0 (null) source 10 0 0 0 0
-0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0 (null) source 12 0 0 0 0 0
-0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null) source 14 0 0 0 0 0 0
-0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source 16 0 0 0 0 0 0 0
-0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18 0 0 0 0 0 0 0 0
-(null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0 0 0 0 0 0 0 0 (null)
-source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0 0 0 0 0 0 0 (null) source
-23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0 0 0 0 0 0 (null) source 25
-0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0 0 0 0 0 (null) source 27 0
-0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0 0 0 0 (null) source 29 0 0
-0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0 0 0 (null) source 31 0 0 0
-0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0 0 (null) source 33 0 0 0 0
-0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0 (null) source 35 0 0 0 0 0
-0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null) source 37 0 0 0 0 0 0
-0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source 39 0 0 0 0 0 0 0
-0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41 0 0 0 0 0 0 0 0
-(null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0 0 0 0 0 0 0 0 (null)
-source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0 0 0 0 0 0 0 (null) source
-46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0 0 0 0 0 0 (null) source 48
-0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0 0 0 0 0 (null) source 50 0
-0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0 0 0 0 (null) source 52 0 0
-0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0 0 0 (null) source 54 0 0 0
-0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0 0 (null) source 56 0 0 0 0
-0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0 (null) source 58 0 0 0 0 0
-0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null) source 60 0 0 0 0 0 0
-0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source 62 0 0 0 0 0 0 0
-0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 3 @hoamapexample hoa.2d.map
-sources_preset source 0 1 -1.88922 0.0884151 0 0.2 0.2 0.2 1 Click
-source 1 1 0.524538 2.92393 0 0.2 0.2 0.2 1 Crack source 2 1 0.733692
--1.74169 0 0.2 0.2 0.2 1 Boom source 3 1 2.86765 0.277803 0 0.2 0.2
-0.2 1 Flam source 4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0 0 0 0 0 0
-(null) source 6 0 0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0 0 0 0 (null)
-source 8 0 0 0 0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0 0 (null) source
-10 0 0 0 0 0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0 (null) source 12
-0 0 0 0 0 0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null) source 14 0
-0 0 0 0 0 0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source 16 0 0
-0 0 0 0 0 0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18 0 0 0
-0 0 0 0 0 (null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0 0 0 0
-0 0 0 0 (null) source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0 0 0 0
-0 0 0 (null) source 23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0 0 0 0
-0 0 (null) source 25 0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0 0 0 0
-0 (null) source 27 0 0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0 0 0 0
-(null) source 29 0 0 0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0 0 0 (null)
-source 31 0 0 0 0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0 0 (null) source
-33 0 0 0 0 0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0 (null) source 35
-0 0 0 0 0 0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null) source 37 0
-0 0 0 0 0 0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source 39 0 0
-0 0 0 0 0 0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41 0 0 0
-0 0 0 0 0 (null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0 0 0 0
-0 0 0 0 (null) source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0 0 0 0
-0 0 0 (null) source 46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0 0 0 0
-0 0 (null) source 48 0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0 0 0 0
-0 (null) source 50 0 0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0 0 0 0
-(null) source 52 0 0 0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0 0 0 (null)
-source 54 0 0 0 0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0 0 (null) source
-56 0 0 0 0 0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0 (null) source 58
-0 0 0 0 0 0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null) source 60 0
-0 0 0 0 0 0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source 62 0 0
-0 0 0 0 0 0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 4 @hoamapexample
-hoa.2d.map sources_preset source 0 1 1.71429 0.546032 0 0.2 0.2 0.2
-1 Click source 1 1 0.266667 0.87619 0 0.2 0.2 0.2 1 Crack source 2
-1 0.139683 -1.81587 0 0.2 0.2 0.2 1 Boom source 3 1 -0.673016 -0.977778
-0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0
-0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0
-0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0
-0 (null) source 10 0 0 0 0 0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0
-(null) source 12 0 0 0 0 0 0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null)
-source 14 0 0 0 0 0 0 0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source
-16 0 0 0 0 0 0 0 0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18
-0 0 0 0 0 0 0 0 (null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0
-0 0 0 0 0 0 0 (null) source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0
-0 0 0 0 0 0 (null) source 23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0
-0 0 0 0 0 (null) source 25 0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0
-0 0 0 0 (null) source 27 0 0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0
-0 0 0 (null) source 29 0 0 0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0
-0 0 (null) source 31 0 0 0 0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0
-0 (null) source 33 0 0 0 0 0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0
-(null) source 35 0 0 0 0 0 0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null)
-source 37 0 0 0 0 0 0 0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source
-39 0 0 0 0 0 0 0 0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41
-0 0 0 0 0 0 0 0 (null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0
-0 0 0 0 0 0 0 (null) source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0
-0 0 0 0 0 0 (null) source 46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0
-0 0 0 0 0 (null) source 48 0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0
-0 0 0 0 (null) source 50 0 0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0
-0 0 0 (null) source 52 0 0 0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0
-0 0 (null) source 54 0 0 0 0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0
-0 (null) source 56 0 0 0 0 0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0
-(null) source 58 0 0 0 0 0 0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null)
-source 60 0 0 0 0 0 0 0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source
-62 0 0 0 0 0 0 0 0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 5
-@hoamapexample hoa.2d.map sources_preset source 0 1 0.368254 0.850794
-0 0.2 0.2 0.2 1 Click source 1 1 -1.86667 -1.25714 0 0.2 0.2 0.2 1
-Crack source 2 1 -1.28254 0.342857 0 0.2 0.2 0.2 1 Boom source 3 1
-1.07937 -0.977778 0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0 0 0 (null)
-source 5 0 0 0 0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0 (null) source
-7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null) source 9 0
-0 0 0 0 0 0 0 (null) source 10 0 0 0 0 0 0 0 0 (null) source 11 0 0
-0 0 0 0 0 0 (null) source 12 0 0 0 0 0 0 0 0 (null) source 13 0 0 0
-0 0 0 0 0 (null) source 14 0 0 0 0 0 0 0 0 (null) source 15 0 0 0 0
-0 0 0 0 (null) source 16 0 0 0 0 0 0 0 0 (null) source 17 0 0 0 0 0
-0 0 0 (null) source 18 0 0 0 0 0 0 0 0 (null) source 19 0 0 0 0 0 0
-0 0 (null) source 20 0 0 0 0 0 0 0 0 (null) source 21 0 0 0 0 0 0 0
-0 (null) source 22 0 0 0 0 0 0 0 0 (null) source 23 0 0 0 0 0 0 0 0
-(null) source 24 0 0 0 0 0 0 0 0 (null) source 25 0 0 0 0 0 0 0 0 (null)
-source 26 0 0 0 0 0 0 0 0 (null) source 27 0 0 0 0 0 0 0 0 (null) source
-28 0 0 0 0 0 0 0 0 (null) source 29 0 0 0 0 0 0 0 0 (null) source 30
-0 0 0 0 0 0 0 0 (null) source 31 0 0 0 0 0 0 0 0 (null) source 32 0
-0 0 0 0 0 0 0 (null) source 33 0 0 0 0 0 0 0 0 (null) source 34 0 0
-0 0 0 0 0 0 (null) source 35 0 0 0 0 0 0 0 0 (null) source 36 0 0 0
-0 0 0 0 0 (null) source 37 0 0 0 0 0 0 0 0 (null) source 38 0 0 0 0
-0 0 0 0 (null) source 39 0 0 0 0 0 0 0 0 (null) source 40 0 0 0 0 0
-0 0 0 (null) source 41 0 0 0 0 0 0 0 0 (null) source 42 0 0 0 0 0 0
-0 0 (null) source 43 0 0 0 0 0 0 0 0 (null) source 44 0 0 0 0 0 0 0
-0 (null) source 45 0 0 0 0 0 0 0 0 (null) source 46 0 0 0 0 0 0 0 0
-(null) source 47 0 0 0 0 0 0 0 0 (null) source 48 0 0 0 0 0 0 0 0 (null)
-source 49 0 0 0 0 0 0 0 0 (null) source 50 0 0 0 0 0 0 0 0 (null) source
-51 0 0 0 0 0 0 0 0 (null) source 52 0 0 0 0 0 0 0 0 (null) source 53
-0 0 0 0 0 0 0 0 (null) source 54 0 0 0 0 0 0 0 0 (null) source 55 0
-0 0 0 0 0 0 0 (null) source 56 0 0 0 0 0 0 0 0 (null) source 57 0 0
-0 0 0 0 0 0 (null) source 58 0 0 0 0 0 0 0 0 (null) source 59 0 0 0
-0 0 0 0 0 (null) source 60 0 0 0 0 0 0 0 0 (null) source 61 0 0 0 0
-0 0 0 0 (null) source 62 0 0 0 0 0 0 0 0 (null) source 63 0 0 0 0 0
-0 0 0 (null) @index 6 @hoamapexample hoa.2d.map sources_preset source
-0 1 0.901587 1.43492 0 0.2 0.2 0.2 1 Click source 1 1 -0.622222 -1.05397
-0 0.2 0.2 0.2 1 Crack source 2 1 1.28254 -0.24127 0 0.2 0.2 0.2 1 Boom
-source 3 1 -0.8 0.647619 0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0
-0 0 (null) source 5 0 0 0 0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0
-(null) source 7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null)
-source 9 0 0 0 0 0 0 0 0 (null) source 10 0 0 0 0 0 0 0 0 (null) source
-11 0 0 0 0 0 0 0 0 (null) source 12 0 0 0 0 0 0 0 0 (null) source 13
-0 0 0 0 0 0 0 0 (null) source 14 0 0 0 0 0 0 0 0 (null) source 15 0
-0 0 0 0 0 0 0 (null) source 16 0 0 0 0 0 0 0 0 (null) source 17 0 0
-0 0 0 0 0 0 (null) source 18 0 0 0 0 0 0 0 0 (null) source 19 0 0 0
-0 0 0 0 0 (null) source 20 0 0 0 0 0 0 0 0 (null) source 21 0 0 0 0
-0 0 0 0 (null) source 22 0 0 0 0 0 0 0 0 (null) source 23 0 0 0 0 0
-0 0 0 (null) source 24 0 0 0 0 0 0 0 0 (null) source 25 0 0 0 0 0 0
-0 0 (null) source 26 0 0 0 0 0 0 0 0 (null) source 27 0 0 0 0 0 0 0
-0 (null) source 28 0 0 0 0 0 0 0 0 (null) source 29 0 0 0 0 0 0 0 0
-(null) source 30 0 0 0 0 0 0 0 0 (null) source 31 0 0 0 0 0 0 0 0 (null)
-source 32 0 0 0 0 0 0 0 0 (null) source 33 0 0 0 0 0 0 0 0 (null) source
-34 0 0 0 0 0 0 0 0 (null) source 35 0 0 0 0 0 0 0 0 (null) source 36
-0 0 0 0 0 0 0 0 (null) source 37 0 0 0 0 0 0 0 0 (null) source 38 0
-0 0 0 0 0 0 0 (null) source 39 0 0 0 0 0 0 0 0 (null) source 40 0 0
-0 0 0 0 0 0 (null) source 41 0 0 0 0 0 0 0 0 (null) source 42 0 0 0
-0 0 0 0 0 (null) source 43 0 0 0 0 0 0 0 0 (null) source 44 0 0 0 0
-0 0 0 0 (null) source 45 0 0 0 0 0 0 0 0 (null) source 46 0 0 0 0 0
-0 0 0 (null) source 47 0 0 0 0 0 0 0 0 (null) source 48 0 0 0 0 0 0
-0 0 (null) source 49 0 0 0 0 0 0 0 0 (null) source 50 0 0 0 0 0 0 0
-0 (null) source 51 0 0 0 0 0 0 0 0 (null) source 52 0 0 0 0 0 0 0 0
-(null) source 53 0 0 0 0 0 0 0 0 (null) source 54 0 0 0 0 0 0 0 0 (null)
-source 55 0 0 0 0 0 0 0 0 (null) source 56 0 0 0 0 0 0 0 0 (null) source
-57 0 0 0 0 0 0 0 0 (null) source 58 0 0 0 0 0 0 0 0 (null) source 59
-0 0 0 0 0 0 0 0 (null) source 60 0 0 0 0 0 0 0 0 (null) source 61 0
-0 0 0 0 0 0 0 (null) source 62 0 0 0 0 0 0 0 0 (null) source 63 0 0
-0 0 0 0 0 0 (null) @index 7 @hoamapexample hoa.2d.map sources_preset
-source 0 1 2.23608 3.55883 0 0.2 0.2 0.2 1 Click source 1 1 -1.89742
--3.21399 0 0.2 0.2 0.2 1 Crack source 2 1 3.74765 -0.705004 0 0.2 0.2
-0.2 1 Boom source 3 1 -2.7496 2.22587 0 0.2 0.2 0.2 1 Flam source 4
-0 0 0 0 0 0 0 0 (null) source 5 0 0 0 0 0 0 0 0 (null) source 6 0 0
-0 0 0 0 0 0 (null) source 7 0 0 0 0 0 0 0 0 (null) source 8 0 0 0 0
-0 0 0 0 (null) source 9 0 0 0 0 0 0 0 0 (null) source 10 0 0 0 0 0
-0 0 0 (null) source 11 0 0 0 0 0 0 0 0 (null) source 12 0 0 0 0 0 0
-0 0 (null) source 13 0 0 0 0 0 0 0 0 (null) source 14 0 0 0 0 0 0 0
-0 (null) source 15 0 0 0 0 0 0 0 0 (null) source 16 0 0 0 0 0 0 0 0
-(null) source 17 0 0 0 0 0 0 0 0 (null) source 18 0 0 0 0 0 0 0 0 (null)
-source 19 0 0 0 0 0 0 0 0 (null) source 20 0 0 0 0 0 0 0 0 (null) source
-21 0 0 0 0 0 0 0 0 (null) source 22 0 0 0 0 0 0 0 0 (null) source 23
-0 0 0 0 0 0 0 0 (null) source 24 0 0 0 0 0 0 0 0 (null) source 25 0
-0 0 0 0 0 0 0 (null) source 26 0 0 0 0 0 0 0 0 (null) source 27 0 0
-0 0 0 0 0 0 (null) source 28 0 0 0 0 0 0 0 0 (null) source 29 0 0 0
-0 0 0 0 0 (null) source 30 0 0 0 0 0 0 0 0 (null) source 31 0 0 0 0
-0 0 0 0 (null) source 32 0 0 0 0 0 0 0 0 (null) source 33 0 0 0 0 0
-0 0 0 (null) source 34 0 0 0 0 0 0 0 0 (null) source 35 0 0 0 0 0 0
-0 0 (null) source 36 0 0 0 0 0 0 0 0 (null) source 37 0 0 0 0 0 0 0
-0 (null) source 38 0 0 0 0 0 0 0 0 (null) source 39 0 0 0 0 0 0 0 0
-(null) source 40 0 0 0 0 0 0 0 0 (null) source 41 0 0 0 0 0 0 0 0 (null)
-source 42 0 0 0 0 0 0 0 0 (null) source 43 0 0 0 0 0 0 0 0 (null) source
-44 0 0 0 0 0 0 0 0 (null) source 45 0 0 0 0 0 0 0 0 (null) source 46
-0 0 0 0 0 0 0 0 (null) source 47 0 0 0 0 0 0 0 0 (null) source 48 0
-0 0 0 0 0 0 0 (null) source 49 0 0 0 0 0 0 0 0 (null) source 50 0 0
-0 0 0 0 0 0 (null) source 51 0 0 0 0 0 0 0 0 (null) source 52 0 0 0
-0 0 0 0 0 (null) source 53 0 0 0 0 0 0 0 0 (null) source 54 0 0 0 0
-0 0 0 0 (null) source 55 0 0 0 0 0 0 0 0 (null) source 56 0 0 0 0 0
-0 0 0 (null) source 57 0 0 0 0 0 0 0 0 (null) source 58 0 0 0 0 0 0
-0 0 (null) source 59 0 0 0 0 0 0 0 0 (null) source 60 0 0 0 0 0 0 0
-0 (null) source 61 0 0 0 0 0 0 0 0 (null) source 62 0 0 0 0 0 0 0 0
-(null) source 63 0 0 0 0 0 0 0 0 (null) @index 8 @hoamapexample hoa.2d.map
-sources_preset source 0 1 -2.23094 -3.56204 0 0.2 0.2 0.2 1 Click source
-1 1 1.89278 3.21672 0 0.2 0.2 0.2 1 Crack source 2 1 -3.74866 0.6996
-0 0.2 0.2 0.2 1 Boom source 3 1 2.75281 -2.2219 0 0.2 0.2 0.2 1 Flam
-source 4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0 0 0 0 0 0 (null) source
-6 0 0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0 0 0 0 (null) source 8 0
-0 0 0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0 0 (null) source 10 0 0
-0 0 0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0 (null) source 12 0 0 0
-0 0 0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null) source 14 0 0 0 0
-0 0 0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source 16 0 0 0 0 0
-0 0 0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18 0 0 0 0 0 0
-0 0 (null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0 0 0 0 0 0 0
-0 (null) source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0 0 0 0 0 0 0
-(null) source 23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0 0 0 0 0 0 (null)
-source 25 0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0 0 0 0 0 (null) source
-27 0 0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0 0 0 0 (null) source 29
-0 0 0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0 0 0 (null) source 31 0
-0 0 0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0 0 (null) source 33 0 0
-0 0 0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0 (null) source 35 0 0 0
-0 0 0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null) source 37 0 0 0 0
-0 0 0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source 39 0 0 0 0 0
-0 0 0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41 0 0 0 0 0 0
-0 0 (null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0 0 0 0 0 0 0
-0 (null) source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0 0 0 0 0 0 0
-(null) source 46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0 0 0 0 0 0 (null)
-source 48 0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0 0 0 0 0 (null) source
-50 0 0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0 0 0 0 (null) source 52
-0 0 0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0 0 0 (null) source 54 0
-0 0 0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0 0 (null) source 56 0 0
-0 0 0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0 (null) source 58 0 0 0
-0 0 0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null) source 60 0 0 0 0
-0 0 0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source 62 0 0 0 0 0
-0 0 0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 9 @hoamapexample
-hoa.2d.map sources_preset source 0 1 -0.758541 -1.24066 0 0.2 0.2 0.2
-1 Click source 1 1 0.564858 0.933692 0 0.2 0.2 0.2 1 Crack source 2
-1 -1.03763 0.203496 0 0.2 0.2 0.2 1 Boom source 3 1 0.695022 -0.542146
-0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0 0 0 (null) source 5 0 0 0
-0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0 (null) source 7 0 0 0 0 0
-0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null) source 9 0 0 0 0 0 0 0
-0 (null) source 10 0 0 0 0 0 0 0 0 (null) source 11 0 0 0 0 0 0 0 0
-(null) source 12 0 0 0 0 0 0 0 0 (null) source 13 0 0 0 0 0 0 0 0 (null)
-source 14 0 0 0 0 0 0 0 0 (null) source 15 0 0 0 0 0 0 0 0 (null) source
-16 0 0 0 0 0 0 0 0 (null) source 17 0 0 0 0 0 0 0 0 (null) source 18
-0 0 0 0 0 0 0 0 (null) source 19 0 0 0 0 0 0 0 0 (null) source 20 0
-0 0 0 0 0 0 0 (null) source 21 0 0 0 0 0 0 0 0 (null) source 22 0 0
-0 0 0 0 0 0 (null) source 23 0 0 0 0 0 0 0 0 (null) source 24 0 0 0
-0 0 0 0 0 (null) source 25 0 0 0 0 0 0 0 0 (null) source 26 0 0 0 0
-0 0 0 0 (null) source 27 0 0 0 0 0 0 0 0 (null) source 28 0 0 0 0 0
-0 0 0 (null) source 29 0 0 0 0 0 0 0 0 (null) source 30 0 0 0 0 0 0
-0 0 (null) source 31 0 0 0 0 0 0 0 0 (null) source 32 0 0 0 0 0 0 0
-0 (null) source 33 0 0 0 0 0 0 0 0 (null) source 34 0 0 0 0 0 0 0 0
-(null) source 35 0 0 0 0 0 0 0 0 (null) source 36 0 0 0 0 0 0 0 0 (null)
-source 37 0 0 0 0 0 0 0 0 (null) source 38 0 0 0 0 0 0 0 0 (null) source
-39 0 0 0 0 0 0 0 0 (null) source 40 0 0 0 0 0 0 0 0 (null) source 41
-0 0 0 0 0 0 0 0 (null) source 42 0 0 0 0 0 0 0 0 (null) source 43 0
-0 0 0 0 0 0 0 (null) source 44 0 0 0 0 0 0 0 0 (null) source 45 0 0
-0 0 0 0 0 0 (null) source 46 0 0 0 0 0 0 0 0 (null) source 47 0 0 0
-0 0 0 0 0 (null) source 48 0 0 0 0 0 0 0 0 (null) source 49 0 0 0 0
-0 0 0 0 (null) source 50 0 0 0 0 0 0 0 0 (null) source 51 0 0 0 0 0
-0 0 0 (null) source 52 0 0 0 0 0 0 0 0 (null) source 53 0 0 0 0 0 0
-0 0 (null) source 54 0 0 0 0 0 0 0 0 (null) source 55 0 0 0 0 0 0 0
-0 (null) source 56 0 0 0 0 0 0 0 0 (null) source 57 0 0 0 0 0 0 0 0
-(null) source 58 0 0 0 0 0 0 0 0 (null) source 59 0 0 0 0 0 0 0 0 (null)
-source 60 0 0 0 0 0 0 0 0 (null) source 61 0 0 0 0 0 0 0 0 (null) source
-62 0 0 0 0 0 0 0 0 (null) source 63 0 0 0 0 0 0 0 0 (null) @index 10
-@hoamapexample hoa.2d.map sources_preset source 0 1 1.28105 0.96732
-0 0.2 0.2 0.2 1 Click source 1 1 1.54248 -1.38562 0 0.2 0.2 0.2 1 Crack
-source 2 1 -1.43791 0.96732 0 0.2 0.2 0.2 1 Boom source 3 1 -1.43791
--1.22876 0 0.2 0.2 0.2 1 Flam source 4 0 0 0 0 0 0 0 0 (null) source
-5 0 0 0 0 0 0 0 0 (null) source 6 0 0 0 0 0 0 0 0 (null) source 7 0
-0 0 0 0 0 0 0 (null) source 8 0 0 0 0 0 0 0 0 (null) source 9 0 0 0
-0 0 0 0 0 (null) source 10 0 0 0 0 0 0 0 0 (null) source 11 0 0 0 0
-0 0 0 0 (null) source 12 0 0 0 0 0 0 0 0 (null) source 13 0 0 0 0 0
-0 0 0 (null) source 14 0 0 0 0 0 0 0 0 (null) source 15 0 0 0 0 0 0
-0 0 (null) source 16 0 0 0 0 0 0 0 0 (null) source 17 0 0 0 0 0 0 0
-0 (null) source 18 0 0 0 0 0 0 0 0 (null) source 19 0 0 0 0 0 0 0 0
-(null) source 20 0 0 0 0 0 0 0 0 (null) source 21 0 0 0 0 0 0 0 0 (null)
-source 22 0 0 0 0 0 0 0 0 (null) source 23 0 0 0 0 0 0 0 0 (null) source
-24 0 0 0 0 0 0 0 0 (null) source 25 0 0 0 0 0 0 0 0 (null) source 26
-0 0 0 0 0 0 0 0 (null) source 27 0 0 0 0 0 0 0 0 (null) source 28 0
-0 0 0 0 0 0 0 (null) source 29 0 0 0 0 0 0 0 0 (null) source 30 0 0
-0 0 0 0 0 0 (null) source 31 0 0 0 0 0 0 0 0 (null) source 32 0 0 0
-0 0 0 0 0 (null) source 33 0 0 0 0 0 0 0 0 (null) source 34 0 0 0 0
-0 0 0 0 (null) source 35 0 0 0 0 0 0 0 0 (null) source 36 0 0 0 0 0
-0 0 0 (null) source 37 0 0 0 0 0 0 0 0 (null) source 38 0 0 0 0 0 0
-0 0 (null) source 39 0 0 0 0 0 0 0 0 (null) source 40 0 0 0 0 0 0 0
-0 (null) source 41 0 0 0 0 0 0 0 0 (null) source 42 0 0 0 0 0 0 0 0
-(null) source 43 0 0 0 0 0 0 0 0 (null) source 44 0 0 0 0 0 0 0 0 (null)
-source 45 0 0 0 0 0 0 0 0 (null) source 46 0 0 0 0 0 0 0 0 (null) source
-47 0 0 0 0 0 0 0 0 (null) source 48 0 0 0 0 0 0 0 0 (null) source 49
-0 0 0 0 0 0 0 0 (null) source 50 0 0 0 0 0 0 0 0 (null) source 51 0
-0 0 0 0 0 0 0 (null) source 52 0 0 0 0 0 0 0 0 (null) source 53 0 0
-0 0 0 0 0 0 (null) source 54 0 0 0 0 0 0 0 0 (null) source 55 0 0 0
-0 0 0 0 0 (null) source 56 0 0 0 0 0 0 0 0 (null) source 57 0 0 0 0
-0 0 0 0 (null) source 58 0 0 0 0 0 0 0 0 (null) source 59 0 0 0 0 0
-0 0 0 (null) source 60 0 0 0 0 0 0 0 0 (null) source 61 0 0 0 0 0 0
-0 0 (null) source 62 0 0 0 0 0 0 0 0 (null) source 63 0 0 0 0 0 0 0
-0 (null) ];
+[ @index 0 @hoamapexample hoa.2d.map sources_preset source 0 1.28105
+0.96732 0 0.2 0.2 0.2 1 Click source 1 1.54248 -1.38562 0 0.2 0.2 0.2
+1 Crack source 2 -1.43791 0.96732 0 0.2 0.2 0.2 1 Boom source 3 -1.43791
+-1.22876 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null)
+@index 1 @hoamapexample hoa.2d.map sources_preset source 0 0.592396
+-1.49193 0 0.2 0.2 0.2 1 Click source 1 -1.74549 -1.11914 0 0.2 0.2
+0.2 1 Crack source 2 1.31444 1.1294 0 0.2 0.2 0.2 1 Boom source 3 -0.80279
+1.71259 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null) @index
+2 @hoamapexample hoa.2d.map sources_preset source 0 -3.82857e-16 4.68864e-32
+0 0.2 0.2 0.2 1 Click source 1 1.91568 1.13915 0 0.2 0.2 0.2 1 Crack
+source 2 0.701111 -1.2832 0 0.2 0.2 0.2 1 Boom source 3 2.48809 -1.08371
+0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null) @index 3 @hoamapexample
+hoa.2d.map sources_preset source 0 -1.88922 0.0884151 0 0.2 0.2 0.2
+1 Click source 1 0.524538 2.92393 0 0.2 0.2 0.2 1 Crack source 2 0.733692
+-1.74169 0 0.2 0.2 0.2 1 Boom source 3 2.86765 0.277803 0 0.2 0.2 0.2
+1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 4 @hoamapexample
+hoa.2d.map sources_preset source 0 1.71429 0.546032 0 0.2 0.2 0.2 1
+Click source 1 0.266667 0.87619 0 0.2 0.2 0.2 1 Crack source 2 0.139683
+-1.81587 0 0.2 0.2 0.2 1 Boom source 3 -0.673016 -0.977778 0 0.2 0.2
+0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 5 @hoamapexample
+hoa.2d.map sources_preset source 0 0.368254 0.850794 0 0.2 0.2 0.2
+1 Click source 1 -1.86667 -1.25714 0 0.2 0.2 0.2 1 Crack source 2 -1.28254
+0.342857 0 0.2 0.2 0.2 1 Boom source 3 1.07937 -0.977778 0 0.2 0.2
+0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 6 @hoamapexample
+hoa.2d.map sources_preset source 0 0.901587 1.43492 0 0.2 0.2 0.2 1
+Click source 1 -0.622222 -1.05397 0 0.2 0.2 0.2 1 Crack source 2 1.28254
+-0.24127 0 0.2 0.2 0.2 1 Boom source 3 -0.8 0.647619 0 0.2 0.2 0.2
+1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 7 @hoamapexample
+hoa.2d.map sources_preset source 0 2.23608 3.55883 0 0.2 0.2 0.2 1
+Click source 1 -1.89742 -3.21399 0 0.2 0.2 0.2 1 Crack source 2 3.74765
+-0.705004 0 0.2 0.2 0.2 1 Boom source 3 -2.7496 2.22587 0 0.2 0.2 0.2
+1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 8 @hoamapexample
+hoa.2d.map sources_preset source 0 -2.23094 -3.56204 0 0.2 0.2 0.2
+1 Click source 1 1.89278 3.21672 0 0.2 0.2 0.2 1 Crack source 2 -3.74866
+0.6996 0 0.2 0.2 0.2 1 Boom source 3 2.75281 -2.2219 0 0.2 0.2 0.2
+1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 9 @hoamapexample
+hoa.2d.map sources_preset source 0 -0.758541 -1.24066 0 0.2 0.2 0.2
+1 Click source 1 0.564858 0.933692 0 0.2 0.2 0.2 1 Crack source 2 -1.03763
+0.203496 0 0.2 0.2 0.2 1 Boom source 3 0.695022 -0.542146 0 0.2 0.2
+0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 10 @hoamapexample
+hoa.2d.map sources_preset source 0 1.28105 0.96732 0 0.2 0.2 0.2 1
+Click source 1 1.54248 -1.38562 0 0.2 0.2 0.2 1 Crack source 2 -1.43791
+0.96732 0 0.2 0.2 0.2 1 Boom source 3 -1.43791 -1.22876 0 0.2 0.2 0.2
+1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) ];
 #X msg -42 21 inter \$1;
 #X obj -42 -7 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname

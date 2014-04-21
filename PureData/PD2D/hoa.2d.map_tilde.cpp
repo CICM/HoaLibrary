@@ -262,22 +262,22 @@ void hoa_map_tilde_list(t_hoa_map_tilde *x, t_symbol* s, long argc, t_atom* argv
     if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
     {
         int index = atom_getlong(argv);
-        if(index < 0 || index >= x->f_map->getNumberOfSources())
+        if(index < 1 || index > x->f_map->getNumberOfSources())
             return;
         
         if(argc > 3 && (atom_getsym(argv+1) == hoa_sym_polar || atom_getsym(argv+1) == hoa_sym_pol))
         {
-            x->f_lines->setRadius(index, atom_getfloat(argv+2));
-            x->f_lines->setAzimuth(index, atom_getfloat(argv+3));
+            x->f_lines->setRadius(index-1, atom_getfloat(argv+2));
+            x->f_lines->setAzimuth(index-1, atom_getfloat(argv+3));
         }
         else if(argc > 3 && (atom_getsym(argv+1) == hoa_sym_cartesian || atom_getsym(argv+1) == hoa_sym_car))
         {
-            x->f_lines->setRadius(index, radius(atom_getfloat(argv+2), atom_getfloat(argv+3)));
-            x->f_lines->setAzimuth(index, azimuth(atom_getfloat(argv+2), atom_getfloat(argv+3)));
+            x->f_lines->setRadius(index-1, radius(atom_getfloat(argv+2), atom_getfloat(argv+3)));
+            x->f_lines->setAzimuth(index-1, azimuth(atom_getfloat(argv+2), atom_getfloat(argv+3)));
         }
         else if(argc > 2 && atom_getsym(argv+1) == hoa_sym_mute)
         {
-            x->f_map->setMute(index, atom_getlong(argv+2));
+            x->f_map->setMute(index-1, atom_getlong(argv+2));
         }
     }
 }
