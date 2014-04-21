@@ -7,9 +7,9 @@
 #ifndef __DEF_HOA_3D_MAP__
 #define __DEF_HOA_3D_MAP__
 
-#include "Ambisonic.h"
-#include "Encoder.h"
-#include "Wider.h"
+#include "Ambisonic_3D.h"
+#include "Encoder_3D.h"
+#include "Wider_3D.h"
 
 namespace Hoa3D
 {

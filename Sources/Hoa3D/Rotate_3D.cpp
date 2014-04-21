@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Rotate.h"
+#include "Rotate_3D.h"
 
 namespace Hoa3D
 {

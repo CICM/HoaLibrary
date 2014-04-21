@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Wider.h"
+#include "Wider_3D.h"
 
 namespace Hoa3D
 {

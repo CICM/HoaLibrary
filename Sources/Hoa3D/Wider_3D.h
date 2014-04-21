@@ -7,7 +7,7 @@
 #ifndef __DEF_HOA_3D_WIDER__
 #define __DEF_HOA_3D_WIDER__
 
-#include "Ambisonic.h"
+#include "Ambisonic_3D.h"
 
 namespace Hoa3D
 {

@@ -92,7 +92,7 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 	t_eclass *c;
     
 	c = eclass_new("hoa.2d.meter~", (method)hoa_meter_new, (method)hoa_meter_free, (short)sizeof(t_hoa_meter), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_meter_new, gensym("hoa.meter~"), A_GIMME);
+    class_addcreator((t_newmethod)hoa_meter_new, gensym("hoa.meter~"), A_GIMME, 0);
     
 	eclass_dspinit(c);
 	eclass_init(c, 0);

@@ -7,6 +7,7 @@
 #include "PDCommon/HoaCommon.pd.h"
 #include "PD2D/Hoa2D.pd.h"
 
+#ifndef _WINDOWS
 extern "C"
 {
     typedef struct _namelist    /* element in a linked list of stored strings */
@@ -21,12 +22,14 @@ extern "C"
     extern t_namelist *sys_helppath;
     extern t_namelist *namelist_append_files(t_namelist *listwas, const char *s);
 }
+#endif
 
 extern "C" void setup_hoa0x2elibrary(void)
 {
+#ifndef _WINDOWS
     char path[MAXPDSTRING];
     t_namelist* var;
-    
+#endif
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
@@ -59,7 +62,8 @@ extern "C" void setup_hoa0x2elibrary(void)
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
     post("© 2012 - 2014  CICM | Paris 8 University");
     post("Version 2.0");
-    
+
+#ifndef _WINDOWS
     var = sys_searchpath;
     while (var)
     {
@@ -94,5 +98,6 @@ extern "C" void setup_hoa0x2elibrary(void)
         }
         var = var->nl_next;
     }
+#endif
 }
 

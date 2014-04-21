@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Meter.h"
+#include "Meter_3D.h"
 
 namespace Hoa3D
 {

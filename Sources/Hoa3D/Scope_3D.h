@@ -7,8 +7,8 @@
 #ifndef __DEF_HOA_3D_SCOPE__
 #define __DEF_HOA_3D_SCOPE__
 
-#include "Ambisonic.h"
-#include "Decoder.h"
+#include "Ambisonic_3D.h"
+#include "Decoder_3D.h"
 
 namespace Hoa3D
 {

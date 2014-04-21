@@ -7,7 +7,7 @@
 #ifndef __DEF_HOA_3D_PLANEWAVES__
 #define __DEF_HOA_3D_PLANEWAVES__
 
-#include "Tools.h"
+#include "Tools_3D.h"
 
 namespace Hoa3D
 {

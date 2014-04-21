@@ -31,7 +31,7 @@ extern "C" void setup_hoa0x2e2d0x2erotate_tilde(void)
     t_eclass* c;
     
     c = eclass_new("hoa.2d.rotate~",(method)hoa_rotate_new,(method)hoa_rotate_free, (short)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_rotate_new, gensym("hoa.rotate~"), A_GIMME);
+    class_addcreator((t_newmethod)hoa_rotate_new, gensym("hoa.rotate~"), A_GIMME, 0);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

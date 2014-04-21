@@ -29,7 +29,7 @@ extern "C" void setup_hoa0x2e2d0x2eencoder_tilde(void)
 {
     t_eclass *c;
     c = eclass_new("hoa.2d.encoder~",(method)hoa_encoder_new,(method)hoa_encoder_free,sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_encoder_new, gensym("hoa.encoder~"), A_GIMME);
+    class_addcreator((t_newmethod)hoa_encoder_new, gensym("hoa.encoder~"), A_GIMME, 0);
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

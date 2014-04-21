@@ -7,8 +7,8 @@
 #ifndef __DEF_HOA_3D_ROTATE__
 #define __DEF_HOA_3D_ROTATE__
 
-#include "Ambisonic.h"
-#include "Encoder.h"
+#include "Ambisonic_3D.h"
+#include "Encoder_3D.h"
 
 namespace Hoa3D
 {

@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Optim.h"
+#include "Optim_3D.h"
 
 namespace Hoa3D
 {
@@ -28,7 +28,7 @@ namespace Hoa3D
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = cos(fabs(getHarmonicDegree(i)) * HOA_PI / (2 * m_order + 2));;
+                m_harmonics[i] = cos(fabs((double)getHarmonicDegree(i)) * HOA_PI / (2 * m_order + 2));;
             }
         }
         else
@@ -36,7 +36,7 @@ namespace Hoa3D
             long double gain = ((m_order + 1) * (m_order + 1)) / (2 * m_order + 1);
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = (long double)((long double)factorial(m_order) * (long double)factorial(m_order + 1.)) / (long double)((long double)factorial(m_order + getHarmonicDegree(i) + 1.) * (long double)factorial(m_order - fabs(getHarmonicDegree(i)))) * gain;
+                m_harmonics[i] = (long double)((long double)factorial(m_order) * (long double)factorial(m_order + 1.)) / (long double)((long double)factorial(m_order + getHarmonicDegree(i) + 1.) * (long double)factorial(m_order - fabs((double)getHarmonicDegree(i)))) * gain;
             }
         }
     }

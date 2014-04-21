@@ -92,7 +92,7 @@ extern "C" void setup_hoa0x2e2d0x2emap_tilde(void)
     t_eclass* c;
     
     c = eclass_new("hoa.2d.map~", (method)hoa_map_tilde_new, (method)hoa_map_tilde_free, (short)sizeof(t_hoa_map_tilde), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_map_tilde_new, gensym("hoa.map~"), A_GIMME);
+    class_addcreator((t_newmethod)hoa_map_tilde_new, gensym("hoa.map~"), A_GIMME, 0);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
