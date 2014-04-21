@@ -29,7 +29,7 @@ extern "C" void setup_hoa0x2e2d0x2eprojector_tilde(void)
     t_eclass* c;
     
     c = eclass_new("hoa.2d.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (short)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_projector_new, gensym("hoa.projector~"), A_GIMME);
+    class_addcreator((t_newmethod)hoa_projector_new, gensym("hoa.projector~"), A_GIMME, 0);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

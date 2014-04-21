@@ -173,7 +173,7 @@ namespace Hoa
         
 		if(l == m)
         {
-			return pow(-1.0f, (double)m) * pow(1. - x * x, 0.5 * m) * double_factorial(2. * m - 1);
+			return pow((double)-1.0, (double)m) * pow((double)(1. - x * x), (double)(0.5 * m)) * double_factorial(2. * m - 1);
 		}
 		else if(l == m + 1)
         {

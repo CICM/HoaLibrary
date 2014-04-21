@@ -26,7 +26,7 @@ extern "C" void setup_hoa0x2elibrary(void)
 {
     char path[MAXPDSTRING];
     t_namelist* var;
-    
+
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
@@ -56,6 +56,11 @@ extern "C" void setup_hoa0x2elibrary(void)
     // Alias /:
     setup_hoa0x2e2d0x2ebinaural();
     
+    post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+    post("© 2012 - 2014  CICM | Paris 8 University");
+    post("Version 2.0");
+
+#ifndef _WINDOWS
     var = sys_searchpath;
     while (var)
     {
@@ -90,5 +95,6 @@ extern "C" void setup_hoa0x2elibrary(void)
         }
         var = var->nl_next;
     }
+#endif
 }
 
