@@ -6,11 +6,10 @@
 
 #include "HoaCommon.pd.h"
 #define DEFDACBLKSIZE 64
-#ifndef _WINDOWS
+extern "C"
+{
 EXTERN t_sample *sys_soundout;
-#else
-t_sample sys_soundout[8192 * 256];
-#endif
+}
 
 typedef struct _hoa_dac
 {
@@ -138,5 +137,9 @@ void hoa_dac_dsp(t_hoa_dac *x, t_signal **sp)
 
 void hoa_dac_free(t_hoa_dac *x)
 {
+#ifndef _WINDOWS
     freebytes(x->x_vec, x->x_n * sizeof(*x->x_vec));
+#else
+	free(x->x_vec);
+#endif
 }
