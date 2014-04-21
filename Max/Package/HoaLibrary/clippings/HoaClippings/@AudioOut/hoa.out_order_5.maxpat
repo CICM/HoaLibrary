@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 25.0, 69.0, 384.0, 192.0 ],
@@ -29,11 +29,18 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.853045, 0.853045, 0.853045, 1.0 ],
+					"border" : 1.0,
+					"bordercolor" : [ 0.378792, 0.378792, 0.378792, 0.5 ],
 					"id" : "obj-1",
 					"local" : 1,
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
+					"offgradcolor1" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+					"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
+					"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
+					"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
 					"patching_rect" : [ 28.0, 102.0, 45.0, 45.0 ]
 				}
 
@@ -54,21 +61,25 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpout_5.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../../../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.2d.scope~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
 				"name" : "hoa.gain~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

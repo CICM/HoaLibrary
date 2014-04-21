@@ -20,7 +20,7 @@ HEADER_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" 
 FRAMEWORK_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
 //DSTROOT = $(SRCROOT)/../../buildsCommon
 MAXPACKAGE = $(SRCROOT)/../../Package/HoaLibrary
-DSTROOT = $(MAXPACKAGE)/externals
+DSTROOT = $(MAXPACKAGE)/externals/Hoa3d
 // (This next path is relative to DSTROOT)
 INSTALL_PATH = /
 

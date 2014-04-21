@@ -27,8 +27,23 @@
 <refpage name='hoa.process~.maxref.xml'/>
 <refpage name='hoa.record~.maxref.xml'/>
 <refpage name='hoa.thisprocess~.maxref.xml'/>
-<refpage name='hoa.abs~.maxref.xml'/>
+<refpage name='hoa.fx.decorrelation~.maxref.xml'/>
+<refpage name='hoa.fx.delay~.maxref.xml'/>
 <refpage name='hoa.fx.gain~.maxref.xml'/>
-<refpage name='hoa.grain~.maxref.xml'/>
-<refpage name='hoa.granular~.maxref.xml'/>
+<refpage name='hoa.fx.grain~.maxref.xml'/>
+<refpage name='hoa.fx.granular~.maxref.xml'/>
+<refpage name='hoa.fx.mirror~.maxref.xml'/>
+<refpage name='hoa.fx.mixer~.maxref.xml'/>
+<refpage name='hoa.fx.ringmod~.maxref.xml'/>
+<refpage name='hoa.highpass~.maxref.xml'/>
+<refpage name='hoa.onepole~.maxref.xml'/>
+<refpage name='hoa.receive.maxref.xml'/>
+<refpage name='hoa.receive~.maxref.xml'/>
+<refpage name='hoa.send.maxref.xml'/>
+<refpage name='hoa.send~.maxref.xml'/>
+<refpage name='hoa.syn.decorrelation~.maxref.xml'/>
+<refpage name='hoa.syn.delay~.maxref.xml'/>
+<refpage name='hoa.syn.grain~.maxref.xml'/>
+<refpage name='hoa.syn.granular~.maxref.xml'/>
+<refpage name='hoa.syn.ringmod~.maxref.xml'/>
 </root>

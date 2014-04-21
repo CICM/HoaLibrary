@@ -528,8 +528,6 @@ void send_configuration(t_hoa_decoder *x)
     t_atom msg[4];
     t_atom rv;
     
-    int reconnect = 0;
-    
     if(!x->f_send_config)
         return;
     

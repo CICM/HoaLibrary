@@ -352,7 +352,7 @@
 	<seealsolist>
 		<seealso name="gain~" />
 		<seealso name="hoa.process~" />
-		<seealso name="hoa.fx.gain~" />
+		<seealso name="hoa.amp~" />
 	</seealsolist>
 
 	<misc name = "Discussion">
