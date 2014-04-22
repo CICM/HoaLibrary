@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 47.0, 93.0, 576.0, 680.0 ],
+		"rect" : [ 91.0, 48.0, 576.0, 680.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 47.0, 119.0, 576.0, 654.0 ],
+						"rect" : [ 91.0, 74.0, 576.0, 654.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -69,6 +69,35 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-33",
+									"maxclass" : "flonum",
+									"minimum" : 20.0,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "float", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 313.0, 155.0, 50.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-30",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 313.0, 184.0, 89.0, 18.0 ],
+									"text" : "minmax 10. $1"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -197,7 +226,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 315.0, 185.0, 61.0, 20.0 ],
+									"patching_rect" : [ 444.0, 150.5, 61.0, 20.0 ],
 									"text" : "0 to 1000"
 								}
 
@@ -1003,6 +1032,25 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-8", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 322.5, 207.5, 266.5, 207.5 ],
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-30", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-33", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1729,7 +1777,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 41.517872, 532.5, 237.5, 19.0 ],
+									"patching_rect" : [ 41.517872, 515.5, 237.5, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -3492,63 +3540,63 @@
 		"parameters" : 		{
 			"obj-18::obj-8" : [ "hoa.2d.space", "hoa.2d.space", 0 ],
 			"obj-18::obj-21" : [ "hoa.2d.space[3]", "hoa.2d.space[3]", 0 ],
-			"obj-18::obj-19" : [ "hoa.2d.space[2]", "hoa.2d.space[2]", 0 ],
-			"obj-18::obj-17" : [ "hoa.2d.space[1]", "hoa.2d.space[1]", 0 ]
+			"obj-18::obj-17" : [ "hoa.2d.space[1]", "hoa.2d.space[1]", 0 ],
+			"obj-18::obj-19" : [ "hoa.2d.space[2]", "hoa.2d.space[2]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
-				"patcherrelativepath" : "../misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.fx.grain~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
-				"patcherrelativepath" : "../patchers/effects",
+				"patcherrelativepath" : "../../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.args.map.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.mode.sel.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.help.process.infos.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
-				"patcherrelativepath" : "../patchers/helputility",
+				"patcherrelativepath" : "../../patchers/helputility",
 				"type" : "JSON",
 				"implicit" : 1
 			}

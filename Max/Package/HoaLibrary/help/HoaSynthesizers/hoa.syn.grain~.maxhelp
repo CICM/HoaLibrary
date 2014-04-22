@@ -1393,7 +1393,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 41.5, 492.5, 241.024994, 19.0 ],
+									"patching_rect" : [ 41.5, 492.5, 240.966415, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -2803,56 +2803,56 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
-				"patcherrelativepath" : "../misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.syn.grain~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
-				"patcherrelativepath" : "../patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/synth",
+				"patcherrelativepath" : "../../patchers/synth",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.args.map.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.mode.sel.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.help.process.infos.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
-				"patcherrelativepath" : "../patchers/helputility",
+				"patcherrelativepath" : "../../patchers/helputility",
 				"type" : "JSON",
 				"implicit" : 1
 			}

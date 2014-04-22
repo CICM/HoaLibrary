@@ -255,8 +255,8 @@ namespace Hoa2D
 
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {
-        if(order > 35)
-            order  = 35;
+        if(m_order > 35)
+            m_order  = 35;
 
         m_vector_size               = 0;
         m_sample_rate               = 0;
