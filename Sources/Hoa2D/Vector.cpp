@@ -23,7 +23,7 @@ namespace Hoa2D
             m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
         }
     }
-    
+
     void Vector::setChannelsOffset(double offset)
     {
         m_offset = wrap_twopi(offset);
@@ -33,14 +33,14 @@ namespace Hoa2D
 			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
 		}
     }
-    
+
     void Vector::setChannelAzimuth(unsigned int index, double azimuth)
     {
         Planewaves::setChannelAzimuth(index, azimuth);
         m_channels_abscissa_float[index] = m_channels_abscissa_double[index] = abscissa(1., m_channels_azimuth[index] + m_offset);
         m_channels_ordinate_float[index] = m_channels_ordinate_double[index] = ordinate(1., m_channels_azimuth[index] + m_offset);
     }
-	
+
 	void Vector::setChannelsAzimuth(double* azimuths)
     {
         Planewaves::setChannelsAzimuth(azimuths);
@@ -50,11 +50,11 @@ namespace Hoa2D
 			m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = ordinate(1., m_channels_azimuth[i] + m_offset);
 		}
     }
-    
+
     void Vector::processVelocity(const float* inputs, float* outputs)
     {
         float veclocitySum = 0.f, velocityAbscissa = 0.f, velocityOrdinate = 0.f;
-        
+
         veclocitySum = 0.;
         for(int i = 0; i < m_number_of_channels; i++)
             veclocitySum += inputs[i];
@@ -71,7 +71,7 @@ namespace Hoa2D
             outputs[1] = 0.;
         }
     }
-    
+
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
@@ -80,7 +80,7 @@ namespace Hoa2D
             veclocitySum += inputs[i];
         velocityAbscissa = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_abscissa_double, 1);
         velocityOrdinate = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_ordinate_double, 1);
-        
+
         if(veclocitySum)
         {
             outputs[0] = velocityAbscissa / veclocitySum;
@@ -92,18 +92,18 @@ namespace Hoa2D
             outputs[1] = 0.;
         }
     }
-    
+
     void Vector::processEnergy(const float* inputs, float* outputs)
     {
         float energySum = 0.f, energyAbscissa = 0.f, energyOrdinate = 0.f;
         cblas_scopy(m_number_of_channels, inputs, 1, m_channels_float, 1);
         for(int i = 0; i < m_number_of_channels; i++)
             m_channels_float[i] *= m_channels_float[i];
-        
+
         energySum = cblas_sasum(m_number_of_channels, m_channels_float, 1);
         energyAbscissa = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_abscissa_float, 1);
         energyOrdinate = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_ordinate_float, 1);
-        
+
         if(energySum)
         {
             outputs[0] = energyAbscissa / energySum;
@@ -115,19 +115,19 @@ namespace Hoa2D
             outputs[1] = 0.;
         }
     }
-    
+
     void Vector::processEnergy(const double* inputs, double* outputs)
     {
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0.;
-        
+
         cblas_dcopy(m_number_of_channels, inputs, 1, m_channels_double, 1);
         for(int i = 0; i < m_number_of_channels; i++)
             m_channels_double[i] *= m_channels_double[i];
-        
+
         energySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
         energyAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
         energyOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
-        
+
         if(energySum)
         {
             outputs[0] = energyAbscissa / energySum;
@@ -139,19 +139,19 @@ namespace Hoa2D
             outputs[1] = 0.;
         }
     }
-    
+
     void Vector::process(const float* inputs, float* outputs)
     {
         processVelocity(inputs, outputs);
         processEnergy(inputs, outputs+2);
     }
-    
+
     void Vector::process(const double* inputs, double* outputs)
     {
         processVelocity(inputs, outputs);
         processEnergy(inputs, outputs+2);
     }
-    
+
     Vector::~Vector()
     {
         delete [] m_channels_float;
