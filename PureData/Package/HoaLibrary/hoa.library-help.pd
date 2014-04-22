@@ -1,25 +1,26 @@
-#N canvas 299 57 763 727 10;
-#X text -690 -1058 Hoa Library allows musicians and composers to synthesize
+#N canvas 299 57 553 613 10;
+#X text -690 -1172 Hoa Library allows musicians and composers to synthesize
 \, transform and render sound fields in a creative and artistic way.
 This library facilitates the understanding and the appropriation of
 key concepts of Ambisonics. Thanks to original graphical interfaces
 a lot of new signal processing are allowed like diffuse sound field
 synthesis \, perspective distorsion or spatial filtering., f 90;
-#X obj -680 -1084 c.patcherinfos;
-#X obj -675 -1101 loadbang;
-#X obj -691 -1102 hoa.help.header;
-#X obj -685 -617 hoa.help.pub;
-#X obj -689 -979 c.tab @size 542 36 @fontname Monaco @fontweight normal
+#X obj -680 -1198 c.patcherinfos;
+#X obj -675 -1215 loadbang;
+#X obj -691 -1216 hoa.help.header;
+#X obj -685 -731 hoa.help.pub;
+#X obj -689 -1093 c.tab @size 542 36 @fontname Monaco @fontweight normal
 @fontslant roman @fontsize 13 @receive (null) @send (null) @presetname
 (null) @orientation 0 @toggle 1 @items hoa.2d hoa.3d hoa.common hoa.process
 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1
 @hocolor 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
-#X obj -689 -939 c.tab @size 542 264 @fontname Monaco @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @orientation 1 @toggle 0 @items hoa.connect hoa.dac~ hoa.io
-hoa.pi hoa.pi~ hoa.process~ hoa.thisprocess~ @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @hocolor 0.5 0.5 0.5 1
-@secolor 0.35 0.35 0.35 1;
+#X obj -689 -1053 c.tab @size 542 264 @fontname Monaco @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @orientation 1 @toggle 0 @items hoa.2d.decoder~ hoa.2d.encoder~
+hoa.2d.map hoa.2d.map~ hoa.2d.meter~ hoa.2d.optim~ hoa.2d.projector~
+hoa.2d.recomposer~ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~
+@bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1
+@hocolor 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
 #N canvas 90 200 452 384 sel.hoa.txt 0;
 #X obj -556 -387 unpack s s;
 #X msg -292 -523 clear;
@@ -45,7 +46,7 @@ hoa.pi hoa.pi~ hoa.process~ hoa.thisprocess~ @bgcolor 0.75 0.75 0.75
 #X connect 10 1 9 0;
 #X connect 10 2 1 0;
 #X connect 10 2 2 0;
-#X restore -419 -978 pd sel.hoa.txt;
+#X restore -419 -1092 pd sel.hoa.txt;
 #N canvas 804 124 691 357 sel.hoa.text2 0;
 #X obj -326 -135 list split 1;
 #X obj -292 -115 list split 1;
@@ -96,7 +97,7 @@ hoa.pi hoa.pi~ hoa.process~ hoa.thisprocess~ @bgcolor 0.75 0.75 0.75
 #X connect 20 0 12 0;
 #X connect 21 0 10 0;
 #X connect 21 1 16 0;
-#X restore -358 -751 pd sel.hoa.text2;
+#X restore -358 -865 pd sel.hoa.text2;
 #N canvas 0 22 450 300 hoa.open.hel 0;
 #X obj -299 -301 makefilename %s-help.pd;
 #X obj -299 -268 pack s s;
@@ -112,14 +113,14 @@ hoa.pi hoa.pi~ hoa.process~ hoa.thisprocess~ @bgcolor 0.75 0.75 0.75
 #X connect 3 1 2 0;
 #X connect 5 0 1 1;
 #X connect 6 0 3 0;
-#X restore -293 -719 pd hoa.open.hel;
-#X obj -610 -978 c.loadmess 0;
-#X obj -689 -671 c.blackboard @size 542 39 @fontname Monaco @fontweight
+#X restore -293 -833 pd hoa.open.hel;
+#X obj -610 -1092 c.loadmess 0;
+#X obj -689 -785 c.blackboard @size 542 39 @fontname Monaco @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
-#X obj -358 -725 c.prepend text;
-#X obj -509 -947 c.prepend append;
-#X msg -368 -695 clear;
+#X obj -358 -839 c.prepend text;
+#X obj -509 -1061 c.prepend append;
+#X msg -368 -809 clear;
 #X connect 1 0 3 0;
 #X connect 2 0 1 0;
 #X connect 5 1 7 0;
@@ -134,4 +135,4 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 #X connect 12 0 11 0;
 #X connect 13 0 6 0;
 #X connect 14 0 11 0;
-#X coords 0 727 1 726 100 60 0;
+#X coords 0 613 1 612 100 60 0;
