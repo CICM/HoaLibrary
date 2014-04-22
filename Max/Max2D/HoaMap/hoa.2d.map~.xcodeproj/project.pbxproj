@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CEE6E571906AE7B00B6FD7B /* MaxLineMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */; };
+		2CEE6E581906AE7B00B6FD7B /* MaxLineMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */; };
 		8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BFD218C6282E00B408F9 /* hoa.max.cpp */; };
 		8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16BFD318C6282E00B408F9 /* hoa.max.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
@@ -59,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaxLineMap.cpp; sourceTree = "<group>"; };
+		2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxLineMap.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.2d.map~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.map~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F16BFD218C6282E00B408F9 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
 		8F16BFD318C6282E00B408F9 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				8FCDF7B418D23E5E0019E1CE /* hoa.2d.map~.cpp */,
+				2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */,
+				2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */,
 				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
@@ -230,6 +236,7 @@
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 				8FCDF79518D23DF60019E1CE /* Kits.h in Headers */,
 				8FCDF7A718D23DF60019E1CE /* Source.h in Headers */,
+				2CEE6E581906AE7B00B6FD7B /* MaxLineMap.h in Headers */,
 				8FCDF7A118D23DF60019E1CE /* Recomposer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +334,7 @@
 				8FCDF7B018D23DF60019E1CE /* Vector.cpp in Sources */,
 				8FCDF7A618D23DF60019E1CE /* Source.cpp in Sources */,
 				8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */,
+				2CEE6E571906AE7B00B6FD7B /* MaxLineMap.cpp in Sources */,
 				8FCDF79118D23DF60019E1CE /* Encoder.cpp in Sources */,
 				8FCDF7B518D23E5E0019E1CE /* hoa.2d.map~.cpp in Sources */,
 				8FCDF7AA18D23DF60019E1CE /* SourcesManager.cpp in Sources */,
@@ -481,7 +489,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -490,7 +498,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
