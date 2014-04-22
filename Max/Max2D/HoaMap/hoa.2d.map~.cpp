@@ -189,14 +189,14 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ramp       = 100;
         x->f_mode       = hoa_sym_polar;
 		
-		if(atom_gettype(argv) == A_LONG)
+		if(argc && atom_gettype(argv) == A_LONG)
 			order = clip_min(atom_getlong(argv), 0);
         if(argc > 1 && atom_gettype(argv+1) == A_LONG)
             numberOfSources = clip_minmax(atom_getlong(argv+1), 1, MAX_CHANNELS);
 		
-		if(argc > 2 && atom_gettype(argv) == A_SYM)
+		if(argc > 2 && atom_gettype(argv+2) == A_SYM)
 		{
-			temp_mode = atom_getsym(argv);
+			temp_mode = atom_getsym(argv+2);
 			if(temp_mode == hoa_sym_cartesian)
 				x->f_mode = hoa_sym_cartesian;
 			else if(temp_mode == hoa_sym_polar)
@@ -222,14 +222,14 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 			outlet_new(x, "signal");
         
         if(x->f_map->getNumberOfSources() == 1)
-            x->f_sig_ins    = new double[3 * SYS_MAXBLKSIZE];
+            x->f_sig_ins    = new double[3 * sys_getblksize()];
         else
-            x->f_sig_ins    = new double[x->f_map->getNumberOfSources() * SYS_MAXBLKSIZE];
+            x->f_sig_ins    = new double[x->f_map->getNumberOfSources() * sys_getblksize()];
 		
-        x->f_sig_outs       = new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_sig_outs       = new double[x->f_map->getNumberOfHarmonics() * sys_getblksize()];
         x->f_lines_vector   = new float[x->f_map->getNumberOfSources() * 2];
 	}
-    
+
 	return (x);
 }
 
@@ -501,11 +501,11 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 void hoa_map_free(t_hoa_map *x) 
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_lines;
 	delete x->f_map;
     delete [] x->f_sig_ins;
     delete [] x->f_sig_outs;
 	delete [] x->f_lines_vector;
+	delete x->f_lines;
 }
 
 PolarLines::PolarLines(unsigned int numberOfSources)
