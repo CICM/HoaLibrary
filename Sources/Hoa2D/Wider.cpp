@@ -41,19 +41,19 @@ namespace Hoa2D
     
     void Wider::setWideningValue(const double value)
     {
-         m_wide = clip_minmax(value, 0., 1.) * (double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics;
+         m_wide = clip_minmax(value, 0., 1.) * (double)(NUMBEROFLINEARPOINTS - 1);
     }
     
     void Wider::process(const float* inputs, float* outputs)
     {
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = inputs[i] * m_wide_matrix[m_wide + i];
+            outputs[i] = inputs[i] * m_wide_matrix[m_wide * m_number_of_harmonics+ i];
     }
     
     void Wider::process(const double* inputs, double* outputs)
     {
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = inputs[i] * m_wide_matrix[m_wide + i];
+            outputs[i] = inputs[i] * m_wide_matrix[m_wide * m_number_of_harmonics + i];
     }
     
     Wider::~Wider()
