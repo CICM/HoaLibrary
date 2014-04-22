@@ -53,6 +53,7 @@
 		4BCB76C018D707CE000E5110 /* HoaDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BCB769218D707CE000E5110 /* HoaDefs.h */; };
 		4BCB76C118D707CE000E5110 /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BCB769318D707CE000E5110 /* HoaMath.h */; };
 		4BCB76C218D707CE000E5110 /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BCB769418D707CE000E5110 /* HoaUtils.h */; };
+		4BCD91A318FBFFD000B02CEA /* HoaOpcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCD91A218FBFFD000B02CEA /* HoaOpcode.cpp */; };
 		59FB02F817A7FAA9001E977D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FB02F717A7FAA9001E977D /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		4BCB769218D707CE000E5110 /* HoaDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaDefs.h; path = ../../Sources/HoaDefs.h; sourceTree = "<group>"; };
 		4BCB769318D707CE000E5110 /* HoaMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaMath.h; path = ../../Sources/HoaMath.h; sourceTree = "<group>"; };
 		4BCB769418D707CE000E5110 /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaUtils.h; path = ../../Sources/HoaUtils.h; sourceTree = "<group>"; };
+		4BCD91A218FBFFD000B02CEA /* HoaOpcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoaOpcode.cpp; sourceTree = "<group>"; };
 		5913846F15DAA36D0029AD16 /* HoaEnc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = HoaEnc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		59FB02F717A7FAA9001E977D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
+				4BCD91A218FBFFD000B02CEA /* HoaOpcode.cpp */,
 				4BCB766618D707CE000E5110 /* Hoa.h */,
 				4BCB766718D707CE000E5110 /* Hoa2D */,
 				4BCB769218D707CE000E5110 /* HoaDefs.h */,
@@ -295,6 +298,7 @@
 				4BCB76A018D707CE000E5110 /* Kits.cpp in Sources */,
 				4BCB76BA18D707CE000E5110 /* SourcesTrajectory.cpp in Sources */,
 				4BCB76B418D707CE000E5110 /* SourcesGroup.cpp in Sources */,
+				4BCD91A318FBFFD000B02CEA /* HoaOpcode.cpp in Sources */,
 				4BCB76A618D707CE000E5110 /* Optim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +350,7 @@
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PREPROCESSOR_DEFINITIONS = NO_PUB;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = $SRCROOT/../builds;

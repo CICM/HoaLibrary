@@ -1,25 +1,7 @@
 /*
-  ==============================================================================
-
-   This file is part of the JUCE library.
-   Copyright (c) 2013 - Raw Material Software Ltd.
-
-   Permission is granted to use this software under the terms of either:
-   a) the GPL v2 (or any later version)
-   b) the Affero GPL v3
-
-   Details of these licenses can be found at: www.gnu.org/licenses
-
-   JUCE is distributed in the hope that it will be useful, but WITHOUT ANY
-   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-   A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-   ------------------------------------------------------------------------------
-
-   To release a closed-source product which uses JUCE, commercial licenses are
-   available: visit www.juce.com for more information.
-
-  ==============================================================================
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
 #include "HoaLookAndFeel.h"
@@ -151,36 +133,6 @@ void HoaLookAndFeel::drawToggleButton (Graphics& g,
                       textX, 4,
                       button.getWidth() - textX - 2, button.getHeight() - 8,
                       Justification::centredLeft, 10);
-}
-
-void HoaLookAndFeel::drawProgressBar (Graphics& g, ProgressBar& progressBar,
-                                            int width, int height,
-                                            double progress, const String& textToShow)
-{
-    if (progress < 0 || progress >= 1.0)
-    {
-        LookAndFeel::drawProgressBar (g, progressBar, width, height, progress, textToShow);
-    }
-    else
-    {
-        const Colour background (progressBar.findColour (ProgressBar::backgroundColourId));
-        const Colour foreground (progressBar.findColour (ProgressBar::foregroundColourId));
-
-        g.fillAll (background);
-        g.setColour (foreground);
-
-        g.fillRect (1, 1,
-                    jlimit (0, width - 2, roundToInt (progress * (width - 2))),
-                    height - 2);
-
-        if (textToShow.isNotEmpty())
-        {
-            g.setColour (Colour::contrasting (background, foreground));
-            g.setFont (height * 0.6f);
-
-            g.drawText (textToShow, 0, 0, width, height, Justification::centred, false);
-        }
-    }
 }
 
 void HoaLookAndFeel::drawScrollbarButton (Graphics& g,
@@ -334,8 +286,8 @@ void HoaLookAndFeel::drawTextEditorOutline (Graphics& g, int width, int height, 
 void HoaLookAndFeel::drawComboBox (Graphics& g, int width, int height, const bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, ComboBox& box)
 {
     g.fillAll(box.findColour (ComboBox::backgroundColourId));
-    g.setColour(Colours::black);
-    g.drawRoundedRectangle(0, 0, width, height, 5., 1.);
+    g.setColour(Colours::grey);
+	g.drawRect(0, 0, width, height, 1);
     g.drawLine(buttonX, buttonY, buttonX, buttonH);
     const float arrowX = 0.3f;
     const float arrowH = 0.2f;
@@ -361,6 +313,46 @@ Font HoaLookAndFeel::getComboBoxFont (ComboBox& box)
     Font f (jmin (15.0f, box.getHeight() * 0.85f));
     f.setHorizontalScale (0.9f);
     return f;
+}
+
+void HoaLookAndFeel::drawLabel (Graphics& g, Label& label)
+{
+    g.fillAll (label.findColour (Label::backgroundColourId));
+	
+    if (! label.isBeingEdited())
+    {
+		if (label.isEditable())
+		{
+			g.fillAll (Colours::white);
+			g.setColour(Colours::grey);
+			g.drawRect(label.getLocalBounds(), 1);
+		}
+		
+        const float alpha = label.isEnabled() ? 1.0f : 0.5f;
+        const Font font (getLabelFont (label));
+		
+        g.setColour (label.findColour (Label::textColourId).withMultipliedAlpha (alpha));
+        g.setFont (font);
+        g.drawFittedText (label.getText(),
+                          label.getHorizontalBorderSize(),
+                          label.getVerticalBorderSize(),
+                          label.getWidth() - 2 * label.getHorizontalBorderSize(),
+                          label.getHeight() - 2 * label.getVerticalBorderSize(),
+                          label.getJustificationType(),
+                          jmax (1, (int) (label.getHeight() / font.getHeight())),
+                          label.getMinimumHorizontalScale());
+    }
+	else if ( label.isBeingEdited() )
+    {
+		g.fillAll (Colours::white);
+		g.setColour(Colours::grey);
+		g.drawRect(label.getLocalBounds(), 2);
+    }
+    else if (label.isEnabled())
+    {
+        //g.setColour (label.findColour (Label::outlineColourId));
+		//g.drawRect (label.getLocalBounds());
+    }
 }
 
 //==============================================================================
@@ -460,17 +452,20 @@ void HoaLookAndFeel::drawLinearSlider (Graphics& g,
     }
 }
 
-Button* HoaLookAndFeel::createSliderButton (const bool isIncrement)
+void HoaLookAndFeel::createSliderButton (const bool isIncrement)
 {
+	/*
     if (isIncrement)
         return new ArrowButton ("u", 0.75f, Colours::white.withAlpha (0.8f));
     else
         return new ArrowButton ("d", 0.25f, Colours::white.withAlpha (0.8f));
+	*/
 }
 
-ImageEffectFilter* HoaLookAndFeel::getSliderEffect()
+void HoaLookAndFeel::getSliderEffect()
 {
-    return &scrollbarShadow;
+	;
+    //return &scrollbarShadow;
 }
 
 int HoaLookAndFeel::getSliderThumbRadius (Slider&)

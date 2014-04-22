@@ -1,10 +1,23 @@
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#ifndef PLUGINPROCESSOR_H_INCLUDED
-#define PLUGINPROCESSOR_H_INCLUDED
+#ifndef __PLUGINPROCESSOR_H_INCLUDED__
+#define __PLUGINPROCESSOR_H_INCLUDED__
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "HoaLookAndFeel.h"
-#include "HoaComponent.h"
+#include "../../../Sources/Hoa2D/Hoa2D.h"
+
+class HoaComponentListener
+{
+public:
+    HoaComponentListener(){};
+    virtual ~HoaComponentListener(){};
+    virtual void componentHasBeenClicked(Component* component) = 0;
+};
 
 enum
 {
@@ -12,14 +25,13 @@ enum
     gui_mode_meter,
 };
 
-class HoaToolsAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
+class HoaToolsAudioProcessor  : public AudioProcessor, public KitSources, public ChangeBroadcaster
 {
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaToolsAudioProcessor)
     
-    long                        m_gui;
-    HoaProcessor*               m_processor;
-    SourcesManager*             m_source_manager;
+    long    m_gui;
+	bool    m_has_been_updated;
     
 public:
     HoaToolsAudioProcessor();
@@ -28,8 +40,8 @@ public:
     void numChannelsChanged();
     void prepareToPlay(double sampleRate, int samplesPerBlock);
     void releaseResources();
-    void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages);
-
+    void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages){};
+    void processBlock(float** inputs, float** outputs);
     AudioProcessorEditor* createEditor();
     bool hasEditor() const;
     long getGui(){return m_gui;};
@@ -47,7 +59,7 @@ public:
     float getParameterDefaultValue (int parameterIndex);
     const String getParameterName (int index);
     const String getParameterText (int index);
-    String getParameterLabel(int index) const;
+    String getParameterLabel(int index);
     bool isParameterAutomatable (int index) const;
     bool isMetaParameter(int index) const;
     
