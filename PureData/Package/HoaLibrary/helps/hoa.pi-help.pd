@@ -1,6 +1,4 @@
 #N canvas 112 23 636 253 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj 41 137 hoa.pi 0.25;
 #X obj 145 136 hoa.pi 0.5;
 #X obj 231 137 hoa.pi 1;
@@ -30,6 +28,7 @@ or want to initialize a good Pi number.;
 #X obj 10 19 c.patcherinfos;
 #X obj 15 2 loadbang;
 #X obj 0 2 hoa.help.header;
+#X obj 416 2 hoa.help.also;
 #X connect 0 0 5 0;
 #X connect 1 0 4 0;
 #X connect 2 0 6 0;

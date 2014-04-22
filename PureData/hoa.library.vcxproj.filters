@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CicmWrapper">
+      <UniqueIdentifier>{2e0ebfcf-ed2c-43a2-8da8-e81daccb4ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources">
+      <UniqueIdentifier>{1312e92e-e677-470c-8a0b-114da388f496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PdCommon">
+      <UniqueIdentifier>{de16d039-a7e3-48a7-9598-ea6b701e9e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PD2d">
+      <UniqueIdentifier>{42e19b4b-a7b8-467d-80d5-0bad61ec258f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources\Hoa2d">
+      <UniqueIdentifier>{fa133f70-7d29-464a-8c3b-bbd5a8d646ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources\Hoa3d">
+      <UniqueIdentifier>{8bdac7a5-64e7-47fe-bc4b-18b4e55a119d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ebox\ebox.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\eclass\eclass.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\d_ugen.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\eboxflag.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\ecommon.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\g_canvas.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_imp.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_pd.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\egraphics\egraphics.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\eobj\eobj.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\epd.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\epd_max.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\epopup\epopup.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\PureData\Sources\estruct.h">
+      <Filter>CicmWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="PD2D\Hoa2D.pd.h">
+      <Filter>PD2d</Filter>
+    </ClInclude>
+    <ClInclude Include="PDCommon\HoaCommon.pd.h">
+      <Filter>PdCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="hoa.pd.h" />
+    <ClInclude Include="hoa.pd_commonsyms.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Ambisonic.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\ChannelManager.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Decoder.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Encoder.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Hoa2D.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Kits.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Map.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Meter.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Optim.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Planewaves.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Projector.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Recomposer.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Rotate.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Scope.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Source.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\SourcesGroup.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\SourcesManager.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\SourcesPreset.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\SourcesTrajectory.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Vector.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Wider.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Map_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Meter_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Optim_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Planewaves_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Rotate_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Tools_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_attr.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_basic.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_draw.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_handle.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_patcher.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_window.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_attrgetter.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_attrnew.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_attroptions.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_attrsetter.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_basic.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eclass\eclass_widget.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ecommon\d_ugen.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\ecommon\ecommon.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\egraphics\egraphics.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\egraphics\egraphics_color.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\egraphics\egraphics_forms.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\egraphics\egraphics_matrix.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\egraphics\egraphics_text.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eobj\eobj_basic.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eobj\eobj_dsp.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eobj\eobj_handle.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eobj\eobj_proxy.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\eobj\eobj_router.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\PureData\Sources\epopup\epopup.c">
+      <Filter>CicmWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.decoder_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.encoder_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.map_gui.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.map_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.meter_gui_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.optim_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.projector_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.recomposer_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.rotate_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.scope_gui_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.space_gui.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD2D\hoa.2d.wider_tilde.cpp">
+      <Filter>PD2d</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.connect.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.dac_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.in.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.in_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.out.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.out_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.pi.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.pi_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.process_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="PDCommon\hoa.thisprocess_tilde.cpp">
+      <Filter>PdCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="hoa.pd.cpp" />
+    <ClCompile Include="hoa.library.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Ambisonic.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\BinauralMatrix2D.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\ChannelManager.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Decoder.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Encoder.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Kits.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Map.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Meter.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Optim.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Planewaves.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Projector.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Recomposer.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Rotate.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Scope.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Source.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\SourcesGroup.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\SourcesManager.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\SourcesPreset.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\SourcesTrajectory.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Vector.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Wider.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\BinauralMatrix_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Optim_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Planewaves_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Rotate_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Scope_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Vector_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

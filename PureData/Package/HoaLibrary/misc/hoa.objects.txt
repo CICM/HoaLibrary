@@ -1,3 +1,4 @@
+hoa.library-help.pd hoa.library High Order Ambisonics Library.;
 hoa.2d.decoder~-help.pd hoa.2d.decoder~ An ambisonic decoder.;
 hoa.2d.encoder~-help.pd hoa.2d.encoder~ An ambisonic encoder.;
 hoa.2d.map-help.pd hoa.2d.map A GUI to spatialize sources on a map.;
@@ -17,3 +18,5 @@ hoa.pi-help.pd hoa.pi A good pi number.;
 hoa.pi~-help.pd hoa.pi~ A good pi number for signal.;
 hoa.process~-help.pd hoa.process~ A multi-patcher for harmonics and plane waves domains.;
 hoa.thisprocess~-help.pd hoa.thisprocess~ A patcher informer for hoa.process.;
+hoa.fx.ringmod~-help.pd hoa.fx.ringmod~ A ring modulation sound field diffuser.;
+hoa.fx.mirror~-help.pd hoa.fx.mirror~ A mirror for sound field.;

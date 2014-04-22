@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 91.0, 106.0, 796.0, 522.0 ],
@@ -29,6 +29,20 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-28",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 594.0, 150.5, 73.0, 19.0 ],
+					"text" : "loadmess 0."
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -106,10 +120,8 @@
 , 			{
 				"box" : 				{
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
 					"id" : "obj-24",
-					"maxclass" : "hoa.scope~",
+					"maxclass" : "hoa.2d.scope~",
 					"numinlets" : 15,
 					"numoutlets" : 0,
 					"order" : 7,
@@ -140,7 +152,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 617.525024, 232.0, 113.25, 19.0 ],
+					"patching_rect" : [ 618.525024, 238.25, 113.25, 19.0 ],
 					"text" : "dblclick pour ouvrir",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -195,12 +207,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-17",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 388.0, 232.0, 225.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.pencoder~ no"
+					"patching_rect" : [ 388.0, 232.0, 225.0, 32.0 ],
+					"text" : "hoa.process~ 7 hoa.syn.encoder~ harmonics"
 				}
 
 			}
@@ -337,13 +350,10 @@
 , 			{
 				"box" : 				{
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
 					"id" : "obj-1",
-					"maxclass" : "hoa.scope~",
+					"maxclass" : "hoa.2d.scope~",
 					"numinlets" : 3,
 					"numoutlets" : 0,
-					"order" : 1,
 					"patching_rect" : [ 25.0, 285.0, 225.0, 225.0 ]
 				}
 
@@ -402,8 +412,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -537,7 +547,10 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 711.25, 45.0, 99.0, 19.0 ],
 					"saved_object_attributes" : 					{
-						"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+						"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+						"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 					}
 ,
 					"text" : "hoa.connect 7 16"
@@ -596,7 +609,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 373.925018, 225.5, 356.850006, 32.5 ],
+					"patching_rect" : [ 373.925018, 225.5, 357.850006, 44.5 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -837,6 +850,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-28", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 2 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -932,16 +954,30 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
-				"type" : "TEXT",
+				"name" : "hoa.syn.encoder~.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/synth",
+				"patcherrelativepath" : "../../synth",
+				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.pencoder~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"name" : "hoa.help.process.infos.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
+				"patcherrelativepath" : "../../helputility",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.args.map.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.mode.sel.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -950,11 +986,27 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
 				"type" : "iLaX"
 			}
  ]

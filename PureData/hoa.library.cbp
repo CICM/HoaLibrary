@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../builds/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
+				<Option output="Package/HoaLibrary/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="Linux" />
 				<Option object_output="Linux" />
 				<Option type="3" />
@@ -16,19 +16,53 @@
 				<Option createStaticLib="1" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
+					<Add option="-O3" />
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-fPIC" />
-					<Add directory="../ThirdParty/PureData/Sources" />
-					<Add directory="../Sources" />
+					<Add option="-D_LINUX" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="/usr/include/x86_64-linux-gnu/" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8/" />
+					<Add directory="/user/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-fPIC" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8/" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="/user/include" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="../builds/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
-				<Option object_output="../builds" />
+				<Option output="Package/HoaLibrary/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="Linux" />
+				<Option object_output="Linux" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-fPIC" />
+					<Add option="-fpermissive" />
+					<Add option="-D_LINUX" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="/usr/lib/openBlas/lib/" />
+					<Add directory="/usr/lib/openBlas/include/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fPIC" />
+					<Add library="/usr/lib/openBlas/lib/libopenblas.a" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="/usr/lib/openBlas/lib/" />
+					<Add directory="/usr/lib/openBlas/include/" />
+				</Linker>
+			</Target>
+			<Target title="Release32">
+				<Option output="Package/HoaLibrary/Linux32/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="Linux" />
+				<Option object_output="Linux" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -36,11 +70,17 @@
 				<Compiler>
 					<Add option="-O3" />
 					<Add option="-fPIC" />
-					<Add directory="../../../../SDKs/pd-extended/pd/src" />
+					<Add option="-m32" />
+					<Add option="-D_LINUX" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-fPIC" />
+					<Add option="-m32" />
+					<Add library="/usr/lib/libgoto2_nehalemp-r1.13.a" />
+					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="/user/include" />
 				</Linker>
 			</Target>
 		</Build>
@@ -90,31 +130,31 @@
 		<Unit filename="../Sources/Hoa2D/Vector.h" />
 		<Unit filename="../Sources/Hoa2D/Wider.cpp" />
 		<Unit filename="../Sources/Hoa2D/Wider.h" />
-		<Unit filename="../Sources/Hoa3D/Ambisonic.cpp" />
-		<Unit filename="../Sources/Hoa3D/Ambisonic.h" />
-		<Unit filename="../Sources/Hoa3D/BinauralMatrix.cpp" />
-		<Unit filename="../Sources/Hoa3D/Decoder.cpp" />
-		<Unit filename="../Sources/Hoa3D/Decoder.h" />
-		<Unit filename="../Sources/Hoa3D/Encoder.cpp" />
-		<Unit filename="../Sources/Hoa3D/Encoder.h" />
+		<Unit filename="../Sources/Hoa3D/Ambisonic_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Ambisonic_3D.h" />
+		<Unit filename="../Sources/Hoa3D/BinauralMatrix_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Decoder_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Decoder_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Encoder_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Encoder_3D.h" />
 		<Unit filename="../Sources/Hoa3D/Hoa3D.h" />
-		<Unit filename="../Sources/Hoa3D/Map.cpp" />
-		<Unit filename="../Sources/Hoa3D/Map.h" />
-		<Unit filename="../Sources/Hoa3D/Meter.cpp" />
-		<Unit filename="../Sources/Hoa3D/Meter.h" />
-		<Unit filename="../Sources/Hoa3D/Optim.cpp" />
-		<Unit filename="../Sources/Hoa3D/Optim.h" />
-		<Unit filename="../Sources/Hoa3D/Planewaves.cpp" />
-		<Unit filename="../Sources/Hoa3D/Planewaves.h" />
-		<Unit filename="../Sources/Hoa3D/Rotate.cpp" />
-		<Unit filename="../Sources/Hoa3D/Rotate.h" />
-		<Unit filename="../Sources/Hoa3D/Scope.cpp" />
-		<Unit filename="../Sources/Hoa3D/Scope.h" />
-		<Unit filename="../Sources/Hoa3D/Tools.h" />
-		<Unit filename="../Sources/Hoa3D/Vector.cpp" />
-		<Unit filename="../Sources/Hoa3D/Vector.h" />
-		<Unit filename="../Sources/Hoa3D/Wider.cpp" />
-		<Unit filename="../Sources/Hoa3D/Wider.h" />
+		<Unit filename="../Sources/Hoa3D/Map_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Map_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Meter_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Meter_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Optim_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Optim_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Planewaves_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Planewaves_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Rotate_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Rotate_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Scope_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Scope_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Tools_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Vector_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Vector_3D.h" />
+		<Unit filename="../Sources/Hoa3D/Wider_3D.cpp" />
+		<Unit filename="../Sources/Hoa3D/Wider_3D.h" />
 		<Unit filename="../Sources/HoaDefs.h" />
 		<Unit filename="../Sources/HoaMath.h" />
 		<Unit filename="../Sources/HoaUtils.h" />
@@ -169,9 +209,6 @@
 		<Unit filename="../ThirdParty/PureData/Sources/ecommon/g_canvas.h" />
 		<Unit filename="../ThirdParty/PureData/Sources/ecommon/m_imp.h" />
 		<Unit filename="../ThirdParty/PureData/Sources/ecommon/m_pd.h" />
-		<Unit filename="../ThirdParty/PureData/Sources/efft.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../ThirdParty/PureData/Sources/efft.h" />
 		<Unit filename="../ThirdParty/PureData/Sources/egraphics/egraphics.c">
 			<Option compilerVar="CC" />
@@ -213,29 +250,29 @@
 		<Unit filename="../ThirdParty/PureData/Sources/epopup/epopup.h" />
 		<Unit filename="../ThirdParty/PureData/Sources/estruct.h" />
 		<Unit filename="PD2D/Hoa2D.pd.h" />
-		<Unit filename="PD2D/hoaDecoder/hoa.2d.decoder~.cpp" />
-		<Unit filename="PD2D/hoaEncoder/hoa.2d.encoder~.cpp" />
-		<Unit filename="PD2D/hoaMap/hoa.2d.map~.cpp" />
-		<Unit filename="PD2D/hoaMap_UI/hoa.2d.map.cpp" />
-		<Unit filename="PD2D/hoaMeter_UI/hoa.2d.meter~.cpp" />
-		<Unit filename="PD2D/hoaOptim/hoa.2d.optim~.cpp" />
-		<Unit filename="PD2D/hoaProcess/hoa.2d.process~.cpp" />
-		<Unit filename="PD2D/hoaProjector/hoa.2d.projector~.cpp" />
-		<Unit filename="PD2D/hoaRecomposer/hoa.2d.recomposer~.cpp" />
-		<Unit filename="PD2D/hoaRotate/hoa.2d.rotate~.cpp" />
-		<Unit filename="PD2D/hoaScope_UI/hoa.2d.scope~.cpp" />
-		<Unit filename="PD2D/hoaSpace_UI/hoa.2d.space.cpp" />
-		<Unit filename="PD2D/hoaWider/hoa.2d.wider~.cpp" />
+		<Unit filename="PD2D/hoa.2d.decoder_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.encoder_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.map_gui.cpp" />
+		<Unit filename="PD2D/hoa.2d.map_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.meter_gui_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.optim_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.projector_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.recomposer_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.rotate_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.scope_gui_tilde.cpp" />
+		<Unit filename="PD2D/hoa.2d.space_gui.cpp" />
+		<Unit filename="PD2D/hoa.2d.wider_tilde.cpp" />
 		<Unit filename="PDCommon/HoaCommon.pd.h" />
-		<Unit filename="PDCommon/hoaConnect/hoa.connect.cpp" />
-		<Unit filename="PDCommon/hoaDac/hoa.dac~.cpp" />
-		<Unit filename="PDCommon/hoaIn/hoa.in.cpp" />
-		<Unit filename="PDCommon/hoaIn_tilde/hoa.in~.cpp" />
-		<Unit filename="PDCommon/hoaOut/hoa.out.cpp" />
-		<Unit filename="PDCommon/hoaOut_tilde/hoa.out~.cpp" />
-		<Unit filename="PDCommon/hoaPi/hoa.pi.cpp" />
-		<Unit filename="PDCommon/hoaPi_tilde/hoa.pi~.cpp" />
-		<Unit filename="PDCommon/hoaThisprocess/hoa.thisprocess~.cpp" />
+		<Unit filename="PDCommon/hoa.connect.cpp" />
+		<Unit filename="PDCommon/hoa.dac_tilde.cpp" />
+		<Unit filename="PDCommon/hoa.in.cpp" />
+		<Unit filename="PDCommon/hoa.in_tilde.cpp" />
+		<Unit filename="PDCommon/hoa.out.cpp" />
+		<Unit filename="PDCommon/hoa.out_tilde.cpp" />
+		<Unit filename="PDCommon/hoa.pi.cpp" />
+		<Unit filename="PDCommon/hoa.pi_tilde.cpp" />
+		<Unit filename="PDCommon/hoa.process_tilde.cpp" />
+		<Unit filename="PDCommon/hoa.thisprocess_tilde.cpp" />
 		<Unit filename="hoa.library.cpp" />
 		<Unit filename="hoa.pd.cpp" />
 		<Unit filename="hoa.pd.h" />
@@ -243,8 +280,7 @@
 		<Extensions>
 			<envvars />
 			<code_completion>
-				<search_path add="../ThirdParty/PureData/Sources" />
-				<search_path add="../Sources" />
+				<search_path add="../../../SDKs/pd-extended/pd/src" />
 			</code_completion>
 			<debugger />
 			<lib_finder disable_auto="1" />

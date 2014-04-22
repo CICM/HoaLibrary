@@ -7,6 +7,18 @@
 #ifndef __DEF_HOA_MATHS__
 #define __DEF_HOA_MATHS__
 
+#include <iostream>
+#include <vector>
+#include <map>
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <math.h>
+#include <string>
+#include <assert.h>
+#include <string.h>
+
 //! The high order ambisonic namespace.
 /**
  This namespace have all the standard methods and functions necessary for ambisonic processing.
@@ -15,11 +27,11 @@ namespace Hoa
 {
 	//! The minimum function
     /** This function returns the minimum value between two values
-	 
+
 	 @param     v1   The first value.
 	 @param     v2   The low boundary.
 	 @return    The maximum value.
-     
+
 	 @see    min
      */
 	inline double min(const double v1, const double v2)
@@ -29,14 +41,14 @@ namespace Hoa
 		else
 			return v2;
 	}
-	
+
 	//! The maximum function
     /** This function returns the maximum value between two values
-	 
+
 	 @param     v1   The first value.
 	 @param     v2   The low boundary.
 	 @return    The maximum value.
-     
+
 	 @see    min
      */
 	inline double max(const double v1, const double v2)
@@ -46,16 +58,16 @@ namespace Hoa
 		else
 			return v2;
 	}
-	
+
 	//! The clipping function
     /** The function clips a number between boundaries. \n
 	 If \f$x < min\f$, \f$f(x) = min\f$ else if \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
-     
+
 	 @param     value   The value to clip.
 	 @param     min     The low boundary.
 	 @param     max     The high boundary.
 	 @return    The function return the clipped value.
-     
+
 	 @see    clip_min
 	 @see    clip_max
      */
@@ -68,15 +80,15 @@ namespace Hoa
         else
             return value;
     }
-    
+
     //! The minimum clipping function
     /** The function clips a number at a minimum value. \n
 	 If \f$x < min\f$, \f$f(x) = min\f$ else \f$f(x) = x\f$.
-     
+
 	 @param     value   The value to clip.
 	 @param     low     The low boundary.
 	 @return    The function return the clipped value.
-     
+
 	 @see    clip_minmax
 	 @see    clip_max
      */
@@ -87,15 +99,15 @@ namespace Hoa
         else
             return value;
     }
-    
+
     //! The maximum clipping function
     /** The function clips a number at a maximum value. \n
 	 If \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
-     
+
 	 @param     value   The value to clip.
 	 @param     high    The high boundary.
 	 @return    The function return the clipped value.
-     
+
         @see    clip_minmax
         @see    clip_min
      */
@@ -106,14 +118,14 @@ namespace Hoa
         else
             return value;
     }
-    
+
 	//! The factorial
     /** The function computes the factorial, the product of all positive integers less than or equal to an integer.
         \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
-     
+
         @param     n     The interger.
         @return    The function return the factorial of n.
-     
+
         @see    double_factorial
      */
     inline long double factorial(long n)
@@ -121,20 +133,20 @@ namespace Hoa
         long double result = n;
 		if(n == 0)
 			return 1;
-        
+
 		while(--n > 0)
 			result *= n;
-        
+
 		return result;
 	}
-    
+
     //! The double factorial
     /**	The function computes the double factorial, the product of all the odd integers up to some odd positive integer :\n
 	 \f[n!! = n \times (n - 2) \times (n - 4) \times {...} \f]
-     
+
 	 @param     n     The interger.
 	 @return    The function return the double factorial of n.
-     
+
 	 @see    factorial
      */
     inline unsigned long double_factorial(long n)
@@ -142,27 +154,27 @@ namespace Hoa
 		if (n == 0 || n == -1) {
 			return 1;
 		}
-        
+
 		long result = n;
 		while ((n -= 2) > 0) {
 			result *= n;
 		}
-        
+
 		return result;
 	}
-    
+
     //! The associated Legendre polynomials
     /**	The function computes the associated Legendre polynomial \f$P(l, m)\f$ that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
         \f[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\f]
         \f[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\f]
         \f[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\f]
         with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
-     
-	 @param     l    The band of the spherical harmonic.
-	 @param     m	The argument of the spherical harmonic.
+
+	 @param     l   The degree of the spherical harmonic.
+	 @param     m	The order of the spherical harmonic.
 	 @param     x    The cosinus of the elevation.
 	 @return    The function return the associated Legendre polynomial of x for l and m.
-     
+
 	 @see    legendre_normalization
 	 @see    spherical_harmonics
      */
@@ -170,10 +182,10 @@ namespace Hoa
 	{
         l = abs(l);
         m = abs(m);
-        
+
 		if(l == m)
         {
-			return pow(-1.0f, (double)m) * pow(1. - x * x, 0.5 * m) * double_factorial(2. * m - 1);
+			return pow((double)-1.0, (double)m) * pow((double)(1. - x * x), (double)(0.5 * m)) * double_factorial(2. * m - 1);
 		}
 		else if(l == m + 1)
         {
@@ -184,7 +196,7 @@ namespace Hoa
             return ((double)(2 * l - 1) * x *  associated_legendre(l - 1, m, x) - (double)(l + m - 1.) * associated_legendre(l - 2, m, x)) / (double)(l - m);
         }
 	}
-    
+
     //! The legendre normalization
     /**	The function normalizes the associated Legendre polynomial over \f$2\pi\f$ : \n
 	 if \f$ m = 0\f$
@@ -192,11 +204,11 @@ namespace Hoa
 	 else
 	 \f[K(l, m) = \sqrt{2 \times \frac{2 \times l + 1}{4\pi} \times \frac{(l - |m|)!}{(l + |m|)!}}\f]
 	 with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
-     
+
 	 @param     l    The band of the spherical harmonic.
 	 @param     m    The argument of the spherical harmonic.
 	 @return    The function return the normalization of the associated Legendre polynomial for l and m.
-     
+
 	 @see    associated_legendre
 	 @see    spherical_harmonics
      */
@@ -207,7 +219,7 @@ namespace Hoa
         else
             return sqrt((2. * l + 1.) / (4. * HOA_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
-    
+
     /*
 	 inline double hoa_normalization(int l, int m)
 	 {
@@ -222,7 +234,7 @@ namespace Hoa
 	 else
 	 return 1.;
 	 }*/
-    
+
     //! The azimuth part of the spherical harmonics function
     /**	The function computes the azimuth coefficient of the spherical harmonic \f$[l, m]\f$ for an angle \f$\phi\f$ in radian :\n
 	 if \f$ m \geq 0\f$
@@ -230,12 +242,12 @@ namespace Hoa
 	 else
 	 \f[Y_{azimuth}(l, m, \phi) = sin(-m \times \phi)\f]
 	 with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
-     
+
 	 @param     l    The band of the spherical harmonic.
 	 @param     m    The argument of the spherical harmonic.
 	 @param     phi  The azimuth.
 	 @return    The function return the azimuth coefficient for phi of the spherical harmonic of band l and argument m.
-     
+
 	 @see    spherical_harmonics_elevation
 	 @see    spherical_harmonics
      */
@@ -246,17 +258,17 @@ namespace Hoa
         else
             return sin((double)-m * phi);
     }
-    
+
     //! The elevation part of the spherical harmonics function
     /**	The function computes the elevation coefficient of the the spherical harmonic \f$[l, m]\f$  for an angle \f$\theta\f$ in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
 	 \f[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\f]
 	 with \f$0 \leq l\f$, \f$-l \leq m \leq +l\f$ and \f$N\f$ the normalization and \f$P\f$ the associated Legendre polynomial.
-     
+
 	 @param     l        The band of the spherical harmonic.
 	 @param     m        The argument of the spherical harmonic.
 	 @param     theta    The elevation.
 	 @return    The function return the elevation coefficient for theta of the spherical harmonic of band l and argument m.
-     
+
 	 @see    legendre_normalization
 	 @see    associated_legendre
 	 @see    spherical_harmonics_azimuth
@@ -266,17 +278,17 @@ namespace Hoa
 	{
         return associated_legendre(l, m, cos(theta)) * legendre_normalization(l, m);
     }
-    
+
     //! The spherical harmonics function
     /** The function computes the spherical harmonics coefficient for the angles \f$\phi\f$ and \f$\theta\f$ in radian.
 	 \f[Y(l, m, \phi, \theta) = Y_{azimuth}(l, m, \phi) \times Y_{elevation}(l, m, \theta)\f]
-     
+
 	 @param     l        The band of the spherical harmonic.
 	 @param     m        The argument of the spherical harmonic.
 	 @param     phi      The azimuth.
 	 @param     theta    The elevation.
 	 @return    The function return the coefficient for phi and theta for the spherical harmonics of band l and argument m.
-     
+
 	 @see    spherical_harmonics_azimuth
 	 @see    spherical_harmonics_elevation
      */
@@ -284,15 +296,15 @@ namespace Hoa
 	{
         return spherical_harmonics_elevation(l, m, theta) * spherical_harmonics_azimuth(l, m, phi);
     }
-    
+
     //! The wrapping function
     /** The function wraps a number between boundarys.
-     
+
 	 @param     value   The value to wrap.
 	 @param     low     The low boundary.
 	 @param     high    The high boundary.
 	 @return    The function return the wrapped value.
-     
+
 	 @see    wrap_twopi
      */
     inline double wrap(double value, const double low, const double high)
@@ -302,21 +314,21 @@ namespace Hoa
         {
             value += increment;
         }
-        
+
         while(value > high)
         {
             value -= increment;
         }
-        
+
         return value;
     }
-    
+
     //! The wrapping function over \f$2\pi\f$
     /** The function wraps a number between \f$0\f$ and \f$2\pi\f$.
-     
+
 	 @param     value   The value to wrap.
 	 @return    The function return the wrapped value.
-     
+
 	 @see    wrap, wrap_360
      */
     inline double wrap_twopi(const double value)
@@ -326,20 +338,20 @@ namespace Hoa
         {
             new_value += HOA_2PI;
         }
-        
+
         while(new_value >= HOA_2PI)
         {
             new_value -= HOA_2PI;
         }
         return new_value;
     }
-	
+
 	//! The wrapping function in degrees.
     /** The function wraps a number between \f$0\f$ and \f$360°\f$.
-     
+
 	 @param     value   The value to wrap.
 	 @return    The wrapped value.
-     
+
 	 @see    wrap, wrap_twopi
      */
 	inline double wrap_360(const double value)
@@ -349,71 +361,71 @@ namespace Hoa
             new_value += 360.;
         while(new_value >= 360.)
             new_value -= 360.;
-        
+
         return new_value;
     }
-    
+
 	//! The ordinate converter function.
     /** This function takes a radius and an azimuth value and convert them to an ordinate value.
-     
+
 	 @param     radius		The radius value (greather than 0).
 	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
 	 @return    The ordinate value.
-     
+
 	 @see    abscissa
      */
 	inline double ordinate(const double radius, const double azimuth)
 	{
 		return radius * sin(azimuth + HOA_PI2);
 	}
-    
+
 	//! The abscissa converter function.
     /** This function takes a radius and an azimuth value and convert them to an abscissa value.
-     
+
 	 @param     radius		The radius value (greather than 0).
 	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
 	 @return    The abscissa value.
-     
+
 	 @see    ordinate
      */
     inline double abscissa(const double radius, const double azimuth)
 	{
 		return radius * cos(azimuth + HOA_PI2);
 	}
-    
+
 	//! The radius converter function.
     /** This function takes an abscissa and an ordinate value and convert them to a radius value.
-     
+
 	 @param     x		The abscissa value.
 	 @param     y		The ordinate value.
 	 @return    The radius value.
-     
+
 	 @see    azimuth
      */
     inline double radius(const double x, const double y)
 	{
 		return sqrt(x*x + y*y);
 	}
-    
+
 	//! The azimuth converter function.
     /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
-     
+
 	 @param     x		The abscissa value.
 	 @param     y		The ordinate value.
 	 @return    The azimuth value.
-     
+
 	 @see    radius
      */
 	inline double azimuth(const double x, const double y)
 	{
 		return atan2(y, x) - HOA_PI2;
 	}
-    
+
     inline double distance(const double x1, const double y1, const double x2, const double y2)
 	{
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
 	}
-	
+
 	inline double distance_radian(double angle1, double angle2)
     {
         angle1 = wrap_twopi(angle1);
@@ -423,7 +435,7 @@ namespace Hoa
         else
             return (angle2 - angle1);
     }
-	
+
 	inline double radianClosestDistance(double angle1, double angle2)
     {
         double minRad, maxRad;
@@ -431,96 +443,96 @@ namespace Hoa
         angle2 = wrap_twopi(angle2);
         minRad = min(angle1, angle2);
         maxRad = max(angle1, angle2);
-        
+
         if (maxRad - minRad <= HOA_PI)
             return maxRad - minRad;
         else
             return HOA_2PI - (maxRad - minRad);
     }
-	
+
 	inline double radToDeg(const double radian)
     {
         return radian * 360. / HOA_2PI;
     }
-    
+
     inline double degToRad(const double degree)
     {
         return degree / 360. * HOA_2PI;
     }
-	
+
 	inline long mstosamps(const double ms, const double samplerate = 44100.)
     {
         return (long)(samplerate * ms * 0.001);
     }
-    
+
     inline double sampstoms(const double s, const double samplerate=44100.)
     {
         return 1000. * s / samplerate;
     }
-    
+
     inline double atodb(const double amp)
     {
         return (amp <= 0.) ? -999.f : (20. * log10(amp));
     }
-    
+
     inline double dbtoa(const double dB)
     {
         return pow(10., dB * 0.05);
     }
-	
+
 	inline double safediv(const double num, const double denom)
     {
         return denom == 0. ? 0. : num/denom;
     }
-	
+
 	inline double scale(const double in, const double inlow, const double inhigh, const double outlow, const double outhigh, const double power)
     {
         double value;
         double inscale = safediv(1., inhigh - inlow);
         double outdiff = outhigh - outlow;
-        
+
         value = (in - inlow) * inscale;
         if (value > 0.0)
             value = pow(value, power);
         else if (value < 0.0)
             value = -pow(-value, power);
         value = (value * outdiff) + outlow;
-        
+
         return value;
     }
-    
+
     inline double scale(const double in, const double inlow, const double inhigh, const double outlow, const double outhigh)
     {
         return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
-	
+
 	inline bool isInside(const double val, const double v1, const double v2)
 	{
         return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
 	}
-	
+
 	inline bool isInsideRad(const double radian, const double loRad, const double hiRad)
 	{
         return isInside(wrap_twopi(radian-loRad), 0, wrap_twopi(hiRad-loRad));
 	}
-    
+
     inline bool isInsideDeg(const double degree, const double loDeg, const double hiDeg)
 	{
         return isInside(wrap_360(degree-loDeg), 0, wrap_360(hiDeg-loDeg));
 	}
-	
+
 	inline void vector_add(unsigned int size, double *vec, double inc)
 	{
 		for (unsigned int i=0; i < size; i++)
 			vec[i] += inc;
 	}
-	
+
 	inline void vector_clip_minmax(unsigned int size, double *vec, double min, double max)
 	{
 		for (unsigned i=0; i < size; i++)
 			vec[i] = clip_minmax(vec[i], min, max);
 	}
-    
+
     inline void vector_sort(unsigned int size, double* vector)
 	{
         int index;
@@ -530,7 +542,7 @@ namespace Hoa
             index  = 0;
             temp[0] = vector[0];
             temp[size - 1] = vector[0];
-            
+
             for(unsigned int i = 1; i < size; i++)
             {
                 if(vector[i] < temp[0]) // Get the minimum
@@ -542,7 +554,7 @@ namespace Hoa
                     temp[size - 1] = vector[i];
             }
             vector[index] -= 1;
-            
+
             for(unsigned int i = 1; i < size - 1; i++)
             {
                 temp[i] = temp[size - 1];

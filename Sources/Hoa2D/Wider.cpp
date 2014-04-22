@@ -21,10 +21,10 @@ namespace Hoa2D
         }
         for(unsigned int i = 1; i < m_number_of_harmonics; i++)
         {
-            double minus =  clip_min(log((double)getHarmonicBand(i)), 0.);
+            double minus =  clip_min(log((double)getHarmonicDegree(i)), 0.);
             minus = -minus;
             
-            double dot	= clip_min(log((double)getHarmonicBand(i) + 1.), 0.);
+            double dot	= clip_min(log((double)getHarmonicDegree(i) + 1.), 0.);
             dot += minus;
             dot  = 1. / dot;
             
@@ -41,19 +41,19 @@ namespace Hoa2D
     
     void Wider::setWideningValue(const double value)
     {
-         m_wide = clip_minmax(value, 0., 1.) * (double)(NUMBEROFLINEARPOINTS - 1);
+         m_wide = clip_minmax(value, 0., 1.) * (double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics;
     }
     
     void Wider::process(const float* inputs, float* outputs)
     {
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = inputs[i] * m_wide_matrix[m_wide * m_number_of_harmonics + i];
+            outputs[i] = inputs[i] * m_wide_matrix[m_wide + i];
     }
     
     void Wider::process(const double* inputs, double* outputs)
     {
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = inputs[i] * m_wide_matrix[m_wide * m_number_of_harmonics + i];
+            outputs[i] = inputs[i] * m_wide_matrix[m_wide + i];
     }
     
     Wider::~Wider()

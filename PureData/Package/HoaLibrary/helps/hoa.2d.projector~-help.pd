@@ -1,6 +1,4 @@
 #N canvas 223 52 754 671 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj -237 -520 hoa.pi 2;
 #X msg -96 -528 \; pd dsp 1;
 #X msg -96 -490 \; pd dsp 0;
@@ -76,6 +74,7 @@ in the plane waves domain compared to the circular harmonics domain.
 #X obj -450 -659 loadbang;
 #X obj -465 -659 hoa.help.header;
 #X obj -324 -44 hoa.help.pub;
+#X obj -24 -658 hoa.help.also;
 #X connect 0 0 3 1;
 #X connect 3 0 11 1;
 #X connect 6 0 3 0;

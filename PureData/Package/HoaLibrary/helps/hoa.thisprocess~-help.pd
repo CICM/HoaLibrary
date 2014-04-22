@@ -1,6 +1,4 @@
 #N canvas 327 57 894 584 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X text -329 296 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 & Eliott Paris © 2012-2013 CICM / Universite Paris 8;
 #X msg 75 -121 \; pd dsp 1;
@@ -48,6 +46,7 @@ of hoa.process~.;
 #X obj -337 -168 loadbang;
 #X obj -352 -168 hoa.help.header;
 #X obj -113 344 hoa.help.pub;
+#X obj 76 -168 hoa.help.also;
 #X connect 7 0 6 0;
 #X connect 8 0 9 0;
 #X connect 12 0 30 0;

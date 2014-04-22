@@ -15,6 +15,7 @@
 using namespace Hoa2D;
 
 extern "C" void setup_hoa0x2econnect(void);
+//extern "C" void setup_hoa0x2econverter_tilde(void);
 extern "C" void setup_hoa0x2edac_tilde(void);
 extern "C" void setup_hoa0x2ein(void);
 extern "C" void setup_hoa0x2ein_tilde(void);

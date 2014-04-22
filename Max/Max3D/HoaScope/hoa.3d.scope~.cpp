@@ -212,7 +212,7 @@ void *hoa_scope_new(t_symbol *s, long argc, t_atom *argv)
     
     dictionary_getlong(d, gensym("order"), (t_atom_long *)&x->f_order);
     x->f_scope      = new Hoa3D::Scope(x->f_order, 100, 199);
-    x->f_order      = x->f_scope->getOrder();
+    x->f_order      = x->f_scope->getDecompositionOrder();
     x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
     x->f_clock      = clock_new((void *)x, (method)hoa_scope_tick);
     x->f_startclock = 0;
@@ -244,7 +244,7 @@ t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long ac, t_at
                 delete x->f_scope;
                 delete [] x->f_signals;
                 x->f_scope      = new Hoa3D::Scope(d, 100, 199);
-                x->f_order      = x->f_scope->getOrder();
+                x->f_order      = x->f_scope->getDecompositionOrder();
                 x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
                 
                 object_obex_lookup(x, gensym("#B"), (t_object **)&b);
@@ -333,7 +333,7 @@ t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"(Signal) %s", x->f_scope->getHarmonicsName(a).c_str());
+    sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
 void hoa_draw_vectors(t_jucebox *x)

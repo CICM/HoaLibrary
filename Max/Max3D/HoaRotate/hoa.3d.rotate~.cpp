@@ -305,12 +305,12 @@ void hoa_rotate_assist(t_hoa_rotate *x, void *b, long m, long a, char *s)
 		}
         else
         {
-            sprintf(s,"(Signal) %s", x->f_rotate->getHarmonicsName(a).c_str());
+            sprintf(s,"(Signal) %s", x->f_rotate->getHarmonicName(a).c_str());
         }
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_rotate->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_rotate->getHarmonicName(a).c_str());
 	}
 }
 

@@ -178,7 +178,7 @@ void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_wider->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_wider->getHarmonicName(a).c_str());
 	}
 }
 

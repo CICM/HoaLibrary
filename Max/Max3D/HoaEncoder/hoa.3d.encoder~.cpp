@@ -190,7 +190,7 @@ void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_encoder->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_encoder->getHarmonicName(a).c_str());
 	}
 }
 

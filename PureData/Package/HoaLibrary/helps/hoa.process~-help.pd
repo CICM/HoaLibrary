@@ -1,10 +1,4 @@
-#N canvas 159 77 1209 677 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
-#X msg -134 -181 \; pd dsp 1;
-#X msg -134 -146 \; pd dsp 0;
-#X obj -236 -328 hoa.2d.process~ 2 hoa.amp~ planewaves @maison zozo
-;
+#N canvas 159 77 1127 515 10;
 #X obj -111 -541 hoa.connect;
 #X obj -111 -562 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -21,12 +15,6 @@ and outlet configuration of the patcher. You should look at the help.
 ;
 #X text -690 -197 Important: If you edit the patcher \, you have recreate
 hoa.process~ to reflect the changes.;
-#X text -44 -135 The hoa.thisprocess~ use of this patch is an example
-made to show how it works. You would prefer to look at the real uses
-of hoa.process~.;
-#X text -240 -467 1st argument is the order if you use hoa.process~
-in the circular harmonics domain or the number of channels if you use
-it in the plane waves domain.;
 #X text -693 -522 hoa.process~ helps the creation of processing in
 the circular or spherical harmonics and plane waves domains by instantiating
 several instances of a patcher.;
@@ -39,7 +27,55 @@ the patcher as many times as the number of channels.;
 #X obj -687 -549 c.patcherinfos;
 #X obj -682 -566 loadbang;
 #X obj -697 -566 hoa.help.header;
-#X obj -603 -100 hoa.help.pub;
-#X connect 4 0 3 0;
-#X connect 14 0 16 0;
-#X connect 15 0 14 0;
+#X obj -688 -144 hoa.help.pub;
+#X obj -284 -566 hoa.help.also;
+#X text -266 -100 The hoa.process~ use of this patch is an example
+made to show how it works. You would prefer to look at the real uses
+of hoa.process~.;
+#X obj -266 -178 hoa.3d.process~ 3 hoa.processexample harmonics;
+#X obj -266 -288 hoa.2d.process~ 3 hoa.processexample harmonics;
+#X text -270 -519 Open;
+#X text -270 -499 Use open message to open a specific instance :;
+#X msg -269 -475 open 1;
+#X msg -208 -475 open all;
+#X text -272 -416 Double-click open the 1st planewave intance \, or
+the harmonic 0 instance.;
+#X obj -269 -446 hoa.2d.process~ 4 hoa.processexample planewaves;
+#X text -270 -379 Target;
+#X text -270 -359 Use target message to route the message to a specific
+instance :;
+#X obj 42 -324 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -266 -324 target 1;
+#X msg -195 -324 target -2;
+#X msg -124 -324 target all;
+#X msg -44 -324 target none;
+#X obj -266 -259 print;
+#X msg -114 -224 target all;
+#X msg -34 -224 target none;
+#X obj -266 -149 print;
+#X msg -266 -224 target 2 1;
+#X msg -195 -224 target 3 -2;
+#X obj 52 -224 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X connect 1 0 0 0;
+#X connect 9 0 11 0;
+#X connect 10 0 9 0;
+#X connect 15 0 33 0;
+#X connect 16 0 30 0;
+#X connect 19 0 22 0;
+#X connect 20 0 22 0;
+#X connect 25 0 16 0;
+#X connect 26 0 16 0;
+#X connect 27 0 16 0;
+#X connect 28 0 16 0;
+#X connect 29 0 16 0;
+#X connect 31 0 15 0;
+#X connect 32 0 15 0;
+#X connect 34 0 15 0;
+#X connect 35 0 15 0;
+#X connect 36 0 15 0;

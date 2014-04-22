@@ -1,6 +1,4 @@
 #N canvas 274 26 829 769 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X text 59 -107 Fisheye factor between 0 and 1;
 #X msg -423 192 \; pd dsp 1;
 #X msg -423 230 \; pd dsp 0;
@@ -57,6 +55,7 @@ field into the circular harmonics domain.;
 #X obj -450 -405 loadbang;
 #X obj -465 -405 hoa.help.header;
 #X obj -298 301 hoa.help.pub;
+#X obj -44 -405 hoa.help.also;
 #X connect 6 0 5 0;
 #X connect 7 0 26 0;
 #X connect 8 0 10 0;

@@ -15,7 +15,7 @@ namespace Hoa2D
         m_number_of_sources = numberOfSources;
         m_harmonics_float   = new float[m_number_of_harmonics];
         m_harmonics_double  = new double[m_number_of_harmonics];
-        m_gains             = new double[m_number_of_harmonics];
+        m_gains             = new double[m_number_of_sources];
 		m_muted				= new bool[m_number_of_sources];
 		m_first_source      = 0;
 		

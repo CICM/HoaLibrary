@@ -1,6 +1,4 @@
 #N canvas 482 22 582 797 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj 122 210 hoa.2d.scope~ @size 201 201 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 5 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
@@ -42,6 +40,7 @@ way to have linear changes.;
 #X obj 14 -44 loadbang;
 #X obj -1 -44 hoa.help.header;
 #X obj 70 697 hoa.help.pub;
+#X obj 406 -44 hoa.help.also;
 #X connect 3 0 16 15;
 #X connect 4 0 3 0;
 #X connect 8 0 4 0;

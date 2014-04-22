@@ -321,9 +321,9 @@ void color_patchline(t_connect *x)
 					inletnum = jpatchline_get_inletnum(line);
 					
 					if (startobj_infos->object_type == HOA_OBJECT_2D)
-						sign = x->f_ambi2D->getHarmonicArgument(inletnum);
+						sign = x->f_ambi2D->getHarmonicOrder(inletnum);
 					if (startobj_infos->object_type == HOA_OBJECT_3D)
-						sign = x->f_ambi3D->getHarmonicArgument(inletnum);
+						sign = x->f_ambi3D->getHarmonicOrder(inletnum);
 					
 					if (sign > 0)
 						linecolor = &x->f_color_positiv;

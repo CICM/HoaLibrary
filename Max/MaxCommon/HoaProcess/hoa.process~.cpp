@@ -169,6 +169,7 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
 
 void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_processor_mutemap(t_hoa_processor *x, long n);
+short hoa_processor_send_mutechange(t_patcher *p, t_args_struct *args);
 
 void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
@@ -710,9 +711,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -728,9 +729,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a - x->declared_sig_outs ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi2D->getHarmonicName( a - x->declared_sig_outs ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a - x->declared_sig_outs ).c_str());
+					sprintf(ctrl_basis_text,"%s", x->f_ambi3D->getHarmonicName( a - x->declared_sig_outs ).c_str());
 			}
 			else
 			{
@@ -746,9 +747,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -764,9 +765,9 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 			if (x->f_mode == hoa_sym_harmonics)
 			{
 				if (x->f_object_type == HOA_OBJECT_2D)
-					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi2D->getHarmonicName( a ).c_str());
 				else if (x->f_object_type == HOA_OBJECT_3D)
-					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicsName( a ).c_str());
+					sprintf(sig_basis_text,"%s", x->f_ambi3D->getHarmonicName( a ).c_str());
 			}
 			else
 			{
@@ -961,14 +962,14 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	{
 		if (x->f_object_type == HOA_OBJECT_2D)
 		{
-			harmonic_band = x->f_ambi2D->getHarmonicBand(index);
-			harmonic_argument = x->f_ambi2D->getHarmonicArgument(index);
+			harmonic_band = x->f_ambi2D->getHarmonicDegree(index);
+			harmonic_argument = x->f_ambi2D->getHarmonicOrder(index);
 			snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
-			harmonic_band = x->f_ambi3D->getHarmonicBand(index);
-			harmonic_argument = x->f_ambi3D->getHarmonicArgument(index);
+			harmonic_band = x->f_ambi3D->getHarmonicDegree(index);
+			harmonic_argument = x->f_ambi3D->getHarmonicOrder(index);
 			snprintf(windowname, 256, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
 		}
 	}
@@ -1307,34 +1308,31 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
         for (int i=0; i < x->patch_spaces_allocated; i++)
         {
             hoa_processor_client_set_patch_on(x, i+1, !state);
-            patch = x->patch_space_ptrs[i]->the_patch;
-            
-            for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
-            {
-                if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
-                {
-                    thisprocess = (t_object *) jbox_get_object(b);
-                    object_method(thisprocess, hoa_sym_bang);
-                }
-            }
+            hoa_processor_patcher_descend(x->patch_space_ptrs[i]->the_patch, (t_intmethod)hoa_processor_send_mutechange, x, x);
         }
     }
     else if (index > 0 && index <= x->patch_spaces_allocated)
     {
         hoa_processor_client_set_patch_on(x, index, !state);
-        patch = x->patch_space_ptrs[index-1]->the_patch;
-        
-        for (b = jpatcher_get_firstobject(patch); b; b = jbox_get_nextobject(b))
+        hoa_processor_patcher_descend(x->patch_space_ptrs[index-1]->the_patch, (t_intmethod)hoa_processor_send_mutechange, x, x);
+    }
+}
+
+// - send a "mutechange" message to all hoa.thisprocess~ objects in the patch
+short hoa_processor_send_mutechange(t_patcher *p, t_args_struct *args)
+{
+	t_box *b;
+	t_object* thisprocess;
+    
+	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
+    {
+        if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
         {
-            if (jbox_get_maxclass(b) == gensym("hoa.thisprocess~"))
-            {
-                thisprocess = (t_object *) jbox_get_object(b);
-                object_method(thisprocess, hoa_sym_bang);
-            }
+            thisprocess = (t_object *) jbox_get_object(b);
+            object_method(thisprocess, gensym("mutechange"));
         }
     }
-    
-    // Todo : notify corresponding thisprocess~
+	return (0);
 }
 
 // report muted instance info as a list in a specied message outlet
@@ -2075,7 +2073,7 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 {
-	long order = x->f_ambi2D->getOrder();
+	long order = x->f_ambi2D->getDecompositionOrder();
 	return (void *) order;
 }
 

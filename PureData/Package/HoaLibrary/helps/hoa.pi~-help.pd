@@ -1,6 +1,4 @@
 #N canvas 347 41 585 251 10;
-#X declare -lib HoaLibrary/hoa.library;
-#X declare -lib hoa.library;
 #X obj 145 105 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
@@ -32,6 +30,7 @@ decimals or want to initialize a good Pi number.;
 #X obj 12 -1 loadbang;
 #X obj -3 -1 hoa.help.header;
 #X obj 9 199 hoa.help.pub;
+#X obj 406 -1 hoa.help.also;
 #X connect 0 0 5 0;
 #X connect 1 0 2 0;
 #X connect 5 0 6 0;

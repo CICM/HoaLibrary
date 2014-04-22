@@ -44,6 +44,8 @@ void pi_float(t_pi *x, double n) ;
 void pi_assist(t_pi *x, void *b, long m, long a, char *s);
 void *pi_new(t_symbol *s, int argc, t_atom *argv);
 
+t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos);
+
 t_class *pi_class;
 
 int C74_EXPORT main(void)
@@ -52,7 +54,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.pi", (method)pi_new, (method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
 	
-	hoa_initclass(c, NULL);
+	hoa_initclass(c, (method)hoa_getinfos);
     
     class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
 	
@@ -111,6 +113,16 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
     }
 	
 	return(x);
+}
+
+t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_STANDARD;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = 0;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 void pi_loadbang(t_pi *x)

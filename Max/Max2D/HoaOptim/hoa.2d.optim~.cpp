@@ -158,7 +158,7 @@ void hoa_optim_perform64(t_hoa_optim *x, t_object *dsp64, double **ins, long num
 
 void hoa_optim_assist(t_hoa_optim *x, void *b, long m, long a, char *s)
 {
-	sprintf(s,"(Signal) %s", x->f_optim->getHarmonicsName(a).c_str());
+	sprintf(s,"(Signal) %s", x->f_optim->getHarmonicName(a).c_str());
 }
 
 void hoa_optim_basic(t_hoa_optim *x)

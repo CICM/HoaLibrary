@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 64.0, 106.0, 711.0, 691.0 ],
@@ -29,6 +29,19 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 330.0, 68.0, 83.0, 19.0 ],
+					"text" : "hoa.syn.gain~"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 7.180877,
@@ -57,8 +70,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -249,8 +262,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 646.0, 125.0, 640.0, 480.0 ],
@@ -839,7 +852,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 264.75, 110.0, 327.250031, 266.0 ],
+					"patching_rect" : [ 264.75, 110.0, 330.0, 266.0 ],
 					"text" : "La décomposition d'un champ sonore ou l'encodage d'une source sonore  dans le domaine des harmoniques circulaires s'éffectue selon un ordre de décomposition. \n\nUn ordre n comprend deux harmoniques, l'harmonique positive d'indice n et l'harmonique négative d'indice -n hormis l'ordre 0 qui ne possède que l'harmonique d'indice 0 (harmonique considérée comme positive).\n\nUn ordre de décomposition n donné \"englobe\" tous les ordres inférieur ou égal (de 0 à n), le champ sonore est alors encodé par 2 n + 1 harmoniques dont les indices vont de -n  à n et sont généralement entrelacés. \n\nAinsi pour un ordre de décomposition 7, il y a 15 harmoniques dont les indices sont : 0, -1, 1, -2, 2, -3, 3, ... , -7, 7.\n\nL'harmonique 0 est omnidirectionnelle, plus l'ordre auquel dépendent les harmoniques augmente plus le nombre de lobes augemente et leur directivité augmente.",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -902,11 +915,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
+						"rect" : [ 806.0, 136.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1072,8 +1085,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1207,7 +1220,10 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 624.25, 34.5, 99.0, 19.0 ],
 					"saved_object_attributes" : 					{
-						"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+						"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+						"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 					}
 ,
 					"text" : "hoa.connect 7 16"
@@ -1223,8 +1239,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 14.0, 160.0, 225.0, 19.0 ],
-					"text" : "hoa.plug~ 7 hoa.amp~ no 0."
+					"patching_rect" : [ 14.0, 160.0, 235.0, 19.0 ],
+					"text" : "hoa.process~ 7 hoa.syn.gain~ harmonics 0."
 				}
 
 			}
@@ -1263,14 +1279,13 @@
 , 			{
 				"box" : 				{
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
+					"gain" : 10.0,
 					"id" : "obj-17",
-					"maxclass" : "hoa.scope~",
+					"maxclass" : "hoa.2d.scope~",
 					"numinlets" : 15,
 					"numoutlets" : 0,
 					"order" : 7,
-					"patching_rect" : [ 14.0, 199.0, 225.0, 225.0 ]
+					"patching_rect" : [ 14.0, 199.0, 235.0, 235.0 ]
 				}
 
 			}
@@ -1615,18 +1630,55 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"name" : "hoa.syn.gain~.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/synth",
+				"patcherrelativepath" : "../../synth",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
+				"name" : "hoa.list.sel.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.args.map.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.mode.sel.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.2d.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.process~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
 				"type" : "iLaX"
 			}
 , 			{

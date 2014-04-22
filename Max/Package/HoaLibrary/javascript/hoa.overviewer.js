@@ -20,8 +20,13 @@ function anything()
 	}
 	if (messagename == "objectlist") 
 	{
-		var objects = d.get(arguments[0] + "::objects");
-		outlet(0, objects);
+		if(d.get(arguments[0]))
+		{
+			var objects = d.get(arguments[0] + "::objects");
+			outlet(0, objects);
+		}
+		else
+			outlet(0, "---");
 	}
 	else if (messagename == "get_category_description_from_category_index") 
 	{
@@ -56,22 +61,27 @@ function anything()
 			outlet(0, "set");
 			return;
 		};
-
-		var objects = d.get(category + "::objects");
-		var objectName = objects[index];
-
-		var dict = max.getrefdict(objectName);
-
-		if (typeof(dict) == "object") 
+		
+		if(d.get(category))
 		{
-			//outlet(0, dict.get("digest"));
-			outlet(0, "set", dict.get("description"));
-			dict.freepeer();
+			var objects = d.get(category + "::objects");
+			var objectName = objects[index];
+
+			var dict = max.getrefdict(objectName);
+
+			if (typeof(dict) == "object") 
+			{
+				//outlet(0, dict.get("digest"));
+				outlet(0, "set", dict.get("description"));
+				dict.freepeer();
+			}
+			else
+			{
+				outlet(0, "set");
+				return;
+			};
 		}
 		else
-		{
 			outlet(0, "set");
-			return;
-		};
 	};
 }
