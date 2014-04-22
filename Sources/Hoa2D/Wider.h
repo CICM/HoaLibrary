@@ -49,7 +49,7 @@ namespace Hoa2D
          */
         double getWideningValue() const
         {
-            return m_wide / (double)(NUMBEROFLINEARPOINTS - 1);
+            return m_wide / ((double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics);
         }
         
         //! This method performs the widening with single precision.
