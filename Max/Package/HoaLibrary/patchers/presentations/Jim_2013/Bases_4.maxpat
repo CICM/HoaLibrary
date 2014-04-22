@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 6,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 102.0, 44.0, 1103.0, 746.0 ],
@@ -416,7 +416,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 598.75, 231.5, 283.0, 266.0 ],
+					"patching_rect" : [ 598.75, 231.5, 289.0, 266.0 ],
 					"text" : "3 - Le vecteur énergie (représenté par la flèche bleu sur le VU-mètre) indique la direction moyenne de provenance de l'énergie. Dans le cas d'une seule source sonore, elle indique la direction perçue de cette source. Nous pouvons remarquer que l'ambisonie offre un rendu homogène de la directionnalité de la source sur l'ensemble du cercle quitte à  décroître la \"précision\" du rendu de la source sonore.\n\nLes techniques d'amplitude panning comme le VBAP sont censées offrir une \"précision maximale\" de rendu de la source sonore compte-tenu des haut-parleurs présents, en particulier lorsque la source virtuelle est placée dans la direction d'un seul haut-parleur car seul ce haut-parleur est alimenté. En réalité, la propriété de \"précision maximale\" est inexacte pour les sources sonores placées entre plusieurs haut-parleurs, le rendu sonore n'est donc pas homogène sur l'ensemble du cercle.",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -521,18 +521,18 @@
 					"numinlets" : 3,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 323.75, 151.0, 224.475021, 19.0 ],
-					"text" : "vbapan~ 8 p s"
+					"patching_rect" : [ 323.75, 151.0, 224.475037, 19.0 ],
+					"text" : "vbapan~ 8 p"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+					"channels" : 8,
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-22",
-					"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-					"maxclass" : "hoa.meter~",
+					"maxclass" : "hoa.2d.meter~",
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"patching_rect" : [ 323.600006, 261.0, 225.0, 225.0 ]
@@ -542,10 +542,10 @@
 , 			{
 				"box" : 				{
 					"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+					"channels" : 8,
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-21",
-					"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-					"maxclass" : "hoa.meter~",
+					"maxclass" : "hoa.2d.meter~",
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"patching_rect" : [ 33.0, 267.0, 225.0, 225.0 ]
@@ -600,7 +600,7 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-17",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 239.0, 115.0, 49.0, 19.0 ],
@@ -622,8 +622,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -673,8 +673,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 6,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1114,8 +1114,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 6,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1555,8 +1555,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 6,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1996,8 +1996,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 6,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -2512,15 +2512,11 @@
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 33.0, 218.0, 225.0, 19.0 ],
 					"saved_object_attributes" : 					{
-						"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0 ],
-						"config" : 5.1,
-						"loudspeakers" : 8,
-						"ls" : 8,
-						"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0 ],
-						"mode" : "ambisonics",
-						"offset" : 0.0,
-						"pinnaesize" : "small",
-						"restitution" : "panning"
+						"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+						"autoconnect" : 1,
+						"channels" : 8,
+						"mode" : "ambisonic",
+						"pinna" : "small"
 					}
 ,
 					"text" : "hoa.decoder~ 3 8"
@@ -2556,8 +2552,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 6,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2691,7 +2687,10 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 712.25, 45.0, 99.0, 19.0 ],
 					"saved_object_attributes" : 					{
-						"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+						"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+						"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+						"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+						"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 					}
 ,
 					"text" : "hoa.connect 7 16"
@@ -3108,7 +3107,7 @@
 		"dependency_cache" : [ 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -3117,11 +3116,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.2d.encoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
+				"name" : "hoa.2d.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -3129,7 +3128,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
