@@ -1,34 +1,16 @@
 /*
-  ==============================================================================
-
-   This file is part of the JUCE library.
-   Copyright (c) 2013 - Raw Material Software Ltd.
-
-   Permission is granted to use this software under the terms of either:
-   a) the GPL v2 (or any later version)
-   b) the Affero GPL v3
-
-   Details of these licenses can be found at: www.gnu.org/licenses
-
-   JUCE is distributed in the hope that it will be useful, but WITHOUT ANY
-   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-   A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-   ------------------------------------------------------------------------------
-
-   To release a closed-source product which uses JUCE, commercial licenses are
-   available: visit www.juce.com for more information.
-
-  ==============================================================================
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef HOA_LOOK_AND_FEEL
-#define HOA_LOOK_AND_FEEL
+#ifndef __HOA_LOOK_AND_FEEL__
+#define __HOA_LOOK_AND_FEEL__
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 
 
-class HoaLookAndFeel : public LookAndFeel
+class HoaLookAndFeel : public LookAndFeel_V3
 {
 public:
     //==============================================================================
@@ -62,9 +44,11 @@ public:
                               bool isButtonDown);
 
     //==============================================================================
+	/*
     virtual void drawProgressBar (Graphics& g, ProgressBar& progressBar,
                                   int width, int height,
                                   double progress, const String& textToShow);
+	*/
 
     //==============================================================================
     virtual void drawScrollbarButton (Graphics& g,
@@ -120,6 +104,10 @@ public:
                                ComboBox& box);
 
     virtual Font getComboBoxFont (ComboBox& box);
+	
+	//==============================================================================
+	
+	virtual void drawLabel (Graphics& g, Label& label);
 
     //==============================================================================
     virtual void drawLinearSlider (Graphics& g,
@@ -133,9 +121,9 @@ public:
 
     virtual int getSliderThumbRadius (Slider& slider);
 
-    virtual Button* createSliderButton (bool isIncrement);
+    virtual void createSliderButton (bool isIncrement);
 
-    virtual ImageEffectFilter* getSliderEffect();
+    virtual void getSliderEffect();
 
     //==============================================================================
     virtual void drawCornerResizer (Graphics& g,
