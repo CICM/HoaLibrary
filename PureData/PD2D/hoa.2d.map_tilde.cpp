@@ -55,14 +55,15 @@ public:
 typedef struct _hoa_map_tilde
 {
     t_edspobj       f_ob;
-    Hoa2D::Map*     f_map;
+    
     t_float*        f_sig_ins;
     t_float*        f_sig_outs;
-    
+    t_float*        f_lines_vector;
 	int             f_mode;
     double          f_ramp;
+    
+    Hoa2D::Map*     f_map;
     MapPolarLines*  f_lines;
-    float*          f_lines_vector;
 } t_hoa_map_tilde;
 
 void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv);
@@ -161,6 +162,7 @@ void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv)
 		return NULL;
     
     x = (t_hoa_map_tilde *)eobj_new(hoa_map_tilde_class);
+
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -178,7 +180,6 @@ void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv)
             x->f_mode = 0;
         
         hoa_map_tilde_deprecated(x, NULL, argc, argv);
-        
         
         x->f_ramp       = 100;
 		x->f_map        = new Hoa2D::Map(order, numberOfSources);
@@ -202,10 +203,10 @@ void *hoa_map_tilde_new(t_symbol *s, long argc, t_atom *argv)
 		
         x->f_sig_outs       = new t_float[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_lines_vector   = new float[x->f_map->getNumberOfSources() * 2];
-        
+
         ebox_attrprocess_viabinbuf(x, d);
 	}
-    
+
 	return (x);
 }
 
