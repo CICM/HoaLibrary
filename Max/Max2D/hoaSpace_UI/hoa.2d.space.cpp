@@ -439,7 +439,7 @@ double cosine_interpolation(double y1, double y2, float mu)
 void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
 {
     int i, index1, index2;
-    double angle, radius, abscissa, ordinate, mu;
+    double angle, radius, abscissa, ordinate, mu, diff, ratio;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_space_layer, rect->width, rect->height);
 
 	if (g)
@@ -450,14 +450,14 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
 		jgraphics_set_line_width(g, 2);
         jgraphics_set_source_jrgba(g, &x->f_color_sp);
 		
+		diff = x->f_minmax[1] - x->f_minmax[0];
+        ratio = x->f_radius / 5.;
+		
         for(i = 0; i < x->f_number_of_channels; i++)
-		{
-            x->f_channel_radius[i] = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5.;
-        }
+			x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
         
-        angle    = 0;
-        abscissa = Hoa::abscissa(x->f_channel_radius[0], angle);
-        ordinate = Hoa::ordinate(x->f_channel_radius[0], angle);
+        abscissa = Hoa::abscissa(x->f_channel_radius[0], 0);
+        ordinate = Hoa::ordinate(x->f_channel_radius[0], 0);
         jgraphics_move_to(g, abscissa, ordinate);
         for(i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 		{
@@ -499,7 +499,7 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
         
         for(i = 0; i < x->f_number_of_channels; i++)
 		{
-            radius = (x->f_channel_values[i] / (x->f_minmax[1] - x->f_minmax[0]) - x->f_minmax[0]) * x->f_radius * 4. / 5. + x->f_radius / 5. - 3.5;
+			radius = x->f_channel_radius[i] - 3.5;
             angle  = (double)(i + 1.) / (double)x->f_number_of_channels * HOA_2PI;
             angle -= HOA_2PI / (double)x->f_number_of_channels;
             abscissa = Hoa::abscissa(radius, angle);
@@ -597,12 +597,12 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     }
     else
     {
-		angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (0.5 / (x->f_number_of_channels) * HOA_2PI));
+		angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (HOA_PI / (double)x->f_number_of_channels));
         radius  = Hoa::radius(mouse.x, mouse.y);
-        index   = (angle / HOA_2PI * x->f_number_of_channels);
+        index   = angle / HOA_2PI * x->f_number_of_channels;
         value   = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
-        value  += x->f_minmax[0];
         value  *= (x->f_minmax[1] - x->f_minmax[0]);
+        value  += x->f_minmax[0];
         value   = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
         x->f_channel_values[index] = value;
     }
@@ -650,25 +650,18 @@ t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
     double min, max;
     if(argc && argv)
     {
-        if(atom_gettype(argv) == A_FLOAT)
+		min = x->f_minmax[0];
+		max = x->f_minmax[1];
+		
+        if(atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG)
             min = atom_getfloat(argv);
-        else
-            min = x->f_minmax[0];
-        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+
+        if(argc > 1 && (atom_gettype(argv+1) == A_FLOAT || atom_gettype(argv+1) == A_LONG))
             max = atom_getfloat(argv+1);
-        else
-            max = x->f_minmax[1];
         
-        if(min > max)
-        {
-            x->f_minmax[1] = min;
-            x->f_minmax[0] = max;
-        }
-        else
-        {
-            x->f_minmax[0] = min;
-            x->f_minmax[1] = max;
-        }
+		x->f_minmax[0] = Hoa::min(min, max);
+		x->f_minmax[1] = Hoa::max(min, max);
+		
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = clip_minmax(x->f_channel_values[i], x->f_minmax[0], x->f_minmax[1]);
         
