@@ -21,7 +21,7 @@
 #X text 17 190 factor;
 #X text 13 180 instance;
 #X obj 14 160 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
+-262144 -1 -1 0.0666667 256;
 #X text 263 203 float : The value \, that control the frequency of
 the ring modulation \, is multiplied by a factor depending on the intance.
 The factor is 1 for the highest harmonic and decreases toward 0 for
@@ -38,6 +38,9 @@ plane waves domain).;
 #X text 172 -5 This hoa.processing synthesizes a sound field with ring
 modulation.;
 #X obj 163 21 hoa.in extra 2;
+#X obj 195 287 random 1000;
+#X obj 195 263 c.loadmess;
+#X obj 195 310 / 1000;
 #X connect 1 0 25 0;
 #X connect 5 0 6 1;
 #X connect 6 0 12 1;
@@ -65,3 +68,6 @@ modulation.;
 #X connect 26 2 23 0;
 #X connect 27 0 26 0;
 #X connect 31 0 26 0;
+#X connect 32 0 34 0;
+#X connect 33 0 32 0;
+#X connect 34 0 8 1;

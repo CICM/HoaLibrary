@@ -1,78 +1,102 @@
-#N canvas 428 57 583 544 10;
-#X text -690 -1061 Hoa Library allows musicians and composers to synthesize
+#N canvas 299 57 553 613 10;
+#X text -690 -1172 Hoa Library allows musicians and composers to synthesize
 \, transform and render sound fields in a creative and artistic way.
 This library facilitates the understanding and the appropriation of
 key concepts of Ambisonics. Thanks to original graphical interfaces
 a lot of new signal processing are allowed like diffuse sound field
-synthesis \, perspective distorsion or spatial filtering., f 90;
-#X obj -680 -1087 c.patcherinfos;
-#X obj -675 -1104 loadbang;
-#X obj -691 -1105 hoa.help.header;
-#X obj -685 -631 hoa.help.pub;
-#X obj -689 -990 c.tab @size 542 36 @fontname Monaco @fontweight normal
+synthesis \, perspective distorsion or spatial filtering.;
+#X obj -680 -1198 c.patcherinfos;
+#X obj -675 -1215 loadbang;
+#X obj -691 -1216 hoa.help.header;
+#X obj -685 -701 hoa.help.pub;
+#X obj -689 -1063 c.tab @size 542 36 @fontname Monaco @fontweight normal
 @fontslant roman @fontsize 13 @receive (null) @send (null) @presetname
 (null) @orientation 0 @toggle 1 @items hoa.2d hoa.3d hoa.common hoa.process
 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1
 @hocolor 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
-#X obj -689 -952 c.tab @size 542 264 @fontname Monaco @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @orientation 1 @toggle 0 @items hoa.2d.decoder~ hoa.2d.encoder~
-hoa.2d.map hoa.2d.map~ hoa.2d.meter~ hoa.2d.optim~ hoa.2d.projector~
-hoa.2d.recomposer~ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~
-@bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1
-@hocolor 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
-#N canvas 195 22 452 384 sel.hoa.txt 0;
-#X obj -592 -407 until;
-#X obj -592 -377 f 0;
-#X obj -566 -377 + 1;
-#X msg -553 -408 0;
-#X obj -592 -327 unpack s s;
-#X msg -533 -543 clear;
-#X obj -592 -572 t b s b;
-#X obj -573 -516 makefilename %s.txt;
+#X obj -689 -1023 c.tab @size 542 264 @fontname Monaco @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @orientation 1 @toggle 0 @items hoa.connect hoa.dac~ hoa.io
+hoa.pi hoa.pi~ hoa.process~ hoa.thisprocess~ @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @hocolor 0.5 0.5 0.5 1
+@secolor 0.35 0.35 0.35 1;
+#N canvas 90 200 452 384 sel.hoa.txt 0;
+#X obj -556 -387 unpack s s;
+#X msg -292 -523 clear;
+#X obj -556 -466 makefilename %s.txt;
 #X obj -592 -600 inlet;
-#X obj -557 -269 outlet;
-#X obj -592 -433 text size \$0-hoa-objs-over;
-#X obj -592 -351 text get \$0-hoa-objs-over;
-#X obj -573 -463 text define \$0-hoa-objs-over;
-#X obj -573 -493 c.prepend read;
-#X obj -497 -269 outlet;
-#X connect 0 0 1 0;
-#X connect 1 0 2 0;
-#X connect 1 0 11 0;
-#X connect 2 0 1 1;
-#X connect 3 0 1 1;
-#X connect 4 1 9 0;
-#X connect 5 0 14 0;
-#X connect 6 0 10 0;
-#X connect 6 1 7 0;
-#X connect 6 2 5 0;
-#X connect 6 2 3 0;
-#X connect 7 0 13 0;
-#X connect 8 0 6 0;
-#X connect 10 0 0 0;
-#X connect 11 0 4 0;
-#X connect 13 0 12 0;
-#X restore -419 -981 pd sel.hoa.txt;
-#N canvas 789 122 450 300 sel.hoa.text2 0;
-#X obj -599 -260 list split 1;
-#X obj -565 -240 list split 1;
-#X obj -423 -336 t f b;
-#X obj -467 -385 inlet;
-#X obj -455 -143 outlet;
-#X obj -599 -282 text get \$0-hoa-objs-over;
-#X obj -460 -363 route -1;
-#X obj -531 -217 c.prepend 10 10;
-#X obj -405 -143 outlet;
-#X connect 0 1 1 0;
-#X connect 1 1 7 0;
+#X obj -499 -349 outlet;
+#X obj -556 -443 c.prepend read;
+#X obj -292 -487 outlet;
+#X obj -556 -413 textfile;
+#X obj -590 -530 until;
+#X msg -573 -498 rewind;
+#X obj -590 -572 t b b s b;
+#X connect 0 1 4 0;
+#X connect 1 0 6 0;
 #X connect 2 0 5 0;
-#X connect 2 1 8 0;
-#X connect 3 0 6 0;
-#X connect 5 0 0 0;
-#X connect 6 1 2 0;
-#X connect 7 0 4 0;
-#X restore -290 -729 pd sel.hoa.text2;
+#X connect 3 0 10 0;
+#X connect 5 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 1 8 1;
+#X connect 8 0 7 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 10 1 9 0;
+#X connect 10 2 1 0;
+#X connect 10 2 2 0;
+#X restore -420 -1055 pd sel.hoa.txt;
+#N canvas 804 124 691 357 sel.hoa.text2 0;
+#X obj -326 -135 list split 1;
+#X obj -292 -115 list split 1;
+#X obj -467 -385 inlet;
+#X obj -258 -62 outlet;
+#X obj -467 -363 route -1;
+#X obj -258 -92 c.prepend 10 10;
+#X obj -124 -163 outlet;
+#X obj -326 -246 makefilename %s.txt;
+#X obj -328 -380 inlet;
+#X obj -326 -223 c.prepend read;
+#X obj -326 -193 textfile;
+#X obj -326 -352 t s b;
+#X obj -422 -286 until;
+#X msg -356 -298 rewind;
+#X obj -422 -336 t f f b;
+#X obj -326 -160 spigot 0;
+#X obj -422 -218 f 0;
+#X obj -383 -217 + 1;
+#X obj -422 -194 ==;
+#X msg -384 -250 0;
+#X obj -422 -310 + 1;
+#X obj -433 -241 t b b;
+#X connect 0 1 1 0;
+#X connect 1 1 5 0;
+#X connect 2 0 4 0;
+#X connect 4 1 14 0;
+#X connect 5 0 3 0;
+#X connect 7 0 9 0;
+#X connect 8 0 11 0;
+#X connect 9 0 10 0;
+#X connect 10 0 15 0;
+#X connect 11 0 7 0;
+#X connect 11 1 6 0;
+#X connect 12 0 21 0;
+#X connect 13 0 10 0;
+#X connect 14 0 20 0;
+#X connect 14 1 18 1;
+#X connect 14 1 19 0;
+#X connect 14 2 13 0;
+#X connect 14 2 6 0;
+#X connect 15 0 0 0;
+#X connect 16 0 17 0;
+#X connect 16 0 18 0;
+#X connect 17 0 16 1;
+#X connect 18 0 15 1;
+#X connect 19 0 16 1;
+#X connect 20 0 12 0;
+#X connect 21 0 10 0;
+#X connect 21 1 16 0;
+#X restore -358 -835 pd sel.hoa.text2;
 #N canvas 0 22 450 300 hoa.open.hel 0;
 #X obj -299 -301 makefilename %s-help.pd;
 #X obj -299 -268 pack s s;
@@ -88,27 +112,26 @@ hoa.2d.recomposer~ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~
 #X connect 3 1 2 0;
 #X connect 5 0 1 1;
 #X connect 6 0 3 0;
-#X restore -470 -729 pd hoa.open.hel;
-#X obj -610 -981 c.loadmess 0;
-#X obj -689 -686 c.blackboard @size 542 39 @fontname Monaco @fontweight
+#X restore -293 -803 pd hoa.open.hel;
+#X obj -610 -1056 c.loadmess 0;
+#X obj -689 -755 c.blackboard @size 542 39 @fontname Monaco @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
-#X obj -290 -703 c.prepend text;
-#X msg -229 -719 clear;
-#X obj -521 -963 c.prepend append;
-#X msg -353 -958 clear;
+#X obj -358 -839 c.prepend text;
+#X obj -509 -1061 c.prepend append;
+#X msg -368 -809 clear;
 #X connect 1 0 3 0;
 #X connect 2 0 1 0;
 #X connect 5 1 7 0;
+#X connect 5 1 8 1;
 #X connect 6 1 9 0;
 #X connect 6 2 8 0;
-#X connect 7 0 14 0;
-#X connect 7 1 15 0;
+#X connect 7 0 13 0;
+#X connect 7 1 6 0;
 #X connect 8 0 12 0;
-#X connect 8 1 13 0;
+#X connect 8 1 14 0;
 #X connect 10 0 5 0;
 #X connect 12 0 11 0;
-#X connect 13 0 11 0;
-#X connect 14 0 6 0;
-#X connect 15 0 6 0;
-#X coords 0 544 1 543 100 60 0;
+#X connect 13 0 6 0;
+#X connect 14 0 11 0;
+#X coords 0 613 1 612 100 60 0;
