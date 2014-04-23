@@ -1,0 +1,181 @@
+#N canvas 46 31 973 640 10;
+#X obj 22 4 c.canvasinfos;
+#X obj 21 0 c.loadmess;
+#X obj 4 -1 hoa.tuto.header;
+#X obj 417 -1 hoa.help.pub;
+#X obj 144 391 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 144 279 sig~ 1;
+#X obj 363 302 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 7 @minmax 0 7 @decimal 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 346 302 c.incdec @size 15 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
+1 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @arcolor 0 0 0 1
+;
+#N canvas 0 22 496 402 map.deg 0;
+#X obj 249 320 outlet;
+#X obj 248 202 / 2;
+#X obj 251 228 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X obj 246 172 + 1;
+#X obj 319 180 % 2;
+#X obj 256 295 int;
+#X obj 255 269 *;
+#X obj 361 205 sel 1;
+#X msg 390 248 -1;
+#X msg 343 242 1;
+#X obj 236 87 inlet;
+#X obj 236 117 t f f;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 3 0 1 0;
+#X connect 4 0 7 0;
+#X connect 5 0 0 0;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 7 1 9 0;
+#X connect 8 0 6 1;
+#X connect 9 0 6 1;
+#X connect 10 0 11 0;
+#X connect 11 0 3 0;
+#X connect 11 1 4 0;
+#X restore 349 302 pd map.deg;
+#N canvas 0 22 450 300 target.pro 0;
+#X obj 259 47 inlet;
+#X obj 260 277 outlet;
+#X msg 320 110 target all \, 0;
+#X msg 259 227 target \$1 \, 1;
+#X obj 264 145 until;
+#X obj 261 105 * 2;
+#X obj 260 125 + 1;
+#X obj 260 204 -;
+#X obj 261 85 t f f b;
+#X obj 262 176 f 0;
+#X obj 335 181 + 1;
+#X msg 345 137 0;
+#X connect 0 0 8 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 9 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 3 0;
+#X connect 8 0 5 0;
+#X connect 8 1 7 1;
+#X connect 8 2 2 0;
+#X connect 8 2 11 0;
+#X connect 9 0 10 0;
+#X connect 9 0 7 0;
+#X connect 10 0 9 1;
+#X connect 11 0 9 1;
+#X restore 363 332 pd target.pro;
+#X msg 59 397 \; pd dsp 1;
+#X msg 59 437 \; pd dsp 0;
+#X text 3 48 The order of decomposition affects the quality of the
+sound field restitution. While the order of decomposition increases
+\, the number of circular harmonics increases and the "spatial resolution"
+of the sound field increases. "Quality" or "relevance" of ambisonic
+processings varies according to the spatial resolution. During the
+encoding of a point source in the circular harmonics field \, the precision
+with which the listener perceives a point source depends on the spatial
+resolution of the sound field. With a high order of decomposition \,
+the listener can clearly define the direction of a point source. It
+is usual to talk about "angular resolution" to describe the precision
+with which the listener perceives a point source. The "spatial resolution"
+is a broader concept to qualify more varied and complex sound field
+where sound field is not necessarily composed of point sources (eg.
+diffuse sound field)., f 66;
+#X obj 144 357 hoa.2d.process~ 7 hoa.fx.gain~ ------;
+#X text 202 302 Order of decomposition;
+#X obj 363 280 c.loadmess 7;
+#X obj 554 391 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 554 279 sig~ 1;
+#X obj 144 331 hoa.2d.encoder~ 7 -----------------;
+#X obj 554 331 hoa.2d.encoder~ 7 -----------------;
+#X obj 554 357 hoa.2d.wider~ 7 ---------------------;
+#X obj 773 303 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 583 304 Fractional decomposition order;
+#X text 833 304 minmax: 0 - 1;
+#X obj 773 276 c.loadmess 1;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 5 0 18 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 6 0 9 0;
+#X connect 7 0 6 0;
+#X connect 9 0 13 15;
+#X connect 13 0 4 0;
+#X connect 13 1 4 1;
+#X connect 13 2 4 2;
+#X connect 13 3 4 3;
+#X connect 13 4 4 4;
+#X connect 13 5 4 5;
+#X connect 13 6 4 6;
+#X connect 13 7 4 7;
+#X connect 13 8 4 8;
+#X connect 13 9 4 9;
+#X connect 13 10 4 10;
+#X connect 13 11 4 11;
+#X connect 13 12 4 12;
+#X connect 13 13 4 13;
+#X connect 13 14 4 14;
+#X connect 15 0 6 0;
+#X connect 17 0 19 0;
+#X connect 18 0 13 0;
+#X connect 18 1 13 1;
+#X connect 18 2 13 2;
+#X connect 18 3 13 3;
+#X connect 18 4 13 4;
+#X connect 18 5 13 5;
+#X connect 18 6 13 6;
+#X connect 18 7 13 7;
+#X connect 18 8 13 8;
+#X connect 18 9 13 9;
+#X connect 18 10 13 10;
+#X connect 18 11 13 11;
+#X connect 18 12 13 12;
+#X connect 18 13 13 13;
+#X connect 18 14 13 14;
+#X connect 19 0 20 0;
+#X connect 19 1 20 1;
+#X connect 19 2 20 2;
+#X connect 19 3 20 3;
+#X connect 19 4 20 4;
+#X connect 19 5 20 5;
+#X connect 19 6 20 6;
+#X connect 19 7 20 7;
+#X connect 19 8 20 8;
+#X connect 19 9 20 9;
+#X connect 19 10 20 10;
+#X connect 19 11 20 11;
+#X connect 19 12 20 12;
+#X connect 19 13 20 13;
+#X connect 19 14 20 14;
+#X connect 20 0 16 0;
+#X connect 20 1 16 1;
+#X connect 20 2 16 2;
+#X connect 20 3 16 3;
+#X connect 20 4 16 4;
+#X connect 20 5 16 5;
+#X connect 20 6 16 6;
+#X connect 20 7 16 7;
+#X connect 20 8 16 8;
+#X connect 20 9 16 9;
+#X connect 20 10 16 10;
+#X connect 20 11 16 11;
+#X connect 20 12 16 12;
+#X connect 20 13 16 13;
+#X connect 20 14 16 14;
+#X connect 21 0 20 15;
+#X connect 24 0 21 0;

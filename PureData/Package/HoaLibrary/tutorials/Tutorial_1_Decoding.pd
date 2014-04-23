@@ -1,0 +1,135 @@
+#N canvas 118 40 971 619 10;
+#X obj 22 4 c.canvasinfos;
+#X obj 21 0 c.loadmess;
+#X obj 4 -1 hoa.tuto.header;
+#X obj 417 -1 hoa.help.pub;
+#X msg 437 426 \; pd dsp 1;
+#X msg 437 466 \; pd dsp 0;
+#X obj 554 381 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 434 229 sig~ 1;
+#X text 3 48 With Ambisonics \, decoding is the operation that synthesizes
+the signals of the loudspeakers. As in any spatialisation technique
+\, this operation has advantages and limitations., f 65;
+#X text 3 98 Ambisonics allows to synthesize several sound fields and
+to decodes them with only a one operation offering. This advantage
+allows to reduce the CPU usage., f 65;
+#X text 3 148 The separation of these two operations allows to perform
+many operations between them \, in the circular harmonics domain \,
+and also to record the sound field in this domain. Thus \, it is possible
+to adapt the sound field \, after the synthesis \, to the speakers
+arrengement., f 65;
+#X text 3 228 Ambisonics offers a homogeneous rendering of the sound
+field. Unlike other techniques where the angular resolution varies
+depending on the sources directions \, Ambisonics provides a constant
+angular resolution across the circle., f 65;
+#X text 3 298 Nevertheless \, the restitution system is restricted
+by the order of decomposition. The number of loudspeakers must be smaller
+than or equal to the number of harmonics. Thus \, the minimum number
+of loudspeakers is 3 for an order of decomposition of 1 Futhermore
+\, the loudspeakers must be placed on a circle at equal distance from
+each other. However \, these restrictions can be bypassed to the detriment
+of the quality of the sound field restitution. Thus \, in practise
+\, it is \, in fact \, possible to project the sound field on many
+loudspeakers systems from stereo to an infinity of loudspeakers through
+all irregular configurations such as 5.1 \, 7.1 and headphones (see
+hoa.decoder~ object)., f 65;
+#X text 3 468 With Ambisonics \, the auditor should be ideally placed
+at the center of the loudspeakers array otherwise the sound field resitution
+will be distorted. However \, the use of the maxRe or inPhase optimizations
+(see hoa.optim~ object) can make up this artefact (to the detriment
+of the spatial resolution) and offers the possibility of an audience
+spread all over the circle., f 65;
+#X obj 434 307 hoa.2d.encoder~ 7 -------------------;
+#X obj 602 251 phasor~ 0.1;
+#X obj 714 229 sig~ 1;
+#X obj 714 307 hoa.2d.encoder~ 7 -------------------;
+#X obj 882 277 hoa.pi~ 2;
+#X obj 602 277 hoa.pi~ 2;
+#X obj 882 251 phasor~ -0.1;
+#X obj 475 110 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#N canvas 0 22 450 300 DecToLs 0;
+#X obj 192 97 * 2;
+#X obj 192 133 + 1;
+#X obj 194 177 outlet;
+#X obj 191 62 inlet;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 0 0;
+#X restore 475 131 pd DecToLs;
+#X obj 475 160 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 438 66 Order of decomposition;
+#X text 428 186 Minimum number of loudspeakers;
+#X obj 715 110 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 715 160 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 671 67 Number of loudspeakers;
+#X text 628 186 Maximum (optimal) order of decomposition;
+#N canvas 0 22 450 300 LsToDec 0;
+#X obj 194 177 outlet;
+#X obj 191 62 inlet;
+#X obj 192 97 - 1;
+#X obj 192 133 / 2;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 0 0;
+#X restore 715 131 pd LsToDec;
+#X obj 475 85 c.loadmess 7;
+#X obj 715 85 c.loadmess 16;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 7 0 14 0;
+#X connect 14 0 6 0;
+#X connect 14 1 6 1;
+#X connect 14 2 6 2;
+#X connect 14 3 6 3;
+#X connect 14 4 6 4;
+#X connect 14 5 6 5;
+#X connect 14 6 6 6;
+#X connect 14 7 6 7;
+#X connect 14 8 6 8;
+#X connect 14 9 6 9;
+#X connect 14 10 6 10;
+#X connect 14 11 6 11;
+#X connect 14 12 6 12;
+#X connect 14 13 6 13;
+#X connect 14 14 6 14;
+#X connect 15 0 19 1;
+#X connect 16 0 17 0;
+#X connect 17 0 6 0;
+#X connect 17 1 6 1;
+#X connect 17 2 6 2;
+#X connect 17 3 6 3;
+#X connect 17 4 6 4;
+#X connect 17 5 6 5;
+#X connect 17 6 6 6;
+#X connect 17 7 6 7;
+#X connect 17 8 6 8;
+#X connect 17 9 6 9;
+#X connect 17 10 6 10;
+#X connect 17 11 6 11;
+#X connect 17 12 6 12;
+#X connect 17 13 6 13;
+#X connect 17 14 6 14;
+#X connect 18 0 17 1;
+#X connect 19 0 14 1;
+#X connect 20 0 18 1;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 26 0 30 0;
+#X connect 30 0 27 0;
+#X connect 31 0 21 0;
+#X connect 32 0 26 0;
