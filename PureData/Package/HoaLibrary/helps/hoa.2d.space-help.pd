@@ -1,7 +1,8 @@
 #N canvas 103 51 1101 716 10;
 #X msg -405 -301 channels \$1;
-#X msg -405 74 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
-0.0343521 0.0879706 0.0634424 0 0 0;
+#X msg -405 74 0.557216 0.542258 0.918157 0.443305 0.403658 0.261755
+0 0.901987 0.831101 0.663136 0.574228 0.561237 0.579898 0.658408 0.65376
+0.613912;
 #X text -397 -346 Number of channels;
 #X text -271 -335 Coefficients;
 #X obj -279 -360 loadbang;
@@ -35,7 +36,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -56 -75 line;
-#X msg -56 -102 1 \, 6 6000;
+#X msg 26 -113 1 \, 6 6000;
 #X text -86 -261 1 - Click and drag to;
 #X text -86 -251 set the coefficients.;
 #X text -86 -231 2 - Hold shift and click;
@@ -50,7 +51,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
 #X obj -405 -243 hoa.2d.space @size 269 269 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoaspacer @send hoaspaces
-@presetname spacepreset @channels 16 @minmax 0 1 @bgcolor 0.76 0.76
+@presetname spacepreset @channels 16 @minmax 0 150 @bgcolor 0.76 0.76
 0.76 1 @bdcolor 0.7 0.7 0.7 1 @spcolor 0.272711 0.434756 0.545421 0.25
 @ptcolor 0 0 0 1;
 #X text -86 -181 3 - Hold alt and;
@@ -153,6 +154,12 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 #X obj -471 -460 hoa.help.header;
 #X obj -370 161 hoa.help.pub;
 #X obj -44 -460 hoa.help.also;
+#X obj -301 44 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 116 256;
+#X obj -224 43 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 150 256;
+#X obj -428 140 c.prepend minmax;
+#X obj -305 131 c.pak 0 0;
 #X connect 0 0 24 0;
 #X connect 4 0 5 0;
 #X connect 5 0 24 0;
@@ -292,3 +299,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 #X connect 59 15 31 15;
 #X connect 61 0 63 0;
 #X connect 62 0 61 0;
+#X connect 66 0 69 0;
+#X connect 67 0 69 1;
+#X connect 68 0 24 0;
+#X connect 69 0 68 0;

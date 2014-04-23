@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2553,11 +2553,11 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 46.400009, 119.0, 59.5, 19.0 ],
 									"restore" : 									{
-										"hoaspace" : [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ]
+										"hoaspace" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u260010474"
+									"varname" : "u404019348"
 								}
 
 							}
@@ -4384,7 +4384,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4429,26 +4429,27 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-9",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 208.800003, 32.0 ],
-									"text" : "To save the drawn shape, \nenable parameter mode and initial",
+									"patching_rect" : [ 36.0, 624.0, 194.399994, 45.0 ],
+									"text" : "To save the drawn shape, \nenable parameter mode and initial in the hoa.2d.space object inspector",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"background" : 1,
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
 									"border" : 1,
-									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"bordercolor" : [ 0.187636, 0.74902, 0.121902, 1.0 ],
 									"id" : "obj-20",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 208.800003, 32.0 ],
+									"patching_rect" : [ 36.0, 624.0, 194.399994, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -13325,8 +13326,8 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-1::obj-2" : [ "space_message", "space_message", 0 ],
-			"obj-45::obj-2" : [ "hoa.2d.space", "hoa.2d.space", 0 ]
+			"obj-45::obj-2" : [ "hoa.2d.space", "hoa.2d.space", 0 ],
+			"obj-1::obj-2" : [ "space_message", "space_message", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
