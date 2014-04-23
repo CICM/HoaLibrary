@@ -31,6 +31,13 @@
 #define MAX_UI_CHANNELS 64
 #define OVERLED_DRAWTIME 1000
 
+typedef enum {
+    VECTOR_NONE = 0,
+	VECTOR_ENERGY,
+	VECTOR_VELOCITY,
+	VECTOR_BOTH
+} e_meter_vector_type;
+
 typedef struct  _meter
 {
 	t_pxjbox	j_box;
@@ -560,9 +567,13 @@ void meter_tick(t_meter *x)
 {
     if(x->f_ramp == x->f_vector->getNumberOfChannels())
         x->f_ramp = 0;
-    
-    //x->f_vector->process(x->f_signals, x->f_vector_coords + x->f_vector->getNumberOfChannels() * x->f_ramp);
-	x->f_vector->process(x->f_signals, x->f_vector_coords);
+	
+	if(x->f_drawvector == VECTOR_BOTH)
+        x->f_vector->process(x->f_signals, x->f_vector_coords);
+    else if(x->f_drawvector == VECTOR_VELOCITY)
+        x->f_vector->processVelocity(x->f_signals, x->f_vector_coords);
+    else if(x->f_drawvector == VECTOR_ENERGY)
+		x->f_vector->processEnergy(x->f_signals, x->f_vector_coords + 2);
     
     for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
     {
@@ -643,7 +654,7 @@ void meter_paint(t_meter *x, t_object *view)
     draw_leds(x, view, &rect);
     if (x->f_drawmborder == 2 || x->f_drawmborder == 3)
         draw_separator(x, view, &rect);
-    if (x->f_drawvector != 0)
+    if (x->f_drawvector != VECTOR_NONE)
 		draw_vectors(x, view, &rect);
 }
 
@@ -1108,51 +1119,46 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 		
-		if (x->f_drawvector == 2 || x->f_drawvector == 3)
+		if (x->f_drawvector == VECTOR_BOTH || x->f_drawvector == VECTOR_ENERGY)
 		{
-			vecX = x->f_vector_coords[0] * maxRadius;
-			vecY = x->f_vector_coords[1] * maxRadius;
-			/*
-			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
-													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
+			if (x->f_rotation)
+			{
+				vecX = x->f_vector_coords[2] * maxRadius;
+				vecY = x->f_vector_coords[3] * maxRadius;
+			}
+			else
+			{
+				double rad = radius(x->f_vector_coords[2], x->f_vector_coords[3]) * maxRadius;
+                double ang = -azimuth(x->f_vector_coords[2], x->f_vector_coords[3]);
+                vecX = abscissa(rad, ang);
+                vecY = ordinate(rad, ang);
+			}
 			
-			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
-			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
-												  x->f_color_velocity.red,
-												  x->f_color_velocity.green,
-												  x->f_color_velocity.blue,
-												  x->f_color_velocity.alpha);
 			
-			jgraphics_set_source(g, pattern);
-			*/
 			
-			jgraphics_set_source_jrgba(g, &x->f_color_velocity);
+			jgraphics_set_source_jrgba(g, &x->f_color_energy);
 			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
 			jgraphics_fill_preserve(g);
 			jgraphics_set_source_rgba(g, 0.2, 0.2, 0.2, 1.);
 			jgraphics_stroke(g);
 		}
 		
-		if (x->f_drawvector == 1 || x->f_drawvector == 3)
+		if (x->f_drawvector == VECTOR_BOTH || x->f_drawvector == VECTOR_VELOCITY)
 		{
-			vecX = x->f_vector_coords[2] * maxRadius;
-			vecY = x->f_vector_coords[3] * maxRadius;
-			
-			/*
-			pattern = jgraphics_pattern_create_radial(vecX - pointSize*0.15, vecY + pointSize*0.15, 0,
-													  vecX + pointSize*0.5 , vecY - pointSize*0.5, 0);
-			
-			jgraphics_pattern_add_color_stop_rgba(pattern, 0., 1., 1., 1., 0.5);
-			jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
-												  x->f_color_energy.red,
-												  x->f_color_energy.green,
-												  x->f_color_energy.blue,
-												  x->f_color_energy.alpha);
-			
-			jgraphics_set_source(g, pattern);
-			*/
-			
-			jgraphics_set_source_jrgba(g, &x->f_color_energy);
+			if (x->f_rotation)
+			{
+				vecX = x->f_vector_coords[0] * maxRadius;
+				vecY = x->f_vector_coords[1] * maxRadius;
+			}
+			else
+			{
+				double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1]) * maxRadius;
+                double ang = -azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
+                vecX = abscissa(rad, ang);
+                vecY = ordinate(rad, ang);
+			}
+						
+			jgraphics_set_source_jrgba(g, &x->f_color_velocity);
 			jgraphics_arc(g, vecX, vecY, pointSize, 0., HOA_2PI);
 			jgraphics_fill_preserve(g);
 			jgraphics_set_source_rgba(g, 0.2, 0.2, 0.2, 1.);
