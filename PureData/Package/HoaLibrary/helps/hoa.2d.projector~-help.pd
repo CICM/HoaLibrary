@@ -22,7 +22,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send hoadelproj
 #X obj -447 -480 hoa.2d.encoder~ 4 ---------------;
 #X obj -447 -454 hoa.2d.projector~ 4 10 ----------;
 #X obj -237 -539 c.loadmess;
-#X obj -252 -432 r hoadelproj;
+#X obj -192 -443 r hoadelproj;
 #X obj -447 -501 c.gain~ @size 127 12 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
@@ -59,12 +59,11 @@ hoa.2d.space list 3000 2998.94 88.6885 82.7172 2914.77 3000 2998.94
 33.988 26.6775;
 #X text -464 -617 hoa.2d.projector~ discretizes the ambisonic sound
 field into the plane waves domain. Use hoa.recomposer~ to come back
-to harmonics domain., f 72;
+to harmonics domain.;
 #X text -131 -419 Sound field transformations have differents behavior
 in the plane waves domain compared to the circular harmonics domain.
 ;
-#X obj -447 -412 hoa.2d.process~ 10 hoa.fx.delay~ planewaves, f 33
-;
+#X obj -447 -412 hoa.2d.process~ 10 hoa.fx.delay~ planewaves;
 #X obj -447 -374 hoa.2d.recomposer~ 4 10 ---------;
 #X obj -447 -128 hoa.2d.decoder~ 4 ambisonic 10 --;
 #X obj -447 -95 hoa.dac~ 1:10 -------------------;
