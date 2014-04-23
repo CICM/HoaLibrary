@@ -3,50 +3,50 @@
 #X obj 21 0 c.loadmess;
 #X obj 4 -1 hoa.tuto.header;
 #X obj 417 -1 hoa.help.pub;
-#X obj 144 361 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+#X obj 142 381 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 1 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 253 249 sig~ 1;
-#X msg 59 367 \; pd dsp 1;
-#X msg 59 407 \; pd dsp 0;
-#X obj 554 361 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+#X obj 251 269 sig~ 1;
+#X msg 57 387 \; pd dsp 1;
+#X msg 57 427 \; pd dsp 0;
+#X obj 554 381 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 554 249 sig~ 1;
-#X obj 773 273 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 554 269 sig~ 1;
+#X obj 773 293 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 6 124 For an order of decomposition 1 \, the sound field is
+#X text 4 144 For an order of decomposition 1 \, the sound field is
 represented by 3 circular harmonics. The gains of harmonics depends
 on the encoding angle :;
-#X text 6 174 The gain of the harmonic 0 is always 1;
-#X text 6 189 The gain of the harmonic -1 is equal to the sinus of
+#X text 4 194 The gain of the harmonic 0 is always 1;
+#X text 4 209 The gain of the harmonic -1 is equal to the sinus of
 the angle.;
-#X text 6 217 The gain of the harmonic 1 is equal to the cosinus of
+#X text 4 237 The gain of the harmonic 1 is equal to the cosinus of
 the angle.;
-#X obj 384 258 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 382 278 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 203 250 Source;
-#X obj 144 322 *~ 1;
-#X obj 363 324 *~ 1;
-#X obj 253 324 *~ 0;
-#X obj 274 299 sin;
-#X obj 384 299 cos;
-#X text 382 236 Azimuth in radian;
-#X text 150 343 Harmonic 0;
-#X text 260 343 Harmonic -1;
-#X text 370 343 Harmonic 1;
+#X text 201 270 Source;
+#X obj 142 342 *~ 1;
+#X obj 361 344 *~ 1;
+#X obj 251 344 *~ 0;
+#X obj 272 319 sin;
+#X obj 382 319 cos;
+#X text 380 256 Azimuth in radian;
+#X text 148 363 Harmonic 0;
+#X text 258 363 Harmonic -1;
+#X text 368 363 Harmonic 1;
 #X text 3 48 With Ambisonics \, the encoding operation gives the spatials
 informations to a sound. Thus \, the sound can be listened as coming
 from a point of the space. Encoding a source in the circular harmonics
 domain returns to synthesize the circular harmonics depending on an
 azimuth. This operation consits to apply a gain to the sound depending
-on the order of the harmonic and this azimuth., f 91;
+on the order of the harmonic and this azimuth., f 65;
 #X text 516 124 For high order of decomposition \, the gain G of the
 harmonics is defined by :;
 #X text 516 164 if m < 0;
@@ -55,9 +55,9 @@ harmonics is defined by :;
 #X text 516 194 else;
 #X text 516 229 With m the order \, l the degree and a the azimuth.
 ;
-#X obj 554 327 hoa.2d.process~ 7 hoa.syn.encoder~ --;
-#X text 661 274 Azimuth in radian;
-#X text 786 328 Look inside;
+#X obj 554 347 hoa.2d.process~ 7 hoa.syn.encoder~ --;
+#X text 661 294 Azimuth in radian;
+#X text 786 348 Look inside;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
 #X connect 5 0 17 0;

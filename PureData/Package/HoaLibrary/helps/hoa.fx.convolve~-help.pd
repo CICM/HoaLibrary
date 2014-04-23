@@ -47,7 +47,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg 47 -302 wet \$1;
 #X obj 46 -347 c.loadmess 1;
 #X msg -43 -302 dry \$1;
-#X obj -7 4 c.loadmess read -resize SmallRoom.wav \$0-ir;
+#X obj 68 -10 c.loadmess read -resize SmallRoom.wav \$0-ir;
 #X obj 135 -325 symbol \$0-ir;
 #X obj -110 -384 hoa.pi~ 2;
 #X obj 135 -353 c.bang @size 17 17 @fontname Helvetica @fontweight

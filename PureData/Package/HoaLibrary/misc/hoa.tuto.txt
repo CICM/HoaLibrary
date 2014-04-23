@@ -4,3 +4,4 @@ Tutorial_1_Space.pd Tutorial_1 Space Representation;
 Tutorial_1_Harmonics.pd Tutorial_1 Harmonics and Decomposition Order;
 Tutorial_1_Resolution.pd Tutorial_1 Spatial Resolution;
 Tutorial_1_Encoding.pd Tutorial_1 Encoding;
+Tutorial_1_Decoding.pd Tutorial_1 Decoding;

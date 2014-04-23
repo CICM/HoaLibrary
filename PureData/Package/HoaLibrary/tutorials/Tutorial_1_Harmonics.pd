@@ -1,4 +1,4 @@
-#N canvas 192 156 953 580 10;
+#N canvas -2 39 889 698 10;
 #X obj 22 4 c.canvasinfos;
 #X obj 21 0 c.loadmess;
 #X obj 4 -1 hoa.tuto.header;
@@ -18,8 +18,8 @@ order N includes all the degrees from 0 to N thus all the orders from
 by their degrees and their orders : (degree order) 0 0 \, 1 -1 \, 1
 1 \, 2 -2 \, 2 2 \, 3 -3 \, 3 3 \, ... \, 7 -7 \, 7 7 . Harmonic 0
 is omnidirectional \, the number of lobes and their directivities increase
-while the degrees increase., f 91;
-#X obj 537 266 c.number @size 53 17 @fontname Helvetica @fontweight
+while the degrees increase.;
+#X obj 470 97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
@@ -31,17 +31,17 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 0 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;
-#X restore 537 291 pd DecToNharmos;
-#X obj 537 316 c.number @size 53 17 @fontname Helvetica @fontweight
+#X restore 470 122 pd DecToNharmos;
+#X obj 470 147 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 537 244 c.loadmess 7;
-#X obj 707 266 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 470 75 c.loadmess 7;
+#X obj 640 97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 707 316 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 640 147 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
@@ -53,9 +53,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 0 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;
-#X restore 707 291 pd NharmosToDec;
-#X obj 707 244 c.loadmess 15;
-#X obj 538 406 c.number @size 53 17 @fontname Helvetica @fontweight
+#X restore 640 122 pd NharmosToDec;
+#X obj 640 75 c.loadmess 15;
+#X obj 471 237 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
@@ -85,15 +85,15 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 8 0 7 1;
 #X connect 9 0 1 0;
 #X connect 10 0 7 0;
-#X restore 538 431 pd DecToDeg;
-#X msg 538 456 0 1 2 3 4 5 6 7;
-#X obj 538 384 c.loadmess 7;
-#X obj 711 406 c.number @size 53 17 @fontname Helvetica @fontweight
+#X restore 471 262 pd DecToDeg;
+#X msg 471 287 0 1 2 3 4 5 6 7;
+#X obj 471 215 c.loadmess 7;
+#X obj 644 237 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg 711 456 0 -1 1 -2 2 -3 3 -4 4 -5 5 -6 6 -7 7;
-#X obj 711 384 c.loadmess 7;
+#X msg 644 287 0 -1 1 -2 2 -3 3 -4 4 -5 5 -6 6 -7 7;
+#X obj 644 215 c.loadmess 7;
 #N canvas 0 22 531 366 DecToOrder 0;
 #X obj 235 101 inlet;
 #X obj 314 353 outlet;
@@ -125,26 +125,26 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 11 0 7 0;
 #X connect 11 1 12 0;
 #X connect 12 0 7 0;
-#X restore 711 431 pd DecToOrder;
-#X text 504 225 Order of decomposition;
-#X text 511 335 Number of harmonics;
-#X text 691 226 Number of harmonics;
-#X text 684 335 Order of decomposition;
-#X text 505 365 Order of decomposition;
-#X text 685 365 Order of decomposition;
-#X text 505 475 Degrees of the harmonics;
-#X text 685 475 Orders of the harmonics;
-#X obj 144 331 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+#X restore 644 262 pd DecToOrder;
+#X text 437 56 Order of decomposition;
+#X text 444 166 Number of harmonics;
+#X text 624 57 Number of harmonics;
+#X text 617 166 Order of decomposition;
+#X text 438 196 Order of decomposition;
+#X text 618 196 Order of decomposition;
+#X text 438 306 Degrees of the harmonics;
+#X text 618 306 Orders of the harmonics;
+#X obj 471 450 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 144 229 sig~ 1;
-#X obj 144 297 hoa.2d.process~ 7 hoa.tuto.gain~ ----;
-#X obj 362 242 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 471 348 sig~ 1;
+#X obj 471 416 hoa.2d.process~ 7 hoa.tuto.gain~ ----;
+#X obj 689 361 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 14 @minmax 0 14 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 346 242 c.incdec @size 15 17 @fontname Helvetica @fontweight
+#X obj 673 361 c.incdec @size 15 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 1 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @arcolor 0 0 0 1
 ;
@@ -152,7 +152,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 #X obj 249 320 outlet;
 #X obj 248 202 / 2;
 #X obj 251 228 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 7.5 256;
+-262144 -1 -1 0.5 256;
 #X obj 246 172 + 1;
 #X obj 319 180 % 2;
 #X obj 256 295 int;
@@ -175,12 +175,12 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 #X connect 10 0 11 0;
 #X connect 11 0 3 0;
 #X connect 11 1 4 0;
-#X restore 349 242 pd map.deg;
-#X obj 363 242 c.number @size 53 17 @fontname Helvetica @fontweight
+#X restore 676 361 pd map.deg;
+#X obj 690 361 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min -7 @max 7 @minmax -7 7 @decimal 0 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 362 218 c.loadmess 0;
+#X obj 689 337 c.loadmess 0;
 #N canvas 0 22 450 300 target.pro 0;
 #X obj 259 47 inlet;
 #X obj 279 204 outlet;
@@ -192,10 +192,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 2 1 3 0;
 #X connect 3 0 1 0;
 #X connect 4 0 1 0;
-#X restore 363 272 pd target.pro;
-#X msg 59 337 \; pd dsp 1;
-#X msg 59 377 \; pd dsp 0;
-#X text 202 242 Order of the harmonics;
+#X restore 690 391 pd target.pro;
+#X msg 738 460 \; pd dsp 1;
+#X msg 738 500 \; pd dsp 0;
+#X text 529 361 Order of the harmonics;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
 #X connect 5 0 6 0;

@@ -1,6 +1,6 @@
-#N canvas 308 229 738 451 10;
-#X obj 45 1 cnv 15 354 40 empty \$0-hoa.header empty 3 12 0 18 -212212
--1 0;
+#N canvas 54 53 738 451 10;
+#X obj 45 1 cnv 15 315 40 empty \$0-hoa.header Tutorial_1 3 12 0 18
+-212212 -1 0;
 #X obj 456 435 s \$0-hoa.header;
 #X obj 455 5 inlet;
 #X obj 296 78 namecanvas \$0-r;
@@ -68,4 +68,4 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 #X connect 27 0 28 0;
 #X connect 28 0 25 0;
 #X connect 29 0 11 0;
-#X coords 0 -1 1 1 400 42 2 0 0;
+#X coords 0 -1 1 1 361 42 2 0 0;

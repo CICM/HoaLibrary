@@ -1,18 +1,18 @@
-#N canvas 216 35 967 589 10;
+#N canvas 46 31 973 640 10;
 #X obj 22 4 c.canvasinfos;
 #X obj 21 0 c.loadmess;
 #X obj 4 -1 hoa.tuto.header;
 #X obj 417 -1 hoa.help.pub;
-#X obj 144 331 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+#X obj 144 391 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 144 219 sig~ 1;
-#X obj 363 242 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 144 279 sig~ 1;
+#X obj 363 302 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 7 @minmax 0 7 @decimal 0 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj 346 242 c.incdec @size 15 17 @fontname Helvetica @fontweight
+#X obj 346 302 c.incdec @size 15 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 1 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @arcolor 0 0 0 1
 ;
@@ -20,7 +20,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 #X obj 249 320 outlet;
 #X obj 248 202 / 2;
 #X obj 251 228 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 4 256;
+-262144 -1 -1 1 256;
 #X obj 246 172 + 1;
 #X obj 319 180 % 2;
 #X obj 256 295 int;
@@ -43,7 +43,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 #X connect 10 0 11 0;
 #X connect 11 0 3 0;
 #X connect 11 1 4 0;
-#X restore 349 242 pd map.deg;
+#X restore 349 302 pd map.deg;
 #N canvas 0 22 450 300 target.pro 0;
 #X obj 259 47 inlet;
 #X obj 260 277 outlet;
@@ -72,9 +72,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @step
 #X connect 9 0 7 0;
 #X connect 10 0 9 1;
 #X connect 11 0 9 1;
-#X restore 363 272 pd target.pro;
-#X msg 59 337 \; pd dsp 1;
-#X msg 59 377 \; pd dsp 0;
+#X restore 363 332 pd target.pro;
+#X msg 59 397 \; pd dsp 1;
+#X msg 59 437 \; pd dsp 0;
 #X text 3 48 The order of decomposition affects the quality of the
 sound field restitution. While the order of decomposition increases
 \, the number of circular harmonics increases and the "spatial resolution"
@@ -88,24 +88,25 @@ is usual to talk about "angular resolution" to describe the precision
 with which the listener perceives a point source. The "spatial resolution"
 is a broader concept to qualify more varied and complex sound field
 where sound field is not necessarily composed of point sources (eg.
-diffuse sound field)., f 91;
-#X obj 144 297 hoa.2d.process~ 7 hoa.fx.gain~ ------;
-#X text 202 242 Order of decomposition;
-#X obj 363 220 c.loadmess 7;
-#X obj 554 331 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+diffuse sound field)., f 66;
+#X obj 144 357 hoa.2d.process~ 7 hoa.fx.gain~ ------;
+#X text 202 302 Order of decomposition;
+#X obj 363 280 c.loadmess 7;
+#X obj 554 391 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 7 @gain 100 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj 554 219 sig~ 1;
-#X obj 144 271 hoa.2d.encoder~ 7 -----------------;
-#X obj 554 271 hoa.2d.encoder~ 7 -----------------;
-#X obj 554 297 hoa.2d.wider~ 7 ---------------------;
-#X obj 773 243 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 554 279 sig~ 1;
+#X obj 144 331 hoa.2d.encoder~ 7 -----------------;
+#X obj 554 331 hoa.2d.encoder~ 7 -----------------;
+#X obj 554 357 hoa.2d.wider~ 7 ---------------------;
+#X obj 773 303 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text 583 244 Fractional decomposition order;
-#X text 833 241 minmax: 0 - 1;
+#X text 583 304 Fractional decomposition order;
+#X text 833 304 minmax: 0 - 1;
+#X obj 773 276 c.loadmess 1;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
 #X connect 5 0 18 0;
@@ -177,3 +178,4 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 20 13 16 13;
 #X connect 20 14 16 14;
 #X connect 21 0 20 15;
+#X connect 24 0 21 0;
