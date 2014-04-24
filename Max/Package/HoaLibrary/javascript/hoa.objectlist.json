@@ -108,8 +108,10 @@
     "fx patches": 
 	{
     	"objects": [
+    	"hoa.fx.convolve~",
     	"hoa.fx.decorrelation~",
     	"hoa.fx.delay~",
+    	"hoa.fx.freeverb~",
     	"hoa.fx.gain~",
 		"hoa.fx.grain~",
 		"hoa.fx.granular~",

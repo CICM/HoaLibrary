@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 38.0, 62.0, 502.0, 485.0 ],
+		"rect" : [ 100.0, 100.0, 495.0, 507.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 38.0, 88.0, 502.0, 459.0 ],
+						"rect" : [ 100.0, 126.0, 495.0, 481.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -75,14 +75,15 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
-									"id" : "obj-18",
+									"id" : "obj-20",
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 69.0, 483.0, 20.0 ],
-									"text" : "c.freeverb~ is a freeverb reverberation implementation",
+									"patching_rect" : [ 7.625, 71.0, 483.0, 47.0 ],
+									"text" : "hoa.fx.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[2]"
+									"varname" : "autohelp_top_description[1]"
 								}
 
 							}
@@ -91,11 +92,11 @@
 									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
 									"border" : 1,
 									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"id" : "obj-19",
+									"id" : "obj-25",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 70.0, 483.0, 19.0 ],
+									"patching_rect" : [ 7.625, 71.0, 483.0, 47.0 ],
 									"rounded" : 0
 								}
 
@@ -109,7 +110,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 370.4375, 223.0, 59.0, 17.0 ],
+									"patching_rect" : [ 370.4375, 253.0, 59.0, 17.0 ],
 									"text" : "freeze $1"
 								}
 
@@ -122,7 +123,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 370.4375, 185.0, 20.0, 20.0 ]
+									"patching_rect" : [ 370.4375, 215.0, 20.0, 20.0 ]
 								}
 
 							}
@@ -135,7 +136,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 292.4375, 223.0, 56.0, 17.0 ],
+									"patching_rect" : [ 292.4375, 253.0, 56.0, 17.0 ],
 									"text" : "damp $1"
 								}
 
@@ -152,7 +153,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 292.4375, 185.0, 50.0, 20.0 ]
+									"patching_rect" : [ 292.4375, 215.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -165,7 +166,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 258.4375, 148.0, 74.0, 17.0 ],
+									"patching_rect" : [ 258.4375, 178.0, 74.0, 17.0 ],
 									"text" : "roomsize $1"
 								}
 
@@ -182,7 +183,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 258.4375, 110.0, 50.0, 20.0 ]
+									"patching_rect" : [ 258.4375, 140.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -196,7 +197,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 20.0, 110.0, 218.0, 87.0 ]
+									"patching_rect" : [ 20.0, 140.0, 218.0, 87.0 ]
 								}
 
 							}
@@ -208,7 +209,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 20.0, 316.0, 135.0, 22.0 ]
+									"patching_rect" : [ 20.0, 346.0, 135.0, 22.0 ]
 								}
 
 							}
@@ -220,7 +221,7 @@
 									"name" : "hoa.helpcredit.maxpat",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 132.4375, 408.0, 326.0, 36.0 ]
+									"patching_rect" : [ 132.4375, 438.0, 326.0, 36.0 ]
 								}
 
 							}
@@ -238,7 +239,7 @@
 									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
 									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
 									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
-									"patching_rect" : [ 20.0, 399.0, 45.0, 45.0 ]
+									"patching_rect" : [ 20.0, 429.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -251,7 +252,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 20.0, 276.0, 69.0, 19.0 ],
+									"patching_rect" : [ 20.0, 306.0, 69.0, 19.0 ],
 									"text" : "c.freeverb~"
 								}
 
@@ -307,7 +308,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 379.9375, 257.5, 29.5, 257.5 ],
+									"midpoints" : [ 379.9375, 287.5, 29.5, 287.5 ],
 									"source" : [ "obj-10", 0 ]
 								}
 
@@ -353,7 +354,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 267.9375, 257.5, 29.5, 257.5 ],
+									"midpoints" : [ 267.9375, 287.5, 29.5, 287.5 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -363,7 +364,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 301.9375, 257.5, 29.5, 257.5 ],
+									"midpoints" : [ 301.9375, 287.5, 29.5, 287.5 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -419,7 +420,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 502.0, 459.0 ],
+						"rect" : [ 0.0, 26.0, 495.0, 481.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
