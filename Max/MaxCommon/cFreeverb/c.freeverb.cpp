@@ -1,30 +1,10 @@
 /*
- * CicmWrapper
- *
- * A wrapper for Pure Data
- *
- * Copyright (C) 2013 Pierre Guillot, CICM - Université Paris 8
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Library General Public License as published
- * by the Free Software Foundation; either version 2 of the License.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
- * License for more details.
- *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
+ // Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+ // For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "../c.library.h"
+#include "HoaCommon.max.h"
 
 const int	numcombs		= 8;
 const int	numallpasses	= 4;
@@ -221,104 +201,117 @@ inline float Freeverb::process(float anInput)
 
 typedef struct _freeverb
 {
-	t_edspobj   j_box;
-    Freeverb*   f_freeverb;
+	t_pxobject   f_ob;
+    Freeverb*    f_freeverb;
     
 } t_freeverb;
 
-t_eclass *freeverb_class;
+t_class *freeverb_class;
 
 void *freeverb_new(t_symbol *s, int argc, t_atom *argv);
 void freeverb_free(t_freeverb *x);
 void freeverb_assist(t_freeverb *x, void *b, long m, long a, char *s);
 
 void freeverb_dsp(t_freeverb *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
-void freeverb_perform(t_freeverb *x, t_object *d, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
-void freeverb_roomsize(t_freeverb *x, float f);
-void freeverb_damp(t_freeverb *x, float f);
-void freeverb_freeze(t_freeverb *x, float f);
+void freeverb_perform(t_freeverb *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
+void freeverb_roomsize(t_freeverb *x, double f);
+void freeverb_damp(t_freeverb *x, double f);
+void freeverb_freeze(t_freeverb *x, long n);
 
-extern "C"  void setup_c0x2efreeverb_tilde(void)
+int C74_EXPORT main(void)
 {
-	t_eclass *c;
+	t_class *c;
     
-	c = eclass_new("c.freeverb~", (method)freeverb_new, (method)freeverb_free, (short)sizeof(t_freeverb), 0L, A_GIMME, 0);
+	c = class_new("c.freeverb~", (method)freeverb_new, (method)freeverb_free, (short)sizeof(t_freeverb), 0L, A_GIMME, 0);
     
-    eclass_dspinit(c);
-    eclass_addmethod(c, (method) freeverb_dsp,             "dsp",              A_CANT, 0);
-	eclass_addmethod(c, (method) freeverb_assist,          "assist",           A_CANT, 0);
+    class_addmethod(c, (method) freeverb_dsp,             "dsp64",            A_CANT, 0);
+	class_addmethod(c, (method) freeverb_assist,          "assist",           A_CANT, 0);
     
-    eclass_addmethod(c, (method) freeverb_roomsize,        "roomsize",         A_FLOAT, 0);
-    eclass_addmethod(c, (method) freeverb_damp,            "damp",             A_FLOAT, 0);
-    eclass_addmethod(c, (method) freeverb_freeze,          "freeze",           A_FLOAT, 0);
+    class_addmethod(c, (method) freeverb_roomsize,        "roomsize",         A_FLOAT, 0);
+    class_addmethod(c, (method) freeverb_damp,            "damp",             A_FLOAT, 0);
+    class_addmethod(c, (method) freeverb_freeze,          "freeze",           A_LONG, 0);
     
-    eclass_register(CLASS_OBJ, c);
+    class_dspinit(c);
+    class_register(CLASS_BOX, c);
 	freeverb_class = c;
 }
 
 void *freeverb_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_freeverb *x =  NULL;
-
-	x = (t_freeverb *)eobj_new(freeverb_class);
-	
-    eobj_dspsetup((t_ebox *)x, 1, 1);
     
-    if(argc && argv && atom_gettype(argv) == A_FLOAT)
-    {
-        if(!atom_getfloat(argv))
-            x->f_freeverb = new Freeverb(0);
-        else
-            x->f_freeverb = new Freeverb(1);
-    }
-    else if(argc && argv && atom_gettype(argv) == A_SYM)
-    {
-        if(atom_getsym(argv) == gensym("right"))
-            x->f_freeverb = new Freeverb(1);
-        else
-            x->f_freeverb = new Freeverb(0);
-    }
-    else
-        x->f_freeverb = new Freeverb(0);    
+    x = (t_freeverb *)object_alloc(freeverb_class);
     
-    x->f_freeverb->setdamp(initialdamp);
-    x->f_freeverb->setroomsize(initialroom);
+    if (x)
+    {
+        if(argc && argv && atom_gettype(argv) == A_FLOAT)
+        {
+            if(!atom_getfloat(argv))
+                x->f_freeverb = new Freeverb(0);
+            else
+                x->f_freeverb = new Freeverb(1);
+        }
+        else if(argc && argv && atom_gettype(argv) == A_SYM)
+        {
+            if(atom_getsym(argv) == gensym("right"))
+                x->f_freeverb = new Freeverb(1);
+            else
+                x->f_freeverb = new Freeverb(0);
+        }
+        else
+            x->f_freeverb = new Freeverb(0);
+        
+        x->f_freeverb->setdamp(initialdamp);
+        x->f_freeverb->setroomsize(initialroom);
+        
+        dsp_setup((t_pxobject *)x, 1);
+        outlet_new(x, "signal");
+    }
     
 	return (x);
 }
 
-void freeverb_roomsize(t_freeverb *x, float f)
+void freeverb_roomsize(t_freeverb *x, double f)
 {
     x->f_freeverb->setroomsize(f);
 }
 
-void freeverb_damp(t_freeverb *x, float f)
+void freeverb_damp(t_freeverb *x, double f)
 {
     x->f_freeverb->setdamp(f);
 }
 
-void freeverb_freeze(t_freeverb *x, float f)
+void freeverb_freeze(t_freeverb *x, long n)
 {
-    x->f_freeverb->setmode(f);
+    x->f_freeverb->setmode(n);
 }
 
 void freeverb_free(t_freeverb *x)
 {
-	eobj_dspfree((t_ebox *)x);
+    dsp_free(&x->f_ob);
     delete x->f_freeverb;
 }
 
 void freeverb_assist(t_freeverb *x, void *b, long m, long a, char *s)
 {
-	;
+	// @out 0 @type signal @digest Output signal
+	if (m == ASSIST_OUTLET)
+		sprintf(s,"(signal) Output");
+	else
+    {
+        if(a == 0)
+            sprintf(s,"(signal) Input, freeverb messages");       // @in 1 @type signal @digest Input signal, freeverb messages
+        else
+            sprintf(s,"Undocumented");
+    }
 }
 
 void freeverb_dsp(t_freeverb *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    object_method(dsp, gensym("dsp_add"), x, (method)freeverb_perform, 0, NULL);
+    object_method(dsp, gensym("dsp_add64"), x, (method)freeverb_perform, 0, NULL);
 }
 
-void freeverb_perform(t_freeverb *x, t_object *d, float **ins, long ni, float **outs, long no, long sampleframes, long f,void *up)
+void freeverb_perform(t_freeverb *x, t_object *d, double **ins, long ni, double **outs, long no, long sampleframes, long f,void *up)
 {
     for(int i = 0; i < sampleframes; i++)
     {
