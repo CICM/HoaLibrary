@@ -159,6 +159,9 @@ namespace Hoa2D
 
 	void SourcesManager::sourceSetRadius(long index, double radius)
 	{
+		if (index < 0)
+			return;
+		
 		if(index >= m_sources.size())
 		{
 			for(int i = m_sources.size(); i < index; i++)
@@ -187,6 +190,9 @@ namespace Hoa2D
 
 	void SourcesManager::sourceSetAzimuth(long index, double azimuth)
 	{
+		if (index < 0)
+			return;
+		
 		if(index >= m_sources.size())
 		{
 			for(int i = m_sources.size(); i < index; i++)
@@ -220,6 +226,9 @@ namespace Hoa2D
 
 	void SourcesManager::sourceSetAbscissa(long index, double abscissa)
 	{
+		if (index < 0)
+			return;
+		
 		if(index >= m_sources.size())
 		{
 			for(int i = m_sources.size(); i < index; i++)
@@ -247,6 +256,9 @@ namespace Hoa2D
 
 	void SourcesManager::sourceSetOrdinate(long index, double ordinate)
 	{
+		if (index < 0)
+			return;
+		
 		if(index >= m_sources.size())
 		{
 			for(int i = m_sources.size(); i < index; i++)
@@ -415,6 +427,9 @@ namespace Hoa2D
 
 	void SourcesManager::groupSetSource(long groupIndex, long sourceIndex)
 	{
+		if (sourceIndex < 0 || groupIndex < 0 )
+			return;
+		
 		if(groupIndex >= m_groups.size())
 		{
 			for(int i = m_groups.size(); i < groupIndex; i++)
@@ -447,6 +462,9 @@ namespace Hoa2D
 
 	void SourcesManager::groupRemoveSource(long groupIndex, long sourceIndex)
 	{
+		if (sourceIndex < 0 || groupIndex < 0 )
+			return;
+		
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
 		{
 			if(m_sources.size() > sourceIndex)

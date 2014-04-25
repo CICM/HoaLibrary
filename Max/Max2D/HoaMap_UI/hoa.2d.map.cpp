@@ -387,7 +387,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
 					(atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
 				{
-					index = atom_getlong(av+i+1);
+					index = atom_getlong(av+i+1) - 1;
 					exist = atom_getlong(av+i+2);
 					
 					if(exist &&
@@ -406,7 +406,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 					{
 						x->f_source_manager->sourceRemove(index);
 						t_atom out_av[3];
-						atom_setlong(out_av, index);
+						atom_setlong(out_av, index + 1);
 						atom_setsym(out_av+1, hoa_sym_mute);
 						atom_setlong(out_av+2, 1);
 						outlet_list(x->f_out_sources, 0L, 3, out_av);
@@ -426,7 +426,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     else if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
 		t_symbol* param = atom_getsym(av+1);
-		long index = atom_getlong(av);
+		long index = atom_getlong(av) -1;
 		
         if(param == hoa_sym_polar || param == hoa_sym_pol)
 		{
@@ -545,7 +545,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
 					 (atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
 				{
-					index = atom_getlong(av+i+1);
+					index = atom_getlong(av+i+1) -1;
 					exist = atom_getlong(av+i+2);
 					
 					if(exist &&
@@ -562,7 +562,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 						{
 							for(long j = 0; j < sources_ac; j++)
 								if (atom_gettype(sources_av+j) == A_LONG)
-									x->f_source_manager->groupSetSource(index, atom_getlong(sources_av+j));
+									x->f_source_manager->groupSetSource(index, atom_getlong(sources_av+j) - 1);
 						}
 						
 						x->f_source_manager->groupSetColor(index,
@@ -584,7 +584,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	}
     else if(ac > 1 && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
-		long index = atom_getlong(av);
+		long index = atom_getlong(av) - 1;
 		t_symbol* param = atom_getsym(av+1);
 		
         if(param == hoa_sym_set)
@@ -592,7 +592,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             x->f_source_manager->groupRemove(index);
             for(int i = 2; i < ac; i++)
 			{
-                x->f_source_manager->groupSetSource(index, atom_getlong(av+i));
+                x->f_source_manager->groupSetSource(index, atom_getlong(av+i) -1);
 			}
         }        
         else if(param == hoa_sym_polar || param == hoa_sym_pol)
@@ -639,7 +639,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         {
             x->f_source_manager->groupRemove(index);
             t_atom av[3];
-            atom_setlong(av, index);
+            atom_setlong(av, index+1);
             atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_groups, 0L, 3, av);
@@ -728,7 +728,7 @@ void hoa_map_preset(t_hoamap *x)
 	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 	{
 		atom_setsym(avptr++, hoa_sym_source);
-		atom_setlong(avptr++, i);
+		atom_setlong(avptr++, i+1);
 		exist = x->f_source_manager->sourceGetExistence(i);
 		atom_setlong(avptr++, exist);
 		
@@ -776,7 +776,7 @@ void hoa_map_preset(t_hoamap *x)
 	for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 	{
 		atom_setsym(avptr++, hoa_sym_group);
-		atom_setlong(avptr++, i);
+		atom_setlong(avptr++, i+1);
 		exist = x->f_source_manager->groupGetExistence(i);
 		atom_setlong(avptr++, exist);
 		
@@ -788,7 +788,7 @@ void hoa_map_preset(t_hoamap *x)
 			for(long j = 0; j < number_of_sources; j++)
 			{
 				if (j) temp_str.push_back(' ');
-				sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j));
+				sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j) + 1);
 				temp_str += temp_char;
 			}
 			atom_setsym(avptr++, gensym(temp_str.c_str()));
@@ -852,7 +852,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 		for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 		{
 			atom_setsym(avptr++, hoa_sym_source);
-			atom_setlong(avptr++, i);
+			atom_setlong(avptr++, i+1);
 			exist = x->f_source_manager->sourceGetExistence(i);
 			atom_setlong(avptr++, exist);
 			
@@ -867,7 +867,11 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 				atom_setfloat(avptr++, color[1]);
 				atom_setfloat(avptr++, color[2]);
 				atom_setfloat(avptr++, color[3]);
-				atom_setsym(avptr++, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+				
+				if (x->f_source_manager->sourceGetDescription(i).empty())
+					atom_setsym(avptr++, hoa_sym_nothing);
+				else
+					atom_setsym(avptr++, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
 			}
 			else
 			{
@@ -889,7 +893,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 		for(int i = 0; i < MAX_NUMBER_OF_SOURCES; i++)
 		{
 			atom_setsym(avptr++, hoa_sym_group);
-			atom_setlong(avptr++, i);
+			atom_setlong(avptr++, i+1);
 			exist = x->f_source_manager->groupGetExistence(i);
 			atom_setlong(avptr++, exist);
 			
@@ -901,7 +905,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 				for(long j = 0; j < number_of_sources; j++)
 				{
 					if (j) temp_str.push_back(' ');
-					sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j));
+					sprintf(temp_char, "%ld", x->f_source_manager->groupGetSourceIndex(i, j) + 1);
 					temp_str += temp_char;
 				}
 				atom_setsym(avptr++, gensym(temp_str.c_str()));
@@ -912,7 +916,10 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 				atom_setfloat(avptr++, color[2]);
 				atom_setfloat(avptr++, color[3]);
 				
-				atom_setsym(avptr++, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+				if (x->f_source_manager->groupGetDescription(i).empty())
+					atom_setsym(avptr++, hoa_sym_nothing);
+				else
+					atom_setsym(avptr++, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
 			}
 			else
 			{
@@ -1058,7 +1065,7 @@ void hoamap_bang(t_hoamap *x)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            atom_setlong(av, i);
+            atom_setlong(av, i+1);
             atom_setlong(av+2, x->f_source_manager->sourceGetMute(i));
             outlet_list(x->f_out_sources, 0L, 3, av);
         }
@@ -1067,7 +1074,7 @@ void hoamap_bang(t_hoamap *x)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            atom_setlong(av, i);
+            atom_setlong(av, i+1);
             atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
             outlet_list(x->f_out_groups, 0L, 4, av);
         }
@@ -1079,7 +1086,7 @@ void hoamap_bang(t_hoamap *x)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-                atom_setlong(av, i);
+                atom_setlong(av, i+1);
                 atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
                 atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
                 outlet_list(x->f_out_sources, 0L, 4, av);
@@ -1089,7 +1096,7 @@ void hoamap_bang(t_hoamap *x)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
-                atom_setlong(av, i);
+                atom_setlong(av, i+1);
                 atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
                 atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
                 outlet_list(x->f_out_groups, 0L, 4, av);
@@ -1104,7 +1111,7 @@ void hoamap_bang(t_hoamap *x)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-                atom_setlong(av, i);
+                atom_setlong(av, i+1);
                 atom_setfloat(av+2,x->f_source_manager->sourceGetAbscissa(i));
                 atom_setfloat(av+3,x->f_source_manager->sourceGetOrdinate(i));
                 outlet_list(x->f_out_sources, 0L, 4, av);
@@ -1114,7 +1121,7 @@ void hoamap_bang(t_hoamap *x)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
-                atom_setlong(av, i);
+                atom_setlong(av, i+1);
                 atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
                 atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
                 outlet_list(x->f_out_groups, 0L, 4, av);
@@ -1134,7 +1141,6 @@ void hoamap_infos(t_hoamap *x)
     long numberOfSource = 0;
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        
         if(x->f_source_manager->sourceGetExistence(i))
         {
             numberOfSource++;
@@ -1152,7 +1158,7 @@ void hoamap_infos(t_hoamap *x)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            atom_setlong(avIndex+j+2, i);
+            atom_setlong(avIndex+j+2, i+1);
             j++;
         }
     }
@@ -1165,7 +1171,7 @@ void hoamap_infos(t_hoamap *x)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            atom_setlong(avMute+2, i);
+            atom_setlong(avMute+2, i+1);
             atom_setlong(avMute+3, x->f_source_manager->sourceGetMute(i));
             outlet_list(x->f_out_infos, 0L, 4, avMute);
         }
@@ -1192,18 +1198,18 @@ void hoamap_infos(t_hoamap *x)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            atom_setlong(avIndex+j+2, i);
+            atom_setlong(avIndex+j+2, i+1);
             j++;
             avSource = new t_atom[x->f_source_manager->groupGetNumberOfSources(i)+3];
             atom_setsym(avSource, hoa_sym_group);
             atom_setsym(avSource+1, hoa_sym_source);
-            atom_setlong(avSource+2, i);
+            atom_setlong(avSource+2, i+1);
             for(int k = 0; k < x->f_source_manager->groupGetNumberOfSources(i); k++)
             {
-                atom_setlong(avSource+3+k,x->f_source_manager->groupGetSourceIndex(i, k));
+                atom_setlong(avSource+3+k, x->f_source_manager->groupGetSourceIndex(i, k) + 1);
             }
             outlet_list(x->f_out_infos, 0L, x->f_source_manager->groupGetNumberOfSources(i)+3, avSource);
-            free(avSource);
+            delete [] avSource;
         }
     }
     outlet_list(x->f_out_infos, 0L, numberOfGroups+2, avIndex);
@@ -1215,7 +1221,7 @@ void hoamap_infos(t_hoamap *x)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            atom_setlong(avMute+2, i);
+            atom_setlong(avMute+2, i+1);
             atom_setlong(avMute+3, x->f_source_manager->groupGetMute(i));
             outlet_list(x->f_out_infos, 0L, 4, avMute);
         }
@@ -1371,11 +1377,11 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 				color = x->f_source_manager->sourceGetColor(i);
 				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
                 
-                if(x->f_source_manager->sourceGetDescription(i).c_str()[0])
-                    sprintf(description,"%i : %s", i, x->f_source_manager->sourceGetDescription(i).c_str());
+                if(!x->f_source_manager->sourceGetDescription(i).empty())
+                    sprintf(description,"%i : %s", i+1, x->f_source_manager->sourceGetDescription(i).c_str());
                 else
-                    sprintf(description,"%i", i);
-                    
+                    sprintf(description,"%i", i+1);
+				            
                 descriptionPositionX = sourcePositionX - 2. * x->f_size_source;
                 descriptionPositionY = sourcePositionY - x->f_size_source - fontSize - 1.;
 
@@ -1469,10 +1475,10 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 				color = x->f_source_manager->groupGetColor(i);
 				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
                 
-                if(x->f_source_manager->groupGetDescription(i).c_str()[0])
-                    sprintf(description,"%i : %s", i, x->f_source_manager->groupGetDescription(i).c_str());
+                if(!x->f_source_manager->groupGetDescription(i).empty())
+                    sprintf(description,"%i : %s", i+1, x->f_source_manager->groupGetDescription(i).c_str());
                 else
-                    sprintf(description,"%i", i);
+                    sprintf(description,"%i", i+1);
     
                 descriptionPositionX = sourcePositionX - 2. * x->f_size_source;
                 descriptionPositionY = sourcePositionY - x->f_size_source - fontSize - 1.;
@@ -2026,6 +2032,7 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
             }
         }
         
+		object_notify(x, hoa_sym_modified, NULL);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);

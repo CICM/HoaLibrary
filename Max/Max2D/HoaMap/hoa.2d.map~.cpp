@@ -216,7 +216,6 @@ void hoa_map_float(t_hoa_map *x, double f)
 			}
 		}
     }
-    
 }
 
 void hoa_map_int(t_hoa_map *x, long n)
@@ -228,7 +227,7 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
 {
     if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
     {
-        int index = atom_getlong(argv);
+        int index = atom_getlong(argv) -1;
         if(index < 0 || index >= x->f_map->getNumberOfSources())
             return;
         
@@ -438,9 +437,9 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         else
         {
             if(a == 0)
-                sprintf(s,"(signal/messages) Input 0 and sources messages");
+                sprintf(s,"(signal/messages) Source 1 and sources messages");
             else
-                sprintf(s,"(Signal/float) Input %ld", a);
+                sprintf(s,"(Signal) Source %ld", a+1);
         }
         
 	}
