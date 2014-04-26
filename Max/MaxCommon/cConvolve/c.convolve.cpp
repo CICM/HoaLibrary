@@ -6,17 +6,18 @@
 
 #include "HoaCommon.max.h"
 
+#define CONVOLUTION_USE_FLOAT
+
 #include <algorithm>
 #include <cstring>
 #include <numeric>
 #include <vector>
-
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
 
 #include "FFTConvolver.h"
-#include "Utilities.h"
+//#include "Utilities.h"
 
 using namespace fftconvolver;
 
@@ -25,6 +26,8 @@ typedef struct _convolve
 	t_pxobject      f_ob;
     FFTConvolver*   f_convolver;
     char            f_normalize;
+    long            f_fftsize;
+    t_atom          f_crop_size;
     
     t_buffer_ref*	f_buffer_ref;
 	t_symbol*		f_buffer_name;
@@ -41,15 +44,22 @@ t_class *convolve_class;
 
 void *convolve_new(t_symbol *s, int argc, t_atom *argv);
 void convolve_free(t_convolve *x);
-t_max_err convolve_notify(t_convolve *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void convolve_dsp64(t_convolve *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
-void convolve_set(t_convolve *x, t_symbol *s, long ac, t_atom *av);
-void convolve_fill_inner_buffer(t_convolve *x);
-void convolve_dblclick(t_convolve *x);
+void convolve_perform64(t_convolve *x, t_object *d, double **ins, long ni, double **outs, long no, long sampleframes, long f,void *up);
+t_max_err convolve_notify(t_convolve *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
+void convolve_set(t_convolve *x, t_symbol *s, long ac, t_atom *av);
+void convolve_dblclick(t_convolve *x);
+void convolve_clear(t_convolve *x);
+
+void convolve_fill_inner_buffer(t_convolve *x);
 t_max_err convolve_setattr_buffername(t_convolve *x, t_symbol *s, long ac, t_atom* av);
 t_max_err convolve_setattr_channel(t_convolve *x, t_symbol *s, long ac, t_atom* av);
 t_max_err convolve_setattr_normalize(t_convolve *x, t_symbol *s, long ac, t_atom* av);
+t_max_err convolve_setattr_fftsize(t_convolve *x, t_symbol *s, long ac, t_atom* av);
+t_max_err convolve_setattr_cropsize(t_convolve *x, t_symbol *s, long ac, t_atom* av);
+
+inline long next_power_of_two (long x);
 
 int C74_EXPORT main()
 {
@@ -61,6 +71,7 @@ int C74_EXPORT main()
 	
     class_addmethod(c, (method) convolve_dsp64,     "dsp64",            A_CANT,  0);
     class_addmethod(c, (method) convolve_set,       "set",              A_GIMME, 0);
+    class_addmethod(c, (method) convolve_clear,     "clear",                     0);
     class_addmethod(c, (method) convolve_notify,	"notify",			A_CANT,  0);
     class_addmethod(c, (method) convolve_dblclick,  "dblclick",         A_CANT,  0);
     
@@ -86,6 +97,20 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER                (c, "normalize",  0, "3");
     // @description If the <b>normalize</b> attribute is checked, <o>c.convolve</o> object will normalize the <o>buffer~</o> content.
     
+    CLASS_ATTR_LONG                 (c, "fftsize", 0, t_convolve, f_fftsize);
+    CLASS_ATTR_CATEGORY             (c, "fftsize", 0, "Behavior");
+	CLASS_ATTR_ACCESSORS            (c, "fftsize", NULL, convolve_setattr_fftsize);
+    CLASS_ATTR_LABEL                (c, "fftsize", 0, "FFT size");
+    CLASS_ATTR_SAVE                 (c, "fftsize", 1);
+    CLASS_ATTR_ORDER                (c, "fftsize",  0, "4");
+    
+    CLASS_ATTR_ATOM                 (c, "cropsize", 0, t_convolve, f_crop_size);
+    CLASS_ATTR_CATEGORY             (c, "cropsize", 0, "Behavior");
+	CLASS_ATTR_ACCESSORS            (c, "cropsize", NULL, convolve_setattr_cropsize);
+    CLASS_ATTR_LABEL                (c, "cropsize", 0, "Crop size (ms)");
+    CLASS_ATTR_SAVE                 (c, "cropsize", 1);
+    CLASS_ATTR_ORDER                (c, "cropsize",  0, "5");
+    
     class_register(CLASS_BOX, c);
 	convolve_class = c;
 }
@@ -101,6 +126,8 @@ void *convolve_new(t_symbol *s, int ac, t_atom *av)
         x->f_buffer_name = hoa_sym_nothing;
         x->f_channel_offset = 1;
         x->f_normalize = 0;
+        x->f_fftsize = 1024;
+        atom_setsym(&x->f_crop_size, gensym("<none>"));
         
         x->f_convolver = new FFTConvolver();
         
@@ -179,6 +206,46 @@ t_max_err convolve_setattr_normalize(t_convolve *x, t_symbol *s, long ac, t_atom
     return MAX_ERR_NONE;
 }
 
+inline long next_power_of_two (long x)
+{
+    if (x < 0)
+        return 0;
+    --x;
+    x |= x >> 1;
+    x |= x >> 2;
+    x |= x >> 4;
+    x |= x >> 8;
+    x |= x >> 16;
+    return x+1;
+}
+
+t_max_err convolve_setattr_fftsize(t_convolve *x, t_symbol *s, long ac, t_atom* av)
+{
+    if (ac && av && atom_gettype(av) == A_LONG)
+	{
+        x->f_fftsize = clip_minmax(next_power_of_two(atom_getlong(av)), 64, 16384);
+        x->f_buffer_need_update = 1;
+	}
+    
+    return MAX_ERR_NONE;
+}
+
+t_max_err convolve_setattr_cropsize(t_convolve *x, t_symbol *s, long ac, t_atom* av)
+{
+    if (ac && av && (atom_gettype(av) == A_FLOAT || atom_gettype(av) == A_LONG))
+	{
+        atom_setfloat(&x->f_crop_size, clip_min(atom_getfloat(av), 1));
+        x->f_buffer_need_update = 1;
+	}
+    else
+    {
+        atom_setsym(&x->f_crop_size, gensym("<none>"));
+        x->f_buffer_need_update = 1;
+    }
+    
+    return MAX_ERR_NONE;
+}
+
 t_max_err convolve_notify(t_convolve *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
@@ -200,15 +267,22 @@ t_max_err convolve_notify(t_convolve *x, t_symbol *s, t_symbol *msg, void *sende
 	return buffer_ref_notify(x->f_buffer_ref, s, msg, sender, data);
 }
 
+void convolve_clear(t_convolve *x)
+{
+    x->f_buffer_need_update = 1;
+}
 
 void convolve_fill_inner_buffer(t_convolve *x)
 {
     t_buffer_obj *buffer = NULL;
     float* temp;
     float *buffer_samples;
-    long frames, nc, chan, frames_per_channel;
+    long frames, nc, chan, buffer_size;
     float buffer_sr;
     float sr = sys_getsr();
+    
+    if ( (x->f_buffer_name == hoa_sym_nothing) || !x->f_buffer_ref)
+        return;
     
     buffer = buffer_ref_getobject(x->f_buffer_ref);
     if (!buffer)
@@ -221,21 +295,26 @@ void convolve_fill_inner_buffer(t_convolve *x)
     frames = buffer_getframecount(buffer);
 	nc = buffer_getchannelcount(buffer);
     buffer_sr = buffer_getsamplerate(buffer);
-    
-    
-    frames_per_channel = frames / nc;
-    
     chan = (long) clip_minmax(x->f_channel_offset-1, 0, nc);
     
-    temp = (float *) malloc( frames_per_channel * sizeof(float));
+    if (atom_gettype(&x->f_crop_size) == A_FLOAT)
+        buffer_size = min(frames, (sr / 1000) * atom_getlong(&x->f_crop_size));
+    else
+        buffer_size = frames;
     
-    for (int i = 0; i < frames_per_channel; i++)
+    //post("buffer_size = %ld", buffer_size);
+    
+    temp = (float *) malloc( buffer_size * sizeof(float));
+    
+    for (int i = 0; i < buffer_size; i++)
+    {
         temp[i] = buffer_samples[i*nc+(chan)];
+    }
     
     if(x->f_normalize)
     {
         float max = 0;
-        for(int i = 0; i < frames_per_channel; i++)
+        for(int i = 0; i < buffer_size; i++)
         {
             if(fabs(temp[i]) > max)
                 max = fabs(temp[i]);
@@ -243,14 +322,14 @@ void convolve_fill_inner_buffer(t_convolve *x)
         if(max != 0)
         {
             max = 1.f / max;
-            for(int i = 0; i < frames_per_channel; i++)
+            for(int i = 0; i < buffer_size; i++)
             {
                 temp[i] *= max;
             }
         }
     }
     
-    x->f_convolver->init(1024, temp, frames_per_channel);
+    x->f_convolver->init(x->f_fftsize, temp, buffer_size);
     free(temp);
     
     buffer_unlocksamples(buffer);
@@ -283,7 +362,9 @@ void convolve_perform64(t_convolve *x, t_object *d, double **ins, long ni, doubl
         convolve_fill_inner_buffer(x);
         x->f_buffer_need_update = 0;
     }
-        
+    
+    //x->f_convolver->process(ins[0], outs[0], sampleframes);
+    
     for (int i = 0; i < sampleframes; i++)
         x->f_sig_ins[i] = ins[0][i];
     
@@ -291,12 +372,6 @@ void convolve_perform64(t_convolve *x, t_object *d, double **ins, long ni, doubl
     
     for (int i = 0; i < sampleframes; i++)
         outs[0][i] = x->f_sig_outs[i];
-}
-
-void convolve_perform64_zero(t_convolve *x, t_object *d, double **ins, long ni, double **outs, long no, long sampleframes, long f,void *up)
-{
-    for (int i = 0; i < sampleframes; i++)
-        outs[0][i] = 0.f;
 }
 
 void convolve_dsp64(t_convolve *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)

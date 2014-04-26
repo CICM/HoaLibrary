@@ -189,11 +189,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"\"DENORM_WANT_FIX = 1\"",
 					"\"NO_TRANSLATION_SUPPORT = 1\"",
 					_APPLE_,
 				);
+				GCC_UNROLL_LOOPS = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -202,6 +206,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					Developer/usr/lib,
+				);
+				LLVM_LTO = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-O4",
 				);
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
@@ -215,12 +224,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"\"DENORM_WANT_FIX = 1\"",
 					"\"NO_TRANSLATION_SUPPORT = 1\"",
 					_APPLE_,
 				);
+				GCC_UNROLL_LOOPS = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -229,6 +242,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					Developer/usr/lib,
+				);
+				LLVM_LTO = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-O4",
 				);
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
