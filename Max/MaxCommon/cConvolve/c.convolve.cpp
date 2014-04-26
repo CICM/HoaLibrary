@@ -4,9 +4,29 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "HoaCommon.max.h"
+/**
+ @file      c.convolve~.cpp
+ @name      c.convolve~
+ @realname  c.convolve~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A zero latency convolution reverberation processor
+ 
+ @description
+ <o>c.convolve~</o> is a zero latency convolution reverberation processor
+ 
+ @discussion
+ <o>c.convolve~</o> is a zero latency convolution reverberation processor
+ 
+ @category hoa objects, audio, MSP
+ 
+ @seealso hoa.fx.convolve~, c.freeverb~, hoa.fx.freeverb~, hoa.process~
+ */
 
-#define CONVOLUTION_USE_FLOAT
+#include "HoaCommon.max.h"
 
 #include <algorithm>
 #include <cstring>
@@ -17,7 +37,6 @@
 #include <cstdlib>
 
 #include "FFTConvolver.h"
-//#include "Utilities.h"
 
 using namespace fftconvolver;
 
@@ -69,10 +88,23 @@ int C74_EXPORT main()
     
     class_dspinit(c);
 	
+    // @method signal @digest Signal to reverberate
+	// @description Signal to reverberate
     class_addmethod(c, (method) convolve_dsp64,     "dsp64",            A_CANT,  0);
+    
+    // @method set @digest Set a new impulse response by passing <o>buffer~</o> object name.
+	// @description The <m>set</m> method sets a new impulse response by passing <o>buffer~</o> object name. An optionnal int can be passed after buffer name to set the buffer channel to be used.
+	// @marg 0 @name buffer-name @optional 0 @type symbol
+	// @marg 1 @name channel @optional 1 @type int
     class_addmethod(c, (method) convolve_set,       "set",              A_GIMME, 0);
+    
+    // @method clear @digest Clear the current reverberation tail
+	// @description The <m>clear</m> method clear the current reverberation tail (may produce clicks)
     class_addmethod(c, (method) convolve_clear,     "clear",                     0);
     class_addmethod(c, (method) convolve_notify,	"notify",			A_CANT,  0);
+    
+    // @method (mouse) @digest Open the file buffer object window.
+	// @description Double-clicking on the <o>c.convolve~</o> opens a display window where you can view the contents of the <o>buffer~</o> used to load the impulse response.
     class_addmethod(c, (method) convolve_dblclick,  "dblclick",         A_CANT,  0);
     
     CLASS_ATTR_SYM                  (c, "buffer", 0, t_convolve, f_buffer_name);
@@ -81,6 +113,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "buffer", 0, "Buffer~ Object Name");
 	CLASS_ATTR_SAVE                 (c, "buffer", 1);
     CLASS_ATTR_ORDER                (c, "buffer",  0, "1");
+    // @description The <b>buffer</b> attribute is the name of the <o>buffer~</o> used to read the impulse response.
 	
     CLASS_ATTR_LONG                 (c, "channel", 0, t_convolve, f_channel_offset);
     CLASS_ATTR_CATEGORY             (c, "channel", 0, "Behavior");
@@ -88,6 +121,7 @@ int C74_EXPORT main()
     CLASS_ATTR_LABEL                (c, "channel", 0, "Channel");
     CLASS_ATTR_SAVE                 (c, "channel", 1);
     CLASS_ATTR_ORDER                (c, "channel",  0, "2");
+    // @description The <b>channel</b> attribute is the channel number of the impulse response buffer.
     
     CLASS_ATTR_LONG                 (c, "normalize",  0, t_convolve, f_normalize);
 	CLASS_ATTR_CATEGORY             (c, "normalize",  0, "Behavior");
@@ -103,6 +137,7 @@ int C74_EXPORT main()
     CLASS_ATTR_LABEL                (c, "fftsize", 0, "FFT size");
     CLASS_ATTR_SAVE                 (c, "fftsize", 1);
     CLASS_ATTR_ORDER                (c, "fftsize",  0, "4");
+    // @description The <b>fftsize</b> attribute is the <o>c.convolve</o> FFT size.
     
     CLASS_ATTR_ATOM                 (c, "cropsize", 0, t_convolve, f_crop_size);
     CLASS_ATTR_CATEGORY             (c, "cropsize", 0, "Behavior");
@@ -110,6 +145,8 @@ int C74_EXPORT main()
     CLASS_ATTR_LABEL                (c, "cropsize", 0, "Crop size (ms)");
     CLASS_ATTR_SAVE                 (c, "cropsize", 1);
     CLASS_ATTR_ORDER                (c, "cropsize",  0, "5");
+    // @description Use the <b>cropsize</b> attribute to limit the impulse response at a maximum size. It can be usefull to prevent too big CPU usage when loading big impulse responses.
+    // the <b>cropsize</b> is set in milliseconds, dont set this if you want to play the entire IR.
     
     class_register(CLASS_BOX, c);
 	convolve_class = c;
@@ -363,15 +400,21 @@ void convolve_perform64(t_convolve *x, t_object *d, double **ins, long ni, doubl
         x->f_buffer_need_update = 0;
     }
     
-    //x->f_convolver->process(ins[0], outs[0], sampleframes);
-    
+#ifdef _APPLE_
+    vDSP_vdpsp(ins[0], 1, x->f_sig_ins, 1, sampleframes);
+#else
     for (int i = 0; i < sampleframes; i++)
         x->f_sig_ins[i] = ins[0][i];
+#endif
     
     x->f_convolver->process(x->f_sig_ins, x->f_sig_outs, sampleframes);
     
+#ifdef _APPLE_
+    vDSP_vspdp(x->f_sig_outs, 1, outs[0], 1, sampleframes);
+#else
     for (int i = 0; i < sampleframes; i++)
         outs[0][i] = x->f_sig_outs[i];
+#endif
 }
 
 void convolve_dsp64(t_convolve *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)

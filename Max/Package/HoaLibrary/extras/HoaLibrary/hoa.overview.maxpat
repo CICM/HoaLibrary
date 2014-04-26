@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -429,7 +429,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 727.0625, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 637.0625, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -551,7 +551,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -960,7 +960,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 1.0,
 									"spacing_y" : 0.0,
-									"tabs" : [ "all", "2d", "3d", "GUI", "utilities", "fx patches", "synth patches", "operators", "tutorials" ]
+									"tabs" : [ "all", "2d", "3d", "GUI", "utilities", "fx patches", "synth patches", "operators" ]
 								}
 
 							}
@@ -1000,7 +1000,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "Tutorial 1 - Basics" ]
+									"tabs" : [ "hoa.fx.convolve~", "hoa.fx.decorrelation~", "hoa.fx.delay~", "hoa.fx.freeverb~", "hoa.fx.gain~", "hoa.fx.grain~", "hoa.fx.granular~", "hoa.fx.mirror~", "hoa.fx.mixer~", "hoa.fx.ringmod~" ]
 								}
 
 							}

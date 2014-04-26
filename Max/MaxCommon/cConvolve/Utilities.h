@@ -180,7 +180,6 @@ private:
 /**
 * @brief Type of one sample
 */
-//typedef double Sample;
 typedef float Sample;
 
 

@@ -20,7 +20,7 @@
  <o>hoa.send</o> is a multichannel version of the <o>send</o> object.
  This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
- @category ambisonics, hoa objects, audio, MSP, abstraction
+ @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
  @seealso send, hoa.send~, hoa.send, hoa.send
  */

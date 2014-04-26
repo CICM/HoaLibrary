@@ -4,6 +4,28 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
+/**
+ @file      c.freeverb~.cpp
+ @name      c.freeverb~
+ @realname  c.freeverb~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A freeverb reverberation processor implementation
+ 
+ @description
+ <o>c.freeverb~</o> is a freeverb reverberation processor implementation
+ 
+ @discussion
+ <o>c.freeverb~</o> is a freeverb reverberation processor implementation
+ 
+ @category hoa objects, audio, MSP
+ 
+ @seealso hoa.fx.freeverb~, c.convolve~, hoa.fx.convolve~, hoa.process~
+ */
+
 #include "HoaCommon.max.h"
 
 const int	numcombs		= 8;
@@ -224,11 +246,24 @@ int C74_EXPORT main(void)
     
 	c = class_new("c.freeverb~", (method)freeverb_new, (method)freeverb_free, (short)sizeof(t_freeverb), 0L, A_GIMME, 0);
     
+    // @method signal @digest Signal to reverberate
+	// @description Signal to reverberate
     class_addmethod(c, (method) freeverb_dsp,             "dsp64",            A_CANT, 0);
 	class_addmethod(c, (method) freeverb_assist,          "assist",           A_CANT, 0);
     
+    // @method roomsize @digest Set the room size
+	// @description The <m>roomsize</m> method sets the size of the room (between 0 and 1).
+	// @marg 0 @name room-size @optional 0 @type float
     class_addmethod(c, (method) freeverb_roomsize,        "roomsize",         A_FLOAT, 0);
+    
+    // @method damp @digest Set damp of the reverberation
+	// @description The <m>damp</m> method sets the damp of the reverberation (between 0 and 1).
+	// @marg 0 @name damp @optional 0 @type float
     class_addmethod(c, (method) freeverb_damp,            "damp",             A_FLOAT, 0);
+    
+    // @method freeze @digest Freeze the reverberation
+	// @description The <m>freeze</m> method can be used to freeze the reverberation
+	// @marg 0 @name freeze-onoff @optional 0 @type int
     class_addmethod(c, (method) freeverb_freeze,          "freeze",           A_LONG, 0);
     
     class_dspinit(c);
@@ -238,13 +273,16 @@ int C74_EXPORT main(void)
 
 void *freeverb_new(t_symbol *s, int argc, t_atom *argv)
 {
+    // @arg 0 @name freeverb-channel @optional 1 @type symbol/int @digest The freeverb channel
+	// @description First argument is the freeverb channel. it can either be left/0 or right/1
+    
 	t_freeverb *x =  NULL;
     
     x = (t_freeverb *)object_alloc(freeverb_class);
     
     if (x)
     {
-        if(argc && argv && atom_gettype(argv) == A_FLOAT)
+        if(argc && argv && atom_gettype(argv) == A_LONG)
         {
             if(!atom_getfloat(argv))
                 x->f_freeverb = new Freeverb(0);
