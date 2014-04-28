@@ -12,6 +12,11 @@
 HoaToolsAudioProcessor::HoaToolsAudioProcessor() : KitSources()
 {
     m_gui = gui_mode_map;
+    setDecodingMode(DecoderMulti::Binaural);
+    setNumberOfSources(2);
+    setNumberOfInputs(2);
+    setNumberOfOutputs(2);
+    applyChanges();
 }
 
 HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
@@ -244,48 +249,18 @@ const String HoaToolsAudioProcessor::getParameterText (int index)
 /************************************************************************************/
 
 
-void HoaToolsAudioProcessor::numChannelsChanged()
-{
-    if(getNumInputChannels() < getNumberOfSources())
-    {
-        setNumberOfSources(getNumInputChannels());
-    }
-    if(getNumOutputChannels() < getNumberOfChannels())
-    {
-        setNumberOfChannels(getNumOutputChannels());
-    }
-    if(isSuspended())
-    {
-        if(applyChanges())
-        {
-            setNumberOfInputs(getNumberOfSources());
-            setNumberOfOutputs(getNumberOfChannels());
-        }
-    }
-    
-    if(getActiveEditor())
-        getActiveEditor()->processorHasBeenUpdated();
-    
-    updateHostDisplay();
-}
-
 void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
 	setSampleRate(sampleRate);
 	setVectorSize(samplesPerBlock);
-    if(applyChanges())
-    {
-        setNumberOfInputs(getNumberOfSources());
-        setNumberOfOutputs(getNumberOfChannels());
-        updateHostDisplay();
-        if(getActiveEditor())
-            getActiveEditor()->processorHasBeenUpdated();
-    }
+
+    if(getActiveEditor())
+    getActiveEditor()->processorHasBeenUpdated();
 }
 
 void HoaToolsAudioProcessor::releaseResources()
 {
-    
+    ;
 }
 
 void HoaToolsAudioProcessor::processBlock(float** inputs, float** outputs)
@@ -293,14 +268,6 @@ void HoaToolsAudioProcessor::processBlock(float** inputs, float** outputs)
     if(getNumOutputChannels() >= getNumberOfChannels() && getNumInputChannels() >= getNumberOfSources())
     {
         process((const float**)inputs, outputs);
-    }
-    if(applyChanges())
-    {
-        setNumberOfInputs(getNumberOfSources());
-        setNumberOfOutputs(getNumberOfChannels());
-        updateHostDisplay();
-        if(getActiveEditor())
-            getActiveEditor()->processorHasBeenUpdated();
     }
 }
 
