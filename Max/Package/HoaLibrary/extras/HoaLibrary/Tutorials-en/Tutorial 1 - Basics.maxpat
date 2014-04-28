@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 26.0, 44.0, 848.0, 806.0 ],
+		"rect" : [ 459.0, 86.0, 848.0, 806.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -42,7 +42,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -68,6 +68,137 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 376.325012, 542.0, 43.0, 20.0 ],
+									"presentation_rect" : [ 372.325012, 555.0, 0.0, 0.0 ],
+									"text" : "BACK",
+									"textcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-21",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 371.325012, 336.0, 52.0, 20.0 ],
+									"presentation_rect" : [ 369.0, 336.0, 0.0, 0.0 ],
+									"text" : "FRONT",
+									"textcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-19",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 482.325012, 452.0, 48.0, 20.0 ],
+									"presentation_rect" : [ 503.0, 456.0, 0.0, 0.0 ],
+									"text" : "RIGHT",
+									"textcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-18",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 265.325012, 452.0, 40.0, 20.0 ],
+									"text" : "LEFT",
+									"textcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.666667, 0.666667, 0.666667, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 0.25, 0.25, 0.25, 1.0 ],
+									"id" : "obj-16",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 217.325012, 282.0, 360.0, 360.0 ],
+									"rounded" : 20,
+									"shape" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"arrows" : 1,
+									"border" : 3.0,
+									"id" : "obj-4",
+									"justification" : 1,
+									"linecolor" : [ 0.165985, 0.310546, 1.0, 1.0 ],
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 387.825012, 427.0, 19.0, 25.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgtransparent" : 1,
+									"id" : "obj-3",
+									"ignoreclick" : 1,
+									"maxclass" : "lcd",
+									"numinlets" : 1,
+									"numoutlets" : 4,
+									"outlettype" : [ "list", "list", "int", "" ],
+									"patching_rect" : [ 207.325012, 272.0, 380.0, 380.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"border" : 2.0,
+									"id" : "obj-11",
+									"justification" : 4,
+									"linecolor" : [ 0.25, 0.25, 0.25, 1.0 ],
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 265.325012, 330.0, 265.0, 264.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"border" : 2.0,
+									"id" : "obj-9",
+									"justification" : 3,
+									"linecolor" : [ 0.25, 0.25, 0.25, 1.0 ],
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 265.325012, 330.0, 265.0, 264.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontface" : 3,
 									"fontname" : "Arial",
@@ -118,7 +249,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -220,8 +351,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 172.849976, 231.059937, 70.0, 17.0 ],
-													"text" : "pensize 3 3"
+													"patching_rect" : [ 172.849976, 231.059937, 138.0, 17.0 ],
+													"text" : "pensize 3 3, frgb 0 0 200"
 												}
 
 											}
@@ -234,7 +365,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 178.349976, 139.059937, 37.0, 18.0 ],
+													"patching_rect" : [ 257.349976, 322.059937, 37.0, 18.0 ],
 													"text" : "clear"
 												}
 
@@ -248,7 +379,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 105.059937, 189.0, 19.0 ],
+													"patching_rect" : [ 132.349976, 260.059937, 189.0, 19.0 ],
 													"text" : "framearc 30 30 350 350 -90 90"
 												}
 
@@ -405,19 +536,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgtransparent" : 1,
-									"id" : "obj-3",
-									"ignoreclick" : 1,
-									"maxclass" : "lcd",
-									"numinlets" : 1,
-									"numoutlets" : 4,
-									"outlettype" : [ "list", "list", "int", "" ],
-									"patching_rect" : [ 207.325012, 272.0, 380.0, 380.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
@@ -427,7 +545,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 68.0, 815.650024, 123.0 ],
-									"text" : "The ambisonic model is based on a polar representation of space in adequacy with a listener placed at the center of a circle of loudspeakers.\n\nWe arbitrarily define the direction of rotation is counterclockwise, and the 0° is 90° phase shifted relative to a mathematical representation of a circle.\n\nThe angles are usually defined in radians (between 0 and 2π rad) for a representation of space in the field of circular harmonics and in degrees (between 0° and 360 °) for a representation of the space outside the scope of circular harmonics.\n\nIt is customary to define as the \"front\" of the sound field is at 0° or 0 rad, the \"left\" at 90 ° or π/2 rad, \"back\" to 180° or π rad and \"right\" to 270° or 3/2π rad assuming a listener in the center of the sound field is directed to 0° as the blue arrow represents.",
+									"text" : "The ambisonic model is based on a polar representation of space in adequacy with a listener placed at the center of a circle of loudspeakers.\n\nWe arbitrarily define the direction of rotation as counterclockwise, and the 0° is 90° phase shifted relative to a mathematical representation of a circle.\n\nThe angles are usually defined in radians (between 0 and 2π rad) for a representation of space in the circular harmonics domain and in degrees (between 0° and 360 °) for a representation of the space outside the circular harmonics domain.\n\nIt is customary to define the \"front\" of the sound field at 0° or 0 rad, the \"left\" at 90 ° or π/2 rad, the \"back\" at 180° or π rad and the\"right\" at 270° or 3/2π rad assuming that the listener is directed to 0°.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -554,11 +672,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 848.0, 780.0 ],
+						"rect" : [ 459.0, 112.0, 848.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -798,8 +916,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 83.0, 814.0, 279.0 ],
-									"text" : "In ambisonics, decoding is the operation which consists in synthesizing the signals assigned to the loudspeakers. As in any spatial techniques, this operation has advantages and limitations.\n\nThe ambisonics can synthesize various sound fields and restore them via a single decoding operation offering the advantage of being able to encode a variety of sources while using one decoding and thus reduce the CPU.\n\nSeparate these two processes can not only perform many operations in the field of circular harmonics but also to record the sound field in the field of harmonics circulars thereafter, restore it on different configurations of speakers.\n\nThe ambisonics offers a seamless rendering of the sound field. Unlike other techniques where the angular spatial resolution of the sound sources depends on the direction of the source, ambisonics provides a constant angular resolution across the circle quite diminish the quality of restitution.\n\nThe restitution system in ambisonics is restricted by the order of decomposition and acoustic principles underlying these techniques. The number of loudspeakers must be smaller than or equal to the number of harmonics. Thus the minimum number of loudspeakers is 3 for an order of decomposition of 1. In addition, the loudspeakers must be placed on a circle at equal distance from each other. However, note that these restrictions can be circumvented at the expense of the quality of reproduction of the sound field. Thus, it is possible to project the sound field of systems ranging from stereo to an infinity of loudspeakers through all irregular configurations such as 5.1. (see hoa.decoder~ object).\n\nIn ambisonics, the auditor should be ideally placed in the very center of the circle or the sound field image will be distorted. Note however that the use of the maxRe or inPhase optimizations (see hoa.optim~ object) are used to overcome this constraint at the expense of spatial resolution and offer the possibility of an audience spread across the circle.",
+									"patching_rect" : [ 7.0, 83.0, 807.0, 279.0 ],
+									"text" : "With Ambisonics, decoding is the operation that synthesizes the signals of the loudspeakers. As in any spatialisation technique, this operation has advantages and limitations.\n\nAmbisonics allows to synthesize several sound fields and to decodes them with only a one operation offering. This advantage allows to reduce the CPU usage.\n\nThe separation of these two operations allows to perform many operations between them, in the circular harmonics domain, and also to record the sound field in this domain. Thus, it is possible to adapt the sound field, after the synthesis, to the speakers arrengement.\n\nAmbisonics offers a homogeneous rendering of the sound field. Unlike other techniques where the angular resolution varies depending on the sources directions, Ambisonics provides a constant angular resolution across the circle.\n\nNevertheless, the restitution system is restricted by the order of decomposition. The number of loudspeakers must be smaller than or equal to the number of harmonics. Thus, the minimum number of loudspeakers is 3 for an order of decomposition of 1 Futhermore, the loudspeakers must be placed on a circle at equal distance from each other. However, these restrictions can be bypassed to the detriment of the quality of the sound field restitution. Thus, in practise, it is, in fact, possible to project the sound field on many loudspeakers systems from stereo to an infinity of loudspeakers through all irregular configurations such as 5.1, 7.1 and headphones (see hoa.2d.decoder~ object).\n\nWith Ambisonics, the auditor should be ideally placed at the center of the loudspeakers array otherwise the sound field resitution will be distorted. However, the use of the maxRe or inPhase optimizations (see hoa.optim~ object) can make up this artefact (to the detriment of the spatial resolution) and offers the possibility of an audience spread all over the circle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1729,7 +1847,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -1755,6 +1873,39 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-45",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 429.0, 280.0, 396.0, 19.0 ],
+									"presentation_rect" : [ 427.0, 284.0, 0.0, 0.0 ],
+									"text" : "With m the order, l the degree and a the azimuth.",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-29",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 429.0, 210.5, 198.0, 32.0 ],
+									"presentation_rect" : [ 430.0, 242.0, 0.0, 0.0 ],
+									"text" : "if m < 0\n  G(m, a) = sin(l*a)",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -2036,12 +2187,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-30",
-									"linecount" : 8,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 815.0, 110.0 ],
-									"text" : "In ambisonics, encode a sound source consists of giving a punctual character in a spatial meaning to the sound source. The sound source, once restored, can, following this operation, be perceptually defined as coming from a specific point in space.\n\nEncode a sound source in the circular harmonics field returns to synthesize circular harmonics dependent signals depending on the angle of incidence given to the sound source.\n\nThis operation consists in assigning the signal from the sound source to be encoded to each of the circular harmonics dependent signals and applying a gain to each of these signals as a function of the indices of the harmonic which they depend on and of the encoding angle.",
+									"patching_rect" : [ 7.0, 81.0, 815.0, 84.0 ],
+									"text" : "With Ambisonics, the encoding operation gives the spatials informations to a sound. \nThus, the sound can be listened as coming from a point of the space. \n\nEncoding a source in the circular harmonics domain returns to synthesize the circular harmonics depending on an azimuth. \n\nThis operation consits to apply a gain to the sound depending on the order of the harmonic and this azimuth.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2215,7 +2366,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 208.0, 399.0, 97.0 ],
+									"patching_rect" : [ 7.0, 193.0, 399.0, 97.0 ],
 									"text" : "For a decomposition order of one, the sound field is represented by three circular harmonics. The gains of harmonics dependent signals depends on the encoding angle :\n\nThe gain of the harmonic 0 is 1.\nThe gain of the harmonic -1 is equal to the sinus of the angle.\nThe gain of the harmonic 1 is equal to the cosinus of the angle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -2354,7 +2505,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 208.0, 399.0, 97.0 ],
+									"patching_rect" : [ 7.0, 193.0, 399.0, 97.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -2408,12 +2559,11 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-14",
-									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 429.0, 208.0, 392.0, 71.0 ],
-									"text" : "For decomposition at higher orders, the gain G of the harmonics of order i and index n and at an angle θ are:\n\nIf i > 0,\nG(n,θ) = cos⁡(nθ)\n",
+									"patching_rect" : [ 429.0, 193.0, 396.0, 19.0 ],
+									"text" : "For high order of decomposition, the gain G of the harmonics is defined by :",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2428,8 +2578,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 429.0, 273.0, 198.0, 32.0 ],
-									"text" : "else\nG(n,θ) = sin⁡(nθ)\n",
+									"patching_rect" : [ 429.0, 243.0, 198.0, 32.0 ],
+									"text" : "else\n  G(m, a) = cos(l*a)",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2442,7 +2592,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 429.0, 208.0, 392.0, 97.0 ],
+									"patching_rect" : [ 429.0, 193.0, 396.0, 107.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -2795,7 +2945,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -2896,7 +3046,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -3319,8 +3469,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 809.650024, 149.0 ],
-									"text" : "The order of decomposition affects the quality of the sound field resititution. More the order of decomposition is high, more the sound field is represented by a large number of circular harmonics and the \"spatial resolution\" of the sound field increases.\n\n\"Quality\" or \"relevance\" of ambisonic processings varies depending on the spatial resolution. During the encoding of a sound source in the circular harmonics field, the precision with which the listener perceives a sound source depends on the spatial resolution of the sound field.\n\nMore the decomposition order increases, more the listener can clearly define the direction of a sound source. It is customary to talk about \"angular resolution\" to describe the precision with which the listener perceives a sound source.\n\nThe \"spatial resolution\" is a broader concept to qualify more varied and complex sound field where sound field is not necessarily composed of punctual source sources (eg. diffuse sound field).",
+									"patching_rect" : [ 7.0, 68.0, 814.0, 149.0 ],
+									"text" : "The order of decomposition affects the quality of the sound field restitution. \nWhile the order of decomposition increases, the number of circular harmonics increases and the \"spatial resolution\" of the sound field increases. \n\"Quality\" or \"relevance\" of ambisonic processings varies according to the spatial resolution. \n\nDuring the encoding of a point source in the circular harmonics field, the precision with which the listener perceives a point source depends on the spatial resolution of the sound field. \n\nWith a high order of decomposition, the listener can clearly define the direction of a point source. It is usual to talk about \"angular resolution\" to describe the precision with which the listener perceives a point source. \nThe \"spatial resolution\" is a broader concept to qualify more varied and complex sound field where sound field is not necessarily composed of point sources (eg. diffuse sound field).",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3557,7 +3707,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 264.0, 809.650024, 32.0 ],
-									"text" : "This example change the order of decomposition by canceling the contributions of circular harmonics above a certain order, which causes a decrease in the spatial resolution of the sound field, and in the case of a punctual sound source, a decrease of the angular resolution.",
+									"text" : "This example changes the order of decomposition by canceling the contributions of circular harmonics above a certain order, which causes a decrease in the spatial resolution of the sound field, and in the case of a point source, a decrease of the angular resolution.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -4334,11 +4484,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 26.0, 70.0, 848.0, 780.0 ],
+						"rect" : [ 0.0, 26.0, 848.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4360,6 +4510,330 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-58",
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 361.5, 572.201172, 421.5, 5.0 ],
+									"presentation_rect" : [ 512.0, 337.798828, 0.0, 0.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-55",
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 563.0, 397.798828, 18.0, 343.701172 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-42",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 6,
+											"minor" : 1,
+											"revision" : 7,
+											"architecture" : "x64"
+										}
+,
+										"rect" : [ 646.0, 125.0, 640.0, 480.0 ],
+										"bglocked" : 0,
+										"openinpresentation" : 0,
+										"default_fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"gridonopen" : 0,
+										"gridsize" : [ 15.0, 15.0 ],
+										"gridsnaponopen" : 0,
+										"statusbarvisible" : 2,
+										"toolbarvisible" : 1,
+										"boxanimatetime" : 200,
+										"imprint" : 0,
+										"enablehscroll" : 1,
+										"enablevscroll" : 1,
+										"devicewidth" : 0.0,
+										"description" : "",
+										"digest" : "",
+										"tags" : "",
+										"boxes" : [ 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 12.0,
+													"id" : "obj-6",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 116.0, 293.0, 74.0, 20.0 ],
+													"text" : "prepend set"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-1",
+													"maxclass" : "outlet",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 116.0, 346.0, 25.0, 25.0 ]
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 11.595187,
+													"id" : "obj-42",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 2,
+													"outlettype" : [ "int", "int" ],
+													"patching_rect" : [ 102.5, 110.201172, 87.5, 19.0 ],
+													"text" : "t i 0"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 11.595187,
+													"id" : "obj-40",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 214.5, 261.201172, 95.0, 19.0 ],
+													"text" : "prepend append"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 11.595187,
+													"id" : "obj-32",
+													"maxclass" : "newobj",
+													"numinlets" : 2,
+													"numoutlets" : 3,
+													"outlettype" : [ "bang", "bang", "int" ],
+													"patching_rect" : [ 102.5, 163.201172, 46.0, 19.0 ],
+													"text" : "uzi 0"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-43",
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "int" ],
+													"patching_rect" : [ 102.5, 40.0, 25.0, 25.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-40", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-32", 2 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-1", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"midpoints" : [ 224.0, 333.0, 125.5, 333.0 ],
+													"source" : [ "obj-40", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-32", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-42", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-6", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-42", 1 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-42", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-43", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-1", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-6", 0 ]
+												}
+
+											}
+ ]
+									}
+,
+									"patching_rect" : [ 361.5, 653.701172, 74.0, 19.0 ],
+									"presentation_rect" : [ 294.5, 689.0, 0.0, 0.0 ],
+									"saved_object_attributes" : 									{
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"description" : "",
+										"digest" : "",
+										"fontface" : 0,
+										"fontname" : "Arial",
+										"fontsize" : 12.0,
+										"globalpatchername" : "",
+										"tags" : ""
+									}
+,
+									"text" : "p DecToDeg"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-43",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 361.5, 681.902344, 85.0, 17.0 ],
+									"presentation_rect" : [ 294.5, 717.201172, 0.0, 0.0 ],
+									"text" : "0 1 2 3 4 5 6 7"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"hidden" : 1,
+									"id" : "obj-45",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 361.5, 591.201172, 70.0, 19.0 ],
+									"presentation_rect" : [ 294.5, 628.701172, 0.0, 0.0 ],
+									"text" : "loadmess 7"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-47",
+									"maxclass" : "number",
+									"minimum" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "int", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 361.5, 629.902344, 50.0, 19.0 ],
+									"presentation_rect" : [ 294.5, 665.201172, 0.0, 0.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-51",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 361.5, 704.701172, 95.0, 32.0 ],
+									"presentation_rect" : [ 294.5, 747.0, 0.0, 0.0 ],
+									"text" : "degrees of the harmonics"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-52",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 361.5, 704.701172, 95.0, 32.0 ],
+									"presentation_rect" : [ 294.5, 747.0, 0.0, 0.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-53",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 361.5, 584.701172, 95.0, 32.0 ],
+									"presentation_rect" : [ 294.5, 620.0, 0.0, 0.0 ],
+									"text" : "Order of decomposition"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-54",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 361.5, 584.701172, 95.0, 32.0 ],
+									"presentation_rect" : [ 294.5, 620.0, 0.0, 0.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -4490,11 +4964,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-38",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 426.0, 529.0, 19.0 ],
-									"text" : "Relationship between the order of decomposition, the number of harmonics and the harmonic indices",
+									"patching_rect" : [ 338.5, 348.5, 405.0, 32.0 ],
+									"text" : "Relationship between the order of decomposition, the number of harmonics the orders of the harmonics",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -4507,7 +4982,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 426.0, 529.0, 20.0 ],
+									"patching_rect" : [ 338.5, 348.5, 405.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -4567,7 +5042,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -4843,7 +5318,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -5003,7 +5478,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 521.5, 494.0, 65.0, 19.0 ],
+									"patching_rect" : [ 647.25, 436.798828, 65.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -5035,7 +5510,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -5251,7 +5726,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 609.0, 521.798828, 88.0, 19.0 ],
+									"patching_rect" : [ 589.5, 651.5, 83.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -5265,7 +5740,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p orderToIndex"
+									"text" : "p DecToOrder"
 								}
 
 							}
@@ -5278,7 +5753,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 609.0, 550.0, 193.5, 17.0 ],
+									"patching_rect" : [ 589.5, 679.701172, 193.5, 17.0 ],
 									"text" : "0 -1 1 -2 2 -3 3 -4 4 -5 5 -6 6 -7 7"
 								}
 
@@ -5293,7 +5768,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 609.0, 461.5, 70.0, 19.0 ],
+									"patching_rect" : [ 589.5, 591.201172, 70.0, 19.0 ],
 									"text" : "loadmess 7"
 								}
 
@@ -5309,7 +5784,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 609.0, 498.0, 50.0, 19.0 ]
+									"patching_rect" : [ 589.5, 627.701172, 50.0, 19.0 ]
 								}
 
 							}
@@ -5323,8 +5798,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 586.5, 582.0, 95.0, 32.0 ],
-									"text" : "harmonics indices."
+									"patching_rect" : [ 589.5, 709.5, 95.0, 32.0 ],
+									"text" : "Orders of the harmonics"
 								}
 
 							}
@@ -5336,7 +5811,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 586.5, 582.0, 95.0, 32.0 ],
+									"patching_rect" : [ 589.5, 709.5, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5352,8 +5827,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 586.5, 455.0, 95.0, 32.0 ],
-									"text" : "Decomposition order"
+									"patching_rect" : [ 589.5, 582.5, 95.0, 32.0 ],
+									"text" : "Order of decomposition"
 								}
 
 							}
@@ -5365,7 +5840,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 586.5, 455.0, 95.0, 32.0 ],
+									"patching_rect" : [ 589.5, 582.5, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5381,7 +5856,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 463.75, 461.5, 76.0, 19.0 ],
+									"patching_rect" : [ 589.5, 404.298828, 76.0, 19.0 ],
 									"text" : "loadmess 15"
 								}
 
@@ -5396,7 +5871,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 320.0, 461.5, 70.0, 19.0 ],
+									"patching_rect" : [ 361.5, 409.5, 70.0, 19.0 ],
 									"text" : "loadmess 7"
 								}
 
@@ -5411,7 +5886,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.25, 455.0, 95.0, 32.0 ],
+									"patching_rect" : [ 589.5, 397.798828, 95.0, 32.0 ],
 									"text" : "Number of harmonics"
 								}
 
@@ -5424,7 +5899,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.25, 455.0, 95.0, 32.0 ],
+									"patching_rect" : [ 589.5, 397.798828, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5440,7 +5915,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 463.75, 549.0, 50.0, 19.0 ]
+									"patching_rect" : [ 589.5, 491.798828, 50.0, 19.0 ]
 								}
 
 							}
@@ -5453,7 +5928,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 463.75, 521.0, 92.0, 19.0 ],
+									"patching_rect" : [ 589.5, 463.798828, 92.0, 19.0 ],
 									"text" : "expr ($i1 - 1) / 2"
 								}
 
@@ -5468,8 +5943,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.25, 582.0, 95.0, 32.0 ],
-									"text" : "Decomposition order"
+									"patching_rect" : [ 589.5, 524.798828, 95.0, 32.0 ],
+									"text" : "Order of decomposition"
 								}
 
 							}
@@ -5484,7 +5959,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 463.75, 494.0, 50.0, 19.0 ]
+									"patching_rect" : [ 589.5, 436.798828, 50.0, 19.0 ]
 								}
 
 							}
@@ -5496,7 +5971,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.25, 582.0, 95.0, 32.0 ],
+									"patching_rect" : [ 589.5, 524.798828, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5512,7 +5987,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 320.0, 549.0, 50.0, 19.0 ]
+									"patching_rect" : [ 361.5, 497.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -5525,7 +6000,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 320.0, 521.0, 89.0, 19.0 ],
+									"patching_rect" : [ 361.5, 469.0, 89.0, 19.0 ],
 									"text" : "expr $i1 * 2 + 1"
 								}
 
@@ -5540,7 +6015,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 582.0, 95.0, 32.0 ],
+									"patching_rect" : [ 361.5, 527.0, 95.0, 32.0 ],
 									"text" : "Number of harmonics"
 								}
 
@@ -5553,7 +6028,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 582.0, 95.0, 32.0 ],
+									"patching_rect" : [ 361.5, 527.0, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5569,8 +6044,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 455.0, 95.0, 32.0 ],
-									"text" : "Decomposition order"
+									"patching_rect" : [ 361.5, 400.0, 95.0, 32.0 ],
+									"text" : "Order of decomposition"
 								}
 
 							}
@@ -5585,7 +6060,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 320.0, 494.0, 50.0, 19.0 ]
+									"patching_rect" : [ 361.5, 442.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -5647,7 +6122,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -5837,7 +6312,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 297.5, 455.0, 95.0, 32.0 ],
+									"patching_rect" : [ 361.5, 400.0, 95.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5849,12 +6324,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-8",
-									"linecount" : 15,
+									"linecount" : 14,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 817.0, 201.0 ],
-									"text" : "Circular harmonics are dependent on an order n and an index i and take as variable an angle α in radian.\n\nEach order n includes a so-called negative harmonic whose index is n and a positive harmonic whose index is -n except 0, which has only one harmonic index 0 considered positive. \n\nThese circular functions can be represented on a two-dimensional space. Depending on the angle α, the functions are positive (red) or negative (blue).\n\nThe decomposition of a sound field in the circular harmonics field used by ambisonics technology is performed according to an order of decomposition N.\n\nA given decomposition order N \"includes\" all less than or equal to N (order 0 to N). The sound field is then encoded by 2 n +1 harmonics whose indices range are from -n to n and are usually interleaved.\n\nSo, for an order of decomposition 7, there are 15 harmonics whose indices are : 0, -1, 1, -2, 2, -3, 3, ... , -7, 7.\n\nHarmonic 0 is omnidirectional, the number of lobes and their directivities increases proportionally to the harmonics order increase.",
+									"patching_rect" : [ 7.0, 68.0, 814.0, 188.0 ],
+									"text" : "The circular harmonics are dependent on a degree l and an order m and take as variable an angle α in radian. \nEach degree l includes a positive harmonic with the order m = l and a negative harmonic with the order m = -l except the degree 0 that has only one harmonic with the order 0 considered positive.\n\nThese circular functions can be represented on a two-dimensional space. Depending on the angle α, the functions are positive (red) or negative (blue).\n\nThe decomposition of a sound field in the circular harmonics domain is performed according to an order of decomposition N. \nA given decomposition order N includes all the degrees from 0 to N and thus all the orders from -N to N. Thus, the sound field is encoded by 2 N + 1 circular harmonics.\n\nFor an order of decomposition 7 :\nthere are 15 harmonics sorted by their degrees and their orders : (degree order) 0 0, 1 -1, 1 1, 2 -2, 2 2, 3 -3, 3 3, ..., 7 -7, 7 7\n\nThe harmonic 0 is omnidirectional and the number of lobes of the harmonics and their directivities increase with the degrees.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -6034,10 +6509,28 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-43", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-42", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-39", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-44", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-47", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-45", 0 ]
 								}
 
 							}
@@ -6193,6 +6686,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-42", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-47", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-56", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -6262,7 +6764,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -6413,7 +6915,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 68.0, 817.0, 45.0 ],
-									"text" : "Ambisonics is a set of techniques for recording, synthesis, transformation and restitution of sound field based on a physical representation of the sound field in the spherical or circular harmonics field. This representation is based on a decomposition of the sound field in a weighted sum of spatial functions that allows a wide range of sound and space processing.",
+									"text" : "Ambisonics is a set of techniques for the recording, synthesis, transformation and restitution of sound field based on a physical representation of the space in the spherical or circular harmonics domain. This representation is based on a decomposition of the space by a weighted sum of spatial functions, the harmonics, that allows a wide range of sound and space processings.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -6508,12 +7010,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-25",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 433.649994, 534.525024, 166.0, 58.0 ],
-									"text" : "representation of the contribution of 16 loudspeakers regularly placed over a circle.",
+									"patching_rect" : [ 433.649994, 534.525024, 166.0, 45.0 ],
+									"text" : "Representation of the contribution of 16 loudspeakers",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -6529,7 +7031,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 688.0, 260.0, 115.0, 45.0 ],
-									"text" : "Circular harmonics representation over a plane.",
+									"text" : "Representation of the circular harmonics",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -6740,7 +7242,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 133.0, 817.0, 32.0 ],
-									"text" : "In this example, a sound source is encoded in a two-dimensional space at an incident angle. The synthesized sound field comprises the sound source and its spatial information as signals dependent circular harmonics. Thereafter, the sound field is decoded to a set of loudspeakers.",
+									"text" : "In this example, a source is encoded in a two-dimensional space. The synthesized sound field owns the sound and its spatial information in the form of circular harmonics. Thereafter, the sound field is decoded to a set of loudspeakers.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
