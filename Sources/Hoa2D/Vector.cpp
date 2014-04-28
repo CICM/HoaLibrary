@@ -53,11 +53,12 @@ namespace Hoa2D
 
     void Vector::processVelocity(const float* inputs, float* outputs)
     {
-        float veclocitySum = 0.f, velocityAbscissa = 0.f, velocityOrdinate = 0.f;
-
-        veclocitySum = 0.;
+        float veclocitySum, velocityAbscissa, velocityOrdinate;
+        veclocitySum = velocityAbscissa = velocityOrdinate = 0.f;
+		
         for(int i = 0; i < m_number_of_channels; i++)
             veclocitySum += inputs[i];
+		
         velocityAbscissa = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_abscissa_float, 1);
         velocityOrdinate = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_ordinate_float, 1);
         if(veclocitySum)
@@ -74,10 +75,12 @@ namespace Hoa2D
 
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
-        double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
-        veclocitySum = 0.;
+        double veclocitySum, velocityAbscissa, velocityOrdinate;
+        veclocitySum = velocityAbscissa = velocityOrdinate = 0.f;
+		
         for(int i = 0; i < m_number_of_channels; i++)
             veclocitySum += inputs[i];
+		
         velocityAbscissa = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_abscissa_double, 1);
         velocityOrdinate = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_ordinate_double, 1);
 
@@ -97,6 +100,7 @@ namespace Hoa2D
     {
         float energySum = 0.f, energyAbscissa = 0.f, energyOrdinate = 0.f;
         cblas_scopy(m_number_of_channels, inputs, 1, m_channels_float, 1);
+		
         for(int i = 0; i < m_number_of_channels; i++)
             m_channels_float[i] *= m_channels_float[i];
 
@@ -121,6 +125,7 @@ namespace Hoa2D
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0.;
 
         cblas_dcopy(m_number_of_channels, inputs, 1, m_channels_double, 1);
+		
         for(int i = 0; i < m_number_of_channels; i++)
             m_channels_double[i] *= m_channels_double[i];
 

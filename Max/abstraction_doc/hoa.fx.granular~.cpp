@@ -22,7 +22,7 @@
  In "harmonics" mode, parameters are scaled depending to the orders to generate a granular sound field.
  This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
- @category ambisonics, hoa objects, audio, MSP, abstraction
+ @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
  @seealso hoa.process~, hoa.syn.granular~, hoa.fx.grain~, hoa.fx.decorrelation~, hoa.fx.gain~, hoa.fx.mirror~, hoa.fx.mixer~, hoa.fx.ringmod~
  */

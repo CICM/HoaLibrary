@@ -58,7 +58,7 @@ extern "C" void setup_hoa0x2elibrary(void)
     
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
     post("© 2012 - 2014  CICM | Paris 8 University");
-    post("Version 2.0");
+    post("Version Beta 2.0");
 
 #ifndef _WINDOWS
     var = sys_searchpath;

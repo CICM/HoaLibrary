@@ -1,0 +1,30 @@
+#N canvas 789 86 365 208 10;
+#X obj -251 -386 c.tab @size 358 102 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @orientation 1 @toggle 0 @items Introduction Space Harmonics
+Resolution Encoding Decoding @bgcolor 0.802322 0.802322 0.802322 1
+@bdcolor 0 0 0 1 @textcolor 0 0 0 1 @hocolor 0.5 0.5 0.5 1 @secolor
+0.35 0.35 0.35 1;
+#N canvas 0 22 450 300 open.tuto 0;
+#X obj 236 -165 c.patcherinfos;
+#X msg 196 -64 \; pd open \$1 \$2;
+#X obj 176 -137 pack s s;
+#X obj 160 -250 t s b;
+#X obj 246 -132 makefilename %s/;
+#X obj 176 -192 makefilename Tutorial_1_%s.pd;
+#X obj 163 -284 inlet;
+#X connect 0 1 4 0;
+#X connect 2 0 1 0;
+#X connect 3 0 5 0;
+#X connect 3 1 0 0;
+#X connect 4 0 2 1;
+#X connect 5 0 2 0;
+#X connect 6 0 3 0;
+#X restore -135 -361 pd open.tuto;
+#X obj -244 -420 c.canvasinfos;
+#X obj -245 -424 c.loadmess;
+#X obj -253 -283 hoa.help.pub;
+#X obj -253 -430 hoa.tuto.header;
+#X connect 0 1 1 0;
+#X connect 2 0 5 0;
+#X connect 3 0 2 0;

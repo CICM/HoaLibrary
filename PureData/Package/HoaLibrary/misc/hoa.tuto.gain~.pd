@@ -1,0 +1,8 @@
+#N canvas 0 22 450 300 10;
+#X obj 155 89 hoa.in~ extra 1;
+#X obj 167 233 hoa.out~;
+#X obj 273 96 hoa.in extra 2;
+#X obj 179 169 *~ 0;
+#X connect 0 0 3 0;
+#X connect 2 0 3 1;
+#X connect 3 0 1 0;
