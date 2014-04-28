@@ -1,24 +1,8 @@
-#N canvas -2 39 889 698 10;
+#N canvas 0 39 889 698 10;
 #X obj 22 4 c.canvasinfos;
 #X obj 21 0 c.loadmess;
 #X obj 4 -1 hoa.tuto.header;
 #X obj 417 -1 hoa.help.pub;
-#X text 3 48 Circular harmonics are dependent on a degree l and an
-order m and take as variable an angle α in radian. Each degree l includes
-a positive harmonic with the order m = l and a negative harmonic with
-the order m = -l except the degree 0 that has only one harmonic with
-the order 0 considered positive. These circular functions can be represented
-on a two-dimensional space. Depending on the angle α \, the functions
-are positive (red) or negative (blue). The decomposition of a sound
-field in the circular harmonics domain used by ambisonics technology
-is performed according to an order of decomposition N. A given decomposition
-order N includes all the degrees from 0 to N thus all the orders from
--N to N. Thus \, the sound field is encoded by 2 N + 1 harmonics. So
-\, for an order of decomposition 7 \, there are 15 harmonics sorted
-by their degrees and their orders : (degree order) 0 0 \, 1 -1 \, 1
-1 \, 2 -2 \, 2 2 \, 3 -3 \, 3 3 \, ... \, 7 -7 \, 7 7 . Harmonic 0
-is omnidirectional \, the number of lobes and their directivities increase
-while the degrees increase.;
 #X obj 470 97 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
@@ -196,40 +180,60 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg 738 460 \; pd dsp 1;
 #X msg 738 500 \; pd dsp 0;
 #X text 529 361 Order of the harmonics;
+#X text 3 148 These circular functions can be represented on a two-dimensional
+space. Depending on the angle α \, the functions are positive (red)
+or negative (blue)., f 59;
+#X text 3 208 The decomposition of a sound field in the circular harmonics
+domain is performed according to an order of decomposition N. A given
+decomposition order N includes all the degrees from 0 to N and thus
+all the orders from -N to N. Thus \, the sound field is encoded by
+2 N + 1 circular harmonics.;
+#X text 3 48 The circular harmonics are dependent on a degree l and
+an order m and take as variable an angle α in radian. Each degree
+l includes a positive harmonic with the order m = l and a negative
+harmonic with the order m = -l except the degree 0 that has only one
+harmonic with the order 0 considered positive.;
+#X text 3 324 0 0 \, 1 -1 \, 1 1 \, 2 -2 \, 2 2 \, 3 -3 \, 3 3 \, ...
+\, 7 -7 \, 7 7;
+#X text 3 298 For an order of decomposition 7 \, there are 15 harmonics
+sorted by their degrees and their orders : (degree order);
+#X text 3 354 The harmonic 0 is omnidirectional and the number of lobes
+of the harmonics and their directivities increase with the degrees.
+;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
+#X connect 4 0 5 0;
 #X connect 5 0 6 0;
-#X connect 6 0 7 0;
-#X connect 8 0 5 0;
-#X connect 9 0 11 0;
-#X connect 11 0 10 0;
-#X connect 12 0 9 0;
+#X connect 7 0 4 0;
+#X connect 8 0 10 0;
+#X connect 10 0 9 0;
+#X connect 11 0 8 0;
+#X connect 12 0 13 0;
 #X connect 13 0 14 0;
-#X connect 14 0 15 0;
-#X connect 16 0 13 0;
-#X connect 17 0 20 0;
+#X connect 15 0 12 0;
+#X connect 16 0 19 0;
+#X connect 18 0 16 0;
 #X connect 19 0 17 0;
-#X connect 20 0 18 0;
-#X connect 30 0 31 0;
-#X connect 31 0 29 0;
-#X connect 31 1 29 1;
-#X connect 31 2 29 2;
-#X connect 31 3 29 3;
-#X connect 31 4 29 4;
-#X connect 31 5 29 5;
-#X connect 31 6 29 6;
-#X connect 31 7 29 7;
-#X connect 31 8 29 8;
-#X connect 31 9 29 9;
-#X connect 31 10 29 10;
-#X connect 31 11 29 11;
-#X connect 31 12 29 12;
-#X connect 31 13 29 13;
-#X connect 31 14 29 14;
-#X connect 32 0 33 0;
-#X connect 32 0 34 0;
-#X connect 33 0 32 0;
-#X connect 34 0 35 0;
-#X connect 35 0 37 0;
-#X connect 36 0 32 0;
-#X connect 37 0 31 1;
+#X connect 29 0 30 0;
+#X connect 30 0 28 0;
+#X connect 30 1 28 1;
+#X connect 30 2 28 2;
+#X connect 30 3 28 3;
+#X connect 30 4 28 4;
+#X connect 30 5 28 5;
+#X connect 30 6 28 6;
+#X connect 30 7 28 7;
+#X connect 30 8 28 8;
+#X connect 30 9 28 9;
+#X connect 30 10 28 10;
+#X connect 30 11 28 11;
+#X connect 30 12 28 12;
+#X connect 30 13 28 13;
+#X connect 30 14 28 14;
+#X connect 31 0 32 0;
+#X connect 31 0 33 0;
+#X connect 32 0 31 0;
+#X connect 33 0 34 0;
+#X connect 34 0 36 0;
+#X connect 35 0 31 0;
+#X connect 36 0 30 1;

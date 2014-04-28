@@ -32,19 +32,19 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 #X obj 23 0 c.loadmess;
 #X obj 6 -1 hoa.tuto.header;
 #X obj 419 -1 hoa.help.pub;
-#X text 5 48 Ambisonics is a set of techniques for recording \, synthesis
-\, transformation and restitution of sound field based on a physical
-representation of the space in the spherical or circular harmonics
-domain. This representation is based on a decomposition of the space
-by a weighted sum of spatial functions that allows a wide range of
-sound and space processing., f 66;
-#X text 7 151 In this example \, a source is encoded in a two-dimensional
-space. The synthesized sound field owns the sound and its spatial information
-as circular harmonics. Then \, the sound field is decoded to a set
-of loudspeakers., f 66;
 #X text 247 324 Representation of the circular harmonics;
 #X text 171 570 Representation of the contribution of 16 loudspeakers
 ;
+#X text 5 48 Ambisonics is a set of techniques for the recording \,
+synthesis \, transformation and restitution of sound field based on
+a physical representation of the space in the spherical or circular
+harmonics domain. This representation is based on a decomposition of
+the space by a weighted sum of spatial functions \, the harmonics \,
+that allows a wide range of sound and space processings., f 66;
+#X text 7 151 In this example \, a source is encoded in a two-dimensional
+space. The synthesized sound field owns the sound and its spatial information
+in the form of circular harmonics. Thereafter \, the sound field is
+decoded to a set of loudspeakers., f 66;
 #X connect 0 0 1 0;
 #X connect 0 0 15 0;
 #X connect 0 1 1 1;
