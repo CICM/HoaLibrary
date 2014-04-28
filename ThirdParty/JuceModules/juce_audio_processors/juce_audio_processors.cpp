@@ -77,6 +77,7 @@ static inline bool arrayContainsPlugin (const OwnedArray<PluginDescription>& lis
 }
 
 #if JUCE_MAC
+//==============================================================================
 struct AutoResizingNSViewComponent  : public NSViewComponent,
                                       private AsyncUpdater
 {
@@ -99,6 +100,41 @@ struct AutoResizingNSViewComponent  : public NSViewComponent,
     void handleAsyncUpdate() override               { resizeToFitView(); }
 
     bool recursive;
+};
+
+//==============================================================================
+struct AutoResizingNSViewComponentWithParent  : public AutoResizingNSViewComponent,
+                                                private Timer
+{
+    AutoResizingNSViewComponentWithParent()
+    {
+        NSView* v = [[NSView alloc] init];
+        setView (v);
+        [v release];
+
+        startTimer (100);
+    }
+
+    void timerCallback() override
+    {
+        if (NSView* parent = (NSView*) getView())
+        {
+            if ([[parent subviews] count] > 0)
+            {
+                if (NSView* child = [[parent subviews] objectAtIndex: 0])
+                {
+                    NSRect f = [parent frame];
+                    NSSize newSize = [child frame].size;
+
+                    if (f.size.width != newSize.width || f.size.height != newSize.height)
+                    {
+                        f.size = newSize;
+                        [parent setFrame: f];
+                    }
+                }
+            }
+        }
+    }
 };
 #endif
 

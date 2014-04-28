@@ -28,7 +28,7 @@
 
 #include "../utility/juce_CheckSettingMacros.h"
 
-#if JucePlugin_Build_VST
+#if JucePlugin_Build_VST || JucePlugin_Build_VST3
 
 #define JUCE_MAC_WINDOW_VISIBITY_BODGE 1
 
@@ -219,7 +219,7 @@ void detachComponentFromWindowRef (Component* comp, void* window, bool isNSView)
         }
        #endif
 
-        (void) isNSView;
+        (void) isNSView; (void) window;
         comp->removeFromDesktop();
     }
 }

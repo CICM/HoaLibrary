@@ -104,6 +104,9 @@ LookAndFeel_V2::LookAndFeel_V2()
         ComboBox::backgroundColourId,               0xffffffff,
         ComboBox::arrowColourId,                    0x99000000,
 
+        PropertyComponent::backgroundColourId,      0x66ffffff,
+        PropertyComponent::labelTextColourId,       0xff000000,
+
         TextPropertyComponent::backgroundColourId,  0xffffffff,
         TextPropertyComponent::textColourId,        0xff000000,
         TextPropertyComponent::outlineColourId,     standardOutlineColour,
@@ -175,6 +178,7 @@ LookAndFeel_V2::LookAndFeel_V2()
         0x1005005, /*MidiKeyboardComponent::textLabelColourId*/               0xff000000,
         0x1005006, /*MidiKeyboardComponent::upDownButtonBackgroundColourId*/  0xffd3d3d3,
         0x1005007, /*MidiKeyboardComponent::upDownButtonArrowColourId*/       0xff000000,
+        0x1005008, /*MidiKeyboardComponent::shadowColourId*/                  0x4c000000,
 
         0x1004500, /*CodeEditorComponent::backgroundColourId*/                0xffffffff,
         0x1004502, /*CodeEditorComponent::highlightColourId*/                 textHighlightColour,
@@ -237,6 +241,16 @@ void LookAndFeel_V2::drawButtonBackground (Graphics& g,
 Font LookAndFeel_V2::getTextButtonFont (TextButton& button)
 {
     return button.getFont();
+}
+
+void LookAndFeel_V2::changeTextButtonWidthToFitText (TextButton& b, int newHeight)
+{
+    if (newHeight >= 0)
+        b.setSize (jmax (1, b.getWidth()), newHeight);
+    else
+        newHeight = b.getHeight();
+
+    b.setSize (getTextButtonFont (b).getStringWidth (b.getButtonText()) + newHeight, newHeight);
 }
 
 void LookAndFeel_V2::drawButtonText (Graphics& g, TextButton& button, bool /*isMouseOverButton*/, bool /*isButtonDown*/)
@@ -1169,13 +1183,11 @@ void LookAndFeel_V2::drawLabel (Graphics& g, Label& label)
 
         g.setColour (label.findColour (Label::textColourId).withMultipliedAlpha (alpha));
         g.setFont (font);
-        g.drawFittedText (label.getText(),
-                          label.getHorizontalBorderSize(),
-                          label.getVerticalBorderSize(),
-                          label.getWidth() - 2 * label.getHorizontalBorderSize(),
-                          label.getHeight() - 2 * label.getVerticalBorderSize(),
-                          label.getJustificationType(),
-                          jmax (1, (int) (label.getHeight() / font.getHeight())),
+
+        Rectangle<int> textArea (label.getBorderSize().subtractedFrom (label.getLocalBounds()));
+
+        g.drawFittedText (label.getText(), textArea, label.getJustificationType(),
+                          jmax (1, (int) (textArea.getHeight() / font.getHeight())),
                           label.getMinimumHorizontalScale());
 
         g.setColour (label.findColour (Label::outlineColourId).withMultipliedAlpha (alpha));
@@ -1454,6 +1466,8 @@ Label* LookAndFeel_V2::createSliderTextBox (Slider& slider)
                                         ? 0.7f : 1.0f));
 
     l->setColour (TextEditor::outlineColourId, slider.findColour (Slider::textBoxOutlineColourId));
+
+    l->setColour (TextEditor::highlightColourId, slider.findColour (Slider::textBoxHighlightColourId));
 
     return l;
 }
@@ -2301,20 +2315,16 @@ void LookAndFeel_V2::drawPropertyPanelSectionHeader (Graphics& g, const String& 
     g.drawText (name, textX, 0, width - textX - 4, height, Justification::centredLeft, true);
 }
 
-void LookAndFeel_V2::drawPropertyComponentBackground (Graphics& g, int width, int height,
-                                                   PropertyComponent&)
+void LookAndFeel_V2::drawPropertyComponentBackground (Graphics& g, int width, int height, PropertyComponent& component)
 {
-    g.setColour (Colour (0x66ffffff));
+    g.setColour (component.findColour (PropertyComponent::backgroundColourId));
     g.fillRect (0, 0, width, height - 1);
 }
 
-void LookAndFeel_V2::drawPropertyComponentLabel (Graphics& g, int, int height,
-                                              PropertyComponent& component)
+void LookAndFeel_V2::drawPropertyComponentLabel (Graphics& g, int, int height, PropertyComponent& component)
 {
-    g.setColour (Colours::black);
-
-    if (! component.isEnabled())
-        g.setOpacity (0.6f);
+    g.setColour (component.findColour (PropertyComponent::labelTextColourId)
+                    .withMultipliedAlpha (component.isEnabled() ? 1.0f : 0.6f));
 
     g.setFont (jmin (height, 24) * 0.65f);
 

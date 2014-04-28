@@ -152,10 +152,11 @@ MidiMessage::MidiMessage (const MidiMessage& other, const double newTimeStamp)
     }
 }
 
-MidiMessage::MidiMessage (const void* srcData, int sz, int& numBytesUsed, const uint8 lastStatusByte, double t)
+MidiMessage::MidiMessage (const void* srcData, int sz, int& numBytesUsed, const uint8 lastStatusByte,
+                          double t, bool sysexHasEmbeddedLength)
     : timeStamp (t)
 {
-    const uint8* src = static_cast <const uint8*> (srcData);
+    const uint8* src = static_cast<const uint8*> (srcData);
     unsigned int byte = (unsigned int) *src;
 
     if (byte < 0x80)
@@ -175,7 +176,7 @@ MidiMessage::MidiMessage (const void* srcData, int sz, int& numBytesUsed, const 
         if (byte == 0xf0)
         {
             const uint8* d = src;
-            bool haveReadAllLengthBytes = false;
+            bool haveReadAllLengthBytes = ! sysexHasEmbeddedLength;
             int numVariableLengthSysexBytes = 0;
 
             while (d < src + sz)
@@ -656,6 +657,36 @@ String MidiMessage::getTextFromTextMetaEvent() const
     const char* const textData = reinterpret_cast <const char*> (getMetaEventData());
     return String (CharPointer_UTF8 (textData),
                    CharPointer_UTF8 (textData + getMetaEventLength()));
+}
+
+MidiMessage MidiMessage::textMetaEvent (int type, StringRef text)
+{
+    jassert (type > 0 && type < 16)
+
+    MidiMessage result;
+
+    const size_t textSize = text.text.sizeInBytes() - 1;
+
+    uint8 header[8];
+    size_t n = sizeof (header);
+
+    header[--n] = (uint8) (textSize & 0x7f);
+
+    for (size_t i = textSize; (i >>= 7) != 0;)
+        header[--n] = (uint8) ((i & 0x7f) | 0x80);
+
+    header[--n] = (uint8) type;
+    header[--n] = 0xff;
+
+    const size_t headerLen = sizeof (header) - n;
+
+    uint8* const dest = result.allocateSpace ((int) (headerLen + textSize));
+    result.size = (int) (headerLen + textSize);
+
+    memcpy (dest, header + n, headerLen);
+    memcpy (dest + headerLen, text.text.getAddress(), textSize);
+
+    return result;
 }
 
 bool MidiMessage::isTrackNameEvent() const noexcept         { const uint8* data = getRawData(); return (data[1] == 3)    && (*data == 0xff); }
