@@ -153,9 +153,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
+						"palette_caption" : "hoa.2d.scope~",
 						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
-						"palette_action" : "hoa.2d.scope~",
-						"palette_caption" : "hoa.2d.scope~"
+						"palette_action" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -429,7 +429,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 637.0625, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 636.0625, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -1000,7 +1000,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.fx.convolve~", "hoa.fx.decorrelation~", "hoa.fx.delay~", "hoa.fx.freeverb~", "hoa.fx.gain~", "hoa.fx.grain~", "hoa.fx.granular~", "hoa.fx.mirror~", "hoa.fx.mixer~", "hoa.fx.ringmod~" ]
+									"tabs" : [ "hoa.fx.gain~", "hoa.highpass~", "hoa.onepole~", "hoa.receive", "hoa.receive~", "hoa.send", "hoa.send~" ]
 								}
 
 							}
