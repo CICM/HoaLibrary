@@ -43,18 +43,20 @@ void PolarLines::setAzimuth(unsigned int index, double azimuth)
     assert(index < m_number_of_sources);
     m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
     m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+	
     double distance;
     if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
         distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
     else
         distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+	
     if(distance <= HOA_PI)
     {
         m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
     }
     else
     {
-        if(m_values_new > m_values_old)
+        if(m_values_new[index + m_number_of_sources] > m_values_old[index + m_number_of_sources])
         {
             m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
         }

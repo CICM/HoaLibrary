@@ -75,8 +75,7 @@ namespace Hoa2D
 
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
-        double veclocitySum, velocityAbscissa, velocityOrdinate;
-        veclocitySum = velocityAbscissa = velocityOrdinate = 0.f;
+        double veclocitySum = 0, velocityAbscissa = 0, velocityOrdinate = 0;
 		
         for(int i = 0; i < m_number_of_channels; i++)
             veclocitySum += inputs[i];

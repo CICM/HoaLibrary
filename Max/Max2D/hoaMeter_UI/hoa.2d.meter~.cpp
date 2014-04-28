@@ -564,10 +564,7 @@ void meter_perform64(t_meter *x, t_object *dsp64, double **ins, long numins, dou
 }
 
 void meter_tick(t_meter *x)
-{
-    if(x->f_ramp == x->f_vector->getNumberOfChannels())
-        x->f_ramp = 0;
-	
+{	
 	if(x->f_drawvector == VECTOR_BOTH)
         x->f_vector->process(x->f_signals, x->f_vector_coords);
     else if(x->f_drawvector == VECTOR_VELOCITY)
@@ -1147,12 +1144,14 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 		{
 			if (x->f_rotation)
 			{
-				vecX = x->f_vector_coords[0] * maxRadius;
-				vecY = x->f_vector_coords[1] * maxRadius;
+				double rad = clip_max(radius(x->f_vector_coords[0], x->f_vector_coords[1]), 1.) * maxRadius;
+                double ang = azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
+                vecX = abscissa(rad, ang);
+                vecY = ordinate(rad, ang);
 			}
 			else
 			{
-				double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1]) * maxRadius;
+				double rad = clip_max(radius(x->f_vector_coords[0], x->f_vector_coords[1]), 1.) * maxRadius;
                 double ang = -azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
                 vecX = abscissa(rad, ang);
                 vecY = ordinate(rad, ang);
