@@ -22,20 +22,10 @@ private:
 	
     Label*                  m_order_label;
     Label*					m_order_value;
-    Label*                  m_decoder_label;
-	ComboBox*               m_decoder_value;
     Label*                  m_optim_label;
 	ComboBox*               m_optim_value;
 	Label*                  m_number_of_sources_label;
     Label*					m_number_of_sources_value;
-	Label*                  m_number_of_channels_label;
-    Label*					m_number_of_channels_value;
-	Label*                  m_offset_label;
-    Label*					m_offset_value;
-	
-    Label*					m_channels_azimuth_label;
-    std::vector<Label*>		m_channels_azimuth_values;
-    std::vector<Label*>		m_channels_azimuth_labels;
     
     Label*                  m_pinna_label;
     ComboBox*               m_pinna_value;
