@@ -13,7 +13,7 @@
 #include "HoaMeter/HoaMeterComponent.h"
 #include "PluginProcessor.h"
 
-class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public Label::Listener
+class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public Label::Listener, public Timer
 {
 private:
     HoaToolsAudioProcessor* m_processor;
@@ -23,6 +23,8 @@ private:
     Image                   m_logo_icon;
     Label*                  m_label;
     Label*					m_value;
+    
+    void timerCallback() override;
     
 public:
     HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter);

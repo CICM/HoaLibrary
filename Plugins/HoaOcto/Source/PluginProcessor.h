@@ -69,6 +69,7 @@ private:
     DecoderRegular* m_decoder;
     Meter*          m_meter;
     PolarLines*     m_lines;
+    bool            m_need_graphic_update;
     
     int             m_vector_size;
     int             m_number_of_sources;
@@ -104,11 +105,7 @@ public:
     
     void setNumberOfSources(int value)
     {
-        m_number_of_sources = value;
-        if(m_number_of_sources < 0)
-            m_number_of_sources = 0;
-        else if(m_number_of_sources > 16)
-            m_number_of_sources = 16;
+        m_number_of_sources = (int)clip_minmax(value, 0, 16);
         
         for(int i = 0; i < 16; i++)
         {
@@ -121,13 +118,24 @@ public:
             {
                 m_map->setMute(i, 1);
                 m_sources->sourceSetMute(i, 1);
-                m_sources->sourceRemove(i);
             }
         }
         m_sources->groupClean();
+        
+        m_need_graphic_update = true;
     }
     
     const String getName() const;
+    
+    bool needGraphicUpdate()
+    {
+        if (m_need_graphic_update)
+        {
+            m_need_graphic_update = false;
+            return true;
+        }
+        return false;
+    }
 
     int getNumParameters();
     float getParameter (int index);
