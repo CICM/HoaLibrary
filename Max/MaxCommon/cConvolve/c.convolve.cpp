@@ -339,8 +339,6 @@ void convolve_fill_inner_buffer(t_convolve *x)
     else
         buffer_size = frames;
     
-    //post("buffer_size = %ld", buffer_size);
-    
     temp = (float *) malloc( buffer_size * sizeof(float));
     
     for (int i = 0; i < buffer_size; i++)
@@ -360,9 +358,7 @@ void convolve_fill_inner_buffer(t_convolve *x)
         {
             max = 1.f / max;
             for(int i = 0; i < buffer_size; i++)
-            {
                 temp[i] *= max;
-            }
         }
     }
     

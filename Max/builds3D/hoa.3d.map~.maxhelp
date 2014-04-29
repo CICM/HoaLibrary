@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -84,15 +84,13 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 45.0, 90.0, 135.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-22",
-									"maxclass" : "hoa.meter~",
-									"numinlets" : 8,
-									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 559.0, 519.0, 225.0, 225.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"maxclass" : "hoa.2d.meter~",
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 559.0, 519.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -180,7 +178,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -246,7 +244,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -810,7 +808,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -1037,7 +1035,10 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 776.0, 214.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+										"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+										"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 									}
 ,
 									"text" : "hoa.connect 7 16"
@@ -1085,7 +1086,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -1115,18 +1116,21 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 360.0, 274.0, 25.0, 25.0 ]
+													"patching_rect" : [ 15.0, 115.0, 25.0, 25.0 ]
 												}
 
 											}
 , 											{
 												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 12.0,
 													"id" : "obj-4",
-													"maxclass" : "button",
+													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "bang" ],
-													"patching_rect" : [ 440.0, 118.0, 20.0, 20.0 ]
+													"patching_rect" : [ 15.0, 51.0, 24.0, 20.0 ],
+													"text" : "t b"
 												}
 
 											}
@@ -1138,7 +1142,7 @@
 													"numinlets" : 0,
 													"numoutlets" : 1,
 													"outlettype" : [ "bang" ],
-													"patching_rect" : [ 335.0, 135.0, 25.0, 25.0 ]
+													"patching_rect" : [ 15.0, 17.0, 25.0, 25.0 ]
 												}
 
 											}
@@ -1152,7 +1156,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 306.0, 188.0, 739.0, 30.0 ],
+													"patching_rect" : [ 15.0, 79.0, 739.0, 30.0 ],
 													"text" : "lscoord 0 0.785398 0.785398, lscoord 1 2.356194 0.785398, lscoord 2 3.926991 0.785398, lscoord 3 5.497787 0.785398, lscoord 4 0.785398 -0.785398, lscoord 5 2.356194 -0.785398, lscoord 6 3.926991 -0.785398, lscoord 7 5.497787 -0.785398"
 												}
 
@@ -1214,7 +1218,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 4,
 									"numoutlets" : 8,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 397.0, 346.0, 116.0, 19.0 ],
 									"text" : "hoa.decoder3D~ 1 8"
 								}
@@ -1508,42 +1512,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-21", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-22", 7 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-23", 7 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-22", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-23", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-22", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-23", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-22", 4 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-23", 4 ]
 								}
 
 							}
@@ -1873,7 +1841,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -1939,19 +1907,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder3D~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.dac~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "hoa.connect.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
+				"name" : "hoa.2d.meter~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

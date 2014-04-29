@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 124.0, 139.0, 701.0, 645.0 ],
+		"rect" : [ 219.0, 98.0, 701.0, 645.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -30,6 +30,22 @@
 		"tags" : "",
 		"title" : "|-- HoaLibrary overview --|",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-1",
+					"linecount" : 4,
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ -165.0, 323.882935, 106.0, 60.0 ],
+					"text" : "loadmess patching_rect 31.6875 552.5 629.8125 23."
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"handoff" : "",
 					"hilite" : 0,
@@ -426,10 +442,12 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 636.0625, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 629.8125, 57.0 ],
+					"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. hoa.process~ is a kind of poly~ object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the hoa.process~",
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -555,7 +573,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 140.0, 310.0, 665.0, 366.0 ],
+						"rect" : [ 235.0, 269.0, 665.0, 366.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -585,7 +603,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 568.0, 696.0, 150.0, 18.0 ],
-									"text" : "Tutorial 1 - Basics"
+									"text" : "hoa.3d.encoder~"
 								}
 
 							}
@@ -1000,7 +1018,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.fx.gain~", "hoa.highpass~", "hoa.onepole~", "hoa.receive", "hoa.receive~", "hoa.send", "hoa.send~" ]
+									"tabs" : [ "hoa.3d.decoder~", "hoa.3d.encoder~", "hoa.3d.map~", "hoa.3d.map", "hoa.3d.meter~", "hoa.3d.optim~", "hoa.3d.process~", "hoa.3d.scope~", "hoa.3d.wider~" ]
 								}
 
 							}
@@ -1426,6 +1444,15 @@
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"disabled" : 0,
+					"hidden" : 1,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"disabled" : 0,
