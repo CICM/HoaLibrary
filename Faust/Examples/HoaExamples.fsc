@@ -1,7 +1,5 @@
 <!DOCTYPE GraphicsSceneFaust>
 <SceneRoot>
- <Scene sceneHeight="864" viewZoom="0.9999998807907104" sceneX="-489.5" sceneY="-631.5" sceneWidth="754" viewX="-103.0000122785583" viewY="-190.0000226497677"/>
- <Item DomFaustItemRectWidth="100" ItemX="-51.5" ItemY="-51.5" ItemZ="2" file="/Users/Pierre/SourceTree/HoaLibrary/_distribution/Faust/HoaLibrary-1.1/Examples/OneSourceToStereo.dsp" DomFaustItemRectHeight="100"/>
- <Item DomFaustItemRectWidth="324" ItemX="-113.5" ItemY="-595" ItemZ="1" file="/Users/Pierre/SourceTree/HoaLibrary/Faust/Examples/FourSourcesToOcto.dsp" DomFaustItemRectHeight="324"/>
- <Item DomFaustItemRectWidth="332" ItemX="-463" ItemY="-534" ItemZ="0" file="/Users/Pierre/SourceTree/HoaLibrary/Faust/Examples/OneSourceToStereo.dsp" DomFaustItemRectHeight="332"/>
+ <Scene sceneHeight="864" viewZoom="1.999999350839004" sceneX="-489.5" sceneY="-631.5" sceneWidth="754" viewX="-171.0000555032832" viewY="-263.500085526989"/>
+ <Item DomFaustItemRectWidth="100" ItemX="-136.5" ItemY="-317.5" ItemZ="2" file="/Users/joaosvidzinski/SourceTree/HoaLibrary/Faust/Examples/OneSourceToStereo.dsp" DomFaustItemRectHeight="100"/>
 </SceneRoot>

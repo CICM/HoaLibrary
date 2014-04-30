@@ -12,14 +12,25 @@
               companyWebsite="http://www.mshparisnord.fr/hoalibrary/" companyName="CICM"
               companyEmail="cicm.mshparisnord@gmail.com">
   <MAINGROUP id="j763xC" name="HoaOcto">
+    <GROUP id="{96B104E0-0CB8-A3D3-83FF-909F9FDB94D8}" name="HoaEditor">
+      <FILE id="kDzUf5" name="HoaEditorComponent.cpp" compile="1" resource="0"
+            file="../HoaEditor/HoaEditorComponent.cpp"/>
+      <FILE id="EemlLO" name="HoaEditorComponent.h" compile="0" resource="0"
+            file="../HoaEditor/HoaEditorComponent.h"/>
+      <FILE id="nY9Qw0" name="HoaMapComponent.cpp" compile="1" resource="0"
+            file="../HoaEditor/HoaMapComponent.cpp"/>
+      <FILE id="LOPwz1" name="HoaMapComponent.h" compile="0" resource="0"
+            file="../HoaEditor/HoaMapComponent.h"/>
+      <FILE id="SlwKdN" name="HoaMeterComponent.cpp" compile="1" resource="0"
+            file="../HoaEditor/HoaMeterComponent.cpp"/>
+      <FILE id="JW5Tvz" name="HoaMeterComponent.h" compile="0" resource="0"
+            file="../HoaEditor/HoaMeterComponent.h"/>
+    </GROUP>
     <GROUP id="{6B4BCD60-19AD-9962-CC20-237184EA4194}" name="Source">
       <FILE id="YZ5ktu" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="bGKsDX" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
-      <FILE id="tjBfKK" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="ER3sHR" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <GROUP id="{B138580C-171E-5AC2-DBCC-6D374BBF9EE4}" name="Hoa">
       <GROUP id="{B62AC74B-8D97-79B8-46D1-67AF3C856917}" name="Hoa2D">
@@ -83,10 +94,6 @@
     <GROUP id="{A0D87251-4308-04EB-8896-DBB1FE7A14D0}" name="img">
       <FILE id="ASPjoN" name="hoa.icon_02_transp.png" compile="0" resource="1"
             file="../../Ressources/hoa.icon_02_transp.png"/>
-      <FILE id="DZf2Fb" name="icon-gear-256.png" compile="0" resource="1"
-            file="../../Ressources/icon-gear-256.png"/>
-      <FILE id="njk4ev" name="icon-info-black-256.png" compile="0" resource="1"
-            file="../../Ressources/icon-info-black-256.png"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
