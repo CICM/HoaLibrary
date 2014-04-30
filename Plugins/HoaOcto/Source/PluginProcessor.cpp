@@ -7,14 +7,20 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-#define DISTANCE_MAX 10
+#define DISTANCE_MAX 20
+#define DEF_NUMBER_OF_SOURCES 2
 
 HoaToolsAudioProcessor::HoaToolsAudioProcessor()
 {
-    m_number_of_sources = 2;
+    m_number_of_sources = DEF_NUMBER_OF_SOURCES;
     m_sources   = new SourcesManager(DISTANCE_MAX);
+    
     for(int i = 0; i < 16; i++)
-        m_sources->sourceRemove(i);
+    {
+        m_sources->sourceNewPolar(1, 0);
+        if (i > DEF_NUMBER_OF_SOURCES-1)
+            m_sources->sourceSetMute(i, 1);
+    }
     
     m_map       = new Map(3, 16);
     m_optim     = new Optim(3);
@@ -31,7 +37,8 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
     m_harmo_vector = new float[7 * 8192];
     m_output_vector= new float[8 * 8192];
     m_lines_vector = new float[32];
-    setNumberOfSources(2);
+    
+    m_need_graphic_update = true;
     
     AudioProcessorEditor* Editor = NULL;
     Editor = getActiveEditor();
@@ -300,16 +307,55 @@ void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
 
 void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
 {
-    setNumberOfSources(2);
+    //setNumberOfSources(2);
+    
+    XmlElement xml("HoaToolsSettings");
+    
+    xml.setAttribute("NumberOfSources", (int)getNumberOfSources());
+    
+    for (int i = 0; i < getNumberOfSources(); i++)
+    {
+        xml.setAttribute("Azimuth", (double)m_map->getAzimuth(i));
+        xml.setAttribute("Radius", (double)m_map->getRadius(i));
+        
+    }
+
+    copyXmlToBinary(xml, destData);
+    
+    
 }
 
 void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    setNumberOfSources(2);
+    //setNumberOfSources(2);
+
+    ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+    if (xmlState != nullptr)
+    {
+        if (xmlState->hasTagName("HoaToolsSettings"))
+        {
+            setNumberOfSources(xmlState->getIntAttribute("NumberOfSources"));
+            
+            for (int i = 0; i < getNumberOfSources(); i++)
+            {
+                m_map->getAzimuth(xmlState->getIntAttribute("Azimuth"));
+                m_map->getRadius(xmlState->getIntAttribute("Radius"));
+            }
+            
+            m_need_graphic_update = true;
+            
+
+        }
+    }
+    
+   /*
     AudioProcessorEditor* Editor = NULL;
     Editor = getActiveEditor();
     if(Editor)
         Editor->repaint();
+    */
+    
 }
 
 /************************************************************************************/

@@ -35,6 +35,17 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     addAndMakeVisible(m_value);
     m_value->setBounds(501, 352, 120, 20);
     setSize(625, 500);
+    
+    startTimer(20);
+}
+
+void HoaToolsAudioProcessorEditor::timerCallback()
+{
+    if (m_processor->needGraphicUpdate())
+    {
+        m_value->setText(String((int)m_processor->getNumberOfSources()), juce::dontSendNotification);
+        m_map->repaint();
+    }
 }
 
 void HoaToolsAudioProcessorEditor::labelTextChanged(Label* label)

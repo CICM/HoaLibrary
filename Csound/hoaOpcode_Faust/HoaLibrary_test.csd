@@ -1,10 +1,10 @@
 <CsoundSynthesizer>
 <CsOptions>
 
---opcode-lib=OneSourceToStereo.dylib
+--opcode-lib=osc.dylib
+
 -odac
 
--+rtaudio=PortAudio
 
 </CsOptions>
 <CsInstruments>
@@ -26,7 +26,9 @@ ke = 0
 kf = 0
 kg = 0
 
-a1, a2 OneSourceToStereo asig, ka, kb
+
+
+asig osc 500, 440, 1
 
 outs asig, asig
 
@@ -43,3 +45,20 @@ e
 
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="nobackground">
+  <r>255</r>
+  <g>255</g>
+  <b>255</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
