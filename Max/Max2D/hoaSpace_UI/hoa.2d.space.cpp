@@ -228,13 +228,28 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 {
     if(ac && av)
     {
-        for(int i = 0; i < x->f_number_of_channels && i < ac; i++)
-        {
-            if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-            {
-                x->f_channel_values[i] = clip_minmax(atom_getfloat(av+i), x->f_minmax[0], x->f_minmax[1]);
-            }
-        }
+		if (atom_gettype(av) == A_LONG)
+		{
+			long index = atom_getlong(av) - 1;
+			if (index < 0 || index >= x->f_number_of_channels)
+				return;
+			
+			if (ac > 1 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT))
+			{
+				x->f_channel_values[index] = clip_minmax(atom_getfloat(av+1), x->f_minmax[0], x->f_minmax[1]);
+			}
+			
+		}
+		else
+		{
+			for(int i = 0; i < x->f_number_of_channels && i < ac; i++)
+			{
+				if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
+				{
+					x->f_channel_values[i] = clip_minmax(atom_getfloat(av+i), x->f_minmax[0], x->f_minmax[1]);
+				}
+			}
+		}
         
         hoa_space_output(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
