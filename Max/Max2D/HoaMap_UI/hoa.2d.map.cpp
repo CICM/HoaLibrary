@@ -88,6 +88,8 @@ typedef struct  _hoamap
     
     t_rect		f_rect_selection;
 	int			f_rect_selection_exist;
+	
+	long		f_showgroups;
     
     // options :
     t_atom_long f_output_mode;
@@ -244,6 +246,14 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
     CLASS_ATTR_SAVE             (c,"zoom", 1);
 	// @description Sets the zoom factor
+	
+	CLASS_ATTR_LONG                 (c, "showgroups", 0, t_hoamap, f_showgroups);
+	CLASS_ATTR_CATEGORY				(c, "showgroups", 0, "Behavior");
+	CLASS_ATTR_ORDER                (c, "showgroups", 0, "1");
+	CLASS_ATTR_STYLE_LABEL          (c, "showgroups", 0, "onoff", "Use and show group");
+	CLASS_ATTR_DEFAULT              (c, "showgroups", 0, "1");
+	CLASS_ATTR_SAVE                 (c, "showgroups", 1);
+	// @description Use and show group ?
 
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;
@@ -1034,6 +1044,10 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
             {
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
             }
+			else if(name == gensym("showgroups"))
+            {
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+            }
             else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
             {
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
@@ -1244,8 +1258,11 @@ void hoamap_paint(t_hoamap *x, t_object *view)
     
 	draw_background(x, view, &rect);
     draw_sources(x, view, &rect);
-    draw_groups(x, view, &rect);
-    draw_rect_selection(x, view, &rect);
+	if (x->f_showgroups)
+	{
+		draw_groups(x, view, &rect);
+		draw_rect_selection(x, view, &rect);
+	}
 }
 
 void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
@@ -1395,17 +1412,20 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
                     
-                    for(int index = 0; index < x->f_source_manager->sourceGetNumberOfGroups(i); index++)
-                    {
-                        jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        int groupIndex = x->f_source_manager->sourceGetGroupIndex(i, index);
-                        double groupPositionX = (x->f_source_manager->groupGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
-                        double groupPositionY = (-x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
-                        jgraphics_line_to(g, groupPositionX, groupPositionY);
-                        jgraphics_stroke(g);
-                    }
+					if (x->f_showgroups)
+					{
+						for(int index = 0; index < x->f_source_manager->sourceGetNumberOfGroups(i); index++)
+						{
+							jgraphics_move_to(g, sourcePositionX, sourcePositionY);
+							int groupIndex = x->f_source_manager->sourceGetGroupIndex(i, index);
+							double groupPositionX = (x->f_source_manager->groupGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+							double groupPositionY = (-x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+							jgraphics_line_to(g, groupPositionX, groupPositionY);
+							jgraphics_stroke(g);
+						}
+					}
                 }
-                              
+                
                 if(!x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor); 
@@ -1609,7 +1629,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
     }
     
-    if(x->f_index_of_selected_source == -1)
+    if(x->f_index_of_selected_source == -1 && x->f_showgroups)
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
@@ -1791,7 +1811,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		object_notify(x, hoa_sym_modified, NULL);
     }
     
-    if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1)
+    if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1 && x->f_showgroups)
     {
         x->f_rect_selection.x = pt.x;
         x->f_rect_selection.y = pt.y;
@@ -1978,7 +1998,8 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             x->f_index_of_selected_source = i;
         }
     }
-    if(x->f_index_of_selected_source == -1)
+	
+    if(x->f_index_of_selected_source == -1 && x->f_showgroups)
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
@@ -1990,7 +2011,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
     }
     
-    if(x->f_index_of_selected_group >= 0 || x->f_index_of_selected_source >= 0)
+    if(x->f_index_of_selected_source >= 0 || x->f_index_of_selected_group >= 0)
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_POINTINGHAND);
     else jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
     
@@ -2014,6 +2035,9 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
 	if (keycode == 97 && modifiers == 1 && textcharacter == 0) //cmd+a
 #endif
     {
+		if (!x->f_showgroups)
+			return filter;
+		
 		int indexOfNewGroup = -1;
         for(int i = 0; indexOfNewGroup == -1; i++)
         {
