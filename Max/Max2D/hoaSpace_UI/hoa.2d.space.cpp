@@ -142,6 +142,7 @@ int C74_EXPORT main()
     CLASS_ATTR_DEFAULT              (c, "minmax",   0, "0. 1.");
     CLASS_ATTR_SAVE                 (c, "minmax",   1);
 	// @description The minimum and maximum values that the sliders can reach.
+	
     
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -562,8 +563,8 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         x->f_mode = 2;
         rad  = radius(mouse.x, mouse.y);
         x->f_value_ref   = (rad - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
+		x->f_value_ref  *= (x->f_minmax[1] - x->f_minmax[0]);
         x->f_value_ref  += x->f_minmax[0];
-        x->f_value_ref  *= (x->f_minmax[1] - x->f_minmax[0]);
         x->f_value_ref   = clip_minmax(x->f_value_ref, x->f_minmax[0], x->f_minmax[1]);
         memcpy(x->f_channel_refs, x->f_channel_values, x->f_number_of_channels * sizeof(double));
     }
@@ -604,8 +605,8 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     {
         radius  = Hoa::radius(mouse.x, mouse.y);
         inc     = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
+		inc    *= (x->f_minmax[1] - x->f_minmax[0]);
         inc    += x->f_minmax[0];
-        inc    *= (x->f_minmax[1] - x->f_minmax[0]);
         inc     = inc - x->f_value_ref;
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = clip_minmax(x->f_channel_refs[i] + inc, x->f_minmax[0], x->f_minmax[1]);
