@@ -34,6 +34,7 @@ typedef struct  _hoa_space
 	void*		f_out;
     long        f_number_of_channels;
     double      f_minmax[2];
+	long		f_floatoutput;
     
     long		f_mode;
     double*     f_channel_values;
@@ -126,7 +127,7 @@ int C74_EXPORT main()
 	// @exclude hoa.2d.map
     
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_channels);
-	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Planewaves");
+	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Value");
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
@@ -135,13 +136,21 @@ int C74_EXPORT main()
 	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_space, f_minmax, 2);
-	CLASS_ATTR_CATEGORY             (c, "minmax",   0, "Behavior");
+	CLASS_ATTR_CATEGORY             (c, "minmax",   0, "Value");
     CLASS_ATTR_LABEL                (c, "minmax",   0, "Minimum and Maximum");
 	CLASS_ATTR_ACCESSORS            (c, "minmax", NULL, minmax_set);
-    CLASS_ATTR_ORDER                (c, "minmax",   0, "1");
+    CLASS_ATTR_ORDER                (c, "minmax",   0, "2");
     CLASS_ATTR_DEFAULT              (c, "minmax",   0, "0. 1.");
     CLASS_ATTR_SAVE                 (c, "minmax",   1);
 	// @description The minimum and maximum values that the sliders can reach.
+	
+	CLASS_ATTR_LONG             (c, "floatoutput", 0, t_hoa_space, f_floatoutput);
+	CLASS_ATTR_CATEGORY			(c, "floatoutput", 0, "Value");
+	CLASS_ATTR_STYLE_LABEL      (c, "floatoutput", 0, "onoff", "Float Output");
+    CLASS_ATTR_ORDER            (c, "floatoutput", 0, "2");
+	CLASS_ATTR_DEFAULT          (c, "floatoutput", 0, "1");
+    CLASS_ATTR_SAVE             (c, "floatoutput", 1);
+    // @description If the <m>autoconnect</m> attribute is checked, connected objects like the <o>hoa.2d.meter~</o>, <o>hoa.2d.vector~</o>, <o>hoa.dac~</o> or <o>hoa.gain~</o> will be notified of changes and adapt their behavior accordingly.
 	
     
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
@@ -238,6 +247,8 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 			if (ac > 1 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT))
 			{
 				x->f_channel_values[index] = clip_minmax(atom_getfloat(av+1), x->f_minmax[0], x->f_minmax[1]);
+				if (!x->f_floatoutput)
+					x->f_channel_values[index] = (int) x->f_channel_values[index];
 			}
 			
 		}
@@ -248,6 +259,8 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 				if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
 				{
 					x->f_channel_values[i] = clip_minmax(atom_getfloat(av+i), x->f_minmax[0], x->f_minmax[1]);
+					if (!x->f_floatoutput)
+						x->f_channel_values[i] = (int) x->f_channel_values[i];
 				}
 			}
 		}
@@ -599,6 +612,8 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
             mu = (double)(angle - mu) / ((double)HOA_2PI / (double)x->f_number_of_channels);
             value = cosine_interpolation(x->f_channel_refs[index], x->f_channel_refs[index2], mu);
             x->f_channel_values[i] = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
+			if (!x->f_floatoutput)
+				x->f_channel_values[i] = (int) x->f_channel_values[i];
         }
     }
     else if(x->f_mode == 2) // shift : gain
@@ -609,7 +624,11 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         inc    += x->f_minmax[0];
         inc     = inc - x->f_value_ref;
         for(int i = 0; i < x->f_number_of_channels; i++)
+		{
             x->f_channel_values[i] = clip_minmax(x->f_channel_refs[i] + inc, x->f_minmax[0], x->f_minmax[1]);
+			if (!x->f_floatoutput)
+				x->f_channel_values[i] = (int) x->f_channel_values[i];
+		}
     }
     else
     {
@@ -621,6 +640,8 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         value  += x->f_minmax[0];
         value   = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
         x->f_channel_values[index] = value;
+		if (!x->f_floatoutput)
+			x->f_channel_values[index] = round(x->f_channel_values[index]);
     }
     
 	object_notify(x, hoa_sym_modified, NULL);
@@ -633,8 +654,13 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
 void hoa_space_output(t_hoa_space *x)
 {
     t_atom argv[MAX_CHANNELS];
-    for(int i = 0; i < x->f_number_of_channels; i++)
-        atom_setfloat(argv+i, x->f_channel_values[i]);
+	for(int i = 0; i < x->f_number_of_channels; i++)
+	{
+		if (x->f_floatoutput)
+			atom_setfloat(argv+i, x->f_channel_values[i]);
+		else
+			atom_setlong(argv+i, x->f_channel_values[i]);
+	}
     
     outlet_list(x->f_out, 0L, x->f_number_of_channels, argv);
 }
