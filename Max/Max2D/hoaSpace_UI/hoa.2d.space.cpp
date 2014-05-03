@@ -35,6 +35,7 @@ typedef struct  _hoa_space
     long        f_number_of_channels;
     double      f_minmax[2];
 	long		f_floatoutput;
+	t_symbol*	f_slider_style;
     
     long		f_mode;
     double*     f_channel_values;
@@ -71,6 +72,7 @@ void hoa_space_paint(t_hoa_space *x, t_object *view);
 void draw_background(t_hoa_space *x, t_object *view, t_rect *rect);
 void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect);
 void draw_points(t_hoa_space *x, t_object *view, t_rect *rect);
+void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect);
 
 t_max_err hoa_space_setvalueof(t_hoa_space *x, long ac, t_atom *av);
 t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av);
@@ -120,11 +122,11 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
     
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
-	// @exclude hoa.2d.map
+	// @exclude hoa.2d.space
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
-	// @exclude hoa.2d.map
+	// @exclude hoa.2d.space
 	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
-	// @exclude hoa.2d.map
+	// @exclude hoa.2d.space
     
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_channels);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Value");
@@ -137,21 +139,34 @@ int C74_EXPORT main()
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_space, f_minmax, 2);
 	CLASS_ATTR_CATEGORY             (c, "minmax",   0, "Value");
-    CLASS_ATTR_LABEL                (c, "minmax",   0, "Minimum and Maximum");
+    CLASS_ATTR_LABEL                (c, "minmax",   0, "Range");
 	CLASS_ATTR_ACCESSORS            (c, "minmax", NULL, minmax_set);
     CLASS_ATTR_ORDER                (c, "minmax",   0, "2");
     CLASS_ATTR_DEFAULT              (c, "minmax",   0, "0. 1.");
     CLASS_ATTR_SAVE                 (c, "minmax",   1);
 	// @description The minimum and maximum values that the sliders can reach.
 	
-	CLASS_ATTR_LONG             (c, "floatoutput", 0, t_hoa_space, f_floatoutput);
-	CLASS_ATTR_CATEGORY			(c, "floatoutput", 0, "Value");
-	CLASS_ATTR_STYLE_LABEL      (c, "floatoutput", 0, "onoff", "Float Output");
-    CLASS_ATTR_ORDER            (c, "floatoutput", 0, "2");
-	CLASS_ATTR_DEFAULT          (c, "floatoutput", 0, "1");
-    CLASS_ATTR_SAVE             (c, "floatoutput", 1);
-    // @description If the <m>autoconnect</m> attribute is checked, connected objects like the <o>hoa.2d.meter~</o>, <o>hoa.2d.vector~</o>, <o>hoa.dac~</o> or <o>hoa.gain~</o> will be notified of changes and adapt their behavior accordingly.
+	CLASS_ATTR_LONG					(c, "floatoutput", 0, t_hoa_space, f_floatoutput);
+	CLASS_ATTR_CATEGORY				(c, "floatoutput", 0, "Value");
+	CLASS_ATTR_STYLE_LABEL			(c, "floatoutput", 0, "onoff", "Float Output");
+    CLASS_ATTR_ORDER				(c, "floatoutput", 0, "3");
+	CLASS_ATTR_DEFAULT				(c, "floatoutput", 0, "1");
+    CLASS_ATTR_SAVE					(c, "floatoutput", 1);
+    // @description The <m>floatoutput</m> attribute set the <o>hoa.2d.space</o> output type. If it is checked, sliders value are sent as floating-pont values, otherwise it will round slider values and send it as integers.
 	
+	CLASS_ATTR_SYM					(c, "sliderstyle", 0, t_hoa_space, f_slider_style);
+	CLASS_ATTR_CATEGORY				(c, "sliderstyle", 0, "Style");
+    CLASS_ATTR_LABEL				(c, "sliderstyle", 0, "Slider Style");
+    CLASS_ATTR_ENUM					(c, "sliderstyle", 0, "Blob Bar");
+    CLASS_ATTR_ORDER				(c, "sliderstyle", 0, "1");
+    //CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "sliderstyle", 0, "Blob");
+	CLASS_ATTR_DEFAULT				(c, "sliderstyle", 0, "Blob");
+	CLASS_ATTR_SAVE					(c, "sliderstyle", 1);
+    // @description Set the sliders style :
+    // <ul>
+    // <li>In <b>Blob</b> mode <o>hoa.2d.space</o> will draw slider values as a global shape.</li>
+    // <li>In <b>Bar</b> mode, each slider is drawn separately as a slider bar.</li>
+    // </ul>
     
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -182,7 +197,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE				(c, "ptcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "ptcolor", 0, "Channel point Color");
     CLASS_ATTR_ORDER                (c, "ptcolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "ptcolor", 0, "0. 0. 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "ptcolor", 0, "0.25 0.25 0.25 1.");
 	// @description Sets the RGBA values for the channel point color of the <o>hoa.2d.space</o> object
 	
 	class_register(CLASS_BOX, c);
@@ -313,6 +328,10 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
 		}
+		else if(name == gensym("sliderstyle"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
+		}
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
@@ -380,8 +399,16 @@ void hoa_space_paint(t_hoa_space *x, t_object *view)
 	x->f_radius = x->f_center * 0.95;
 	
 	draw_background(x, view, &rect);
-	draw_space(x, view, &rect);
-	draw_points(x, view, &rect);
+	
+	if (x->f_slider_style == gensym("Blob"))
+	{
+		draw_space(x, view, &rect);
+		draw_points(x, view, &rect);
+	}
+	else
+	{
+		draw_slider_bars(x, view, &rect);
+	}
 }
 
 void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
@@ -540,6 +567,57 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
         jbox_end_layer((t_object*)x, view, hoa_sym_points_layer);
 	}
 	jbox_paint_layer((t_object *)x, view, hoa_sym_points_layer, 0., 0.);
+}
+
+void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
+{
+	int i;
+    double diff, ratio, angle1, angle2;
+	t_pt pt[2];
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_space_layer, rect->width, rect->height);
+	
+	if (g)
+	{
+		t_jmatrix transform;
+		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
+		jgraphics_set_matrix(g, &transform);
+		
+		jgraphics_set_line_width(g, 1);
+		
+		diff = x->f_minmax[1] - x->f_minmax[0];
+        ratio = x->f_radius / 5.;
+		
+        for(i = 0; i < x->f_number_of_channels; i++)
+		{
+			x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+			
+			angle1 = -(HOA_2PI / (double)x->f_number_of_channels) * 0.5;
+			angle2 =  (HOA_2PI / (double)x->f_number_of_channels) * 0.5;
+			
+			angle1 += i*(HOA_2PI / (double)x->f_number_of_channels);
+			angle2 += i*(HOA_2PI / (double)x->f_number_of_channels);
+			
+			pt[0].x = Hoa::abscissa(ratio, angle1);
+			pt[0].y = Hoa::ordinate(ratio, angle1);
+			
+			pt[1].x = Hoa::abscissa(x->f_channel_radius[i], angle2);
+			pt[1].y = Hoa::ordinate(x->f_channel_radius[i], angle2);
+			
+			jgraphics_move_to(g, pt[0].x, pt[0].y);
+			jgraphics_arc(g, 0, 0, ratio, angle1+HOA_PI2, angle2+HOA_PI2);
+			jgraphics_line_to(g, pt[1].x, pt[1].y);
+			jgraphics_arc_negative(g, 0, 0, x->f_channel_radius[i], angle2+HOA_PI2, angle1+HOA_PI2);
+			
+			jgraphics_close_path(g);
+			jgraphics_set_source_jrgba(g, &x->f_color_sp);
+			jgraphics_fill_preserve(g);
+			jgraphics_set_source_jrgba(g, &x->f_color_pt);
+			jgraphics_stroke(g);
+		}
+        
+        jbox_end_layer((t_object*)x, view, hoa_sym_space_layer);
+	}
+	jbox_paint_layer((t_object *)x, view, hoa_sym_space_layer, 0., 0.);
 }
 
 /**********************************************************/
