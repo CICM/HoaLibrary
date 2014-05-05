@@ -51,7 +51,7 @@ namespace Hoa
 
 	 @see    min
      */
-	double max(const double v1, const double v2)
+	inline double max(const double v1, const double v2)
 	{
 		if (v1 >= v2)
 			return v1;
