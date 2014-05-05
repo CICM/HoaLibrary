@@ -172,12 +172,12 @@ namespace Hoa2D
                 long   channel_index1 = 0, channel_index2 = 0;
                 double factor_index1 = 0, factor_index2 = 0;
 
-                // Get the pair of real channels corresponding to the virtual channel
                 double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
-
+                
+                // Get the pair of real channels corresponding to the virtual channel
                 for(unsigned int j = 0; j < m_number_of_channels; j++)
                 {
-                    if(j < m_number_of_channels-1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
+                    if(j < m_number_of_channels - 1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
                     {
                         channel_index1 = j;
                         channel_index2 = j+1;
@@ -189,9 +189,9 @@ namespace Hoa2D
                         factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
                         factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
                     }
-                    else if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
+                    else //if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
                     {
-                        channel_index1 = m_number_of_channels-1;
+                        channel_index1 = m_number_of_channels - 1;
                         channel_index2 = 0;
 
                         // Get the factor for the pair of real channels
