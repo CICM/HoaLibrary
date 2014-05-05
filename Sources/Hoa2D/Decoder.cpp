@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -65,6 +65,9 @@ namespace Hoa2D
         m_decoder_matrix            = new double[m_number_of_channels * m_number_of_harmonics];
         m_decoder_matrix_float      = new float[m_number_of_channels * m_number_of_harmonics];
         m_encoder                   = new Encoder(m_order);
+        m_nearest_channel[0]        = NULL;
+        m_nearest_channel[1]        = NULL;
+        
         m_offset = 0;
         setChannelAzimuth(0, 0.);
     }
@@ -83,7 +86,6 @@ namespace Hoa2D
 
     void DecoderIrregular::setChannelAzimuth(unsigned int index, double azimuth)
     {
-        long    number_of_virutal_channels;
         double  current_distance, minimum_distance;
 
         Planewaves::setChannelAzimuth(index, azimuth);
@@ -101,16 +103,24 @@ namespace Hoa2D
         }
 
         // Get the optimal number of virtual channels
-        // Always prefer the number of harmonics + 2
+        // Always prefer the number of harmonics + 1
         if(minimum_distance > 0)
-            number_of_virutal_channels = (HOA_2PI / minimum_distance);
+            m_number_of_virtual_channels = (HOA_2PI / minimum_distance);
         else
-            number_of_virutal_channels = m_number_of_harmonics + 2;
-        if(number_of_virutal_channels < m_number_of_harmonics + 2)
+            m_number_of_virtual_channels = m_number_of_harmonics + 1;
+        if(m_number_of_virtual_channels < m_number_of_harmonics + 1)
         {
-            number_of_virutal_channels = m_number_of_harmonics + 2;
+            m_number_of_virtual_channels = m_number_of_harmonics + 1;
         }
-
+        
+        if(m_nearest_channel[0] && m_nearest_channel[1])
+        {
+            delete [] m_nearest_channel[0];
+            delete [] m_nearest_channel[1];
+        }
+        m_nearest_channel[0] = new unsigned int[m_number_of_virtual_channels];
+        m_nearest_channel[1] = new unsigned int[m_number_of_virtual_channels];
+        
         for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
         {
             m_decoder_matrix[i] = 0.;
@@ -119,9 +129,9 @@ namespace Hoa2D
 
         if(m_number_of_channels == 1)
         {
-            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+            for(unsigned int i = 0; i < m_number_of_virtual_channels; i++)
             {
-                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+                double angle = (double)i / (double)m_number_of_virtual_channels * HOA_2PI;
                 m_encoder->setAzimuth(angle + m_offset);
                 m_encoder->process(1., m_harmonics_vector);
 
@@ -138,10 +148,10 @@ namespace Hoa2D
         }
         else if(m_number_of_channels == 2)
         {
-            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+            for(unsigned int i = 0; i < m_number_of_virtual_channels; i++)
             {
                 double factor_index1 = 0, factor_index2 = 0;
-                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+                double angle = (double)i / (double)m_number_of_virtual_channels * HOA_2PI;
                 m_encoder->setAzimuth(angle + m_offset);
                 m_encoder->process(1., m_harmonics_vector);
 
@@ -166,47 +176,51 @@ namespace Hoa2D
         }
         else
         {
-            // Compute the decoding matrix for sorted channels
-            for(unsigned int i = 0; i < number_of_virutal_channels; i++)
+            // Get the nearest channels
+            for(unsigned int i = 0; i < m_number_of_virtual_channels; i++)
             {
                 long   channel_index1 = 0, channel_index2 = 0;
+                double distance1 = HOA_2PI, distance2 = HOA_2PI;
+                double angle = (double)i / (double)m_number_of_virtual_channels * HOA_2PI;
                 double factor_index1 = 0, factor_index2 = 0;
-
-                double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
                 
-                // Get the pair of real channels corresponding to the virtual channel
                 for(unsigned int j = 0; j < m_number_of_channels; j++)
                 {
-                    if(j < m_number_of_channels - 1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
+                    if(radianClosestDistance(m_channels_azimuth[j], angle) < distance1)
                     {
+                        distance1 = radianClosestDistance(m_channels_azimuth[j], angle);
                         channel_index1 = j;
-                        channel_index2 = j+1;
-
-                        // Get the factor for the pair of real channels
-                        double distance_index1 = angle - m_channels_azimuth[j];
-                        double distance_index2 = m_channels_azimuth[j+1] - angle;
-                        double distance_ratio = distance_index1 + distance_index2;
-                        factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
-                        factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
-                    }
-                    else //if(angle >= m_channels_azimuth[m_number_of_channels-1] && angle <= m_channels_azimuth[0] + HOA_2PI)
-                    {
-                        channel_index1 = m_number_of_channels - 1;
-                        channel_index2 = 0;
-
-                        // Get the factor for the pair of real channels
-                        double distance_index1 = angle - m_channels_azimuth[m_number_of_channels-1];
-                        double distance_index2 = HOA_2PI - angle + m_channels_azimuth[0];
-                        double distance_ratio = distance_index1 + distance_index2;
-                        factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
-                        factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
                     }
                 }
-
-                // Get the harmonics coefficients for virtual channel
+                
+                for(unsigned int j = 0; j < m_number_of_channels; j++)
+                {
+                    if(radianClosestDistance(m_channels_azimuth[j], angle) < distance2 && j != channel_index1)
+                    {
+                        distance2 = radianClosestDistance(m_channels_azimuth[j], angle);
+                        channel_index2 = j;
+                    }
+                }
+                
+                if(fabs(distance1 - distance2) < HOA_PI / (double)m_number_of_virtual_channels)
+                {
+                    double angle1 = m_channels_azimuth[channel_index1], angle2 = m_channels_azimuth[channel_index2];
+                    double distance_index1 = radianClosestDistance(angle, angle1);
+                    double distance_index2 = radianClosestDistance(angle, angle2);
+                    double distance_ratio = distance_index1 + distance_index2;
+                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI2);
+                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI2);
+                }
+                else
+                {
+                    factor_index1   = 1;
+                    factor_index2   = 0;
+                }
+                
+                // Get the harmonics coefficients for the virtual channel
                 m_encoder->setAzimuth(angle + m_offset);
                 m_encoder->process(1., m_harmonics_vector);
-
+                
                 m_decoder_matrix[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
                 m_decoder_matrix[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
                 for(unsigned int j = 1; j < m_number_of_harmonics; j++)
@@ -238,6 +252,8 @@ namespace Hoa2D
 		delete [] m_decoder_matrix;
         delete [] m_decoder_matrix_float;
         delete [] m_harmonics_vector;
+        delete [] m_nearest_channel[0];
+        delete [] m_nearest_channel[1];
         delete m_encoder;
 	}
 

@@ -476,6 +476,7 @@ t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             send_configuration(x);
         }
     }
+    
     return MAX_ERR_NONE;
 }
 
