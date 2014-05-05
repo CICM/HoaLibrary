@@ -274,8 +274,6 @@
 		8F27E39619178A33004E1370 /* g_canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = g_canvas.h; sourceTree = "<group>"; };
 		8F27E39719178A33004E1370 /* m_imp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_imp.h; sourceTree = "<group>"; };
 		8F27E39819178A33004E1370 /* m_pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
-		8F27E39919178A33004E1370 /* pd.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pd.def; sourceTree = "<group>"; };
-		8F27E39A19178A33004E1370 /* pd.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = pd.dll; sourceTree = "<group>"; };
 		8F27E39E19178A33004E1370 /* egraphics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egraphics.c; sourceTree = "<group>"; };
 		8F27E39F19178A33004E1370 /* egraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = egraphics.h; sourceTree = "<group>"; };
 		8F27E3A019178A33004E1370 /* egraphics_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egraphics_color.c; sourceTree = "<group>"; };
@@ -521,8 +519,6 @@
 				8F27E39619178A33004E1370 /* g_canvas.h */,
 				8F27E39719178A33004E1370 /* m_imp.h */,
 				8F27E39819178A33004E1370 /* m_pd.h */,
-				8F27E39919178A33004E1370 /* pd.def */,
-				8F27E39A19178A33004E1370 /* pd.dll */,
 			);
 			path = ecommon;
 			sourceTree = "<group>";

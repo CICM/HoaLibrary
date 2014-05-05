@@ -9,7 +9,6 @@
 extern "C"
 {
 #include "../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
-EXTERN t_canvas *canvas_list;
 }
 
 typedef struct _hoa_in

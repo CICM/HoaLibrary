@@ -7,26 +7,8 @@
 #include "PDCommon/HoaCommon.pd.h"
 #include "PD2D/Hoa2D.pd.h"
 
-extern "C"
-{
-    typedef struct _namelist    /* element in a linked list of stored strings */
-    {
-        struct _namelist *nl_next;  /* next in list */
-        char *nl_string;            /* the string */
-    } t_namelist;
-    
-    extern t_namelist *sys_externlist;
-    extern t_namelist *sys_searchpath;
-    extern t_namelist *sys_staticpath;
-    extern t_namelist *sys_helppath;
-    extern t_namelist *namelist_append_files(t_namelist *listwas, const char *s);
-}
-
 extern "C" void setup_hoa0x2elibrary(void)
 {
-    char path[MAXPDSTRING];
-    t_namelist* var;
-
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
@@ -60,41 +42,10 @@ extern "C" void setup_hoa0x2elibrary(void)
     post("© 2012 - 2014  CICM | Paris 8 University");
     post("Version Beta 2.0");
 
-#ifndef _WINDOWS
-    var = sys_searchpath;
-    while (var)
-    {
-        sprintf(path, "%s/HoaLibrary",var->nl_string);
-        if(strncmp(var->nl_string, "HoaLibrary", 10) == 0)
-        {
-            sprintf(path, "%s/patchers", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/clippings", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/dependencies", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/media", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/misc", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            return;
-        }
-        else if(access(path, O_RDONLY) != -1)
-        {
-            sprintf(path, "%s/HoaLibrary/patchers", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/HoaLibrary/clippings", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/HoaLibrary/dependencies", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/HoaLibrary/media", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            sprintf(path, "%s/HoaLibrary/misc", var->nl_string);
-            namelist_append_files(sys_searchpath, path);
-            return;
-        }
-        var = var->nl_next;
-    }
-#endif
+    library_add_subfolder("HoaLibrary", "patchers");
+    library_add_subfolder("HoaLibrary", "clippings");
+    library_add_subfolder("HoaLibrary", "dependencies");
+    library_add_subfolder("HoaLibrary", "media");
+    library_add_subfolder("HoaLibrary", "misc");
 }
 
