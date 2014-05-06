@@ -13,24 +13,53 @@ namespace Hoa2D
         assert(numberOfSources > 0);
         
         m_number_of_sources = numberOfSources;
-        m_harmonics_float   = new float[m_number_of_harmonics];
-        m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_sources];
 		m_muted				= new bool[m_number_of_sources];
+        m_azimuth           = new double[m_number_of_sources];
+        m_sinx              = new double[m_number_of_sources];
+        m_cosx              = new double[m_number_of_sources];
+        m_wide              = new long[m_number_of_sources];
+        
+        m_wide_matrix       = new double[NUMBEROFLINEARPOINTS * m_number_of_harmonics];
+        
+        double weight_order = log((double)(m_order + 1));
+        
+        for(unsigned int j = 0; j < NUMBEROFLINEARPOINTS; j++)
+        {
+            m_wide_matrix[j * m_number_of_harmonics] = (1. - ((double)j / (double)(NUMBEROFLINEARPOINTS-1))) * weight_order + 1.;
+        }
+        for(unsigned int i = 1; i < m_number_of_harmonics; i++)
+        {
+            double minus =  clip_min(log((double)getHarmonicDegree(i)), 0.);
+            minus = -minus;
+            
+            double dot	= clip_min(log((double)getHarmonicDegree(i) + 1.), 0.);
+            dot += minus;
+            dot  = 1. / dot;
+            
+            for(unsigned int j = 0; j < NUMBEROFLINEARPOINTS; j++)
+            {
+                double weight = (1. - ((double)j / (double)(NUMBEROFLINEARPOINTS-1))) * weight_order + 1.;
+                double scale = ((double)j / (double)(NUMBEROFLINEARPOINTS-1)) * weight_order;
+                double new_weight = (minus + scale) * dot;
+                new_weight = clip_minmax(new_weight, 0., 1.);
+                m_wide_matrix[j * m_number_of_harmonics + i] = new_weight * weight;
+            }
+        }
+        
 		m_first_source      = 0;
-		
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
 			setMute(i, 0);
-            m_encoders.push_back(new Encoder(order));
-            m_widers.push_back(new Wider(order));
         }
     }
     
     void Map::setAzimuth(const unsigned int index, const double azimuth)
     {
         assert(index < m_number_of_sources);
-        m_encoders[index]->setAzimuth(azimuth);
+        m_azimuth[index] = wrap_twopi(azimuth);
+        m_cosx[index]    = cos(m_azimuth[index]);
+        m_sinx[index]    = sin(m_azimuth[index]);
     }
 	
     void Map::setRadius(const unsigned int index, const double radius)
@@ -39,12 +68,12 @@ namespace Hoa2D
         if(radius >= 1.)
         {
             m_gains[index] = 1. / (radius * radius);
-            m_widers[index]->setWideningValue(1.);
+            m_wide[index] = NUMBEROFLINEARPOINTS - 1;
         }
         else
         {
             m_gains[index] = 1.;
-			m_widers[index]->setWideningValue(radius);
+            m_wide[index] = clip_minmax(radius, 0., 1.) * (double)(NUMBEROFLINEARPOINTS - 1);
         }
     }
     
@@ -67,22 +96,47 @@ namespace Hoa2D
     {
         if(m_first_source > -1)
         {
-            m_encoders[m_first_source]->process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_float);
-            m_widers[m_first_source]->process(m_harmonics_float, outputs);
+            int index = m_wide[m_first_source] * m_number_of_harmonics;
+            float cos_x = m_cosx[m_first_source];
+            float sin_x = m_sinx[m_first_source];
+            float tcos_x = cos_x;
+            float sig = inputs[m_first_source] * m_gains[m_first_source] * m_wide_matrix[index];
+            outputs[0] = sig;
+            for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
+            {
+                outputs[i] = sig * sin_x * m_wide_matrix[index + i];
+                outputs[i+1] = sig * cos_x * m_wide_matrix[index + i + 1];
+                cos_x = tcos_x * m_cosx[m_first_source] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                sin_x = tcos_x * m_sinx[m_first_source] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                tcos_x = cos_x;
+            }
+            
             for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if (!m_muted[i])
                 {
-                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
-                    m_widers[i]->process(m_harmonics_float, m_harmonics_float);
-                    cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
+                    index = m_wide[i] * m_number_of_harmonics;
+                    cos_x = m_cosx[i];
+                    sin_x = m_sinx[i];
+                    tcos_x = cos_x;
+                    sig = inputs[i] * m_gains[i] * m_wide_matrix[index];
+                    outputs[0] += sig;
+                    for(unsigned int j = 1; j < m_number_of_harmonics; j += 2)
+                    {
+                        outputs[j] += sig * sin_x * m_wide_matrix[index + j];
+                        outputs[j+1] += sig * cos_x * m_wide_matrix[index + j + 1];
+                        cos_x = tcos_x * m_cosx[i] - sin_x * m_sinx[i]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                        sin_x = tcos_x * m_sinx[i] + sin_x * m_cosx[i]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                        tcos_x = cos_x;
+                    }
+                    
                 }
             }
         }
         else
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
-                outputs[i] = 0.f;
+                outputs[i] = 0.;
         }
     }
     
@@ -90,16 +144,40 @@ namespace Hoa2D
     {
 		if(m_first_source > -1)
         {
-            m_encoders[m_first_source]->process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_double);
-            m_widers[m_first_source]->process(m_harmonics_double, outputs);
-			
+            int index = m_wide[m_first_source] * m_number_of_harmonics;
+            double cos_x = m_cosx[m_first_source];
+            double sin_x = m_sinx[m_first_source];
+            double tcos_x = cos_x;
+            double sig = inputs[m_first_source] * m_gains[m_first_source] * m_wide_matrix[index];
+            outputs[0] = sig;
+            for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
+            {
+                outputs[i] = sig * sin_x * m_wide_matrix[index + i];
+                outputs[i+1] = sig * cos_x * m_wide_matrix[index + i + 1];
+                cos_x = tcos_x * m_cosx[m_first_source] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                sin_x = tcos_x * m_sinx[m_first_source] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                tcos_x = cos_x;
+            }
+
             for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if (!m_muted[i])
                 {
-                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
-                    m_widers[i]->process(m_harmonics_double, m_harmonics_double);
-                    cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);
+                    index = m_wide[i] * m_number_of_harmonics;
+                    cos_x = m_cosx[i];
+                    sin_x = m_sinx[i];
+                    tcos_x = cos_x;
+                    sig = inputs[i] * m_gains[i] * m_wide_matrix[index];
+                    outputs[0] += sig;
+                    for(unsigned int j = 1; j < m_number_of_harmonics; j += 2)
+                    {
+                        outputs[j] += sig * sin_x * m_wide_matrix[index + j];
+                        outputs[j+1] += sig * cos_x * m_wide_matrix[index + j + 1];
+                        cos_x = tcos_x * m_cosx[i] - sin_x * m_sinx[i]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                        sin_x = tcos_x * m_sinx[i] + sin_x * m_cosx[i]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                        tcos_x = cos_x;
+                    }
+                    
                 }
             }
         }
@@ -112,12 +190,13 @@ namespace Hoa2D
     
     Map::~Map()
     {
-        m_encoders.clear();
-        m_widers.clear();
-        delete [] m_harmonics_double;
-        delete [] m_harmonics_float;
         delete [] m_gains;
         delete [] m_muted;
+        delete [] m_azimuth;
+        delete [] m_cosx;
+        delete [] m_sinx;
+        delete [] m_wide_matrix;
+        delete [] m_wide;
     }
 }
 
