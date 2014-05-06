@@ -18,7 +18,7 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
     m_sources   = new SourcesManager(DISTANCE_MAX);
     
     m_map       = new Map(ORDER, 16);
-    m_optim     = new Optim(ORDER);
+    m_optim     = new Optim(ORDER, Hoa2D::Optim::InPhase);
     m_decoder   = new DecoderRegular(ORDER, NCHANNEL);
     m_meter     = new Meter(NCHANNEL);
     m_lines     = new PolarLines(16);
@@ -26,13 +26,17 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
     m_lines->setRamp(4410);
     m_meter->setChannelsOffset(0.0625 * HOA_PI);
     m_decoder->setChannelsOffset(0.0625 * HOA_PI);
-    m_optim->setMode(Hoa2D::Optim::InPhase);
     
     m_input_vector = new float[16 * 8192];
     m_harmo_vector = new float[NHARMO * 8192];
     m_output_vector= new float[NCHANNEL * 8192];
     m_lines_vector = new float[32];
     
+    for(int i = 0; i < 16; i++)
+    {
+        m_lines->setRadiusDirect(i, 1.);
+        m_lines->setAzimuthDirect(i, 0.);
+    }
     m_number_of_sources = 0;
     setNumberOfSources(2);
 }
@@ -43,6 +47,7 @@ HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
     delete m_map;
     delete m_optim;
     delete m_decoder;
+    delete m_lines;
     delete [] m_input_vector;
     delete [] m_output_vector;
     delete [] m_harmo_vector;
@@ -261,6 +266,10 @@ void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBloc
 {
 	m_vector_size = samplesPerBlock;
     
+    memset(m_input_vector, 0, 16 * 8192 * sizeof(float));
+    memset(m_harmo_vector, 0, NHARMO * 8192 * sizeof(float));
+    memset(m_output_vector, 0, NCHANNEL * 8192 * sizeof(float));
+    
     AudioProcessorEditor* Editor = NULL;
     Editor = getActiveEditor();
     if(Editor)
@@ -278,21 +287,28 @@ void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
     int numins = getNumInputChannels();
     int numouts = getNumOutputChannels();
     int nharmo = NHARMO;
-    float* channelData;
-
-    for(i = 0; i < numins && i < m_number_of_sources; i++)
+    int vectorsize = buffer.getNumSamples();
+    
+    for(i = 0; i < numins; i++)
     {
-        channelData = buffer.getWritePointer(i);
-        cblas_scopy(m_vector_size, channelData, 1, m_input_vector+i, numins);
+        cblas_scopy(vectorsize, buffer.getReadPointer(i), 1, m_input_vector+i, numins);
         m_lines->setRadius(i, m_sources->sourceGetRadius(i));
         m_lines->setAzimuth(i, m_sources->sourceGetAzimuth(i));
+        if(m_sources->sourceGetExistence(i))
+            m_map->setMute(i, 0);
+        else
+            m_map->setMute(i, 1);
     }
-    for(i = 0; i < m_vector_size; i++)
+    for(; i < 16; i++)
+    {
+        m_map->setMute(i, 1);
+    }
+    for(i = 0; i < vectorsize; i++)
     {
         m_lines->process(m_lines_vector);
-        for(int j = 0; j < numins && j < m_number_of_sources; j++)
+        for(int j = 0; j < numins; j++)
             m_map->setRadius(j, m_lines_vector[j]);
-        for(int j = 0; j < numins && j < m_number_of_sources; j++)
+        for(int j = 0; j < numins; j++)
             m_map->setAzimuth(j, m_lines_vector[j+numins]);
         
         m_map->process(m_input_vector+ numins * i, m_harmo_vector + nharmo * i);
@@ -300,10 +316,10 @@ void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
         m_decoder->process(m_harmo_vector + nharmo * i, m_output_vector + numouts * i);
         m_meter->process(m_output_vector + numouts * i);
     }
+
     for(i = 0; i < numouts; i++)
     {
-        channelData = buffer.getWritePointer(i);
-        cblas_scopy(m_vector_size, m_output_vector+i, numouts, channelData, 1);
+        cblas_scopy(vectorsize, m_output_vector+i, numouts, buffer.getWritePointer(i), 1);
     }
 }
 

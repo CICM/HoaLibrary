@@ -35,6 +35,11 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
         
     m_lines_vector = new float[32];
     
+    for(int i = 0; i < 16; i++)
+    {
+        m_lines->setRadiusDirect(i, 1.);
+        m_lines->setAzimuthDirect(i, 0.);
+    }
     m_number_of_sources = 0;
     setNumberOfSources(2);
 }
@@ -45,6 +50,7 @@ HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
     delete m_map;
     delete m_optim;
     delete m_decoder;
+    delete m_lines;
     
     for(int i = 0; i < NHARMO; i++)
          delete [] m_harmo_matrix[i];
@@ -284,41 +290,49 @@ void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer&
 {
     int i;
     int numins = getNumInputChannels();
-    float* channelData;
+    int vectorsize = buffer.getNumSamples();
+    int nharmo = NHARMO;
     
+    m_decoder->setVectorSize(vectorsize);
     if(!m_decoder->getState())
         return;
     
-    for(i = 0; i < numins && i < m_number_of_sources; i++)
+    for(i = 0; i < numins; i++)
     {
-        channelData = buffer.getWritePointer(i);
-        cblas_scopy(m_vector_size, channelData, 1, m_input_vector+i, numins);
+        cblas_scopy(vectorsize, buffer.getReadPointer(i), 1, m_input_vector+i, numins);
         m_lines->setRadius(i, m_sources->sourceGetRadius(i));
         m_lines->setAzimuth(i, m_sources->sourceGetAzimuth(i));
+        if(m_sources->sourceGetExistence(i))
+            m_map->setMute(i, 0);
+        else
+            m_map->setMute(i, 1);
     }
-    for(i = 0; i < m_vector_size; i++)
+    for(; i < 16; i++)
+    {
+        m_map->setMute(i, 1);
+    }
+    for(i = 0; i < vectorsize; i++)
     {
         m_lines->process(m_lines_vector);
-        for(int j = 0; j < numins && j < m_number_of_sources; j++)
+        for(int j = 0; j < numins; j++)
             m_map->setRadius(j, m_lines_vector[j]);
-        for(int j = 0; j < numins && j < m_number_of_sources; j++)
+        for(int j = 0; j < numins; j++)
             m_map->setAzimuth(j, m_lines_vector[j+numins]);
         
-        m_map->process(m_input_vector+ numins * i, m_harmo_vector + NHARMO * i);
-        m_optim->process(m_harmo_vector + NHARMO * i, m_harmo_vector + NHARMO * i);
+        m_map->process(m_input_vector+ numins * i, m_harmo_vector + nharmo * i);
+        m_optim->process(m_harmo_vector + nharmo * i, m_harmo_vector + nharmo * i);
     }
+    
     for(i = 0; i < NHARMO; i++)
     {
-        cblas_scopy(m_vector_size, m_harmo_vector+i, NHARMO, m_harmo_matrix[i], 1);
+        cblas_scopy(vectorsize, m_harmo_vector+i, NHARMO, m_harmo_matrix[i], 1);
     }
-
     m_decoder->process(m_harmo_matrix, buffer.getArrayOfWritePointers());    
     for(i = 0; i < NCHANNEL; i++)
     {
-        channelData = buffer.getWritePointer(i);
-        cblas_scopy(m_vector_size, channelData, 1, m_harmo_vector+i, NCHANNEL);
+        cblas_scopy(vectorsize, buffer.getWritePointer(i), 1, m_harmo_vector+i, NCHANNEL);
     }
-    for(i = 0; i < m_vector_size; i++)
+    for(i = 0; i < vectorsize; i++)
     {
         m_meter->process(m_harmo_vector + NCHANNEL * i);
     }
