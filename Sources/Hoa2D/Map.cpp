@@ -51,6 +51,8 @@ namespace Hoa2D
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
 			setMute(i, 0);
+            setAzimuth(i, 0.);
+            setRadius(i, 1.);
         }
     }
     
