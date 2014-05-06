@@ -73,7 +73,7 @@ private:
     int             m_number_of_sources;
     float*          m_input_vector;
     float*          m_harmo_vector;
-    float*          m_output_vector;
+    float**         m_harmo_matrix;
     float*          m_lines_vector;
 public:
     HoaToolsAudioProcessor();
