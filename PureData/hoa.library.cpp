@@ -42,10 +42,10 @@ extern "C" void setup_hoa0x2elibrary(void)
     post("© 2012 - 2014  CICM | Paris 8 University");
     post("Version Beta 2.0");
 
-    library_add_subfolder("HoaLibrary", "patchers");
-    library_add_subfolder("HoaLibrary", "clippings");
-    library_add_subfolder("HoaLibrary", "dependencies");
-    library_add_subfolder("HoaLibrary", "media");
-    library_add_subfolder("HoaLibrary", "misc");
+    pd_library_add_folder("HoaLibrary", "patchers");
+    pd_library_add_folder("HoaLibrary", "clippings");
+    pd_library_add_folder("HoaLibrary", "dependencies");
+    pd_library_add_folder("HoaLibrary", "media");
+    pd_library_add_folder("HoaLibrary", "misc");
 }
 
