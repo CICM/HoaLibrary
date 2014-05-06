@@ -94,24 +94,25 @@ namespace Hoa2D
     
     void Map::process(const float* inputs, float* outputs)
     {
-        if(m_first_source > -1)
+        int first = m_first_source;
+        if(first > -1)
         {
-            int index = m_wide[m_first_source] * m_number_of_harmonics;
-            float cos_x = m_cosx[m_first_source];
-            float sin_x = m_sinx[m_first_source];
+            int index = m_wide[first] * m_number_of_harmonics;
+            float cos_x = m_cosx[first];
+            float sin_x = m_sinx[first];
             float tcos_x = cos_x;
-            float sig = inputs[m_first_source] * m_gains[m_first_source] * m_wide_matrix[index];
+            float sig = inputs[first] * m_gains[first] * m_wide_matrix[index];
             outputs[0] = sig;
             for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
             {
                 outputs[i] = sig * sin_x * m_wide_matrix[index + i];
                 outputs[i+1] = sig * cos_x * m_wide_matrix[index + i + 1];
-                cos_x = tcos_x * m_cosx[m_first_source] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
-                sin_x = tcos_x * m_sinx[m_first_source] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                cos_x = tcos_x * m_cosx[first] - sin_x * m_sinx[first]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                sin_x = tcos_x * m_sinx[first] + sin_x * m_cosx[first]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
                 tcos_x = cos_x;
             }
             
-            for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
+            for(unsigned int i = first+1; i < m_number_of_sources; i++)
             {
                 if (!m_muted[i])
                 {
@@ -142,24 +143,25 @@ namespace Hoa2D
     
     void Map::process(const double* inputs, double* outputs)
     {
-		if(m_first_source > -1)
+        int first = m_first_source;
+		if(first > -1)
         {
-            int index = m_wide[m_first_source] * m_number_of_harmonics;
-            double cos_x = m_cosx[m_first_source];
-            double sin_x = m_sinx[m_first_source];
+            int index = m_wide[first] * m_number_of_harmonics;
+            double cos_x = m_cosx[first];
+            double sin_x = m_sinx[first];
             double tcos_x = cos_x;
-            double sig = inputs[m_first_source] * m_gains[m_first_source] * m_wide_matrix[index];
+            double sig = inputs[first] * m_gains[first] * m_wide_matrix[index];
             outputs[0] = sig;
             for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
             {
                 outputs[i] = sig * sin_x * m_wide_matrix[index + i];
                 outputs[i+1] = sig * cos_x * m_wide_matrix[index + i + 1];
-                cos_x = tcos_x * m_cosx[m_first_source] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
-                sin_x = tcos_x * m_sinx[m_first_source] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                cos_x = tcos_x * m_cosx[first] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                sin_x = tcos_x * m_sinx[first] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
                 tcos_x = cos_x;
             }
 
-            for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
+            for(unsigned int i = first+1; i < m_number_of_sources; i++)
             {
                 if (!m_muted[i])
                 {
