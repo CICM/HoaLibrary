@@ -24,13 +24,15 @@ namespace Hoa2D
     private:
         
         unsigned int			m_number_of_sources;
-        float*					m_harmonics_float;
-        double*					m_harmonics_double;
         double*					m_gains;
 		bool*					m_muted;
         int						m_first_source;
-        std::vector<Encoder*>   m_encoders;
-        std::vector<Wider*>     m_widers;
+        
+        double*                 m_azimuth;
+        double*                 m_cosx;
+        double*                 m_sinx;
+        long*                   m_wide;
+        double*                 m_wide_matrix;
         
     public:
         
@@ -92,7 +94,7 @@ namespace Hoa2D
         double getAzimuth(const unsigned int index) const
         {
             assert(index < m_number_of_sources);
-            return m_encoders[index]->getAzimuth();
+            return m_azimuth[index];
         }
 		
         //! This method retrieve the radius of a source.
@@ -104,8 +106,8 @@ namespace Hoa2D
         double getRadius(const unsigned int index) const
         {
             assert(index < m_number_of_sources);
-            if(m_widers[index]->getWideningValue() < 1)
-                return m_widers[index]->getWideningValue();
+            if(m_wide[index] / ((double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics) < 1)
+                return m_wide[index] / ((double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics);
             else
                 return 1. / sqrt(m_gains[index]);
         }

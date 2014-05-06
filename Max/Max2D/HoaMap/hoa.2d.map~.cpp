@@ -170,8 +170,12 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
             x->f_lines->setAzimuthDirect(i, 0.);
         }
         
-		x->f_sig_ins    = new double[MAX_NUMBER_OF_SOURCES * 8192];
-        x->f_sig_outs   = new double[MAX_NUMBER_OF_SOURCES * 8192];
+        if(x->f_map->getNumberOfSources() == 1)
+            x->f_sig_ins    = new double[3 * 8192];
+        else
+            x->f_sig_ins    = new double[x->f_map->getNumberOfSources() * 8192];
+        
+        x->f_sig_outs   = new double[x->f_map->getNumberOfHarmonics() * 8192];
 		
 		if(x->f_map->getNumberOfSources() == 1)
             dsp_setup((t_pxobject *)x, 3);
@@ -180,6 +184,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		
 		for (int i = 0; i < x->f_map->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
+        
 	}
 	
 	return (x);
@@ -299,7 +304,7 @@ void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerat
 
 void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int nsources = clip_max(x->f_map->getNumberOfSources(), MAX_NUMBER_OF_SOURCES);
+    int nsources = x->f_map->getNumberOfSources();
     for(int i = 0; i < numins; i++)
     {
         cblas_dcopy(sampleframes, ins[i], 1, x->f_sig_ins+i, numins);
@@ -307,12 +312,11 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
     for(int i = 0; i < sampleframes; i++)
     {
         x->f_lines->process(x->f_lines_vector);
-		
 		for(int j = 0; j < nsources; j++)
 			x->f_map->setRadius(j, x->f_lines_vector[j]);
-		for(int j = 0; j < nsources; j++)
+        for(int j = 0; j < nsources; j++)
 			x->f_map->setAzimuth(j, x->f_lines_vector[j + nsources]);
-		
+        
         x->f_map->process(x->f_sig_ins + numins * i, x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
