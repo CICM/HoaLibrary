@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -92,6 +92,8 @@ namespace Hoa2D
 		double*         m_harmonics_vector;
         Encoder*        m_encoder;
         double          m_offset;
+        unsigned int    m_number_of_virtual_channels;
+        unsigned int*   m_nearest_channel[2];
         
     public:
         
@@ -123,6 +125,16 @@ namespace Hoa2D
 		double getChannelsOffset() const
         {
             return m_offset;
+        }
+        
+        //! Get the number of virtual channels.
+        /**	Retreive the number of virtual channels.
+         
+         @return    The the number of virtual channels.
+         */
+		unsigned int getNumberOfVirutalChannels() const
+        {
+            return m_number_of_virtual_channels;
         }
         
         //! Set the azimuth of a channel.
@@ -396,6 +408,19 @@ namespace Hoa2D
                 return m_decoder_irregular->getNumberOfChannels();
             else
                 return m_decoder_binaural->getNumberOfChannels();
+        }
+        
+        //! Get the number of virtual channels.
+        /**	Retreive the number of virtual channels.
+         
+         @return    The the number of virtual channels.
+         */
+		unsigned int getNumberOfVirutalChannels() const
+        {
+            if(m_mode == Irregular)
+                return m_decoder_irregular->getNumberOfVirutalChannels();
+            else
+                return 0;
         }
         
         //! Set the offset of the channels for the regular decoding.

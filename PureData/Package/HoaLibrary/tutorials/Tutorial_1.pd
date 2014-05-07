@@ -1,11 +1,11 @@
-#N canvas 789 86 365 208 10;
+#N canvas 752 78 388 211 10;
 #X obj -251 -386 c.tab @size 358 102 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @orientation 1 @toggle 0 @items Introduction Space Harmonics
 Resolution Encoding Decoding @bgcolor 0.802322 0.802322 0.802322 1
 @bdcolor 0 0 0 1 @textcolor 0 0 0 1 @hocolor 0.5 0.5 0.5 1 @secolor
 0.35 0.35 0.35 1;
-#N canvas 0 22 450 300 open.tuto 0;
+#N canvas 0 50 450 300 open.tuto 0;
 #X obj 236 -165 c.patcherinfos;
 #X msg 196 -64 \; pd open \$1 \$2;
 #X obj 176 -137 pack s s;

@@ -73,7 +73,7 @@ private:
     int             m_number_of_sources;
     float*          m_input_vector;
     float*          m_harmo_vector;
-    float*          m_output_vector;
+    float**         m_harmo_matrix;
     float*          m_lines_vector;
 public:
     HoaToolsAudioProcessor();
@@ -110,13 +110,11 @@ public:
         {
             if(i >= oldnumber && i < m_number_of_sources)
             {
-                m_map->setMute(i, 0);
                 m_sources->sourceSetPolar(i, 1., 0.);
                 m_sources->sourceSetMute(i, 0);
             }
             else if(i >= m_number_of_sources)
             {
-                m_map->setMute(i, 1);
                 m_sources->sourceSetMute(i, 1);
                 m_sources->sourceRemove(i);
             }

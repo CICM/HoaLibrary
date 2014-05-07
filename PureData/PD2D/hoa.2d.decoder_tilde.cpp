@@ -79,7 +79,7 @@ extern "C" void setup_hoa0x2e2d0x2ebinaural(void)
     
 	c = eclass_new("hoa.2d.binaural~", (method)hoa_binaural_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
     class_addcreator((t_newmethod)hoa_binaural_new, gensym("hoa.binaural~"), A_GIMME, 0);
-    
+
 	eclass_init(c, 0);
     eclass_register(CLASS_BOX, c);
 	hoa_binaural_alias = c;

@@ -16,6 +16,6 @@
 	/>
 	<UserMacro
 		Name="C74SUPPORT"
-		Value="$(InputDir)..\..\..\..\SDKs\MaxSDK-6.1.1\c74support\"
+		Value="$(InputDir)..\..\..\ThirdParty\Max\c74support\"
 	/>
 </VisualStudioPropertySheet>

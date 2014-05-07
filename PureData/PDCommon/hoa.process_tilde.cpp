@@ -306,10 +306,9 @@ void *hoa_process_new(t_symbol *s, long argc, t_atom *argv)
         {
             x->f_outlets_signals[i] = new t_sample[8192];
         }
-
+		
         x->f_target = -1;
 	}
-    
     
 	return x;
 }
@@ -1087,7 +1086,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
 
     if(fd >= 0)
     {
-        
+  
         // Allocation of each canvas
         for(int i = 0; i < ncnv; i++)
         {
@@ -1110,7 +1109,6 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
             }
             
             // Load the canvas
-            int dspstate = canvas_suspend_dsp();
             t_pd *boundx = s__X.s_thing;
             s__X.s_thing = 0;
             binbuf_evalfile(gensym(nameptr), gensym(dirbuf));
@@ -1119,7 +1117,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
                 x->f_canvas[i] = (t_canvas *)s__X.s_thing;
                 vmess((t_pd *)x->f_canvas[i], gensym("pop"), "i", 1);
             }
-            canvas_resume_dsp(dspstate);
+            
             s__X.s_thing = boundx;
             
             // If the canvas is loaded
@@ -1128,7 +1126,6 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
                 hoa_process_get_thisprocess(x, i, argc, argv);
                 
                 x->f_canvas[i]->gl_owner = eobj_getcanvas(x);   // Set the owner of the canvas
-                canvas_vis(x->f_canvas[i], 0);                  // Hide the canvas
                 canvas_removefromlist(x->f_canvas[i]);          // Remove canvas from top level
                 canvas_loadbang(x->f_canvas[i]);                // Send loadbang
                 
@@ -1136,11 +1133,13 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
                 hoa_process_get_io(x, i);
                 x->f_dsp_context[i] = dsp_context_new();
                 x->f_ncanvas++;
+                canvas_vis(x->f_canvas[i], 0);                  // Hide the canvas
             }
             else
             {
                 canvas_setcurrent(eobj_getcanvas(x));
                 pd_error(x, "hoa.process~ : error while loading canvas.");
+				canvas_resume_dsp(state);
                 return;
             }
         }

@@ -7,6 +7,8 @@
 #ifndef __DEF_HOA_LIBRARY__
 #define __DEF_HOA_LIBRARY__
 
+namespace Hoa{};
+
 #include "HoaDefs.h"
 #include "HoaMath.h"
 #include "HoaUtils.h"
