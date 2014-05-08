@@ -6,6 +6,7 @@
 
 #include "PDCommon/HoaCommon.pd.h"
 #include "PD2D/Hoa2D.pd.h"
+#include "PD3D/Hoa3D.pd.h"
 
 extern "C" void setup_hoa0x2elibrary(void)
 {
@@ -35,6 +36,9 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2espace();
     setup_hoa0x2e2d0x2ewider_tilde();
 
+    // HOA 3D //
+    setup_hoa0x2e3d0x2eencoder_tilde();
+    
     // Alias /:
     setup_hoa0x2e2d0x2ebinaural();
     
