@@ -15,6 +15,7 @@
  */
 namespace Hoa3D{};
 
+
 #include "Encoder_3D.h"
 #include "Decoder_3D.h"
 #include "Wider_3D.h"

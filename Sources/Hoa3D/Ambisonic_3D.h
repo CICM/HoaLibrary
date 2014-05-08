@@ -8,7 +8,7 @@
 #define __DEF_HOA_3D_AMBISONIC__
 
 #include "Tools_3D.h"
-
+#include "../Hoa.h"
 //! The 3D ambisonic classes.
 /**
  All the 3D ambisonic and planewaves classes will be part of this namespace

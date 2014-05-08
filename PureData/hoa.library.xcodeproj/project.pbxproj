@@ -147,6 +147,9 @@
 		8F27E3D819178A33004E1370 /* epopup.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E3AE19178A33004E1370 /* epopup.c */; };
 		8F27E3D919178A33004E1370 /* epopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E3AF19178A33004E1370 /* epopup.h */; };
 		8F27E3DA19178A33004E1370 /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E3B019178A33004E1370 /* estruct.h */; };
+		8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */; };
+		8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */; };
+		8F5A12BB191BB99D00825567 /* hoa.3d.map_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -291,6 +294,9 @@
 		8F27E3AE19178A33004E1370 /* epopup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = epopup.c; sourceTree = "<group>"; };
 		8F27E3AF19178A33004E1370 /* epopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
 		8F27E3B019178A33004E1370 /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
+		8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.encoder_tilde.cpp; sourceTree = "<group>"; };
+		8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.pd.h; sourceTree = "<group>"; };
+		8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.map_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,10 +318,11 @@
 				8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */,
 				8F189F3318EB0DBE00348D89 /* hoa.pd.cpp */,
 				8F189F3418EB0DBE00348D89 /* hoa.pd.h */,
+				8F27E2A219178943004E1370 /* PD2D */,
+				8F5A12B5191BB6EB00825567 /* PD3D */,
+				8F27E27219178923004E1370 /* PDCommon */,
 				8F18A02B18EB188D00348D89 /* CicmWrapper */,
 				8F27E2C0191789BD004E1370 /* Sources */,
-				8F27E2A219178943004E1370 /* PD2D */,
-				8F27E27219178923004E1370 /* PDCommon */,
 				59FB02F717A7FAA9001E977D /* Accelerate.framework */,
 				5913847015DAA36D0029AD16 /* Products */,
 			);
@@ -558,6 +565,16 @@
 			path = epopup;
 			sourceTree = "<group>";
 		};
+		8F5A12B5191BB6EB00825567 /* PD3D */ = {
+			isa = PBXGroup;
+			children = (
+				8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */,
+				8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */,
+				8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */,
+			);
+			path = PD3D;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -580,6 +597,7 @@
 				8F27E365191789BE004E1370 /* Encoder_3D.h in Headers */,
 				8F27E342191789BE004E1370 /* Map.h in Headers */,
 				8F27E3D919178A33004E1370 /* epopup.h in Headers */,
+				8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */,
 				8F27E377191789BE004E1370 /* Wider_3D.h in Headers */,
 				8F27E3C219178A33004E1370 /* eboxflag.h in Headers */,
 				8F27E33E191789BE004E1370 /* Hoa2D.h in Headers */,
@@ -678,6 +696,7 @@
 				8F27E2BE19178943004E1370 /* hoa.2d.wider_tilde.cpp in Sources */,
 				8F27E353191789BE004E1370 /* SourcesGroup.cpp in Sources */,
 				8F27E343191789BE004E1370 /* Meter.cpp in Sources */,
+				8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */,
 				8F27E2B919178943004E1370 /* hoa.2d.projector_tilde.cpp in Sources */,
 				8F27E3BA19178A33004E1370 /* eclass_attrgetter.c in Sources */,
 				8F27E3BD19178A33004E1370 /* eclass_attrsetter.c in Sources */,
@@ -721,6 +740,7 @@
 				8F27E374191789BE004E1370 /* Vector_3D.cpp in Sources */,
 				8F27E35D191789BE004E1370 /* Wider.cpp in Sources */,
 				8F27E3B519178A33004E1370 /* ebox_draw.c in Sources */,
+				8F5A12BB191BB99D00825567 /* hoa.3d.map_tilde.cpp in Sources */,
 				8F27E3C319178A33004E1370 /* ecommon.c in Sources */,
 				8F27E347191789BE004E1370 /* Planewaves.cpp in Sources */,
 				8F27E364191789BE004E1370 /* Encoder_3D.cpp in Sources */,

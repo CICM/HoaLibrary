@@ -1,0 +1,51 @@
+#N canvas 374 96 735 641 10;
+#X obj -28 -400 phasor~ -0.3;
+#X text -205 -396 source;
+#X text 6 -350 angle;
+#X msg -332 -239 \; pd dsp 1;
+#X msg -332 -204 \; pd dsp 0;
+#X obj -203 65 hoa.dac~ 1:16 -----------------------------;
+#X obj -8 -329 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj -203 -371 hoa.soundgrain;
+#X obj -203 -342 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
+0.5 1 @kncolor 0.5 0.5 0.5 1;
+#X obj 227 -334 hoa.connect;
+#X obj 227 -354 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -375 -428 hoa.2d.encoder~ creates the circular harmonics of
+a signal depending on a given order and an angle.;
+#X obj -28 -375 hoa.pi~ 2;
+#X obj -380 -455 c.patcherinfos;
+#X obj -380 -472 loadbang;
+#X obj -380 -472 hoa.help.header;
+#X obj -250 86 hoa.help.pub;
+#X obj 36 -472 hoa.help.also;
+#X obj -203 -294 hoa.3d.encoder~ 3 -------------------------;
+#X obj -201 -231 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+3 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj -255 -326 sig~ 1;
+#X obj 75 -340 osc~ 0.1;
+#X connect 0 0 12 1;
+#X connect 7 0 8 0;
+#X connect 10 0 9 0;
+#X connect 12 0 6 0;
+#X connect 12 0 18 1;
+#X connect 13 0 15 0;
+#X connect 14 0 13 0;
+#X connect 18 0 19 0;
+#X connect 18 2 19 1;
+#X connect 18 3 19 2;
+#X connect 18 7 19 3;
+#X connect 18 8 19 4;
+#X connect 18 14 19 5;
+#X connect 18 15 19 6;
+#X connect 20 0 18 0;
+#X connect 21 0 18 2;
+#X coords 0 641 1 640 100 60 0;

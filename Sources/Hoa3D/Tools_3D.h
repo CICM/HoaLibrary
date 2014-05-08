@@ -224,135 +224,6 @@ namespace Hoa3D
         return spherical_harmonics_elevation(l, m, theta) * spherical_harmonics_azimuth(l, m, phi);
     }
 
-    //! The wrapping function
-    /** The function wraps a number between boundaries.
-
-        @param     value   The value to wrap.
-        @param     low     The low boundarie.
-        @param     high    The high boundarie.
-        @return    The function return the wrapped value.
-
-        @see    wrap_twopi
-     */
-    inline double wrap(double value, double low, double high)
-    {
-        double increment = high - low;
-        while(value < low)
-        {
-            value += increment;
-        }
-
-        while(value > high)
-        {
-            value -= increment;
-        }
-
-        return value;
-    }
-
-    //! The wrapping function over \f$2\pi\f$
-    /** The function wraps a number between 0 and \f$2\pi\f$.
-
-        @param     value   The value to wrap.
-        @return    The function return the wrapped value.
-
-        @see    wrap
-     */
-    inline double wrap_twopi(double value)
-    {
-        double new_value = value;
-        while(new_value < 0.)
-        {
-            new_value += HOA_2PI;
-        }
-
-        while(new_value > HOA_2PI)
-        {
-            new_value -= HOA_2PI;
-        }
-        return new_value;
-    }
-
-    //! The clipping function
-    /** The function clips a number between boundaries. \n
-        If \f$x < min\f$, \f$f(x) = min\f$ else if \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
-
-        @param     value   The value to clip.
-        @param     low     The low boundarie.
-        @param     high    The high boundarie.
-        @return    The function return the clipped value.
-
-        @see    clip_min
-        @see    clip_max
-     */
-    inline double clip_minmax(double value, double low, double high)
-    {
-        if(value < low)
-            return low;
-        else if(value > high)
-            return high;
-        else
-            return value;
-    }
-
-    //! The minimum clipping function
-    /** The function clips a number at a minimum value. \n
-        If \f$x < min\f$, \f$f(x) = min\f$ else \f$f(x) = x\f$.
-
-        @param     value   The value to clip.
-        @param     low     The low boundarie.
-        @return    The function return the clipped value.
-
-        @see    clip_minmax
-        @see    clip_max
-     */
-    inline double clip_min(double value, double low)
-    {
-        if(value < low)
-            return low;
-        else
-            return value;
-    }
-
-    //! The maximum clipping function
-    /** The function clips a number at a maximum value. \n
-        If \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
-
-        @param     value   The value to clip.
-        @param     high    The high boundarie.
-        @return    The function return the clipped value.
-
-        @see    clip_minmax
-        @see    clip_min
-     */
-    inline double clip_max(const double value, const double high)
-    {
-        if(value > high)
-            return high;
-        else
-            return value;
-    }
-
-    inline double radius(const double x, const double y)
-	{
-		return sqrt(x*x + y*y);
-	}
-
-	inline double angle(const double x, const double y)
-	{
-		return atan2(y, x) + HOA_PI2;
-	}
-
-	inline double ordinate(const double radius, const double angle)
-	{
-		return radius * sin(angle - HOA_PI2);
-	}
-
-    inline double abscissa(const double radius, const double angle)
-	{
-		return radius * cos(angle - HOA_PI2);
-	}
-
     inline double radius(double x, double y, double z)
 	{
 		return sqrt(x*x + y*y + z*z);
@@ -360,7 +231,7 @@ namespace Hoa3D
 
 	inline double azimuth(double x, double y, double z)
 	{
-		return angle(x, y);
+		return atan2(y, x) + HOA_PI2;
 	}
 
     inline double elevation(double x, double y, double z)
