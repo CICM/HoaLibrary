@@ -158,8 +158,8 @@ namespace Hoa2D
             {
                 outputs[i] = sig * sin_x * m_wide_matrix[index + i];
                 outputs[i+1] = sig * cos_x * m_wide_matrix[index + i + 1];
-                cos_x = tcos_x * m_cosx[first] - sin_x * m_sinx[m_first_source]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
-                sin_x = tcos_x * m_sinx[first] + sin_x * m_cosx[m_first_source]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+                cos_x = tcos_x * m_cosx[first] - sin_x * m_sinx[first]; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+                sin_x = tcos_x * m_sinx[first] + sin_x * m_cosx[first]; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
                 tcos_x = cos_x;
             }
 

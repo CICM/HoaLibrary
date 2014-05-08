@@ -65,6 +65,7 @@ t_max_err connect_setattr_negcolor(t_connect *x, void *attr, long argc, t_atom *
 t_max_err connect_setattr_planecolor(t_connect *x, void *attr, long argc, t_atom *argv);
 
 short is_obj_hoa_exotic(t_object *obj);
+short is_obj_hoa_bpatcher(t_object *obj);
 void make_patchline(t_connect *x);
 void color_patchline(t_connect *x);
 void connect_connect(t_patcher *p, t_object *send, int outlet, t_object *receive, int inlet);
@@ -234,7 +235,7 @@ void make_patchline(t_connect *x)
 	{
 		for (i = 0; i < x->f_nbSelected; i++)
 		{
-			obj1 = jbox_get_object(x->f_objects[i]);
+            obj1 = jbox_get_object(x->f_objects[i]);
 			if(object_is_hoa(obj1) || is_obj_hoa_exotic(obj1))
             {
 				x->f_objects[valid_objects++] = x->f_objects[i]; // ! store BOX objects
