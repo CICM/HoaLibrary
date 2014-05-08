@@ -83,6 +83,10 @@ int C74_EXPORT main(void)
     // @marg 1 @name on/off-flag @optional 0 @type int
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
     
+    // @method getmute @digest Report mute state.
+	// @description Report mute state only.
+	class_addmethod(c, (method)hoa_thisprocess_mutechange,			"getmute",		A_NOTHING, 0);
+    
      // @method bang @digest Report the instance informations in a right to left outputting order.
 	 // @description Output instance informations in a right to left outputting order. <br/><br/>
      // <ul>

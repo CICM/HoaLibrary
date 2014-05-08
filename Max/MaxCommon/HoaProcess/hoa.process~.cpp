@@ -2069,6 +2069,38 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 	if (state) state = 1;
 	if (index <= x->patch_spaces_allocated)
 		x->patch_space_ptrs[index - 1]->patch_on = state;
+    else
+        return;
+    
+    /*
+    if (!state)
+    {
+        // Zero Outputs
+        for (int i = 0; i < x->declared_sig_outs; i++)
+        {
+            memset(x->patch_space_ptrs[index - 1]->out_ptrs[i], 0, SIG_SIZE * x->last_vec_size);
+        }
+        
+        double** sigins = (double**)x->sig_ins;
+        double** sigouts = (double**)x->sig_outs;
+        for (int i = 0; i < x->declared_sig_ins; i++)
+        {
+            for (int j=0; j < x->last_vec_size; j++)
+            {
+                sigins[i][j] = 0;
+            }
+        }
+        
+        for (int i = 0; i < x->declared_sig_outs; i++)
+        {
+            for (int j=0; j < x->last_vec_size; j++)
+            {
+                sigouts[i][j] = 0;
+            }
+            //x->sig_outs[index - 1][i] = 0;
+        }
+    }
+    */
 }
 
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
