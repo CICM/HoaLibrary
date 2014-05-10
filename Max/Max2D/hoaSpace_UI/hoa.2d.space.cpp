@@ -36,6 +36,7 @@ typedef struct  _hoa_space
     double      f_minmax[2];
 	long		f_floatoutput;
 	t_symbol*	f_slider_style;
+	long		f_draw_value;
     
     long		f_mode;
     double*     f_channel_values;
@@ -48,9 +49,13 @@ typedef struct  _hoa_space
     t_jrgba     f_color_bd;
 	t_jrgba		f_color_sp;
 	t_jrgba		f_color_pt;
+	t_jrgba		f_color_sel;
+	t_jrgba		f_color_text;
 
 	double		f_center;
     double      f_radius;
+	
+	long		f_last_mouse_index;
     
 } t_hoa_space;
 
@@ -67,12 +72,14 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
 void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
 
 void hoa_space_paint(t_hoa_space *x, t_object *view);
 void draw_background(t_hoa_space *x, t_object *view, t_rect *rect);
 void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect);
 void draw_points(t_hoa_space *x, t_object *view, t_rect *rect);
 void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect);
+void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect);
 
 t_max_err hoa_space_setvalueof(t_hoa_space *x, long ac, t_atom *av);
 t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av);
@@ -92,7 +99,7 @@ int C74_EXPORT main()
 	c = class_new("hoa.2d.space", (method)hoa_space_new, (method)hoa_space_free, (short)sizeof(t_hoa_space), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 
     hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_space_assist,          "assist",         A_CANT,	0);
@@ -117,6 +124,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)hoa_space_mouse_move,      "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_down,      "mouseup",        A_CANT, 0);
+	class_addmethod(c, (method)hoa_space_mouse_leave,      "mouseleave",     A_CANT, 0);
     class_addmethod(c, (method)hoa_space_preset,          "preset",         0);
     class_addmethod(c, (method)hoa_space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
@@ -154,12 +162,19 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE					(c, "floatoutput", 1);
     // @description The <m>floatoutput</m> attribute set the <o>hoa.2d.space</o> output type. If it is checked, sliders value are sent as floating-pont values, otherwise it will round slider values and send it as integers.
 	
+	CLASS_ATTR_LONG					(c, "drawvalue", 0, t_hoa_space, f_draw_value);
+	CLASS_ATTR_CATEGORY				(c, "drawvalue", 0, "Style");
+	CLASS_ATTR_STYLE_LABEL			(c, "drawvalue", 0, "onoff", "Draw Text Value");
+    CLASS_ATTR_ORDER				(c, "drawvalue", 0, "1");
+	CLASS_ATTR_DEFAULT				(c, "drawvalue", 0, "0");
+    CLASS_ATTR_SAVE					(c, "drawvalue", 1);
+    // @description When the <m>drawvalue</m> attribute is checked, slider values are posted at the center.
+	
 	CLASS_ATTR_SYM					(c, "sliderstyle", 0, t_hoa_space, f_slider_style);
 	CLASS_ATTR_CATEGORY				(c, "sliderstyle", 0, "Style");
     CLASS_ATTR_LABEL				(c, "sliderstyle", 0, "Slider Style");
     CLASS_ATTR_ENUM					(c, "sliderstyle", 0, "Blob Bar");
-    CLASS_ATTR_ORDER				(c, "sliderstyle", 0, "1");
-    //CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "sliderstyle", 0, "Blob");
+    CLASS_ATTR_ORDER				(c, "sliderstyle", 0, "2");
 	CLASS_ATTR_DEFAULT				(c, "sliderstyle", 0, "Blob");
 	CLASS_ATTR_SAVE					(c, "sliderstyle", 1);
     // @description Set the sliders style :
@@ -191,6 +206,22 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER                (c, "spcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "spcolor", 0, "0. 0. 1. 0.25");
 	// @description Sets the RGBA values for the space color of the <o>hoa.2d.space</o> object
+	
+	CLASS_ATTR_RGBA					(c, "selcolor", 0, t_hoa_space, f_color_sel);
+	CLASS_ATTR_CATEGORY				(c, "selcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "selcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "selcolor", 0, "Select Color");
+    CLASS_ATTR_ORDER                (c, "selcolor", 0, "3");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "selcolor", 0, "1. 0. 0. 0.25");
+	// @description Sets the RGBA values for the selected slider color of the <o>hoa.2d.space</o> object
+	
+	CLASS_ATTR_RGBA					(c, "textcolor", 0, t_hoa_space, f_color_text);
+	CLASS_ATTR_CATEGORY				(c, "textcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "textcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "textcolor", 0, "Text Color");
+    CLASS_ATTR_ORDER                (c, "textcolor", 0, "3");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "textcolor", 0, "0.1 0.1 0.1 1.");
+	// @description Sets the RGBA values for the text color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "ptcolor", 0, t_hoa_space, f_color_pt);
 	CLASS_ATTR_CATEGORY				(c, "ptcolor", 0, "Color");
@@ -231,6 +262,8 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_channel_refs   = new double[MAX_CHANNELS];
     x->f_channel_radius = new double[MAX_CHANNELS];
     x->f_out			= listout(x);
+	
+	x->f_last_mouse_index = -1;
 
 	attr_dictionary_process(x, d);
 	jbox_ready((t_jbox *)x);
@@ -332,6 +365,19 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
 		}
+		else if(name == gensym("textcolor"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
+		}
+		else if(name == gensym("floatoutput"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
+		}
+		else if(name == gensym("selcolor"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
+		}
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
@@ -408,6 +454,11 @@ void hoa_space_paint(t_hoa_space *x, t_object *view)
 	else
 	{
 		draw_slider_bars(x, view, &rect);
+	}
+	
+	if (x->f_draw_value)
+	{
+		draw_text_value(x, view, &rect);
 	}
 }
 
@@ -561,6 +612,12 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
             abscissa = Hoa::abscissa(radius, angle);
             ordinate = Hoa::ordinate(radius, angle);
             jgraphics_arc(g, abscissa, ordinate, 3., 0., HOA_2PI);
+			
+			if (x->f_last_mouse_index == i)
+				jgraphics_set_source_jrgba(g, &x->f_color_sel);
+			else
+				jgraphics_set_source_jrgba(g, &x->f_color_pt);
+			
             jgraphics_fill(g);
         }
         
@@ -609,7 +666,11 @@ void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
 			jgraphics_arc_negative(g, 0, 0, x->f_channel_radius[i], angle2+HOA_PI2, angle1+HOA_PI2);
 			
 			jgraphics_close_path(g);
-			jgraphics_set_source_jrgba(g, &x->f_color_sp);
+			if (x->f_last_mouse_index == i)
+				jgraphics_set_source_jrgba(g, &x->f_color_sel);
+			else
+				jgraphics_set_source_jrgba(g, &x->f_color_sp);
+			
 			jgraphics_fill_preserve(g);
 			jgraphics_set_source_jrgba(g, &x->f_color_pt);
 			jgraphics_stroke(g);
@@ -620,19 +681,72 @@ void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_space_layer, 0., 0.);
 }
 
+void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect)
+{
+	if (x->f_last_mouse_index < 0 || x->f_last_mouse_index > x->f_number_of_channels)
+		return;
+	
+    t_jfont *jf;
+	t_jtextlayout *jtl;
+    char text[16];
+    double fontsize = jbox_get_fontsize((t_object *)x);
+		
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_text_layer, rect->width, rect->height);
+	
+	if (g)
+	{
+        jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_ITALIC, JGRAPHICS_FONT_WEIGHT_BOLD, fontsize);
+        jtl = jtextlayout_withbgcolor(g, &x->f_color_bg);
+		
+		jtextlayout_settextcolor(jtl, &x->f_color_text);
+		
+		if (x->f_floatoutput)
+			sprintf(text,"%.3f", x->f_channel_values[x->f_last_mouse_index]);
+		else
+			sprintf(text,"%ld", (long)x->f_channel_values[x->f_last_mouse_index]);
+		
+		jtextlayout_set(jtl, text, jf, 0, 0, rect->width, rect->height, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
+		jtextlayout_draw(jtl, g);
+
+		jbox_end_layer((t_object*)x, view, hoa_sym_text_layer);
+	}
+	jbox_paint_layer((t_object *)x, view, hoa_sym_text_layer, 0., 0.);
+}
+
 /**********************************************************/
 /*                      Souris                            */
 /**********************************************************/
 
 void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    if(modifiers == 132 || modifiers == 5) // ctrl : rotation
+    t_pt mouse;
+    mouse.x = pt.x - x->f_center;
+    mouse.y = x->f_center * 2. - pt.y - x->f_center;
+    double angle, radius;
+	
+	angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (HOA_PI / (double)x->f_number_of_channels));
+	radius  = Hoa::radius(mouse.x, mouse.y);
+	x->f_last_mouse_index  = angle / HOA_2PI * x->f_number_of_channels;
+	
+	if(modifiers == 132 || modifiers == 5) // ctrl : rotation
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_DRAGGINGHAND);
     else if(modifiers == 2) // shift : gain
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_RESIZE_FOURWAY);
     else
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
     
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
+    jbox_redraw((t_jbox *)x);
+}
+
+void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+	x->f_last_mouse_index = -1;
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
     jbox_redraw((t_jbox *)x);
 }
 
@@ -720,9 +834,12 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         x->f_channel_values[index] = value;
 		if (!x->f_floatoutput)
 			x->f_channel_values[index] = round(x->f_channel_values[index]);
+		
+		x->f_last_mouse_index = index;
     }
     
 	object_notify(x, hoa_sym_modified, NULL);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
     jbox_redraw((t_jbox *)x);
@@ -757,6 +874,7 @@ t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
             
 			object_notify(x, hoa_sym_modified, NULL);
             jbox_invalidate_layer((t_object*)x, NULL, hoa_sym_background_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
             jbox_redraw((t_jbox *)x);
@@ -786,6 +904,7 @@ t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
             x->f_channel_values[i] = clip_minmax(x->f_channel_values[i], x->f_minmax[0], x->f_minmax[1]);
         
 		object_notify(x, hoa_sym_modified, NULL);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
         jbox_redraw((t_jbox *)x);
