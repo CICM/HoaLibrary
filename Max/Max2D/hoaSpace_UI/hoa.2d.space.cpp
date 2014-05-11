@@ -38,6 +38,7 @@ typedef struct  _hoa_space
 	t_symbol*	f_slider_style;
 	long		f_draw_value;
 	long		f_grid;
+	long		f_snaptogrid;
     
     long		f_mode;
     double*     f_channel_values;
@@ -162,6 +163,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT				(c, "floatoutput", 0, "1");
     CLASS_ATTR_SAVE					(c, "floatoutput", 1);
     // @description The <m>floatoutput</m> attribute set the <o>hoa.2d.space</o> output type. If it is checked, sliders value are sent as floating-pont values, otherwise it will round slider values and send it as integers.
+	
+	CLASS_ATTR_LONG					(c, "snaptogrid", 0, t_hoa_space, f_snaptogrid);
+	CLASS_ATTR_CATEGORY				(c, "snaptogrid", 0, "Value");
+	CLASS_ATTR_STYLE_LABEL			(c, "snaptogrid", 0, "onoff", "Snap to Grid");
+    CLASS_ATTR_ORDER				(c, "snaptogrid", 0, "4");
+	CLASS_ATTR_DEFAULT				(c, "snaptogrid", 0, "0");
+    CLASS_ATTR_SAVE					(c, "snaptogrid", 1);
+    // @description If the <m>snaptogrid</m> attribute is checked, sliders will snap to the setted grid.
 	
 	CLASS_ATTR_LONG					(c, "drawvalue", 0, t_hoa_space, f_draw_value);
 	CLASS_ATTR_CATEGORY				(c, "drawvalue", 0, "Style");
@@ -847,7 +856,16 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         value  *= (x->f_minmax[1] - x->f_minmax[0]);
         value  += x->f_minmax[0];
         value   = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
-        x->f_channel_values[index] = value;
+		
+		if (x->f_snaptogrid || modifiers == 17)
+		{
+			double grid_step = safediv((x->f_minmax[1] - x->f_minmax[0]), x->f_grid);
+			int div = round(safediv(value, grid_step));
+			value = div * grid_step;
+		}
+		
+		x->f_channel_values[index] = value;
+		
 		if (!x->f_floatoutput)
 			x->f_channel_values[index] = round(x->f_channel_values[index]);
 		
