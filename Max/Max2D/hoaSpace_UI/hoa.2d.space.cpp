@@ -37,6 +37,7 @@ typedef struct  _hoa_space
 	long		f_floatoutput;
 	t_symbol*	f_slider_style;
 	long		f_draw_value;
+	long		f_grid;
     
     long		f_mode;
     double*     f_channel_values;
@@ -124,7 +125,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)hoa_space_mouse_move,      "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_down,      "mouseup",        A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_mouse_leave,      "mouseleave",     A_CANT, 0);
+	class_addmethod(c, (method)hoa_space_mouse_leave,     "mouseleave",     A_CANT, 0);
     class_addmethod(c, (method)hoa_space_preset,          "preset",         0);
     class_addmethod(c, (method)hoa_space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
@@ -182,6 +183,15 @@ int C74_EXPORT main()
     // <li>In <b>Blob</b> mode <o>hoa.2d.space</o> will draw slider values as a global shape.</li>
     // <li>In <b>Bar</b> mode, each slider is drawn separately as a slider bar.</li>
     // </ul>
+	
+	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_space, f_grid);
+	CLASS_ATTR_CATEGORY             (c, "grid", 0, "Value");
+    CLASS_ATTR_LABEL                (c, "grid", 0, "Grid Size");
+	CLASS_ATTR_FILTER_MIN			(c, "grid", 0);
+    CLASS_ATTR_ORDER                (c, "grid", 0, "3");
+    CLASS_ATTR_DEFAULT              (c, "grid", 0, "4");
+    CLASS_ATTR_SAVE                 (c, "grid", 1);
+	// @description Set the grid size
     
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -349,7 +359,7 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
 		
-		if(name == hoa_sym_bgcolor || name == hoa_sym_bdcolor)
+		if(name == hoa_sym_bgcolor || name == hoa_sym_bdcolor || name == gensym("grid"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
 		}
@@ -465,9 +475,14 @@ void hoa_space_paint(t_hoa_space *x, t_object *view)
 void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
 {
     int i;
-	double y1, y2, rotateAngle;
+	double y1, y2, rotateAngle, grid_rad, inner_radius, grid_range, grid_step;
     t_jmatrix transform;
     t_jrgba black, white;
+	
+	long grid = x->f_grid;
+	inner_radius = (double) 1 / 5 * x->f_radius;
+	grid_range = x->f_radius - inner_radius;
+	grid_step = safediv(grid_range, grid);
     
     black = white = x->f_color_bg;
     black.red   = clip_min(black.red - contrast_black, 0.);
@@ -518,16 +533,17 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
         
         jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
-        
-        for(i = 5; i > 0; i--)
+		
+		for(i = grid; i >= 0; i--)
 		{
+			grid_rad = grid_step * i + inner_radius;
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., HOA_2PI);
+            jgraphics_arc(g, 1, 1, grid_rad,  0., HOA_2PI);
             jgraphics_stroke(g);
             jgraphics_set_line_width(g, 1);
             jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
+            jgraphics_arc(g, 0, 0, grid_rad,  0., HOA_2PI);
             jgraphics_stroke(g);
 		}
         
