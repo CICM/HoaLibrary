@@ -17,6 +17,10 @@
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
 
+#ifndef  HoaPlugin_Name
+#define HoaPlugin_Name                   "QUADRA"
+#endif
+
 #define BUILD_AU_CARBON_UI 0
 
 // [END_USER_CODE_SECTION]
