@@ -28,7 +28,7 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
     m_decoder   = new DecoderIrregular(ORDER, NCHANNEL);
     m_meter     = new Meter(NCHANNEL);
     m_lines     = new PolarLines(16);
-   
+    m_sources->setZoom(0.5);
     m_lines->setRamp(4410);
     m_meter->setChannelsAzimuth(angles);
     m_decoder->setChannelsAzimtuh(angles);
