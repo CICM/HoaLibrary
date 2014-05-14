@@ -17,14 +17,14 @@ Pure data (HoaLibrary beta v2.0) :
 This version is compatible with Pure Data 0.45.4 (32 bit) and higher. The library is also compatible with Pure Data Extented.
 
 Installation:
-Copy the "HoaLibrary" folder in your Pure Data "package" folder and add "hoa.library" in startup preferences. In the help menu of Pure Data, the HoaLibrary folder constains informations, helps and tutorials.
+
+Copy the "HoaLibrary" folder in your Pure Data "package" folder and add "hoa.library" in startup preferences. You can also copy the "HoaLibrary" folder in another folder than the default package folder, then you have to add this folder in the path preferences and add "HoaLibrary/hoa.library" in the startup preferences. For PD-Extented, use the startup flags "-lib hoa.library" or "-lib HoaLibrary/hoa.library". In the help menu of Pure Data, the HoaLibrary folder constains informations, helps and tutorials.
 
 Uninstall:
-Remove the "HoaLibrary" folder from your "package" folder.
+Remove the "HoaLibrary" folder and the startup flag from your "package" folder.
 
-The "package" folder default locations :
-Mac OsX : /Applications/Pd-extended.app/Contents/Resources/extra
-Windows : C:\Program Files (x86)\pd\extra
+Important:
+You need to install the Cream library, if you want that the Hoa library to work properly.
 
 ------------------------------------------------------------------------------------------
 
