@@ -30,7 +30,7 @@
     ]
   },
   "hoa.2d.map": {
-    "digest": "A graphic user interface to spatialize sources on a plane.",
+    "digest": "A vvgraphic user interface to spatialize sources on a plane.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -38,18 +38,7 @@
       "audio",
       "GUI",
       "MSP"
-    ],
-    "palette": {
-      "category": [
-        "ambisonics",
-        "hoa objects",
-        "audio",
-        "GUI",
-        "MSP"
-      ],
-      "action": "hoa.2d.map",
-      "pic": "hoa.2d.map.svg"
-    }
+    ]
   },
   "hoa.2d.meter~": {
     "digest": "A circular array of visual peak level indicators",

@@ -87,7 +87,7 @@
 		<o>hoa.2d.encoder~</o> creates the circular harmonics of a signal depending of a given order (arg 1) and a position on a circle given in radians (right inlet).
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

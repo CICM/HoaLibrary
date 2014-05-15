@@ -66,6 +66,15 @@
 				</ul>
 			</description>
 		</method>
+		<method name="getmute">
+			<arglist />
+			<digest>
+				Report mute state.
+			</digest>
+			<description>
+				Report mute state only.
+			</description>
+		</method>
 		<method name="mute">
 			<arg name="value" optional="0" type="int" />
 			<arg name="on/off-flag" optional="0" type="int" />
@@ -106,7 +115,7 @@
 		Use the <o>hoa.thisprocess~</o> object to control <o>hoa.process~</o> voice allocation, muting, argument and attributes. When placed inside a patcher loaded by a <o>hoa.process~</o> object, it send and receive messages from the <o>hoa.process~</o> object that loads it.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

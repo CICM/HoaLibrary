@@ -102,6 +102,19 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
+		<attribute name="extra" get="1" set="1" type="int" size="1">
+			<digest>
+				extra index
+			</digest>
+			<description>
+				Defines an extra outlet. Extra outlet are added to the "normal" instance outlet and can be used to receive messages from all instances.
+			</description>
+			<attributelist>
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="extra index" />
+				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 	</attributelist>
 
 	<!--DISCUSSION-->
@@ -123,7 +136,7 @@
 		<o>hoa.out</o> defines a message outlet for a patcher loaded by hoa.process~
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

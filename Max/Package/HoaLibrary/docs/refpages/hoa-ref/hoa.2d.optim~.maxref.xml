@@ -106,7 +106,7 @@
 		<o>hoa.2d.optim~</o> weights the circular harmonics signals depending on the ambisonic optimization. It can be <b>basic</b> for no optimization, <b>maxRe</b> or <b>inPhase</b>.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

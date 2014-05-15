@@ -215,6 +215,16 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="color" get="1" set="1" type="" size="1">
+			<digest>
+				
+			</digest>
+			<description>
+			</description>
+			<attributelist>
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 		<attribute name="fisheyecolor" get="1" set="1" type="" size="1">
 			<digest>
 				FishEye color
@@ -301,6 +311,16 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="textcolor" get="1" set="1" type="" size="1">
+			<digest>
+				
+			</digest>
+			<description>
+			</description>
+			<attributelist>
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 	</attributelist>
 
 	<!--DISCUSSION-->
@@ -329,7 +349,7 @@
 		<o>hoa.2d.recomposer</o> helps you to set angle and widening value of channels to warp the sound field. It is mainly dedicated to the control of the <o>hoa.2d.recomposer~</o> processor object.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

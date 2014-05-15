@@ -99,7 +99,7 @@
 		<o>hoa.out~</o> defines a signal outlet for a patcher loaded by hoa.process~
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

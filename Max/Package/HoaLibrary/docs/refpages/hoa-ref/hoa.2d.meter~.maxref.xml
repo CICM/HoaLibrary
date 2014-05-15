@@ -117,6 +117,16 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="color" get="1" set="1" type="" size="1">
+			<digest>
+				
+			</digest>
+			<description>
+			</description>
+			<attributelist>
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 		<attribute name="dbperled" get="1" set="1" type="int" size="1">
 			<digest>
 				DeciBels per Led
@@ -455,7 +465,7 @@
 		The <o>hoa.2d.meter~</o> object displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

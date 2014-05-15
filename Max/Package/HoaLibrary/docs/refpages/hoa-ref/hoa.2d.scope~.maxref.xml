@@ -74,6 +74,16 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="color" get="1" set="1" type="" size="1">
+			<digest>
+				
+			</digest>
+			<description>
+			</description>
+			<attributelist>
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 		<attribute name="gain" get="1" set="1" type="float" size="1">
 			<digest>
 				Gain
@@ -162,6 +172,16 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="textcolor" get="1" set="1" type="" size="1">
+			<digest>
+				
+			</digest>
+			<description>
+			</description>
+			<attributelist>
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 	</attributelist>
 
 	<!--DISCUSSION-->
@@ -184,7 +204,7 @@
 		<o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

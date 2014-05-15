@@ -24,6 +24,9 @@
  @category ambisonics, hoa objects, audio, GUI, MSP
  
  @seealso hoa.2d.map~, hoa.2d.space, hoa.2d.recomposer, hoa.2d.meter~, hoa.2d.scope~, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.decoder~
+ 
+ @illustration on @caption hoa.2d.map GUI object
+ @palette yes
  */
 
 #include "../Hoa2D.max.h"
@@ -1837,7 +1840,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-			x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - HOA_PI2);
+			x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y));
 
 		 // Radius
 #ifdef _WINDOWS

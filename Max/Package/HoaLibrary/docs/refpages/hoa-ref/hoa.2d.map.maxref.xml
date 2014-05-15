@@ -138,17 +138,6 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
 			</attributelist>
 		</attribute>
-		<attribute name="patching_rect" get="1" set="1" type="" size="1">
-			<digest>
-				
-			</digest>
-			<description>
-			</description>
-			<attributelist>
-				<attribute name="default" get="1" set="1" type="" size="1" value="0 0 300 300" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
-			</attributelist>
-		</attribute>
 		<attribute name="rect" get="1" set="1" type="" size="1">
 			<digest>
 				
@@ -176,6 +165,21 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
+		<attribute name="showgroups" get="1" set="1" type="int" size="1">
+			<digest>
+				Use and show group
+			</digest>
+			<description>
+				Use and show group ?
+			</description>
+			<attributelist>
+				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
+				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Use and show group" />
+				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
+			</attributelist>
+		</attribute>
 		<attribute name="zoom" get="1" set="1" type="float" size="1">
 			<digest>
 				Zoom
@@ -192,6 +196,11 @@
 			</attributelist>
 		</attribute>
 	</attributelist>
+
+	<!--EXAMPLE-->
+	<examplelist>
+		<example img="hoa.2d.map.png" caption="hoa.2d.map GUI object" />
+	</examplelist>
 
 	<!--DISCUSSION-->
 	<discussion>
@@ -216,7 +225,7 @@
 		<o>hoa.2d.map</o> allows you to spatialize several sources on a plane. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.2d.map</o> is dedicated to control the <o>hoa.2d.map~</o> object.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>

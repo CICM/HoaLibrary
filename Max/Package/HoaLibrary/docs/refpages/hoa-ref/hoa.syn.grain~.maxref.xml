@@ -117,7 +117,7 @@
 		This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 ambisonics, hoa objects, audio, MSP, abstraction.
 			</description>

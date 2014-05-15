@@ -220,7 +220,7 @@
 		<o>hoa.process~</o> helps the modularization of patches for ambisonic or plane waves processing. <o>hoa.process~</o> is a kind of <o>poly~</o> object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the <o>hoa.process~</o>
 			</description>
 		</entry>
-		<entry name ="Keywords:">
+		<entry name ="Keywords">
 			<description>
 			</description>
 		</entry>
