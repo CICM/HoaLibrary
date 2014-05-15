@@ -16,10 +16,19 @@ namespace Hoa3D
         m_harmonics_float   = new float[m_number_of_harmonics];
         m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_harmonics];
+        m_muted				= new bool[m_number_of_sources];
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
             m_encoders.push_back(new Encoder(order));
             m_widers.push_back(new Wider(order));
+        }
+        
+        m_first_source      = 0;
+        for(unsigned int i = 0; i < m_number_of_sources; i++)
+        {
+			setMute(i, 0);
+            setAzimuth(i, 0.);
+            setRadius(i, 1.);
         }
     }
     
@@ -35,42 +44,81 @@ namespace Hoa3D
         m_encoders[index]->setElevation(elevation);
     }
     
-    void Map::setDistance(unsigned int index, const double distance)
+    void Map::setRadius(unsigned int index, const double radius)
     {
         assert(index < m_number_of_sources);
-        if(distance >= 1.)
+        if(radius >= 1.)
         {
-            m_gains[index] = 1. / (distance * distance);
+            m_gains[index] = 1. / (radius * radius);
             m_widers[index]->setWideningValue(1.);
         }
         else
         {
             m_gains[index] = 1.;
-            m_widers[index]->setWideningValue(Hoa::clip_min(distance, 0.));
+            m_widers[index]->setWideningValue(Hoa::clip_min(radius, 0.));
+        }
+    }
+    
+    void Map::setMute(const unsigned int index, const bool muted)
+    {
+        assert(index < m_number_of_sources);
+        m_muted[index] = muted;
+        m_first_source = -1;
+        for(unsigned int i = 0; i < m_number_of_sources; i++)
+        {
+            if(!m_muted[i])
+            {
+                m_first_source = i;
+                break;
+            }
         }
     }
     
     void Map::process(const float* inputs, float* outputs)
     {
-        m_encoders[0]->process(inputs[0] * m_gains[0], outputs);
-        m_widers[0]->process(outputs, outputs);
-        for(unsigned int i = 1; i < m_number_of_sources; i++)
+        int first = m_first_source;
+        if(first > -1)
         {
-            m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
-            m_widers[i]->process(m_harmonics_float, m_harmonics_float);
-            cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
+            m_encoders[first]->process(inputs[first] * m_gains[first], outputs);
+            m_widers[first]->process(outputs, outputs);
+            for(unsigned int i = first+1; i < m_number_of_sources; i++)
+            {
+                if (!m_muted[i])
+                {
+                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
+                    m_widers[i]->process(m_harmonics_float, m_harmonics_float);
+                    cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
+                }
+            }
+        }
+        else
+        {
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = 0.;
         }
     }
     
     void Map::process(const double* inputs, double* outputs)
     {
-        m_encoders[0]->process(inputs[0] * m_gains[0], outputs);
-        m_widers[0]->process(outputs, outputs);
-        for(unsigned int i = 1; i < m_number_of_sources; i++)
+        int first = m_first_source;
+        if(first > -1)
         {
-            m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
-            m_widers[i]->process(m_harmonics_double, m_harmonics_double);
-            cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);
+            m_encoders[first]->process(inputs[first] * m_gains[first], outputs);
+            m_widers[first]->process(outputs, outputs);
+            for(unsigned int i = first+1; i < m_number_of_sources; i++)
+            {
+                if (!m_muted[i])
+                {
+                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
+                    m_widers[i]->process(m_harmonics_double, m_harmonics_double);
+                    cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);
+                }
+            }
+        }
+        else
+        {
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = 0.;
         }
     }
     
@@ -81,6 +129,7 @@ namespace Hoa3D
         delete [] m_harmonics_double;
         delete [] m_harmonics_float;
         delete [] m_gains;
+        delete [] m_muted;
     }
 }
 

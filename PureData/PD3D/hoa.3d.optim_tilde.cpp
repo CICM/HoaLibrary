@@ -9,20 +9,20 @@
 typedef struct _hoa_optim_3D
 {
     t_edspobj   f_ob;
-    t_float*    f_signals;
+    t_float*    f_ins;
+    t_float*    f_outs;
     Optim*      f_optim;
 } t_hoa_optim_3D;
 
 void *hoa_optim_3D_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_optim_3D_free(t_hoa_optim_3D *x);
-void hoa_optim_3D_float(t_hoa_optim_3D *x, float f);
 
 void hoa_optim_3D_dsp(t_hoa_optim_3D *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_optim_3D_perform(t_hoa_optim_3D *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
 
-void hoa_optim_basic(t_hoa_optim_3D *x);
-void hoa_optim_maxre(t_hoa_optim_3D *x);
-void hoa_optim_inphase(t_hoa_optim_3D *x);
+void hoa_optim_3D_basic(t_hoa_optim_3D *x);
+void hoa_optim_3D_maxre(t_hoa_optim_3D *x);
+void hoa_optim_3D_inphase(t_hoa_optim_3D *x);
 
 t_eclass *hoa_optim_3D_class;
 
@@ -36,10 +36,9 @@ extern "C" void setup_hoa0x2e3d0x2eoptim_tilde(void)
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_optim_3D_dsp,    "dsp",		A_CANT, 0);
-    eclass_addmethod(c, (method)hoa_optim_3D_float,  "float",      A_FLOAT, 0);
-    eclass_addmethod(c, (method)hoa_optim_basic,     "basic",       A_NULL, 0);
-    eclass_addmethod(c, (method)hoa_optim_maxre,     "maxRe",       A_NULL, 0);
-    eclass_addmethod(c, (method)hoa_optim_inphase,   "inPhase",     A_NULL, 0);
+    eclass_addmethod(c, (method)hoa_optim_3D_basic,     "basic",       A_NULL, 0);
+    eclass_addmethod(c, (method)hoa_optim_3D_maxre,     "maxRe",       A_NULL, 0);
+    eclass_addmethod(c, (method)hoa_optim_3D_inphase,   "inPhase",     A_NULL, 0);
     
     eclass_register(CLASS_OBJ, c);
     hoa_optim_3D_class = c;
@@ -70,7 +69,8 @@ void *hoa_optim_3D_new(t_symbol *s, long argc, t_atom *argv)
         
         eobj_dspsetup(x, x->f_optim->getNumberOfHarmonics(), x->f_optim->getNumberOfHarmonics());
         
-        x->f_signals =  new t_float[x->f_optim->getNumberOfHarmonics() * 8192];
+        x->f_ins =  new t_float[x->f_optim->getNumberOfHarmonics() * 8192];
+        x->f_outs = new t_float[x->f_optim->getNumberOfHarmonics() * 8192];
 	}
 	return (x);
 }
@@ -85,81 +85,49 @@ t_hoa_err hoa_getinfos(t_hoa_optim_3D* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_optim_3D_float(t_hoa_optim_3D *x, float f)
-{
-    if(eobj_getproxy(x) == 1)
-        x->f_optim->setAzimuth(f);
-    else if(eobj_getproxy(x) == 2)
-        x->f_optim->setElevation(f);
-}
-
 void hoa_optim_3D_dsp(t_hoa_optim_3D *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    if(count[1] && count[2])
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_3D_perform, 0, NULL);
-    else if(count[1] && !count[2])
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_3D_perform_azimuth, 0, NULL);
-    else if(!count[1] && count[2])
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_3D_perform_elevation, 0, NULL);
-    else
-        object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_3D_perform_offset, 0, NULL);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_3D_perform, 0, NULL);
 }
 
-void hoa_optim_3D_perform(t_hoa_optim_3D *x, t_object *dsp, float **ins, long nins, float **outs, long numouts, long sampleframes, long f,void *up)
+void hoa_optim_3D_perform(t_hoa_optim_3D *x, t_object *dsp, float **ins, long numins, float **outs, long numouts, long sampleframes, long f,void *up)
 {
-    for(int i = 0; i < sampleframes; i++)
+    for(int i = 0; i < numins; i++)
     {
-        x->f_optim->setAzimuth(ins[1][i]);
-        x->f_optim->setElevation(ins[2][i]);
-        x->f_optim->process(ins[0][i], x->f_signals + numouts * i);
+        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
+    }
+	for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_optim->process(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_scopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
-void hoa_optim_3D_perform_azimuth(t_hoa_optim_3D *x, t_object *dsp, float **ins, long nins, float **outs, long numouts, long sampleframes, long f,void *up)
+void hoa_optim_3D_basic(t_hoa_optim_3D *x)
 {
-    for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_optim->setAzimuth(ins[1][i]);
-        x->f_optim->process(ins[0][i], x->f_signals + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
-    }
+    if(x->f_optim->getMode() != Hoa3D::Optim::Basic)
+        x->f_optim->setMode(Hoa3D::Optim::Basic);
 }
 
-void hoa_optim_3D_perform_elevation(t_hoa_optim_3D *x, t_object *dsp, float **ins, long nins, float **outs, long numouts, long sampleframes, long f,void *up)
+void hoa_optim_3D_maxre(t_hoa_optim_3D *x)
 {
-    for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_optim->setElevation(ins[2][i]);
-        x->f_optim->process(ins[0][i], x->f_signals + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
-    }
+    if(x->f_optim->getMode() != Hoa3D::Optim::MaxRe)
+        x->f_optim->setMode(Hoa3D::Optim::MaxRe);
 }
 
-void hoa_optim_3D_perform_offset(t_hoa_optim_3D *x, t_object *dsp, float **ins, long nins, float **outs, long numouts, long sampleframes, long f,void *up)
+void hoa_optim_3D_inphase(t_hoa_optim_3D *x)
 {
-    for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_optim->process(ins[0][i], x->f_signals + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
-    }
+    if(x->f_optim->getMode() != Hoa3D::Optim::InPhase)
+        x->f_optim->setMode(Hoa3D::Optim::InPhase);
 }
 
 void hoa_optim_3D_free(t_hoa_optim_3D *x)
 {
 	eobj_dspfree(x);
 	delete x->f_optim;
-    delete [] x->f_signals;
+    delete [] x->f_ins;
+    delete [] x->f_outs;
 }
