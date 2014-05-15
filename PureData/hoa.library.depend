@@ -5,12 +5,12 @@
 1397749506 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Ambisonic.h
 	"../Hoa.h"
 
-1394725310 /home/pierre/Git/HoaLibrary/Sources/Hoa.h
+1399363326 /home/pierre/Git/HoaLibrary/Sources/Hoa.h
 	"HoaDefs.h"
 	"HoaMath.h"
 	"HoaUtils.h"
 
-1398125386 /home/pierre/Git/HoaLibrary/Sources/HoaDefs.h
+1399363326 /home/pierre/Git/HoaLibrary/Sources/HoaDefs.h
 	<iostream>
 	<vector>
 	<map>
@@ -24,6 +24,7 @@
 	<Accelerate/Accelerate.h>
 	<gsl_cblas.h>
 	<cblas.h>
+	"../../ThirdParty/PureData/Sources/cicm_wrapper.h"
 
 1398122052 /home/pierre/Git/HoaLibrary/Sources/HoaMath.h
 	<iostream>
@@ -59,10 +60,10 @@
 1396597674 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/ChannelManager.h
 	"../Hoa.h"
 
-1398126704 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Decoder.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Decoder.cpp
 	"Decoder.h"
 
-1396866034 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Decoder.h
+1399363326 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Decoder.h
 	"Ambisonic.h"
 	"Planewaves.h"
 	"Encoder.h"
@@ -92,12 +93,12 @@
 	"Meter.h"
 	"SourcesManager.h"
 
-1394725310 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Map.h
+1399376782 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Map.h
 	"Ambisonic.h"
 	"Encoder.h"
 	"Wider.h"
 
-1394725310 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Wider.h
+1399363326 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Wider.h
 	"Ambisonic.h"
 
 1394808524 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/Optim.h
@@ -122,7 +123,7 @@
 	"Source.h"
 	"SourcesManager.h"
 
-1394725310 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Map.cpp
+1400081414 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Map.cpp
 	"Map.h"
 
 1394829224 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Meter.cpp
@@ -167,7 +168,7 @@
 1394725310 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/SourcesGroup.cpp
 	"SourcesGroup.h"
 
-1396522388 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/SourcesManager.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/SourcesManager.cpp
 	"SourcesManager.h"
 
 1396648678 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/SourcesPreset.cpp
@@ -183,19 +184,20 @@
 1396970844 /home/pierre/Git/HoaLibrary/Sources/Hoa2D/SourcesTrajectory.h
 	"SourcesPreset.h"
 
-1398156397 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Vector.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Vector.cpp
 	"Vector.h"
 
-1397749072 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Wider.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/Sources/Hoa2D/Wider.cpp
 	"Wider.h"
 
 1398104266 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Ambisonic_3D.cpp
 	"Ambisonic_3D.h"
 
-1398104266 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Ambisonic_3D.h
+1400081414 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Ambisonic_3D.h
 	"Tools_3D.h"
+	"../Hoa.h"
 
-1398126891 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Tools_3D.h
+1400081414 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Tools_3D.h
 	<iostream>
 	<vector>
 	<map>
@@ -224,7 +226,7 @@
 1398104268 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Encoder_3D.cpp
 	"Encoder_3D.h"
 
-1398104268 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Map_3D.cpp
+1400081414 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Map_3D.cpp
 	"Map_3D.h"
 
 1398104268 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Map_3D.h
@@ -241,8 +243,9 @@
 1398104268 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Meter_3D.h
 	"Planewaves_3D.h"
 
-1398104268 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Planewaves_3D.h
+1400081414 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Planewaves_3D.h
 	"Tools_3D.h"
+	"../Hoa.h"
 
 1398104268 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Optim_3D.cpp
 	"Optim_3D.h"
@@ -276,7 +279,7 @@
 1398104268 source:/home/pierre/Git/HoaLibrary/Sources/Hoa3D/Wider_3D.cpp
 	"Wider_3D.h"
 
-1398104266 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.decoder_tilde.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.decoder_tilde.cpp
 	"Hoa2D.pd.h"
 
 1397063128 /home/pierre/Git/HoaLibrary/PureData/PD2D/Hoa2D.pd.h
@@ -299,12 +302,15 @@
 	"../ebox/ebox.h"
 	"../epopup/epopup.h"
 
-1396385160 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/estruct.h
+1400081348 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/estruct.h
 	"ecommon/ecommon.h"
 
-1396367642 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/ecommon.h
+1400081348 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/ecommon.h
 	<io.h>
 	<unistd.h>
+	"m_pd.h"
+	"m_imp.h"
+	"g_canvas.h"
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -313,23 +319,20 @@
 	<string.h>
 	<stdarg.h>
 	<fcntl.h>
-	"m_pd.h"
-	"m_imp.h"
-	"g_canvas.h"
 	"eboxflag.h"
 
-1395443220 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/m_pd.h
+1400081348 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/m_pd.h
 	<stddef.h>
 	<stdint.h>
 	<stdio.h>
 
 1394735284 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/m_imp.h
 
-1398085658 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/g_canvas.h
+1399363182 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/g_canvas.h
 
 1394735284 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/eboxflag.h
 
-1394735284 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ebox/ebox.h
+1400081348 /home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ebox/ebox.h
 	"../estruct.h"
 	"../egraphics/egraphics.h"
 	"../eobj/eobj.h"
@@ -374,7 +377,7 @@
 1398104266 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.map_gui.cpp
 	"Hoa2D.pd.h"
 
-1398104266 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.map_tilde.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.map_tilde.cpp
 	"Hoa2D.pd.h"
 
 1398104266 source:/home/pierre/Git/HoaLibrary/PureData/PD2D/hoa.2d.meter_gui_tilde.cpp
@@ -409,7 +412,7 @@
 	"../../Sources/Hoa2D/Hoa2D.h"
 	"../../Sources/Hoa3D/Hoa3D.h"
 
-1398104268 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Hoa3D.h
+1400081414 /home/pierre/Git/HoaLibrary/Sources/Hoa3D/Hoa3D.h
 	"../Hoa.h"
 	"Encoder_3D.h"
 	"Decoder_3D.h"
@@ -442,7 +445,7 @@
 1397765672 source:/home/pierre/Git/HoaLibrary/PureData/PDCommon/hoa.pi_tilde.cpp
 	"HoaCommon.pd.h"
 
-1397765780 source:/home/pierre/Git/HoaLibrary/PureData/PDCommon/hoa.process_tilde.cpp
+1399363326 source:/home/pierre/Git/HoaLibrary/PureData/PDCommon/hoa.process_tilde.cpp
 	"HoaCommon.pd.h"
 	"../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
 
@@ -845,7 +848,7 @@
 1394735284 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ebox/ebox_patcher.c
 	"ebox.h"
 
-1394735284 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ebox/ebox_window.c
+1399390016 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ebox/ebox_window.c
 	"ebox.h"
 
 1396007594 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eclass/eclass_attrgetter.c
@@ -869,7 +872,7 @@
 1396255558 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/d_ugen.c
 	"d_ugen.h"
 
-1398085658 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/ecommon.c
+1400081348 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/ecommon/ecommon.c
 	"ecommon.h"
 
 1394735284 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/egraphics/egraphics.c
@@ -887,13 +890,13 @@
 1394735284 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/egraphics/egraphics_text.c
 	"egraphics.h"
 
-1396386320 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_basic.c
+1399363182 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_basic.c
 	"eobj.h"
 
 1398085658 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_dsp.c
 	"eobj.h"
 
-1397483556 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_handle.c
+1399363182 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_handle.c
 	"eobj.h"
 
 1398085658 source:/home/pierre/Git/HoaLibrary/ThirdParty/PureData/Sources/eobj/eobj_proxy.c
@@ -907,4 +910,13 @@
 
 1398005960 source:/home/pierre/Git/HoaLibrary/PureData/hoa.pd.cpp
 	"hoa.pd.h"
+
+1400081584 source:/home/pierre/Git/HoaLibrary/PureData/hoa.library.cpp
+	"PDCommon/HoaCommon.pd.h"
+	"PD2D/Hoa2D.pd.h"
+	"PD3D/Hoa3D.pd.h"
+
+1400081414 /home/pierre/Git/HoaLibrary/PureData/PD3D/Hoa3D.pd.h
+	"../hoa.pd.h"
+	"../../Sources/Hoa3D/Hoa3D.h"
 

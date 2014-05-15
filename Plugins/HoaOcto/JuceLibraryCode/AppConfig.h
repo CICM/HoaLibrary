@@ -14,6 +14,10 @@
 #ifndef __JUCE_APPCONFIG_WASB9K__
 #define __JUCE_APPCONFIG_WASB9K__
 
+#ifndef  HoaPlugin_Name
+#define HoaPlugin_Name                   "OCTO"
+#endif
+
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
 

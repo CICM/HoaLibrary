@@ -149,7 +149,6 @@
 		8F27E3DA19178A33004E1370 /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E3B019178A33004E1370 /* estruct.h */; };
 		8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */; };
 		8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */; };
-		8F5A12BB191BB99D00825567 /* hoa.3d.map_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -296,7 +295,6 @@
 		8F27E3B019178A33004E1370 /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
 		8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.encoder_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.pd.h; sourceTree = "<group>"; };
-		8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.map_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -569,7 +567,6 @@
 			isa = PBXGroup;
 			children = (
 				8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */,
-				8F5A12BA191BB99D00825567 /* hoa.3d.map_tilde.cpp */,
 				8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */,
 			);
 			path = PD3D;
@@ -740,7 +737,6 @@
 				8F27E374191789BE004E1370 /* Vector_3D.cpp in Sources */,
 				8F27E35D191789BE004E1370 /* Wider.cpp in Sources */,
 				8F27E3B519178A33004E1370 /* ebox_draw.c in Sources */,
-				8F5A12BB191BB99D00825567 /* hoa.3d.map_tilde.cpp in Sources */,
 				8F27E3C319178A33004E1370 /* ecommon.c in Sources */,
 				8F27E347191789BE004E1370 /* Planewaves.cpp in Sources */,
 				8F27E364191789BE004E1370 /* Encoder_3D.cpp in Sources */,

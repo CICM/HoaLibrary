@@ -21,7 +21,7 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2epi_tilde();
     setup_hoa0x2eprocess_tilde();
     setup_hoa0x2ethisprocess_tilde();
-    
+
     // HOA 2D //
     setup_hoa0x2e2d0x2edecoder_tilde();
     setup_hoa0x2e2d0x2eencoder_tilde();;
@@ -37,11 +37,11 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2ewider_tilde();
 
     // HOA 3D //
-    setup_hoa0x2e3d0x2eencoder_tilde();
-    
+    //setup_hoa0x2e3d0x2eencoder_tilde();
+
     // Alias /:
     setup_hoa0x2e2d0x2ebinaural();
-    
+
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
     post("© 2012 - 2014  CICM | Paris 8 University");
     post("Version Beta 2.0");
