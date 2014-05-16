@@ -256,6 +256,12 @@ namespace Hoa3D
                 elevations[i] = -HOA_PI4;
             }
         }
+        
+        for(int i = 0; i < numberOfPoints; i++)
+        {
+            azimuths[i] = wrap_twopi(azimuths[i]);
+            elevations[i] = wrap_twopi(elevations[i]);
+        }
     }
 	
 } // end of namespace Hoa3D

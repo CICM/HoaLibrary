@@ -24,6 +24,9 @@ namespace Hoa3D
         float*          m_decoder_matrix_float;
 		double*         m_harmonics_vector;
         Encoder*        m_encoder;
+        double          m_azimuth_offset;
+        double          m_elevation_offset;
+        
 	public:
         
 		/**	The decoder constructor.
@@ -40,9 +43,37 @@ namespace Hoa3D
 		/**	Set channel position.
 		 @param     index		The index of the channel.
 		 @param     azimuth		An azimuth value. In radian, between 0 and 2π.
-		 @param     elevation	An azimuth value. In radian, between 0 and 2π.
+		 @param     elevation	An elevation value. In radian, between 0 and 2π.
          */
 		void	setChannelPosition(unsigned int index, double azimuth, double elevation);
+        
+        //! Set the offset of the channels.
+		/**	Set the azimuth and the elevation offsets of the channels in radian.
+         
+         @param     azimuth		An azimuth value.
+         @param     elevation	An elevation value.
+         */
+		void setChannelsOffset(double azimuth, double elevation);
+        
+        //! Get the azimuth offset of the channels.
+        /**	Retreive the azimuth offset of the channels in radian.
+         
+         @return    The azimuth offset of the channels.
+         */
+		double getChannelsAzimuthOffset() const
+        {
+            return m_azimuth_offset;
+        }
+        
+        //! Get the elevation offset of the channels.
+        /**	Retreive the elevation offset of the channels in radian.
+         
+         @return    The elevation offset of the channels.
+         */
+		double getChannelsElevationOffset() const
+        {
+            return m_elevation_offset;
+        }
 		
         /**	This method performs the decoding with single precision.
          @param     input	The inputs array.

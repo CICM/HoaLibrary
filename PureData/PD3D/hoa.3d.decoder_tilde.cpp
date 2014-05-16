@@ -16,7 +16,7 @@ typedef struct _hoa_decoder_3D
     double                  f_angles_of_channels[MAX_CHANNELS * 2];
     double                  f_offset[2];
     long                    f_pinna;
-    long                    f_number_of_channels;
+    long                    f_number_of_angles;
 } t_hoa_decoder_3D;
 
 void *hoa_decoder_3D_new(t_symbol *s, long argc, t_atom *argv);
@@ -43,7 +43,7 @@ extern "C" void setup_hoa0x2e3d0x2edecoder_tilde(void)
     hoa_initclass(c, (method)hoa_getinfos);
     eclass_addmethod(c, (method)hoa_decoder_3D_dsp,           "dsp",          A_CANT,  0);
     
-    CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles",0, t_hoa_decoder_3D, f_angles_of_channels, f_number_of_channels, MAX_CHANNELS*2);
+    CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles",0, t_hoa_decoder_3D, f_angles_of_channels, f_number_of_angles, MAX_CHANNELS*2);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
@@ -79,16 +79,15 @@ void *hoa_decoder_3D_new(t_symbol *s, long argc, t_atom *argv)
         if(order < 1)
             order = 1;
         
-        if(argc >= 1 && atom_gettype(argv+2) == A_LONG)
+        if(argc >= 1 && atom_gettype(argv+1) == A_LONG)
         {
-            number_of_channels = atom_getint(argv+2);
+            number_of_channels = atom_getint(argv+1);
             if(number_of_channels < 1)
                 number_of_channels = 1;
         }
         
         x->f_decoder    = new Hoa3D::Decoder(order, number_of_channels);
-        
-        x->f_number_of_channels = x->f_decoder->getNumberOfChannels();
+        x->f_number_of_angles = x->f_decoder->getNumberOfChannels() * 2;
     
         eobj_dspsetup(x, x->f_decoder->getNumberOfHarmonics(), x->f_decoder->getNumberOfChannels());
         x->f_ins = new t_float[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
@@ -134,43 +133,36 @@ void hoa_decoder_3D_perform64(t_hoa_decoder_3D *x, t_object *dsp64, float **ins,
 
 t_pd_err angles_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv)
 {
-    /*
-    double *angles;
     if(argc && argv)
     {
         int dspState = canvas_suspend_dsp();
-        for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
+        for(int i = 1, j = 0; i < x->f_decoder->getNumberOfChannels() * 2 && i < argc; i+= 2, j++)
         {
-            if(i < argc && (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG))
-                angles[i] = atom_getfloat(argv+i) / 360. * HOA_2PI;
-            else
-                angles[i] = x->f_decoder->getChannelAzimuth(i);
+            if(atom_gettype(argv+i-1) == A_FLOAT && atom_gettype(argv+i) == A_FLOAT)
+                x->f_decoder->setChannelPosition(j, atom_getfloat(argv+i-1) / 360. * HOA_2PI, atom_getfloat(argv+i) / 360. * HOA_2PI);
         }
-        
-        free(angles);
         canvas_resume_dsp(dspState);
     }
-    */
     return 0;
 }
 
 t_pd_err offset_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv)
 {
-    /*
-    if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    if(argc && argv)
     {
-        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
-        if(offset != x->f_decoder->getChannelsOffset())
-        {
-            int dspState;
-            if(x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Binaural)
-                dspState = canvas_suspend_dsp();
-            x->f_decoder->setChannelsOffset(offset);
-            if(x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Binaural)
-                canvas_resume_dsp(dspState);
-        }
+        double azimuth, elevation;
+        if(atom_gettype(argv) == A_FLOAT)
+           azimuth = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        else
+            azimuth = x->f_decoder->getChannelsAzimuthOffset();
+        
+        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+            elevation = wrap_twopi(atom_getfloat(argv+1) / 360. * HOA_2PI);
+        else
+            elevation = x->f_decoder->getChannelsElevationOffset();
+        
+        x->f_decoder->setChannelsOffset(azimuth, elevation);
     }
-     */
     return 0;
 }
 
