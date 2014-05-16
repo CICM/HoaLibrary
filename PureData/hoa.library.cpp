@@ -38,6 +38,7 @@ extern "C" void setup_hoa0x2elibrary(void)
     
 #ifdef __APPLE__
     // HOA 3D //
+    setup_hoa0x2e3d0x2edecoder_tilde();
     setup_hoa0x2e3d0x2eencoder_tilde();
     setup_hoa0x2e3d0x2eoptim_tilde();
     setup_hoa0x2e3d0x2ewider_tilde();

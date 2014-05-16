@@ -99,7 +99,6 @@
 		8F27E370191789BE004E1370 /* Rotate_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E312191789BE004E1370 /* Rotate_3D.h */; };
 		8F27E371191789BE004E1370 /* Scope_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E313191789BE004E1370 /* Scope_3D.cpp */; };
 		8F27E372191789BE004E1370 /* Scope_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E314191789BE004E1370 /* Scope_3D.h */; };
-		8F27E373191789BE004E1370 /* Tools_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E315191789BE004E1370 /* Tools_3D.h */; };
 		8F27E374191789BE004E1370 /* Vector_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E316191789BE004E1370 /* Vector_3D.cpp */; };
 		8F27E375191789BE004E1370 /* Vector_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E317191789BE004E1370 /* Vector_3D.h */; };
 		8F27E376191789BE004E1370 /* Wider_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E318191789BE004E1370 /* Wider_3D.cpp */; };
@@ -152,6 +151,7 @@
 		8F2DD89719252CDD00442B20 /* hoa.3d.map_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */; };
 		8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */; };
 		8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */; };
+		8F794ED01926163C0006491F /* hoa.3d.decoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,7 +248,6 @@
 		8F27E312191789BE004E1370 /* Rotate_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate_3D.h; sourceTree = "<group>"; };
 		8F27E313191789BE004E1370 /* Scope_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope_3D.cpp; sourceTree = "<group>"; };
 		8F27E314191789BE004E1370 /* Scope_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope_3D.h; sourceTree = "<group>"; };
-		8F27E315191789BE004E1370 /* Tools_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools_3D.h; sourceTree = "<group>"; };
 		8F27E316191789BE004E1370 /* Vector_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector_3D.cpp; sourceTree = "<group>"; };
 		8F27E317191789BE004E1370 /* Vector_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector_3D.h; sourceTree = "<group>"; };
 		8F27E318191789BE004E1370 /* Wider_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider_3D.cpp; sourceTree = "<group>"; };
@@ -301,6 +300,7 @@
 		8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.map_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.encoder_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.pd.h; sourceTree = "<group>"; };
+		8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.decoder_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,7 +482,6 @@
 				8F27E312191789BE004E1370 /* Rotate_3D.h */,
 				8F27E313191789BE004E1370 /* Scope_3D.cpp */,
 				8F27E314191789BE004E1370 /* Scope_3D.h */,
-				8F27E315191789BE004E1370 /* Tools_3D.h */,
 				8F27E316191789BE004E1370 /* Vector_3D.cpp */,
 				8F27E317191789BE004E1370 /* Vector_3D.h */,
 				8F27E318191789BE004E1370 /* Wider_3D.cpp */,
@@ -572,10 +571,11 @@
 		8F5A12B5191BB6EB00825567 /* PD3D */ = {
 			isa = PBXGroup;
 			children = (
+				8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */,
 				8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */,
+				8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */,
 				8F2DD89219252A2800442B20 /* hoa.3d.optim_tilde.cpp */,
 				8F2DD89419252BEB00442B20 /* hoa.3d.wider_tilde.cpp */,
-				8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */,
 				8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */,
 			);
 			path = PD3D;
@@ -633,7 +633,6 @@
 				8F27E3B919178A33004E1370 /* eclass.h in Headers */,
 				8F27E36C191789BE004E1370 /* Optim_3D.h in Headers */,
 				8F27E33B191789BE004E1370 /* Decoder.h in Headers */,
-				8F27E373191789BE004E1370 /* Tools_3D.h in Headers */,
 				8F27E363191789BE004E1370 /* Decoder_3D.h in Headers */,
 				8F27E36E191789BE004E1370 /* Planewaves_3D.h in Headers */,
 				8F27E34C191789BE004E1370 /* Recomposer.h in Headers */,
@@ -702,6 +701,7 @@
 				8F27E2BE19178943004E1370 /* hoa.2d.wider_tilde.cpp in Sources */,
 				8F27E353191789BE004E1370 /* SourcesGroup.cpp in Sources */,
 				8F27E343191789BE004E1370 /* Meter.cpp in Sources */,
+				8F794ED01926163C0006491F /* hoa.3d.decoder_tilde.cpp in Sources */,
 				8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */,
 				8F27E2B919178943004E1370 /* hoa.2d.projector_tilde.cpp in Sources */,
 				8F27E3BA19178A33004E1370 /* eclass_attrgetter.c in Sources */,
