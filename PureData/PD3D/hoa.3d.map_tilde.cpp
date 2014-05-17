@@ -4,7 +4,7 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "Hoa2D.pd.h"
+#include "Hoa3D.pd.h"
 
 // TODO
 
@@ -72,7 +72,7 @@ typedef struct _hoa_map_3D_tilde
 	int             f_mode;
     double          f_ramp;
     
-    Hoa2D::Map*     f_map;
+    Hoa3D::Map*     f_map;
     MapPolarLines3D*  f_lines;
 } t_hoa_map_3D_tilde;
 
@@ -83,12 +83,20 @@ void hoa_map_3D_tilde_list(t_hoa_map_3D_tilde *x, t_symbol *s, long argc, t_atom
 
 void hoa_map_3D_tilde_dsp(t_hoa_map_3D_tilde *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 
-void hoa_map_3D_tilde_perform_multisources(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
-
-void hoa_map_3D_tilde_perform(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform_in1_in2_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform_in1_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform_in1_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform_in2_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_map_3D_tilde_perform_in1(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_map_3D_tilde_perform_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_3D_tilde_perform_in1_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_3D_tilde_perform(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+void hoa_map_3D_tilde_perform_multisources(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+
+
+
 
 t_pd_err ramp_set(t_hoa_map_3D_tilde *x, t_object *attr, long argc, t_atom *argv);
 
@@ -148,7 +156,7 @@ void *hoa_map_3D_tilde_new(t_symbol *s, long argc, t_atom *argv)
             x->f_mode = 0;
         
         x->f_ramp       = 100;
-		x->f_map        = new Hoa2D::Map(order, numberOfSources);
+		x->f_map        = new Hoa3D::Map(order, numberOfSources);
 		x->f_lines      = new MapPolarLines3D(x->f_map->getNumberOfSources());
         x->f_lines->setRamp(0.1 * sys_getsr());
         for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
@@ -214,23 +222,30 @@ void hoa_map_3D_tilde_float(t_hoa_map_3D_tilde *x, float f)
 		{
 			if(eobj_getproxy((t_object *)x) == 1)
 			{
+                float abs = f;
                 float ord = ordinate(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
-                float ele = 0;
-				x->f_lines->setRadius(0, radius(f, ord));
-                x->f_lines->setAzimuth(0, azimuth(f, ord));
-                x->f_lines->setElevation(0, ele);
+                float hei = height(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
+				x->f_lines->setRadius(0, radius(abs, ord, hei));
+                x->f_lines->setAzimuth(0, azimuth(abs, ord, hei));
+                x->f_lines->setElevation(0, elevation(abs, ord, hei));
 			}
 			else if(eobj_getproxy((t_object *)x) == 2)
 			{
-				float abs = abscissa(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0));
-                x->f_lines->setRadius(0, radius(abs, f));
-				x->f_lines->setAzimuth(0, azimuth(abs, f));
+				float abs = abscissa(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
+                float ord = f;
+                float hei = height(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
+				x->f_lines->setRadius(0, radius(abs, ord, hei));
+                x->f_lines->setAzimuth(0, azimuth(abs, ord, hei));
+                x->f_lines->setElevation(0, elevation(abs, ord, hei));
 			}
             else if(eobj_getproxy((t_object *)x) == 3)
 			{
-				float abs = abscissa(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0));
-                x->f_lines->setRadius(0, radius(abs, f));
-				x->f_lines->setAzimuth(0, azimuth(abs, f));
+				float abs = abscissa(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
+                float ord = ordinate(x->f_lines->getRadius(0), x->f_lines->getAzimuth(0), x->f_lines->getElevation(0));
+                float hei = f;
+                x->f_lines->setRadius(0, radius(abs, ord, hei));
+                x->f_lines->setAzimuth(0, azimuth(abs, ord, hei));
+                x->f_lines->setElevation(0, elevation(abs, ord, hei));
 			}
 		}
     }
@@ -244,15 +259,17 @@ void hoa_map_3D_tilde_list(t_hoa_map_3D_tilde *x, t_symbol* s, long argc, t_atom
         if(index < 1 || index > x->f_map->getNumberOfSources())
             return;
         
-        if(argc > 3 && (atom_getsym(argv+1) == hoa_sym_polar || atom_getsym(argv+1) == hoa_sym_pol))
+        if(argc > 4 && (atom_getsym(argv+1) == hoa_sym_polar || atom_getsym(argv+1) == hoa_sym_pol))
         {
             x->f_lines->setRadius(index-1, atom_getfloat(argv+2));
             x->f_lines->setAzimuth(index-1, atom_getfloat(argv+3));
+            x->f_lines->setElevation(index-1, atom_getfloat(argv+4));
         }
-        else if(argc > 3 && (atom_getsym(argv+1) == hoa_sym_cartesian || atom_getsym(argv+1) == hoa_sym_car))
+        else if(argc > 4 && (atom_getsym(argv+1) == hoa_sym_cartesian || atom_getsym(argv+1) == hoa_sym_car))
         {
-            x->f_lines->setRadius(index-1, radius(atom_getfloat(argv+2), atom_getfloat(argv+3)));
-            x->f_lines->setAzimuth(index-1, azimuth(atom_getfloat(argv+2), atom_getfloat(argv+3)));
+            x->f_lines->setRadius(index-1, radius(atom_getfloat(argv+2), atom_getfloat(argv+3), atom_getfloat(argv+4)));
+            x->f_lines->setAzimuth(index-1, azimuth(atom_getfloat(argv+2), atom_getfloat(argv+3), atom_getfloat(argv+4)));
+            x->f_lines->setElevation(index-1, elevation(atom_getfloat(argv+2), atom_getfloat(argv+3), atom_getfloat(argv+4)));
         }
         else if(argc > 2 && atom_getsym(argv+1) == hoa_sym_mute)
         {
@@ -281,18 +298,216 @@ void hoa_map_3D_tilde_dsp(t_hoa_map_3D_tilde *x, t_object *dsp, short *count, do
     
     if(x->f_map->getNumberOfSources() == 1)
     {
-		if(count[1] && count[2])
+		if(count[1] && count[2] && count[3])
+            object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in1_in2_in3, 0, NULL);
+        else if(count[1] && count[2] && !count[3])
             object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in1_in2, 0, NULL);
+        else if(count[1] && !count[2] && count[3])
+            object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in1_in3, 0, NULL);
+        else if(!count[1] && count[2] && count[3])
+            object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in1_in3, 0, NULL);
         else if(count[1] && !count[2])
             object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in1, 0, NULL);
         else if(!count[1] && count[2])
             object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in2, 0, NULL);
-		else if(!count[1] && !count[2])
+        else if(!count[1] && count[2])
+            object_method(dsp, gensym("dsp_add64"), x, (method)hoa_map_3D_tilde_perform_in3, 0, NULL);
+		else if(!count[1] && !count[2] && !count[3])
             object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_3D_tilde_perform, 0, NULL);
     }
     else
     {
         object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_3D_tilde_perform_multisources, 0, NULL);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in1_in2_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, ins[2][i]);
+            x->f_map->setElevation(0, ins[3][i]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], ins[2][i], ins[3][i]));
+			x->f_map->setRadius(0, radius(ins[1][i], ins[2][i], ins[3][i]));
+            x->f_map->setElevation(0,elevation(ins[1][i], ins[2][i], ins[3][i]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in1_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, ins[2][i]);
+            x->f_map->setElevation(0, x->f_lines_vector[2]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], ins[2][i], x->f_lines_vector[2]));
+			x->f_map->setRadius(0, radius(ins[1][i], ins[2][i], x->f_lines_vector[2]));
+            x->f_map->setElevation(0, elevation(ins[1][i], ins[2][i], x->f_lines_vector[2]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in1_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, x->f_lines_vector[1]);
+            x->f_map->setElevation(0, ins[3][i]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], x->f_lines_vector[1], ins[3][i]));
+			x->f_map->setRadius(0, radius(ins[1][i], x->f_lines_vector[1], ins[3][i]));
+            x->f_map->setElevation(0, elevation(ins[1][i], x->f_lines_vector[1], ins[3][i]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in2_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, x->f_lines_vector[0]);
+			x->f_map->setAzimuth(0, ins[2][i]);
+            x->f_map->setElevation(0, ins[3][i]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(x->f_lines_vector[0], ins[2][i], ins[3][i]));
+			x->f_map->setRadius(0, radius(x->f_lines_vector[0], ins[2][i], ins[3][i]));
+            x->f_map->setElevation(0, elevation(x->f_lines_vector[0], ins[2][i], ins[3][i]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in1(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+		x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, x->f_lines_vector[1]);
+            x->f_map->setElevation(0, x->f_lines_vector[2]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], x->f_lines_vector[1], x->f_lines_vector[2]));
+			x->f_map->setRadius(0, radius(ins[1][i], x->f_lines_vector[1], x->f_lines_vector[2]));
+            x->f_map->setElevation(0, elevation(ins[1][i], x->f_lines_vector[1], x->f_lines_vector[2]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+		x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, x->f_lines_vector[0]);
+			x->f_map->setAzimuth(0, ins[2][i]);
+            x->f_map->setElevation(0, x->f_lines_vector[2]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(x->f_lines_vector[0], ins[2][i], x->f_lines_vector[2]));
+			x->f_map->setRadius(0, radius(x->f_lines_vector[0], ins[2][i], x->f_lines_vector[2]));
+            x->f_map->setElevation(0, elevation(x->f_lines_vector[0], ins[2][i], x->f_lines_vector[2]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform_in3(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+		x->f_lines->process(x->f_lines_vector);
+        if(x->f_mode == 0)
+		{
+			x->f_map->setRadius(0, x->f_lines_vector[0]);
+			x->f_map->setAzimuth(0, x->f_lines_vector[1]);
+            x->f_map->setElevation(0, ins[3][i]);
+		}
+		else if(x->f_mode == 1)
+		{
+			x->f_map->setAzimuth(0, azimuth(x->f_lines_vector[0], x->f_lines_vector[1], ins[3][i]));
+			x->f_map->setRadius(0, radius(x->f_lines_vector[0], x->f_lines_vector[1], ins[3][i]));
+            x->f_map->setElevation(0, elevation(x->f_lines_vector[0], x->f_lines_vector[1], ins[3][i]));
+		}
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_3D_tilde_perform(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+		x->f_lines->process(x->f_lines_vector);
+		x->f_map->setRadius(0, x->f_lines_vector[0]);
+		x->f_map->setAzimuth(0, x->f_lines_vector[1]);
+        x->f_map->setElevation(0, x->f_lines_vector[2]);
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -310,93 +525,10 @@ void hoa_map_3D_tilde_perform_multisources(t_hoa_map_3D_tilde *x, t_object *dsp6
 			x->f_map->setRadius(j, x->f_lines_vector[j]);
         for(int j = 0; j < nsources; j++)
 			x->f_map->setAzimuth(j, x->f_lines_vector[j + nsources]);
+        for(int j = 0; j < nsources; j++)
+			x->f_map->setElevation(j, x->f_lines_vector[j + nsources * 2]);
         
         x->f_map->process(x->f_sig_ins + numins * i, x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_3D_tilde_perform(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-		x->f_lines->process(x->f_lines_vector);
-		x->f_map->setRadius(0, x->f_lines_vector[0]);
-		x->f_map->setAzimuth(0, x->f_lines_vector[1]);
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_3D_tilde_perform_in1(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-		x->f_lines->process(x->f_lines_vector);
-		if (x->f_mode == 0)
-		{
-			x->f_map->setRadius(0, ins[1][i]);
-			x->f_map->setAzimuth(0, x->f_lines_vector[1]);
-		}
-		else if (x->f_mode == 1)
-		{
-			x->f_map->setAzimuth(0, azimuth(ins[1][i], x->f_lines_vector[1]));
-			x->f_map->setRadius(0, radius(ins[1][i], x->f_lines_vector[1]));
-		}
-		
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_3D_tilde_perform_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-		x->f_lines->process(x->f_lines_vector);
-		if (x->f_mode == 0)
-		{
-            x->f_map->setRadius(0, x->f_lines_vector[0]);
-			x->f_map->setAzimuth(0, ins[2][i]);
-		}
-		else if (x->f_mode == 1)
-		{
-			x->f_map->setAzimuth(0, azimuth(x->f_lines_vector[0], ins[2][i]));
-			x->f_map->setRadius(0, radius(x->f_lines_vector[0], ins[2][i]));
-		}
-		
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_3D_tilde_perform_in1_in2(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-        if(x->f_mode == 0)
-		{
-			x->f_map->setRadius(0, ins[1][i]);
-			x->f_map->setAzimuth(0, ins[2][i]);
-		}
-		else if(x->f_mode == 1)
-		{
-			x->f_map->setAzimuth(0, azimuth(ins[1][i], ins[2][i]));
-			x->f_map->setRadius(0, radius(ins[1][i], ins[2][i]));
-		}
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
@@ -419,9 +551,9 @@ MapPolarLines3D::MapPolarLines3D(unsigned int numberOfSources)
     assert(numberOfSources > 0);
     m_number_of_sources = numberOfSources;
     
-    m_values_old    = new float[m_number_of_sources * 2];
-    m_values_new    = new float[m_number_of_sources * 2];
-    m_values_step   = new float[m_number_of_sources * 2];
+    m_values_old    = new float[m_number_of_sources * 3];
+    m_values_new    = new float[m_number_of_sources * 3];
+    m_values_step   = new float[m_number_of_sources * 3];
 }
 
 MapPolarLines3D::~MapPolarLines3D()
@@ -476,7 +608,32 @@ void MapPolarLines3D::setAzimuth(unsigned int index, double azimuth)
 
 void MapPolarLines3D::setElevation(unsigned int index, double elevation)
 {
-    ;
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources * 2] = wrap_twopi(elevation);
+    m_values_old[index + m_number_of_sources * 2] = wrap_twopi(m_values_old[index + m_number_of_sources * 2]);
+    
+    double distance;
+    if(m_values_old[index + m_number_of_sources * 2] > m_values_new[index + m_number_of_sources * 2])
+        distance = (m_values_old[index + m_number_of_sources * 2] - m_values_new[index + m_number_of_sources * 2]);
+    else
+        distance = (m_values_new[index + m_number_of_sources * 2] - m_values_old[index + m_number_of_sources * 2]);
+    
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources * 2] = (m_values_new[index + m_number_of_sources * 2] - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new[index + m_number_of_sources * 2] > m_values_old[index + m_number_of_sources * 2])
+        {
+            m_values_step[index + m_number_of_sources * 2] = ((m_values_new[index + m_number_of_sources * 2] - HOA_2PI) - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources * 2] = ((m_values_new[index + m_number_of_sources * 2] + HOA_2PI) - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
 }
 
 void MapPolarLines3D::setRadiusDirect(unsigned int index, double radius)
@@ -498,17 +655,20 @@ void MapPolarLines3D::setAzimuthDirect(unsigned int index, double azimuth)
 
 void MapPolarLines3D::setElevationDirect(unsigned int index, double elevation)
 {
-    ;
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources * 2] = m_values_new[index + m_number_of_sources * 2] = elevation;
+    m_values_step[index + m_number_of_sources * 2] = 0.;
+    m_counter = 0;
 }
 
 void MapPolarLines3D::process(float* vector)
 {
-    cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
+    cblas_saxpy(m_number_of_sources * 3, 1., m_values_step, 1, m_values_old, 1);
     if(m_counter++ >= m_ramp)
     {
-        cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
-        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
+        cblas_scopy(m_number_of_sources * 3, m_values_new, 1, m_values_old, 1);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 3);
         m_counter    = 0;
     }
-    cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
+    cblas_scopy(m_number_of_sources * 3, m_values_old, 1, vector, 1);
 }

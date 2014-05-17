@@ -407,19 +407,48 @@ namespace Hoa
 		return sqrt(x*x + y*y);
 	}
     
-    inline double ordinate(double radius, double phi, double theta)
+    //! The azimuth converter function.
+    /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
+     
+	 @param     x		The abscissa value.
+	 @param     y		The ordinate value.
+	 @return    The azimuth value.
+     
+	 @see    radius
+     */
+	inline double azimuth(const double x, const double y)
 	{
-		return radius * sin(phi - HOA_PI2) * cos(theta);
+		return atan2(y, x) - HOA_PI2;
 	}
     
-    inline double abscissa(double radius, double phi, double theta)
+    inline double abscissa(const double radius, const double phi, const double theta)
 	{
 		return radius * cos(phi - HOA_PI2) * cos(theta);
 	}
     
-    inline double height(double radius, double phi, double theta)
+    inline double ordinate(const double radius, const double phi, const double theta)
+	{
+		return radius * sin(phi - HOA_PI2) * cos(theta);
+	}
+    
+    inline double height(const double radius, const double phi, const double theta)
 	{
 		return radius * sin(theta);
+	}
+    
+    inline double radius(const double x, const double y, const double z)
+	{
+		return sqrt(x*x + y*y + z*z);
+	}
+    
+    inline double azimuth(const double x, const double y, const double z)
+	{
+		return atan2(y, x) - HOA_PI2;
+	}
+    
+    inline double elevation(const double x, const double y, const double z)
+	{
+		return acos(z/ radius(x, y, z));
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)
@@ -432,20 +461,6 @@ namespace Hoa
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2) + (z1-z2) * (z1-z2));
 	}
     
-    
-	//! The azimuth converter function.
-    /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
-
-	 @param     x		The abscissa value.
-	 @param     y		The ordinate value.
-	 @return    The azimuth value.
-
-	 @see    radius
-     */
-	inline double azimuth(const double x, const double y)
-	{
-		return atan2(y, x) - HOA_PI2;
-	}
 
 	inline double distance_radian(double angle1, double angle2)
     {

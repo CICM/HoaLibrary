@@ -1,120 +1,40 @@
-#N canvas 509 110 975 640 10;
-#X obj -76 -482 phasor~ -0.3;
-#X text -205 -558 source;
-#X msg -332 -401 \; pd dsp 1;
-#X msg -332 -366 \; pd dsp 0;
-#X obj -8 -431 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#N canvas 262 110 594 535 10;
+#X obj -76 -587 phasor~ -0.3;
+#X text -205 -663 source;
+#X msg -332 -506 \; pd dsp 1;
+#X msg -332 -471 \; pd dsp 0;
+#X obj -8 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -203 -533 hoa.soundgrain;
-#X obj -203 -504 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -203 -638 hoa.soundgrain;
+#X obj -203 -609 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X obj 103 -550 hoa.connect;
-#X obj 103 -570 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 103 -655 hoa.connect;
+#X obj 103 -675 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -76 -457 hoa.pi~ 2;
-#X obj -380 -617 c.patcherinfos;
-#X obj -380 -634 loadbang;
-#X obj -380 -634 hoa.help.header;
-#X obj 36 -634 hoa.help.also;
-#X text -12 -457 azimuth;
-#X obj 132 -431 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -76 -562 hoa.pi~ 2;
+#X obj -380 -722 c.patcherinfos;
+#X obj -380 -739 loadbang;
+#X obj -380 -739 hoa.help.header;
+#X obj 36 -739 hoa.help.also;
+#X text -12 -562 azimuth;
+#X obj 132 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -202 -161 hoa.dac~ 1:8 ------------------------------;
-#X text 128 -457 elevation;
-#X obj -203 -349 hoa.3d.decoder~ 3 8 -----------------------;
-#X obj -203 -406 hoa.3d.encoder~ 3 -------------------------;
-#X obj -203 -377 hoa.3d.optim~ 3 inPhase -------------------;
-#X text -375 -590 hoa.3d.encoder~ creates the spherical harmonics of
+#X obj -202 -266 hoa.dac~ 1:8 ------------------------------;
+#X text 128 -562 elevation;
+#X obj -203 -354 hoa.3d.decoder~ 3 8 -----------------------;
+#X obj -203 -511 hoa.3d.encoder~ 3 -------------------------;
+#X obj -203 -442 hoa.3d.optim~ 3 inPhase -------------------;
+#X text -375 -695 hoa.3d.encoder~ creates the spherical harmonics of
 a signal depending on a given order \, an azimuth and an elevation.
 ;
-#X obj 52 -457 hoa.pi~ 1;
-#N canvas 79 76 778 543 meterview 0;
-#X obj 2 2 hoa.2d.meter~ @size 128 128 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-4 @angles 0 90 180 270 @offset 45 @rotation anti-clockwise @vectors
-energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
-1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85
-0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 133 2 hoa.2d.meter~ @size 128 128 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-4 @angles 0 90 180 270 @offset 45 @rotation anti-clockwise @vectors
-energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
-1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85
-0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 264 2 hoa.2d.meter~ @size 128 128 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-4 @angles 0 90 180 270 @offset 45 @rotation anti-clockwise @vectors
-energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
-1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85
-0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 395 2 hoa.2d.meter~ @size 128 128 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-4 @angles 0 90 180 270 @offset 45 @rotation anti-clockwise @vectors
-energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
-1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85
-0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj -8 -255 inlet~;
-#X obj 39 -200 inlet~;
-#X obj 13 -225 inlet~;
-#X obj 77 -172 inlet~;
-#X obj 113 -145 inlet~;
-#X obj 160 -90 inlet~;
-#X obj 134 -115 inlet~;
-#X obj 198 -62 inlet~;
-#X obj 3 3 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
-0.5 0.5 1;
-#X obj 429 -197 namecanvas \$0-this;
-#X obj 419 -162 symbol \$0-this;
-#X obj 394 -189 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 422 -112 pack s 262;
-#X obj 492 -112 pack s 0;
-#X msg 421 -82 \; \$1 donecanvasdialog 0 0 1 0 -1 1 1 262 131 \$2 0
-;
-#X obj 290 -110 sel 0 1;
-#X obj 389 -132 symbol \$0-this;
-#X obj 265 3 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
-0.5 0.5 1;
-#X msg 273 -40 set \$1;
-#X msg 323 -40 set \$1;
-#X connect 4 0 0 0;
-#X connect 5 0 0 2;
-#X connect 6 0 0 1;
-#X connect 7 0 0 3;
-#X connect 8 0 1 0;
-#X connect 9 0 1 2;
-#X connect 10 0 1 1;
-#X connect 11 0 1 3;
-#X connect 12 0 19 0;
-#X connect 12 0 22 0;
-#X connect 14 0 16 0;
-#X connect 15 0 14 0;
-#X connect 16 0 18 0;
-#X connect 17 0 18 0;
-#X connect 19 0 20 0;
-#X connect 19 1 14 0;
-#X connect 20 0 17 0;
-#X connect 21 0 23 0;
-#X connect 21 0 19 0;
-#X connect 22 0 21 0;
-#X connect 23 0 12 0;
-#X coords 0 -1 1 1 262 131 1 0 0;
-#X restore -203 -315 pd meterview;
-#X obj 52 -483 hoa.tri~ 0.1;
+#X obj 52 -562 hoa.pi~ 1;
+#X obj 52 -588 hoa.tri~ 0.1;
 #X connect 0 0 9 1;
 #X connect 5 0 6 0;
 #X connect 6 0 19 0;
@@ -124,21 +44,13 @@ energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
 #X connect 10 0 12 0;
 #X connect 11 0 10 0;
 #X connect 18 0 16 0;
-#X connect 18 0 23 0;
 #X connect 18 1 16 1;
-#X connect 18 1 23 1;
 #X connect 18 2 16 2;
-#X connect 18 2 23 2;
 #X connect 18 3 16 3;
-#X connect 18 3 23 3;
 #X connect 18 4 16 4;
-#X connect 18 4 23 4;
 #X connect 18 5 16 5;
-#X connect 18 5 23 5;
 #X connect 18 6 16 6;
-#X connect 18 6 23 6;
 #X connect 18 7 16 7;
-#X connect 18 7 23 7;
 #X connect 19 0 20 0;
 #X connect 19 1 20 1;
 #X connect 19 2 20 2;
@@ -173,5 +85,5 @@ energy @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
 #X connect 20 15 18 15;
 #X connect 22 0 15 0;
 #X connect 22 0 19 2;
-#X connect 24 0 22 1;
-#X coords 0 640 1 639 100 60 0;
+#X connect 23 0 22 1;
+#X coords 0 535 1 534 100 60 0;
