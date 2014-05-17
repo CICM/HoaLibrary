@@ -32,6 +32,7 @@ typedef struct  _hoa_space
 {
 	t_jbox		j_box;
 	void*		f_out;
+	void*		f_out_mouse;
     long        f_number_of_channels;
     double      f_minmax[2];
 	long		f_floatoutput;
@@ -280,6 +281,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_channel_values = new double[MAX_CHANNELS];
     x->f_channel_refs   = new double[MAX_CHANNELS];
     x->f_channel_radius = new double[MAX_CHANNELS];
+	x->f_out_mouse		= intout(x);
     x->f_out			= listout(x);
 	
 	x->f_last_mouse_index = -1;
@@ -357,7 +359,10 @@ void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
 	}
 	else
 	{
-        sprintf(s,"(list) Channels coefficients");
+		if (a == 0)
+			sprintf(s,"(list) Channels coefficients");
+		else if (a == 1)
+			sprintf(s,"(int) Mouseover index");
 	}
 }
 
@@ -749,6 +754,8 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     mouse.y = x->f_center * 2. - pt.y - x->f_center;
     double angle, radius;
 	
+	x->f_last_mouse_index = -1;
+	
 	angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (HOA_PI / (double)x->f_number_of_channels));
 	radius  = Hoa::radius(mouse.x, mouse.y);
 	x->f_last_mouse_index  = angle / HOA_2PI * x->f_number_of_channels;
@@ -759,6 +766,11 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_RESIZE_FOURWAY);
     else
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
+	
+	if (x->f_last_mouse_index >= 0)
+		outlet_int(x->f_out_mouse, x->f_last_mouse_index + 1);
+	else
+		outlet_int(x->f_out_mouse, -1);
     
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
@@ -769,6 +781,7 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
 void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	x->f_last_mouse_index = -1;
+	outlet_int(x->f_out_mouse, x->f_last_mouse_index);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);

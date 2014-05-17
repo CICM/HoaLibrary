@@ -327,6 +327,12 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
 
 void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	if (x->f_map->getMute(0))
+	{
+		for(int i = 0; i < numouts; i++)
+			memset(outs[i], 0, sizeof(double)*sampleframes);
+		return;
+	}
 	for(int i = 0; i < sampleframes; i++)
     {
 		x->f_lines->process(x->f_lines_vector);
@@ -342,6 +348,12 @@ void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins,
 
 void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	if (x->f_map->getMute(0))
+	{
+		for(int i = 0; i < numouts; i++)
+			memset(outs[i], 0, sizeof(double)*sampleframes);
+		return;
+	}
     for(int i = 0; i < sampleframes; i++)
     {
 		x->f_lines->process(x->f_lines_vector);
@@ -366,6 +378,12 @@ void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long num
 
 void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	if (x->f_map->getMute(0))
+	{
+		for(int i = 0; i < numouts; i++)
+			memset(outs[i], 0, sizeof(double)*sampleframes);
+		return;
+	}
 	for(int i = 0; i < sampleframes; i++)
     {
 		x->f_lines->process(x->f_lines_vector);
@@ -390,6 +408,12 @@ void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long num
 
 void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	if (x->f_map->getMute(0))
+	{
+		for(int i = 0; i < numouts; i++)
+			memset(outs[i], 0, sizeof(double)*sampleframes);
+		return;
+	}
     for(int i = 0; i < sampleframes; i++)
     {
 		if(x->f_mode == hoa_sym_polar)
