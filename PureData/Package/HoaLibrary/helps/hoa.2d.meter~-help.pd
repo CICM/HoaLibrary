@@ -53,7 +53,7 @@ vectors.;
 #X msg -29 -158 angles 0 72 144 -144 -72;
 #X obj -189 -214 c.loadmess 1;
 #X obj -443 -276 hoa.2d.decoder~ 3 irregular 5 @angles 0 30 110 250
-330;
+330, f 38;
 #X obj -6 -451 hoa.connect;
 #X obj -6 -471 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;

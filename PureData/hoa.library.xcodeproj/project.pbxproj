@@ -152,6 +152,12 @@
 		8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */; };
 		8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */; };
 		8F794ED01926163C0006491F /* hoa.3d.decoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */; };
+		8F794EDE19279AB10006491F /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794ED619279AB10006491F /* Source.cpp */; };
+		8F794EDF19279AB10006491F /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794ED719279AB10006491F /* Source.h */; };
+		8F794EE019279AB10006491F /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794ED819279AB10006491F /* SourcesGroup.cpp */; };
+		8F794EE119279AB10006491F /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794ED919279AB10006491F /* SourcesGroup.h */; };
+		8F794EE219279AB10006491F /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794EDA19279AB10006491F /* SourcesManager.cpp */; };
+		8F794EE319279AB10006491F /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EDB19279AB10006491F /* SourcesManager.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +307,12 @@
 		8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.encoder_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.pd.h; sourceTree = "<group>"; };
 		8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.decoder_tilde.cpp; sourceTree = "<group>"; };
+		8F794ED619279AB10006491F /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
+		8F794ED719279AB10006491F /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		8F794ED819279AB10006491F /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
+		8F794ED919279AB10006491F /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
+		8F794EDA19279AB10006491F /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
+		8F794EDB19279AB10006491F /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +414,7 @@
 				8F27E2C2191789BD004E1370 /* Hoa.h */,
 				8F27E2C3191789BD004E1370 /* Hoa2D */,
 				8F27E300191789BD004E1370 /* Hoa3D */,
+				8F794ED319279AB10006491F /* HoaCommon */,
 				8F27E31F191789BE004E1370 /* HoaDefs.h */,
 				8F27E320191789BE004E1370 /* HoaMath.h */,
 				8F27E321191789BE004E1370 /* HoaUtils.h */,
@@ -581,6 +594,19 @@
 			path = PD3D;
 			sourceTree = "<group>";
 		};
+		8F794ED319279AB10006491F /* HoaCommon */ = {
+			isa = PBXGroup;
+			children = (
+				8F794ED619279AB10006491F /* Source.cpp */,
+				8F794ED719279AB10006491F /* Source.h */,
+				8F794ED819279AB10006491F /* SourcesGroup.cpp */,
+				8F794ED919279AB10006491F /* SourcesGroup.h */,
+				8F794EDA19279AB10006491F /* SourcesManager.cpp */,
+				8F794EDB19279AB10006491F /* SourcesManager.h */,
+			);
+			path = HoaCommon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -624,7 +650,9 @@
 				8F27E358191789BE004E1370 /* SourcesPreset.h in Headers */,
 				8F27E35E191789BE004E1370 /* Wider.h in Headers */,
 				8F27E375191789BE004E1370 /* Vector_3D.h in Headers */,
+				8F794EE119279AB10006491F /* SourcesGroup.h in Headers */,
 				8F27E34E191789BE004E1370 /* Rotate.h in Headers */,
+				8F794EE319279AB10006491F /* SourcesManager.h in Headers */,
 				8F27E3C419178A33004E1370 /* ecommon.h in Headers */,
 				8F27E37E191789BE004E1370 /* HoaUtils.h in Headers */,
 				8F27E37D191789BE004E1370 /* HoaMath.h in Headers */,
@@ -639,6 +667,7 @@
 				8F189F3518EB0DBE00348D89 /* hoa.pd_commonsyms.h in Headers */,
 				8F27E348191789BE004E1370 /* Planewaves.h in Headers */,
 				8F27E3C619178A33004E1370 /* m_imp.h in Headers */,
+				8F794EDF19279AB10006491F /* Source.h in Headers */,
 				8F27E366191789BE004E1370 /* Hoa3D.h in Headers */,
 				8F27E340191789BE004E1370 /* Kits.h in Headers */,
 				8F27E322191789BE004E1370 /* Hoa.h in Headers */,
@@ -708,6 +737,7 @@
 				8F27E3BD19178A33004E1370 /* eclass_attrsetter.c in Sources */,
 				8F27E33C191789BE004E1370 /* Encoder.cpp in Sources */,
 				8F27E3CC19178A33004E1370 /* egraphics_color.c in Sources */,
+				8F794EE019279AB10006491F /* SourcesGroup.cpp in Sources */,
 				8F27E3D319178A33004E1370 /* eobj_handle.c in Sources */,
 				8F27E34B191789BE004E1370 /* Recomposer.cpp in Sources */,
 				8F27E335191789BE004E1370 /* Ambisonic.cpp in Sources */,
@@ -726,6 +756,7 @@
 				8F27E3D519178A33004E1370 /* eobj_router.c in Sources */,
 				8F27E29819178923004E1370 /* hoa.dac_tilde.cpp in Sources */,
 				8F27E3D819178A33004E1370 /* epopup.c in Sources */,
+				8F794EDE19279AB10006491F /* Source.cpp in Sources */,
 				8F27E345191789BE004E1370 /* Optim.cpp in Sources */,
 				8F27E369191789BE004E1370 /* Meter_3D.cpp in Sources */,
 				8F27E3B619178A33004E1370 /* ebox_handle.c in Sources */,
@@ -780,6 +811,7 @@
 				8F27E3B319178A33004E1370 /* ebox_attr.c in Sources */,
 				8F27E36B191789BE004E1370 /* Optim_3D.cpp in Sources */,
 				8F27E35F191789BE004E1370 /* Ambisonic_3D.cpp in Sources */,
+				8F794EE219279AB10006491F /* SourcesManager.cpp in Sources */,
 				8F27E3B419178A33004E1370 /* ebox_basic.c in Sources */,
 				8F27E2A019178923004E1370 /* hoa.thisprocess_tilde.cpp in Sources */,
 				8F27E3CD19178A33004E1370 /* egraphics_forms.c in Sources */,
