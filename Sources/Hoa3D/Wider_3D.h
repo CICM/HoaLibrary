@@ -42,6 +42,16 @@ namespace Hoa3D
          */
         void setWideningValue(const double value);
         
+        //! This method retreive the widening value.
+        /**	The method returns the widening value.
+         
+         @return     The widening value.
+         */
+        double getWideningValue() const
+        {
+            return m_wide / ((double)(NUMBEROFLINEARPOINTS - 1) * m_number_of_harmonics);
+        }
+        
         //! This method performs the widening with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          

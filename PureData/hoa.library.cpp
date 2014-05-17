@@ -35,9 +35,15 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2escope_tilde();
     setup_hoa0x2e2d0x2espace();
     setup_hoa0x2e2d0x2ewider_tilde();
-
+    
+#ifdef __APPLE__
     // HOA 3D //
-    //setup_hoa0x2e3d0x2eencoder_tilde();
+    setup_hoa0x2e3d0x2edecoder_tilde();
+    setup_hoa0x2e3d0x2eencoder_tilde();
+    setup_hoa0x2e3d0x2eoptim_tilde();
+    setup_hoa0x2e3d0x2ewider_tilde();
+    setup_hoa0x2e3d0x2emap_tilde();
+#endif
 
     // Alias /:
     setup_hoa0x2e2d0x2ebinaural();

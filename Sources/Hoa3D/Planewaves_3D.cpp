@@ -8,25 +8,26 @@
 
 namespace Hoa3D
 {
-    Planewaves::Planewaves(unsigned int numberOfLoudspeakers)
+    Planewaves::Planewaves(unsigned int numberOfChannels)
     {
-		assert(numberOfLoudspeakers > 0);
-		m_number_of_loudspeakers    = numberOfLoudspeakers;
-        m_loudspeakers_azimuth      = new double[m_number_of_loudspeakers];
-        m_loudspeakers_elevation    = new double[m_number_of_loudspeakers];
+		assert(numberOfChannels > 0);
+		m_number_of_channels    = numberOfChannels;
+        m_channels_azimuth      = new double[m_number_of_channels];
+        m_channels_elevation    = new double[m_number_of_channels];
+        sphere_discretize(numberOfChannels, m_channels_azimuth, m_channels_elevation);
     }
 	
-	void Planewaves::setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)
+	void Planewaves::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
-		assert(index < m_number_of_loudspeakers);
-		m_loudspeakers_azimuth[index] = wrap_twopi(azimuth);
-        m_loudspeakers_elevation[index] = wrap_twopi(elevation);
+		assert(index < m_number_of_channels);
+		m_channels_azimuth[index] = wrap_twopi(azimuth);
+        m_channels_elevation[index] = wrap_twopi(elevation);
 	}
     
     Planewaves::~Planewaves()
     {
-		delete [] m_loudspeakers_azimuth;
-        delete [] m_loudspeakers_elevation;
+		delete [] m_channels_azimuth;
+        delete [] m_channels_elevation;
     }
 }
 

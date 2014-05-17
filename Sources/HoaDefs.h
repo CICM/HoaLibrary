@@ -35,7 +35,7 @@
 #endif
 
 #ifdef PD_DEBUG
-#include "../../ThirdParty/PureData/Sources/cicm_wrapper.h"
+#include "../ThirdParty/PureData/Sources/cicm_wrapper.h"
 #endif
 
 #define HOA_PI  (3.141592653589793238462643383279502884)

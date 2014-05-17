@@ -8,33 +8,33 @@
 
 namespace Hoa3D
 {
-    Vector::Vector(unsigned int numberOfLoudspeakers) : Planewaves(numberOfLoudspeakers)
+    Vector::Vector(unsigned int numberOfChannels) : Planewaves(numberOfChannels)
     {
-        m_loudspeakers_float = new float[m_number_of_loudspeakers];
-        m_loudspeakers_double = new double[m_number_of_loudspeakers];
-        m_loudspeakers_abscissa_float = new float[m_number_of_loudspeakers];
-        m_loudspeakers_abscissa_double = new double[m_number_of_loudspeakers];
-        m_loudspeakers_ordinate_float = new float[m_number_of_loudspeakers];
-        m_loudspeakers_ordinate_double = new double[m_number_of_loudspeakers];
-        m_loudspeakers_height_float = new float[m_number_of_loudspeakers];
-        m_loudspeakers_height_double = new double[m_number_of_loudspeakers];
+        m_channels_float = new float[m_number_of_channels];
+        m_channels_double = new double[m_number_of_channels];
+        m_channels_abscissa_float = new float[m_number_of_channels];
+        m_channels_abscissa_double = new double[m_number_of_channels];
+        m_channels_ordinate_float = new float[m_number_of_channels];
+        m_channels_ordinate_double = new double[m_number_of_channels];
+        m_channels_height_float = new float[m_number_of_channels];
+        m_channels_height_double = new double[m_number_of_channels];
 
-        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getLoudspeakerAbscissa(i);
-            m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getLoudspeakerOrdinate(i);
-            m_loudspeakers_height_float[i] = m_loudspeakers_height_double[i] = getLoudspeakerHeight(i);
+            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
+            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
+            m_channels_height_float[i] = m_channels_height_double[i] = getChannelHeight(i);
         }
     }
 
-    void Vector::setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)
+    void Vector::setChannelPosition(unsigned int index, double azimuth, double elevation)
     {
-        Planewaves::setLoudspeakerPosition(index, azimuth, elevation);
-        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+        Planewaves::setChannelPosition(index, azimuth, elevation);
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getLoudspeakerAbscissa(i);
-            m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getLoudspeakerOrdinate(i);
-            m_loudspeakers_height_float[i] = m_loudspeakers_height_double[i] = getLoudspeakerHeight(i);
+            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
+            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
+            m_channels_height_float[i] = m_channels_height_double[i] = getChannelHeight(i);
         }
     }
 
@@ -42,10 +42,10 @@ namespace Hoa3D
     {
         float veclocitySum = 0.f, velocityAbscissa = 0.f, velocityOrdinate = 0.f, velocityElevation = 0.f;
 
-        veclocitySum = cblas_sasum(m_number_of_loudspeakers, inputs, 1);
-        velocityAbscissa = cblas_sdot(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_abscissa_float, 1);
-        velocityOrdinate = cblas_sdot(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_ordinate_float, 1);
-        velocityElevation= cblas_sdot(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_height_float, 1);
+        veclocitySum = cblas_sasum(m_number_of_channels, inputs, 1);
+        velocityAbscissa = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_abscissa_float, 1);
+        velocityOrdinate = cblas_sdot(m_number_of_channels, inputs, 1, m_channels_ordinate_float, 1);
+        velocityElevation= cblas_sdot(m_number_of_channels, inputs, 1, m_channels_height_float, 1);
         if(veclocitySum)
         {
             outputs[0] = velocityAbscissa / veclocitySum;
@@ -64,10 +64,10 @@ namespace Hoa3D
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0., velocityElevation = 0.;
-        veclocitySum = cblas_dasum(m_number_of_loudspeakers, m_loudspeakers_double, 1);
-        velocityAbscissa = cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_abscissa_double, 1);
-        velocityOrdinate = cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_ordinate_double, 1);
-        velocityElevation= cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_height_double, 1);
+        veclocitySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
+        velocityAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
+        velocityOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
+        velocityElevation= cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_height_double, 1);
 
         if(veclocitySum)
         {
@@ -86,14 +86,14 @@ namespace Hoa3D
     void Vector::processEnergy(const float* inputs, float* outputs)
     {
         float energySum = 0.f, energyAbscissa = 0.f, energyOrdinate = 0.f, energyElevation = 0.f;
-        cblas_scopy(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_float, 1);
-        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
-            m_loudspeakers_float[i] *= m_loudspeakers_float[i];
+        cblas_scopy(m_number_of_channels, inputs, 1, m_channels_float, 1);
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
+            m_channels_float[i] *= m_channels_float[i];
 
-        energySum = cblas_sasum(m_number_of_loudspeakers, m_loudspeakers_float, 1);
-        energyAbscissa = cblas_sdot(m_number_of_loudspeakers, m_loudspeakers_float, 1, m_loudspeakers_abscissa_float, 1);
-        energyOrdinate = cblas_sdot(m_number_of_loudspeakers, m_loudspeakers_float, 1, m_loudspeakers_ordinate_float, 1);
-        energyElevation = cblas_sdot(m_number_of_loudspeakers, m_loudspeakers_float, 1, m_loudspeakers_height_float, 1);
+        energySum = cblas_sasum(m_number_of_channels, m_channels_float, 1);
+        energyAbscissa = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_abscissa_float, 1);
+        energyOrdinate = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_ordinate_float, 1);
+        energyElevation = cblas_sdot(m_number_of_channels, m_channels_float, 1, m_channels_height_float, 1);
 
         if(energySum)
         {
@@ -113,14 +113,14 @@ namespace Hoa3D
     {
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0., energyElevation = 0.;
 
-        cblas_dcopy(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_double, 1);
-        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
-            m_loudspeakers_double[i] *= m_loudspeakers_double[i];
+        cblas_dcopy(m_number_of_channels, inputs, 1, m_channels_double, 1);
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
+            m_channels_double[i] *= m_channels_double[i];
 
-        energySum = cblas_dasum(m_number_of_loudspeakers, m_loudspeakers_double, 1);
-        energyAbscissa = cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_abscissa_double, 1);
-        energyOrdinate = cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_ordinate_double, 1);
-        energyElevation = cblas_ddot(m_number_of_loudspeakers, m_loudspeakers_double, 1, m_loudspeakers_height_double, 1);
+        energySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
+        energyAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
+        energyOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
+        energyElevation = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_height_double, 1);
 
         if(energySum)
         {
@@ -150,14 +150,14 @@ namespace Hoa3D
 
     Vector::~Vector()
     {
-        delete [] m_loudspeakers_float;
-        delete [] m_loudspeakers_double;
-        delete [] m_loudspeakers_ordinate_float;
-        delete [] m_loudspeakers_ordinate_double;
-        delete [] m_loudspeakers_abscissa_float;
-        delete [] m_loudspeakers_abscissa_double;
-        delete [] m_loudspeakers_height_float;
-        delete [] m_loudspeakers_height_double;
+        delete [] m_channels_float;
+        delete [] m_channels_double;
+        delete [] m_channels_ordinate_float;
+        delete [] m_channels_ordinate_double;
+        delete [] m_channels_abscissa_float;
+        delete [] m_channels_abscissa_double;
+        delete [] m_channels_height_float;
+        delete [] m_channels_height_double;
     }
 }
 

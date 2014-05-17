@@ -13,8 +13,8 @@
 
 namespace Hoa3D
 {
-    //! The ambisonic multi-encoder with distance compensation.
-    /** The map is a multi Encoder with distance compensation. It uses intances of the Wider class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere.
+    //! The ambisonic multi-encoder with radius compensation.
+    /** The map is a multi Encoder with radius compensation. It uses intances of the Wider class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere.
      
         @see Encoder
      */
@@ -23,12 +23,14 @@ namespace Hoa3D
         
     private:
         
-        unsigned int        m_number_of_sources;
-        float*              m_harmonics_float;
-        double*             m_harmonics_double;
-        double*             m_gains;
-        std::vector<Encoder*>    m_encoders;
-        std::vector<Wider*>      m_widers;
+        unsigned int            m_number_of_sources;
+        float*                  m_harmonics_float;
+        double*                 m_harmonics_double;
+        double*                 m_gains;
+        std::vector<Encoder*>   m_encoders;
+        std::vector<Wider*>     m_widers;
+        bool*                   m_muted;
+        int						m_first_source;
         
     public:
         
@@ -51,7 +53,7 @@ namespace Hoa3D
             @param     index	The index of the source.
             @param     azimuth	The azimuth.
             @see       setElevation()
-            @see       setDistance()
+            @see       setRadius()
          */
         void setAzimuth(unsigned int index, const double azimuth);
         
@@ -61,19 +63,27 @@ namespace Hoa3D
             @param     index	The index of the source.
             @param     elevation The elevation.
             @see       setAzimuth()
-            @see       setDistance()
+            @see       setRadius()
          */
         void setElevation(unsigned int index, const double elevation);
         
-        //! This method set the diatnce of a source.
-        /**	The distance is between 0 and infinity. At 0, the source is in the center of the ambisonic sphere and at 1, the source is at the surface of the ambisonic sphere. Over 1, the source get away the ambisonic sphere. The index must be between 0 and the number of sources.
+        //! This method set the radius of a source.
+        /**	The radius is between 0 and infinity. At 0, the source is in the center of the ambisonic sphere and at 1, the source is at the surface of the ambisonic sphere. Over 1, the source get away the ambisonic sphere. The index must be between 0 and the number of sources.
          
             @param     index	The index of the source.
             @param     elevation The elevation.
             @see       setAzimuth()
             @see       setElevation()
          */
-        void setDistance(unsigned int index, const double distance);
+        void setRadius(unsigned int index, const double radius);
+        
+        //! This method mute or unmute a source.
+        /**	Mute or unmute a source with a boolean value. The index must be between 0 and the number of sources - 1.
+         
+            @param     index	The index of the source.
+            @param     muted	The mute state.
+         */
+        void setMute(const unsigned int index, const bool muted);
         
         //! This method retrieve the number of sources.
         /** Retrieve the number of sources.
@@ -82,16 +92,68 @@ namespace Hoa3D
          */
         unsigned int getNumberOfSources() const {return m_number_of_sources;};
         
-        //! This method performs the encoding with distance compensation with single precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        //! This method retrieve the azimuth of a source.
+        /** Retrieve the azimuth of a source.
+         
+         @param     index	The index of the source.
+         @return The azimuth of the source if the source exists, otherwise the function generates an error.
+         */
+        double getAzimuth(const unsigned int index) const
+        {
+            assert(index < m_number_of_sources);
+            return m_encoders[index]->getAzimuth();
+        }
+        
+        //! This method retrieve the elevation of a source.
+        /** Retrieve the elevation of a source.
+         
+         @param     index	The index of the source.
+         @return The elevation of the source if the source exists, otherwise the function generates an error.
+         */
+        double getElevation(const unsigned int index) const
+        {
+            assert(index < m_number_of_sources);
+            return m_encoders[index]->getElevation();
+        }
+		
+        //! This method retrieve the radius of a source.
+        /** Retrieve the radius of a source.
+         
+         @param     index	The index of the source.
+         @return The radius of the source if the source exists, otherwise the function generates an error.
+         */
+        double getRadius(const unsigned int index) const
+        {
+            assert(index < m_number_of_sources);
+            if(m_widers[index]->getWideningValue() < 1)
+                return m_widers[index]->getWideningValue();
+            else
+                return 1. / sqrt(m_gains[index]);
+        }
+        
+        //! This method retrieve the mute or unmute state of a source.
+        /**	Get the Mute state of a source.
+         
+         @param     index	The index of the source.
+         @return    The mute state of the source if the source exists, otherwise the function generates an error.
+         @see       setMute()
+         */
+        bool getMute(const unsigned int index, const bool muted) const
+        {
+            assert(index < m_number_of_sources);
+            return m_muted[index];
+        }
+        
+        //! This method performs the encoding with radius compensation with single precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the encoding with radius compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs  The inputs array.
             @param     outputs The outputs array.
          */
         void process(const float* inputs, float* outputs);
         
-        //! This method performs the encoding with distance compensation with double precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        //! This method performs the encoding with radius compensation with double precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the encoding with radius compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs  The inputs array.
             @param     outputs The outputs array.

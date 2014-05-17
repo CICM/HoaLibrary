@@ -66,6 +66,20 @@ namespace Hoa3D
             return m_normalization[index];
         };
         
+        /**	Retreive the azimuth of a source
+         */
+        double getAzimuth() const
+        {
+            return (double)m_azimuth * HOA_2PI / (double)(NUMBEROFCIRCLEPOINTS - 1);
+        };
+        
+        /**	Retreive the azimuth of a source
+         */
+        double getElevation() const
+        {
+            return (double)m_elevation * HOA_2PI / (double)(NUMBEROFCIRCLEPOINTS - 1);
+        };
+        
         //! This method performs the encoding with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          

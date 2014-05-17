@@ -406,25 +406,61 @@ namespace Hoa
 	{
 		return sqrt(x*x + y*y);
 	}
-
-	//! The azimuth converter function.
+    
+    //! The azimuth converter function.
     /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
-
+     
 	 @param     x		The abscissa value.
 	 @param     y		The ordinate value.
 	 @return    The azimuth value.
-
+     
 	 @see    radius
      */
 	inline double azimuth(const double x, const double y)
 	{
 		return atan2(y, x) - HOA_PI2;
 	}
-
-    inline double distance(const double x1, const double y1, const double x2, const double y2)
+    
+    inline double abscissa(const double radius, const double phi, const double theta)
+	{
+		return radius * cos(phi - HOA_PI2) * cos(theta);
+	}
+    
+    inline double ordinate(const double radius, const double phi, const double theta)
+	{
+		return radius * sin(phi - HOA_PI2) * cos(theta);
+	}
+    
+    inline double height(const double radius, const double phi, const double theta)
+	{
+		return radius * sin(theta);
+	}
+    
+    inline double radius(const double x, const double y, const double z)
+	{
+		return sqrt(x*x + y*y + z*z);
+	}
+    
+    inline double azimuth(const double x, const double y, const double z)
+	{
+		return atan2(y, x) - HOA_PI2;
+	}
+    
+    inline double elevation(const double x, const double y, const double z)
+	{
+		return acos(z/ radius(x, y, z));
+	}
+    
+    inline double distance(double x1, double y1, double x2, double y2)
 	{
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
 	}
+    
+    inline double distance(double x1, double y1, double z1, double x2, double y2, double z2)
+	{
+		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2) + (z1-z2) * (z1-z2));
+	}
+    
 
 	inline double distance_radian(double angle1, double angle2)
     {

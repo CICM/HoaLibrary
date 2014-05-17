@@ -21,7 +21,7 @@ namespace Hoa3D
         unsigned int    m_vector_size;
         unsigned int    m_number_of_rows;
         unsigned int    m_number_of_columns;
-        double*         m_loudspeakers_peaks;
+        double*         m_channels_peaks;
         unsigned int*   m_matrix;
     public:
         
@@ -30,7 +30,7 @@ namespace Hoa3D
          
             @param     order	The order.
          */
-        Meter(unsigned int numberOfLoudspeakers, unsigned int numberOfRows, unsigned int numberOfColumns);
+        Meter(unsigned int numberOfChannels, unsigned int numberOfRows, unsigned int numberOfColumns);
         
         //! The meter destructor.
         /**	The meter destructor free the memory.
@@ -39,39 +39,39 @@ namespace Hoa3D
         
         void setVectorSize(unsigned int vectorSize);
         
-        //! Set the position of a loudspeaker.
-        /** Set the position of a loudspeaker with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of loudspeakers - 1.
+        //! Set the position of a channel.
+        /** Set the position of a channel with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
          
-         @param     index		The index of the loudspeaker.
+         @param     index		The index of the channel.
          @param     azimuth		The azimuth.
          @param     elevation	The elevation.
          */
-		void setLoudspeakerPosition(unsigned int index, double azimuth, double elevation);
+		void setChannelPosition(unsigned int index, double azimuth, double elevation);
         
-        inline double getLoudspeakerPeak(unsigned int index) const
+        inline double getChannelPeak(unsigned int index) const
         {
-            assert(index < m_number_of_loudspeakers);
-            return m_loudspeakers_peaks[index];
+            assert(index < m_number_of_channels);
+            return m_channels_peaks[index];
         }
         
-        inline double getLoudspeakerEnergy(unsigned int index) const
+        inline double getChannelEnergy(unsigned int index) const
         {
-            assert(index < m_number_of_loudspeakers);
-            return 20. * log10(m_loudspeakers_peaks[index]);
+            assert(index < m_number_of_channels);
+            return 20. * log10(m_channels_peaks[index]);
         }
         
         inline double getSpherePeak(unsigned int rowIndex, unsigned int columnIndex) const
         {
             assert(rowIndex < m_number_of_rows);
             assert(columnIndex < m_number_of_columns);
-            return getLoudspeakerPeak(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
+            return getChannelPeak(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
         }
         
         inline double getSphereEnergy(unsigned int rowIndex, unsigned int columnIndex) const
         {
             assert(rowIndex < m_number_of_rows);
             assert(columnIndex < m_number_of_columns);
-            return getLoudspeakerEnergy(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
+            return getChannelEnergy(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
         }
         
         //! Retrieve the number of rows.

@@ -416,7 +416,7 @@ t_pd_err offset_get(t_hoa_meter *x, void *attr, long *argc, t_atom **argv)
     argv[0] = (t_atom *)malloc(sizeof(t_atom));
     if(argv[0] && argc[0])
     {
-        atom_setfloat(argv[0], x->f_meter->getChannelsOffset());
+        atom_setfloat(argv[0], x->f_meter->getChannelsOffset() / HOA_2PI * 360.);
     }
     else
     {

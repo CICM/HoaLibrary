@@ -7,7 +7,6 @@
 #ifndef __DEF_HOA_3D_AMBISONIC__
 #define __DEF_HOA_3D_AMBISONIC__
 
-#include "Tools_3D.h"
 #include "../Hoa.h"
 //! The 3D ambisonic classes.
 /**

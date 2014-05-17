@@ -8,17 +8,17 @@
 
 namespace Hoa3D
 {
-    Meter::Meter(unsigned int numberOfLoudspeakers,  unsigned int numberOfRows, unsigned int numberOfColumns) : Planewaves(numberOfLoudspeakers)
+    Meter::Meter(unsigned int numberOfChannels,  unsigned int numberOfRows, unsigned int numberOfColumns) : Planewaves(numberOfChannels)
     {
         m_ramp                  = 0;
         m_vector_size           = 256;
         m_number_of_rows        = numberOfRows;
         m_number_of_columns     = numberOfColumns;
-        m_loudspeakers_peaks    = new double[m_number_of_loudspeakers];
+        m_channels_peaks    = new double[m_number_of_channels];
         m_matrix                = new unsigned int[m_number_of_rows * m_number_of_columns];
-        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_loudspeakers_peaks[i] = 0.;
+            m_channels_peaks[i] = 0.;
         }
         for(unsigned int i = 0; i < m_number_of_rows; i++)
         {
@@ -35,12 +35,12 @@ namespace Hoa3D
         m_ramp          = 0;
     }
     
-    void Meter::setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)
+    void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         double dist1, dist2;
         double x, y, z;
         double azi, ele;
-        Planewaves::setLoudspeakerPosition(index, azimuth, elevation);
+        Planewaves::setChannelPosition(index, azimuth, elevation);
         
         for(unsigned int i = 0; i < m_number_of_rows; i++)
         {
@@ -51,11 +51,11 @@ namespace Hoa3D
                 x = abscissa(1., azi, ele);
                 y = ordinate(1., azi, ele);
                 z = height(1., azi, ele);
-                dist1 = distance(x, y, z, getLoudspeakerAbscissa(0), getLoudspeakerOrdinate(0), getLoudspeakerHeight(0));
+                dist1 = distance(x, y, z, getChannelAbscissa(0), getChannelOrdinate(0), getChannelHeight(0));
                 m_matrix[i * m_number_of_columns + j] = 0;
-                for(unsigned int k = 1; k < m_number_of_loudspeakers; k++)
+                for(unsigned int k = 1; k < m_number_of_channels; k++)
                 {
-                    dist2 = distance(x, y, z, getLoudspeakerAbscissa(k), getLoudspeakerOrdinate(k), getLoudspeakerHeight(k));
+                    dist2 = distance(x, y, z, getChannelAbscissa(k), getChannelOrdinate(k), getChannelHeight(k));
                     if(dist2 <= dist1)
                     {
                         dist1 = dist2;
@@ -71,17 +71,17 @@ namespace Hoa3D
         if(m_ramp++ == m_vector_size)
         {
             m_ramp = 0;
-            for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+            for(unsigned int i = 0; i < m_number_of_channels; i++)
             {
-                m_loudspeakers_peaks[i] = fabs(inputs[i]);
+                m_channels_peaks[i] = fabs(inputs[i]);
             }
         }
         else
         {
-            for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+            for(unsigned int i = 0; i < m_number_of_channels; i++)
             {
-                if(fabs(inputs[i]) > m_loudspeakers_peaks[i])
-                    m_loudspeakers_peaks[i] = fabs(inputs[i]);
+                if(fabs(inputs[i]) > m_channels_peaks[i])
+                    m_channels_peaks[i] = fabs(inputs[i]);
             }
         }
     }
@@ -91,24 +91,24 @@ namespace Hoa3D
         if(m_ramp++ == m_vector_size)
         {
             m_ramp = 0;
-            for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+            for(unsigned int i = 0; i < m_number_of_channels; i++)
             {
-                m_loudspeakers_peaks[i] = fabs(inputs[i]);
+                m_channels_peaks[i] = fabs(inputs[i]);
             }
         }
         else
         {
-            for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
+            for(unsigned int i = 0; i < m_number_of_channels; i++)
             {
-                if(fabs(inputs[i]) > m_loudspeakers_peaks[i])
-                    m_loudspeakers_peaks[i] = fabs(inputs[i]);
+                if(fabs(inputs[i]) > m_channels_peaks[i])
+                    m_channels_peaks[i] = fabs(inputs[i]);
             }
         }
     }
     
     Meter::~Meter()
     {
-        delete [] m_loudspeakers_peaks;
+        delete [] m_channels_peaks;
         delete [] m_matrix;
     }
 }

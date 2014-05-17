@@ -1,51 +1,89 @@
-#N canvas 374 96 735 641 10;
-#X obj -28 -400 phasor~ -0.3;
-#X text -205 -396 source;
-#X text 6 -350 angle;
-#X msg -332 -239 \; pd dsp 1;
-#X msg -332 -204 \; pd dsp 0;
-#X obj -203 65 hoa.dac~ 1:16 -----------------------------;
-#X obj -8 -329 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#N canvas 262 110 594 535 10;
+#X obj -76 -587 phasor~ -0.3;
+#X text -205 -663 source;
+#X msg -332 -506 \; pd dsp 1;
+#X msg -332 -471 \; pd dsp 0;
+#X obj -8 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -203 -371 hoa.soundgrain;
-#X obj -203 -342 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -203 -638 hoa.soundgrain;
+#X obj -203 -609 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X obj 227 -334 hoa.connect;
-#X obj 227 -354 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 103 -655 hoa.connect;
+#X obj 103 -675 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text -375 -428 hoa.2d.encoder~ creates the circular harmonics of
-a signal depending on a given order and an angle.;
-#X obj -28 -375 hoa.pi~ 2;
-#X obj -380 -455 c.patcherinfos;
-#X obj -380 -472 loadbang;
-#X obj -380 -472 hoa.help.header;
-#X obj -250 86 hoa.help.pub;
-#X obj 36 -472 hoa.help.also;
-#X obj -203 -294 hoa.3d.encoder~ 3 -------------------------;
-#X obj -201 -231 hoa.2d.scope~ @size 225 225 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
-3 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
-0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
-#X obj -255 -326 sig~ 1;
-#X obj 75 -340 osc~ 0.1;
-#X connect 0 0 12 1;
-#X connect 7 0 8 0;
-#X connect 10 0 9 0;
-#X connect 12 0 6 0;
-#X connect 12 0 18 1;
-#X connect 13 0 15 0;
-#X connect 14 0 13 0;
-#X connect 18 0 19 0;
-#X connect 18 2 19 1;
-#X connect 18 3 19 2;
-#X connect 18 7 19 3;
-#X connect 18 8 19 4;
-#X connect 18 14 19 5;
-#X connect 18 15 19 6;
+#X obj -76 -562 hoa.pi~ 2;
+#X obj -380 -722 c.patcherinfos;
+#X obj -380 -739 loadbang;
+#X obj -380 -739 hoa.help.header;
+#X obj 36 -739 hoa.help.also;
+#X text -12 -562 azimuth;
+#X obj 132 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj -202 -266 hoa.dac~ 1:8 ------------------------------;
+#X text 128 -562 elevation;
+#X obj -203 -354 hoa.3d.decoder~ 3 8 -----------------------;
+#X obj -203 -511 hoa.3d.encoder~ 3 -------------------------;
+#X obj -203 -442 hoa.3d.optim~ 3 inPhase -------------------;
+#X text -375 -695 hoa.3d.encoder~ creates the spherical harmonics of
+a signal depending on a given order \, an azimuth and an elevation.
+;
+#X obj 52 -562 hoa.pi~ 1;
+#X obj 52 -588 hoa.tri~ 0.1;
+#X connect 0 0 9 1;
+#X connect 5 0 6 0;
+#X connect 6 0 19 0;
+#X connect 8 0 7 0;
+#X connect 9 0 4 0;
+#X connect 9 0 19 1;
+#X connect 10 0 12 0;
+#X connect 11 0 10 0;
+#X connect 18 0 16 0;
+#X connect 18 1 16 1;
+#X connect 18 2 16 2;
+#X connect 18 3 16 3;
+#X connect 18 4 16 4;
+#X connect 18 5 16 5;
+#X connect 18 6 16 6;
+#X connect 18 7 16 7;
+#X connect 19 0 20 0;
+#X connect 19 1 20 1;
+#X connect 19 2 20 2;
+#X connect 19 3 20 3;
+#X connect 19 4 20 4;
+#X connect 19 5 20 5;
+#X connect 19 6 20 6;
+#X connect 19 7 20 7;
+#X connect 19 8 20 8;
+#X connect 19 9 20 9;
+#X connect 19 10 20 10;
+#X connect 19 11 20 11;
+#X connect 19 12 20 12;
+#X connect 19 13 20 13;
+#X connect 19 14 20 14;
+#X connect 19 15 20 15;
 #X connect 20 0 18 0;
-#X connect 21 0 18 2;
-#X coords 0 641 1 640 100 60 0;
+#X connect 20 1 18 1;
+#X connect 20 2 18 2;
+#X connect 20 3 18 3;
+#X connect 20 4 18 4;
+#X connect 20 5 18 5;
+#X connect 20 6 18 6;
+#X connect 20 7 18 7;
+#X connect 20 8 18 8;
+#X connect 20 9 18 9;
+#X connect 20 10 18 10;
+#X connect 20 11 18 11;
+#X connect 20 12 18 12;
+#X connect 20 13 18 13;
+#X connect 20 14 18 14;
+#X connect 20 15 18 15;
+#X connect 22 0 15 0;
+#X connect 22 0 19 2;
+#X connect 23 0 22 1;
+#X coords 0 535 1 534 100 60 0;
