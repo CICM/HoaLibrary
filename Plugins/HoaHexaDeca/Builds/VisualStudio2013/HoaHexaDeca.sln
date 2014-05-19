@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{BBB3EE1B-2AFF-9C3F-D1CE-2E280E12FBA2}") = "HoaHexaDeca", "HoaHexaDeca.vcxproj", "{3C53E05B-4854-43E1-88E3-4CC51E1E866E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Debug|Win32.Build.0 = Debug|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Release|Win32.ActiveCfg = Release|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

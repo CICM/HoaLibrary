@@ -14,12 +14,14 @@
 #ifndef __JUCE_APPCONFIG_WASB9K__
 #define __JUCE_APPCONFIG_WASB9K__
 
-#ifndef  HoaPlugin_Name
-#define HoaPlugin_Name                   "OCTO"
-#endif
-
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
+
+#ifndef  HoaPlugin_Name
+#define HoaPlugin_Name                   "OCTO"
+#define HoaPlugin_Path                   "..\HoaOcto\Source\PluginProcessor.h"
+#define HOA_OCTO
+#endif
 
 #define BUILD_AU_CARBON_UI 0
 

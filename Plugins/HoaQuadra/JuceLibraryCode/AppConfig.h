@@ -19,6 +19,8 @@
 
 #ifndef  HoaPlugin_Name
 #define HoaPlugin_Name                   "QUADRA"
+#define HoaPlugin_Path                   "..\HoaQuadra\Source\PluginProcessor.h"
+#define HOA_QUADRA
 #endif
 
 #define BUILD_AU_CARBON_UI 0
