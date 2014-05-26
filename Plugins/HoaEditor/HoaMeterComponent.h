@@ -9,7 +9,34 @@
 
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
+
+#ifdef __APPLE__
+
+#include "PluginProcessor.h"
+
+#elif _WINDOWS
+
+#ifdef HOA_QUADRA
 #include "..\HoaQuadra\Source\PluginProcessor.h"
+#endif
+#ifdef HOA_OCTO
+#include "..\HoaOcto\Source\PluginProcessor.h"
+#endif
+#ifdef HOA_BINAURAL
+#include "..\HoaBinaural\Source\PluginProcessor.h"
+#endif
+#ifdef HOA_FIVEDOTONE
+#include "..\HoaFiveDotOne\Source\PluginProcessor.h"
+#endif
+#ifdef HOA_HEXA
+#include "..\HoaHexa\Source\PluginProcessor.h"
+#endif
+#ifdef HOA_HEXADECA
+#include "..\HoaHexaDeca\Source\PluginProcessor.h"
+#endif
+
+#endif
+
 
 class HoaMeterComponent : public Component, public Timer
 {

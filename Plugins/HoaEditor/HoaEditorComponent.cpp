@@ -4,7 +4,6 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "..\HoaQuadra\Source\PluginProcessor.h"
 #include "HoaEditorComponent.h"
 
 
