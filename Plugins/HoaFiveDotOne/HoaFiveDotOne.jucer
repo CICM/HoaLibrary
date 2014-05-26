@@ -119,6 +119,30 @@
         <MODULEPATH id="juce_audio_formats" path="../../ThirdParty/JuceModules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <VS2013 targetFolder="Builds/VisualStudio2013" vstFolder="../../ThirdParty/Vst3SDK/"
+            externalLibraries="libgslcblas.lib">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="HoaFiveDotOne" headerPath="..\..\..\..\..\GSL-1.13\include\gsl"
+                       libraryPath="..\..\..\..\..\GSL-1.13\bin"/>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="1" targetName="HoaFiveDotOne" headerPath="..\..\..\..\..\GSL-1.13\include\gsl"
+                       libraryPath="..\..\..\..\..\GSL-1.13\bin"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_graphics" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_events" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_data_structures" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_core" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../ThirdParty/JuceModules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../ThirdParty/JuceModules"/>
+      </MODULEPATHS>
+    </VS2013>
   </EXPORTFORMATS>
   <MODULES>
     <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>

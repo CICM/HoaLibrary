@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{B45C29FB-1213-B3DC-8CFE-EE1CB2E0B3BA}") = "HoaOcto", "HoaOcto.vcxproj", "{3C53E05B-4854-43E1-88E3-4CC51E1E866E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Debug|Win32.Build.0 = Debug|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Release|Win32.ActiveCfg = Release|Win32
+		{3C53E05B-4854-43E1-88E3-4CC51E1E866E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

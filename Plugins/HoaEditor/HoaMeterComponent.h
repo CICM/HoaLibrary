@@ -9,7 +9,7 @@
 
 #include <JuceHeader.h>
 #include "../../../Sources/Hoa2D/Hoa2D.h"
-#include "PluginProcessor.h"
+#include "..\HoaQuadra\Source\PluginProcessor.h"
 
 class HoaMeterComponent : public Component, public Timer
 {

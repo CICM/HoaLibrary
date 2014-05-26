@@ -14,12 +14,14 @@
 #ifndef __JUCE_APPCONFIG_WASB9K__
 #define __JUCE_APPCONFIG_WASB9K__
 
-#ifndef  HoaPlugin_Name
-#define HoaPlugin_Name                   "BINAURAL"
-#endif
-
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
+
+#ifndef  HoaPlugin_Name
+#define HoaPlugin_Name                   "BINAURAL"
+#define HoaPlugin_Path                   "..\HoaBinaural\Source\PluginProcessor.h"
+#define HOA_BINAURAL
+#endif
 
 #define BUILD_AU_CARBON_UI 0
 
@@ -195,7 +197,7 @@
  #define JucePlugin_Build_AAX              0
 #endif
 #ifndef  JucePlugin_Name
-#define JucePlugin_Name                   "HoaBinaural"
+ #define JucePlugin_Name                   "HoaBinaural"
 #endif
 #ifndef  JucePlugin_Desc
  #define JucePlugin_Desc                   "Binaural spatializer"
