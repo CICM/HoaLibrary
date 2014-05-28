@@ -11,6 +11,13 @@
 #include "../../../Sources/Hoa2D/Hoa2D.h"
 #include "HoaMapComponent.h"
 #include "HoaMeterComponent.h"
+
+#ifdef __APPLE__
+
+#include "PluginProcessor.h"
+
+#elif _WINDOWS
+
 #ifdef HOA_QUADRA
 #include "..\HoaQuadra\Source\PluginProcessor.h"
 #endif
@@ -29,6 +36,10 @@
 #ifdef HOA_HEXADECA
 #include "..\HoaHexaDeca\Source\PluginProcessor.h"
 #endif
+
+#endif
+
+
 
 
 class HoaLabel : public Label
