@@ -70,7 +70,6 @@ int C74_EXPORT main(void)
 	
 	// @method signal @digest Signal to encode / azimuth of the encoding in radians.
 	// @description In the left inlet, the signal to encode. In The right inlet : set the azimuth of the encoding in radians
-	// @marg 0 @name encoding-signal @optional 0 @type signal
 	class_addmethod(c, (method)hoa_encoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_encoder_assist,      "assist",	A_CANT, 0);
 	

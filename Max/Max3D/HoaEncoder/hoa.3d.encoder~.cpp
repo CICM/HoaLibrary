@@ -1,8 +1,30 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
-// For information on usage and redistribution, and for a DISCLAIMER OF ALL
-// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
-*/
+ // Copyright (c) 2012-2013 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+ // For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+ */
+
+/**
+ @file      hoa.3d.encoder~.cpp
+ @name      hoa.3d.encoder~
+ @realname  hoa.3d.encoder~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ An ambisonic 3d encoder.
+ 
+ @description
+ <o>hoa.3d.encoder~</o> encodes a signal into the spherical harmonics domain depending on a given order of decomposition, an azimuth and an elevation value given in radians
+ 
+ @discussion
+ <o>hoa.3d.encoder~</o> encodes a signal into the spherical harmonics domain depending on a given order of decomposition, an azimuth and an elevation value given in radians
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.encoder~, hoa.3d.decoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.scope~, hoa.3d.wider~, hoa.pi, hoa.pi~
+ */
 
 #include "../Hoa3D.max.h"
 
@@ -39,8 +61,22 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+	// @method int @digest Set the azimuth or the elevation of the encoding in radians (between 0 and 2π)
+	// In the second inlet : The <m>float</m> method sets the azimuth of the encoding.
+	// In the third inlet : The <m>float</m> method the elevation of the encoding.
+	// @marg 0 @name azimuth/elevation @optional 0 @type float
 	class_addmethod(c, (method)hoa_encoder_float,		"float",	A_FLOAT, 0);
+	
+	// @method int @digest Set the azimuth or the elevation of the encoding in radians (between 0 and 2π)
+	// In the second inlet : The <m>int</m> method sets the azimuth of the encoding.
+	// In the third inlet : The <m>int</m> method the elevation of the encoding.
+	// @marg 0 @name azimuth/elevation @optional 0 @type int
 	class_addmethod(c, (method)hoa_encoder_int,         "int",		A_LONG, 0);
+	
+	// @method signal @digest Signal to encode or azimuth / elevation of the encoding in radians.
+	// @description In the left inlet, the signal to encode.
+	// In the second inlet : set the azimuth of the encoding in radians
+	// In the third inlet : set the elevation of the encoding in radians
 	class_addmethod(c, (method)hoa_encoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_encoder_assist,      "assist",	A_CANT, 0);
 	
@@ -53,6 +89,9 @@ int C74_EXPORT main(void)
 
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
+	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
+	// @description First argument is the ambisonic order of decomposition.
+	
 	t_hoa_encoder *x = NULL;
 	int	order = 1;
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);

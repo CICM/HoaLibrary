@@ -76,7 +76,6 @@ int C74_EXPORT main(void)
     
     // @method signal @digest Array of circular harmonic signals to decode for an array of loudspeakers
 	// @description Array of circular harmonic signals to decode for an array of loudspeakers
-	// @marg 0 @name encoding-signal @optional 0 @type signal
 	class_addmethod(c, (method)hoa_decoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_decoder_assist,		"assist",	A_CANT, 0);
     
@@ -117,7 +116,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT          (c, "offset", 0, "0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
     CLASS_ATTR_SAVE             (c, "offset", 0);
-    // @description The number of Channels. In <b>ambisonic</b> <m>mode</m>, the number of channels must be equal or higher to the number of harmonics : (order *2 + 1), (default : order * 2 + 2).
+    // @description The offset of channels, in degrees between 0. and 360.
     
     CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr, f_attr, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Planewaves");
@@ -125,7 +124,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "angles", angles_get, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "4");
 	CLASS_ATTR_SAVE             (c, "angles", 0);
-    // @description Angles of each channel. The angles of channel are only settable in <b>irregular</b> <m>mode</m>. Each angle are in degrees and is wrapped between 0. and 360. So you can also set an angle with a negative value. ex : angles for a 5.1 loudspeakers restitution system can be setted either by the "angles 0 30 110 250 330" or by "angles 0 30 110 -110 -30".
+    // @description Angles of each channels. The angles of channels are only settable in <b>irregular</b> <m>mode</m>. Each angle are in degrees and is wrapped between 0. and 360. So you can also set an angle with a negative value. ex : angles for a 5.1 loudspeakers restitution system can be setted either by the "angles 0 30 110 250 330" or by "angles 0 30 110 -110 -30".
     
     CLASS_ATTR_SYM              (c, "pinna", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "pinna", 0, "Planewaves");
@@ -316,6 +315,7 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 	{
         if(atom_getsym(argv) == hoa_sym_ambisonic && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Regular)
         {
+            //short dspstate = dsp_setloadupdate(true);
             object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Regular);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
@@ -326,6 +326,7 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 		}
         else if(atom_getsym(argv) == hoa_sym_irregular && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Irregular)
         {
+            //short dspstate = dsp_setloadupdate(true);
             object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Irregular);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 0);
@@ -335,7 +336,8 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         }
         else if(atom_getsym(argv) == hoa_sym_binaural && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Binaural)
         {
-            object_method(gensym("dsp")->s_thing, hoa_sym_stop);
+            //short dspstate = dsp_setloadupdate(true);
+            //object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Binaural);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_channels, 1);

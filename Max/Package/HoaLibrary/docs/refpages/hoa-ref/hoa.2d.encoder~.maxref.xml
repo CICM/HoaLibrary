@@ -55,7 +55,7 @@
 			</description>
 		</method>
 		<method name="signal">
-			<arg name="encoding-signal" optional="0" type="signal" />
+			<arglist />
 			<digest>
 				Signal to encode / azimuth of the encoding in radians.
 			</digest>

@@ -62,7 +62,6 @@ extern "C" void setup_hoa0x2e3d0x2edecoder_tilde(void)
 
 void *hoa_decoder_3D_new(t_symbol *s, long argc, t_atom *argv)
 {
-    
     t_hoa_decoder_3D *x = NULL;
     t_binbuf *d;
 	int	order = 1;

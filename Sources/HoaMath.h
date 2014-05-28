@@ -448,7 +448,8 @@ namespace Hoa
     
     inline double elevation(const double x, const double y, const double z)
 	{
-		return acos(z/ radius(x, y, z));
+		if (z == 0. || (x == 0 && y == 0 && z == 0)) return 0;
+		return acos(z / radius(x, y, z));
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)

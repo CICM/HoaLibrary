@@ -81,8 +81,7 @@ int C74_EXPORT main(void)
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Sources signals to encode.
-	// @description If you have only one source, the first signal inlet is for the source to encode, the two others ones are to control source position with signal rate. if you have more than one single source to spatialize, all of the inputs represent a signal to encode and coordonates are given with messages.
-	// @marg 0 @name encoding-signals @optional 0 @type signal
+	// @description If you have a single source, the first signal inlet is for the source to encode, the two other ones are to control source position at signal rate. if you have more than one single source to spatialize, all of the inputs represent a signal to encode and coordonates are given with messages.
 	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
 	
 	// @method float @digest Set single source coordinate with messages depending on the mode.
@@ -133,7 +132,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	
 	// @arg 1 @name number-of-sources @optional 0 @type int @digest The number of sources
 	// @description Second argument is the number of sources to spatialize.
-	// If there is a single source, <o>hoa.2d.map~</o> object owns 3 inlets, the first one correspond to the signal to encode, the two other ones are usefull  to control source position at signal rate. If you have more than one source to spatialize, the number of signal inlets will equal to the number of sources to encode, and coordinates will be given with messages.
+	// If there is a single source, <o>hoa.2d.map~</o> object owns 3 inlets, the first one correspond to the signal to encode, the two other ones are usefull  to control source position at signal rate. If you have more than one source to spatialize, the number of signal inlets will be equal to the number of sources to encode, and coordinates will be given with list messages.
 	
 	t_hoa_map *x = NULL;
 	int	order = 1;

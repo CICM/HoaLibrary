@@ -95,7 +95,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 177.625, 220.0, 117.0, 20.0 ],
-									"presentation_rect" : [ 179.25, 207.0, 0.0, 0.0 ],
 									"text" : "Azimuth (0 -  2*π) ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -112,7 +111,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 177.625, 220.0, 117.0, 20.0 ],
-									"presentation_rect" : [ 179.25, 207.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -127,7 +125,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 318.25, 220.0, 117.0, 20.0 ],
-									"presentation_rect" : [ 313.25, 176.0, 0.0, 0.0 ],
 									"text" : "Elevation (0 -  2*π) ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -144,7 +141,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 318.25, 220.0, 117.0, 20.0 ],
-									"presentation_rect" : [ 313.25, 176.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -160,7 +156,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 392.25, 248.0, 58.0, 19.0 ],
-									"presentation_rect" : [ 554.25, 265.0, 0.0, 0.0 ],
 									"text" : "loadbang"
 								}
 
@@ -175,7 +170,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
 									"patching_rect" : [ 392.25, 278.0, 55.0, 19.0 ],
-									"presentation_rect" : [ 554.25, 295.0, 0.0, 0.0 ],
 									"saved_object_attributes" : 									{
 										"outonload" : 1
 									}
@@ -194,8 +188,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 318.25, 248.0, 50.0, 19.0 ],
-									"presentation_rect" : [ 480.25, 265.0, 0.0, 0.0 ]
+									"patching_rect" : [ 318.25, 248.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -209,7 +202,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 318.25, 308.0, 93.0, 19.0 ],
-									"presentation_rect" : [ 480.25, 325.0, 0.0, 0.0 ],
 									"text" : "*~"
 								}
 
@@ -224,7 +216,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 318.25, 278.0, 72.0, 19.0 ],
-									"presentation_rect" : [ 480.25, 295.0, 0.0, 0.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
@@ -254,7 +245,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
 									"patching_rect" : [ 251.625, 278.0, 55.0, 19.0 ],
-									"presentation_rect" : [ 184.75, 249.0, 0.0, 0.0 ],
 									"saved_object_attributes" : 									{
 										"outonload" : 1
 									}
@@ -273,8 +263,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 177.625, 248.0, 50.0, 19.0 ],
-									"presentation_rect" : [ 110.75, 219.0, 0.0, 0.0 ]
+									"patching_rect" : [ 177.625, 248.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -288,7 +277,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 177.625, 308.0, 93.0, 19.0 ],
-									"presentation_rect" : [ 110.75, 279.0, 0.0, 0.0 ],
 									"text" : "*~"
 								}
 
@@ -303,7 +291,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 177.625, 278.0, 72.0, 19.0 ],
-									"presentation_rect" : [ 110.75, 249.0, 0.0, 0.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
@@ -356,6 +343,10 @@
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 37.0, 561.0, 300.25, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : "ambisonic"
+									}
+,
 									"text" : "hoa.3d.decoder~ 1 8"
 								}
 
@@ -388,7 +379,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 515.25, 278.0, 212.0, 33.0 ],
+									"patching_rect" : [ 515.25, 278.0, 213.0, 33.0 ],
 									"text" : "Azimuth and elevation can be set with signal or float values.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
