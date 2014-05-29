@@ -167,7 +167,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 275.25, 308.0, 62.0, 19.0 ],
-									"presentation_rect" : [ 457.625, 306.0, 0.0, 0.0 ],
 									"text" : "hoa.pi~ 2."
 								}
 
@@ -182,7 +181,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 318.25, 278.0, 72.0, 19.0 ],
-									"presentation_rect" : [ 500.625, 276.0, 0.0, 0.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
@@ -197,7 +195,6 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 37.0, 405.25, 336.666656, 19.0 ],
-									"presentation_rect" : [ 747.0, 355.25, 0.0, 0.0 ],
 									"text" : "hoa.3d.wider~ 1"
 								}
 
@@ -226,7 +223,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 199.125, 220.0, 104.0, 20.0 ],
+									"patching_rect" : [ 199.125, 220.0, 107.0, 20.0 ],
 									"text" : "Azimuth (0 -  2*π) ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -382,6 +379,10 @@
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 37.0, 561.0, 336.666656, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : "ambisonic"
+									}
+,
 									"text" : "hoa.3d.decoder~ 1 8"
 								}
 

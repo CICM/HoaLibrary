@@ -62,7 +62,7 @@ int C74_EXPORT main(void)
     hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Array of circular harmonic signals to be processed, widening value.
-	// @description Array of circular harmonic signals to be processes. Set the widening value in the last inlet at signal rate. The widening value is clipped between 0. and 1.
+	// @description Array of circular harmonic signals to be processed. Set the widening value in the last inlet at signal rate. The widening value is clipped between 0. and 1.
 	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_wider_assist,	"assist",	A_CANT, 0);
 	
