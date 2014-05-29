@@ -14,12 +14,13 @@
 #ifndef __JUCE_APPCONFIG_WASB9K__
 #define __JUCE_APPCONFIG_WASB9K__
 
-#ifndef  HoaPlugin_Name
-#define HoaPlugin_Name                   "HEXADECA"
-#endif
-
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
+#ifndef  HoaPlugin_Name
+#define HoaPlugin_Name                   "HEXADECA"
+#define HoaPlugin_Path                   "..\HoaHexaDeca\Source\PluginProcessor.h"
+#define HOA_HEXADECA
+#endif
 
 #define BUILD_AU_CARBON_UI 0
 

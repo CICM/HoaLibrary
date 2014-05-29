@@ -240,7 +240,7 @@ void HoaMapComponent::draw_sources(Graphics& g)
             
             g.setFont(11);
             g.setColour(Colours::black);
-            g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
+            g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), false);
         }
     }
 }

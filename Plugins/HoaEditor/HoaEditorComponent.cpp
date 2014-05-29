@@ -4,7 +4,6 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "PluginProcessor.h"
 #include "HoaEditorComponent.h"
 
 

@@ -23,7 +23,7 @@ HoaToolsAudioProcessor::HoaToolsAudioProcessor()
     m_meter     = new Meter(NCHANNEL);
     m_lines     = new PolarLines(16);
     m_sources->setZoom(0.5);
-    m_lines->setRamp(4410);
+    m_lines->setRamp(1000);
     m_meter->setChannelsOffset(0.5 * HOA_PI);
     m_optim->setMode(Hoa2D::Optim::InPhase);
     

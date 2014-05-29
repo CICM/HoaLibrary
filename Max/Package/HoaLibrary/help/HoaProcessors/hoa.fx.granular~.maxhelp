@@ -407,14 +407,15 @@
 								"box" : 								{
 									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-21",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "list" ],
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "int" ],
 									"parameter_enable" : 1,
 									"patching_rect" : [ 421.0, 419.5, 121.0, 121.0 ],
-									"ptcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "hoa.2d.space[3]",
@@ -450,14 +451,15 @@
 								"box" : 								{
 									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-19",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "list" ],
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "int" ],
 									"parameter_enable" : 1,
 									"patching_rect" : [ 257.0, 419.5, 121.0, 121.0 ],
-									"ptcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "hoa.2d.space",
@@ -493,15 +495,16 @@
 								"box" : 								{
 									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-17",
 									"maxclass" : "hoa.2d.space",
 									"minmax" : [ 0.0, 100.0 ],
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "list" ],
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "int" ],
 									"parameter_enable" : 1,
 									"patching_rect" : [ 421.0, 222.5, 121.0, 121.0 ],
-									"ptcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "hoa.2d.space[2]",
@@ -537,15 +540,16 @@
 								"box" : 								{
 									"channels" : 8,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-8",
 									"maxclass" : "hoa.2d.space",
 									"minmax" : [ 0.0, 100.0 ],
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "list" ],
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "int" ],
 									"parameter_enable" : 1,
 									"patching_rect" : [ 257.0, 222.5, 121.0, 121.0 ],
-									"ptcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "hoa.2d.space[1]",
@@ -3286,10 +3290,10 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-18::obj-21" : [ "hoa.2d.space[3]", "hoa.2d.space[3]", 0 ],
+			"obj-18::obj-8" : [ "hoa.2d.space[1]", "hoa.2d.space[1]", 0 ],
 			"obj-18::obj-17" : [ "hoa.2d.space[2]", "hoa.2d.space[2]", 0 ],
 			"obj-18::obj-19" : [ "hoa.2d.space", "hoa.2d.space", 0 ],
-			"obj-18::obj-8" : [ "hoa.2d.space[1]", "hoa.2d.space[1]", 0 ]
+			"obj-18::obj-21" : [ "hoa.2d.space[3]", "hoa.2d.space[3]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

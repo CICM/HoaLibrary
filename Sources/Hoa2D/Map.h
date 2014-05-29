@@ -119,7 +119,7 @@ namespace Hoa2D
             @return    The mute state of the source if the source exists, otherwise the function generates an error.
             @see       setMute()
          */
-        bool getMute(const unsigned int index, const bool muted) const
+        bool getMute(const unsigned int index) const
         {
             assert(index < m_number_of_sources);
             return m_muted[index];

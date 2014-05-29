@@ -32,6 +32,7 @@ typedef struct  _hoa_space
 {
 	t_jbox		j_box;
 	void*		f_out;
+	void*		f_out_mouse;
     long        f_number_of_channels;
     double      f_minmax[2];
 	long		f_floatoutput;
@@ -58,7 +59,6 @@ typedef struct  _hoa_space
     double      f_radius;
 	
 	long		f_last_mouse_index;
-    
 } t_hoa_space;
 
 void *hoa_space_new(t_symbol *s, int argc, t_atom *argv);
@@ -280,8 +280,9 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_channel_values = new double[MAX_CHANNELS];
     x->f_channel_refs   = new double[MAX_CHANNELS];
     x->f_channel_radius = new double[MAX_CHANNELS];
+	x->f_out_mouse		= intout(x);
     x->f_out			= listout(x);
-	
+
 	x->f_last_mouse_index = -1;
 
 	attr_dictionary_process(x, d);
@@ -314,8 +315,6 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 			if (ac > 1 && (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT))
 			{
 				x->f_channel_values[index] = clip_minmax(atom_getfloat(av+1), x->f_minmax[0], x->f_minmax[1]);
-				if (!x->f_floatoutput)
-					x->f_channel_values[index] = (int) x->f_channel_values[index];
 			}
 			
 		}
@@ -326,8 +325,6 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 				if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
 				{
 					x->f_channel_values[i] = clip_minmax(atom_getfloat(av+i), x->f_minmax[0], x->f_minmax[1]);
-					if (!x->f_floatoutput)
-						x->f_channel_values[i] = (int) x->f_channel_values[i];
 				}
 			}
 		}
@@ -357,7 +354,10 @@ void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
 	}
 	else
 	{
-        sprintf(s,"(list) Channels coefficients");
+		if (a == 0)
+			sprintf(s,"(list) Channels coefficients");
+		else if (a == 1)
+			sprintf(s,"(int) Mouseover index");
 	}
 }
 
@@ -586,7 +586,12 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
         ratio = x->f_radius / 5.;
 		
         for(i = 0; i < x->f_number_of_channels; i++)
-			x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+		{
+			if(x->f_floatoutput)
+				x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+			else
+				x->f_channel_radius[i] = ((int)x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+		}
         
         abscissa = Hoa::abscissa(x->f_channel_radius[0], 0);
         ordinate = Hoa::ordinate(x->f_channel_radius[0], 0);
@@ -631,7 +636,11 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
         
         for(i = 0; i < x->f_number_of_channels; i++)
 		{
-			radius = x->f_channel_radius[i] - 3.5;
+			if(x->f_floatoutput)
+				radius = x->f_channel_radius[i] - 3.5;
+			else
+				radius = x->f_channel_radius[i] - 3.5;
+			
             angle  = (double)(i + 1.) / (double)x->f_number_of_channels * HOA_2PI;
             angle -= HOA_2PI / (double)x->f_number_of_channels;
             abscissa = Hoa::abscissa(radius, angle);
@@ -671,7 +680,10 @@ void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
 		
         for(i = 0; i < x->f_number_of_channels; i++)
 		{
-			x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+			if(x->f_floatoutput)
+				x->f_channel_radius[i] = (x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
+			else
+				x->f_channel_radius[i] = ((int)x->f_channel_values[i] - x->f_minmax[0]) / diff *  4 * ratio + ratio;
 			
 			angle1 = -(HOA_2PI / (double)x->f_number_of_channels) * 0.5;
 			angle2 =  (HOA_2PI / (double)x->f_number_of_channels) * 0.5;
@@ -749,6 +761,8 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     mouse.y = x->f_center * 2. - pt.y - x->f_center;
     double angle, radius;
 	
+	x->f_last_mouse_index = -1;
+	
 	angle   = wrap_twopi(azimuth(mouse.x, mouse.y) + (HOA_PI / (double)x->f_number_of_channels));
 	radius  = Hoa::radius(mouse.x, mouse.y);
 	x->f_last_mouse_index  = angle / HOA_2PI * x->f_number_of_channels;
@@ -759,6 +773,11 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_RESIZE_FOURWAY);
     else
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
+	
+	if (x->f_last_mouse_index >= 0)
+		outlet_int(x->f_out_mouse, x->f_last_mouse_index + 1);
+	else
+		outlet_int(x->f_out_mouse, -1);
     
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
@@ -769,6 +788,7 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
 void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	x->f_last_mouse_index = -1;
+	outlet_int(x->f_out_mouse, x->f_last_mouse_index);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
@@ -812,6 +832,8 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     mouse.x = pt.x - x->f_center;
     mouse.y = x->f_center * 2. - pt.y - x->f_center;
     double angle, radius, value, inc, mu;
+	
+	x->f_last_mouse_index = -1;
     
     if(x->f_mode == 1) // ctrl : rotation
     {
@@ -829,8 +851,14 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
             mu = (double)(angle - mu) / ((double)HOA_2PI / (double)x->f_number_of_channels);
             value = cosine_interpolation(x->f_channel_refs[index], x->f_channel_refs[index2], mu);
             x->f_channel_values[i] = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
-			if (!x->f_floatoutput)
-				x->f_channel_values[i] = (int) x->f_channel_values[i];
+			
+			if((x->f_snaptogrid || modifiers == 17) && x->f_grid)
+			{
+				double grid_step = (x->f_minmax[1] - x->f_minmax[0]) / (double)x->f_grid;
+				double div = (int)((x->f_channel_values[i] - x->f_minmax[0]) / grid_step);
+				double temp = grid_step * div + x->f_minmax[0];
+				x->f_channel_values[i] = temp;
+			}
         }
     }
     else if(x->f_mode == 2) // shift : gain
@@ -843,8 +871,13 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         for(int i = 0; i < x->f_number_of_channels; i++)
 		{
             x->f_channel_values[i] = clip_minmax(x->f_channel_refs[i] + inc, x->f_minmax[0], x->f_minmax[1]);
-			if (!x->f_floatoutput)
-				x->f_channel_values[i] = (int) x->f_channel_values[i];
+			if((x->f_snaptogrid || modifiers == 17) && x->f_grid)
+			{
+				double grid_step = (x->f_minmax[1] - x->f_minmax[0]) / (double)x->f_grid;
+				double div = (int)((x->f_channel_values[i] - x->f_minmax[0]) / grid_step);
+				double temp = grid_step * div + x->f_minmax[0];
+				x->f_channel_values[i] = temp;
+			}
 		}
     }
     else
@@ -855,22 +888,25 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         value   = (radius - (x->f_radius / 5.)) / (x->f_radius * 4. / 5.);
         value  *= (x->f_minmax[1] - x->f_minmax[0]);
         value  += x->f_minmax[0];
-        value   = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
+		value = clip_minmax(value, x->f_minmax[0], x->f_minmax[1]);
 		
-		if (x->f_snaptogrid || modifiers == 17)
+		if((x->f_snaptogrid || modifiers == 17) && x->f_grid)
 		{
-			double grid_step = safediv((x->f_minmax[1] - x->f_minmax[0]), x->f_grid);
-			int div = round(safediv(value, grid_step));
-			value = div * grid_step;
+			double grid_step = (x->f_minmax[1] - x->f_minmax[0]) / (double)x->f_grid;
+			double div = (int)((value - x->f_minmax[0]) / grid_step);
+			double temp = grid_step * div + x->f_minmax[0];
+			value = temp;
 		}
 		
 		x->f_channel_values[index] = value;
 		
-		if (!x->f_floatoutput)
-			x->f_channel_values[index] = round(x->f_channel_values[index]);
-		
 		x->f_last_mouse_index = index;
     }
+	
+	if (x->f_last_mouse_index >= 0)
+		outlet_int(x->f_out_mouse, x->f_last_mouse_index + 1);
+	else
+		outlet_int(x->f_out_mouse, -1);
     
 	object_notify(x, hoa_sym_modified, NULL);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
