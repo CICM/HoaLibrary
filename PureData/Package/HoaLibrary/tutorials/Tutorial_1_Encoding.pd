@@ -17,8 +17,8 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
 #X obj 554 269 sig~ 1;
 #X obj 773 293 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X text 4 144 For an order of decomposition 1 \, the sound field is
 represented by 3 circular harmonics. The gains of harmonics depends
 on the encoding angle :;

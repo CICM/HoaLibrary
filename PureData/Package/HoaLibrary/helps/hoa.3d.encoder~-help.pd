@@ -1,40 +1,40 @@
-#N canvas 262 110 594 535 10;
-#X obj -76 -587 phasor~ -0.3;
-#X text -205 -663 source;
-#X msg -332 -506 \; pd dsp 1;
-#X msg -332 -471 \; pd dsp 0;
-#X obj -8 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#N canvas 612 22 606 510 10;
+#X obj -76 -732 phasor~ -0.3;
+#X text -205 -808 source;
+#X msg -332 -651 \; pd dsp 1;
+#X msg -332 -616 \; pd dsp 0;
+#X obj -8 -681 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -203 -638 hoa.soundgrain;
-#X obj -203 -609 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -203 -783 hoa.soundgrain;
+#X obj -203 -754 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X obj 103 -655 hoa.connect;
-#X obj 103 -675 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 103 -800 hoa.connect;
+#X obj 103 -820 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -76 -562 hoa.pi~ 2;
-#X obj -380 -722 c.patcherinfos;
-#X obj -380 -739 loadbang;
-#X obj -380 -739 hoa.help.header;
-#X obj 36 -739 hoa.help.also;
-#X text -12 -562 azimuth;
-#X obj 132 -536 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -76 -707 hoa.pi~ 2;
+#X obj -380 -867 c.patcherinfos;
+#X obj -380 -884 loadbang;
+#X obj -380 -884 hoa.help.header;
+#X obj 36 -884 hoa.help.also;
+#X text -12 -707 azimuth;
+#X obj 132 -681 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -202 -266 hoa.dac~ 1:8 ------------------------------;
-#X text 128 -562 elevation;
-#X obj -203 -354 hoa.3d.decoder~ 3 8 -----------------------;
-#X obj -203 -511 hoa.3d.encoder~ 3 -------------------------;
-#X obj -203 -442 hoa.3d.optim~ 3 inPhase -------------------;
-#X text -375 -695 hoa.3d.encoder~ creates the spherical harmonics of
+#X obj -203 -411 hoa.dac~ 1:8 ------------------------------;
+#X text 128 -707 elevation;
+#X obj -203 -499 hoa.3d.decoder~ 3 8 -----------------------;
+#X obj -203 -656 hoa.3d.encoder~ 3 -------------------------;
+#X obj -203 -587 hoa.3d.optim~ 3 inPhase -------------------;
+#X text -375 -840 hoa.3d.encoder~ creates the spherical harmonics of
 a signal depending on a given order \, an azimuth and an elevation.
 ;
-#X obj 52 -562 hoa.pi~ 1;
-#X obj 52 -588 hoa.tri~ 0.1;
+#X obj 52 -707 hoa.pi~ 1;
+#X obj 52 -733 hoa.tri~ 0.1;
 #X connect 0 0 9 1;
 #X connect 5 0 6 0;
 #X connect 6 0 19 0;
@@ -86,4 +86,4 @@ a signal depending on a given order \, an azimuth and an elevation.
 #X connect 22 0 15 0;
 #X connect 22 0 19 2;
 #X connect 23 0 22 1;
-#X coords 0 535 1 534 100 60 0;
+#X coords 0 510 1 509 100 60 0;

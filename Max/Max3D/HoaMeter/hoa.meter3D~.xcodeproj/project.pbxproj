@@ -21,19 +21,7 @@
 		858F91982155E4AEEF9BCB24 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC80B730492768687A51E5B /* WebKit.framework */; };
 		8EED802133DF777E485B0B5D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B0C90E3E826AB1E6DD8E5D /* Carbon.framework */; };
 		8F716EF918B5225B000184D8 /* jucebox_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F716EF718B5225B000184D8 /* jucebox_wrapper.cpp */; };
-		8FC23BB618B7416C0085CBCA /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23B9E18B7416C0085CBCA /* Ambisonic.cpp */; };
-		8FC23BB718B7416C0085CBCA /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BA018B7416C0085CBCA /* Decoder.cpp */; };
-		8FC23BB818B7416C0085CBCA /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BA218B7416C0085CBCA /* Encoder.cpp */; };
-		8FC23BB918B7416C0085CBCA /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BA518B7416C0085CBCA /* Map.cpp */; };
-		8FC23BBA18B7416C0085CBCA /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BA718B7416C0085CBCA /* Meter.cpp */; };
-		8FC23BBB18B7416C0085CBCA /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BA918B7416C0085CBCA /* Optim.cpp */; };
-		8FC23BBC18B7416C0085CBCA /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BAB18B7416C0085CBCA /* Planewaves.cpp */; };
-		8FC23BBD18B7416C0085CBCA /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BAD18B7416C0085CBCA /* Rotate.cpp */; };
-		8FC23BBE18B7416C0085CBCA /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BAF18B7416C0085CBCA /* Scope.cpp */; };
-		8FC23BBF18B7416C0085CBCA /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BB218B7416C0085CBCA /* Vector.cpp */; };
-		8FC23BC018B7416C0085CBCA /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BB418B7416C0085CBCA /* Wider.cpp */; };
 		8FC23BC418B7499D0085CBCA /* hoa.meter3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BC318B7499D0085CBCA /* hoa.meter3D~.cpp */; };
-		8FC23BC718B77AFF0085CBCA /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC23BC518B77AFF0085CBCA /* hoa.max.cpp */; };
 		C9F4B1EEAE5FA4C3BF642D60 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62823803A07D640638ABF736 /* IOKit.framework */; };
 		E991E06EC9DC8E5BAB33163A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E31CEC2267C05AB95FDE6634 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -157,7 +145,6 @@
 		2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2C63E5CA18A7E11100B75E00 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		2CA89AF918ABBADE0001B9EC /* OpenGLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTools.h; sourceTree = "<group>"; };
 		2DEE934C8C26A2958EA0BD12 /* juce_TextLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_TextLayout.cpp; path = ../../ThirdParty/JuceModules/juce_graphics/fonts/juce_TextLayout.cpp; sourceTree = SOURCE_ROOT; };
 		2ED260B2B767947B0FDE5456 /* juce_MouseEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_MouseEvent.cpp; path = ../../ThirdParty/JuceModules/juce_gui_basics/mouse/juce_MouseEvent.cpp; sourceTree = SOURCE_ROOT; };
 		2EFAB58620F7F8D9E65BEEC3 /* juce_FileTreeComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_FileTreeComponent.h; path = ../../ThirdParty/JuceModules/juce_gui_basics/filebrowser/juce_FileTreeComponent.h; sourceTree = SOURCE_ROOT; };
@@ -418,33 +405,7 @@
 		8F716EF718B5225B000184D8 /* jucebox_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jucebox_wrapper.cpp; sourceTree = "<group>"; };
 		8F716EF818B5225B000184D8 /* jucebox_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jucebox_wrapper.h; sourceTree = "<group>"; };
 		8F9E2845B4B08A646553D135 /* juce_DropShadower.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_DropShadower.h; path = ../../ThirdParty/JuceModules/juce_gui_basics/misc/juce_DropShadower.h; sourceTree = SOURCE_ROOT; };
-		8FC23B9E18B7416C0085CBCA /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
-		8FC23B9F18B7416C0085CBCA /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8FC23BA018B7416C0085CBCA /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
-		8FC23BA118B7416C0085CBCA /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
-		8FC23BA218B7416C0085CBCA /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
-		8FC23BA318B7416C0085CBCA /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
-		8FC23BA418B7416C0085CBCA /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
-		8FC23BA518B7416C0085CBCA /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		8FC23BA618B7416C0085CBCA /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		8FC23BA718B7416C0085CBCA /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
-		8FC23BA818B7416C0085CBCA /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
-		8FC23BA918B7416C0085CBCA /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
-		8FC23BAA18B7416C0085CBCA /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
-		8FC23BAB18B7416C0085CBCA /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
-		8FC23BAC18B7416C0085CBCA /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
-		8FC23BAD18B7416C0085CBCA /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
-		8FC23BAE18B7416C0085CBCA /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
-		8FC23BAF18B7416C0085CBCA /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
-		8FC23BB018B7416C0085CBCA /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
-		8FC23BB118B7416C0085CBCA /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		8FC23BB218B7416C0085CBCA /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
-		8FC23BB318B7416C0085CBCA /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
-		8FC23BB418B7416C0085CBCA /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
-		8FC23BB518B7416C0085CBCA /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8FC23BC318B7499D0085CBCA /* hoa.meter3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.meter3D~.cpp"; sourceTree = "<group>"; };
-		8FC23BC518B77AFF0085CBCA /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../hoa.max.cpp; sourceTree = "<group>"; };
-		8FC23BC618B77AFF0085CBCA /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		8FC79DEA312DB2B452FA744C /* juce_win32_Windowing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_Windowing.cpp; path = ../../ThirdParty/JuceModules/juce_gui_basics/native/juce_win32_Windowing.cpp; sourceTree = SOURCE_ROOT; };
 		8FCC13363BB57F22A7285D8E /* juce_ios_Windowing.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_ios_Windowing.mm; path = ../../ThirdParty/JuceModules/juce_gui_basics/native/juce_ios_Windowing.mm; sourceTree = SOURCE_ROOT; };
 		905F0824AB39EC76EEB82365 /* juce_OwnedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_OwnedArray.h; path = ../../ThirdParty/JuceModules/juce_core/containers/juce_OwnedArray.h; sourceTree = SOURCE_ROOT; };
@@ -810,11 +771,8 @@
 			children = (
 				2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */,
 				8FC23BC318B7499D0085CBCA /* hoa.meter3D~.cpp */,
-				8FC23BC518B77AFF0085CBCA /* hoa.max.cpp */,
-				8FC23BC618B77AFF0085CBCA /* hoa.max.h */,
 				2CA89AF818ABBADE0001B9EC /* HoaOpenGL */,
 				8F716EF618B5225B000184D8 /* MaxJuceBox */,
-				8FC23B9D18B7416C0085CBCA /* Hoa3D */,
 				9280F1C95A8D150F0936AAD3 /* Juce Modules */,
 				319F1A3B9A3A30E8D21AC4A9 /* Juce Library Code */,
 				1F55EFEC721F6FF3CAC4178F /* Resources */,
@@ -1006,7 +964,6 @@
 		2CA89AF818ABBADE0001B9EC /* HoaOpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				2CA89AF918ABBADE0001B9EC /* OpenGLTools.h */,
 			);
 			name = HoaOpenGL;
 			path = ../../Sources/HoaOpenGL;
@@ -1459,38 +1416,6 @@
 			);
 			name = MaxJuceBox;
 			path = ../../MaxJuceBox;
-			sourceTree = "<group>";
-		};
-		8FC23B9D18B7416C0085CBCA /* Hoa3D */ = {
-			isa = PBXGroup;
-			children = (
-				8FC23B9E18B7416C0085CBCA /* Ambisonic.cpp */,
-				8FC23B9F18B7416C0085CBCA /* Ambisonic.h */,
-				8FC23BA018B7416C0085CBCA /* Decoder.cpp */,
-				8FC23BA118B7416C0085CBCA /* Decoder.h */,
-				8FC23BA218B7416C0085CBCA /* Encoder.cpp */,
-				8FC23BA318B7416C0085CBCA /* Encoder.h */,
-				8FC23BA418B7416C0085CBCA /* Hoa3D.h */,
-				8FC23BA518B7416C0085CBCA /* Map.cpp */,
-				8FC23BA618B7416C0085CBCA /* Map.h */,
-				8FC23BA718B7416C0085CBCA /* Meter.cpp */,
-				8FC23BA818B7416C0085CBCA /* Meter.h */,
-				8FC23BA918B7416C0085CBCA /* Optim.cpp */,
-				8FC23BAA18B7416C0085CBCA /* Optim.h */,
-				8FC23BAB18B7416C0085CBCA /* Planewaves.cpp */,
-				8FC23BAC18B7416C0085CBCA /* Planewaves.h */,
-				8FC23BAD18B7416C0085CBCA /* Rotate.cpp */,
-				8FC23BAE18B7416C0085CBCA /* Rotate.h */,
-				8FC23BAF18B7416C0085CBCA /* Scope.cpp */,
-				8FC23BB018B7416C0085CBCA /* Scope.h */,
-				8FC23BB118B7416C0085CBCA /* Tools.h */,
-				8FC23BB218B7416C0085CBCA /* Vector.cpp */,
-				8FC23BB318B7416C0085CBCA /* Vector.h */,
-				8FC23BB418B7416C0085CBCA /* Wider.cpp */,
-				8FC23BB518B7416C0085CBCA /* Wider.h */,
-			);
-			name = Hoa3D;
-			path = ../../Sources/Hoa3D;
 			sourceTree = "<group>";
 		};
 		925105C05D06DABA1143A1CB /* image_formats */ = {
@@ -2123,24 +2048,12 @@
 				8FC23BC418B7499D0085CBCA /* hoa.meter3D~.cpp in Sources */,
 				0C0E42491C8D3B43E9440563 /* juce_core.mm in Sources */,
 				8F716EF918B5225B000184D8 /* jucebox_wrapper.cpp in Sources */,
-				8FC23BBF18B7416C0085CBCA /* Vector.cpp in Sources */,
-				8FC23BC718B77AFF0085CBCA /* hoa.max.cpp in Sources */,
 				324578EC4FC5A3907B0191A1 /* juce_data_structures.mm in Sources */,
 				2792CDA6BEA127DA493F244A /* juce_events.mm in Sources */,
-				8FC23BBC18B7416C0085CBCA /* Planewaves.cpp in Sources */,
-				8FC23BBE18B7416C0085CBCA /* Scope.cpp in Sources */,
-				8FC23BB918B7416C0085CBCA /* Map.cpp in Sources */,
-				8FC23BC018B7416C0085CBCA /* Wider.cpp in Sources */,
 				645829C9526D6601D2858BF3 /* juce_graphics.mm in Sources */,
-				8FC23BBA18B7416C0085CBCA /* Meter.cpp in Sources */,
 				1CB68738A28F93D79B4F364B /* juce_gui_basics.mm in Sources */,
-				8FC23BB618B7416C0085CBCA /* Ambisonic.cpp in Sources */,
-				8FC23BB818B7416C0085CBCA /* Encoder.cpp in Sources */,
-				8FC23BBD18B7416C0085CBCA /* Rotate.cpp in Sources */,
 				62D7B061686CD422E5C63B14 /* juce_gui_extra.mm in Sources */,
 				6B147434B82CB80755F02475 /* juce_opengl.mm in Sources */,
-				8FC23BB718B7416C0085CBCA /* Decoder.cpp in Sources */,
-				8FC23BBB18B7416C0085CBCA /* Optim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

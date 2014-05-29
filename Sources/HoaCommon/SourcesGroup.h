@@ -35,11 +35,15 @@ namespace HoaCommon
 		
 		void computeCentroid();
 		void shiftPolar(double radius, double azimuth);
+        void shiftPolar(double radius, double azimuth, double elevation);
 		void shiftRadius(double radius);
-		void shiftAngle(double azimuth);
+		void shiftAzimuth(double azimuth);
+        void shiftElevation(double elevation);
 		void shiftCartesian(double abscissa, double ordinate);
+        void shiftCartesian(double abscissa, double ordinate, double height);
 		void shiftAbscissa(double abscissa);
 		void shiftOrdinate(double ordinate);
+        void shiftHeight(double ordinate);
 		
 	public:
 		
@@ -70,6 +74,15 @@ namespace HoaCommon
 			@see setRelativeCoordinatesPolar, setCoordinatesCartesian
          */
 		void setCoordinatesPolar(double radius, double azimuth);
+        
+        //! Set the position of the group with polar coordinates.
+		/**
+         @param     radius			The radius of the group.
+         @param     azimuth			The azimuth of the group.
+         @param     elevation			The elevation of the group.
+         @see setRelativeCoordinatesPolar, setCoordinatesCartesian
+         */
+		void setCoordinatesPolar(double radius, double azimuth, double elevation);
 		
 		//! Set the radius of the group.
 		/**
@@ -82,7 +95,13 @@ namespace HoaCommon
 		/**
 		 @param     azimuth			The azimuth of the group.
          */
-		void seAzimuth(double azimuth);
+		void setAzimuth(double azimuth);
+        
+        //! Set the elevation of the group.
+		/**
+		 @param     elevation			The elevation of the group.
+         */
+		void setElevation(double elevation);
 		
 		//! Set the position of the group with cartesians coordinates.
 		/**
@@ -90,6 +109,14 @@ namespace HoaCommon
 			@param     ordinate		The ordinate of the group.
          */
 		void setCoordinatesCartesian(double abscissa, double ordinate);
+        
+        //! Set the position of the group with cartesians coordinates.
+		/**
+         @param     abscissa		The abscissa of the group.
+         @param     ordinate		The ordinate of the group.
+         @param     height		The height of the group.
+         */
+		void setCoordinatesCartesian(double abscissa, double ordinate, double height);
 		
 		//! Set the abscissa of the group.
 		/**
@@ -102,6 +129,12 @@ namespace HoaCommon
 			@param     ordinate		The ordinate of the group.
          */
 		void setOrdinate(double ordinate);
+        
+        //! Set the height of the group.
+		/**
+         @param     height		The height of the group.
+         */
+		void setHeight(double height);
 		
 		//! Set the color of the group.
 		/**
@@ -156,6 +189,15 @@ namespace HoaCommon
 			@see setCoordinatesPolar, setRelativeRadius
          */
 		void setRelativeCoordinatesPolar(double radius, double azimuth);
+        
+        //! Set the position of the group with relative polar coordinates.
+		/**
+         @param     radius			The relative radius value.
+         @param     azimuth			The relative azimuth value.
+         @param     elevation		The relative elevation value.
+         @see setCoordinatesPolar, setRelativeRadius
+         */
+		void setRelativeCoordinatesPolar(double radius, double azimuth, double elevation);
 		
 		//! Set the radius of the group with a relative value.
 		/**
@@ -170,6 +212,13 @@ namespace HoaCommon
 			@see setCoordinatesPolar, setRelativeRadius
          */
 		void setRelativeAzimuth(double azimuth);
+        
+        //! Set the elevation of the group with a relative value.
+		/**
+         @param     elevation			The relative elevation value.
+         @see setCoordinatesPolar, setRelativeRadius
+         */
+		void setRelativeElevation(double elevation);
 		
 		//! Get the existence state of the group.
 		/**
@@ -183,14 +232,21 @@ namespace HoaCommon
 			@return		The radius of the group.
 			@see setRadius, setCoordinatesPolar
          */
-		double			getRadius()			const { return radius(m_centroid_x, m_centroid_y);}
+		double			getRadius()			const { return radius(m_centroid_x, m_centroid_y, m_centroid_z);}
 		
 		//! Get the azimuth of the group.
 		/**
 			@return		The azimuth of the group.
 			@see setAzimuth, setCoordinatesPolar
          */
-		double			getAzimuth()		const {return azimuth(m_centroid_x, m_centroid_y) + HOA_PI2;}
+		double			getAzimuth()		const {return azimuth(m_centroid_x, m_centroid_y, m_centroid_z) + HOA_PI2;}
+        
+        //! Get the elevation of the group.
+		/**
+         @return		The elevation of the group.
+         @see setAzimuth, setCoordinatesPolar
+         */
+		double			getElevation()		const {return elevation(m_centroid_x, m_centroid_y, m_centroid_z);}
 		
 		//! Get the abscissa of the group.
 		/**
@@ -205,6 +261,13 @@ namespace HoaCommon
 			@see setOrdinate, setCoordinatesCartesian
          */
 		double			getOrdinate()		const {return m_centroid_y;}
+        
+        //! Get the height of the group.
+		/**
+         @return		The height of the group.
+         @see setOrdinate, setCoordinatesCartesian
+         */
+		double			getHeight()		const {return m_centroid_z;}
 		
 		//! Get the color of the group.
 		/**

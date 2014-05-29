@@ -421,6 +421,11 @@ namespace Hoa
 		return atan2(y, x) - HOA_PI2;
 	}
     
+    inline double azimuth(const double x, const double y, const double z)
+	{
+		return atan2(y, x) - HOA_PI2;
+	}
+    
     inline double abscissa(const double radius, const double phi, const double theta)
 	{
 		return radius * cos(phi - HOA_PI2) * cos(theta);
@@ -441,14 +446,11 @@ namespace Hoa
 		return sqrt(x*x + y*y + z*z);
 	}
     
-    inline double azimuth(const double x, const double y, const double z)
-	{
-		return atan2(y, x) - HOA_PI2;
-	}
+   
     
     inline double elevation(const double x, const double y, const double z)
 	{
-		return acos(z/ radius(x, y, z));
+		return acos(z / radius(x, y, z));
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)

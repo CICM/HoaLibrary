@@ -30,7 +30,7 @@ t_hoa_err hoa_getinfos(t_hoa_encoder_3D* x, t_hoa_boxinfos* boxinfos);
 extern "C" void setup_hoa0x2e3d0x2eencoder_tilde(void)
 {
     t_eclass *c;
-    c = eclass_new("hoa.3d.encoder~",(method)hoa_encoder_3D_new,(method)hoa_encoder_3D_free,sizeof(t_hoa_encoder_3D), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.3d.encoder~",(method)hoa_encoder_3D_new,(method)hoa_encoder_3D_free,sizeof(t_hoa_encoder_3D), CLASS_NOINLET, A_GIMME, 0);
     
     eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

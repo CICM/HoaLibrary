@@ -234,7 +234,7 @@ t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long ac, t_at
     {
         if(atom_gettype(av) == A_LONG)
         {
-            d = Hoa3D::clip_min(long(atom_getlong(av)), long(1));
+            d = clip_min(long(atom_getlong(av)), long(1));
             if (d != x->f_order)
             {
                 int dspState = sys_getdspobjdspstate((t_object*)x);
@@ -302,7 +302,7 @@ t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t
 		for(int i = 0; i < 2 && i < argc; i++)
 		{
             if(atom_gettype(argv+i) == A_FLOAT)
-                x->f_camera[i] = Hoa3D::wrap(atom_getfloat(argv+i), -HOA_PI, HOA_PI);
+                x->f_camera[i] = wrap(atom_getfloat(argv+i), -HOA_PI, HOA_PI);
 		}
     }
     return MAX_ERR_NONE;

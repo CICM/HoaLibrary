@@ -138,6 +138,18 @@ namespace HoaCommon
 			}
 		}
 	}
+    
+    void SourcesManager::sourceNewPolar(double radius, double azimuth, double elevation)
+	{
+		for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		{
+			if(!sourceGetExistence(i))
+			{
+				sourceSetPolar(i, radius, azimuth, elevation);
+				return;
+			}
+		}
+	}
 
 	void SourcesManager::sourceNewCartesian(double abscissa, double ordinate)
 	{
@@ -150,11 +162,30 @@ namespace HoaCommon
 			}
 		}
 	}
+    
+    void SourcesManager::sourceNewCartesian(double abscissa, double ordinate, double height)
+	{
+		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		{
+			if(!sourceGetExistence(i))
+			{
+				sourceSetCartesian(i, abscissa, ordinate, height);
+				return;
+			}
+		}
+	}
 
 	void SourcesManager::sourceSetPolar(long index, double radius, double azimuth)
 	{
 		sourceSetRadius(index, radius);
 		sourceSetAzimuth(index, azimuth);
+	}
+    
+    void SourcesManager::sourceSetPolar(long index, double radius, double azimuth, double elevation)
+	{
+		sourceSetRadius(index, radius);
+		sourceSetAzimuth(index, azimuth);
+        sourceSetElevation(index, elevation);
 	}
 
 	void SourcesManager::sourceSetRadius(long index, double radius)
@@ -217,11 +248,48 @@ namespace HoaCommon
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
+    
+    void SourcesManager::sourceSetElevation(long index, double elevation)
+    {
+        if (index < 0)
+			return;
+		
+		if(index >= m_sources.size())
+		{
+			for(int i = m_sources.size(); i < index; i++)
+			{
+				m_sources.push_back(new Source(0));
+				m_sources[i]->setMaximumRadius(m_maximum_radius);
+			}
+			m_sources.push_back(new Source(1));
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->setElevation(elevation);
+		}
+		else if(index >= 0)
+		{
+			m_sources[index]->setElevation(elevation);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
+		}
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
+		{
+			int groupIndex = m_sources[index]->getGroupIndex(i);
+			if(groupIndex >= 0 && groupIndex < m_groups.size())
+				m_groups[groupIndex]->sourceHasMoved();
+		}
+    }
 
 	void SourcesManager::sourceSetCartesian(long index, double abscissa, double ordinate)
 	{
 		sourceSetAbscissa(index, abscissa);
 		sourceSetOrdinate(index, ordinate);
+	}
+    
+    void SourcesManager::sourceSetCartesian(long index, double abscissa, double ordinate, double height)
+	{
+		sourceSetAbscissa(index, abscissa);
+		sourceSetOrdinate(index, ordinate);
+        sourceSetHeight(index, height);
 	}
 
 	void SourcesManager::sourceSetAbscissa(long index, double abscissa)
@@ -283,6 +351,36 @@ namespace HoaCommon
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
+    
+    void SourcesManager::sourceSetHeight(long index, double height)
+    {
+        if (index < 0)
+			return;
+		
+		if(index >= m_sources.size())
+		{
+			for(int i = m_sources.size(); i < index; i++)
+			{
+				m_sources.push_back(new Source(0));
+				m_sources[i]->setMaximumRadius(m_maximum_radius);
+			}
+			m_sources.push_back(new Source(1));
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->setHeight(height);
+		}
+		else if(index >= 0)
+		{
+			m_sources[index]->setHeight(height);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
+		}
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
+		{
+			int groupIndex = m_sources[index]->getGroupIndex(i);
+			if(groupIndex >= 0 && groupIndex < m_groups.size())
+				m_groups[groupIndex]->sourceHasMoved();
+		}
+    }
 
 	void SourcesManager::sourceSetColor(long index, double red, double green, double blue, double alpha)
 	{
@@ -352,6 +450,14 @@ namespace HoaCommon
 
 		return 0;
 	}
+    
+    double SourcesManager::sourceGetElevation(long index)
+    {
+        if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getElevation();
+        
+        return 0;
+    }
 
 	double SourcesManager::sourceGetAbscissa(long index)
 	{
@@ -369,6 +475,14 @@ namespace HoaCommon
 		return 0;
 	}
 
+    double SourcesManager::sourceGetHeight(long index)
+    {
+        if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getHeight();
+        
+		return 0;
+    }
+    
 	double* SourcesManager::sourceGetColor(long index)
 	{
 		if(index < m_sources.size() && index >= 0)
@@ -482,6 +596,14 @@ namespace HoaCommon
 			m_groups[groupIndex]->setCoordinatesPolar(radius, azimuth);
 		}
 	}
+    
+    void SourcesManager::groupSetPolar(long groupIndex, double radius, double azimuth, double elevation)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setCoordinatesPolar(radius, azimuth, elevation);
+		}
+	}
 
 	void SourcesManager::groupSetRadius(long groupIndex, double radius)
 	{
@@ -495,7 +617,15 @@ namespace HoaCommon
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
 		{
-			m_groups[groupIndex]->seAzimuth(azimuth);
+			m_groups[groupIndex]->setAzimuth(azimuth);
+		}
+	}
+    
+    void SourcesManager::groupSetElevation(long groupIndex, double elevation)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setElevation(elevation);
 		}
 	}
 
@@ -504,6 +634,14 @@ namespace HoaCommon
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
 		{
 			m_groups[groupIndex]->setCoordinatesCartesian(abscissa, ordinate);
+		}
+	}
+    
+    void SourcesManager::groupSetCartesian(long groupIndex, double abscissa, double ordinate, double height)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setCoordinatesCartesian(abscissa, ordinate, height);
 		}
 	}
 
@@ -522,12 +660,28 @@ namespace HoaCommon
 			m_groups[groupIndex]->setOrdinate(ordinate);
 		}
 	}
+    
+    void SourcesManager::groupSetHeight(long groupIndex, double height)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setHeight(height);
+		}
+	}
 
 	void SourcesManager::groupSetRelativePolar(long groupIndex, double radius, double azimuth)
 	{
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
 		{
 			m_groups[groupIndex]->setRelativeCoordinatesPolar(radius, azimuth);
+		}
+	}
+    
+    void SourcesManager::groupSetRelativePolar(long groupIndex, double radius, double azimuth, double elevation)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setRelativeCoordinatesPolar(radius, azimuth, elevation);
 		}
 	}
 
@@ -544,6 +698,14 @@ namespace HoaCommon
 		if(groupIndex < m_groups.size() && groupIndex >= 0)
 		{
 			m_groups[groupIndex]->setRelativeAzimuth(azimuth);
+		}
+	}
+    
+    void SourcesManager::groupSetRelativeElevation(long groupIndex, double elevation)
+	{
+		if(groupIndex < m_groups.size() && groupIndex >= 0)
+		{
+			m_groups[groupIndex]->setRelativeElevation(elevation);
 		}
 	}
 
@@ -627,6 +789,14 @@ namespace HoaCommon
 
 		return 0;
 	}
+    
+    double SourcesManager::groupGetElevation(long index)
+	{
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getElevation();
+        
+		return 0;
+	}
 
 	double SourcesManager::groupGetAbscissa(long index)
 	{
@@ -641,6 +811,14 @@ namespace HoaCommon
 		if(index < m_groups.size() && index >= 0)
 			return m_groups[index]->getOrdinate();
 
+		return 0;
+	}
+    
+    double SourcesManager::groupGetHeight(long index)
+	{
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getHeight();
+        
 		return 0;
 	}
 

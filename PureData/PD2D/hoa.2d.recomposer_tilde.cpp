@@ -96,7 +96,7 @@ extern "C" void setup_hoa0x2e2d0x2erecomposer_tilde(void)
 {
     t_eclass* c;
     
-    c = eclass_new("hoa.2d.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.2d.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), CLASS_NOINLET, A_GIMME, 0);
     class_addcreator((t_newmethod)hoa_recomposer_new, gensym("hoa.recomposer~"), A_GIMME, 0);
     
 	eclass_dspinit(c);
