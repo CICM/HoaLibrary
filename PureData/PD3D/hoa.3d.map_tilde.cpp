@@ -108,7 +108,7 @@ extern "C" void setup_hoa0x2e3d0x2emap_tilde(void)
 {
     t_eclass* c;
     
-    c = eclass_new("hoa.3d.map~", (method)hoa_map_3D_tilde_new, (method)hoa_map_3D_tilde_free, (short)sizeof(t_hoa_map_3D_tilde), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.3d.map~", (method)hoa_map_3D_tilde_new, (method)hoa_map_3D_tilde_free, (short)sizeof(t_hoa_map_3D_tilde), CLASS_NOINLET, A_GIMME, 0);
     
 	eclass_dspinit(c);
     hoa_initclass(c, (method)hoa_getinfos);

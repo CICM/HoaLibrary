@@ -120,6 +120,15 @@ namespace HoaCommon
 		 * @see sourceNewCartesian
          */
 		void sourceNewPolar(double radius, double azimuth);
+        
+        //! Add a new source with polar coordinates.
+		/**
+		 * @param     radius			The radius of the source.
+		 * @param     azimuth			The azimuth of the source.
+         * @param     elevation			The elevation of the source.
+		 * @see sourceNewCartesian
+         */
+		void sourceNewPolar(double radius, double azimuth, double elevation);
 
 		//! Add a new source with cartesian coordinates.
 		/**
@@ -128,6 +137,15 @@ namespace HoaCommon
 		 * @see sourceNewPolar
          */
 		void sourceNewCartesian(double abscissa, double ordinate);
+        
+        //! Add a new source with cartesian coordinates.
+		/**
+		 * @param     abscissa			The abscissa of the source.
+		 * @param     ordinate			The ordinate of the source.
+         * @param     height			The height of the source.
+		 * @see sourceNewPolar
+         */
+		void sourceNewCartesian(double abscissa, double ordinate, double height);
 		
 		//! Set position of a source with polar coordinates.
 		/**
@@ -137,6 +155,16 @@ namespace HoaCommon
 		 * @see sourceSetRadius, sourceSetAzimuth, sourceSetCartesian
          */
 		void sourceSetPolar(long index, double radius, double azimuth);
+        
+        //! Set position of a source with polar coordinates.
+		/**
+		 * @param     index				The index of the source.
+		 * @param     radius			The radius of the source.
+		 * @param     azimuth			The azimuth of the source.
+         * @param     elevation			The elevation of the source.
+		 * @see sourceSetRadius, sourceSetAzimuth, sourceSetCartesian
+         */
+		void sourceSetPolar(long index, double radius, double azimuth, double elevation);
 		
 		//! Set radius of a source.
 		/**
@@ -153,6 +181,14 @@ namespace HoaCommon
 		 * @see sourceSetRadius, sourceSetAzimuth
          */
 		void sourceSetAzimuth(long index, double azimuth);
+        
+        //! Set elevation of a source.
+		/**
+		 * @param     index				The index of the source.
+		 * @param     elevation			The elevation of the source.
+		 * @see sourceSetRadius, sourceSetAzimuth
+         */
+		void sourceSetElevation(long index, double elevation);
 		
 		//! Set position of a source with cartesian coordinates.
 		/**
@@ -162,6 +198,16 @@ namespace HoaCommon
 		 * @see sourceSetAbscissa, sourceSetOrdinate, sourceSetPolar
          */
 		void sourceSetCartesian(long index, double abscissa, double ordinate);
+        
+        //! Set position of a source with cartesian coordinates.
+		/**
+		 * @param     index				The index of the source.
+		 * @param     abscissa			The abscissa of the source.
+		 * @param     ordinate			The ordinate of the source.
+         * @param     height			The height of the source.
+		 * @see sourceSetAbscissa, sourceSetOrdinate, sourceSetPolar
+         */
+		void sourceSetCartesian(long index, double abscissa, double ordinate, double height);
 		
 		//! Set abscissa of a source.
 		/**
@@ -178,6 +224,14 @@ namespace HoaCommon
 		 * @see sourceSetAbscissa
          */
 		void sourceSetOrdinate(long index, double ordinate);
+        
+        //! Set ordinate of a source.
+		/**
+		 * @param     index				The index of the source.
+		 * @param     height			The height of the source.
+		 * @see sourceSetAbscissa
+         */
+		void sourceSetHeight(long index, double height);
 		
 		//! Set the rgba color of a source.
 		/** All values are clipped between 0 and 1.
@@ -229,6 +283,13 @@ namespace HoaCommon
 		 * @return						The azimuth of the source.
          */
 		double sourceGetAzimuth(long index);
+        
+        //! Get the elevation of a source.
+		/**
+		 * @param     index				The index of the source.
+		 * @return						The elevation of the source.
+         */
+		double sourceGetElevation(long index);
 		
 		//! Get the abscissa of a source.
 		/**
@@ -243,6 +304,13 @@ namespace HoaCommon
 		 * @return						The ordinate of the source.
          */
 		double sourceGetOrdinate(long index);
+        
+        //! Get the height of a source.
+		/**
+		 * @param     index				The index of the source.
+		 * @return						The height of the source.
+         */
+		double sourceGetHeight(long index);
 		
 		//! Get the rgba color of a source.
 		/**
@@ -308,6 +376,16 @@ namespace HoaCommon
 		 * @see groupSetRadius, groupSetAzimuth, groupSetCartesian
          */
 		void groupSetPolar(long index, double radius, double azimuth);
+        
+        //! Set position of a group with polar coordinates.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     radius			The radius of the group.
+		 * @param     azimuth			The azimuth of the group.
+         * @param     elevation			The elevation of the group.
+		 * @see groupSetRadius, groupSetAzimuth, groupSetCartesian
+         */
+		void groupSetPolar(long index, double radius, double azimuth, double elevation);
 		
 		//! Set radius of a group.
 		/**
@@ -324,6 +402,14 @@ namespace HoaCommon
 		 * @see groupSetRadius, groupSetAzimuth
          */
 		void groupSetAzimuth(long index, double azimuth);
+        
+        //! Set elevation of a group.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     elevation			The elevation of the group.
+		 * @see groupSetRadius, groupSetAzimuth
+         */
+		void groupSetElevation(long index, double elevation);
 		
 		//! Set position of a group with cartesian coordinates.
 		/**
@@ -333,6 +419,16 @@ namespace HoaCommon
 		 * @see groupSetAbscissa, groupSetOrdinate, groupSetPolar
          */
 		void groupSetCartesian(long index, double abscissa, double ordinate);
+        
+        //! Set position of a group with cartesian coordinates.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     abscissa			The abscissa of the group.
+		 * @param     ordinate			The ordinate of the group.
+         * @param     height			The height of the group.
+		 * @see groupSetAbscissa, groupSetOrdinate, groupSetPolar
+         */
+		void groupSetCartesian(long index, double abscissa, double ordinate, double height);
 		
 		//! Set abscissa of a group.
 		/**
@@ -349,6 +445,14 @@ namespace HoaCommon
 		 * @see groupSetAbscissa
          */
 		void groupSetOrdinate(long index, double ordinate);
+        
+        //! Set height of a group.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     height			The height of the group.
+		 * @see groupSetAbscissa
+         */
+		void groupSetHeight(long index, double height);
 		
 		//! Set position of a group with relative polar coordinates.
 		/**
@@ -358,6 +462,16 @@ namespace HoaCommon
 		 * @see groupSetRadius, groupSetAzimuth, groupSetCartesian
          */
 		void groupSetRelativePolar(long groupIndex, double radius, double azimuth);
+        
+        //! Set position of a group with relative polar coordinates.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     radius			The relative radius of the group.
+		 * @param     azimuth			The relative azimuth of the group.
+         * @param     elevation			The relative elevation of the group.
+		 * @see groupSetRadius, groupSetAzimuth, groupSetCartesian
+         */
+		void groupSetRelativePolar(long groupIndex, double radius, double azimuth, double elevation);
 		
 		//! Set radius of a group with relative value.
 		/**
@@ -374,6 +488,14 @@ namespace HoaCommon
 		 * @see groupSetAzimuth, groupSetRadius, groupSetPolar
          */
 		void groupSetRelativeAzimuth(long groupIndex, double azimuth);
+        
+        //! Set elevation of a group with relative value.
+		/**
+		 * @param     index				The index of the group.
+		 * @param     azimuth			The relative elevation of the group.
+		 * @see groupSetAzimuth, groupSetRadius, groupSetPolar
+         */
+		void groupSetRelativeElevation(long groupIndex, double elevation);
 		
 		//! Set the rgba color of a group.
 		/** All values are clipped between 0 and 1.
@@ -451,6 +573,13 @@ namespace HoaCommon
 		 * @return						The azimuth of the group.
          */
 		double groupGetAzimuth(long index);
+        
+        //! Get the elevation of a group.
+		/**
+		 * @param     index				The index of the group.
+		 * @return						The elevation of the group.
+         */
+		double groupGetElevation(long index);
 		
 		//! Get the abscissa of a group.
 		/**
@@ -465,6 +594,13 @@ namespace HoaCommon
 		 * @return						The ordinate of the group.
          */
 		double groupGetOrdinate(long index);
+        
+        //! Get the height of a group.
+		/**
+		 * @param     index				The index of the group.
+		 * @return						The height of the group.
+         */
+		double groupGetHeight(long index);
 		
 		//! Get the rgba color of a group.
 		/**

@@ -87,7 +87,169 @@ namespace Hoa3D
          */
 		void process(const double* input, double* output);
 	};
+    
+    //const float* get_mit_hrtf_3D(unsigned long samplerate, unsigned long azimuth, bool large);
+    
+    //! The ambisonic binaural decoder.
+    /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
+     */
+    class DecoderBinaural : public Ambisonic, public Planewaves
+    {
+    public:
+        
+        enum PinnaSize
+        {
+            Small       = 0,	/**< Small Pinna Size  */
+            Large       = 1,	/**< Large Pinna Size */
+        };
+        
+    private:
+        float*          m_impulses_matrix;
+        float*          m_harmonics_vector;
+        float*          m_channels_vector;
+        double*         m_channels_vector_double;
+        unsigned int    m_number_of_virtual_channels;
+        unsigned int    m_sample_rate;
+        unsigned int    m_vector_size;
+        unsigned int    m_impulses_size;
+        
+        bool            m_impulses_loaded;
+        bool            m_matrix_allocated;
+        
+        float*          m_input_matrix;
+        float*          m_result_matrix;
+        float*          m_result_matrix_left;
+        float*          m_result_matrix_right;
+        float*          m_linear_vector_left;
+        float*          m_linear_vector_right;
+        
+        // Sample by sample
+        float**         m_channels_inputs_right;
+        float**         m_channels_inputs_left;
+        int             m_index;
+        
+        const float**   m_impulses_vector;
+        PinnaSize       m_pinna_size;
+        
+        Decoder*        m_decoder;
+    public:
+        
+        //! The binaural decoder constructor.
+        /**	The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35. It is essential to set the sample rate and the vector size to load the impulse response and to be able to use the binaural decoding. The binaural process is optimized for block processing. The HRTF are from the MIT database.
+         
+         @param     order				The order
+         */
+		DecoderBinaural(unsigned int order);
+		
+        //! The binaural decoder destructor.
+        /**	The binaural decoder destructor free the memory.
+         */
+		~DecoderBinaural();
+        
+        //! Set the sample rate.
+        /** Set the sample rate. The sample will change the impulse responses size and their sizes increase with it. The valid sample rate are 44100, 48000, 88200 and 9600. Setting the sample rate will load the impulse responses, it is essential to define it before the digital signal processing.
+         
+         @param     sampleRate		The sample rate.
+         
+         @see    setVectorSize
+         */
+        void setSampleRate(unsigned int sampleRate);
+        
+        //! Set the vector size.
+        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
+         
+         @param     vectorSize		The vector size.
+         
+         @see    setSampleRate
+         */
+        
+        void setVectorSize(unsigned int vectorSize);
+        
+        //! Retrieve if the decoder is ready to process.
+        /** Retrieve if the impulses has been loaded and the matrix allocated.
+         
+         @return    The function returns true if the decoder is ready to process and false if not.
+         */
+		inline bool getState() const
+        {
+            if(m_impulses_loaded && m_matrix_allocated)
+                return true;
+            else
+                return false;
+        };
+        
+        //! Set the pinna size.
+        /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
+         
+         @param     pinnaSize		The pinna size.
+         
+         */
+        void setPinnaSize(PinnaSize pinnaSize);
+        
+        //! Retrieve the pinna size.
+        /** Retrieve the current size of the pinna.
+         
+         @return    The function returns the pinna size used to compute the HRTF.
+         */
+		inline PinnaSize getPinnaSize() const
+        {
+            return m_pinna_size;
+        };
+        
+        //! Retrieve a name for a channel.
+        /** Retrieve a name for a channel in a std::string format that will be "Headphone Left" or "Headphone Right".
+         
+         @param     index	The index of a channel.
+         @return    The method returns a name for the channel.
+         
+         */
+		inline std::string getChannelName(unsigned int index)
+        {
+            assert(index < 2);
+            if(index == 0)
+                return "Headphone Left";
+            else
+                return "Headphone Right";
+        };
+        
+        //! This method performs the binaural decoding with single precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
+         
+         @param     inputs	The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const float* const* inputs, float** outputs);
+		
+        //! This method performs the binaural decoding with double precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
+         
+         @param     input    The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const double* const* inputs, double** outputs);
+        
+        //! This method performs the binaural decoding with single precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     inputs	The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const float* inputs, float* outputs);
+		
+        //! This method performs the binaural decoding with double precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
+         
+         @param     input    The input samples.
+         @param     outputs  The output array that contains samples destinated to channels.
+         */
+		void process(const double* inputs, double* outputs);
+        
+    };
 	
+    inline const float* get_mit_hrtf_3D(long samplerate, long elevation, bool azimuth)
+    {
+        ;
+    }
     /*
     inline const float* get_mit_hrtf(long samplerate, long elevation, long azimuth)
     {

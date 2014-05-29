@@ -5,14 +5,13 @@
 */
 
 #include "../../hoa.max.h"
-#include "../../Sources/HoaOpenGL/OpenGLTools.h"
+#include "../Hoa3D.max.h"
 #include "../../MaxJuceBox/jucebox_wrapper.h"
 
 typedef struct _hoa_meter
 {
 	t_jucebox	j_box;
 
-    Hoa3D::Meter*   f_meter;
     long            f_number_of_loudspeakers;
     double*         f_signals;
     
