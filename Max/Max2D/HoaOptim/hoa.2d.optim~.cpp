@@ -68,7 +68,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_optim_assist,    "assist",	A_CANT, 0);
 	
 	// @method basic @digest Set the optimization mode to <b>basic</b>, does not apply any optimization.
-	// @description Set the optimization mode to <b>basic</b>. This is particulary suitable when the listener is ideally placed at the center of the loudspeaker arrangement
+	// @description Set the optimization mode to <b>basic</b>. This is particulary suitable when the listener is ideally placed at the center of the loudspeaker arrangement, or for diffused soundfields.
 	class_addmethod(c, (method)hoa_optim_basic,     "basic",	A_NOTHING, 0);
 	
 	// @method maxRe @digest Set the optimization mode to <b>maxRe</b>.

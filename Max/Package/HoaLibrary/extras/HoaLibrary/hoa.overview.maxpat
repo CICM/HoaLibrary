@@ -184,9 +184,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
+						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
 						"palette_action" : "hoa.2d.scope~",
-						"palette_caption" : "hoa.2d.scope~",
-						"palette_category" : [ "HoaLib", "Interface", "Recent" ]
+						"palette_caption" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -1031,7 +1031,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.fx.convolve~", "hoa.fx.decorrelation~", "hoa.fx.delay~", "hoa.fx.freeverb~", "hoa.fx.gain~", "hoa.fx.grain~", "hoa.fx.granular~", "hoa.fx.mirror~", "hoa.fx.mixer~", "hoa.fx.ringmod~" ]
+									"tabs" : [ "hoa.3d.decoder~", "hoa.3d.encoder~", "hoa.3d.map~", "hoa.3d.map", "hoa.3d.meter~", "hoa.3d.optim~", "hoa.3d.process~", "hoa.3d.scope~", "hoa.3d.wider~" ]
 								}
 
 							}

@@ -445,15 +445,10 @@ namespace Hoa
 	{
 		return sqrt(x*x + y*y + z*z);
 	}
-    
-   
-    
+
     inline double elevation(const double x, const double y, const double z)
 	{
-<<<<<<< HEAD
 		if (z == 0. || (x == 0 && y == 0 && z == 0)) return 0;
-=======
->>>>>>> 3eb13a13913165e7cd381ad2ede85ef027e68051
 		return acos(z / radius(x, y, z));
 	}
     

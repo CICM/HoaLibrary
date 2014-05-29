@@ -15,6 +15,7 @@ max oblist "hoa objects" hoa.2d.wider~;
 max oblist "hoa objects" hoa.3d.decoder~;
 max oblist "hoa objects" hoa.3d.encoder~;
 max oblist "hoa objects" hoa.3d.map~;
+max oblist "hoa objects" hoa.3d.optim~;
 max oblist "hoa objects" c.convolve~;
 max oblist "hoa objects" c.freeverb~;
 max oblist "hoa objects" hoa.connect;

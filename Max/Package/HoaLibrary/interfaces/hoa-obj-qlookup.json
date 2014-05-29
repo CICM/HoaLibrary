@@ -181,6 +181,16 @@
       "MSP"
     ]
   },
+  "hoa.3d.optim~": {
+    "digest": "A 3d ambisonic optimization tool",
+    "module": "hoa",
+    "category": [
+      "ambisonics",
+      "hoa objects",
+      "audio",
+      "MSP"
+    ]
+  },
   "c.convolve~": {
     "digest": "A zero latency convolution reverberation processor",
     "module": "hoa",
