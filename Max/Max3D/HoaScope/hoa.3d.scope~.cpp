@@ -438,7 +438,6 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	t_jrgba color_positive = x->f_color_ph;
 	t_jrgba color_negative = x->f_color_nh;
 	
-	post("");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
