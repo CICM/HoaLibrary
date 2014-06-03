@@ -8,7 +8,7 @@
 
 namespace Hoa3D
 {
-	Decoder::Decoder(unsigned int order, unsigned int numberOfChannels) : Ambisonic(order), Planewaves(numberOfChannels)
+	DecoderStandard::DecoderStandard(unsigned int order, unsigned int numberOfChannels) : Ambisonic(order), Planewaves(numberOfChannels)
 	{
         m_harmonics_vector          = new double[m_number_of_harmonics];
         m_decoder_matrix            = new double[m_number_of_channels * m_number_of_harmonics];
@@ -17,7 +17,7 @@ namespace Hoa3D
         setChannelsOffset(0., 0);
 	}
     
-    void Decoder::setChannelsOffset(double azimuth, double elevation)
+    void DecoderStandard::setChannelsOffset(double azimuth, double elevation)
     {
         m_azimuth_offset = wrap_twopi(azimuth);
         m_elevation_offset = wrap_twopi(elevation);
@@ -28,7 +28,7 @@ namespace Hoa3D
         
     }
 	
-	void Decoder::setChannelPosition(unsigned int index, double azimuth, double elevation)
+	void DecoderStandard::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         Planewaves::setChannelPosition(index, azimuth, elevation);
         
@@ -42,17 +42,17 @@ namespace Hoa3D
         }
 	}
 	
-	void Decoder::process(const float* input, float* output)
+	void DecoderStandard::process(const float* input, float* output)
 	{
 		cblas_sgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_decoder_matrix_float, m_number_of_harmonics, input, 1, 0.f, output, 1);
 	}
 	
-	void Decoder::process(const double* input, double* output)
+	void DecoderStandard::process(const double* input, double* output)
 	{
 		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1., m_decoder_matrix, m_number_of_harmonics, input, 1, 0., output, 1);
 	}
 	
-	Decoder::~Decoder()
+	DecoderStandard::~DecoderStandard()
 	{
 		delete [] m_decoder_matrix;
         delete [] m_decoder_matrix_float;
@@ -67,10 +67,10 @@ namespace Hoa3D
     unsigned int hoa_number_binaural_configs    = 4;
     unsigned int hoa_number_binaural_elevation  = 14;
     unsigned int hoa_binaural_configs[] = {
-        4, 0,  12, 20,
-        0, 8,  0,  24,
-        0, 0,  16, 28,
-        0, 0,  0,  32,
+        4, 0,  12, 24,
+        0, 8,  0,  28,
+        0, 0,  16, 32,
+        0, 0,  0,  34,
         9, 12, 18, 36,
         0, 0,  0,  34,
         0, 0,  16, 32,
@@ -103,6 +103,7 @@ namespace Hoa3D
         m_linear_vector_left        = NULL;
         m_linear_vector_right       = NULL;
         m_pinna_size                = Small;
+        m_configuration             = 0;
         
         for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
         {
@@ -123,7 +124,7 @@ namespace Hoa3D
         m_harmonics_vector  = new float[m_number_of_harmonics];
         m_channels_vector   = new float[m_number_of_virtual_channels];
         m_channels_vector_double = new double[m_number_of_virtual_channels];
-        m_decoder           = new Decoder(m_order, m_number_of_virtual_channels);
+        m_decoder           = new DecoderStandard(m_order, m_number_of_virtual_channels);
         
         // Other
         m_channels_azimuth[0] = HOA_PI2;
@@ -172,7 +173,7 @@ namespace Hoa3D
                 int n_elev_channels = hoa_binaural_configs[i + hoa_number_binaural_configs * m_configuration];
                 for(unsigned int j = 0; j < n_elev_channels; j++)
                 {
-                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, j * (360. / (double )n_elev_channels), i * 10 - 40) +hoa_binaural_crop[index];
+                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, j * (360. / (double )n_elev_channels), i * 10 - 40) + hoa_binaural_crop[index];
                     nimpulse++;
                 }
             }
@@ -192,6 +193,7 @@ namespace Hoa3D
             {
                 m_harmonics_vector[i] = 0.;
             }
+            
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
                 if(i != 0)
@@ -206,13 +208,20 @@ namespace Hoa3D
                     value_left = 0;
                     value_right = 0;
                     
-                    for(unsigned int k = 0; k < m_number_of_virtual_channels; k++)
+                    int nimpulse = 0;
+                    for(unsigned int k = 0; k < hoa_number_binaural_elevation; k++)
                     {
-                        value_right += m_channels_vector[k] * m_impulses_vector[k][j];
-                        if(k == 0)
-                            value_left += m_channels_vector[k] * m_impulses_vector[k][j];
-                        else
-                            value_left += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
+                        int n_elev_channels = hoa_binaural_configs[k + hoa_number_binaural_configs * m_configuration];
+                        for(unsigned int l = 0; l < n_elev_channels; l++)
+                        {
+                            value_right += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
+                            if(l == 0)
+                                value_left += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
+                            else
+                                value_left += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
+                            nimpulse++;
+                            int zaza;
+                        }
                     }
                     
                     m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;
@@ -220,6 +229,7 @@ namespace Hoa3D
                 }
             }
             
+            return;
             m_impulses_loaded = 1;
         }
     }
@@ -360,6 +370,75 @@ namespace Hoa3D
             delete [] m_linear_vector_right;
         m_linear_vector_right = NULL;
 	}
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Decoder Multi //
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    DecoderMulti::DecoderMulti(unsigned int order) : Ambisonic(order), Planewaves(order * 2 + 2)
+    {
+        m_mode = Standard;
+        m_decoder_regular   = new DecoderStandard(m_order, (m_order + 1) * (m_order + 1));
+        m_decoder_binaural  = new DecoderBinaural(m_order);
+    }
+    
+    void DecoderMulti::setDecodingMode(Mode mode)
+    {
+        m_mode = mode;
+    }
+    
+    void DecoderMulti::setNumberOfChannels(unsigned int numberOfChannels)
+    {
+        if(numberOfChannels != getNumberOfChannels())
+        {
+            if(m_mode == Standard)
+            {
+                delete m_decoder_regular;
+                m_decoder_regular = new DecoderStandard(m_order, numberOfChannels);
+            }
+        }
+    }
+    
+    void DecoderMulti::setChannelsOffset(double azimuth, double elevation)
+    {
+        if(m_mode == Standard)
+        {
+            m_decoder_regular->setChannelsOffset(azimuth, elevation);
+        }
+    }
+    
+    void DecoderMulti::setChannelPosition(unsigned int index, double azimuth, double elevation)
+    {
+        if(m_mode == Standard)
+        {
+            m_decoder_regular->setChannelPosition(index, azimuth, elevation);
+        }
+    }
+    
+    void DecoderMulti::setPinnaSize(DecoderBinaural::PinnaSize pinnaSize)
+    {
+        m_decoder_binaural->setPinnaSize(pinnaSize);
+    }
+    
+    void DecoderMulti::setSampleRate(unsigned int sampleRate)
+    {
+        m_decoder_binaural->setSampleRate(sampleRate);
+        m_sample_rate = sampleRate;
+    }
+    
+    void DecoderMulti::setVectorSize(unsigned int vectorSize)
+    {
+        m_decoder_binaural->setVectorSize(vectorSize);
+        m_vector_size = vectorSize;
+    }
+    
+	DecoderMulti::~DecoderMulti()
+	{
+        delete m_decoder_regular;
+        delete m_decoder_binaural;
+	}
+
 }
 
 
