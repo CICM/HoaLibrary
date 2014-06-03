@@ -64,8 +64,23 @@ namespace Hoa3D
     // Decoder Binaural //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    unsigned int hoa_number_binaural_configs    = 8;
-    unsigned int hoa_binaural_configs[]         = {4, 6, 8, 12, 18, 24, 36, 72};
+    unsigned int hoa_number_binaural_configs    = 4;
+    unsigned int hoa_number_binaural_elevation  = 14;
+    unsigned int hoa_binaural_configs[] = {
+        4, 0,  12, 20,
+        0, 8,  0,  24,
+        0, 0,  16, 28,
+        0, 0,  0,  32,
+        9, 12, 18, 36,
+        0, 0,  0,  34,
+        0, 0,  16, 32,
+        0, 8,  0,  28,
+        4, 0,  12, 24,
+        0, 0,  0,  20,
+        0, 4,  8,  14,
+        0, 0,  0,  8,
+        0, 0,  3,  4,
+        1, 1,  1,  1};
     
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
@@ -74,9 +89,10 @@ namespace Hoa3D
     
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {
-        if(m_order > 35)
-            m_order  = 35;
+        if(m_order > 16)
+            m_order  = 16;
         
+        m_configuration             = 0;
         m_vector_size               = 0;
         m_sample_rate               = 0;
         m_impulses_loaded           = 0;
@@ -90,9 +106,15 @@ namespace Hoa3D
         
         for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
         {
-            if(hoa_binaural_configs[i] > m_order * 2 + 2)
+            int number_of_loudspeaker = hoa_binaural_configs[i];
+            for (unsigned int j = 1; j < hoa_number_binaural_elevation; j++)
             {
-                m_number_of_virtual_channels = hoa_binaural_configs[i];
+                number_of_loudspeaker += hoa_binaural_configs[i + j * hoa_number_binaural_configs];
+            }
+            if(number_of_loudspeaker > (m_order * 1) * (m_order * 1))
+            {
+                m_number_of_virtual_channels = number_of_loudspeaker;
+                m_configuration = i;
                 break;
             }
         }
@@ -102,16 +124,6 @@ namespace Hoa3D
         m_channels_vector   = new float[m_number_of_virtual_channels];
         m_channels_vector_double = new double[m_number_of_virtual_channels];
         m_decoder           = new Decoder(m_order, m_number_of_virtual_channels);
-        
-        // Sample by sample //
-        m_channels_inputs_left = new float*[m_number_of_virtual_channels];
-        m_channels_inputs_right= new float*[m_number_of_virtual_channels];
-        
-        for(int i = 0; i < m_number_of_virtual_channels; i++)
-        {
-            m_channels_inputs_left[i]   = NULL;
-            m_channels_inputs_right[i]  = NULL;
-        }
         
         // Other
         m_channels_azimuth[0] = HOA_PI2;
@@ -153,28 +165,21 @@ namespace Hoa3D
                 m_sample_rate       = hoa_binaural_samplerate[0];
                 m_impulses_size     = hoa_binaural_impulse_sizes[0];
             }
-            for(int i = 0; i < m_number_of_virtual_channels; i++)
+            
+            int nimpulse = 0;
+            for(unsigned int i = 0; i < hoa_number_binaural_elevation; i++)
             {
-                m_impulses_vector[i] = get_mit_hrtf_3D(m_sample_rate, wrap_360(-i * 360 / m_number_of_virtual_channels), m_pinna_size) +hoa_binaural_crop[index];
+                int n_elev_channels = hoa_binaural_configs[i + hoa_number_binaural_configs * m_configuration];
+                for(unsigned int j = 0; j < n_elev_channels; j++)
+                {
+                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, j * (360. / (double )n_elev_channels), i * 10 - 40) +hoa_binaural_crop[index];
+                    nimpulse++;
+                }
             }
             
             if(m_impulses_matrix)
                 delete [] m_impulses_matrix;
             
-            // Sample by sample
-            for(int i = 0; i < m_number_of_virtual_channels; i++)
-            {
-                if(m_channels_inputs_left[i])
-                    delete [] m_channels_inputs_left[i];
-                if(m_channels_inputs_right[i])
-                    delete [] m_channels_inputs_right[i];
-                
-                m_channels_inputs_left[i]   = new float[m_impulses_size * 2 - 1];
-                m_channels_inputs_right[i]  = new float[m_impulses_size * 2 - 1];
-            }
-            m_index = m_impulses_size;
-            
-            // Other
             m_impulses_matrix = new float[m_impulses_size * 2 * m_number_of_harmonics];
             
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
@@ -252,58 +257,6 @@ namespace Hoa3D
             m_result_matrix_left    = m_result_matrix;
             m_result_matrix_right   = m_result_matrix + m_vector_size  * m_impulses_size;
             m_matrix_allocated = 1;
-        }
-    }
-    
-    void DecoderBinaural::process(const float* inputs, float* outputs)
-	{
-        m_decoder->process(inputs, m_channels_vector);
-        
-        --m_index;
-        m_channels_inputs_left[0][m_index] = m_channels_vector[0];
-        outputs[1] = outputs[0] = cblas_sdot(m_impulses_size, m_channels_inputs_left[0]+m_index, 1, m_impulses_vector[0], 1);
-        for(int i = 1; i < m_number_of_virtual_channels; i++)
-        {
-            m_channels_inputs_left[i][m_index] = m_channels_vector[i];
-            m_channels_inputs_right[i][m_index] = m_channels_vector[i];
-            outputs[0] += cblas_sdot(m_impulses_size, m_channels_inputs_left[i]+m_index, 1, m_impulses_vector[m_number_of_virtual_channels - i], 1);
-            outputs[1] += cblas_sdot(m_impulses_size, m_channels_inputs_right[i]+m_index, 1, m_impulses_vector[i], 1);
-        }
-        if(m_index <= 0)
-        {
-            m_index = m_impulses_size;
-            cblas_scopy(m_impulses_size, m_channels_inputs_left[0], 1, m_channels_inputs_left[0]+m_impulses_size, 1);
-            for(int i = 1; i < m_number_of_virtual_channels; i++)
-            {
-                cblas_scopy(m_impulses_size, m_channels_inputs_left[i], 1, m_channels_inputs_left[i]+m_impulses_size, 1);
-                cblas_scopy(m_impulses_size, m_channels_inputs_right[i], 1, m_channels_inputs_right[i]+m_impulses_size, 1);
-            }
-        }
-    }
-    
-    void DecoderBinaural::process(const double* inputs, double* outputs)
-	{
-        m_decoder->process(inputs, m_channels_vector_double);
-        
-        --m_index;
-        m_channels_inputs_left[0][m_index] = m_channels_vector_double[0];
-        outputs[1] = outputs[0] = cblas_sdot(m_impulses_size, m_channels_inputs_left[0]+m_index, 1, m_impulses_vector[0], 1);
-        for(int i = 1; i < m_number_of_virtual_channels; i++)
-        {
-            m_channels_inputs_left[i][m_index] = m_channels_vector_double[i];
-            m_channels_inputs_right[i][m_index] = m_channels_vector_double[i];
-            outputs[0] += cblas_sdot(m_impulses_size, m_channels_inputs_left[i]+m_index, 1, m_impulses_vector[m_number_of_virtual_channels - i], 1);
-            outputs[1] += cblas_sdot(m_impulses_size, m_channels_inputs_right[i]+m_index, 1, m_impulses_vector[i], 1);
-        }
-        if(m_index <= 0)
-        {
-            m_index = m_impulses_size;
-            cblas_scopy(m_impulses_size, m_channels_inputs_left[0], 1, m_channels_inputs_left[0]+m_impulses_size, 1);
-            for(int i = 1; i < m_number_of_virtual_channels; i++)
-            {
-                cblas_scopy(m_impulses_size, m_channels_inputs_left[i], 1, m_channels_inputs_left[i]+m_impulses_size, 1);
-                cblas_scopy(m_impulses_size, m_channels_inputs_right[i], 1, m_channels_inputs_right[i]+m_impulses_size, 1);
-            }
         }
     }
     
@@ -406,15 +359,6 @@ namespace Hoa3D
         if(m_linear_vector_right)
             delete [] m_linear_vector_right;
         m_linear_vector_right = NULL;
-        
-        // Sample by sample
-        for(int i = 0; i < m_number_of_virtual_channels; i++)
-        {
-            if(m_channels_inputs_left[i])
-                delete [] m_channels_inputs_left[i];
-            if(m_channels_inputs_right[i])
-                delete [] m_channels_inputs_right[i];
-        }
 	}
 }
 

@@ -88,7 +88,7 @@ namespace Hoa3D
 		void process(const double* input, double* output);
 	};
     
-    //const float* get_mit_hrtf_3D(unsigned long samplerate, unsigned long azimuth, bool large);
+    const float* get_mit_hrtf_3D(long samplerate, double azimuth, double elevation);
     
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
@@ -112,6 +112,7 @@ namespace Hoa3D
         unsigned int    m_sample_rate;
         unsigned int    m_vector_size;
         unsigned int    m_impulses_size;
+        unsigned int    m_configuration;
         
         bool            m_impulses_loaded;
         bool            m_matrix_allocated;
@@ -122,11 +123,6 @@ namespace Hoa3D
         float*          m_result_matrix_right;
         float*          m_linear_vector_left;
         float*          m_linear_vector_right;
-        
-        // Sample by sample
-        float**         m_channels_inputs_right;
-        float**         m_channels_inputs_left;
-        int             m_index;
         
         const float**   m_impulses_vector;
         PinnaSize       m_pinna_size;
@@ -228,90 +224,8 @@ namespace Hoa3D
          */
 		void process(const double* const* inputs, double** outputs);
         
-        //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
-         
-         @param     inputs	The input samples.
-         @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const float* inputs, float* outputs);
-		
-        //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
-         
-         @param     input    The input samples.
-         @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const double* inputs, double* outputs);
-        
     };
-	
-    inline const float* get_mit_hrtf_3D(long samplerate, long elevation, bool azimuth)
-    {
-        ;
-    }
-    /*
-    inline const float* get_mit_hrtf(long samplerate, long elevation, long azimuth)
-    {
-        int elevation_index;
-        int number_of_samples;
-        int elevation_offset;
-        
-        if(samplerate == 44100)
-            number_of_samples = 512;
-        else if(samplerate == 48000)
-            number_of_samples = 557;
-        else if(samplerate == 48000)
-            number_of_samples = 1024;
-        else if(samplerate == 48000)
-            number_of_samples = 1114;
-        else
-            return NULL;
-        
-        if(elevation == -40)
-            elevation_offset = 0;
-        else if(elevation == -30)
-            elevation_offset = 56 * number_of_samples;
-        else if(elevation == -20)
-            elevation_offset = (56 + 60) * number_of_samples;
-        else if(elevation == -10)
-            elevation_offset = (56 + 60 + 72) * number_of_samples;
-        else if(elevation == 0)
-            elevation_offset = (56 + 60 + 72 + 72) * number_of_samples;
-        else if(elevation == 10)
-            elevation_offset = (56 + 60 + 72 + 72 + 72) * number_of_samples;
-        else if(elevation == 20)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72) * number_of_samples;
-        else if(elevation == 30)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72) * number_of_samples;
-        else if(elevation == 40)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60) * number_of_samples;
-        else if(elevation == 50)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56) * number_of_samples;
-        else if(elevation == 60)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45) * number_of_samples;
-        else if(elevation == 70)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36) * number_of_samples;
-        else if(elevation == 80)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36 + 24) * number_of_samples;
-        else if(elevation == 90)
-            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36 + 24 + 12) * number_of_samples;
-        else
-            return NULL;
-        
-        elevation_index = (elevation + 40) / 130;
-        
-        if(samplerate == 44100)
-            return MIT_HRTF_44100+elevation_offset;
-        else if(samplerate == 48000)
-            return MIT_HRTF_44100+elevation_offset;
-        else if(samplerate == 88200)
-            return MIT_HRTF_88200+elevation_offset;
-        else if(samplerate == 96000)
-            return MIT_HRTF_96000+elevation_offset;
-        return NULL;
-    }
-    */
+
 } // end of namespace Hoa3D
 
 #endif

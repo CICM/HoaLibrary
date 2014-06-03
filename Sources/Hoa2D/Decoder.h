@@ -173,10 +173,84 @@ namespace Hoa2D
 		void process(const double* input, double* output);
     };
     
-    
-    
-    
     const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth, bool large);
+    
+    /*
+    extern const float MIT_HRTF_44100_2D_LARGE[];
+    extern const float MIT_HRTF_48000_2D_LARGE[];
+    extern const float MIT_HRTF_88200_2D_LARGE[];
+    extern const float MIT_HRTF_96000_2D_LARGE[];
+    
+    extern const float MIT_HRTF_44100_2D[];
+    extern const float MIT_HRTF_48000_2D[];
+    extern const float MIT_HRTF_88200_2D[];
+    extern const float MIT_HRTF_96000_2D[];
+    
+    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth, bool large)
+    {
+        int number_of_samples;
+        int azimuth_offset;
+        
+        if(samplerate == 44100)
+            number_of_samples = 512;
+        else if(samplerate == 48000)
+            number_of_samples = 557;
+        else if(samplerate == 88200)
+            number_of_samples = 1024;
+        else if(samplerate == 96000)
+            number_of_samples = 1114;
+        else
+        {
+            samplerate = 44100;
+            number_of_samples = 512;
+        }
+        
+        if(azimuth % 5 != 0)
+        {
+            if(azimuth > 356)
+                azimuth = 0;
+            else if(azimuth % 5 < 3)
+            {
+                while(azimuth % 5 != 0)
+                {
+                    azimuth--;
+                }
+            }
+            else
+            {
+                while(azimuth % 5 != 0)
+                {
+                    azimuth++;
+                }
+            }
+        }
+        
+        azimuth_offset = (azimuth / 5) * number_of_samples;
+        if(large)
+        {
+            if(samplerate == 44100)
+                return MIT_HRTF_44100_2D_LARGE+azimuth_offset;
+            else if(samplerate == 48000)
+                return MIT_HRTF_48000_2D_LARGE+azimuth_offset;
+            else if(samplerate == 88200)
+                return MIT_HRTF_88200_2D_LARGE+azimuth_offset;
+            else if(samplerate == 96000)
+                return MIT_HRTF_96000_2D_LARGE+azimuth_offset;
+            return NULL;
+        }
+        else
+        {
+            if(samplerate == 44100)
+                return MIT_HRTF_44100_2D+azimuth_offset;
+            else if(samplerate == 48000)
+                return MIT_HRTF_48000_2D+azimuth_offset;
+            else if(samplerate == 88200)
+                return MIT_HRTF_88200_2D+azimuth_offset;
+            else if(samplerate == 96000)
+                return MIT_HRTF_96000_2D+azimuth_offset;
+            return NULL;
+        }
+    }*/
     
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
