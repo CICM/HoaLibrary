@@ -26,6 +26,7 @@ void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp, short *count, double sampl
 void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_pd_err angles_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
 t_pd_err offset_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
@@ -204,6 +205,16 @@ void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp64, short *count, double sam
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_irregular, 0, NULL);
     else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Binaural && x->f_decoder->getBinauralState())
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_binaural, 0, NULL);
+    else
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_zero, 0, NULL);
+}
+
+void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < sampleframes; i++)
+    {
+        outs[0][i] = outs[1][i] = 0.;
+    }
 }
 
 void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)

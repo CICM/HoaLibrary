@@ -47,6 +47,7 @@ extern "C" void setup_hoa0x2elibrary(void)
 
     // Alias /:
     setup_hoa0x2e2d0x2ebinaural();
+    setup_hoa0x2e3d0x2ebinaural();
 
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
     post("© 2012 - 2014  CICM | Paris 8 University");
