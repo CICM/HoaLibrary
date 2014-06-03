@@ -149,8 +149,8 @@
     <ClCompile Include="..\..\..\HoaEditor\HoaMapComponent.cpp"/>
     <ClCompile Include="..\..\..\HoaEditor\HoaMeterComponent.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
-    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Ambisonic.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\BinauralMatrix2D.cpp"/>
+    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Ambisonic.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\ChannelManager.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\Decoder.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\Encoder.cpp"/>
@@ -168,7 +168,6 @@
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\SourcesManager.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\SourcesPreset.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\SourcesTrajectory.cpp"/>
-    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Vector.cpp"/>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\Wider.cpp"/>
     <ClCompile Include="..\..\..\..\ThirdParty\JuceModules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -1257,7 +1256,6 @@
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\SourcesManager.h"/>
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\SourcesPreset.h"/>
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\SourcesTrajectory.h"/>
-    <ClInclude Include="..\..\..\..\Sources\Hoa2D\Vector.h"/>
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\Wider.h"/>
     <ClInclude Include="..\..\..\..\Sources\Hoa.h"/>
     <ClInclude Include="..\..\..\..\Sources\HoaDefs.h"/>

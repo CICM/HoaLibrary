@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="WAsB9K" name="HoaHexaDeca" projectType="audioplug" version="0.0.1"
               bundleIdentifier="com.cicm.HoaHexaDeca" includeBinaryInAppConfig="1"
-              buildVST="1" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="0"
+              buildVST="1" buildVST3="0" buildAU="1" buildRTAS="0" buildAAX="0"
               pluginName="HoaHexaDeca" pluginDesc="HexaDecaphonic spatializer"
               pluginManufacturer="CICM" pluginManufacturerCode="CICM" pluginCode="Plug"
               pluginChannelConfigs="{1, 16}, {2, 16}, {3, 16}, {4, 16}, {5, 16}, {6, 16}, {7, 16}, {8, 16}, {9, 16}, {10, 16}, {11, 16}, {12, 16}, {13, 16}, {14, 16}, {15, 16}, {16, 16}"

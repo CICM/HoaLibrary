@@ -310,10 +310,10 @@
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>HoaQuadra\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Ambisonic.cpp">
+    <ClCompile Include="..\..\..\..\Sources\Hoa2D\BinauralMatrix2D.cpp">
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Sources\Hoa2D\BinauralMatrix2D.cpp">
+    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Ambisonic.cpp">
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\ChannelManager.cpp">
@@ -365,9 +365,6 @@
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\SourcesTrajectory.cpp">
-      <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Sources\Hoa2D\Vector.cpp">
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Sources\Hoa2D\Wider.cpp">
@@ -1618,9 +1615,6 @@
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\SourcesTrajectory.h">
-      <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Sources\Hoa2D\Vector.h">
       <Filter>HoaQuadra\Hoa\Hoa2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Sources\Hoa2D\Wider.h">

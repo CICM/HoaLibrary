@@ -191,6 +191,16 @@
       "MSP"
     ]
   },
+  "hoa.3d.scope~": {
+    "digest": "",
+    "module": "hoa",
+    "category": [
+      "ambisonics",
+      "hoa objects",
+      "audio",
+      "MSP"
+    ]
+  },
   "hoa.3d.wider~": {
     "digest": "A fractional ambisonic orders simulator for 2d",
     "module": "hoa",

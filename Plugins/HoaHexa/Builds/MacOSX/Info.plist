@@ -23,5 +23,24 @@
     <string>CICM</string>
     <key>NSHighResolutionCapable</key>
     <true/>
+    <key>AudioComponents</key>
+    <array>
+      <dict>
+        <key>name</key>
+        <string>CICM: HoaHexa</string>
+        <key>description</key>
+        <string>Hexaphonic spatializer</string>
+        <key>factoryFunction</key>
+        <string>HoaHexaAUFactory</string>
+        <key>manufacturer</key>
+        <string>CICM</string>
+        <key>type</key>
+        <string>aumf</string>
+        <key>subtype</key>
+        <string>Plug</string>
+        <key>version</key>
+        <integer>1</integer>
+      </dict>
+    </array>
   </dict>
 </plist>

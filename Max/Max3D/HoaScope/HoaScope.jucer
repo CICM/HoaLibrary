@@ -26,33 +26,34 @@
     </GROUP>
     <GROUP id="{FDE3A5FC-1B06-B0F1-87F5-F312ADD2E6C6}" name="Sources">
       <FILE id="RsU8Gx" name="Hoa.h" compile="0" resource="0" file="../../../Sources/Hoa.h"/>
-      <GROUP id="{9F031092-29E9-E39F-3A76-E2E916B3B87A}" name="Hoa3D">
-        <FILE id="XR6ioy" name="Ambisonic.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Ambisonic.cpp"/>
-        <FILE id="uFzv4f" name="Ambisonic.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Ambisonic.h"/>
-        <FILE id="mcaLdn" name="BinauralMatrix.cpp" compile="1" resource="0"
-              file="../../../Sources/Hoa3D/BinauralMatrix.cpp"/>
-        <FILE id="s391cR" name="Decoder.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Decoder.cpp"/>
-        <FILE id="ITFLgb" name="Decoder.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Decoder.h"/>
-        <FILE id="PbNhvm" name="Encoder.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Encoder.cpp"/>
-        <FILE id="JMNAKT" name="Encoder.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Encoder.h"/>
-        <FILE id="naik7h" name="Hoa3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Hoa3D.h"/>
-        <FILE id="qk7WuK" name="Map.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Map.cpp"/>
-        <FILE id="cyGebL" name="Map.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Map.h"/>
-        <FILE id="uADPHL" name="Meter.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Meter.cpp"/>
-        <FILE id="mhUgeE" name="Meter.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Meter.h"/>
-        <FILE id="CcqpGD" name="Optim.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Optim.cpp"/>
-        <FILE id="lglVk0" name="Optim.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Optim.h"/>
-        <FILE id="B4OVXV" name="Planewaves.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Planewaves.cpp"/>
-        <FILE id="HQckqR" name="Planewaves.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Planewaves.h"/>
-        <FILE id="G6PtBO" name="Rotate.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Rotate.cpp"/>
-        <FILE id="BdUn7N" name="Rotate.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Rotate.h"/>
-        <FILE id="JcQrsx" name="Scope.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Scope.cpp"/>
-        <FILE id="ljYGMZ" name="Scope.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Scope.h"/>
-        <FILE id="CvqpRf" name="Tools.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Tools.h"/>
-        <FILE id="t6HXzS" name="Vector.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Vector.cpp"/>
-        <FILE id="je11gF" name="Vector.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Vector.h"/>
-        <FILE id="m7DcjZ" name="Wider.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Wider.cpp"/>
-        <FILE id="BJO3rs" name="Wider.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Wider.h"/>
+      <GROUP id="{4535244E-30F5-BB12-7DAE-41C340E8CC5E}" name="Hoa3D">
+        <FILE id="gATlwi" name="Ambisonic_3D.cpp" compile="1" resource="0"
+              file="../../../Sources/Hoa3D/Ambisonic_3D.cpp"/>
+        <FILE id="BzIbKa" name="Ambisonic_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Ambisonic_3D.h"/>
+        <FILE id="Erlyiv" name="BinauralMatrix_3D.cpp" compile="1" resource="0"
+              file="../../../Sources/Hoa3D/BinauralMatrix_3D.cpp"/>
+        <FILE id="ekrlBZ" name="Decoder_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Decoder_3D.cpp"/>
+        <FILE id="OJoCCs" name="Decoder_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Decoder_3D.h"/>
+        <FILE id="eilmTy" name="Encoder_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Encoder_3D.cpp"/>
+        <FILE id="SsHIj2" name="Encoder_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Encoder_3D.h"/>
+        <FILE id="VPB0VS" name="Hoa3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Hoa3D.h"/>
+        <FILE id="dW1TaO" name="Map_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Map_3D.cpp"/>
+        <FILE id="exfxOk" name="Map_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Map_3D.h"/>
+        <FILE id="HD9Ck6" name="Meter_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Meter_3D.cpp"/>
+        <FILE id="ptk97r" name="Meter_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Meter_3D.h"/>
+        <FILE id="rSvAU6" name="Optim_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Optim_3D.cpp"/>
+        <FILE id="FFqBWU" name="Optim_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Optim_3D.h"/>
+        <FILE id="fMbeUG" name="Planewaves_3D.cpp" compile="1" resource="0"
+              file="../../../Sources/Hoa3D/Planewaves_3D.cpp"/>
+        <FILE id="M7UtIE" name="Planewaves_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Planewaves_3D.h"/>
+        <FILE id="X3hbHS" name="Rotate_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Rotate_3D.cpp"/>
+        <FILE id="AaNSTL" name="Rotate_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Rotate_3D.h"/>
+        <FILE id="juC3L0" name="Scope_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Scope_3D.cpp"/>
+        <FILE id="piORnM" name="Scope_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Scope_3D.h"/>
+        <FILE id="PwKqMQ" name="Vector_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Vector_3D.cpp"/>
+        <FILE id="bjybPn" name="Vector_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Vector_3D.h"/>
+        <FILE id="P5aERc" name="Wider_3D.cpp" compile="1" resource="0" file="../../../Sources/Hoa3D/Wider_3D.cpp"/>
+        <FILE id="xCkL6m" name="Wider_3D.h" compile="0" resource="0" file="../../../Sources/Hoa3D/Wider_3D.h"/>
       </GROUP>
       <FILE id="sAg8f8" name="HoaDefs.h" compile="0" resource="0" file="../../../Sources/HoaDefs.h"/>
       <FILE id="t2E95a" name="HoaMath.h" compile="0" resource="0" file="../../../Sources/HoaMath.h"/>
@@ -66,12 +67,12 @@
                externalLibraries="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="64BitUniversal"
-                       isDebug="1" optimisation="1" targetName="hoa.3d.scope~" customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../../_prerelease/max-package/externals&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"
+                       isDebug="1" optimisation="1" targetName="hoa.3d.scope~" customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../Package/HoaLibrary/externals/Hoa3d/&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"
                        headerPath="$(C74SUPPORT)/max-includes&#10;$(C74SUPPORT)/msp-includes&#10;$(C74SUPPORT)/jit-includes"
                        libraryPath="" binaryPath=""/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="64BitUniversal"
                        isDebug="0" optimisation="3" targetName="hoa.3d.scope~" headerPath="$(C74SUPPORT)/max-includes&#10;$(C74SUPPORT)/msp-includes&#10;$(C74SUPPORT)/jit-includes"
-                       customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../builds3D&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"/>
+                       customXcodeFlags="C74SUPPORT = &quot;$(SRCROOT)/../../../ThirdParty/Max/c74support&quot;, WRAPPER_EXTENSION = mxo, GENERATE_PKGINFO_FILE = YES, PRODUCT_VERSION = &quot;HoaLibrary 2.0&quot;, DEPLOYMENT_LOCATION = YES, INSTALL_PATH = /, DSTROOT = &quot;$(SRCROOT)/../../Package/HoaLibrary/externals/Hoa3d/&quot;, FRAMEWORK_SEARCH_PATHS = &quot;$(C74SUPPORT)/max-includes $(C74SUPPORT)/msp-includes&quot;, C74_SYM_LINKER_FLAGS = &quot;@$(C74SUPPORT)/max-includes/c74_linker_flags.txt&quot;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../ThirdParty/JuceModules"/>

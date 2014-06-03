@@ -117,7 +117,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
 	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
-	// @description The <b>gain</b> factor can be used to offer a better visualisation of low sound fields.
+	// @description The <b>gain</b> factor can be used to offer a better visualisation of low amplitude sound fields.
 
 	CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
 	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Behavior");

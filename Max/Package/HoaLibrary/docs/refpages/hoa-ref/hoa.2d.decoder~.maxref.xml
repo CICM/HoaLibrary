@@ -59,6 +59,7 @@
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Angles of Channels" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -73,6 +74,7 @@
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Auto connection" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
 			</attributelist>
@@ -88,6 +90,7 @@
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
 				<attribute name="default" get="1" set="1" type="int" size="1" value="4" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Number of Channels" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -107,6 +110,7 @@
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Mode" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -122,6 +126,7 @@
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
 				<attribute name="default" get="1" set="1" type="float" size="1" value="0" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Offset of Channels" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -136,6 +141,7 @@
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Pinna Size" />
+				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>

@@ -1,8 +1,30 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
-// For information on usage and redistribution, and for a DISCLAIMER OF ALL
-// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
-*/
+ // Copyright (c) 2012-2013 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+ // For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+ */
+
+/**
+ @file      hoa.3d.scope~.cpp
+ @name      hoa.3d.scope~
+ @realname  hoa.3d.scope~
+ @type      object
+ @module    hoa
+ @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+ 
+ @digest
+ A spherical harmonic visualizer
+ 
+ @description
+ <o>hoa.3d.scope~</o> displays spherical harmonics of an ambisonic sound field
+ 
+ @discussion
+ <o>hoa.3d.scope~</o> displays spherical harmonics of an ambisonic sound field
+ 
+ @category ambisonics, hoa objects, audio, MSP
+ 
+ @seealso hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.scope~, hoa.3d.wider~, hoa.dac~
+ */
 
 #include "../Hoa3D.max.h"
 #include "../../MaxJuceBox/jucebox_wrapper.h"
@@ -69,7 +91,12 @@ int C74_EXPORT main(void)
     jucebox_initclass(c, (method)hoa_scope_paint,  JBOX_COLOR | JBOX_FIXWIDTH);
     hoa_initclass(c, (method)hoa_getinfos);
     
+	// @method signal @digest Array of spherical harmonic signals that represent a sound field
+	// @description Array of spherical harmonic signals that represent a sound field
 	class_addmethod(c, (method)hoa_scope_dsp64,				"dsp64",            A_CANT, 0);
+	
+	// @method (mouse) @digest Change point of view by dragging the scene.
+	// @description Change point of view by dragging the scene.
 	class_addmethod(c, (method)hoa_scope_mousedown,			"mousedown",        A_CANT, 0);
     class_addmethod(c, (method)hoa_scope_mousedrag,			"mousedrag",        A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,			"assist",           A_CANT, 0);
@@ -88,6 +115,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT              (c, "order", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "order", 1);
     CLASS_ATTR_PAINT                (c, "order", 1);
+	// @description The ambisonic order of decomposition. Will adapt the number of input accordingly.
     
     CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_scope, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
@@ -95,6 +123,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.9 0.9 0.9 1.");
+	// @description Sets the RGBA values for the background color of the <o>hoa.3d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_scope, f_color_bd);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
@@ -102,6 +131,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.1 0.1 0.1 1.");
+	// @description Sets the RGBA values for the border color of the <o>hoa.3d.scope~</o> object
 	
     CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_scope, f_color_ph);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
@@ -109,6 +139,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positive Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "phcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "phcolor", 0, "1. 0. 0. 1.");
+	// @description Sets the RGBA values for the positive harmonics color of the <o>hoa.3d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_hoa_scope, f_color_nh);
 	CLASS_ATTR_CATEGORY             (c, "nhcolor", 0, "Color");
@@ -116,6 +147,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negative Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "nhcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
+	// @description Sets the RGBA values for the negative harmonics color of the <o>hoa.2d.scope~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "spcolor", 0, t_hoa_scope, f_color_sp);
 	CLASS_ATTR_CATEGORY             (c, "spcolor", 0, "Color");
@@ -123,6 +155,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL                (c, "spcolor", 0, "Sphere Color");
 	CLASS_ATTR_ORDER                (c, "spcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "spcolor", 0, "0. 0. 0. 1.");
+	// @description Sets the RGBA values for the sphere color of the <o>hoa.3d.scope~</o> object
 	
     CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
 	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Rendering");
@@ -131,6 +164,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
 	CLASS_ATTR_DEFAULT              (c, "interval", 0, "100");
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
+	// @description The refresh interval time in milliseconds.
     
 	CLASS_ATTR_DOUBLE_ARRAY         (c, "camera", 0, t_hoa_scope, f_camera, 2);
 	CLASS_ATTR_CATEGORY             (c, "camera", 0, "Rendering");
@@ -139,6 +173,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT_SAVE         (c, "camera", 0, "0. 0.");
 	CLASS_ATTR_ACCESSORS            (c, "camera", NULL, hoa_scope_attr_set_camera);
     CLASS_ATTR_PAINT                (c, "camera", 1);
+	// @description The scene point of view.
     
     CLASS_ATTR_ATOM_LONG            (c, "vectors", 0, t_hoa_scope, f_vectors);
 	CLASS_ATTR_CATEGORY             (c, "vectors", 0, "Rendering");
@@ -147,6 +182,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT              (c, "vectors", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "vectors", 1);
     CLASS_ATTR_PAINT                (c, "vectors", 1);
+	// @description Display or not the cartesian vectors.
     
     CLASS_ATTR_ATOM_LONG            (c, "sphere", 0, t_hoa_scope, f_sphere);
 	CLASS_ATTR_CATEGORY             (c, "sphere", 0, "Rendering");
@@ -155,6 +191,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT              (c, "sphere", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "sphere", 1);
     CLASS_ATTR_PAINT                (c, "sphere", 1);
+	// @description Display or not the sphere.
     
     CLASS_ATTR_ATOM_LONG            (c, "style", 0, t_hoa_scope, f_mode);
 	CLASS_ATTR_CATEGORY             (c, "style", 0, "Rendering");
@@ -165,6 +202,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_FILTER_CLIP          (c, "style", 0, 1);
 	CLASS_ATTR_SAVE                 (c, "style", 1);
     CLASS_ATTR_PAINT                (c, "style", 1);
+	// @description Display mode of the spherical harmonics.
     
     CLASS_ATTR_DOUBLE               (c, "gain", 0, t_hoa_scope, f_gain);
 	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Rendering");
@@ -173,6 +211,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
 	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
+	// @description The <b>gain</b> factor can be used to offer a better visualisation of low amplitude sound fields.
 	
 	CLASS_ATTR_ATOM_LONG            (c, "light", 0, t_hoa_scope, f_light);
 	CLASS_ATTR_CATEGORY             (c, "light", 0, "Rendering");
@@ -181,6 +220,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT              (c, "light", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "light", 1);
     CLASS_ATTR_PAINT                (c, "light", 1);
+	// @description Activate or deactivate lighting.
     
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;
@@ -464,7 +504,7 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
                 else
                     glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
                 
-                glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+                glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
                 
                 elevation   = x->f_scope->getElevation(i);
                 value       = x->f_scope->getValue(i, j);
@@ -476,7 +516,7 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
                 else
                     glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
                 
-                glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+                glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
                 
             }
         }
@@ -492,13 +532,13 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
                 value       = (x->f_scope->getValue(i-1, j) + 1.) * 0.5;
                 glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
                 
-                glVertex3d(Hoa3D::abscissa(1., azimuth, elevation), Hoa3D::height(1., azimuth, elevation), Hoa3D::ordinate(1., azimuth, elevation));
+                glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
                 
                 elevation   = x->f_scope->getElevation(i);
                 value       = (x->f_scope->getValue(i, j) + 1.) * 0.5;
                 glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
                 
-                glVertex3d(Hoa3D::abscissa(1., azimuth, elevation), Hoa3D::height(1., azimuth, elevation), Hoa3D::ordinate(1., azimuth, elevation));
+                glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
             }
         }
     }

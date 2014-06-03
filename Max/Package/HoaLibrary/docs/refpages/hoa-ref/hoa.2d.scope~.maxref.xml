@@ -89,7 +89,7 @@
 				Gain
 			</digest>
 			<description>
-				The <b>gain</b> factor can be used to offer a better visualisation of low sound fields.
+				The <b>gain</b> factor can be used to offer a better visualisation of low amplitude sound fields.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />

@@ -25,7 +25,7 @@ void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double sam
 void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void hoa_vector_setLoudspeakers(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv);
+void hoa_vector_setChannels(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv);
 t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_vector_class;
@@ -41,7 +41,7 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_vector_setLoudspeakers,   "lscoord",    A_GIMME, 0);
+    class_addmethod(c, (method)hoa_vector_setChannels,   "lscoord",    A_GIMME, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -53,27 +53,27 @@ int C74_EXPORT main(void)
 void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_vector *x = NULL;
-	int	numberOfLoudspeakers = 1;
+	int	numberOfChannels = 1;
     int mode = 1;
     x = (t_hoa_vector *)object_alloc(hoa_vector_class);
 	if (x)
 	{		
 		if(argc && atom_gettype(argv) == A_LONG)
-			numberOfLoudspeakers = atom_getlong(argv);
-        if(numberOfLoudspeakers < 1)
-            numberOfLoudspeakers = 1;
+			numberOfChannels = atom_getlong(argv);
+        if(numberOfChannels < 1)
+            numberOfChannels = 1;
         
         if(argc > 1 && atom_gettype(argv+1) == A_SYM && atom_getsym(argv+1) == gensym("velocity"))
 			mode = 0;
         
         x->f_mode = mode;
 		
-		x->f_vector = new Hoa3D::Vector(numberOfLoudspeakers);
+		x->f_vector = new Hoa3D::Vector(numberOfChannels);
 		for (int i = 0; i < 3; i++)
 			outlet_new(x, "signal");
         
-		dsp_setup((t_pxobject *)x, x->f_vector->getNumberOfLoudspeakers());
-        x->f_sig_ins =  new double[x->f_vector->getNumberOfLoudspeakers() * SYS_MAXBLKSIZE];
+		dsp_setup((t_pxobject *)x, x->f_vector->getNumberOfChannels());
+        x->f_sig_ins =  new double[x->f_vector->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_sig_outs = new double[3 * SYS_MAXBLKSIZE];
 	}
 
@@ -84,7 +84,7 @@ t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	boxinfos->autoconnect_inputs = 0;
-	boxinfos->autoconnect_outputs = x->f_vector->getNumberOfLoudspeakers();
+	boxinfos->autoconnect_outputs = x->f_vector->getNumberOfChannels();
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
@@ -135,7 +135,7 @@ void hoa_vector_assist(t_hoa_vector *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
     {
-        sprintf(s,"(Signal) %s", x->f_vector->getLoudspeakerName(a).c_str());
+        sprintf(s,"(Signal) %s", x->f_vector->getChannelName(a).c_str());
     }
     else
     {
@@ -168,15 +168,15 @@ void hoa_vector_free(t_hoa_vector *x)
     delete [] x->f_sig_outs;
 }
 
-void hoa_vector_setLoudspeakers(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv)
+void hoa_vector_setChannels(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv)
 {
     if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_FLOAT && atom_gettype(argv+2) == A_FLOAT)
     {
-        x->f_vector->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+        x->f_vector->setChannelPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
     }
-    for(int i = 0; i < x->f_vector->getNumberOfLoudspeakers(); i++)
+    for(int i = 0; i < x->f_vector->getNumberOfChannels(); i++)
     {
-        post("ls %i %f %f", i, x->f_vector->getLoudspeakerAzimuth(i), x->f_vector->getLoudspeakerElevation(i));
-        post("ls %i %f %f %f", i, x->f_vector->getLoudspeakerAbscissa(i), x->f_vector->getLoudspeakerOrdinate(i), x->f_vector->getLoudspeakerHeight(i));
+        post("ls %i %f %f", i, x->f_vector->getChannelAzimuth(i), x->f_vector->getChannelElevation(i));
+        post("ls %i %f %f %f", i, x->f_vector->getChannelAbscissa(i), x->f_vector->getChannelOrdinate(i), x->f_vector->getChannelHeight(i));
     }
 }

@@ -58,7 +58,8 @@ public:
 
         context.extensions.glFramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureID, 0);
 
-        if (wantsDepthBuffer || wantsStencilBuffer)
+        //if (wantsDepthBuffer || wantsStencilBuffer)
+		if (1)
         {
             context.extensions.glGenRenderbuffers (1, &depthOrStencilBuffer);
             context.extensions.glBindRenderbuffer (GL_RENDERBUFFER, depthOrStencilBuffer);

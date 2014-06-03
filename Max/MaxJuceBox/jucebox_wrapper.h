@@ -17,6 +17,7 @@ extern "C"
 }
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include <OpenGL/gl.h>
 
 class MaxOpenGlComponent : public juce::Component, public OpenGLRenderer
 {
