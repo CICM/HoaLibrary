@@ -13,6 +13,7 @@
 		21A96A6808B95B5303B7F950 /* BinauralMatrix_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC383DF44554C77E439E97 /* BinauralMatrix_3D.cpp */; };
 		23AFAA69D3F8DFB02AEE7341 /* jucebox_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79A91C7788C1BD0F81399D11 /* jucebox_wrapper.cpp */; };
 		285B24D2E9804A291D0CE54D /* juce_core.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEA2249A4DD35493B0B26567 /* juce_core.mm */; };
+		2CE43F43193E2B9600339E34 /* jucebox_wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CE43F41193E2B9600339E34 /* jucebox_wrapper.mm */; };
 		46F849E9F9935A8D3A124BE2 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB538661CFC42C4AAA0F926 /* MaxAPI.framework */; };
 		4A7D46D2CD84751AC44BC646 /* juce_data_structures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81294C78C44C7C2D6114C5BD /* juce_data_structures.mm */; };
 		54CFBC6A69F9410B34DE1E01 /* hoa.3d.scope~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C908276C7161CCA7F88CB6F /* hoa.3d.scope~.cpp */; };
@@ -157,6 +158,8 @@
 		2BEC383DF44554C77E439E97 /* BinauralMatrix_3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinauralMatrix_3D.cpp; path = ../../../Sources/Hoa3D/BinauralMatrix_3D.cpp; sourceTree = SOURCE_ROOT; };
 		2C3647C0E014195ACCC9A93F /* juce_mac_CarbonViewWrapperComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_mac_CarbonViewWrapperComponent.h; path = ../../../ThirdParty/JuceModules/juce_gui_extra/native/juce_mac_CarbonViewWrapperComponent.h; sourceTree = SOURCE_ROOT; };
 		2CA232048B14E5C5CF541ADE /* juce_URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_URL.h; path = ../../../ThirdParty/JuceModules/juce_core/network/juce_URL.h; sourceTree = SOURCE_ROOT; };
+		2CE43F41193E2B9600339E34 /* jucebox_wrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = jucebox_wrapper.mm; path = ../../MaxJuceBox/jucebox_wrapper.mm; sourceTree = "<group>"; };
+		2CE43F42193E2B9600339E34 /* jucebox_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jucebox_wrapper.h; path = ../../MaxJuceBox/jucebox_wrapper.h; sourceTree = "<group>"; };
 		2D5ECC65EBDC830D1A85D916 /* juce_MessageManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_MessageManager.cpp; path = ../../../ThirdParty/JuceModules/juce_events/messages/juce_MessageManager.cpp; sourceTree = SOURCE_ROOT; };
 		2DCDE73CC3E40395861CF54B /* juce_LiveConstantEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_LiveConstantEditor.h; path = ../../../ThirdParty/JuceModules/juce_gui_extra/misc/juce_LiveConstantEditor.h; sourceTree = SOURCE_ROOT; };
 		2E4856CE6AC55DC9771824A5 /* juce_RelativeCoordinate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_RelativeCoordinate.cpp; path = ../../../ThirdParty/JuceModules/juce_gui_basics/positioning/juce_RelativeCoordinate.cpp; sourceTree = SOURCE_ROOT; };
@@ -741,7 +744,6 @@
 		FAC98BBCF9723821DDB8A2A0 /* juce_MouseInputSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_MouseInputSource.h; path = ../../../ThirdParty/JuceModules/juce_gui_basics/mouse/juce_MouseInputSource.h; sourceTree = SOURCE_ROOT; };
 		FAC9AF2AE4F6D593DD530399 /* juce_StretchableLayoutManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_StretchableLayoutManager.cpp; path = ../../../ThirdParty/JuceModules/juce_gui_basics/layout/juce_StretchableLayoutManager.cpp; sourceTree = SOURCE_ROOT; };
 		FAD6A37877A846C3CF87E473 /* juce_OpenGLTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_OpenGLTexture.h; path = ../../../ThirdParty/JuceModules/juce_opengl/opengl/juce_OpenGLTexture.h; sourceTree = SOURCE_ROOT; };
-		FB301EA04B32B12EE2B5A8D6 /* jucebox_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = jucebox_wrapper.h; path = ../../MaxJuceBox/jucebox_wrapper.h; sourceTree = SOURCE_ROOT; };
 		FB99106327A124FD17688EE7 /* juce_Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Singleton.h; path = ../../../ThirdParty/JuceModules/juce_core/memory/juce_Singleton.h; sourceTree = SOURCE_ROOT; };
 		FC212F55C24E362246952B0E /* juce_Uuid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_Uuid.cpp; path = ../../../ThirdParty/JuceModules/juce_core/misc/juce_Uuid.cpp; sourceTree = SOURCE_ROOT; };
 		FC23BD4D11F00198ABA62D90 /* juce_DirectoryContentsList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DirectoryContentsList.cpp; path = ../../../ThirdParty/JuceModules/juce_gui_basics/filebrowser/juce_DirectoryContentsList.cpp; sourceTree = SOURCE_ROOT; };
@@ -1436,7 +1438,8 @@
 			isa = PBXGroup;
 			children = (
 				79A91C7788C1BD0F81399D11 /* jucebox_wrapper.cpp */,
-				FB301EA04B32B12EE2B5A8D6 /* jucebox_wrapper.h */,
+				2CE43F41193E2B9600339E34 /* jucebox_wrapper.mm */,
+				2CE43F42193E2B9600339E34 /* jucebox_wrapper.h */,
 			);
 			name = MaxJuceBox;
 			sourceTree = "<group>";
@@ -2163,6 +2166,7 @@
 				21A96A6808B95B5303B7F950 /* BinauralMatrix_3D.cpp in Sources */,
 				81B51EBF7D24A3D4CA2A7747 /* Decoder_3D.cpp in Sources */,
 				78F18A7FBBA591C87CC7FADE /* Encoder_3D.cpp in Sources */,
+				2CE43F43193E2B9600339E34 /* jucebox_wrapper.mm in Sources */,
 				C7B5BE2ECB99747ECF66CFB2 /* Map_3D.cpp in Sources */,
 				036ADE6B74A1E6FA33A9AD11 /* Meter_3D.cpp in Sources */,
 				86A3CFA836DF2EB28D92D605 /* Optim_3D.cpp in Sources */,
@@ -2357,7 +2361,7 @@
 				69049D3376BBA62F592FB001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		D7183D615E303D31044FD571 /* Build configuration list for PBXProject "HoaScope" */ = {
 			isa = XCConfigurationList;
@@ -2366,7 +2370,7 @@
 				10095FBD0521F0087A855858 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

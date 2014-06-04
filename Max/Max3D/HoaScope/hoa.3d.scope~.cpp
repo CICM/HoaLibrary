@@ -44,6 +44,7 @@ typedef struct _hoa_scope
     long            f_interval;
     
     long            f_mode;
+	long			f_color_interp_mode;
     long            f_vectors;
 	long            f_light;
     long            f_sphere;
@@ -78,6 +79,11 @@ void hoa_scope_mousedrag(t_hoa_scope *x, t_object *patcherview, t_pt pt, long mo
 t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
 t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
+
+void hoa_draw_lighting(t_hoa_scope *x);
+void hoa_draw_camera(t_hoa_scope *x);
+void hoa_draw_harmonics_shape(t_hoa_scope *x);
+void hoa_draw_harmonics_mapping(t_hoa_scope *x);
 
 int C74_EXPORT main(void)
 {
@@ -203,6 +209,17 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_SAVE                 (c, "style", 1);
     CLASS_ATTR_PAINT                (c, "style", 1);
 	// @description Display mode of the spherical harmonics.
+	
+	CLASS_ATTR_ATOM_LONG            (c, "colorinterp", 0, t_hoa_scope, f_color_interp_mode);
+	CLASS_ATTR_CATEGORY             (c, "colorinterp", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "colorinterp", 0, "5");
+    CLASS_ATTR_ENUMINDEX3           (c, "colorinterp", 0, "Linear", "Cosine", "Absolute");
+    CLASS_ATTR_LABEL                (c, "colorinterp", 0, "Color interpolation type");
+	CLASS_ATTR_DEFAULT              (c, "colorinterp", 0, "0");
+    CLASS_ATTR_FILTER_CLIP          (c, "colorinterp", 0, 2);
+	CLASS_ATTR_SAVE                 (c, "colorinterp", 1);
+    CLASS_ATTR_PAINT                (c, "colorinterp", 1);
+	// @description Color interpolation mode (only works in <m>mapping</m> drawing mode)
     
     CLASS_ATTR_DOUBLE               (c, "gain", 0, t_hoa_scope, f_gain);
 	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Rendering");
@@ -376,22 +393,31 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
     sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
-void hoa_draw_vectors(t_jucebox *x)
+void hoa_draw_vectors(t_hoa_scope *x)
 {
-    glColor4d(1., 0., 0., 1.);
-    glBegin(GL_LINE_STRIP);
-    glVertex3d(0, 0, 1);
+	glPushMatrix();
+	
+	glLineWidth(4);
+	glBegin(GL_LINE_STRIP);
+	glColor4d(1., 0., 0., 1.);
+	glVertex3d(0, 0, 1);
     glVertex3d(0, 0, 0);
     glVertex3d(0, 1, 0);
     glVertex3d(0, 0, 0);
     glVertex3d(1, 0, 0);
     glEnd();
+	
+	glPopMatrix();
 }
 
-void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
+void hoa_draw_sphere(t_hoa_scope *x, t_jrgba color)
 {
+	glPushMatrix();
+	hoa_draw_camera(x);
+	
     double one, cos_one, sin_one, two ,cos_two, sin_two;
     
+	glLineWidth(1);
     glColor4d(color.red, color.green, color.blue, color.alpha);
     for(int i = 1; i < 10; i++)
     {
@@ -426,11 +452,86 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
         }
         glEnd();
     }
+	
+	glPopMatrix();
 }
 
-void hoa_scope_paint(t_hoa_scope *x, double w, double h)
+void hoa_draw_harmonics_shape(t_hoa_scope *x)
 {
-    int number_of_rows = x->f_scope->getNumberOfRows();
+	int number_of_rows = x->f_scope->getNumberOfRows();
+	int number_of_columns = x->f_scope->getNumberOfColumns();
+	float value;
+    float azimuth, elevation;
+	t_jrgba color_positive = x->f_color_ph;
+	t_jrgba color_negative = x->f_color_nh;
+	
+	glPushMatrix();
+	
+	glBegin(GL_TRIANGLE_STRIP);
+    for(int i = 1; i < number_of_rows; i++)
+	{
+		for(int j = 0; j < number_of_columns; j++)
+		{
+			azimuth     =  x->f_scope->getAzimuth(j);
+			elevation   = x->f_scope->getElevation(i-1);
+			value       = x->f_scope->getValue(i-1, j);
+			if(value < 0)
+			{
+				glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
+				value= -value;
+			}
+			else
+				glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
+			
+			glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
+			
+			elevation   = x->f_scope->getElevation(i);
+			value       = x->f_scope->getValue(i, j);
+			if(value < 0)
+			{
+				glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
+				value= -value;
+			}
+			else
+				glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
+			
+			glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
+			
+		}
+	}
+	glEnd();
+	
+	glPopMatrix();
+}
+
+double cosine_interpolation(double mu, double y1, float y2)
+{
+    double mu2;
+    mu2 = (1-cos(mu*HOA_PI))/2;
+    return(y1*(1-mu2)+y2*mu2);;
+}
+
+double color_interp(t_hoa_scope *x, double val, double y1, float y2)
+{
+	if (x->f_color_interp_mode == 0)
+	{
+		return y2 * val + y1 * (1. - val);
+	}
+    else if (x->f_color_interp_mode == 1)
+	{
+		double val2;
+		val2 = (1-cos(val*HOA_PI))/2;
+		return(y1*(1-val2)+y2*val2);
+	}
+	else
+	{
+		return (val < 0.5) ? y1 : y2;
+	}
+}
+
+void hoa_draw_harmonics_mapping(t_hoa_scope *x)
+{
+	int number_of_rows = x->f_scope->getNumberOfRows();
 	int number_of_columns = x->f_scope->getNumberOfColumns();
     
 	float value;
@@ -438,112 +539,104 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	t_jrgba color_positive = x->f_color_ph;
 	t_jrgba color_negative = x->f_color_nh;
 	
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+	glPushMatrix();
 	
-    glEnable(GL_DEPTH_TEST); // enable depth buffer
-	
-	if (x->f_light)
+	glBegin(GL_TRIANGLE_STRIP);
+	for(int i = 1; i < number_of_rows; i++)
 	{
+		for(int j = 0; j < number_of_columns; j++)
+		{
+			azimuth     =  x->f_scope->getAzimuth(j);
+			elevation   = x->f_scope->getElevation(i-1);
+			value       = (x->f_scope->getValue(i-1, j) + 1.) * 0.5;
+			
+			glColor4d(color_interp(x, value, color_negative.red, color_positive.red), color_interp(x, value, color_negative.green, color_positive.green), color_interp(x, value, color_negative.blue, color_positive.blue), color_interp(x, value, color_negative.alpha, color_positive.alpha));
+			
+			glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
+			
+			elevation   = x->f_scope->getElevation(i);
+			value       = (x->f_scope->getValue(i, j) + 1.) * 0.5;
+			
+			glColor4d(color_interp(x, value, color_negative.red, color_positive.red), color_interp(x, value, color_negative.green, color_positive.green), color_interp(x, value, color_negative.blue, color_positive.blue), color_interp(x, value, color_negative.alpha, color_positive.alpha));
+			
+			glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
+		}
+	}
+	glEnd();
+	
+	glPopMatrix();
+}
+
+void hoa_draw_lighting(t_hoa_scope *x)
+{
+	if (x->f_light && x->f_mode == 0)
+	{
+		//glMatrixMode(GL_MODELVIEW);
+		
 		// lighting
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 		
-		glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT ) ;
-		//glColorMaterial ( GL_FRONT_AND_BACK, GL_DIFFUSE ) ;
-		//glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
-		//glColorMaterial ( GL_FRONT_AND_BACK, GL_SHININESS ) ;
-		//glColorMaterial ( GL_FRONT_AND_BACK, GL_EMISSION ) ;
+		//glEnable(GL_LIGHT1);
 		
 		glEnable(GL_COLOR_MATERIAL);
-		glShadeModel (GL_SMOOTH); // enable smooth transition from the dark colour to the light
+		glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT ) ;
 		
 		//Add ambient light
-		GLfloat ambientColor[] = {0.5f, 0.5f, 0.5f, 1.0f};
+		GLfloat ambientColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
 		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		
 		//Add positioned light
-		GLfloat lightColor0[] = {0.4f, 0.4f, 0.4f, 1.0f};
-		GLfloat lightPos0[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f};
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+		//glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor0);
+		
+		//GLfloat lightPos0[] = {2.0f, 2.0f, 0.0f, 1.f};
+		//GLfloat lightPos0[] = {0, 0, 0.5, 1.};
+		GLfloat lightPos0[] = {0, 0, 0, 1.};
+		//GLfloat lightPos1[] = {0, 0, -0.5, 1.};
+		
+		//GLfloat lightPos0[] = {0.1f, 0.1f, 0.2f, 1.f};
+		
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
-		//glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 1000);
+		//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	}
 	else
 	{
 		glDisable(GL_LIGHTING);
 	}
+}
+
+void hoa_draw_camera(t_hoa_scope *x)
+{
+	glRotated(wrap_360(-x->f_camera[1] / HOA_2PI * 360.), 1., 0., 0.);
+    glRotated(wrap_360(x->f_camera[0] / HOA_2PI * 360.), 0., 1., 0.);
+}
+
+void hoa_scope_paint(t_hoa_scope *x, double w, double h)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST); // enable depth buffer
+	glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 	
-	glRotated(-x->f_camera[1] / HOA_2PI * 360., 1., 0., 0.);
-    glRotated(x->f_camera[0] / HOA_2PI * 360., 0., 1., 0.);
+	hoa_draw_lighting(x);
 	
-	glPointSize(1.0f);
-    
-    if(x->f_sphere)
-        hoa_draw_sphere((t_jucebox *)x, x->f_color_sp);
+	hoa_draw_camera(x);
+		
+	// draw sphere
+    if(x->f_sphere && x->f_mode == 0)
+        hoa_draw_sphere(x, x->f_color_sp);
+	
+	// draw vectors
     if(x->f_vectors)
-        hoa_draw_vectors((t_jucebox *) x);
+        hoa_draw_vectors(x);
     
-	glBegin(GL_TRIANGLE_STRIP);
+	// draw harmonics
     if(x->f_mode == 0)
-    {
-        for(int i = 1; i < number_of_rows; i++)
-        {
-            for(int j = 0; j < number_of_columns; j++)
-            {
-                azimuth     =  x->f_scope->getAzimuth(j);
-                elevation   = x->f_scope->getElevation(i-1);
-                value       = x->f_scope->getValue(i-1, j);
-                if(value < 0)
-                {
-                    glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-                    value= -value;
-                }
-                else
-                    glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-                
-                glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
-                
-                elevation   = x->f_scope->getElevation(i);
-                value       = x->f_scope->getValue(i, j);
-                if(value < 0)
-                {
-                    glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-                    value= -value;
-                }
-                else
-                    glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-                
-                glVertex3d(abscissa(value, azimuth, elevation), height(value, azimuth, elevation), ordinate(value, azimuth, elevation));
-                
-            }
-        }
-    }
+        hoa_draw_harmonics_shape(x);
     else
-    {
-        for(int i = 1; i < number_of_rows; i++)
-        {
-            for(int j = 0; j < number_of_columns; j++)
-            {
-                azimuth     =  x->f_scope->getAzimuth(j);
-                elevation   = x->f_scope->getElevation(i-1);
-                value       = (x->f_scope->getValue(i-1, j) + 1.) * 0.5;
-                glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
-                
-                glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
-                
-                elevation   = x->f_scope->getElevation(i);
-                value       = (x->f_scope->getValue(i, j) + 1.) * 0.5;
-                glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
-                
-                glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
-            }
-        }
-    }
-    
-    
-	glEnd();
+        hoa_draw_harmonics_mapping(x);
 }
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)

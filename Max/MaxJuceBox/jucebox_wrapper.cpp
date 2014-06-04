@@ -8,11 +8,11 @@
 
 MaxOpenGlComponent::MaxOpenGlComponent()
 {
-    setBounds(-10, -10, 1, 1);
+    setBounds(-1000, -1000, 1, 1);
     m_context = new OpenGLContext();
     m_context->setComponentPaintingEnabled(false);
 
-	m_context->setRenderer(this); // need this to set m_scale
+	m_context->setRenderer(this); // we need this to set m_scale
     m_context->attachTo(*this);
     m_context->setContinuousRepainting(false);
     setInterceptsMouseClicks(false, false);
@@ -34,6 +34,7 @@ Image MaxOpenGlComponent::makeScreenshot(t_object* x, double width, double heigh
     (object_getmethod(x, gensym("jucebox_paint")))(x, width * m_scale, height * m_scale);
 	
     buffer->releaseAsRenderingTarget();
+	
     return img;
 }
 
@@ -48,23 +49,31 @@ void jucebox_initclass(t_class* c, method paint, long flags)
     jbox_initclass(c, flags);
 	class_addmethod(c, (method)jucebox_paint, "paint", A_CANT, 0);
     class_addmethod(c, (method)paint, "jucebox_paint", A_CANT, 0);
+	
+	if(gensym("hoa_scope_newwindow")->s_thing == NULL)
+	{
+		MaxOpenGlComponent *wm = new MaxOpenGlComponent();
+		wm->setOpaque(true);
+		wm->setVisible(true);
+		wm->setActive();
+		wm->addToDesktop(0, 0);
+		gensym("hoa_scope_newwindow")->s_thing = (t_object *)wm;
+	}
 }
 
 void jucebox_new(t_jucebox* x)
 {
-    x->j_component = new MaxOpenGlComponent();
-	x->j_component->setOpaque(false);
-	x->j_component->setVisible(true);
-    x->j_component->addToDesktop(0);
-    x->j_component->setActive();
+    x->j_component = (MaxOpenGlComponent *)gensym("hoa_scope_newwindow")->s_thing;
 }
 
 void jucebox_free(t_jucebox* x)
 {
     jbox_free((t_jbox *)x);
-	x->j_component->removeFromDesktop();
-    delete x->j_component;
+	//x->j_component->removeFromDesktop();
+    //delete x->j_component;
 }
+
+int test = 0;
 
 void jucebox_paint(t_jucebox* x, t_object *patcherview)
 {
@@ -72,6 +81,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
     int width, height, imgStride;
     unsigned char* data;
     
+	//x->j_component->addToDesktop(ComponentPeer::windowIsTemporary, 0);
     if(x->j_component->isOnDesktop())
     {
         x->j_component->setActive();
@@ -103,8 +113,8 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
                 jgraphics_surface_destroy(surface);
             }
         }
-        
     }
+	//x->j_component->removeFromDesktop();
 }
 
 
