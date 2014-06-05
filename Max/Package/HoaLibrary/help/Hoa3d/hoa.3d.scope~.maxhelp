@@ -92,8 +92,7 @@
 									"numinlets" : 25,
 									"numoutlets" : 0,
 									"order" : 4,
-									"patching_rect" : [ 334.0, 367.0, 353.1875, 353.1875 ],
-									"style" : 1
+									"patching_rect" : [ 334.0, 367.0, 353.1875, 353.1875 ]
 								}
 
 							}
@@ -1573,6 +1572,15 @@
 									"hidden" : 0,
 									"midpoints" : [ 39.5, 227.0 ],
 									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 25 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-31", 0 ]
 								}
 
 							}

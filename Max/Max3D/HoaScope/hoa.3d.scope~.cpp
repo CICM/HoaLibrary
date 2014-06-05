@@ -21,13 +21,15 @@
  @discussion
  <o>hoa.3d.scope~</o> displays spherical harmonics of an ambisonic sound field
  
- @category ambisonics, hoa objects, audio, MSP
+ @category ambisonics, hoa objects, audio, GUI, MSP
  
- @seealso hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.scope~, hoa.3d.wider~, hoa.dac~
+ @seealso hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
  */
 
 #include "../Hoa3D.max.h"
 #include "../../MaxJuceBox/jucebox_wrapper.h"
+
+#include <OpenGL/glu.h>
 
 typedef struct _hoa_scope
 {
@@ -395,8 +397,6 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 
 void hoa_draw_vectors(t_hoa_scope *x)
 {
-	glPushMatrix();
-	
 	glLineWidth(4);
 	glBegin(GL_LINE_STRIP);
 	glColor4d(1., 0., 0., 1.);
@@ -406,15 +406,10 @@ void hoa_draw_vectors(t_hoa_scope *x)
     glVertex3d(0, 0, 0);
     glVertex3d(1, 0, 0);
     glEnd();
-	
-	glPopMatrix();
 }
 
 void hoa_draw_sphere(t_hoa_scope *x, t_jrgba color)
 {
-	glPushMatrix();
-	hoa_draw_camera(x);
-	
     double one, cos_one, sin_one, two ,cos_two, sin_two;
     
 	glLineWidth(1);
@@ -452,8 +447,6 @@ void hoa_draw_sphere(t_hoa_scope *x, t_jrgba color)
         }
         glEnd();
     }
-	
-	glPopMatrix();
 }
 
 void hoa_draw_harmonics_shape(t_hoa_scope *x)
@@ -464,8 +457,6 @@ void hoa_draw_harmonics_shape(t_hoa_scope *x)
     float azimuth, elevation;
 	t_jrgba color_positive = x->f_color_ph;
 	t_jrgba color_negative = x->f_color_nh;
-	
-	glPushMatrix();
 	
 	glBegin(GL_TRIANGLE_STRIP);
     for(int i = 1; i < number_of_rows; i++)
@@ -500,8 +491,6 @@ void hoa_draw_harmonics_shape(t_hoa_scope *x)
 		}
 	}
 	glEnd();
-	
-	glPopMatrix();
 }
 
 double cosine_interpolation(double mu, double y1, float y2)
@@ -539,8 +528,6 @@ void hoa_draw_harmonics_mapping(t_hoa_scope *x)
 	t_jrgba color_positive = x->f_color_ph;
 	t_jrgba color_negative = x->f_color_nh;
 	
-	glPushMatrix();
-	
 	glBegin(GL_TRIANGLE_STRIP);
 	for(int i = 1; i < number_of_rows; i++)
 	{
@@ -563,22 +550,15 @@ void hoa_draw_harmonics_mapping(t_hoa_scope *x)
 		}
 	}
 	glEnd();
-	
-	glPopMatrix();
 }
 
 void hoa_draw_lighting(t_hoa_scope *x)
 {
 	if (x->f_light && x->f_mode == 0)
 	{
-		//glMatrixMode(GL_MODELVIEW);
-		
-		// lighting
+		// enable lighting
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
-		
-		//glEnable(GL_LIGHT1);
-		
 		glEnable(GL_COLOR_MATERIAL);
 		glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT ) ;
 		
@@ -589,17 +569,8 @@ void hoa_draw_lighting(t_hoa_scope *x)
 		//Add positioned light
 		GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f};
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
-		//glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor0);
-		
-		//GLfloat lightPos0[] = {2.0f, 2.0f, 0.0f, 1.f};
-		//GLfloat lightPos0[] = {0, 0, 0.5, 1.};
 		GLfloat lightPos0[] = {0, 0, 0, 1.};
-		//GLfloat lightPos1[] = {0, 0, -0.5, 1.};
-		
-		//GLfloat lightPos0[] = {0.1f, 0.1f, 0.2f, 1.f};
-		
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
-		//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	}
 	else
 	{
@@ -609,34 +580,48 @@ void hoa_draw_lighting(t_hoa_scope *x)
 
 void hoa_draw_camera(t_hoa_scope *x)
 {
-	glRotated(wrap_360(-x->f_camera[1] / HOA_2PI * 360.), 1., 0., 0.);
-    glRotated(wrap_360(x->f_camera[0] / HOA_2PI * 360.), 0., 1., 0.);
+	/*
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(1.0, 1.0, 1.0, 1.0, 1.0, 1.0);
+	glFrustum(-1, 1, -1, 1, 0.0, 40.0);
+	*/
+	
+	//glOrtho(x->f_camera[0], x->f_camera[1], x->f_camera[0], x->f_camera[1], x->f_camera[0], x->f_camera[1]);
+	//glOrtho(1, -1, 1, -1, 1, -1);
+	
+	glRotated(x->f_camera[0] / HOA_2PI * 360., 0., 1., 0.);
+	glRotated(-x->f_camera[1] / HOA_2PI * 360., 1., 0., 0.);
+	
 }
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST); // enable depth buffer
+	
 	glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+	glLoadIdentity();
 	
 	hoa_draw_lighting(x);
-	
 	hoa_draw_camera(x);
+
+	if (x->f_mode == 0)
+	{
+		// draw sphere
+		if(x->f_sphere)
+			hoa_draw_sphere(x, x->f_color_sp);
 		
-	// draw sphere
-    if(x->f_sphere && x->f_mode == 0)
-        hoa_draw_sphere(x, x->f_color_sp);
-	
-	// draw vectors
-    if(x->f_vectors)
-        hoa_draw_vectors(x);
-    
-	// draw harmonics
-    if(x->f_mode == 0)
-        hoa_draw_harmonics_shape(x);
-    else
-        hoa_draw_harmonics_mapping(x);
+		// draw vectors
+		if(x->f_vectors)
+			hoa_draw_vectors(x);
+		
+		hoa_draw_harmonics_shape(x);
+	}
+	else
+	{
+		hoa_draw_harmonics_mapping(x);
+	}
 }
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)

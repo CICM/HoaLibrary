@@ -3,7 +3,7 @@
 <JUCERPROJECT id="axgz9f" name="HoaScope" projectType="audioplug" version="2.0"
               bundleIdentifier="com.cicm.hoa_3d_scope" includeBinaryInAppConfig="0"
               buildVST="0" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="0"
-              pluginName="hoa.3d.scope" pluginDesc="HoaScope" pluginManufacturer="cicm"
+              pluginName="hoa.3d.scope~" pluginDesc="HoaScope" pluginManufacturer="cicm"
               pluginManufacturerEmail="support@yourcompany.com" pluginManufacturerCode="Manu"
               pluginCode="Plug" pluginChannelConfigs="{1, 1}, {2, 2}" pluginIsSynth="0"
               pluginWantsMidiIn="0" pluginProducesMidiOut="0" pluginSilenceInIsSilenceOut="0"
@@ -11,7 +11,7 @@
               pluginRTASCategory="" aaxIdentifier="com.yourcompany.HoaScope"
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.1.0">
   <MAINGROUP id="LySPAm" name="HoaScope">
-    <FILE id="DepNm6" name="hoa.3d.scope~.cpp" compile="1" resource="0"
+    <FILE id="lCC1Al" name="hoa.3d.scope~.cpp" compile="1" resource="0"
           file="hoa.3d.scope~.cpp"/>
     <FILE id="HN4PX9" name="hoa.max_commonsyms.h" compile="0" resource="0"
           file="../../hoa.max_commonsyms.h"/>
