@@ -29,8 +29,6 @@
 #include "../Hoa3D.max.h"
 #include "../../MaxJuceBox/jucebox_wrapper.h"
 
-#include <OpenGL/glu.h>
-
 typedef struct _hoa_scope
 {
 	t_jucebox	j_box;
@@ -77,6 +75,7 @@ void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long num
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_scope_mousedrag(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_scope_dblclick(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers);
 
 t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
@@ -107,6 +106,7 @@ int C74_EXPORT main(void)
 	// @description Change point of view by dragging the scene.
 	class_addmethod(c, (method)hoa_scope_mousedown,			"mousedown",        A_CANT, 0);
     class_addmethod(c, (method)hoa_scope_mousedrag,			"mousedrag",        A_CANT, 0);
+	class_addmethod(c, (method)hoa_scope_dblclick,			"mousedoubleclick",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,			"assist",           A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_getdrawparams,		"getdrawparams",    A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_notify,			"notify",           A_CANT, 0);
@@ -399,7 +399,7 @@ void hoa_draw_vectors(t_hoa_scope *x)
 {
 	glLineWidth(4);
 	glBegin(GL_LINE_STRIP);
-	glColor4d(1., 0., 0., 1.);
+	glColor4d(0., 1., 0., 1.);
 	glVertex3d(0, 0, 1);
     glVertex3d(0, 0, 0);
     glVertex3d(0, 1, 0);
@@ -510,7 +510,7 @@ double color_interp(t_hoa_scope *x, double val, double y1, float y2)
 	{
 		double val2;
 		val2 = (1-cos(val*HOA_PI))/2;
-		return(y1*(1-val2)+y2*val2);
+		return (y1*(1-val2)+y2*val2);
 	}
 	else
 	{
@@ -569,6 +569,7 @@ void hoa_draw_lighting(t_hoa_scope *x)
 		//Add positioned light
 		GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f};
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+		//GLfloat lightPos0[] = {0, 0, 0, 1.};
 		GLfloat lightPos0[] = {0, 0, 0, 1.};
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 	}
@@ -578,6 +579,64 @@ void hoa_draw_lighting(t_hoa_scope *x)
 	}
 }
 
+void CrossProd(float x1, float y1, float z1, float x2, float y2, float z2, float res[3])
+{
+	res[0] = y1*z2 - y2*z1;
+	res[1] = x2*z1 - x1*z2;
+	res[2] = x1*y2 - x2*y1;
+}
+
+// my own implementation
+void CicmGluLookAt(float eyeX, float eyeY, float eyeZ, float lookAtX, float lookAtY, float lookAtZ, float upX, float upY, float upZ)
+{
+	// i am not using here proper implementation for vectors.
+	// if you want, you can replace the arrays with your own
+	// vector types
+	float f[3];
+	
+	// calculating the viewing vector
+	f[0] = lookAtX - eyeX;
+	f[1] = lookAtY - eyeY;
+	f[2] = lookAtZ - eyeZ;
+	
+	float fMag, upMag;
+	fMag = sqrt(f[0]*f[0] + f[1]*f[1] + f[2]*f[2]);
+	upMag = sqrt(upX*upX + upY*upY + upZ*upZ);
+	
+	// normalizing the viewing vector
+	if( fMag != 0)
+	{
+		f[0] = f[0]/fMag;
+		f[1] = f[1]/fMag;
+		f[2] = f[2]/fMag;
+	}
+	
+	// normalising the up vector. no need for this here if you have your
+	// up vector already normalised, which is mostly the case.
+	if( upMag != 0 )
+	{
+		upX = upX/upMag;
+		upY = upY/upMag;
+		upZ = upZ/upMag;
+	}
+	
+	float s[3], u[3];
+	
+	CrossProd(f[0], f[1], f[2], upX, upY, upZ, s);
+	CrossProd(s[0], s[1], s[2], f[0], f[1], f[2], u);
+	
+	float M[]=
+	{
+		s[0], u[0], -f[0], 0,
+		s[1], u[1], -f[1], 0,
+		s[2], u[2], -f[2], 0,
+		0, 0, 0, 1
+	};
+	
+	glMultMatrixf(M);
+	glTranslatef (-eyeX, -eyeY, -eyeZ); 
+}
+
 void hoa_draw_camera(t_hoa_scope *x)
 {
 	/*
@@ -585,14 +644,12 @@ void hoa_draw_camera(t_hoa_scope *x)
 	glLoadIdentity();
 	glOrtho(1.0, 1.0, 1.0, 1.0, 1.0, 1.0);
 	glFrustum(-1, 1, -1, 1, 0.0, 40.0);
+	//glOrtho(-0.8, 0.8, -0.8, 0.8, 0, 4.0);
+	//CicmGluLookAt(0, 1, -1, 0, 0, 0, 0, 1, 0);
 	*/
-	
-	//glOrtho(x->f_camera[0], x->f_camera[1], x->f_camera[0], x->f_camera[1], x->f_camera[0], x->f_camera[1]);
-	//glOrtho(1, -1, 1, -1, 1, -1);
 	
 	glRotated(x->f_camera[0] / HOA_2PI * 360., 0., 1., 0.);
 	glRotated(-x->f_camera[1] / HOA_2PI * 360., 1., 0., 0.);
-	
 }
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
@@ -600,9 +657,12 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST); // enable depth buffer
 	
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
+		
 	hoa_draw_lighting(x);
 	hoa_draw_camera(x);
 
@@ -640,6 +700,14 @@ void hoa_scope_mousedrag(t_hoa_scope *x, t_object *patcherview, t_pt pt, long mo
     jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
     atom_setfloat(av, x->f_camera_ref[0] + (pt.x - x->f_mouse.x) / (rect.width * 0.5) * HOA_PI2);
     atom_setfloat(av+1, x->f_camera_ref[1] + (pt.y - x->f_mouse.y) / (-rect.height * 0.5) * HOA_PI2);
+    object_method(x, gensym("camera"), 2, av);
+}
+
+void hoa_scope_dblclick(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+	t_atom av[2];
+    atom_setfloat(av, 0);
+    atom_setfloat(av+1, 0);
     object_method(x, gensym("camera"), 2, av);
 }
 

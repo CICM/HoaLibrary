@@ -13,6 +13,8 @@ typedef struct _hoa_vector
     double*                 f_sig_outs;
     Hoa3D::Vector*          f_vector;
     int                     f_mode;
+	double					f_angles_of_channels[MAX_CHANNELS * 2];
+	long					f_number_of_angles;
 } t_hoa_vector;
 
 void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv);
@@ -25,7 +27,8 @@ void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double sam
 void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void hoa_vector_setChannels(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv);
+t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
+
 t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_vector_class;
@@ -41,7 +44,12 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_vector_setChannels,   "lscoord",    A_GIMME, 0);
+	
+	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", ATTR_SET_DEFER_LOW, t_hoa_vector, f_angles_of_channels, f_number_of_angles, MAX_CHANNELS*2);
+	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Channels");
+	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
+	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
+	// @description Set the angles of each channels in degrees. Each angles are in degrees, wrapped between 0. and 360. You must specify 2 values per channel corresponding to the azimuth value followed by the elevation value.
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
@@ -53,28 +61,39 @@ int C74_EXPORT main(void)
 void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_vector *x = NULL;
-	int	numberOfChannels = 1;
+	int	number_of_channels = 1;
     int mode = 1;
     x = (t_hoa_vector *)object_alloc(hoa_vector_class);
 	if (x)
 	{		
-		if(argc && atom_gettype(argv) == A_LONG)
-			numberOfChannels = atom_getlong(argv);
-        if(numberOfChannels < 1)
-            numberOfChannels = 1;
+		if(argc && (atom_gettype(argv) == A_LONG || atom_gettype(argv+1) == A_FLOAT))
+			number_of_channels = atom_getlong(argv);
+        if(number_of_channels < 1)
+            number_of_channels = 1;
         
         if(argc > 1 && atom_gettype(argv+1) == A_SYM && atom_getsym(argv+1) == gensym("velocity"))
 			mode = 0;
         
         x->f_mode = mode;
 		
-		x->f_vector = new Hoa3D::Vector(numberOfChannels);
+		x->f_vector = new Hoa3D::Vector(number_of_channels);
+		
 		for (int i = 0; i < 3; i++)
 			outlet_new(x, "signal");
         
 		dsp_setup((t_pxobject *)x, x->f_vector->getNumberOfChannels());
         x->f_sig_ins =  new double[x->f_vector->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_sig_outs = new double[3 * SYS_MAXBLKSIZE];
+		
+		x->f_number_of_angles = x->f_vector->getNumberOfChannels() * 2;
+		
+		for(int i = 0; i < x->f_vector->getNumberOfChannels() * 2; i+= 2)
+        {
+			x->f_angles_of_channels[i] = x->f_vector->getChannelAzimuth(i/2) / HOA_2PI * 360;
+			x->f_angles_of_channels[i+1] = x->f_vector->getChannelElevation(i/2) / HOA_2PI * 360;
+        }
+		
+		attr_args_process(x, argc, argv);
 	}
 
 	return (x);
@@ -168,15 +187,23 @@ void hoa_vector_free(t_hoa_vector *x)
     delete [] x->f_sig_outs;
 }
 
-void hoa_vector_setChannels(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv)
+t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_FLOAT && atom_gettype(argv+2) == A_FLOAT)
+    if(argc && argv)
     {
-        x->f_vector->setChannelPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+		short dspstate = dsp_setloadupdate(false);
+        for(int i = 1, j = 0; i < x->f_vector->getNumberOfChannels() * 2 && i < argc; i+= 2, j++)
+        {
+            if( (atom_gettype(argv+i-1) == A_FLOAT || atom_gettype(argv+i-1) == A_LONG) &&
+			   (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG) )
+			{
+                x->f_vector->setChannelPosition(j, atom_getfloat(argv+i-1) / 360. * HOA_2PI, atom_getfloat(argv+i) / 360. * HOA_2PI);
+			}
+			
+			x->f_angles_of_channels[i-1] = x->f_vector->getChannelAzimuth(j) / HOA_2PI * 360;
+			x->f_angles_of_channels[i] = x->f_vector->getChannelElevation(j) / HOA_2PI * 360;
+        }
+		dsp_setloadupdate(dspstate);
     }
-    for(int i = 0; i < x->f_vector->getNumberOfChannels(); i++)
-    {
-        post("ls %i %f %f", i, x->f_vector->getChannelAzimuth(i), x->f_vector->getChannelElevation(i));
-        post("ls %i %f %f %f", i, x->f_vector->getChannelAbscissa(i), x->f_vector->getChannelOrdinate(i), x->f_vector->getChannelHeight(i));
-    }
+    return MAX_ERR_NONE;
 }

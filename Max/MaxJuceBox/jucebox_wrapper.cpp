@@ -81,7 +81,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
     int width, height, imgStride;
     unsigned char* data;
     
-	//x->j_component->addToDesktop(ComponentPeer::windowIsTemporary, 0);
+	x->j_component->addToDesktop(ComponentPeer::windowIsTemporary, 0);
     if(x->j_component->isOnDesktop())
     {
         x->j_component->setActive();
@@ -114,7 +114,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
             }
         }
     }
-	//x->j_component->removeFromDesktop();
+	x->j_component->removeFromDesktop();
 }
 
 
