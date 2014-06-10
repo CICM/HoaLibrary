@@ -1,0 +1,43 @@
+#N canvas 391 40 931 769 10;
+#X text -205 -780 source;
+#X obj 103 -792 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -380 -839 c.patcherinfos;
+#X obj -380 -856 loadbang;
+#X obj -380 -856 hoa.help.header;
+#X obj 36 -856 hoa.help.also;
+#X text -375 -812 hoa.3d.encoder~ creates the spherical harmonics of
+a signal depending on a given order \, an azimuth and an elevation.
+;
+#X obj 387 -786 hoa.tri~ 0.1;
+#X obj -195 -544 hoa.3d.scope~ @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+3 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj -185 -619 hoa.3d.encoder~ 3, f 43;
+#X obj 114 -759 hoa.connect;
+#X obj -138 -668 sig~ 1;
+#X obj -76 -728 phasor~ -0.3;
+#X msg -332 -647 \; pd dsp 1;
+#X msg -332 -612 \; pd dsp 0;
+#X obj -76 -703 hoa.pi~ 2;
+#X obj 52 -703 hoa.pi~ 1;
+#X obj 52 -729 hoa.tri~ 0.1;
+#X obj -52 -767 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X connect 1 0 10 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 9 0 8 0;
+#X connect 9 1 8 1;
+#X connect 9 2 8 2;
+#X connect 9 3 8 3;
+#X connect 11 0 9 0;
+#X connect 12 0 15 1;
+#X connect 15 0 9 1;
+#X connect 16 0 9 2;
+#X connect 17 0 16 1;
+#X connect 18 0 12 0;
+#X coords 0 769 1 768 100 60 0;

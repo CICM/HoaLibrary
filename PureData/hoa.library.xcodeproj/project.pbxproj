@@ -158,6 +158,7 @@
 		8F794EED192A60B20006491F /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE7192A60B20006491F /* SourcesGroup.h */; };
 		8F794EEE192A60B20006491F /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794EE8192A60B20006491F /* SourcesManager.cpp */; };
 		8F794EEF192A60B20006491F /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE9192A60B20006491F /* SourcesManager.h */; };
+		8FD0878C193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -313,6 +314,7 @@
 		8F794EE7192A60B20006491F /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
 		8F794EE8192A60B20006491F /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
 		8F794EE9192A60B20006491F /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
+		8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.scope_gui_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +590,7 @@
 				8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */,
 				8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */,
 				8F2DD89219252A2800442B20 /* hoa.3d.optim_tilde.cpp */,
+				8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */,
 				8F2DD89419252BEB00442B20 /* hoa.3d.wider_tilde.cpp */,
 				8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */,
 			);
@@ -805,6 +808,7 @@
 				8F27E33A191789BE004E1370 /* Decoder.cpp in Sources */,
 				8F27E34D191789BE004E1370 /* Rotate.cpp in Sources */,
 				8F27E3B719178A33004E1370 /* ebox_patcher.c in Sources */,
+				8FD0878C193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp in Sources */,
 				8F27E3D119178A33004E1370 /* eobj_basic.c in Sources */,
 				8F27E362191789BE004E1370 /* Decoder_3D.cpp in Sources */,
 				8F27E36F191789BE004E1370 /* Rotate_3D.cpp in Sources */,
