@@ -488,6 +488,35 @@ namespace Hoa
     {
         return acos(sin(elevation1) * sin(elevation2) + cos(elevation1) * cos(elevation2) * cos(azimuth1 - azimuth2));
     }
+	
+	inline double center_azimuth(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	{
+		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
+		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
+		double z = sin(elevation1) + sin(elevation2);
+		double n = sqrt(x * x + y * y + z * z);
+		if(x >= 0)
+		{
+			return asin(y / (n * cos(asin(z / n))));
+		}
+		else if(y >= 0)
+		{
+			return HOA_PI - asin(fabs(y) / (n * cos(asin(z / n))));
+		}
+		else
+		{
+			return -(HOA_PI - asin(fabs(y) / (n * cos(asin(z / n)))));
+		}
+	}
+
+	inline double center_elevation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	{
+		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
+		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
+		double z = sin(elevation1) + sin(elevation2);
+		double n = sqrt(x * x + y * y + z * z);
+		return asin(z / n);
+	}
 
 	inline double radianClosestDistance(double angle1, double angle2)
     {

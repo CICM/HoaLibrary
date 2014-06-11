@@ -19,6 +19,9 @@
     <Filter Include="HoaSources\Hoa3d">
       <UniqueIdentifier>{8bdac7a5-64e7-47fe-bc4b-18b4e55a119d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PD3d">
+      <UniqueIdentifier>{370a77ef-0ccf-4605-a75c-72ebd76d135a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h">
       <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="PD3D\Hoa3D.pd.h">
+      <Filter>PD3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,6 +425,24 @@
     </ClCompile>
     <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp">
       <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.decoder_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.encoder_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.map_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.optim_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.scope_gui_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.wider_tilde.cpp">
+      <Filter>PD3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

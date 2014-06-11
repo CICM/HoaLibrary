@@ -63,6 +63,7 @@
     <ClInclude Include="hoa.pd.h" />
     <ClInclude Include="hoa.pd_commonsyms.h" />
     <ClInclude Include="PD2D\Hoa2D.pd.h" />
+    <ClInclude Include="PD3D\Hoa3D.pd.h" />
     <ClInclude Include="PDCommon\HoaCommon.pd.h" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,12 @@
     <ClCompile Include="PD2D\hoa.2d.scope_gui_tilde.cpp" />
     <ClCompile Include="PD2D\hoa.2d.space_gui.cpp" />
     <ClCompile Include="PD2D\hoa.2d.wider_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.decoder_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.encoder_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.map_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.optim_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.scope_gui_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.wider_tilde.cpp" />
     <ClCompile Include="PDCommon\hoa.connect.cpp" />
     <ClCompile Include="PDCommon\hoa.dac_tilde.cpp" />
     <ClCompile Include="PDCommon\hoa.in.cpp" />
@@ -159,7 +166,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseIntelIPP>false</UseIntelIPP>
     <UseIntelMKL>No</UseIntelMKL>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
