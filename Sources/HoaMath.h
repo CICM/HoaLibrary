@@ -149,7 +149,7 @@ namespace Hoa
 
 	 @see    factorial
      */
-    inline unsigned long double_factorial(long n)
+    inline long double double_factorial(long n)
 	{
 		if (n == 0 || n == -1) {
 			return 1;
@@ -472,6 +472,51 @@ namespace Hoa
         else
             return (angle2 - angle1);
     }
+    
+    //! The great-circle distance
+    /** This function compute the great circle distance of two points in radians on a unit sphere.
+     
+        @param     azimuth1		The azimuth of the first point in radian.
+        @param     elevation1   The elevation of the first point in radian.
+        @param     azimuth2		The azimuth of the second point in radian.
+        @param     elevation2   The elevation of the second point in radian.
+        @return    The great-circle distance.
+     
+        @see    radius
+     */
+    inline double distance_spherical(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+    {
+        return acos(sin(elevation1) * sin(elevation2) + cos(elevation1) * cos(elevation2) * cos(azimuth1 - azimuth2));
+    }
+	
+	inline double center_azimuth(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	{
+		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
+		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
+		double z = sin(elevation1) + sin(elevation2);
+		double n = sqrt(x * x + y * y + z * z);
+		if(x >= 0)
+		{
+			return asin(y / (n * cos(asin(z / n))));
+		}
+		else if(y >= 0)
+		{
+			return HOA_PI - asin(fabs(y) / (n * cos(asin(z / n))));
+		}
+		else
+		{
+			return -(HOA_PI - asin(fabs(y) / (n * cos(asin(z / n)))));
+		}
+	}
+
+	inline double center_elevation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	{
+		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
+		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
+		double z = sin(elevation1) + sin(elevation2);
+		double n = sqrt(x * x + y * y + z * z);
+		return asin(z / n);
+	}
 
 	inline double radianClosestDistance(double angle1, double angle2)
     {

@@ -28,7 +28,7 @@ typedef struct  _hoa_scope
    
 } t_hoa_scope;
 
-t_eclass *scope_class;
+t_eclass *hoa_scope_class;
 
 void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv);
 void hoa_scope_free(t_hoa_scope *x);
@@ -48,8 +48,6 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect);
 
 t_pd_err    set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av);
 t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
-
-t_class *hoa_scope_class;
 
 #define  contrast_white 0.06
 #define  contrast_black 0.14
@@ -138,7 +136,7 @@ extern "C" void setup_hoa0x2e2d0x2escope_tilde(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
     
     eclass_register(CLASS_BOX, c);
-    scope_class = c;
+    hoa_scope_class = c;
 }
 
 void hoa_scope_deprecated(t_hoa_scope* x, t_symbol *s, long ac, t_atom* av)
@@ -160,7 +158,7 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
 	if (!(d = binbuf_via_atoms(argc, argv)))
 		return NULL;
 
-	x = (t_hoa_scope *)eobj_new(scope_class);
+	x = (t_hoa_scope *)eobj_new(hoa_scope_class);
     
     x->f_order      = 1;
 	x->f_startclock = 0;

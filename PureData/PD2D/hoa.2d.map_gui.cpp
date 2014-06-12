@@ -40,6 +40,7 @@ typedef struct  _hoa_map
     t_symbol*   f_output_mode;
     long        f_read;
     long        f_write;
+    _hoa_map*   f_friend;
 } t_hoa_map;
 
 t_eclass *hoa_map_class;
@@ -80,7 +81,25 @@ void hoa_map_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modif
 long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
-
+/*
+void hoa_map_bind(t_hoa_map* x, t_symbol* name)
+{
+    char scrptname[MAXPDSTRING];
+    sprintf(scrptname, "%s_hoamap_xx1", name->s_name);
+    if(gensym(scrptname)->s_thing)
+    {
+        x->f_friend = (t_hoa_map *)gensym(scrptname)->s_thing;
+        x->f_friend->f_friend = x;
+        sprintf(scrptname, "%s_hoamap_xx2", name->s_name);
+        t_symbol *newsym = gensym(scrptname);
+        newsym->s_thing = (t_class **)x;
+    }
+    else
+    {
+        gensym(scrptname)->s_thing = (t_class **)x;
+    }
+}
+*/
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 

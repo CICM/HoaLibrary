@@ -19,10 +19,10 @@ namespace Hoa3D
     private:
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
-        unsigned int    m_number_of_rows;
-        unsigned int    m_number_of_columns;
         double*         m_channels_peaks;
-        unsigned int*   m_matrix;
+		unsigned int*   m_channels_number_of_points;
+		double**		m_channels_points_azimuth;
+		double**		m_channels_points_elevation;
     public:
         
         //! The meter constructor.
@@ -30,7 +30,7 @@ namespace Hoa3D
          
             @param     order	The order.
          */
-        Meter(unsigned int numberOfChannels, unsigned int numberOfRows, unsigned int numberOfColumns);
+        Meter(unsigned int numberOfChannels);
         
         //! The meter destructor.
         /**	The meter destructor free the memory.
@@ -59,41 +59,7 @@ namespace Hoa3D
             assert(index < m_number_of_channels);
             return 20. * log10(m_channels_peaks[index]);
         }
-        
-        inline double getSpherePeak(unsigned int rowIndex, unsigned int columnIndex) const
-        {
-            assert(rowIndex < m_number_of_rows);
-            assert(columnIndex < m_number_of_columns);
-            return getChannelPeak(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
-        }
-        
-        inline double getSphereEnergy(unsigned int rowIndex, unsigned int columnIndex) const
-        {
-            assert(rowIndex < m_number_of_rows);
-            assert(columnIndex < m_number_of_columns);
-            return getChannelEnergy(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
-        }
-        
-        //! Retrieve the number of rows.
-        /**	Retrieve the number of rows used to discretize the ambisonic sphere.
-         
-         @return     This method returns the number of rows used to discretize the sphere.
-         */
-        inline unsigned int getNumberOfRows() const
-        {
-            return m_number_of_rows;
-        }
-        
-        //! Retrieve the number of column.
-        /**	Retrieve the number of column used to discretize the ambisonic sphere.
-         
-         @return     This method returns the number of column used to discretize the sphere.
-         */
-        inline unsigned int getNumberOfColumns() const
-        {
-            return m_number_of_columns;
-        }
-        
+       
         //! This method performs the widening with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          

@@ -19,5 +19,6 @@ extern "C" void setup_hoa0x2e3d0x2eoptim_tilde(void);
 extern "C" void setup_hoa0x2e3d0x2ewider_tilde(void);
 extern "C" void setup_hoa0x2e3d0x2emap_tilde(void);
 extern "C" void setup_hoa0x2e3d0x2ebinaural(void);
+extern "C" void setup_hoa0x2e3d0x2escope_tilde(void);
 
 #endif
