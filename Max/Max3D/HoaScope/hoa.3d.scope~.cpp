@@ -59,6 +59,14 @@ typedef struct _hoa_scope
     t_pt            f_mouse;
 } t_hoa_scope;
 
+typedef struct _hsla
+{
+	float hue;          /*!< The hue value. */
+	float saturation;   /*!< The saturation value. */
+	float lightness;    /*!< The lightness value. */
+    float alpha;        /*!< The alpha value. */
+} t_hsla;
+
 t_class *hoa_scope_class;
 
 void *hoa_scope_new(t_symbol *s, long argc, t_atom *argv);
@@ -215,10 +223,10 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ATOM_LONG            (c, "colorinterp", 0, t_hoa_scope, f_color_interp_mode);
 	CLASS_ATTR_CATEGORY             (c, "colorinterp", 0, "Rendering");
 	CLASS_ATTR_ORDER                (c, "colorinterp", 0, "5");
-    CLASS_ATTR_ENUMINDEX3           (c, "colorinterp", 0, "Linear", "Cosine", "Absolute");
+    CLASS_ATTR_ENUMINDEX4           (c, "colorinterp", 0, "Linear", "Cosine", "Absolute", "test");
     CLASS_ATTR_LABEL                (c, "colorinterp", 0, "Color interpolation type");
 	CLASS_ATTR_DEFAULT              (c, "colorinterp", 0, "0");
-    CLASS_ATTR_FILTER_CLIP          (c, "colorinterp", 0, 2);
+    CLASS_ATTR_FILTER_CLIP          (c, "colorinterp", 0, 3);
 	CLASS_ATTR_SAVE                 (c, "colorinterp", 1);
     CLASS_ATTR_PAINT                (c, "colorinterp", 1);
 	// @description Color interpolation mode (only works in <m>mapping</m> drawing mode)
@@ -395,6 +403,98 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
     sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
+t_hsla rgba_to_hsla(t_jrgba color)
+{
+    t_hsla ncolor;
+    float delta, deltar, deltag, deltab;
+    float max = color.red;
+    float min = color.red;
+    if(min > color.green)
+        min = color.green;
+    if(min > color.blue)
+        min = color.blue;
+    if(max < color.green)
+        max = color.green;
+    if(max < color.blue)
+        max = color.blue;
+    delta = max - min;
+    ncolor.alpha = color.alpha;
+    ncolor.lightness = (max + min) / 2.;
+    if(max == 0)
+    {
+        ncolor.hue = 0;
+        ncolor.saturation = 0;
+    }
+    else
+    {
+        if(ncolor.lightness < 0.5)
+            ncolor.saturation = delta / (max + min);
+        else
+            ncolor.saturation = delta / (2. - max - min);
+        
+        deltar = (((max - color.red ) / 6 ) + (delta / 2)) / delta;
+        deltag = (((max - color.green ) / 6 ) + (delta / 2)) / delta;
+        deltab = (((max - color.blue ) / 6 ) + (delta / 2)) / delta;
+        
+        if(color.red == max)
+            ncolor.hue = deltab - deltag;
+        else if(color.green == max)
+            ncolor.hue = (1. / 3.) + deltar - deltab;
+        else if(color.blue == max)
+            ncolor.hue = (2. / 3.) + deltag - deltar;
+		
+        if(ncolor.hue < 0.)
+            ncolor.hue += 1;
+        if(ncolor.hue > 1.)
+            ncolor.hue -= 1;
+    }
+    
+    return ncolor;
+}
+
+float Hue_2_RGB(float v1,float v2,float vH)
+{
+    if(vH < 0.)
+        vH += 1.;
+    if(vH > 1.)
+        vH -= 1.;
+    if((6. * vH) < 1.)
+        return (v1 + (v2 - v1) * 6. * vH);
+    if((2. * vH) < 1.)
+        return v2;
+    if(( 3 * vH) < 2.)
+        return (v1 + (v2 - v1) * ((2. / 3.) - vH) * 6.);
+    return v1;
+}
+
+t_jrgba hsla_to_rgba(t_hsla color)
+{
+    float var1, var2;
+    t_jrgba ncolor;
+    if(color.saturation == 0.)
+    {
+        ncolor.red = color.lightness;
+        ncolor.green = color.lightness;
+        ncolor.blue = color.lightness;
+    }
+    else
+    {
+        if(color.lightness < 0.5)
+            var2 = color.lightness * (1. + color.saturation);
+        else
+            var2 = (color.lightness + color.saturation) - (color.saturation * color.lightness);
+        
+        var1 = 2. * color.lightness - var2;
+        
+        ncolor.red = Hue_2_RGB(var1, var2, color.hue + (1. / 3.));
+        ncolor.green = Hue_2_RGB(var1, var2, color.hue);
+        ncolor.blue = Hue_2_RGB(var1, var2, color.hue - (1. / 3.));
+    }
+    
+    ncolor.alpha = color.alpha;
+    return ncolor;
+}
+
 void hoa_draw_vectors(t_hoa_scope *x)
 {
 	glLineWidth(4);
@@ -497,7 +597,7 @@ double cosine_interpolation(double mu, double y1, float y2)
 {
     double mu2;
     mu2 = (1-cos(mu*HOA_PI))/2;
-    return(y1*(1-mu2)+y2*mu2);;
+    return(y1*(1-mu2)+y2*mu2);
 }
 
 double color_interp(t_hoa_scope *x, double val, double y1, float y2)
@@ -512,10 +612,19 @@ double color_interp(t_hoa_scope *x, double val, double y1, float y2)
 		val2 = (1-cos(val*HOA_PI))/2;
 		return (y1*(1-val2)+y2*val2);
 	}
-	else
+	else if (x->f_color_interp_mode == 2)
 	{
 		return (val < 0.5) ? y1 : y2;
 	}
+	else
+	{
+		double val2;
+		y1 *= 2.;
+		y2 *= 2.;
+		val2 = (1-cos(val*HOA_PI))/2;
+		return (y1*(1-val2)+y2*val2);
+	}
+	return y1;
 }
 
 void hoa_draw_harmonics_mapping(t_hoa_scope *x)
@@ -525,8 +634,16 @@ void hoa_draw_harmonics_mapping(t_hoa_scope *x)
     
 	float value;
     float azimuth, elevation;
-	t_jrgba color_positive = x->f_color_ph;
-	t_jrgba color_negative = x->f_color_nh;
+	
+	t_hsla color_positive = rgba_to_hsla(x->f_color_ph);
+	t_hsla color_negative = rgba_to_hsla(x->f_color_nh);
+	if(fabs(color_negative.hue - color_positive.hue) >= 0.5)
+	{
+		color_negative.hue += 1.;
+	}
+	
+	t_hsla color_result;
+	t_jrgba color_result_rgba;
 	
 	glBegin(GL_TRIANGLE_STRIP);
 	for(int i = 1; i < number_of_rows; i++)
@@ -537,14 +654,24 @@ void hoa_draw_harmonics_mapping(t_hoa_scope *x)
 			elevation   = x->f_scope->getElevation(i-1);
 			value       = (x->f_scope->getValue(i-1, j) + 1.) * 0.5;
 			
-			glColor4d(color_interp(x, value, color_negative.red, color_positive.red), color_interp(x, value, color_negative.green, color_positive.green), color_interp(x, value, color_negative.blue, color_positive.blue), color_interp(x, value, color_negative.alpha, color_positive.alpha));
+			color_result.hue = wrap(color_interp(x, value, color_negative.hue, color_positive.hue), 0., 1.);
+			color_result.saturation = color_interp(x, value, color_negative.saturation, color_positive.saturation);
+			color_result.lightness = color_interp(x, value, color_negative.lightness, color_positive.lightness);
+			color_result.alpha = color_interp(x, value, color_negative.alpha, color_positive.alpha);
+			color_result_rgba = hsla_to_rgba(color_result);
+			glColor4d(color_result_rgba.red, color_result_rgba.green, color_result_rgba.blue, color_result_rgba.alpha);
 			
 			glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
 			
 			elevation   = x->f_scope->getElevation(i);
 			value       = (x->f_scope->getValue(i, j) + 1.) * 0.5;
 			
-			glColor4d(color_interp(x, value, color_negative.red, color_positive.red), color_interp(x, value, color_negative.green, color_positive.green), color_interp(x, value, color_negative.blue, color_positive.blue), color_interp(x, value, color_negative.alpha, color_positive.alpha));
+			color_result.hue = wrap(color_interp(x, value, color_negative.hue, color_positive.hue), 0., 1.);
+			color_result.saturation = color_interp(x, value, color_negative.saturation, color_positive.saturation);
+			color_result.lightness = color_interp(x, value, color_negative.lightness, color_positive.lightness);
+			color_result.alpha = color_interp(x, value, color_negative.alpha, color_positive.alpha);
+			color_result_rgba = hsla_to_rgba(color_result);
+			glColor4d(color_result_rgba.red, color_result_rgba.green, color_result_rgba.blue, color_result_rgba.alpha);
 			
 			glVertex3d(abscissa(1., azimuth, elevation), height(1., azimuth, elevation), ordinate(1., azimuth, elevation));
 		}

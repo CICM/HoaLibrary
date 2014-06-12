@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 646.0, 675.0 ],
+						"rect" : [ 0.0, 26.0, 646.0, 675.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1734,7 +1734,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 646.0, 675.0 ],
+						"rect" : [ 0.0, 70.0, 646.0, 675.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1797,7 +1797,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 420.5, 303.0, 204.0, 87.0 ],
-									"presentation_rect" : [ 174.25, 396.5, 0.0, 0.0 ],
 									"text" : "• gain attr can be usefull to visualize soundfield with low amplitude.\n• camera attr allows you to set an other point of view. Draging the object has the same effect. dbl-click to reset",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -1814,7 +1813,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 420.5, 303.0, 204.0, 87.0 ],
-									"presentation_rect" : [ 174.25, 396.5, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
