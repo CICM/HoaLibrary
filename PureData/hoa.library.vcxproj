@@ -42,7 +42,6 @@
     <ClInclude Include="..\Sources\Hoa3D\Planewaves_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Rotate_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h" />
-    <ClInclude Include="..\Sources\Hoa3D\Tools_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h" />
@@ -142,6 +141,7 @@
     <ClCompile Include="PD3D\hoa.3d.decoder_tilde.cpp" />
     <ClCompile Include="PD3D\hoa.3d.encoder_tilde.cpp" />
     <ClCompile Include="PD3D\hoa.3d.map_tilde.cpp" />
+    <ClCompile Include="PD3D\hoa.3d.meter_gui_tilde.cpp" />
     <ClCompile Include="PD3D\hoa.3d.optim_tilde.cpp" />
     <ClCompile Include="PD3D\hoa.3d.scope_gui_tilde.cpp" />
     <ClCompile Include="PD3D\hoa.3d.wider_tilde.cpp" />
@@ -235,7 +235,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>C:\gsl\gsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;NT;PD;PD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

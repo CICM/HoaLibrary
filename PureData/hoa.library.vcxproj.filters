@@ -170,9 +170,6 @@
     <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h">
       <Filter>HoaSources\Hoa3d</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sources\Hoa3D\Tools_3D.h">
-      <Filter>HoaSources\Hoa3d</Filter>
-    </ClInclude>
     <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h">
       <Filter>HoaSources\Hoa3d</Filter>
     </ClInclude>
@@ -442,6 +439,9 @@
       <Filter>PD3d</Filter>
     </ClCompile>
     <ClCompile Include="PD3D\hoa.3d.wider_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.meter_gui_tilde.cpp">
       <Filter>PD3d</Filter>
     </ClCompile>
   </ItemGroup>

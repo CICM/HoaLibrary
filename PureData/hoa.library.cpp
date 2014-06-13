@@ -44,6 +44,7 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e3d0x2eoptim_tilde();
     setup_hoa0x2e3d0x2ewider_tilde();
     setup_hoa0x2e3d0x2emap_tilde();
+	setup_hoa0x2e3d0x2emeter_tilde();
     setup_hoa0x2e3d0x2escope_tilde();  
 
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
