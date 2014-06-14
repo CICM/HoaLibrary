@@ -20,6 +20,8 @@ namespace Hoa3D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
+		int**			m_channels_neighbors;
+
 		unsigned int*   m_channels_number_of_points;
 		double**		m_channels_points_azimuth;
 		double**		m_channels_points_elevation;
@@ -68,9 +70,9 @@ namespace Hoa3D
         {
             assert(index < m_number_of_channels);
 			if(top)
-				return m_channels_number_of_points_top[index];
+				return m_channels_number_of_points[index];
 			else
-				return m_channels_number_of_points_bottom[index];
+				return m_channels_number_of_points[index];
         }
 
 		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const

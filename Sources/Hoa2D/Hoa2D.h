@@ -27,8 +27,6 @@ namespace Hoa2D{};
 #include "Meter.h"
 #include "Recomposer.h"
 #include "SourcesManager.h"
-#include "SourcesPreset.h"
-#include "SourcesTrajectory.h"
 #include "ChannelManager.h"
 #include "Kits.h"
 
