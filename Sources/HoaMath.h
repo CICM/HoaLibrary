@@ -489,20 +489,44 @@ namespace Hoa
         return acos(sin(elevation1) * sin(elevation2) + cos(elevation1) * cos(elevation2) * cos(azimuth1 - azimuth2));
     }
 
-	inline double center_elevation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	inline double spherical_azimuth_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
 	{
-		
-		double x = cos(elevation1) * cos(azimuth1) + cos(elevation2) * cos(azimuth2);
-		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
-		double z = sin(elevation1) + sin(elevation2);
-		double n = sqrt(x * x + y * y + z * z);
-		return asin(z / n);
-		/*
-		if(elevation1 < elevation2)
-			return distance_radian(elevation1, elevation2) * 0.5 + elevation2;
+		double distance = distance_radian(azimuth1, azimuth2);
+		if(azimuth1 < azimuth2)
+		{
+			if(distance > HOA_PI)
+			{
+				distance = HOA_2PI - distance;
+				return wrap_twopi(azimuth1 - distance * mu);
+			}
+			else
+				return distance * mu + azimuth1;
+		}
 		else
-			return distance_radian(elevation1, elevation2) * 0.5 + elevation1;
-			*/
+		{
+			double distance = distance_radian(azimuth1, azimuth2);
+			if(distance > HOA_PI)
+			{
+				distance = HOA_2PI - distance;
+				return wrap_twopi(azimuth2 - distance * (1. - mu));
+			}
+			else
+				return distance * (1. - mu) + azimuth2;
+		}
+	}
+
+	inline double spherical_elevation_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
+	{
+		double distance = distance_radian(elevation1, elevation2);
+		if(azimuth1 == wrap_twopi(azimuth2 + HOA_PI))
+			distance = elevation1 + elevation2;
+
+		if(distance > HOA_PI)
+			distance  = HOA_2PI - distance;
+		if(elevation1 < elevation2)
+			return elevation1 + distance * mu;
+		else
+			return elevation2 + distance * (1. - mu);
 	}
 
 	inline double radianClosestDistance(double angle1, double angle2)

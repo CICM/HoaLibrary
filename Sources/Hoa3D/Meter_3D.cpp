@@ -11,8 +11,6 @@
 
 namespace Hoa3D
 {
-	int m_meter_matrix[METER_ROW_NUMBER * METER_COLUMN_NUMBER];
-
     Meter::Meter(unsigned int numberOfChannels) : Planewaves(numberOfChannels)
     {
         m_ramp                  = 0;
@@ -36,13 +34,19 @@ namespace Hoa3D
         {
             m_channels_peaks[i] = 0.;
 			m_channels_neighbors[i]			= new int[m_number_of_channels];
+
+			m_channels_number_of_points[i]	= 0;
 			m_channels_points_azimuth[i]	= new double[m_number_of_channels];
 			m_channels_points_elevation[i]	= new double[m_number_of_channels];
-			m_channels_points_azimuth_top[i]	= new double[m_number_of_channels];
-			m_channels_points_elevation_top[i]	= new double[m_number_of_channels];
-			m_channels_points_azimuth_bottom[i]	= new double[m_number_of_channels];
-			m_channels_points_elevation_bottom[i]	= new double[m_number_of_channels];
-			m_channels_number_of_points[i]	= 0;
+
+			m_channels_number_of_points_top[i]	= 0;
+			m_channels_points_azimuth_top[i]	= new double[m_number_of_channels * 2];
+			m_channels_points_elevation_top[i]	= new double[m_number_of_channels * 2];
+
+			m_channels_number_of_points_bottom[i]	= 0;
+			m_channels_points_azimuth_bottom[i]		= new double[m_number_of_channels * 2];
+			m_channels_points_elevation_bottom[i]	= new double[m_number_of_channels * 2];
+			
         }
 		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
     }
@@ -59,11 +63,19 @@ namespace Hoa3D
 		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
 	}
 
-	// Fill a matrix that discretize a sphere with the indices of the closest loudspeakers - must find another name for the function ;)
-	void fill_sphere_with_channels(const double* azimuths, const double* elevations, const unsigned int numberOfChannels, 
-		int* sphere, const unsigned int numberOfRows, const unsigned int numberOfColumns)
-	{ 
+	void Meter::find_neighbor_channels()
+	{
+		int indices[8];
 		double dist1, dist2, azi, ele;
+		unsigned int numberOfRows = METER_ROW_NUMBER;
+		unsigned int numberOfColumns = METER_COLUMN_NUMBER;
+		int* sphere = new int[numberOfRows * numberOfColumns];
+		unsigned int numberOfChannels = m_number_of_channels;
+		double* azimuths = m_channels_azimuth;
+		double* elevations = m_channels_elevation;
+		int** channels_neighbours = m_channels_neighbors;
+		
+		// Fill a matrix that discretize a sphere with the indices of the closest loudspeakers
 		for(unsigned int i = 0; i < numberOfRows; i++)
         {
             for(unsigned int j = 0; j < numberOfColumns; j++)
@@ -83,12 +95,8 @@ namespace Hoa3D
                 }
             }
 		}
-	}
 
-	void find_neighbors_channels(const unsigned int numberOfChannels, int** channels_neighbours,
-		int* sphere, const unsigned int numberOfRows, const unsigned int numberOfColumns)
-	{
-		int indices[8];
+		// Find the neighbor channels
 		for(unsigned int i = 0; i < numberOfChannels; i++)
 		{
 			for(unsigned int j = 0; j < numberOfChannels; j++)
@@ -169,7 +177,19 @@ namespace Hoa3D
 					}
 				}
 			}
-		}	
+		}
+
+		for(unsigned int i = 0; i < m_number_of_channels; i++)
+		{
+			m_channels_number_of_points[i] = 0;
+			//post("channel %i :", i);
+			for(int j = 0; j < m_number_of_channels && m_channels_neighbors[i][j] != -1; j++, m_channels_number_of_points[i]++)
+			{
+				//post("neighbors %i :", m_channels_neighbors[i][j]);
+			}
+		}
+
+		delete [] sphere;
 	}
 
 	void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations, double azimuth)
@@ -221,67 +241,121 @@ namespace Hoa3D
     void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         Planewaves::setChannelPosition(index, azimuth, elevation);
-		fill_sphere_with_channels(m_channels_azimuth, m_channels_elevation, m_number_of_channels, 
-			m_meter_matrix, METER_ROW_NUMBER, METER_COLUMN_NUMBER);
-		find_neighbors_channels(m_number_of_channels, m_channels_neighbors, m_meter_matrix, METER_ROW_NUMBER, METER_COLUMN_NUMBER);
-		
-		for(unsigned int i = 0; i < m_number_of_channels; i++)
-		{
-			m_channels_number_of_points[i] = 0;
-			//post("channel %i :", i);
-			for(int j = 0; j < m_number_of_channels && m_channels_neighbors[i][j] != -1; j++, m_channels_number_of_points[i]++)
-			{
-				//post("neighbors %i :", m_channels_neighbors[i][j]);
-			}
-		}
+		find_neighbor_channels();
 
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
 		{
-			//post("channel %i", i);
-			for(int j = 0; j < m_channels_number_of_points[i]; j++)
+			int npts = m_channels_number_of_points[i];
+			for(int j = 0; j < npts; j++)
 			{
 				int index = m_channels_neighbors[i][j];
-				double distance = distance_radian(m_channels_azimuth[index], m_channels_azimuth[i]);
-				if(m_channels_azimuth[index] < m_channels_azimuth[i])
-				{
-					if(distance > HOA_PI)
-					{
-						distance = HOA_2PI - distance;
-						m_channels_points_azimuth[i][j] = wrap_twopi(m_channels_azimuth[index] - distance * 0.5);
-					}
-					else
-						m_channels_points_azimuth[i][j] = distance * 0.5 + m_channels_azimuth[index];
-				}
-				else
-				{
-					double distance = distance_radian(m_channels_azimuth[index], m_channels_azimuth[i]);
-					if(distance > HOA_PI)
-					{
-						distance = HOA_2PI - distance;
-						m_channels_points_azimuth[i][j] = wrap_twopi(m_channels_azimuth[i] - distance * 0.5);
-					}
-					else
-						m_channels_points_azimuth[i][j] = distance * 0.5 + m_channels_azimuth[i];
-				}
-				//post("index %i %f %f : %f", index, (float)(m_channels_azimuth[i] / HOA_2PI * 360.), (float)(m_channels_azimuth[index] / HOA_2PI * 360.), (float)(m_channels_points_azimuth[i][j] / HOA_2PI * 360.));
-				
-				distance = distance_radian(m_channels_elevation[index], m_channels_elevation[i]);
-				if(m_channels_azimuth[index] == wrap_twopi(m_channels_azimuth[i] + HOA_PI))
-				{
-					distance = m_channels_elevation[index] + m_channels_elevation[i];
-				}
-
-				if(distance > HOA_PI)
-					distance  = HOA_2PI - distance;
-				if(m_channels_elevation[index] < m_channels_elevation[i])
-					m_channels_points_elevation[i][j] = m_channels_elevation[index] + distance * 0.5;
-				else
-					m_channels_points_elevation[i][j] = m_channels_elevation[i] + distance * 0.5;
-				//post("distance %f", distance / HOA_2PI * 360.);
-				//post("index %i %f %f : %f", index, (float)(m_channels_elevation[i] / HOA_2PI * 360.), (float)(m_channels_elevation[index] / HOA_2PI * 360.), (float)(m_channels_points_elevation[i][j] / HOA_2PI * 360.));
-				
+				m_channels_points_azimuth[i][j] = spherical_azimuth_interpolation(m_channels_azimuth[i], m_channels_elevation[i], 
+					m_channels_azimuth[index], m_channels_elevation[index], 0.5);
+				m_channels_points_elevation[i][j] = spherical_elevation_interpolation(m_channels_azimuth[i], m_channels_elevation[i], 
+					m_channels_azimuth[index], m_channels_elevation[index], 0.5);
 			}
 			vector_sort_coordinates(m_channels_number_of_points[i], m_channels_points_azimuth[i], m_channels_points_elevation[i], m_channels_azimuth[i]);
+
+			// Find the top and bottom pvue points
+			bool top = 0, bottom = 0;
+			for(int j = 0; j < npts; j++)
+			{
+				if(m_channels_points_elevation[i][j] > 0)
+					top = 1;
+				else if(m_channels_points_elevation[i][j] < 0)
+					bottom = 1;
+			}
+			m_channels_number_of_points_top[i] = 0;
+			m_channels_number_of_points_bottom[i] = 0;
+			if(top)
+			{
+				for(int j = 0; j < npts; j++)
+				{
+					if(m_channels_points_elevation[i][j] >= 0)
+					{
+						m_channels_points_azimuth_top[i][m_channels_number_of_points_top[i]] = m_channels_points_azimuth[i][j];
+						m_channels_points_elevation_top[i][m_channels_number_of_points_top[i]] = m_channels_points_elevation[i][j];
+						m_channels_number_of_points_top[i]++;
+						int next = j + 1;
+						if(j == npts - 1)
+							next = 0;
+						if(m_channels_points_elevation[i][next] < 0)
+						{
+							double mu =  m_channels_points_elevation[i][j] / ( m_channels_points_elevation[i][j] - m_channels_points_elevation[i][next]);
+							m_channels_points_azimuth_top[i][m_channels_number_of_points_top[i]] = spherical_azimuth_interpolation(
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], 
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], mu);
+							m_channels_points_elevation_top[i][m_channels_number_of_points_top[i]] = spherical_elevation_interpolation(
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], 
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], mu);
+							m_channels_number_of_points_top[i]++;
+						}
+					}
+					else
+					{
+						int next = j + 1;
+						if(j == npts - 1)
+							next = 0;
+						if(m_channels_points_elevation[i][next] > 0)
+						{
+							double mu =  m_channels_points_elevation[i][next] / ( m_channels_points_elevation[i][next] - m_channels_points_elevation[i][j]);
+							m_channels_points_azimuth_top[i][m_channels_number_of_points_top[i]] = spherical_azimuth_interpolation(
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], 
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], mu);
+							m_channels_points_elevation_top[i][m_channels_number_of_points_top[i]] = spherical_elevation_interpolation(
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], 
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], mu);
+							m_channels_number_of_points_top[i]++;
+						}
+					}
+				}
+			}
+			if(bottom)
+			{
+				/*
+				m_channels_number_of_points_bottom[i] = 0;
+				for(int j = 0; j < npts; j++)
+				{
+					if(m_channels_points_elevation[i][j] <= 0)
+					{
+						m_channels_points_azimuth_bottom[i][m_channels_number_of_points_bottom[i]] = m_channels_points_azimuth[i][j];
+						m_channels_points_elevation_bottom[i][m_channels_number_of_points_bottom[i]] = m_channels_points_elevation[i][j];
+						m_channels_number_of_points_bottom[i]++;
+						int next = j + 1;
+						if(j == npts - 1)
+							next = 0;
+						if(m_channels_points_elevation[i][next] > 0)
+						{
+							double mu =  m_channels_points_elevation[i][j] / ( m_channels_points_elevation[i][j] - m_channels_points_elevation[i][next]);
+							m_channels_points_azimuth_bottom[i][m_channels_number_of_points_top[i]] = spherical_azimuth_interpolation(
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], 
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], mu);
+							m_channels_points_elevation_bottom[i][m_channels_number_of_points_top[i]] = spherical_elevation_interpolation(
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], 
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], mu);
+							m_channels_number_of_points_top[i]++;
+						}
+					}
+					else
+					{
+						int next = j + 1;
+						if(j == npts - 1)
+							next = 0;
+						if(m_channels_points_elevation[i][next] > 0)
+						{
+							double mu =  m_channels_points_elevation[i][next] / ( m_channels_points_elevation[i][next] - m_channels_points_elevation[i][j]);
+							m_channels_points_azimuth_bottom[i][m_channels_number_of_points_top[i]] = spherical_azimuth_interpolation(
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], 
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], mu);
+							m_channels_points_elevation_top[i][m_channels_number_of_points_top[i]] = spherical_elevation_interpolation(
+								m_channels_points_azimuth[i][next], m_channels_points_elevation[i][next], 
+								m_channels_points_azimuth[i][j], m_channels_points_elevation[i][j], mu);
+							m_channels_number_of_points_bottom[i]++;
+						}
+					}
+				}*/
+			}
+
 		}
 	}
     
@@ -338,11 +412,16 @@ namespace Hoa3D
 			delete [] m_channels_points_elevation_bottom[i];
 		}
 		delete [] m_channels_neighbors;
+
 		delete [] m_channels_number_of_points;
 		delete [] m_channels_points_azimuth;
 		delete [] m_channels_points_elevation;
+
+		delete [] m_channels_number_of_points_top;
 		delete [] m_channels_points_azimuth_top;
 		delete [] m_channels_points_elevation_top;
+
+		delete [] m_channels_number_of_points_bottom;
 		delete [] m_channels_points_azimuth_bottom;
 		delete [] m_channels_points_elevation_bottom;
     }

@@ -289,7 +289,6 @@ t_pd_err channels_get(t_hoa_meter_3d *x, void *attr, long *argc, t_atom **argv)
 
 t_pd_err channels_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
 {
-    t_atom* av;
     if(argc && argv)
     {
         if(atom_gettype(argv) == A_FLOAT)
@@ -300,18 +299,7 @@ t_pd_err channels_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
                 int dspState = canvas_suspend_dsp();
                 delete x->f_meter;
                 x->f_meter = new Meter(d);
-                
-                av = new t_atom[x->f_meter->getNumberOfChannels() * 2];
-				for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels() * 2; i+=2, j++)
-				{
-					atom_setfloat(av+i, x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360.);
-					atom_setfloat(av+i+1, x->f_meter->getChannelElevation(j) / HOA_2PI * 360.);
-					x->f_over_leds[i] = 0;
-				}	
-                angles_set(x, NULL, x->f_meter->getNumberOfChannels() * 2, av);
-                delete [] av;
                 eobj_resize_inputs((t_ebox *)x, x->f_meter->getNumberOfChannels());
-                
                 canvas_resume_dsp(dspState);
             }
         }
@@ -601,30 +589,33 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         egraphics_set_matrix(g, &transform);
 		egraphics_rotate(g, -HOA_PI2);
-		for(int i = 0; i < x->f_meter->getNumberOfChannels() * 0.5; i++)
+		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
 		{
-			egraphics_set_color_rgba(g, &x->f_color_cold_signal);
-			float azi = x->f_meter->getChannelPointAzimuth(i, 0);
-			float ele = x->f_meter->getChannelPointElevation(i, 0);
-			float abs =  abscissa(x->f_radius, azi, ele);
-			float ord = ordinate(x->f_radius, azi, ele);
-			egraphics_move_to(g, abscissa(x->f_radius, x->f_meter->getChannelPointAzimuth(i, 0), x->f_meter->getChannelPointElevation(i, 0)), ordinate(x->f_radius, x->f_meter->getChannelPointAzimuth(i, 0), x->f_meter->getChannelPointElevation(i, 0)));
-
-			for(int j = 1; j < x->f_meter->getChannelNumberOfPoints(i); j++)
+			if(x->f_meter->getChannelNumberOfPoints(i), 1)
 			{
-				azi = x->f_meter->getChannelPointAzimuth(i, j);
-				ele = x->f_meter->getChannelPointElevation(i, j);
-				abs =  abscissa(x->f_radius, azi, ele);
-				ord = ordinate(x->f_radius, azi, ele);
-				egraphics_line_to(g, abs, ord);
+				egraphics_set_color_rgba(g, &x->f_color_cold_signal);
+				float azi = x->f_meter->getChannelPointAzimuth(i, 0);
+				float ele = x->f_meter->getChannelPointElevation(i, 0);
+				float abs =  abscissa(x->f_radius, azi, ele);
+				float ord = ordinate(x->f_radius, azi, ele);
+				egraphics_move_to(g, abscissa(x->f_radius, x->f_meter->getChannelPointAzimuth(i, 0), x->f_meter->getChannelPointElevation(i, 0)), ordinate(x->f_radius, x->f_meter->getChannelPointAzimuth(i, 0), x->f_meter->getChannelPointElevation(i, 0)));
+
+				for(int j = 1; j < x->f_meter->getChannelNumberOfPoints(i); j++)
+				{
+					azi = x->f_meter->getChannelPointAzimuth(i, j);
+					ele = x->f_meter->getChannelPointElevation(i, j);
+					abs =  abscissa(x->f_radius, azi, ele);
+					ord = ordinate(x->f_radius, azi, ele);
+					egraphics_line_to(g, abs, ord);
+				}
+				egraphics_close_path(g);
+				egraphics_fill_preserve(g);
+				
+				egraphics_set_color_rgba(g, &x->f_color_bd);
+				egraphics_set_line_width(g, 2);
+				egraphics_stroke(g);
 			}
-			egraphics_close_path(g);
-			egraphics_fill_preserve(g);
-			/*
-			egraphics_set_color_rgba(g, &x->f_color_bd);
-			egraphics_set_line_width(g, 2);
-			egraphics_stroke(g);
-			*/
+
 		}
 		ebox_end_layer((t_ebox*)x,  hoa_sym_3d_leds_layer);
 	}
