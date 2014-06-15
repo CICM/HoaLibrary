@@ -491,27 +491,28 @@ namespace Hoa
 
 	inline double spherical_azimuth_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
 	{
-		double distance = distance_radian(azimuth1, azimuth2);
+		double distance;
+		double angle1 = wrap_twopi(azimuth1);
+        double angle2 = wrap_twopi(azimuth2);
+        if(angle1 > angle2)
+            distance = (angle1 - angle2);
+        else
+            distance = (angle2 - angle1);
+		if(azimuth1 == azimuth2)
+			return azimuth1;
 		if(azimuth1 < azimuth2)
 		{
 			if(distance > HOA_PI)
-			{
-				distance = HOA_2PI - distance;
-				return wrap_twopi(azimuth1 - distance * mu);
-			}
+				return wrap_twopi(azimuth1 - (HOA_2PI - distance) * mu);
 			else
-				return distance * mu + azimuth1;
+				return azimuth1 + distance * mu;
 		}
 		else
 		{
-			double distance = distance_radian(azimuth1, azimuth2);
 			if(distance > HOA_PI)
-			{
-				distance = HOA_2PI - distance;
-				return wrap_twopi(azimuth2 - distance * (1. - mu));
-			}
+				return wrap_twopi(azimuth1 + (HOA_2PI - distance) * mu);
 			else
-				return distance * (1. - mu) + azimuth2;
+				return azimuth1 - distance * mu;
 		}
 	}
 

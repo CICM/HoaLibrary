@@ -72,7 +72,7 @@ namespace Hoa3D
         {
             assert(index < m_number_of_channels);
 			if(top)
-				return m_channels_number_of_points_top[index];
+				return m_channels_number_of_points[index];
 			else
 				return m_channels_number_of_points[index];
         }
@@ -80,13 +80,13 @@ namespace Hoa3D
 		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_channels_points_azimuth_top[index][pointindex];
+            return m_channels_points_azimuth[index][pointindex];
         }
 
 		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_channels_points_elevation_top[index][pointindex];
+            return m_channels_points_elevation[index][pointindex];
         }
 
         inline double getChannelPeak(unsigned int index) const
