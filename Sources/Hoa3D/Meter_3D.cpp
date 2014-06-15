@@ -182,7 +182,7 @@ namespace Hoa3D
 		int inc2 = 0;
 		for(unsigned int i = 0; i < size; i++)
 		{
-			if(wrap_twopi(azimuths[i] - azimuth) < HOA_PI)
+			if(wrap_twopi(azimuths[i] - azimuth) <= HOA_PI)
 			{
 				temp1_a[inc1] = azimuths[i];
 				temp1_e[inc1] = elevations[i];
@@ -228,17 +228,58 @@ namespace Hoa3D
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
 		{
 			m_channels_number_of_points[i] = 0;
+			//post("channel %i :", i);
 			for(int j = 0; j < m_number_of_channels && m_channels_neighbors[i][j] != -1; j++, m_channels_number_of_points[i]++)
 			{
+				//post("neighbors %i :", m_channels_neighbors[i][j]);
 			}
 		}
 
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
 		{
+			//post("channel %i", i);
 			for(int j = 0; j < m_channels_number_of_points[i]; j++)
 			{
-				m_channels_points_azimuth[i][j]		= center_azimuth(m_channels_azimuth[m_channels_neighbors[i][j]], m_channels_elevation[m_channels_neighbors[i][j]],m_channels_azimuth[i], m_channels_elevation[i]);
-				m_channels_points_elevation[i][j]	= center_elevation(m_channels_azimuth[m_channels_neighbors[i][j]], m_channels_elevation[m_channels_neighbors[i][j]],m_channels_azimuth[i], m_channels_elevation[i]);
+				int index = m_channels_neighbors[i][j];
+				double distance = distance_radian(m_channels_azimuth[index], m_channels_azimuth[i]);
+				if(m_channels_azimuth[index] < m_channels_azimuth[i])
+				{
+					if(distance > HOA_PI)
+					{
+						distance = HOA_2PI - distance;
+						m_channels_points_azimuth[i][j] = wrap_twopi(m_channels_azimuth[index] - distance * 0.5);
+					}
+					else
+						m_channels_points_azimuth[i][j] = distance * 0.5 + m_channels_azimuth[index];
+				}
+				else
+				{
+					double distance = distance_radian(m_channels_azimuth[index], m_channels_azimuth[i]);
+					if(distance > HOA_PI)
+					{
+						distance = HOA_2PI - distance;
+						m_channels_points_azimuth[i][j] = wrap_twopi(m_channels_azimuth[i] - distance * 0.5);
+					}
+					else
+						m_channels_points_azimuth[i][j] = distance * 0.5 + m_channels_azimuth[i];
+				}
+				//post("index %i %f %f : %f", index, (float)(m_channels_azimuth[i] / HOA_2PI * 360.), (float)(m_channels_azimuth[index] / HOA_2PI * 360.), (float)(m_channels_points_azimuth[i][j] / HOA_2PI * 360.));
+				
+				distance = distance_radian(m_channels_elevation[index], m_channels_elevation[i]);
+				if(m_channels_azimuth[index] == wrap_twopi(m_channels_azimuth[i] + HOA_PI))
+				{
+					distance = m_channels_elevation[index] + m_channels_elevation[i];
+				}
+
+				if(distance > HOA_PI)
+					distance  = HOA_2PI - distance;
+				if(m_channels_elevation[index] < m_channels_elevation[i])
+					m_channels_points_elevation[i][j] = m_channels_elevation[index] + distance * 0.5;
+				else
+					m_channels_points_elevation[i][j] = m_channels_elevation[i] + distance * 0.5;
+				//post("distance %f", distance / HOA_2PI * 360.);
+				//post("index %i %f %f : %f", index, (float)(m_channels_elevation[i] / HOA_2PI * 360.), (float)(m_channels_elevation[index] / HOA_2PI * 360.), (float)(m_channels_points_elevation[i][j] / HOA_2PI * 360.));
+				
 			}
 			vector_sort_coordinates(m_channels_number_of_points[i], m_channels_points_azimuth[i], m_channels_points_elevation[i], m_channels_azimuth[i]);
 		}
