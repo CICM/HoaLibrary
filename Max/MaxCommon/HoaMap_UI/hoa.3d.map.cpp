@@ -55,6 +55,11 @@ t_max_err textfield_notify(t_textfield *x, t_symbol *s, t_symbol *msg, void *sen
 
 static t_class *s_textfield_class = NULL;
 
+typedef struct _linkmap
+{
+	_linkmap *next;
+	t_object *map;
+} t_linkmap;
 
 typedef struct  _hoamap
 {
@@ -98,6 +103,9 @@ typedef struct  _hoamap
     t_atom_long f_output_mode;			// Polar Cartesian
 	long		f_output_3D;			// 0 is 2d, 1 is 3d
 	t_atom_long f_coord_display_mode;	// xy xz yz
+	
+	t_symbol*	f_binding_name;
+	t_linkmap*	f_listmap;
 } t_hoamap;
 
 t_class *hoamap_class;
@@ -141,6 +149,9 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
 
 t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos);
 void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av);
+
+t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+t_max_err is_server_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 
 int C74_EXPORT main()
 {
@@ -251,22 +262,30 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE             (c, "output3d", 1);
 	// @description Check this to output 3d coordinates, default is 2d.
 	
-	CLASS_ATTR_LONG				(c,"coordmode", 0, t_hoamap, f_coord_display_mode);
-	CLASS_ATTR_LABEL			(c,"coordmode", 0, "Coordinate Mode");
-	CLASS_ATTR_CATEGORY			(c,"coordmode", 0, "Behavior");
-	CLASS_ATTR_ENUMINDEX		(c,"coordmode", 0, "xy xz yz");
-	CLASS_ATTR_DEFAULT          (c,"coordmode", 0,  "0");
-    CLASS_ATTR_SAVE             (c,"coordmode", 1);
-    CLASS_ATTR_ORDER			(c,"coordmode", 0, "1");
+	CLASS_ATTR_LONG				(c, "view", 0, t_hoamap, f_coord_display_mode);
+	CLASS_ATTR_LABEL			(c, "view", 0, "Coordinate Mode");
+	CLASS_ATTR_CATEGORY			(c, "view", 0, "Behavior");
+	CLASS_ATTR_ENUMINDEX		(c, "view", 0, "xy xz yz");
+	CLASS_ATTR_DEFAULT          (c, "view", 0,  "0");
+    CLASS_ATTR_SAVE             (c, "view", 1);
+    CLASS_ATTR_ORDER			(c, "view", 0, "1");
 	// @description Sets the coordinates display mode. coordinates display mode can be <b>xy</b>, <b>xz</b> or <b>yz</b>
+	
+	CLASS_ATTR_SYM				(c, "bindname", 0, t_hoamap, f_binding_name);
+	CLASS_ATTR_LABEL			(c, "bindname", 0, "Binding Name");
+	CLASS_ATTR_CATEGORY			(c, "bindname", 0, "Behavior");
+	CLASS_ATTR_ACCESSORS		(c, "bindname", NULL, bindname_set);
+	CLASS_ATTR_DEFAULT          (c, "bindname", 0,  "");
+    CLASS_ATTR_SAVE             (c, "bindname", 1);
+    CLASS_ATTR_ORDER			(c, "bindname", 0, "1");
     
-	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
-    CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
-	CLASS_ATTR_LABEL			(c,"zoom", 0,   "Zoom");
-	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Behavior");
-	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
-    CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
-    CLASS_ATTR_SAVE             (c,"zoom", 1);
+	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoamap, f_zoom_factor);
+    CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
+	CLASS_ATTR_LABEL			(c, "zoom", 0,   "Zoom");
+	CLASS_ATTR_CATEGORY			(c, "zoom", 0,   "Behavior");
+	CLASS_ATTR_DEFAULT          (c, "zoom", 0,   "0.35");
+    CLASS_ATTR_ORDER			(c, "zoom", 0,   "2");
+    CLASS_ATTR_SAVE             (c, "zoom", 1);
 	// @description Sets the zoom factor
 	
 	CLASS_ATTR_LONG                 (c, "showgroups", 0, t_hoamap, f_showgroups);
@@ -303,7 +322,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
-    
+    x->f_listmap = NULL;
     x->f_rect_selection_exist = 0;
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
@@ -312,7 +331,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     x->f_out_infos      = listout(x);
     x->f_out_groups     = listout(x);
 	x->f_out_sources    = listout(x);
-	
+		
 	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
 
     x->f_patcher = NULL;
@@ -322,6 +341,81 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	jbox_ready(&x->j_box);
 	
 	return (x);
+}
+
+t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+{
+	char strname[2048];
+	if (argc && argv && atom_gettype(argv) == A_SYM)
+	{
+		if(atom_getsym(argv) != hoa_sym_nothing && atom_getsym(argv) != x->f_binding_name)
+		{
+			sprintf(strname, "%smap1572", atom_getsym(argv)->s_name);
+			t_symbol* name = gensym(strname);
+			if(name->s_thing == NULL)
+			{
+				x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
+				x->f_listmap->map = (t_object *)x;
+				x->f_listmap->next = NULL;
+				name->s_thing = (t_object *)x->f_listmap;
+			}
+			else
+			{
+				t_linkmap *temp, *temp2;
+				if(x->f_listmap != NULL)
+				{
+					temp = x->f_listmap;
+					while(temp)
+					{
+						if(temp->next != NULL && temp->next->map == (t_object *)x)
+						{
+							temp2 = temp->next->next;
+							free(temp->next);
+							temp->next = temp2;
+						}
+						temp = temp->next;
+					}
+				}
+				x->f_listmap = (t_linkmap *)name->s_thing;
+				temp = x->f_listmap;
+				while(temp)
+				{
+					if(temp->next == NULL)
+					{
+						temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
+						temp2->map = (t_object *)x;
+						temp2->next = NULL;
+						temp->next = temp2;
+						break;
+					}
+					temp = temp->next;
+				}
+				
+			}
+			x->f_binding_name = atom_getsym(argv);
+		}
+		else if(atom_getsym(argv) != hoa_sym_nothing)
+		{
+			t_linkmap *temp, *temp2;
+			if(x->f_listmap != NULL)
+			{
+				temp = x->f_listmap;
+				while(temp)
+				{
+					if(temp->next != NULL && temp->next->map == (t_object *)x)
+					{
+						temp2 = temp->next->next;
+						free(temp->next);
+						temp->next = temp2;
+					}
+					temp = temp->next;
+				}
+			}
+			x->f_listmap = NULL;
+			x->f_binding_name = NULL;
+		}
+	}
+	return MAX_ERR_NONE;
 }
 
 void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av)
@@ -404,6 +498,17 @@ void hoamap_clear_all(t_hoamap *x)
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
+	if(x->f_listmap)
+	{
+		t_linkmap *temp = x->f_listmap;
+		int i = 0;
+		while (temp)
+		{
+			post("%i %ld", i++, (long)temp->map);
+			temp = temp->next;
+		}
+	}
+	
 	int index;
 	int exist;
 	
@@ -1043,6 +1148,7 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
+	
     if (msg == hoa_sym_free)
     {
 		if (sender == x->f_patcher)
