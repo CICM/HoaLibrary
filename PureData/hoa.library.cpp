@@ -21,12 +21,12 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2epi_tilde();
     setup_hoa0x2eprocess_tilde();
     setup_hoa0x2ethisprocess_tilde();
+	//setup_hoa0x2emap();
 
     // HOA 2D //
 	setup_hoa0x2e2d0x2ebinaural();
     setup_hoa0x2e2d0x2edecoder_tilde();
     setup_hoa0x2e2d0x2eencoder_tilde();
-    setup_hoa0x2e2d0x2emap();
     setup_hoa0x2e2d0x2emap_tilde();
     setup_hoa0x2e2d0x2emeter_tilde();
     setup_hoa0x2e2d0x2eoptim_tilde();
