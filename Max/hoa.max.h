@@ -38,6 +38,8 @@ static t_symbol* _sym_credit_line2 = gensym("Copyright \u00a9 2012 - 2014, CICM 
 
 typedef long t_hoa_err;		///< an integer value suitable to be returned as an hoa error code  @ingroup misc
 
+#define atom_isNumber(av) (atom_gettype(av) == A_LONG || atom_gettype(av) == A_FLOAT)
+
 /**
  Various errors definitions returned by Hoa functions
  @ingroup hoa_max

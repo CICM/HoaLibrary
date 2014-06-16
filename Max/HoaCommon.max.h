@@ -7,10 +7,9 @@
 #ifndef DEF_HOA_COMMON_MAX
 #define DEF_HOA_COMMON_MAX
 
-#include "../hoa.max.h"
-#include "../../Sources/Hoa2D/Hoa2D.h"
-#include "../../Sources/Hoa3D/Hoa3D.h"
+#include "hoa.max.h"
+#include "../Sources/HoaCommon/HoaCommon.h"
 
-using namespace Hoa2D;
+using namespace HoaCommon;
 
 #endif

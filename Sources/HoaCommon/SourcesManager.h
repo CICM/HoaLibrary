@@ -213,7 +213,7 @@ namespace HoaCommon
 		/**
 		 * @param     index				The index of the source.
 		 * @param     abscissa			The abscissa of the source.
-		 * @see sourceSetOrdinate
+		 * @see sourceSetOrdinate, sourceSetHeight
          */
 		void sourceSetAbscissa(long index, double abscissa);
 		
@@ -221,15 +221,15 @@ namespace HoaCommon
 		/**
 		 * @param     index				The index of the source.
 		 * @param     ordinate			The ordinate of the source.
-		 * @see sourceSetAbscissa
+		 * @see sourceSetAbscissa, sourceSetHeight
          */
 		void sourceSetOrdinate(long index, double ordinate);
         
-        //! Set ordinate of a source.
+        //! Set height of a source.
 		/**
 		 * @param     index				The index of the source.
 		 * @param     height			The height of the source.
-		 * @see sourceSetAbscissa
+		 * @see sourceSetOrdinate, sourceSetAbscissa
          */
 		void sourceSetHeight(long index, double height);
 		

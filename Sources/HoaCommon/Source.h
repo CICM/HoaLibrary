@@ -196,6 +196,7 @@ namespace HoaCommon
          */
 		double			getAbscissa()		const {return abscissa(m_radius, m_azimuth, m_elevation);}
 		
+		
 		//! Get the ordinate of the source.
 		/**
 			@return		The ordinate of the source.

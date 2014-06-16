@@ -365,20 +365,6 @@ namespace Hoa
         return new_value;
     }
 
-	//! The ordinate converter function.
-    /** This function takes a radius and an azimuth value and convert them to an ordinate value.
-
-	 @param     radius		The radius value (greather than 0).
-	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
-	 @return    The ordinate value.
-
-	 @see    abscissa
-     */
-	inline double ordinate(const double radius, const double azimuth)
-	{
-		return radius * sin(azimuth + HOA_PI2);
-	}
-
 	//! The abscissa converter function.
     /** This function takes a radius and an azimuth value and convert them to an abscissa value.
 
@@ -388,26 +374,31 @@ namespace Hoa
 
 	 @see    ordinate
      */
-    inline double abscissa(const double radius, const double azimuth)
+    inline double abscissa(const double radius, const double azimuth, const double elevation = 0.)
 	{
-		return radius * cos(azimuth + HOA_PI2);
+		return radius * cos(azimuth + HOA_PI2) * cos(elevation);
 	}
-
-	//! The radius converter function.
-    /** This function takes an abscissa and an ordinate value and convert them to a radius value.
-
-	 @param     x		The abscissa value.
-	 @param     y		The ordinate value.
-	 @return    The radius value.
-
-	 @see    azimuth
+	
+	//! The ordinate converter function.
+    /** This function takes a radius and an azimuth value and convert them to an ordinate value.
+	 
+	 @param     radius		The radius value (greather than 0).
+	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
+	 @return    The ordinate value.
+	 
+	 @see    abscissa
      */
-    inline double radius(const double x, const double y)
+    inline double ordinate(const double radius, const double azimuth, const double elevation = 0.)
 	{
-		return sqrt(x*x + y*y);
+		return radius * sin(azimuth + HOA_PI2) * cos(elevation);
 	}
     
-    //! The azimuth converter function.
+    inline double height(const double radius, const double azimuth, const double elevation)
+	{
+		return radius * sin(elevation);
+	}
+	
+	//! The azimuth converter function.
     /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
      
 	 @param     x		The abscissa value.
@@ -416,40 +407,32 @@ namespace Hoa
      
 	 @see    radius
      */
-	inline double azimuth(const double x, const double y)
+	inline double azimuth(const double x, const double y, const double z = 0.)
 	{
+		if (x == 0 && y == 0)
+			return 0;
 		return atan2(y, x) - HOA_PI2;
 	}
-    
-    inline double azimuth(const double x, const double y, const double z)
-	{
-		return atan2(y, x) - HOA_PI2;
-	}
-    
-    inline double abscissa(const double radius, const double phi, const double theta)
-	{
-		return radius * cos(phi - HOA_PI2) * cos(theta);
-	}
-    
-    inline double ordinate(const double radius, const double phi, const double theta)
-	{
-		return radius * sin(phi - HOA_PI2) * cos(theta);
-	}
-    
-    inline double height(const double radius, const double phi, const double theta)
-	{
-		return radius * sin(theta);
-	}
-    
-    inline double radius(const double x, const double y, const double z)
+	
+	//! The radius converter function.
+    /** This function takes an abscissa and an ordinate value and convert them to a radius value.
+	 
+	 @param     x		The abscissa value.
+	 @param     y		The ordinate value.
+	 @return    The radius value.
+	 
+	 @see    azimuth
+     */
+    inline double radius(const double x, const double y, const double z = 0.)
 	{
 		return sqrt(x*x + y*y + z*z);
 	}
-
+    
     inline double elevation(const double x, const double y, const double z)
 	{
-		if (z == 0. || (x == 0 && y == 0 && z == 0)) return 0;
-		return acos(z / radius(x, y, z));
+		if (x == 0 && y == 0 && z == 0)
+			return 0;
+		return HOA_PI2 - acos(z / sqrt(x*x + y*y + z*z));
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)
@@ -462,7 +445,6 @@ namespace Hoa
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2) + (z1-z2) * (z1-z2));
 	}
     
-
 	inline double distance_radian(double angle1, double angle2)
     {
         angle1 = wrap_twopi(angle1);

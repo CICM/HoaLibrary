@@ -13,14 +13,14 @@
 #include "Optim.h"
 #include "Decoder.h"
 #include "Meter.h"
-#include "SourcesManager.h"
+#include "../HoaCommon/SourcesManager.h"
 
 namespace Hoa2D
 {
     //! The kit to spatialize points sources.
     /** The KitSources is an all-in-one class that owns a Map, an Optim, a DecoderMulti, a Meter and a SourcesManager and that can be used to spatialize several sources. It allows to dynamicaly change the classes parameters.
      */
-    class KitSources : public SourcesManager
+    class KitSources : public HoaCommon::SourcesManager
     {
         
     private:

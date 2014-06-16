@@ -37,6 +37,12 @@
 #ifdef PD_DEBUG
 #include "../ThirdParty/PureData/Sources/cicm_wrapper.h"
 #endif
+#ifdef MAX_DEBUG
+#include <ext.h>
+#include <ext_obex.h>
+#include <z_dsp.h>
+#include <ext_common.h>
+#endif
 
 #define HOA_PI  (3.141592653589793238462643383279502884)
 #define HOA_2PI (6.283185307179586476925286766559005)

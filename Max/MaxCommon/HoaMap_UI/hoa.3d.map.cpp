@@ -29,7 +29,7 @@
  @palette yes
  */
 
-#include "../HoaCommon.max.h"
+#include "../../HoaCommon.max.h"
 
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
@@ -95,9 +95,9 @@ typedef struct  _hoamap
 	long		f_showgroups;
     
     // options :
-    t_atom_long f_output_mode;
-	
-	t_atom_long f_coord_couple;
+    t_atom_long f_output_mode;			// Polar Cartesian
+	long		f_output_3D;			// 0 is 2d, 1 is 3d
+	t_atom_long f_coord_display_mode;	// xy xz yz
 } t_hoamap;
 
 t_class *hoamap_class;
@@ -242,6 +242,23 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE             (c,"outputmode", 1);
     CLASS_ATTR_ORDER			(c,"outputmode", 0, "1");
 	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
+	
+	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoamap, f_output_3D);
+	CLASS_ATTR_CATEGORY			(c, "output3d", 0, "Behavior");
+	CLASS_ATTR_ORDER            (c, "output3d", 0, "1");
+	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
+	CLASS_ATTR_DEFAULT          (c, "output3d", 0, "0");
+	CLASS_ATTR_SAVE             (c, "output3d", 1);
+	// @description Check this to output 3d coordinates, default is 2d.
+	
+	CLASS_ATTR_LONG				(c,"coordmode", 0, t_hoamap, f_coord_display_mode);
+	CLASS_ATTR_LABEL			(c,"coordmode", 0, "Coordinate Mode");
+	CLASS_ATTR_CATEGORY			(c,"coordmode", 0, "Behavior");
+	CLASS_ATTR_ENUMINDEX		(c,"coordmode", 0, "xy xz yz");
+	CLASS_ATTR_DEFAULT          (c,"coordmode", 0,  "0");
+    CLASS_ATTR_SAVE             (c,"coordmode", 1);
+    CLASS_ATTR_ORDER			(c,"coordmode", 0, "1");
+	// @description Sets the coordinates display mode. coordinates display mode can be <b>xy</b>, <b>xz</b> or <b>yz</b>
     
 	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
@@ -303,6 +320,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     
 	attr_dictionary_process(x, d);
 	jbox_ready(&x->j_box);
+	
 	return (x);
 }
 
@@ -445,23 +463,74 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		
         if(param == hoa_sym_polar || param == hoa_sym_pol)
 		{
-			x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
-			hoamap_bang(x);
+			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
+			{
+				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
+				hoamap_bang(x);
+			}
+			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
+			{
+				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
+				hoamap_bang(x);
+			}
 		}
         else if(param == hoa_sym_radius)
 		{
 			x->f_source_manager->sourceSetRadius(index, atom_getfloat(av+2));
 			hoamap_bang(x);
 		}
-        else if(param == hoa_sym_angle)
+        else if(param == hoa_sym_azimuth)
 		{
 			x->f_source_manager->sourceSetAzimuth(index, atom_getfloat(av+2));
 			hoamap_bang(x);
 		}
+		else if(param == hoa_sym_elevation)
+		{
+			x->f_source_manager->sourceSetElevation(index, atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
         else if(param == hoa_sym_cartesian || param == hoa_sym_car)
 		{
-			x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
-			hoamap_bang(x);
+			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
+			{
+				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
+				hoamap_bang(x);
+			}
+			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
+			{
+				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
+				hoamap_bang(x);
+			}
+			
+			float px = atom_getfloat(av+2);
+			float py = atom_getfloat(av+3);
+			float ph = atom_getfloat(av+4);
+			
+			
+			post("***** 3 *******");
+			post("px = %f, py = %f, ph = %f", px, py, ph);
+			
+			float rad = radius(px, py, ph);
+			float az = azimuth(px, py, ph);
+			float el = elevation(px, py, ph);
+			post("rad = %f, az = %f, el = %f", rad, az, el);
+			
+			px = abscissa(rad, az, el);
+			py = ordinate(rad, az, el);
+			ph = height(rad, az, el);
+			post("px = %f, py = %f, ph = %f", px, py, ph);
+			
+			post("***** 2D *******");
+			post("px = %f, py = %f", px, py);
+			
+			rad = radius(px, py);
+			az = azimuth(px, py);
+			post("rad = %f, az = %f", rad, az);
+			
+			px = abscissa(rad, az);
+			py = ordinate(rad, az);
+			post("px = %f, py = %f", px, py);
+			
 		}
         else if(param == hoa_sym_abscissa)
 		{
@@ -471,6 +540,11 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(param == hoa_sym_ordinate)
 		{
             x->f_source_manager->sourceSetOrdinate(index, atom_getfloat(av+2));
+			hoamap_bang(x);
+		}
+		else if(param == hoa_sym_height)
+		{
+            x->f_source_manager->sourceSetHeight(index, atom_getfloat(av+2));
 			hoamap_bang(x);
 		}
         else if(param == hoa_sym_remove)
@@ -1078,7 +1152,7 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 
 void hoamap_bang(t_hoamap *x)
 {
-    t_atom av[4];
+    t_atom av[5];
     atom_setsym(av+1, hoa_sym_mute);
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
@@ -1101,49 +1175,88 @@ void hoamap_bang(t_hoamap *x)
     if(x->f_output_mode == 0)
     {
         atom_setsym(av+1, hoa_sym_polar);
+		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        {
+            if(x->f_source_manager->groupGetExistence(i))
+            {
+				atom_setlong(av, i+1);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
+					outlet_list(x->f_out_groups, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
+					atom_setfloat(av+4, x->f_source_manager->groupGetElevation(i));
+					outlet_list(x->f_out_groups, 0L, 5, av);
+				}
+            }
+        }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
-                outlet_list(x->f_out_sources, 0L, 4, av);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
+					outlet_list(x->f_out_sources, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
+					atom_setfloat(av+4, x->f_source_manager->sourceGetElevation(i));
+					outlet_list(x->f_out_sources, 0L, 5, av);
+				}
             }
         }
-        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i))
-            {
-                atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
-                outlet_list(x->f_out_groups, 0L, 4, av);
-            }
-        }
-        
     }
     else
     {
         atom_setsym(av+1, hoa_sym_cartesian);
+		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        {
+            if(x->f_source_manager->groupGetExistence(i))
+            {
+				atom_setlong(av, i+1);
+                if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
+					outlet_list(x->f_out_groups, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
+					atom_setfloat(av+4, x->f_source_manager->groupGetHeight(i));
+					outlet_list(x->f_out_groups, 0L, 5, av);
+				}
+            }
+        }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-                atom_setfloat(av+2,x->f_source_manager->sourceGetAbscissa(i));
-                atom_setfloat(av+3,x->f_source_manager->sourceGetOrdinate(i));
-                outlet_list(x->f_out_sources, 0L, 4, av);
-            }
-        }
-        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i))
-            {
-                atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
-                atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
-                outlet_list(x->f_out_groups, 0L, 4, av);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+					outlet_list(x->f_out_sources, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+					atom_setfloat(av+4, x->f_source_manager->sourceGetHeight(i));
+					outlet_list(x->f_out_sources, 0L, 5, av);
+				}
             }
         }
     }
@@ -1393,8 +1506,28 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-                sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-                sourcePositionY = (-x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+				switch (x->f_coord_display_mode)
+				{
+					case 0 : // XY
+					{
+						sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					case 1 : // XZ
+					{
+						sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					case 2 : // YZ
+					{
+						sourcePositionX = (x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					default: break;
+				}
 				
 				color = x->f_source_manager->sourceGetColor(i);
 				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
@@ -1494,8 +1627,28 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
-                sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-                sourcePositionY = (-x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+				switch (x->f_coord_display_mode)
+				{
+					case 0 : // XY
+					{
+						sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					case 1 : // XZ
+					{
+						sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->groupGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					case 2 : // YZ
+					{
+						sourcePositionX = (x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						break;
+					}
+					default: break;
+				}
                 
 				color = x->f_source_manager->groupGetColor(i);
 				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
@@ -1615,7 +1768,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     double maxwh = max(x->rect.width, x->rect.height);
-    double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
+    double distanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
+	double distanceSelected_test;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
@@ -1624,12 +1778,39 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     x->f_rect_selection_exist = -1;
     x->f_rect_selection.width = x->f_rect_selection.height = 0.;
+	
+	t_pt displayed_coords;
         
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        if(x->f_source_manager->sourceGetExistence(i) && distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+		switch (x->f_coord_display_mode)
+		{
+			case 0 : // XY
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetAbscissa(i);
+				displayed_coords.y = x->f_source_manager->sourceGetOrdinate(i);
+				break;
+			}
+			case 1 : // XZ
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetAbscissa(i);
+				displayed_coords.y = x->f_source_manager->sourceGetHeight(i);
+				break;
+			}
+			case 2 : // YZ
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetOrdinate(i);
+				displayed_coords.y = x->f_source_manager->sourceGetHeight(i);
+				break;
+			}
+			default: break;
+		}
+		
+		distanceSelected_test = distance(displayed_coords.x, displayed_coords.y, cursor.x, cursor.y);
+		
+        if(x->f_source_manager->sourceGetExistence(i) && distanceSelected_test <= distanceSelected)
         {
-            ditanceSelected = distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
+            distanceSelected = distanceSelected_test;
             x->f_index_of_selected_source = i;
         }
     }
@@ -1638,11 +1819,36 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-            if(x->f_source_manager->groupGetExistence(i) && distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
-            {
-                ditanceSelected = distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
-                x->f_index_of_selected_group = i;
-            }
+			switch (x->f_coord_display_mode)
+			{
+				case 0 : // XY
+				{
+					displayed_coords.x = x->f_source_manager->groupGetAbscissa(i);
+					displayed_coords.y = x->f_source_manager->groupGetOrdinate(i);
+					break;
+				}
+				case 1 : // XZ
+				{
+					displayed_coords.x = x->f_source_manager->groupGetAbscissa(i);
+					displayed_coords.y = x->f_source_manager->groupGetHeight(i);
+					break;
+				}
+				case 2 : // YZ
+				{
+					displayed_coords.x = x->f_source_manager->groupGetOrdinate(i);
+					displayed_coords.y = x->f_source_manager->groupGetHeight(i);
+					break;
+				}
+				default: break;
+			}
+			
+			distanceSelected_test = distance(displayed_coords.x, displayed_coords.y, cursor.x, cursor.y);
+			
+			if(x->f_source_manager->groupGetExistence(i) && distanceSelected_test <= distanceSelected)
+			{
+				distanceSelected = distanceSelected_test;
+				x->f_index_of_selected_group = i;
+			}
         }
     }
 
@@ -1834,16 +2040,35 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     t_pt mousedelta = {x->f_cursor_position.x - cursor.x, x->f_cursor_position.y - cursor.y};
 	
+	// source is dragged
 	if (x->f_index_of_selected_source != -1)
     {
 		// Angle
 #ifdef _WINDOWS
 		if(modifiers == 24) // Alt
 #else
-		if(modifiers == 148 || modifiers == 404)
+		if(modifiers == 148 || modifiers == 404) // ctrl
 #endif
-			x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y));
-
+		{
+			switch (x->f_coord_display_mode)
+			{
+				case 0 : // XY
+				{
+					x->f_source_manager->sourceSetAzimuth(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y));
+					break;
+				}
+				case 1 : // XZ
+				{
+					break;
+				}
+				case 2 : // YZ
+				{
+					break;
+				}
+				default: break;
+			}
+		}
+		
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
@@ -1851,11 +2076,12 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		else if(modifiers == 18 || modifiers == 274)
 #endif
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
+		
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
 #else
-		else if (modifiers == 17)
+		else if (modifiers == 17) // cmd
 #endif
         {
             if (fabs(mousedelta.x) >= fabs(mousedelta.y))
@@ -1867,8 +2093,30 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
           
         }
         else
-            x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
+		{
+			switch (x->f_coord_display_mode)
+			{
+				case 0 : // XY
+				{
+					x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
+					break;
+				}
+				case 1 : // XZ
+				{
+					x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, x->f_source_manager->sourceGetOrdinate(x->f_index_of_selected_source), cursor.y);
+					break;
+				}
+				case 2 : // YZ
+				{
+					x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, x->f_source_manager->sourceGetAbscissa(x->f_index_of_selected_source), cursor.x, cursor.y);
+					break;
+				}
+				default: break;
+			}
+		}
     }
+	
+	// group is dragged
     else if (x->f_index_of_selected_group != -1)
     {
 
@@ -1921,6 +2169,8 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+	
+	t_pt screen_source_coord;
     
     if(x->f_rect_selection_exist)
     {
@@ -1942,10 +2192,30 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
         {
             if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
             {
-                double abscissaOfSource = x->f_source_manager->sourceGetAbscissa(i);
-                double ordinateOfSource = x->f_source_manager->sourceGetOrdinate(i);
+				switch (x->f_coord_display_mode)
+				{
+					case 0 : // XY
+					{
+						screen_source_coord.x = x->f_source_manager->sourceGetAbscissa(i);
+						screen_source_coord.y = x->f_source_manager->sourceGetOrdinate(i);
+						break;
+					}
+					case 1 : // XZ
+					{
+						screen_source_coord.x = x->f_source_manager->sourceGetAbscissa(i);
+						screen_source_coord.y = x->f_source_manager->sourceGetHeight(i);
+						break;
+					}
+					case 2 : // YZ
+					{
+						screen_source_coord.x = x->f_source_manager->sourceGetOrdinate(i);
+						screen_source_coord.y = x->f_source_manager->sourceGetHeight(i);
+						break;
+					}
+					default: break;
+				}
                                 
-                if(((abscissaOfSource > x1 && abscissaOfSource < x2) || (abscissaOfSource < x1 && abscissaOfSource > x2)) && ((ordinateOfSource > y1 && ordinateOfSource < y2) || (ordinateOfSource < y1 && ordinateOfSource > y2)))
+                if(((screen_source_coord.x > x1 && screen_source_coord.x < x2) || (screen_source_coord.x < x1 && screen_source_coord.x > x2)) && ((screen_source_coord.y > y1 && screen_source_coord.y < y2) || (screen_source_coord.y < y1 && screen_source_coord.y > y2)))
                 {
                     x->f_source_manager->groupSetSource(indexOfNewGroup, i);
                     x->f_index_of_selected_group = indexOfNewGroup;
@@ -1986,34 +2256,88 @@ void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    t_pt cursor;
+    t_pt cursor, displayed_coords;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     double maxwh = max(x->rect.width, x->rect.height);
-    double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
+    double distanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
+	double distanceSelected_test;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+	
+	// test if mouse is over a source
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        if(x->f_source_manager->sourceGetExistence(i) && distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+		switch (x->f_coord_display_mode)
+		{
+			case 0 : // XY
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetAbscissa(i);
+				displayed_coords.y = x->f_source_manager->sourceGetOrdinate(i);
+				break;
+			}
+			case 1 : // XZ
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetAbscissa(i);
+				displayed_coords.y = x->f_source_manager->sourceGetHeight(i);
+				break;
+			}
+			case 2 : // YZ
+			{
+				displayed_coords.x = x->f_source_manager->sourceGetOrdinate(i);
+				displayed_coords.y = x->f_source_manager->sourceGetHeight(i);
+				break;
+			}
+			default: break;
+		}
+		
+		distanceSelected_test = distance(displayed_coords.x, displayed_coords.y, cursor.x, cursor.y);
+		
+        if(x->f_source_manager->sourceGetExistence(i) && distanceSelected_test <= distanceSelected)
         {
-            ditanceSelected = distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
+            distanceSelected = distanceSelected_test;
             x->f_index_of_selected_source = i;
         }
     }
 	
+	// test if mouse is over a group
     if(x->f_index_of_selected_source == -1 && x->f_showgroups)
     {
-        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-            if(x->f_source_manager->groupGetExistence(i) && distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
-            {
-                ditanceSelected = distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
-                x->f_index_of_selected_group = i;
-            }
+			switch (x->f_coord_display_mode)
+			{
+				case 0 : // XY
+				{
+					displayed_coords.x = x->f_source_manager->groupGetAbscissa(i);
+					displayed_coords.y = x->f_source_manager->groupGetOrdinate(i);
+					break;
+				}
+				case 1 : // XZ
+				{
+					displayed_coords.x = x->f_source_manager->groupGetAbscissa(i);
+					displayed_coords.y = x->f_source_manager->groupGetHeight(i);
+					break;
+				}
+				case 2 : // YZ
+				{
+					displayed_coords.x = x->f_source_manager->groupGetOrdinate(i);
+					displayed_coords.y = x->f_source_manager->groupGetHeight(i);
+					break;
+				}
+				default: break;
+			}
+			
+			distanceSelected_test = distance(displayed_coords.x, displayed_coords.y, cursor.x, cursor.y);
+			
+			if(x->f_source_manager->groupGetExistence(i) && distanceSelected_test <= distanceSelected)
+			{
+				distanceSelected = distanceSelected_test;
+				x->f_index_of_selected_group = i;
+			}
         }
     }
     
