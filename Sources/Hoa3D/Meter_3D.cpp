@@ -196,68 +196,84 @@ namespace Hoa3D
 		delete [] sphere;
 	}
 
-	void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations)
+	void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations, double azymuth, double elevation)
 	{
         double* abs	= new double[size];
 		double* ord	= new double[size];
 		double* azi	= new double[size];
+		double* azb	= new double[size];
 		double* cpa	= new double[size];
 		double* cpe	= new double[size];
 		int* index	= new int[size];
-		double g_x = 0, g_y = 0;
+		double g_x = abscissa(1, azymuth, elevation), g_y = ordinate(1, azymuth, elevation);
 		memcpy(cpa, azimuths, size * sizeof(double));
 		memcpy(cpe, elevations, size * sizeof(double));
 
 		for(unsigned int i = 0; i < size; i++)
 		{
 			abs[i] = abscissa(1., azimuths[i], elevations[i]);
-			ord[i] = ordinate(1., azimuths[i], elevations[i]);
-			if(elevations[i] < 0)
+			ord[i] = ordinate(1., azimuths[i], elevations[i]) - g_y;
+			if(elevations[i] < 0.)
 			{
 				if(abs[i] < 0)
 					abs[i] *= -1;
-				abs[i] += 1.;
+				abs[i] += 2.;
 			}
-			g_x += abs[i];
-			g_y += ord[i];
+			abs[i] -= g_x;
 		}
-		g_x /= (double)size;
-		g_y /= (double)size;
 
 		double max = -1;
 		for(unsigned int i = 0; i < size; i++)
 		{
-			abs[i] -= g_x;
-			ord[i] -= g_y;
 			azi[i] = wrap_twopi(azimuth(abs[i], ord[i]));
 			if(azi[i] > max)
 			{
 				max = azi[i];
-				index[0] = i;
+				azi[i] = -2;
+				index[size - 1] = i;
 			}
 		}
-		int inc = 1;
+		memcpy(azb, azi, size * sizeof(double));
+		vector_sort(size, azb);
 		for(unsigned int i = 0; i < size; i++)
 		{
-			double max2 = -1;
 			for(unsigned int j = 0; j < size; j++)
 			{
-				if(azi[j] > max2 && azi[j] < max)
+				if(azb[i] == azi[j])
 				{
-					max2 = max = azi[j];
+					azimuths[i] = cpa[j];
+					elevations[i] = cpe[j];
+				}
+			}
+		}
+		/*
+		int inc = size - 2;
+		while(inc)
+		{
+			max = -1;
+			for(unsigned int j = 0; j < size; j++)
+			{
+				if(azi[j] > max)
+				{
+					max = azi[j];
 					index[inc] = j;
 				}
 			}
-			inc++;
+			azi[index[inc]] = -2;
+			inc--;
 		}
 		
 		for(unsigned int i = 0; i < size; i++)
 		{
 			if(index[i] >= size || index[i] < 0)
+			{
 				post("index[i] %i", index[i]);
-			//azimuths[i] = cpa[index[i]];
-			//elevations[i] = cpe[index[i]];
+				index[i] = 0;
+			}
+			azimuths[i] = cpa[index[i]];
+			elevations[i] = cpe[index[i]];
 		}
+		*/
 		delete [] abs;
 		delete [] ord;
 		delete [] azi;
@@ -283,7 +299,7 @@ namespace Hoa3D
 				m_channels_points_elevation[i][j] = spherical_elevation_interpolation(m_channels_azimuth[i], m_channels_elevation[i], 
 					m_channels_azimuth[index], m_channels_elevation[index], 0.5);
 			}
-			vector_sort_coordinates(m_channels_number_of_points[i], m_channels_points_azimuth[i], m_channels_points_elevation[i]);
+			vector_sort_coordinates(m_channels_number_of_points[i], m_channels_points_azimuth[i], m_channels_points_elevation[i], m_channels_azimuth[i], m_channels_elevation[i]);
 
 			// Find the top and bottom pvue points
 			bool top = 0, bottom = 0;
