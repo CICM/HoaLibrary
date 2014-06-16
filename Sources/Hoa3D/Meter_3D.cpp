@@ -6,8 +6,8 @@
 
 #include "Meter_3D.h"
 
-#define METER_ROW_NUMBER 181
-#define METER_COLUMN_NUMBER 360
+#define METER_ROW_NUMBER 361
+#define METER_COLUMN_NUMBER 721
 
 namespace Hoa3D
 {
@@ -87,7 +87,7 @@ namespace Hoa3D
                 for(unsigned int k = 1; k < numberOfChannels; k++)
                 {
                     dist2 = distance_spherical(azimuths[k], elevations[k], azi, ele);
-                    if(dist2 < dist1)
+                    if(dist2 <= dist1)
                     {
                         dist1 = dist2;
                         sphere[i * numberOfColumns + j] = k;
@@ -121,30 +121,18 @@ namespace Hoa3D
 				if(i == 0)
 				{
 					i2 = 0; i3 = 0; i4 = 0;
-					j2 += numberOfColumns * 0.5;
 					j3 += numberOfColumns * 0.5;
-					j4 += numberOfColumns * 0.5;
-					if(j2 > numberOfColumns - 1)
-						j2 -= numberOfColumns;
 					if(j3 > numberOfColumns - 1)
 						j3 -= numberOfColumns;
-					if(j4 > numberOfColumns - 1)
-						j4 -= numberOfColumns;
-					//post("j2 %i, j3 %i , j4 %i", j2, j3, j4);
+					j4 = j2 = j3;
 				}
 				else if(i == numberOfRows - 1)
 				{
 					i0 = i; i6 = i; i7 = i;
-					j0 += numberOfColumns * 0.5;
-					j6 += numberOfColumns * 0.5;
 					j7 += numberOfColumns * 0.5;
-					if(j0 > numberOfColumns - 1)
-						j0 -= numberOfColumns;
-					if(j6 > numberOfColumns - 1)
-						j6 -= numberOfColumns;
 					if(j7 > numberOfColumns - 1)
 						j7 -= numberOfColumns;
-					//post("j1 %i, j6 %i , j7 %i", j1, j6, j7);
+					j6 = j0 = j7;
 				}
 				
 				indices[0] = sphere[i0 * numberOfColumns + j0];
@@ -185,12 +173,12 @@ namespace Hoa3D
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
 		{
 			m_channels_number_of_points[i] = 0;
-			//post("channel %i :", i);
+			post("channel %i :", i);
 			for(int j = 0; j < m_number_of_channels && m_channels_neighbors[i][j] != -1; j++, m_channels_number_of_points[i]++)
 			{
-				//post("neighbors %i :", m_channels_neighbors[i][j]);
+				post("neighbors %i :", m_channels_neighbors[i][j]);
 			}
-			//post("total %i :", m_channels_number_of_points[i]);
+			post("total %i :", m_channels_number_of_points[i]);
 		}
 
 		delete [] sphere;
@@ -208,47 +196,42 @@ namespace Hoa3D
 		double g_x = abscissa(1, azymuth, elevation), g_y = ordinate(1, azymuth, elevation);
 		memcpy(cpa, azimuths, size * sizeof(double));
 		memcpy(cpe, elevations, size * sizeof(double));
-
+		//post("********");
 		for(unsigned int i = 0; i < size; i++)
 		{
 			abs[i] = abscissa(1., azimuths[i], elevations[i]);
 			ord[i] = ordinate(1., azimuths[i], elevations[i]) - g_y;
-			if(elevations[i] < 0.)
+			if(elevation >= 0 && elevations[i] < 0.)
 			{
 				if(abs[i] < 0)
 					abs[i] *= -1;
 				abs[i] += 2.;
 			}
+			else if(elevation < 0 && elevations[i] > 0.)
+			{
+				if(abs[i] > 0)
+					abs[i] *= -1;
+				abs[i] += 2.;
+			}
 			abs[i] -= g_x;
+			
 		}
-
-		double max = -1;
+		double max = -100;
+		int inc = size - 1;
 		for(unsigned int i = 0; i < size; i++)
 		{
 			azi[i] = wrap_twopi(azimuth(abs[i], ord[i]));
 			if(azi[i] > max)
 			{
 				max = azi[i];
-				azi[i] = -2;
-				index[size - 1] = i;
+				index[inc] = i;
 			}
+			
 		}
 		memcpy(azb, azi, size * sizeof(double));
-		vector_sort(size, azb);
-		for(unsigned int i = 0; i < size; i++)
-		{
-			for(unsigned int j = 0; j < size; j++)
-			{
-				if(azb[i] == azi[j])
-				{
-					azimuths[i] = cpa[j];
-					elevations[i] = cpe[j];
-				}
-			}
-		}
-		/*
-		int inc = size - 2;
-		while(inc)
+		azi[index[inc]] = -100;
+		inc--;
+		while(inc > -1)
 		{
 			max = -1;
 			for(unsigned int j = 0; j < size; j++)
@@ -259,21 +242,18 @@ namespace Hoa3D
 					index[inc] = j;
 				}
 			}
-			azi[index[inc]] = -2;
+			azi[index[inc]] = -100;
 			inc--;
 		}
+		//for(unsigned int i = 0; i < size; i++)
+		//	post("abs %f ord %f azi %f", abs[index[i]], ord[index[i]], azb[index[i]]);
 		
 		for(unsigned int i = 0; i < size; i++)
 		{
-			if(index[i] >= size || index[i] < 0)
-			{
-				post("index[i] %i", index[i]);
-				index[i] = 0;
-			}
 			azimuths[i] = cpa[index[i]];
 			elevations[i] = cpe[index[i]];
 		}
-		*/
+		
 		delete [] abs;
 		delete [] ord;
 		delete [] azi;
@@ -354,6 +334,7 @@ namespace Hoa3D
 						}
 					}
 				}
+				vector_sort_coordinates(m_channels_number_of_points_top[i], m_channels_points_azimuth_top[i], m_channels_points_elevation_top[i], m_channels_azimuth[i], m_channels_elevation[i]);
 			}
 			if(bottom)
 			{

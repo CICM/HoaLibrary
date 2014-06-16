@@ -19,6 +19,12 @@
 #include <assert.h>
 #include <string.h>
 
+#ifdef _WINDOWS
+static inline double round(double val)
+{    
+    return floor(val + 0.5);
+}
+#endif
 //! The high order ambisonic namespace.
 /**
  This namespace have all the standard methods and functions necessary for ambisonic processing.
@@ -501,7 +507,7 @@ namespace Hoa
 	inline double spherical_elevation_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
 	{
 		double distance = distance_radian(elevation1, elevation2);
-		if(azimuth1 == wrap_twopi(azimuth2 + HOA_PI))
+		if(round(azimuth1 / HOA_2PI *360.) == round(wrap_twopi(azimuth2 + HOA_PI) / HOA_2PI * 360.))
 			distance = elevation1 + elevation2;
 
 		if(distance > HOA_PI)

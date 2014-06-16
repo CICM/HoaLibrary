@@ -22,6 +22,9 @@
     <Filter Include="PD3d">
       <UniqueIdentifier>{370a77ef-0ccf-4605-a75c-72ebd76d135a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HoaSources\HoaCommon">
+      <UniqueIdentifier>{208c9b50-57f7-498a-8419-68bd6ff5efe6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h">
@@ -119,15 +122,6 @@
     <ClInclude Include="..\Sources\Hoa2D\Scope.h">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\Source.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\SourcesGroup.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\SourcesManager.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
     <ClInclude Include="..\Sources\Hoa2D\Vector.h">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
@@ -172,6 +166,18 @@
     </ClInclude>
     <ClInclude Include="PD3D\Hoa3D.pd.h">
       <Filter>PD3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\HoaCommon.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\Source.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\SourcesGroup.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\SourcesManager.h">
+      <Filter>HoaSources\HoaCommon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -254,9 +260,6 @@
       <Filter>PD2d</Filter>
     </ClCompile>
     <ClCompile Include="PD2D\hoa.2d.encoder_tilde.cpp">
-      <Filter>PD2d</Filter>
-    </ClCompile>
-    <ClCompile Include="PD2D\hoa.2d.map_gui.cpp">
       <Filter>PD2d</Filter>
     </ClCompile>
     <ClCompile Include="PD2D\hoa.2d.map_tilde.cpp">
@@ -360,15 +363,6 @@
     <ClCompile Include="..\Sources\Hoa2D\Scope.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\Source.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\SourcesGroup.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\SourcesManager.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sources\Hoa2D\Vector.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
@@ -431,6 +425,15 @@
     </ClCompile>
     <ClCompile Include="PD3D\hoa.3d.meter_gui_tilde.cpp">
       <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\Source.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\SourcesGroup.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

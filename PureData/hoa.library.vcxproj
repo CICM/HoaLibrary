@@ -25,9 +25,6 @@
     <ClInclude Include="..\Sources\Hoa2D\Recomposer.h" />
     <ClInclude Include="..\Sources\Hoa2D\Rotate.h" />
     <ClInclude Include="..\Sources\Hoa2D\Scope.h" />
-    <ClInclude Include="..\Sources\Hoa2D\Source.h" />
-    <ClInclude Include="..\Sources\Hoa2D\SourcesGroup.h" />
-    <ClInclude Include="..\Sources\Hoa2D\SourcesManager.h" />
     <ClInclude Include="..\Sources\Hoa2D\Vector.h" />
     <ClInclude Include="..\Sources\Hoa2D\Wider.h" />
     <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h" />
@@ -42,6 +39,10 @@
     <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h" />
+    <ClInclude Include="..\Sources\HoaCommon\HoaCommon.h" />
+    <ClInclude Include="..\Sources\HoaCommon\Source.h" />
+    <ClInclude Include="..\Sources\HoaCommon\SourcesGroup.h" />
+    <ClInclude Include="..\Sources\HoaCommon\SourcesManager.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\ebox\ebox.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\eclass\eclass.h" />
@@ -78,9 +79,6 @@
     <ClCompile Include="..\Sources\Hoa2D\Recomposer.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Rotate.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Scope.cpp" />
-    <ClCompile Include="..\Sources\Hoa2D\Source.cpp" />
-    <ClCompile Include="..\Sources\Hoa2D\SourcesGroup.cpp" />
-    <ClCompile Include="..\Sources\Hoa2D\SourcesManager.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Vector.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Wider.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp" />
@@ -95,6 +93,9 @@
     <ClCompile Include="..\Sources\Hoa3D\Scope_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Vector_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\Source.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\SourcesGroup.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp" />
     <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_attr.c" />
     <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_basic.c" />
     <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_draw.c" />
@@ -124,7 +125,6 @@
     <ClCompile Include="hoa.pd.cpp" />
     <ClCompile Include="PD2D\hoa.2d.decoder_tilde.cpp" />
     <ClCompile Include="PD2D\hoa.2d.encoder_tilde.cpp" />
-    <ClCompile Include="PD2D\hoa.2d.map_gui.cpp" />
     <ClCompile Include="PD2D\hoa.2d.map_tilde.cpp" />
     <ClCompile Include="PD2D\hoa.2d.meter_gui_tilde.cpp" />
     <ClCompile Include="PD2D\hoa.2d.optim_tilde.cpp" />
