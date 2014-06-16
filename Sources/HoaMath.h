@@ -470,34 +470,46 @@ namespace Hoa
     {
         return acos(sin(elevation1) * sin(elevation2) + cos(elevation1) * cos(elevation2) * cos(azimuth1 - azimuth2));
     }
-	
-	inline double center_azimuth(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+
+	inline double spherical_azimuth_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
 	{
-		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
-		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
-		double z = sin(elevation1) + sin(elevation2);
-		double n = sqrt(x * x + y * y + z * z);
-		if(x >= 0)
+		double distance;
+		double angle1 = wrap_twopi(azimuth1);
+        double angle2 = wrap_twopi(azimuth2);
+        if(angle1 > angle2)
+            distance = (angle1 - angle2);
+        else
+            distance = (angle2 - angle1);
+		if(azimuth1 == azimuth2)
+			return azimuth1;
+		if(azimuth1 < azimuth2)
 		{
-			return asin(y / (n * cos(asin(z / n))));
-		}
-		else if(y >= 0)
-		{
-			return HOA_PI - asin(fabs(y) / (n * cos(asin(z / n))));
+			if(distance > HOA_PI)
+				return wrap_twopi(azimuth1 - (HOA_2PI - distance) * mu);
+			else
+				return azimuth1 + distance * mu;
 		}
 		else
 		{
-			return -(HOA_PI - asin(fabs(y) / (n * cos(asin(z / n)))));
+			if(distance > HOA_PI)
+				return wrap_twopi(azimuth1 + (HOA_2PI - distance) * mu);
+			else
+				return azimuth1 - distance * mu;
 		}
 	}
 
-	inline double center_elevation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2)
+	inline double spherical_elevation_interpolation(const double azimuth1, const double elevation1, const double azimuth2, const double elevation2, double mu)
 	{
-		double x = cos(elevation1) * cos(elevation1) + cos(elevation2) * cos(azimuth2);
-		double y = cos(elevation1) * sin(azimuth1) + cos(elevation2) * sin(azimuth2);
-		double z = sin(elevation1) + sin(elevation2);
-		double n = sqrt(x * x + y * y + z * z);
-		return asin(z / n);
+		double distance = distance_radian(elevation1, elevation2);
+		if(azimuth1 == wrap_twopi(azimuth2 + HOA_PI))
+			distance = elevation1 + elevation2;
+
+		if(distance > HOA_PI)
+			distance  = HOA_2PI - distance;
+		if(elevation1 < elevation2)
+			return elevation1 + distance * mu;
+		else
+			return elevation2 + distance * (1. - mu);
 	}
 
 	inline double radianClosestDistance(double angle1, double angle2)
@@ -638,6 +650,60 @@ namespace Hoa
             }
             memcpy(vector, temp, size * sizeof(double));
             delete [] temp;
+        }
+	}
+
+	inline void vector_sort_byone(unsigned int size, double* vector, double* vector2)
+	{
+        int index;
+        double* temp	= new double[size];
+		double* temp2	= new double[size];
+        if(temp && size)
+        {
+            index  = 0;
+            temp[0] = vector[0];
+            temp[size - 1] = vector[0];
+			temp2[0] = vector2[0];
+			temp2[size - 1] = vector2[0];
+            for(unsigned int i = 1; i < size; i++)
+            {
+                if(vector[i] < temp[0]) // Get the minimum
+                {
+                    temp[0] = vector[i];
+					temp2[0] = vector2[i];
+                    index = i;
+                }
+                if(vector[i] > temp[size - 1]) // Get the maximum
+				{
+                    temp[size - 1] = vector[i];
+					temp2[size - 1] = vector2[i];
+				}
+            }
+            vector[index] -= 1;
+
+            for(unsigned int i = 1; i < size - 1; i++)
+            {
+                temp[i] = temp[size - 1];
+				temp2[i] = temp2[size - 1];
+                index   = -1;
+                for(unsigned int j = 0; j < size; j++)
+                {
+                    if(vector[j] >= temp[i-1] && vector[j] <= temp[i])
+                    {
+                        temp[i] = vector[j];
+						temp2[i] = vector2[j];
+                        index = j;
+                    }
+                }
+                if(index > -1)
+                {
+                    vector[index] -= 1;
+                }
+            }
+            memcpy(vector, temp, size * sizeof(double));
+			memcpy(vector2, temp2, size * sizeof(double));
+            delete [] temp;
+			delete [] temp2;
         }
 	}
 }

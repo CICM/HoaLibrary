@@ -20,9 +20,21 @@ namespace Hoa3D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
+		int**			m_channels_neighbors;
+
 		unsigned int*   m_channels_number_of_points;
 		double**		m_channels_points_azimuth;
 		double**		m_channels_points_elevation;
+	
+		unsigned int*   m_channels_number_of_points_top;
+		double**		m_channels_points_azimuth_top;
+		double**		m_channels_points_elevation_top;
+		
+		unsigned int*   m_channels_number_of_points_bottom;
+		double**		m_channels_points_azimuth_bottom;
+		double**		m_channels_points_elevation_bottom;
+
+		void find_neighbor_channels();
     public:
         
         //! The meter constructor.
@@ -48,6 +60,35 @@ namespace Hoa3D
          */
 		void setChannelPosition(unsigned int index, double azimuth, double elevation);
         
+		//! Set the position of the channels.
+        /** Set the position of the channels with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
+         
+            @param     azimuths		The azimuths.
+            @param     elevations	The elevations.
+         */
+		void setChannelsPosition(double* azimuths, double* elevations);
+
+		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
+        {
+            assert(index < m_number_of_channels);
+			if(top)
+				return m_channels_number_of_points[index];
+			else
+				return m_channels_number_of_points[index];
+        }
+
+		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const
+        {
+            assert(index < m_number_of_channels);
+            return m_channels_points_azimuth[index][pointindex];
+        }
+
+		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex, bool top = 1) const
+        {
+            assert(index < m_number_of_channels);
+            return m_channels_points_elevation[index][pointindex];
+        }
+
         inline double getChannelPeak(unsigned int index) const
         {
             assert(index < m_number_of_channels);

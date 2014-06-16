@@ -128,12 +128,6 @@
     <ClInclude Include="..\Sources\Hoa2D\SourcesManager.h">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\SourcesPreset.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\SourcesTrajectory.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
     <ClInclude Include="..\Sources\Hoa2D\Vector.h">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
@@ -168,9 +162,6 @@
       <Filter>HoaSources\Hoa3d</Filter>
     </ClInclude>
     <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h">
-      <Filter>HoaSources\Hoa3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa3D\Tools_3D.h">
       <Filter>HoaSources\Hoa3d</Filter>
     </ClInclude>
     <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h">
@@ -378,12 +369,6 @@
     <ClCompile Include="..\Sources\Hoa2D\SourcesManager.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\SourcesPreset.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\SourcesTrajectory.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sources\Hoa2D\Vector.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
@@ -442,6 +427,9 @@
       <Filter>PD3d</Filter>
     </ClCompile>
     <ClCompile Include="PD3D\hoa.3d.wider_tilde.cpp">
+      <Filter>PD3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PD3D\hoa.3d.meter_gui_tilde.cpp">
       <Filter>PD3d</Filter>
     </ClCompile>
   </ItemGroup>
