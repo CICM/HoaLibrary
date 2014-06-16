@@ -7,7 +7,9 @@
 #ifndef __DEF_HOA_3D_METER__
 #define __DEF_HOA_3D_METER__
 
+#define _AFXDLL
 #include "Planewaves_3D.h"
+#include "Delaunay.h"
 
 namespace Hoa3D
 {
@@ -20,21 +22,8 @@ namespace Hoa3D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-		int**			m_channels_neighbors;
-
-		unsigned int*   m_channels_number_of_points;
-		double**		m_channels_points_azimuth;
-		double**		m_channels_points_elevation;
-	
-		unsigned int*   m_channels_number_of_points_top;
-		double**		m_channels_points_azimuth_top;
-		double**		m_channels_points_elevation_top;
-		
-		unsigned int*   m_channels_number_of_points_bottom;
-		double**		m_channels_points_azimuth_bottom;
-		double**		m_channels_points_elevation_bottom;
-
-		void find_neighbor_channels();
+		vertexSet		m_vertices;
+		triangleSet		m_triangles;
     public:
         
         //! The meter constructor.
@@ -71,22 +60,19 @@ namespace Hoa3D
 		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-			if(top)
-				return m_channels_number_of_points_top[index];
-			else
-				return m_channels_number_of_points[index];
+			return 0;
         }
 
 		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_channels_points_azimuth_top[index][pointindex];
+            return 0;
         }
 
 		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_channels_points_elevation_top[index][pointindex];
+            return 0;
         }
 
         inline double getChannelPeak(unsigned int index) const

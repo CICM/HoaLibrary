@@ -26,7 +26,6 @@
 // mailto:sjaak@sjaakpriester.nl
 
 
-#include "StdAfx.h"
 #include "Delaunay.h"
 
 const REAL sqrt3 = 1.732050808F;

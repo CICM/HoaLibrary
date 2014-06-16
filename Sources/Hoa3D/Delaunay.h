@@ -29,12 +29,16 @@
 // mailto:sjaak@sjaakpriester.nl
 
 #pragma once
+#include "../Hoa.h"
+#include <iterator>     // std::front_inserter
 
 #include <set>
 #include <algorithm>
 #include <math.h>
 
+
 using namespace std;
+#define ASSERT assert
 
 #ifndef _GDIPLUS_H
 
@@ -79,6 +83,11 @@ public:
 	{
 		return m_Pnt.X == v.m_Pnt.X && m_Pnt.Y == v.m_Pnt.Y;
 	}
+
+	void operator=(const vertex& v) const
+	{
+		;
+	}
 	
 	REAL GetX()	const	{ return m_Pnt.X; }
 	REAL GetY() const	{ return m_Pnt.Y; }
@@ -108,6 +117,7 @@ public:
 	{
 		for (int i = 0; i < 3; i++) m_Vertices[i] = tri.m_Vertices[i];
 	}
+
 	triangle(const vertex * p0, const vertex * p1, const vertex * p2)
 	{
 		m_Vertices[0] = p0;
@@ -126,6 +136,13 @@ public:
 		if (m_Center.X == tri.m_Center.X) return m_Center.Y < tri.m_Center.Y;
 		return m_Center.X < tri.m_Center.X;
 	}
+
+	/*
+	void operator=(const triangle& tri) const
+	{
+		;
+	}
+	*/
 
 	const vertex * GetVertex(int i) const
 	{

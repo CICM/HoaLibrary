@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Sources\Hoa.h" />
     <ClInclude Include="..\Sources\Hoa2D\Ambisonic.h" />
     <ClInclude Include="..\Sources\Hoa2D\ChannelManager.h" />
     <ClInclude Include="..\Sources\Hoa2D\Decoder.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="..\Sources\Hoa2D\Wider.h" />
     <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Delaunay.h" />
     <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Map_3D.h" />
@@ -43,6 +45,9 @@
     <ClInclude Include="..\Sources\HoaCommon\Source.h" />
     <ClInclude Include="..\Sources\HoaCommon\SourcesGroup.h" />
     <ClInclude Include="..\Sources\HoaCommon\SourcesManager.h" />
+    <ClInclude Include="..\Sources\HoaDefs.h" />
+    <ClInclude Include="..\Sources\HoaMath.h" />
+    <ClInclude Include="..\Sources\HoaUtils.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\cicm_wrapper.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\ebox\ebox.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\eclass\eclass.h" />
@@ -84,6 +89,7 @@
     <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\BinauralMatrix_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Delaunay.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp" />
