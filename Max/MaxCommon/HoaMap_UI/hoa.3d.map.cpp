@@ -35,6 +35,8 @@
 #define MIN_ZOOM 0.01
 #define MAX_NUMBER_OF_SOURCES 64
 
+#define ODD_BINDING_SUFFIX "map1572"
+
 typedef struct _textfield {
 	t_jbox			j_box;
     t_object*       j_patcher;
@@ -55,11 +57,7 @@ t_max_err textfield_notify(t_textfield *x, t_symbol *s, t_symbol *msg, void *sen
 
 static t_class *s_textfield_class = NULL;
 
-typedef struct _linkmap
-{
-	_linkmap *next;
-	t_object *map;
-} t_linkmap;
+typedef struct _linkmap t_linkmap;
 
 typedef struct  _hoamap
 {
@@ -102,11 +100,24 @@ typedef struct  _hoamap
     // options :
     t_atom_long f_output_mode;			// Polar Cartesian
 	long		f_output_3D;			// 0 is 2d, 1 is 3d
-	t_atom_long f_coord_display_mode;	// xy xz yz
+	t_atom_long f_coord_view;			// xy xz yz
 	
 	t_symbol*	f_binding_name;
 	t_linkmap*	f_listmap;
 } t_hoamap;
+
+typedef struct _linkmap
+{
+	t_linkmap *next;
+	t_hoamap *map;
+	void update_headptr(t_linkmap *linkmap_headptr)
+	{
+		map->f_listmap = linkmap_headptr;
+		if(next != NULL)
+			next->update_headptr(linkmap_headptr);
+	}
+} t_linkmap;
+
 
 t_class *hoamap_class;
 
@@ -212,7 +223,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_key,              "key",				A_CANT, 0);
 
-	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
+	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 220 220");
 	// @exclude hoa.3d.map
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	// @exclude hoa.3d.map
@@ -262,8 +273,8 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE             (c, "output3d", 1);
 	// @description Check this to output 3d coordinates, default is 2d.
 	
-	CLASS_ATTR_LONG				(c, "view", 0, t_hoamap, f_coord_display_mode);
-	CLASS_ATTR_LABEL			(c, "view", 0, "Coordinate Mode");
+	CLASS_ATTR_LONG				(c, "view", 0, t_hoamap, f_coord_view);
+	CLASS_ATTR_LABEL			(c, "view", 0, "Coordinate View");
 	CLASS_ATTR_CATEGORY			(c, "view", 0, "Behavior");
 	CLASS_ATTR_ENUMINDEX		(c, "view", 0, "xy xz yz");
 	CLASS_ATTR_DEFAULT          (c, "view", 0,  "0");
@@ -271,13 +282,14 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER			(c, "view", 0, "1");
 	// @description Sets the coordinates display mode. coordinates display mode can be <b>xy</b>, <b>xz</b> or <b>yz</b>
 	
-	CLASS_ATTR_SYM				(c, "bindname", 0, t_hoamap, f_binding_name);
-	CLASS_ATTR_LABEL			(c, "bindname", 0, "Binding Name");
-	CLASS_ATTR_CATEGORY			(c, "bindname", 0, "Behavior");
-	CLASS_ATTR_ACCESSORS		(c, "bindname", NULL, bindname_set);
-	CLASS_ATTR_DEFAULT          (c, "bindname", 0,  "");
-    CLASS_ATTR_SAVE             (c, "bindname", 1);
-    CLASS_ATTR_ORDER			(c, "bindname", 0, "1");
+	CLASS_ATTR_SYM				(c, "mapname", 0, t_hoamap, f_binding_name);
+	CLASS_ATTR_LABEL			(c, "mapname", 0, "Map Name");
+	CLASS_ATTR_CATEGORY			(c, "mapname", 0, "Name");
+	CLASS_ATTR_ACCESSORS		(c, "mapname", NULL, bindname_set);
+	CLASS_ATTR_DEFAULT          (c, "mapname", 0,  "");
+    CLASS_ATTR_SAVE             (c, "mapname", 1);
+    CLASS_ATTR_ORDER			(c, "mapname", 0, "1");
+	// @description Use the <m>mapmode</m> attribute to bind multiple <o>hoa.map</o> objects together.
     
 	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
@@ -322,10 +334,13 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
-    x->f_listmap = NULL;
     x->f_rect_selection_exist = 0;
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+	
+	x->f_binding_name = hoa_sym_nothing;
+	x->f_listmap = NULL;
+	
     x->j_box.b_firstin = (t_object*) x;
         
     x->f_out_infos      = listout(x);
@@ -343,77 +358,119 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 {
 	char strname[2048];
+	sprintf(strname, "%s%s", binding_name->s_name, ODD_BINDING_SUFFIX);
+	t_symbol* name = gensym(strname);
+	
+	// symbol null => new t_listmap
+	if(name->s_thing == NULL)
+	{
+		x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
+		x->f_listmap->map = x;
+		x->f_listmap->next = NULL;
+		name->s_thing = (t_object *)x->f_listmap;
+	}
+	else // t_listmap exist => add our object in it
+	{
+		t_linkmap *temp, *temp2;
+		if(x->f_listmap != NULL)
+		{
+			temp = x->f_listmap;
+			while(temp)
+			{
+				if(temp->next != NULL && temp->next->map == x)
+				{
+					temp2 = temp->next->next;
+					free(temp->next);
+					temp->next = temp2;
+				}
+				temp = temp->next;
+			}
+		}
+		
+		x->f_listmap = (t_linkmap *)name->s_thing;
+		temp = x->f_listmap;
+		while(temp)
+		{
+			if(temp->next == NULL)
+			{
+				temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
+				temp2->map = x;
+				temp2->next = NULL;
+				temp->next = temp2;
+				break;
+			}
+			temp = temp->next;
+		}
+	}
+}
+
+void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
+{
+	char strname[2048];
+	sprintf(strname, "%s%s", binding_name->s_name, ODD_BINDING_SUFFIX);
+	t_symbol* name = gensym(strname);
+	
+	if(name->s_thing != NULL)
+	{
+		int counter = 0;
+		t_linkmap *temp, *temp2;
+		temp = (t_linkmap *)name->s_thing;
+		while(temp)
+		{
+			if (counter == 0 && temp->map == x) // head of the linkmap
+			{
+				if(temp->next == NULL) // last item of the linkmap
+					name->s_thing = NULL;
+				else
+				{
+					name->s_thing = (t_object *)temp->next;
+					temp->next->update_headptr((t_linkmap *)name->s_thing);
+				}
+				free(x->f_listmap);
+				x->f_listmap = NULL;
+			}
+			if(temp->next != NULL && temp->next->map == x)
+			{
+				temp2 = temp->next->next;
+				free(temp->next);
+				temp->next = temp2;
+			}
+			
+			counter++;
+			temp = temp->next;
+		}
+	}
+}
+
+t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+{
 	if (argc && argv && atom_gettype(argv) == A_SYM)
 	{
-		if(atom_getsym(argv) != hoa_sym_nothing && atom_getsym(argv) != x->f_binding_name)
+		t_symbol* binding_name = atom_getsym(argv);
+		
+		// remove previous reference
+		if (x->f_binding_name != hoa_sym_nothing)
+			linkmap_remove_with_binding_name(x, x->f_binding_name);
+		
+		if (binding_name == hoa_sym_nothing)
 		{
-			sprintf(strname, "%smap1572", atom_getsym(argv)->s_name);
-			t_symbol* name = gensym(strname);
-			if(name->s_thing == NULL)
-			{
-				x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
-				x->f_listmap->map = (t_object *)x;
-				x->f_listmap->next = NULL;
-				name->s_thing = (t_object *)x->f_listmap;
-			}
-			else
-			{
-				t_linkmap *temp, *temp2;
-				if(x->f_listmap != NULL)
-				{
-					temp = x->f_listmap;
-					while(temp)
-					{
-						if(temp->next != NULL && temp->next->map == (t_object *)x)
-						{
-							temp2 = temp->next->next;
-							free(temp->next);
-							temp->next = temp2;
-						}
-						temp = temp->next;
-					}
-				}
-				x->f_listmap = (t_linkmap *)name->s_thing;
-				temp = x->f_listmap;
-				while(temp)
-				{
-					if(temp->next == NULL)
-					{
-						temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
-						temp2->map = (t_object *)x;
-						temp2->next = NULL;
-						temp->next = temp2;
-						break;
-					}
-					temp = temp->next;
-				}
-				
-			}
-			x->f_binding_name = atom_getsym(argv);
+			x->f_binding_name = hoa_sym_nothing;
 		}
-		else if(atom_getsym(argv) != hoa_sym_nothing)
+		else if(binding_name != x->f_binding_name)
 		{
-			t_linkmap *temp, *temp2;
-			if(x->f_listmap != NULL)
-			{
-				temp = x->f_listmap;
-				while(temp)
-				{
-					if(temp->next != NULL && temp->next->map == (t_object *)x)
-					{
-						temp2 = temp->next->next;
-						free(temp->next);
-						temp->next = temp2;
-					}
-					temp = temp->next;
-				}
-			}
-			x->f_listmap = NULL;
-			x->f_binding_name = NULL;
+			linkmap_add_with_binding_name(x, binding_name);
+			x->f_binding_name = binding_name;
 		}
+	}
+	else
+	{
+		if (x->f_binding_name != hoa_sym_nothing)
+			linkmap_remove_with_binding_name(x, x->f_binding_name);
+		
+		x->f_binding_name = hoa_sym_nothing;
 	}
 	return MAX_ERR_NONE;
 }
@@ -442,8 +499,11 @@ t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos)
 
 void hoamap_free(t_hoamap *x)
 {
+	linkmap_remove_with_binding_name(x, x->f_binding_name);
+	
 	jbox_free(&x->j_box);
     jfont_destroy(x->jfont);
+	
     delete x->f_source_manager;
     if(x->f_patcher)
         object_free(x->f_patcher);
@@ -502,11 +562,15 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	{
 		t_linkmap *temp = x->f_listmap;
 		int i = 0;
+		object_post((t_object*)x,"** bind : %s **", x->f_binding_name->s_name);
 		while (temp)
 		{
-			post("%i %ld", i++, (long)temp->map);
+			
+			object_post((t_object*)temp->map,"%i %ld", i++, (long)temp->map);
 			temp = temp->next;
 		}
+		
+		object_post((t_object*)x,"there is %i map linked", i);
 	}
 	
 	int index;
@@ -1612,7 +1676,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-				switch (x->f_coord_display_mode)
+				switch (x->f_coord_view)
 				{
 					case 0 : // XY
 					{
@@ -1733,7 +1797,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
-				switch (x->f_coord_display_mode)
+				switch (x->f_coord_view)
 				{
 					case 0 : // XY
 					{
@@ -1889,7 +1953,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-		switch (x->f_coord_display_mode)
+		switch (x->f_coord_view)
 		{
 			case 0 : // XY
 			{
@@ -1925,7 +1989,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-			switch (x->f_coord_display_mode)
+			switch (x->f_coord_view)
 			{
 				case 0 : // XY
 				{
@@ -2156,7 +2220,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		if(modifiers == 148 || modifiers == 404) // ctrl
 #endif
 		{
-			switch (x->f_coord_display_mode)
+			switch (x->f_coord_view)
 			{
 				case 0 : // XY
 				{
@@ -2200,7 +2264,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
         else
 		{
-			switch (x->f_coord_display_mode)
+			switch (x->f_coord_view)
 			{
 				case 0 : // XY
 				{
@@ -2298,7 +2362,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
         {
             if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
             {
-				switch (x->f_coord_display_mode)
+				switch (x->f_coord_view)
 				{
 					case 0 : // XY
 					{
@@ -2377,7 +2441,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	// test if mouse is over a source
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-		switch (x->f_coord_display_mode)
+		switch (x->f_coord_view)
 		{
 			case 0 : // XY
 			{
@@ -2414,7 +2478,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
 		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-			switch (x->f_coord_display_mode)
+			switch (x->f_coord_view)
 			{
 				case 0 : // XY
 				{
