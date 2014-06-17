@@ -16,13 +16,11 @@ namespace Hoa3D
         m_ramp                  = 0;
         m_vector_size           = 256;
         m_channels_peaks		= new double[m_number_of_channels];
+		m_delaunay				= new Delaunay();
 
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
-        {
             m_channels_peaks[i] = 0.;			
-        }
 		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
-		m_delaunay = new Delaunay(m_number_of_channels);
     }
     
     void Meter::setVectorSize(unsigned int vectorSize)
@@ -40,9 +38,24 @@ namespace Hoa3D
     void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         Planewaves::setChannelPosition(index, azimuth, elevation);
-		for(int i = 0; i < m_number_of_channels; i++)
-			m_delaunay->setPointPosition(i, m_channels_azimuth[i], m_channels_elevation[i]);
+		m_delaunay->clear();
+		for(unsigned int i = 0; i < m_number_of_channels; i++)
+			m_delaunay->addPoint(m_channels_azimuth[i], m_channels_elevation[i]);
 		m_delaunay->perform();
+		post("n circles %i", m_delaunay->getNumberOfCircles());
+		/*
+		
+		m_delaunay->perform();
+		
+		for(unsigned int i = 0; i < m_delaunay->getNumberOfTriangles(); i++)
+		{
+			post("triangles %i", i);
+			for(unsigned int j = 0; j < 3; j++)
+			{
+				post("point %i abs", m_delaunay->getTrianglePointAbscissa(i, j));
+				post("point %i ord",  m_delaunay->getTrianglePointOrdinate(i, j));
+			}
+		}*/
 	}
     
     void Meter::process(const float* inputs)

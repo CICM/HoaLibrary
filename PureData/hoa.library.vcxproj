@@ -38,7 +38,6 @@
     <ClInclude Include="..\Sources\Hoa3D\Planewaves_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Rotate_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h" />
-    <ClInclude Include="..\Sources\Hoa3D\Triangle.h" />
     <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h" />
     <ClInclude Include="..\Sources\HoaCommon\HoaCommon.h" />
@@ -96,7 +95,6 @@
     <ClCompile Include="..\Sources\Hoa3D\Planewaves_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Rotate_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Scope_3D.cpp" />
-    <ClCompile Include="..\Sources\Hoa3D\Triangle.c" />
     <ClCompile Include="..\Sources\Hoa3D\Vector_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp" />
     <ClCompile Include="..\Sources\HoaCommon\Source.cpp" />

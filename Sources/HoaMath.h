@@ -659,7 +659,7 @@ namespace Hoa
         }
 	}
 
-	void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations, double azymuth, double elevation)
+	inline void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations, double azymuth, double elevation)
 	{
         double* abs	= new double[size];
 		double* ord	= new double[size];
