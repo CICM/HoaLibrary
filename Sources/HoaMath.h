@@ -659,6 +659,82 @@ namespace Hoa
         }
 	}
 
+	void vector_sort_coordinates(unsigned int size, double* azimuths, double* elevations, double azymuth, double elevation)
+	{
+        double* abs	= new double[size];
+		double* ord	= new double[size];
+		double* azi	= new double[size];
+		double* cpa	= new double[size];
+		double* cpe	= new double[size];
+		int* index	= new int[size];
+		double g_x = abscissa(1, azymuth, elevation), g_y = ordinate(1, azymuth, elevation);
+		memcpy(cpa, azimuths, size * sizeof(double));
+		memcpy(cpe, elevations, size * sizeof(double));
+	
+		for(unsigned int i = 0; i < size; i++)
+		{
+			abs[i] = abscissa(1., azimuths[i], elevations[i]);
+			ord[i] = ordinate(1., azimuths[i], elevations[i]) - g_y;
+			if(elevation >= 0 && elevations[i] < 0.)
+			{
+				if(abs[i] < 0)
+					abs[i] *= -1;
+				abs[i] += 2.;
+			}
+			else if(elevation < 0 && elevations[i] > 0.)
+			{
+				if(abs[i] > 0)
+					abs[i] *= -1;
+				abs[i] += 2.;
+			}
+			abs[i] -= g_x;
+			
+		}
+		double max = -100;
+		int inc = size - 1;
+		for(unsigned int i = 0; i < size; i++)
+		{
+			azi[i] = wrap_twopi(azimuth(abs[i], ord[i]));
+			if(azi[i] > max)
+			{
+				max = azi[i];
+				index[inc] = i;
+			}
+			
+		}
+		
+		azi[index[inc]] = -100;
+		inc--;
+		while(inc > -1)
+		{
+			max = -1;
+			for(unsigned int j = 0; j < size; j++)
+			{
+				if(azi[j] > max)
+				{
+					max = azi[j];
+					index[inc] = j;
+				}
+			}
+			azi[index[inc]] = -100;
+			inc--;
+		}
+
+		for(unsigned int i = 0; i < size; i++)
+		{
+			azimuths[i] = cpa[index[i]];
+			elevations[i] = cpe[index[i]];
+		}
+		
+		delete [] abs;
+		delete [] ord;
+		delete [] azi;
+		delete [] cpa;
+		delete [] cpe;
+		delete [] index;
+
+	}
+
 	inline void vector_sort_byone(unsigned int size, double* vector, double* vector2)
 	{
         int index;
