@@ -594,7 +594,7 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
     t_matrix transform;
     t_rgba black = rgba_addContrast(x->f_color_bg, -0.14);
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_3d_leds_layer, rect->width, rect->height);
-    return;
+
 	if (g)
 	{
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);

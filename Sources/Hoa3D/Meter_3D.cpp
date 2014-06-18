@@ -43,6 +43,9 @@ namespace Hoa3D
 			m_delaunay->addPoint(m_channels_azimuth[i], m_channels_elevation[i]);
 		m_delaunay->perform();
 		post("n circles %i", m_delaunay->getNumberOfCircles());
+
+		for(unsigned int i = 0; i < m_number_of_channels; i++)
+			post("point %i circles %i", i, m_delaunay->getPointNumberOfCircles(i));
 		/*
 		
 		m_delaunay->perform();

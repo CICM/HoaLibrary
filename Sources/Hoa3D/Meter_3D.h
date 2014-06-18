@@ -61,18 +61,23 @@ namespace Hoa3D
 			double angle_jik = azimuth(points[j].x - points[i].x, points[j].y - points[i].y) - azimuth(points[k].x - points[i].x, points[k].y - points[i].y);
 			if(angle_jik > HOA_PI)
 				angle_jik = HOA_PI - angle_jik;
-			double dista_ij = distance(points[j].x, points[j].y, points[i].x, points[i].y);
+			double dista_ij = sqrt((points[j].x - points[i].x) * (points[j].x - points[i].x) + (points[j].y - points[i].y) * (points[j].y - points[i].y));
 			double radius = dista_ij / sin(angle_jik);
 
 			double abs = radius + dista_ij * 0.5;
 			double ord = radius + points[i].y;
-
-			for(int l = 0; l < points.size(); l++)
+			int size = points.size();
+			bool check = 0;
+			for(int l = 0; l < size; l++)
 			{
 				if(distance(abs, ord, points[l].x, points[l].y) < radius)
 					return;
 			}
-
+			if(check)
+			{
+				post("bah");
+				return;
+			}
 			DelaunayCircle circle = DelaunayCircle(abs, ord, radius);
 			circle.points.push_back(&points[i]);
 			circle.points.push_back(&points[j]);
@@ -98,14 +103,17 @@ namespace Hoa3D
 
 		void addPoint(double _azimuth, double _elevation, bool _bottom = 0)
 		{
-			double abs = abscissa(1., _azimuth, _elevation);
-			double ord = ordinate(1., _azimuth, _elevation);
+			double abs;
+			double ord;
 			if((_bottom && _elevation > 0) || (!_bottom && _elevation < 0))
 			{
-				double rad = (1. - radius(abs, ord)) + 1.;
-				double azy = azimuth(abs, ord);
-				abs = abscissa(rad, azy);
-				ord = ordinate(rad, azy);
+				abs = cos(_azimuth) * (2. - fabs(2. * _elevation / HOA_PI));
+				ord = sin(_azimuth) * (2. - fabs(2. * _elevation / HOA_PI));
+			}
+			else
+			{
+				abs = cos(_azimuth) * fabs(2. * _elevation / HOA_PI);
+				ord = sin(_azimuth) * fabs(2. * _elevation / HOA_PI);
 			}
 			points.push_back(DelaunayPoint(abs, ord));
 		};
@@ -129,6 +137,33 @@ namespace Hoa3D
 		{
 			return circles.size();
 		};
+
+		unsigned int getPointNumberOfCircles(unsigned int _index_point) const
+		{
+			assert(_index_point < points.size());
+			return points[_index_point].circles.size();
+		};
+		/*
+		double getPointCircleAzimuth(unsigned int _index_point, unsigned int _index_circle) const
+		{
+			assert(_index_point < points.size());
+			assert(_index_circle < points[_index_point].circles.size());
+			if (points[_index_point].circles[_index_circle].x == 0 && points[_index_point].circles[_index_circle].y == 0);
+				return 0;
+			else
+				return atan2(points[_index_point].circles[_index_circle].y, points[_index_point].circles[_index_circle].x);
+		};
+
+		double getPointCircleElevation(unsigned int _index_point, unsigned int _index_circle) const
+		{
+			assert(_index_point < points.size());
+			assert(_index_circle < points[_index_point].circles.size());
+			double radius = sqrt(points[_index_point].circles[_index_circle].x * points[_index_point].circles[_index_circle].x + points[_index_point].circles[_index_circle].x * points[_index_point].circles[_index_circle].x);
+			if (radius <= 0)
+				return radius * HOA_PI2;
+			else
+				return (1. - radius) * HOA_PI2;
+		};*/
 	};
     //! The planewaves peak level meter.
     /** The meter should be used to widen the sound propagation.
