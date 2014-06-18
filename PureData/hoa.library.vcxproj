@@ -30,6 +30,7 @@
     <ClInclude Include="..\Sources\Hoa2D\Wider.h" />
     <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Delaunay.h" />
     <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Map_3D.h" />
@@ -88,6 +89,7 @@
     <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\BinauralMatrix_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Delaunay.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp" />

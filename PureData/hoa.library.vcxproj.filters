@@ -191,6 +191,9 @@
     <ClInclude Include="..\Sources\HoaDefs.h">
       <Filter>HoaSources</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Delaunay.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\PureData\Sources\ebox\ebox_attr.c">
@@ -446,6 +449,9 @@
     </ClCompile>
     <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp">
       <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Delaunay.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
