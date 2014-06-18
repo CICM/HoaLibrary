@@ -10,6 +10,7 @@
 
 extern "C" void setup_hoa0x2elibrary(void)
 {
+    //
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
