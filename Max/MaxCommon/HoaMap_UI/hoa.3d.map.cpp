@@ -74,6 +74,7 @@ typedef struct  _hoamap
     t_object*   f_textfield;
     
 	SourcesManager*     f_source_manager;
+	SourcesManager*     f_self_source_manager;
     
     t_pt        f_cursor_position;
     long        f_index_of_selected_source;
@@ -110,11 +111,12 @@ typedef struct _linkmap
 {
 	t_linkmap *next;
 	t_hoamap *map;
-	void update_headptr(t_linkmap *linkmap_headptr)
+	void update_headptr(t_linkmap *linkmap_headptr, SourcesManager* sourcesManager)
 	{
 		map->f_listmap = linkmap_headptr;
+		map->f_source_manager = sourcesManager;
 		if(next != NULL)
-			next->update_headptr(linkmap_headptr);
+			next->update_headptr(linkmap_headptr, sourcesManager);
 	}
 } t_linkmap;
 
@@ -163,6 +165,9 @@ void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av);
 
 t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 t_max_err is_server_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+
+void hoamap_send_binded_map_repaint(t_hoamap *x);
+void hoamap_binded_map_repaint(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 
 int C74_EXPORT main()
 {
@@ -222,6 +227,8 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_key,              "key",				A_CANT, 0);
+	
+	class_addmethod(c, (method) hoamap_binded_map_repaint, "binded_map_repaint", A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 220 220");
 	// @exclude hoa.3d.map
@@ -334,6 +341,8 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
+	x->f_self_source_manager = x->f_source_manager;
+	
     x->f_rect_selection_exist = 0;
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
@@ -371,10 +380,12 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		x->f_listmap->map = x;
 		x->f_listmap->next = NULL;
 		name->s_thing = (t_object *)x->f_listmap;
+		x->f_source_manager = x->f_self_source_manager;
 	}
 	else // t_listmap exist => add our object in it
 	{
 		t_linkmap *temp, *temp2;
+		
 		if(x->f_listmap != NULL)
 		{
 			temp = x->f_listmap;
@@ -392,6 +403,10 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		
 		x->f_listmap = (t_linkmap *)name->s_thing;
 		temp = x->f_listmap;
+		t_hoamap* head_map = temp->map;
+		
+		object_post((t_object*)head_map, "add function headmap");
+		
 		while(temp)
 		{
 			if(temp->next == NULL)
@@ -400,6 +415,16 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				temp2->map = x;
 				temp2->next = NULL;
 				temp->next = temp2;
+				
+				temp->next->map->f_source_manager = head_map->f_self_source_manager;
+				
+				// on redonne au map le pointeur d'origine
+				//temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
+				// on copie le sourceManager partagé dans sourceManager d'origine
+				//head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
+				
+				//head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
+				//temp->next->map->f_source_manager = head_map->f_self_source_manager;
 				break;
 			}
 			temp = temp->next;
@@ -415,31 +440,48 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 	
 	if(name->s_thing != NULL)
 	{
-		int counter = 0;
 		t_linkmap *temp, *temp2;
 		temp = (t_linkmap *)name->s_thing;
+		t_hoamap* head_map = temp->map;
+		int counter = 0;
+		object_post((t_object*)head_map, "remove function headmap");
+		
 		while(temp)
 		{
 			if (counter == 0 && temp->map == x) // head of the linkmap
 			{
-				if(temp->next == NULL) // last item of the linkmap
+				head_map = temp->map;
+				
+				if(temp->next == NULL) // is also the last item of the linkmap
+				{
 					name->s_thing = NULL;
+				}
 				else
 				{
 					name->s_thing = (t_object *)temp->next;
-					temp->next->update_headptr((t_linkmap *)name->s_thing);
+					// le sourceManager du linkmap est celui du head, on le copie dans le suivant et on les fait tous pointer vers celui ci
+					
+					head_map->f_source_manager->copyTo(temp->next->map->f_self_source_manager);
+					temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
 				}
 				free(x->f_listmap);
 				x->f_listmap = NULL;
+				
+				x->f_source_manager = x->f_self_source_manager; // pas necessaire (pointe deja sur celui du head)
 			}
-			if(temp->next != NULL && temp->next->map == x)
+			else if(temp->next != NULL && temp->next->map == x)
 			{
+				// on redonne au map le pointeur d'origine
+				temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
+				// on copie le sourceManager partagé dans sourceManager d'origine
+				head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
+				
 				temp2 = temp->next->next;
 				free(temp->next);
 				temp->next = temp2;
+				x->f_listmap = NULL;
 			}
 			
-			counter++;
 			temp = temp->next;
 		}
 	}
@@ -449,21 +491,39 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (argc && argv && atom_gettype(argv) == A_SYM)
 	{
-		t_symbol* binding_name = atom_getsym(argv);
+		t_symbol* new_binding_name = atom_getsym(argv);
 		
+		if(new_binding_name != x->f_binding_name)
+		{
+			// remove previous reference
+			if (x->f_binding_name != hoa_sym_nothing)
+				linkmap_remove_with_binding_name(x, x->f_binding_name);
+			
+			// remove previous reference
+			if (new_binding_name != hoa_sym_nothing)
+			{
+				linkmap_add_with_binding_name(x, new_binding_name);
+				x->f_binding_name = new_binding_name;
+			}
+			else
+				x->f_binding_name = hoa_sym_nothing;
+		}
+		
+		/*
 		// remove previous reference
 		if (x->f_binding_name != hoa_sym_nothing)
 			linkmap_remove_with_binding_name(x, x->f_binding_name);
 		
-		if (binding_name == hoa_sym_nothing)
+		if (new_binding_name == hoa_sym_nothing)
 		{
 			x->f_binding_name = hoa_sym_nothing;
 		}
-		else if(binding_name != x->f_binding_name)
+		else if(new_binding_name != x->f_binding_name)
 		{
-			linkmap_add_with_binding_name(x, binding_name);
-			x->f_binding_name = binding_name;
+			linkmap_add_with_binding_name(x, new_binding_name);
+			x->f_binding_name = new_binding_name;
 		}
+		*/
 	}
 	else
 	{
@@ -472,6 +532,13 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 		
 		x->f_binding_name = hoa_sym_nothing;
 	}
+	
+	object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+    jbox_redraw((t_jbox *)x);
+    hoamap_bang(x);
+	
 	return MAX_ERR_NONE;
 }
 
@@ -504,7 +571,9 @@ void hoamap_free(t_hoamap *x)
 	jbox_free(&x->j_box);
     jfont_destroy(x->jfont);
 	
-    delete x->f_source_manager;
+    //delete x->f_source_manager;
+	delete x->f_self_source_manager;
+	
     if(x->f_patcher)
         object_free(x->f_patcher);
     if(x->f_colorpicker )
@@ -556,6 +625,36 @@ void hoamap_clear_all(t_hoamap *x)
     hoamap_bang(x);
 }
 
+void hoamap_send_binded_map_repaint(t_hoamap *x)
+{
+	if(x->f_listmap)
+	{
+		t_linkmap *temp = x->f_listmap;
+		t_object* mapobj;
+		while (temp)
+		{
+			mapobj = (t_object*)temp->map;
+			
+			if (mapobj != (t_object*)x)
+			{
+				object_method(mapobj, gensym("binded_map_repaint"));
+			}
+			
+			temp = temp->next;
+		}
+	}
+}
+
+void hoamap_binded_map_repaint(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+{
+	object_post((t_object*)x, "hoamap_binded_map (repaint)");
+	object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+    jbox_redraw((t_jbox *)x);
+    hoamap_bang(x);
+}
+
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	if(x->f_listmap)
@@ -565,13 +664,35 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		object_post((t_object*)x,"** bind : %s **", x->f_binding_name->s_name);
 		while (temp)
 		{
-			
 			object_post((t_object*)temp->map,"%i %ld", i++, (long)temp->map);
 			temp = temp->next;
 		}
 		
 		object_post((t_object*)x,"there is %i map linked", i);
 	}
+	else
+	{
+		object_post((t_object*)x,"no linkmap ** bind : %s **", x->f_binding_name->s_name);
+	}
+	
+	/*
+	if(x->f_listmap)
+	{
+		t_linkmap *temp = x->f_listmap;
+		t_object* mapobj;
+		while (temp)
+		{
+			mapobj = (t_object*)temp->map;
+			
+			if (mapobj != (t_object*)x)
+			{
+				object_method(mapobj, gensym("binded_msg"), ac, av);
+			}
+			
+			temp = temp->next;
+		}
+	}
+	*/
 	
 	int index;
 	int exist;
@@ -2150,6 +2271,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
+			hoamap_send_binded_map_repaint(x);
             hoamap_bang(x);
         }
         else
@@ -2329,6 +2451,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     object_notify(x, hoa_sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+	hoamap_send_binded_map_repaint(x);
     jbox_redraw((t_jbox *)x);
 	
 	if (output)

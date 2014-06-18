@@ -944,6 +944,46 @@ namespace HoaCommon
 			}
 		}
 	}
+	
+	/************************************/
+	
+	void SourcesManager::copyTo(SourcesManager* sourcesManagerDestination)
+	{
+		double* color;
+		sourcesManagerDestination->setExistence(0);
+		if(getExistence() == 1)
+		{
+			sourcesManagerDestination->setExistence(1);
+			sourcesManagerDestination->setMaximumRadius(getLimitMaximum());
+			
+			for(long i = 0; i <= getMaximumIndexOfSource(); i++)
+			{
+				if(sourceGetExistence(i) == 1)
+				{
+					color = sourceGetColor(i);
+					sourcesManagerDestination->sourceSetRadius(i, sourceGetRadius(i));
+					sourcesManagerDestination->sourceSetAzimuth(i, sourceGetAzimuth(i));
+					sourcesManagerDestination->sourceSetElevation(i, sourceGetElevation(i));
+					sourcesManagerDestination->sourceSetColor(i, color[0], color[1], color[2], color[3]);
+					sourcesManagerDestination->sourceSetDescription(i, sourceGetDescription(i));
+					sourcesManagerDestination->sourceSetMute(i, sourceGetMute(i));
+				}
+			}
+			for(long i = 0; i <= getMaximumIndexOfGroup(); i++)
+			{
+				if(groupGetExistence(i) == 1)
+				{
+					for(long j = 0; j < groupGetNumberOfSources(i); j++)
+					{
+						sourcesManagerDestination->groupSetSource(i, groupGetSourceIndex(i, j));
+					}
+					color = groupGetColor(i);
+					sourcesManagerDestination->groupSetColor(i, color[0], color[1], color[2], color[3]);
+					sourcesManagerDestination->groupSetDescription(i, groupGetDescription(i));
+				}
+			}
+		}
+	}
 
 	/************************************/
 

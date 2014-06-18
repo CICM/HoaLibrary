@@ -44,6 +44,9 @@ namespace HoaCommon
 		//! The source manager destructor free the memory.
 		~SourcesManager();
 		
+		//! Make a copy of this SourcesManager into an other
+		void copyTo(SourcesManager* sourcesManagerDestination);
+		
 		//! Clear all the sources and groups.
 		void clearAll();
 		
