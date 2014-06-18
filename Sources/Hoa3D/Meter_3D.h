@@ -8,163 +8,10 @@
 #define __DEF_HOA_3D_METER__
 
 #include "Planewaves_3D.h"
+#include "Delaunay.h"
 
 namespace Hoa3D
 {
-
-	class Delaunay
-	{
-	private :
-		class DelaunayPoint;
-		class DelaunayCircle
-		{
-		public :
-			double x;
-			double y;
-			double r;
-			std::vector<DelaunayPoint *> points;
-
-			DelaunayCircle(double _x, double _y, double _r){
-				x = _x;
-				y = _y;
-				r = _r;
-			};
-			~DelaunayCircle()
-			{
-				points.clear();
-			};
-		};
-
-		class DelaunayPoint
-		{
-		public :
-			double x;
-			double y;
-			std::vector<DelaunayCircle *> circles;
-
-			DelaunayPoint(double _x, double _y){
-				x = _x;
-				y = _y;
-			};
-
-			~DelaunayPoint()
-			{
-				circles.clear();
-			};
-		};
-
-		std::vector<DelaunayPoint> points;
-		std::vector<DelaunayCircle> circles;
-
-		void evaluateTriangle(int i, int j, int k)
-		{
-			double angle_jik = azimuth(points[j].x - points[i].x, points[j].y - points[i].y) - azimuth(points[k].x - points[i].x, points[k].y - points[i].y);
-			if(angle_jik > HOA_PI)
-				angle_jik = HOA_PI - angle_jik;
-			double dista_ij = sqrt((points[j].x - points[i].x) * (points[j].x - points[i].x) + (points[j].y - points[i].y) * (points[j].y - points[i].y));
-			double radius = dista_ij / sin(angle_jik);
-
-			double abs = radius + dista_ij * 0.5;
-			double ord = radius + points[i].y;
-			int size = points.size();
-			bool check = 0;
-			for(int l = 0; l < size; l++)
-			{
-				if(distance(abs, ord, points[l].x, points[l].y) < radius)
-					return;
-			}
-			if(check)
-			{
-				post("bah");
-				return;
-			}
-			DelaunayCircle circle = DelaunayCircle(abs, ord, radius);
-			circle.points.push_back(&points[i]);
-			circle.points.push_back(&points[j]);
-			circle.points.push_back(&points[k]);
-			circles.push_back(circle);
-			points[i].circles.push_back(&circle);
-			points[j].circles.push_back(&circle);
-			points[k].circles.push_back(&circle);
-		};
-
-	public :
-		Delaunay(){};
-		~Delaunay()
-		{
-			clear();
-		};
-
-		void clear()
-		{
-			points.clear();
-			circles.clear();
-		};
-
-		void addPoint(double _azimuth, double _elevation, bool _bottom = 0)
-		{
-			double abs;
-			double ord;
-			if((_bottom && _elevation > 0) || (!_bottom && _elevation < 0))
-			{
-				abs = cos(_azimuth) * (2. - fabs(2. * _elevation / HOA_PI));
-				ord = sin(_azimuth) * (2. - fabs(2. * _elevation / HOA_PI));
-			}
-			else
-			{
-				abs = cos(_azimuth) * fabs(2. * _elevation / HOA_PI);
-				ord = sin(_azimuth) * fabs(2. * _elevation / HOA_PI);
-			}
-			points.push_back(DelaunayPoint(abs, ord));
-		};
-			
-		void perform()
-		{
-			int size = points.size();
-			for(int i = 0; i < size - 3; i++)
-			{
-				for(int j = i+1; j < size - 2; j++)
-				{
-					for(int k = j+1; k < size - 1; k++)
-					{
-						evaluateTriangle(i, j, k);
-					}
-				}
-			}
-		};
-
-		unsigned int getNumberOfCircles() const
-		{
-			return circles.size();
-		};
-
-		unsigned int getPointNumberOfCircles(unsigned int _index_point) const
-		{
-			assert(_index_point < points.size());
-			return points[_index_point].circles.size();
-		};
-		/*
-		double getPointCircleAzimuth(unsigned int _index_point, unsigned int _index_circle) const
-		{
-			assert(_index_point < points.size());
-			assert(_index_circle < points[_index_point].circles.size());
-			if (points[_index_point].circles[_index_circle].x == 0 && points[_index_point].circles[_index_circle].y == 0);
-				return 0;
-			else
-				return atan2(points[_index_point].circles[_index_circle].y, points[_index_point].circles[_index_circle].x);
-		};
-
-		double getPointCircleElevation(unsigned int _index_point, unsigned int _index_circle) const
-		{
-			assert(_index_point < points.size());
-			assert(_index_circle < points[_index_point].circles.size());
-			double radius = sqrt(points[_index_point].circles[_index_circle].x * points[_index_point].circles[_index_circle].x + points[_index_point].circles[_index_circle].x * points[_index_point].circles[_index_circle].x);
-			if (radius <= 0)
-				return radius * HOA_PI2;
-			else
-				return (1. - radius) * HOA_PI2;
-		};*/
-	};
     //! The planewaves peak level meter.
     /** The meter should be used to widen the sound propagation.
      */
@@ -175,7 +22,7 @@ namespace Hoa3D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-		Delaunay*		m_delaunay;
+		Hoa::Delaunay*	m_delaunay;
     public:
         
         //! The meter constructor.
