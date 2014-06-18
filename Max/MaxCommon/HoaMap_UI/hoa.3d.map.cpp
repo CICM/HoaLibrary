@@ -37,6 +37,12 @@
 
 #define ODD_BINDING_SUFFIX "map1572"
 
+typedef enum _BindingMapMsgFlag {
+	BMAP_REPAINT		= 0x01,
+	BMAP_NOTIFY		= 0x02,
+	BMAP_OUTPUT		= 0x04
+} BindingMapMsgFlag;
+
 typedef struct _textfield {
 	t_jbox			j_box;
     t_object*       j_patcher;
@@ -105,6 +111,7 @@ typedef struct  _hoamap
 	
 	t_symbol*	f_binding_name;
 	t_linkmap*	f_listmap;
+	int			f_output_enabled;
 } t_hoamap;
 
 typedef struct _linkmap
@@ -137,9 +144,11 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_bang(t_hoamap *x);
 void hoamap_infos(t_hoamap *x);
 void hoamap_clear_all(t_hoamap *x);
+void hoamap_output(t_hoamap *x);
 
 void hoamap_color_picker(t_hoamap *x);
 void hoamap_text_field(t_hoamap *x);
@@ -164,10 +173,7 @@ t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos);
 void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av);
 
 t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-t_max_err is_server_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-
-void hoamap_send_binded_map_repaint(t_hoamap *x);
-void hoamap_binded_map_repaint(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_send_binded_map_update(t_hoamap *x, long flags); // BindingMapMsgFlag
 
 int C74_EXPORT main()
 {
@@ -197,6 +203,14 @@ int C74_EXPORT main()
 	// @description The <m>getinfo</m> message report informations in the rightmost outlet.
     class_addmethod(c, (method) hoamap_infos,            "getinfo",					0);
     
+	// @method set @digest Send source or group relative instructions without causing output.
+	// @description The <m>set</m> message send <m>source</m> or <m>group</m> relative instructions like their position, color, a description, a mute state...
+	// @marg 0 @name source-or-group @optional 0 @type symbol
+	// @marg 1 @name source-index @optional 0 @type int
+	// @marg 2 @name modifier-message @optional 0 @type symbol
+	// @marg 3 @name message-arguments @optional 0 @type float/int/symbol
+    class_addmethod(c, (method) hoamap_set,				 "set",				A_GIMME,0);
+	
 	// @method source @digest Send source relative instructions.
 	// @description The <m>source</m> message send source relative instructions like their position, color, add a description, mute them...
 	// @marg 0 @name source-index @optional 0 @type int
@@ -228,8 +242,6 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",		A_CANT, 0);
     class_addmethod(c, (method) hoamap_key,              "key",				A_CANT, 0);
 	
-	class_addmethod(c, (method) hoamap_binded_map_repaint, "binded_map_repaint", A_CANT, 0);
-
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 220 220");
 	// @exclude hoa.3d.map
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
@@ -349,6 +361,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	
 	x->f_binding_name = hoa_sym_nothing;
 	x->f_listmap = NULL;
+	x->f_output_enabled = 1;
 	
     x->j_box.b_firstin = (t_object*) x;
         
@@ -469,8 +482,8 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				
 				temp2 = temp->next->next;
 				free(temp->next);
-				temp->next = temp2;
 				x->f_listmap = NULL;
+				temp->next = temp2;
 			}
 			
 			temp = temp->next;
@@ -512,7 +525,7 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
+    hoamap_output(x);
 	
 	return MAX_ERR_NONE;
 }
@@ -521,11 +534,11 @@ void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av)
 {
 	if (s == hoa_sym_slot)
 	{
-		object_error((t_object*)x, "slot method is deprecated, please use preset or pattr system");
+		object_error((t_object*)x, "slot method is deprecated, please use preset or pattr system instead");
 	}
 	else if (s == hoa_sym_trajectory)
 	{
-		object_error((t_object*)x, "trajectory is deprecated, please use preset or pattr system");
+		object_error((t_object*)x, "trajectory is deprecated, please use preset or pattr system instead");
 	}
 }
 
@@ -597,10 +610,12 @@ void hoamap_clear_all(t_hoamap *x)
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
+    hoamap_output(x);
+	hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+	
 }
 
-void hoamap_send_binded_map_repaint(t_hoamap *x)
+void hoamap_send_binded_map_update(t_hoamap *x, long flags)
 {
 	if(x->f_listmap)
 	{
@@ -611,45 +626,47 @@ void hoamap_send_binded_map_repaint(t_hoamap *x)
 			mapobj = (t_object*)temp->map;
 			
 			if (mapobj != (t_object*)x)
-				object_method(mapobj, gensym("binded_map_repaint"));
+			{
+				if (flags & BMAP_REPAINT)
+				{
+					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_sources_layer);
+					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_groups_layer);
+					jbox_redraw((t_jbox *)mapobj);
+				}
+				if (flags & BMAP_NOTIFY)
+					object_notify(mapobj, hoa_sym_modified, NULL);
+				if (flags & BMAP_OUTPUT && x->f_output_enabled)
+					object_method(mapobj, hoa_sym_bang);
+			}
 			
 			temp = temp->next;
 		}
 	}
 }
 
-void hoamap_binded_map_repaint(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-	object_post((t_object*)x, "hoamap_binded_map (repaint)");
-	object_notify(x, hoa_sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-    jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
+	x->f_output_enabled = 0;
+	if (ac && av && atom_gettype(av) == A_SYM)
+	{
+		t_symbol* msgtype = atom_getsym(av);
+		av++; ac--;
+		if (msgtype == hoa_sym_source)
+			object_method_typed(x, hoa_sym_source, ac, av, NULL);
+		else if (msgtype == hoa_sym_group)
+			object_method_typed(x, hoa_sym_group, ac, av, NULL);
+	}
+	x->f_output_enabled = 1;
 }
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-	if(x->f_listmap)
-	{
-		t_linkmap *temp = x->f_listmap;
-		int i = 0;
-		object_post((t_object*)x,"** bind : %s **", x->f_binding_name->s_name);
-		while (temp)
-		{
-			object_post((t_object*)temp->map,"%i %ld", i++, (long)temp->map);
-			temp = temp->next;
-		}
-		
-		object_post((t_object*)x,"there is %i map linked", i);
-	}
-	else
-	{
-		object_post((t_object*)x,"no linkmap ** bind : %s **", x->f_binding_name->s_name);
-	}
-	
 	int index;
 	int exist;
+	
+	post("source msg");
+	
+	postatom(av);
 	
 	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
 	{
@@ -696,7 +713,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_bang(x);
+		hoamap_output(x);
 		*/
 	}
 	
@@ -710,56 +727,56 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
 			{
 				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
-				hoamap_bang(x);
+				hoamap_output(x);
 			}
 			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
 			{
 				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
-				hoamap_bang(x);
+				hoamap_output(x);
 			}
 		}
         else if(param == hoa_sym_radius)
 		{
 			x->f_source_manager->sourceSetRadius(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
         else if(param == hoa_sym_azimuth)
 		{
 			x->f_source_manager->sourceSetAzimuth(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
 		else if(param == hoa_sym_elevation)
 		{
 			x->f_source_manager->sourceSetElevation(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
         else if(param == hoa_sym_cartesian || param == hoa_sym_car)
 		{
 			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
 			{
 				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
-				hoamap_bang(x);
+				hoamap_output(x);
 			}
 			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
 			{
 				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
-				hoamap_bang(x);
+				hoamap_output(x);
 			}			
 		}
         else if(param == hoa_sym_abscissa)
 		{
 			x->f_source_manager->sourceSetAbscissa(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
         else if(param == hoa_sym_ordinate)
 		{
             x->f_source_manager->sourceSetOrdinate(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
 		else if(param == hoa_sym_height)
 		{
             x->f_source_manager->sourceSetHeight(index, atom_getfloat(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
         else if(param == hoa_sym_remove)
         {
@@ -769,12 +786,12 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_sources, 0L, 3, av);
-			hoamap_bang(x);
+			hoamap_output(x);
         }
         else if(param == hoa_sym_mute)
 		{
 			x->f_source_manager->sourceSetMute(index, atom_getlong(av+2));
-			hoamap_bang(x);
+			hoamap_output(x);
 		}
         else if(param == hoa_sym_description)
         {
@@ -822,7 +839,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_send_binded_map_repaint(x);
+		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
     }
 }
 
@@ -884,7 +901,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_bang(x);
+		hoamap_output(x);
 	}
     else if(ac > 1 && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
@@ -994,8 +1011,8 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_bang(x);
-		hoamap_send_binded_map_repaint(x);
+		hoamap_output(x);
+		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
     }
 }
 
@@ -1285,14 +1302,14 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                 x->f_source_manager->sourceSetDescription(x->f_index_of_source_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                 object_notify(x, hoa_sym_modified, NULL);
-				hoamap_send_binded_map_repaint(x);
+				hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
             }
             else if(x->f_index_of_group_to_color > -1)
             {
                 x->f_source_manager->groupSetDescription(x->f_index_of_group_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
                 object_notify(x, hoa_sym_modified, NULL);
-				hoamap_send_binded_map_repaint(x);
+				hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
             }
         }
         jbox_redraw((t_jbox *)x);
@@ -1315,14 +1332,14 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                         x->f_source_manager->sourceSetColor(x->f_index_of_source_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                         object_notify(x, hoa_sym_modified, NULL);
-						hoamap_send_binded_map_repaint(x);
+						hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
                     }
                     else if(x->f_index_of_group_to_color > -1)
                     {
                         x->f_source_manager->groupSetColor(x->f_index_of_group_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
                         object_notify(x, hoa_sym_modified, NULL);
-						hoamap_send_binded_map_repaint(x);
+						hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
                     }
                     else if(x->f_index_of_source_to_color == -2)
                     {
@@ -1373,8 +1390,28 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 
 void hoamap_bang(t_hoamap *x)
 {
-    t_atom av[5];
+    hoamap_output(x);
+}
+
+void hoamap_output(t_hoamap *x)
+{
+	if (!x->f_output_enabled)
+		return;
+	
+	t_atom av[5];
     atom_setsym(av+1, hoa_sym_mute);
+	
+	// output group mute state
+	for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(x->f_source_manager->groupGetExistence(i))
+        {
+            atom_setlong(av, i+1);
+            atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
+            outlet_list(x->f_out_groups, 0L, 4, av);
+        }
+    }
+	// output source mute state
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1382,15 +1419,6 @@ void hoamap_bang(t_hoamap *x)
             atom_setlong(av, i+1);
             atom_setlong(av+2, x->f_source_manager->sourceGetMute(i));
             outlet_list(x->f_out_sources, 0L, 3, av);
-        }
-    }
-    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            atom_setlong(av, i+1);
-            atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
-            outlet_list(x->f_out_groups, 0L, 4, av);
         }
     }
     if(x->f_output_mode == 0)
@@ -2110,7 +2138,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemove(x->f_index_of_group_to_remove);
-                    hoamap_bang(x);
+                    hoamap_output(x);
                     break;
                 }
                 case 2:
@@ -2121,7 +2149,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
-                    hoamap_bang(x);
+                    hoamap_output(x);
                     break;
                 }
                 case 3: // Mute group
@@ -2150,8 +2178,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
-            hoamap_bang(x);
-			hoamap_send_binded_map_repaint(x);
+            hoamap_output(x);
+			hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
         }
         else if(x->f_index_of_selected_source != -1)
         {
@@ -2202,8 +2230,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
-			hoamap_send_binded_map_repaint(x);
-            hoamap_bang(x);
+			hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+            hoamap_output(x);
         }
         else
         {
@@ -2235,7 +2263,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 case 2: // Clear All
                 {
                     hoamap_clear_all(x);
-					hoamap_send_binded_map_repaint(x);
+					hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
                     break;
                 }
                 default:
@@ -2387,8 +2415,8 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	
 	if (output)
 	{
-		hoamap_bang(x);
-		hoamap_send_binded_map_repaint(x);
+		hoamap_output(x);
+		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
 	}
 }
 
@@ -2451,7 +2479,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
         }
 		
 		object_notify(x, hoa_sym_modified, NULL);
-		hoamap_send_binded_map_repaint(x);
+		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
     }
     
     x->f_rect_selection_exist = x->f_rect_selection.width = x->f_rect_selection.height = 0;
@@ -2619,7 +2647,7 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);
-		hoamap_send_binded_map_repaint(x);
+		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
         
         filter = 1;
 	}
