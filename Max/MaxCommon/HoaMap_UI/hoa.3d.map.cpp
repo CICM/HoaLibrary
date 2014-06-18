@@ -38,7 +38,7 @@
 #define ODD_BINDING_SUFFIX "map1572"
 
 typedef enum _BindingMapMsgFlag {
-	BMAP_REPAINT		= 0x01,
+	BMAP_REDRAW		= 0x01,
 	BMAP_NOTIFY		= 0x02,
 	BMAP_OUTPUT		= 0x04
 } BindingMapMsgFlag;
@@ -418,8 +418,6 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		temp = x->f_listmap;
 		t_hoamap* head_map = temp->map;
 		
-		object_post((t_object*)head_map, "add function headmap");
-		
 		while(temp)
 		{
 			if(temp->next == NULL)
@@ -448,7 +446,6 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		temp = (t_linkmap *)name->s_thing;
 		t_hoamap* head_map = temp->map;
 		int counter = 0;
-		object_post((t_object*)head_map, "remove function headmap");
 		
 		while(temp)
 		{
@@ -604,6 +601,15 @@ void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *
 
 void hoamap_clear_all(t_hoamap *x)
 {
+	// mute all source and output before clearing them to notify hoa.#.map~
+	for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
+		if(x->f_source_manager->sourceGetExistence(i))
+			x->f_source_manager->sourceSetMute(i, 1);
+	
+	hoamap_output(x);
+	hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+	
+	// now we can clear, then notify, output and redraw all maps
     x->f_source_manager->clearAll();
     
     object_notify(x, hoa_sym_modified, NULL);
@@ -611,8 +617,7 @@ void hoamap_clear_all(t_hoamap *x)
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_output(x);
-	hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
-	
+	hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 
 void hoamap_send_binded_map_update(t_hoamap *x, long flags)
@@ -627,7 +632,7 @@ void hoamap_send_binded_map_update(t_hoamap *x, long flags)
 			
 			if (mapobj != (t_object*)x)
 			{
-				if (flags & BMAP_REPAINT)
+				if (flags & BMAP_REDRAW)
 				{
 					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_sources_layer);
 					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_groups_layer);
@@ -663,10 +668,6 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	int index;
 	int exist;
-	
-	post("source msg");
-	
-	postatom(av);
 	
 	if (ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
 	{
@@ -709,12 +710,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 			}
 		}
 		
-		/* // useless : group will update all of that just after
-		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-		jbox_redraw((t_jbox *)x);
-		hoamap_output(x);
-		*/
+		// no need to (repaint | notify | output) here => group will do this just after
 	}
 	
     else if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
@@ -722,62 +718,34 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		t_symbol* param = atom_getsym(av+1);
 		long index = atom_getlong(av) -1;
 		
+		int causeOutput = 1;
+		
         if(param == hoa_sym_polar || param == hoa_sym_pol)
 		{
 			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
-			{
 				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
-				hoamap_output(x);
-			}
 			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
-			{
 				x->f_source_manager->sourceSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
-				hoamap_output(x);
-			}
 		}
         else if(param == hoa_sym_radius)
-		{
 			x->f_source_manager->sourceSetRadius(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
         else if(param == hoa_sym_azimuth)
-		{
 			x->f_source_manager->sourceSetAzimuth(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
 		else if(param == hoa_sym_elevation)
-		{
 			x->f_source_manager->sourceSetElevation(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
         else if(param == hoa_sym_cartesian || param == hoa_sym_car)
 		{
 			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
-			{
 				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
-				hoamap_output(x);
-			}
 			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
-			{
 				x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
-				hoamap_output(x);
-			}			
 		}
         else if(param == hoa_sym_abscissa)
-		{
 			x->f_source_manager->sourceSetAbscissa(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
         else if(param == hoa_sym_ordinate)
-		{
             x->f_source_manager->sourceSetOrdinate(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
 		else if(param == hoa_sym_height)
-		{
             x->f_source_manager->sourceSetHeight(index, atom_getfloat(av+2));
-			hoamap_output(x);
-		}
         else if(param == hoa_sym_remove)
         {
             x->f_source_manager->sourceRemove(index);
@@ -786,15 +754,12 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_sources, 0L, 3, av);
-			hoamap_output(x);
         }
         else if(param == hoa_sym_mute)
-		{
 			x->f_source_manager->sourceSetMute(index, atom_getlong(av+2));
-			hoamap_output(x);
-		}
         else if(param == hoa_sym_description)
         {
+			causeOutput = 0;
             char description[250];
             char number[250];
             if(atom_gettype(av+1) == A_SYM)
@@ -833,13 +798,25 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(param == hoa_sym_color && ac >= 5)
         {
             x->f_source_manager->sourceSetColor(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
+			causeOutput = 0;
         }
+		else
+		{
+			causeOutput = 0;
+		}
 		
 		object_notify(x, hoa_sym_modified, NULL);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+		
+		if (causeOutput)
+		{
+			hoamap_output(x);
+			hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+		}
+		
+		hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_NOTIFY);
     }
 }
 
@@ -907,6 +884,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
 		long index = atom_getlong(av) - 1;
 		t_symbol* param = atom_getsym(av+1);
+		int causeOutput = 1;
 		
         if(param == hoa_sym_set)
         {
@@ -915,42 +893,51 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 			{
                 x->f_source_manager->groupSetSource(index, atom_getlong(av+i) -1);
 			}
-        }        
+        }
         else if(param == hoa_sym_polar || param == hoa_sym_pol)
 		{
-			x->f_source_manager->groupSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
+			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
+				x->f_source_manager->groupSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
+			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
+				x->f_source_manager->groupSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
 		}
         else if(param == hoa_sym_radius)
-		{
-            x->f_source_manager->groupSetRadius(index, atom_getfloat(av+2));
-		}
-        else if(param == hoa_sym_angle)
-		{
-            x->f_source_manager->groupSetAzimuth(index, atom_getfloat(av+2));
-		}
+			x->f_source_manager->groupSetRadius(index, atom_getfloat(av+2));
+        else if(param == hoa_sym_azimuth)
+			x->f_source_manager->groupSetAzimuth(index, atom_getfloat(av+2));
+		else if(param == hoa_sym_elevation)
+			x->f_source_manager->groupSetElevation(index, atom_getfloat(av+2));
         else if(param == hoa_sym_cartesian || param == hoa_sym_car)
 		{
-            x->f_source_manager->groupSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
+			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
+				x->f_source_manager->groupSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
+			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
+				x->f_source_manager->groupSetCartesian(index, atom_getfloat(av+2), atom_getfloat(av+3));
 		}
         else if(param == hoa_sym_abscissa)
-		{
-            x->f_source_manager->groupSetAbscissa(index, atom_getfloat(av+2));
-		}
+			x->f_source_manager->groupSetAbscissa(index, atom_getfloat(av+2));
         else if(param == hoa_sym_ordinate)
-		{
             x->f_source_manager->groupSetOrdinate(index, atom_getfloat(av+2));
-		}
-        else if(param == hoa_sym_relpolar || param == hoa_sym_relativepolar)
+		else if(param == hoa_sym_height)
+            x->f_source_manager->sourceSetHeight(index, atom_getfloat(av+2));
+        else if(param == hoa_sym_relpolar)
 		{
-            x->f_source_manager->groupSetRelativePolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
+			if (ac >= 5 && atom_isNumber(av+2) && atom_isNumber(av+3) && atom_isNumber(av+4))
+				x->f_source_manager->groupSetRelativePolar(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4));
+			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
+				x->f_source_manager->groupSetRelativePolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
 		}
-        else if(param == hoa_sym_relradius || param == hoa_sym_relativeradius)
+        else if(param == hoa_sym_relradius)
 		{
             x->f_source_manager->groupSetRelativeRadius(index, atom_getfloat(av+2));
 		}
-        else if(param == hoa_sym_relangle || param == hoa_sym_relativeangle)
+        else if(param == hoa_sym_relazimuth)
 		{
             x->f_source_manager->groupSetRelativeAzimuth(index, atom_getfloat(av+2));
+		}
+		else if(param == hoa_sym_relelevation)
+		{
+            x->f_source_manager->groupSetRelativeElevation(index, atom_getfloat(av+2));
 		}
         else if(param == hoa_sym_mute)
 		{
@@ -967,6 +954,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         }
         else if(param == hoa_sym_description)
         {
+			causeOutput = 0;
             char description[250];
             char number[250];
             if(atom_gettype(av+1) == A_SYM)
@@ -1004,15 +992,24 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         }
         else if(param == hoa_sym_color && ac >= 6)
         {
+			causeOutput = 0;
             x->f_source_manager->groupSetColor(index, atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
         }
+		else
+		{
+			causeOutput = 0;
+		}
 		
 		object_notify(x, hoa_sym_modified, NULL);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
 		jbox_redraw((t_jbox *)x);
-		hoamap_output(x);
-		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+		if (causeOutput)
+		{
+			hoamap_output(x);
+			hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+		}
+		hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_NOTIFY);
     }
 }
 
@@ -1302,14 +1299,14 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                 x->f_source_manager->sourceSetDescription(x->f_index_of_source_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                 object_notify(x, hoa_sym_modified, NULL);
-				hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+				hoamap_send_binded_map_update(x, BMAP_NOTIFY);
             }
             else if(x->f_index_of_group_to_color > -1)
             {
                 x->f_source_manager->groupSetDescription(x->f_index_of_group_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
                 object_notify(x, hoa_sym_modified, NULL);
-				hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+				hoamap_send_binded_map_update(x, BMAP_NOTIFY);
             }
         }
         jbox_redraw((t_jbox *)x);
@@ -1332,25 +1329,15 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                         x->f_source_manager->sourceSetColor(x->f_index_of_source_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                         object_notify(x, hoa_sym_modified, NULL);
-						hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+						hoamap_send_binded_map_update(x, BMAP_NOTIFY | BMAP_REDRAW);
                     }
                     else if(x->f_index_of_group_to_color > -1)
                     {
                         x->f_source_manager->groupSetColor(x->f_index_of_group_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
                         object_notify(x, hoa_sym_modified, NULL);
-						hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+						hoamap_send_binded_map_update(x, BMAP_NOTIFY | BMAP_REDRAW);
                     }
-                    else if(x->f_index_of_source_to_color == -2)
-                    {
-                        x->f_color_bg.red = atom_getfloat(av);
-                        x->f_color_bg.green = atom_getfloat(av+1);
-                        x->f_color_bg.blue = atom_getfloat(av+2);
-                        x->f_color_bg.alpha = atom_getfloat(av+3);
-                        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
-                        object_notify(x, hoa_sym_modified, NULL);
-                    }
-                    
                 }
             }
         }
@@ -1363,6 +1350,11 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
             }
 			else if(name == gensym("showgroups"))
             {
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+            }
+			else if(name == gensym("view"))
+            {
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             }
             else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
@@ -1730,10 +1722,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 	t_jtextlayout *jtl;
 	t_jrgba sourceColor;
 	char description[250];
-	double descriptionPositionX;
-    double descriptionPositionY;
-	double sourcePositionX;
-    double sourcePositionY;
+	
+	t_pt sourceDisplayPos, groupDisplayPos, textDisplayPos;
 	
 	double* color;
     
@@ -1759,20 +1749,20 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 				{
 					case 0 : // XY
 					{
-						sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					case 1 : // XZ
 					{
-						sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					case 2 : // YZ
 					{
-						sourcePositionX = (x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					default: break;
@@ -1786,28 +1776,50 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 else
                     sprintf(description,"%i", i+1);
 				            
-                descriptionPositionX = sourcePositionX - 2. * x->f_size_source;
-                descriptionPositionY = sourcePositionY - x->f_size_source - fontSize - 1.;
+                textDisplayPos.x = sourceDisplayPos.x - 2. * x->f_size_source;
+                textDisplayPos.y = sourceDisplayPos.y - x->f_size_source - fontSize - 1.;
 
                 jtextlayout_settextcolor(jtl, &sourceColor);
-                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, fontSize * 10., fontSize * 2., JGRAPHICS_TEXT_JUSTIFICATION_LEFT, JGRAPHICS_TEXTLAYOUT_USEELLIPSIS);
+                jtextlayout_set(jtl, description, x->jfont, textDisplayPos.x, textDisplayPos.y, fontSize * 10., fontSize * 2., JGRAPHICS_TEXT_JUSTIFICATION_LEFT, JGRAPHICS_TEXTLAYOUT_USEELLIPSIS);
                 jtextlayout_draw(jtl, g);
 			
                 if (x->f_index_of_selected_source == i)
                 {
                     jgraphics_set_source_jrgba(g, &x->f_color_selection);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
                     
 					if (x->f_showgroups)
 					{
 						for(int index = 0; index < x->f_source_manager->sourceGetNumberOfGroups(i); index++)
 						{
-							jgraphics_move_to(g, sourcePositionX, sourcePositionY);
+							jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
 							int groupIndex = x->f_source_manager->sourceGetGroupIndex(i, index);
-							double groupPositionX = (x->f_source_manager->groupGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
-							double groupPositionY = (-x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
-							jgraphics_line_to(g, groupPositionX, groupPositionY);
+							
+							switch (x->f_coord_view)
+							{
+								case 0 : // XY
+								{
+									groupDisplayPos.x = (x->f_source_manager->groupGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+									groupDisplayPos.y = (-x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+									break;
+								}
+								case 1 : // XZ
+								{
+									groupDisplayPos.x = (x->f_source_manager->groupGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+									groupDisplayPos.y = (-x->f_source_manager->groupGetHeight(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+									break;
+								}
+								case 2 : // YZ
+								{
+									groupDisplayPos.x = (x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+									groupDisplayPos.y = (-x->f_source_manager->groupGetHeight(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+									break;
+								}
+								default: break;
+							}
+							
+							jgraphics_line_to(g, groupDisplayPos.x, groupDisplayPos.y);
 							jgraphics_stroke(g);
 						}
 					}
@@ -1816,22 +1828,22 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 if(!x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor); 
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 0.6,  0., HOA_2PI);
                     jgraphics_fill(g);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
                 }
                 if(x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 0.6,  0., HOA_2PI);
                     jgraphics_fill(g);
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red); 
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
-                    jgraphics_move_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI2 / 2.));
-                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 * 5. / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI * 5. / 4.));
+                    jgraphics_move_to(g, sourceDisplayPos.x + abscissa(x->f_size_source * 1., HOA_PI2 / 2.), sourceDisplayPos.y + ordinate(x->f_size_source * 1., HOA_PI2 / 2.));
+                    jgraphics_line_to(g, sourceDisplayPos.x + abscissa(x->f_size_source * 1., HOA_PI2 * 5. / 2.), sourceDisplayPos.y + ordinate(x->f_size_source * 1., HOA_PI * 5. / 4.));
                     jgraphics_stroke(g);
                 }
                 
@@ -1852,10 +1864,8 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 	t_jtextlayout *jtl;
 	t_jrgba sourceColor;    
 	char description[250] = {0};
-	double descriptionPositionX;
-    double descriptionPositionY;
-	double sourcePositionX;
-    double sourcePositionY;
+	
+	t_pt sourceDisplayPos, groupDisplayPos, textDisplayPos;
 	
 	double* color;
     
@@ -1880,20 +1890,20 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 				{
 					case 0 : // XY
 					{
-						sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					case 1 : // XZ
 					{
-						sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->groupGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->groupGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					case 2 : // YZ
 					{
-						sourcePositionX = (x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
-						sourcePositionY = (-x->f_source_manager->sourceGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
+						sourceDisplayPos.x = (x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.x;
+						sourceDisplayPos.y = (-x->f_source_manager->groupGetHeight(i) * x->f_zoom_factor + 1.) * ctr.y;
 						break;
 					}
 					default: break;
@@ -1907,47 +1917,69 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 else
                     sprintf(description,"%i", i+1);
     
-                descriptionPositionX = sourcePositionX - 2. * x->f_size_source;
-                descriptionPositionY = sourcePositionY - x->f_size_source - fontSize - 1.;
+                textDisplayPos.x = sourceDisplayPos.x - 2. * x->f_size_source;
+                textDisplayPos.y = sourceDisplayPos.y - x->f_size_source - fontSize - 1.;
                 
                 jtextlayout_settextcolor(jtl, &sourceColor);
-                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, fontSize * 10., fontSize * 2., JGRAPHICS_TEXT_JUSTIFICATION_LEFT, JGRAPHICS_TEXTLAYOUT_USEELLIPSIS);
+                jtextlayout_set(jtl, description, x->jfont, textDisplayPos.x, textDisplayPos.y, fontSize * 10., fontSize * 2., JGRAPHICS_TEXT_JUSTIFICATION_LEFT, JGRAPHICS_TEXTLAYOUT_USEELLIPSIS);
                 jtextlayout_draw(jtl, g);
                 
                 if (x->f_index_of_selected_group == i)
                 {
                     //x->f_color_selection
                     jgraphics_set_source_jrgba(g, &x->f_color_selection);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
                     
                     for(int index = 0; index < x->f_source_manager->groupGetNumberOfSources(i); index++)
                     {
-                        jgraphics_move_to(g, sourcePositionX, sourcePositionY);
+                        jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
                         int groupIndex = x->f_source_manager->groupGetSourceIndex(i, index);
-                        double groupPositionX = (x->f_source_manager->sourceGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
-                        double groupPositionY = (-x->f_source_manager->sourceGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
-                        jgraphics_line_to(g, groupPositionX, groupPositionY);
+						
+						switch (x->f_coord_view)
+						{
+							case 0 : // XY
+							{
+								groupDisplayPos.x = (x->f_source_manager->sourceGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+								groupDisplayPos.y = (-x->f_source_manager->sourceGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+								break;
+							}
+							case 1 : // XZ
+							{
+								groupDisplayPos.x = (x->f_source_manager->sourceGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+								groupDisplayPos.y = (-x->f_source_manager->sourceGetHeight(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+								break;
+							}
+							case 2 : // YZ
+							{
+								groupDisplayPos.x = (x->f_source_manager->sourceGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
+								groupDisplayPos.y = (-x->f_source_manager->sourceGetHeight(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
+								break;
+							}
+							default: break;
+						}
+						
+                        jgraphics_line_to(g, groupDisplayPos.x, groupDisplayPos.y);
                         jgraphics_stroke(g);
                     }
                 }
                 jgraphics_set_source_jrgba(g, &sourceColor);
                 for(int j = 1; j < 4; j += 2)
                 {
-                    jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.));
+                    jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
+                    jgraphics_line_to(g, sourceDisplayPos.x + abscissa(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.), sourceDisplayPos.y + ordinate(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.));
                 }
                 jgraphics_stroke(g);
                 if(!x->f_source_manager->groupGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 1.,  0., HOA_2PI);
                     jgraphics_stroke(g);
                 
                     for(int j = 0; j < 2; j++)
                     {
-                        jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
+                        jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
+                        jgraphics_line_to(g, sourceDisplayPos.x + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourceDisplayPos.y + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
                     }
                 }
                 jgraphics_stroke(g);
@@ -1955,12 +1987,12 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 {
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
+                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
                     for(int j = 0; j < 2; j++)
                     {
-                        jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
+                        jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
+                        jgraphics_line_to(g, sourceDisplayPos.x + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourceDisplayPos.y + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
                     }
                     jgraphics_stroke(g);
                 }
@@ -2101,8 +2133,12 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
     }
 
-    if(modifiers == 160) // right click
+    if(modifiers == 160 || modifiers == 416) // right click
     {
+		int causeOutput = 0;
+		int causeRedraw = 0;
+		int causeNotify = 0;
+		
         int posX, posY;
         t_pt pos;
         jmouse_getposition_global(&posX, &posY);
@@ -2133,53 +2169,53 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 case 1:
                 {
                     t_atom av[3];
-                    atom_setlong(av, x->f_index_of_group_to_remove);
+                    atom_setlong(av, x->f_index_of_group_to_remove+1);
                     atom_setsym(av+1, hoa_sym_mute);
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemove(x->f_index_of_group_to_remove);
-                    hoamap_output(x);
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 2:
                 {
-                    t_atom av[3];
-                    atom_setlong(av, x->f_index_of_group_to_remove);
-                    atom_setsym(av+1, hoa_sym_mute);
-                    atom_setlong(av+2, 1);
-                    outlet_list(x->f_out_groups, 0L, 3, av);
-                    x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
-                    hoamap_output(x);
+					x->f_source_manager->groupSetMute(x->f_index_of_group_to_remove, 1);
+					hoamap_output(x);
+					hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+					x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 3: // Mute group
                 {
                     x->f_source_manager->groupSetMute(x->f_index_of_group_to_remove, 1);
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 4: // Unmute group
                 {
                     x->f_source_manager->groupSetMute(x->f_index_of_group_to_remove, 0);
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 5: // Set group color
                 {
                     hoamap_color_picker(x);
+					causeOutput = causeRedraw = causeNotify = 0;
                     break;
                 }
                 case 6: // Set group description
                 {
                     hoamap_text_field(x);
+					causeOutput = causeRedraw = causeNotify = 0;
                     break;
                 }
                 default:
-                    break;
+				{
+					causeOutput = causeRedraw = causeNotify = 0;
+					break;
+				}
             }
-            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-            jbox_redraw((t_jbox *)x);
-            hoamap_output(x);
-			hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
         }
         else if(x->f_index_of_selected_source != -1)
         {
@@ -2199,11 +2235,12 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 case 1:
                 {
                     t_atom av[3];
-                    atom_setlong(av, x->f_index_of_source_to_remove);
+                    atom_setlong(av, x->f_index_of_source_to_remove+1);
                     atom_setsym(av+1, hoa_sym_mute);
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_sources, 0L, 3, av);
                     x->f_source_manager->sourceRemove(x->f_index_of_source_to_remove);
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 2:
@@ -2212,25 +2249,32 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                         x->f_source_manager->sourceSetMute(x->f_index_of_source_to_remove, 0);
                     else
                         x->f_source_manager->sourceSetMute(x->f_index_of_source_to_remove, 1);
+					
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 3:
                 {
                     hoamap_color_picker(x);
+					causeOutput = causeRedraw = causeNotify = 0;
                     break;
                 }
                 case 4:
                 {
                     hoamap_text_field(x);
+					causeOutput = causeRedraw = causeNotify = 0;
                     break;
                 }
                 default:
+				{
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
+				}
             }
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
-			hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+			hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
             hoamap_output(x);
         }
         else
@@ -2258,20 +2302,43 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                             hoamap_mousedrag(x, patcherview, pt, modifiers);
                         }
                     }
+					causeOutput = causeRedraw = causeNotify = 1;
                     break;
                 }
                 case 2: // Clear All
                 {
                     hoamap_clear_all(x);
-					hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+					causeOutput = causeRedraw = causeNotify = 0; // (did in the hoamap_clear_all() function)
                     break;
                 }
                 default:
+				{
+					causeOutput = causeRedraw = causeNotify = 0;
                     break;
+				}
             }
         }
         jpopupmenu_destroy(popup);
-		object_notify(x, hoa_sym_modified, NULL);
+		
+		if (causeRedraw)
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+			jbox_redraw((t_jbox *)x);
+			hoamap_send_binded_map_update(x, BMAP_REDRAW);
+		}
+		
+		if (causeNotify)
+		{
+			object_notify(x, hoa_sym_modified, NULL);
+			hoamap_send_binded_map_update(x, BMAP_NOTIFY);
+		}
+		
+		if (causeOutput)
+		{
+			hoamap_output(x);
+			hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+		}
     }
     
     if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1 && x->f_showgroups)
@@ -2285,21 +2352,24 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	int output = 1;
     t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     
     t_pt mousedelta = {x->f_cursor_position.x - cursor.x, x->f_cursor_position.y - cursor.y};
 	
+	int causeOutput = 0;
+	int causeRedraw = 0;
+	int causeNotify = 0;
+	
 	// source is dragged
 	if (x->f_index_of_selected_source != -1)
     {
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24) // Alt
+		if(modifiers == 24 && x->f_coord_view == 0) // Alt
 #else
-		if(modifiers == 148 || modifiers == 404) // ctrl
+		if( (modifiers == 148 || modifiers == 404) && x->f_coord_view == 0) // ctrl
 #endif
 		{
 			switch (x->f_coord_view)
@@ -2311,10 +2381,12 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 				}
 				case 1 : // XZ
 				{
+					//x->f_source_manager->sourceSetElevation(x->f_index_of_selected_source, wrap_twopi(azimuth(cursor.x, cursor.y) + HOA_PI2));
 					break;
 				}
 				case 2 : // YZ
 				{
+					//x->f_source_manager->sourceSetElevation(x->f_index_of_selected_source, wrap_twopi(azimuth(cursor.x, cursor.y) + HOA_PI2));
 					break;
 				}
 				default: break;
@@ -2327,8 +2399,10 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
+		{
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
-		
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
@@ -2342,7 +2416,8 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
             else
                 x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
-          
+			
+          causeOutput = causeRedraw = causeNotify = 1;
         }
         else
 		{
@@ -2365,6 +2440,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 				}
 				default: break;
 			}
+			causeOutput = causeRedraw = causeNotify = 1;
 		}
     }
 	
@@ -2374,27 +2450,84 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24) // Alt
+		if(modifiers == 24 && x->f_coord_view == 0) // Alt
 #else
-		if(modifiers == 148 || modifiers == 404)
+		if( (modifiers == 148 || modifiers == 404) && x->f_coord_view == 0) // ctrl
 #endif
-            x->f_source_manager->groupSetRelativeAzimuth(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+		{
+			switch (x->f_coord_view)
+			{
+				case 0 : // XY
+				{
+					x->f_source_manager->groupSetRelativeAzimuth(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+					break;
+				}
+				case 1 : // XZ
+				{
+					//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+					break;
+				}
+				case 2 : // YZ
+				{
+					//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+					break;
+				}
+				default: break;
+			}
+			
+			//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+            //x->f_source_manager->groupSetRelativeAzimuth(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
+		
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
 #else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
+		{
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, radius(cursor.x, cursor.y));
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
 		 // Angle + radius
 #ifdef _WINDOWS
-		else if(modifiers == 26) // Shift
+		else if(modifiers == 26) // Shift + alt
 #else
 		else if (modifiers == 17)
 #endif
+		{
             x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, radius(cursor.x, cursor.y), azimuth(cursor.x, cursor.y));
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
         else
-            x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            
+		{
+			switch (x->f_coord_view)
+			{
+				case 0 : // XY
+				{
+					x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);
+					break;
+				}
+				case 1 : // XZ
+				{
+					x->f_source_manager->groupSetAbscissa(x->f_index_of_selected_group, cursor.x);
+					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
+					//x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, x->f_source_manager->groupGetOrdinate(x->f_index_of_selected_group), cursor.y);
+					break;
+				}
+				case 2 : // YZ
+				{
+					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.x);
+					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
+					//x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, x->f_source_manager->groupGetAbscissa(x->f_index_of_selected_group), cursor.x, cursor.y);
+					break;
+				}
+				default: break;
+			}
+            //x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
     }
     else
     {
@@ -2402,21 +2535,30 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
 		jbox_redraw((t_jbox *)x);
-		output = 0;
+		causeOutput = causeRedraw = causeNotify = 0;
     }
     
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
-    
-    object_notify(x, hoa_sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-    jbox_redraw((t_jbox *)x);
 	
-	if (output)
+	if (causeNotify)
+	{
+		object_notify(x, hoa_sym_modified, NULL);
+		hoamap_send_binded_map_update(x, BMAP_NOTIFY);
+	}
+	
+	if (causeRedraw)
+	{
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
+		hoamap_send_binded_map_update(x, BMAP_REDRAW);
+	}
+	
+	if (causeOutput)
 	{
 		hoamap_output(x);
-		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+		hoamap_send_binded_map_update(x, BMAP_OUTPUT);
 	}
 }
 
@@ -2426,6 +2568,10 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
     x->f_index_of_selected_group = -1;
 	
 	t_pt screen_source_coord;
+	
+	int causeOutput = 0;
+	int causeRedraw = 0;
+	int causeNotify = 0;
     
     if(x->f_rect_selection_exist)
     {
@@ -2474,20 +2620,36 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
                 {
                     x->f_source_manager->groupSetSource(indexOfNewGroup, i);
                     x->f_index_of_selected_group = indexOfNewGroup;
+					causeOutput = causeRedraw = causeNotify = 1;
                 }
             }
         }
-		
-		object_notify(x, hoa_sym_modified, NULL);
-		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
     }
     
     x->f_rect_selection_exist = x->f_rect_selection.width = x->f_rect_selection.height = 0;
+	
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
+	jbox_redraw((t_jbox *)x);
     
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
-    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
-    jbox_redraw((t_jbox *)x);
+	if (causeNotify)
+	{
+		object_notify(x, hoa_sym_modified, NULL);
+		hoamap_send_binded_map_update(x, BMAP_NOTIFY);
+	}
+	
+	if (causeRedraw)
+	{
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+		jbox_redraw((t_jbox *)x);
+		hoamap_send_binded_map_update(x, BMAP_REDRAW);
+	}
+	
+	if (causeOutput)
+	{
+		hoamap_output(x);
+		hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+	}
 }
 
 void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
@@ -2501,7 +2663,6 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);
-		
 	}
 }
 
@@ -2610,6 +2771,9 @@ void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 {
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+    jbox_redraw((t_jbox *)x);
 }
 
 long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
@@ -2647,7 +2811,7 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);
-		hoamap_send_binded_map_update(x, BMAP_REPAINT | BMAP_OUTPUT | BMAP_NOTIFY);
+		hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
         
         filter = 1;
 	}

@@ -371,47 +371,47 @@ namespace HoaCommon
 		}
 	}
     
-    void SourcesGroup::shiftHeight(double ordinate)
+    void SourcesGroup::shiftHeight(double height)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(ordinate < 0.)
+			if(height < 0.)
 			{
-				double refOrdinate = -m_maximum_radius * 2.;
+				double refHeight = -m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
 				{
-					double circleOrdinate = -sqrt(m_maximum_radius * m_maximum_radius - m_source_manager->sourceGetAbscissa(m_sources[i]) * m_source_manager->sourceGetAbscissa(m_sources[i]));
-					if(circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]) > refOrdinate)
+					double circleHeight = -sqrt(m_maximum_radius * m_maximum_radius - m_source_manager->sourceGetAbscissa(m_sources[i]) * m_source_manager->sourceGetAbscissa(m_sources[i]));
+					if(circleHeight - m_source_manager->sourceGetHeight(m_sources[i]) > circleHeight)
 					{
-						refOrdinate = circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]);
+						refHeight = circleHeight - m_source_manager->sourceGetHeight(m_sources[i]);
 					}
 				}
-				if(ordinate < refOrdinate)
+				if(height < refHeight)
 				{
-					ordinate = refOrdinate;
+					height = refHeight;
 				}
 			}
-			else if(ordinate >= 0.)
+			else if(height >= 0.)
 			{
-				double refOrdinate = m_maximum_radius * 2.;
+				double refHeight = m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
 				{
-					double circleOrdinate = sqrt(m_maximum_radius * m_maximum_radius - m_source_manager->sourceGetAbscissa(m_sources[i]) * m_source_manager->sourceGetAbscissa(m_sources[i]));
-					if(circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]) < refOrdinate)
+					double circleHeight = sqrt(m_maximum_radius * m_maximum_radius - m_source_manager->sourceGetAbscissa(m_sources[i]) * m_source_manager->sourceGetAbscissa(m_sources[i]));
+					if(circleHeight - m_source_manager->sourceGetHeight(m_sources[i]) < refHeight)
 					{
-						refOrdinate = circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]);
+						refHeight = circleHeight - m_source_manager->sourceGetHeight(m_sources[i]);
 					}
 				}
-				if(ordinate > refOrdinate)
+				if(height > refHeight)
 				{
-					ordinate = refOrdinate;
+					height = refHeight;
 				}
 			}
 		}
 		
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetOrdinate(m_sources[i], ordinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
+			m_source_manager->sourceSetHeight(m_sources[i], height + m_source_manager->sourceGetHeight(m_sources[i]));
 		}
 	}
 	

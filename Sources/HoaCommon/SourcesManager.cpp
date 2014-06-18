@@ -129,7 +129,7 @@ namespace HoaCommon
 
 	void SourcesManager::sourceNewPolar(double radius, double azimuth)
 	{
-		for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		for (int i = 0; i <= getMaximumIndexOfSource()+1; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
@@ -141,7 +141,7 @@ namespace HoaCommon
     
     void SourcesManager::sourceNewPolar(double radius, double azimuth, double elevation)
 	{
-		for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		for (int i = 0; i <= getMaximumIndexOfSource()+1; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
@@ -153,7 +153,7 @@ namespace HoaCommon
 
 	void SourcesManager::sourceNewCartesian(double abscissa, double ordinate)
 	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		for(int i = 0; i <= getMaximumIndexOfSource()+1; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
@@ -165,7 +165,7 @@ namespace HoaCommon
     
     void SourcesManager::sourceNewCartesian(double abscissa, double ordinate, double height)
 	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		for(int i = 0; i <= getMaximumIndexOfSource()+1; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
@@ -747,7 +747,7 @@ namespace HoaCommon
 
 	void SourcesManager::groupRemoveWithSources(long groupIndex)
 	{
-		for(int i = 0; i < getMaximumIndexOfSource(); i++)
+		for(int i = 0; i <= getMaximumIndexOfSource(); i++)
 		{
 			if (m_sources[i]->isOwnedByGroup(groupIndex)) {
 				sourceRemove(i);

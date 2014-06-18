@@ -146,11 +146,9 @@ static t_symbol* hoa_sym_skeleton_layer				= gensym("skeleton_layer");
 
 
 static t_symbol* hoa_sym_relpolar 					= gensym("relpolar");
-static t_symbol* hoa_sym_relativepolar 				= gensym("relativepolar");
 static t_symbol* hoa_sym_relradius 					= gensym("relradius");
-static t_symbol* hoa_sym_relativeradius				= gensym("relativeradius");
-static t_symbol* hoa_sym_relangle 					= gensym("relangle");
-static t_symbol* hoa_sym_relativeangle				= gensym("relativeangle");
+static t_symbol* hoa_sym_relazimuth					= gensym("relazimuth");
+static t_symbol* hoa_sym_relelevation				= gensym("relazimuth");
 
 // Preset
 static t_symbol* hoa_sym_store 						= gensym("store");
