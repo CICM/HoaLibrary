@@ -673,11 +673,11 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	{
 		av++; ac--;
 		
-		// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description
+		// source / index / exist / abscissa / ordinate / height / mutestate / r / g / b / a / description
 		
-		for(int i = 0; i < MAX_NUMBER_OF_SOURCES*11; i += 11)
+		for(int i = 0; i < MAX_NUMBER_OF_SOURCES*12; i += 12)
 		{
-			if( (i <= ac-11) && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
+			if( (i <= ac-12) && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
 			{
 				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
 					(atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
@@ -686,16 +686,16 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 					exist = atom_getlong(av+i+2);
 					
 					if(exist &&
-					   atom_gettype(av+i+3) == A_FLOAT && atom_gettype(av+i+4) == A_FLOAT &&
-					   (atom_gettype(av+i+5) == A_FLOAT || atom_gettype(av+i+5) == A_LONG) &&
-					   atom_gettype(av+i+6) == A_FLOAT && atom_gettype(av+i+7) == A_FLOAT &&
-					   atom_gettype(av+i+8) == A_FLOAT && atom_gettype(av+i+9) == A_FLOAT &&
-					   atom_gettype(av+i+10) == A_SYM)
+					   atom_gettype(av+i+3) == A_FLOAT && atom_gettype(av+i+4) == A_FLOAT && atom_gettype(av+i+5) == A_FLOAT &&
+					   (atom_gettype(av+i+6) == A_FLOAT || atom_gettype(av+i+6) == A_LONG) &&
+					   atom_gettype(av+i+7) == A_FLOAT && atom_gettype(av+i+8) == A_FLOAT &&
+					   atom_gettype(av+i+9) == A_FLOAT && atom_gettype(av+i+10) == A_FLOAT &&
+					   atom_gettype(av+i+11) == A_SYM)
 					{
-						x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4));
-						x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+5));
-						x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
-						x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i+10)->s_name);
+						x->f_source_manager->sourceSetCartesian(index, atom_getfloat(av+i+3), atom_getfloat(av+i+4), atom_getfloat(av+i+5));
+						x->f_source_manager->sourceSetMute(index, atom_getlong(av+i+6));
+						x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9), atom_getfloat(av+i+10));
+						x->f_source_manager->sourceSetDescription(index, atom_getsym(av+i+11)->s_name);
 					}
 					else if (!exist && x->f_source_manager->sourceGetExistence(index))
 					{
@@ -1033,9 +1033,9 @@ void hoa_map_preset(t_hoamap *x)
 		return;
 	
 	
-	// source / index / exist / abscissa / ordinate / mutestate / r / g / b / a / description, .. source / index ...
+	// source / index / exist / abscissa / ordinate / height / mutestate / r / g / b / a / description, .. source / index ...
 	
-	ac = (MAX_NUMBER_OF_SOURCES * 11 + 4);
+	ac = (MAX_NUMBER_OF_SOURCES * 12 + 4);
 	av = (t_atom*)getbytes(ac * sizeof(t_atom));
 	avptr = av;
 	
@@ -1057,6 +1057,7 @@ void hoa_map_preset(t_hoamap *x)
 			
 			atom_setfloat(avptr++, x->f_source_manager->sourceGetAbscissa(i));
 			atom_setfloat(avptr++, x->f_source_manager->sourceGetOrdinate(i));
+			atom_setfloat(avptr++, x->f_source_manager->sourceGetHeight(i));
 			atom_setlong(avptr++, x->f_source_manager->sourceGetMute(i));
 			atom_setfloat(avptr++, color[0]);
 			atom_setfloat(avptr++, color[1]);
@@ -1068,6 +1069,7 @@ void hoa_map_preset(t_hoamap *x)
 		{
 			atom_setfloat(avptr++, 0.);
 			atom_setfloat(avptr++, 0.);
+			atom_setfloat(avptr++, 0.);
 			atom_setlong (avptr++, 0 );
 			atom_setfloat(avptr++, 0.);
 			atom_setfloat(avptr++, 0.);
@@ -1077,7 +1079,7 @@ void hoa_map_preset(t_hoamap *x)
 		}
 	}
 	
-	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 4), av);
+	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 12 + 4), av);
 	
 	// group / index / exist / symbol(srcIndex1_srcIndex2_...) / r / g / b / a / description, .. groupe / index ...
 
@@ -1137,13 +1139,16 @@ void hoa_map_preset(t_hoamap *x)
 
 t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
 {
-	if ( (ac >= (MAX_NUMBER_OF_SOURCES * 11) + 1) && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
+	int source_ac = MAX_NUMBER_OF_SOURCES * 12;
+	int group_ac = MAX_NUMBER_OF_SOURCES * 9;
+	
+	if ( (ac >= source_ac + 1) && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_source_preset_data)
 	{
-		object_method(x, hoa_sym_source, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 1), av);
+		object_method(x, hoa_sym_source, NULL, source_ac + 1, av);
 	}
-	if ((ac >= (MAX_NUMBER_OF_SOURCES * 11) + (MAX_NUMBER_OF_SOURCES * 9) + 2) && (av+(MAX_NUMBER_OF_SOURCES * 11) + 1) && atom_gettype(av+(MAX_NUMBER_OF_SOURCES * 11) + 1) == A_SYM && atom_getsym(av+(MAX_NUMBER_OF_SOURCES * 11) + 1) == hoa_sym_group_preset_data)
+	if ((ac >= (source_ac + group_ac + 2)) && (av + source_ac + 1) && atom_gettype(av + source_ac + 1) == A_SYM && atom_getsym(av + source_ac + 1) == hoa_sym_group_preset_data)
 	{
-		object_method(x, hoa_sym_group, NULL, ac - (MAX_NUMBER_OF_SOURCES * 9 + 1), av+(MAX_NUMBER_OF_SOURCES * 11 + 1));
+		object_method(x, hoa_sym_group, NULL, ac - (group_ac + 1), av + source_ac + 1);
 	}
 	return MAX_ERR_NONE;
 }
@@ -1158,7 +1163,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 		int number_of_sources = 0;
 		std::string temp_str = "";
 		char temp_char[4];
-		long max_ac = (MAX_NUMBER_OF_SOURCES * 11) + (MAX_NUMBER_OF_SOURCES * 9) + 2;
+		long max_ac = (MAX_NUMBER_OF_SOURCES * 12) + (MAX_NUMBER_OF_SOURCES * 9) + 2;
 		
 		if(*ac > 0)
 			freebytes(*av, *ac * sizeof(t_atom));
@@ -1181,6 +1186,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 				
 				atom_setfloat(avptr++, x->f_source_manager->sourceGetAbscissa(i));
 				atom_setfloat(avptr++, x->f_source_manager->sourceGetOrdinate(i));
+				atom_setfloat(avptr++, x->f_source_manager->sourceGetHeight(i));
 				atom_setlong(avptr++, x->f_source_manager->sourceGetMute(i));
 				atom_setfloat(avptr++, color[0]);
 				atom_setfloat(avptr++, color[1]);
@@ -1194,6 +1200,7 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 			}
 			else
 			{
+				atom_setfloat(avptr++, 0.);
 				atom_setfloat(avptr++, 0.);
 				atom_setfloat(avptr++, 0.);
 				atom_setlong (avptr++, 0 );
