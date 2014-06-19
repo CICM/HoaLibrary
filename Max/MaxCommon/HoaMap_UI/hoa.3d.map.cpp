@@ -94,7 +94,7 @@ typedef struct  _hoamap
     t_jrgba     f_color_bd;
     t_jrgba     f_color_selection;
     
-    int         f_cartConstrain;
+    int         f_cartesian_drag;
     
     double      f_size_source;
 	double		f_zoom_factor;
@@ -527,6 +527,35 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 	return MAX_ERR_NONE;
 }
 
+void hoamap_send_binded_map_update(t_hoamap *x, long flags)
+{
+	if(x->f_listmap)
+	{
+		t_linkmap *temp = x->f_listmap;
+		t_object* mapobj;
+		while (temp)
+		{
+			mapobj = (t_object*)temp->map;
+			
+			if (mapobj != (t_object*)x)
+			{
+				if (flags & BMAP_REDRAW)
+				{
+					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_sources_layer);
+					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_groups_layer);
+					jbox_redraw((t_jbox *)mapobj);
+				}
+				if (flags & BMAP_NOTIFY)
+					object_notify(mapobj, hoa_sym_modified, NULL);
+				if (flags & BMAP_OUTPUT && x->f_output_enabled)
+					object_method(mapobj, hoa_sym_bang);
+			}
+			
+			temp = temp->next;
+		}
+	}
+}
+
 void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av)
 {
 	if (s == hoa_sym_slot)
@@ -620,35 +649,6 @@ void hoamap_clear_all(t_hoamap *x)
 	hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 
-void hoamap_send_binded_map_update(t_hoamap *x, long flags)
-{
-	if(x->f_listmap)
-	{
-		t_linkmap *temp = x->f_listmap;
-		t_object* mapobj;
-		while (temp)
-		{
-			mapobj = (t_object*)temp->map;
-			
-			if (mapobj != (t_object*)x)
-			{
-				if (flags & BMAP_REDRAW)
-				{
-					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_sources_layer);
-					jbox_invalidate_layer((t_object *)mapobj, NULL, hoa_sym_groups_layer);
-					jbox_redraw((t_jbox *)mapobj);
-				}
-				if (flags & BMAP_NOTIFY)
-					object_notify(mapobj, hoa_sym_modified, NULL);
-				if (flags & BMAP_OUTPUT && x->f_output_enabled)
-					object_method(mapobj, hoa_sym_bang);
-			}
-			
-			temp = temp->next;
-		}
-	}
-}
-
 void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	x->f_output_enabled = 0;
@@ -679,8 +679,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 		{
 			if( (i <= ac-12) && atom_gettype(av+i) == A_SYM && atom_getsym(av+i) == hoa_sym_source)
 			{
-				if ( (atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
-					(atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
+				if ( atom_isNumber(av+i+1) && atom_isNumber(av+i+2))
 				{
 					index = atom_getlong(av+i+1) - 1;
 					exist = atom_getlong(av+i+2);
@@ -2347,6 +2346,62 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 			hoamap_send_binded_map_update(x, BMAP_OUTPUT);
 		}
     }
+	
+	if (x->f_index_of_selected_group != -1)
+	{
+		t_pt mouse_pos;
+		switch (x->f_coord_view)
+		{
+			case 0 : // XY
+			{
+				mouse_pos.x = (x->f_source_manager->groupGetAbscissa(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->groupGetOrdinate(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			case 1 : // XZ
+			{
+				mouse_pos.x = (x->f_source_manager->groupGetAbscissa(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->groupGetHeight(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			case 2 : // YZ
+			{
+				mouse_pos.x = (x->f_source_manager->groupGetOrdinate(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->groupGetHeight(x->f_index_of_selected_group) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			default: break;
+		}
+		jmouse_setposition_box(patcherview, (t_object*)x, mouse_pos.x, mouse_pos.y);
+	}
+	else if (x->f_index_of_selected_source != -1)
+	{
+		t_pt mouse_pos;
+		switch (x->f_coord_view)
+		{
+			case 0 : // XY
+			{
+				mouse_pos.x = (x->f_source_manager->sourceGetAbscissa(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->sourceGetOrdinate(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			case 1 : // XZ
+			{
+				mouse_pos.x = (x->f_source_manager->sourceGetAbscissa(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->sourceGetHeight(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			case 2 : // YZ
+			{
+				mouse_pos.x = (x->f_source_manager->sourceGetOrdinate(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.width*0.5);
+				mouse_pos.y = (-x->f_source_manager->sourceGetHeight(x->f_index_of_selected_source) * x->f_zoom_factor + 1.) * (x->rect.height*0.5);
+				break;
+			}
+			default: break;
+		}
+		jmouse_setposition_box(patcherview, (t_object*)x, mouse_pos.x, mouse_pos.y);
+	}
+	
     
     if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1 && x->f_showgroups)
     {
@@ -2369,14 +2424,24 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	int causeRedraw = 0;
 	int causeNotify = 0;
 	
+	// check if we wanna constrain drag to cartesian
+	if (modifiers == 17) // cmd
+	{
+		if(x->f_cartesian_drag == 0)
+			x->f_cartesian_drag = (fabs(mousedelta.x) >= fabs(mousedelta.y)) ? 1 : 2;
+	}
+	else
+		x->f_cartesian_drag = 0;
+	
+	
 	// source is dragged
 	if (x->f_index_of_selected_source != -1)
     {
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24 && x->f_coord_view == 0) // Alt
+		if(modifiers == 24) // Alt
 #else
-		if( (modifiers == 148 || modifiers == 404) && x->f_coord_view == 0) // ctrl
+		if( (modifiers == 148 || modifiers == 404)) // ctrl
 #endif
 		{
 			switch (x->f_coord_view)
@@ -2388,16 +2453,26 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 				}
 				case 1 : // XZ
 				{
-					//x->f_source_manager->sourceSetElevation(x->f_index_of_selected_source, wrap_twopi(azimuth(cursor.x, cursor.y) + HOA_PI2));
+					double source_radius = radius(x->f_source_manager->sourceGetAbscissa(x->f_index_of_selected_source), x->f_source_manager->sourceGetHeight(x->f_index_of_selected_source));
+					double mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+					
+					x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, abscissa(source_radius, mouse_azimuth));
+					x->f_source_manager->sourceSetHeight(x->f_index_of_selected_source, ordinate(source_radius, mouse_azimuth));
 					break;
 				}
 				case 2 : // YZ
 				{
-					//x->f_source_manager->sourceSetElevation(x->f_index_of_selected_source, wrap_twopi(azimuth(cursor.x, cursor.y) + HOA_PI2));
+					double source_radius = radius(x->f_source_manager->sourceGetOrdinate(x->f_index_of_selected_source), x->f_source_manager->sourceGetHeight(x->f_index_of_selected_source));
+					double mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+					
+					x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, abscissa(source_radius, mouse_azimuth));
+					x->f_source_manager->sourceSetHeight(x->f_index_of_selected_source, ordinate(source_radius, mouse_azimuth));
 					break;
 				}
 				default: break;
 			}
+			
+			causeOutput = causeRedraw = causeNotify = 1;
 		}
 		
 		 // Radius
@@ -2417,11 +2492,9 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		else if (modifiers == 17) // cmd
 #endif
         {
-            if (fabs(mousedelta.x) >= fabs(mousedelta.y))
-            {
+            if (x->f_cartesian_drag == 1)
                 x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, cursor.x);
-            }
-            else
+            else if(x->f_cartesian_drag == 2)
                 x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
 			
           causeOutput = causeRedraw = causeNotify = 1;
@@ -2520,14 +2593,12 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 				{
 					x->f_source_manager->groupSetAbscissa(x->f_index_of_selected_group, cursor.x);
 					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
-					//x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, x->f_source_manager->groupGetOrdinate(x->f_index_of_selected_group), cursor.y);
 					break;
 				}
 				case 2 : // YZ
 				{
 					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.x);
 					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
-					//x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, x->f_source_manager->groupGetAbscissa(x->f_index_of_selected_group), cursor.x, cursor.y);
 					break;
 				}
 				default: break;
