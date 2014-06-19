@@ -83,6 +83,7 @@ typedef struct  _hoamap
 	SourcesManager*     f_self_source_manager;
     
     t_pt        f_cursor_position;
+	int			f_mouse_was_dragging;
     long        f_index_of_selected_source;
     long        f_index_of_selected_group;
     long        f_index_of_source_to_remove;
@@ -2065,6 +2066,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     x->f_rect_selection_exist = -1;
     x->f_rect_selection.width = x->f_rect_selection.height = 0.;
+	x->f_cartesian_drag = 0;
 	
 	t_pt displayed_coords;
         
@@ -2372,6 +2374,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 			}
 			default: break;
 		}
+		x->f_cursor_position.x = mouse_pos.x;
+		x->f_cursor_position.y = mouse_pos.y;
 		jmouse_setposition_box(patcherview, (t_object*)x, mouse_pos.x, mouse_pos.y);
 	}
 	else if (x->f_index_of_selected_source != -1)
@@ -2399,6 +2403,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 			}
 			default: break;
 		}
+		x->f_cursor_position.x = mouse_pos.x;
+		x->f_cursor_position.y = mouse_pos.y;
 		jmouse_setposition_box(patcherview, (t_object*)x, mouse_pos.x, mouse_pos.y);
 	}
 	
@@ -2425,7 +2431,11 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	int causeNotify = 0;
 	
 	// check if we wanna constrain drag to cartesian
-	if (modifiers == 17) // cmd
+#ifdef _WINDOWS
+	if(modifiers == 26 && x->f_mouse_was_dragging) // ??
+#else
+	if (modifiers == 17 && x->f_mouse_was_dragging) // cmd
+#endif
 	{
 		if(x->f_cartesian_drag == 0)
 			x->f_cartesian_drag = (fabs(mousedelta.x) >= fabs(mousedelta.y)) ? 1 : 2;
@@ -2485,7 +2495,8 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
-		 // Angle + radius
+		
+		 // Cartesian constrain
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
 #else
@@ -2493,9 +2504,19 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #endif
         {
             if (x->f_cartesian_drag == 1)
-                x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, cursor.x);
+			{
+				if (x->f_coord_view == 0 || x->f_coord_view == 1)
+					x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, cursor.x);
+				else if (x->f_coord_view == 2)
+					x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.x);
+			}
             else if(x->f_cartesian_drag == 2)
-                x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
+			{
+				if (x->f_coord_view == 0)
+					x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
+				else
+					x->f_source_manager->sourceSetHeight(x->f_index_of_selected_source, cursor.y);
+			}
 			
           causeOutput = causeRedraw = causeNotify = 1;
         }
@@ -2530,9 +2551,9 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24 && x->f_coord_view == 0) // Alt
+		if(modifiers == 24) // Alt
 #else
-		if( (modifiers == 148 || modifiers == 404) && x->f_coord_view == 0) // ctrl
+		if( (modifiers == 148 || modifiers == 404)) // ctrl
 #endif
 		{
 			switch (x->f_coord_view)
@@ -2544,19 +2565,60 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 				}
 				case 1 : // XZ
 				{
-					//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+					if (x->f_mouse_was_dragging)
+					{
+						t_pt source_display;
+						int srcIndex, grpIndex;
+						double source_radius, source_azimuth, mouse_azimuth, mouse_azimuth_prev;
+						grpIndex = x->f_index_of_selected_group;
+						mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+						mouse_azimuth_prev = wrap_twopi(azimuth(x->f_cursor_position.x, x->f_cursor_position.y));
+						
+						for(int i = 0; i < x->f_source_manager->groupGetNumberOfSources(grpIndex); i++)
+						{
+							srcIndex = x->f_source_manager->groupGetSourceIndex(grpIndex, i);
+							
+							source_display.x = x->f_source_manager->sourceGetAbscissa(srcIndex);
+							source_display.y = x->f_source_manager->sourceGetHeight(srcIndex);
+							source_radius = radius(source_display.x, source_display.y);
+							source_azimuth = azimuth(source_display.x, source_display.y);
+							source_azimuth += mouse_azimuth - mouse_azimuth_prev;
+							
+							x->f_source_manager->sourceSetAbscissa(srcIndex, abscissa(source_radius, source_azimuth));
+							x->f_source_manager->sourceSetHeight(srcIndex, ordinate(source_radius, source_azimuth));
+						}
+					}
 					break;
 				}
 				case 2 : // YZ
 				{
-					//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
+					if (x->f_mouse_was_dragging)
+					{
+						t_pt source_display;
+						int srcIndex, grpIndex;
+						double source_radius, source_azimuth, mouse_azimuth, mouse_azimuth_prev;
+						grpIndex = x->f_index_of_selected_group;
+						mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+						mouse_azimuth_prev = wrap_twopi(azimuth(x->f_cursor_position.x, x->f_cursor_position.y));
+						
+						for(int i = 0; i < x->f_source_manager->groupGetNumberOfSources(grpIndex); i++)
+						{
+							srcIndex = x->f_source_manager->groupGetSourceIndex(grpIndex, i);
+							
+							source_display.x = x->f_source_manager->sourceGetOrdinate(srcIndex);
+							source_display.y = x->f_source_manager->sourceGetHeight(srcIndex);
+							source_radius = radius(source_display.x, source_display.y);
+							source_azimuth = azimuth(source_display.x, source_display.y);
+							source_azimuth += mouse_azimuth - mouse_azimuth_prev;
+							
+							x->f_source_manager->sourceSetOrdinate(srcIndex, abscissa(source_radius, source_azimuth));
+							x->f_source_manager->sourceSetHeight(srcIndex, ordinate(source_radius, source_azimuth));
+						}
+					}
 					break;
 				}
 				default: break;
 			}
-			
-			//x->f_source_manager->groupSetRelativeElevation(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
-            //x->f_source_manager->groupSetRelativeAzimuth(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
 		
@@ -2564,20 +2626,114 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
 #else
-		else if(modifiers == 18 || modifiers == 274)
+		else if(modifiers == 18 || modifiers == 274) // Shift
 #endif
 		{
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, radius(cursor.x, cursor.y));
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
+		
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift + alt
 #else
-		else if (modifiers == 17)
+		else if (modifiers == 150 || modifiers == 406) // Shift + alt (Maj on/off)
 #endif
 		{
-            x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, radius(cursor.x, cursor.y), azimuth(cursor.x, cursor.y));
+			switch (x->f_coord_view)
+			{
+				case 0 : // XY
+				{
+					x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, radius(cursor.x, cursor.y), azimuth(cursor.x, cursor.y));
+					break;
+				}
+				case 1 : // XZ
+				{
+					if (x->f_mouse_was_dragging)
+					{
+						t_pt source_display;
+						int srcIndex, grpIndex;
+						double source_radius, source_azimuth, mouse_azimuth, mouse_azimuth_prev, mouse_radius, mouse_radius_prev;
+						grpIndex = x->f_index_of_selected_group;
+						mouse_radius = clip_min(radius(cursor.x, cursor.y), 0);
+						mouse_radius_prev = clip_min(radius(x->f_cursor_position.x, x->f_cursor_position.y), 0);
+						mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+						mouse_azimuth_prev = wrap_twopi(azimuth(x->f_cursor_position.x, x->f_cursor_position.y));
+						
+						for(int i = 0; i < x->f_source_manager->groupGetNumberOfSources(grpIndex); i++)
+						{
+							srcIndex = x->f_source_manager->groupGetSourceIndex(grpIndex, i);
+							
+							source_display.x = x->f_source_manager->sourceGetAbscissa(srcIndex);
+							source_display.y = x->f_source_manager->sourceGetHeight(srcIndex);
+							source_radius = radius(source_display.x, source_display.y);
+							source_radius += mouse_radius - mouse_radius_prev;
+							source_azimuth = azimuth(source_display.x, source_display.y);
+							source_azimuth += mouse_azimuth - mouse_azimuth_prev;
+							
+							x->f_source_manager->sourceSetAbscissa(srcIndex, abscissa(source_radius, source_azimuth));
+							x->f_source_manager->sourceSetHeight(srcIndex, ordinate(source_radius, source_azimuth));
+						}
+					}
+					break;
+				}
+				case 2 : // YZ
+				{
+					if (x->f_mouse_was_dragging)
+					{
+						t_pt source_display;
+						int srcIndex, grpIndex;
+						double source_radius, source_azimuth, mouse_azimuth, mouse_azimuth_prev, mouse_radius, mouse_radius_prev;
+						grpIndex = x->f_index_of_selected_group;
+						mouse_radius = clip_min(radius(cursor.x, cursor.y), 0);
+						mouse_radius_prev = clip_min(radius(x->f_cursor_position.x, x->f_cursor_position.y), 0);
+						mouse_azimuth = wrap_twopi(azimuth(cursor.x, cursor.y));
+						mouse_azimuth_prev = wrap_twopi(azimuth(x->f_cursor_position.x, x->f_cursor_position.y));
+						
+						for(int i = 0; i < x->f_source_manager->groupGetNumberOfSources(grpIndex); i++)
+						{
+							srcIndex = x->f_source_manager->groupGetSourceIndex(grpIndex, i);
+							
+							source_display.x = x->f_source_manager->sourceGetOrdinate(srcIndex);
+							source_display.y = x->f_source_manager->sourceGetHeight(srcIndex);
+							source_radius = radius(source_display.x, source_display.y);
+							source_radius += mouse_radius - mouse_radius_prev;
+							source_azimuth = azimuth(source_display.x, source_display.y);
+							source_azimuth += mouse_azimuth - mouse_azimuth_prev;
+							
+							x->f_source_manager->sourceSetOrdinate(srcIndex, abscissa(source_radius, source_azimuth));
+							x->f_source_manager->sourceSetHeight(srcIndex, ordinate(source_radius, source_azimuth));
+						}
+					}
+					break;
+				}
+				default: break;
+			}
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
+		
+// constrain drag to cartesian
+#ifdef _WINDOWS
+		else if(modifiers == 26) // ??
+#else
+		else if (modifiers == 17) // cmd
+#endif
+		{
+			if (x->f_cartesian_drag == 1)
+			{
+				if (x->f_coord_view == 0 || x->f_coord_view == 1)
+					x->f_source_manager->groupSetAbscissa(x->f_index_of_selected_group, cursor.x);
+				else if (x->f_coord_view == 2)
+					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.x);
+			}
+            else if(x->f_cartesian_drag == 2)
+			{
+				if (x->f_coord_view == 0)
+					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.y);
+				else
+					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
+			}
+			
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
         else
@@ -2618,6 +2774,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
+	x->f_mouse_was_dragging = 1;
 	
 	if (causeNotify)
 	{
@@ -2644,6 +2801,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+	x->f_mouse_was_dragging = 0;
 	
 	t_pt screen_source_coord;
 	
