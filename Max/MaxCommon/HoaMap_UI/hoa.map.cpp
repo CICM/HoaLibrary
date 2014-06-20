@@ -5,9 +5,9 @@
 */
 
 /**
- @file      hoa.3d.map.cpp
- @name      hoa.3d.map
- @realname  hoa.3d.map
+ @file      hoa.map.cpp
+ @name      hoa.map
+ @realname  hoa.map
  @type      object
  @module    hoa
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
@@ -16,16 +16,16 @@
  A graphic user interface to spatialize sources on a plane.
  
  @description
- <o>hoa.3d.map</o> allows you to spatialize several sources on a plane. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control the <o>hoa.3d.map~</o> object.
+ <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
  
  @discussion
- <o>hoa.3d.map</o> allows you to spatialize several sources on a plane. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control the <o>hoa.3d.map~</o> object.
+ <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
  
  @category ambisonics, hoa objects, audio, GUI, MSP
  
- @seealso hoa.3d.map~, hoa.2d.space, hoa.2d.recomposer, hoa.2d.meter~, hoa.2d.scope~, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.decoder~
+ @seealso hoa.2d.map, hoa.3d.map~, hoa.2d.space, hoa.2d.meter~, hoa.2d.scope~, hoa.2d.encoder~, hoa.2d.wider~, hoa.2d.decoder~, hoa.3d.encoder~, hoa.3d.scope~, hoa.3d.wider~, hoa.3d.decoder~
  
- @illustration on @caption hoa.3d.map GUI object
+ @illustration on @caption hoa.map GUI object
  @palette yes
  */
 
@@ -137,9 +137,10 @@ void hoamap_free(t_hoamap *x);
 void hoamap_tick(t_hoamap *x);
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
-void hoa_map_preset(t_hoamap *x);
-t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av);
-t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av);
+void hoamap_preset(t_hoamap *x);
+t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av);
+t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av);
+void hoamap_jsave(t_hoamap *x, t_dictionary *d);
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 
@@ -181,7 +182,7 @@ int C74_EXPORT main()
     hoa_textfield_init();
 	t_class *c;
     
-	c = class_new("hoa.3d.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
+	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
 	
 	hoa_initclass(c, NULL);
 	
@@ -192,9 +193,10 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) hoamap_paint,            "paint",			A_CANT,	0);
 	class_addmethod(c, (method) hoamap_getdrawparams,    "getdrawparams",	A_CANT, 0);
 	class_addmethod(c, (method) hoamap_notify,           "notify",			A_CANT, 0);
-	class_addmethod(c, (method) hoa_map_preset,			 "preset",			0);
-    class_addmethod(c, (method) hoa_map_getvalueof,		 "getvalueof",		A_CANT, 0);
-	class_addmethod(c, (method) hoa_map_setvalueof,		 "setvalueof",		A_CANT, 0);
+	class_addmethod(c, (method) hoamap_preset,			 "preset",			0);
+    class_addmethod(c, (method) hoamap_getvalueof,		 "getvalueof",		A_CANT, 0);
+	class_addmethod(c, (method) hoamap_setvalueof,		 "setvalueof",		A_CANT, 0);
+	class_addmethod(c, (method) hoamap_jsave,            "jsave",			A_CANT, 0);
     
 	// @method bang @digest Output current sources values.
 	// @description The <m>bang</m> Output current sources values.
@@ -289,7 +291,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_CATEGORY			(c, "output3d", 0, "Behavior");
 	CLASS_ATTR_ORDER            (c, "output3d", 0, "1");
 	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
-	CLASS_ATTR_DEFAULT          (c, "output3d", 0, "0");
+	//CLASS_ATTR_DEFAULT          (c, "output3d", 0, "0");
 	CLASS_ATTR_SAVE             (c, "output3d", 1);
 	// @description Check this to output 3d coordinates, default is 2d.
 	
@@ -351,18 +353,12 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_GROWY
 	| JBOX_HILITE
 	;
+	
+	int is3D = (s == gensym("hoa.3d.map"));
     
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
 	x->f_self_source_manager = x->f_source_manager;
-	
-    x->f_rect_selection_exist = 0;
-    x->f_index_of_selected_source = -1;
-    x->f_index_of_selected_group = -1;
-	
-	x->f_binding_name = hoa_sym_nothing;
-	x->f_listmap = NULL;
-	x->f_output_enabled = 1;
 	
     x->j_box.b_firstin = (t_object*) x;
         
@@ -374,10 +370,26 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 
     x->f_patcher = NULL;
     x->f_colorpicker = NULL;
-    
-	attr_dictionary_process(x, d);
-	jbox_ready(&x->j_box);
 	
+	x->f_rect_selection_exist = 0;
+    x->f_index_of_selected_source = -1;
+    x->f_index_of_selected_group = -1;
+	
+	x->f_binding_name = hoa_sym_nothing;
+	x->f_listmap = NULL;
+	x->f_output_enabled = 1;
+	
+	x->f_output_3D = is3D;
+	
+	attr_dictionary_process(x, d);
+	
+	t_atom *av = NULL;
+    long ac = 0;
+	
+    dictionary_copyatoms(d, gensym("map_saved_state"), &ac, &av);
+    hoamap_setvalueof(x, ac, av);
+	
+	jbox_ready(&x->j_box);
 	return (x);
 }
 
@@ -390,11 +402,15 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 	// symbol null => new t_listmap
 	if(name->s_thing == NULL)
 	{
-		x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
-		x->f_listmap->map = x;
-		x->f_listmap->next = NULL;
-		name->s_thing = (t_object *)x->f_listmap;
-		x->f_source_manager = x->f_self_source_manager;
+		x->f_listmap = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
+		if (x->f_listmap)
+		{
+			//x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
+			x->f_listmap->map = x;
+			x->f_listmap->next = NULL;
+			name->s_thing = (t_object *)x->f_listmap;
+			x->f_source_manager = x->f_self_source_manager;
+		}
 	}
 	else // t_listmap exist => add our object in it
 	{
@@ -408,7 +424,8 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				if(temp->next != NULL && temp->next->map == x)
 				{
 					temp2 = temp->next->next;
-					free(temp->next);
+					sysmem_freeptr(temp->next);
+					//free(temp->next);
 					temp->next = temp2;
 				}
 				temp = temp->next;
@@ -423,11 +440,15 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		{
 			if(temp->next == NULL)
 			{
-				temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
-				temp2->map = x;
-				temp2->next = NULL;
-				temp->next = temp2;
-				temp->next->map->f_source_manager = head_map->f_self_source_manager;
+				temp2 = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
+				if (temp2)
+				{
+					//temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
+					temp2->map = x;
+					temp2->next = NULL;
+					temp->next = temp2;
+					temp->next->map->f_source_manager = head_map->f_self_source_manager;
+				}
 				break;
 			}
 			temp = temp->next;
@@ -462,24 +483,25 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				{
 					name->s_thing = (t_object *)temp->next;
 					
-					// le sourceManager du linkmap est celui du head, on le copie dans le suivant et on les fait tous pointer vers celui ci
+					// bind all object to the next SourcesManager (next becoming the new head of the t_linkmap)
 					head_map->f_source_manager->copyTo(temp->next->map->f_self_source_manager);
 					temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
 				}
-				free(x->f_listmap);
+				
+				sysmem_freeptr(x->f_listmap);
 				x->f_listmap = NULL;
 				
-				x->f_source_manager = x->f_self_source_manager; // pas necessaire (pointe deja sur celui du head)
+				x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)
 			}
 			else if(temp->next != NULL && temp->next->map == x)
 			{
-				// on redonne au map le pointeur d'origine
+				// we restore the original pointer
 				temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
-				// on copie le sourceManager partagé dans sourceManager d'origine
+				// then we copy the shared SourcesManager into the original one
 				head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
 				
 				temp2 = temp->next->next;
-				free(temp->next);
+				sysmem_freeptr(temp->next);
 				x->f_listmap = NULL;
 				temp->next = temp2;
 			}
@@ -1017,7 +1039,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 /*                  Preset et Pattr                       */
 /**********************************************************/
 
-void hoa_map_preset(t_hoamap *x)
+void hoamap_preset(t_hoamap *x)
 {
 	void* z;
 	double* color;
@@ -1137,7 +1159,7 @@ void hoa_map_preset(t_hoamap *x)
 	freebytes(av, ac * sizeof(t_atom));
 }
 
-t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
+t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
 {
 	int source_ac = MAX_NUMBER_OF_SOURCES * 12;
 	int group_ac = MAX_NUMBER_OF_SOURCES * 9;
@@ -1153,7 +1175,7 @@ t_max_err hoa_map_setvalueof(t_hoamap *x, long ac, t_atom *av)
 	return MAX_ERR_NONE;
 }
 
-t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
+t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 {
 	if(ac && av)
     {
@@ -1260,6 +1282,15 @@ t_max_err hoa_map_getvalueof(t_hoamap *x, long *ac, t_atom **av)
     }
 	
 	return MAX_ERR_NONE;
+}
+
+void hoamap_jsave(t_hoamap *x, t_dictionary *d)
+{
+	long ac = 0;
+	t_atom* av = NULL;
+	hoamap_getvalueof(x, &ac, &av);
+	dictionary_appendatoms(d, gensym("map_saved_state"), ac, av);
+	freebytes(av, ac * sizeof(t_atom));
 }
 
 /**********************************************************/

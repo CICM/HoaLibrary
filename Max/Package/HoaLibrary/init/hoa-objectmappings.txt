@@ -1,6 +1,5 @@
 max objectfile hoa.decoder~ hoa.2d.decoder~;
 max objectfile hoa.encoder~ hoa.2d.encoder~;
-max objectfile hoa.map hoa.2d.map;
 max objectfile hoa.map~ hoa.2d.map~;
 max objectfile hoa.meter~ hoa.2d.meter~;
 max objectfile hoa.optim~ hoa.2d.optim~;
@@ -20,3 +19,6 @@ max objectfile hoa.3d.record~ hoa.record~;
 
 max objectfile hoa.2d.process~ hoa.process~;
 max objectfile hoa.3d.process~ hoa.process~;
+
+max objectfile hoa.2d.map hoa.map;
+max objectfile hoa.3d.map hoa.map;

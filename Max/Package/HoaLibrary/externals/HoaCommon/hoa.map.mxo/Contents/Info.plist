@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13C64</string>
+	<string>13D65</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>hoa.2d.map</string>
+	<string>hoa.map</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cicm.hoa-2d-map</string>
+	<string>com.cicm.hoa-map</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>hoa.2d.map HoaLibrary 2.0, Copyright 2010 Cycling '74</string>
+	<string>hoa.map HoaLibrary 2.0, CICM</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>
