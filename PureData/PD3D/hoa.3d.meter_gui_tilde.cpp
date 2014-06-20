@@ -540,8 +540,6 @@ void hoa_meter_3d_paint(t_hoa_meter_3d *x, t_object *view)
 
 void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 {
-	int i;
-    float coso, sino, angle, x1, y1, x2, y2;
     t_rgba black, white;
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_3d_background_layer, rect->width, rect->height);
@@ -553,14 +551,7 @@ void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 	{
         egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         egraphics_set_matrix(g, &transform);
-       
-        //egraphics_rotate(g, -HOA_PI);
-        
 		egraphics_set_line_width(g, 1.);
-
-		egraphics_set_color_rgba(g, &x->f_color_bg);
-		egraphics_arc(g, 0.f, 0.f, x->f_radius, 0., HOA_2PI);
-		egraphics_fill(g);
 		
         egraphics_set_color_rgba(g, &white);
         egraphics_set_line_width(g, 1.f);
@@ -585,14 +576,10 @@ void hoa_meter_3d_float(t_hoa_meter_3d *x, float f)
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_vector_layer);
 		ebox_redraw((t_ebox *)x);
 }
+
 void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 {
-    int i;
-    float j, h, dB;
-    float angle_start, angle, angle_end, radius, center_x, center_y;
-    float led_width = 0.49 * rect->width / 18.;
     t_matrix transform;
-    t_rgba black = rgba_addContrast(x->f_color_bg, -0.14);
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_3d_leds_layer, rect->width, rect->height);
 
 	if (g)
@@ -607,10 +594,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				
 				float azi = x->f_meter->getChannelPointAzimuth(i, 0);
 				float ele = x->f_meter->getChannelPointElevation(i, 0);
+                post("channel %i : %i", i, x->f_meter->getChannelNumberOfPoints(i));
+				post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
+                if(ele < 0)
+                    ele  = 0;
 				float abs =  abscissa(x->f_radius, azi, ele);
 				float ord = ordinate(x->f_radius, azi, ele);
-				//post("channel %i", i);
-				//post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
+				
 
 				egraphics_set_color_rgba(g, &x->f_color_cold_signal);
 				egraphics_move_to(g, abs, ord);
@@ -618,10 +608,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j);
 					ele = x->f_meter->getChannelPointElevation(i, j);
+                    post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
+                    if(ele < 0)
+                        ele  = 0;
 					abs = abscissa(x->f_radius, azi, ele);
 					ord = ordinate(x->f_radius, azi, ele);
 					egraphics_line_to(g, abs, ord);
-					//post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
+				
 				}
 				egraphics_close_path(g);
 				egraphics_fill_preserve(g);
@@ -634,6 +627,8 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j);
 					ele = x->f_meter->getChannelPointElevation(i, j);
+                    if(ele < 0)
+                        ele  = 0;
 					abs =  abscissa(x->f_radius, azi, ele);
 					ord = ordinate(x->f_radius, azi, ele);
 					egraphics_set_color_rgba(g, &rgba_black);

@@ -8,7 +8,7 @@
 #define __DEF_HOA_3D_METER__
 
 #include "Planewaves_3D.h"
-#include "Delaunay.h"
+#include "Voronoi.h"
 
 namespace Hoa3D
 {
@@ -22,7 +22,10 @@ namespace Hoa3D
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-		Hoa::Delaunay*	m_delaunay;
+		Hoa::Voronoi*	m_Voronoi;
+        int*            m_channels_top;
+        int*            m_channels_bottom;
+
     public:
         
         //! The meter constructor.
@@ -56,22 +59,22 @@ namespace Hoa3D
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
 
-		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
+		inline unsigned int getChannelNumberOfPoints(unsigned int index) const
         {
             assert(index < m_number_of_channels);
-			return 0;
+			return m_Voronoi->getPointVoronoiLenght(index);
         }
 
-		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const
+		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return 0;
+            return m_Voronoi->getPointVoronoiAzimuth(index, pointindex);
         }
 
-		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex, bool top = 1) const
+		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return 0;
+            return m_Voronoi->getPointVoronoiElevation(index, pointindex);
         }
 
         inline double getChannelPeak(unsigned int index) const
