@@ -402,59 +402,66 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 {
 	char strname[2048];
-	sprintf(strname, "%s%s", binding_name->s_name, ODD_BINDING_SUFFIX);
-	t_symbol* name = gensym(strname);
-	
-	// t_listmap null => new t_listmap
-	if(name->s_thing == NULL)
+	t_symbol* name = NULL;
+	t_object *jp = NULL;
+	object_obex_lookup(x, gensym("#P"), &jp);
+	if (jp && (jp = jpatcher_get_toppatcher(jp)))
 	{
-		x->f_listmap = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
-		if (x->f_listmap)
-		{
-			x->f_listmap->map = x;
-			x->f_listmap->next = NULL;
-			name->s_thing = (t_object *)x->f_listmap;
-			x->f_source_manager = x->f_self_source_manager;
-		}
-	}
-	else // t_listmap exist => add our object in it
-	{
-		t_linkmap *temp, *temp2;
+		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		name = gensym(strname);
+		//object_post((t_object*)x, "name : %s", name->s_name);
 		
-		if(x->f_listmap != NULL)
+		// t_listmap null => new t_listmap
+		if(name->s_thing == NULL)
 		{
+			x->f_listmap = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
+			if (x->f_listmap)
+			{
+				x->f_listmap->map = x;
+				x->f_listmap->next = NULL;
+				name->s_thing = (t_object *)x->f_listmap;
+				x->f_source_manager = x->f_self_source_manager;
+			}
+		}
+		else // t_listmap exist => add our object in it
+		{
+			t_linkmap *temp, *temp2;
+			
+			if(x->f_listmap != NULL)
+			{
+				temp = x->f_listmap;
+				while(temp)
+				{
+					if(temp->next != NULL && temp->next->map == x)
+					{
+						temp2 = temp->next->next;
+						sysmem_freeptr(temp->next);
+						temp->next = temp2;
+					}
+					temp = temp->next;
+				}
+			}
+			
+			x->f_listmap = (t_linkmap *)name->s_thing;
 			temp = x->f_listmap;
+			t_hoamap* head_map = temp->map;
+			
 			while(temp)
 			{
-				if(temp->next != NULL && temp->next->map == x)
+				if(temp->next == NULL)
 				{
-					temp2 = temp->next->next;
-					sysmem_freeptr(temp->next);
-					temp->next = temp2;
+					temp2 = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
+					if (temp2)
+					{
+						temp2->map = x;
+						temp2->next = NULL;
+						temp->next = temp2;
+						temp->next->map->f_source_manager = head_map->f_self_source_manager;
+					}
+					break;
 				}
 				temp = temp->next;
 			}
-		}
-		
-		x->f_listmap = (t_linkmap *)name->s_thing;
-		temp = x->f_listmap;
-		t_hoamap* head_map = temp->map;
-		
-		while(temp)
-		{
-			if(temp->next == NULL)
-			{
-				temp2 = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
-				if (temp2)
-				{
-					temp2->map = x;
-					temp2->next = NULL;
-					temp->next = temp2;
-					temp->next->map->f_source_manager = head_map->f_self_source_manager;
-				}
-				break;
-			}
-			temp = temp->next;
 		}
 	}
 }
@@ -462,56 +469,63 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 {
 	char strname[2048];
-	sprintf(strname, "%s%s", binding_name->s_name, ODD_BINDING_SUFFIX);
-	t_symbol* name = gensym(strname);
-	
-	if(name->s_thing != NULL)
+	t_symbol* name = NULL;
+	t_object *jp = NULL;
+	object_obex_lookup(x, gensym("#P"), &jp);
+	if (jp && (jp = jpatcher_get_toppatcher(jp)))
 	{
-		t_linkmap *temp, *temp2;
-		temp = (t_linkmap *)name->s_thing;
-		t_hoamap* head_map = temp->map;
-		int counter = 0;
+		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		name = gensym(strname);
 		
-		while(temp)
+		if(name->s_thing != NULL)
 		{
-			if (counter == 0 && temp->map == x) // head of the linkmap
-			{
-				head_map = temp->map;
-				
-				if(temp->next == NULL) // is also the last item of the linkmap
-				{
-					name->s_thing = NULL;
-				}
-				else
-				{
-					name->s_thing = (t_object *)temp->next;
-					
-					// bind all object to the next SourcesManager (next becoming the new head of the t_linkmap)
-					head_map->f_source_manager->copyTo(temp->next->map->f_self_source_manager);
-					temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
-				}
-				
-				sysmem_freeptr(x->f_listmap);
-				x->f_listmap = NULL;
-				
-				x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)
-			}
-			else if(temp->next != NULL && temp->next->map == x)
-			{
-				// we restore the original pointer
-				temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
-				// then we copy the shared SourcesManager into the original one
-				head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
-				
-				temp2 = temp->next->next;
-				sysmem_freeptr(temp->next);
-				x->f_listmap = NULL;
-				temp->next = temp2;
-			}
+			t_linkmap *temp, *temp2;
+			temp = (t_linkmap *)name->s_thing;
+			t_hoamap* head_map = temp->map;
+			int counter = 0;
 			
-			temp = temp->next;
+			while(temp)
+			{
+				if (counter == 0 && temp->map == x) // head of the linkmap
+				{
+					head_map = temp->map;
+					
+					if(temp->next == NULL) // is also the last item of the linkmap
+					{
+						name->s_thing = NULL;
+					}
+					else
+					{
+						name->s_thing = (t_object *)temp->next;
+						
+						// bind all object to the next SourcesManager (next becoming the new head of the t_linkmap)
+						head_map->f_source_manager->copyTo(temp->next->map->f_self_source_manager);
+						temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
+					}
+					
+					sysmem_freeptr(x->f_listmap);
+					x->f_listmap = NULL;
+					
+					x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)
+				}
+				else if(temp->next != NULL && temp->next->map == x)
+				{
+					// we restore the original pointer
+					temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
+					// then we copy the shared SourcesManager into the original one
+					head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
+					
+					temp2 = temp->next->next;
+					sysmem_freeptr(temp->next);
+					x->f_listmap = NULL;
+					temp->next = temp2;
+				}
+				
+				temp = temp->next;
+			}
 		}
 	}
+	
 }
 
 t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
@@ -529,7 +543,9 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 			// add new one
 			if (new_binding_name != hoa_sym_nothing)
 			{
-				linkmap_add_with_binding_name(x, new_binding_name);
+				// use deferlow to have the good toppatcher pointer when the patch is being loaded
+				defer_low(x, (method)linkmap_add_with_binding_name, new_binding_name, NULL, NULL);
+				//linkmap_add_with_binding_name(x, new_binding_name);
 				x->f_binding_name = new_binding_name;
 			}
 			else
