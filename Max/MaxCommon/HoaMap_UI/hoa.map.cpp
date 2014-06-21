@@ -104,6 +104,7 @@ typedef struct  _hoamap
 	int			f_rect_selection_exist;
 	
 	long		f_showgroups;
+	long		f_save_with_patcher;
     
     // options :
     t_atom_long f_output_mode;			// Polar Cartesian
@@ -278,31 +279,50 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the selection in a <o>hoa.3d.map</o> object
 	
     /* Behavior */
-	CLASS_ATTR_LONG				(c,"outputmode", 0, t_hoamap, f_output_mode);
-	CLASS_ATTR_LABEL			(c,"outputmode", 0, "Output Mode");
-	CLASS_ATTR_CATEGORY			(c,"outputmode", 0, "Behavior");
-	CLASS_ATTR_ENUMINDEX		(c,"outputmode", 0, "Polar Cartesian");
-	CLASS_ATTR_DEFAULT          (c,"outputmode", 0,  "0");
-    CLASS_ATTR_SAVE             (c,"outputmode", 1);
-    CLASS_ATTR_ORDER			(c,"outputmode", 0, "1");
-	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
-	
-	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoamap, f_output_3D);
-	CLASS_ATTR_CATEGORY			(c, "output3d", 0, "Behavior");
-	CLASS_ATTR_ORDER            (c, "output3d", 0, "1");
-	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
-	//CLASS_ATTR_DEFAULT          (c, "output3d", 0, "0");
-	CLASS_ATTR_SAVE             (c, "output3d", 1);
-	// @description Check this to output 3d coordinates, default is 2d.
-	
+	CLASS_STICKY_CATEGORY(c, 0, "Behavior");
 	CLASS_ATTR_LONG				(c, "view", 0, t_hoamap, f_coord_view);
 	CLASS_ATTR_LABEL			(c, "view", 0, "Coordinate View");
-	CLASS_ATTR_CATEGORY			(c, "view", 0, "Behavior");
 	CLASS_ATTR_ENUMINDEX		(c, "view", 0, "xy xz yz");
 	CLASS_ATTR_DEFAULT          (c, "view", 0,  "0");
     CLASS_ATTR_SAVE             (c, "view", 1);
     CLASS_ATTR_ORDER			(c, "view", 0, "1");
 	// @description Sets the coordinates display mode. coordinates display mode can be <b>xy</b>, <b>xz</b> or <b>yz</b>
+	
+	CLASS_ATTR_LONG				(c, "outputmode", 0, t_hoamap, f_output_mode);
+	CLASS_ATTR_LABEL			(c, "outputmode", 0, "Output Mode");
+	CLASS_ATTR_ENUMINDEX		(c, "outputmode", 0, "Polar Cartesian");
+	CLASS_ATTR_DEFAULT          (c, "outputmode", 0,  "0");
+    CLASS_ATTR_SAVE             (c, "outputmode", 1);
+    CLASS_ATTR_ORDER			(c, "outputmode", 0, "2");
+	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
+	
+	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoamap, f_output_3D);
+	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
+	CLASS_ATTR_SAVE             (c, "output3d", 1);
+	CLASS_ATTR_ORDER            (c, "output3d", 0, "3");
+	// @description Check this to output 3d coordinates, default is 2d.
+    
+	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoamap, f_zoom_factor);
+    CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
+	CLASS_ATTR_LABEL			(c, "zoom", 0, "Zoom");
+	CLASS_ATTR_DEFAULT          (c, "zoom", 0, "0.35");
+    CLASS_ATTR_ORDER			(c, "zoom", 0, "4");
+    CLASS_ATTR_SAVE             (c, "zoom", 1);
+	// @description Sets the zoom factor
+	
+	CLASS_ATTR_LONG             (c, "showgroups", 0, t_hoamap, f_showgroups);
+	CLASS_ATTR_STYLE_LABEL      (c, "showgroups", 0, "onoff", "Use and show group");
+	CLASS_ATTR_DEFAULT          (c, "showgroups", 0, "1");
+	CLASS_ATTR_SAVE             (c, "showgroups", 1);
+	CLASS_ATTR_ORDER            (c, "showgroups", 0, "5");
+	// @description Use and show group ?
+	
+	CLASS_ATTR_LONG             (c, "save", 0, t_hoamap, f_save_with_patcher);
+	CLASS_ATTR_STYLE_LABEL      (c, "save", 0, "onoff", "Save Object State with Patcher");
+	CLASS_ATTR_DEFAULT          (c, "save", 0, "1");
+	CLASS_ATTR_SAVE             (c, "save", 1);
+	CLASS_ATTR_ORDER            (c, "save", 0, "6");
+	// @description Check this to save object' state with patcher. Warning : if Parameter Mode and Initial are enable, this <m>save</m> method is no longer effective.
 	
 	CLASS_ATTR_SYM				(c, "mapname", 0, t_hoamap, f_binding_name);
 	CLASS_ATTR_LABEL			(c, "mapname", 0, "Map Name");
@@ -312,23 +332,6 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE             (c, "mapname", 1);
     CLASS_ATTR_ORDER			(c, "mapname", 0, "1");
 	// @description Use the <m>mapmode</m> attribute to bind multiple <o>hoa.map</o> objects together.
-    
-	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoamap, f_zoom_factor);
-    CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
-	CLASS_ATTR_LABEL			(c, "zoom", 0,   "Zoom");
-	CLASS_ATTR_CATEGORY			(c, "zoom", 0,   "Behavior");
-	CLASS_ATTR_DEFAULT          (c, "zoom", 0,   "0.35");
-    CLASS_ATTR_ORDER			(c, "zoom", 0,   "2");
-    CLASS_ATTR_SAVE             (c, "zoom", 1);
-	// @description Sets the zoom factor
-	
-	CLASS_ATTR_LONG                 (c, "showgroups", 0, t_hoamap, f_showgroups);
-	CLASS_ATTR_CATEGORY				(c, "showgroups", 0, "Behavior");
-	CLASS_ATTR_ORDER                (c, "showgroups", 0, "1");
-	CLASS_ATTR_STYLE_LABEL          (c, "showgroups", 0, "onoff", "Use and show group");
-	CLASS_ATTR_DEFAULT              (c, "showgroups", 0, "1");
-	CLASS_ATTR_SAVE                 (c, "showgroups", 1);
-	// @description Use and show group ?
 
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;
@@ -380,14 +383,16 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_output_enabled = 1;
 	
 	x->f_output_3D = is3D;
+	x->f_save_with_patcher = 1;
 	
 	attr_dictionary_process(x, d);
 	
+	// restore object state
+	long ac = 0;
 	t_atom *av = NULL;
-    long ac = 0;
-	
     dictionary_copyatoms(d, gensym("map_saved_state"), &ac, &av);
-    hoamap_setvalueof(x, ac, av);
+	if (ac && av)
+		hoamap_setvalueof(x, ac, av);
 	
 	jbox_ready(&x->j_box);
 	return (x);
@@ -399,13 +404,12 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 	sprintf(strname, "%s%s", binding_name->s_name, ODD_BINDING_SUFFIX);
 	t_symbol* name = gensym(strname);
 	
-	// symbol null => new t_listmap
+	// t_listmap null => new t_listmap
 	if(name->s_thing == NULL)
 	{
 		x->f_listmap = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
 		if (x->f_listmap)
 		{
-			//x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
 			x->f_listmap->map = x;
 			x->f_listmap->next = NULL;
 			name->s_thing = (t_object *)x->f_listmap;
@@ -425,7 +429,6 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				{
 					temp2 = temp->next->next;
 					sysmem_freeptr(temp->next);
-					//free(temp->next);
 					temp->next = temp2;
 				}
 				temp = temp->next;
@@ -443,7 +446,6 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 				temp2 = (t_linkmap *)sysmem_newptr(sizeof(t_linkmap));
 				if (temp2)
 				{
-					//temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
 					temp2->map = x;
 					temp2->next = NULL;
 					temp->next = temp2;
@@ -923,8 +925,6 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 			else if (ac >= 4 && atom_isNumber(av+2) && atom_isNumber(av+3))
 				x->f_source_manager->groupSetPolar(index, atom_getfloat(av+2), atom_getfloat(av+3));
 		}
-        else if(param == hoa_sym_radius)
-			x->f_source_manager->groupSetRadius(index, atom_getfloat(av+2));
         else if(param == hoa_sym_azimuth)
 			x->f_source_manager->groupSetAzimuth(index, atom_getfloat(av+2));
 		else if(param == hoa_sym_elevation)
@@ -1286,11 +1286,18 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 
 void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 {
-	long ac = 0;
-	t_atom* av = NULL;
-	hoamap_getvalueof(x, &ac, &av);
-	dictionary_appendatoms(d, gensym("map_saved_state"), ac, av);
-	freebytes(av, ac * sizeof(t_atom));
+	if (x->f_save_with_patcher)
+	{
+		long ac = 0;
+		t_atom* av = NULL;
+		hoamap_getvalueof(x, &ac, &av);
+		dictionary_appendatoms(d, gensym("map_saved_state"), ac, av);
+		freebytes(av, ac * sizeof(t_atom));
+	}
+	else if(dictionary_hasentry(d, gensym("map_saved_state")))
+	{
+		dictionary_chuckentry(d, gensym("map_saved_state"));
+	}
 }
 
 /**********************************************************/
