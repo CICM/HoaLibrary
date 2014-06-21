@@ -140,9 +140,9 @@
 		8F2DD89719252CDD00442B20 /* hoa.3d.map_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */; };
 		8F5A12B8191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */; };
 		8F5A12B9191BB6EB00825567 /* Hoa3D.pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */; };
-		8F714B101951FC5500C1D9D0 /* Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F714B0E1951FC5500C1D9D0 /* Delaunay.cpp */; };
-		8F714B111951FC5500C1D9D0 /* Delaunay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F714B0F1951FC5500C1D9D0 /* Delaunay.h */; };
 		8F714B131951FC7E00C1D9D0 /* hoa.3d.meter_gui_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F714B121951FC7E00C1D9D0 /* hoa.3d.meter_gui_tilde.cpp */; };
+		8F714B16195472A800C1D9D0 /* Voronoi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F714B14195472A800C1D9D0 /* Voronoi.cpp */; };
+		8F714B17195472A800C1D9D0 /* Voronoi.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F714B15195472A800C1D9D0 /* Voronoi.h */; };
 		8F794ED01926163C0006491F /* hoa.3d.decoder_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */; };
 		8F794EEA192A60B20006491F /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794EE4192A60B20006491F /* Source.cpp */; };
 		8F794EEB192A60B20006491F /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE5192A60B20006491F /* Source.h */; };
@@ -288,9 +288,9 @@
 		8F2DD89619252CDD00442B20 /* hoa.3d.map_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.map_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B6191BB6EB00825567 /* hoa.3d.encoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.encoder_tilde.cpp; sourceTree = "<group>"; };
 		8F5A12B7191BB6EB00825567 /* Hoa3D.pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.pd.h; sourceTree = "<group>"; };
-		8F714B0E1951FC5500C1D9D0 /* Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delaunay.cpp; sourceTree = "<group>"; };
-		8F714B0F1951FC5500C1D9D0 /* Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delaunay.h; sourceTree = "<group>"; };
 		8F714B121951FC7E00C1D9D0 /* hoa.3d.meter_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.meter_gui_tilde.cpp; sourceTree = "<group>"; };
+		8F714B14195472A800C1D9D0 /* Voronoi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Voronoi.cpp; sourceTree = "<group>"; };
+		8F714B15195472A800C1D9D0 /* Voronoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voronoi.h; sourceTree = "<group>"; };
 		8F794ECF1926163C0006491F /* hoa.3d.decoder_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.decoder_tilde.cpp; sourceTree = "<group>"; };
 		8F794EE4192A60B20006491F /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
 		8F794EE5192A60B20006491F /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
@@ -455,8 +455,6 @@
 				8F27E303191789BE004E1370 /* BinauralMatrix_3D.cpp */,
 				8F27E304191789BE004E1370 /* Decoder_3D.cpp */,
 				8F27E305191789BE004E1370 /* Decoder_3D.h */,
-				8F714B0E1951FC5500C1D9D0 /* Delaunay.cpp */,
-				8F714B0F1951FC5500C1D9D0 /* Delaunay.h */,
 				8F27E306191789BE004E1370 /* Encoder_3D.cpp */,
 				8F27E307191789BE004E1370 /* Encoder_3D.h */,
 				8F27E308191789BE004E1370 /* Hoa3D.h */,
@@ -474,6 +472,8 @@
 				8F27E314191789BE004E1370 /* Scope_3D.h */,
 				8F27E316191789BE004E1370 /* Vector_3D.cpp */,
 				8F27E317191789BE004E1370 /* Vector_3D.h */,
+				8F714B14195472A800C1D9D0 /* Voronoi.cpp */,
+				8F714B15195472A800C1D9D0 /* Voronoi.h */,
 				8F27E318191789BE004E1370 /* Wider_3D.cpp */,
 				8F27E319191789BE004E1370 /* Wider_3D.h */,
 			);
@@ -596,7 +596,6 @@
 				8F27E350191789BE004E1370 /* Scope.h in Headers */,
 				8F794EEB192A60B20006491F /* Source.h in Headers */,
 				8F27E336191789BE004E1370 /* Ambisonic.h in Headers */,
-				8F714B111951FC5500C1D9D0 /* Delaunay.h in Headers */,
 				8F27E3C519178A33004E1370 /* g_canvas.h in Headers */,
 				8F27E34A191789BE004E1370 /* Projector.h in Headers */,
 				8F27E37C191789BE004E1370 /* HoaDefs.h in Headers */,
@@ -629,6 +628,7 @@
 				8F27E375191789BE004E1370 /* Vector_3D.h in Headers */,
 				8F27E34E191789BE004E1370 /* Rotate.h in Headers */,
 				8F27E3C419178A33004E1370 /* ecommon.h in Headers */,
+				8F714B17195472A800C1D9D0 /* Voronoi.h in Headers */,
 				8F27E37E191789BE004E1370 /* HoaUtils.h in Headers */,
 				8F27E37D191789BE004E1370 /* HoaMath.h in Headers */,
 				8F27E372191789BE004E1370 /* Scope_3D.h in Headers */,
@@ -720,7 +720,6 @@
 				8F27E29919178923004E1370 /* hoa.in.cpp in Sources */,
 				8F794EEE192A60B20006491F /* SourcesManager.cpp in Sources */,
 				8F27E34F191789BE004E1370 /* Scope.cpp in Sources */,
-				8F714B101951FC5500C1D9D0 /* Delaunay.cpp in Sources */,
 				8F189F3618EB0DBE00348D89 /* hoa.pd.cpp in Sources */,
 				8F27E29A19178923004E1370 /* hoa.in_tilde.cpp in Sources */,
 				8F27E338191789BE004E1370 /* ChannelManager.cpp in Sources */,
@@ -752,6 +751,7 @@
 				8F27E374191789BE004E1370 /* Vector_3D.cpp in Sources */,
 				8F27E35D191789BE004E1370 /* Wider.cpp in Sources */,
 				8F27E3B519178A33004E1370 /* ebox_draw.c in Sources */,
+				8F714B16195472A800C1D9D0 /* Voronoi.cpp in Sources */,
 				8F27E3C319178A33004E1370 /* ecommon.c in Sources */,
 				8F27E347191789BE004E1370 /* Planewaves.cpp in Sources */,
 				8F27E364191789BE004E1370 /* Encoder_3D.cpp in Sources */,
@@ -839,7 +839,11 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = PD_DEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"/usr/local/include/voro++",
+				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INSTALL_PATH = $SRCROOT/Package/HoaLibrary;
 				LIBRARY_SEARCH_PATHS = "";

@@ -16,7 +16,7 @@ namespace Hoa3D
         m_ramp                  = 0;
         m_vector_size           = 256;
         m_channels_peaks		= new double[m_number_of_channels];
-		m_delaunay				= new Delaunay();
+		m_Voronoi				= new Voronoi(Voronoi::Sphere);
 
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
             m_channels_peaks[i] = 0.;			
@@ -38,27 +38,12 @@ namespace Hoa3D
     void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         Planewaves::setChannelPosition(index, azimuth, elevation);
-		m_delaunay->clear();
+        
+		m_Voronoi->clear();
 		for(unsigned int i = 0; i < m_number_of_channels; i++)
-			m_delaunay->addPoint(m_channels_azimuth[i], m_channels_elevation[i]);
-		m_delaunay->perform();
-		post("n circles %i", m_delaunay->getNumberOfCircles());
+			m_Voronoi->addPointPolar(1., m_channels_azimuth[i], m_channels_elevation[i]);
+		m_Voronoi->perform();
 
-		for(unsigned int i = 0; i < m_number_of_channels; i++)
-			post("point %i circles %i", i, m_delaunay->getPointNumberOfCircles(i));
-		/*
-		
-		m_delaunay->perform();
-		
-		for(unsigned int i = 0; i < m_delaunay->getNumberOfTriangles(); i++)
-		{
-			post("triangles %i", i);
-			for(unsigned int j = 0; j < 3; j++)
-			{
-				post("point %i abs", m_delaunay->getTrianglePointAbscissa(i, j));
-				post("point %i ord",  m_delaunay->getTrianglePointOrdinate(i, j));
-			}
-		}*/
 	}
     
     void Meter::process(const float* inputs)
@@ -104,7 +89,7 @@ namespace Hoa3D
     Meter::~Meter()
     {
 		delete [] m_channels_peaks;
-		delete m_delaunay;
+		delete m_Voronoi;
     }
 }
 
