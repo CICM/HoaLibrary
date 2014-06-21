@@ -730,11 +730,11 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 				
                 // leds Background :
                 jgraphics_set_line_width(g, ledStroke);
-                jgraphics_set_source_jrgba(g, &white);
+				jgraphics_set_line_cap(g, (x->f_number_of_channels < 24 && (channelWidth > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
+				
+				jgraphics_set_source_jrgba(g, &white);
                 for( j=0; j < x->f_numleds; j++ )
                 {
-                    jgraphics_set_line_cap(g, (x->f_number_of_channels < 24 && (channelWidth > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
-                    //if ( isInsideDeg(rotateAngle, -45, 135) )
 					if ( isInsideRad(x->f_meter->getChannelAzimuth(i), -HOA_PI4, HOA_PI4*3) )
                     {
                         if (x->f_number_of_channels > 1)
@@ -768,7 +768,7 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
                                 if (x->f_direction == 0) // inside
                                     jgraphics_arc_negative(g, 0, 1, x->f_rayonExt - (j*ledOffset) - ledMargin - 4, deg2, deg1);
                                 else // outside
-                                    jgraphics_arc_negative(g, 0, 1, x->f_rayonInt + (j*ledOffset) + ledMargin + 4, deg2, deg1);
+                                    jgraphics_arc_negative(g, 0, 1, x->f_rayonInt + (j*ledOffset) + ledMargin + 2, deg2, deg1);
                             }
                         }
                         else // mono
