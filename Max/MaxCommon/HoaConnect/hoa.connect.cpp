@@ -26,7 +26,7 @@
  @seealso hoa.process~
  */
 
-#include "HoaCommon.max.h"
+#include "../Hoa2D3D.max.h"
 
 #define CONNECT_MAX_TAB 100
 

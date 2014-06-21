@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -80,7 +80,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 249.25, 634.0, 233.0, 20.0 ],
-									"presentation_rect" : [ 171.5, 640.0, 0.0, 0.0 ],
 									"text" : "currently dragged or mouse over value =>",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[16]"
@@ -97,7 +96,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 249.25, 634.0, 233.0, 19.0 ],
-									"presentation_rect" : [ 171.5, 640.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -651,8 +649,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ],
-									"text" : "10. 8. 6. 4. 4. 4. 4. 4. 4. 6. 6. 8. 8. 8. 8. 12."
+									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ]
 								}
 
 							}
@@ -665,6 +662,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"grid" : 10,
+									"hoa_space_saved_state" : [ 7.0, 3.0, 2.0, 7.0, 3.0, 7.0, 4.0, 1.0, 8.0, 3.0, 1.0, 3.0, 8.0, 1.0, 8.0, 4.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
 									"minmax" : [ 0.0, 20.0 ],
@@ -1151,7 +1149,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3419,7 +3417,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 443.5, 235.5, 228.0, 58.0 ],
+									"patching_rect" : [ 443.5, 235.5, 230.0, 58.0 ],
 									"text" : "hoa.2d.process~ 7 hoa.syn.granular~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
@@ -3449,7 +3447,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 442.700012, 298.5, 243.851639, 32.0 ],
+									"patching_rect" : [ 442.700012, 298.5, 245.928558, 32.0 ],
 									"text" : "hoa.2d.process~ 7 hoa.send~ harmonics @name space"
 								}
 
@@ -3659,7 +3657,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u334010066"
+									"varname" : "u411010056"
 								}
 
 							}
@@ -3675,9 +3673,9 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 24.0, 570.0, 185.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"client_rect" : [ 854, 172, 1208, 300 ],
+										"client_rect" : [ 4, 44, 358, 172 ],
 										"parameter_enable" : 0,
-										"storage_rect" : [ 766, 44, 1220, 302 ]
+										"storage_rect" : [ 583, 69, 1034, 197 ]
 									}
 ,
 									"text" : "pattrstorage space @savemode 2",
@@ -3692,6 +3690,7 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hoa_space_saved_state" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
@@ -5511,6 +5510,36 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-25",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 14.0, 618.0, 414.0, 58.0 ],
+									"text" : "If the \"save\" attribute is on (default) slider values are saved with the patcher and will be restored when the patch is loaded. \nNote : Another saving method is to enable parameter mode and initial in the hoa.map object inspector (this second option has the priority over the first one)",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"attr" : "save",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-26",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 22.0, 576.0, 129.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bgcolor" : [ 0.853045, 0.853045, 0.853045, 1.0 ],
 									"border" : 1.0,
 									"bordercolor" : [ 0.378792, 0.378792, 0.378792, 0.5 ],
@@ -5523,23 +5552,7 @@
 									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
 									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
 									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
-									"patching_rect" : [ 369.0, 631.0, 45.0, 45.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-9",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 194.399994, 45.0 ],
-									"text" : "To save the drawn shape, \nenable parameter mode and initial in the hoa.2d.space object inspector",
-									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
+									"patching_rect" : [ 369.0, 510.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -5553,7 +5566,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 194.399994, 45.0 ],
+									"patching_rect" : [ 14.0, 618.0, 414.0, 58.0 ],
 									"rounded" : 0
 								}
 
@@ -8106,25 +8119,14 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hoa_space_saved_state" : [ 1.0, 1.0, 1.0, 1.0, 0.27359, 0.277408, 0.282395, 0.275176, 0.284597, 0.276572, 0.281659, 0.27359, 0.27443, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "int" ],
-									"parameter_enable" : 1,
+									"parameter_enable" : 0,
 									"patching_rect" : [ 22.0, 289.0, 266.0, 266.0 ],
-									"saved_attribute_attributes" : 									{
-										"valueof" : 										{
-											"parameter_longname" : "space_message",
-											"parameter_shortname" : "space_message",
-											"parameter_type" : 3,
-											"parameter_initial_enable" : 1,
-											"parameter_initial" : [ 1.0, 1.0, 1.0, 1.0, 0.27359, 0.277408, 0.282395, 0.275176, 0.284597, 0.276572, 0.281659, 0.27359, 0.27443, 1.0, 1.0, 1.0 ],
-											"parameter_invisible" : 1
-										}
-
-									}
-,
 									"varname" : "space_message"
 								}
 
@@ -8542,7 +8544,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 22.0, 585.5, 194.199997, 19.0 ]
+									"patching_rect" : [ 42.400002, 248.0, 194.199997, 19.0 ]
 								}
 
 							}
@@ -8552,7 +8554,6 @@
 									"destination" : [ "obj-2", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 31.5, 613.5, 11.5, 613.5, 11.5, 279.0, 31.5, 279.0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -9211,6 +9212,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-23", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 31.5, 602.0, 9.5, 602.0, 9.5, 279.0, 31.5, 279.0 ],
+									"source" : [ "obj-26", 0 ]
 								}
 
 							}
@@ -12496,6 +12507,7 @@
 									"outlettype" : [ "list", "int" ],
 									"parameter_enable" : 1,
 									"patching_rect" : [ 22.0, 289.0, 266.0, 266.0 ],
+									"save" : 0,
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "hoa.2d.space",
@@ -12595,7 +12607,7 @@
 									"numinlets" : 17,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 406.0, 412.5, 244.0, 19.0 ],
+									"patching_rect" : [ 406.0, 412.5, 242.0, 19.0 ],
 									"text" : "hoa.2d.process~ 16 hoa.fx.gain~ planewaves"
 								}
 
@@ -13382,7 +13394,7 @@
 									"destination" : [ "obj-15", 16 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 31.5, 564.0, 336.0, 564.0, 336.0, 402.5, 640.5, 402.5 ],
+									"midpoints" : [ 31.5, 564.0, 336.0, 564.0, 336.0, 402.5, 638.5, 402.5 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
@@ -14435,7 +14447,6 @@
 		"lines" : [  ],
 		"parameters" : 		{
 			"obj-3::obj-2" : [ "hoa.2d.space[1]", "hoa.2d.space[1]", 0 ],
-			"obj-1::obj-2" : [ "space_message", "space_message", 0 ],
 			"obj-45::obj-2" : [ "hoa.2d.space", "hoa.2d.space", 0 ]
 		}
 ,

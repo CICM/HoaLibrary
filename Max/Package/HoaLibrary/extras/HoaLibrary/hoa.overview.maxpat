@@ -69,7 +69,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 602.875, 22.898775, 58.625, 30.70245 ]
+					"patching_rect" : [ 604.875, 22.898775, 58.625, 30.70245 ]
 				}
 
 			}
@@ -173,7 +173,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 406.0, 47.0, 19.0, 20.0 ],
+					"patching_rect" : [ 408.0, 47.0, 19.0, 20.0 ],
 					"text" : "|",
 					"textcolor" : [ 0.5, 0.5, 0.5, 1.0 ]
 				}
@@ -192,7 +192,7 @@
 					"maxclass" : "fpic",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 602.875, 22.898775, 58.625, 30.70245 ],
+					"patching_rect" : [ 604.875, 22.898775, 58.625, 30.70245 ],
 					"pic" : "GPLv3_Logo.svg"
 				}
 
@@ -220,7 +220,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 4.78125, 72.75, 675.84375, 8.0 ]
+					"patching_rect" : [ 6.78125, 72.75, 675.84375, 8.0 ]
 				}
 
 			}
@@ -231,7 +231,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 3.78125, 71.75, 675.84375, 8.0 ]
+					"patching_rect" : [ 5.78125, 71.75, 675.84375, 8.0 ]
 				}
 
 			}
@@ -245,7 +245,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 208.78125, 20.75, 73.0, 20.0 ],
+					"patching_rect" : [ 210.78125, 20.75, 73.0, 20.0 ],
 					"text" : "Beta 2.0",
 					"textcolor" : [ 0.9404, 0.940544, 0.940332, 1.0 ],
 					"textjustification" : 1,
@@ -263,7 +263,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 209.78125, 21.75, 73.0, 20.0 ],
+					"patching_rect" : [ 211.78125, 21.75, 73.0, 20.0 ],
 					"text" : "Beta 2.0",
 					"textcolor" : [ 0.424631, 0.424696, 0.4246, 0.21 ],
 					"textjustification" : 1,
@@ -279,7 +279,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 208.78125, 20.75, 74.0, 21.0 ],
+					"patching_rect" : [ 210.78125, 20.75, 74.0, 21.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -293,7 +293,7 @@
 					"name" : "hoa.helpheader.maxpat",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 4.78125, 10.75, 292.0, 55.0 ]
+					"patching_rect" : [ 6.78125, 10.75, 292.0, 55.0 ]
 				}
 
 			}
@@ -304,7 +304,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 4.78125, 5.75, 675.84375, 5.0 ]
+					"patching_rect" : [ 6.78125, 5.75, 675.84375, 5.0 ]
 				}
 
 			}
@@ -315,7 +315,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 3.78125, 4.75, 675.84375, 5.0 ]
+					"patching_rect" : [ 5.78125, 4.75, 675.84375, 5.0 ]
 				}
 
 			}
@@ -344,7 +344,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 14.5, 63.75, 33.28125, 17.0 ],
+					"patching_rect" : [ 16.5, 63.75, 33.28125, 17.0 ],
 					"text" : "grow"
 				}
 
@@ -373,7 +373,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 4.78125, 65.525246, 13.0, 13.0 ]
+					"patching_rect" : [ 6.78125, 65.525246, 13.0, 13.0 ]
 				}
 
 			}
@@ -387,7 +387,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 312.5625, 10.75, 262.0, 32.0 ],
+					"patching_rect" : [ 314.5625, 10.75, 262.0, 32.0 ],
 					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2013 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -401,7 +401,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 312.5625, 10.75, 259.5, 32.0 ],
+					"patching_rect" : [ 314.5625, 10.75, 259.5, 32.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -460,7 +460,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 629.8125, 23.0 ],
+					"patching_rect" : [ 33.6875, 552.5, 630.0, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -473,7 +473,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 19.0625, 548.5, 6.0, 80.0 ],
+					"patching_rect" : [ 21.0625, 548.5, 6.0, 80.0 ],
 					"rounded" : 0
 				}
 
@@ -488,7 +488,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0625, 544.5, 664.6875, 87.25 ],
+					"patching_rect" : [ 18.0625, 544.5, 664.6875, 87.25 ],
 					"rounded" : 0
 				}
 
@@ -502,7 +502,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 418.0625, 46.75, 65.0, 20.0 ],
+					"patching_rect" : [ 420.0625, 46.75, 65.0, 20.0 ],
 					"text" : "contact us",
 					"textcolor" : [ 0.392157, 0.494118, 0.666667, 1.0 ]
 				}
@@ -517,7 +517,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 418.0625, 46.75, 65.0, 20.0 ]
+					"patching_rect" : [ 420.0625, 46.75, 65.0, 20.0 ]
 				}
 
 			}
@@ -562,7 +562,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 313.0625, 46.75, 96.0, 20.0 ],
+					"patching_rect" : [ 315.0625, 46.75, 96.0, 20.0 ],
 					"text" : "visit our website",
 					"textcolor" : [ 0.392157, 0.494118, 0.666667, 1.0 ]
 				}
@@ -586,7 +586,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 235.0, 269.0, 665.0, 366.0 ],
+						"rect" : [ 237.0, 269.0, 665.0, 366.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1031,7 +1031,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.3d.decoder~", "hoa.3d.encoder~", "hoa.3d.map~", "hoa.3d.map", "hoa.3d.meter~", "hoa.3d.optim~", "hoa.3d.process~", "hoa.3d.scope~", "hoa.3d.wider~" ]
+									"tabs" : [ "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.recomposer", "hoa.2d.scope~", "hoa.2d.space", "hoa.gain~" ]
 								}
 
 							}
@@ -1361,7 +1361,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 16.0625, 171.257935, 664.5625, 365.25 ]
+					"patching_rect" : [ 18.0625, 171.257935, 664.5625, 365.25 ]
 				}
 
 			}
@@ -1374,7 +1374,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 313.0625, 46.75, 96.0, 20.0 ]
+					"patching_rect" : [ 315.0625, 46.75, 96.0, 20.0 ]
 				}
 
 			}
@@ -1418,7 +1418,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 13.9375, 85.5, 666.6875, 74.0 ],
+					"patching_rect" : [ 15.9375, 85.5, 666.6875, 74.0 ],
 					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering...",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
@@ -1435,7 +1435,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0625, 171.257935, 664.5625, 365.25 ],
+					"patching_rect" : [ 18.0625, 171.257935, 664.5625, 365.25 ],
 					"rounded" : 0
 				}
 
@@ -1450,7 +1450,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 13.9375, 85.25, 666.6875, 74.25 ],
+					"patching_rect" : [ 15.9375, 85.25, 666.6875, 74.25 ],
 					"rounded" : 0
 				}
 

@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonic 3d encoder.
+ A 3d ambisonic encoder.
  
  @description
  <o>hoa.3d.encoder~</o> encodes a signal into the spherical harmonics domain depending on a given order of decomposition, an azimuth and an elevation value given in radians

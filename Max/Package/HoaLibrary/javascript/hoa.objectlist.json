@@ -75,10 +75,11 @@
     "GUI": 
 	{
     	"objects": [
-		"hoa.2d.map",
+		"hoa.map",
 		"hoa.2d.meter~",
 		"hoa.2d.recomposer",
 		"hoa.2d.scope~",
+		"hoa.3d.scope~",
 		"hoa.2d.space",
 		"hoa.gain~"
     	],

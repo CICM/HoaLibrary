@@ -1,6 +1,6 @@
 {
   "hoa.2d.decoder~": {
-    "digest": "An ambisonic 2d decoder.",
+    "digest": "A 2d ambisonic decoder.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -10,7 +10,7 @@
     ]
   },
   "hoa.2d.encoder~": {
-    "digest": "An ambisonic 2d encoder.",
+    "digest": "A 2d ambisonic encoder.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -20,7 +20,7 @@
     ]
   },
   "hoa.2d.map~": {
-    "digest": "A ambisonic multisource 2d spatializer.",
+    "digest": "A 2d ambisonic multisource spatializer.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -28,28 +28,6 @@
       "audio",
       "MSP"
     ]
-  },
-  "hoa.2d.map": {
-    "digest": "A graphic user interface to spatialize sources on a plane.",
-    "module": "hoa",
-    "category": [
-      "ambisonics",
-      "hoa objects",
-      "audio",
-      "GUI",
-      "MSP"
-    ],
-    "palette": {
-      "category": [
-        "ambisonics",
-        "hoa objects",
-        "audio",
-        "GUI",
-        "MSP"
-      ],
-      "action": "hoa.2d.map",
-      "pic": "hoa.2d.map.svg"
-    }
   },
   "hoa.2d.meter~": {
     "digest": "A circular array of visual peak level indicators",
@@ -132,7 +110,7 @@
     ]
   },
   "hoa.2d.vector~": {
-    "digest": "A soundfield energy and velocity vectors calculator for 2d.",
+    "digest": "A 2d soundfield energy and velocity vectors calculator.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -142,7 +120,7 @@
     ]
   },
   "hoa.2d.wider~": {
-    "digest": "A fractional ambisonic orders simulator for 2d",
+    "digest": "A 2d fractional ambisonic orders simulator",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -152,7 +130,7 @@
     ]
   },
   "hoa.3d.decoder~": {
-    "digest": "An ambisonic 3d decoder.",
+    "digest": "A 3d ambisonic decoder.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -162,7 +140,7 @@
     ]
   },
   "hoa.3d.encoder~": {
-    "digest": "An ambisonic 3d encoder.",
+    "digest": "A 3d ambisonic encoder.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -203,7 +181,7 @@
     ]
   },
   "hoa.3d.wider~": {
-    "digest": "A fractional ambisonic orders simulator for 2d",
+    "digest": "A 3d fractional ambisonic orders simulator",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -278,6 +256,28 @@
       "audio",
       "msp"
     ]
+  },
+  "hoa.map": {
+    "digest": "A graphic user interface to spatialize sources on a plane.",
+    "module": "hoa",
+    "category": [
+      "ambisonics",
+      "hoa objects",
+      "audio",
+      "GUI",
+      "MSP"
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "audio",
+        "GUI",
+        "MSP"
+      ],
+      "action": "hoa.map",
+      "pic": "hoa.map.svg"
+    }
   },
   "hoa.out": {
     "digest": "message outlet for a patcher loaded by hoa.process~",

@@ -16,10 +16,10 @@
  A graphic user interface to spatialize sources on a plane.
  
  @description
- <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
+ <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
  
  @discussion
- <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.3d.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
+ <o>hoa.map</o> allows you to spatialize several sources in a 2d or 3d context. You can add and remove sources, change coordinates, add description and create groups. <o>hoa.map</o> is dedicated to control a <o>hoa.2d.map~</o> or a <o>hoa.3d.map~</o> object.
  
  @category ambisonics, hoa objects, audio, GUI, MSP
  
@@ -29,7 +29,7 @@
  @palette yes
  */
 
-#include "../../HoaCommon.max.h"
+#include "../HoaCommon.max.h"
 
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
@@ -323,6 +323,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE             (c, "save", 1);
 	CLASS_ATTR_ORDER            (c, "save", 0, "6");
 	// @description Check this to save object' state with patcher. Warning : if Parameter Mode and Initial are enable, this <m>save</m> method is no longer effective.
+	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_SYM				(c, "mapname", 0, t_hoamap, f_binding_name);
 	CLASS_ATTR_LABEL			(c, "mapname", 0, "Map Name");

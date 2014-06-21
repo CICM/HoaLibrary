@@ -10,7 +10,7 @@
 	</digest>
 
 	<description>
-		<o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+		<o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.
 	</description>
 
 	<!--METADATA-->
@@ -186,7 +186,7 @@
 
 	<!--DISCUSSION-->
 	<discussion>
-		<o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+		<o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.
 	</discussion>
 
 	<!--SEEALSO-->
@@ -201,7 +201,7 @@
 	<misc name = "Discussion">
 		<entry name ="More details">
 			<description>
-		<o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+		<o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.
 			</description>
 		</entry>
 		<entry name ="Keywords">

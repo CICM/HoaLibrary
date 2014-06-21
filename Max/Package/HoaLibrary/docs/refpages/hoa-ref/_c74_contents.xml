@@ -3,7 +3,6 @@
 <refpage name='hoa.2d.decoder~.maxref.xml'/>
 <refpage name='hoa.2d.encoder~.maxref.xml'/>
 <refpage name='hoa.2d.map~.maxref.xml'/>
-<refpage name='hoa.2d.map.maxref.xml'/>
 <refpage name='hoa.2d.meter~.maxref.xml'/>
 <refpage name='hoa.2d.optim~.maxref.xml'/>
 <refpage name='hoa.2d.projector~.maxref.xml'/>
@@ -27,6 +26,7 @@
 <refpage name='hoa.gain~.maxref.xml'/>
 <refpage name='hoa.in.maxref.xml'/>
 <refpage name='hoa.in~.maxref.xml'/>
+<refpage name='hoa.map.maxref.xml'/>
 <refpage name='hoa.out.maxref.xml'/>
 <refpage name='hoa.out~.maxref.xml'/>
 <refpage name='hoa.pi.maxref.xml'/>

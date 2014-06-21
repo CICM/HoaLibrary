@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.encoder~" module="hoa">
 
 	<digest>
-		An ambisonic 2d encoder.
+		A 2d ambisonic encoder.
 	</digest>
 
 	<description>

@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonic 2d encoder.
+ A 2d ambisonic encoder.
  
  @description
  <o>hoa.2d.encoder~</o> creates the circular harmonics of a signal depending of a given order (arg 1) and a position on a circle given in radians (right inlet).

@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 65.0, 59.0, 957.0, 757.0 ],
+		"rect" : [ 458.0, 55.0, 957.0, 757.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 458.0, 81.0, 957.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4641,7 +4641,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 65.0, 85.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7793,7 +7793,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u286001925"
+									"varname" : "u016002743"
 								}
 
 							}
@@ -13502,11 +13502,11 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ],
-			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
-			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
-			"obj-5::obj-18" : [ "hoa.2d.map[5]", "hoa.2d.map", 0 ],
 			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ],
+			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
+			"obj-5::obj-18" : [ "hoa.2d.map[5]", "hoa.2d.map", 0 ],
+			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
+			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ],
 			"obj-5::obj-3" : [ "hoa.map[1]", "hoa.map[1]", 0 ],
 			"obj-5::obj-2" : [ "hoa.map", "hoa.map", 0 ]
 		}

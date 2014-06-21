@@ -6,7 +6,7 @@
 <c74object name="hoa.2d.wider~" module="hoa">
 
 	<digest>
-		A fractional ambisonic orders simulator for 2d
+		A 2d fractional ambisonic orders simulator
 	</digest>
 
 	<description>

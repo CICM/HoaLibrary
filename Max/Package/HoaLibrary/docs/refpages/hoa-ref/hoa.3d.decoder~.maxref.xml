@@ -6,7 +6,7 @@
 <c74object name="hoa.3d.decoder~" module="hoa">
 
 	<digest>
-		An ambisonic 3d decoder.
+		A 3d ambisonic decoder.
 	</digest>
 
 	<description>

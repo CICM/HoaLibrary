@@ -16,10 +16,10 @@
  A 2d ambisonic harmonic scope.
  
  @description
- <o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+ <o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.
  
  @discussion
- <o>hoa.2d.scope~</o> displays the harmonics of an ambisonic sound field on a circle.
+ <o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.
  
  @category ambisonics, hoa objects, audio, GUI, MSP
  

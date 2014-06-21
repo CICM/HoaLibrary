@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonic 3d decoder.
+ A 3d ambisonic decoder.
  
  @description
  <o>hoa.3d.decoder~</o> decodes an ambisonics soundfield for several loudspeakers configuration or for headphones. First argument is the ambisonic order of decomposition, the second one is the number of channels.

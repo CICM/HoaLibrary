@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- An ambisonic 2d decoder.
+ A 2d ambisonic decoder.
  
  @description
  <o>hoa.2d.decoder~</o> decodes an ambisonics soundfield for several loudspeakers configuration or for headphones. First argument is the ambisonic order of decomposition.

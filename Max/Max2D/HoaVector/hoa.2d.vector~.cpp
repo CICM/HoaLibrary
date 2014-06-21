@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A soundfield energy and velocity vectors calculator for 2d.
+ A 2d soundfield energy and velocity vectors calculator.
  
  @description
  <o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.

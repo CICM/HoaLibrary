@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2C2720A51953AED000436220 /* hoa.map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2720A41953AED000436220 /* hoa.map.cpp */; };
 		2CB25E441949BBEF00DC659C /* MaxHoaCommon.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CB25E431949BBEF00DC659C /* MaxHoaCommon.xcconfig */; };
-		2CB25E461949D96D00DC659C /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB25E451949D96D00DC659C /* HoaCommon.max.h */; };
 		2CB25E531949DA6100DC659C /* HoaCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB25E4A1949DA6100DC659C /* HoaCommon.h */; };
 		2CB25E541949DA6100DC659C /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB25E4B1949DA6100DC659C /* Source.cpp */; };
 		2CB25E551949DA6100DC659C /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB25E4C1949DA6100DC659C /* Source.h */; };
@@ -31,7 +30,6 @@
 /* Begin PBXFileReference section */
 		2C2720A41953AED000436220 /* hoa.map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.map.cpp; sourceTree = "<group>"; };
 		2CB25E431949BBEF00DC659C /* MaxHoaCommon.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoaCommon.xcconfig; path = ../MaxHoaCommon.xcconfig; sourceTree = "<group>"; };
-		2CB25E451949D96D00DC659C /* HoaCommon.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.max.h; path = ../../HoaCommon.max.h; sourceTree = "<group>"; };
 		2CB25E4A1949DA6100DC659C /* HoaCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaCommon.h; sourceTree = "<group>"; };
 		2CB25E4B1949DA6100DC659C /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
 		2CB25E4C1949DA6100DC659C /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				2C2720A41953AED000436220 /* hoa.map.cpp */,
-				2CB25E451949D96D00DC659C /* HoaCommon.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
 				2CB25E431949BBEF00DC659C /* MaxHoaCommon.xcconfig */,
@@ -119,7 +116,6 @@
 				2CB25E571949DA6100DC659C /* SourcesGroup.h in Headers */,
 				2CB45833194EFB6B00596E28 /* HoaDefs.h in Headers */,
 				2CB25E591949DA6100DC659C /* SourcesManager.h in Headers */,
-				2CB25E461949D96D00DC659C /* HoaCommon.max.h in Headers */,
 				2CB25E531949DA6100DC659C /* HoaCommon.h in Headers */,
 				2CB45832194EFB6B00596E28 /* Hoa.h in Headers */,
 				2CB25E551949DA6100DC659C /* Source.h in Headers */,

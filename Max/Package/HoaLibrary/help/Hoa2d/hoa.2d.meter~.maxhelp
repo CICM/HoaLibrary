@@ -3558,7 +3558,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
+						"rect" : [ 229.0, 86.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4814,7 +4814,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 229.0, 86.0, 850.0, 687.0 ],
+						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7288,10 +7288,10 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
-			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
 			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
-			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
+			"obj-30::obj-19" : [ "flonum", "flonum", 0 ],
+			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
+			"obj-30::obj-28" : [ "umenu", "umenu", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
