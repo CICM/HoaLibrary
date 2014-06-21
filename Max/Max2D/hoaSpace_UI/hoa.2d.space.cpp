@@ -40,6 +40,7 @@ typedef struct  _hoa_space
 	long		f_draw_value;
 	long		f_grid;
 	long		f_snaptogrid;
+	long		f_save_with_patcher;
     
     long		f_mode;
     double*     f_channel_values;
@@ -85,6 +86,7 @@ void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect);
 
 t_max_err hoa_space_setvalueof(t_hoa_space *x, long ac, t_atom *av);
 t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av);
+void hoa_space_jsave(t_hoa_space *x, t_dictionary *d);
 t_hoa_err hoa_getinfos(t_hoa_space* x, t_hoa_boxinfos* boxinfos);
 t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
 t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
@@ -130,6 +132,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)hoa_space_preset,          "preset",         0);
     class_addmethod(c, (method)hoa_space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
+	class_addmethod(c, (method)hoa_space_jsave,           "jsave",			A_CANT, 0);
     
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	// @exclude hoa.2d.space
@@ -138,8 +141,8 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
 	// @exclude hoa.2d.space
     
+	CLASS_STICKY_CATEGORY(c, 0, "Value");
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_channels);
-	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Value");
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
@@ -148,7 +151,6 @@ int C74_EXPORT main()
 	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_space, f_minmax, 2);
-	CLASS_ATTR_CATEGORY             (c, "minmax",   0, "Value");
     CLASS_ATTR_LABEL                (c, "minmax",   0, "Range");
 	CLASS_ATTR_ACCESSORS            (c, "minmax", NULL, minmax_set);
     CLASS_ATTR_ORDER                (c, "minmax",   0, "2");
@@ -157,7 +159,6 @@ int C74_EXPORT main()
 	// @description The minimum and maximum values that the sliders can reach.
 	
 	CLASS_ATTR_LONG					(c, "floatoutput", 0, t_hoa_space, f_floatoutput);
-	CLASS_ATTR_CATEGORY				(c, "floatoutput", 0, "Value");
 	CLASS_ATTR_STYLE_LABEL			(c, "floatoutput", 0, "onoff", "Float Output");
     CLASS_ATTR_ORDER				(c, "floatoutput", 0, "3");
 	CLASS_ATTR_DEFAULT				(c, "floatoutput", 0, "1");
@@ -165,12 +166,28 @@ int C74_EXPORT main()
     // @description The <m>floatoutput</m> attribute set the <o>hoa.2d.space</o> output type. If it is checked, sliders value are sent as floating-pont values, otherwise it will round slider values and send it as integers.
 	
 	CLASS_ATTR_LONG					(c, "snaptogrid", 0, t_hoa_space, f_snaptogrid);
-	CLASS_ATTR_CATEGORY				(c, "snaptogrid", 0, "Value");
 	CLASS_ATTR_STYLE_LABEL			(c, "snaptogrid", 0, "onoff", "Snap to Grid");
     CLASS_ATTR_ORDER				(c, "snaptogrid", 0, "4");
 	CLASS_ATTR_DEFAULT				(c, "snaptogrid", 0, "0");
     CLASS_ATTR_SAVE					(c, "snaptogrid", 1);
     // @description If the <m>snaptogrid</m> attribute is checked, sliders will snap to the setted grid.
+	
+	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_space, f_grid);
+	CLASS_ATTR_CATEGORY             (c, "grid", 0, "Value");
+    CLASS_ATTR_LABEL                (c, "grid", 0, "Grid Size");
+	CLASS_ATTR_FILTER_MIN			(c, "grid", 0);
+    CLASS_ATTR_ORDER                (c, "grid", 0, "5");
+    CLASS_ATTR_DEFAULT              (c, "grid", 0, "4");
+    CLASS_ATTR_SAVE                 (c, "grid", 1);
+	// @description Set the grid size
+	
+	CLASS_ATTR_LONG					(c, "save", 0, t_hoa_space, f_save_with_patcher);
+	CLASS_ATTR_STYLE_LABEL			(c, "save", 0, "onoff", "Save Object State with Patcher");
+	CLASS_ATTR_DEFAULT				(c, "save", 0, "1");
+	CLASS_ATTR_SAVE					(c, "save", 1);
+	CLASS_ATTR_ORDER				(c, "save", 0, "6");
+	// @description Check this to save object' state with patcher. Warning : if Parameter Mode and Initial are enable, this <m>save</m> method is no longer effective.
+	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_LONG					(c, "drawvalue", 0, t_hoa_space, f_draw_value);
 	CLASS_ATTR_CATEGORY				(c, "drawvalue", 0, "Style");
@@ -192,18 +209,9 @@ int C74_EXPORT main()
     // <li>In <b>Blob</b> mode <o>hoa.2d.space</o> will draw slider values as a global shape.</li>
     // <li>In <b>Bar</b> mode, each slider is drawn separately as a slider bar.</li>
     // </ul>
-	
-	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_space, f_grid);
-	CLASS_ATTR_CATEGORY             (c, "grid", 0, "Value");
-    CLASS_ATTR_LABEL                (c, "grid", 0, "Grid Size");
-	CLASS_ATTR_FILTER_MIN			(c, "grid", 0);
-    CLASS_ATTR_ORDER                (c, "grid", 0, "3");
-    CLASS_ATTR_DEFAULT              (c, "grid", 0, "4");
-    CLASS_ATTR_SAVE                 (c, "grid", 1);
-	// @description Set the grid size
     
+	CLASS_STICKY_CATEGORY(c, 0, "Color");
 	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
-	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
@@ -211,7 +219,6 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.space</o> object
     
     CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_space, f_color_bd);
-	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
@@ -219,7 +226,6 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the border color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "spcolor", 0, t_hoa_space, f_color_sp);
-	CLASS_ATTR_CATEGORY				(c, "spcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "spcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "spcolor", 0, "Space Color");
     CLASS_ATTR_ORDER                (c, "spcolor", 0, "3");
@@ -227,7 +233,6 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the space color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "selcolor", 0, t_hoa_space, f_color_sel);
-	CLASS_ATTR_CATEGORY				(c, "selcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "selcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "selcolor", 0, "Select Color");
     CLASS_ATTR_ORDER                (c, "selcolor", 0, "3");
@@ -235,7 +240,6 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the selected slider color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "textcolor", 0, t_hoa_space, f_color_text);
-	CLASS_ATTR_CATEGORY				(c, "textcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "textcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "textcolor", 0, "Text Color");
     CLASS_ATTR_ORDER                (c, "textcolor", 0, "3");
@@ -243,12 +247,12 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the text color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "ptcolor", 0, t_hoa_space, f_color_pt);
-	CLASS_ATTR_CATEGORY				(c, "ptcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "ptcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "ptcolor", 0, "Channel point Color");
     CLASS_ATTR_ORDER                (c, "ptcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "ptcolor", 0, "0.25 0.25 0.25 1.");
 	// @description Sets the RGBA values for the channel point color of the <o>hoa.2d.space</o> object
+	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	class_register(CLASS_BOX, c);
 	hoa_space_class = c;
@@ -284,8 +288,17 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_out			= listout(x);
 
 	x->f_last_mouse_index = -1;
+	x->f_save_with_patcher = 1;
 
 	attr_dictionary_process(x, d);
+	
+	// restore object state
+	long ac = 0;
+	t_atom *av = NULL;
+    dictionary_copyatoms(d, gensym("hoa_space_saved_state"), &ac, &av);
+	if (ac && av)
+		hoa_space_setvalueof(x, ac, av);
+	
 	jbox_ready((t_jbox *)x);
 
 	return (x);
@@ -453,6 +466,22 @@ t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av)
             atom_setfloat(*av+i, x->f_channel_values[i]);
     }
 	return MAX_ERR_NONE;
+}
+
+void hoa_space_jsave(t_hoa_space *x, t_dictionary *d)
+{
+	if (x->f_save_with_patcher)
+	{
+		long ac = 0;
+		t_atom* av = NULL;
+		hoa_space_getvalueof(x, &ac, &av);
+		dictionary_appendatoms(d, gensym("hoa_space_saved_state"), ac, av);
+		freebytes(av, ac * sizeof(t_atom));
+	}
+	else if(dictionary_hasentry(d, gensym("hoa_space_saved_state")))
+	{
+		dictionary_chuckentry(d, gensym("hoa_space_saved_state"));
+	}
 }
 
 void hoa_space_paint(t_hoa_space *x, t_object *view)
