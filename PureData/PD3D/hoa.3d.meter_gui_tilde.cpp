@@ -491,7 +491,6 @@ void hoa_meter_3d_tick(t_hoa_meter_3d *x)
     }
     
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_leds_layer);
-	ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_vector_layer);
   	ebox_redraw((t_ebox *)x);
     
 	if (sys_getdspstate())
@@ -581,34 +580,37 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 {
     t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_3d_leds_layer, rect->width, rect->height);
-
+    
 	if (g)
 	{
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         egraphics_set_matrix(g, &transform);
 		
-		for(int i = x->f_channel - 1; i < x->f_channel; i++)
+		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
 		{
 			if(x->f_meter->getChannelNumberOfPoints(i))
 			{
-				
 				float azi = x->f_meter->getChannelPointAzimuth(i, 0);
 				float ele = x->f_meter->getChannelPointElevation(i, 0);
-                post("channel %i : %i", i, x->f_meter->getChannelNumberOfPoints(i));
-				post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
-                if(ele < 0)
-                    ele  = 0;
 				float abs =  abscissa(x->f_radius, azi, ele);
 				float ord = ordinate(x->f_radius, azi, ele);
+                
+				if(x->f_meter->getChannelEnergy(i) < -25.5)
+                    egraphics_set_color_rgba(g, &x->f_color_cold_signal);
+                else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+                    egraphics_set_color_rgba(g, &x->f_color_tepid_signal);
+                else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+                    egraphics_set_color_rgba(g, &x->f_color_warm_signal);
+                else
+                    egraphics_set_color_rgba(g, &x->f_color_hot_signal);
 				
-
-				egraphics_set_color_rgba(g, &x->f_color_cold_signal);
 				egraphics_move_to(g, abs, ord);
-				for(int j = 1; j < x->f_meter->getChannelNumberOfPoints(i); j++)
+                
+                int factor = 1 / (rect->width / x->f_meter->getChannelNumberOfPoints(i)) * 12;
+				for(int j = factor; j < x->f_meter->getChannelNumberOfPoints(i); j += factor)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j);
 					ele = x->f_meter->getChannelPointElevation(i, j);
-                    post("azi %f ele %f", azi / HOA_2PI *360., ele / HOA_2PI *360. );
                     if(ele < 0)
                         ele  = 0;
 					abs = abscissa(x->f_radius, azi, ele);
@@ -616,29 +618,28 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 					egraphics_line_to(g, abs, ord);
 				
 				}
-				egraphics_close_path(g);
+				//egraphics_close_path(g);
 				egraphics_fill_preserve(g);
 				
 				egraphics_set_color_rgba(g, &x->f_color_bd);
-				egraphics_set_line_width(g, 2);
+				egraphics_set_line_width(g, 1);
 				egraphics_stroke(g);
-
+                /*
 				for(int j = 0; j < x->f_meter->getChannelNumberOfPoints(i); j++)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j);
 					ele = x->f_meter->getChannelPointElevation(i, j);
-                    if(ele < 0)
-                        ele  = 0;
 					abs =  abscissa(x->f_radius, azi, ele);
 					ord = ordinate(x->f_radius, azi, ele);
 					egraphics_set_color_rgba(g, &rgba_black);
 					egraphics_circle(g, abs, ord, 2);
 					egraphics_fill(g);
-				}
+				}*/
 			}
 
 		}
-
+        /*
+        egraphics_set_color_rgba(g, &rgba_red);
 		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
 		{
 			if(x->f_meter->getChannelNumberOfPoints(i))
@@ -647,11 +648,11 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				double ele = x->f_meter->getChannelElevation(i);
 				double abs =  abscissa(x->f_radius, azi, ele);
 				double ord = ordinate(x->f_radius, azi, ele);
-				egraphics_set_color_rgba(g, &rgba_red);
-				egraphics_circle(g, abs, ord, 2);
+				
+				egraphics_circle(g, abs, ord, 3);
 				egraphics_fill(g);
 			}
-		}
+		}*/
 		ebox_end_layer((t_ebox*)x,  hoa_sym_3d_leds_layer);
 	}
 	ebox_paint_layer((t_ebox *)x, hoa_sym_3d_leds_layer, 0., 0.);

@@ -8,7 +8,6 @@
 #define __DEF_HOA_3D_METER__
 
 #include "Planewaves_3D.h"
-#include "Voronoi.h"
 
 namespace Hoa3D
 {
@@ -18,14 +17,60 @@ namespace Hoa3D
     class Meter : public Planewaves
     {
     private :
+        class MeterPoint
+		{
+            public :
+			double azi;
+            double ele;
+            double x;
+            double y;
+            double ref_x;
+            double ref_y;
+			MeterPoint(double _azi, double _ele)
+            {
+                azi = _azi;
+                ele = _ele;
+                x = abscissa(1., azi, ele);
+                y = ordinate(1., azi, ele);
+            };
+			~MeterPoint(){};
+            
+            static bool compare(MeterPoint c1, MeterPoint c2)
+			{
+				return azimuth(c1.x - c1.ref_x, c1.y - c1.ref_y) < azimuth(c2.x - c1.ref_x, c2.y - c1.ref_y);
+			};
+            
+            static bool isBetween(MeterPoint a, MeterPoint b, MeterPoint c)
+            {
+                if(fabs(c.ele - a.ele) - fabs(b.ele - a.ele) > FLT_EPSILON)
+                    return 1;
+                if(fabs(c.azi - a.azi) - fabs(b.azi - a.azi) > FLT_EPSILON)
+                    return 1;
+                double crossproduct = (c.y - a.y) * (b.x - a.x) - (c.x - a.x) * (b.y - a.y);
+                if(fabs(crossproduct) > FLT_EPSILON)
+                    return 0;
+                    
+                double dotproduct = (c.x - a.x) * (b.x - a.x) + (c.y - a.y)*(b.y - a.y);
+                if(dotproduct < 0)
+                    return 0;
+                        
+                double squaredlengthba = (b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y);
+                if(dotproduct > squaredlengthba)
+                    return 0;
+                
+                return 1;
+            }
+            
+		};
 
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-		Hoa::Voronoi*	m_Voronoi;
         int*            m_channels_top;
         int*            m_channels_bottom;
-
+        std::vector<MeterPoint>* m_points_top;
+        std::vector<MeterPoint>* m_points_bottom;
+        std::vector<MeterPoint>  m_channels;
     public:
         
         //! The meter constructor.
@@ -62,19 +107,19 @@ namespace Hoa3D
 		inline unsigned int getChannelNumberOfPoints(unsigned int index) const
         {
             assert(index < m_number_of_channels);
-			return m_Voronoi->getPointVoronoiLenght(index);
+			return m_points_top[index].size();
         }
 
 		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return m_Voronoi->getPointVoronoiAzimuth(index, pointindex);
+            return m_points_top[index][pointindex].azi;
         }
 
 		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return m_Voronoi->getPointVoronoiElevation(index, pointindex);
+            return m_points_top[index][pointindex].ele;
         }
 
         inline double getChannelPeak(unsigned int index) const

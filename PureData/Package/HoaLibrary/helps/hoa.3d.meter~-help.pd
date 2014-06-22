@@ -1,29 +1,86 @@
-#N canvas 391 40 931 769 10;
-#X text -205 -780 source;
-#X obj 103 -792 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#N canvas 75 22 1043 791 10;
+#X text -205 -758 source;
+#X obj 103 -770 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -380 -839 c.patcherinfos;
-#X obj -380 -856 loadbang;
-#X obj -380 -856 hoa.help.header;
-#X obj 36 -856 hoa.help.also;
-#X text -375 -812 hoa.3d.encoder~ creates the spherical harmonics of
+#X obj -380 -817 c.patcherinfos;
+#X obj -380 -834 loadbang;
+#X obj -380 -834 hoa.help.header;
+#X obj 36 -834 hoa.help.also;
+#X text -375 -790 hoa.3d.encoder~ creates the spherical harmonics of
 a signal depending on a given order \, an azimuth and an elevation.
 ;
-#X obj 387 -786 hoa.tri~ 0.1;
-#X obj -185 -619 hoa.3d.encoder~ 3, f 43;
-#X obj 114 -759 hoa.connect;
-#X obj -138 -668 sig~ 1;
-#X obj -76 -728 phasor~ -0.3;
-#X msg -332 -647 \; pd dsp 1;
-#X msg -332 -612 \; pd dsp 0;
-#X obj -76 -703 hoa.pi~ 2;
-#X obj 52 -703 hoa.pi~ 1;
-#X obj 52 -729 hoa.tri~ 0.1;
-#X obj -52 -767 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 387 -764 hoa.tri~ 0.1;
+#X obj -185 -597 hoa.3d.encoder~ 3, f 43;
+#X obj 114 -737 hoa.connect;
+#X msg -332 -625 \; pd dsp 1;
+#X msg -332 -590 \; pd dsp 0;
+#X obj -76 -681 hoa.pi~ 2;
+#X obj 52 -681 hoa.pi~ 1;
+#X obj 52 -707 hoa.tri~ 0.1;
+#X obj -52 -745 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -60 -435 hoa.3d.meter~ @size 225 225 @fontname Helvetica @fontweight
+#X obj 18 -496 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 44 -520 angles 0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45
+270 -45;
+#X msg 55 -462 channels \$1;
+#X obj 28 -555 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 307 -471 until;
+#X obj 307 -447 f;
+#X obj 334 -447 + 1;
+#X obj 307 -368 t f f;
+#X obj 307 -253 pack 0 0;
+#X obj 392 -211 t l;
+#X msg 351 -488 0;
+#X obj 216 -488 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 307 -210 list prepend;
+#X obj 219 -467 t b b b;
+#X obj 497 -233 list length;
+#X obj 506 -198 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 128 256;
+#X obj 241 -281 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 308 -419 - 0;
+#X obj 308 -287 % 360;
+#X obj 472 -343 int;
+#X obj 472 -320 sel 0 1;
+#X msg 464 -294 22.5;
+#X msg 497 -288 45;
+#X msg 530 -292 67.5;
+#X obj 472 -368 * 2;
+#X msg 260 -149 angles 0 0 15 7 30 15 45 22 60 30 75 37 90 45 105 52
+120 60 135 67 150 75 165 82 180 0 195 7 210 15 225 22 240 30 255 37
+270 45 285 52 300 60 315 67 330 75 345 82 0 0 15 7 30 15 45 22 60 30
+75 37 90 45 105 52 120 60 135 67 150 75 165 82 180 0 195 7 210 15 225
+22 240 30 255 37 270 45 285 52 300 60 315 67 330 75 345 82 0 0 15 7
+30 15 45 22 60 30 75 37 90 45 105 52 120 60 135 67 150 75 165 82 180
+0 195 7 210 15 225 22;
+#X obj 307 -187 c.prepend set angles;
+#X obj 361 -298 % 90;
+#X obj 402 -287 mod 90;
+#X obj 311 -318 * 720;
+#X obj -138 -646 sig~ 1;
+#X obj 66 -648 hoa.pi 0.5;
+#X obj -44 -648 hoa.pi 0.5;
+#X obj 138 -625 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 138 -594 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -174 -544 hoa.3d.optim~ 3 inPhase;
+#X obj -76 -706 phasor~ 0.3;
+#X obj -265 -330 hoa.3d.meter~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 24 @angles 0 45 30 45 60 45 90 45 120 45 150 45 180 45 210 45 240 45
 270 45 300 45 330 45 0 -45 30 -45 60 -45 90 -45 120 -45 150 -45 180
@@ -32,28 +89,112 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj -52 -557 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
-0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg 44 -542 angles 0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45
-270 -45;
-#X msg 55 -484 channels \$1;
-#X obj 28 -577 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
-0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 360 -361 * 360;
+#X obj 307 -393 / 48;
+#X msg 307 -498 64;
+#X obj -161 -509 hoa.3d.decoder~ 3 0 48;
 #X connect 1 0 9 0;
 #X connect 2 0 4 0;
 #X connect 3 0 2 0;
-#X connect 10 0 8 0;
-#X connect 11 0 14 1;
-#X connect 14 0 8 1;
-#X connect 15 0 8 2;
-#X connect 16 0 15 1;
-#X connect 17 0 11 0;
+#X connect 8 0 51 0;
+#X connect 8 1 51 1;
+#X connect 8 2 51 2;
+#X connect 8 3 51 3;
+#X connect 8 4 51 4;
+#X connect 8 5 51 5;
+#X connect 8 6 51 6;
+#X connect 8 7 51 7;
+#X connect 8 8 51 8;
+#X connect 8 9 51 9;
+#X connect 8 10 51 10;
+#X connect 8 11 51 11;
+#X connect 8 12 51 12;
+#X connect 8 13 51 13;
+#X connect 8 14 51 14;
+#X connect 8 15 51 15;
+#X connect 12 0 8 1;
+#X connect 14 0 13 1;
+#X connect 15 0 52 0;
+#X connect 18 0 53 1;
 #X connect 19 0 18 0;
-#X connect 20 0 18 0;
-#X connect 21 0 18 0;
-#X connect 22 0 21 0;
-#X coords 0 769 1 768 100 60 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 21 0 33 0;
+#X connect 22 0 21 1;
+#X connect 23 0 45 0;
+#X connect 23 1 54 0;
+#X connect 24 0 28 0;
+#X connect 25 0 28 1;
+#X connect 26 0 21 1;
+#X connect 27 0 29 0;
+#X connect 28 0 25 0;
+#X connect 28 0 30 0;
+#X connect 28 0 42 0;
+#X connect 29 0 56 0;
+#X connect 29 1 26 0;
+#X connect 29 2 28 0;
+#X connect 29 2 28 1;
+#X connect 30 0 31 0;
+#X connect 33 0 55 0;
+#X connect 34 0 24 0;
+#X connect 35 0 36 0;
+#X connect 36 0 37 0;
+#X connect 36 1 38 0;
+#X connect 36 2 39 0;
+#X connect 40 0 35 0;
+#X connect 41 0 53 1;
+#X connect 41 0 57 1;
+#X connect 42 0 41 0;
+#X connect 44 0 24 1;
+#X connect 45 0 34 0;
+#X connect 46 0 8 0;
+#X connect 47 0 8 2;
+#X connect 48 0 8 1;
+#X connect 49 0 47 0;
+#X connect 50 0 48 0;
+#X connect 51 0 57 0;
+#X connect 51 1 57 1;
+#X connect 51 2 57 2;
+#X connect 51 3 57 3;
+#X connect 51 4 57 4;
+#X connect 51 5 57 5;
+#X connect 51 6 57 6;
+#X connect 51 7 57 7;
+#X connect 51 8 57 8;
+#X connect 51 9 57 9;
+#X connect 51 10 57 10;
+#X connect 51 11 57 11;
+#X connect 51 12 57 12;
+#X connect 51 13 57 13;
+#X connect 51 14 57 14;
+#X connect 51 15 57 15;
+#X connect 52 0 12 1;
+#X connect 54 0 43 0;
+#X connect 54 0 44 0;
+#X connect 55 0 23 0;
+#X connect 56 0 20 0;
+#X connect 57 0 53 0;
+#X connect 57 1 53 1;
+#X connect 57 2 53 2;
+#X connect 57 3 53 3;
+#X connect 57 4 53 4;
+#X connect 57 5 53 5;
+#X connect 57 6 53 6;
+#X connect 57 7 53 7;
+#X connect 57 8 53 8;
+#X connect 57 9 53 9;
+#X connect 57 10 53 10;
+#X connect 57 11 53 11;
+#X connect 57 12 53 12;
+#X connect 57 13 53 13;
+#X connect 57 14 53 14;
+#X connect 57 15 53 15;
+#X connect 57 16 53 16;
+#X connect 57 17 53 17;
+#X connect 57 18 53 18;
+#X connect 57 19 53 19;
+#X connect 57 20 53 20;
+#X connect 57 21 53 21;
+#X connect 57 22 53 22;
+#X connect 57 23 53 23;
+#X coords 0 791 1 790 100 60 0;
