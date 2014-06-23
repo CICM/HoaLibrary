@@ -107,7 +107,7 @@ namespace Hoa3D
         
         for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
         {
-            int number_of_loudspeaker = hoa_binaural_configs[i];
+            unsigned int number_of_loudspeaker = hoa_binaural_configs[i];
             for (unsigned int j = 1; j < hoa_number_binaural_elevation; j++)
             {
                 number_of_loudspeaker += hoa_binaural_configs[i + j * hoa_number_binaural_configs];
@@ -129,7 +129,7 @@ namespace Hoa3D
         int nimpulse = 0;
         for(unsigned int i = 0; i < hoa_number_binaural_elevation; i++)
         {
-            int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
+            unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
             for(unsigned int j = 0; j < n_elev_channels; j++)
             {
                 m_decoder->setChannelPosition(nimpulse, (j * (360. / (double )n_elev_channels)) / 360. * HOA_2PI, ((double)i * 10. - 40.) / 360. * HOA_2PI);
@@ -181,7 +181,7 @@ namespace Hoa3D
             int nimpulse = 0;
             for(unsigned int i = 0; i < hoa_number_binaural_elevation; i++)
             {
-                int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
+                unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
                 for(unsigned int j = 0; j < n_elev_channels; j++)
                 {
                     m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, ((double)j * (360. / (double )n_elev_channels)), i * 10 - 40) + hoa_binaural_crop[index];
@@ -223,7 +223,7 @@ namespace Hoa3D
                     int nimpulse = 0;
                     for(unsigned int k = 0; k < hoa_number_binaural_elevation; k++)
                     {
-                        int n_elev_channels = hoa_binaural_configs[m_configuration + k * hoa_number_binaural_configs];
+                        unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + k * hoa_number_binaural_configs];
                         int channel_offset = nimpulse + n_elev_channels;
                         for(unsigned int l = 0; l < n_elev_channels; l++)
                         {

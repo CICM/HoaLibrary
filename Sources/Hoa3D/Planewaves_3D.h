@@ -250,7 +250,7 @@ namespace Hoa3D
         }
         else // Two circles
         {
-            int i = 0;
+            unsigned int i = 0;
             int up = ceil(numberOfPoints * 0.5);
             int down = numberOfPoints - up;
             for(i = 0; i < up; i++)

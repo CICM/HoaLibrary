@@ -147,7 +147,6 @@ namespace Hoa3D
                         else if(i > (int)(METER_ROW_NUMBER * 0.5) && index_central != indices[k])
                         {
                             m_points_top[index_central].push_back(pt);
-                            post("aki");
                             break;
                         }
                     }
