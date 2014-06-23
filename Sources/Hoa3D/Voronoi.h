@@ -33,7 +33,7 @@ namespace Hoa
         std::vector<VoronoiPoint> boundaries;
         
         public :
-        VoronoiPoint(double x, double y, double z = 0);
+        VoronoiPoint(double x = 0, double y = 0, double z = 0);
         
         void addBoundary(VoronoiPoint pt);
         void clearBoundaries();
@@ -79,6 +79,8 @@ namespace Hoa
         
         double azimuth() const
         {
+            if(xyz[0] == 0 && xyz[1] == 0)
+                return 0;
             return atan2(xyz[1], xyz[0]);
         }
         
@@ -123,6 +125,9 @@ namespace Hoa
         {
             return VoronoiPoint(y() * pt.z() - z() * pt.y(), z() * pt.x() - x() * pt.z(), x() * pt.y() - y() * pt.x());
         }
+        
+        void shiftElevation(double elevation);
+        void shiftElevation(VoronoiPoint const& pt);
         
         VoronoiPoint operator-(VoronoiPoint const& pt) const;
         VoronoiPoint operator-(double scalar) const;

@@ -167,6 +167,18 @@ namespace Hoa
         return pt1.x() != pt2.x() || pt1.y() != pt2.y() || pt1.z() != pt2.z();
     }
     
+    void VoronoiPoint::shiftElevation(double elevation)
+    {
+        xyz[0] = radius() * cos(azimuth()) * sin(elevation + elevation);
+        xyz[1] = radius() * sin(azimuth()) * sin(elevation + elevation);
+        xyz[2] = radius() * cos(elevation + elevation);
+    }
+    
+    void VoronoiPoint::shiftElevation(VoronoiPoint const& pt)
+    {
+        shiftElevation(pt.elevation());
+    }
+    
     VoronoiPoint::~VoronoiPoint()
     {
         boundaries.clear();
@@ -201,34 +213,149 @@ namespace Hoa
     
     VoronoiCircle::VoronoiCircle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3)
     {
-        VoronoiPoint ac = pt3 - pt1;
-        VoronoiPoint ab = pt2 - pt1;
-        VoronoiPoint abXac = ab.cross(ac);
-        if(abXac.radius() < 0)
+        int refindex1 = 1;
+        VoronoiPoint ref_trans1 = pt1, ref_elev1, ref_elev2, ref_trans2;
+        
+        post("1 -----------------");
+        post("%f %f %f", pt1.x(), pt1.y(), pt1.z());
+        post("%f %f %f", pt2.x(), pt2.y(), pt2.z());
+        post("%f %f %f", pt3.x(), pt3.y(), pt3.z());
+        
+        if(fabs(ref_trans1.z()) > fabs(pt2.z()))
         {
-            xyz[0] = 0;
-            xyz[1] = 0;
-            xyz[2] = 0;
-            rad    = -1;
+            ref_trans1 = pt2;
+            refindex1 = 2;
         }
-        // (abXac.cross( ab )*ac.len2() + ac.cross( abXac )*ab.len2()) / (2.f*abXac.len2()) ;
-        VoronoiPoint toCircumsphereCenter = (abXac.cross(ab) * ac.radius() * ac.radius() + ac.cross(abXac) * ab.radius() *  ab.radius()) / (2. * abXac.radius() * abXac.radius()) ;
-        rad = toCircumsphereCenter.radius() ;
-        VoronoiPoint center = pt1 + toCircumsphereCenter;
-        xyz[0] = center.x();
-        xyz[1] = center.y();
-        xyz[2] = center.z();
+        if(fabs(ref_trans1.z()) > fabs(pt3.z()))
+        {
+            ref_trans1 = pt3;
+            refindex1 = 3;
+        }
+        
+        // Translate all the point with the ref point
+        pt1 -= ref_trans1;
+        pt2 -= ref_trans1;
+        pt3 -= ref_trans1;
+        
+        post("2 -----------------");
+        post("%f %f %f", pt1.x(), pt1.y(), pt1.z());
+        post("%f %f %f", pt2.x(), pt2.y(), pt2.z());
+        post("%f %f %f", pt3.x(), pt3.y(), pt3.z());
+        
+        if(refindex1 == 1)
+        {
+            ref_elev1 = pt2;
+            if(fabs(ref_elev1.z()) > fabs(pt3.z()))
+            {
+                ref_elev1 = pt3;
+                pt3.shiftElevation(-ref_elev1.elevation());
+                pt2.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt3;
+                pt1 -= pt3;
+                pt2 -= pt3;
+                pt3 -= pt3;
+                ref_elev2 = pt2;
+                pt2.shiftElevation(-ref_elev2.elevation());
+            }
+            else
+            {
+                pt2.shiftElevation(-ref_elev1.elevation());
+                pt3.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt2;
+                pt1 -= pt2;
+                pt2 -= pt2;
+                pt3 -= pt2;
+                ref_elev2 = pt3;
+                pt3.shiftElevation(-ref_elev2.elevation());
+            }
+        }
+        else if(refindex1 == 2)
+        {
+            ref_elev1 = pt1;
+            if(fabs(ref_elev1.z()) > fabs(pt3.z()))
+            {
+                ref_elev1 = pt3;
+                pt3.shiftElevation(-ref_elev1.elevation());
+                pt1.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt3;
+                pt1 -= pt3;
+                pt2 -= pt3;
+                pt3 -= pt3;
+                ref_elev2 = pt1;
+                pt1.shiftElevation(-ref_elev2.elevation());
+            }
+            else
+            {
+                pt1.shiftElevation(-ref_elev1.elevation());
+                pt3.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt1;
+                pt1 -= pt1;
+                pt2 -= pt1;
+                pt3 -= pt1;
+                ref_elev2 = pt3;
+                pt3.shiftElevation(-ref_elev2.elevation());
+            }
+        }
+        else
+        {
+            ref_elev1 = pt1;
+            if(fabs(ref_elev1.z()) > fabs(pt2.z()))
+            {
+                ref_elev1 = pt2;
+                pt2.shiftElevation(-ref_elev1.elevation());
+                pt1.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt2;
+                pt1 -= pt2;
+                pt2 -= pt2;
+                pt3 -= pt2;
+                ref_elev2 = pt1;
+                pt1.shiftElevation(-ref_elev2.elevation());
+                
+            }
+            else
+            {
+                pt1.shiftElevation(-ref_elev1.elevation());
+                pt2.shiftElevation(-ref_elev1.elevation());
+                ref_trans2 = pt1;
+                pt1 -= pt1;
+                pt2 -= pt1;
+                pt3 -= pt1;
+                ref_elev2 = pt2;
+                pt2.shiftElevation(-ref_elev2.elevation());
+            }
+        }
+        post("3 -----------------");
+        post("%f %f %f", pt1.x(), pt1.y(), pt1.z());
+        post("%f %f %f", pt2.x(), pt2.y(), pt2.z());
+        post("%f %f %f", pt3.x(), pt3.y(), pt3.z());
         
         double ikx = (pt1.x() - pt3.x()), jky = (pt2.y() - pt3.y()), jkx = (pt2.x() - pt3.x()), iky = (pt1.y() - pt3.y()), ik_x = (pt1.x() + pt3.x()), ik_y = (pt1.y() + pt3.y()), jk_x = (pt2.x() + pt3.x()), jk_y = (pt2.y() + pt3.y());
         double D = ikx * jky - jkx * iky;
         if(!D)
+        {
+            xyz[0] = xyz[1] = xyz[2] = 0.;
+            rad = -1;
             return;
+        }
         
-        xyz[0] = ((ikx * ik_x + iky * ik_y) * 0.5 * jky - (jkx * jk_x + jky * jk_y) * 0.5 * iky) / D;
-        xyz[1] = ((jkx * jk_x + jky * jk_y) * 0.5 * ikx - (ikx * ik_x + iky * ik_y) * 0.5 * jkx) / D;
-        double abs = xyz[0] - pt1.x();
-        double ord = xyz[1] - pt1.y();
-        rad = sqrt(abs * abs + ord * ord);
+        VoronoiPoint center = VoronoiPoint(((ikx * ik_x + iky * ik_y) * 0.5 * jky - (jkx * jk_x + jky * jk_y) * 0.5 * iky) / D,
+                                           ((jkx * jk_x + jky * jk_y) * 0.5 * ikx - (ikx * ik_x + iky * ik_y) * 0.5 * jkx) / D,
+                                           0);
+        rad = sqrt((center.x() - pt1.x()) * (center.x() - pt1.x()) + (center.y() - pt1.y()) * (center.y() - pt1.y()));
+        
+        center.shiftElevation(ref_elev2.elevation());
+        center += ref_trans2;
+        center.shiftElevation(ref_elev1.elevation());
+        center += ref_trans1;
+        
+        xyz[0] = center.x();
+        xyz[1] = center.y();
+        xyz[2] = center.z();
+        post("4 -----------------");
+        post("%f %f %f", center.x(), center.y(), center.z());
+        
+        post("");
+        
     }
     
     VoronoiCircle::~VoronoiCircle()
@@ -277,14 +404,14 @@ namespace Hoa
         
         for(int i = 0; i < size; i++)
         {
-            pt1.sortBoundaries();
+            points[i].sortBoundaries();
         }
 	};
 
 	void Voronoi::evaluateTriangle(int i, int j, int k)
 	{
         int size = points.size();
-        VoronoiCircle circle = VoronoiCircle(pt1, pt2, pt3);
+        VoronoiCircle circle = VoronoiCircle(points[i], points[j], points[k]);
         if(circle.radius() < 0)
             return;
         
@@ -298,9 +425,9 @@ namespace Hoa
                 }
             }
         }
-        pt1.addBoundary(circle.center());
-        pt2.addBoundary(circle.center());
-        pt3.addBoundary(circle.center());
+        points[i].addBoundary(circle.center());
+        points[j].addBoundary(circle.center());
+        points[k].addBoundary(circle.center());
 	};
 }
 
