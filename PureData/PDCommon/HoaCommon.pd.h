@@ -13,6 +13,7 @@
 #include "../../Sources/Hoa3D/Hoa3D.h"
 
 using namespace Hoa2D;
+using namespace HoaCommon;
 
 extern "C" void setup_hoa0x2econnect(void);
 //extern "C" void setup_hoa0x2econverter_tilde(void);
@@ -25,5 +26,6 @@ extern "C" void setup_hoa0x2epi(void);
 extern "C" void setup_hoa0x2epi_tilde(void);
 extern "C" void setup_hoa0x2eprocess_tilde(void);
 extern "C" void setup_hoa0x2ethisprocess_tilde(void);
+extern "C" void setup_hoa0x2emap(void);
 
 #endif
