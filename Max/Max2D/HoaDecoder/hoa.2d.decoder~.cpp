@@ -357,7 +357,7 @@ t_max_err offset_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv
     
     if(argv[0])
     {
-        atom_setfloat(argv[0], x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f);
+        atom_setfloat(argv[0], wrap(x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f, -180, 180));
     }
     else
     {
@@ -369,9 +369,9 @@ t_max_err offset_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv
 
 t_max_err offset_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    if(argc && argv && atom_isNumber(argv))
     {
-        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        double offset = wrap_twopi(wrap(atom_getfloat(argv), -180, 180) / 360. * HOA_2PI);
         if(offset != x->f_decoder->getChannelsOffset())
         {
             object_method(gensym("dsp")->s_thing, hoa_sym_stop);
@@ -548,7 +548,7 @@ void send_configuration(t_hoa_decoder *x)
     if(argv)
     {
         atom_setlong(&nchannels, x->f_decoder->getNumberOfChannels());
-        atom_setfloat(&offset, x->f_decoder->getChannelsOffset() / HOA_2PI * 360.);
+        atom_setfloat(&offset, wrap(x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f, -180, 180));
         for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
             atom_setfloat(argv+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
         
@@ -561,11 +561,15 @@ void send_configuration(t_hoa_decoder *x)
                 if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.gain~") ||
                    classname == gensym("hoa.dac~") || classname == gensym("dac~"))
                 {
-                    if (classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.gain~"))
+                    if (classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~"))
                     {
                         object_method_typed(jbox_get_object(object), hoa_sym_channels, 1, &nchannels, NULL);
                         object_method_typed(jbox_get_object(object), hoa_sym_angles, x->f_decoder->getNumberOfChannels(), argv, NULL);
                         object_method_typed(jbox_get_object(object), hoa_sym_offset, 1, &offset, NULL);
+                    }
+                    else if(classname == gensym("hoa.gain~"))
+                    {
+                        object_method_typed(jbox_get_object(object), hoa_sym_channels, 1, &nchannels, NULL);
                     }
                     
                     // connection
