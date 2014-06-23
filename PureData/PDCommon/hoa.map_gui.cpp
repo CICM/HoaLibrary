@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Hoa2D.pd.h"
+#include "HoaCommon.pd.h"
 
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
@@ -81,25 +81,7 @@ void hoa_map_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modif
 long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
-/*
-void hoa_map_bind(t_hoa_map* x, t_symbol* name)
-{
-    char scrptname[MAXPDSTRING];
-    sprintf(scrptname, "%s_hoamap_xx1", name->s_name);
-    if(gensym(scrptname)->s_thing)
-    {
-        x->f_friend = (t_hoa_map *)gensym(scrptname)->s_thing;
-        x->f_friend->f_friend = x;
-        sprintf(scrptname, "%s_hoamap_xx2", name->s_name);
-        t_symbol *newsym = gensym(scrptname);
-        newsym->s_thing = (t_class **)x;
-    }
-    else
-    {
-        gensym(scrptname)->s_thing = (t_class **)x;
-    }
-}
-*/
+
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
@@ -107,12 +89,13 @@ void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av);
 
 t_symbol *hoa_sym_sources_preset;
 
-extern "C" void setup_hoa0x2e2d0x2emap(void)
+extern "C" void setup_hoa0x2emap(void)
 {
 	t_eclass *c;
     
-	c = eclass_new("hoa.2d.map", (method)hoa_map_new, (method)hoa_map_free, sizeof(t_hoa_map), 0L, A_GIMME, 0);
-    class_addcreator((t_newmethod)hoa_map_new, gensym("hoa.map"), A_GIMME, 0);
+	c = eclass_new("hoa.map", (method)hoa_map_new, (method)hoa_map_free, sizeof(t_hoa_map), 0L, A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_map_new, gensym("hoa.2d.map"), A_GIMME, 0);
+    class_addcreator((t_newmethod)hoa_map_new, gensym("hoa.3d.map"), A_GIMME, 0);
     
     eclass_init(c, 0);
     
@@ -268,7 +251,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         
         x->f_rect_selection_exist = 0;
         x->f_index_of_selected_source = -1;
-        x->f_index_of_selected_group = -1;
+        x->f_index_of_selected_group  = -1;
         x->f_read   = 0;
         x->f_write  = 0;
         x->f_out_sources    = listout(x);

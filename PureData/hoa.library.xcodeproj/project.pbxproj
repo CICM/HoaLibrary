@@ -150,6 +150,7 @@
 		8F794EED192A60B20006491F /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE7192A60B20006491F /* SourcesGroup.h */; };
 		8F794EEE192A60B20006491F /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F794EE8192A60B20006491F /* SourcesManager.cpp */; };
 		8F794EEF192A60B20006491F /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE9192A60B20006491F /* SourcesManager.h */; };
+		8FC4E1F01957FDDC0098DCD3 /* hoa.map_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FC4E1EF1957FDDC0098DCD3 /* hoa.map_gui.cpp */; };
 		8FD0878C193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */; };
 /* End PBXBuildFile section */
 
@@ -298,6 +299,7 @@
 		8F794EE7192A60B20006491F /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
 		8F794EE8192A60B20006491F /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
 		8F794EE9192A60B20006491F /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
+		8FC4E1EF1957FDDC0098DCD3 /* hoa.map_gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.map_gui.cpp; sourceTree = "<group>"; };
 		8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.scope_gui_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -363,6 +365,7 @@
 				8F27E28119178923004E1370 /* hoa.dac_tilde.cpp */,
 				8F27E28219178923004E1370 /* hoa.in.cpp */,
 				8F27E28319178923004E1370 /* hoa.in_tilde.cpp */,
+				8FC4E1EF1957FDDC0098DCD3 /* hoa.map_gui.cpp */,
 				8F27E28419178923004E1370 /* hoa.out.cpp */,
 				8F27E28519178923004E1370 /* hoa.out_tilde.cpp */,
 				8F27E28619178923004E1370 /* hoa.pi.cpp */,
@@ -742,6 +745,7 @@
 				8F27E29619178923004E1370 /* hoa.connect.cpp in Sources */,
 				8F27E2BC19178943004E1370 /* hoa.2d.scope_gui_tilde.cpp in Sources */,
 				8F27E33F191789BE004E1370 /* Kits.cpp in Sources */,
+				8FC4E1F01957FDDC0098DCD3 /* hoa.map_gui.cpp in Sources */,
 				8F27E2BB19178943004E1370 /* hoa.2d.rotate_tilde.cpp in Sources */,
 				8F26F18B17E76274005FCB97 /* hoa.library.cpp in Sources */,
 				8F27E2B419178943004E1370 /* hoa.2d.encoder_tilde.cpp in Sources */,

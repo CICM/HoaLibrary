@@ -45,7 +45,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj 219 -467 t b b b;
 #X obj 497 -233 list length;
 #X obj 506 -198 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 128 256;
+10 -262144 -1 -1 0 256;
 #X obj 241 -281 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 308 -419 - 0;
@@ -82,13 +82,11 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -76 -706 phasor~ 0.3;
 #X obj -265 -330 hoa.3d.meter~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-24 @angles 0 45 30 45 60 45 90 45 120 45 150 45 180 45 210 45 240 45
-270 45 300 45 330 45 0 -45 30 -45 60 -45 90 -45 120 -45 150 -45 180
--45 210 -45 240 -45 270 -45 300 -45 330 -45 @rotation anti-clockwise
-@vectors none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
-0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
-0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
-0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+8 @angles 45 45 135 45 225 45 315 45 45 -45 135 -45 225 -45 315 -45
+@rotation anti-clockwise @vectors none @interval 50 @bgcolor 0.76 0.76
+0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6
+0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
+1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X obj 360 -361 * 360;
 #X obj 307 -393 / 48;
 #X msg 307 -498 64;
@@ -115,6 +113,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 #X connect 12 0 8 1;
 #X connect 14 0 13 1;
 #X connect 15 0 52 0;
+#X connect 16 0 53 0;
 #X connect 18 0 53 1;
 #X connect 19 0 18 0;
 #X connect 20 0 21 0;
@@ -181,20 +180,4 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 #X connect 57 5 53 5;
 #X connect 57 6 53 6;
 #X connect 57 7 53 7;
-#X connect 57 8 53 8;
-#X connect 57 9 53 9;
-#X connect 57 10 53 10;
-#X connect 57 11 53 11;
-#X connect 57 12 53 12;
-#X connect 57 13 53 13;
-#X connect 57 14 53 14;
-#X connect 57 15 53 15;
-#X connect 57 16 53 16;
-#X connect 57 17 53 17;
-#X connect 57 18 53 18;
-#X connect 57 19 53 19;
-#X connect 57 20 53 20;
-#X connect 57 21 53 21;
-#X connect 57 22 53 22;
-#X connect 57 23 53 23;
 #X coords 0 791 1 790 100 60 0;
