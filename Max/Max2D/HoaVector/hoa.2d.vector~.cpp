@@ -179,9 +179,9 @@ void hoa_vector_perform64(t_hoa_vector *x, t_object *dsp64, double **ins, long n
 void hoa_vector_assist(t_hoa_vector *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
-        sprintf(s,"(Signal) %s", x->f_vector->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_vector->getChannelName(a).c_str());
     else
-        sprintf(s,"(Signal) %s", x->f_vector->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_vector->getChannelName(a).c_str());
 }
 
 
@@ -236,7 +236,7 @@ t_max_err offset_get(t_hoa_vector *x, t_object *attr, long *argc, t_atom **argv)
     
     if(argv[0])
     {
-        atom_setfloat(argv[0], x->f_vector->getChannelsOffset() / HOA_2PI * 360.f);
+		atom_setfloat(argv[0], wrap(x->f_vector->getChannelsOffset() / HOA_2PI * 360.f, -180, 180));
     }
     else
     {
@@ -250,7 +250,7 @@ t_max_err offset_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        double offset = wrap_twopi(wrap(atom_getfloat(argv), -180, 180) / 360. * HOA_2PI);
         if(offset != x->f_vector->getChannelsOffset())
         {
             x->f_vector->setChannelsOffset(offset);

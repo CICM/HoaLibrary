@@ -30,16 +30,16 @@
 
 typedef struct _hoa_decoder 
 {
-	t_pxobject          f_ob;
-	double*             f_ins;
-    double*             f_outs;
-	Hoa3D::Decoder*     f_decoder;
+	t_pxobject				f_ob;
+	double*					f_ins;
+    double*					f_outs;
+	Hoa3D::DecoderMulti*    f_decoder;
 	
-	double              f_angles_of_channels[MAX_CHANNELS * 2];
-	long                f_number_of_angles;
-    double              f_offset[2];
-    t_symbol*           f_pinna;
-	t_symbol*           f_mode;
+	double					f_angles_of_channels[MAX_CHANNELS * 2];
+	long					f_number_of_angles;
+    double					f_offset[2];
+    t_symbol*				f_pinna;
+	t_symbol*				f_mode;
 } t_hoa_decoder;
 
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv);
@@ -47,7 +47,11 @@ void hoa_decoder_free(t_hoa_decoder *x);
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s);
 
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+//void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_standard(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 
 t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv);
@@ -132,7 +136,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         if(atom_gettype(argv+1) == A_LONG || atom_gettype(argv+1) == A_FLOAT)
 			number_of_channels	= clip_min(atom_getfloat(argv+1), 1);
 		
-        x->f_decoder = new Hoa3D::Decoder(order, number_of_channels);
+        x->f_decoder = new Hoa3D::DecoderMulti(order, number_of_channels);
 		x->f_number_of_angles = x->f_decoder->getNumberOfChannels() * 2;
         
 		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
@@ -166,77 +170,111 @@ t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64, 0, NULL);
+	x->f_decoder->setSampleRate(samplerate);
+    x->f_decoder->setVectorSize(maxvectorsize);
+    
+    if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Standard)
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_standard, 0, NULL);
+    else if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural && x->f_decoder->getBinauralState())
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_binaural, 0, NULL);
+    else
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_zero, 0, NULL);
 }
 
-void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	for(int i = 0; i < numins; i++)
+    for(int i = 0; i < sampleframes; i++)
+        outs[0][i] = outs[1][i] = 0.;
+}
+
+void hoa_decoder_perform64_standard(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < numins; i++)
     {
         cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_decoder->process(x->f_ins + numins * i, x->f_outs + numouts * i);
+        x->f_decoder->processStandard(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
         cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
+    
+}
+
+void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    x->f_decoder->processBinaural(ins, outs);
 }
 
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"(Signal) %s",x->f_decoder->getHarmonicName(a).c_str());
+		sprintf(s,"(signal) %s",x->f_decoder->getHarmonicName(a).c_str());
 	else
 	{
-		sprintf(s,"(Signal) Channel %ld", a);
+		sprintf(s,"(signal) Channel %ld", a);
 	}
 }
+
+void hoa_decoder_resize_outlets(t_hoa_decoder *x)
+{
+	t_object *b = NULL;
+	object_method(gensym("dsp")->s_thing, hoa_sym_stop);
+	
+	object_obex_lookup(x, hoa_sym_pound_B, (t_object **)&b);
+	object_method(b, hoa_sym_dynlet_begin);
+	
+	if(outlet_count((t_object *)x) > x->f_decoder->getNumberOfChannels())
+	{
+		for(int i = outlet_count((t_object *)x); i > x->f_decoder->getNumberOfChannels(); i--)
+		{
+			outlet_delete(outlet_nth((t_object*)x, i-1));
+		}
+	}
+	else if(outlet_count((t_object *)x) < x->f_decoder->getNumberOfChannels())
+	{
+		for(int i = outlet_count((t_object *)x); i < x->f_decoder->getNumberOfChannels(); i++)
+		{
+			outlet_append((t_object*)x, NULL, gensym("signal"));
+		}
+	}
+	
+	object_method(b, hoa_sym_dynlet_end);
+}
+
 t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
 	if(argc && argv && atom_gettype(argv) == A_SYM)
 	{
 		t_symbol* mode = atom_getsym(argv);
-        if(mode == hoa_sym_ambisonic /* && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Regular */)
+        if(mode == hoa_sym_ambisonic && x->f_decoder->getDecodingMode() != Hoa3D::DecoderMulti::Standard)
         {
-			/*
-            object_method(gensym("dsp")->s_thing, hoa_sym_stop);
-            x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Regular);
+			object_method(gensym("dsp")->s_thing, hoa_sym_stop);
+            x->f_decoder->setDecodingMode(Hoa3D::DecoderMulti::Standard);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_channels, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_offset, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 1);
-            object_attr_setfloat(x, hoa_sym_offset, (float)x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f);
-			*/
+			float offset[2];
+			offset[0] = x->f_decoder->getChannelsAzimuthOffset() / HOA_2PI * 360.f;
+			offset[1] = x->f_decoder->getChannelsElevationOffset() / HOA_2PI * 360.f;
+			object_attr_setfloat_array(x, hoa_sym_offset, 2, offset);
 			x->f_mode = mode;
+			hoa_decoder_resize_outlets(x);
 		}
-        else if(mode == hoa_sym_irregular /* && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Irregular */)
+        else if(mode == hoa_sym_binaural && x->f_decoder->getDecodingMode() != Hoa3D::DecoderMulti::Binaural)
         {
-			/*
-            object_method(gensym("dsp")->s_thing, hoa_sym_stop);
-            x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Irregular);
-            object_attr_setdisabled((t_object *)x, hoa_sym_angles, 0);
-            object_attr_setdisabled((t_object *)x, hoa_sym_channels, 0);
-            object_attr_setdisabled((t_object *)x, hoa_sym_offset, 0);
-            object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 1);
-			*/
-			x->f_mode = mode;
-        }
-        else if(mode == hoa_sym_binaural /* && x->f_decoder->getDecodingMode() != Hoa2D::DecoderMulti::Binaural */)
-        {
-			/*
-            x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Binaural);
+			x->f_decoder->setDecodingMode(Hoa3D::DecoderMulti::Binaural);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_channels, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_offset, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 0);
-			*/
 			x->f_mode = mode;
+			hoa_decoder_resize_outlets(x);
         }
-        //object_attr_setlong(x, hoa_sym_channels, x->f_decoder->getNumberOfChannels());
-        //send_configuration(x);
     }
     return MAX_ERR_NONE;
 }
@@ -289,22 +327,18 @@ t_max_err pinna_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
 	if(argc && argv && atom_gettype(argv) == A_SYM)
 	{
-        if(atom_getsym(argv) == gensym("small") /* && x->f_decoder->getPinnaSize() != Hoa2D::DecoderBinaural::Small*/)
+        if(atom_getsym(argv) == gensym("small") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Small)
         {
-			/*
             if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
                 object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setPinnaSize(Hoa3D::DecoderBinaural::Small);
-			*/
 			x->f_pinna = atom_getsym(argv);
 		}
-        else if(atom_getsym(argv) == gensym("large") /* && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Large */)
+        else if(atom_getsym(argv) == gensym("large") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Large)
         {
-			/*
-            if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Binaural)
+            if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
                 object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setPinnaSize(Hoa3D::DecoderBinaural::Large);
-			*/
 			x->f_pinna = atom_getsym(argv);
         }
     }
