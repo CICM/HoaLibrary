@@ -1116,6 +1116,10 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
+		if (x->f_rotation)
+			jgraphics_rotate(g, degToRad(x->f_offset_of_channels));
+		else
+			jgraphics_rotate(g, -degToRad(x->f_offset_of_channels));
 		
 		if (x->f_drawvector == VECTOR_BOTH || x->f_drawvector == VECTOR_ENERGY)
 		{

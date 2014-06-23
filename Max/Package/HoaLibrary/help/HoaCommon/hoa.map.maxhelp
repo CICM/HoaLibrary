@@ -489,7 +489,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 419.5, 117.0, 280.0, 84.0 ],
+									"patching_rect" : [ 419.5, 117.0, 296.5, 84.0 ],
 									"text" : "These three hoa.map objects share the same \"mapname\" attribute so they are linked together and react to the change of each others. So, sources and groups position, description and colors modifications will affect all linked hoa.map objects to control a hoa.3d.map~.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -504,7 +504,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 419.5, 117.0, 272.5, 84.0 ],
+									"patching_rect" : [ 419.5, 117.0, 296.5, 84.0 ],
 									"rounded" : 0
 								}
 
@@ -7795,7 +7795,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u673002117"
+									"varname" : "u086002709"
 								}
 
 							}

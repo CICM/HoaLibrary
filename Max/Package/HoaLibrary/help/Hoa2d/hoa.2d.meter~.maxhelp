@@ -1369,7 +1369,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
+						"rect" : [ 229.0, 86.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1815,6 +1815,7 @@
 										"autoconnect" : 1,
 										"channels" : 5,
 										"mode" : "irregular",
+										"offset" : 208.0,
 										"pinna" : "small"
 									}
 ,
@@ -3558,7 +3559,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 229.0, 86.0, 850.0, 687.0 ],
+						"rect" : [ 0.0, 26.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,

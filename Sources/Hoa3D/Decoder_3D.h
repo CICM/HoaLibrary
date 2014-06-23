@@ -254,6 +254,14 @@ namespace Hoa3D
          @param     order				The order
          */
         DecoderMulti(unsigned int order);
+		
+		//! The multi-decoder constructor.
+        /**	The multi-decoder constructor allocates and initialize the three decoder.
+         
+         @param     order				The order
+		 @param     numberOfChannels	The number of channels
+         */
+		DecoderMulti(unsigned int order, unsigned int numberOfChannels);
         
         //! The multi-decoder destructor.
         /**	The multi-decoder destructor free the memory.
@@ -488,7 +496,7 @@ namespace Hoa3D
             else
                 return m_decoder_binaural->getChannelName(index);
         };
-        
+		
         //! This method performs the binaural decoding with single precision.
         /**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          

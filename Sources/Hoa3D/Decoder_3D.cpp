@@ -394,6 +394,13 @@ namespace Hoa3D
         m_decoder_regular   = new DecoderStandard(m_order, (m_order + 1) * (m_order + 1));
         m_decoder_binaural  = new DecoderBinaural(m_order);
     }
+	
+	DecoderMulti::DecoderMulti(unsigned int order, unsigned int numberOfChannels) : Ambisonic(order), Planewaves(order * 2 + 2)
+    {
+        m_mode = Standard;
+        m_decoder_regular   = new DecoderStandard(m_order, numberOfChannels);
+        m_decoder_binaural  = new DecoderBinaural(m_order);
+    }
     
     void DecoderMulti::setDecodingMode(Mode mode)
     {
