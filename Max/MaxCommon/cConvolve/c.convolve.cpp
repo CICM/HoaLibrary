@@ -26,7 +26,7 @@
  @seealso hoa.fx.convolve~, c.freeverb~, hoa.fx.freeverb~, hoa.process~
  */
 
-#include "HoaCommon.max.h"
+#include "../HoaCommon.max.h"
 
 #include <algorithm>
 #include <cstring>
@@ -66,6 +66,7 @@ void convolve_free(t_convolve *x);
 void convolve_dsp64(t_convolve *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void convolve_perform64(t_convolve *x, t_object *d, double **ins, long ni, double **outs, long no, long sampleframes, long f,void *up);
 t_max_err convolve_notify(t_convolve *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void convolve_assist(t_convolve *x, void *b, long m, long a, char *s);
 
 void convolve_set(t_convolve *x, t_symbol *s, long ac, t_atom *av);
 void convolve_dblclick(t_convolve *x);
@@ -91,6 +92,7 @@ int C74_EXPORT main()
     // @method signal @digest Signal to reverberate
 	// @description Signal to reverberate
     class_addmethod(c, (method) convolve_dsp64,     "dsp64",            A_CANT,  0);
+    class_addmethod(c, (method) convolve_assist,  "assist",           A_CANT,  0);
     
     // @method set @digest Set a new impulse response by passing <o>buffer~</o> object name.
 	// @description The <m>set</m> method sets a new impulse response by passing <o>buffer~</o> object name. An optionnal int can be passed after buffer name to set the buffer channel to be used.
@@ -182,7 +184,7 @@ void *convolve_new(t_symbol *s, int ac, t_atom *av)
 	return (x);
 }
 
-void index_assist(t_convolve *x, void *b, long m, long a, char *s)
+void convolve_assist(t_convolve *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_OUTLET)
 		sprintf(s,"(signal) Output");

@@ -26,7 +26,7 @@
  @seealso dac~, adc~, adstatus, ezdac~
  */
 
-#include "HoaCommon.max.h"
+#include "../../hoa.max.h"
 
 typedef struct _hoa_dac
 {

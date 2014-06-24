@@ -441,6 +441,11 @@
 		</attribute>
 	</attributelist>
 
+	<!--EXAMPLE-->
+	<examplelist>
+		<example img="hoa.2d.meter~.png" caption="the hoa.2d.meter~ GUI object" />
+	</examplelist>
+
 	<!--DISCUSSION-->
 	<discussion>
 		The <o>hoa.2d.meter~</o> object displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.

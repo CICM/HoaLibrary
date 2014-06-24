@@ -28,7 +28,7 @@
  @seealso hoa.process~, hoa.in, hoa.out~, hoa.out
  */
 
-#include "../HoaCommon.max.h"
+#include "../../hoa.max.h"
 #include "../HoaProcessSuite.h"
 
 typedef struct _hoa_sig_in

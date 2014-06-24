@@ -24,6 +24,9 @@
  @category ambisonics, hoa objects, GUI
  
  @seealso  hoa.2d.process~, hoa.amp~, hoa.delay~, hoa.gain~, hoa.2d.recomposer, hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~
+ 
+ @illustration on @caption the hoa.2d.space GUI object
+ @palette yes
  */
 
 #include "../Hoa2D.max.h"

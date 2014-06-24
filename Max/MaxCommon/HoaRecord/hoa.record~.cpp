@@ -26,7 +26,7 @@
  @seealso hoa.play~, sfplay~, sfrecord~
  */
 
-#include "HoaCommon.max.h"
+#include "../../hoa.max.h"
 
 void *record_class;
 

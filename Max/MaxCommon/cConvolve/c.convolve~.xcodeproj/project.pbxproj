@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C30D2A018E7410A00ED0EBE /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */; };
 		2C3377441907D131002A69A7 /* c.convolve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C3377431907D131002A69A7 /* c.convolve.cpp */; };
 		2C33774B1907D170002A69A7 /* AudioFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C3377451907D170002A69A7 /* AudioFFT.cpp */; };
 		2C33774C1907D170002A69A7 /* AudioFFT.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C3377461907D170002A69A7 /* AudioFFT.h */; };
@@ -23,7 +22,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.max.h; path = ../HoaCommon.max.h; sourceTree = "<group>"; };
 		2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoaCommon.xcconfig; path = ../MaxHoaCommon.xcconfig; sourceTree = "<group>"; };
 		2C3377431907D131002A69A7 /* c.convolve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = c.convolve.cpp; sourceTree = "<group>"; };
 		2C3377451907D170002A69A7 /* AudioFFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFFT.cpp; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 				2C3377481907D170002A69A7 /* FFTConvolver.h */,
 				2C3377491907D170002A69A7 /* Utilities.cpp */,
 				2C33774A1907D170002A69A7 /* Utilities.h */,
-				2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
 				2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */,
@@ -93,7 +90,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */,
-				2C30D2A018E7410A00ED0EBE /* HoaCommon.max.h in Headers */,
 				2C33774E1907D170002A69A7 /* FFTConvolver.h in Headers */,
 				2C33774C1907D170002A69A7 /* AudioFFT.h in Headers */,
 				2C3377501907D170002A69A7 /* Utilities.h in Headers */,

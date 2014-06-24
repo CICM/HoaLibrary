@@ -76,15 +76,14 @@ int C74_EXPORT main(void)
 	
 	CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_decoder, f_mode);
     CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural irregular");
+    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
-    // @description There is three decoding <m>mode</m> :
+    // @description There is two decoding <m>mode</m> :
     // <ul>
-    // <li><b>Ambisonics</b> : for a regular loudspeakers repartition over a sphere.</li>
+    // <li><b>Ambisonics</b> : for a standard or irregular loudspeakers repartition over a sphere.</li>
     // <li><b>Binaural</b> : for headphones.</li>
-    // <li><b>Irregular</b> : for an irregular loudspeakers repartition</li>
     // </ul>
 	
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_angles_of_channels, f_number_of_angles, MAX_CHANNELS*2);
@@ -254,8 +253,7 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         {
 			object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setDecodingMode(Hoa3D::DecoderMulti::Standard);
-            object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
-            object_attr_setdisabled((t_object *)x, hoa_sym_channels, 0);
+            object_attr_setdisabled((t_object *)x, hoa_sym_angles, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_offset, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 1);
 			float offset[2];
@@ -269,7 +267,6 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         {
 			x->f_decoder->setDecodingMode(Hoa3D::DecoderMulti::Binaural);
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 1);
-            object_attr_setdisabled((t_object *)x, hoa_sym_channels, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_offset, 1);
             object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 0);
 			x->f_mode = mode;
