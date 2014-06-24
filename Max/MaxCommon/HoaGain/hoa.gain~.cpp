@@ -24,6 +24,9 @@
  @category ambisonics, hoa objects, GUI, msp
  
  @seealso gain~, hoa.process~, hoa.amp~
+ 
+ @illustration on @caption the hoa.gain~ GUI object
+ @palette yes
  */
 
 #include "HoaCommon.max.h"

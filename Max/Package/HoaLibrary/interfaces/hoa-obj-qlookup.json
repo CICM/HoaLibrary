@@ -38,7 +38,18 @@
       "audio",
       "GUI",
       "MSP"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "audio",
+        "GUI",
+        "MSP"
+      ],
+      "action": "hoa.2d.meter~",
+      "pic": "hoa.2d.meter~.svg"
+    }
   },
   "hoa.2d.optim~": {
     "digest": "A 2d ambisonic signal optimization external.",
@@ -77,7 +88,16 @@
       "ambisonics",
       "hoa objects",
       "GUI"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "GUI"
+      ],
+      "action": "hoa.2d.recomposer",
+      "pic": "hoa.2d.recomposer.svg"
+    }
   },
   "hoa.2d.rotate~": {
     "digest": "A 2d ambisonic sound field rotation external",
@@ -98,7 +118,18 @@
       "audio",
       "GUI",
       "MSP"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "audio",
+        "GUI",
+        "MSP"
+      ],
+      "action": "hoa.2d.scope~",
+      "pic": "hoa.2d.scope~.svg"
+    }
   },
   "hoa.2d.space": {
     "digest": "A graphic user interface to design 2d ambisonic space",
@@ -107,7 +138,16 @@
       "ambisonics",
       "hoa objects",
       "GUI"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "GUI"
+      ],
+      "action": "hoa.2d.space",
+      "pic": "hoa.2d.space.svg"
+    }
   },
   "hoa.2d.vector~": {
     "digest": "A 2d soundfield energy and velocity vectors calculator.",
@@ -178,7 +218,18 @@
       "audio",
       "GUI",
       "MSP"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "audio",
+        "GUI",
+        "MSP"
+      ],
+      "action": "hoa.3d.scope~",
+      "pic": "hoa.3d.scope~.svg"
+    }
   },
   "hoa.3d.wider~": {
     "digest": "A 3d fractional ambisonic orders simulator",
@@ -235,7 +286,17 @@
       "hoa objects",
       "GUI",
       "msp"
-    ]
+    ],
+    "palette": {
+      "category": [
+        "ambisonics",
+        "hoa objects",
+        "GUI",
+        "msp"
+      ],
+      "action": "hoa.gain~",
+      "pic": "hoa.gain~.svg"
+    }
   },
   "hoa.in": {
     "digest": "message inlet for a patcher loaded by hoa.process~",

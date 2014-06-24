@@ -343,6 +343,11 @@
 		</attribute>
 	</attributelist>
 
+	<!--EXAMPLE-->
+	<examplelist>
+		<example img="hoa.gain~.png" caption="the hoa.gain~ GUI object" />
+	</examplelist>
+
 	<!--DISCUSSION-->
 	<discussion>
 		<o>hoa.gain~</o> is a multichannel exponential scaling volume slider. hoa.gain~ is a slider that scales signals. it can also make a smooth transition as you move from one value of the slider to the next.

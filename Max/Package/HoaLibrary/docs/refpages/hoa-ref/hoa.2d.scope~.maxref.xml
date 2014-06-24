@@ -184,6 +184,11 @@
 		</attribute>
 	</attributelist>
 
+	<!--EXAMPLE-->
+	<examplelist>
+		<example img="hoa.2d.scope~.png" caption="the hoa.2d.scope~ GUI object" />
+	</examplelist>
+
 	<!--DISCUSSION-->
 	<discussion>
 		<o>hoa.2d.scope~</o> displays the circular harmonics of an ambisonic sound field.

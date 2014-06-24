@@ -74,11 +74,10 @@
 				Mode
 			</digest>
 			<description>
-				There is three decoding <m>mode</m> :
+				There is two decoding <m>mode</m> :
 				<ul>
-				<li><b>Ambisonics</b> : for a regular loudspeakers repartition over a sphere.</li>
+				<li><b>Ambisonics</b> : for a standard or irregular loudspeakers repartition over a sphere.</li>
 				<li><b>Binaural</b> : for headphones.</li>
-				<li><b>Irregular</b> : for an irregular loudspeakers repartition</li>
 				</ul>
 			</description>
 			<attributelist>

@@ -323,6 +323,11 @@
 		</attribute>
 	</attributelist>
 
+	<!--EXAMPLE-->
+	<examplelist>
+		<example img="hoa.2d.recomposer.png" caption="the hoa.2d.recomposer GUI object" />
+	</examplelist>
+
 	<!--DISCUSSION-->
 	<discussion>
 		<o>hoa.2d.recomposer</o> helps you to set angle and widening value of channels to warp the sound field. It is mainly dedicated to the control of the <o>hoa.2d.recomposer~</o> processor object.
