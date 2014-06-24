@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C30D2A018E7410A00ED0EBE /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */; };
 		2CACD43E1900028700CC80B9 /* hoa.dac~.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD43D1900028700CC80B9 /* hoa.dac~.c */; };
 		8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BFD218C6282E00B408F9 /* hoa.max.cpp */; };
 		8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16BFD318C6282E00B408F9 /* hoa.max.h */; };
@@ -17,7 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaCommon.max.h; path = ../HoaCommon.max.h; sourceTree = "<group>"; };
 		2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoaCommon.xcconfig; path = ../MaxHoaCommon.xcconfig; sourceTree = "<group>"; };
 		2CACD43D1900028700CC80B9 /* hoa.dac~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.dac~.c"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.dac~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +44,6 @@
 			isa = PBXGroup;
 			children = (
 				2CACD43D1900028700CC80B9 /* hoa.dac~.c */,
-				2C30D29F18E7410A00ED0EBE /* HoaCommon.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
 				2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */,
@@ -75,7 +72,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */,
-				2C30D2A018E7410A00ED0EBE /* HoaCommon.max.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,7 +26,7 @@
  @seealso hoa.pi
  */
 
-#include "HoaCommon.max.h"
+#include "../HoaCommon.max.h"
 
 typedef struct _pi 
 {	

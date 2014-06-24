@@ -28,7 +28,7 @@
  @seealso hoa.process~, hoa.in~, hoa.in, hoa.out, hoa.out~, thispoly~, poly~, thispatcher, patcher
  */
 
-#include "../HoaCommon.max.h"
+#include "../Hoa2D3D.max.h"
 #include "../HoaProcessSuite.h"
 
 typedef struct _hoa_thisprocess
@@ -528,6 +528,6 @@ void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char 
 	}
     else 
 	{
-		sprintf(s,"(int) set mute, (bang) for report");
+		sprintf(s,"(mute) set mute, (bang) for report");
     }
 }

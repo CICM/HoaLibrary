@@ -28,7 +28,7 @@
  @seealso hoa.in~, hoa.in, hoa.out, hoa.out~, hoa.thisprocess~, poly~, patcher
  */
 
-#include "../HoaCommon.max.h"
+#include "../Hoa2D3D.max.h"
 #include "../HoaProcessSuite.h"
 
 t_class *hoa_processor_class;
@@ -1221,10 +1221,6 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
     int state = 0;
     int index = -1;
     target_arg = target_band = 0;
-    
-    t_box *b;
-    t_object* thisprocess;
-    t_patcher* patch;
     
     if (argc && argv)
     {

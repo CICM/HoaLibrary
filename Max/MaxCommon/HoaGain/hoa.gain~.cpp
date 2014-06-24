@@ -29,7 +29,7 @@
  @palette yes
  */
 
-#include "HoaCommon.max.h"
+#include "../../hoa.max.h"
 #include "Line.h"
 
 #define MAX_IO 64
