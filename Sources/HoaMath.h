@@ -417,7 +417,7 @@ namespace Hoa
 	{
 		if (x == 0 && y == 0)
 			return 0;
-		return atan2(y, x) - HOA_PI2;
+		return wrap(atan2(y, x) - HOA_PI2, -HOA_PI, HOA_PI);
 	}
 	
 	//! The radius converter function.

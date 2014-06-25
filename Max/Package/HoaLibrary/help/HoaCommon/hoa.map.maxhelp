@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 957.0, 757.0 ],
+		"rect" : [ 161.0, 51.0, 973.0, 802.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 957.0, 731.0 ],
+						"rect" : [ 161.0, 77.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -459,8 +459,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 667.799988, 210.0, 246.0, 45.0 ],
-									"text" : "To deassociate a hoa.map with others, simply send the \"mapname\" message (or clear the mapname attribute in the object inspector)",
+									"patching_rect" : [ 667.799988, 210.0, 255.200012, 45.0 ],
+									"text" : "To deassociate a hoa.map to the others, simply send the \"mapname\" message (or clear the mapname attribute in the object inspector)",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
 
@@ -474,7 +474,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 667.799988, 210.0, 242.5, 45.0 ],
+									"patching_rect" : [ 667.799988, 210.0, 255.200012, 45.0 ],
 									"rounded" : 0
 								}
 
@@ -489,7 +489,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 419.5, 117.0, 296.5, 84.0 ],
+									"patching_rect" : [ 419.5, 117.0, 300.0, 84.0 ],
 									"text" : "These three hoa.map objects share the same \"mapname\" attribute so they are linked together and react to the change of each others. So, sources and groups position, description and colors modifications will affect all linked hoa.map objects to control a hoa.3d.map~.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ]
 								}
@@ -4643,7 +4643,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6022,7 +6022,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7493,7 +7493,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7795,7 +7795,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u086002709"
+									"varname" : "u624001214"
 								}
 
 							}
@@ -8111,7 +8111,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -9382,7 +9382,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -13457,7 +13457,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 957.0, 731.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -13504,13 +13504,13 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-5::obj-2" : [ "hoa.map", "hoa.map", 0 ],
+			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ],
+			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
 			"obj-5::obj-18" : [ "hoa.2d.map[5]", "hoa.2d.map", 0 ],
 			"obj-5::obj-3" : [ "hoa.map[1]", "hoa.map[1]", 0 ],
-			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
+			"obj-5::obj-2" : [ "hoa.map", "hoa.map", 0 ],
 			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
-			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ],
-			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ]
+			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

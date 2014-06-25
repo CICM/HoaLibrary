@@ -102,8 +102,8 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
-	boxinfos->autoconnect_inputs = 0;
-	boxinfos->autoconnect_outputs = x->f_vector->getNumberOfChannels();
+	boxinfos->autoconnect_inputs = x->f_vector->getNumberOfChannels();
+	boxinfos->autoconnect_outputs = 0;
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;

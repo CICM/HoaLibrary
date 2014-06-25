@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 484.0, 201.0, 108.0, 264.0 ],
+						"rect" : [ 483.0, 199.0, 108.0, 264.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -70,6 +70,76 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-13",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 804.0, 597.0, 34.0, 20.0 ],
+									"presentation_rect" : [ 757.0, 467.0, 0.0, 0.0 ],
+									"text" : "print"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-10",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 804.0, 555.0, 63.0, 20.0 ],
+									"text" : "zl group 2"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-9",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "toto" ],
+									"patching_rect" : [ 679.0, 439.0, 37.0, 20.0 ],
+									"text" : "t toto"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-8",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "int", "int" ],
+									"patching_rect" : [ 696.0, 279.0, 32.5, 20.0 ],
+									"text" : "t i 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-3",
+									"maxclass" : "newobj",
+									"numinlets" : 17,
+									"numoutlets" : 16,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 639.0, 119.0, 235.0, 20.0 ],
+									"text" : "hoa.3d.process~ 3 hoa.fx.delay~"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -468,7 +538,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 129.0, 74.0, 205.0, 20.0 ],
-									"text" : "patcherargs 3 @mode 3d harmonics"
+									"text" : "patcherargs 1 @mode 3d harmonics"
 								}
 
 							}
@@ -491,7 +561,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 818.0, 173.0, 25.0, 25.0 ]
+									"patching_rect" : [ 893.0, 71.5, 25.0, 25.0 ]
 								}
 
 							}
@@ -506,10 +576,10 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 826.0, 233.0, 106.0, 39.0 ],
+									"patching_rect" : [ 915.0, 234.0, 106.0, 45.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "all", "none" ]
+									"tabs" : [ "all", "none", "0 0" ]
 								}
 
 							}
@@ -524,10 +594,10 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 879.0, 272.0, 53.0, 223.0 ],
+									"patching_rect" : [ 968.0, 279.0, 53.0, 223.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "1", "1", "2", "1", "2", "3" ]
+									"tabs" : [ "toto" ]
 								}
 
 							}
@@ -542,10 +612,10 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 826.0, 272.0, 53.0, 223.0 ],
+									"patching_rect" : [ 915.0, 279.0, 53.0, 223.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "-1", "-1", "-2", "-1", "-2", "-3" ]
+									"tabs" : [ "-1" ]
 								}
 
 							}
@@ -560,12 +630,12 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 333.0, 239.0, 106.0, 39.0 ],
+									"patching_rect" : [ 333.0, 229.0, 106.0, 49.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 1.0, 1.0, 106.0, 39.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "all", "none" ]
+									"tabs" : [ "all", "none", "0" ]
 								}
 
 							}
@@ -585,7 +655,7 @@
 									"presentation_rect" : [ 54.0, 40.0, 53.0, 223.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "1", "2", "3", "4" ]
+									"tabs" : [ "1" ]
 								}
 
 							}
@@ -605,12 +675,21 @@
 									"presentation_rect" : [ 1.0, 40.0, 53.0, 223.0 ],
 									"rounded" : 0.0,
 									"spacing_x" : 2.0,
-									"tabs" : [ "-1", "-2", "-3", "-4" ]
+									"tabs" : [ "-1" ]
 								}
 
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-13", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-10", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
 									"disabled" : 0,
@@ -882,10 +961,9 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-76", 0 ],
+									"destination" : [ "obj-8", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 655.0, 300.5, 543.0, 300.5 ],
 									"source" : [ "obj-67", 2 ]
 								}
 
@@ -901,7 +979,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-74", 0 ],
+									"destination" : [ "obj-9", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-68", 1 ]
@@ -1007,10 +1085,29 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-76", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 705.5, 300.5, 543.0, 300.5 ],
+									"source" : [ "obj-8", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-74", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-9", 0 ]
+								}
+
+							}
  ]
 					}
 ,
-					"patching_rect" : [ 0.0, 0.0, 108.0, 264.0 ]
+					"patching_rect" : [ -1.0, -2.0, 108.0, 264.0 ]
 				}
 
 			}
@@ -1022,6 +1119,47 @@
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.fx.delay~.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/effects",
+				"patcherrelativepath" : "../effects",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.help.process.infos.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/helputility",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.args.map.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.process~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

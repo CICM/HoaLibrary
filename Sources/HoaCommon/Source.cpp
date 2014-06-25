@@ -61,7 +61,17 @@ namespace HoaCommon
     
     void Source::setElevation(double elevation)
 	{
-		m_elevation = wrap_twopi(elevation);
+		m_elevation = wrap(elevation, -HOA_PI, HOA_PI);
+		if(m_elevation > HOA_PI2)
+		{
+			m_azimuth = wrap_twopi(m_azimuth + HOA_PI);
+			m_elevation = HOA_PI2 - (elevation - HOA_PI2);
+		}
+		else if(m_elevation < -HOA_PI2)
+		{
+			m_azimuth = wrap_twopi(m_azimuth + HOA_PI);
+			m_elevation = -HOA_PI2 + (-elevation + HOA_PI2);
+		}
 	}
 	
 	void Source::setCoordinatesCartesian(double abscissa, double ordinate)
