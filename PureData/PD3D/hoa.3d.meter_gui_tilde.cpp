@@ -614,10 +614,10 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
                 else
                     egraphics_set_color_rgba(g, &x->f_color_hot_signal);
                 
-				float azi = x->f_meter->getChannelPointAzimuth(i, 0);
-				float ele = x->f_meter->getChannelPointElevation(i, 0);
-				float abs =  abscissa(x->f_radius, azi, ele);
-				float ord = ordinate(x->f_radius, azi, ele);
+				double azi = x->f_meter->getChannelPointAzimuth(i, 0);
+				double ele = x->f_meter->getChannelPointElevation(i, 0);
+				double abs =  abscissa(x->f_radius, azi, ele);
+				double ord = ordinate(x->f_radius, azi, ele);
 				egraphics_move_to(g, abs, ord);
                 post("%i : %i", i, x->f_meter->getChannelNumberOfPoints(i));
                 abs = abscissa(x->f_meter->getChannelPointRadius(i, 0) , azi, ele);

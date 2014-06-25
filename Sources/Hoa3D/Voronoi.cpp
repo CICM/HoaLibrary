@@ -39,7 +39,6 @@ namespace Hoa
         {
             if(pt == boundaries[i])
             {
-                post("already there");
                 return;
             }
         }
@@ -445,32 +444,13 @@ namespace Hoa
     /////////////////////////////////////////////////////////
     // Voronoi Circle ///////////////////////////////////////
     /////////////////////////////////////////////////////////
-    VoronoiTriangle::VoronoiTriangle(double x, double y, double r)
-    {
-        xyz[0] = x;
-        xyz[1] = y;
-        xyz[2] = 0;
-        rad = r;
-    };
-    
-    VoronoiTriangle::VoronoiTriangle(double x, double y, double z, double r)
-    {
-        xyz[0] = x;
-        xyz[1] = y;
-        xyz[2] = z;
-        rad = r;
-    };
-    
-    VoronoiTriangle::VoronoiTriangle(VoronoiPoint pt, double r)
-    {
-        xyz[0] = pt.x();
-        xyz[1] = pt.y();
-        xyz[2] = pt.z();
-        rad = r;
-    }
     
     VoronoiTriangle::VoronoiTriangle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3)
     {
+        pts[0] = pt1;
+        pts[1] = pt2;
+        pts[2] = pt3;
+        
         VoronoiPoint ref_translate = pt1;
         pt1.translateCartesian(-ref_translate.x(), -ref_translate.y(), -ref_translate.z());
         pt2.translateCartesian(-ref_translate.x(), -ref_translate.y(), -ref_translate.z());
@@ -486,39 +466,43 @@ namespace Hoa
         
         double ref_rotate_y = atan2(pt3.z(), pt3.x());
         pt3.rotateAroundY(-ref_rotate_y);
-        /*
-        if(pt3.y() < 0 || pt3.y() > pt2.y()) // not sure
-        {
-            xyz[0] = xyz[1] = xyz[2] = 0.;
-            rad = -1;
-            return;
-        }*/
-        VoronoiPoint center;
+        
         double alpha = pt3.azimuth();
-        if(alpha > VoroPi)
+        
+        
+        if((alpha < 0 && alpha > -VoroPi) || alpha > VoroPi)
         {
-            alpha = Voro2Pi - alpha;
-            rad =  pt2.distance(pt3) / (2. * sin(alpha));
+            alpha = 2. * sin(Voro2Pi - alpha);
+            if(alpha < VoroMin)
+                circumradius = -1;
+
+            circumradius =  pt2.distance(pt3) / alpha;
             double y = pt2.y() * 0.5;
-            double x = sqrt(rad * rad - y*y);
-            center = VoronoiPoint(x, y, 0);
+            if(fabs(y) > fabs(circumradius))
+                circumradius = -1;
+
+            double x = sqrt(circumradius * circumradius - y*y);
+            circumcenter = VoronoiPoint(x, y, 0);
         }
         else
         {
-            rad =  pt2.distance(pt3) / (2. * sin(alpha));
+            alpha = 2. * sin(alpha);
+            if(alpha < VoroMin)
+                circumradius = -1;
+
+            circumradius =  pt2.distance(pt3) / alpha;
             double y = pt2.y() * 0.5;
-            double x = sqrt(rad * rad - y*y);
-            center = VoronoiPoint(-x, y, 0);
+            if(fabs(y) > fabs(circumradius))
+                circumradius = -1;
+            
+            double x = sqrt(circumradius * circumradius - y*y);
+            circumcenter = VoronoiPoint(-x, y, 0);
         }
         
-        center.rotateAroundY(ref_rotate_y);
-        center.rotateAroundX(ref_rotate_x);
-        center.rotateAroundZ(ref_rotate_z);
-        center.translateCartesian(ref_translate);
-        
-        xyz[0] = center.x();
-        xyz[1] = center.y();
-        xyz[2] = center.z();
+        circumcenter.rotateAroundY(ref_rotate_y);
+        circumcenter.rotateAroundX(ref_rotate_x);
+        circumcenter.rotateAroundZ(ref_rotate_z);
+        circumcenter.translateCartesian(ref_translate);
     }
     
     VoronoiTriangle::~VoronoiTriangle()
@@ -571,21 +555,20 @@ namespace Hoa
 
 	void Voronoi::evaluateTriangle(int i, int j, int k)
 	{
+        int b = 1;
         int size = points.size();
-        if(i == 0 || j == 0 || k == 0)
+        if(i == b || j == b || k == b)
         {
             post("\n%i %i %i", i, j, k);
-//            points[i].postCartesian();
-//            points[j].postCartesian();
-//            points[k].postCartesian();
         }
-        VoronoiTriangle circle = VoronoiTriangle(points[i], points[j], points[k]);
-        VoronoiPoint center = circle.center();
-        if(i == 0 || j == 0 || k == 0)
+        VoronoiTriangle triangle = VoronoiTriangle(points[i], points[j], points[k]);
+        VoronoiPoint center = triangle.getCircumcenter();
+        
+        if(i == b || j == b || k == b)
             post("result : ");
-        if(circle.radius() < VoroMin || center.radius() < VoroMin)
+        if(triangle.getCircumradius() < VoroMin || center.radius() < VoroMin)
         {
-            if(i == 0 || j == 0 || k == 0)
+            if(i == b || j == b || k == b)
                 post("removed by radius or center");
             return;
         }
@@ -594,17 +577,20 @@ namespace Hoa
         {
             if(l != i && l != j && l != k && l)
             {
-                if((points[l].distance(center) + VoroMin) < circle.radius())
+                if((points[l].distance(center) + VoroMin) < triangle.getCircumradius())
                 {
-                    if(i == 0 || j == 0 || k == 0)
+                    if(i == b || j == b || k == b)
                     post("removed by %i : %f", l, points[l].distance(center));
                     return;
                 }
             }
         }
+        center.postPolar();
         center.normalize();
-        if(i == 0 || j == 0 || k == 0)
+        if(i == b || j == b || k == b)
             center.postCartesian();
+        if(i == 1 || j == 3 || k == 4)
+            post("this one");
         points[i].addBoundary(center);
         points[j].addBoundary(center);
         points[k].addBoundary(center);

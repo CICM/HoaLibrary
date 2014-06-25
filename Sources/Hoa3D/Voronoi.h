@@ -114,12 +114,7 @@ namespace Hoa
         {
             if(xyz[0] == 0 && xyz[1] == 0)
                 return 0;
-            double alpha = atan2(xyz[1], xyz[0]) - VoroPi2;
-            while (alpha < 0)
-                alpha += Voro2Pi;
-            while (alpha > Voro2Pi)
-                alpha -= Voro2Pi;
-            return alpha;
+            return atan2(xyz[1], xyz[0]) - VoroPi2;
         }
         
         double elevation() const
@@ -255,39 +250,61 @@ namespace Hoa
     class VoronoiTriangle
     {
 		private :
-        double xyz[3];
-        double rad;
+        VoronoiPoint pts[3];
+        VoronoiPoint circumcenter;
+        double circumradius;
         
         public :
-        VoronoiTriangle(double x, double y, double r);
-        VoronoiTriangle(double x, double y, double z, double r);
-        VoronoiTriangle(VoronoiPoint pt, double r);
         VoronoiTriangle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3);
         ~VoronoiTriangle();
         
-        double x() const
+        double getCircumcenterX() const
         {
-            return xyz[0];
+            return circumcenter.x();
         }
         
-        double y() const
+        double getCircumcenterY() const
         {
-            return xyz[1];
+            return circumcenter.y();
         }
         
-        double z() const
+        double getCircumcenterZ() const
         {
-            return xyz[2];
+            return circumcenter.z();
         }
         
-        VoronoiPoint center() const
+        VoronoiPoint getCircumcenter() const
         {
-            return VoronoiPoint(x(), y(), z(), 0);
+            return circumcenter;
         }
         
-        double radius() const
+        double getCircumradius() const
         {
-            return rad;
+            return circumradius;
+        }
+        
+        VoronoiPoint getPoint(int index) const
+        {
+            assert(index >= 0 && index < 3);
+            return pts[index];
+        }
+        
+        double getPointX(int index) const
+        {
+            assert(index >= 0 && index < 3);
+            return pts[index].x();
+        }
+        
+        double getPointY(int index) const
+        {
+            assert(index >= 0 && index < 3);
+            return pts[index].y();
+        }
+        
+        double getPointZ(int index) const
+        {
+            assert(index >= 0 && index < 3);
+            return pts[index].z();
         }
     };
     

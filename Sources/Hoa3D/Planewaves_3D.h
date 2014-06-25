@@ -148,12 +148,14 @@ namespace Hoa3D
     {
         if(numberOfPoints == 4) // Tethrahedron
         {
+            double oh = sqrt(2. / 3.) / sqrt(3. / 8.) - 1;
+            double hc = sqrt(1 - oh * oh);
             azimuths[0] = 0.;
             elevations[0] = HOA_PI2;
             azimuths[1] = 0.;
             azimuths[2] = HOA_2PI / 3.;
             azimuths[3] = 2. * HOA_2PI / 3.;
-            elevations[1] = elevations[2] = elevations[3] = HOA_PI2 - HOA_2PI / 3.;
+            elevations[1] = elevations[2] = elevations[3] = elevation(0, hc, -oh);
         }
         else if(numberOfPoints == 5) // Not regular : Octahedron with only 3 points at 0 azymuth
         {
@@ -206,8 +208,8 @@ namespace Hoa3D
             azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
             azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
             azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = elevation(-1, 1, 1);
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -elevations[3];
             elevations[8] = HOA_PI2;
             azimuths[8] = 0;
         }
@@ -217,8 +219,8 @@ namespace Hoa3D
             azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
             azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
             azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = elevation(-1, 1, 1);
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -elevations[3];
             elevations[8] = HOA_PI2;
             elevations[9] = -HOA_PI2;
             azimuths[9] = azimuths[8] = 0;
@@ -229,8 +231,8 @@ namespace Hoa3D
             azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
             azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
             azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = HOA_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -HOA_PI4;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = elevation(-1, 1, 1);
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -elevations[3];
             elevations[8] = HOA_PI2;
             elevations[9] = elevations[9] = -HOA_PI2;
             azimuths[9] = azimuths[8] = 0;
@@ -243,9 +245,10 @@ namespace Hoa3D
             elevations[11] = -HOA_PI2;
             for(int i = 1; i < 6; i++)
             {
-                azimuths[i] = azimuths[i+5] = (i - 1.) / 5. * HOA_2PI;
-                elevations[i] = HOA_PI2 / 3.;
-                elevations[i+5] = -HOA_PI2 / 3.;
+                azimuths[i] = (i - 1.) / 5. * HOA_2PI;
+                azimuths[i+5] = azimuths[i] - HOA_PI / 5.;
+                elevations[i] = atan(0.5);
+                elevations[i+5] = -elevations[i];
             }
         }
         else // Two circles
@@ -263,12 +266,6 @@ namespace Hoa3D
                 azimuths[i] = (double)(i - up) / (double)down * HOA_2PI;
                 elevations[i] = -HOA_PI4;
             }
-        }
-        
-        for(int i = 0; i < numberOfPoints; i++)
-        {
-            azimuths[i] = wrap_twopi(azimuths[i]);
-            elevations[i] = wrap_twopi(elevations[i]);
         }
     }
 	
