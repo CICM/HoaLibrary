@@ -34,8 +34,17 @@ namespace Hoa
     
     void VoronoiPoint::addBoundary(VoronoiPoint const& pt)
     {
+        const int size = boundaries.size();
+        for(int i = 0; i < size; i++)
+        {
+            if(pt == boundaries[i])
+            {
+                post("already there");
+                return;
+            }
+        }
         boundaries.push_back(pt);
-        boundaries[boundaries.size()-1].setRelativePoint(*this);
+        boundaries[size].setRelativePoint(*this);
     }
     
     void VoronoiPoint::setRelativePoint(VoronoiPoint const& pt)
@@ -76,6 +85,11 @@ namespace Hoa
     void VoronoiPoint::sortBoundaries()
     {
         std::sort(boundaries.begin(), boundaries.end(), compareRelativeAzimuth);
+    }
+    
+    void VoronoiPoint::normalize()
+    {
+        *this = VoronoiPoint(1, azimuth(), elevation(), 1);
     }
     
     VoronoiPoint VoronoiPoint::operator-(VoronoiPoint const& pt) const
@@ -431,7 +445,7 @@ namespace Hoa
     /////////////////////////////////////////////////////////
     // Voronoi Circle ///////////////////////////////////////
     /////////////////////////////////////////////////////////
-    VoronoiCircle::VoronoiCircle(double x, double y, double r)
+    VoronoiTriangle::VoronoiTriangle(double x, double y, double r)
     {
         xyz[0] = x;
         xyz[1] = y;
@@ -439,7 +453,7 @@ namespace Hoa
         rad = r;
     };
     
-    VoronoiCircle::VoronoiCircle(double x, double y, double z, double r)
+    VoronoiTriangle::VoronoiTriangle(double x, double y, double z, double r)
     {
         xyz[0] = x;
         xyz[1] = y;
@@ -447,7 +461,7 @@ namespace Hoa
         rad = r;
     };
     
-    VoronoiCircle::VoronoiCircle(VoronoiPoint pt, double r)
+    VoronoiTriangle::VoronoiTriangle(VoronoiPoint pt, double r)
     {
         xyz[0] = pt.x();
         xyz[1] = pt.y();
@@ -455,7 +469,7 @@ namespace Hoa
         rad = r;
     }
     
-    VoronoiCircle::VoronoiCircle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3)
+    VoronoiTriangle::VoronoiTriangle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3)
     {
         VoronoiPoint ref_translate = pt1;
         pt1.translateCartesian(-ref_translate.x(), -ref_translate.y(), -ref_translate.z());
@@ -472,32 +486,30 @@ namespace Hoa
         
         double ref_rotate_y = atan2(pt3.z(), pt3.x());
         pt3.rotateAroundY(-ref_rotate_y);
-        
+        /*
         if(pt3.y() < 0 || pt3.y() > pt2.y()) // not sure
         {
             xyz[0] = xyz[1] = xyz[2] = 0.;
             rad = -1;
             return;
-        }
-        post("\n-----------------------");
-        pt1.postCartesian();
-        pt2.postCartesian();
-        pt3.postCartesian();
+        }*/
         VoronoiPoint center;
         double alpha = pt3.azimuth();
         if(alpha > VoroPi)
         {
             alpha = Voro2Pi - alpha;
             rad =  pt2.distance(pt3) / (2. * sin(alpha));
-            center = VoronoiPoint(cos(alpha) * rad, pt2.y() * 0.5, 0);
+            double y = pt2.y() * 0.5;
+            double x = sqrt(rad * rad - y*y);
+            center = VoronoiPoint(x, y, 0);
         }
         else
         {
             rad =  pt2.distance(pt3) / (2. * sin(alpha));
-            center = VoronoiPoint(-cos(alpha) * rad, pt2.y() * 0.5, 0);
+            double y = pt2.y() * 0.5;
+            double x = sqrt(rad * rad - y*y);
+            center = VoronoiPoint(-x, y, 0);
         }
-        post("center  : radius %f  = %f / 2 * sin(%f) = %f / 2 * %f", rad, pt2.distance(pt3), alpha, pt2.distance(pt3), sin(alpha));
-        center.postCartesian();
         
         center.rotateAroundY(ref_rotate_y);
         center.rotateAroundX(ref_rotate_x);
@@ -509,7 +521,7 @@ namespace Hoa
         xyz[2] = center.z();
     }
     
-    VoronoiCircle::~VoronoiCircle()
+    VoronoiTriangle::~VoronoiTriangle()
     {
         ;
     };
@@ -540,8 +552,7 @@ namespace Hoa
 	void Voronoi::perform()
 	{
         int size = points.size();
-        //for(int i = 0; i < size - 2; i++)
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < size - 2; i++)
         {
             for(int j = i+1; j < size - 1; j++)
             {
@@ -554,8 +565,6 @@ namespace Hoa
         
         for(int i = 0; i < size; i++)
         {
-            points[i].normalizeBoundaries();
-            points[i].cleanBoundaries();
             points[i].sortBoundaries();
         }
 	};
@@ -563,31 +572,39 @@ namespace Hoa
 	void Voronoi::evaluateTriangle(int i, int j, int k)
 	{
         int size = points.size();
-        post("\n%i %i %i", i, j, k);
-        points[i].postCartesian();
-        points[j].postCartesian();
-        points[k].postCartesian();
-        VoronoiCircle circle = VoronoiCircle(points[i], points[j], points[k]);
-        post("result : ");
-        if(circle.radius() < 0)
+        if(i == 0 || j == 0 || k == 0)
         {
-            post("removed by radius");
+            post("\n%i %i %i", i, j, k);
+//            points[i].postCartesian();
+//            points[j].postCartesian();
+//            points[k].postCartesian();
+        }
+        VoronoiTriangle circle = VoronoiTriangle(points[i], points[j], points[k]);
+        VoronoiPoint center = circle.center();
+        if(i == 0 || j == 0 || k == 0)
+            post("result : ");
+        if(circle.radius() < VoroMin || center.radius() < VoroMin)
+        {
+            if(i == 0 || j == 0 || k == 0)
+                post("removed by radius or center");
             return;
         }
-        VoronoiPoint center = circle.center();
-        center.postCartesian();
+        
         for(int l = 0; l < size; l++)
         {
             if(l != i && l != j && l != k && l)
             {
-                if((points[l].distance(center) + FLT_EPSILON) < circle.radius())
+                if((points[l].distance(center) + VoroMin) < circle.radius())
                 {
+                    if(i == 0 || j == 0 || k == 0)
                     post("removed by %i : %f", l, points[l].distance(center));
                     return;
                 }
             }
         }
-        
+        center.normalize();
+        if(i == 0 || j == 0 || k == 0)
+            center.postCartesian();
         points[i].addBoundary(center);
         points[j].addBoundary(center);
         points[k].addBoundary(center);

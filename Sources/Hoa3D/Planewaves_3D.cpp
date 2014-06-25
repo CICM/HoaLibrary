@@ -27,12 +27,12 @@ namespace Hoa3D
 			if(m_channels_elevation[i] > HOA_PI2)
 			{
 				m_channels_azimuth[i] = wrap_twopi(m_channels_azimuth[i] + HOA_PI);
-				m_channels_elevation[i] -= HOA_PI2;
+				m_channels_elevation[i] = HOA_PI2 - (m_channels_elevation[i] - HOA_PI2);
 			}
 			else if (m_channels_elevation[i] < -HOA_PI2)
 			{
 				m_channels_azimuth[i] = wrap_twopi(m_channels_azimuth[i] + HOA_PI);
-				m_channels_elevation[i] += HOA_PI2;
+				m_channels_elevation[i] = -HOA_PI2 + (-m_channels_elevation[i] + HOA_PI2);
 			}
 		}
 	}

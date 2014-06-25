@@ -80,11 +80,12 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -76 -706 phasor~ 0.3;
 #X obj -265 -330 hoa.3d.meter~ @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
-9 @angles 45 45 135 45 225 45 315 45 45 -45 135 -45 225 -45 315 -45
-0 90 @rotation anti-clockwise @vectors none @interval 50 @bgcolor 0.76
-0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
-0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
-1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+8 @angles 45 35 135 35.2644 225 35.2644 315 35.2644 45 -35.2644 135
+-35.2644 225 -35.2644 315 -35.2644 @rotation anti-clockwise @vectors
+none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
+@coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85
+0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1
+0.8 @velocitycolor 1 0 0 0.8;
 #X obj 360 -361 * 360;
 #X obj 307 -393 / 48;
 #X msg 307 -498 64;
@@ -108,6 +109,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 polar @zoom 0.35;
 #X obj -237 -91 print;
 #X obj 53 -310 c.prepend source;
+#X msg 132 -695 angles 45 35 \, 2.6439e+06 135 35 \, 2.6439e+06 -135
+35 \, 2.6439e+06 -45 35 \, 2.6439e+06 45 -35 \, 2.6439e+06 135 -35
+\, 2.6439e+06 -135 -35 \, 2.6439e+06 -45 -35 \, 2.6439e+06;
 #X connect 1 0 9 0;
 #X connect 2 0 4 0;
 #X connect 3 0 2 0;
@@ -202,4 +206,5 @@ polar @zoom 0.35;
 #X connect 61 0 60 0;
 #X connect 65 0 64 0;
 #X connect 65 0 63 0;
+#X connect 66 0 52 0;
 #X coords 0 791 1 790 100 60 0;

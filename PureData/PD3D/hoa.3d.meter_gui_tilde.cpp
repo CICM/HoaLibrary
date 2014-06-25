@@ -627,16 +627,12 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j);
 					ele = x->f_meter->getChannelPointElevation(i, j);
-                    if(ele >= 0)
-                    {
-                        abs = abscissa(x->f_radius, azi, ele);
-                        ord = ordinate(x->f_radius, azi, ele);
-                        egraphics_line_to(g, abs, ord);
-                        abs = abscissa(x->f_meter->getChannelPointRadius(i, j) , azi, ele);
-                        ord = ordinate(x->f_meter->getChannelPointRadius(i, j), azi, ele);
-                        post("%i %f %f %f",j, abs, ord, height(x->f_meter->getChannelPointRadius(i, j), azi, ele));
-                    }
-					
+                    abs = abscissa(x->f_radius, azi, ele);
+                    ord = ordinate(x->f_radius, azi, ele);
+                    egraphics_line_to(g, abs, ord);
+                    abs = abscissa(x->f_meter->getChannelPointRadius(i, j) , azi, ele);
+                    ord = ordinate(x->f_meter->getChannelPointRadius(i, j), azi, ele);
+                    post("%i %f %f %f",j, abs, ord, height(x->f_meter->getChannelPointRadius(i, j), azi, ele));
 				
 				}
 				egraphics_close_path(g);

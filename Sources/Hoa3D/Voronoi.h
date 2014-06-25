@@ -21,7 +21,7 @@
 #define VoroPi  (3.141592653589793238462643383279502884)
 #define Voro2Pi (6.283185307179586476925286766559005)
 #define VoroPi2 (1.57079632679489661923132169163975144)
-
+#define VoroMin 0.002
 namespace Hoa
 {
     /////////////////////////////////////////////////////////
@@ -124,9 +124,9 @@ namespace Hoa
         
         double elevation() const
         {
-            if(xyz[0] == 0 && xyz[1] == 0 && xyz[2] == 0)
+            if(xyz[2] == 0)
                 return 0;
-            return VoroPi2 - acos(xyz[2] / radius());
+            return asin(xyz[2] / radius());
         }
         
         double x_rel() const
@@ -164,6 +164,8 @@ namespace Hoa
         {
             return VoronoiPoint(y() * pt.z() - z() * pt.y(), z() * pt.x() - x() * pt.z(), x() * pt.y() - y() * pt.x());
         }
+        
+        void normalize();
         
         void shiftElevation(double elevation);
         void shiftElevation(VoronoiPoint const& pt);
@@ -228,13 +230,7 @@ namespace Hoa
         
         inline bool operator==(VoronoiPoint const& pt) const
         {
-//            post("-----");
-//            postCartesian();
-//            pt.postCartesian();
-//            post("%i", (fabs(x() - pt.x()) < DBL_EPSILON));
-//            post("%i", (fabs(y() - pt.y()) < DBL_EPSILON));
-//            post("%i", (fabs(z() - pt.z()) < DBL_EPSILON));
-            return (fabs(x() - pt.x()) < DBL_EPSILON) && (fabs(y() - pt.y()) < DBL_EPSILON) && (fabs(z() - pt.z()) < DBL_EPSILON);
+            return (fabs(x() - pt.x()) < VoroMin) && (fabs(y() - pt.y()) < VoroMin) && (fabs(z() - pt.z()) < VoroMin);
         };
         
         inline bool operator!=(VoronoiPoint const& pt) const
@@ -254,20 +250,20 @@ namespace Hoa
     
     
     /////////////////////////////////////////////////////////
-    // Voronoi Circle ///////////////////////////////////////
+    // Voronoi Triangle /////////////////////////////////////
     /////////////////////////////////////////////////////////
-    class VoronoiCircle
+    class VoronoiTriangle
     {
 		private :
         double xyz[3];
         double rad;
         
         public :
-        VoronoiCircle(double x, double y, double r);
-        VoronoiCircle(double x, double y, double z, double r);
-        VoronoiCircle(VoronoiPoint pt, double r);
-        VoronoiCircle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3);
-        ~VoronoiCircle();
+        VoronoiTriangle(double x, double y, double r);
+        VoronoiTriangle(double x, double y, double z, double r);
+        VoronoiTriangle(VoronoiPoint pt, double r);
+        VoronoiTriangle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3);
+        ~VoronoiTriangle();
         
         double x() const
         {
