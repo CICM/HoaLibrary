@@ -114,12 +114,12 @@ namespace Hoa
         {
             if(xyz[0] == 0 && xyz[1] == 0)
                 return 0;
-            double azi = atan2(xyz[1], xyz[0]) - VoroPi2;
-            while(azi < -VoroPi)
-                azi += Voro2Pi;
-            while(azi > VoroPi)
-                azi -= Voro2Pi;
-            return azi;
+            double alpha = atan2(xyz[1], xyz[0]) - VoroPi2;
+            while (alpha < 0)
+                alpha += Voro2Pi;
+            while (alpha > Voro2Pi)
+                alpha -= Voro2Pi;
+            return alpha;
         }
         
         double elevation() const

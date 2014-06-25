@@ -65,12 +65,6 @@ namespace Hoa
             {
                 if(i != j && boundaries[i] == boundaries[j])
                 {
-                    post("\ndelete");
-                    post("%i", i);
-                    boundaries[i].postCartesian();
-                    post("%i", j);
-                    boundaries[j].postCartesian();
-                    
                     boundaries.erase(boundaries.begin()+j);
                     size--;
                     j--;
@@ -479,21 +473,31 @@ namespace Hoa
         double ref_rotate_y = atan2(pt3.z(), pt3.x());
         pt3.rotateAroundY(-ref_rotate_y);
         
-        double alpha = pt3.azimuth();
-        rad =  pt1.distance(pt2) / (2. * sin(fabs(alpha)));
-        if(fabs(rad) > 2)
+        if(pt3.y() < 0 || pt3.y() > pt2.y()) // not sure
         {
             xyz[0] = xyz[1] = xyz[2] = 0.;
             rad = -1;
             return;
         }
-        
+        post("\n-----------------------");
+        pt1.postCartesian();
+        pt2.postCartesian();
+        pt3.postCartesian();
         VoronoiPoint center;
-        if((alpha < 0 && alpha > -VoroPi) || alpha > VoroPi)
-            center = VoronoiPoint(rad, pt2.y() * 0.5, 0);
+        double alpha = pt3.azimuth();
+        if(alpha > VoroPi)
+        {
+            alpha = Voro2Pi - alpha;
+            rad =  pt2.distance(pt3) / (2. * sin(alpha));
+            center = VoronoiPoint(cos(alpha) * rad, pt2.y() * 0.5, 0);
+        }
         else
-            center = VoronoiPoint(-rad, pt2.y() * 0.5, 0);
-        
+        {
+            rad =  pt2.distance(pt3) / (2. * sin(alpha));
+            center = VoronoiPoint(-cos(alpha) * rad, pt2.y() * 0.5, 0);
+        }
+        post("center  : radius %f  = %f / 2 * sin(%f) = %f / 2 * %f", rad, pt2.distance(pt3), alpha, pt2.distance(pt3), sin(alpha));
+        center.postCartesian();
         
         center.rotateAroundY(ref_rotate_y);
         center.rotateAroundX(ref_rotate_x);
@@ -536,7 +540,8 @@ namespace Hoa
 	void Voronoi::perform()
 	{
         int size = points.size();
-        for(int i = 0; i < size - 2; i++)
+        //for(int i = 0; i < size - 2; i++)
+        for(int i = 0; i < 1; i++)
         {
             for(int j = i+1; j < size - 1; j++)
             {
@@ -549,40 +554,40 @@ namespace Hoa
         
         for(int i = 0; i < size; i++)
         {
-            if(i == 0){
-                points[i].postBoundariesCartesian(); post("");}
             points[i].normalizeBoundaries();
-            if(i == 0){
-                points[i].postBoundariesCartesian(); post("");}
             points[i].cleanBoundaries();
-            if(i == 0){
-                points[i].postBoundariesCartesian(); post("");}
             points[i].sortBoundaries();
-            if(i == 0){
-                points[i].postBoundariesCartesian(); post("");}
         }
 	};
 
 	void Voronoi::evaluateTriangle(int i, int j, int k)
 	{
         int size = points.size();
+        post("\n%i %i %i", i, j, k);
+        points[i].postCartesian();
+        points[j].postCartesian();
+        points[k].postCartesian();
         VoronoiCircle circle = VoronoiCircle(points[i], points[j], points[k]);
+        post("result : ");
         if(circle.radius() < 0)
         {
+            post("removed by radius");
             return;
         }
-        
+        VoronoiPoint center = circle.center();
+        center.postCartesian();
         for(int l = 0; l < size; l++)
         {
             if(l != i && l != j && l != k && l)
             {
-                if(points[l].distance(circle.center()) < circle.radius())
+                if((points[l].distance(center) + FLT_EPSILON) < circle.radius())
                 {
+                    post("removed by %i : %f", l, points[l].distance(center));
                     return;
                 }
             }
         }
-        VoronoiPoint center = circle.center();
+        
         points[i].addBoundary(center);
         points[j].addBoundary(center);
         points[k].addBoundary(center);

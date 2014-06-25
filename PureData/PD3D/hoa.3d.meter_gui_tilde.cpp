@@ -13,7 +13,7 @@ typedef struct  _hoa_meter_3d
 	t_edspbox   j_box;
     
     Hoa3D::Meter*   f_meter;
-    
+    t_outlet*       f_out;
     t_float*        f_signals;
     t_float         f_vector_coords[4];
     long            f_ramp;
@@ -237,7 +237,7 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
     x->f_clock = clock_new(x,(t_method)hoa_meter_3d_tick);
 	x->f_startclock = 0;
     eobj_dspsetup((t_ebox *)x, x->f_meter->getNumberOfChannels(), 0);
-    
+    x->f_out = listout(x);
     flags = 0
     | EBOX_GROWLINK
     | EBOX_IGNORELOCKCLICK
