@@ -72,6 +72,12 @@ namespace Hoa3D
             assert(index < m_number_of_channels);
             return m_voronoi->getPointVoronoiElevation(index, pointindex);
         }
+        
+        inline double getChannelPointRadius(unsigned int index, unsigned int pointindex) const
+        {
+            assert(index < m_number_of_channels);
+            return m_voronoi->getPointVoronoiRadius(index, pointindex);
+        }
 
         inline double getChannelPeak(unsigned int index) const
         {

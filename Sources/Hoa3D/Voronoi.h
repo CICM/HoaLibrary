@@ -17,7 +17,10 @@
 #include <assert.h>
 #include <algorithm>
 #include "../Hoa.h"
+
 #define VoroPi  (3.141592653589793238462643383279502884)
+#define Voro2Pi (6.283185307179586476925286766559005)
+#define VoroPi2 (1.57079632679489661923132169163975144)
 
 namespace Hoa
 {
@@ -33,11 +36,13 @@ namespace Hoa
         std::vector<VoronoiPoint> boundaries;
         
         public :
-        VoronoiPoint(double x = 0, double y = 0, double z = 0);
+        VoronoiPoint(double x_radius = 0, double y_azimuth = 0, double z_elevation = 0, bool polar = 0);
         
-        void addBoundary(VoronoiPoint pt);
+        void addBoundary(VoronoiPoint const& pt);
         void clearBoundaries();
         void sortBoundaries();
+        void cleanBoundaries();
+        void normalizeBoundaries();
         void setRelativePoint(VoronoiPoint const& pt);
         
         int getNumberOfBoundaries() const
@@ -57,6 +62,34 @@ namespace Hoa
             return boundaries[index].elevation();
         }
         
+        double getBoundaryRadius(int index) const
+        {
+            assert(index < boundaries.size());
+            return boundaries[index].radius();
+        }
+        
+        void postCartesian() const
+        {
+            post("Point Cartesian : %f %f %f", x(), y(), z());
+        }
+        
+        void postPolar() const
+        {
+            post("Point Polar : %f %f %f", radius(), azimuth(), elevation());
+        }
+        
+        void postBoundariesCartesian() const
+        {
+            for(int i = 0; i < boundaries.size(); i++)
+                post("Boundary %i Cartesian : %f %f %f", i, boundaries[i].x(), boundaries[i].y(), boundaries[i].z());
+        }
+        
+        void postBoundariesPolar() const
+        {
+            for(int i = 0; i < boundaries.size(); i++)
+                post("Boundary %i Polar : %f %f %f", i, boundaries[i].radius(), boundaries[i].azimuth(), boundaries[i].elevation());
+        }
+        
         double x() const
         {
             return xyz[0];
@@ -74,21 +107,26 @@ namespace Hoa
         
         double radius() const
         {
-            return sqrt(xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[1] * xyz[1]);
+            return sqrt(xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[2] * xyz[2]);
         }
         
         double azimuth() const
         {
             if(xyz[0] == 0 && xyz[1] == 0)
                 return 0;
-            return atan2(xyz[1], xyz[0]);
+            double alpha = atan2(xyz[1], xyz[0]) - VoroPi2;
+            while (alpha < 0)
+                alpha += Voro2Pi;
+            while (alpha > Voro2Pi)
+                alpha -= Voro2Pi;
+            return alpha;
         }
         
         double elevation() const
         {
-            if (xyz[0] == 0 && xyz[1] == 0 && xyz[2] == 0)
-                return VoroPi * 0.5;
-            return acos(xyz[2] / radius());
+            if(xyz[0] == 0 && xyz[1] == 0 && xyz[2] == 0)
+                return 0;
+            return VoroPi2 - acos(xyz[2] / radius());
         }
         
         double x_rel() const
@@ -118,7 +156,8 @@ namespace Hoa
         
         double distance(VoronoiPoint const& pt) const
         {
-            return sqrt(pow(x() - pt.x(), 2) + pow(y() - pt.y(), 2) + pow(z() - pt.z(), 2));
+            double xm  = x() - pt.x(), ym = y() - pt.y(), zm = z() - pt.z();
+            return sqrt(xm*xm + ym *ym + zm *zm);
         }
         
         VoronoiPoint cross(VoronoiPoint const& pt) const
@@ -128,6 +167,36 @@ namespace Hoa
         
         void shiftElevation(double elevation);
         void shiftElevation(VoronoiPoint const& pt);
+        void shiftAzimuth(double azimuth);
+        void shiftAzimuth(VoronoiPoint const& pt);
+        void shiftRadius(double radius);
+        void shiftRadius(VoronoiPoint const& pt);
+        void shiftPolar(double radius, double azimuth, double elevation);
+        void shiftPolar(VoronoiPoint const& pt);
+        
+        void shiftElevation(VoronoiPoint const& ref, double elevation);
+        void shiftElevation(VoronoiPoint const& ref, VoronoiPoint const& pt);
+        void shiftAzimuth(VoronoiPoint const& ref, double azimuth);
+        void shiftAzimuth(VoronoiPoint const& ref, VoronoiPoint const& pt);
+        void shiftRadius(VoronoiPoint const& ref, double radius);
+        void shiftRadius(VoronoiPoint const& ref, VoronoiPoint const& pt);
+        void shiftPolar(VoronoiPoint const& ref, double radius, double azimuth, double elevation);
+        void shiftPolar(VoronoiPoint const& ref, VoronoiPoint const& pt);
+        
+        void translateAbscissa(double abscissa);
+        void translateAbscissa(VoronoiPoint const& pt);
+        void translateOrdinate(double ordinate);
+        void translateOrdinate(VoronoiPoint const& pt);
+        void translateHeight(double height);
+        void translateHeight(VoronoiPoint const& pt);
+        void translateCartesian(double abscissa, double ordinate, double height);
+        void translateCartesian(VoronoiPoint const& pt);
+        
+        void rotateAroundX(double anglex);
+        void rotateAroundY(double angley);
+        void rotateAroundZ(double anglez);
+        void rotateAroundZYX(double anglex, double angley, double anglez);
+        void rotateAroundXYZ(double anglex, double angley, double anglez);
         
         VoronoiPoint operator-(VoronoiPoint const& pt) const;
         VoronoiPoint operator-(double scalar) const;
@@ -149,7 +218,31 @@ namespace Hoa
         VoronoiPoint& operator/=(VoronoiPoint const& pt);
         VoronoiPoint& operator/=(double scalar);
         
-        static bool compareRelativeAzimuth(VoronoiPoint const& pt1, VoronoiPoint const& pt2)
+        VoronoiPoint& operator=(VoronoiPoint const& pt)
+        {
+            xyz[0] = pt.x();
+            xyz[1] = pt.y();
+            xyz[2] = pt.z();
+            return *this;
+        }
+        
+        inline bool operator==(VoronoiPoint const& pt) const
+        {
+//            post("-----");
+//            postCartesian();
+//            pt.postCartesian();
+//            post("%i", (fabs(x() - pt.x()) < DBL_EPSILON));
+//            post("%i", (fabs(y() - pt.y()) < DBL_EPSILON));
+//            post("%i", (fabs(z() - pt.z()) < DBL_EPSILON));
+            return (fabs(x() - pt.x()) < DBL_EPSILON) && (fabs(y() - pt.y()) < DBL_EPSILON) && (fabs(z() - pt.z()) < DBL_EPSILON);
+        };
+        
+        inline bool operator!=(VoronoiPoint const& pt) const
+        {
+            return x() != pt.x() || y() != pt.y() || z() != pt.z();
+        };
+
+        static bool compareRelativeAzimuth(VoronoiPoint pt1, VoronoiPoint pt2)
         {
             return pt1.azimuth_rel() > pt2.azimuth_rel();
         }
@@ -157,10 +250,8 @@ namespace Hoa
         ~VoronoiPoint();
     };
     
-    
     VoronoiPoint operator*(double scalar, VoronoiPoint const& pt);
-    bool operator==(VoronoiPoint const& pt1, VoronoiPoint const& pt2);
-    bool operator!=(VoronoiPoint const& pt1, VoronoiPoint const& pt2);
+    
     
     /////////////////////////////////////////////////////////
     // Voronoi Circle ///////////////////////////////////////
@@ -195,7 +286,7 @@ namespace Hoa
         
         VoronoiPoint center() const
         {
-            return VoronoiPoint(x(), y(), z());
+            return VoronoiPoint(x(), y(), z(), 0);
         }
         
         double radius() const
@@ -256,6 +347,12 @@ namespace Hoa
 		{
 			assert(index < points.size());
             return points[index].getBoundaryElevation(index2);
+		};
+        
+        double getPointVoronoiRadius(unsigned int index, unsigned int index2) const
+		{
+			assert(index < points.size());
+            return points[index].getBoundaryRadius(index2);
 		};
 	};
 }
