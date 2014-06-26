@@ -453,12 +453,6 @@
     "category": [
     ]
   },
-  "hoa.fx.granular~": {
-    "digest": "A multichannel granulator processor.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
   "hoa.fx.mirror~": {
     "digest": "An ambisonic sound field mirror processor.",
     "module": "hoa",
@@ -526,12 +520,6 @@
     ]
   },
   "hoa.syn.grain~": {
-    "digest": "A multichannel granulator synthesizer.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
-  "hoa.syn.granular~": {
     "digest": "A multichannel granulator synthesizer.",
     "module": "hoa",
     "category": [

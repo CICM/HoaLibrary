@@ -3418,7 +3418,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 235.5, 230.0, 58.0 ],
-									"text" : "hoa.2d.process~ 7 hoa.syn.granular~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"text" : "hoa.2d.process~ 7 hoa.syn.grain~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -8156,7 +8156,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 261.5, 230.0, 58.0 ],
-									"text" : "hoa.2d.process~ 7 hoa.syn.granular~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"text" : "hoa.2d.process~ 7 hoa.syn.grain~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -12550,7 +12550,7 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 406.0, 220.5, 228.0, 58.0 ],
-									"text" : "hoa.2d.process~ 7 hoa.syn.granular~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
+									"text" : "hoa.2d.process~ 7 hoa.syn.grain~ harmonics @size 100 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
 
 							}
@@ -14500,7 +14500,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.syn.granular~.maxpat",
+				"name" : "hoa.syn.grain~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/synth",
 				"patcherrelativepath" : "../../patchers/synth",
 				"type" : "JSON",

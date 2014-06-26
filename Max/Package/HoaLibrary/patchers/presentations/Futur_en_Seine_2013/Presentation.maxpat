@@ -3311,7 +3311,7 @@
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 404.0, 431.0, 199.0, 58.0 ],
-					"text" : "hoa.2d.process~ 4 hoa.syn.granular~ harmonics @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
+					"text" : "hoa.2d.process~ 4 hoa.syn.grain~ harmonics @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
 				}
 
 			}
@@ -6303,7 +6303,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.syn.granular~.maxpat",
+				"name" : "hoa.syn.grain~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/synth",
 				"patcherrelativepath" : "../../synth",
 				"type" : "JSON",

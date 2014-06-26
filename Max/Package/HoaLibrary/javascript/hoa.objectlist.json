@@ -115,7 +115,6 @@
     	"hoa.fx.freeverb~",
     	"hoa.fx.gain~",
 		"hoa.fx.grain~",
-		"hoa.fx.granular~",
 		"hoa.fx.mirror~",
 		"hoa.fx.mixer~",
 		"hoa.fx.ringmod~"
@@ -129,7 +128,6 @@
     	"hoa.syn.decorrelation~",
     	"hoa.syn.delay~",
 		"hoa.syn.grain~",
-		"hoa.syn.granular~",
 		"hoa.syn.ringmod~"
     	],
     	"description" : "Examples of processing patches synthesizer that can be loaded by a hoa.process~ object. \nYou can obviously create your own."

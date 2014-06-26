@@ -22,7 +22,7 @@
  
  @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
- @seealso c.convolve~, hoa.process~, hoa.fx.freeverb~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.granular~, hoa.fx.mirror~, hoa.fx.mixer~
+ @seealso c.convolve~, hoa.process~, hoa.fx.freeverb~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.mirror~, hoa.fx.mixer~
  */
 
 // @method set @digest Set a new impulse response by passing <o>buffer~</o> object name.

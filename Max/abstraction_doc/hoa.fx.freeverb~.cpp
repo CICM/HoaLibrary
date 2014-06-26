@@ -22,7 +22,7 @@
  
  @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
- @seealso c.freeverb~, c.convolve~, hoa.process~, hoa.fx.convolve~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.granular~, hoa.fx.mirror~, hoa.fx.mixer~
+ @seealso c.freeverb~, c.convolve~, hoa.process~, hoa.fx.convolve~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.mirror~, hoa.fx.mixer~
  */
     
 CLASS_ATTR_DOUBLE               (c, "size", 0, 0, 0);

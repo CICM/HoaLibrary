@@ -195,12 +195,13 @@ namespace Hoa3D
         }
         else if(numberOfPoints == 8) // Hexahedron or cube
         {
+			double elev = asin(1/sqrt(3)); // or elevation(-1, 1, 1);
             azimuths[0] = azimuths[4] = HOA_PI4;
             azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
             azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
             azimuths[3] = azimuths[7] = HOA_PI4 + HOA_PI + HOA_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = elevation(-1, 1, 1);
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -elevations[3];
+			elevations[0] = elevations[1] = elevations[2] = elevations[3] = elev;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -elev;
         }
         else if(numberOfPoints == 9) // Not regular : Hexahedron or cube with 1 at PI/2 elevation
         {

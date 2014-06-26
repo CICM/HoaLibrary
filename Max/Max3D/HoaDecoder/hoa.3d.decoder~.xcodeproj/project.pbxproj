@@ -274,6 +274,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"\"DENORM_WANT_FIX = 1\"",
+					"\"NO_TRANSLATION_SUPPORT = 1\"",
+					MAX_DEBUG,
+				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -302,6 +307,11 @@
 			baseConfigurationReference = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */;
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"\"DENORM_WANT_FIX = 1\"",
+					"\"NO_TRANSLATION_SUPPORT = 1\"",
+					MAX_DEBUG,
+				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,

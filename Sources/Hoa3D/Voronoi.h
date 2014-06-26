@@ -68,6 +68,7 @@ namespace Hoa
             return boundaries[index].radius();
         }
         
+		#ifdef MAX_DEBUG
         void postCartesian() const
         {
             post("Point Cartesian : %f %f %f", x(), y(), z());
@@ -89,6 +90,7 @@ namespace Hoa
             for(int i = 0; i < boundaries.size(); i++)
                 post("Boundary %i Polar : %f %f %f", i, boundaries[i].radius(), boundaries[i].azimuth(), boundaries[i].elevation());
         }
+		#endif //MAX_DEBUG
         
         double x() const
         {
