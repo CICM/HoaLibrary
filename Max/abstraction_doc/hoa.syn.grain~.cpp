@@ -24,7 +24,7 @@
  
  @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
- @seealso hoa.process~, hoa.fx.grain~, hoa.syn.granular~, hoa.syn.decorrelation~, hoa.syn.delay~, hoa.syn.ringmod~
+ @seealso hoa.process~, hoa.fx.grain~, hoa.syn.decorrelation~, hoa.syn.delay~, hoa.syn.ringmod~
  */
 
 CLASS_ATTR_SYM	            (c, "name", 0, 0, 0);

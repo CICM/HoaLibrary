@@ -105,7 +105,6 @@
 		<seealso name="hoa.syn.grain~" />
 		<seealso name="hoa.fx.decorrelation~" />
 		<seealso name="hoa.fx.gain~" />
-		<seealso name="hoa.fx.granular~" />
 		<seealso name="hoa.fx.mirror~" />
 		<seealso name="hoa.fx.mixer~" />
 		<seealso name="hoa.fx.ringmod~" />

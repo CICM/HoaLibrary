@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 770.0, 663.0 ],
+						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -268,7 +268,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -428,7 +428,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -479,7 +479,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -920,7 +920,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -1361,7 +1361,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -1802,7 +1802,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -2416,7 +2416,7 @@
 									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 5,
 									"numoutlets" : 0,
-									"patching_rect" : [ 164.967712, 354.0, 227.064575, 227.064575 ]
+									"patching_rect" : [ 164.967712, 359.0, 227.064575, 227.064575 ]
 								}
 
 							}
@@ -2448,7 +2448,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -3210,11 +3210,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 770.0, 663.0 ],
+						"rect" : [ 100.0, 126.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3275,7 +3275,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 467.5, 125.0, 250.0, 47.0 ],
+									"patching_rect" : [ 451.5, 132.0, 250.0, 47.0 ],
 									"text" : "Important : We use the matrice optimization that depends on the signal vector size that should be at least 256 sample.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -3291,7 +3291,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 467.5, 125.0, 250.0, 47.0 ],
+									"patching_rect" : [ 451.5, 132.0, 250.0, 47.0 ],
 									"rounded" : 0
 								}
 
@@ -3322,7 +3322,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "signal", "signal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 164.967712, 320.935425, 227.064575, 19.0 ]
+									"patching_rect" : [ 164.967712, 324.935425, 227.064575, 19.0 ]
 								}
 
 							}
@@ -3401,7 +3401,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -3561,7 +3561,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -3612,7 +3612,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -4053,7 +4053,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -4494,7 +4494,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -4935,7 +4935,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 7,
 															"architecture" : "x64"
 														}
 ,
@@ -5465,7 +5465,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 462.0, 285.0, 100.0, 19.0 ]
+									"patching_rect" : [ 462.0, 294.0, 100.0, 19.0 ]
 								}
 
 							}
@@ -5578,7 +5578,7 @@
 									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 164.967712, 355.935425, 227.064575, 227.064575 ]
+									"patching_rect" : [ 164.967712, 359.935425, 227.064575, 227.064575 ]
 								}
 
 							}
@@ -5610,7 +5610,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -5812,6 +5812,7 @@
 									"destination" : [ "obj-40", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 382.532287, 318.467712, 278.5, 318.467712 ],
 									"source" : [ "obj-12", 1 ]
 								}
 
@@ -6033,7 +6034,7 @@
 									"destination" : [ "obj-36", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 512.0, 311.0, 471.5, 311.0 ],
+									"midpoints" : [ 512.0, 319.0, 471.5, 319.0 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -6213,7 +6214,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 278.5, 351.0, 382.532287, 351.0 ],
+									"midpoints" : [ 278.5, 351.0, 382.532288, 351.0 ],
 									"source" : [ "obj-40", 1 ]
 								}
 
@@ -6299,7 +6300,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -6338,7 +6339,7 @@
 									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
 									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
 									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
-									"patching_rect" : [ 102.0, 571.0, 45.0, 45.0 ]
+									"patching_rect" : [ 97.0, 571.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -6511,7 +6512,7 @@
 									"numoutlets" : 17,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 164.967712, 324.0, 240.935547, 22.0 ]
+									"patching_rect" : [ 164.967712, 325.0, 240.935547, 22.0 ]
 								}
 
 							}
@@ -6684,7 +6685,7 @@
 									"maxclass" : "hoa.2d.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 164.967712, 354.0, 227.064575, 227.064575 ]
+									"patching_rect" : [ 164.967712, 360.0, 227.064575, 227.064575 ]
 								}
 
 							}
@@ -6716,7 +6717,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -6870,7 +6871,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 164.967712, 298.0, 227.064575, 19.0 ],
+									"patching_rect" : [ 164.967712, 293.0, 227.064575, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -7282,7 +7283,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 480.5, 285.0, 382.532287, 285.0 ],
+									"midpoints" : [ 480.5, 285.0, 382.532288, 285.0 ],
 									"source" : [ "obj-36", 0 ]
 								}
 
@@ -7806,7 +7807,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -8240,7 +8241,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -9330,7 +9331,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,

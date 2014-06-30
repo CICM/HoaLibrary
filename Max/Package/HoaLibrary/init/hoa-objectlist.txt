@@ -15,7 +15,8 @@ max oblist "hoa objects" hoa.3d.decoder~;
 max oblist "hoa objects" hoa.3d.encoder~;
 max oblist "hoa objects" hoa.3d.map~;
 max oblist "hoa objects" hoa.3d.optim~;
-max oblist "hoa objects" hoa.3d.scope~;
+max oblist "hoa objects" hoa.3d.scope~
+;
 max oblist "hoa objects" hoa.3d.wider~;
 max oblist "hoa objects" c.convolve~;
 max oblist "hoa objects" c.freeverb~;
@@ -39,7 +40,7 @@ max oblist "hoa abstractions" hoa.fx.delay~;
 max oblist "hoa abstractions" hoa.fx.freeverb~;
 max oblist "hoa abstractions" hoa.fx.gain~;
 max oblist "hoa abstractions" hoa.fx.grain~;
-max oblist "hoa abstractions" hoa.fx.granular~;
+max oblist "hoa abstractions" hoa.fx.grain~;
 max oblist "hoa abstractions" hoa.fx.mirror~;
 max oblist "hoa abstractions" hoa.fx.mixer~;
 max oblist "hoa abstractions" hoa.fx.ringmod~;
@@ -52,5 +53,5 @@ max oblist "hoa abstractions" hoa.send~;
 max oblist "hoa abstractions" hoa.syn.decorrelation~;
 max oblist "hoa abstractions" hoa.syn.delay~;
 max oblist "hoa abstractions" hoa.syn.grain~;
-max oblist "hoa abstractions" hoa.syn.granular~;
+max oblist "hoa abstractions" hoa.syn.grain~;
 max oblist "hoa abstractions" hoa.syn.ringmod~;

@@ -41,7 +41,6 @@
 <refpage name='hoa.fx.freeverb~.maxref.xml'/>
 <refpage name='hoa.fx.gain~.maxref.xml'/>
 <refpage name='hoa.fx.grain~.maxref.xml'/>
-<refpage name='hoa.fx.granular~.maxref.xml'/>
 <refpage name='hoa.fx.mirror~.maxref.xml'/>
 <refpage name='hoa.fx.mixer~.maxref.xml'/>
 <refpage name='hoa.fx.ringmod~.maxref.xml'/>
@@ -54,6 +53,5 @@
 <refpage name='hoa.syn.decorrelation~.maxref.xml'/>
 <refpage name='hoa.syn.delay~.maxref.xml'/>
 <refpage name='hoa.syn.grain~.maxref.xml'/>
-<refpage name='hoa.syn.granular~.maxref.xml'/>
 <refpage name='hoa.syn.ringmod~.maxref.xml'/>
 </root>

@@ -320,7 +320,7 @@
     "category": [
     ]
   },
-  "hoa.fx.granular~": {
+  "hoa.fx.grain~": {
     "digest": "A multichannel granulator processor.",
     "module": "hoa",
     "category": [
@@ -398,7 +398,7 @@
     "category": [
     ]
   },
-  "hoa.syn.granular~": {
+  "hoa.syn.grain~": {
     "digest": "A multichannel granulator synthesizer.",
     "module": "hoa",
     "category": [

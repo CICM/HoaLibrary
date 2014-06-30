@@ -22,5 +22,5 @@
  
  @keywords ambisonics, hoa objects, audio, MSP, abstraction
  
- @seealso hoa.process~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.granular~, hoa.fx.mirror~, hoa.fx.ringmod~
+ @seealso hoa.process~, hoa.fx.decorrelation~, hoa.fx.delay~, hoa.fx.gain~, hoa.fx.grain~, hoa.fx.mirror~, hoa.fx.ringmod~
  */

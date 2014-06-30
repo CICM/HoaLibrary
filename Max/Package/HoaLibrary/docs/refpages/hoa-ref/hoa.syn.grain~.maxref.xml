@@ -103,7 +103,6 @@
 	<seealsolist>
 		<seealso name="hoa.process~" />
 		<seealso name="hoa.fx.grain~" />
-		<seealso name="hoa.syn.granular~" />
 		<seealso name="hoa.syn.decorrelation~" />
 		<seealso name="hoa.syn.delay~" />
 		<seealso name="hoa.syn.ringmod~" />
