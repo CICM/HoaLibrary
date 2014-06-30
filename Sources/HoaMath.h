@@ -401,7 +401,7 @@ namespace Hoa
     
     inline double height(const double radius, const double azimuth, const double elevation)
 	{
-		return radius * elevation / HOA_PI2;
+		return radius * sin(elevation);
 	}
 	
 	//! The azimuth converter function.

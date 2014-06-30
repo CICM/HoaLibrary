@@ -334,8 +334,8 @@ t_pd_err angles_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
 {
     double azimuths[MAX_SPEAKER];
 	double elevations[MAX_SPEAKER];
-    if(argc > MAX_SPEAKER)
-        argc = MAX_SPEAKER;
+    if(argc > MAX_SPEAKER * 2)
+        argc = MAX_SPEAKER * 2;
 	
     if(argc && argv)
     {
@@ -569,100 +569,117 @@ void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 
 void hoa_meter_3d_float(t_hoa_meter_3d *x, float f)
 {
-	x->f_channel = pd_clip_minmax(f, 1, x->f_meter->getNumberOfChannels());
+    x->f_channel = pd_clip_minmax(f, 0, x->f_meter->getNumberOfChannels());
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_background_layer);
-        ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_leds_layer);
-        ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_vector_layer);
-		ebox_redraw((t_ebox *)x);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_leds_layer);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_vector_layer);
+    ebox_redraw((t_ebox *)x);
 }
 
 void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 {
     t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_3d_leds_layer, rect->width, rect->height);
-    
+    t_rgba mcolor;
 	if (g)
 	{
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         egraphics_set_matrix(g, &transform);
-		
-        egraphics_set_color_rgba(g, &rgba_red);
-		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
-		{
-			if(x->f_meter->getChannelNumberOfPoints(i))
-			{
-				double azi = x->f_meter->getChannelAzimuth(i);
-				double ele = x->f_meter->getChannelElevation(i);
-				double abs =  abscissa(x->f_radius, azi, ele);
-				double ord = ordinate(x->f_radius, azi, ele);
-				
-				egraphics_circle(g, abs, ord, 3);
-				egraphics_fill(g);
-			}
-		}
+		egraphics_set_line_width(g, 2);
         
-		for(int i = x->f_channel -1; i < x->f_channel; i++)
+        x->f_channel = pd_clip_minmax(x->f_channel, 0, x->f_meter->getNumberOfChannels());
+        int min = x->f_channel -1, max = x->f_channel;
+        if(x->f_channel == 0)
+        {
+            min = 0; max = x->f_meter->getNumberOfChannels();
+        }
+        
+		for(int i = min; i < max; i++)
 		{
+            post("%i : points %i", i, x->f_meter->getChannelNumberOfPoints(i));
 			if(x->f_meter->getChannelNumberOfPoints(i))
 			{
                 if(x->f_meter->getChannelEnergy(i) < -25.5)
-                    egraphics_set_color_rgba(g, &x->f_color_cold_signal);
+                    mcolor = x->f_color_cold_signal;
                 else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
-                    egraphics_set_color_rgba(g, &x->f_color_tepid_signal);
+                    mcolor = x->f_color_tepid_signal;
                 else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
-                    egraphics_set_color_rgba(g, &x->f_color_warm_signal);
+                    mcolor = x->f_color_warm_signal;
                 else
-                    egraphics_set_color_rgba(g, &x->f_color_hot_signal);
+                    mcolor = x->f_color_hot_signal;
                 
 				double azi = x->f_meter->getChannelPointAzimuth(i, 0);
 				double ele = x->f_meter->getChannelPointElevation(i, 0);
-				double abs =  abscissa(x->f_radius, azi, ele);
+				double abs = abscissa(x->f_radius, azi, ele);
 				double ord = ordinate(x->f_radius, azi, ele);
-				egraphics_move_to(g, abs, ord);
-                post("%i : %i", i, x->f_meter->getChannelNumberOfPoints(i));
-                abs = abscissa(x->f_meter->getChannelPointRadius(i, 0) , azi, ele);
-                ord = ordinate(x->f_meter->getChannelPointRadius(i, 0), azi, ele);
-                post("0 %f %f %f", abs, ord, height(x->f_meter->getChannelPointRadius(i, 0), azi, ele));
+            
 				for(int j = 1; j < x->f_meter->getChannelNumberOfPoints(i); j++)
 				{
-					azi = x->f_meter->getChannelPointAzimuth(i, j);
-					ele = x->f_meter->getChannelPointElevation(i, j);
-                    abs = abscissa(x->f_radius, azi, ele);
-                    ord = ordinate(x->f_radius, azi, ele);
-                    egraphics_line_to(g, abs, ord);
-                    abs = abscissa(x->f_meter->getChannelPointRadius(i, j) , azi, ele);
-                    ord = ordinate(x->f_meter->getChannelPointRadius(i, j), azi, ele);
-                    post("%i %f %f %f",j, abs, ord, height(x->f_meter->getChannelPointRadius(i, j), azi, ele));
-				
+					double azi2 = x->f_meter->getChannelPointAzimuth(i, j);
+					double ele2 = x->f_meter->getChannelPointElevation(i, j);
+                    double abs2 = abscissa(x->f_radius, azi2, ele2);
+                    double ord2 = ordinate(x->f_radius, azi2, ele2);
+                    double radx = fabs(abs2);
+                    double rady = fabs(ord2);
+                    if(fabs(abs) > radx)
+                        radx = fabs(abs);
+                    if(fabs(ord) > rady)
+                        rady = fabs(ord);
+                    
+                    egraphics_set_color_rgba(g, &mcolor);
+                    egraphics_arc_oval(g, 0, 0, radx, rady, azi, azi2);
+                    egraphics_fill_preserve(g);
+                    egraphics_set_color_rgba(g, &x->f_color_bd);
+                    egraphics_stroke(g);
+                    azi = azi2;
 				}
-				egraphics_close_path(g);
-				egraphics_fill_preserve(g);
-				
-				egraphics_set_color_rgba(g, &x->f_color_bd);
-				egraphics_set_line_width(g, 1);
-				egraphics_stroke(g);
                 
-				for(int j = 0; j < x->f_meter->getChannelNumberOfPoints(i); j++)
-				{
-					azi = x->f_meter->getChannelPointAzimuth(i, j);
-					ele = x->f_meter->getChannelPointElevation(i, j);
-					abs =  abscissa(x->f_radius, azi, ele);
-					ord = ordinate(x->f_radius, azi, ele);
-					egraphics_set_color_rgba(g, &rgba_black);
-					egraphics_circle(g, abs, ord, 2);
-					egraphics_fill(g);
-				}
+                double azi2 = x->f_meter->getChannelPointAzimuth(i, 0);
+                double ele2 = x->f_meter->getChannelPointElevation(i, 0);
+                double abs2 = abscissa(x->f_radius, azi2, ele2);
+                double ord2 = ordinate(x->f_radius, azi2, ele2);
+                double radx = fabs(abs2);
+                double rady = fabs(ord2);
+                if(fabs(abs) > radx)
+                    radx = fabs(abs);
+                if(fabs(ord) > rady)
+                    rady = fabs(ord);
+                
+                egraphics_set_color_rgba(g, &mcolor);
+                egraphics_arc_oval(g, 0, 0, radx, rady, azi, azi2);
+                egraphics_fill_preserve(g);
+                egraphics_set_color_rgba(g, &x->f_color_bd);
+                egraphics_stroke(g);
 			}
-            egraphics_set_color_rgba(g, &rgba_blue);
-            double azi = x->f_meter->getChannelAzimuth(i);
-            double ele = x->f_meter->getChannelElevation(i);
-            double abs =  abscissa(x->f_radius, azi, ele);
-            double ord = ordinate(x->f_radius, azi, ele);
             
-            egraphics_circle(g, abs, ord, 3);
-            egraphics_fill(g);
-
+            egraphics_set_color_rgba(g, &rgba_blue);
+            for(int j = 0; j < x->f_meter->getChannelNumberOfPoints(i); j++)
+            {
+                double azi = x->f_meter->getChannelPointAzimuth(i, j);
+                double ele = x->f_meter->getChannelPointElevation(i, j);
+                double abs = abscissa(x->f_radius, azi, ele);
+                double ord = ordinate(x->f_radius, azi, ele);
+                
+                egraphics_circle(g, abs, ord, 3);
+                egraphics_fill(g);
+            }
 		}
+        
+        egraphics_set_color_rgba(g, &rgba_red);
+        for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
+        {
+            if(x->f_meter->getChannelNumberOfPoints(i))
+            {
+                double azi = x->f_meter->getChannelAzimuth(i);
+                double ele = x->f_meter->getChannelElevation(i);
+                double abs =  abscissa(x->f_radius, azi, ele);
+                double ord = ordinate(x->f_radius, azi, ele);
+                
+                egraphics_circle(g, abs, ord, 3);
+                egraphics_fill(g);
+            }
+        }
+
         
 		ebox_end_layer((t_ebox*)x,  hoa_sym_3d_leds_layer);
 	}

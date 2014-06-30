@@ -21,7 +21,7 @@
 #define VoroPi  (3.141592653589793238462643383279502884)
 #define Voro2Pi (6.283185307179586476925286766559005)
 #define VoroPi2 (1.57079632679489661923132169163975144)
-#define VoroMin 0.002
+#define VoroMin 0.0001
 namespace Hoa
 {
     /////////////////////////////////////////////////////////
@@ -34,6 +34,8 @@ namespace Hoa
         double xyz[3];
         double xyz_rel[3];
         std::vector<VoronoiPoint> boundaries;
+        std::vector<VoronoiPoint> top;
+        std::vector<VoronoiPoint> bottom;
         
         public :
         VoronoiPoint(double x_radius = 0, double y_azimuth = 0, double z_elevation = 0, bool polar = 0);
@@ -48,6 +50,12 @@ namespace Hoa
         int getNumberOfBoundaries() const
         {
             return boundaries.size();
+        }
+        
+        VoronoiPoint getBoundary(int index) const
+        {
+            assert(index < boundaries.size());
+            return boundaries[index];
         }
         
         double getBoundaryAzimuth(int index) const
@@ -66,6 +74,64 @@ namespace Hoa
         {
             assert(index < boundaries.size());
             return boundaries[index].radius();
+        }
+        
+        int getNumberOfTopBoundaries() const
+        {
+            return top.size();
+        }
+        
+        VoronoiPoint getTopBoundary(int index) const
+        {
+            assert(index < top.size());
+            return top[index];
+        }
+        
+        double getTopBoundaryAzimuth(int index) const
+        {
+            assert(index < top.size());
+            return top[index].azimuth();
+        }
+        
+        double getTopBoundaryElevation(int index) const
+        {
+            assert(index < top.size());
+            return top[index].elevation();
+        }
+        
+        double getTopBoundaryRadius(int index) const
+        {
+            assert(index < top.size());
+            return top[index].radius();
+        }
+        
+        int getNumberOfBottomBoundaries() const
+        {
+            return bottom.size();
+        }
+        
+        VoronoiPoint getBottomBoundary(int index) const
+        {
+            assert(index < bottom.size());
+            return bottom[index];
+        }
+        
+        double getBottomBoundaryAzimuth(int index) const
+        {
+            assert(index < bottom.size());
+            return bottom[index].azimuth();
+        }
+        
+        double getBottomBoundaryElevation(int index) const
+        {
+            assert(index < bottom.size());
+            return bottom[index].elevation();
+        }
+        
+        double getBottomBoundaryRadius(int index) const
+        {
+            assert(index < bottom.size());
+            return bottom[index].radius();
         }
         
         void postCartesian() const
@@ -155,9 +221,54 @@ namespace Hoa
             return sqrt(xm*xm + ym *ym + zm *zm);
         }
         
+        double greatCircleDistance(VoronoiPoint const& pt) const
+        {
+            double dlon = pt.elevation() - elevation();
+            double dlat = pt.azimuth() - azimuth();
+            double a = pow(sin(dlat * 0.5), 2) + cos(azimuth()) * cos(pt.azimuth()) * pow(sin(dlon * 0.5), 2);
+            return 2. * atan2(sqrt(a), sqrt(1. - a));
+        }
+        
+        VoronoiPoint slerp(VoronoiPoint const& pt, double theta) const
+        {    
+            double dote = dot(pt);
+            double angl = acos(dote);
+            double sTheta = sin(angl);
+            
+            double w1 = sin((1. - theta) * angl) / sTheta;
+            double w2 = sin(theta * angl) / sTheta;
+            VoronoiPoint temp = *this*w1 + pt*w2;
+            temp.normalize();
+            return temp;
+        }
+        
+        VoronoiPoint zeroElevationCrossing(VoronoiPoint const& pt) const
+        {
+            if((elevation() >= 0 && pt.elevation() >= 0) || (elevation() <= 0 && pt.elevation() <= 0))
+                return pt;
+            else
+            {
+                double elev1 = elevation();
+                double elev2 = pt.elevation();
+                if(elev1 == VoroPi2 || elev1 == -VoroPi2)
+                    return VoronoiPoint(1, pt.azimuth(), 0, 1);
+                else if(elev2 == VoroPi2 || elev2 == -VoroPi2)
+                    return VoronoiPoint(1, azimuth(), 0, 1);
+                
+                double theta = elev1 / (elev1 - pt.elevation());
+                double dist = pt.azimuth() - azimuth();
+                return VoronoiPoint(1, azimuth() + dist * theta, 0, 1);
+            }
+        }
+        
         VoronoiPoint cross(VoronoiPoint const& pt) const
         {
             return VoronoiPoint(y() * pt.z() - z() * pt.y(), z() * pt.x() - x() * pt.z(), x() * pt.y() - y() * pt.x());
+        }
+        
+        double dot(VoronoiPoint const& pt) const
+        {
+            return x() * pt.x() + y() * pt.y() + z() * pt.z();
         }
         
         void normalize();
@@ -316,6 +427,8 @@ namespace Hoa
     private :
 
 		std::vector<VoronoiPoint> points;
+        std::vector<VoronoiPoint> top;
+        std::vector<VoronoiPoint> bottom;
 		void evaluateTriangle(int i, int j, int k);
 
 	public :
@@ -366,6 +479,30 @@ namespace Hoa
 		{
 			assert(index < points.size());
             return points[index].getBoundaryRadius(index2);
+		};
+        
+        unsigned int getTopPointVoronoiLenght(unsigned int index) const
+		{
+			assert(index < points.size());
+            return points[index].getNumberOfTopBoundaries();
+		};
+        
+        double getTopPointVoronoiAzimuth(unsigned int index, unsigned int index2) const
+		{
+			assert(index < points.size());
+            return points[index].getTopBoundaryAzimuth(index2);
+		};
+        
+        double getTopPointVoronoiElevation(unsigned int index, unsigned int index2) const
+		{
+			assert(index < points.size());
+            return points[index].getTopBoundaryElevation(index2);
+		};
+        
+        double getTopPointVoronoiRadius(unsigned int index, unsigned int index2) const
+		{
+			assert(index < points.size());
+            return points[index].getTopBoundaryRadius(index2);
 		};
 	};
 }

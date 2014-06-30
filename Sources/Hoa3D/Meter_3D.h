@@ -58,25 +58,25 @@ namespace Hoa3D
 		inline unsigned int getChannelNumberOfPoints(unsigned int index) const
         {
             assert(index < m_number_of_channels);
-			return m_voronoi->getPointVoronoiLenght(index);
+			return m_voronoi->getTopPointVoronoiLenght(index);
         }
 
 		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return m_voronoi->getPointVoronoiAzimuth(index, pointindex);
+            return m_voronoi->getTopPointVoronoiAzimuth(index, pointindex);
         }
 
 		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return m_voronoi->getPointVoronoiElevation(index, pointindex);
+            return m_voronoi->getTopPointVoronoiElevation(index, pointindex);
         }
         
         inline double getChannelPointRadius(unsigned int index, unsigned int pointindex) const
         {
             assert(index < m_number_of_channels);
-            return m_voronoi->getPointVoronoiRadius(index, pointindex);
+            return m_voronoi->getTopPointVoronoiRadius(index, pointindex);
         }
 
         inline double getChannelPeak(unsigned int index) const

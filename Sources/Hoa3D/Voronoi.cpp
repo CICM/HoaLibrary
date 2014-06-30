@@ -48,11 +48,9 @@ namespace Hoa
     
     void VoronoiPoint::setRelativePoint(VoronoiPoint const& pt)
     {
-        VoronoiPoint rel = *this;
-        rel.rotateAroundZYX(-pt.x(), -pt.y(), -pt.z());
-        xyz_rel[0] = rel.x();
-        xyz_rel[1] = rel.y();
-        xyz_rel[2] = rel.z();
+        xyz_rel[0] = x() - pt.x();
+        xyz_rel[1] = y() - pt.y();
+        xyz_rel[2] = z();
     }
     
     void VoronoiPoint::normalizeBoundaries()
@@ -83,7 +81,41 @@ namespace Hoa
     
     void VoronoiPoint::sortBoundaries()
     {
+        top.clear();
+        bottom.clear();
+        int size = boundaries.size();
+        for(int i = 0; i < size; i++)
+        {
+            int next = i+1, previous = i-1;
+            if(next > size - 1)
+                next = 0;
+            if(previous < 0)
+                previous = size - 1;
+            if(boundaries[i].elevation() > 0)
+            {
+                top.push_back(boundaries[i]);
+                if(boundaries[previous].elevation() < 0)
+                    bottom.push_back(boundaries[previous].zeroElevationCrossing(boundaries[i]));
+                if(boundaries[next].elevation() < 0)
+                    bottom.push_back(boundaries[i].zeroElevationCrossing(boundaries[next]));
+            }
+            else if(boundaries[i].elevation() < 0)
+            {
+                bottom.push_back(boundaries[i]);
+                if(boundaries[previous].elevation() > 0)
+                    top.push_back(boundaries[previous].zeroElevationCrossing(boundaries[i]));
+                if(boundaries[next].elevation() > 0)
+                    top.push_back(boundaries[i].zeroElevationCrossing(boundaries[next]));
+            }
+            else
+            {
+                top.push_back(boundaries[i]);
+                bottom.push_back(boundaries[i]);
+            }
+        }
         std::sort(boundaries.begin(), boundaries.end(), compareRelativeAzimuth);
+        std::sort(top.begin(), top.end(), compareRelativeAzimuth);
+        std::sort(bottom.begin(), bottom.end(), compareRelativeAzimuth);
     }
     
     void VoronoiPoint::normalize()
@@ -442,7 +474,7 @@ namespace Hoa
     
     
     /////////////////////////////////////////////////////////
-    // Voronoi Circle ///////////////////////////////////////
+    // Voronoi Triangle /////////////////////////////////////
     /////////////////////////////////////////////////////////
     
     VoronoiTriangle::VoronoiTriangle(VoronoiPoint pt1, VoronoiPoint pt2, VoronoiPoint pt3)
@@ -468,18 +500,22 @@ namespace Hoa
         pt3.rotateAroundY(-ref_rotate_y);
         
         double alpha = pt3.azimuth();
-        
-        
         if((alpha < 0 && alpha > -VoroPi) || alpha > VoroPi)
         {
             alpha = 2. * sin(Voro2Pi - alpha);
             if(alpha < VoroMin)
+            {
                 circumradius = -1;
+                return;
+            }
 
             circumradius =  pt2.distance(pt3) / alpha;
             double y = pt2.y() * 0.5;
-            if(fabs(y) > fabs(circumradius))
+            if(fabs(y) >= fabs(circumradius))
+            {
                 circumradius = -1;
+                return;
+            }
 
             double x = sqrt(circumradius * circumradius - y*y);
             circumcenter = VoronoiPoint(x, y, 0);
@@ -488,12 +524,18 @@ namespace Hoa
         {
             alpha = 2. * sin(alpha);
             if(alpha < VoroMin)
+            {
                 circumradius = -1;
+                return;
+            }
 
             circumradius =  pt2.distance(pt3) / alpha;
             double y = pt2.y() * 0.5;
-            if(fabs(y) > fabs(circumradius))
+            if(fabs(y) >= fabs(circumradius))
+            {
                 circumradius = -1;
+                return;
+            }
             
             double x = sqrt(circumradius * circumradius - y*y);
             circumcenter = VoronoiPoint(-x, y, 0);
@@ -536,6 +578,7 @@ namespace Hoa
 	void Voronoi::perform()
 	{
         int size = points.size();
+        points.push_back(VoronoiPoint(0, 0, 0));
         for(int i = 0; i < size - 2; i++)
         {
             for(int j = i+1; j < size - 1; j++)
@@ -546,7 +589,7 @@ namespace Hoa
                 }
             }
         }
-        
+        points.pop_back();
         for(int i = 0; i < size; i++)
         {
             points[i].sortBoundaries();
@@ -555,42 +598,34 @@ namespace Hoa
 
 	void Voronoi::evaluateTriangle(int i, int j, int k)
 	{
-        int b = 1;
         int size = points.size();
-        if(i == b || j == b || k == b)
-        {
-            post("\n%i %i %i", i, j, k);
-        }
         VoronoiTriangle triangle = VoronoiTriangle(points[i], points[j], points[k]);
         VoronoiPoint center = triangle.getCircumcenter();
         
-        if(i == b || j == b || k == b)
-            post("result : ");
         if(triangle.getCircumradius() < VoroMin || center.radius() < VoroMin)
         {
-            if(i == b || j == b || k == b)
-                post("removed by radius or center");
             return;
         }
         
+        center.normalize();
         for(int l = 0; l < size; l++)
         {
-            if(l != i && l != j && l != k && l)
+            if(l != i && l != j && l != k)
             {
-                if((points[l].distance(center) + VoroMin) < triangle.getCircumradius())
+                if(points[l].distance(center) < triangle.getCircumradius())
                 {
-                    if(i == b || j == b || k == b)
-                    post("removed by %i : %f", l, points[l].distance(center));
+                    return;
+                }
+            }
+            else
+            {
+                if(points[l].distance(center) < VoroMin)
+                {
                     return;
                 }
             }
         }
-        center.postPolar();
-        center.normalize();
-        if(i == b || j == b || k == b)
-            center.postCartesian();
-        if(i == 1 || j == 3 || k == 4)
-            post("this one");
+        
         points[i].addBoundary(center);
         points[j].addBoundary(center);
         points[k].addBoundary(center);

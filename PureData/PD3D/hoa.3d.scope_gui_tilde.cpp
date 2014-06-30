@@ -375,46 +375,64 @@ void draw_background(t_hoa_scope_3D *x, t_object *view, t_rect *rect)
 
 void draw_harmonics(t_hoa_scope_3D *x, t_object *view, t_rect *rect)
 {
-    t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_harmonics_layer, rect->width, rect->height);
     
 	if (g)
 	{
-        double value;
-        egraphics_rotate(g, HOA_PI);
-		egraphics_set_line_width(g, 1);
-        egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
-        egraphics_set_matrix(g, &transform);
+        float value;
+		egraphics_set_line_width(g, 2);
         
-        float increment = 2;
-        float ratio = x->f_radius / (x->f_scope->getNumberOfRows() * 0.5);
+        float angle;
         for(int j = x->f_scope->getNumberOfRows() * 0.5; j < x->f_scope->getNumberOfRows(); j++)
         {
-            for(int i = 0; i < x->f_scope->getNumberOfColumns(); )
+            float elev = (double)j / (double)x->f_scope->getNumberOfRows() * HOA_PI;
+            float abs = abscissa(x->f_radius, 0, elev);
+            float ord = ordinate(x->f_radius, 0, elev);
+            float rad = radius(abs, ord);
+            value = x->f_scope->getValue(j, 0);
+            if(value > 0)
             {
-                value = x->f_scope->getValue(j, i);
-                if(value > 0)
-                    egraphics_set_color_rgba(g, &x->f_color_ph);
-                else
-                    egraphics_set_color_rgba(g, &x->f_color_nh);
-                float azym = (double)i / (double)x->f_scope->getNumberOfColumns() * HOA_2PI;
-                float elev = (double)j / (double)x->f_scope->getNumberOfRows() * HOA_PI;
-                float abs = abscissa(x->f_radius, azym, elev);
-                float ord = ordinate(x->f_radius, azym, elev);
-                /*
-                azym = (double)(i + 1) / (double)x->f_scope->getNumberOfColumns() * HOA_2PI;
-                elev = (double)(j + 1) / (double)x->f_scope->getNumberOfRows() * HOA_PI;
-                float abs2 = abscissa(x->f_radius, azym, elev);
-                float ord2 = ordinate(x->f_radius, azym, elev);
-                 */
-                egraphics_circle(g, abs, ord, cos((j - x->f_scope->getNumberOfRows()) / (x->f_scope->getNumberOfRows() * HOA_PI)) * ratio);
-                egraphics_fill(g);
-                i += increment;
+                value = 1;
+                egraphics_set_color_rgba(g, &x->f_color_ph);
             }
-            /*
-            if(increment < x->f_scope->getNumberOfRows() * 0.5 - 1)
-                increment *= 1.05;
-             */
+            else
+            {
+                value= -1;
+                egraphics_set_color_rgba(g, &x->f_color_nh);
+            }
+            angle = 0;
+            for(int i = 0; i < x->f_scope->getNumberOfColumns(); i+= 2)
+            {
+                float next = x->f_scope->getValue(j, i);
+                if(next > 0)
+                {
+                    next = 1;
+                }
+                else
+                {
+                    next= -1;
+                }
+                if(next != value)
+                {
+                    float azym = (double)i / (double)x->f_scope->getNumberOfColumns() * HOA_2PI;
+                    egraphics_arc(g, x->f_center, x->f_center, rad, angle, azym);
+                    egraphics_stroke(g);
+                    value = next;
+                    if(value > 0)
+                    {
+                        value = 1;
+                        egraphics_set_color_rgba(g, &x->f_color_ph);
+                    }
+                    else
+                    {
+                        value= -1;
+                        egraphics_set_color_rgba(g, &x->f_color_nh);
+                    }
+                    angle = azym;
+                }
+            }
+            egraphics_arc(g, x->f_center, x->f_center, rad, angle, 0.00001);
+            egraphics_stroke(g);
         }
                  
 		ebox_end_layer((t_ebox *)x, hoa_sym_harmonics_layer);
