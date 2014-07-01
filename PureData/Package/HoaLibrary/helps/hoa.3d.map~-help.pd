@@ -1,0 +1,104 @@
+#N canvas 198 77 1013 640 10;
+#X msg -332 -651 \; pd dsp 1;
+#X msg -332 -616 \; pd dsp 0;
+#X obj 104 -679 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 103 -820 hoa.connect;
+#X obj 103 -840 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 41 -707 hoa.pi~ 2;
+#X obj -380 -887 c.patcherinfos;
+#X obj -380 -904 loadbang;
+#X obj -380 -904 hoa.help.header;
+#X obj 36 -904 hoa.help.also;
+#X text 104 -707 azimuth;
+#X text 239 -709 elevation;
+#X obj 169 -707 hoa.pi~ 1;
+#X obj 169 -758 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 41 -758 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 243 -679 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X obj 169 -732 hoa.tri~ 0.1 -0.5 0.5;
+#X text 98 -696 -Pi & Pi;
+#X text 231 -697 -Pi/2 & Pi/2;
+#X obj 41 -732 phasor~ -0.5;
+#X text -375 -860 hoa.3d.map~ is an ambisonics encoder that uses fractionnal
+orders and amplitude variation to simulate sources distances. First
+argument is the order and second argument is the number of sources.
+;
+#X obj -253 -607 hoa.3d.optim~ 1 inPhase;
+#X obj -253 -636 hoa.3d.map~ 1 2 -------;
+#X obj -84 -345 hoa.help.pub;
+#X obj -253 -664 sig~ 1;
+#X obj -118 -664 sig~ 1;
+#X msg -368 -718 1 car \$1 \$2;
+#X text -151 -797 radius;
+#X text -88 -797 angle;
+#X text -307 -798 ordinate;
+#X text -372 -798 abscissa;
+#X obj -368 -774 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -305 -774 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -148 -774 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -85 -774 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -148 -739 c.pak 0 0;
+#X msg -148 -718 2 pol \$1 \$2;
+#X text -258 -694 source 1;
+#X obj -368 -739 c.pak 0 0 0;
+#X obj -253 -582 hoa.3d.decoder~ 1 0 8 -------------------------;
+#X obj -253 -545 hoa.meter.cube~;
+#X connect 4 0 3 0;
+#X connect 5 0 2 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 12 0 15 0;
+#X connect 13 0 16 0;
+#X connect 14 0 19 0;
+#X connect 16 0 12 1;
+#X connect 19 0 5 1;
+#X connect 21 0 39 0;
+#X connect 21 1 39 1;
+#X connect 21 2 39 2;
+#X connect 21 3 39 3;
+#X connect 22 0 21 0;
+#X connect 22 1 21 1;
+#X connect 22 2 21 2;
+#X connect 22 3 21 3;
+#X connect 24 0 22 0;
+#X connect 25 0 22 1;
+#X connect 31 0 38 0;
+#X connect 32 0 38 1;
+#X connect 33 0 35 0;
+#X connect 34 0 35 1;
+#X connect 35 0 36 0;
+#X connect 38 0 26 0;
+#X connect 39 0 40 0;
+#X connect 39 1 40 1;
+#X connect 39 2 40 2;
+#X connect 39 3 40 3;
+#X connect 39 4 40 4;
+#X connect 39 5 40 5;
+#X connect 39 6 40 6;
+#X connect 39 7 40 7;
+#X coords 0 640 1 639 100 60 0;
