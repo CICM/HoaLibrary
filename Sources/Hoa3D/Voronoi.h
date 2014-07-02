@@ -133,7 +133,7 @@ namespace Hoa
             assert(index < bottom.size());
             return bottom[index].radius();
         }
-        
+
         void postCartesian() const
         {
             post("Point Cartesian : %f %f %f", x(), y(), z());

@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 41.0, 53.0, 837.0, 718.0 ],
+		"rect" : [ 100.0, 100.0, 837.0, 718.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 41.0, 79.0, 837.0, 692.0 ],
+						"rect" : [ 100.0, 126.0, 837.0, 692.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -832,7 +832,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -842,7 +842,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -881,7 +881,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-29", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -891,7 +891,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-29", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -922,7 +922,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-32", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -933,7 +933,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-32", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,

@@ -17,8 +17,6 @@
 		2C253D4D193604D80067BB7D /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C253D35193604D80067BB7D /* Hoa3D.h */; };
 		2C253D4E193604D80067BB7D /* Map_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C253D36193604D80067BB7D /* Map_3D.cpp */; };
 		2C253D4F193604D80067BB7D /* Map_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C253D37193604D80067BB7D /* Map_3D.h */; };
-		2C253D50193604D80067BB7D /* Meter_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C253D38193604D80067BB7D /* Meter_3D.cpp */; };
-		2C253D51193604D80067BB7D /* Meter_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C253D39193604D80067BB7D /* Meter_3D.h */; };
 		2C253D52193604D80067BB7D /* Optim_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C253D3A193604D80067BB7D /* Optim_3D.cpp */; };
 		2C253D53193604D80067BB7D /* Optim_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C253D3B193604D80067BB7D /* Optim_3D.h */; };
 		2C253D54193604D80067BB7D /* Planewaves_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C253D3C193604D80067BB7D /* Planewaves_3D.cpp */; };
@@ -54,8 +52,6 @@
 		2C253D35193604D80067BB7D /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
 		2C253D36193604D80067BB7D /* Map_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map_3D.cpp; sourceTree = "<group>"; };
 		2C253D37193604D80067BB7D /* Map_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map_3D.h; sourceTree = "<group>"; };
-		2C253D38193604D80067BB7D /* Meter_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter_3D.cpp; sourceTree = "<group>"; };
-		2C253D39193604D80067BB7D /* Meter_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter_3D.h; sourceTree = "<group>"; };
 		2C253D3A193604D80067BB7D /* Optim_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim_3D.cpp; sourceTree = "<group>"; };
 		2C253D3B193604D80067BB7D /* Optim_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim_3D.h; sourceTree = "<group>"; };
 		2C253D3C193604D80067BB7D /* Planewaves_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves_3D.cpp; sourceTree = "<group>"; };
@@ -137,8 +133,6 @@
 				2C253D35193604D80067BB7D /* Hoa3D.h */,
 				2C253D36193604D80067BB7D /* Map_3D.cpp */,
 				2C253D37193604D80067BB7D /* Map_3D.h */,
-				2C253D38193604D80067BB7D /* Meter_3D.cpp */,
-				2C253D39193604D80067BB7D /* Meter_3D.h */,
 				2C253D3A193604D80067BB7D /* Optim_3D.cpp */,
 				2C253D3B193604D80067BB7D /* Optim_3D.h */,
 				2C253D3C193604D80067BB7D /* Planewaves_3D.cpp */,
@@ -172,7 +166,6 @@
 				2C253D53193604D80067BB7D /* Optim_3D.h in Headers */,
 				2C253D5D193604D80067BB7D /* Wider_3D.h in Headers */,
 				2C253D5B193604D80067BB7D /* Vector_3D.h in Headers */,
-				2C253D51193604D80067BB7D /* Meter_3D.h in Headers */,
 				2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */,
 				2C9255F718D1D16B00A3A730 /* hoa.max.h in Headers */,
 				2C253D4D193604D80067BB7D /* Hoa3D.h in Headers */,
@@ -257,7 +250,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C253D50193604D80067BB7D /* Meter_3D.cpp in Sources */,
 				2C253D58193604D80067BB7D /* Scope_3D.cpp in Sources */,
 				2C9255F918D1D74100A3A730 /* hoa.3d.map~.cpp in Sources */,
 				2C9255F618D1D16B00A3A730 /* hoa.max.cpp in Sources */,

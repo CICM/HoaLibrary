@@ -43,16 +43,6 @@
 		8FCDF7A318D23DF60019E1CE /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF77918D23DF60019E1CE /* Rotate.h */; };
 		8FCDF7A418D23DF60019E1CE /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF77A18D23DF60019E1CE /* Scope.cpp */; };
 		8FCDF7A518D23DF60019E1CE /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF77B18D23DF60019E1CE /* Scope.h */; };
-		8FCDF7A618D23DF60019E1CE /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF77C18D23DF60019E1CE /* Source.cpp */; };
-		8FCDF7A718D23DF60019E1CE /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF77D18D23DF60019E1CE /* Source.h */; };
-		8FCDF7A818D23DF60019E1CE /* SourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF77E18D23DF60019E1CE /* SourcesGroup.cpp */; };
-		8FCDF7A918D23DF60019E1CE /* SourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF77F18D23DF60019E1CE /* SourcesGroup.h */; };
-		8FCDF7AA18D23DF60019E1CE /* SourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF78018D23DF60019E1CE /* SourcesManager.cpp */; };
-		8FCDF7AB18D23DF60019E1CE /* SourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF78118D23DF60019E1CE /* SourcesManager.h */; };
-		8FCDF7AC18D23DF60019E1CE /* SourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF78218D23DF60019E1CE /* SourcesPreset.cpp */; };
-		8FCDF7AD18D23DF60019E1CE /* SourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF78318D23DF60019E1CE /* SourcesPreset.h */; };
-		8FCDF7AE18D23DF60019E1CE /* SourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF78418D23DF60019E1CE /* SourcesTrajectory.cpp */; };
-		8FCDF7AF18D23DF60019E1CE /* SourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF78518D23DF60019E1CE /* SourcesTrajectory.h */; };
 		8FCDF7B018D23DF60019E1CE /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF78618D23DF60019E1CE /* Vector.cpp */; };
 		8FCDF7B118D23DF60019E1CE /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF78718D23DF60019E1CE /* Vector.h */; };
 		8FCDF7B218D23DF60019E1CE /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF78818D23DF60019E1CE /* Wider.cpp */; };
@@ -99,16 +89,6 @@
 		8FCDF77918D23DF60019E1CE /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
 		8FCDF77A18D23DF60019E1CE /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
 		8FCDF77B18D23DF60019E1CE /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
-		8FCDF77C18D23DF60019E1CE /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
-		8FCDF77D18D23DF60019E1CE /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
-		8FCDF77E18D23DF60019E1CE /* SourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesGroup.cpp; sourceTree = "<group>"; };
-		8FCDF77F18D23DF60019E1CE /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
-		8FCDF78018D23DF60019E1CE /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
-		8FCDF78118D23DF60019E1CE /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
-		8FCDF78218D23DF60019E1CE /* SourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesPreset.cpp; sourceTree = "<group>"; };
-		8FCDF78318D23DF60019E1CE /* SourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesPreset.h; sourceTree = "<group>"; };
-		8FCDF78418D23DF60019E1CE /* SourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesTrajectory.cpp; sourceTree = "<group>"; };
-		8FCDF78518D23DF60019E1CE /* SourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesTrajectory.h; sourceTree = "<group>"; };
 		8FCDF78618D23DF60019E1CE /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
 		8FCDF78718D23DF60019E1CE /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		8FCDF78818D23DF60019E1CE /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
@@ -188,16 +168,6 @@
 				8FCDF77918D23DF60019E1CE /* Rotate.h */,
 				8FCDF77A18D23DF60019E1CE /* Scope.cpp */,
 				8FCDF77B18D23DF60019E1CE /* Scope.h */,
-				8FCDF77C18D23DF60019E1CE /* Source.cpp */,
-				8FCDF77D18D23DF60019E1CE /* Source.h */,
-				8FCDF77E18D23DF60019E1CE /* SourcesGroup.cpp */,
-				8FCDF77F18D23DF60019E1CE /* SourcesGroup.h */,
-				8FCDF78018D23DF60019E1CE /* SourcesManager.cpp */,
-				8FCDF78118D23DF60019E1CE /* SourcesManager.h */,
-				8FCDF78218D23DF60019E1CE /* SourcesPreset.cpp */,
-				8FCDF78318D23DF60019E1CE /* SourcesPreset.h */,
-				8FCDF78418D23DF60019E1CE /* SourcesTrajectory.cpp */,
-				8FCDF78518D23DF60019E1CE /* SourcesTrajectory.h */,
 				8FCDF78618D23DF60019E1CE /* Vector.cpp */,
 				8FCDF78718D23DF60019E1CE /* Vector.h */,
 				8FCDF78818D23DF60019E1CE /* Wider.cpp */,
@@ -215,12 +185,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FCDF79D18D23DF60019E1CE /* Planewaves.h in Headers */,
-				8FCDF7AF18D23DF60019E1CE /* SourcesTrajectory.h in Headers */,
 				8FCDF79718D23DF60019E1CE /* Map.h in Headers */,
 				8FCDF79318D23DF60019E1CE /* Hoa2D.h in Headers */,
 				8FCDF78B18D23DF60019E1CE /* Ambisonic.h in Headers */,
 				8FCDF7B118D23DF60019E1CE /* Vector.h in Headers */,
-				8FCDF7AB18D23DF60019E1CE /* SourcesManager.h in Headers */,
 				8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */,
 				8FCDF79918D23DF60019E1CE /* Meter.h in Headers */,
 				8FCDF7B318D23DF60019E1CE /* Wider.h in Headers */,
@@ -229,13 +197,10 @@
 				8FCDF79218D23DF60019E1CE /* Encoder.h in Headers */,
 				8FCDF79F18D23DF60019E1CE /* Projector.h in Headers */,
 				8FCDF79B18D23DF60019E1CE /* Optim.h in Headers */,
-				8FCDF7AD18D23DF60019E1CE /* SourcesPreset.h in Headers */,
 				8FCDF7A318D23DF60019E1CE /* Rotate.h in Headers */,
 				8FCDF78E18D23DF60019E1CE /* ChannelManager.h in Headers */,
-				8FCDF7A918D23DF60019E1CE /* SourcesGroup.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 				8FCDF79518D23DF60019E1CE /* Kits.h in Headers */,
-				8FCDF7A718D23DF60019E1CE /* Source.h in Headers */,
 				2CEE6E581906AE7B00B6FD7B /* MaxLineMap.h in Headers */,
 				8FCDF7A118D23DF60019E1CE /* Recomposer.h in Headers */,
 			);
@@ -320,24 +285,19 @@
 				8FCDF7A018D23DF60019E1CE /* Recomposer.cpp in Sources */,
 				8FCDF78D18D23DF60019E1CE /* ChannelManager.cpp in Sources */,
 				8FCDF7A418D23DF60019E1CE /* Scope.cpp in Sources */,
-				8FCDF7AC18D23DF60019E1CE /* SourcesPreset.cpp in Sources */,
 				8FCDF79E18D23DF60019E1CE /* Projector.cpp in Sources */,
 				8FCDF78F18D23DF60019E1CE /* Decoder.cpp in Sources */,
 				8FCDF79618D23DF60019E1CE /* Map.cpp in Sources */,
-				8FCDF7AE18D23DF60019E1CE /* SourcesTrajectory.cpp in Sources */,
 				8FCDF79C18D23DF60019E1CE /* Planewaves.cpp in Sources */,
 				8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */,
 				8FCDF7A218D23DF60019E1CE /* Rotate.cpp in Sources */,
 				8FCDF79A18D23DF60019E1CE /* Optim.cpp in Sources */,
-				8FCDF7A818D23DF60019E1CE /* SourcesGroup.cpp in Sources */,
 				8FCDF79418D23DF60019E1CE /* Kits.cpp in Sources */,
 				8FCDF7B018D23DF60019E1CE /* Vector.cpp in Sources */,
-				8FCDF7A618D23DF60019E1CE /* Source.cpp in Sources */,
 				8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */,
 				2CEE6E571906AE7B00B6FD7B /* MaxLineMap.cpp in Sources */,
 				8FCDF79118D23DF60019E1CE /* Encoder.cpp in Sources */,
 				8FCDF7B518D23E5E0019E1CE /* hoa.2d.map~.cpp in Sources */,
-				8FCDF7AA18D23DF60019E1CE /* SourcesManager.cpp in Sources */,
 				8FCDF78A18D23DF60019E1CE /* Ambisonic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

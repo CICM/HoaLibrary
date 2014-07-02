@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 124.0, 92.0, 681.0, 718.0 ],
+		"rect" : [ 100.0, 100.0, 681.0, 718.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 124.0, 118.0, 681.0, 692.0 ],
+						"rect" : [ 0.0, 26.0, 681.0, 692.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -80,7 +80,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 554.108337, 348.375, 19.0, 19.0 ],
-									"presentation_rect" : [ 556.858337, 349.5, 0.0, 0.0 ],
 									"text" : "X",
 									"textcolor" : [ 0.345705, 0.371263, 0.398517, 1.0 ]
 								}
@@ -96,8 +95,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 538.875, 352.375, 15.0, 10.0 ],
-									"presentation_rect" : [ 541.625, 353.5, 0.0, 0.0 ]
+									"patching_rect" : [ 538.875, 352.375, 15.0, 10.0 ]
 								}
 
 							}
@@ -111,7 +109,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 457.25, 252.0, 19.0, 19.0 ],
-									"presentation_rect" : [ 460.0, 253.125, 0.0, 0.0 ],
 									"text" : "Z",
 									"textcolor" : [ 0.345705, 0.371263, 0.398517, 1.0 ]
 								}
@@ -127,8 +124,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 460.25, 269.875, 10.0, 15.0 ],
-									"presentation_rect" : [ 463.0, 271.0, 0.0, 0.0 ]
+									"patching_rect" : [ 460.25, 269.875, 10.0, 15.0 ]
 								}
 
 							}
@@ -801,7 +797,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-29", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -811,7 +807,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-29", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -842,7 +838,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -853,7 +849,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -952,7 +948,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 681.0, 692.0 ],
+						"rect" : [ 100.0, 126.0, 681.0, 692.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1711,7 +1707,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-29", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1721,7 +1717,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-29", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1752,7 +1748,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1763,7 +1759,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1908,8 +1904,8 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-1::obj-2" : [ "hoa.map", "hoa.map", 0 ],
-			"obj-1::obj-3" : [ "hoa.map[1]", "hoa.map", 0 ]
+			"obj-1::obj-3" : [ "hoa.map[1]", "hoa.map", 0 ],
+			"obj-1::obj-2" : [ "hoa.map", "hoa.map", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

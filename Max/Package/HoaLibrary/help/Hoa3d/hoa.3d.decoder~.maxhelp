@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 46.0, 844.0, 740.0 ],
+		"rect" : [ 100.0, 100.0, 844.0, 740.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 72.0, 844.0, 714.0 ],
+						"rect" : [ 100.0, 126.0, 844.0, 714.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -80,7 +80,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 177.625, 315.0, 62.0, 19.0 ],
-									"presentation_rect" : [ 289.25, 306.0, 0.0, 0.0 ],
 									"text" : "hoa.pi~ 2."
 								}
 
@@ -106,8 +105,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 296.625, 591.0, 13.0, 58.0 ],
-									"presentation_rect" : [ 291.0, 590.0, 0.0, 0.0 ]
+									"patching_rect" : [ 296.625, 591.0, 13.0, 58.0 ]
 								}
 
 							}
@@ -763,7 +761,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -773,7 +771,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -803,7 +801,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-29", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -813,7 +811,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-29", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -844,7 +842,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-32", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -855,7 +853,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-32", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1783,7 +1781,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1793,7 +1791,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1832,7 +1830,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-29", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1842,7 +1840,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-29", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1873,7 +1871,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-32", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1884,7 +1882,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-32", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,

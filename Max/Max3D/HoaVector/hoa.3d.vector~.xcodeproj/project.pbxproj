@@ -18,8 +18,6 @@
 		2C155D77193C887B00BDF1FC /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C155D5F193C887B00BDF1FC /* Hoa3D.h */; };
 		2C155D78193C887B00BDF1FC /* Map_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C155D60193C887B00BDF1FC /* Map_3D.cpp */; };
 		2C155D79193C887B00BDF1FC /* Map_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C155D61193C887B00BDF1FC /* Map_3D.h */; };
-		2C155D7A193C887B00BDF1FC /* Meter_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C155D62193C887B00BDF1FC /* Meter_3D.cpp */; };
-		2C155D7B193C887B00BDF1FC /* Meter_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C155D63193C887B00BDF1FC /* Meter_3D.h */; };
 		2C155D7C193C887B00BDF1FC /* Optim_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C155D64193C887B00BDF1FC /* Optim_3D.cpp */; };
 		2C155D7D193C887B00BDF1FC /* Optim_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C155D65193C887B00BDF1FC /* Optim_3D.h */; };
 		2C155D7E193C887B00BDF1FC /* Planewaves_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C155D66193C887B00BDF1FC /* Planewaves_3D.cpp */; };
@@ -33,7 +31,6 @@
 		2C155D86193C887B00BDF1FC /* Wider_3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C155D6E193C887B00BDF1FC /* Wider_3D.cpp */; };
 		2C155D87193C887B00BDF1FC /* Wider_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C155D6F193C887B00BDF1FC /* Wider_3D.h */; };
 		2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255B918D1D01400A3A730 /* Hoa3D.max.h */; };
-		2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C9255BB18D1D06000A3A730 /* MaxHoa3D.xcconfig */; };
 		2C9255BE18D1D0EB00A3A730 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9255BD18D1D0EB00A3A730 /* MaxAudioAPI.framework */; };
 		2C9255F518D1D16B00A3A730 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9255F218D1D16B00A3A730 /* hoa.max_commonsyms.h */; };
 		2C9255F618D1D16B00A3A730 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9255F318D1D16B00A3A730 /* hoa.max.cpp */; };
@@ -54,8 +51,6 @@
 		2C155D5F193C887B00BDF1FC /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
 		2C155D60193C887B00BDF1FC /* Map_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map_3D.cpp; sourceTree = "<group>"; };
 		2C155D61193C887B00BDF1FC /* Map_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map_3D.h; sourceTree = "<group>"; };
-		2C155D62193C887B00BDF1FC /* Meter_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter_3D.cpp; sourceTree = "<group>"; };
-		2C155D63193C887B00BDF1FC /* Meter_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter_3D.h; sourceTree = "<group>"; };
 		2C155D64193C887B00BDF1FC /* Optim_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim_3D.cpp; sourceTree = "<group>"; };
 		2C155D65193C887B00BDF1FC /* Optim_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim_3D.h; sourceTree = "<group>"; };
 		2C155D66193C887B00BDF1FC /* Planewaves_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves_3D.cpp; sourceTree = "<group>"; };
@@ -132,8 +127,6 @@
 				2C155D5F193C887B00BDF1FC /* Hoa3D.h */,
 				2C155D60193C887B00BDF1FC /* Map_3D.cpp */,
 				2C155D61193C887B00BDF1FC /* Map_3D.h */,
-				2C155D62193C887B00BDF1FC /* Meter_3D.cpp */,
-				2C155D63193C887B00BDF1FC /* Meter_3D.h */,
 				2C155D64193C887B00BDF1FC /* Optim_3D.cpp */,
 				2C155D65193C887B00BDF1FC /* Optim_3D.h */,
 				2C155D66193C887B00BDF1FC /* Planewaves_3D.cpp */,
@@ -166,7 +159,6 @@
 				2C155D7D193C887B00BDF1FC /* Optim_3D.h in Headers */,
 				2C155D87193C887B00BDF1FC /* Wider_3D.h in Headers */,
 				2C155D85193C887B00BDF1FC /* Vector_3D.h in Headers */,
-				2C155D7B193C887B00BDF1FC /* Meter_3D.h in Headers */,
 				2C9255BA18D1D01400A3A730 /* Hoa3D.max.h in Headers */,
 				2C9255F718D1D16B00A3A730 /* hoa.max.h in Headers */,
 				2C155D77193C887B00BDF1FC /* Hoa3D.h in Headers */,
@@ -204,7 +196,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.3d.vector~" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -231,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9255BC18D1D06000A3A730 /* MaxHoa3D.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C155D7A193C887B00BDF1FC /* Meter_3D.cpp in Sources */,
 				2C155D82193C887B00BDF1FC /* Scope_3D.cpp in Sources */,
 				2C0561C418D1F4830076AABB /* hoa.3d.vector~.cpp in Sources */,
 				2C9255F618D1D16B00A3A730 /* hoa.max.cpp in Sources */,
