@@ -43,8 +43,8 @@
 
 /* Begin PBXFileReference section */
 		2C0561C718D1F69C0076AABB /* hoa.3d.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.3d.decoder~.cpp"; sourceTree = "<group>"; };
-		2C7FEE0519348FBF002B210A /* Ambisonic_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic_3D.cpp; sourceTree = "<group>"; };
-		2C7FEE0619348FBF002B210A /* Ambisonic_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic_3D.h; sourceTree = "<group>"; };
+		2C7FEE0519348FBF002B210A /* Ambisonic_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Ambisonic_3D.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C7FEE0619348FBF002B210A /* Ambisonic_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Ambisonic_3D.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2C7FEE0719348FBF002B210A /* BinauralMatrix_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix_3D.cpp; sourceTree = "<group>"; };
 		2C7FEE0819348FBF002B210A /* Decoder_3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder_3D.cpp; sourceTree = "<group>"; };
 		2C7FEE0919348FBF002B210A /* Decoder_3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder_3D.h; sourceTree = "<group>"; };

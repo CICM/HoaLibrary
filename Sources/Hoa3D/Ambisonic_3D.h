@@ -22,8 +22,8 @@ namespace Hoa3D
     protected:
         unsigned int    m_order;
         unsigned int	m_number_of_harmonics;
-        unsigned int*   m_harmonics_bands;
-        int*            m_harmonics_arguments;
+        unsigned int*   m_harmonics_degrees;
+        int*            m_harmonics_orders;
         
     public:
         
@@ -62,7 +62,7 @@ namespace Hoa3D
         inline int getHarmonicOrder(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return m_harmonics_arguments[index];
+            return m_harmonics_orders[index];
         };
         
         //! Retrieve the degree of an harmonic.
@@ -78,7 +78,7 @@ namespace Hoa3D
         inline unsigned int getHarmonicDegree(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return m_harmonics_bands[index];
+            return m_harmonics_degrees[index];
         };
         
         //! Retrieve a name for an harmonic.
