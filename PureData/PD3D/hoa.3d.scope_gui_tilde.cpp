@@ -207,7 +207,6 @@ void hoa_scope_3D_tick(t_hoa_scope_3D *x)
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
     
 	ebox_invalidate_layer((t_ebox *)x, hoa_sym_harmonics_layer);
-    ebox_invalidate_layer((t_ebox *)x, hoa_sym_background_layer);
 	ebox_redraw((t_ebox *)x);
 	if(sys_getdspstate())
 		clock_delay(x->f_clock, x->f_interval);
@@ -233,11 +232,7 @@ t_pd_err hoa_scope_3D_notify(t_hoa_scope_3D *x, t_symbol *s, t_symbol *msg, void
 	if (msg == hoa_sym_attr_modified)
 	{
 		name = s;
-		if( name == hoa_sym_bgcolor || name == gensym("order"))
-		{
-			ebox_invalidate_layer((t_ebox *)x, hoa_sym_background_layer);
-		}
-		else if(name == gensym("phcolor") || name == gensym("nhcolor"))
+		if(name == gensym("phcolor") || name == gensym("nhcolor") || name == hoa_sym_bgcolor || name == gensym("order"))
 		{
 			ebox_invalidate_layer((t_ebox *)x, hoa_sym_harmonics_layer);
 		}

@@ -18,6 +18,7 @@ hoa.3d.map~-help.pd hoa.3d.map~ An ambisonic sources spatializer.;
 hoa.3d.meter~-help.pd hoa.3d.meter~ A multi circular meter with sound field descriptor.;
 hoa.3d.optim~-help.pd hoa.3d.optim~ An ambisonic sound field optimization.;
 hoa.3d.wider~-help.pd hoa.3d.wider~ An ambisonic fractional orders simulator.;
+hoa.3d.scope~-help.pd hoa.3d.scope~ An ambisonic harmonics visualizer.;
 hoa.connect-help.pd hoa.connect A connector for hoa objects.;
 hoa.dac~-help.pd hoa.dac~ A custom dac~ with matlab syntax.;
 hoa.io-help.pd hoa.io A set of inlet and outlet for hoa.process.;
