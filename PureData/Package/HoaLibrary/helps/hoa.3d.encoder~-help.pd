@@ -1,66 +1,66 @@
-#N canvas 406 177 767 623 10;
-#X text -255 -815 source;
-#X msg -332 -668 \; pd dsp 1;
-#X msg -332 -633 \; pd dsp 0;
-#X obj -63 -676 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#N canvas 402 81 779 677 10;
+#X text -255 -771 source;
+#X msg -332 -624 \; pd dsp 1;
+#X msg -332 -589 \; pd dsp 0;
+#X obj -63 -632 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj -253 -800 hoa.soundgrain;
-#X obj -253 -771 c.gain~ @size 131 10 @fontname Helvetica @fontweight
+#X obj -253 -756 hoa.soundgrain;
+#X obj -253 -727 c.gain~ @size 131 10 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5
 0.5 1 @kncolor 0.5 0.5 0.5 1;
-#X obj 103 -817 hoa.connect;
-#X obj 103 -837 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 103 -773 hoa.connect;
+#X obj 103 -793 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -126 -704 hoa.pi~ 2;
-#X obj -380 -884 c.patcherinfos;
-#X obj -380 -901 loadbang;
-#X obj -380 -901 hoa.help.header;
-#X obj 36 -901 hoa.help.also;
-#X text -63 -704 azimuth;
-#X text 72 -706 elevation;
-#X text -375 -857 hoa.3d.encoder~ creates the spherical harmonics of
+#X obj -126 -660 hoa.pi~ 2;
+#X obj -380 -840 c.patcherinfos;
+#X obj -380 -857 loadbang;
+#X obj -380 -857 hoa.help.header;
+#X obj 36 -857 hoa.help.also;
+#X text -63 -660 azimuth;
+#X text 72 -662 elevation;
+#X text -375 -813 hoa.3d.encoder~ creates the spherical harmonics of
 a signal depending on a given order \, an azimuth and an elevation.
 ;
-#X obj 2 -704 hoa.pi~ 1;
-#X obj 2 -755 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj 2 -660 hoa.pi~ 1;
+#X obj 2 -711 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -126 -755 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -126 -711 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -253 -653 hoa.3d.encoder~ 3 -------------------------;
-#X obj -253 -604 hoa.3d.optim~ 3 inPhase -------------------;
-#X obj 76 -676 c.number~ @size 53 17 @fontname Helvetica @fontweight
+#X obj -253 -609 hoa.3d.encoder~ 3 -------------------------;
+#X obj -253 -560 hoa.3d.optim~ 3 inPhase -------------------;
+#X obj 76 -632 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
 0 0 0 1;
-#X obj 2 -729 hoa.tri~ 0.1 -0.5 0.5;
-#X obj -253 -314 hoa.dac~ 1:20 -----------------------------;
-#X obj -253 -509 hoa.3d.decoder~ 3 regular 20 --------------;
-#X text -69 -693 -Pi & Pi;
-#X text 64 -694 -Pi/2 & Pi/2;
-#X obj -253 -465 hoa.2d.meter~ @size 126 126 @fontname Helvetica @fontweight
+#X obj 2 -685 hoa.tri~ 0.1 -0.5 0.5;
+#X obj -253 -270 hoa.dac~ 1:20 -----------------------------;
+#X obj -253 -465 hoa.3d.decoder~ 3 regular 20 --------------;
+#X text -69 -649 -Pi & Pi;
+#X text 64 -650 -Pi/2 & Pi/2;
+#X obj -253 -421 hoa.2d.meter~ @size 126 126 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 10 @angles 0 36 72 108 144 180 216 252 288 324 @offset 0 @rotation
 anti-clockwise @vectors none @interval 50 @bgcolor 0.76 0.76 0.76 1
 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73
 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1
 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X obj -119 -465 hoa.2d.meter~ @size 127 127 @fontname Helvetica @fontweight
+#X obj -119 -421 hoa.2d.meter~ @size 127 127 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 10 @angles 0 36 72 108 144 180 216 252 288 324 @offset 0 @rotation
 anti-clockwise @vectors none @interval 50 @bgcolor 0.76 0.76 0.76 1
 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73
 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1
 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
-#X text -335 -413 Top channels;
-#X text 12 -413 Bottom channels;
-#X obj 158 -747 c.blackboard @size 200 200 @fontname Helvetica @fontweight
+#X text -335 -369 Top channels;
+#X text 12 -369 Bottom channels;
+#X obj 158 -703 c.blackboard @size 200 200 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoa3dSpherePt @send (null)
 @chalkmode 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
 #N canvas 0 22 920 491 drawGui3d 0;
@@ -205,14 +205,15 @@ normal @fontslant roman @fontsize 11 @receive hoa3dSpherePt @send (null)
 #X connect 52 0 13 0;
 #X connect 53 0 50 1;
 #X connect 54 0 20 0;
-#X restore 55 -652 pd drawGui3d;
-#X obj -126 -729 phasor~ -0.5;
-#X obj 158 -523 c.blackboard @size 200 200 @fontname Helvetica @fontweight
+#X restore 55 -608 pd drawGui3d;
+#X obj -126 -685 phasor~ -0.5;
+#X obj 158 -479 c.blackboard @size 200 200 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive hoa3dSpherePt2 @send
 (null) @chalkmode 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5
 1;
-#X text 161 -541 View from top;
-#X text 161 -765 View from back;
+#X text 161 -497 View from top;
+#X text 161 -721 View from back;
+#X obj -184 -241 hoa.help.pub;
 #X connect 3 1 32 0;
 #X connect 4 0 5 0;
 #X connect 5 0 19 0;
@@ -300,4 +301,4 @@ normal @fontslant roman @fontsize 11 @receive hoa3dSpherePt2 @send
 #X connect 24 19 23 19;
 #X connect 24 19 28 9;
 #X connect 33 0 8 1;
-#X coords 0 623 1 622 100 60 0;
+#X coords 0 677 1 676 100 60 0;

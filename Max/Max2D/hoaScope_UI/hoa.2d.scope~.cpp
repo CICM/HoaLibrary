@@ -431,17 +431,12 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
             }
             else if(x->f_scope->getValue(i) >= 0)
             {
-                if (pathLength == 0)
+                if(!pathLength)
                 {
                     beginCoord.x = x->f_scope->getAbscissa(i) * x->f_radius;
                     beginCoord.y = x->f_scope->getOrdinate(i) * x->f_radius;
                     jgraphics_move_to(g, beginCoord.x, beginCoord.y );
                     pathLength++;
-                }
-                else if(x->f_scope->getValue(i) < 0)
-                {
-                    jgraphics_line_to(g, 0, 0);
-                    jgraphics_move_to(g, x->f_scope->getAbscissa(i) * x->f_radius, x->f_scope->getOrdinate(i) * x->f_radius);
                 }
                 else
                 {
@@ -462,23 +457,18 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
             precIndex = i-1;
             if (precIndex < 0) precIndex += x->f_scope->getNumberOfPoints();
             
-            if (i == x->f_scope->getNumberOfPoints()-1)
+            if(i == x->f_scope->getNumberOfPoints()-1)
             {
                 jgraphics_line_to(g, beginCoord.x, beginCoord.y );
             }
             else if(x->f_scope->getValue(i) < 0)
             {
-                if (!pathLength)
+                if(!pathLength)
                 {
                     beginCoord.x = x->f_scope->getAbscissa(i) * x->f_radius;
                     beginCoord.y = x->f_scope->getOrdinate(i) * x->f_radius;
                     jgraphics_move_to(g, beginCoord.x, beginCoord.y );
                     pathLength++;
-                }
-                else if(x->f_scope->getValue(precIndex) >= 0)
-                {
-                    jgraphics_line_to(g, 0, 0);
-                    jgraphics_move_to(g, x->f_scope->getAbscissa(i) * x->f_radius, x->f_scope->getOrdinate(i) * x->f_radius);
                 }
                 else
                 {

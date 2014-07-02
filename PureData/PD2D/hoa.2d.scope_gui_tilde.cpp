@@ -319,7 +319,6 @@ void hoa_scope_paint(t_hoa_scope *x, t_object *view)
 
 void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect)
 {
-    int i;
 	double y1, y2, rotateAngle;
     t_matrix transform;
     t_rgba black, white;
@@ -340,7 +339,7 @@ void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect)
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		egraphics_set_matrix(g, &transform);
         
-        for(i = 0; i < (x->f_order * 2 + 2) ; i++)
+        for(int i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
             rotateAngle = ((double)i / (x->f_order * 2 + 2) * HOA_2PI ) - (0.5 / (x->f_order * 2 + 2) * HOA_2PI);
 			egraphics_rotate(g, rotateAngle);
@@ -348,22 +347,12 @@ void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect)
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            if(rotateAngle > HOA_PI2 && rotateAngle < HOA_PI + HOA_PI2)
-            {
-                egraphics_move_to(g, -1, long(y1));
-                egraphics_line_to(g, -1, long(y2));
-            }
-            else
-            {
-                egraphics_move_to(g, 1, long(y1));
-                egraphics_line_to(g, 1, long(y2));
-            }
-            egraphics_set_line_width(g, 2);
+            egraphics_move_to(g, 0, y1);
+			egraphics_line_to(g, 0, y2);
+            egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
             egraphics_stroke(g);
             
-			egraphics_move_to(g, 0, y1);
-			egraphics_line_to(g, 0, y2);
             egraphics_set_color_rgba(g, &black);
 			egraphics_set_line_width(g, 1);
 			egraphics_stroke(g);
@@ -371,18 +360,14 @@ void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect)
 			egraphics_rotate(g, -rotateAngle);
 		}
         
-        egraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
-		egraphics_set_matrix(g, &transform);
-        
-        for(i = 5; i > 0; i--)
+        for(int i = 5; i > 0; i--)
 		{
-            egraphics_set_line_width(g, 2);
+            egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
-            egraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., HOA_2PI);
+            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
             egraphics_stroke(g);
             egraphics_set_line_width(g, 1);
             egraphics_set_color_rgba(g, &black);
-            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
             egraphics_stroke(g);
 		}
         
@@ -396,18 +381,9 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
     long pathLength = 0;
 	t_pt beginCoord;
     t_matrix transform;
-    t_rgba shadcolor = {0.4, 0.4, 0.4, 1.};
     long precIndex = 0;
     
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_harmonics_layer, rect->width, rect->height);
-    
-    if(shadcolor.alpha > x->f_color_nh.alpha)
-        shadcolor.alpha = x->f_color_ph.alpha;
-    if(shadcolor.alpha > x->f_color_nh.alpha)
-        shadcolor.alpha = x->f_color_nh.alpha;
-	shadcolor.alpha -= 0.5;
-	if(shadcolor.alpha < 0.)
-        shadcolor.alpha = 0;
     
 	if (g)
 	{
@@ -415,9 +391,9 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
 		egraphics_set_line_width(g, 1);
         egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
         egraphics_set_matrix(g, &transform);
-        egraphics_set_color_rgba(g, &x->f_color_ph);
         
-        // positiv harmonics
+        // positive harmonics
+        egraphics_set_color_rgba(g, &x->f_color_ph);
         for(int i = 0; i < x->f_scope->getNumberOfPoints(); i++)
         {
             precIndex = i-1;
@@ -437,12 +413,6 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
                     egraphics_move_to(g, beginCoord.x, beginCoord.y );
                     pathLength++;
                 }
-                else if(x->f_scope->getValue(i) < 0)
-                {
-                    egraphics_line_to(g, 0, 0);
-                    egraphics_stroke(g);
-                    egraphics_move_to(g, x->f_scope->getAbscissa(i) * x->f_radius, x->f_scope->getOrdinate(i) * x->f_radius);
-                }
                 else
                 {
                     egraphics_line_to(g, x->f_scope->getAbscissa(i) * x->f_radius, x->f_scope->getOrdinate(i) * x->f_radius);
@@ -452,6 +422,7 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
         if(pathLength)
             egraphics_stroke(g);
         
+        // negative harmonics
         egraphics_set_color_rgba(g, &x->f_color_nh);
         pathLength = 0;
         for(int i = 0; i < x->f_scope->getNumberOfPoints(); i++)
@@ -471,12 +442,6 @@ void draw_harmonics(t_hoa_scope *x, t_object *view, t_rect *rect)
                     beginCoord.y = x->f_scope->getOrdinate(i) * x->f_radius;
                     egraphics_move_to(g, beginCoord.x, beginCoord.y );
                     pathLength++;
-                }
-                else if(x->f_scope->getValue(precIndex) >= 0)
-                {
-                    egraphics_line_to(g, 0, 0);
-                    egraphics_stroke(g);
-                    egraphics_move_to(g, x->f_scope->getAbscissa(i) * x->f_radius, x->f_scope->getOrdinate(i) * x->f_radius);
                 }
                 else
                 {

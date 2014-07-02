@@ -353,22 +353,12 @@ void draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            if(rotateAngle > HOA_PI2 && rotateAngle < HOA_PI + HOA_PI2)
-            {
-                egraphics_move_to(g, -1, long(y1));
-                egraphics_line_to(g, -1, long(y2));
-            }
-            else
-            {
-                egraphics_move_to(g, 1, long(y1));
-                egraphics_line_to(g, 1, long(y2));
-            }
-            egraphics_set_line_width(g, 2);
+            egraphics_move_to(g, 0, y1);
+			egraphics_line_to(g, 0, y2);
+            egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
             egraphics_stroke(g);
             
-			egraphics_move_to(g, 0, y1);
-			egraphics_line_to(g, 0, y2);
             egraphics_set_color_rgba(g, &black);
 			egraphics_set_line_width(g, 1);
 			egraphics_stroke(g);
@@ -381,13 +371,13 @@ void draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
         
         for(i = 5; i > 0; i--)
 		{
-            egraphics_set_line_width(g, 2);
+            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
+            egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
-            egraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., HOA_2PI);
             egraphics_stroke(g);
+            
             egraphics_set_line_width(g, 1);
             egraphics_set_color_rgba(g, &black);
-            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
             egraphics_stroke(g);
 		}
         

@@ -1,12 +1,12 @@
-#N canvas 398 88 917 663 10;
-#X obj 2 26 hoa.2d.meter~ @size 143 143 @fontname Helvetica @fontweight
+#N canvas 723 143 1021 677 10;
+#X obj 2 25 hoa.2d.meter~ @size 144.5 144.5 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 4 @angles 45 135 225 315 @offset 0 @rotation anti-clockwise @vectors
 none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85
 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1
 0.8 @velocitycolor 1 0 0 0.8;
-#X obj 147 26 hoa.2d.meter~ @size 143 143 @fontname Helvetica @fontweight
+#X obj 147 25 hoa.2d.meter~ @size 144.5 144.5 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 4 @angles 45 135 225 315 @offset 0 @rotation anti-clockwise @vectors
 none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
@@ -21,17 +21,17 @@ none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 #X obj 192 -317 inlet~;
 #X obj 238 -317 inlet~;
 #X obj 285 -317 inlet~;
-#X obj 3 3 c.tab @size 286 20 @fontname Helvetica @fontweight normal
+#X obj 3 3 c.tab @size 287 20 @fontname Helvetica @fontweight normal
 @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @orientation 0 @toggle 0 @items 'Top / Bottom' @bgcolor 0.75
+(null) @orientation 0 @toggle 0 @items 'Front / Back' @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @hocolor 0.5
 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
-#X msg 400 168 setitem 0 Top / Bottom;
-#X msg 572 173 setitem 0 Front / Back;
-#X obj 347 34 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X msg 330 178 setitem 0 Top / Bottom;
+#X msg 357 205 setitem 0 Front / Back;
+#X obj 400 54 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 400 81 sel 0;
-#X obj 347 9 bang;
+#X obj 400 29 bang;
 #X obj 47 -118 *~;
 #X obj 93 -118 *~;
 #X obj 67 -148 *~;
@@ -40,21 +40,19 @@ none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 #X obj 238 -118 *~;
 #X obj 211 -148 *~;
 #X obj 257 -148 *~;
-#X obj 354 -293 c.loadmess 0;
+#X obj 433 28 c.loadmess 0;
 #X obj 400 111 f 1;
 #X obj 430 111 f 0;
-#X obj 550 115 f 1;
-#X obj 580 115 f 0;
-#X obj 391 -259 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 496 -185 route canvassize;
-#X obj 390 -227 c.canvasinfos @notify 1;
-#X msg 534 -262 notify 1;
-#X obj 496 -159 unpack f f f f;
-#X obj 550 -132 <, f 5;
-#X obj 420 -160 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X msg 418 -118 pos \$1 \$1;
+#X obj 460 112 f 1;
+#X obj 490 112 f 0;
+#X obj 16 -39 r \$0-tab;
+#X obj 330 232 s \$0-tab;
+#X obj 400 153 s \$0-gain1;
+#X obj 126 -238 r \$0-gain1;
+#X obj 342 -237 r \$0-gain2;
+#X obj 470 153 s \$0-gain2;
+#X obj 96 -35 r \$0-met1;
+#X obj 166 -35 r \$0-met2;
 #X connect 2 0 0 0;
 #X connect 3 0 16 0;
 #X connect 3 0 22 0;
@@ -62,14 +60,14 @@ none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 #X connect 4 0 23 0;
 #X connect 5 0 0 3;
 #X connect 6 0 1 0;
-#X connect 6 0 18 0;
 #X connect 7 0 20 0;
+#X connect 7 0 18 0;
 #X connect 8 0 21 0;
+#X connect 8 0 19 0;
 #X connect 9 0 1 3;
-#X connect 9 0 19 0;
 #X connect 10 0 15 0;
-#X connect 11 0 10 0;
-#X connect 12 0 10 0;
+#X connect 11 0 30 0;
+#X connect 12 0 30 0;
 #X connect 13 0 14 0;
 #X connect 14 0 11 0;
 #X connect 14 0 25 0;
@@ -87,29 +85,19 @@ none @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 #X connect 22 0 1 1;
 #X connect 23 0 1 2;
 #X connect 24 0 13 0;
-#X connect 24 0 29 0;
-#X connect 25 0 21 1;
-#X connect 25 0 20 1;
-#X connect 25 0 17 1;
-#X connect 25 0 16 1;
-#X connect 26 0 23 1;
-#X connect 26 0 22 1;
-#X connect 26 0 19 1;
-#X connect 26 0 18 1;
-#X connect 27 0 23 1;
-#X connect 27 0 22 1;
-#X connect 27 0 19 1;
-#X connect 27 0 18 1;
-#X connect 28 0 21 1;
-#X connect 28 0 20 1;
-#X connect 28 0 17 1;
-#X connect 28 0 16 1;
-#X connect 29 0 31 0;
-#X connect 30 0 33 0;
-#X connect 31 2 30 0;
-#X connect 32 0 31 0;
-#X connect 33 2 34 0;
-#X connect 33 3 34 1;
-#X connect 35 0 36 0;
-#X connect 36 0 10 0;
-#X coords 0 -1 1 1 291 170 2 0 0;
+#X connect 25 0 31 0;
+#X connect 26 0 34 0;
+#X connect 27 0 34 0;
+#X connect 28 0 31 0;
+#X connect 29 0 10 0;
+#X connect 32 0 16 1;
+#X connect 32 0 17 1;
+#X connect 32 0 22 1;
+#X connect 32 0 23 1;
+#X connect 33 0 18 1;
+#X connect 33 0 19 1;
+#X connect 33 0 20 1;
+#X connect 33 0 21 1;
+#X connect 35 0 0 0;
+#X connect 36 0 1 0;
+#X coords 10 0 291 175 292 170 2 0 0;
