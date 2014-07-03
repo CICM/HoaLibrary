@@ -164,18 +164,12 @@
 , 							{
 								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"colorinterp" : 1,
 									"id" : "obj-7",
-									"light" : 0,
 									"maxclass" : "hoa.3d.scope~",
 									"numinlets" : 25,
 									"numoutlets" : 0,
 									"order" : 4,
-									"patching_rect" : [ 30.5, 303.0, 356.5, 356.5 ],
-									"spcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"sphere" : 0,
-									"style" : 1,
-									"vectors" : 0
+									"patching_rect" : [ 30.5, 303.0, 356.5, 356.5 ]
 								}
 
 							}
@@ -1924,13 +1918,13 @@
 , 							{
 								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"gain" : 2.32,
 									"id" : "obj-7",
 									"maxclass" : "hoa.3d.scope~",
 									"numinlets" : 25,
 									"numoutlets" : 0,
 									"order" : 4,
-									"patching_rect" : [ 31.0, 303.0, 356.5, 356.5 ],
-									"spcolor" : [ 0.25, 0.25, 0.25, 1.0 ]
+									"patching_rect" : [ 31.0, 303.0, 356.5, 356.5 ]
 								}
 
 							}
@@ -2527,6 +2521,15 @@
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
 									"disabled" : 0,
@@ -3423,6 +3426,15 @@
 									"hidden" : 1,
 									"midpoints" : [ 525.5, 34.5, 525.5, 34.5 ],
 									"source" : [ "obj-46", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-23", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-5", 0 ]
 								}
 
 							}
