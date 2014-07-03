@@ -114,12 +114,12 @@ typedef struct  _hoamap
 	t_symbol*	f_binding_name;
 	t_linkmap*	f_listmap;
 	int			f_output_enabled;
-} t_hoamap;
+} t_hoa_map;
 
 typedef struct _linkmap
 {
 	t_linkmap *next;
-	t_hoamap *map;
+	t_hoa_map *map;
 	void update_headptr(t_linkmap *linkmap_headptr, SourcesManager* sourcesManager)
 	{
 		map->f_listmap = linkmap_headptr;
@@ -134,56 +134,56 @@ t_class *hoamap_class;
 
 // general methods
 void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
-void hoamap_free(t_hoamap *x);
-void hoamap_tick(t_hoamap *x);
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
-void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
-void hoamap_preset(t_hoamap *x);
-t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av);
-t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av);
-void hoamap_jsave(t_hoamap *x, t_dictionary *d);
-t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+void hoamap_free(t_hoa_map *x);
+void hoamap_tick(t_hoa_map *x);
+void hoamap_getdrawparams(t_hoa_map *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoamap_assist(t_hoa_map *x, void *b, long m, long a, char *s);
+void hoamap_preset(t_hoa_map *x);
+t_max_err hoamap_setvalueof(t_hoa_map *x, long ac, t_atom *av);
+t_max_err hoamap_getvalueof(t_hoa_map *x, long *ac, t_atom **av);
+void hoamap_jsave(t_hoa_map *x, t_dictionary *d);
+t_max_err hoamap_notify(t_hoa_map *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_max_err hoamap_zoom(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 
-void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_bang(t_hoamap *x);
-void hoamap_infos(t_hoamap *x);
-void hoamap_clear_all(t_hoamap *x);
-void hoamap_output(t_hoamap *x);
+void hoamap_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_set(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_bang(t_hoa_map *x);
+void hoamap_infos(t_hoa_map *x);
+void hoamap_clear_all(t_hoa_map *x);
+void hoamap_output(t_hoa_map *x);
 
-void hoamap_color_picker(t_hoamap *x);
-void hoamap_text_field(t_hoamap *x);
+void hoamap_color_picker(t_hoa_map *x);
+void hoamap_text_field(t_hoa_map *x);
 
 /* Paint Methods */
-void hoamap_paint(t_hoamap *x, t_object *view);
-void draw_background(t_hoamap *x, t_object *view, t_rect *rect);
-void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect);
-void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect);
-void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect);
+void hoamap_paint(t_hoa_map *x, t_object *view);
+void draw_background(t_hoa_map *x, t_object *view, t_rect *rect);
+void draw_sources(t_hoa_map *x,  t_object *view, t_rect *rect);
+void draw_groups(t_hoa_map *x,  t_object *view, t_rect *rect);
+void draw_rect_selection(t_hoa_map *x,  t_object *view, t_rect *rect);
 
-void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
-long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
+void hoamap_mousedown(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseup(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseenter(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousemove(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseleave(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
+long hoamap_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
-t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos);
-void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av);
+t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
+void hoamap_deprecated(t_hoa_map *x, t_symbol* s, long ac, t_atom* av);
 
-t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-void hoamap_send_binded_map_update(t_hoamap *x, long flags); // BindingMapMsgFlag
+t_max_err bindname_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+void hoamap_send_binded_map_update(t_hoa_map *x, long flags); // BindingMapMsgFlag
 
 int C74_EXPORT main()
 {
     hoa_textfield_init();
 	t_class *c;
     
-	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
+	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
 	
 	hoa_initclass(c, NULL);
 	
@@ -254,7 +254,7 @@ int C74_EXPORT main()
 	// @exclude hoa.3d.map
     
     /* Colors */
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_color_bg);
+	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoa_map, f_color_bg);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
@@ -262,7 +262,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.75 0.75 0.75 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.3d.map</o> object
     
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_color_bd);
+    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_map, f_color_bd);
 	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
@@ -270,7 +270,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
 	// @description Sets the RGBA values for the border color of the <o>hoa.3d.map</o> object
     
-    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_color_selection);
+    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoa_map, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "selcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selcolor", 0, "Selection Color");
@@ -280,7 +280,7 @@ int C74_EXPORT main()
 	
     /* Behavior */
 	CLASS_STICKY_CATEGORY(c, 0, "Behavior");
-	CLASS_ATTR_LONG				(c, "view", 0, t_hoamap, f_coord_view);
+	CLASS_ATTR_LONG				(c, "view", 0, t_hoa_map, f_coord_view);
 	CLASS_ATTR_LABEL			(c, "view", 0, "Coordinate View");
 	CLASS_ATTR_ENUMINDEX		(c, "view", 0, "xy xz yz");
 	CLASS_ATTR_DEFAULT          (c, "view", 0,  "0");
@@ -288,7 +288,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER			(c, "view", 0, "1");
 	// @description Sets the coordinates display mode. coordinates display mode can be <b>xy</b>, <b>xz</b> or <b>yz</b>
 	
-	CLASS_ATTR_LONG				(c, "outputmode", 0, t_hoamap, f_output_mode);
+	CLASS_ATTR_LONG				(c, "outputmode", 0, t_hoa_map, f_output_mode);
 	CLASS_ATTR_LABEL			(c, "outputmode", 0, "Output Mode");
 	CLASS_ATTR_ENUMINDEX		(c, "outputmode", 0, "Polar Cartesian");
 	CLASS_ATTR_DEFAULT          (c, "outputmode", 0,  "0");
@@ -296,13 +296,13 @@ int C74_EXPORT main()
     CLASS_ATTR_ORDER			(c, "outputmode", 0, "2");
 	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
 	
-	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoamap, f_output_3D);
+	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoa_map, f_output_3D);
 	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
 	CLASS_ATTR_SAVE             (c, "output3d", 1);
 	CLASS_ATTR_ORDER            (c, "output3d", 0, "3");
 	// @description Check this to output 3d coordinates, default is 2d.
     
-	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoamap, f_zoom_factor);
+	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoa_map, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
 	CLASS_ATTR_LABEL			(c, "zoom", 0, "Zoom");
 	CLASS_ATTR_DEFAULT          (c, "zoom", 0, "0.35");
@@ -310,14 +310,14 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE             (c, "zoom", 1);
 	// @description Sets the zoom factor
 	
-	CLASS_ATTR_LONG             (c, "showgroups", 0, t_hoamap, f_showgroups);
+	CLASS_ATTR_LONG             (c, "showgroups", 0, t_hoa_map, f_showgroups);
 	CLASS_ATTR_STYLE_LABEL      (c, "showgroups", 0, "onoff", "Use and show group");
 	CLASS_ATTR_DEFAULT          (c, "showgroups", 0, "1");
 	CLASS_ATTR_SAVE             (c, "showgroups", 1);
 	CLASS_ATTR_ORDER            (c, "showgroups", 0, "5");
 	// @description Use and show group ?
 	
-	CLASS_ATTR_LONG             (c, "save", 0, t_hoamap, f_save_with_patcher);
+	CLASS_ATTR_LONG             (c, "save", 0, t_hoa_map, f_save_with_patcher);
 	CLASS_ATTR_STYLE_LABEL      (c, "save", 0, "onoff", "Save Object State with Patcher");
 	CLASS_ATTR_DEFAULT          (c, "save", 0, "1");
 	CLASS_ATTR_SAVE             (c, "save", 1);
@@ -325,7 +325,7 @@ int C74_EXPORT main()
 	// @description Check this to save object' state with patcher. Warning : if Parameter Mode and Initial are enable, this <m>save</m> method is no longer effective.
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
-	CLASS_ATTR_SYM				(c, "mapname", 0, t_hoamap, f_binding_name);
+	CLASS_ATTR_SYM				(c, "mapname", 0, t_hoa_map, f_binding_name);
 	CLASS_ATTR_LABEL			(c, "mapname", 0, "Map Name");
 	CLASS_ATTR_CATEGORY			(c, "mapname", 0, "Name");
 	CLASS_ATTR_ACCESSORS		(c, "mapname", NULL, bindname_set);
@@ -341,14 +341,14 @@ int C74_EXPORT main()
 
 void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_hoamap *x =  NULL; 
+	t_hoa_map *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 	
-	x = (t_hoamap *)object_alloc(hoamap_class);
+	x = (t_hoa_map *)object_alloc(hoamap_class);
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
@@ -399,7 +399,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
+void linkmap_add_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 {
 	char strname[2048];
 	t_symbol* name = NULL;
@@ -444,7 +444,7 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 			
 			x->f_listmap = (t_linkmap *)name->s_thing;
 			temp = x->f_listmap;
-			t_hoamap* head_map = temp->map;
+			t_hoa_map* head_map = temp->map;
 			
 			while(temp)
 			{
@@ -466,7 +466,7 @@ void linkmap_add_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 	}
 }
 
-void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
+void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 {
 	char strname[2048];
 	t_symbol* name = NULL;
@@ -481,7 +481,7 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 		{
 			t_linkmap *temp, *temp2;
 			temp = (t_linkmap *)name->s_thing;
-			t_hoamap* head_map = temp->map;
+			t_hoa_map* head_map = temp->map;
 			int counter = 0;
 			
 			while(temp)
@@ -528,7 +528,7 @@ void linkmap_remove_with_binding_name(t_hoamap *x, t_symbol* binding_name)
 	
 }
 
-t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+t_max_err bindname_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (argc && argv && atom_gettype(argv) == A_SYM)
 	{
@@ -569,7 +569,7 @@ t_max_err bindname_set(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 	return MAX_ERR_NONE;
 }
 
-void hoamap_send_binded_map_update(t_hoamap *x, long flags)
+void hoamap_send_binded_map_update(t_hoa_map *x, long flags)
 {
 	if(x->f_listmap)
 	{
@@ -598,7 +598,7 @@ void hoamap_send_binded_map_update(t_hoamap *x, long flags)
 	}
 }
 
-void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av)
+void hoamap_deprecated(t_hoa_map *x, t_symbol* s, long ac, t_atom* av)
 {
 	if (s == hoa_sym_slot)
 	{
@@ -610,7 +610,7 @@ void hoamap_deprecated(t_hoamap *x, t_symbol* s, long ac, t_atom* av)
 	}
 }
 
-t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_2D;
 	boxinfos->autoconnect_inputs = 0;
@@ -620,7 +620,7 @@ t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoamap_free(t_hoamap *x)
+void hoamap_free(t_hoa_map *x)
 {
 	linkmap_remove_with_binding_name(x, x->f_binding_name);
 	
@@ -638,7 +638,7 @@ void hoamap_free(t_hoamap *x)
         object_free(x->f_textfield);
 }
 
-void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
+void hoamap_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 		sprintf(s,"(messages) Behavior and appearance");
@@ -653,7 +653,7 @@ void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
     }
 }
 
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoamap_getdrawparams(t_hoa_map *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
 	params->d_cornersize = HOA_UI_CORNERSIZE;
@@ -670,7 +670,7 @@ void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *
 /*          Intialisation par l'utilisateur               */
 /**********************************************************/
 
-void hoamap_clear_all(t_hoamap *x)
+void hoamap_clear_all(t_hoa_map *x)
 {
 	// mute all source and output before clearing them to notify hoa.#.map~
 	for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
@@ -691,7 +691,7 @@ void hoamap_clear_all(t_hoamap *x)
 	hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 
-void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_set(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 {
 	x->f_output_enabled = 0;
 	if (ac && av && atom_gettype(av) == A_SYM)
@@ -706,7 +706,7 @@ void hoamap_set(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 	x->f_output_enabled = 1;
 }
 
-void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 {
 	int index;
 	int exist;
@@ -861,7 +861,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     }
 }
 
-void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 {
 	if ( ac && av && atom_gettype(av) == A_SYM && atom_getsym(av) == hoa_sym_group_preset_data)
 	{
@@ -1056,7 +1056,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 /*                  Preset et Pattr                       */
 /**********************************************************/
 
-void hoamap_preset(t_hoamap *x)
+void hoamap_preset(t_hoa_map *x)
 {
 	void* z;
 	double* color;
@@ -1176,7 +1176,7 @@ void hoamap_preset(t_hoamap *x)
 	freebytes(av, ac * sizeof(t_atom));
 }
 
-t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
+t_max_err hoamap_setvalueof(t_hoa_map *x, long ac, t_atom *av)
 {
 	int source_ac = MAX_NUMBER_OF_SOURCES * 12;
 	int group_ac = MAX_NUMBER_OF_SOURCES * 9;
@@ -1192,7 +1192,7 @@ t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
 	return MAX_ERR_NONE;
 }
 
-t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
+t_max_err hoamap_getvalueof(t_hoa_map *x, long *ac, t_atom **av)
 {
 	if(ac && av)
     {
@@ -1301,7 +1301,7 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 	return MAX_ERR_NONE;
 }
 
-void hoamap_jsave(t_hoamap *x, t_dictionary *d)
+void hoamap_jsave(t_hoa_map *x, t_dictionary *d)
 {
 	if (x->f_save_with_patcher)
 	{
@@ -1321,7 +1321,7 @@ void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 /*                      Zoom and Notify                   */
 /**********************************************************/
 
-t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoamap_zoom(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
             x->f_zoom_factor = clip_minmax(atom_getfloat(argv), MIN_ZOOM, MAX_ZOOM);
@@ -1332,7 +1332,7 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
-t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoamap_notify(t_hoa_map *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	
@@ -1442,12 +1442,12 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 /*                          Sortie                        */
 /**********************************************************/
 
-void hoamap_bang(t_hoamap *x)
+void hoamap_bang(t_hoa_map *x)
 {
     hoamap_output(x);
 }
 
-void hoamap_output(t_hoamap *x)
+void hoamap_output(t_hoa_map *x)
 {
 	if (!x->f_output_enabled)
 		return;
@@ -1565,7 +1565,7 @@ void hoamap_output(t_hoamap *x)
     }
 }
 
-void hoamap_infos(t_hoamap *x)
+void hoamap_infos(t_hoa_map *x)
 {
     t_atom avNumber[3];
     t_atom* avIndex;
@@ -1667,7 +1667,7 @@ void hoamap_infos(t_hoamap *x)
 /*                          Paint                         */
 /**********************************************************/
 
-void hoamap_paint(t_hoamap *x, t_object *view)
+void hoamap_paint(t_hoa_map *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -1686,7 +1686,7 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 	}
 }
 
-void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
+void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g;
     t_jrgba black, white;
@@ -1777,7 +1777,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
-void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
+void draw_sources(t_hoa_map *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double fontSize;
@@ -1919,7 +1919,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 }
 
 
-void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
+void draw_groups(t_hoa_map *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double fontSize;
@@ -2069,7 +2069,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 }
 
 
-void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
+void draw_rect_selection(t_hoa_map *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g;
     t_jrgba strokecolor = x->f_color_selection;
@@ -2105,7 +2105,7 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 /*                   Souris et clavier                    */
 /**********************************************************/
 
-void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousedown(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
@@ -2473,7 +2473,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 }
 
 
-void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
@@ -2852,7 +2852,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	}
 }
 
-void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseup(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
@@ -2943,7 +2943,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 	}
 }
 
-void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
+void hoamap_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
 {
 	if (modifiers == eAltKey)
     {
@@ -2957,12 +2957,12 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 	}
 }
 
-void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseenter(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     ;
 }
 
-void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousemove(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor, displayed_coords;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
@@ -3058,7 +3058,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     jbox_redraw((t_jbox *)x);
 }
 
-void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseleave(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
@@ -3067,7 +3067,7 @@ void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
     jbox_redraw((t_jbox *)x);
 }
 
-long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
+long hoamap_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {
     int filter = 0;
 
@@ -3109,7 +3109,7 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
 	return filter;
 }
     
-void hoamap_color_picker(t_hoamap *x)
+void hoamap_color_picker(t_hoa_map *x)
 {
     if(x->f_patcher)
         object_free(x->f_patcher);
@@ -3140,7 +3140,7 @@ void hoamap_color_picker(t_hoamap *x)
     object_method(x->f_colorpicker, hoa_sym_bang);
 }
 
-void hoamap_text_field(t_hoamap *x)
+void hoamap_text_field(t_hoa_map *x)
 {
     if(x->f_textfield)
         object_free(x->f_textfield);

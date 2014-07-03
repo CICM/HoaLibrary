@@ -9,6 +9,16 @@
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
 
+#define ODD_BINDING_SUFFIX "map1572"
+
+typedef enum _BindingMapMsgFlag {
+	BMAP_REDRAW		= 0x01,
+	BMAP_NOTIFY		= 0x02,
+	BMAP_OUTPUT		= 0x04
+} BindingMapMsgFlag;
+
+typedef struct _linkmap t_linkmap;
+
 typedef struct  _hoa_map
 {
 	t_ebox          j_box;
@@ -18,7 +28,8 @@ typedef struct  _hoa_map
     t_outlet*		f_out_groups;
     t_outlet*		f_out_infos;
     
-    SourcesManager*     f_source_manager;
+	SourcesManager*     f_source_manager;
+	SourcesManager*     f_self_source_manager;
     
     t_pt        f_cursor_position;
     long        f_index_of_selected_source;
@@ -40,8 +51,28 @@ typedef struct  _hoa_map
     t_symbol*   f_output_mode;
     long        f_read;
     long        f_write;
-    _hoa_map*   f_friend;
+	
+	// options :
+	long		f_output_3D;			// 0 is 2d, 1 is 3d
+	long		f_coord_view;			// xy xz yz
+	
+	t_symbol*	f_binding_name;
+	t_linkmap*	f_listmap;
+	int			f_output_enabled;
 } t_hoa_map;
+
+typedef struct _linkmap
+{
+	t_linkmap *next;
+	t_hoa_map *map;
+	void update_headptr(t_linkmap *linkmap_headptr, SourcesManager* sourcesManager)
+	{
+		map->f_listmap = linkmap_headptr;
+		map->f_source_manager = sourcesManager;
+		if(next != NULL)
+			next->update_headptr(linkmap_headptr, sourcesManager);
+	}
+} t_linkmap;
 
 t_eclass *hoa_map_class;
 
@@ -63,6 +94,7 @@ void hoa_map_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_slot(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_trajectory(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_bang(t_hoa_map *x);
+void hoa_map_output(t_hoa_map *x);
 void hoa_map_infos(t_hoa_map *x);
 void hoa_map_clear_all(t_hoa_map *x);
 
@@ -81,6 +113,11 @@ void hoa_map_mousewheel(t_hoa_map *x, t_object *patcherview, t_pt pt, long modif
 long hoa_map_key(t_hoa_map *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
+
+void linkmap_add_with_binding_name(t_hoa_map *x, t_symbol* binding_name);
+void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name);
+t_pd_err bindname_set(t_hoa_map *x, void *attr, long argc, t_atom *argv);
+void hoamap_send_binded_map_update(t_hoa_map *x, long flags); // BindingMapMsgFlag
 
 #define  contrast_white 0.06
 #define  contrast_black 0.14
@@ -158,10 +195,18 @@ extern "C" void setup_hoa0x2emap(void)
 	CLASS_ATTR_CATEGORY             (c, "zoom", 0, "Behavior");
 	CLASS_ATTR_DEFAULT              (c, "zoom", 0, "0.35");
     CLASS_ATTR_ORDER                (c, "zoom", 0, "2");
-    CLASS_ATTR_SAVE                 (c, "zoom", 0);
+    CLASS_ATTR_SAVE                 (c, "zoom", 1);
     CLASS_ATTR_PAINT                (c, "zoom", 0);
     CLASS_ATTR_STYLE                (c, "zoom", 0, "number");
-    
+	
+	CLASS_ATTR_SYMBOL				(c, "mapname", 0, t_hoa_map, f_binding_name);
+	CLASS_ATTR_ACCESSORS			(c, "mapname", NULL, bindname_set);
+	CLASS_ATTR_LABEL				(c, "mapname", 0, "Map Name");
+	CLASS_ATTR_CATEGORY				(c, "mapname", 0, "Name");
+	CLASS_ATTR_DEFAULT				(c, "mapname", 0,  "");
+    //CLASS_ATTR_SAVE					(c, "mapname", 1); // plante si on le met (copy paste object)
+    CLASS_ATTR_ORDER				(c, "mapname", 0, "1");
+	
     eclass_register(CLASS_BOX, c);
 	hoa_map_class = c;
     
@@ -245,9 +290,11 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         flags = 0
         | EBOX_GROWLINK
         ;
+		
+		int is3D = (s == gensym("hoa.3d.map"));
         
-        ebox_new((t_ebox *)x, flags);
-        x->f_source_manager     = new SourcesManager(1. / (double)MIN_ZOOM - 5.);
+        x->f_source_manager      = new SourcesManager(1. / (double)MIN_ZOOM - 5.);
+		x->f_self_source_manager = x->f_source_manager;
         
         x->f_rect_selection_exist = 0;
         x->f_index_of_selected_source = -1;
@@ -257,6 +304,13 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         x->f_out_sources    = listout(x);
         x->f_out_groups     = listout(x);
         x->f_out_infos      = listout(x);
+		
+		x->f_binding_name = hoa_sym_nothing;
+		x->f_listmap = NULL;
+		x->f_output_enabled = 1;
+		x->f_output_3D = is3D;
+		
+		ebox_new((t_ebox *)x, flags);
         
         hoa_map_deprecated(x, NULL, argc, argv);
         ebox_attrprocess_viabinbuf(x, d);
@@ -279,8 +333,215 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_map_free(t_hoa_map *x)
 {
+	linkmap_remove_with_binding_name(x, x->f_binding_name);
+	
     ebox_free((t_ebox *)x);
-    delete x->f_source_manager;
+	delete x->f_self_source_manager;
+}
+
+void linkmap_add_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
+{
+	char strname[2048];
+	t_symbol* name = NULL;
+	t_canvas *jp = NULL;
+	jp = eobj_getcanvas(x);
+	if (jp && (jp = canvas_getrootfor(jp)))
+	{
+		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		name = gensym(strname);
+		//post("name : %s", name->s_name);
+		
+		// t_listmap null => new t_listmap
+		if(name->s_thing == NULL)
+		{
+			x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
+			if (x->f_listmap)
+			{
+				x->f_listmap->map = x;
+				x->f_listmap->next = NULL;
+				name->s_thing = (t_class **)x->f_listmap;
+				x->f_source_manager = x->f_self_source_manager;
+			}
+		}
+		else // t_listmap exist => add our object in it
+		{
+			t_linkmap *temp, *temp2;
+			
+			if(x->f_listmap != NULL)
+			{
+				temp = x->f_listmap;
+				while(temp)
+				{
+					if(temp->next != NULL && temp->next->map == x)
+					{
+						temp2 = temp->next->next;
+						free(temp->next);
+						temp->next = temp2;
+					}
+					temp = temp->next;
+				}
+			}
+			
+			x->f_listmap = (t_linkmap *)name->s_thing;
+			temp = x->f_listmap;
+			t_hoa_map* head_map = temp->map;
+			
+			while(temp)
+			{
+				if(temp->next == NULL)
+				{
+					temp2 = (t_linkmap *)malloc(sizeof(t_linkmap));
+					if (temp2)
+					{
+						temp2->map = x;
+						temp2->next = NULL;
+						temp->next = temp2;
+						temp->next->map->f_source_manager = head_map->f_self_source_manager;
+					}
+					break;
+				}
+				temp = temp->next;
+			}
+		}
+	}
+}
+
+void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
+{
+	char strname[2048];
+	t_symbol* name = NULL;
+	t_canvas *jp = NULL;
+	jp = eobj_getcanvas(x);
+	if (jp && (jp = canvas_getrootfor(jp)))
+	{
+		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		name = gensym(strname);
+		
+		if(name->s_thing != NULL)
+		{
+			t_linkmap *temp, *temp2;
+			temp = (t_linkmap *)name->s_thing;
+			t_hoa_map* head_map = temp->map;
+			int counter = 0;
+			
+			while(temp)
+			{
+				if (counter == 0 && temp->map == x) // head of the linkmap
+				{
+					head_map = temp->map;
+					
+					if(temp->next == NULL) // is also the last item of the linkmap
+					{
+						name->s_thing = NULL;
+					}
+					else
+					{
+						name->s_thing = (t_class **)temp->next;
+						
+						// bind all object to the next SourcesManager (next becoming the new head of the t_linkmap)
+						head_map->f_source_manager->copyTo(temp->next->map->f_self_source_manager);
+						temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
+					}
+					
+					free(x->f_listmap);
+					x->f_listmap = NULL;
+					
+					x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)
+				}
+				else if(temp->next != NULL && temp->next->map == x)
+				{
+					// we restore the original pointer
+					temp->next->map->f_source_manager = temp->next->map->f_self_source_manager;
+					// then we copy the shared SourcesManager into the original one
+					head_map->f_self_source_manager->copyTo(temp->next->map->f_source_manager);
+					
+					temp2 = temp->next->next;
+					free(temp->next);
+					x->f_listmap = NULL;
+					temp->next = temp2;
+				}
+				
+				temp = temp->next;
+			}
+		}
+	}
+	
+}
+
+t_pd_err bindname_set(t_hoa_map *x, void *attr, long argc, t_atom *argv)
+{
+	if (argc && argv && atom_gettype(argv) == A_SYM)
+	{
+		t_symbol* new_binding_name = atom_getsym(argv);
+		
+		if(new_binding_name != x->f_binding_name)
+		{
+			// remove previous binding
+			if (x->f_binding_name != hoa_sym_nothing)
+				linkmap_remove_with_binding_name(x, x->f_binding_name);
+			
+			// add new one
+			if (new_binding_name != hoa_sym_nothing)
+			{
+				// use deferlow to have the good toppatcher pointer when the patch is being loaded
+				//defer_low(x, (method)linkmap_add_with_binding_name, new_binding_name, NULL, NULL);
+				linkmap_add_with_binding_name(x, new_binding_name);
+				x->f_binding_name = new_binding_name;
+			}
+			else
+				x->f_binding_name = hoa_sym_nothing;
+		}
+	}
+	else
+	{
+		if (x->f_binding_name != hoa_sym_nothing)
+			linkmap_remove_with_binding_name(x, x->f_binding_name);
+		
+		x->f_binding_name = hoa_sym_nothing;
+	}
+	
+	ebox_notify((t_ebox *)x, NULL, hoa_sym_modified, NULL, NULL);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
+    ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
+    ebox_redraw((t_ebox *)x);
+    hoa_map_output(x);
+	
+	return 0;
+}
+
+void hoamap_send_binded_map_update(t_hoa_map *x, long flags)
+{
+	if(x->f_listmap)
+	{
+		t_linkmap *temp = x->f_listmap;
+		t_object* mapobj;
+		while (temp)
+		{
+			mapobj = (t_object*)temp->map;
+			
+			if (mapobj != (t_object*)x)
+			{
+				if (flags & BMAP_REDRAW)
+				{
+					ebox_invalidate_layer((t_ebox *)mapobj, hoa_sym_sources_layer);
+					ebox_invalidate_layer((t_ebox *)mapobj, hoa_sym_groups_layer);
+					ebox_redraw((t_ebox *)mapobj);
+				}
+				if (flags & BMAP_NOTIFY)
+				{
+					ebox_notify((t_ebox *)mapobj, NULL, hoa_sym_modified, NULL, NULL);
+				}
+				if (flags & BMAP_OUTPUT && x->f_output_enabled)
+				{
+					//object_method(mapobj, hoa_sym_bang);
+					rmethod nrmethod = (rmethod)getfn((t_pd *)x, hoa_sym_bang);
+					nrmethod(x, hoa_sym_bang);
+				}
+			}
+			
+			temp = temp->next;
+		}
+	}
 }
 
 void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
@@ -308,13 +569,23 @@ void hoa_map_oksize(t_hoa_map *x, t_rect *newrect)
 
 void hoa_map_clear_all(t_hoa_map *x)
 {
+	// mute all source and output before clearing them to notify hoa.#.map~
+	for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
+		if(x->f_source_manager->sourceGetExistence(i))
+			x->f_source_manager->sourceSetMute(i, 1);
+	
+	hoa_map_output(x);
+	hoamap_send_binded_map_update(x, BMAP_OUTPUT);
+	
+	// now we can clear, then notify, output and redraw all maps
     x->f_source_manager->clearAll();
-  
+    
     ebox_notify((t_ebox *)x, NULL, hoa_sym_modified, NULL, NULL);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);
+    hoa_map_output(x);
+	hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 
 void hoa_map_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
@@ -393,7 +664,7 @@ void hoa_map_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);
+    hoa_map_output(x);
 }
 
 void hoa_map_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
@@ -486,7 +757,7 @@ void hoa_map_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);    
+    hoa_map_output(x);    
 }
 
 t_pd_err hoa_map_zoom(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
@@ -535,72 +806,122 @@ t_pd_err hoa_map_notify(t_hoa_map *x, t_symbol *s, t_symbol *msg, void *sender, 
 
 void hoa_map_bang(t_hoa_map *x)
 {
-    t_atom av[4];
+    hoa_map_output(x);
+}
+
+void hoa_map_output(t_hoa_map *x)
+{
+	if (!x->f_output_enabled)
+		return;
+	
+	t_atom av[5];
     atom_setsym(av+1, hoa_sym_mute);
+	
+	// output group mute state
+	for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(x->f_source_manager->groupGetExistence(i))
+        {
+            atom_setlong(av, i+1);
+            atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
+            outlet_list(x->f_out_groups, 0L, 4, av);
+        }
+    }
+	// output source mute state
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
             atom_setlong(av, i+1);
             atom_setlong(av+2, x->f_source_manager->sourceGetMute(i));
-            outlet_list(x->f_out_sources, &s_list, 3, av);
+            outlet_list(x->f_out_sources, 0L, 3, av);
         }
     }
-    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            atom_setlong(av, i+1);
-            atom_setfloat(av+2, x->f_source_manager->groupGetMute(i));
-            outlet_list(x->f_out_groups, &s_list, 4, av);
-        }
-    }
-    if(x->f_output_mode == hoa_sym_polar)
+    if(x->f_output_mode == 0)
     {
         atom_setsym(av+1, hoa_sym_polar);
+		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        {
+            if(x->f_source_manager->groupGetExistence(i))
+            {
+				atom_setlong(av, i+1);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
+					outlet_list(x->f_out_groups, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
+					atom_setfloat(av+4, x->f_source_manager->groupGetElevation(i));
+					outlet_list(x->f_out_groups, 0L, 5, av);
+				}
+            }
+        }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
-                outlet_list(x->f_out_sources, &s_list, 4, av);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
+					outlet_list(x->f_out_sources, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
+					atom_setfloat(av+4, x->f_source_manager->sourceGetElevation(i));
+					outlet_list(x->f_out_sources, 0L, 5, av);
+				}
             }
         }
-        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i))
-            {
-                atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
-                outlet_list(x->f_out_groups, &s_list, 4, av);
-            }
-        }
-        
     }
     else
     {
         atom_setsym(av+1, hoa_sym_cartesian);
+		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        {
+            if(x->f_source_manager->groupGetExistence(i))
+            {
+				atom_setlong(av, i+1);
+                if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
+					outlet_list(x->f_out_groups, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
+					atom_setfloat(av+4, x->f_source_manager->groupGetHeight(i));
+					outlet_list(x->f_out_groups, 0L, 5, av);
+				}
+            }
+        }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-                atom_setfloat(av+2,x->f_source_manager->sourceGetAbscissa(i));
-                atom_setfloat(av+3,x->f_source_manager->sourceGetOrdinate(i));
-                outlet_list(x->f_out_sources, &s_list, 4, av);
-            }
-        }
-        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i))
-            {
-                atom_setlong(av, i+1);
-                atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
-                atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
-                outlet_list(x->f_out_groups, &s_list, 4, av);
+				if (!x->f_output_3D)
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+					outlet_list(x->f_out_sources, 0L, 4, av);
+				}
+				else
+				{
+					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+					atom_setfloat(av+4, x->f_source_manager->sourceGetHeight(i));
+					outlet_list(x->f_out_sources, 0L, 5, av);
+				}
             }
         }
     }
@@ -1143,7 +1464,7 @@ void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
                 atom_setlong(av+2, 1);
                 outlet_list(x->f_out_groups, 0L, 3, av);
                 x->f_source_manager->groupRemove(x->f_index_of_group_to_remove);
-                hoa_map_bang(x);
+                hoa_map_output(x);
                 break;
             }
             case 2:
@@ -1154,7 +1475,7 @@ void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
                 atom_setlong(av+2, 1);
                 outlet_list(x->f_out_groups, 0L, 3, av);
                 x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
-                hoa_map_bang(x);
+                hoa_map_output(x);
                 break;
             }
             case 3: // Mute group
@@ -1173,7 +1494,7 @@ void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
         ebox_redraw((t_ebox *)x);
-        hoa_map_bang(x);
+        hoa_map_output(x);
     }
     else if(s ==hoa_sym_source)
     {
@@ -1203,7 +1524,7 @@ void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
         ebox_redraw((t_ebox *)x);
-        hoa_map_bang(x);
+        hoa_map_output(x);
     }
     else if(s ==gensym("nothing"))
     {
@@ -1223,7 +1544,7 @@ void hoa_map_popup(t_hoa_map *x, t_symbol *s, long itemid)
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
         ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
         ebox_redraw((t_ebox *)x);
-        hoa_map_bang(x);
+        hoa_map_output(x);
     }
     
 }
@@ -1270,7 +1591,9 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);
+    hoa_map_output(x);
+	
+	hoamap_send_binded_map_update(x, BMAP_REDRAW);
 }
 
 void hoa_map_mouseup(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -1549,7 +1872,7 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);
+    hoa_map_output(x);
 }
 
 void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* av2, t_atom ratio)
@@ -1648,7 +1971,7 @@ void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* 
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_sources_layer);
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
-    hoa_map_bang(x);
+    hoa_map_output(x);
 
 }
 

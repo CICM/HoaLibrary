@@ -1,9 +1,9 @@
-#N canvas 248 42 837 726 10;
+#N canvas 589 86 837 726 10;
 #X text -342 -185 Mousewheel and alt to change the zoom.;
-#X obj -649 -303 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+#X obj -649 -304 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
-polar @zoom 0.4;
+polar @zoom 0.4 @mapname ;
 #X obj -649 -328 c.loadmess;
 #X msg -237 97 \; pd dsp 1;
 #X msg -237 132 \; pd dsp 0;
@@ -149,7 +149,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -649 37 hoa.2d.optim~ 3 inPhase -----------------;
-#N canvas 153 23 1155 646 messages 0;
+#N canvas 216 150 1155 646 messages 0;
 #X msg -518 -122 zoom \$1;
 #X text -531 -173 Set the zoom;
 #X obj -96 13 send map_mes;
@@ -215,10 +215,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg 195 -128 source 1 description Jimi Hendrix;
 #X msg 217 -105 group 1 description Band of Gypsys;
 #X msg 229 64 group 1 color 0.2 0.9 0 1;
-#X obj -518 -68 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+#X obj -518 -68 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@outputmode polar @zoom 0.35;
+@outputmode polar @zoom 0.35 @mapname ;
 #X text -332 -146 Clear all;
 #X msg -196 -83 source 1 pol 1 3.14;
 #X msg -50 -83 source 2 abscissa 2.5;
@@ -260,10 +260,10 @@ normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 #X obj -27 -370 route 0 1;
 #X obj -31 -145 receive map_outs_groups;
 #X obj -285 22 route list;
-#X obj -504 -287 hoa.2d.map @size 225 225 @fontname Helvetica @fontweight
+#X obj -504 -287 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
-polar @zoom 0.35;
+polar @zoom 0.35 @mapname ;
 #X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
@@ -480,6 +480,41 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -700 -475 hoa.help.header;
 #X obj -554 200 hoa.help.pub;
 #X obj -284 -475 hoa.help.also;
+#N canvas 216 150 877 558 3D 1;
+#X msg -678 -122 zoom \$1;
+#X text -691 -173 Set the zoom;
+#X msg -491 -121 clear;
+#X text -601 -149 Bang to output;
+#X obj -678 -152 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -596 -122 c.bang @size 17 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X obj -678 -80 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
+@outputmode polar @zoom 0.35 @mapname ;
+#X text -492 -146 Clear all;
+#X msg -389 -163 mapname cicm;
+#X obj -366 -23 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
+@outputmode polar @zoom 0.35 @mapname ;
+#X msg -389 -140 mapname;
+#X msg -290 -111 mapname cicm;
+#X msg -290 -88 mapname;
+#X connect 0 0 6 0;
+#X connect 2 0 6 0;
+#X connect 4 0 0 0;
+#X connect 5 0 6 0;
+#X connect 8 0 6 0;
+#X connect 10 0 6 0;
+#X connect 11 0 9 0;
+#X connect 12 0 9 0;
+#X restore -100 160 pd 3D;
+#X text -103 144 3D view;
 #X connect 1 0 13 0;
 #X connect 2 0 1 0;
 #X connect 7 0 6 0;
