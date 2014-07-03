@@ -324,19 +324,9 @@ void hoa_space_paint(t_hoa_space *x, t_object *view)
 
 void draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
 {
-    int i;
-	double y1, y2, rotateAngle;
     t_matrix transform;
-    t_rgba black, white;
-    
-    black = white = x->f_color_bg;
-    black.red = clip_min(black.red - contrast_black, 0.);
-    black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue = clip_min(black.blue - contrast_black, 0.);
-    
-    white.red = clip_max(white.red + contrast_white, 1.);
-    white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue = clip_max(white.blue + contrast_white, 1.);
+    t_rgba black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    t_rgba white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_background_layer, rect->width, rect->height);
     
@@ -345,16 +335,20 @@ void draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		egraphics_set_matrix(g, &transform);
         
-        for(i = 0; i < x->f_number_of_channels ; i++)
+        double angle, x1, x2, y1, y2, cosa, sina;
+        for(int i = 0; i < x->f_number_of_channels ; i++)
 		{
-            rotateAngle = ((double)i / (x->f_number_of_channels) * HOA_2PI ) - (0.5 / (x->f_number_of_channels) * HOA_2PI);
-			egraphics_rotate(g, rotateAngle);
-			
-			y1 = x->f_radius / 5.;
-			y2 = x->f_radius;
+            angle = ((double)(i - 0.5) / (x->f_number_of_channels) * HOA_2PI);
+        
+			cosa = cos(angle);
+            sina = sin(angle);
+            x1 = cosa * x->f_radius * 0.2;
+			y1 = sina * x->f_radius * 0.2;
+            x2 = cosa * x->f_radius;
+			y2 = sina * x->f_radius;
             
-            egraphics_move_to(g, 0, y1);
-			egraphics_line_to(g, 0, y2);
+            egraphics_move_to(g, x1, y1);
+			egraphics_line_to(g, x2, y2);
             egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
             egraphics_stroke(g);
@@ -362,16 +356,12 @@ void draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
             egraphics_set_color_rgba(g, &black);
 			egraphics_set_line_width(g, 1);
 			egraphics_stroke(g);
-			
-			egraphics_rotate(g, -rotateAngle);
+
 		}
         
-        egraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
-		egraphics_set_matrix(g, &transform);
-        
-        for(i = 5; i > 0; i--)
+        for(int i = 5; i > 0; i--)
 		{
-            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
+            egraphics_arc(g, 0, 0, (double)i * 0.2 * x->f_radius,  0., HOA_2PI);
             egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
             egraphics_stroke(g);

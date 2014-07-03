@@ -39,7 +39,6 @@ typedef struct  _hoa_meter_3d
 	
     double          f_radius;
     double          f_center;
-	double          f_radius_center;
     
 	t_clock*        f_clock;
     void*           f_attrs;
@@ -88,6 +87,9 @@ t_symbol* hoa_sym_3d_leds_layer = gensym("leds_layers");
 t_symbol* hoa_sym_3d_background_layer = gensym("background_layers");
 t_symbol* hoa_sym_3d_top = gensym("top");
 t_symbol* hoa_sym_3d_bottom = gensym("bottom");
+
+#define  contrast_white 0.06
+#define  contrast_black 0.14
 
 extern "C" void setup_hoa0x2e3d0x2emeter_tilde(void)
 {
@@ -579,7 +581,6 @@ void hoa_meter_3d_paint(t_hoa_meter_3d *x, t_object *view)
 	
     x->f_center = rect.width * .5;
 	x->f_radius = x->f_center * 0.95;
-	x->f_radius_center = x->f_radius / 5.;
 	
 	draw_background(x, view, &rect);
     draw_leds(x, view, &rect);
@@ -592,8 +593,8 @@ void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_3d_background_layer, rect->width, rect->height);
     
-    black = rgba_addContrast(x->f_color_bg, -0.14);
-    white = rgba_addContrast(x->f_color_bg, 0.06);
+    black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	if (g)
 	{
@@ -684,48 +685,60 @@ void draw_vectors(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 	double x1, y1, size;
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_3d_vector_layer, rect->width, rect->height);
-	
+	t_rgba color;
+    double distance;
 	if (g)
 	{
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width / 2., rect->width / 2.);
 		egraphics_set_matrix(g, &transform);
-		size = 1. / 64. * rect->width;
+		size = rect->width / 32.;
         
         if(x->f_vector_type == hoa_sym_3d_both || x->f_vector_type == hoa_sym_3d_energy)
         {
-            egraphics_set_color_rgba(g, &x->f_color_energy_vector);
+            double rad = radius(x->f_vector_coords[3], x->f_vector_coords[4], x->f_vector_coords[5]);
+            distance = (fabs(rad) * 0.5 + 0.5);
+            color = rgba_addContrast(x->f_color_energy_vector, -(1. - distance));
+            egraphics_set_color_rgba(g, &color);
             if(x->f_clockwise == hoa_sym_3d_anticlock)
             {
-                x1 = x->f_vector_coords[3] * x->f_radius * 0.85;
-                y1 = x->f_vector_coords[4] * x->f_radius * 0.85;
+                x1 = x->f_vector_coords[3] * x->f_radius;
+                y1 = x->f_vector_coords[4] * x->f_radius;
             }
             else
             {
-                double rad = radius(x->f_vector_coords[3], x->f_vector_coords[4]) * x->f_radius * 0.85;
-                double ang = -azimuth(x->f_vector_coords[3], x->f_vector_coords[4]);
-                x1 = abscissa(rad, ang);
-                y1 = ordinate(rad, ang);
+                double ang = -azimuth(x->f_vector_coords[3], x->f_vector_coords[4], x->f_vector_coords[5]);
+                x1 = abscissa(rad * x->f_radius, ang);
+                y1 = ordinate(rad * x->f_radius, ang);
             }
-            egraphics_arc(g, x1, y1, size, 0., HOA_2PI);
-            egraphics_fill(g);
+            
+            if((x->f_vector_coords[5] >= 0 && x->f_view == hoa_sym_3d_top) ||  (x->f_vector_coords[5] <= 0 && x->f_view == hoa_sym_3d_bottom))
+            {
+                egraphics_arc(g, x1, y1, size * distance, 0., HOA_2PI);
+                egraphics_fill(g);
+            }
 		}
         if(x->f_vector_type == hoa_sym_3d_both || x->f_vector_type == hoa_sym_3d_velocity)
         {
-            egraphics_set_color_rgba(g, &x->f_color_velocity_vector);
-            if(x->f_clockwise == hoa_sym_3d_anticlock)
+            if((x->f_vector_coords[2] >= 0 && x->f_view == hoa_sym_3d_top) ||  (x->f_vector_coords[2] <= 0 && x->f_view == hoa_sym_3d_bottom))
             {
-                x1 = x->f_vector_coords[0] * x->f_radius * 0.85;
-                y1 = x->f_vector_coords[1] * x->f_radius * 0.85;
+                double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1], x->f_vector_coords[2]);
+                distance = (fabs(rad) * 0.5 + 0.5);
+                color = rgba_addContrast(x->f_color_velocity_vector, -(1. - distance));
+                egraphics_set_color_rgba(g, &color);
+                if(x->f_clockwise == hoa_sym_3d_anticlock)
+                {
+                    x1 = x->f_vector_coords[0] * x->f_radius;
+                    y1 = x->f_vector_coords[1] * x->f_radius;
+                }
+                else
+                {
+                    double ang = -azimuth(x->f_vector_coords[0], x->f_vector_coords[1], x->f_vector_coords[2]);
+                    x1 = abscissa(rad * x->f_radius, ang);
+                    y1 = ordinate(rad * x->f_radius, ang);
+                }
+                egraphics_arc(g, x1, y1, size * distance, 0., HOA_2PI);
+                egraphics_fill(g);
             }
-            else
-            {
-                double rad = radius(x->f_vector_coords[0], x->f_vector_coords[1]) * x->f_radius * 0.85;
-                double ang = -azimuth(x->f_vector_coords[0], x->f_vector_coords[1]);
-                x1 = abscissa(rad, ang);
-                y1 = ordinate(rad, ang);
-            }
-            egraphics_arc(g, x1, y1, size, 0., HOA_2PI);
-            egraphics_fill(g);
 		}
         
 		ebox_end_layer((t_ebox*)x,  hoa_sym_3d_vector_layer);

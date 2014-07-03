@@ -87,6 +87,9 @@ t_symbol* hoa_sym_leds_layer = gensym("leds_layers");
 
 void hoa_meter_deprecated(t_hoa_meter* x, t_symbol *s, long ac, t_atom* av);
 
+#define  contrast_white 0.06
+#define  contrast_black 0.14
+
 extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void)
 {
 	t_eclass *c;
@@ -600,8 +603,8 @@ void draw_background(t_hoa_meter *x,  t_object *view, t_rect *rect)
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_background_layer, rect->width, rect->height);
     
-    black = rgba_addContrast(x->f_color_bg, -0.14);
-    white = rgba_addContrast(x->f_color_bg, 0.06);
+    black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	if (g)
 	{
