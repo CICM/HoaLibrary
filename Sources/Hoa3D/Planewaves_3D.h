@@ -252,6 +252,40 @@ namespace Hoa3D
                 elevations[i+5] = -elevations[i];
             }
         }
+        else if(numberOfPoints == 20)
+        {
+            double phi = (sqrt(5.) - 1.) / 2.; // The golden ratio
+            double R = 1. / sqrt(3.);
+            
+            double a = R;
+            double b = R / phi;
+            double c = R * phi;
+            
+            for(int i = -1, index = 0; i < 2; i += 2)
+            {
+                for(int j = -1; j < 2; j += 2)
+                {
+                    azimuths[index] = azimuth(0., i * c * R, j * b * R);
+                    elevations[index] = elevation(0., i * c * R, j * b * R) * -1;
+                    index++;
+                    
+                    azimuths[index] = azimuth(i * c * R, j * b * R, 0.);
+                    elevations[index] = elevation(i * c * R, j * b * R, 0.) * -1;
+                    index++;
+                    
+                    azimuths[index] = azimuth(i * b * R, 0., j * c * R);
+                    elevations[index] = elevation(i * b * R, 0., j * c * R) * -1;
+                    index++;
+                    
+                    for (int k = -1; k < 2; k += 2)
+                    {
+                        azimuths[index] = azimuth(i * a * R, j * a * R, k * a * R);
+                        elevations[index] = elevation(i * a * R, j * a * R, k * a * R) * -1;
+                        index++;
+                    }
+                }
+            }
+        }
         else // Two circles
         {
             unsigned int i = 0;
