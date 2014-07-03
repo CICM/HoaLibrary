@@ -678,15 +678,15 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
     t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_3d_leds_layer, rect->width, rect->height);
     t_jrgba mcolor;
-    bool viewd = 1;
-    if(x->f_view == hoa_sym_3d_bottom)
-        viewd = 0;
+    bool viewd = (x->f_view == hoa_sym_3d_top);
+	
 	if (g)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         jgraphics_set_matrix(g, &transform);
         
-		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
+		//for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
+		for(int i = 0; i < 1; i++)
 		{
             if(x->f_over_leds[i])
 				mcolor = x->f_color_over_signal;
@@ -727,18 +727,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 					jgraphics_line_to(g, abs, ord);
 				}
 				
-				for(int j = factor; j < npt; j += factor)
-				{
-					azi = x->f_meter->getChannelPointAzimuth(i, j, viewd);
-                    if(x->f_clockwise == hoa_sym_3d_clockwise)
-                        azi =-azi;
-                    
-					ele = x->f_meter->getChannelPointElevation(i, j, viewd);
-					abs = abscissa(x->f_radius, azi, ele);
-					ord = ordinate(x->f_radius, azi, ele);
-					jgraphics_line_to(g, abs, ord);
-				}
-				
 				jgraphics_close_path(g);
 				jgraphics_fill_preserve(g);
 				
@@ -746,7 +734,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				jgraphics_set_line_width(g, 1);
 				jgraphics_stroke(g);
 			}
-			
 		}
 		jbox_end_layer((t_object*)x, view, hoa_sym_3d_leds_layer);
 	}

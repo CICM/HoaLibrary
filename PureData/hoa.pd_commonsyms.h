@@ -13,6 +13,7 @@
 static t_symbol* hoa_sym_hoa_getinfos				= gensym("hoa_getinfos");
 
 // notify
+static t_symbol* hoa_sym_null						= gensym("(null)");
 static t_symbol* hoa_sym_nothing 					= gensym("");
 static t_symbol* hoa_sym_notify 					= gensym("notify");
 static t_symbol* hoa_sym_modified 					= gensym("modified");
