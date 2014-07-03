@@ -50,6 +50,14 @@ namespace Hoa3D
          */
 		void setChannelPosition(unsigned int index, double azimuth, double elevation);
         
+        //! Set the position of the channels.
+        /** Set the position of the channels with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
+         
+         @param     azimuths		The azimuths.
+         @param     elevations	The elevations.
+         */
+		void setChannelsPosition(double* azimuths, double* elevations);
+        
         //! This method compute the energy and velocity vectors with single precision.
         /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 6. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height, energy abscissa, energy ordinate, energy height.
          

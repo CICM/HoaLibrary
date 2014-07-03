@@ -37,6 +37,12 @@ namespace Hoa3D
             m_channels_height_float[i] = m_channels_height_double[i] = getChannelHeight(i);
         }
     }
+    
+    void Vector::setChannelsPosition(double* azimuths, double* elevations)
+	{
+		Planewaves::setChannelsPosition(azimuths, elevations);
+		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
+	}
 
     void Vector::processVelocity(const float* inputs, float* outputs)
     {

@@ -748,7 +748,7 @@ void draw_vectors(t_hoa_meter *x, t_object *view, t_rect *rect)
 	t_matrix transform;
 	t_elayer *g = ebox_start_layer((t_ebox *)x,  hoa_sym_vector_layer, rect->width, rect->height);
 	
-	if (g)
+	if(g)
 	{
 		egraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width / 2., rect->width / 2.);
 		egraphics_set_matrix(g, &transform);
