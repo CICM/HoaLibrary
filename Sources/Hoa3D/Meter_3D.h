@@ -8,20 +8,114 @@
 #define __DEF_HOA_3D_METER__
 
 #include "Planewaves_3D.h"
-#include "Voronoi.h"
+
 namespace Hoa3D
 {
+    class MeterPoint
+    {
+		private :
+        
+        double xyzae[5];
+        double xyzae_rel[5];
+        
+        public :
+        // Plutot faire en spherique - de calculs
+        MeterPoint(double y_azimuth = 0, double z_elevation = 0)
+        {
+            xyzae[0] = Hoa::abscissa(1., y_azimuth, z_elevation);
+            xyzae[1] = Hoa::ordinate(1., y_azimuth, z_elevation);
+            xyzae[2] = Hoa::elevation(1., y_azimuth, z_elevation);
+            xyzae[3] = y_azimuth;
+            xyzae[4] = z_elevation;
+        }
+        
+        void setRelativePoint(MeterPoint const& pt)
+        {
+            xyzae_rel[0] = x() - pt.x();
+            xyzae_rel[1] = y() - pt.y();
+            xyzae_rel[2] = z();
+            xyzae_rel[3] = Hoa::azimuth(xyzae_rel[0], xyzae_rel[1]);
+            xyzae_rel[4] = Hoa::elevation(xyzae_rel[0], xyzae_rel[1], xyzae_rel[2]);
+        }
+        
+        double x() const
+        {
+            return xyzae[0];
+        }
+        
+        double y() const
+        {
+            return xyzae[1];
+        }
+        
+        double z() const
+        {
+            return xyzae[2];
+        }
+        
+        double radius() const
+        {
+            return 1;
+        }
+        
+        double azimuth() const
+        {
+            return xyzae[3];
+        }
+        
+        double elevation() const
+        {
+            return xyzae[4];
+        }
+        
+        double x_rel() const
+        {
+            return xyzae_rel[0];
+        }
+        
+        double y_rel() const
+        {
+            return xyzae_rel[1];
+        }
+        
+        double z_rel() const
+        {
+            return xyzae_rel[2];
+        }
+        
+        double radius_rel() const
+        {
+            return 1;
+        }
+        
+        double azimuth_rel() const
+        {
+            return xyzae_rel[3];
+        }
+        
+        static bool compareRelativeAzimuth(MeterPoint pt1, MeterPoint pt2)
+        {
+            return pt1.azimuth_rel() > pt2.azimuth_rel();
+        }
+        
+        ~MeterPoint(){};
+    };
+    
     //! The planewaves peak level meter.
     /** The meter should be used to widen the sound propagation.
      */
     class Meter : public Planewaves
     {
-    private :
-
+    private:
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
         double*         m_channels_peaks;
-        Voronoi*        m_voronoi;
+
+        //std::vector<MeterPoint> m_points[256];
+        std::vector<MeterPoint> m_points_top[256];
+        std::vector<MeterPoint> m_points_bottom[256];
+
+		void find_channels_boundaries();
     public:
         
         //! The meter constructor.
@@ -55,28 +149,32 @@ namespace Hoa3D
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
 
-		inline unsigned int getChannelNumberOfPoints(unsigned int index) const
+		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-			return m_voronoi->getTopPointVoronoiLenght(index);
+			if(top)
+				return m_points_top[index].size();
+			else
+				return m_points_bottom[index].size();
         }
 
-		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex) const
+		inline double getChannelPointAzimuth(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_voronoi->getTopPointVoronoiAzimuth(index, pointindex);
+            if(top)
+				return m_points_top[index][pointindex].azimuth();
+			else
+				return m_points_bottom[index][pointindex].azimuth();
+            
         }
 
-		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex) const
+		inline double getChannelPointElevation(unsigned int index, unsigned int pointindex, bool top = 1) const
         {
             assert(index < m_number_of_channels);
-            return m_voronoi->getTopPointVoronoiElevation(index, pointindex);
-        }
-        
-        inline double getChannelPointRadius(unsigned int index, unsigned int pointindex) const
-        {
-            assert(index < m_number_of_channels);
-            return m_voronoi->getTopPointVoronoiRadius(index, pointindex);
+            if(top)
+				return m_points_top[index][pointindex].elevation();
+			else
+				return m_points_bottom[index][pointindex].elevation();
         }
 
         inline double getChannelPeak(unsigned int index) const
