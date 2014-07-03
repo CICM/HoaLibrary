@@ -128,12 +128,14 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 	if(x)
 	{
 		x->f_mode = hoa_sym_ambisonic;
-		x->f_pinna = gensym("large");
+		x->f_pinna = gensym("small");
 		
-		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
-			order	= clip_min(atom_getfloat(argv), 1);
-        if(atom_gettype(argv+1) == A_LONG || atom_gettype(argv+1) == A_FLOAT)
-			number_of_channels	= clip_min(atom_getfloat(argv+1), 1);
+		if(argc && atom_isNumber(argv))
+			order	= clip_min(atom_getlong(argv), 1);
+        if(argc > 1 && atom_isNumber(argv+1))
+			number_of_channels	= clip_min(atom_getlong(argv+1), 4);
+		else
+			number_of_channels = (order+1)*(order+1);
 		
         x->f_decoder = new Hoa3D::DecoderMulti(order, number_of_channels);
 		x->f_number_of_angles = x->f_decoder->getNumberOfChannels() * 2;

@@ -158,6 +158,7 @@ namespace Hoa3D
         int index;
         float value_left;
         float value_right;
+		
         if(sampleRate != m_sample_rate)
         {
             m_impulses_loaded   = 0;
@@ -184,7 +185,7 @@ namespace Hoa3D
                 unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
                 for(unsigned int j = 0; j < n_elev_channels; j++)
                 {
-                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, ((double)j * (360. / (double )n_elev_channels)), i * 10 - 40) + hoa_binaural_crop[index];
+                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, ((double)j * (360. / (double )n_elev_channels)), i * 10 - 40, m_pinna_size) + hoa_binaural_crop[index];
                     
                     nimpulse++;
                 }

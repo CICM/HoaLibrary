@@ -88,7 +88,7 @@ namespace Hoa3D
 		void process(const double* input, double* output);
 	};
     
-    const float* get_mit_hrtf_3D(long samplerate, double azimuth, long elevation);
+    const float* get_mit_hrtf_3D(long samplerate, double azimuth, long elevation, bool large);
     
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
