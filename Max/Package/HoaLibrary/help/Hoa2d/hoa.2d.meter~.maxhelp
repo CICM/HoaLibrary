@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 65.0, 850.0, 713.0 ],
+		"rect" : [ 100.0, 100.0, 850.0, 713.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -1369,7 +1369,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 91.0, 850.0, 687.0 ],
+						"rect" : [ 100.0, 126.0, 850.0, 687.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1657,7 +1657,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
+									"args" : [ "@obj-name", "hoa.2d.meter~", "@obj-desc", "A circular version of the meter~ with sound field descriptor." ],
 									"id" : "obj-8",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -7288,10 +7288,10 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
-			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
 			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
-			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
+			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
+			"obj-30::obj-19" : [ "flonum", "flonum", 0 ],
+			"obj-30::obj-28" : [ "umenu", "umenu", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

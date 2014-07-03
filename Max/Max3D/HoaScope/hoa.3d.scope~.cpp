@@ -584,7 +584,7 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
         {
             int dspState = sys_getdspobjdspstate((t_object*)x);
             if(dspState)
-                object_method(gensym("dsp")->s_thing, hoa_sym_start);
+                object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             
             delete x->f_scope;
             delete [] x->f_signals;
@@ -598,7 +598,7 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
             object_method(b, hoa_sym_dynlet_end);
             
             if(dspState)
-                object_method(gensym("dsp")->s_thing, hoa_sym_stop);
+                object_method(gensym("dsp")->s_thing, hoa_sym_start);
         }
 	}
     

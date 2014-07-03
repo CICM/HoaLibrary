@@ -216,7 +216,7 @@ void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s)
 		sprintf(s,"(signal) %s",x->f_decoder->getHarmonicName(a).c_str());
 	else
 	{
-		sprintf(s,"(signal) Channel %ld", a);
+		sprintf(s,"(signal) Channel %ld", a+1);
 	}
 }
 
