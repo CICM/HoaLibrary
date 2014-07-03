@@ -23,7 +23,7 @@ namespace Hoa3D
 				m_decoder->setChannelPosition(i * m_number_of_columns + j,
 											  (double)j * HOA_2PI / (double)m_number_of_columns,
 											  (double)i * HOA_PI / (double)(m_number_of_rows - 1) - HOA_PI2);
-				
+				m_matrix[i * m_number_of_columns + j] = 0.;
             }
         }
     }

@@ -1,4 +1,4 @@
-#N canvas 388 53 409 573 10;
+#N canvas 388 53 415 573 10;
 #X text -690 -1795 Hoa Library allows musicians and composers to synthesize
 \, transform and render sound fields in a creative and artistic way.
 This library facilitates the understanding and the appropriation of
@@ -16,8 +16,9 @@ synthesis \, perspective distorsion or spatial filtering.;
 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
 #X obj -689 -1646 c.tab @size 398 264 @fontname Monaco @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @orientation 1 @toggle 0 @items hoa.3d.decoder~ hoa.3d.encoder~
-hoa.3d.map hoa.3d.map~ hoa.3d.meter~ hoa.3d.optim~ hoa.3d.wider~ hoa.3d.scope~
+(null) @orientation 1 @toggle 0 @items hoa.2d.decoder~ hoa.2d.encoder~
+hoa.2d.map hoa.2d.map~ hoa.2d.meter~ hoa.2d.optim~ hoa.2d.projector~
+hoa.2d.recomposer~ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~
 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1
 @hocolor 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
 #N canvas 762 438 452 384 sel.hoa.txt 0;

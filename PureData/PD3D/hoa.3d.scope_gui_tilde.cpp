@@ -144,7 +144,7 @@ void *hoa_scope_3D_new(t_symbol *s, int argc, t_atom *argv)
     
     x->f_order      = 1;
 	x->f_startclock = 0;
-	x->f_scope      = new Hoa3D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI2 * 0.5, NUMBEROFCIRCLEPOINTS_UI2);
+	x->f_scope      = new Hoa3D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI2 * 0.25, NUMBEROFCIRCLEPOINTS_UI2 * 0.5);
     x->f_order      = x->f_scope->getDecompositionOrder();
     x->f_signals    = new t_float[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
     x->f_index      = 0;
@@ -268,7 +268,7 @@ t_pd_err set_order(t_hoa_scope_3D *x, t_object *attr, long ac, t_atom *av)
             
             delete x->f_scope;
             delete [] x->f_signals;
-            x->f_scope      = new Hoa3D::Scope(order, 100, 199);
+            x->f_scope      = new Hoa3D::Scope(order, NUMBEROFCIRCLEPOINTS_UI2 * 0.25, NUMBEROFCIRCLEPOINTS_UI2 * 0.5);
             x->f_order      = x->f_scope->getDecompositionOrder();
             x->f_signals    = new t_float[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
             
@@ -295,25 +295,12 @@ void hoa_scope_3D_paint(t_hoa_scope_3D *x, t_object *view)
 void draw_harmonics(t_hoa_scope_3D *x, t_object *view, t_rect *rect)
 {
     char pathLength;
-	t_pt beginCoord;
     t_matrix transform;
-    long precIndex = 0;
     t_rgba color_pos;
     t_rgba color_neg;
 	t_elayer *g = ebox_start_layer((t_ebox *)x, hoa_sym_harmonics_layer, rect->width, rect->height);
-    
-    
-	double y1, y2, rotateAngle;
-    t_rgba black, white;
-    
-    black = white = x->f_color_bg;
-    black.red = clip_min(black.red - contrast_black, 0.);
-    black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue = clip_min(black.blue - contrast_black, 0.);
-    
-    white.red = clip_max(white.red + contrast_white, 1.);
-    white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue = clip_max(white.blue + contrast_white, 1.);
+    t_rgba black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    t_rgba white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	if (g)
 	{
@@ -329,94 +316,82 @@ void draw_harmonics(t_hoa_scope_3D *x, t_object *view, t_rect *rect)
             double constrast = (j - x->f_scope->getNumberOfRows() * 0.5) / (double)x->f_scope->getNumberOfRows();
             color_pos = rgba_addContrast(x->f_color_ph, constrast);
             color_neg = rgba_addContrast(x->f_color_nh, constrast);
-            
             egraphics_set_color_rgba(g, &color_pos);
+            double elev = x->f_scope->getElevation(j);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if(i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value >= 0)
                 {
-                    egraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) >= 0)
-                {
-                    if (pathLength == 0)
+                    value *= x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        egraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        egraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        egraphics_line_to(g, abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        egraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            egraphics_close_path(g);
             if(pathLength)
-                egraphics_stroke(g);
+                egraphics_fill(g);
             
             pathLength = 0;
             // negative harmonics
             egraphics_set_color_rgba(g, &color_neg);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if (i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value < 0)
                 {
-                    egraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) < 0)
-                {
-                    if (!pathLength)
+                    value *= -x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        egraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        egraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        egraphics_line_to(g, abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        egraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            egraphics_close_path(g);
             if(pathLength)
-                egraphics_stroke(g);
+                egraphics_fill(g);
         }
         
+        double angle, x1, x2, y1, y2, cosa, sina;
         for(int i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
-            rotateAngle = ((double)i / (x->f_order * 2 + 2) * HOA_2PI ) - (0.5 / (x->f_order * 2 + 2) * HOA_2PI);
-			egraphics_rotate(g, rotateAngle);
-			
-			y1 = x->f_radius / 5.;
-			y2 = x->f_radius;
+            angle = ((double)(i - 0.5) / (x->f_order * 2 + 2) * HOA_2PI);
+			cosa = cos(angle);
+            sina = sin(angle);
+            x1 = cosa * x->f_radius * 0.2;
+			y1 = sina * x->f_radius * 0.2;
+            x2 = cosa * x->f_radius;
+			y2 = sina * x->f_radius;
             
-            egraphics_move_to(g, 0, y1);
-			egraphics_line_to(g, 0, y2);
+            egraphics_move_to(g, x1, y1);
+			egraphics_line_to(g, x2, y2);
             egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
             egraphics_stroke(g);
-            
             egraphics_set_color_rgba(g, &black);
 			egraphics_set_line_width(g, 1);
 			egraphics_stroke(g);
-			
-			egraphics_rotate(g, -rotateAngle);
 		}
         
         for(int i = 5; i > 0; i--)
 		{
             egraphics_set_line_width(g, 3);
             egraphics_set_color_rgba(g, &white);
-            egraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
+            egraphics_arc(g, 0, 0, (double)i * 0.2 * x->f_radius,  0., HOA_2PI);
             egraphics_stroke(g);
             egraphics_set_line_width(g, 1);
             egraphics_set_color_rgba(g, &black);
@@ -430,66 +405,54 @@ void draw_harmonics(t_hoa_scope_3D *x, t_object *view, t_rect *rect)
             double constrast = (j - x->f_scope->getNumberOfRows() * 0.5) / (double)x->f_scope->getNumberOfRows();
             color_pos = rgba_addContrast(x->f_color_ph, constrast);
             color_neg = rgba_addContrast(x->f_color_nh, constrast);
-            
             egraphics_set_color_rgba(g, &color_pos);
+            double elev = x->f_scope->getElevation(j);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if(i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value >= 0)
                 {
-                    egraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) >= 0)
-                {
-                    if (pathLength == 0)
+                    value *= x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        egraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        egraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        egraphics_line_to(g, abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        egraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            egraphics_close_path(g);
             if(pathLength)
-                egraphics_stroke(g);
+                egraphics_fill(g);
             
             pathLength = 0;
             // negative harmonics
             egraphics_set_color_rgba(g, &color_neg);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if (i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value < 0)
                 {
-                    egraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) < 0)
-                {
-                    if (!pathLength)
+                    value *= -x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        egraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        egraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        egraphics_line_to(g, abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        egraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            egraphics_close_path(g);
             if(pathLength)
-                egraphics_stroke(g);
+                egraphics_fill(g);
         }
 
                  
