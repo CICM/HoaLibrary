@@ -55,6 +55,7 @@ typedef struct  _hoa_map
     long        f_write;
 	
 	int			f_mouse_was_dragging;
+	int			f_cartesian_drag;
 	
 	// options :
 	long		f_output_3D;			// 0 is 2d, 1 is 3d
@@ -1545,6 +1546,7 @@ void hoa_map_mousedown(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
     
     x->f_rect_selection_exist = -1;
     x->f_rect_selection.width = x->f_rect_selection.height = 0.;
+	x->f_cartesian_drag = 0;
 	
 	t_pt displayed_coords;
         
@@ -1806,6 +1808,15 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
 	
     t_pt mousedelta = {x->f_cursor_position.x - cursor.x, x->f_cursor_position.y - cursor.y};
 	
+	// check if we wanna constrain drag to cartesian
+	if (modifiers == EMOD_CTRL && x->f_mouse_was_dragging) // cmd
+	{
+		if(x->f_cartesian_drag == 0)
+			x->f_cartesian_drag = (fabs(mousedelta.x) >= fabs(mousedelta.y)) ? 1 : 2;
+	}
+	else
+		x->f_cartesian_drag = 0;
+	
 	int causeOutput = 0;
 	int causeRedraw = 0;
 	int causeNotify = 0;
@@ -1847,6 +1858,25 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
         else if(modifiers == EMOD_ALT)
 		{
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
+		else if(modifiers == EMOD_CTRL) // Cartesian constrain
+		{
+            if (x->f_cartesian_drag == 1)
+			{
+				if (x->f_coord_view == 0 || x->f_coord_view == 1)
+					x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, cursor.x);
+				else if (x->f_coord_view == 2)
+					x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.x);
+			}
+            else if(x->f_cartesian_drag == 2)
+			{
+				if (x->f_coord_view == 0)
+					x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
+				else
+					x->f_source_manager->sourceSetHeight(x->f_index_of_selected_source, cursor.y);
+			}
+			
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
         else
@@ -2018,6 +2048,25 @@ void hoa_map_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifi
 				}
 				default: break;
 			}
+			causeOutput = causeRedraw = causeNotify = 1;
+		}
+		else if (modifiers == EMOD_CTRL)
+		{
+			if (x->f_cartesian_drag == 1)
+			{
+				if (x->f_coord_view == 0 || x->f_coord_view == 1)
+					x->f_source_manager->groupSetAbscissa(x->f_index_of_selected_group, cursor.x);
+				else if (x->f_coord_view == 2)
+					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.x);
+			}
+            else if(x->f_cartesian_drag == 2)
+			{
+				if (x->f_coord_view == 0)
+					x->f_source_manager->groupSetOrdinate(x->f_index_of_selected_group, cursor.y);
+				else
+					x->f_source_manager->groupSetHeight(x->f_index_of_selected_group, cursor.y);
+			}
+			
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
         else
@@ -2448,7 +2497,8 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
                             x->f_source_manager->groupSetSource(index, atom_getlong(av+i+3+j));
                     }
                     
-                    if(ac > i+6+nsources && atom_gettype(av+i+3+nsources) == A_FLOAT
+                    if(ac > i+6+nsources
+					   && atom_gettype(av+i+3+nsources) == A_FLOAT
                        && atom_gettype(av+i+4+nsources) == A_FLOAT
                        && atom_gettype(av+i+5+nsources) == A_FLOAT
                        && atom_gettype(av+i+6+nsources) == A_FLOAT)
@@ -2572,6 +2622,5 @@ void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* 
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
     hoa_map_output(x);
-
 }
 
