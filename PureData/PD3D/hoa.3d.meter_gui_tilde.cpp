@@ -151,7 +151,7 @@ extern "C" void setup_hoa0x2e3d0x2emeter_tilde(void)
 	CLASS_ATTR_LABEL                (c, "view", 0, "Number of Channels");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "view", 0, "top");
     CLASS_ATTR_STYLE                (c, "view", 1, "menu");
-    CLASS_ATTR_ITEMS                (c, "view", 1, "top bottom");
+    CLASS_ATTR_ITEMS                (c, "view", 1, "top bottom top-bottom top/bottom");
     
 	CLASS_ATTR_SYMBOL               (c, "vectors", 0, t_hoa_meter_3d, f_vector_type);
     CLASS_ATTR_ACCESSORS            (c, "vectors", NULL, vectors_set);
@@ -643,7 +643,7 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
             
             egraphics_set_color_rgba(g, &mcolor);
             int npt = x->f_meter->getChannelNumberOfPoints(i, viewd);
-            int factor = pd_clip_min(rect->width / (double)(npt * 0.1) - 1, 1);
+            int factor = pd_clip_min(sqrt((rect->width * 500)) / (double)(npt * 0.1) - 1, 1);
 			if(npt)
 			{
 				float azi = x->f_meter->getChannelPointAzimuth(i, 0, viewd);
@@ -652,8 +652,8 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 				float ele = x->f_meter->getChannelPointElevation(i, 0, viewd);
 				float abs = abscissa(x->f_radius, azi, ele);
 				float ord = ordinate(x->f_radius, azi, ele);
+                
 				egraphics_move_to(g, abs, ord);
-
 				for(int j = factor; j < npt; j += factor)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j, viewd);
@@ -666,6 +666,7 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 					egraphics_line_to(g, abs, ord);
 
 				}
+                egraphics_set_line_splinestep(g, 1000.);
 				egraphics_close_path(g);
 				egraphics_fill_preserve(g);
 				
