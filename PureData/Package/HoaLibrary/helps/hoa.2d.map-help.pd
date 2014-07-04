@@ -2,8 +2,8 @@
 #X text -342 -185 Mousewheel and alt to change the zoom.;
 #X obj -649 -304 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
-polar @zoom 0.4 @mapname ;
+hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view
+0 @outputmode polar @output3d 0 @zoom 0.4;
 #X obj -649 -328 c.loadmess;
 #X msg -237 97 \; pd dsp 1;
 #X msg -237 132 \; pd dsp 0;
@@ -218,7 +218,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -518 -68 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@outputmode polar @zoom 0.35 @mapname ;
+@view 0 @outputmode polar @output3d 0 @zoom 0.35;
 #X text -332 -146 Clear all;
 #X msg -196 -83 source 1 pol 1 3.14;
 #X msg -50 -83 source 2 abscissa 2.5;
@@ -262,8 +262,8 @@ normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 #X obj -285 22 route list;
 #X obj -504 -287 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @outputmode
-polar @zoom 0.35 @mapname ;
+(null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view 0 @outputmode
+polar @output3d 0 @zoom 0.35;
 #X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
@@ -480,11 +480,10 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -700 -475 hoa.help.header;
 #X obj -554 200 hoa.help.pub;
 #X obj -284 -475 hoa.help.also;
-#N canvas 216 150 877 558 3D 1;
+#N canvas 86 150 877 558 3D 1;
 #X msg -678 -122 zoom \$1;
 #X text -691 -173 Set the zoom;
 #X msg -491 -121 clear;
-#X text -601 -149 Bang to output;
 #X obj -678 -152 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
@@ -495,24 +494,63 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 #X obj -678 -80 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@outputmode polar @zoom 0.35 @mapname ;
+@view 0 @outputmode polar @output3d 0 @zoom 0.35;
 #X text -492 -146 Clear all;
 #X msg -389 -163 mapname cicm;
-#X obj -366 -23 hoa.map @size 225 225 @fontname Helvetica @fontweight
+#X obj -364 -6 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@outputmode polar @zoom 0.35 @mapname ;
+@view 1 @outputmode polar @output3d 1 @zoom 0.35;
 #X msg -389 -140 mapname;
 #X msg -290 -111 mapname cicm;
 #X msg -290 -88 mapname;
-#X connect 0 0 6 0;
-#X connect 2 0 6 0;
-#X connect 4 0 0 0;
-#X connect 5 0 6 0;
-#X connect 8 0 6 0;
-#X connect 10 0 6 0;
-#X connect 11 0 9 0;
-#X connect 12 0 9 0;
+#X msg -148 -105 set source;
+#X obj 11 -107 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -363 243 c.prepend set;
+#X msg -363 271 2 cartesian -0.939219 -0.977778 1.67994;
+#X obj -646 176 c.prepend set;
+#X msg -645 205 2 cartesian -0.939219 -0.977778;
+#X obj -392 -74 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg -64 -53 source 1 azimuth \$1;
+#X obj -4 52 c.prepend output3d;
+#X obj -4 26 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -4 -5 c.loadmess 1;
+#X obj -9 168 c.prepend view;
+#X obj -9 131 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text -600 -149 Bang to output;
+#X text 19 17 Activate output3d;
+#X text 18 32 to output 3 coordinates;
+#X connect 0 0 5 0;
+#X connect 2 0 5 0;
+#X connect 3 0 0 0;
+#X connect 4 0 5 0;
+#X connect 5 0 16 0;
+#X connect 7 0 5 0;
+#X connect 8 0 14 0;
+#X connect 9 0 5 0;
+#X connect 10 0 8 0;
+#X connect 11 0 8 0;
+#X connect 12 0 8 0;
+#X connect 13 0 19 0;
+#X connect 14 0 15 0;
+#X connect 16 0 17 0;
+#X connect 18 0 8 0;
+#X connect 19 0 8 0;
+#X connect 20 0 8 0;
+#X connect 21 0 20 0;
+#X connect 22 0 21 0;
+#X connect 23 0 8 0;
+#X connect 24 0 23 0;
 #X restore -100 160 pd 3D;
 #X text -103 144 3D view;
 #X connect 1 0 13 0;

@@ -1853,10 +1853,11 @@ void draw_sources(t_hoa_map *x,  t_object *view, t_rect *rect)
                     
 					if (x->f_showgroups)
 					{
+						int groupIndex;
 						for(int index = 0; index < x->f_source_manager->sourceGetNumberOfGroups(i); index++)
 						{
 							jgraphics_move_to(g, sourceDisplayPos.x, sourceDisplayPos.y);
-							int groupIndex = x->f_source_manager->sourceGetGroupIndex(i, index);
+							groupIndex = x->f_source_manager->sourceGetGroupIndex(i, index);
 							
 							switch (x->f_coord_view)
 							{
@@ -1889,11 +1890,11 @@ void draw_sources(t_hoa_map *x,  t_object *view, t_rect *rect)
                 
                 if(!x->f_source_manager->sourceGetMute(i))
                 {
-                    jgraphics_set_source_jrgba(g, &sourceColor); 
-                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 0.6,  0., HOA_2PI);
+                    jgraphics_set_source_jrgba(g, &sourceColor);
+					jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 0.7,  0., HOA_2PI);
                     jgraphics_fill(g);
-                    jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source,  0., HOA_2PI);
-                    jgraphics_stroke(g);
+                    //jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source,  0., HOA_2PI);
+                    //jgraphics_stroke(g);
                 }
                 if(x->f_source_manager->sourceGetMute(i))
                 {
@@ -1988,7 +1989,6 @@ void draw_groups(t_hoa_map *x,  t_object *view, t_rect *rect)
                 
                 if (x->f_index_of_selected_group == i)
                 {
-                    //x->f_color_selection
                     jgraphics_set_source_jrgba(g, &x->f_color_selection);
                     jgraphics_arc(g, sourceDisplayPos.x, sourceDisplayPos.y, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
@@ -2814,7 +2814,6 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 				}
 				default: break;
 			}
-            //x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);
 			causeOutput = causeRedraw = causeNotify = 1;
 		}
     }
