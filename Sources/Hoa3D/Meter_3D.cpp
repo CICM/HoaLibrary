@@ -38,6 +38,18 @@ namespace Hoa3D
 		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
 	}
     
+    void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
+	{
+        Planewaves::setChannelPosition(index, azimuth, elevation);
+		find_channels_boundaries();
+	}
+    
+    void Meter::setChannelsRotation(double axis_x, double axis_y, double axis_z)
+    {
+        Planewaves::setChannelsRotation(axis_x, axis_y, axis_z);
+        setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
+    }
+    
 	void Meter::find_channels_boundaries()
 	{
 		int indices[8];
@@ -47,9 +59,9 @@ namespace Hoa3D
         unsigned int numberOfChannels = m_number_of_channels;
 		int* sphere = new int[numberOfRows * numberOfColumns];
 
-		double* azimuths = m_channels_azimuth;
-		double* elevations = m_channels_elevation;
-    
+		double* azimuths = m_channels_rotated_azimuth;
+		double* elevations = m_channels_rotated_elevation;
+        
         // Fill a matrix that discretize a sphere with the indices of the closest loudspeakers
         for(unsigned int i = 0; i < numberOfRows; i++)
         {
@@ -71,10 +83,9 @@ namespace Hoa3D
             }
         }
         
-        
         for(unsigned int l = 0; l < numberOfChannels; l++)
         {
-            MeterPoint ChannelPt = MeterPoint(m_channels_azimuth[l], m_channels_elevation[l]);
+            MeterPoint ChannelPt = MeterPoint(azimuths[l], elevations[l]);
             m_points_top[l].clear();
             m_points_bottom[l].clear();
             
@@ -199,12 +210,6 @@ namespace Hoa3D
         }
         
 		delete [] sphere;
-	}
-    
-    void Meter::setChannelPosition(unsigned int index, double azimuth, double elevation)
-	{
-        Planewaves::setChannelPosition(index, azimuth, elevation);
-		find_channels_boundaries();
 	}
     
     void Meter::process(const float* inputs)

@@ -436,9 +436,9 @@ t_pd_err offset_get(t_hoa_meter_3d *x, void *attr, long *argc, t_atom **argv)
     argv[0] = (t_atom *)malloc(3 * sizeof(t_atom));
     if(argv[0] && argc[0])
     {
-       // atom_setfloat(argv[0], x->f_meter->getChannelsOffset() / HOA_2PI * 360.);
-		argc[0] = 3;
-        argv[0] = argv[2] = argv[2] = 0;
+        atom_setfloat(argv[0], x->f_meter->getChannelsRotationX() / HOA_2PI * 360.);
+        atom_setfloat(argv[0]+1, x->f_meter->getChannelsRotationY() / HOA_2PI * 360.);
+        atom_setfloat(argv[0]+2, x->f_meter->getChannelsRotationZ() / HOA_2PI * 360.);
     }
     else
     {
@@ -450,10 +450,22 @@ t_pd_err offset_get(t_hoa_meter_3d *x, void *attr, long *argc, t_atom **argv)
 
 t_pd_err offset_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
 {
-    if(argc && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc && argv)
     {
-     
-       // x->f_meter->setChannelsOffset(atom_getfloat(argv) / 360 * HOA_2PI);
+        double ax, ay, az;
+        if(atom_gettype(argv) == A_FLOAT)
+            ax = atom_getfloat(argv);
+        else
+            ax = x->f_meter->getChannelsRotationX();
+        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+            ay = atom_getfloat(argv+1);
+        else
+            ay = x->f_meter->getChannelsRotationX();
+        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+            az = atom_getfloat(argv+2);
+        else
+            az = x->f_meter->getChannelsRotationX();
+        x->f_meter->setChannelsRotation(ax, ay, az);
     }
     
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_background_layer);

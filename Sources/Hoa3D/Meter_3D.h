@@ -150,6 +150,15 @@ namespace Hoa3D
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
 
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
+        
 		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
         {
             assert(index < m_number_of_channels);
