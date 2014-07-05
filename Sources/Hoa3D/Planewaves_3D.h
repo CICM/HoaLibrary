@@ -252,6 +252,17 @@ namespace Hoa3D
                 elevations[i+5] = -elevations[i];
             }
         }
+        else if(numberOfPoints > 12 && numberOfPoints < 20)
+        {
+            double elev[20];
+            double azim[20];
+            sphere_discretize(20, azim, elev);
+            for(int i = 0; i < numberOfPoints; i++)
+            {
+                azimuths[i] = azim[i];
+                elevations[i] = elev[i];
+            }
+        }
         else if(numberOfPoints == 20)
         {
             double phi = (sqrt(5.) - 1.) / 2.; // The golden ratio

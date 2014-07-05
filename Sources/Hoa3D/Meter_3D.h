@@ -109,9 +109,10 @@ namespace Hoa3D
     private:
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
+        unsigned int    m_number_of_rows;
+        unsigned int    m_number_of_columns;
         double*         m_channels_peaks;
-
-        //std::vector<MeterPoint> m_points[256];
+        
         std::vector<MeterPoint> m_points_top[256];
         std::vector<MeterPoint> m_points_bottom[256];
 
@@ -123,7 +124,7 @@ namespace Hoa3D
          
             @param     order	The order.
          */
-        Meter(unsigned int numberOfChannels);
+        Meter(unsigned int numberOfChannels, unsigned int numberOfRows, unsigned int numberOfColumns);
         
         //! The meter destructor.
         /**	The meter destructor free the memory.

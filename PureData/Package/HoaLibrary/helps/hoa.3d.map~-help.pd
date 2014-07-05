@@ -68,12 +68,12 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg -148 -718 2 pol \$1 \$2 \$3;
 #X obj -148 -739 c.pak 0 0 0;
 #X obj 304 -831 hoa.map~;
-#X obj -251 -552 hoa.3d.meter~ @size 138 138 @fontname Helvetica @fontweight
+#X obj -251 -552 hoa.3d.meter~ @size 276 138 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
 8 @angles 0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45 @rotation
-anti-clockwise @view top @vectors none @interval 50 @bgcolor 0.76 0.76
-0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6
-0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
+anti-clockwise @view top-bottom @vectors none @interval 50 @bgcolor
+0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor
+0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor
 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X connect 4 0 3 0;
 #X connect 5 0 2 0;

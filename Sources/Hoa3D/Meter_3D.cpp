@@ -6,16 +6,20 @@
 
 #include "Meter_3D.h"
 
-#define METER_ROW_NUMBER 181
-#define METER_COLUMN_NUMBER 360
-
 namespace Hoa3D
 {
-    Meter::Meter(unsigned int numberOfChannels) : Planewaves(numberOfChannels)
+    Meter::Meter(unsigned int numberOfChannels, unsigned int numberOfRows, unsigned int numberOfColumns) : Planewaves(numberOfChannels)
     {
         m_ramp                  = 0;
         m_vector_size           = 256;
         m_channels_peaks		= new double[m_number_of_channels];
+        m_number_of_rows        = numberOfRows;
+        m_number_of_columns     = numberOfColumns;
+        if(m_number_of_rows % 2 != 1)
+            m_number_of_rows++;
+        if(m_number_of_columns % 2 != 0)
+            m_number_of_columns++;
+        
         for(unsigned int i = 0; i < numberOfChannels; i++)
             m_channels_peaks[i] = 0.;
         
@@ -38,15 +42,15 @@ namespace Hoa3D
 	{
 		int indices[8];
 		double dist1, dist2, azi, ele;
-		unsigned int numberOfRows = METER_ROW_NUMBER;
-		unsigned int numberOfColumns = METER_COLUMN_NUMBER;
+		unsigned int numberOfRows = m_number_of_rows;
+		unsigned int numberOfColumns = m_number_of_columns;
         unsigned int numberOfChannels = m_number_of_channels;
 		int* sphere = new int[numberOfRows * numberOfColumns];
 
 		double* azimuths = m_channels_azimuth;
 		double* elevations = m_channels_elevation;
-		
-		// Fill a matrix that discretize a sphere with the indices of the closest loudspeakers
+    
+        // Fill a matrix that discretize a sphere with the indices of the closest loudspeakers
         for(unsigned int i = 0; i < numberOfRows; i++)
         {
             for(unsigned int j = 0; j < numberOfColumns; j++)
@@ -66,6 +70,7 @@ namespace Hoa3D
                 }
             }
         }
+        
         
         for(unsigned int l = 0; l < numberOfChannels; l++)
         {
