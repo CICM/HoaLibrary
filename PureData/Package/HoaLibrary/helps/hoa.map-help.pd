@@ -1,4 +1,4 @@
-#N canvas 589 86 837 726 10;
+#N canvas 238 102 837 726 10;
 #X text -342 -185 Mousewheel and alt to change the zoom.;
 #X obj -649 -304 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
@@ -14,9 +14,6 @@ add description and create groups., f 90;
 #X obj -120 -462 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj -649 -53 c.loadmess 1;
-#X text -344 -380 To move source or group \, click on it and drag it.
-Click and drag with alt to change the radius. Click and drag with shift
-to change the angle.;
 #X text -343 -328 To create source \, right-click or click with cmd
 on a "free" zone then select "Add source" in the popup menu. To remove
 source \, idem and select "Remove source".;
@@ -149,11 +146,11 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -649 37 hoa.2d.optim~ 3 inPhase -----------------;
-#N canvas 216 150 1155 646 messages 0;
-#X msg -518 -122 zoom \$1;
-#X text -531 -173 Set the zoom;
-#X obj -96 13 send map_mes;
-#X text -202 -216 Display source or group and set coordinates with
+#N canvas 216 150 1155 646 messages 1;
+#X msg -532 -122 zoom \$1;
+#X text -545 -173 Set the zoom;
+#X obj -110 13 send map_mes;
+#X text -216 -216 Display source or group and set coordinates with
 "source" or "group" message followed by an integer for the index \,
 the type of coordinates and one or two floating values for coordinates.
 The coordinates types accepted are "polar" (or "pol") \, "cartesian"
@@ -161,73 +158,77 @@ The coordinates types accepted are "polar" (or "pol") \, "cartesian"
 polar type is followed by the radius then the angle and the cartesian
 type is followed by the abscissa then the ordinate. Exemple : "source
 0 car 1 0.".;
-#X text 196 -216 Set descriptions with "source" or "group" message
+#X text 182 -216 Set descriptions with "source" or "group" message
 followed by an integer for the index \, the "description" message and
 everything you want for the description. Set "remove" instead of the
 description to remove the description. Exemple : "source 0 description
 Jimi Hendrix".;
-#X obj 195 -77 send map_mes;
-#X text 199 -40 Set colors with "source" or "group" message followed
+#X obj 181 -77 send map_mes;
+#X text 185 -40 Set colors with "source" or "group" message followed
 by an integer for the index \, the "color" message and four floating
 values for red \, green \, blue and alpha (ok... there's no alpha).
 Exemple : "source 0 color 1 0.2 0.6 1;
-#X obj 207 92 send map_mes;
-#X msg 207 41 source 1 color 0.7 0 0.6 1;
-#X obj -38 176 send map_mes;
-#X text -184 39 Mute with the "mute" message".;
-#X text 197 129 Remove a source or group with the "remove" message".
+#X obj 193 92 send map_mes;
+#X msg 193 41 source 1 color 0.7 0 0.6 1;
+#X obj -52 176 send map_mes;
+#X text -198 39 Mute with the "mute" message".;
+#X text 183 129 Remove a source or group with the "remove" message".
 Note that remove will also remove coordinates \, descriptions \, color
 and send a message to hoa.2D.map~ to mute the source (exept for groups).
 ;
-#X obj 210 242 send map_mes;
-#X msg 210 191 group 1 remove;
-#X msg 232 214 source 3 remove;
-#X msg -331 -121 clear;
-#X msg -50 -30 source 3 car 0.2 -0.7;
-#X text -194 214 Create a group with the "group" message followed by
+#X obj 196 242 send map_mes;
+#X msg 196 191 group 1 remove;
+#X msg 218 214 source 3 remove;
+#X msg -345 -121 clear;
+#X msg -64 -30 source 3 car 0.2 -0.7;
+#X text -208 214 Create a group with the "group" message followed by
 an integer for the group index \, "set" message and a list of intergers
 \, the indexs of source to put in the group. Exemple : "group 0 set
 1 2 3 4".;
-#X obj -181 332 send map_mes;
-#X text -71 290 (create the source 3 before);
-#X text 305 191 (create the group 1 before);
-#X text 328 213 (create the source 3 before);
-#X text -441 -149 Bang to output;
-#X obj -518 -152 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -195 332 send map_mes;
+#X text -85 290 (create the source 3 before);
+#X text 291 191 (create the group 1 before);
+#X text 314 213 (create the source 3 before);
+#X text -455 -149 Bang to output;
+#X obj -532 -152 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -436 -122 c.bang @size 17 17 @fontname Helvetica @fontweight
+#X obj -450 -122 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
-#X obj 32 96 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
+#X obj 18 96 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
 @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X obj -121 66 c.toggle @size 15 15 @fontname Helvetica @fontweight
+#X obj -135 66 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X obj -44 116 c.toggle @size 15 15 @fontname Helvetica @fontweight
+#X obj -58 116 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X msg 195 -128 source 1 description Jimi Hendrix;
-#X msg 217 -105 group 1 description Band of Gypsys;
-#X msg 229 64 group 1 color 0.2 0.9 0 1;
-#X obj -518 -68 hoa.map @size 225 225 @fontname Helvetica @fontweight
+#X msg 181 -128 source 1 description Jimi Hendrix;
+#X msg 203 -105 group 1 description Band of Gypsys;
+#X msg 215 64 group 1 color 0.2 0.9 0 1;
+#X obj -532 -68 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 @view 0 @outputmode polar @output3d 0 @zoom 0.35;
-#X text -332 -146 Clear all;
-#X msg -196 -83 source 1 pol 1 3.14;
-#X msg -50 -83 source 2 abscissa 2.5;
-#X msg -18 -58 group 1 angle 1.14;
-#X msg -150 -59 group 1 car 0.5 0.5;
-#X msg -181 292 group 1 set 1 2 3;
-#X msg 32 123 group 1 mute \$1;
-#X msg -121 88 source 1 mute \$1;
-#X msg -44 144 source 2 mute \$1;
+#X text -346 -146 Clear all;
+#X msg -210 -83 source 1 pol 1 3.14;
+#X msg -64 -83 source 2 abscissa 2.5;
+#X msg -32 -58 group 1 angle 1.14;
+#X msg -164 -59 group 1 car 0.5 0.5;
+#X msg -195 292 group 1 set 1 2 3;
+#X msg 18 123 group 1 mute \$1;
+#X msg -135 88 source 1 mute \$1;
+#X msg -58 144 source 2 mute \$1;
+#X obj -530 334 send map_mes;
+#X msg -530 308 set source 1 pol 1 3.14;
+#X text -537 268 If the source or group messages are prepended by the
+"set" symbol \, it will not producing any output;
 #X connect 0 0 31 0;
 #X connect 8 0 7 0;
 #X connect 13 0 12 0;
@@ -250,6 +251,7 @@ normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 #X connect 38 0 9 0;
 #X connect 39 0 9 0;
 #X connect 40 0 9 0;
+#X connect 42 0 41 0;
 #X restore -339 -149 pd messages;
 #N canvas 161 119 804 672 outputs 0;
 #X obj -504 -5 send map_outs_sources;
@@ -480,123 +482,299 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -700 -475 hoa.help.header;
 #X obj -554 200 hoa.help.pub;
 #X obj -284 -475 hoa.help.also;
-#N canvas 86 150 877 558 3D 1;
-#X msg -678 -122 zoom \$1;
-#X text -691 -173 Set the zoom;
-#X msg -491 -121 clear;
-#X obj -678 -152 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
-0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -596 -122 c.bang @size 17 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
-#X obj -678 -80 hoa.map @size 225 225 @fontname Helvetica @fontweight
+#N canvas 125 76 964 712 3D 1;
+#X obj -667 100 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@view 0 @outputmode polar @output3d 0 @zoom 0.35;
-#X text -492 -146 Clear all;
-#X msg -389 -163 mapname cicm;
-#X obj -364 -6 hoa.map @size 225 225 @fontname Helvetica @fontweight
+@view 0 @outputmode polar @output3d 1 @zoom 0.35;
+#X obj -359 201 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
 @view 1 @outputmode polar @output3d 1 @zoom 0.35;
-#X msg -389 -140 mapname;
-#X msg -290 -111 mapname cicm;
-#X msg -290 -88 mapname;
-#X msg -148 -105 set source;
-#X obj 11 -107 c.number @size 53 17 @fontname Helvetica @fontweight
+#X msg 75 136 mapname;
+#X obj -249 15 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -363 243 c.prepend set;
-#X msg -363 271 2 cartesian -0.939219 -0.977778 1.67994;
-#X obj -646 176 c.prepend set;
-#X msg -645 205 2 cartesian -0.939219 -0.977778;
-#X obj -392 -74 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X msg -64 -53 source 1 azimuth \$1;
-#X obj -4 52 c.prepend output3d;
-#X obj -4 26 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+#X obj -359 472 c.prepend set;
+#X msg -359 500 4 cartesian 0 0 0;
+#X msg -249 42 source 1 azimuth \$1;
+#X obj -478 28 c.prepend output3d;
+#X obj -478 2 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X obj -4 -5 c.loadmess 1;
-#X obj -9 168 c.prepend view;
-#X obj -9 131 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -478 -29 c.loadmess 1;
+#X obj -359 161 c.prepend view;
+#X text -455 -7 Activate output3d;
+#X obj -359 129 c.menu @size 40 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
-0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text -600 -149 Bang to output;
-#X text 19 17 Activate output3d;
-#X text 18 32 to output 3 coordinates;
-#X connect 0 0 5 0;
-#X connect 2 0 5 0;
-#X connect 3 0 0 0;
-#X connect 4 0 5 0;
-#X connect 5 0 16 0;
-#X connect 7 0 5 0;
-#X connect 8 0 14 0;
-#X connect 9 0 5 0;
-#X connect 10 0 8 0;
-#X connect 11 0 8 0;
-#X connect 12 0 8 0;
-#X connect 13 0 19 0;
-#X connect 14 0 15 0;
-#X connect 16 0 17 0;
-#X connect 18 0 8 0;
-#X connect 19 0 8 0;
-#X connect 20 0 8 0;
-#X connect 21 0 20 0;
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -656 346 c.loadmess 1;
+#N canvas 284 119 577 458 hoa.rhythm 0;
+#X msg 231 -105 0;
+#X obj 158 21 *~ 0;
+#X msg 211 -33 0;
+#X obj 204 -105 + 1;
+#X obj 179 -104 f;
+#X obj 8 21 *~ 0;
+#X msg 61 -33 0;
+#X obj 54 -105 + 1;
+#X obj 29 -104 f;
+#X msg 81 -105 0;
+#X obj 29 -82 sel 0 4;
+#X obj 61 -56 delay 3;
+#X obj -112 57 *~ 0;
+#X msg -59 -13 0;
+#X obj -66 -85 + 1;
+#X obj -91 -84 f;
+#X msg -39 -85 0;
+#X obj -91 -62 sel 0 6;
+#X obj -62 231 *~ 0;
+#X msg -9 177 0;
+#X obj -9 154 delay 1;
+#X obj -16 105 + 1;
+#X obj -41 106 f;
+#X msg 11 105 0;
+#X obj -41 128 sel 0 2;
+#X obj -62 200 osc~ 0.05;
+#X obj -112 11 phasor~ 0.1;
+#X obj -59 -36 delay 3;
+#X obj -112 32 +~ 0.2;
+#X obj 56 -9 osc~ 3.7;
+#X obj 211 -59 delay 5;
+#X obj -32 32 +~ 0.2;
+#X obj 61 18 abs~;
+#X obj 191 -166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 145 -194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj 179 -82 sel 1 3 8;
+#X obj 29 -138 metro 120;
+#X msg -91 -13 0.8;
+#X msg 29 -33 0.8;
+#X obj 136 -66 noise~;
+#X obj 144 -12 lop~ 200;
+#X msg 179 -33 4;
+#X msg -41 177 0.7;
+#X obj 120 105 outlet~;
+#X obj 180 105 outlet~;
+#X obj 180 145 outlet~;
+#X obj 120 145 outlet~;
+#X obj 351 -46 inlet;
+#X connect 0 0 4 0;
+#X connect 1 0 44 0;
+#X connect 2 0 1 1;
+#X connect 3 0 4 1;
+#X connect 4 0 3 0;
+#X connect 4 0 35 0;
+#X connect 5 0 43 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 1;
+#X connect 8 0 7 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 0 38 0;
+#X connect 10 0 11 0;
+#X connect 10 1 9 0;
+#X connect 11 0 6 0;
+#X connect 12 0 46 0;
+#X connect 13 0 12 1;
+#X connect 14 0 15 1;
+#X connect 15 0 14 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 17 0 37 0;
+#X connect 17 0 27 0;
+#X connect 17 1 16 0;
+#X connect 18 0 45 0;
+#X connect 19 0 18 1;
+#X connect 20 0 19 0;
+#X connect 21 0 22 1;
 #X connect 22 0 21 0;
-#X connect 23 0 8 0;
-#X connect 24 0 23 0;
-#X restore -100 160 pd 3D;
-#X text -103 144 3D view;
-#X connect 1 0 13 0;
+#X connect 22 0 24 0;
+#X connect 23 0 22 0;
+#X connect 24 0 42 0;
+#X connect 24 0 20 0;
+#X connect 24 1 23 0;
+#X connect 25 0 18 0;
+#X connect 26 0 28 0;
+#X connect 27 0 13 0;
+#X connect 28 0 12 0;
+#X connect 29 0 32 0;
+#X connect 30 0 2 0;
+#X connect 31 0 5 0;
+#X connect 32 0 31 0;
+#X connect 33 0 36 1;
+#X connect 34 0 36 0;
+#X connect 35 0 41 0;
+#X connect 35 0 30 0;
+#X connect 35 1 41 0;
+#X connect 35 1 30 0;
+#X connect 35 2 0 0;
+#X connect 36 0 4 0;
+#X connect 36 0 8 0;
+#X connect 36 0 15 0;
+#X connect 36 0 22 0;
+#X connect 37 0 12 1;
+#X connect 38 0 5 1;
+#X connect 39 0 40 0;
+#X connect 40 0 1 0;
+#X connect 41 0 1 1;
+#X connect 42 0 18 1;
+#X connect 47 0 34 0;
+#X restore -656 370 pd hoa.rhythm ---------------------------;
+#X obj -667 435 hoa.3d.optim~ 1 inPhase -----------------;
+#X obj -667 472 hoa.3d.decoder~ 1 8 ---------------------;
+#X obj -667 504 hoa.dac~ 1:8 ----------------------------;
+#X obj -28 201 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
+@view 2 @outputmode polar @output3d 1 @zoom 0.35;
+#X text -456 8 to output 3 coordinates;
+#X text 79 185 |;
+#X text 79 178 ^;
+#X text 79 167 z;
+#X text -251 185 |;
+#X text -251 178 ^;
+#X text -251 167 z;
+#X text 199 301 _;
+#X text 206 304 >;
+#X text 216 304 y;
+#X text -131 301 _;
+#X text -124 304 >;
+#X text -114 304 x;
+#X text -559 85 |;
+#X text -559 78 ^;
+#X text -439 201 _;
+#X text -432 204 >;
+#X text -422 204 x;
+#X text -559 67 y;
+#X obj -359 99 c.loadmess 1;
+#X obj -28 136 c.prepend view;
+#X obj -28 104 c.menu @size 40 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -28 74 c.loadmess 2;
+#X obj -667 51 c.prepend view;
+#X obj -667 19 c.menu @size 40 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -667 -11 c.loadmess 0;
+#X text -296 -103 These three hoa.map objects share the same "mapname"
+attribute so they are linked together and react to the change of each
+others. So \, sources and groups position \, description and colors
+modifications will affect all linked hoa.map objects to control a hoa.3d.map~.
+;
+#X obj -667 402 hoa.3d.map~ 1 4 -------------------------;
+#X obj -184 75 c.loadmess mapname cicm;
+#X text -663 -175 These three hoa.map objects share the same "mapname"
+attribute so they are linked together and react to the change of each
+others. So \, sources and groups position \, description and colors
+modifications will affect all linked hoa.map objects to control a These
+three hoa.map objects share the same "mapname" attribute so they are
+linked together and react to the change of each others. So \, sources
+and groups position \, description and colors modifications will affect
+all linked hoa.map objects to control a hoa.3d.map~., f 124;
+#X text 74 23 To deassociate a hoa.map to the others \, simply send
+the "mapname" message (or clear the mapname attribute in the propriety
+window), f 27;
+#X msg -155 465 source 1 car -1 1 1 \, source 2 car 1 1 0 \, source
+3 car -1 -1 -1 \, source 4 car 0 0 0 \, group 1 set 1 2;
+#X obj -155 441 loadbang;
+#X text -669 -90 • The "output3d" attribute must be checked to control
+a hoa.3d.map~ object • Change the coordinate system to change the
+point of view and interact differently with sources and groups;
+#X connect 0 0 46 0;
+#X connect 1 0 4 0;
+#X connect 2 0 18 0;
+#X connect 3 0 6 0;
+#X connect 4 0 5 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 7 0 0 0;
+#X connect 8 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 1 0;
+#X connect 12 0 10 0;
+#X connect 13 0 14 0;
+#X connect 14 0 46 0;
+#X connect 14 1 46 1;
+#X connect 14 2 46 2;
+#X connect 14 3 46 3;
+#X connect 15 0 16 0;
+#X connect 15 1 16 1;
+#X connect 15 2 16 2;
+#X connect 15 3 16 3;
+#X connect 16 0 17 0;
+#X connect 38 0 12 0;
+#X connect 39 0 18 0;
+#X connect 40 0 39 0;
+#X connect 41 0 40 0;
+#X connect 42 0 0 0;
+#X connect 43 0 42 0;
+#X connect 44 0 43 0;
+#X connect 46 0 15 0;
+#X connect 46 1 15 1;
+#X connect 46 2 15 2;
+#X connect 46 3 15 3;
+#X connect 47 0 1 0;
+#X connect 47 0 0 0;
+#X connect 47 0 18 0;
+#X connect 50 0 18 0;
+#X connect 51 0 50 0;
+#X restore -337 -61 pd 3D;
+#X text -340 -77 3D view;
+#X text -344 -380 To move source or group \, click on it and drag it.
+Click and drag with alt to change the radius. Click and drag with shift
+to change the angle.;
+#X connect 1 0 12 0;
 #X connect 2 0 1 0;
 #X connect 7 0 6 0;
-#X connect 8 0 14 0;
-#X connect 13 0 18 0;
-#X connect 13 1 18 1;
-#X connect 13 2 18 2;
-#X connect 13 3 18 3;
-#X connect 13 4 18 4;
-#X connect 13 5 18 5;
-#X connect 13 6 18 6;
-#X connect 14 0 13 0;
-#X connect 14 1 13 1;
-#X connect 14 2 13 2;
-#X connect 14 3 13 3;
-#X connect 15 0 35 7;
-#X connect 16 0 15 0;
+#X connect 8 0 13 0;
+#X connect 12 0 17 0;
+#X connect 12 1 17 1;
+#X connect 12 2 17 2;
+#X connect 12 3 17 3;
+#X connect 12 4 17 4;
+#X connect 12 5 17 5;
+#X connect 12 6 17 6;
+#X connect 13 0 12 0;
+#X connect 13 1 12 1;
+#X connect 13 2 12 2;
+#X connect 13 3 12 3;
+#X connect 14 0 34 7;
+#X connect 15 0 14 0;
+#X connect 16 0 33 0;
 #X connect 17 0 34 0;
-#X connect 18 0 35 0;
-#X connect 18 1 35 1;
-#X connect 18 2 35 2;
-#X connect 18 3 35 3;
-#X connect 18 4 35 4;
-#X connect 18 5 35 5;
-#X connect 18 6 35 6;
+#X connect 17 1 34 1;
+#X connect 17 2 34 2;
+#X connect 17 3 34 3;
+#X connect 17 4 34 4;
+#X connect 17 5 34 5;
+#X connect 17 6 34 6;
+#X connect 21 0 20 0;
 #X connect 22 0 21 0;
-#X connect 23 0 22 0;
-#X connect 24 0 26 2;
-#X connect 25 0 26 1;
-#X connect 26 0 23 0;
-#X connect 30 0 31 0;
-#X connect 30 1 31 1;
-#X connect 34 0 35 7;
-#X connect 35 0 30 0;
-#X connect 35 1 30 1;
-#X connect 35 2 30 2;
-#X connect 35 3 30 3;
-#X connect 35 4 30 4;
-#X connect 35 5 30 5;
-#X connect 35 6 30 6;
-#X connect 36 0 37 0;
-#X connect 37 0 35 7;
+#X connect 23 0 25 2;
+#X connect 24 0 25 1;
+#X connect 25 0 22 0;
+#X connect 29 0 30 0;
+#X connect 29 1 30 1;
+#X connect 33 0 34 7;
+#X connect 34 0 29 0;
+#X connect 34 1 29 1;
+#X connect 34 2 29 2;
+#X connect 34 3 29 3;
+#X connect 34 4 29 4;
+#X connect 34 5 29 5;
+#X connect 34 6 29 6;
+#X connect 35 0 36 0;
+#X connect 36 0 34 7;
+#X connect 37 0 24 0;
 #X connect 38 0 25 0;
-#X connect 39 0 26 0;
-#X connect 40 0 42 0;
-#X connect 41 0 40 0;
+#X connect 39 0 41 0;
+#X connect 40 0 39 0;
 #X coords 0 726 1 725 85 60 0;
