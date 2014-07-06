@@ -115,9 +115,6 @@
 		8F27E3C219178A33004E1370 /* eboxflag.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39319178A33004E1370 /* eboxflag.h */; };
 		8F27E3C319178A33004E1370 /* ecommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E39419178A33004E1370 /* ecommon.c */; };
 		8F27E3C419178A33004E1370 /* ecommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39519178A33004E1370 /* ecommon.h */; };
-		8F27E3C519178A33004E1370 /* g_canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39619178A33004E1370 /* g_canvas.h */; };
-		8F27E3C619178A33004E1370 /* m_imp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39719178A33004E1370 /* m_imp.h */; };
-		8F27E3C719178A33004E1370 /* m_pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39819178A33004E1370 /* m_pd.h */; };
 		8F27E3CA19178A33004E1370 /* egraphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E39E19178A33004E1370 /* egraphics.c */; };
 		8F27E3CB19178A33004E1370 /* egraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39F19178A33004E1370 /* egraphics.h */; };
 		8F27E3CC19178A33004E1370 /* egraphics_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F27E3A019178A33004E1370 /* egraphics_color.c */; };
@@ -239,11 +236,9 @@
 		8FAC0C58196985A400E09ACB /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2F1191789BD004E1370 /* Scope.h */; };
 		8FAC0C59196985A400E09ACB /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F794EE5192A60B20006491F /* Source.h */; };
 		8FAC0C5A196985A400E09ACB /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2D7191789BD004E1370 /* Ambisonic.h */; };
-		8FAC0C5B196985A400E09ACB /* g_canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39619178A33004E1370 /* g_canvas.h */; };
 		8FAC0C5C196985A400E09ACB /* Projector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2EB191789BD004E1370 /* Projector.h */; };
 		8FAC0C5D196985A400E09ACB /* HoaDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E31F191789BE004E1370 /* HoaDefs.h */; };
 		8FAC0C5E196985A400E09ACB /* Ambisonic_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E302191789BE004E1370 /* Ambisonic_3D.h */; };
-		8FAC0C5F196985A400E09ACB /* m_pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39819178A33004E1370 /* m_pd.h */; };
 		8FAC0C60196985A400E09ACB /* eobj.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E3A519178A33004E1370 /* eobj.h */; };
 		8FAC0C61196985A400E09ACB /* d_ugen.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39219178A33004E1370 /* d_ugen.h */; };
 		8FAC0C62196985A400E09ACB /* epd_max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E3AB19178A33004E1370 /* epd_max.h */; };
@@ -283,7 +278,6 @@
 		8FAC0C84196985A400E09ACB /* Recomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2ED191789BD004E1370 /* Recomposer.h */; };
 		8FAC0C85196985A400E09ACB /* hoa.pd_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F189F3218EB0DBE00348D89 /* hoa.pd_commonsyms.h */; };
 		8FAC0C86196985A400E09ACB /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2E9191789BD004E1370 /* Planewaves.h */; };
-		8FAC0C87196985A400E09ACB /* m_imp.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E39719178A33004E1370 /* m_imp.h */; };
 		8FAC0C88196985A400E09ACB /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E308191789BE004E1370 /* Hoa3D.h */; };
 		8FAC0C89196985A400E09ACB /* Kits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2E1191789BD004E1370 /* Kits.h */; };
 		8FAC0C8A196985A400E09ACB /* Hoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F27E2C2191789BD004E1370 /* Hoa.h */; };
@@ -405,9 +399,6 @@
 		8F27E39319178A33004E1370 /* eboxflag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eboxflag.h; sourceTree = "<group>"; };
 		8F27E39419178A33004E1370 /* ecommon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ecommon.c; sourceTree = "<group>"; };
 		8F27E39519178A33004E1370 /* ecommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecommon.h; sourceTree = "<group>"; };
-		8F27E39619178A33004E1370 /* g_canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = g_canvas.h; sourceTree = "<group>"; };
-		8F27E39719178A33004E1370 /* m_imp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_imp.h; sourceTree = "<group>"; };
-		8F27E39819178A33004E1370 /* m_pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
 		8F27E39E19178A33004E1370 /* egraphics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egraphics.c; sourceTree = "<group>"; };
 		8F27E39F19178A33004E1370 /* egraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = egraphics.h; sourceTree = "<group>"; };
 		8F27E3A019178A33004E1370 /* egraphics_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egraphics_color.c; sourceTree = "<group>"; };
@@ -438,7 +429,7 @@
 		8F794EE7192A60B20006491F /* SourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesGroup.h; sourceTree = "<group>"; };
 		8F794EE8192A60B20006491F /* SourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SourcesManager.cpp; sourceTree = "<group>"; };
 		8F794EE9192A60B20006491F /* SourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesManager.h; sourceTree = "<group>"; };
-		8FAC0C91196985A400E09ACB /* hoa.library copy.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "hoa.library copy.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FAC0C91196985A400E09ACB /* hoa.library.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = hoa.library.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FC4E1EF1957FDDC0098DCD3 /* hoa.map_gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.map_gui.cpp; sourceTree = "<group>"; };
 		8FD0878B193F119E00213B8D /* hoa.3d.scope_gui_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.3d.scope_gui_tilde.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -484,7 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				5913846F15DAA36D0029AD16 /* hoa.library.pd_darwin */,
-				8FAC0C91196985A400E09ACB /* hoa.library copy.pd_darwin */,
+				8FAC0C91196985A400E09ACB /* hoa.library.pd_darwin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -666,9 +657,6 @@
 				8F27E39319178A33004E1370 /* eboxflag.h */,
 				8F27E39419178A33004E1370 /* ecommon.c */,
 				8F27E39519178A33004E1370 /* ecommon.h */,
-				8F27E39619178A33004E1370 /* g_canvas.h */,
-				8F27E39719178A33004E1370 /* m_imp.h */,
-				8F27E39819178A33004E1370 /* m_pd.h */,
 			);
 			path = ecommon;
 			sourceTree = "<group>";
@@ -746,11 +734,9 @@
 				8F27E350191789BE004E1370 /* Scope.h in Headers */,
 				8F794EEB192A60B20006491F /* Source.h in Headers */,
 				8F27E336191789BE004E1370 /* Ambisonic.h in Headers */,
-				8F27E3C519178A33004E1370 /* g_canvas.h in Headers */,
 				8F27E34A191789BE004E1370 /* Projector.h in Headers */,
 				8F27E37C191789BE004E1370 /* HoaDefs.h in Headers */,
 				8F27E360191789BE004E1370 /* Ambisonic_3D.h in Headers */,
-				8F27E3C719178A33004E1370 /* m_pd.h in Headers */,
 				8F27E3D019178A33004E1370 /* eobj.h in Headers */,
 				8F27E3C119178A33004E1370 /* d_ugen.h in Headers */,
 				8F27E3D619178A33004E1370 /* epd_max.h in Headers */,
@@ -790,7 +776,6 @@
 				8F27E34C191789BE004E1370 /* Recomposer.h in Headers */,
 				8F189F3518EB0DBE00348D89 /* hoa.pd_commonsyms.h in Headers */,
 				8F27E348191789BE004E1370 /* Planewaves.h in Headers */,
-				8F27E3C619178A33004E1370 /* m_imp.h in Headers */,
 				8F27E366191789BE004E1370 /* Hoa3D.h in Headers */,
 				8F27E340191789BE004E1370 /* Kits.h in Headers */,
 				8F27E322191789BE004E1370 /* Hoa.h in Headers */,
@@ -808,11 +793,9 @@
 				8FAC0C58196985A400E09ACB /* Scope.h in Headers */,
 				8FAC0C59196985A400E09ACB /* Source.h in Headers */,
 				8FAC0C5A196985A400E09ACB /* Ambisonic.h in Headers */,
-				8FAC0C5B196985A400E09ACB /* g_canvas.h in Headers */,
 				8FAC0C5C196985A400E09ACB /* Projector.h in Headers */,
 				8FAC0C5D196985A400E09ACB /* HoaDefs.h in Headers */,
 				8FAC0C5E196985A400E09ACB /* Ambisonic_3D.h in Headers */,
-				8FAC0C5F196985A400E09ACB /* m_pd.h in Headers */,
 				8FAC0C60196985A400E09ACB /* eobj.h in Headers */,
 				8FAC0C61196985A400E09ACB /* d_ugen.h in Headers */,
 				8FAC0C62196985A400E09ACB /* epd_max.h in Headers */,
@@ -852,7 +835,6 @@
 				8FAC0C84196985A400E09ACB /* Recomposer.h in Headers */,
 				8FAC0C85196985A400E09ACB /* hoa.pd_commonsyms.h in Headers */,
 				8FAC0C86196985A400E09ACB /* Planewaves.h in Headers */,
-				8FAC0C87196985A400E09ACB /* m_imp.h in Headers */,
 				8FAC0C88196985A400E09ACB /* Hoa3D.h in Headers */,
 				8FAC0C89196985A400E09ACB /* Kits.h in Headers */,
 				8FAC0C8A196985A400E09ACB /* Hoa.h in Headers */,
@@ -897,7 +879,7 @@
 			);
 			name = hoa.library_extented;
 			productName = pd1;
-			productReference = 8FAC0C91196985A400E09ACB /* hoa.library copy.pd_darwin */;
+			productReference = 8FAC0C91196985A400E09ACB /* hoa.library.pd_darwin */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -1162,7 +1144,7 @@
 				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = PD_DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"<Multiple",
@@ -1192,7 +1174,7 @@
 				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = PD_DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = PD_EXTENTED;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"<Multiple",
@@ -1200,14 +1182,14 @@
 					"/usr/local/include/voro++",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
-				INSTALL_PATH = $SRCROOT/Package/HoaLibrary;
+				INSTALL_PATH = "$SRCROOT/Package/HoaLibrary/pd-extented";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
 				);
 				PRELINK_LIBS = "";
-				PRODUCT_NAME = "hoa.library copy";
+				PRODUCT_NAME = hoa.library;
 				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include";
 			};
 			name = Release;
