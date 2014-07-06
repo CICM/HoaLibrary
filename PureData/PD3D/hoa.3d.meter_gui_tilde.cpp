@@ -454,18 +454,19 @@ t_pd_err offset_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
     {
         double ax, ay, az;
         if(atom_gettype(argv) == A_FLOAT)
-            ax = atom_getfloat(argv);
+            ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
             ax = x->f_meter->getChannelsRotationX();
         if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
-            ay = atom_getfloat(argv+1);
+            ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
             ay = x->f_meter->getChannelsRotationX();
         if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
-            az = atom_getfloat(argv+2);
+            az = atom_getfloat(argv+2) / 360. * HOA_2PI;
         else
             az = x->f_meter->getChannelsRotationX();
         x->f_meter->setChannelsRotation(ax, ay, az);
+        x->f_vector->setChannelsRotation(ax, ay, az);
     }
     
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_3d_background_layer);

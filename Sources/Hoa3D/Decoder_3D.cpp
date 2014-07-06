@@ -14,26 +14,15 @@ namespace Hoa3D
         m_decoder_matrix            = new double[m_number_of_channels * m_number_of_harmonics];
         m_decoder_matrix_float      = new float[m_number_of_channels * m_number_of_harmonics];
         m_encoder                   = new Encoder(m_order);
-        setChannelsOffset(0., 0);
+        setChannelsPosition(m_channels_azimuth, m_channels_elevation);
 	}
-    
-    void DecoderStandard::setChannelsOffset(double azimuth, double elevation)
-    {
-        m_azimuth_offset = wrap_twopi(azimuth);
-        m_elevation_offset = wrap_twopi(elevation);
-        for(unsigned int i = 0; i < m_number_of_channels; i++)
-        {
-            setChannelPosition(i, m_channels_azimuth[i], m_channels_elevation[i]);
-        }
-        
-    }
 	
 	void DecoderStandard::setChannelPosition(unsigned int index, double azimuth, double elevation)
 	{
         Planewaves::setChannelPosition(index, azimuth, elevation);
         
-        m_encoder->setAzimuth(m_channels_azimuth[index] + m_azimuth_offset);
-        m_encoder->setElevation(m_channels_elevation[index] + m_elevation_offset);
+        m_encoder->setAzimuth(m_channels_rotated_azimuth[index]);
+        m_encoder->setElevation(m_channels_rotated_elevation[index]);
         m_encoder->process(12.5 / (double)((m_order+1.)*(m_order+1.)), m_harmonics_vector);
         
         for(unsigned int j = 0; j < m_number_of_harmonics; j++)
@@ -41,6 +30,18 @@ namespace Hoa3D
             m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j] * m_encoder->getNormalization(j) * m_encoder->getNormalization(j);
         }
 	}
+    
+    void DecoderStandard::setChannelsPosition(double* azimuths, double* elevations)
+	{
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
+            setChannelPosition(i, azimuths[i], elevations[i]);
+	}
+    
+    void DecoderStandard::setChannelsRotation(double axis_x, double axis_y, double axis_z)
+    {
+        Planewaves::setChannelsRotation(axis_x, axis_y, axis_z);
+        setChannelsPosition(m_channels_azimuth, m_channels_elevation);
+    }
 	
 	void DecoderStandard::process(const float* input, float* output)
 	{
@@ -140,6 +141,11 @@ namespace Hoa3D
         // Other
         m_channels_azimuth[0] = HOA_PI2;
         m_channels_azimuth[1] = HOA_PI + HOA_PI2;
+    }
+    
+    void DecoderBinaural::setChannelsRotation(double axis_x, double axis_y, double axis_z)
+    {
+        Planewaves::setChannelsRotation(axis_x, axis_y, axis_z);
     }
     
     void DecoderBinaural::setPinnaSize(PinnaSize pinnaSize)
@@ -389,14 +395,14 @@ namespace Hoa3D
     // Decoder Multi //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    DecoderMulti::DecoderMulti(unsigned int order) : Ambisonic(order), Planewaves(order * 2 + 2)
+    DecoderMulti::DecoderMulti(unsigned int order) : Ambisonic(order)
     {
         m_mode = Standard;
         m_decoder_regular   = new DecoderStandard(m_order, (m_order + 1) * (m_order + 1));
         m_decoder_binaural  = new DecoderBinaural(m_order);
     }
 	
-	DecoderMulti::DecoderMulti(unsigned int order, unsigned int numberOfChannels) : Ambisonic(order), Planewaves(order * 2 + 2)
+	DecoderMulti::DecoderMulti(unsigned int order, unsigned int numberOfChannels) : Ambisonic(order)
     {
         m_mode = Standard;
         m_decoder_regular   = new DecoderStandard(m_order, numberOfChannels);
@@ -420,20 +426,26 @@ namespace Hoa3D
         }
     }
     
-    void DecoderMulti::setChannelsOffset(double azimuth, double elevation)
-    {
-        if(m_mode == Standard)
-        {
-            m_decoder_regular->setChannelsOffset(azimuth, elevation);
-        }
-    }
-    
     void DecoderMulti::setChannelPosition(unsigned int index, double azimuth, double elevation)
     {
         if(m_mode == Standard)
         {
             m_decoder_regular->setChannelPosition(index, azimuth, elevation);
         }
+    }
+    
+    void DecoderMulti::setChannelsPosition(double* azimuths, double* elevations)
+    {
+        if(m_mode == Standard)
+        {
+            m_decoder_regular->setChannelsPosition(azimuths, elevations);
+        }
+    }
+    
+    void DecoderMulti::setChannelsRotation(double axis_x, double axis_y, double axis_z)
+    {
+        m_decoder_regular->setChannelsRotation(axis_x, axis_y, axis_z);
+        m_decoder_binaural->setChannelsRotation(axis_x, axis_y, axis_z);
     }
     
     void DecoderMulti::setPinnaSize(DecoderBinaural::PinnaSize pinnaSize)

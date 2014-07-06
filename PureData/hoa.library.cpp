@@ -10,7 +10,6 @@
 
 extern "C" void setup_hoa0x2elibrary(void)
 {
-    //
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
@@ -50,7 +49,11 @@ extern "C" void setup_hoa0x2elibrary(void)
 
     post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
     post("© 2012 - 2014  CICM | Paris 8 University");
-    post("Version Beta 2.0");
+#ifdef PD_EXTENTED
+    post("Version Beta 2.0 for Pd-Extented");
+#else
+    post("Version Beta 2.0 for Pd-Vanilla");
+#endif
 
     pd_library_add_folder("HoaLibrary", "patchers");
     pd_library_add_folder("HoaLibrary", "clippings");

@@ -5,7 +5,7 @@
  */
 
 #include "Hoa3D.pd.h"
-
+#include <stdlib.h>
 // TODO
 
 class MapPolarLines3D
@@ -94,10 +94,6 @@ void hoa_map_3D_tilde_perform(t_hoa_map_3D_tilde *x, t_object *dsp64, float **in
 
 void hoa_map_3D_tilde_perform_multisources(t_hoa_map_3D_tilde *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-
-
-
-
 t_pd_err ramp_set(t_hoa_map_3D_tilde *x, t_object *attr, long argc, t_atom *argv);
 
 t_hoa_err hoa_getinfos(t_hoa_map_3D_tilde* x, t_hoa_boxinfos* boxinfos);
@@ -163,6 +159,7 @@ void *hoa_map_3D_tilde_new(t_symbol *s, long argc, t_atom *argv)
         {
             x->f_lines->setRadiusDirect(i, 1);
             x->f_lines->setAzimuthDirect(i, 0.);
+            x->f_lines->setElevationDirect(i, 0.);
         }
         
 		if(x->f_map->getNumberOfSources() == 1)

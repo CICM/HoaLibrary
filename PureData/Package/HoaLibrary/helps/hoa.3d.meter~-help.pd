@@ -21,22 +21,20 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
 #X obj -535 -1059 hoa.tri~ 0.05 -0.5 0.5;
 #X obj -714 -1059 phasor~ 0.5;
-#X obj -472 -776 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -225 -985 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max 64 @minmax 1 64 @decimal 0 @bgcolor 0.75 0.75 0.75
 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg -472 -743 channels \$1;
-#X text -367 -837 Offset of;
-#X text -367 -827 channels;
-#X text -248 -797 channels;
-#X text -248 -807 Rotation of;
-#X msg -245 -743 rotation \$1;
-#X obj -245 -777 c.menu @size 100 17 @fontname Helvetica @fontweight
+#X msg -225 -952 channels \$1;
+#X text -128 -1006 channels;
+#X text -128 -1016 Rotation of;
+#X msg -125 -952 rotation \$1;
+#X obj -125 -986 c.menu @size 100 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items Anti-Clockwise Clockwise @states 0 0 @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X text -468 -797 channels;
-#X text -468 -807 Number of;
+#X text -221 -1006 channels;
+#X text -221 -1016 Number of;
 #X obj -343 -985 c.menu @size 100 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items none energy velocity both @states 0 0 0 0 @bgcolor
@@ -44,16 +42,14 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X msg -343 -951 vectors \$1;
 #X text -326 -1015 Vectors to;
 #X text -326 -1005 display;
-#X text -285 -711 Angles;
-#X obj -365 -705 s hoameter3d;
-#X obj -342 -903 s hoameter3d;
+#X obj -185 -904 s hoameter3d;
 #X obj -892 -893 hoa.3d.meter~ @size 363 181.5 @fontname Helvetica
 @fontweight normal @fontslant roman @fontsize 11 @receive hoameter3d
 @send (null) @channels 20 @angles 180 69.0948 159.095 -0 90 20.9052
 135 35.2644 135 -35.2644 180 -69.0948 20.9052 -0 90 -20.9052 45 35.2644
 45 -35.2644 0 69.0948 200.905 -0 270 20.9052 225 35.2644 225 -35.2644
 0 -69.0948 339.095 -0 270 -20.9052 315 35.2644 315 -35.2644 @offset
-58.3101 0 0 @rotation anti-clockwise @view top-bottom @vectors velocity
+60 0 180 @rotation anti-clockwise @view top-bottom @vectors velocity
 @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor
 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
@@ -64,109 +60,119 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 ;
 #X obj -892 -932 hoa.3d.decoder~ 3 ambisonic 20 -----------------------------
 ;
-#X obj -472 -833 c.loadmess 20;
-#X msg -212 -1075 angles 180 69.0948 159.095 -0 90 20.9052 135 35.2644
-135 -35.2644 180 -69.0948 20.9052 -0 90 -20.9052 45 35.2644 45 -35.2644
-0 69.0948 200.905 -0 270 20.9052 225 35.2644 225 -35.2644 0 -69.0948
-339.095 -0 270 -20.9052 315 35.2644 315 -35.2644;
-#X msg -186 -994 angles 0 0 72 6 144 12 216 18 288 24 0 30 72 36 144
-42 216 48 288 54 0 60 72 66 144 72 216 78 288 84 0 90 60 -33 180 -33
--60 -33;
+#X obj -225 -1042 c.loadmess 20;
 #X obj -514 -962 r hoadec3d;
-#X obj -182 -907 s hoadec3d;
-#X obj -111 -777 c.menu @size 100 17 @fontname Helvetica @fontweight
+#X obj -1 -986 c.menu @size 100 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @hover 0 @items top bottom top-bottom top/bottom @states 0 0
 0 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0
 0 1;
-#X msg -111 -743 view \$1;
-#X obj -111 -817 c.loadmess set 2;
+#X msg -1 -952 view \$1;
+#X obj -1 -1042 c.loadmess set 2;
 #X text -907 -1133 hoa.2d.meter~ displays the peak levels for a spherical
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
-#X obj -343 -1031 c.loadmess set 1;
-#X msg -365 -743 offset \$1 \$2 \$3;
-#X msg -365 -796 0 0 0;
-#X msg -345 -774 45 0 0;
+#X obj -343 -1042 c.loadmess set 1;
+#X text -417 -857 Offset of;
+#X text -417 -847 channels;
+#X msg -415 -733 offset \$1 \$2 \$3;
+#X msg -415 -786 0 0 0;
+#X msg -395 -764 60 0 180;
+#X msg -212 -825 angles 180 69.0948 159.095 -0 90 20.9052 135 35.2644
+135 -35.2644 180 -69.0948 20.9052 -0 90 -20.9052 45 35.2644 45 -35.2644
+0 69.0948 200.905 -0 270 20.9052 225 35.2644 225 -35.2644 0 -69.0948
+339.095 -0 270 -20.9052 315 35.2644 315 -35.2644;
+#X msg -186 -744 angles 0 0 72 6 144 12 216 18 288 24 0 30 72 36 144
+42 216 48 288 54 0 60 72 66 144 72 216 78 288 84 0 90 60 -33 180 -33
+-60 -33;
+#X obj -212 -655 s hoadec3d;
+#X obj -309 -655 s hoameter3d;
+#X text -417 -837 (Rotation around;
+#X text -417 -827 xyz axes);
+#X text -206 -847 channels;
+#X text -206 -857 Angles of;
+#X text 4 -1017 View;
+#X obj -351 -521 hoa.help.pub;
 #X connect 0 0 5 0;
 #X connect 1 0 3 0;
 #X connect 2 0 1 0;
-#X connect 8 0 33 1;
-#X connect 9 0 33 2;
+#X connect 8 0 29 1;
+#X connect 9 0 29 2;
 #X connect 10 0 14 0;
-#X connect 11 0 33 0;
+#X connect 11 0 29 0;
 #X connect 12 0 13 0;
 #X connect 13 0 9 1;
 #X connect 14 0 8 1;
 #X connect 15 0 16 0;
-#X connect 16 0 30 0;
-#X connect 21 0 30 0;
-#X connect 22 0 21 0;
-#X connect 25 0 26 0;
-#X connect 26 0 31 0;
-#X connect 33 0 34 0;
-#X connect 33 1 34 1;
-#X connect 33 2 34 2;
-#X connect 33 3 34 3;
-#X connect 33 4 34 4;
-#X connect 33 5 34 5;
-#X connect 33 6 34 6;
-#X connect 33 7 34 7;
-#X connect 33 8 34 8;
-#X connect 33 9 34 9;
-#X connect 33 10 34 10;
-#X connect 33 11 34 11;
-#X connect 33 12 34 12;
-#X connect 33 13 34 13;
-#X connect 33 14 34 14;
-#X connect 33 15 34 15;
+#X connect 16 0 27 0;
+#X connect 19 0 27 0;
+#X connect 20 0 19 0;
+#X connect 23 0 24 0;
+#X connect 24 0 27 0;
+#X connect 29 0 30 0;
+#X connect 29 1 30 1;
+#X connect 29 2 30 2;
+#X connect 29 3 30 3;
+#X connect 29 4 30 4;
+#X connect 29 5 30 5;
+#X connect 29 6 30 6;
+#X connect 29 7 30 7;
+#X connect 29 8 30 8;
+#X connect 29 9 30 9;
+#X connect 29 10 30 10;
+#X connect 29 11 30 11;
+#X connect 29 12 30 12;
+#X connect 29 13 30 13;
+#X connect 29 14 30 14;
+#X connect 29 15 30 15;
+#X connect 30 0 31 0;
+#X connect 30 1 31 1;
+#X connect 30 2 31 2;
+#X connect 30 3 31 3;
+#X connect 30 4 31 4;
+#X connect 30 5 31 5;
+#X connect 30 6 31 6;
+#X connect 30 7 31 7;
+#X connect 30 8 31 8;
+#X connect 30 9 31 9;
+#X connect 30 10 31 10;
+#X connect 30 11 31 11;
+#X connect 30 12 31 12;
+#X connect 30 13 31 13;
+#X connect 30 14 31 14;
+#X connect 30 15 31 15;
+#X connect 31 0 28 0;
+#X connect 31 1 28 1;
+#X connect 31 2 28 2;
+#X connect 31 3 28 3;
+#X connect 31 4 28 4;
+#X connect 31 5 28 5;
+#X connect 31 6 28 6;
+#X connect 31 7 28 7;
+#X connect 31 8 28 8;
+#X connect 31 9 28 9;
+#X connect 31 10 28 10;
+#X connect 31 11 28 11;
+#X connect 31 12 28 12;
+#X connect 31 13 28 13;
+#X connect 31 14 28 14;
+#X connect 31 15 28 15;
+#X connect 31 16 28 16;
+#X connect 31 17 28 17;
+#X connect 31 18 28 18;
+#X connect 31 19 28 19;
+#X connect 32 0 15 0;
+#X connect 33 0 31 15;
 #X connect 34 0 35 0;
-#X connect 34 1 35 1;
-#X connect 34 2 35 2;
-#X connect 34 3 35 3;
-#X connect 34 4 35 4;
-#X connect 34 5 35 5;
-#X connect 34 6 35 6;
-#X connect 34 7 35 7;
-#X connect 34 8 35 8;
-#X connect 34 9 35 9;
-#X connect 34 10 35 10;
-#X connect 34 11 35 11;
-#X connect 34 12 35 12;
-#X connect 34 13 35 13;
-#X connect 34 14 35 14;
-#X connect 34 15 35 15;
-#X connect 35 0 32 0;
-#X connect 35 1 32 1;
-#X connect 35 2 32 2;
-#X connect 35 3 32 3;
-#X connect 35 4 32 4;
-#X connect 35 5 32 5;
-#X connect 35 6 32 6;
-#X connect 35 7 32 7;
-#X connect 35 8 32 8;
-#X connect 35 9 32 9;
-#X connect 35 10 32 10;
-#X connect 35 11 32 11;
-#X connect 35 12 32 12;
-#X connect 35 13 32 13;
-#X connect 35 14 32 14;
-#X connect 35 15 32 15;
-#X connect 35 16 32 16;
-#X connect 35 17 32 17;
-#X connect 35 18 32 18;
-#X connect 35 19 32 19;
-#X connect 36 0 15 0;
-#X connect 37 0 31 0;
-#X connect 37 0 40 0;
-#X connect 38 0 31 0;
-#X connect 38 0 40 0;
-#X connect 39 0 35 15;
-#X connect 41 0 42 0;
-#X connect 42 0 30 0;
+#X connect 35 0 27 0;
+#X connect 36 0 34 0;
+#X connect 38 0 23 0;
+#X connect 41 0 47 0;
+#X connect 41 0 46 0;
+#X connect 42 0 41 0;
 #X connect 43 0 41 0;
-#X connect 45 0 25 0;
-#X connect 46 0 30 0;
-#X connect 47 0 46 0;
-#X connect 48 0 46 0;
+#X connect 44 0 46 0;
+#X connect 44 0 47 0;
+#X connect 45 0 46 0;
+#X connect 45 0 47 0;
 #X coords 0 763 1 762 100 60 0;

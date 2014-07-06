@@ -75,11 +75,19 @@ namespace Hoa3D
         double y = getChannelOrdinate(index);
         double z = getChannelHeight(index);
         
+        // Rotation around x
+        double cosAngle = cos(m_channels_rotation_x);
+        double sinAngle = sin(m_channels_rotation_x);
+        double ry = y * cosAngle - z * sinAngle;
+        double rz = y * sinAngle + z * cosAngle;
+        y = ry;
+        z = rz;
+        
         // Rotation around z
-        double cosAngle = cos(m_channels_rotation_z);
-        double sinAngle = sin(m_channels_rotation_z);
+        cosAngle = cos(m_channels_rotation_z);
+        sinAngle = sin(m_channels_rotation_z);
         double rx = x * cosAngle - y * sinAngle;
-        double ry = x * sinAngle + y * cosAngle;
+        ry = x * sinAngle + y * cosAngle;
         x = rx;
         y = ry;
         
@@ -87,16 +95,8 @@ namespace Hoa3D
         cosAngle = cos(m_channels_rotation_y);
         sinAngle = sin(m_channels_rotation_y);
         rx = x * cosAngle - z * sinAngle;
-        double rz = x * sinAngle + z * cosAngle;
+        rz = x * sinAngle + z * cosAngle;
         x = rx;
-        z = rz;
-        
-        // Rotation around x
-        cosAngle = cos(m_channels_rotation_x);
-        sinAngle = sin(m_channels_rotation_x);
-        ry = y * cosAngle - z * sinAngle;
-        rz = y * sinAngle + z * cosAngle;
-        y = ry;
         z = rz;
         
         m_channels_rotated_azimuth[index] = azimuth(x, y, z);
