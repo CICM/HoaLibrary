@@ -1,6 +1,6 @@
 #N canvas 263 63 1195 625 10;
-#X msg -348 -393 \; pd dsp 1;
-#X msg -348 -358 \; pd dsp 0;
+#X msg 263 -880 \; pd dsp 1;
+#X msg 263 -845 \; pd dsp 0;
 #X obj 261 -684 c.number~ @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
 50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
@@ -133,18 +133,17 @@ orders and amplitude variation to simulate sources distances. First
 argument is the order \, second argument is the number of sources and
 third argument (facultative) is the coordinates mode (polar or pol
 / cartesian or car).;
-#X obj 319 -864 hoa.map~;
 #X text 390 -839 With one source \, you can drive it with signals.
 Set the mode polar (or pol or 0) to use polar coordinates (radius \,
 azimuth and elevation) and cartesian (or car or 1) to use cartesian
 coordinates (abscissa \, ordinate and height).;
-#X text -273 -398 hoa.map~'s syntax;
-#X text -273 -388 for multisource mode :;
-#X text -273 -378 index;
-#X text -273 -368 coordinate type (polar or cartesian);
-#X text -273 -358 coordinate one (radius or abscissa);
-#X text -273 -348 coordinate two (azimuth or ordinate);
-#X text -273 -338 coordinate three (elevation or height).;
+#X text -333 -398 hoa.map~'s syntax;
+#X text -333 -388 for multisource mode :;
+#X text -333 -378 index;
+#X text -333 -368 coordinate type (polar or cartesian);
+#X text -333 -358 coordinate one (radius or abscissa);
+#X text -333 -348 coordinate two (azimuth or ordinate);
+#X text -333 -338 coordinate three (elevation or height).;
 #X connect 4 0 3 0;
 #X connect 5 0 2 0;
 #X connect 5 0 55 2;

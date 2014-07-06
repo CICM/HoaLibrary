@@ -1,28 +1,25 @@
-#N canvas 238 102 837 726 10;
-#X text -342 -185 Mousewheel and alt to change the zoom.;
-#X obj -649 -304 hoa.map @size 225 225 @fontname Helvetica @fontweight
+#N canvas 327 79 730 709 10;
+#X text -342 -202 Mousewheel and alt to change the zoom.;
+#X obj -649 -371 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 hoamapexample @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view
-0 @outputmode polar @output3d 0 @zoom 0.4;
-#X obj -649 -328 c.loadmess;
-#X msg -237 97 \; pd dsp 1;
-#X msg -237 132 \; pd dsp 0;
-#X text -699 -431 hoa.2d.map allows you to spatialize several sources
-on a plane. You can add and remove sources \, change coordinates \,
-add description and create groups., f 90;
-#X obj -120 -437 hoa.connect;
-#X obj -120 -462 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+0 @outputmode polar @output3d 0 @zoom 0.4 @mapname (null);
+#X obj -649 -395 c.loadmess;
+#X msg -108 44 \; pd dsp 1;
+#X msg -108 79 \; pd dsp 0;
+#X obj -120 -454 hoa.connect;
+#X obj -120 -479 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -649 -53 c.loadmess 1;
-#X text -343 -328 To create source \, right-click or click with cmd
+#X obj -649 -120 c.loadmess 1;
+#X text -343 -345 To create source \, right-click or click with cmd
 on a "free" zone then select "Add source" in the popup menu. To remove
 source \, idem and select "Remove source".;
-#X text -342 -274 To create group \, drag select a set of sources \,
+#X text -342 -291 To create group \, drag select a set of sources \,
 when mouse up the group will be created. To remove group \, right-click
 or click with cmd on group then select "Remove group".;
-#X text -344 -223 To mute source or group \, right-click or click with
+#X text -344 -240 To mute source or group \, right-click or click with
 cmd on it and select "Mute" or "Unmute".;
-#X obj -649 2 hoa.2d.map~ 3 4 -------------------------;
+#X obj -649 -65 hoa.2d.map~ 3 4 -------------------------;
 #N canvas 284 119 577 458 hoa.rhythm 0;
 #X msg 231 -105 0;
 #X obj 158 21 *~ 0;
@@ -135,18 +132,9 @@ cmd on it and select "Mute" or "Unmute".;
 #X connect 41 0 1 1;
 #X connect 42 0 18 1;
 #X connect 47 0 34 0;
-#X restore -649 -30 pd hoa.rhythm ---------------------------;
-#X msg -364 40 roomsize \$1;
-#X obj -364 8 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -273 9 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -649 37 hoa.2d.optim~ 3 inPhase -----------------;
-#N canvas 216 150 1155 646 messages 1;
+#X restore -649 -97 pd hoa.rhythm ---------------------------;
+#X obj -649 -30 hoa.2d.optim~ 3 inPhase -----------------;
+#N canvas 216 150 1155 646 messages 0;
 #X msg -532 -122 zoom \$1;
 #X text -545 -173 Set the zoom;
 #X obj -110 13 send map_mes;
@@ -215,7 +203,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -532 -68 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 @presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@view 0 @outputmode polar @output3d 0 @zoom 0.35;
+@view 0 @outputmode polar @output3d 0 @zoom 0.35 @mapname (null);
 #X text -346 -146 Clear all;
 #X msg -210 -83 source 1 pol 1 3.14;
 #X msg -64 -83 source 2 abscissa 2.5;
@@ -252,8 +240,8 @@ normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 #X connect 39 0 9 0;
 #X connect 40 0 9 0;
 #X connect 42 0 41 0;
-#X restore -339 -149 pd messages;
-#N canvas 161 119 804 672 outputs 0;
+#X restore -339 -166 pd messages;
+#N canvas 386 120 804 672 outputs 1;
 #X obj -504 -5 send map_outs_sources;
 #X obj -395 -32 send map_outs_groups;
 #X msg -382 -326 getinfo;
@@ -264,8 +252,8 @@ normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
 #X obj -285 22 route list;
 #X obj -504 -287 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view 0 @outputmode
-polar @output3d 0 @zoom 0.35;
+hoamapex3 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view 0
+@outputmode polar @output3d 0 @zoom 0.35 @mapname (null);
 #X obj -504 -328 c.bang @size 17 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
@@ -294,14 +282,14 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
 #X obj 55 -303 c.prepend set;
-#X msg 55 -271 cartesian 2.08808 -0.565355;
+#X msg 55 -271 cartesian -1.10476 -1.25714;
 #X obj -2 -333 route mute;
 #X obj -2 -271 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
 #X obj 51 -52 c.prepend set;
-#X msg 51 -20 cartesian 0.938703 0.76803;
+#X msg 51 -20 cartesian -1.20635 0.152381;
 #X obj -6 -82 route mute;
 #X obj -6 -20 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
@@ -312,6 +300,16 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -233 99 print group;
 #X obj -285 74 print source;
 #X obj -285 48 route source group;
+#X obj -117 -329 c.preset @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 10 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
+0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
+[ @index 0 @hoamapex3 hoa.map sources_preset source 0 -1.10476 -1.25714
+0 1 0.2 0.2 0.2 1 (null) source 1 -1.30794 1.5619 0 1 0.2 0.2 0.2 1
+(null) source 2 2.04444 -0.571429 0 0 0.2 0.2 0.2 1 (null) group 0
+2 0 1 0.2 0.2 0.2 1 (null) group 1 3 0 1 2 0.2 0.2 0.2 1 (null) ];
+#X obj -117 -371 c.loadmess 1;
+#X obj -117 -351 pipe 200;
 #X connect 2 0 8 0;
 #X connect 3 0 5 0;
 #X connect 5 0 23 0;
@@ -340,65 +338,68 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 33 1 31 0;
 #X connect 37 0 36 0;
 #X connect 37 1 35 0;
-#X restore -338 -101 pd outputs;
-#X obj -132 46 c.preset @size 102 41 @fontname Helvetica @fontweight
+#X connect 39 0 40 0;
+#X connect 40 0 38 0;
+#X restore -338 -118 pd outputs;
+#X obj -242 69 c.preset @size 102 41 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
 0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
-[ @index 0 @hoamapexample hoa.2d.map sources_preset source 0 1.28105
-0.96732 0 0.2 0.2 0.2 1 Click source 1 1.54248 -1.38562 0 0.2 0.2 0.2
-1 Crack source 2 -1.43791 0.96732 0 0.2 0.2 0.2 1 Boom source 3 -1.43791
--1.22876 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null)
-@index 1 @hoamapexample hoa.2d.map sources_preset source 0 0.592396
--1.49193 0 0.2 0.2 0.2 1 Click source 1 -1.74549 -1.11914 0 0.2 0.2
-0.2 1 Crack source 2 1.31444 1.1294 0 0.2 0.2 0.2 1 Boom source 3 -0.80279
-1.71259 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null) @index
-2 @hoamapexample hoa.2d.map sources_preset source 0 -3.82857e-16 4.68864e-32
-0 0.2 0.2 0.2 1 Click source 1 1.91568 1.13915 0 0.2 0.2 0.2 1 Crack
-source 2 0.701111 -1.2832 0 0.2 0.2 0.2 1 Boom source 3 2.48809 -1.08371
-0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null) @index 3 @hoamapexample
-hoa.2d.map sources_preset source 0 -1.88922 0.0884151 0 0.2 0.2 0.2
-1 Click source 1 0.524538 2.92393 0 0.2 0.2 0.2 1 Crack source 2 0.733692
--1.74169 0 0.2 0.2 0.2 1 Boom source 3 2.86765 0.277803 0 0.2 0.2 0.2
-1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 4 @hoamapexample
-hoa.2d.map sources_preset source 0 1.71429 0.546032 0 0.2 0.2 0.2 1
-Click source 1 0.266667 0.87619 0 0.2 0.2 0.2 1 Crack source 2 0.139683
--1.81587 0 0.2 0.2 0.2 1 Boom source 3 -0.673016 -0.977778 0 0.2 0.2
-0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 5 @hoamapexample
-hoa.2d.map sources_preset source 0 0.368254 0.850794 0 0.2 0.2 0.2
-1 Click source 1 -1.86667 -1.25714 0 0.2 0.2 0.2 1 Crack source 2 -1.28254
-0.342857 0 0.2 0.2 0.2 1 Boom source 3 1.07937 -0.977778 0 0.2 0.2
-0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 6 @hoamapexample
-hoa.2d.map sources_preset source 0 0.901587 1.43492 0 0.2 0.2 0.2 1
-Click source 1 -0.622222 -1.05397 0 0.2 0.2 0.2 1 Crack source 2 1.28254
--0.24127 0 0.2 0.2 0.2 1 Boom source 3 -0.8 0.647619 0 0.2 0.2 0.2
-1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 7 @hoamapexample
-hoa.2d.map sources_preset source 0 2.23608 3.55883 0 0.2 0.2 0.2 1
-Click source 1 -1.89742 -3.21399 0 0.2 0.2 0.2 1 Crack source 2 3.74765
--0.705004 0 0.2 0.2 0.2 1 Boom source 3 -2.7496 2.22587 0 0.2 0.2 0.2
-1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 8 @hoamapexample
-hoa.2d.map sources_preset source 0 -2.23094 -3.56204 0 0.2 0.2 0.2
-1 Click source 1 1.89278 3.21672 0 0.2 0.2 0.2 1 Crack source 2 -3.74866
-0.6996 0 0.2 0.2 0.2 1 Boom source 3 2.75281 -2.2219 0 0.2 0.2 0.2
-1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 9 @hoamapexample
-hoa.2d.map sources_preset source 0 -0.758541 -1.24066 0 0.2 0.2 0.2
-1 Click source 1 0.564858 0.933692 0 0.2 0.2 0.2 1 Crack source 2 -1.03763
-0.203496 0 0.2 0.2 0.2 1 Boom source 3 0.695022 -0.542146 0 0.2 0.2
-0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 10 @hoamapexample
-hoa.2d.map sources_preset source 0 1.28105 0.96732 0 0.2 0.2 0.2 1
-Click source 1 1.54248 -1.38562 0 0.2 0.2 0.2 1 Crack source 2 -1.43791
-0.96732 0 0.2 0.2 0.2 1 Boom source 3 -1.43791 -1.22876 0 0.2 0.2 0.2
-1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null) ];
-#X msg -132 21 inter \$1;
-#X obj -132 -7 c.number @size 53 17 @fontname Helvetica @fontweight
+[ @index 0 @hoamapexample hoa.map sources_preset source 0 1.28105 0.96732
+0 0 0.2 0.2 0.2 1 Click source 1 1.54248 -1.38562 0 0 0.2 0.2 0.2 1
+Crack source 2 -1.43791 0.96732 0 0 0.2 0.2 0.2 1 Boom source 3 -1.43791
+-1.22876 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null)
+@index 1 @hoamapexample hoa.map sources_preset source 0 0.592396 -1.49193
+0 0 0.2 0.2 0.2 1 Click source 1 -1.74549 -1.11914 0 0 0.2 0.2 0.2
+1 Crack source 2 1.31444 1.1294 0 0 0.2 0.2 0.2 1 Boom source 3 -0.80279
+1.71259 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null) @index
+2 @hoamapexample hoa.map sources_preset source 0 -3.82857e-16 4.68864e-32
+0 0 0.2 0.2 0.2 1 Click source 1 1.91568 1.13915 0 0 0.2 0.2 0.2 1
+Crack source 2 0.701111 -1.2832 0 0 0.2 0.2 0.2 1 Boom source 3 2.48809
+-1.08371 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0 0 0 0.2 (null)
+@index 3 @hoamapexample hoa.map sources_preset source 0 -1.88922 0.0884151
+0 0 0.2 0.2 0.2 1 Click source 1 0.524538 2.92393 0 0 0.2 0.2 0.2 1
+Crack source 2 0.733692 -1.74169 0 0 0.2 0.2 0.2 1 Boom source 3 2.86765
+0.277803 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null)
+@index 4 @hoamapexample hoa.map sources_preset source 0 1.71429 0.546032
+0 0 0.2 0.2 0.2 1 Click source 1 0.266667 0.87619 0 0 0.2 0.2 0.2 1
+Crack source 2 0.139683 -1.81587 0 0 0.2 0.2 0.2 1 Boom source 3 -0.673016
+-0.977778 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2 0.2 1 (null)
+@index 5 @hoamapexample hoa.map sources_preset source 0 0.368254 0.850794
+0 0 0.2 0.2 0.2 1 Click source 1 -1.86667 -1.25714 0 0 0.2 0.2 0.2
+1 Crack source 2 -1.28254 0.342857 0 0 0.2 0.2 0.2 1 Boom source 3
+1.07937 -0.977778 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2 3 0.2 0.2
+0.2 1 (null) @index 6 @hoamapexample hoa.map sources_preset source
+0 0.901587 1.43492 0 0 0.2 0.2 0.2 1 Click source 1 -0.622222 -1.05397
+0 0 0.2 0.2 0.2 1 Crack source 2 1.28254 -0.24127 0 0 0.2 0.2 0.2 1
+Boom source 3 -0.8 0.647619 0 0 0.2 0.2 0.2 1 Flam group 0 4 0 1 2
+3 0.2 0.2 0.2 1 (null) @index 7 @hoamapexample hoa.map sources_preset
+source 0 2.23608 3.55883 0 0 0.2 0.2 0.2 1 Click source 1 -1.89742
+-3.21399 0 0 0.2 0.2 0.2 1 Crack source 2 3.74765 -0.705004 0 0 0.2
+0.2 0.2 1 Boom source 3 -2.7496 2.22587 0 0 0.2 0.2 0.2 1 Flam group
+0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 8 @hoamapexample hoa.map sources_preset
+source 0 -2.23094 -3.56204 0 0 0.2 0.2 0.2 1 Click source 1 1.89278
+3.21672 0 0 0.2 0.2 0.2 1 Crack source 2 -3.74866 0.6996 0 0 0.2 0.2
+0.2 1 Boom source 3 2.75281 -2.2219 0 0 0.2 0.2 0.2 1 Flam group 0
+4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 9 @hoamapexample hoa.map sources_preset
+source 0 -0.758541 -1.24066 0 0 0.2 0.2 0.2 1 Click source 1 0.564858
+0.933692 0 0 0.2 0.2 0.2 1 Crack source 2 -1.03763 0.203496 0 0 0.2
+0.2 0.2 1 Boom source 3 0.695022 -0.542146 0 0 0.2 0.2 0.2 1 Flam group
+0 4 0 1 2 3 0.2 0.2 0.2 1 (null) @index 10 @hoamapexample hoa.map sources_preset
+source 0 1.28105 0.96732 0 0 0.2 0.2 0.2 1 Click source 1 1.54248 -1.38562
+0 0 0.2 0.2 0.2 1 Crack source 2 -1.43791 0.96732 0 0 0.2 0.2 0.2 1
+Boom source 3 -1.43791 -1.22876 0 0 0.2 0.2 0.2 1 Flam group 0 4 0
+1 2 3 0.2 0.2 0.2 1 (null) ];
+#X msg -242 44 inter \$1;
+#X obj -242 16 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -3 -70 c.toggle @size 15 15 @fontname Helvetica @fontweight
+#X obj -113 -47 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
-#X obj -68 -70 c.number @size 53 17 @fontname Helvetica @fontweight
+#X obj -178 -47 c.number @size 53 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
@@ -436,10 +437,111 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 13 0 14 0;
 #X connect 13 1 3 0;
 #X connect 14 0 0 0;
-#X restore -132 -39 pd preset_player _____;
-#X text -137 -97 Play;
-#X text -65 -97 Duration;
-#X text -8 -97 Loop;
+#X restore -242 -16 pd preset_player _____;
+#X text -247 -74 Play;
+#X text -175 -74 Duration;
+#X text -118 -74 Loop;
+#X text -342 -182 Control with messages;
+#X text -340 -137 Output informations;
+#X obj -178 -98 c.loadmess 10000;
+#X obj -242 -47 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -690 -475 c.patcherinfos;
+#X obj -685 -492 loadbang;
+#X obj -700 -492 hoa.help.header;
+#X obj -554 153 hoa.help.pub;
+#X obj -284 -492 hoa.help.also;
+#N canvas 125 76 891 554 3D 0;
+#X obj -667 50 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@presetname hoamapex2 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7
+1 @view 0 @outputmode polar @output3d 1 @zoom 0.35 @mapname cicm;
+#X obj -379 50 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view 1 @outputmode
+polar @output3d 1 @zoom 0.35 @mapname cicm;
+#X obj -379 312 c.prepend set;
+#X msg -379 340 4 cartesian 0 0 0;
+#X obj -379 10 c.prepend view;
+#X obj -379 -22 c.menu @size 40 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -88 50 hoa.map @size 225 225 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view 2 @outputmode
+polar @output3d 1 @zoom 0.35 @mapname cicm;
+#X text 19 34 |;
+#X text 19 27 ^;
+#X text 19 16 z;
+#X text -271 34 |;
+#X text -271 27 ^;
+#X text -271 16 z;
+#X text 139 150 _;
+#X text 146 153 >;
+#X text 156 153 y;
+#X text -151 150 _;
+#X text -144 153 >;
+#X text -134 153 x;
+#X text -559 35 |;
+#X text -559 28 ^;
+#X text -439 151 _;
+#X text -432 154 >;
+#X text -422 154 x;
+#X text -559 17 y;
+#X obj -88 15 c.prepend view;
+#X obj -88 -17 c.menu @size 40 17 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -667 11 c.prepend view;
+#X obj -667 -21 c.menu @size 40 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 111 -114 c.preset @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 10 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @emcolor
+0.85 0.85 0.85 1 @stcolor 0.5 0.5 0.5 1 @secolor 0.15 0.15 0.15 1 @preset
+[ @index 0 @hoamapex2 hoa.map sources_preset source 0 -1 1 1 0 0.2
+0.2 0.2 1 (null) source 1 1 1 0 0 0.2 0.2 0.2 1 (null) source 2 -1
+-1 -1 0 0.2 0.2 0.2 1 (null) source 3 0 0 0 0 0.2 0.2 0.2 1 (null)
+group 0 2 0 1 0.2 0.2 0.2 1 (null) ];
+#X obj -667 -51 c.loadmess set 0;
+#X obj -379 -51 c.loadmess set 1;
+#X obj -88 -47 c.loadmess set 2;
+#X text -663 -175 These three hoa.map objects share the same "mapname"
+attribute so they are linked together and react to the changes of each
+others. Thus \, sources and groups position \, description and colors
+modifications will affect all linked hoa.map objects., f 124;
+#X text -669 -120 The "output3d" attribute must be checked to control
+a hoa.3d.map~ object Change the coordinate system to change the point
+of view and interact differently with sources and groups;
+#X obj 111 -156 c.loadmess 1;
+#X obj 111 -136 pipe 200;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
+#X connect 25 0 6 0;
+#X connect 26 0 25 0;
+#X connect 27 0 0 0;
+#X connect 28 0 27 0;
+#X connect 30 0 28 0;
+#X connect 31 0 5 0;
+#X connect 32 0 26 0;
+#X connect 35 0 36 0;
+#X connect 36 0 29 0;
+#X restore -337 -78 pd 3D;
+#X text -340 -94 3D view;
+#X text -344 -397 To move source or group \, click on it and drag it.
+Click and drag with alt to change the radius. Click and drag with shift
+to change the angle.;
+#X text -699 -448 hoa.map allows you to spatialize several sources
+on a plane. You can add and remove sources \, change coordinates \,
+add description and create groups., f 90;
 #N canvas 0 22 450 300 (subpatch) 0;
 #X obj 0 10 inlet~;
 #X obj 50 10 inlet~;
@@ -461,320 +563,48 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X connect 6 0 7 6;
 #X connect 7 0 9 0;
 #X connect 7 1 10 0;
-#X restore -649 126 hoa.binaural~ 3 @block 256 @pinna large -;
-#X obj -649 162 hoa.dac~ 1 2 ----------------------------;
-#X text -342 -165 Control with messages;
-#X text -340 -120 Output informations;
-#X msg -273 41 damp \$1;
-#X obj -649 82 hoa.process~ 3 hoa.fx.freeverb~ harmonics;
-#X obj -213 9 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X msg -213 41 diff \$1;
-#X obj -68 -121 c.loadmess 10000;
-#X obj -132 -70 c.toggle @size 15 15 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
-0.5 0.5 1;
-#X obj -690 -458 c.patcherinfos;
-#X obj -685 -475 loadbang;
-#X obj -700 -475 hoa.help.header;
-#X obj -554 200 hoa.help.pub;
-#X obj -284 -475 hoa.help.also;
-#N canvas 125 76 964 712 3D 1;
-#X obj -667 100 hoa.map @size 225 225 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
-@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@view 0 @outputmode polar @output3d 1 @zoom 0.35;
-#X obj -359 201 hoa.map @size 225 225 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
-@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@view 1 @outputmode polar @output3d 1 @zoom 0.35;
-#X msg 75 136 mapname;
-#X obj -249 15 c.number @size 53 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
-0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -359 472 c.prepend set;
-#X msg -359 500 4 cartesian 0 0 0;
-#X msg -249 42 source 1 azimuth \$1;
-#X obj -478 28 c.prepend output3d;
-#X obj -478 2 c.toggle @size 15 15 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
-0.5 0.5 1;
-#X obj -478 -29 c.loadmess 1;
-#X obj -359 161 c.prepend view;
-#X text -455 -7 Activate output3d;
-#X obj -359 129 c.menu @size 40 17 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -656 346 c.loadmess 1;
-#N canvas 284 119 577 458 hoa.rhythm 0;
-#X msg 231 -105 0;
-#X obj 158 21 *~ 0;
-#X msg 211 -33 0;
-#X obj 204 -105 + 1;
-#X obj 179 -104 f;
-#X obj 8 21 *~ 0;
-#X msg 61 -33 0;
-#X obj 54 -105 + 1;
-#X obj 29 -104 f;
-#X msg 81 -105 0;
-#X obj 29 -82 sel 0 4;
-#X obj 61 -56 delay 3;
-#X obj -112 57 *~ 0;
-#X msg -59 -13 0;
-#X obj -66 -85 + 1;
-#X obj -91 -84 f;
-#X msg -39 -85 0;
-#X obj -91 -62 sel 0 6;
-#X obj -62 231 *~ 0;
-#X msg -9 177 0;
-#X obj -9 154 delay 1;
-#X obj -16 105 + 1;
-#X obj -41 106 f;
-#X msg 11 105 0;
-#X obj -41 128 sel 0 2;
-#X obj -62 200 osc~ 0.05;
-#X obj -112 11 phasor~ 0.1;
-#X obj -59 -36 delay 3;
-#X obj -112 32 +~ 0.2;
-#X obj 56 -9 osc~ 3.7;
-#X obj 211 -59 delay 5;
-#X obj -32 32 +~ 0.2;
-#X obj 61 18 abs~;
-#X obj 191 -166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj 145 -194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
-#X obj 179 -82 sel 1 3 8;
-#X obj 29 -138 metro 120;
-#X msg -91 -13 0.8;
-#X msg 29 -33 0.8;
-#X obj 136 -66 noise~;
-#X obj 144 -12 lop~ 200;
-#X msg 179 -33 4;
-#X msg -41 177 0.7;
-#X obj 120 105 outlet~;
-#X obj 180 105 outlet~;
-#X obj 180 145 outlet~;
-#X obj 120 145 outlet~;
-#X obj 351 -46 inlet;
-#X connect 0 0 4 0;
-#X connect 1 0 44 0;
-#X connect 2 0 1 1;
-#X connect 3 0 4 1;
-#X connect 4 0 3 0;
-#X connect 4 0 35 0;
-#X connect 5 0 43 0;
-#X connect 6 0 5 1;
-#X connect 7 0 8 1;
-#X connect 8 0 7 0;
-#X connect 8 0 10 0;
-#X connect 9 0 8 0;
-#X connect 10 0 38 0;
-#X connect 10 0 11 0;
-#X connect 10 1 9 0;
-#X connect 11 0 6 0;
-#X connect 12 0 46 0;
-#X connect 13 0 12 1;
-#X connect 14 0 15 1;
-#X connect 15 0 14 0;
-#X connect 15 0 17 0;
-#X connect 16 0 15 0;
-#X connect 17 0 37 0;
-#X connect 17 0 27 0;
-#X connect 17 1 16 0;
-#X connect 18 0 45 0;
-#X connect 19 0 18 1;
-#X connect 20 0 19 0;
-#X connect 21 0 22 1;
-#X connect 22 0 21 0;
-#X connect 22 0 24 0;
-#X connect 23 0 22 0;
-#X connect 24 0 42 0;
-#X connect 24 0 20 0;
-#X connect 24 1 23 0;
-#X connect 25 0 18 0;
-#X connect 26 0 28 0;
-#X connect 27 0 13 0;
-#X connect 28 0 12 0;
-#X connect 29 0 32 0;
-#X connect 30 0 2 0;
-#X connect 31 0 5 0;
-#X connect 32 0 31 0;
-#X connect 33 0 36 1;
-#X connect 34 0 36 0;
-#X connect 35 0 41 0;
-#X connect 35 0 30 0;
-#X connect 35 1 41 0;
-#X connect 35 1 30 0;
-#X connect 35 2 0 0;
-#X connect 36 0 4 0;
-#X connect 36 0 8 0;
-#X connect 36 0 15 0;
-#X connect 36 0 22 0;
-#X connect 37 0 12 1;
-#X connect 38 0 5 1;
-#X connect 39 0 40 0;
-#X connect 40 0 1 0;
-#X connect 41 0 1 1;
-#X connect 42 0 18 1;
-#X connect 47 0 34 0;
-#X restore -656 370 pd hoa.rhythm ---------------------------;
-#X obj -667 435 hoa.3d.optim~ 1 inPhase -----------------;
-#X obj -667 472 hoa.3d.decoder~ 1 8 ---------------------;
-#X obj -667 504 hoa.dac~ 1:8 ----------------------------;
-#X obj -28 201 hoa.map @size 225 225 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
-@presetname (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1
-@view 2 @outputmode polar @output3d 1 @zoom 0.35;
-#X text -456 8 to output 3 coordinates;
-#X text 79 185 |;
-#X text 79 178 ^;
-#X text 79 167 z;
-#X text -251 185 |;
-#X text -251 178 ^;
-#X text -251 167 z;
-#X text 199 301 _;
-#X text 206 304 >;
-#X text 216 304 y;
-#X text -131 301 _;
-#X text -124 304 >;
-#X text -114 304 x;
-#X text -559 85 |;
-#X text -559 78 ^;
-#X text -439 201 _;
-#X text -432 204 >;
-#X text -422 204 x;
-#X text -559 67 y;
-#X obj -359 99 c.loadmess 1;
-#X obj -28 136 c.prepend view;
-#X obj -28 104 c.menu @size 40 17 @fontname Helvetica @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -28 74 c.loadmess 2;
-#X obj -667 51 c.prepend view;
-#X obj -667 19 c.menu @size 40 17 @fontname Helvetica @fontweight normal
-@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @hover 0 @items xy xz yz @states 0 0 0 @bgcolor 0.75 0.75 0.75
-1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
-#X obj -667 -11 c.loadmess 0;
-#X text -296 -103 These three hoa.map objects share the same "mapname"
-attribute so they are linked together and react to the change of each
-others. So \, sources and groups position \, description and colors
-modifications will affect all linked hoa.map objects to control a hoa.3d.map~.
+#X restore -649 59 hoa.binaural~ 3 @block 256 @pinna large --------
 ;
-#X obj -667 402 hoa.3d.map~ 1 4 -------------------------;
-#X obj -184 75 c.loadmess mapname cicm;
-#X text -663 -175 These three hoa.map objects share the same "mapname"
-attribute so they are linked together and react to the change of each
-others. So \, sources and groups position \, description and colors
-modifications will affect all linked hoa.map objects to control a These
-three hoa.map objects share the same "mapname" attribute so they are
-linked together and react to the change of each others. So \, sources
-and groups position \, description and colors modifications will affect
-all linked hoa.map objects to control a hoa.3d.map~., f 124;
-#X text 74 23 To deassociate a hoa.map to the others \, simply send
-the "mapname" message (or clear the mapname attribute in the propriety
-window), f 27;
-#X msg -155 465 source 1 car -1 1 1 \, source 2 car 1 1 0 \, source
-3 car -1 -1 -1 \, source 4 car 0 0 0 \, group 1 set 1 2;
-#X obj -155 441 loadbang;
-#X text -669 -90 • The "output3d" attribute must be checked to control
-a hoa.3d.map~ object • Change the coordinate system to change the
-point of view and interact differently with sources and groups;
-#X connect 0 0 46 0;
-#X connect 1 0 4 0;
-#X connect 2 0 18 0;
-#X connect 3 0 6 0;
-#X connect 4 0 5 0;
-#X connect 6 0 1 0;
-#X connect 7 0 1 0;
-#X connect 7 0 0 0;
-#X connect 8 0 7 0;
-#X connect 9 0 8 0;
-#X connect 10 0 1 0;
-#X connect 12 0 10 0;
-#X connect 13 0 14 0;
-#X connect 14 0 46 0;
-#X connect 14 1 46 1;
-#X connect 14 2 46 2;
-#X connect 14 3 46 3;
-#X connect 15 0 16 0;
-#X connect 15 1 16 1;
-#X connect 15 2 16 2;
-#X connect 15 3 16 3;
-#X connect 16 0 17 0;
-#X connect 38 0 12 0;
-#X connect 39 0 18 0;
-#X connect 40 0 39 0;
-#X connect 41 0 40 0;
-#X connect 42 0 0 0;
-#X connect 43 0 42 0;
-#X connect 44 0 43 0;
-#X connect 46 0 15 0;
-#X connect 46 1 15 1;
-#X connect 46 2 15 2;
-#X connect 46 3 15 3;
-#X connect 47 0 1 0;
-#X connect 47 0 0 0;
-#X connect 47 0 18 0;
-#X connect 50 0 18 0;
-#X connect 51 0 50 0;
-#X restore -337 -61 pd 3D;
-#X text -340 -77 3D view;
-#X text -344 -380 To move source or group \, click on it and drag it.
-Click and drag with alt to change the radius. Click and drag with shift
-to change the angle.;
-#X connect 1 0 12 0;
+#X obj -649 95 hoa.dac~ 1 2 -----------------------------------;
+#X obj -649 15 hoa.process~ 3 hoa.fx.freeverb~ harmonics ------;
+#X connect 1 0 11 0;
 #X connect 2 0 1 0;
-#X connect 7 0 6 0;
-#X connect 8 0 13 0;
-#X connect 12 0 17 0;
-#X connect 12 1 17 1;
-#X connect 12 2 17 2;
-#X connect 12 3 17 3;
-#X connect 12 4 17 4;
-#X connect 12 5 17 5;
-#X connect 12 6 17 6;
-#X connect 13 0 12 0;
-#X connect 13 1 12 1;
-#X connect 13 2 12 2;
-#X connect 13 3 12 3;
-#X connect 14 0 34 7;
-#X connect 15 0 14 0;
-#X connect 16 0 33 0;
-#X connect 17 0 34 0;
-#X connect 17 1 34 1;
-#X connect 17 2 34 2;
-#X connect 17 3 34 3;
-#X connect 17 4 34 4;
-#X connect 17 5 34 5;
-#X connect 17 6 34 6;
-#X connect 21 0 20 0;
-#X connect 22 0 21 0;
-#X connect 23 0 25 2;
-#X connect 24 0 25 1;
-#X connect 25 0 22 0;
-#X connect 29 0 30 0;
-#X connect 29 1 30 1;
-#X connect 33 0 34 7;
-#X connect 34 0 29 0;
-#X connect 34 1 29 1;
-#X connect 34 2 29 2;
-#X connect 34 3 29 3;
-#X connect 34 4 29 4;
-#X connect 34 5 29 5;
-#X connect 34 6 29 6;
-#X connect 35 0 36 0;
-#X connect 36 0 34 7;
-#X connect 37 0 24 0;
-#X connect 38 0 25 0;
-#X connect 39 0 41 0;
-#X connect 40 0 39 0;
-#X coords 0 726 1 725 85 60 0;
+#X connect 6 0 5 0;
+#X connect 7 0 12 0;
+#X connect 11 0 13 0;
+#X connect 11 1 13 1;
+#X connect 11 2 13 2;
+#X connect 11 3 13 3;
+#X connect 11 4 13 4;
+#X connect 11 5 13 5;
+#X connect 11 6 13 6;
+#X connect 12 0 11 0;
+#X connect 12 1 11 1;
+#X connect 12 2 11 2;
+#X connect 12 3 11 3;
+#X connect 13 0 40 0;
+#X connect 13 1 40 1;
+#X connect 13 2 40 2;
+#X connect 13 3 40 3;
+#X connect 13 4 40 4;
+#X connect 13 5 40 5;
+#X connect 13 6 40 6;
+#X connect 17 0 16 0;
+#X connect 18 0 17 0;
+#X connect 19 0 21 2;
+#X connect 20 0 21 1;
+#X connect 21 0 18 0;
+#X connect 27 0 20 0;
+#X connect 28 0 21 0;
+#X connect 29 0 31 0;
+#X connect 30 0 29 0;
+#X connect 38 0 39 0;
+#X connect 38 1 39 1;
+#X connect 40 0 38 0;
+#X connect 40 1 38 1;
+#X connect 40 2 38 2;
+#X connect 40 3 38 3;
+#X connect 40 4 38 4;
+#X connect 40 5 38 5;
+#X connect 40 6 38 6;
+#X coords 0 709 1 708 85 60 0;

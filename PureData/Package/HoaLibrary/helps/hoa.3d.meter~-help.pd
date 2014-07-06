@@ -49,9 +49,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 135 35.2644 135 -35.2644 180 -69.0948 20.9052 -0 90 -20.9052 45 35.2644
 45 -35.2644 0 69.0948 200.905 -0 270 20.9052 225 35.2644 225 -35.2644
 0 -69.0948 339.095 -0 270 -20.9052 315 35.2644 315 -35.2644 @offset
-60 0 180 @rotation anti-clockwise @view top-bottom @vectors velocity
-@interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor
-0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+0 0 0 @rotation anti-clockwise @view top-bottom @vectors velocity @interval
+50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6
+0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor
 1 0 0 0.8;
 #X obj -892 -1010 hoa.3d.encoder~ 3 ------------------------------------------
