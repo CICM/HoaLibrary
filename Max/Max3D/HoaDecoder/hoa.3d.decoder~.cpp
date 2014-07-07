@@ -92,10 +92,10 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	// @description Set the angles of each channels in degrees. The angles of channels are only settable in <b>irregular</b> <m>mode</m>. Each angles are in degrees, wrapped between 0. and 360. You must specify 2 values per channel corresponding to the azimuth value followed by the elevation value.
     
-    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", 0, t_hoa_decoder, f_offset, 2);
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", 0, t_hoa_decoder, f_offset, 3);
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "offset", NULL, offset_set);
-    CLASS_ATTR_DEFAULT          (c, "offset", 0, "0 0");
+    CLASS_ATTR_DEFAULT          (c, "offset", 0, "0 0 0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
     // @description Set the offsets of channels with a list of 2 float values corresponding to the azimuth and elevation offset, in degrees between 0. and 360.
 	
@@ -258,10 +258,11 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             object_attr_setdisabled((t_object *)x, hoa_sym_angles, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_offset, 0);
             object_attr_setdisabled((t_object *)x, hoa_sym_pinna, 1);
-			float offset[2];
-			offset[0] = x->f_decoder->getChannelsAzimuthOffset() / HOA_2PI * 360.f;
-			offset[1] = x->f_decoder->getChannelsElevationOffset() / HOA_2PI * 360.f;
-			object_attr_setfloat_array(x, hoa_sym_offset, 2, offset);
+			float offset[3];
+			offset[0] = x->f_decoder->getChannelsRotationX() / HOA_2PI * 360.f;
+			offset[1] = x->f_decoder->getChannelsRotationY() / HOA_2PI * 360.f;
+			offset[2] = x->f_decoder->getChannelsRotationZ() / HOA_2PI * 360.f;
+			object_attr_setfloat_array(x, hoa_sym_offset, 3, offset);
 			x->f_mode = mode;
 			hoa_decoder_resize_outlets(x);
 		}
@@ -303,21 +304,20 @@ t_max_err offset_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
-        double azimuth, elevation;
-        if(atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG)
-			azimuth = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+        double ax, ay, az;
+        if(atom_gettype(argv) == A_FLOAT)
+            ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
-            azimuth = x->f_decoder->getChannelsAzimuthOffset();
-        
-        if(argc > 1 && (atom_gettype(argv+1) == A_FLOAT || atom_gettype(argv+1) == A_LONG))
-            elevation = wrap_twopi(atom_getfloat(argv+1) / 360. * HOA_2PI);
+            ax = x->f_decoder->getChannelsRotationX();
+        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+            ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
-            elevation = x->f_decoder->getChannelsElevationOffset();
-        
-        x->f_decoder->setChannelsOffset(azimuth, elevation);
-		
-		x->f_offset[0] = x->f_decoder->getChannelsAzimuthOffset() / HOA_2PI * 360;
-		x->f_offset[1] = x->f_decoder->getChannelsElevationOffset() / HOA_2PI * 360;
+            ay = x->f_decoder->getChannelsRotationX();
+        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+            az = atom_getfloat(argv+2) / 360. * HOA_2PI;
+        else
+            az = x->f_decoder->getChannelsRotationX();
+        x->f_decoder->setChannelsRotation(ax, ay, az);
     }
     return MAX_ERR_NONE;
 }

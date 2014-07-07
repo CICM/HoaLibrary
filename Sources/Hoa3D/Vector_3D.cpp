@@ -70,10 +70,10 @@ namespace Hoa3D
     void Vector::processVelocity(const double* inputs, double* outputs)
     {
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0., velocityElevation = 0.;
-        veclocitySum = cblas_dasum(m_number_of_channels, m_channels_double, 1);
-        velocityAbscissa = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_abscissa_double, 1);
-        velocityOrdinate = cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_ordinate_double, 1);
-        velocityElevation= cblas_ddot(m_number_of_channels, m_channels_double, 1, m_channels_height_double, 1);
+        veclocitySum = cblas_dasum(m_number_of_channels, inputs, 1);
+        velocityAbscissa = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_abscissa_double, 1);
+        velocityOrdinate = cblas_ddot(m_number_of_channels, inputs, 1, m_channels_ordinate_double, 1);
+        velocityElevation= cblas_ddot(m_number_of_channels, inputs, 1, m_channels_height_double, 1);
 
         if(veclocitySum)
         {
