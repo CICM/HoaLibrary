@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 646.0, 701.0 ],
+		"rect" : [ 81.0, 45.0, 974.0, 732.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 646.0, 675.0 ],
+						"rect" : [ 0.0, 26.0, 974.0, 706.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1728,7 +1728,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 646.0, 675.0 ],
+						"rect" : [ 81.0, 71.0, 974.0, 706.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1759,7 +1759,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 307.0, 402.0, 50.0, 19.0 ]
+									"patching_rect" : [ 658.0, 204.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -1773,7 +1773,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 257.0, 402.0, 50.0, 19.0 ]
+									"patching_rect" : [ 608.0, 204.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -1786,7 +1786,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 260.0, 443.0, 61.0, 19.0 ],
+									"patching_rect" : [ 611.0, 245.0, 61.0, 19.0 ],
 									"text" : "pak 0. 90."
 								}
 
@@ -1801,8 +1801,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 260.0, 502.0, 347.0, 43.0 ],
-									"presentation_rect" : [ 342.0, 387.0, 0.0, 0.0 ],
+									"patching_rect" : [ 609.0, 304.0, 347.0, 43.0 ],
 									"text" : "angles $1 $2 0. 26.565051 72. 26.565051 144. 26.565051 216. 26.565051 288. 26.565051 324. -26.565051 36. -26.565051 108. -26.565051 180. -26.565051 252. -26.565051 0. -90."
 								}
 
@@ -1845,7 +1844,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 395.0, 296.0, 248.0, 186.0 ],
+									"patching_rect" : [ 746.0, 98.0, 248.0, 186.0 ],
 									"text" : "angles 0 0 11.25 11 22.5 22 33.75 33 45 45 56.25 56 67.5 67 78.75 78 90 0 101.25 11 112.5 22 123.75 33 135 45 146.25 56 157.5 67 168.75 78 180 0 191.25 11 202.5 22 213.75 33 225 45 236.25 56 247.5 67 258.75 78 270 0 281.25 11 292.5 22 303.75 33 315 45 326.25 56 337.5 67 348.75 78 360 0 371.25 11 382.5 22 393.75 33 405 45 416.25 56 427.5 67 438.75 78 450 0 461.25 11 472.5 22 483.75 33 495 45 506.25 56 517.5 67 528.75 78 540 0 551.25 11 562.5 22 573.75 33 585 45 596.25 56 607.5 67 618.75 78 630 0 641.25 11 652.5 22 663.75 33 675 45 686.25 56 697.5 67 708.75 78"
 								}
 
@@ -1859,8 +1858,9 @@
 									"maxclass" : "hoa.3d.meter~",
 									"numinlets" : 12,
 									"numoutlets" : 0,
-									"patching_rect" : [ 31.0, 337.0, 189.0, 189.0 ],
-									"vectors" : "none"
+									"patching_rect" : [ 31.0, 366.25, 189.0, 378.0 ],
+									"vectors" : "none",
+									"view" : "top/bottom"
 								}
 
 							}
@@ -2409,6 +2409,21 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 31.0, 189.0, 189.0, 19.0 ],
 									"text" : "hoa.3d.encoder~ 3"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"attr" : "view",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-9",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 233.0, 322.0, 150.0, 19.0 ],
+									"text_width" : 48.0
 								}
 
 							}
@@ -2987,6 +3002,15 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-3", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-9", 0 ]
+								}
+
+							}
  ]
 					}
 ,
@@ -3028,7 +3052,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 646.0, 675.0 ],
+						"rect" : [ 0.0, 26.0, 974.0, 706.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,

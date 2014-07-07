@@ -58,3 +58,13 @@ void hoa_boxinfos_init(t_hoa_boxinfos* boxinfos)
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 }
+
+t_jrgba rgba_addContrast(t_jrgba color, double contrast)
+{
+    t_jrgba new_color = color;
+    new_color.red = clip_minmax(new_color.red += contrast, 0., 1.);
+    new_color.green = clip_minmax(new_color.green += contrast, 0., 1.);
+    new_color.blue = clip_minmax(new_color.blue += contrast, 0., 1.);
+    return new_color;
+}
+

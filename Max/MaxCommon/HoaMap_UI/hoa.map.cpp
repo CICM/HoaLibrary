@@ -108,7 +108,6 @@ typedef struct  _hoamap
     
     // options :
     t_atom_long f_output_mode;			// Polar Cartesian
-	long		f_output_3D;			// 0 is 2d, 1 is 3d
 	t_atom_long f_coord_view;			// xy xz yz
 	
 	t_symbol*	f_binding_name;
@@ -295,12 +294,6 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE             (c, "outputmode", 1);
     CLASS_ATTR_ORDER			(c, "outputmode", 0, "2");
 	// @description Sets the output mode. Output mode can be <b>polar</b> or <b>cartesian</b>
-	
-	CLASS_ATTR_LONG             (c, "output3d", 0, t_hoa_map, f_output_3D);
-	CLASS_ATTR_STYLE_LABEL      (c, "output3d", 0, "onoff", "3d output");
-	CLASS_ATTR_SAVE             (c, "output3d", 1);
-	CLASS_ATTR_ORDER            (c, "output3d", 0, "3");
-	// @description Check this to output 3d coordinates, default is 2d.
     
 	CLASS_ATTR_DOUBLE			(c, "zoom", 0, t_hoa_map, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c, "zoom", NULL, hoamap_zoom);
@@ -357,8 +350,6 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_GROWY
 	| JBOX_HILITE
 	;
-	
-	int is3D = (s == gensym("hoa.3d.map"));
     
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
@@ -383,7 +374,6 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_listmap = NULL;
 	x->f_output_enabled = 1;
 	
-	x->f_output_3D = is3D;
 	x->f_save_with_patcher = 1;
 	
 	attr_dictionary_process(x, d);
@@ -1483,19 +1473,10 @@ void hoamap_output(t_hoa_map *x)
             if(x->f_source_manager->groupGetExistence(i))
             {
 				atom_setlong(av, i+1);
-				if (!x->f_output_3D)
-				{
-					atom_setfloat(av+2, x->f_source_manager->groupGetRadius(i));
-					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
-					outlet_list(x->f_out_groups, 0L, 4, av);
-				}
-				else
-				{
-					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-					atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
-					atom_setfloat(av+4, x->f_source_manager->groupGetElevation(i));
-					outlet_list(x->f_out_groups, 0L, 5, av);
-				}
+				atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+				atom_setfloat(av+3, x->f_source_manager->groupGetAzimuth(i));
+				atom_setfloat(av+4, x->f_source_manager->groupGetElevation(i));
+				outlet_list(x->f_out_groups, 0L, 5, av);
             }
         }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
@@ -1503,19 +1484,10 @@ void hoamap_output(t_hoa_map *x)
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-				if (!x->f_output_3D)
-				{
-					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
-					outlet_list(x->f_out_sources, 0L, 4, av);
-				}
-				else
-				{
-					atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-					atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
-					atom_setfloat(av+4, x->f_source_manager->sourceGetElevation(i));
-					outlet_list(x->f_out_sources, 0L, 5, av);
-				}
+				atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
+				atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
+				atom_setfloat(av+4, x->f_source_manager->sourceGetElevation(i));
+				outlet_list(x->f_out_sources, 0L, 5, av);
             }
         }
     }
@@ -1527,19 +1499,10 @@ void hoamap_output(t_hoa_map *x)
             if(x->f_source_manager->groupGetExistence(i))
             {
 				atom_setlong(av, i+1);
-                if (!x->f_output_3D)
-				{
-					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
-					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
-					outlet_list(x->f_out_groups, 0L, 4, av);
-				}
-				else
-				{
-					atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
-					atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
-					atom_setfloat(av+4, x->f_source_manager->groupGetHeight(i));
-					outlet_list(x->f_out_groups, 0L, 5, av);
-				}
+                atom_setfloat(av+2, x->f_source_manager->groupGetAbscissa(i));
+				atom_setfloat(av+3, x->f_source_manager->groupGetOrdinate(i));
+				atom_setfloat(av+4, x->f_source_manager->groupGetHeight(i));
+				outlet_list(x->f_out_groups, 0L, 5, av);
             }
         }
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
@@ -1547,19 +1510,10 @@ void hoamap_output(t_hoa_map *x)
             if(x->f_source_manager->sourceGetExistence(i))
             {
                 atom_setlong(av, i+1);
-				if (!x->f_output_3D)
-				{
-					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
-					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
-					outlet_list(x->f_out_sources, 0L, 4, av);
-				}
-				else
-				{
-					atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
-					atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
-					atom_setfloat(av+4, x->f_source_manager->sourceGetHeight(i));
-					outlet_list(x->f_out_sources, 0L, 5, av);
-				}
+				atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+				atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+				atom_setfloat(av+4, x->f_source_manager->sourceGetHeight(i));
+				outlet_list(x->f_out_sources, 0L, 5, av);
             }
         }
     }
@@ -1577,10 +1531,9 @@ void hoamap_infos(t_hoa_map *x)
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
-        {
             numberOfSource++;
-        }
     }
+	
     atom_setsym(avNumber, hoa_sym_source);
     atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfSource);

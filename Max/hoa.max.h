@@ -24,6 +24,8 @@ extern "C"
 #include <jpatcher_syms.h>
 }
 
+#include "../Sources/Hoa3D/Hoa3D.h"
+
 #include "hoa.max_commonsyms.h"
 
 #define MAX_CHANNELS SYS_MAXSIGS
@@ -98,6 +100,7 @@ void hoa_boxinfos_init(t_hoa_boxinfos* boxinfos);
 
 t_hoa_err hoa_not_implemented_method();
 t_hoa_err hoa_initclass(t_class* c, method hoabox_getinfos);
+t_jrgba rgba_addContrast(t_jrgba color, double contrast);
 
 
 #endif

@@ -314,14 +314,14 @@ void hoa_meter_3d_oksize(t_hoa_meter_3d *x, t_rect *newrect)
     double delta1 = newrect->width - x->j_box.b_rect_last.width;
     double delta2 = newrect->height - x->j_box.b_rect_last.height;
     
-    if(x->f_view == gensym("top-bottom"))
+    if(x->f_view == hoa_sym_3d_topnextbottom)
     {
         if(fabs(delta1) < fabs(delta2))
             newrect->width = newrect->height * 2;
         else
             newrect->height = newrect->width * 0.5;
     }
-    else if(x->f_view == gensym("top/bottom"))
+    else if(x->f_view == hoa_sym_3d_toponbottom)
     {
         if(fabs(delta1) < fabs(delta2))
             newrect->width = newrect->height * 0.5;

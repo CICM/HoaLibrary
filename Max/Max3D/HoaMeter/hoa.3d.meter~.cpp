@@ -36,6 +36,7 @@
 typedef struct  _hoa_meter_3d
 {
 	t_pxjbox		j_box;
+	t_rect			f_rect;
     
     Hoa3D::Meter*   f_meter;
     Hoa3D::Vector*  f_vector;
@@ -114,6 +115,11 @@ t_symbol* hoa_sym_3d_leds_layer = gensym("leds_layers");
 t_symbol* hoa_sym_3d_background_layer = gensym("background_layers");
 t_symbol* hoa_sym_3d_top = gensym("top");
 t_symbol* hoa_sym_3d_bottom = gensym("bottom");
+t_symbol* hoa_sym_3d_toponbottom = gensym("top/bottom");
+t_symbol* hoa_sym_3d_topnextbottom = gensym("top-bottom");
+
+#define  contrast_white 0.06
+#define  contrast_black 0.14
 
 int C74_EXPORT main()
 {
@@ -122,7 +128,8 @@ int C74_EXPORT main()
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+	//jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+	jbox_initclass(c, JBOX_COLOR);
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	class_addmethod(c, (method) hoa_meter_3d_dsp64,           "dsp64",			A_CANT, 0);
@@ -168,7 +175,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER                (c, "view", 0, "5");
 	CLASS_ATTR_LABEL                (c, "view", 0, "View");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "view", 0, "top");
-    CLASS_ATTR_ENUM					(c, "view", 0, "top bottom");
+    CLASS_ATTR_ENUM					(c, "view", 0, "top bottom top-bottom top/bottom");
     
 	CLASS_ATTR_SYM					(c, "vectors", 0, t_hoa_meter_3d, f_vector_type);
     CLASS_ATTR_ACCESSORS            (c, "vectors", NULL, vectors_set);
@@ -256,6 +263,7 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	t_hoa_meter_3d *x =  NULL;
 	t_dictionary *d;
 	long flags;
+	int numberOfChannels = 8;
 	
 	if(!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
@@ -266,18 +274,21 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_DRAWINLAST
 	| JBOX_DRAWBACKGROUND
 	| JBOX_TRANSPARENT
-	| JBOX_GROWY
+	| JBOX_GROWBOTH
 	;
 	
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
+	
+	jbox_get_patching_rect((t_object*)x, &x->f_rect);
     
     x->f_ramp = 0;
-    x->f_meter  = new Hoa3D::Meter(8);
-    x->f_vector = new Hoa3D::Vector(8);
+	x->f_meter  = new Hoa3D::Meter(numberOfChannels, 181, 360);
+    x->f_vector = new Hoa3D::Vector(numberOfChannels);
     
     x->f_signals = new double[MAX_SPEAKER * SYS_MAXBLKSIZE];
     x->f_over_leds = new int[MAX_CHANNELS];
+	
     for(int i = 0; i < MAX_CHANNELS; i++)
         x->f_over_leds[i] = 0;
 	
@@ -312,8 +323,34 @@ void hoa_meter_3d_getdrawparams(t_hoa_meter_3d *x, t_object *patcherview, t_jbox
 
 long hoa_meter_3d_oksize(t_hoa_meter_3d *x, t_rect *newrect)
 {
-    newrect->width = clip_min(newrect->width, 20.);
+	newrect->width = clip_min(newrect->width, 20.);
     newrect->height = clip_min(newrect->height, 20.);
+	
+    double delta1 = newrect->width - x->f_rect.width;
+    double delta2 = newrect->height - x->f_rect.height;
+    
+    if(x->f_view == hoa_sym_3d_topnextbottom)
+    {
+        if(fabs(delta1) < fabs(delta2))
+            newrect->width = newrect->height * 2;
+        else
+            newrect->height = newrect->width * 0.5;
+    }
+    else if(x->f_view == hoa_sym_3d_toponbottom)
+    {
+        if(fabs(delta1) < fabs(delta2))
+            newrect->width = newrect->height * 0.5;
+        else
+            newrect->height = newrect->width * 2;
+    }
+    else
+    {
+        if(fabs(delta1) < fabs(delta2))
+            newrect->width = newrect->height;
+        else
+            newrect->height = newrect->width;
+    }
+	
 	return 0;
 }
 
@@ -353,7 +390,7 @@ t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
 					
 					delete x->f_meter;
 					delete x->f_vector;
-					x->f_meter = new Meter(d);
+					x->f_meter = new Meter(d, 181, 360);
 					x->f_vector = new Vector(d);
 					
 					object_method(b, hoa_sym_dynlet_begin);
@@ -518,24 +555,38 @@ t_max_err rotation_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
 
 t_max_err view_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 {
+	t_symbol* view = x->f_view;
     if(argc && argv)
     {
         if(atom_gettype(argv) == A_SYM)
         {
             if(atom_getsym(argv) == hoa_sym_3d_bottom)
-                x->f_view = hoa_sym_3d_bottom;
+                view = hoa_sym_3d_bottom;
+            else if(atom_getsym(argv) == hoa_sym_3d_topnextbottom)
+                view = hoa_sym_3d_topnextbottom;
+            else if(atom_getsym(argv) == hoa_sym_3d_toponbottom)
+                view = hoa_sym_3d_toponbottom;
             else
-                x->f_view = hoa_sym_3d_top;
+                view = hoa_sym_3d_top;
         }
         else if(atom_gettype(argv) == A_FLOAT)
         {
             if(atom_getlong(argv) == 1)
-                x->f_view = hoa_sym_3d_bottom;
+                view = hoa_sym_3d_bottom;
+            else if(atom_getlong(argv) == 2)
+                view = hoa_sym_3d_topnextbottom;
+            else if(atom_getlong(argv) == 3)
+                view = hoa_sym_3d_toponbottom;
             else
-                x->f_view = hoa_sym_3d_top;
+                view = hoa_sym_3d_top;
+        }
+        if(view != x->f_view)
+        {
+            x->f_view = view;
+			jbox_set_patching_rect((t_object*)x, &x->f_rect);
         }
     }
-    return 0;
+    return MAX_ERR_NONE;
 }
 
 void hoa_meter_3d_dsp64(t_hoa_meter_3d *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
@@ -560,7 +611,6 @@ void hoa_meter_3d_perform64(t_hoa_meter_3d *x, t_object *dsp, double **ins, long
 		x->f_startclock = 0;
 		clock_delay(x->f_clock,0);
 	}
-	
 }
 
 void hoa_meter_3d_tick(t_hoa_meter_3d *x)
@@ -607,7 +657,7 @@ void hoa_meter_3d_free(t_hoa_meter_3d *x)
 void hoa_meter_3d_assist(t_hoa_meter_3d *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-        sprintf(s,"(Signal) %s", x->f_meter->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_meter->getChannelName(a).c_str());
 }
 
 t_max_err hoa_meter_3d_notify(t_hoa_meter_3d *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
@@ -626,10 +676,13 @@ void hoa_meter_3d_paint(t_hoa_meter_3d *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
+	x->f_rect = rect;
 	
-    x->f_center = rect.width * .5;
+	if(x->f_view == hoa_sym_3d_topnextbottom)
+        x->f_center = rect.width * .25;
+    else
+        x->f_center = rect.width * .5;
 	x->f_radius = x->f_center * 0.95;
-	x->f_radius_center = x->f_radius / 5.;
 	
 	draw_background(x, view, &rect);
     draw_leds(x, view, &rect);
@@ -648,25 +701,71 @@ t_jrgba rgba_addContrast(t_jrgba color, float contrast)
 void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 {
     t_jrgba black, white;
-	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_3d_background_layer, rect->width, rect->height);
     
-    black = rgba_addContrast(x->f_color_bg, -0.14);
-    white = rgba_addContrast(x->f_color_bg, 0.06);
+    black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	if (g)
 	{
-        jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
-        jgraphics_set_matrix(g, &transform);
 		jgraphics_set_line_width(g, 1.);
 		
-        jgraphics_set_source_jrgba(g, &white);
-        jgraphics_arc(g, 1, 1, x->f_radius,  0., HOA_2PI);
-        jgraphics_stroke(g);
-        
-        jgraphics_set_source_jrgba(g, &black);
-        jgraphics_arc(g, 0.f, 0.f, x->f_radius,  0., HOA_2PI);
-        jgraphics_stroke(g);
+		if(x->f_view == hoa_sym_3d_topnextbottom)
+        {
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g, 3.);
+            jgraphics_arc(g, x->f_center, x->f_center, x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g, 1.);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_line_draw_fast(g, x->f_center * 2, 0, x->f_center * 2, x->f_center * 2, 3);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_line_draw_fast(g, x->f_center * 2, 0, x->f_center * 2, x->f_center * 2, 1);
+            
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g, 3.);
+            jgraphics_arc(g, x->f_center * 3, x->f_center, x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g, 1.);
+            jgraphics_stroke(g);
+        }
+        else if(x->f_view == hoa_sym_3d_toponbottom)
+        {
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g, 3.);
+            jgraphics_arc(g, x->f_center, x->f_center, x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g, 1.);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_line_draw_fast(g, 0, x->f_center * 2, x->f_center * 2, x->f_center * 2, 3);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_line_draw_fast(g, 0, x->f_center * 2, x->f_center * 2, x->f_center * 2, 1);
+            
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g, 3.);
+            jgraphics_arc(g, x->f_center, x->f_center * 3, x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g, 1.);
+            jgraphics_stroke(g);
+        }
+        else
+        {
+			jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g, 3.);
+            jgraphics_arc(g, x->f_center, x->f_center, x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g, 1.);
+            jgraphics_stroke(g);
+		}
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_3d_background_layer);
 	}
@@ -676,22 +775,22 @@ void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
 void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 {
     t_jmatrix transform;
+    t_jrgba black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    t_jrgba white = rgba_addContrast(x->f_color_bg, contrast_white);
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_3d_leds_layer, rect->width, rect->height);
     t_jrgba mcolor;
-    bool viewd = (x->f_view == hoa_sym_3d_top);
-	
+    bool viewd = 1;
+    if(x->f_view == hoa_sym_3d_bottom)
+        viewd = 0;
 	if (g)
 	{
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
+		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
         jgraphics_set_matrix(g, &transform);
         
-		//for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
-		for(int i = 0; i < 1; i++)
+		for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
 		{
             if(x->f_over_leds[i])
 				mcolor = x->f_color_over_signal;
-			else if (x->f_meter->getChannelEnergy(i) < -50)
-				mcolor = x->f_color_off_signal;
             else if(x->f_meter->getChannelEnergy(i) < -25.5)
                 mcolor = x->f_color_cold_signal;
             else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
@@ -703,18 +802,17 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
             
             jgraphics_set_source_jrgba(g, &mcolor);
             int npt = x->f_meter->getChannelNumberOfPoints(i, viewd);
-            int factor = clip_min(rect->width / (double)(npt * 0.1) - 1, 1);
-			
+            int factor = clip_min(sqrt((rect->width * 100)) / (double)(npt * 0.1) - 1, 1);
 			if(npt)
 			{
 				float azi = x->f_meter->getChannelPointAzimuth(i, 0, viewd);
                 if(x->f_clockwise == hoa_sym_3d_clockwise)
-                    azi = -azi;
+                    azi =-azi;
 				float ele = x->f_meter->getChannelPointElevation(i, 0, viewd);
 				float abs = abscissa(x->f_radius, azi, ele);
 				float ord = ordinate(x->f_radius, azi, ele);
+                
 				jgraphics_move_to(g, abs, ord);
-				
 				for(int j = factor; j < npt; j += factor)
 				{
 					azi = x->f_meter->getChannelPointAzimuth(i, j, viewd);
@@ -722,19 +820,88 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
                         azi =-azi;
                     
 					ele = x->f_meter->getChannelPointElevation(i, j, viewd);
-					abs = abscissa(x->f_radius, azi, ele);
+					abs =  abscissa(x->f_radius, azi, ele);
 					ord = ordinate(x->f_radius, azi, ele);
 					jgraphics_line_to(g, abs, ord);
+					
 				}
 				
 				jgraphics_close_path(g);
 				jgraphics_fill_preserve(g);
 				
-				jgraphics_set_source_jrgba(g, &x->f_color_bd);
+				jgraphics_set_source_jrgba(g, &white);
+				jgraphics_set_line_width(g, 3);
+				jgraphics_stroke(g);
+                
+                jgraphics_set_source_jrgba(g, &black);
 				jgraphics_set_line_width(g, 1);
 				jgraphics_stroke(g);
 			}
+			
 		}
+        
+        if(x->f_view == hoa_sym_3d_toponbottom || x->f_view == hoa_sym_3d_topnextbottom)
+        {
+            viewd = 0;
+            if(x->f_view == hoa_sym_3d_toponbottom)
+                jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center * 3);
+            else
+                jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center * 3, x->f_center);
+            
+            jgraphics_set_matrix(g, &transform);
+            
+            for(int i = 0; i < x->f_meter->getNumberOfChannels(); i++)
+            {
+                if(x->f_over_leds[i])
+                    mcolor = x->f_color_over_signal;
+                else if(x->f_meter->getChannelEnergy(i) < -25.5)
+                    mcolor = x->f_color_cold_signal;
+                else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+                    mcolor = x->f_color_tepid_signal;
+                else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+                    mcolor = x->f_color_warm_signal;
+                else
+                    mcolor = x->f_color_hot_signal;
+                
+                jgraphics_set_source_jrgba(g, &mcolor);
+                int npt = x->f_meter->getChannelNumberOfPoints(i, viewd);
+                int factor = clip_min(sqrt((rect->width * 100)) / (double)(npt * 0.1) - 1, 1);
+                if(npt)
+                {
+                    float azi = x->f_meter->getChannelPointAzimuth(i, 0, viewd);
+                    if(x->f_clockwise == hoa_sym_3d_clockwise)
+                        azi =-azi;
+                    float ele = x->f_meter->getChannelPointElevation(i, 0, viewd);
+                    float abs = abscissa(x->f_radius, azi, ele);
+                    float ord = ordinate(x->f_radius, azi, ele);
+                    
+                    jgraphics_move_to(g, abs, ord);
+                    for(int j = factor; j < npt; j += factor)
+                    {
+                        azi = x->f_meter->getChannelPointAzimuth(i, j, viewd);
+                        if(x->f_clockwise == hoa_sym_3d_clockwise)
+                            azi =-azi;
+                        
+                        ele = x->f_meter->getChannelPointElevation(i, j, viewd);
+                        abs =  abscissa(x->f_radius, azi, ele);
+                        ord = ordinate(x->f_radius, azi, ele);
+                        jgraphics_line_to(g, abs, ord);
+                        
+                    }
+                    jgraphics_close_path(g);
+                    jgraphics_fill_preserve(g);
+                    
+                    jgraphics_set_source_jrgba(g, &white);
+                    jgraphics_set_line_width(g, 3);
+                    jgraphics_stroke(g);
+                    
+                    jgraphics_set_source_jrgba(g, &black);
+                    jgraphics_set_line_width(g, 1);
+                    jgraphics_stroke(g);
+                }
+                
+            }
+        }
 		jbox_end_layer((t_object*)x, view, hoa_sym_3d_leds_layer);
 	}
 	jbox_paint_layer((t_object *)x, view, hoa_sym_3d_leds_layer, 0., 0.);
