@@ -58,6 +58,15 @@ namespace Hoa3D
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
         
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
+        
         //! This method compute the energy and velocity vectors with single precision.
         /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 6. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height, energy abscissa, energy ordinate, energy height.
          

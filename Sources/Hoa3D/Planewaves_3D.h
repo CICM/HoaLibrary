@@ -23,7 +23,13 @@ namespace Hoa3D
 		unsigned int    m_number_of_channels;
         double*         m_channels_azimuth;
 		double*         m_channels_elevation;
+        double*         m_channels_rotated_azimuth;
+		double*         m_channels_rotated_elevation;
+        double          m_channels_rotation_x;
+        double          m_channels_rotation_y;
+        double          m_channels_rotation_z;
 		
+        void rotateChannel(unsigned int index);
     public:
         
 		//! The planewaves constructor.
@@ -54,6 +60,45 @@ namespace Hoa3D
             @param     elevations	The elevations.
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
+        
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
+        
+        //! Get the x rotation of the channels.
+        /**	Retreive the x rotation of the channels in radian.
+         
+         @return    The x rotation of the channels.
+         */
+		double getChannelsRotationX() const
+        {
+            return m_channels_rotation_x;
+        }
+        
+        //! Get the y rotation of the channels.
+        /**	Retreive the x rotation of the channels in radian.
+         
+         @return    The y rotation of the channels.
+         */
+		double getChannelsRotationY() const
+        {
+            return m_channels_rotation_y;
+        }
+        
+        //! Get the z rotation of the channels.
+        /**	Retreive the z rotation of the channels in radian.
+         
+         @return    The z rotation of the channels.
+         */
+		double getChannelsRotationZ() const
+        {
+            return m_channels_rotation_z;
+        }
         
         //! Retrieve the number of channels.
 		/** Retrieve the number of channels of the planewave class.
@@ -86,6 +131,32 @@ namespace Hoa3D
         {
             assert(index < m_number_of_channels);
             return m_channels_elevation[index];
+        }
+        
+        //! Retrieve the azimuth of a channel with the zyx rotation.
+        /** Retrieve the azimuth of a channel with the zyx rotation. The azimuth of the channel is in radian, 0 radian is at the front of the soundfield and Pi is at the back of the sound field. The maximum index must be the number of channels - 1.
+         
+         @param      index   The index of the channel.
+         @return     The azimuth of the channel.
+         @see getChannelElevation
+         */
+		inline double getChannelRotatedAzimuth(unsigned int index) const
+        {
+            assert(index < m_number_of_channels);
+            return m_channels_rotated_azimuth[index];
+        }
+		
+        //! Retrieve the elevation of a channel with the zyx rotation.
+		/** Retrieve the elevation of a channel with the zyx rotation. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
+         
+         @param      index   The index of the channel.
+         @return     The elevation of the channel.
+         @see getChannelAzimuth
+         */
+		inline double getChannelRotatedElevation(unsigned int index) const
+        {
+            assert(index < m_number_of_channels);
+            return m_channels_rotated_elevation[index];
         }
 		
         //! Retrieve the abscissa of a channel.
@@ -128,6 +199,48 @@ namespace Hoa3D
         {
             assert(index < m_number_of_channels);
             return height(1., m_channels_azimuth[index], m_channels_elevation[index]);
+        }
+        
+        //! Retrieve the abscissa of a channel with the zyx rotation.
+		/** Retrieve the abscissa of a channel with the zyx rotation. The abscissa is between -1 and 1, -1 is the left of the soundfield, 0 is the center of the soundfield and 1 is the right of the soundfield. The maximum index must be the number of channels - 1.
+         
+         @param     index    The index of the channel.
+         @return    The abscissa of the channel.
+         @see getChannelOrdinate
+         @see getChannelHeight
+         */
+		inline double getChannelRotatedAbscissa(unsigned int index) const
+        {
+            assert(index < m_number_of_channels);
+            return abscissa(1., m_channels_rotated_azimuth[index], m_channels_rotated_elevation[index]);
+        }
+		
+        //! Retrieve the ordinate of a channel with the zyx rotation.
+		/** Retrieve the ordinate of a channel with the zyx rotation. The ordinate is between -1 and 1, -1 is the back of the soundfield, 0 is the center of the soundfield and 1 is the front of the soundfield. The maximum index must be the number of channels - 1.
+         
+         @param     index	The index of the channel.
+         @return    The ordinate of the channel.
+         @see getChannelAbscissa
+         @see getChannelHeight
+         */
+		inline double getChannelRotatedOrdinate(unsigned int index) const
+        {
+            assert(index < m_number_of_channels);
+            return ordinate(1., m_channels_rotated_azimuth[index], m_channels_rotated_elevation[index]);
+        }
+        
+        //! Retrieve the height of a channel with the zyx rotation.
+        /** Retrieve the height of a channel with the zyx rotation. The height is between -1 and 1, -1 is the bottom of the soundfield, 0 is the center of the soundfield and 1 is the top of the soundfield. The maximum index must be the number of channels - 1.
+         
+         @param      index	The index of the channel.
+         @return     The height of the channel.
+         @see getChannelAbscissa
+         @see getChannelOrdinate
+         */
+		inline double getChannelRotatedHeight(unsigned int index) const
+        {
+            assert(index < m_number_of_channels);
+            return height(1., m_channels_rotated_azimuth[index], m_channels_rotated_elevation[index]);
         }
         
         //! Retrieve the number of channel.
@@ -250,6 +363,17 @@ namespace Hoa3D
                 azimuths[i+5] = azimuths[i] - HOA_PI / 5.;
                 elevations[i] = atan(0.5);
                 elevations[i+5] = -elevations[i];
+            }
+        }
+        else if(numberOfPoints > 12 && numberOfPoints < 20)
+        {
+            double elev[20];
+            double azim[20];
+            sphere_discretize(20, azim, elev);
+            for(int i = 0; i < numberOfPoints; i++)
+            {
+                azimuths[i] = azim[i];
+                elevations[i] = elev[i];
             }
         }
         else if(numberOfPoints == 20)

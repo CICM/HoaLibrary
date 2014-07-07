@@ -14,7 +14,7 @@ typedef struct _hoa_decoder_3D
     t_float*                f_outs;
     
     double                  f_angles_of_channels[MAX_CHANNELS * 2];
-    double                  f_offset[2];
+    double                  f_offset[3];
     long                    f_pinna;
     long                    f_number_of_angles;
 } t_hoa_decoder_3D;
@@ -62,7 +62,7 @@ extern "C" void setup_hoa0x2e3d0x2edecoder_tilde(void)
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
     
-    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", 0, t_hoa_decoder_3D, f_offset, 2);
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", 0, t_hoa_decoder_3D, f_offset, 3);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "offset", NULL, offset_set);
@@ -203,18 +203,20 @@ t_pd_err offset_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
-        double azimuth, elevation;
+        double ax, ay, az;
         if(atom_gettype(argv) == A_FLOAT)
-           azimuth = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
+            ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
-            azimuth = x->f_decoder->getChannelsAzimuthOffset();
-        
+            ax = x->f_decoder->getChannelsRotationX();
         if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
-            elevation = wrap_twopi(atom_getfloat(argv+1) / 360. * HOA_2PI);
+            ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
-            elevation = x->f_decoder->getChannelsElevationOffset();
-        
-        x->f_decoder->setChannelsOffset(azimuth, elevation);
+            ay = x->f_decoder->getChannelsRotationX();
+        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+            az = atom_getfloat(argv+2) / 360. * HOA_2PI;
+        else
+            az = x->f_decoder->getChannelsRotationX();
+        x->f_decoder->setChannelsRotation(ax, ay, az);
     }
     return 0;
 }

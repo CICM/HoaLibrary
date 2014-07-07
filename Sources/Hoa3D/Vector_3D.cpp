@@ -18,13 +18,7 @@ namespace Hoa3D
         m_channels_ordinate_double = new double[m_number_of_channels];
         m_channels_height_float = new float[m_number_of_channels];
         m_channels_height_double = new double[m_number_of_channels];
-
-        for(unsigned int i = 0; i < m_number_of_channels; i++)
-        {
-            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
-            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
-            m_channels_height_float[i] = m_channels_height_double[i] = getChannelHeight(i);
-        }
+        setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
     }
 
     void Vector::setChannelPosition(unsigned int index, double azimuth, double elevation)
@@ -32,9 +26,9 @@ namespace Hoa3D
         Planewaves::setChannelPosition(index, azimuth, elevation);
         for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelAbscissa(i);
-            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelOrdinate(i);
-            m_channels_height_float[i] = m_channels_height_double[i] = getChannelHeight(i);
+            m_channels_abscissa_float[i] = m_channels_abscissa_double[i] = getChannelRotatedAbscissa(i);
+            m_channels_ordinate_float[i] = m_channels_ordinate_double[i] = getChannelRotatedOrdinate(i);
+            m_channels_height_float[i] = m_channels_height_double[i] = getChannelRotatedHeight(i);
         }
     }
     
@@ -43,6 +37,12 @@ namespace Hoa3D
 		Planewaves::setChannelsPosition(azimuths, elevations);
 		setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
 	}
+    
+    void Vector::setChannelsRotation(double axis_x, double axis_y, double axis_z)
+    {
+        Planewaves::setChannelsRotation(axis_x, axis_y, axis_z);
+        setChannelPosition(0, m_channels_azimuth[0], m_channels_elevation[0]);
+    }
 
     void Vector::processVelocity(const float* inputs, float* outputs)
     {

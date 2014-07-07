@@ -224,8 +224,8 @@ extern "C" void setup_hoa0x2emap(void)
 	CLASS_ATTR_ACCESSORS			(c, "mapname", NULL, bindname_set);
 	CLASS_ATTR_LABEL				(c, "mapname", 0, "Map Name");
 	CLASS_ATTR_CATEGORY				(c, "mapname", 0, "Name");
-	CLASS_ATTR_DEFAULT				(c, "mapname", 0,  "");
-    //CLASS_ATTR_SAVE					(c, "mapname", 1); // plante si on le met (copy paste object)
+	CLASS_ATTR_DEFAULT				(c, "mapname", 0,  "(null)");
+    CLASS_ATTR_SAVE					(c, "mapname", 1);
     CLASS_ATTR_ORDER				(c, "mapname", 0, "1");
 	
     eclass_register(CLASS_BOX, c);
@@ -252,7 +252,7 @@ void hoa_map_deprecated(t_hoa_map* x, t_symbol *s, long ac, t_atom* av)
             else if(atom_getsym(av+i) == gensym("groups_parameters"))
                 atom_setsym(av+i, hoa_sym_groups_parameters);
             else if(atom_getsym(av+i) == gensym("s_nosymbol"))
-                atom_setsym(av+i, gensym("(null)"));
+                atom_setsym(av+i, hoa_sym_null);
         }
     }
     
@@ -326,7 +326,7 @@ void *hoa_map_new(t_symbol *s, int argc, t_atom *argv)
         x->f_out_groups     = listout(x);
         x->f_out_infos      = listout(x);
 		
-		x->f_binding_name = hoa_sym_nothing;
+		x->f_binding_name = hoa_sym_null;
 		x->f_listmap = NULL;
 		x->f_output_enabled = 1;
 		x->f_output_3D = is3D;
@@ -364,15 +364,16 @@ void linkmap_add_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 {
 	char strname[2048];
 	t_symbol* name = NULL;
-	t_canvas *jp = NULL;
-	jp = eobj_getcanvas(x);
-	if (jp && (jp = canvas_getrootfor(jp)))
+	t_canvas *canvas = canvas_getrootfor(eobj_getcanvas(x));
+    
+    if(!binding_name || binding_name == hoa_sym_nothing || binding_name == hoa_sym_null)
+        return;
+    
+	if(canvas)
 	{
-		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		sprintf(strname, "p%ld_%s_%s", (long)canvas, binding_name->s_name, ODD_BINDING_SUFFIX);
 		name = gensym(strname);
-		//post("name : %s", name->s_name);
-		
-		// t_listmap null => new t_listmap
+
 		if(name->s_thing == NULL)
 		{
 			x->f_listmap = (t_linkmap *)malloc(sizeof(t_linkmap));
@@ -431,11 +432,14 @@ void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 {
 	char strname[2048];
 	t_symbol* name = NULL;
-	t_canvas *jp = NULL;
-	jp = eobj_getcanvas(x);
-	if (jp && (jp = canvas_getrootfor(jp)))
+	t_canvas *canvas = canvas_getrootfor(eobj_getcanvas(x));
+    
+    if(!binding_name || binding_name == hoa_sym_nothing || binding_name == hoa_sym_null)
+        return;
+    
+	if(canvas)
 	{
-		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
+		sprintf(strname, "p%ld_%s_%s", (long)canvas, binding_name->s_name, ODD_BINDING_SUFFIX);
 		name = gensym(strname);
 		
 		if(name->s_thing != NULL)
@@ -497,28 +501,20 @@ t_pd_err bindname_set(t_hoa_map *x, void *attr, long argc, t_atom *argv)
 		
 		if(new_binding_name != x->f_binding_name)
 		{
-			// remove previous binding
-			if (x->f_binding_name != hoa_sym_nothing)
-				linkmap_remove_with_binding_name(x, x->f_binding_name);
-			
-			// add new one
-			if (new_binding_name != hoa_sym_nothing)
+			linkmap_remove_with_binding_name(x, x->f_binding_name);
+			if(new_binding_name != hoa_sym_nothing || new_binding_name != hoa_sym_null)
 			{
-				// use deferlow to have the good toppatcher pointer when the patch is being loaded
-				//defer_low(x, (method)linkmap_add_with_binding_name, new_binding_name, NULL, NULL);
 				linkmap_add_with_binding_name(x, new_binding_name);
 				x->f_binding_name = new_binding_name;
 			}
 			else
-				x->f_binding_name = hoa_sym_nothing;
+				x->f_binding_name = hoa_sym_null;
 		}
 	}
 	else
 	{
-		if (x->f_binding_name != hoa_sym_nothing)
-			linkmap_remove_with_binding_name(x, x->f_binding_name);
-		
-		x->f_binding_name = hoa_sym_nothing;
+        linkmap_remove_with_binding_name(x, x->f_binding_name);
+		x->f_binding_name = hoa_sym_null;
 	}
 	
 	ebox_notify((t_ebox *)x, NULL, hoa_sym_modified, NULL, NULL);
@@ -615,9 +611,15 @@ void hoa_map_set(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 		t_symbol* msgtype = atom_getsym(av);
 		av++; ac--;
 		if (msgtype == hoa_sym_source)
+<<<<<<< HEAD
 			pd_anything((t_pd*)x, hoa_sym_source, ac, av);
 		else if (msgtype == hoa_sym_group)
 			pd_anything((t_pd*)x, hoa_sym_source, ac, av);
+=======
+			pd_typedmess((t_pd *)x, hoa_sym_source, ac, av);
+		else if (msgtype == hoa_sym_group)
+			pd_typedmess((t_pd *)x, hoa_sym_group, ac, av);
+>>>>>>> ed9aa71515a78c09cbb5f222f395c01dfd61bba2
 	}
 	x->f_output_enabled = 1;
 }
@@ -1058,7 +1060,7 @@ void hoa_map_infos(t_hoa_map *x)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            atom_setlong(avIndex+j+2, i);
+            atom_setlong(avIndex+j+2, i+1);
             j++;
         }
     }
@@ -1071,7 +1073,7 @@ void hoa_map_infos(t_hoa_map *x)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
-            atom_setlong(avMute+2, i);
+            atom_setlong(avMute+2, i+1);
             atom_setlong(avMute+3, x->f_source_manager->sourceGetMute(i));
             outlet_list(x->f_out_infos, &s_list, 4, avMute);
         }
@@ -1098,22 +1100,30 @@ void hoa_map_infos(t_hoa_map *x)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            atom_setlong(avIndex+j+2, i);
+            atom_setlong(avIndex+j+2, i+1);
             j++;
+        }
+    }
+    outlet_list(x->f_out_infos, &s_list, numberOfGroups+2, avIndex);
+    free(avIndex);
+    
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(x->f_source_manager->groupGetExistence(i))
+        {
             avSource = new t_atom[x->f_source_manager->groupGetNumberOfSources(i)+3];
             atom_setsym(avSource, hoa_sym_group);
             atom_setsym(avSource+1, hoa_sym_source);
-            atom_setlong(avSource+2, i);
+            atom_setlong(avSource+2, i+1);
             for(int k = 0; k < x->f_source_manager->groupGetNumberOfSources(i); k++)
             {
-                atom_setlong(avSource+3+k,x->f_source_manager->groupGetSourceIndex(i, k));
+                atom_setlong(avSource+3+k,x->f_source_manager->groupGetSourceIndex(i, k)+1);
             }
             outlet_list(x->f_out_infos, &s_list, x->f_source_manager->groupGetNumberOfSources(i)+3, avSource);
             free(avSource);
         }
     }
-    outlet_list(x->f_out_infos, &s_list, numberOfGroups+2, avIndex);
-    free(avIndex);
+    
     
     atom_setsym(avMute, hoa_sym_group);
     atom_setsym(avMute+1, hoa_sym_mute);
@@ -1121,7 +1131,7 @@ void hoa_map_infos(t_hoa_map *x)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            atom_setlong(avMute+2, i);
+            atom_setlong(avMute+2, i+1);
             atom_setlong(avMute+3, x->f_source_manager->groupGetMute(i));
             outlet_list(x->f_out_infos, &s_list, 4, avMute);
         }
@@ -2416,7 +2426,7 @@ void hoa_map_preset(t_hoa_map *x, t_binbuf *d)
             if(x->f_source_manager->sourceGetDescription(i).size())
                 binbuf_addv(d, "s", format_string(x->f_source_manager->sourceGetDescription(i).c_str()));
             else
-                binbuf_addv(d, "s", gensym("(null)"));
+                binbuf_addv(d, "s", hoa_sym_null);
         }
     }
     
@@ -2440,7 +2450,7 @@ void hoa_map_preset(t_hoa_map *x, t_binbuf *d)
             if(x->f_source_manager->groupGetDescription(i).size())
                 binbuf_addv(d, "s", format_string(x->f_source_manager->groupGetDescription(i).c_str()));
             else
-                binbuf_addv(d, "s", gensym("(null)"));
+                binbuf_addv(d, "s", hoa_sym_null);
         }
     }
 }
@@ -2504,7 +2514,7 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
                        && atom_gettype(av+i+6+nsources) == A_FLOAT)
                         x->f_source_manager->groupSetColor(index, atom_getfloat(av+i+3+nsources), atom_getfloat(av+i+4+nsources), atom_getfloat(av+i+5+nsources), atom_getfloat(av+i+6+nsources));
                     
-                    if(ac > i+7+nsources && atom_gettype(av+i+7+nsources) == A_SYM && atom_getsym(av+i+7+nsources) != gensym("(null)"))
+                    if(ac > i+7+nsources && atom_gettype(av+i+7+nsources) == A_SYM && atom_getsym(av+i+7+nsources) != hoa_sym_null)
                         x->f_source_manager->groupSetDescription(index, format_string(atom_getsym(av+i+7+nsources)->s_name)->s_name);
                     else
                         x->f_source_manager->groupSetDescription(index, "");
@@ -2520,6 +2530,7 @@ void hoa_map_sources_preset(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
     hoa_map_output(x);
+    hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 
 void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* av2, t_atom ratio)
@@ -2579,7 +2590,7 @@ void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* 
                        && atom_gettype(av+i+9) == A_FLOAT)
                         x->f_source_manager->sourceSetColor(index, atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8), atom_getfloat(av+i+9));
                     
-                    if(atom_gettype(av+i+10) == A_SYM && atom_getsym(av+i+10) != gensym("(null)"))
+                    if(atom_gettype(av+i+10) == A_SYM && atom_getsym(av+i+10) != hoa_sym_null)
                         x->f_source_manager->sourceSetDescription(index, format_string(atom_getsym(av+i+10)->s_name)->s_name);
                     else
                         x->f_source_manager->sourceSetDescription(index, "");
@@ -2606,7 +2617,7 @@ void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* 
                        && atom_gettype(av+i+6+nsources) == A_FLOAT)
                         x->f_source_manager->groupSetColor(index, atom_getfloat(av+i+3+nsources), atom_getfloat(av+i+4+nsources), atom_getfloat(av+i+5+nsources), atom_getfloat(av+i+6+nsources));
                     
-                    if(ac > i+7+nsources && atom_gettype(av+i+7+nsources) == A_SYM && atom_getsym(av+i+7+nsources) != gensym("(null)"))
+                    if(ac > i+7+nsources && atom_gettype(av+i+7+nsources) == A_SYM && atom_getsym(av+i+7+nsources) != hoa_sym_null)
                         x->f_source_manager->groupSetDescription(index, format_string(atom_getsym(av+i+7+nsources)->s_name)->s_name);
                     else
                         x->f_source_manager->groupSetDescription(index, "");
@@ -2622,5 +2633,6 @@ void hoa_map_interpolate(t_hoa_map *x, short ac, t_atom *av, short ac2, t_atom* 
     ebox_invalidate_layer((t_ebox *)x, hoa_sym_groups_layer);
     ebox_redraw((t_ebox *)x);
     hoa_map_output(x);
+    hoamap_send_binded_map_update(x, BMAP_REDRAW | BMAP_OUTPUT | BMAP_NOTIFY);
 }
 

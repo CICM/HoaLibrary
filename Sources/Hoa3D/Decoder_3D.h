@@ -23,10 +23,7 @@ namespace Hoa3D
 		double*         m_decoder_matrix;
         float*          m_decoder_matrix_float;
 		double*         m_harmonics_vector;
-        Encoder*        m_encoder;
-        double          m_azimuth_offset;
-        double          m_elevation_offset;
-        
+        Encoder*        m_encoder;        
 	public:
         
 		/**	The decoder constructor.
@@ -47,33 +44,22 @@ namespace Hoa3D
          */
 		void	setChannelPosition(unsigned int index, double azimuth, double elevation);
         
-        //! Set the offset of the channels.
-		/**	Set the azimuth and the elevation offsets of the channels in radian.
+        //! Set the position of the channels.
+        /** Set the position of the channels with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
          
-         @param     azimuth		An azimuth value.
-         @param     elevation	An elevation value.
+         @param     azimuths		The azimuths.
+         @param     elevations	The elevations.
          */
-		void setChannelsOffset(double azimuth, double elevation);
+		void setChannelsPosition(double* azimuths, double* elevations);
         
-        //! Get the azimuth offset of the channels.
-        /**	Retreive the azimuth offset of the channels in radian.
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
          
-         @return    The azimuth offset of the channels.
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
          */
-		double getChannelsAzimuthOffset() const
-        {
-            return m_azimuth_offset;
-        }
-        
-        //! Get the elevation offset of the channels.
-        /**	Retreive the elevation offset of the channels in radian.
-         
-         @return    The elevation offset of the channels.
-         */
-		double getChannelsElevationOffset() const
-        {
-            return m_elevation_offset;
-        }
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
 		
         /**	This method performs the decoding with single precision.
          @param     input	The inputs array.
@@ -141,6 +127,15 @@ namespace Hoa3D
         /**	The binaural decoder destructor free the memory.
          */
 		~DecoderBinaural();
+        
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
         
         //! Set the sample rate.
         /** Set the sample rate. The sample will change the impulse responses size and their sizes increase with it. The valid sample rate are 44100, 48000, 88200 and 9600. Setting the sample rate will load the impulse responses, it is essential to define it before the digital signal processing.
@@ -228,7 +223,7 @@ namespace Hoa3D
     //! The ambisonic multi-decoder.
     /** The multi-decoder is a class that facilitates the use of the three decoder : regular, irregular and binaural.
      */
-    class DecoderMulti : public Ambisonic, public Planewaves
+    class DecoderMulti : public Ambisonic
     {
     public:
         
@@ -305,46 +300,68 @@ namespace Hoa3D
                 return m_decoder_binaural->getNumberOfChannels();
         }
         
-        //! Set the offset of the channels or the regular decoding.
-        /**	Set the azimuth and the elevation offsets of the channels in radian.
-         
-         @param     azimuth		An azimuth value.
-         @param     elevation	An elevation value.
-         */
-        void setChannelsOffset(double azimuth, double elevation);
-        
-        //! Get the azimuth offset of the channels.
-        /**	Retreive the azimuth offset of the channels in radian.
-         
-         @return    The azimuth offset of the channels.
-         */
-        double getChannelsAzimuthOffset() const
-        {
-            if(m_mode == Standard)
-                return m_decoder_regular->getChannelsAzimuthOffset();
-            else
-                return 0;
-        }
-        
-        //! Get the elevation offset of the channels.
-        /**	Retreive the elevation offset of the channels in radian.
-         
-         @return    The elevation offset of the channels.
-         */
-        double getChannelsElevationOffset() const
-        {
-            if(m_mode == Standard)
-                return m_decoder_regular->getChannelsElevationOffset();
-            else
-                return 0;
-        }
-        
         /**	Set channel position.
          @param     index		The index of the channel.
          @param     azimuth		An azimuth value. In radian, between 0 and 2π.
          @param     elevation	An elevation value. In radian, between 0 and 2π.
          */
-        void	setChannelPosition(unsigned int index, double azimuth, double elevation);
+        void setChannelPosition(unsigned int index, double azimuth, double elevation);
+        
+        //! Set the position of the channels.
+        /** Set the position of the channels with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of channels - 1.
+         
+         @param     azimuths		The azimuths.
+         @param     elevations	The elevations.
+         */
+		void setChannelsPosition(double* azimuths, double* elevations);
+        
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
+        
+        //! Get the x rotation of the channels.
+        /**	Retreive the x rotation of the channels in radian.
+         
+         @return    The x rotation of the channels.
+         */
+		double getChannelsRotationX() const
+        {
+            if(m_mode == Standard)
+                return m_decoder_regular->getChannelsRotationX();
+            else
+                return 0;
+        }
+        
+        //! Get the y rotation of the channels.
+        /**	Retreive the x rotation of the channels in radian.
+         
+         @return    The y rotation of the channels.
+         */
+		double getChannelsRotationY() const
+        {
+            if(m_mode == Standard)
+                return m_decoder_regular->getChannelsRotationY();
+            else
+                return 0;
+        }
+        
+        //! Get the z rotation of the channels.
+        /**	Retreive the z rotation of the channels in radian.
+         
+         @return    The z rotation of the channels.
+         */
+		double getChannelsRotationZ() const
+        {
+            if(m_mode == Standard)
+                return m_decoder_regular->getChannelsRotationZ();
+            else
+                return 0;
+        }
         
         //! Set the sample rate.
         /** Set the sample rate. The sample will change the impulse responses size and their sizes increase with it. The valid sample rate are 44100, 48000, 88200 and 9600. Setting the sample rate will load the impulse responses, it is essential to define it before the digital signal processing.

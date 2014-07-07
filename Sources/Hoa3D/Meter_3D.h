@@ -109,9 +109,10 @@ namespace Hoa3D
     private:
         unsigned int    m_ramp;
         unsigned int    m_vector_size;
+        unsigned int    m_number_of_rows;
+        unsigned int    m_number_of_columns;
         double*         m_channels_peaks;
-
-        //std::vector<MeterPoint> m_points[256];
+        
         std::vector<MeterPoint> m_points_top[256];
         std::vector<MeterPoint> m_points_bottom[256];
 
@@ -123,7 +124,7 @@ namespace Hoa3D
          
             @param     order	The order.
          */
-        Meter(unsigned int numberOfChannels);
+        Meter(unsigned int numberOfChannels, unsigned int numberOfRows, unsigned int numberOfColumns);
         
         //! The meter destructor.
         /**	The meter destructor free the memory.
@@ -149,6 +150,15 @@ namespace Hoa3D
          */
 		void setChannelsPosition(double* azimuths, double* elevations);
 
+        //! Set the rotation of the channels.
+		/**	Set the angles in radian of the rotation of the channels around the axes x, y and z.
+         
+         @param     axis_x	The angle of rotation around the x axe.
+         @param     axis_y	The angle of rotation around the y axe.
+         @param     axis_z	The angle of rotation around the z axe.
+         */
+		void setChannelsRotation(double axis_x, double axis_y, double axis_z);
+        
 		inline unsigned int getChannelNumberOfPoints(unsigned int index, bool top = 1) const
         {
             assert(index < m_number_of_channels);

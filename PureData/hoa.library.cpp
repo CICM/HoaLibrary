@@ -8,9 +8,19 @@
 #include "PD2D/Hoa2D.pd.h"
 #include "PD3D/Hoa3D.pd.h"
 
+char hoaversion[] = "Beta 2.1";
+#ifdef PD_EXTENTED
+char pdversion[] = "Pd-Extented";
+#else
+char pdversion[] = "Pd-Vanilla";
+#endif
+
 extern "C" void setup_hoa0x2elibrary(void)
 {
-    //
+    post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+    post("© 2012 - 2014  CICM | Paris 8 University");
+    post("Version %s (%s) for %s", hoaversion, __DATE__, pdversion);
+    
     // HOA COMMON //
     setup_hoa0x2econnect();
     setup_hoa0x2edac_tilde();
@@ -47,10 +57,6 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e3d0x2emap_tilde();
 	setup_hoa0x2e3d0x2emeter_tilde();
     setup_hoa0x2e3d0x2escope_tilde();  
-
-    post("HOA Library by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-    post("© 2012 - 2014  CICM | Paris 8 University");
-    post("Version Beta 2.0");
 
     pd_library_add_folder("HoaLibrary", "patchers");
     pd_library_add_folder("HoaLibrary", "clippings");
