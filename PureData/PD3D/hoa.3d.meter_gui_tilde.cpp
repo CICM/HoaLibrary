@@ -763,11 +763,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 		{
             if(x->f_over_leds[i])
                  mcolor = x->f_color_over_signal;
-            else if(x->f_meter->getChannelEnergy(i) < -25.5)
+            else if(x->f_meter->getChannelEnergy(i) < -90.)
+                mcolor = x->f_color_bd;
+            else if(x->f_meter->getChannelEnergy(i) < -30.)
                 mcolor = x->f_color_cold_signal;
-            else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+            else if(x->f_meter->getChannelEnergy(i) < -21)
                 mcolor = x->f_color_tepid_signal;
-            else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+            else if(x->f_meter->getChannelEnergy(i) < -12)
                 mcolor = x->f_color_warm_signal;
             else
                 mcolor = x->f_color_hot_signal;
@@ -826,11 +828,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
             {
                 if(x->f_over_leds[i])
                     mcolor = x->f_color_over_signal;
-                else if(x->f_meter->getChannelEnergy(i) < -25.5)
+                else if(x->f_meter->getChannelEnergy(i) < -90.)
+                    mcolor = x->f_color_bd;
+                else if(x->f_meter->getChannelEnergy(i) < -30)
                     mcolor = x->f_color_cold_signal;
-                else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+                else if(x->f_meter->getChannelEnergy(i) < -21)
                     mcolor = x->f_color_tepid_signal;
-                else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+                else if(x->f_meter->getChannelEnergy(i) < -12)
                     mcolor = x->f_color_warm_signal;
                 else
                     mcolor = x->f_color_hot_signal;
