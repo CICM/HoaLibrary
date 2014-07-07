@@ -68,21 +68,37 @@ namespace Hoa3D
     unsigned int hoa_number_binaural_configs    = 4;
     unsigned int hoa_number_binaural_elevation  = 14;
     unsigned int hoa_binaural_configs[] = {
-        4, 0,  12, 24,
-        0, 8,  0,  28,
-        0, 0,  16, 32,
+        4, 0,  8, 24,
+        0, 6,  0,  28,
+        0, 0,  12, 32,
         0, 0,  0,  34,
-        9, 12, 18, 36,
+        8, 12, 18, 36,
         0, 0,  0,  34,
-        0, 0,  16, 32,
-        0, 8,  0,  28,
-        4, 0,  12, 24,
+        0, 0,  12, 32,
+        0, 6,  0,  28,
+        4, 0,  8, 24,
         0, 0,  0,  20,
-        0, 4,  8,  14,
+        0, 4,  4,  14,
         0, 0,  0,  8,
-        0, 0,  3,  4,
+        0, 0,  0,  4,
         1, 1,  1,  1};
-    
+    /*
+    unsigned int hoa_binaural_configs[] = {
+        0, 0,  0, 0,
+        0, 8,  0,  0,
+        0, 0,  0, 0,
+        0, 0,  0,  0,
+        9, 12, 18, 18,
+        0, 0,  0,  0,
+        0, 0,  0, 0,
+        0, 8,  0,  0,
+        4, 0,  0, 0,
+        0, 0,  0,  0,
+        0, 4,  0,  0,
+        0, 0,  0,  0,
+        0, 0,  0,  0,
+        1, 1,  0,  0};
+    */
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
     unsigned int hoa_binaural_impulse_sizes[]   = {128, 142, 256, 286};
@@ -108,8 +124,8 @@ namespace Hoa3D
         
         for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
         {
-            unsigned int number_of_loudspeaker = hoa_binaural_configs[i];
-            for (unsigned int j = 1; j < hoa_number_binaural_elevation; j++)
+            unsigned int number_of_loudspeaker = 0;
+            for (unsigned int j = 0; j < hoa_number_binaural_elevation; j++)
             {
                 number_of_loudspeaker += hoa_binaural_configs[i + j * hoa_number_binaural_configs];
             }
@@ -120,7 +136,7 @@ namespace Hoa3D
                 break;
             }
         }
-
+        
         m_impulses_vector   = new const float*[m_number_of_virtual_channels];
         m_harmonics_vector  = new float[m_number_of_harmonics];
         m_channels_vector   = new float[m_number_of_virtual_channels];
@@ -133,7 +149,9 @@ namespace Hoa3D
             unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
             for(unsigned int j = 0; j < n_elev_channels; j++)
             {
-                m_decoder->setChannelPosition(nimpulse, (j * (360. / (double )n_elev_channels)) / 360. * HOA_2PI, ((double)i * 10. - 40.) / 360. * HOA_2PI);
+                m_decoder->setChannelPosition(nimpulse,
+                                              (double)j / (double )n_elev_channels * HOA_2PI,
+                                              ((double)i * 10. - 40.) / 360. * HOA_2PI);
                 nimpulse++;
             }
         }
@@ -191,7 +209,10 @@ namespace Hoa3D
                 unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + i * hoa_number_binaural_configs];
                 for(unsigned int j = 0; j < n_elev_channels; j++)
                 {
-                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate, ((double)j * (360. / (double )n_elev_channels)), i * 10 - 40, m_pinna_size) + hoa_binaural_crop[index];
+                    m_impulses_vector[nimpulse] = get_mit_hrtf_3D(m_sample_rate,
+                                                                  (double)j / (double )n_elev_channels * 360.,
+                                                                  i * 10 - 40,
+                                                                  m_pinna_size) + hoa_binaural_crop[index];
                     
                     nimpulse++;
                 }
@@ -230,18 +251,22 @@ namespace Hoa3D
                     int nimpulse = 0;
                     for(unsigned int k = 0; k < hoa_number_binaural_elevation; k++)
                     {
-                        unsigned int n_elev_channels = hoa_binaural_configs[m_configuration + k * hoa_number_binaural_configs];
-                        int channel_offset = nimpulse + n_elev_channels;
-                        for(unsigned int l = 0; l < n_elev_channels; l++)
+                        int n_elev_channels = hoa_binaural_configs[m_configuration + k * hoa_number_binaural_configs];
+                        
+                        if(n_elev_channels)
                         {
+                            int channel_offset = nimpulse + n_elev_channels;
                             value_left += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
-                            if(l == 0)
-                                value_right += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
-                            else
-                                value_right += m_channels_vector[nimpulse] * m_impulses_vector[channel_offset - l][j];
-                            
+                            value_right += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
                             nimpulse++;
+                            for(unsigned int l = 1; l < n_elev_channels; l++)
+                            {
+                                value_left  += m_channels_vector[nimpulse] * m_impulses_vector[nimpulse][j];
+                                value_right += m_channels_vector[nimpulse] * m_impulses_vector[channel_offset - l][j];
+                                nimpulse++;
+                            }
                         }
+                        
                     }
                     
                     m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;

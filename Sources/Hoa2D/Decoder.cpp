@@ -351,7 +351,7 @@ namespace Hoa2D
             }
             for(int i = 0; i < m_number_of_virtual_channels; i++)
             {
-                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, wrap_360(-i * 360 / m_number_of_virtual_channels), m_pinna_size) +hoa_binaural_crop[index];
+                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, wrap_360(-i * 360 / m_number_of_virtual_channels), m_pinna_size) + hoa_binaural_crop[index];
             }
 
             if(m_impulses_matrix)
