@@ -613,7 +613,7 @@ void hoa_map_set(t_hoa_map *x, t_symbol *s, short ac, t_atom *av)
 		if (msgtype == hoa_sym_source)
 			pd_typedmess((t_pd *)x, hoa_sym_source, ac, av);
 		else if (msgtype == hoa_sym_group)
-			pd_typedmess((t_pd *)x, hoa_sym_group, ac, av);
+			pd_typedmess((t_pd *)x, hoa_sym_source, ac, av);
 	}
 	x->f_output_enabled = 1;
 }
