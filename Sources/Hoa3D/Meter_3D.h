@@ -196,7 +196,10 @@ namespace Hoa3D
         inline double getChannelEnergy(unsigned int index) const
         {
             assert(index < m_number_of_channels);
-            return 20. * log10(m_channels_peaks[index]);
+            if(m_channels_peaks[index] == 0.)
+                return -91;
+            else
+                return clip_min(20. * log10(m_channels_peaks[index]), -90.);
         }
        
         //! This method performs the widening with single precision.

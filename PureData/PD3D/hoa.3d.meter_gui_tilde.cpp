@@ -129,7 +129,7 @@ extern "C" void setup_hoa0x2e3d0x2emeter_tilde(void)
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
-    CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45");
+    CLASS_ATTR_DEFAULT              (c, "angles", 0, "45 35.2644 135 35.2644 225 35.2644 315 35.2644 45 -35.2644 135 -35.2644 225 -35.2644 315 -35.2644");
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "offset", 0, t_hoa_meter_3d, f_attrs, 3);
     CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
@@ -255,6 +255,8 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
     binbuf_get_attribute(d, gensym("@channels"), &ac, &av);
     if(ac && av)
     {
+        if(atom_getlong(av) < 4)
+            atom_setlong(av, 4);
         x->f_meter  = new Hoa3D::Meter(atom_getlong(av), 181, 360);
         x->f_vector = new Hoa3D::Vector(atom_getlong(av));
         free(av);
@@ -761,11 +763,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 		{
             if(x->f_over_leds[i])
                  mcolor = x->f_color_over_signal;
-            else if(x->f_meter->getChannelEnergy(i) < -25.5)
+            else if(x->f_meter->getChannelEnergy(i) < -90.)
+                mcolor = x->f_color_bd;
+            else if(x->f_meter->getChannelEnergy(i) < -30.)
                 mcolor = x->f_color_cold_signal;
-            else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+            else if(x->f_meter->getChannelEnergy(i) < -21)
                 mcolor = x->f_color_tepid_signal;
-            else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+            else if(x->f_meter->getChannelEnergy(i) < -12)
                 mcolor = x->f_color_warm_signal;
             else
                 mcolor = x->f_color_hot_signal;
@@ -795,7 +799,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 					egraphics_line_to(g, abs, ord);
 
 				}
-                egraphics_set_line_splinestep(g, 1000.);
 				egraphics_close_path(g);
 				egraphics_fill_preserve(g);
 				
@@ -824,11 +827,13 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
             {
                 if(x->f_over_leds[i])
                     mcolor = x->f_color_over_signal;
-                else if(x->f_meter->getChannelEnergy(i) < -25.5)
+                else if(x->f_meter->getChannelEnergy(i) < -90.)
+                    mcolor = x->f_color_bd;
+                else if(x->f_meter->getChannelEnergy(i) < -30)
                     mcolor = x->f_color_cold_signal;
-                else if(x->f_meter->getChannelEnergy(i) >= -25.5 && x->f_meter->getChannelEnergy(i) < -16.5)
+                else if(x->f_meter->getChannelEnergy(i) < -21)
                     mcolor = x->f_color_tepid_signal;
-                else if(x->f_meter->getChannelEnergy(i) >= -16.5 && x->f_meter->getChannelEnergy(i) < -7.5)
+                else if(x->f_meter->getChannelEnergy(i) < -12)
                     mcolor = x->f_color_warm_signal;
                 else
                     mcolor = x->f_color_hot_signal;
@@ -858,7 +863,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
                         egraphics_line_to(g, abs, ord);
                         
                     }
-                    egraphics_set_line_splinestep(g, 1000.);
                     egraphics_close_path(g);
                     egraphics_fill_preserve(g);
                     

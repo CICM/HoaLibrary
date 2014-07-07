@@ -33,14 +33,14 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj 122 154 hoa.2d.encoder~ 7 -------------;
 #X obj 122 180 hoa.2d.wider~ 7 -----------------;
 #X obj 122 107 hoa.soundrone;
-#X text 4 0 hoa.2d.wider~ can be used to wide the diffusion of a localised
-sound. The order depending signals are weighted and appear in a logarithmic
-way to have linear changes.;
 #X obj 9 -27 c.patcherinfos;
 #X obj 14 -44 loadbang;
 #X obj -1 -44 hoa.help.header;
 #X obj 70 697 hoa.help.pub;
 #X obj 406 -44 hoa.help.also;
+#X text 4 0 hoa.2d.wider~ can be used to wide the diffusion of a localised
+sound. The degrees depending signals are weighted and appear in a logarithmic
+way to have linear changes.;
 #X connect 3 0 16 15;
 #X connect 4 0 3 0;
 #X connect 8 0 4 0;
@@ -126,6 +126,6 @@ way to have linear changes.;
 #X connect 16 14 0 14;
 #X connect 16 14 14 14;
 #X connect 17 0 15 0;
-#X connect 19 0 21 0;
-#X connect 20 0 19 0;
+#X connect 18 0 20 0;
+#X connect 19 0 18 0;
 #X coords 0 797 1 796 100 60 0;
