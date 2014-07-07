@@ -1,0 +1,120 @@
+#N canvas 84 93 901 707 10;
+#X obj 626 53 hoa.pi 2;
+#X obj 611 73 *~;
+#X obj 611 12 phasor~ 0.1;
+#X obj 499 69 sig~ 1;
+#X msg 14 164 \; pd dsp 1;
+#X msg 13 201 \; pd dsp 0;
+#X obj 626 32 loadbang;
+#X text 470 53 Source synthesis;
+#X text 261 405 2 - Decoding for a set of loudspeakers;
+#X obj 633 106 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X text 564 -15 Encoding angle in radian;
+#X obj 24 -76 c.canvasinfos;
+#X obj 23 -80 c.loadmess;
+#X obj 6 -81 hoa.tuto.header;
+#X obj 419 -81 hoa.help.pub;
+#X text 247 244 Representation of the circular harmonics;
+#X text 5 -32 Ambisonics can be extented to, f 66;
+#X text 218 136 1 - Encoding in the spherical harmonics domain;
+#X obj 499 163 hoa.3d.scope~ @size 231 231 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+3 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7
+0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X text 171 490 Representation of the contribution of 20 loudspeakers
+;
+#X obj 500 432 hoa.3d.meter~ @size 231 115.5 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @channels
+20 @angles 180 69.0948 159.095 -0 90 20.9052 135 35.2644 135 -35.2644
+180 -69.0948 20.9052 -0 90 -20.9052 45 35.2644 45 -35.2644 0 69.0948
+200.905 -0 270 20.9052 225 35.2644 225 -35.2644 0 -69.0948 339.095
+-0 270 -20.9052 315 35.2644 315 -35.2644 @offset 0 0 0 @rotation anti-clockwise
+@view top-bottom @vectors none @interval 50 @bgcolor 0.76 0.76 0.76
+1 @bdcolor 0.7 0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73
+0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1
+0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+#X obj 499 135 hoa.3d.encoder~ 3 --------------------;
+#X obj 500 405 hoa.3d.decoder~ 3 ambisonics 20 ------;
+#X text 794 81 elevation;
+#X obj 724 83 hoa.pi~ 1;
+#X obj 724 32 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 798 111 c.number~ @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @interval
+50 @decimal 6 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor
+0 0 0 1;
+#X text 786 93 -Pi/2 & Pi/2;
+#X obj 724 58 hoa.tri~ 0.05 -0.5 0.5;
+#X text 7 71 In this example \, a source is encoded in a three dimensional
+space. The synthesized sound field owns the sound and its spatial information
+in the form of spherical harmonics. Thereafter \, the sound field is
+decoded for a set of loudspeakers., f 66;
+#X connect 0 0 1 1;
+#X connect 1 0 9 0;
+#X connect 1 0 21 1;
+#X connect 2 0 1 0;
+#X connect 3 0 21 0;
+#X connect 6 0 0 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 21 0 18 0;
+#X connect 21 0 22 0;
+#X connect 21 1 18 1;
+#X connect 21 1 22 1;
+#X connect 21 2 18 2;
+#X connect 21 2 22 2;
+#X connect 21 3 18 3;
+#X connect 21 3 22 3;
+#X connect 21 4 18 4;
+#X connect 21 4 22 4;
+#X connect 21 5 18 5;
+#X connect 21 5 22 5;
+#X connect 21 6 18 6;
+#X connect 21 6 22 6;
+#X connect 21 7 18 7;
+#X connect 21 7 22 7;
+#X connect 21 8 18 8;
+#X connect 21 8 22 8;
+#X connect 21 9 18 9;
+#X connect 21 9 22 9;
+#X connect 21 10 18 10;
+#X connect 21 10 22 10;
+#X connect 21 11 18 11;
+#X connect 21 11 22 11;
+#X connect 21 12 18 12;
+#X connect 21 12 22 12;
+#X connect 21 13 18 13;
+#X connect 21 13 22 13;
+#X connect 21 14 18 14;
+#X connect 21 14 22 14;
+#X connect 21 15 18 15;
+#X connect 21 15 22 15;
+#X connect 22 0 20 0;
+#X connect 22 1 20 1;
+#X connect 22 2 20 2;
+#X connect 22 3 20 3;
+#X connect 22 4 20 4;
+#X connect 22 5 20 5;
+#X connect 22 6 20 6;
+#X connect 22 7 20 7;
+#X connect 22 8 20 8;
+#X connect 22 9 20 9;
+#X connect 22 10 20 10;
+#X connect 22 11 20 11;
+#X connect 22 12 20 12;
+#X connect 22 13 20 13;
+#X connect 22 14 20 14;
+#X connect 22 15 20 15;
+#X connect 22 16 20 16;
+#X connect 22 17 20 17;
+#X connect 22 18 20 18;
+#X connect 22 19 20 19;
+#X connect 24 0 26 0;
+#X connect 24 0 21 2;
+#X connect 25 0 28 0;
+#X connect 28 0 24 1;

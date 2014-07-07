@@ -1,2 +1,3 @@
-Tutorial_1.pd Tutorial_1 Basic Introduction.;
-Tutorial_2.pd Tutorial_2 Process.;
+Tutorial_1.pd Tutorial_1 Circular harmonics domain.;
+Tutorial_2.pd Tutorial_2 Spherical harmonics domain.;
+Tutorial_3.pd Tutorial_3 Planewaves domain.;

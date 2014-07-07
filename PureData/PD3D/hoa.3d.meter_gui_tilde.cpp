@@ -255,6 +255,8 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
     binbuf_get_attribute(d, gensym("@channels"), &ac, &av);
     if(ac && av)
     {
+        if(atom_getlong(av) < 4)
+            atom_setlong(av, 4);
         x->f_meter  = new Hoa3D::Meter(atom_getlong(av), 181, 360);
         x->f_vector = new Hoa3D::Vector(atom_getlong(av));
         free(av);
