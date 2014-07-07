@@ -129,7 +129,7 @@ extern "C" void setup_hoa0x2e3d0x2emeter_tilde(void)
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
-    CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45");
+    CLASS_ATTR_DEFAULT              (c, "angles", 0, "45 35.2644 135 35.2644 225 35.2644 315 35.2644 45 -35.2644 135 -35.2644 225 -35.2644 315 -35.2644");
     
     CLASS_ATTR_DOUBLE_ARRAY         (c, "offset", 0, t_hoa_meter_3d, f_attrs, 3);
     CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
@@ -799,7 +799,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 					egraphics_line_to(g, abs, ord);
 
 				}
-                egraphics_set_line_splinestep(g, 1000.);
 				egraphics_close_path(g);
 				egraphics_fill_preserve(g);
 				
@@ -864,7 +863,6 @@ void draw_leds(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
                         egraphics_line_to(g, abs, ord);
                         
                     }
-                    egraphics_set_line_splinestep(g, 1000.);
                     egraphics_close_path(g);
                     egraphics_fill_preserve(g);
                     

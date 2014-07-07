@@ -29,6 +29,7 @@ void hoa_decoder_3D_perform64_zero(t_hoa_decoder_3D *x, t_object *dsp64, float *
 
 t_pd_err angles_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv);
 t_pd_err offset_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv);
+t_pd_err pinna_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv);;
 
 t_eclass *hoa_decoder_3D_class;
 t_eclass *hoa_binaural_3d_alias;
@@ -69,6 +70,10 @@ extern "C" void setup_hoa0x2e3d0x2edecoder_tilde(void)
     CLASS_ATTR_DEFAULT          (c, "offset", 0, "0 0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
     CLASS_ATTR_SAVE             (c, "offset", 0);
+    
+    CLASS_ATTR_LONG				(c, "pinna", 0 , t_hoa_decoder_3D, f_pinna);
+    CLASS_ATTR_ACCESSORS		(c, "pinna", NULL, pinna_set);
+	CLASS_ATTR_LABEL			(c, "pinna", 0, "Pinna Size");
     
     eclass_register(CLASS_OBJ, c);
     hoa_decoder_3D_class = c;
@@ -217,6 +222,32 @@ t_pd_err offset_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv)
         else
             az = x->f_decoder->getChannelsRotationX();
         x->f_decoder->setChannelsRotation(ax, ay, az);
+    }
+    return 0;
+}
+
+t_pd_err pinna_set(t_hoa_decoder_3D *x, void *attr, long argc, t_atom *argv)
+{
+    if(argc && argv && atom_gettype(argv) == A_SYM)
+	{
+        if(atom_getsym(argv) == gensym("small") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Small)
+        {
+            int dspState;
+            if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
+                dspState = canvas_suspend_dsp();
+            x->f_decoder->setPinnaSize(Hoa3D::DecoderBinaural::Small);
+            if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
+                canvas_resume_dsp(dspState);
+		}
+        else if(atom_getsym(argv) == gensym("large") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Large)
+        {
+            int dspState;
+            if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
+                dspState = canvas_suspend_dsp();
+            x->f_decoder->setPinnaSize(Hoa3D::DecoderBinaural::Large);
+            if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
+                canvas_resume_dsp(dspState);
+        }
     }
     return 0;
 }

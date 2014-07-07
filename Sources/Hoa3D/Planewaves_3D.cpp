@@ -17,7 +17,7 @@ namespace Hoa3D
         m_channels_rotated_azimuth      = new double[m_number_of_channels];
         m_channels_rotated_elevation    = new double[m_number_of_channels];
         sphere_discretize(numberOfChannels, m_channels_azimuth, m_channels_elevation);
-		setChannelsPosition(m_channels_azimuth, m_channels_elevation);
+        setChannelsRotation(0, 0, 0);
     }
 
 	void Planewaves::setChannelsPosition(double* azimuths, double* elevations)
