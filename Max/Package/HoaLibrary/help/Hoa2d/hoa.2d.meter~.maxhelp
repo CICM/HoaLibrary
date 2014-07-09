@@ -644,8 +644,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 555.0, 392.0, 84.0, 18.0 ],
-									"text" : "drawvector $1"
+									"patching_rect" : [ 555.0, 392.0, 66.0, 18.0 ],
+									"text" : "vectors $1"
 								}
 
 							}
@@ -1732,7 +1732,6 @@
 									"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 3,
 									"energycolor" : [ 0.0, 0.054688, 0.875, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "hoa.2d.meter~",
@@ -4511,7 +4510,6 @@
 								"box" : 								{
 									"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 0,
 									"id" : "obj-1",
 									"interval" : 20,
 									"maxclass" : "hoa.2d.meter~",
@@ -5118,7 +5116,6 @@
 									"angles" : [ 0.0 ],
 									"channels" : 1,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 0,
 									"id" : "obj-25",
 									"interval" : 150,
 									"maxclass" : "hoa.2d.meter~",
@@ -5835,8 +5832,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 493.0, 449.0, 98.0, 18.0 ],
-									"text" : "drawmborder $1"
+									"patching_rect" : [ 493.0, 449.0, 72.0, 18.0 ],
+									"text" : "mborder $1"
 								}
 
 							}
@@ -5864,8 +5861,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 493.0, 374.0, 84.0, 18.0 ],
-									"text" : "drawvector $1"
+									"patching_rect" : [ 493.0, 374.0, 66.0, 18.0 ],
+									"text" : "vectors $1"
 								}
 
 							}
@@ -6030,8 +6027,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 493.0, 302.0, 89.0, 18.0 ],
-									"text" : "drawledsbg $1"
+									"patching_rect" : [ 493.0, 302.0, 63.0, 18.0 ],
+									"text" : "ledsbg $1"
 								}
 
 							}

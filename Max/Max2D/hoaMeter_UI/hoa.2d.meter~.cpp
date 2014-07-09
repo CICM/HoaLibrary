@@ -21,7 +21,7 @@
  @discussion
  The <o>hoa.2d.meter~</o> object displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vectors.
  
- @category ambisonics, hoa objects, audio, GUI, MSP
+ @category planewaves, hoa objects, audio, GUI, MSP
  
  @seealso meter~, live.gain~, hoa.gain~, hoa.2d.scope~, hoa.2d.map, hoa.2d.space, hoa.2d.recomposer, hoa.2d.encoder~, hoa.2d.decoder~
  
@@ -148,28 +148,28 @@ int C74_EXPORT main()
 	
 	/* APPEARANCE */
     CLASS_STICKY_CATEGORY           (c, 0, "Appearance");
-	CLASS_ATTR_LONG                 (c, "drawledsbg", 0, t_meter, f_drawledsbg);
-	CLASS_ATTR_ORDER                (c, "drawledsbg", 0, "1");
-	CLASS_ATTR_STYLE_LABEL          (c, "drawledsbg", 0, "onoff", "Draw Leds Background");
-	CLASS_ATTR_DEFAULT              (c, "drawledsbg", 0, "1");
-	CLASS_ATTR_SAVE                 (c, "drawledsbg", 1);
+	CLASS_ATTR_LONG                 (c, "ledsbg", 0, t_meter, f_drawledsbg);
+	CLASS_ATTR_ORDER                (c, "ledsbg", 0, "1");
+	CLASS_ATTR_STYLE_LABEL          (c, "ledsbg", 0, "onoff", "Draw Leds Background");
+	CLASS_ATTR_DEFAULT              (c, "ledsbg", 0, "1");
+	CLASS_ATTR_SAVE                 (c, "ledsbg", 1);
 	// @description Draw leds background ?
 	
-	CLASS_ATTR_LONG                 (c, "drawvector", 0, t_meter, f_drawvector);
-	CLASS_ATTR_ORDER                (c, "drawvector", 0, "2");
-    CLASS_ATTR_LABEL                (c, "drawvector", 0, "Draw Vectors");
-    CLASS_ATTR_ENUMINDEX4           (c, "drawvector", 0, "none", "energy", "velocity", "both")
-	CLASS_ATTR_DEFAULT              (c, "drawvector", 0, "1");
-	CLASS_ATTR_SAVE                 (c, "drawvector", 1);
-	// @description The vector to draw.
+	CLASS_ATTR_LONG                 (c, "vectors", 0, t_meter, f_drawvector);
+	CLASS_ATTR_ORDER                (c, "vectors", 0, "2");
+    CLASS_ATTR_LABEL                (c, "vectors", 0, "Draw Vectors");
+    CLASS_ATTR_ENUMINDEX4           (c, "vectors", 0, "none", "energy", "velocity", "both")
+	CLASS_ATTR_DEFAULT              (c, "vectors", 0, "1");
+	CLASS_ATTR_SAVE                 (c, "vectors", 1);
+	// @description The vector(s) to draw.
     
-    CLASS_ATTR_LONG                 (c, "drawmborder", 0, t_meter, f_drawmborder);
-	CLASS_ATTR_ORDER                (c, "drawmborder", 0, "3");
-    CLASS_ATTR_LABEL                (c, "drawmborder", 0, "Draw Meter Borders");
-    CLASS_ATTR_ENUMINDEX4           (c, "drawmborder", 0, "none", "Circles", "Axes", "both")
-	CLASS_ATTR_DEFAULT              (c, "drawmborder", 0, "3");
-	CLASS_ATTR_SAVE                 (c, "drawmborder", 1);
-	// @description The border to draw.
+    CLASS_ATTR_LONG                 (c, "mborder", 0, t_meter, f_drawmborder);
+	CLASS_ATTR_ORDER                (c, "mborder", 0, "3");
+    CLASS_ATTR_LABEL                (c, "mborder", 0, "Draw Meter Borders");
+    CLASS_ATTR_ENUMINDEX4           (c, "mborder", 0, "none", "Circles", "Axes", "both")
+	CLASS_ATTR_DEFAULT              (c, "mborder", 0, "3");
+	CLASS_ATTR_SAVE                 (c, "mborder", 1);
+	// @description The meter border(s) to draw.
 	
 	CLASS_ATTR_DOUBLE               (c, "metersize", 0, t_meter, f_metersize);
 	CLASS_ATTR_ORDER                (c, "metersize", 0, "4");
@@ -312,7 +312,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "tepidcolor", 0, "Tepid Signal Color");
 	CLASS_ATTR_ORDER                (c, "tepidcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
-	// @description Sets the RGBA values for the LEDs color for the lower-middle of the <o>hoa.2d.meter~</o> object
+	// @description Sets the RGBA values for the LEDs color for the lower-middle "tepid" range of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "warmcolor", 0, t_meter, f_color_warm);
     CLASS_ATTR_CATEGORY             (c, "warmcolor", 0, "Color");
@@ -606,7 +606,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	if (msg == hoa_sym_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
-		if(name == gensym("mbgcolor") || name == gensym("drawledsbg") || name == gensym("drawmborder"))
+		if(name == gensym("mbgcolor") || name == gensym("ledsbg") || name == gensym("mborder"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
@@ -617,7 +617,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_leds_layer);
 		}
-        else if(name == gensym("drawvector") || name == gensym("energycolor") || name == gensym("velocitycolor"))
+        else if(name == gensym("vectors") || name == gensym("energycolor") || name == gensym("velocitycolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_vectors_layer);
 		}

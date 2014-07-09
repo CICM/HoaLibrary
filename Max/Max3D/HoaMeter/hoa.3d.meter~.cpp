@@ -1,7 +1,7 @@
-/*
- // Copyright (c) 2012-2013 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
- // For information on usage and redistribution, and for a DISCLAIMER OF ALL
- // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+/**
+ * Copyright (c) 2012-2013 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+ * For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ * WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
 /**
@@ -13,17 +13,17 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A spherical harmonic visualizer
+ A spherical array of visual peak level indicators
  
  @description
- <o>hoa.3d.meter~</o> displays spherical harmonics of an ambisonic sound field
+ <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o> object with soundfield descriptors.
  
  @discussion
- <o>hoa.3d.meter~</o> displays spherical harmonics of an ambisonic sound field
+ <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o> object with soundfield descriptors. It computes and displays the energy and velocity vectors.
  
- @category ambisonics, hoa objects, audio, GUI, MSP
+ @category planewaves, hoa objects, audio, GUI, MSP
  
- @seealso hoa.3d.gl.scope~, hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
+ @seealso meter~ hoa.2d.meter~ hoa.3d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
  
  @illustration on @caption the hoa.3d.meter~ GUI object
  @palette yes
@@ -129,10 +129,11 @@ int C74_EXPORT main()
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
-	//jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 	jbox_initclass(c, JBOX_COLOR);
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+	// @method signal @digest Array of signals to be visualize.
+	// @description Array of signals to be visualize.
 	class_addmethod(c, (method) hoa_meter_3d_dsp64,           "dsp64",			A_CANT, 0);
 	class_addmethod(c, (method) hoa_meter_3d_assist,          "assist",			A_CANT, 0);
 	class_addmethod(c, (method) hoa_meter_3d_paint,           "paint",			A_CANT, 0);
@@ -149,6 +150,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_SAVE                 (c, "channels", 1);
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "8");
+	// @description The number of displayed channel and peak level indicators.
 	
     CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs, f_attrs, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
@@ -156,6 +158,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
     CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45");
+	// @description The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels<m> : interleaved azimuth and elevation value for each channels.
     
     CLASS_ATTR_FLOAT_ARRAY			(c, "offset", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs, 3);
     CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
@@ -163,6 +166,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_DEFAULT              (c, "offset", 0, "0. 0. 0.");
 	CLASS_ATTR_SAVE                 (c, "offset", 1);
+	// @description Offset of channels and peak level indicators. The 3 values, corresponding to a rotation of the sphere over the (X, Y, Z) axis are in degree.
 	
     CLASS_ATTR_SYM					(c, "rotation", 0, t_hoa_meter_3d, f_clockwise);
     CLASS_ATTR_ACCESSORS            (c, "rotation", NULL, rotation_set);
@@ -170,6 +174,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "rotation", 0, "Rotation of Channels");
     CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "rotation", 0, "anti-clockwise");
     CLASS_ATTR_ENUM					(c, "rotation", 0, "anti-clockwise clockwise");
+	// @description The rotation can either be <b>clockwise</b> or <b>anti-clockwise</b>
     
     CLASS_ATTR_SYM					(c, "view", 0 , t_hoa_meter_3d, f_view);
     CLASS_ATTR_ACCESSORS            (c, "view", NULL, view_set);
@@ -177,6 +182,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "view", 0, "View");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "view", 0, "top");
     CLASS_ATTR_ENUM					(c, "view", 0, "top bottom top-bottom top/bottom");
+	// @description Select the view you want compared to the sphere. "top-bottom" will draw the bottom of the sphere at the right of the top while the "top/bottom" view will draw it at the bottom.
     
 	CLASS_ATTR_SYM					(c, "vectors", 0, t_hoa_meter_3d, f_vector_type);
     CLASS_ATTR_ACCESSORS            (c, "vectors", NULL, vectors_set);
@@ -185,6 +191,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT              (c, "vectors", 0, "Energy");
 	CLASS_ATTR_SAVE                 (c, "vectors", 1);
     CLASS_ATTR_ENUM					(c, "vectors", 0, "none energy velocity both");
+	// @description The vector(s) to draw.
     
     CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_meter_3d, f_interval);
 	CLASS_ATTR_ORDER                (c, "interval", 0, "5");
@@ -192,6 +199,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
 	CLASS_ATTR_DEFAULT              (c, "interval", 0, "50");
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
+	// @description The refresh interval time in milliseconds.
     
 	CLASS_STICKY_CATEGORY(c, 0, "Color");
     CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoa_meter_3d, f_color_bg);
@@ -199,60 +207,70 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 1, "rgba");
+	// @description Sets the RGBA values for the background color of the <o>hoa.3d.meter~</o> object
     
     CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoa_meter_3d, f_color_bd);
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
     CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.7 0.7 0.7 1.");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 1, "rgba");
+	// @description Sets the RGBA values for the border color of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "offcolor", 0, t_hoa_meter_3d, f_color_off_signal);
 	CLASS_ATTR_LABEL                (c, "offcolor", 0, "Off Signal Color");
 	CLASS_ATTR_ORDER                (c, "offcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "offcolor", 0, "0. 0. 0. 0.2");
 	CLASS_ATTR_STYLE                (c, "offcolor", 1, "rgba");
+	// @description Sets the RGBA values for the off signal color of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "coldcolor", 0, t_hoa_meter_3d, f_color_cold_signal);
 	CLASS_ATTR_LABEL                (c, "coldcolor", 0, "Cold Signal Color");
 	CLASS_ATTR_ORDER                (c, "coldcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "coldcolor", 0, "0. 0.6 0. 0.8");
 	CLASS_ATTR_STYLE                (c, "coldcolor", 1, "rgba");
+	// @description Sets the RGBA values for the cold signal color of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "tepidcolor", 0, t_hoa_meter_3d, f_color_tepid_signal);
 	CLASS_ATTR_LABEL                (c, "tepidcolor", 0, "Tepid Signal Color");
 	CLASS_ATTR_ORDER                (c, "tepidcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
 	CLASS_ATTR_STYLE                (c, "tepidcolor", 1, "rgba");
+	// @description Sets the RGBA values for the LEDs color for the lower-middle "tepid" range of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "warmcolor", 0, t_hoa_meter_3d, f_color_warm_signal);
 	CLASS_ATTR_LABEL                (c, "warmcolor", 0, "Warm Signal Color");
 	CLASS_ATTR_ORDER                (c, "warmcolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "warmcolor", 0, ".85 .85 0. 0.8");
 	CLASS_ATTR_STYLE                (c, "warmcolor", 1, "rgba");
+	// @description Sets the RGBA values for the LEDs color for upper-middle "warm" range of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "hotcolor", 0, t_hoa_meter_3d, f_color_hot_signal);
 	CLASS_ATTR_LABEL                (c, "hotcolor", 0, "Hot Signal Color");
 	CLASS_ATTR_ORDER                (c, "hotcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "hotcolor", 0, "1. 0.6 0. 0.8");
 	CLASS_ATTR_STYLE                (c, "hotcolor", 1, "rgba");
+	// @description Sets the RGBA values for the LEDs color for the upper "hot" range of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "overcolor", 0, t_hoa_meter_3d, f_color_over_signal);
 	CLASS_ATTR_LABEL                (c, "overcolor", 0, "Overload Signal Color");
 	CLASS_ATTR_ORDER                (c, "overcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overcolor", 0, "1. 0. 0. 0.8");
 	CLASS_ATTR_STYLE                (c, "overcolor", 1, "rgba");
+	// @description Sets the RGBA values for the LEDs color for the "over" indicator of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "energycolor", 0, t_hoa_meter_3d, f_color_energy_vector);
 	CLASS_ATTR_LABEL                (c, "energycolor", 0, "Energy Vector Color");
 	CLASS_ATTR_ORDER                (c, "energycolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "energycolor", 0, "0. 0. 1. 0.8");
     CLASS_ATTR_STYLE                (c, "energycolor", 1, "rgba");
+	// @description Sets the RGBA values for the energy vector color of the <o>hoa.3d.meter~</o> object
     
     CLASS_ATTR_RGBA                 (c, "velocitycolor", 0, t_hoa_meter_3d, f_color_velocity_vector);
 	CLASS_ATTR_LABEL                (c, "velocitycolor", 0, "Velocity Vector Color");
 	CLASS_ATTR_ORDER                (c, "velocitycolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "velocitycolor", 0, "1. 0. 0. 0.8");
     CLASS_ATTR_STYLE                (c, "velocitycolor", 1, "rgba");
+	// @description Sets the RGBA values for the velocity vector color of the <o>hoa.3d.meter~</o> object
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
     class_register(CLASS_BOX, c);
@@ -375,7 +393,7 @@ t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
             long d = clip_minmax(atom_getlong(argv), 1, MAX_SPEAKER);
             if(d != x->f_meter->getNumberOfChannels())
             {
-				object_obex_lookup(x, gensym("#B"), (t_object **)&b);
+				object_obex_lookup(x, hoa_sym_pound_B, (t_object **)&b);
                 int dspState = sys_getdspobjdspstate((t_object*)x);
 
 				if (b)
@@ -450,6 +468,8 @@ t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+	
+	
     
 	jbox_redraw((t_jbox *)x);
     return MAX_ERR_NONE;
@@ -461,10 +481,9 @@ t_max_err offset_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **arg
     argv[0] = (t_atom *)malloc(3 * sizeof(t_atom));
     if(argv[0] && argc[0])
     {
-		// atom_setfloat(argv[0], x->f_meter->getChannelsOffset() / HOA_2PI * 360.);
-		atom_setfloat(argv[0]  , 0);
-		atom_setfloat(argv[0]+1, 0);
-		atom_setfloat(argv[0]+2, 0);
+        atom_setfloat(argv[0], x->f_meter->getChannelsRotationX() / HOA_2PI * 360.);
+        atom_setfloat(argv[0]+1, x->f_meter->getChannelsRotationY() / HOA_2PI * 360.);
+        atom_setfloat(argv[0]+2, x->f_meter->getChannelsRotationZ() / HOA_2PI * 360.);
     }
     else
     {
@@ -476,23 +495,32 @@ t_max_err offset_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **arg
 
 t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 {
-	double offsets[3];
+	if(argc && argv)
+    {
+        double ax, ay, az;
+        if(atom_gettype(argv) == A_FLOAT)
+            ax = atom_getfloat(argv) / 360. * HOA_2PI;
+        else
+            ax = x->f_meter->getChannelsRotationX();
+        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+            ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
+        else
+            ay = x->f_meter->getChannelsRotationX();
+        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+            az = atom_getfloat(argv+2) / 360. * HOA_2PI;
+        else
+            az = x->f_meter->getChannelsRotationX();
+				
+        x->f_meter->setChannelsRotation(ax, ay, az);
+        x->f_vector->setChannelsRotation(ax, ay, az);
+				
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+		jbox_redraw((t_jbox *)x);
+    }
 	
-	if(argc && argv && atom_isNumber(argv))
-		offsets[0] = atom_getfloat(argv);
-	if(argc > 1 && argv+1 && atom_isNumber(argv+1))
-		offsets[1] = atom_getfloat(argv+1);
-	if(argc > 2 && argv+2 && atom_isNumber(argv+2))
-		offsets[2] = atom_getfloat(argv+2);
-	
-	// x->f_meter->setChannelsOffset(atom_getfloat(argv) / 360 * HOA_2PI);
-	
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
-    
-	jbox_redraw((t_jbox *)x);
-    return 0;
+    return MAX_ERR_NONE;
 }
 
 t_max_err vectors_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
