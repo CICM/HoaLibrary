@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 219.0, 98.0, 701.0, 645.0 ],
+		"rect" : [ 60.0, 54.0, 701.0, 645.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -453,14 +453,16 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Goudy Old Style",
+					"fontname" : "Arial",
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.6875, 552.5, 630.0, 23.0 ],
+					"patching_rect" : [ 31.6875, 552.5, 630.0, 57.0 ],
+					"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. hoa.process~ is a kind of poly~ object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the hoa.process~",
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -586,7 +588,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 237.0, 269.0, 665.0, 366.0 ],
+						"rect" : [ 78.0, 225.0, 665.0, 366.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1031,7 +1033,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.recomposer", "hoa.2d.scope~", "hoa.2d.space", "hoa.gain~" ]
+									"tabs" : [ "hoa.2d.decoder~", "hoa.2d.encoder~", "hoa.2d.map~", "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.optim~", "hoa.2d.projector~", "hoa.2d.recomposer~", "hoa.2d.recomposer", "hoa.2d.rotate~", "hoa.2d.scope~", "hoa.2d.space", "hoa.2d.vector~", "hoa.2d.wider~", "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.2d.play~", "hoa.3d.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
 								}
 
 							}
@@ -1410,7 +1412,7 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Goudy Old Style",
+					"fontname" : "Arial",
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-5",
@@ -1418,7 +1420,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.9375, 85.5, 666.6875, 74.0 ],
+					"patching_rect" : [ 15.9375, 85.25, 666.6875, 74.0 ],
 					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering...",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"

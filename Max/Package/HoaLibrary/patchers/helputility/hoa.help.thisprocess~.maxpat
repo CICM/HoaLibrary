@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -53,7 +53,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 850.0, 100.5, 69.0, 33.0 ],
-					"presentation_rect" : [ 852.5, 86.0, 0.0, 0.0 ],
 					"text" : "This instance"
 				}
 
@@ -69,7 +68,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 775.5, 100.5, 69.0, 33.0 ],
-					"presentation_rect" : [ 774.416626, 87.0, 0.0, 0.0 ],
 					"text" : "Number of instances"
 				}
 
@@ -210,7 +208,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 134.833328, 319.5, 342.0, 47.0 ],
-					"text" : "harmonic argument in \"2d harmonics\" mode. (0, -1, 1, -2, 2..).\nharmonic band in \"3d harmonics\" mode. (0, 1, 2, 3 ..).\nchannel index in \"planewaves\" mode (0, 1, 2, 3 ..)."
+					"text" : "harmonic argument in \"2d harmonics\" mode. (0, -1, 1, -2, 2..).\nharmonic band in \"3d harmonics\" mode. (0, 1, 2, 3 ..).\nchannel index in \"planewaves\" mode (1, 2, 3, 4 ..)."
 				}
 
 			}
@@ -641,7 +639,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 850.0, 100.5, 69.0, 33.0 ],
-					"presentation_rect" : [ 852.5, 86.0, 0.0, 0.0 ],
 					"rounded" : 0
 				}
 
@@ -657,7 +654,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 775.5, 100.5, 69.0, 33.0 ],
-					"presentation_rect" : [ 774.416626, 87.0, 0.0, 0.0 ],
 					"rounded" : 0
 				}
 

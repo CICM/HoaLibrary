@@ -1795,7 +1795,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ -1.0, 126.0, 1441.0, 729.0 ],
+						"rect" : [ 0.0, 26.0, 1441.0, 729.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2447,7 +2447,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 84.0, 378.0, 235.0, 303.0 ],
+										"rect" : [ 85.0, 278.0, 235.0, 303.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7541,7 +7541,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 11.0, 176.5, 152.333344, 47.0 ],
+									"patching_rect" : [ 11.0, 176.5, 153.0, 47.0 ],
 									"text" : "The word open/wclose… opens/closes the specified instance patcher",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -10341,7 +10341,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 125.583313, 488.5, 342.0, 47.0 ],
-									"text" : "harmonic argument in \"2d harmonics\" mode. (0, -1, 1, -2, 2..).\nharmonic band in \"3d harmonics\" mode. (0, 1, 2, 3 ..).\nchannel index in \"planewaves\" mode (0, 1, 2, 3 ..)."
+									"text" : "harmonic argument in \"2d harmonics\" mode. (0, -1, 1, -2, 2..).\nharmonic band in \"3d harmonics\" mode. (0, 1, 2, 3 ..).\nchannel index in \"planewaves\" mode (1, 2, 3, 4 ..)."
 								}
 
 							}
@@ -11852,7 +11852,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1441.0, 729.0 ],
+						"rect" : [ -1.0, 126.0, 1441.0, 729.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12249,7 +12249,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 27.0, 221.0, 665.0, 365.0 ],
+										"rect" : [ 26.0, 321.0, 665.0, 365.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -12548,7 +12548,7 @@
 													"spacing_x" : 20.0,
 													"spacing_y" : 3.0,
 													"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-													"tabs" : [ "hoa.fx.convolve~", "hoa.fx.decorrelation~", "hoa.fx.delay~", "hoa.fx.freeverb~", "hoa.fx.gain~", "hoa.fx.grain~", "hoa.fx.mirror~", "hoa.fx.mixer~", "hoa.fx.ringmod~" ]
+													"tabs" : [ "hoa.fx.gain~", "hoa.highpass~", "hoa.onepole~", "hoa.receive", "hoa.receive~", "hoa.send", "hoa.send~" ]
 												}
 
 											}
