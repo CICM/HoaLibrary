@@ -82,6 +82,23 @@ public:
             return abs(m_harmonics_orders[index]);
         }
         
+        //! Retrieve the index of an harmonic.
+        /** The orders of the harmonics are in the range 0 to the decomposition order. Each order contains 2 harmonics with the orders -order and order. For the first orders, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[order].
+         
+         @param     order	The order an harmonic.
+         @return    The method returns the index of the harmonic if the harmonic exists, otherwise the function generates an error.
+         @see       getHarmonicOrder()
+         @see       getHarmonicName()
+         */
+        inline unsigned int getHarmonicIndex(const int order) const
+        {
+            assert(order >= getDecompositionOrder() && order <= -getDecompositionOrder());
+            if(order < 0)
+                return -order * 2 - 1;
+            else
+                return order * 2;
+        };
+        
         //! Retrieve a name for an harmonic.
         /** Retrieve a name for an harmonic in a std::string format that will be "harmonic order".
          

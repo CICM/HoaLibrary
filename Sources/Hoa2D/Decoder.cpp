@@ -267,7 +267,6 @@ namespace Hoa2D
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
     unsigned int hoa_binaural_impulse_sizes[]   = {128, 142, 256, 286};
-    unsigned int hoa_binaural_crop[]            = {36, 40, 64, 80};
 
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {
@@ -351,7 +350,7 @@ namespace Hoa2D
             }
             for(int i = 0; i < m_number_of_virtual_channels; i++)
             {
-                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, wrap_360(-i * 360 / m_number_of_virtual_channels), m_pinna_size) +hoa_binaural_crop[index];
+                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, wrap_360(i * 360. / (double)m_number_of_virtual_channels), m_pinna_size);
             }
 
             if(m_impulses_matrix)
@@ -399,11 +398,11 @@ namespace Hoa2D
 
                     for(unsigned int k = 0; k < m_number_of_virtual_channels; k++)
                     {
-                        value_right += m_channels_vector[k] * m_impulses_vector[k][j];
+                        value_left += m_channels_vector[k] * m_impulses_vector[k][j];
                         if(k == 0)
-                            value_left += m_channels_vector[k] * m_impulses_vector[k][j];
+                            value_right += m_channels_vector[k] * m_impulses_vector[k][j];
                         else
-                            value_left += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
+                            value_right += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
                     }
 
                     m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;

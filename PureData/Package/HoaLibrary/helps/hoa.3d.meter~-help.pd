@@ -1,4 +1,4 @@
-#N canvas 290 46 1113 763 10;
+#N canvas 361 47 1113 763 10;
 #X obj -429 -1113 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj -912 -1160 c.patcherinfos;
