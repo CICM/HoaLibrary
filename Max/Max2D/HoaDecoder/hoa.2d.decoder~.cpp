@@ -87,7 +87,6 @@ int C74_EXPORT main(void)
     // @description If the <m>autoconnect</m> attribute is checked, connected objects like the <o>hoa.2d.meter~</o>, <o>hoa.2d.vector~</o>, <o>hoa.dac~</o> or <o>hoa.gain~</o> will be notified of changes and adapt their behavior accordingly.
     
     CLASS_ATTR_SYM              (c, "mode", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
     CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural irregular");
 	CLASS_ATTR_ACCESSORS		(c, "mode", mode_get, mode_set);
@@ -101,7 +100,6 @@ int C74_EXPORT main(void)
     // </ul>
     
     CLASS_ATTR_LONG             (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
-	CLASS_ATTR_CATEGORY			(c, "channels", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "channels", channel_get, channel_set);
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "4");
@@ -110,8 +108,7 @@ int C74_EXPORT main(void)
     // @description The number of Channels. In <b>ambisonic</b> <m>mode</m>, the number of channels must be equal or higher to the number of harmonics : (order *2 + 1), (default : order * 2 + 2).
     
     CLASS_ATTR_DOUBLE           (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
-	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Planewaves");
-    CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Channels");
+    CLASS_ATTR_LABEL            (c, "offset", 0, "Offsets of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "offset", offset_get, offset_set);
     CLASS_ATTR_DEFAULT          (c, "offset", 0, "0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
@@ -119,7 +116,6 @@ int C74_EXPORT main(void)
     // @description The offset of channels, in degrees between 0. and 360.
     
     CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr, f_attr, MAX_CHANNELS);
-	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "angles", angles_get, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "4");
@@ -127,7 +123,6 @@ int C74_EXPORT main(void)
     // @description Angles of each channels. The angles of channels are only settable in <b>irregular</b> <m>mode</m>. Each angle are in degrees and is wrapped between 0. and 360. So you can also set an angle with a negative value. ex : angles for a 5.1 loudspeakers restitution system can be setted either by the "angles 0 30 110 250 330" or by "angles 0 30 110 -110 -30".
     
     CLASS_ATTR_SYM              (c, "pinna", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
-	CLASS_ATTR_CATEGORY			(c, "pinna", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "pinna", 0, "Pinna Size");
     CLASS_ATTR_ENUM             (c, "pinna", 0, "small large");
 	CLASS_ATTR_ACCESSORS		(c, "pinna", pinna_get, pinna_set);
@@ -153,6 +148,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
     t_atom_long channels;
     t_symbol*   mode;
 	int	order = 1;
+    
     x = (t_hoa_decoder *)object_alloc(hoa_decoder_class);
 	if (x)
 	{
@@ -164,6 +160,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         x->f_send_config = 1;
     
         x->f_decoder    = new Hoa2D::DecoderMulti(order);
+        
         d = (t_dictionary *)gensym("#D")->s_thing;
         if(d && dictionary_getdictionary(d, gensym("saved_object_attributes"), (t_object **)&attr) == MAX_ERR_NONE)
         {
@@ -527,6 +524,7 @@ void send_configuration(t_hoa_decoder *x)
 	t_object *decoder;
     t_object *object;
     t_object *line;
+    t_object *obj;
 	t_max_err err;
     t_atom msg[4];
     t_atom rv;
@@ -557,19 +555,16 @@ void send_configuration(t_hoa_decoder *x)
             if (jpatchline_get_box1(line) == decoder)
             {
                 object = jpatchline_get_box2(line);
-                t_symbol* classname = object_classname(jbox_get_object(object));
-                if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~") || classname == gensym("hoa.gain~") ||
-                   classname == gensym("hoa.dac~") || classname == gensym("dac~"))
+                obj = jbox_get_object(object);
+                t_symbol* classname = object_classname(obj);
+                
+                if(classname == hoa_sym_hoa_2d_meter || classname == hoa_sym_hoa_2d_vector || classname == hoa_sym_hoa_gain || classname == hoa_sym_hoa_dac || hoa_sym_dac)
                 {
-                    if (classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.2d.vector~"))
+                    if (classname == hoa_sym_hoa_2d_meter || classname == hoa_sym_hoa_2d_vector || classname == hoa_sym_hoa_gain)
                     {
-                        object_method_typed(jbox_get_object(object), hoa_sym_channels, 1, &nchannels, NULL);
-                        object_method_typed(jbox_get_object(object), hoa_sym_angles, x->f_decoder->getNumberOfChannels(), argv, NULL);
-                        object_method_typed(jbox_get_object(object), hoa_sym_offset, 1, &offset, NULL);
-                    }
-                    else if(classname == gensym("hoa.gain~"))
-                    {
-                        object_method_typed(jbox_get_object(object), hoa_sym_channels, 1, &nchannels, NULL);
+                        object_method_typed(obj, hoa_sym_channels, 1, &nchannels, NULL);
+                        object_method_typed(obj, hoa_sym_angles, x->f_decoder->getNumberOfChannels(), argv, NULL);
+                        object_method_typed(obj, hoa_sym_offset, 1, &offset, NULL);
                     }
                     
                     // connection

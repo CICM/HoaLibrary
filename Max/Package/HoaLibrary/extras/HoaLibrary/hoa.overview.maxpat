@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 60.0, 54.0, 701.0, 645.0 ],
+		"rect" : [ 430.0, 104.0, 701.0, 645.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -388,7 +388,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 314.5625, 10.75, 262.0, 32.0 ],
-					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2013 CICM / Universite Paris 8",
+					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM / University of Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
 
@@ -454,15 +454,13 @@
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 15.0,
+					"fontsize" : 14.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
-					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 552.5, 630.0, 57.0 ],
-					"text" : "hoa.process~ helps the modularization of patches for ambisonic or plane waves processing. hoa.process~ is a kind of poly~ object particulary suitable for multichannel ambisonic or plane wave processing. Create a patch/effect/operator, then parallelize it with the hoa.process~",
+					"patching_rect" : [ 31.6875, 552.5, 630.0, 22.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -588,7 +586,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 78.0, 225.0, 665.0, 366.0 ],
+						"rect" : [ 448.0, 275.0, 665.0, 366.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -618,7 +616,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 568.0, 696.0, 150.0, 18.0 ],
-									"text" : "hoa.3d.encoder~"
+									"text" : "hoa.connect"
 								}
 
 							}
@@ -1033,7 +1031,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 3.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.2d.decoder~", "hoa.2d.encoder~", "hoa.2d.map~", "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.optim~", "hoa.2d.projector~", "hoa.2d.recomposer~", "hoa.2d.recomposer", "hoa.2d.rotate~", "hoa.2d.scope~", "hoa.2d.space", "hoa.2d.vector~", "hoa.2d.wider~", "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.2d.play~", "hoa.3d.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
+									"tabs" : [ "hoa.connect", "hoa.dac~", "hoa.gain~", "hoa.in", "hoa.in~", "hoa.out", "hoa.out~", "hoa.pi", "hoa.pi~", "hoa.play~", "hoa.process~", "hoa.record~", "hoa.thisprocess~" ]
 								}
 
 							}
