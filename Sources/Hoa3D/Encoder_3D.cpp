@@ -27,8 +27,8 @@ namespace Hoa3D
             double max;
             double theta;
             double phi;
-            int band     = getHarmonicDegree(i);
-            int argument = getHarmonicOrder(i);
+            int degree = getHarmonicDegree(i);
+            int order = getHarmonicOrder(i);
             
             max = 0.;
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
@@ -36,17 +36,18 @@ namespace Hoa3D
 				phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI;
                 phi = wrap_twopi(phi);
                 
-                m_azimuth_matrix[j][i] = spherical_harmonics_azimuth(band, argument, phi);
+                m_azimuth_matrix[j][i] = spherical_harmonics_azimuth(degree, order, phi);
                 
                 theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI2;
                 theta = wrap_twopi(theta);
                 if(theta >= HOA_PI)
                     theta = HOA_2PI - theta;
-    
-                m_elevation_matrix[j][i] = spherical_harmonics_elevation(band, argument, theta);
-                if(max < fabs(m_elevation_matrix[j][i]))
+                
+                double value = spherical_harmonics_elevation(degree, order, theta);
+                m_elevation_matrix[j][i] = value;
+                if(max < fabs(value))
                 {
-                    max = fabs(m_elevation_matrix[j][i]);
+                    max = fabs(value);
                 }
             }
             m_normalization[i] = max;
