@@ -45,15 +45,6 @@
     <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\ecommon.h">
       <Filter>CicmWrapper</Filter>
     </ClInclude>
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\g_canvas.h">
-      <Filter>CicmWrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_imp.h">
-      <Filter>CicmWrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_pd.h">
-      <Filter>CicmWrapper</Filter>
-    </ClInclude>
     <ClInclude Include="..\ThirdParty\PureData\Sources\egraphics\egraphics.h">
       <Filter>CicmWrapper</Filter>
     </ClInclude>
@@ -93,9 +84,6 @@
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
     <ClInclude Include="..\Sources\Hoa2D\Hoa2D.h">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa2D\Kits.h">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClInclude>
     <ClInclude Include="..\Sources\Hoa2D\Map.h">
@@ -190,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="..\Sources\HoaDefs.h">
       <Filter>HoaSources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\Hoa3D\Delaunay.h">
-      <Filter>HoaSources\Hoa3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -339,9 +324,6 @@
     <ClCompile Include="..\Sources\Hoa2D\Ambisonic.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\BinauralMatrix2D.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sources\Hoa2D\ChannelManager.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
@@ -349,9 +331,6 @@
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\Hoa2D\Encoder.cpp">
-      <Filter>HoaSources\Hoa2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\Hoa2D\Kits.cpp">
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\Hoa2D\Map.cpp">
@@ -385,9 +364,6 @@
       <Filter>HoaSources\Hoa2d</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp">
-      <Filter>HoaSources\Hoa3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\Hoa3D\BinauralMatrix_3D.cpp">
       <Filter>HoaSources\Hoa3d</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp">
@@ -450,8 +426,8 @@
     <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp">
       <Filter>HoaSources\HoaCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sources\Hoa3D\Delaunay.cpp">
-      <Filter>HoaSources\Hoa3d</Filter>
+    <ClCompile Include="PDCommon\hoa.map_gui.cpp">
+      <Filter>PdCommon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

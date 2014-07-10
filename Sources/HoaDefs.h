@@ -17,6 +17,7 @@
 #include <math.h>
 #include <string>
 #include <assert.h>
+#include <algorithm>
 
 #ifdef __APPLE__
 

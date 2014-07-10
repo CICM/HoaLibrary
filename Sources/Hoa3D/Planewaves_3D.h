@@ -308,7 +308,7 @@ namespace Hoa3D
         }
         else if(numberOfPoints == 8) // Hexahedron or cube
         {
-			double elev = asin(1/sqrt(3)); // or elevation(-1, 1, 1);
+			double elev = asin(1/sqrt(3.)); // or elevation(-1, 1, 1);
             azimuths[0] = azimuths[4] = HOA_PI4;
             azimuths[1] = azimuths[5] = HOA_PI4 + HOA_PI2;
             azimuths[2] = azimuths[6] = HOA_PI4 + HOA_PI;
