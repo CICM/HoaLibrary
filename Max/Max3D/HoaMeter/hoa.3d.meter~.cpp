@@ -251,11 +251,11 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE                (c, "hotcolor", 1, "rgba");
 	// @description Sets the RGBA values for the LEDs color for the upper "hot" range of the <o>hoa.3d.meter~</o> object
     
-	CLASS_ATTR_RGBA                 (c, "overcolor", 0, t_hoa_meter_3d, f_color_over_signal);
-	CLASS_ATTR_LABEL                (c, "overcolor", 0, "Overload Signal Color");
-	CLASS_ATTR_ORDER                (c, "overcolor", 0, "8");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overcolor", 0, "1. 0. 0. 0.8");
-	CLASS_ATTR_STYLE                (c, "overcolor", 1, "rgba");
+	CLASS_ATTR_RGBA                 (c, "overloadcolor", 0, t_hoa_meter_3d, f_color_over_signal);
+	CLASS_ATTR_LABEL                (c, "overloadcolor", 0, "Overload Signal Color");
+	CLASS_ATTR_ORDER                (c, "overloadcolor", 0, "8");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overloadcolor", 0, "1. 0. 0. 0.8");
+	CLASS_ATTR_STYLE                (c, "overloadcolor", 1, "rgba");
 	// @description Sets the RGBA values for the LEDs color for the "over" indicator of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "energycolor", 0, t_hoa_meter_3d, f_color_energy_vector);
