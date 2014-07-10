@@ -22,7 +22,7 @@ namespace Hoa3D
         unsigned int m_number_of_columns;
         double*     m_harmonics;
         double*     m_matrix;
-        DecoderStandard*    m_decoder;
+        DecoderRegular*    m_decoder;
     public:
         
         //! The Scope constructor.
