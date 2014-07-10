@@ -6,7 +6,7 @@
 <c74object name="hoa.fx.ringmod~" module="hoa">
 
 	<digest>
-		A multichannel sound field diffusion processor with ring modulation.
+		A ring modulation sound field diffuser.
 	</digest>
 
 	<description>

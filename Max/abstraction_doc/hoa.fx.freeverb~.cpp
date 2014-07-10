@@ -10,10 +10,10 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel freeverb processor.
+ A freeverb reverberation for sound fields.
  
  @description
- <o>hoa.fx.freeverb~</o> is a multichannel freeverb reverberation processor.
+ <o>hoa.fx.freeverb~</o> is a multichannel freeverb reverberation diffuser.
  This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
  
  @discussion

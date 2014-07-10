@@ -6,7 +6,7 @@
 <c74object name="hoa.syn.delay~" module="hoa">
 
 	<digest>
-		A multichannel delay processor.
+		A delay sound field synthesizer.
 	</digest>
 
 	<description>

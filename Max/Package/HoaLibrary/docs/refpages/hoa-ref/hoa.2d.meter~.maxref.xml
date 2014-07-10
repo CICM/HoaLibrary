@@ -16,7 +16,7 @@
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">Julien Colafrancesco, Pierre Guillot, Eliott Paris.</metadata>
-		<metadata name="tag">ambisonics</metadata>
+		<metadata name="tag">planewaves</metadata>
 		<metadata name="tag">hoa objects</metadata>
 		<metadata name="tag">audio</metadata>
 		<metadata name="tag">GUI</metadata>
@@ -142,48 +142,6 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
-		<attribute name="drawledsbg" get="1" set="1" type="int" size="1">
-			<digest>
-				Draw Leds Background
-			</digest>
-			<description>
-				Draw leds background ?
-			</description>
-			<attributelist>
-				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Leds Background" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
-			</attributelist>
-		</attribute>
-		<attribute name="drawmborder" get="1" set="1" type="int" size="1">
-			<digest>
-				Draw Meter Borders
-			</digest>
-			<description>
-				The border to draw.
-			</description>
-			<attributelist>
-				<attribute name="default" get="1" set="1" type="int" size="1" value="3" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Meter Borders" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
-			</attributelist>
-		</attribute>
-		<attribute name="drawvector" get="1" set="1" type="int" size="1">
-			<digest>
-				Draw Vectors
-			</digest>
-			<description>
-				The vector to draw.
-			</description>
-			<attributelist>
-				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Vectors" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
-			</attributelist>
-		</attribute>
 		<attribute name="energycolor" get="1" set="1" type="" size="1">
 			<digest>
 				Energy Vector Color
@@ -230,6 +188,20 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
+		<attribute name="ledsbg" get="1" set="1" type="int" size="1">
+			<digest>
+				Draw Leds Background
+			</digest>
+			<description>
+				Draw leds background ?
+			</description>
+			<attributelist>
+				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Leds Background" />
+				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
+			</attributelist>
+		</attribute>
 		<attribute name="mbgcolor" get="1" set="1" type="" size="1">
 			<digest>
 				Meter Background Color
@@ -244,6 +216,20 @@
 				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
+			</attributelist>
+		</attribute>
+		<attribute name="mborder" get="1" set="1" type="int" size="1">
+			<digest>
+				Draw Meter Borders
+			</digest>
+			<description>
+				The meter border(s) to draw.
+			</description>
+			<attributelist>
+				<attribute name="default" get="1" set="1" type="int" size="1" value="3" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Meter Borders" />
+				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
 			</attributelist>
 		</attribute>
 		<attribute name="metersize" get="1" set="1" type="float" size="1">
@@ -396,7 +382,7 @@
 				Tepid Signal Color
 			</digest>
 			<description>
-				Sets the RGBA values for the LEDs color for the lower-middle of the <o>hoa.2d.meter~</o> object
+				Sets the RGBA values for the LEDs color for the lower-middle "tepid" range of the <o>hoa.2d.meter~</o> object
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Color" />
@@ -405,6 +391,20 @@
 				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
+			</attributelist>
+		</attribute>
+		<attribute name="vectors" get="1" set="1" type="int" size="1">
+			<digest>
+				Draw Vectors
+			</digest>
+			<description>
+				The vector(s) to draw.
+			</description>
+			<attributelist>
+				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Vectors" />
+				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
 			</attributelist>
 		</attribute>
 		<attribute name="velocitycolor" get="1" set="1" type="" size="1">

@@ -6,7 +6,7 @@
 <c74object name="hoa.syn.ringmod~" module="hoa">
 
 	<digest>
-		A multichannel sound field diffusion synthesizer with ring modulation.
+		A sound ring modulation field diffusion synthesizer.
 	</digest>
 
 	<description>

@@ -6,11 +6,11 @@
 <c74object name="hoa.fx.freeverb~" module="hoa">
 
 	<digest>
-		A multichannel freeverb processor.
+		A freeverb reverberation for sound fields.
 	</digest>
 
 	<description>
-		<o>hoa.fx.freeverb~</o> is a multichannel freeverb reverberation processor.
+		<o>hoa.fx.freeverb~</o> is a multichannel freeverb reverberation diffuser.
 		This patcher requires to be loaded by a <o>hoa.process~</o> object to work.
 	</description>
 

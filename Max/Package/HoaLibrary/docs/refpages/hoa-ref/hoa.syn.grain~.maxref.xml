@@ -6,7 +6,7 @@
 <c74object name="hoa.syn.grain~" module="hoa">
 
 	<digest>
-		A multichannel granulator synthesizer.
+		A granular sound field synthesizer.
 	</digest>
 
 	<description>

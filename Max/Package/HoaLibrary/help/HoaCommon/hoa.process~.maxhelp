@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ -1.0, 100.0, 1441.0, 755.0 ],
+		"rect" : [ 6.0, 44.0, 1441.0, 755.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -11852,7 +11852,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ -1.0, 126.0, 1441.0, 729.0 ],
+						"rect" : [ 6.0, 70.0, 1441.0, 729.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12212,8 +12212,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 27.0625, 164.492065, 268.0, 20.0 ],
-									"text" : "loadmess \"fx patches\" \"synth patches\" operators"
+									"patching_rect" : [ 27.0625, 164.492065, 107.0, 20.0 ],
+									"text" : "loadmess process"
 								}
 
 							}
@@ -12249,7 +12249,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 26.0, 321.0, 665.0, 365.0 ],
+										"rect" : [ 33.0, 265.0, 665.0, 365.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -12508,7 +12508,7 @@
 													"rounded" : 0.0,
 													"spacing_x" : 1.0,
 													"spacing_y" : 0.0,
-													"tabs" : [ "fx patches", "synth patches", "operators" ]
+													"tabs" : [ "process" ]
 												}
 
 											}
@@ -12548,7 +12548,7 @@
 													"spacing_x" : 20.0,
 													"spacing_y" : 3.0,
 													"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-													"tabs" : [ "hoa.fx.gain~", "hoa.highpass~", "hoa.onepole~", "hoa.receive", "hoa.receive~", "hoa.send", "hoa.send~" ]
+													"tabs" : [ "hoa.fx.convolve~", "hoa.fx.decorrelation~", "hoa.syn.decorrelation~", "hoa.fx.delay~", "hoa.syn.delay~", "hoa.fx.freeverb~", "hoa.fx.gain~", "hoa.fx.grain~", "hoa.syn.grain~", "hoa.fx.mirror~", "hoa.fx.mixer~", "hoa.fx.ringmod~", "hoa.syn.ringmod~" ]
 												}
 
 											}

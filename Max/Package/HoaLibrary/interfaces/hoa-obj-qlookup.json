@@ -33,7 +33,7 @@
     "digest": "A circular array of visual peak level indicators",
     "module": "hoa",
     "category": [
-      "ambisonics",
+      "planewaves",
       "hoa objects",
       "audio",
       "GUI",
@@ -41,7 +41,7 @@
     ],
     "palette": {
       "category": [
-        "ambisonics",
+        "planewaves",
         "hoa objects",
         "audio",
         "GUI",
@@ -198,6 +198,28 @@
       "audio",
       "MSP"
     ]
+  },
+  "hoa.3d.meter~": {
+    "digest": "Displays the peak level indicators for a spherical array of loudspeakers",
+    "module": "hoa",
+    "category": [
+      "planewaves",
+      "hoa objects",
+      "audio",
+      "GUI",
+      "MSP"
+    ],
+    "palette": {
+      "category": [
+        "planewaves",
+        "hoa objects",
+        "audio",
+        "GUI",
+        "MSP"
+      ],
+      "action": "hoa.3d.meter~",
+      "pic": "hoa.3d.meter~.svg"
+    }
   },
   "hoa.3d.optim~": {
     "digest": "A 3d ambisonic optimization tool",
@@ -430,13 +452,13 @@
     ]
   },
   "hoa.fx.delay~": {
-    "digest": "A multichannel delay processor.",
+    "digest": "A delay sound field diffuser.",
     "module": "hoa",
     "category": [
     ]
   },
   "hoa.fx.freeverb~": {
-    "digest": "A multichannel freeverb processor.",
+    "digest": "A freeverb reverberation for sound fields.",
     "module": "hoa",
     "category": [
     ]
@@ -466,19 +488,7 @@
     ]
   },
   "hoa.fx.ringmod~": {
-    "digest": "A multichannel sound field diffusion processor with ring modulation.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
-  "hoa.highpass~": {
-    "digest": "A multichannel version of the <o>onepole~</o> object.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
-  "hoa.onepole~": {
-    "digest": "A multichannel version of the <o>onepole~</o> object.",
+    "digest": "A ring modulation sound field diffuser.",
     "module": "hoa",
     "category": [
     ]
@@ -514,19 +524,19 @@
     ]
   },
   "hoa.syn.delay~": {
-    "digest": "A multichannel delay processor.",
+    "digest": "A delay sound field synthesizer.",
     "module": "hoa",
     "category": [
     ]
   },
   "hoa.syn.grain~": {
-    "digest": "A multichannel granulator synthesizer.",
+    "digest": "A granular sound field synthesizer.",
     "module": "hoa",
     "category": [
     ]
   },
   "hoa.syn.ringmod~": {
-    "digest": "A multichannel sound field diffusion synthesizer with ring modulation.",
+    "digest": "A sound ring modulation field diffusion synthesizer.",
     "module": "hoa",
     "category": [
     ]

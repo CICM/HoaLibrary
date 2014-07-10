@@ -69,6 +69,18 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
+		<attribute name="channels" get="1" set="1" type="int" size="1">
+			<digest>
+				Number of Channels
+			</digest>
+			<description>
+				The number of Channels.
+			</description>
+			<attributelist>
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Number of Channels" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
+			</attributelist>
+		</attribute>
 		<attribute name="mode" get="1" set="1" type="symbol" size="1">
 			<digest>
 				Mode
@@ -94,7 +106,6 @@
 				Set the offsets of channels with a list of 2 float values corresponding to the azimuth and elevation offset, in degrees between 0. and 360.
 			</description>
 			<attributelist>
-				<attribute name="default" get="1" set="1" type="float_array" size="0" value="0 0" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Offset of Channels" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>

@@ -28,7 +28,8 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showontab" : 1,
+		"showrootpatcherontab" : 0,
+		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
@@ -797,7 +798,7 @@
 													}
 ,
 													"text" : "autopattr",
-													"varname" : "u858002388"
+													"varname" : "u422022561"
 												}
 
 											}
@@ -1961,7 +1962,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 3,
 													"outlettype" : [ "list", "list", "list" ],
-													"output3d" : 0,
 													"parameter_enable" : 1,
 													"patching_rect" : [ 285.5, 161.0, 143.0, 143.0 ],
 													"saved_attribute_attributes" : 													{
