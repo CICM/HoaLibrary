@@ -376,7 +376,7 @@ namespace Hoa3D
                 elevations[i] = elev[i];
             }
         }
-        else if(numberOfPoints == 20)
+        else if(numberOfPoints == 20) // dodecahedron
         {
             double phi = (sqrt(5.) - 1.) / 2.; // The golden ratio
             double R = 1. / sqrt(3.);
