@@ -27,11 +27,11 @@ counterclockwise \, and the 0° is 90° phase shifted relative to a
 mathematical representation of a circle., f 65;
 #X text 3 128 The angles are usually defined in radians (between 0
 and 2π rad) for a representation of space in the circular harmonics
-domain and in degrees (between 0° and 360 °) for a representation
+domain and in degrees (between 0° and 360°) for a representation
 of the space outside the circular harmonics domain., f 65;
 #X text 3 198 It is customary to define the "front" of the sound field
-at 0° or 0 rad \, the "left" at 90 ° or π/2 rad \, the "back" at
-180° or π rad and the"right" at 270° or 3/2π rad assuming that
+at 0° or 0 rad \, the "left" at 90° or π/2 rad \, the "back" at
+180° or π rad and the"right" at 270° or 3π/2 rad assuming that
 the listener is directed to 0°., f 65;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;

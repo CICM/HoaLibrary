@@ -173,8 +173,6 @@ namespace Hoa2D
 		void process(const double* input, double* output);
     };
     
-    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth, bool large);
-    
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
      */
@@ -188,35 +186,14 @@ namespace Hoa2D
             Large       = 1,	/**< Large Pinna Size */
         };
         
-    private:
-        float*          m_impulses_matrix;
-        float*          m_harmonics_vector;
-        float*          m_channels_vector;
-        double*         m_channels_vector_double;
-        unsigned int    m_number_of_virtual_channels;
-        unsigned int    m_sample_rate;
-        unsigned int    m_vector_size;
-        unsigned int    m_impulses_size;
+    private:        
         
-        bool            m_impulses_loaded;
-        bool            m_matrix_allocated;
-        
-        float*          m_input_matrix;
-        float*          m_result_matrix;
-        float*          m_result_matrix_left;
-        float*          m_result_matrix_right;
-        float*          m_linear_vector_left;
-        float*          m_linear_vector_right;
-        
-        // Sample by sample
-        float**         m_channels_inputs_right;
-        float**         m_channels_inputs_left;
-        int             m_index;
-        
-        const float**   m_impulses_vector;
         PinnaSize       m_pinna_size;
-        
+        double*         m_outputs_double;
+        float*          m_outputs_float;
         DecoderRegular* m_decoder;
+        std::vector<BinauralFilter> m_filters_left;
+        std::vector<BinauralFilter> m_filters_right;
     public:
         
         //! The binaural decoder constructor.
@@ -239,29 +216,6 @@ namespace Hoa2D
             @see    setVectorSize
          */
         void setSampleRate(unsigned int sampleRate);
-        
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
-         
-            @param     vectorSize		The vector size.
-         
-            @see    setSampleRate
-         */
-
-        void setVectorSize(unsigned int vectorSize);
-        
-        //! Retrieve if the decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-            @return    The function returns true if the decoder is ready to process and false if not.
-         */
-		inline bool getState() const
-        {
-            if(m_impulses_loaded && m_matrix_allocated)
-                return true;
-            else
-                return false;
-        };
         
         //! Set the pinna size.
         /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
@@ -296,22 +250,6 @@ namespace Hoa2D
             else
                 return "Headphone Right";
         };
-        
-        //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const float* const* inputs, float** outputs);
-		
-        //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     input    The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const double* const* inputs, double** outputs);
         
         //! This method performs the binaural decoding with single precision.
 		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
@@ -470,15 +408,6 @@ namespace Hoa2D
          */
         void setSampleRate(unsigned int sampleRate);
         
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding.
-         
-         @param     vectorSize		The vector rate.
-         
-         @see    setSampleRate
-         */
-        
-        void setVectorSize(unsigned int vectorSize);
         
         //! Set the pinna size.
         /** Set the pinna size of the binaural decoding.
@@ -487,19 +416,6 @@ namespace Hoa2D
          
          */
         void setPinnaSize(DecoderBinaural::PinnaSize pinnaSize);
-        
-        //! Retrieve if the binaural decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-            @return    The function returns true if the binaural decoder is ready to process and false if not.
-         */
-		inline bool getBinauralState() const
-        {
-            if(m_mode == Binaural && m_decoder_binaural->getState())
-                return true;
-            else
-                return false;
-        };
         
         //! Retrieve if the pinna size of the binaural decoder.
         /** Retrieve if the pinna size of the binaural decoder.
@@ -610,28 +526,6 @@ namespace Hoa2D
             m_decoder_binaural->process(inputs, outputs);
         }
         
-        //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-		inline void processBinaural(const float* const* inputs, float** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-		
-        //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-		inline void processBinaural(const double* const* inputs, double** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-        
         //! This method performs the decoding depending of the mode with single precision.
 		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
@@ -676,7 +570,6 @@ namespace Hoa2D
             m_decoder_irregular->process(inputs, outputs);
         }
     };
-    
 }
 
 
