@@ -12,7 +12,7 @@ namespace Hoa3D
     {
         m_number_of_rows = numberOfRows;
         m_number_of_columns = numberOfColumns;
-		m_decoder   = new DecoderStandard(order, m_number_of_rows * m_number_of_columns);
+		m_decoder   = new DecoderRegular(order, m_number_of_rows * m_number_of_columns);
         m_matrix    = new double[m_number_of_rows * m_number_of_columns];
         m_harmonics = new double[m_number_of_harmonics];
  

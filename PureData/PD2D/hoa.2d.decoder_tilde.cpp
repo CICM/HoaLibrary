@@ -23,10 +23,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_decoder_free(t_hoa_decoder *x);
 
 void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_pd_err angles_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
 t_pd_err offset_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv);
@@ -196,23 +193,10 @@ void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp64, short *count, double sam
 {
 	x->f_decoder->setSampleRate(samplerate);
     
-    if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Regular)
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_regular, 0, NULL);
-    else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_irregular, 0, NULL);
-    else
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_binaural, 0, NULL);
+    object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64, 0, NULL);
 }
 
-void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-        outs[0][i] = outs[1][i] = 0.;
-    }
-}
-
-void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numins; i++)
     {
@@ -220,7 +204,7 @@ void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **in
     }
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_decoder->processRegular(x->f_ins + numins * i, x->f_outs + numouts * i);
+        x->f_decoder->process(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
@@ -228,39 +212,6 @@ void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, float **in
     }
     
 }
-
-void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < numins; i++)
-    {
-        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
-    }
-	for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_decoder->processIrregular(x->f_ins + numins * i, x->f_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < numins; i++)
-    {
-        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
-    }
-	for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_decoder->processBinaural(x->f_ins + numins * i, x->f_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
-    }
-}
-
 
 t_pd_err angles_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv)
 {

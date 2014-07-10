@@ -16,7 +16,7 @@ namespace Hoa3D
 	//! The ambisonic decoder.
     /** The decoder should be used to decode a signal encoded in the spherical harmonics domain depending on a decomposition order and a number of channels.
      */
-	class DecoderStandard : public Ambisonic, public Planewaves
+	class DecoderRegular : public Ambisonic, public Planewaves
 	{
 		
 	private:
@@ -31,11 +31,11 @@ namespace Hoa3D
 		 @param     numberOfChannels	The number of channels, must be at least (order + 1)^2.
 		 @param     shape					Is a sphere or a half sphere.
          */
-		DecoderStandard(unsigned int order, unsigned int numberOfChannels);
+		DecoderRegular(unsigned int order, unsigned int numberOfChannels);
 		
         /**	The decoder destructor.
          */
-		~DecoderStandard();
+		~DecoderRegular();
         
 		/**	Set channel position.
 		 @param     index		The index of the channel.
@@ -90,30 +90,12 @@ namespace Hoa3D
         };
         
     private:
-        float*          m_impulses_matrix;
-        float*          m_harmonics_vector;
-        float*          m_channels_vector;
-        double*         m_channels_vector_double;
-        unsigned int    m_number_of_virtual_channels;
-        unsigned int    m_sample_rate;
-        unsigned int    m_vector_size;
-        unsigned int    m_impulses_size;
-        unsigned int    m_configuration;
-        
-        bool            m_impulses_loaded;
-        bool            m_matrix_allocated;
-        
-        float*          m_input_matrix;
-        float*          m_result_matrix;
-        float*          m_result_matrix_left;
-        float*          m_result_matrix_right;
-        float*          m_linear_vector_left;
-        float*          m_linear_vector_right;
-        
-        const float**   m_impulses_vector;
         PinnaSize       m_pinna_size;
-        
-        DecoderStandard* m_decoder;
+        double*         m_outputs_double;
+        float*          m_outputs_float;
+        DecoderRegular* m_decoder;
+        std::vector<BinauralFilter> m_filters_left;
+        std::vector<BinauralFilter> m_filters_right;
     public:
         
         //! The binaural decoder constructor.
@@ -145,29 +127,6 @@ namespace Hoa3D
          @see    setVectorSize
          */
         void setSampleRate(unsigned int sampleRate);
-        
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
-         
-         @param     vectorSize		The vector size.
-         
-         @see    setSampleRate
-         */
-        
-        void setVectorSize(unsigned int vectorSize);
-        
-        //! Retrieve if the decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-         @return    The function returns true if the decoder is ready to process and false if not.
-         */
-		inline bool getState() const
-        {
-            if(m_impulses_loaded && m_matrix_allocated)
-                return true;
-            else
-                return false;
-        };
         
         //! Set the pinna size.
         /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
@@ -204,20 +163,20 @@ namespace Hoa3D
         };
         
         //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
          
          @param     inputs	The input samples.
          @param     outputs  The output array that contains samples destinated to channels.
          */
-		void process(const float* const* inputs, float** outputs);
+		void process(const float* inputs, float* outputs);
 		
         //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
+		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
          
          @param     input    The input samples.
          @param     outputs  The output array that contains samples destinated to channels.
          */
-		void process(const double* const* inputs, double** outputs);
+		void process(const double* inputs, double* outputs);
     };
     
     //! The ambisonic multi-decoder.
@@ -229,12 +188,12 @@ namespace Hoa3D
         
         enum Mode
         {
-            Standard    = 0,	/**< Standard Decoding   */
+            Regular     = 0,	/**< Regular Decoding   */
             Binaural    = 1     /**< Binaural Decoding  */
         };
         
     private:
-        DecoderStandard*    m_decoder_regular;
+        DecoderRegular*    m_decoder_regular;
         DecoderBinaural*    m_decoder_binaural;
         Mode                m_mode;
         unsigned int        m_sample_rate;
@@ -294,7 +253,7 @@ namespace Hoa3D
          */
         inline unsigned int getNumberOfChannels() const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getNumberOfChannels();
             else
                 return m_decoder_binaural->getNumberOfChannels();
@@ -331,7 +290,7 @@ namespace Hoa3D
          */
 		double getChannelsRotationX() const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelsRotationX();
             else
                 return 0;
@@ -344,7 +303,7 @@ namespace Hoa3D
          */
 		double getChannelsRotationY() const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelsRotationY();
             else
                 return 0;
@@ -357,7 +316,7 @@ namespace Hoa3D
          */
 		double getChannelsRotationZ() const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelsRotationZ();
             else
                 return 0;
@@ -372,16 +331,6 @@ namespace Hoa3D
          */
         void setSampleRate(unsigned int sampleRate);
         
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding.
-         
-         @param     vectorSize		The vector rate.
-         
-         @see    setSampleRate
-         */
-        
-        void setVectorSize(unsigned int vectorSize);
-        
         //! Set the pinna size.
         /** Set the pinna size of the binaural decoding.
          
@@ -389,19 +338,7 @@ namespace Hoa3D
          
          */
         void setPinnaSize(DecoderBinaural::PinnaSize pinnaSize);
-        
-        //! Retrieve if the binaural decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-         @return    The function returns true if the binaural decoder is ready to process and false if not.
-         */
-        inline bool getBinauralState() const
-        {
-            if(m_mode == Binaural && m_decoder_binaural->getState())
-                return true;
-            else
-                return false;
-        };
+
         
         //! Retrieve if the pinna size of the binaural decoder.
         /** Retrieve if the pinna size of the binaural decoder.
@@ -425,7 +362,7 @@ namespace Hoa3D
          */
         inline double getChannelAzimuth(unsigned int index) const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelAzimuth(index);
             else
                 return m_decoder_binaural->getChannelAzimuth(index);
@@ -440,7 +377,7 @@ namespace Hoa3D
          */
         inline double getChannelElevation(unsigned int index) const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelElevation(index);
             else
                 return m_decoder_binaural->getChannelElevation(index);
@@ -458,7 +395,7 @@ namespace Hoa3D
          */
         inline double getChannelAbscissa(unsigned int index) const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelAbscissa(index);
             else
                 return m_decoder_binaural->getChannelAbscissa(index);
@@ -476,7 +413,7 @@ namespace Hoa3D
          */
         inline double getChannelOrdinate(unsigned int index) const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelOrdinate(index);
             else
                 return m_decoder_binaural->getChannelOrdinate(index);
@@ -492,7 +429,7 @@ namespace Hoa3D
          */
         inline double getChannelHeight(unsigned int index) const
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelHeight(index);
             else
                 return m_decoder_binaural->getChannelHeight(index);
@@ -508,33 +445,11 @@ namespace Hoa3D
          */
         inline std::string getChannelName(unsigned int index)
         {
-            if(m_mode == Standard)
+            if(m_mode == Regular)
                 return m_decoder_regular->getChannelName(index);
             else
                 return m_decoder_binaural->getChannelName(index);
         };
-		
-        //! This method performs the binaural decoding with single precision.
-        /**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-         @param     inputs	The input samples.
-         @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-        inline void processBinaural(const float* const* inputs, float** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-        
-        //! This method performs the binaural decoding with double precision.
-        /**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
-         
-         @param     inputs	The input samples.
-         @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-        inline void processBinaural(const double* const* inputs, double** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
         
         //! This method performs the decoding depending of the mode with single precision.
         /**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
@@ -542,20 +457,26 @@ namespace Hoa3D
          @param     inputs	The input samples.
          @param     outputs  The output matrix that contains samples destinated to channels.
          */
-        inline void processStandard(const float* inputs, float* outputs)
+        inline void process(const float* inputs, float* outputs)
         {
-            m_decoder_regular->process(inputs, outputs);
+            if(m_mode == Regular)
+                m_decoder_regular->process(inputs, outputs);
+            else
+                m_decoder_binaural->process(inputs, outputs);
         }
         
-        //! This method performs the regular decoding with single precision.
+        //! This method performs the decoding depending of the mode with double precision.
         /**	You should use this method for in-place or not-in-place processing and performs the regular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimym size must be the number of channels.
          
          @param     input	The input sample.
          @param     outputs The output array that contains samples destinated to channels.
          */
-        inline void processStandard(const double* inputs, double* outputs)
+        inline void process(const double* inputs, double* outputs)
         {
-            m_decoder_regular->process(inputs, outputs);
+            if(m_mode == Regular)
+                m_decoder_regular->process(inputs, outputs);
+            else
+                m_decoder_binaural->process(inputs, outputs);
         }
     };
 
