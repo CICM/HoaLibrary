@@ -269,8 +269,8 @@ namespace Hoa2D
         for(int i = 0; i < m_decoder->getNumberOfChannels(); i++)
         {
             double angle = m_decoder->getChannelAzimuth(i);
-            m_filters_left.push_back(BinauralFilter(angle));
-            m_filters_right.push_back(BinauralFilter(-angle));
+            m_filters_left.push_back(BinauralFilter(angle, 0));
+            m_filters_right.push_back(BinauralFilter(-angle, 0));
         }
         m_pinna_size = Small;
         m_outputs_double    = new double[m_decoder->getNumberOfChannels()];
