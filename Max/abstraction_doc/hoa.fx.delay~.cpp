@@ -10,7 +10,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel delay processor.
+ A delay sound field diffuser.
  
  @description
  <o>hoa.fx.delay~</o> allows you to delay the different harmonics or channels signals.

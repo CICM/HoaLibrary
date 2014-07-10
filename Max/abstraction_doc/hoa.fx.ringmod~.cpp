@@ -10,7 +10,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel sound field diffusion processor with ring modulation.
+ A ring modulation sound field diffuser.
  
  @description
  <o>hoa.fx.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.

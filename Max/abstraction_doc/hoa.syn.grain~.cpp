@@ -10,7 +10,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel granulator synthesizer.
+ A granular sound field synthesizer.
  
  @description
  <o>hoa.syn.grain~</o> create a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains.

@@ -16,6 +16,7 @@
 <refpage name='hoa.3d.decoder~.maxref.xml'/>
 <refpage name='hoa.3d.encoder~.maxref.xml'/>
 <refpage name='hoa.3d.map~.maxref.xml'/>
+<refpage name='hoa.3d.meter~.maxref.xml'/>
 <refpage name='hoa.3d.optim~.maxref.xml'/>
 <refpage name='hoa.3d.scope~.maxref.xml'/>
 <refpage name='hoa.3d.wider~.maxref.xml'/>
@@ -44,8 +45,6 @@
 <refpage name='hoa.fx.mirror~.maxref.xml'/>
 <refpage name='hoa.fx.mixer~.maxref.xml'/>
 <refpage name='hoa.fx.ringmod~.maxref.xml'/>
-<refpage name='hoa.highpass~.maxref.xml'/>
-<refpage name='hoa.onepole~.maxref.xml'/>
 <refpage name='hoa.receive.maxref.xml'/>
 <refpage name='hoa.receive~.maxref.xml'/>
 <refpage name='hoa.send.maxref.xml'/>

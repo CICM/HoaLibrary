@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 81.0, 45.0, 974.0, 732.0 ],
+		"rect" : [ 110.0, 69.0, 974.0, 732.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -142,22 +142,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 417.0, 430.0, 150.0, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "colorinterp",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-1",
-									"lock" : 1,
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 417.0, 533.0, 170.0, 19.0 ],
-									"text_width" : 90.75
 								}
 
 							}
@@ -620,22 +604,6 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "style",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-42",
-									"lock" : 1,
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 417.0, 491.0, 170.0, 19.0 ],
-									"text_width" : 89.75
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-31",
@@ -768,16 +736,6 @@
 							}
  ],
 						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 426.5, 561.0, 403.375, 561.0, 403.375, 293.0, 40.0, 293.0 ],
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
 									"disabled" : 0,
@@ -1641,16 +1599,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 426.5, 519.0, 403.375, 519.0, 403.375, 293.0, 40.0, 293.0 ],
-									"source" : [ "obj-42", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-13", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1728,7 +1676,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 81.0, 71.0, 974.0, 706.0 ],
+						"rect" : [ 110.0, 95.0, 974.0, 706.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1754,13 +1702,43 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
+									"id" : "obj-4",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 761.25, 610.5, 196.0, 33.0 ],
+									"text" : "The offset performs an xyz rotation of the channels positions.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[5]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"id" : "obj-6",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 761.25, 610.5, 196.0, 33.0 ],
+									"rounded" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
 									"id" : "obj-17",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 432.25, 405.5, 486.0, 33.0 ],
-									"presentation_rect" : [ 431.25, 405.5, 0.0, 0.0 ],
 									"text" : "The channels surfaces necessitates heavy calculations, thus you shouldn't change the number of channels, the offset or the angles before the last computation has been made.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -1777,7 +1755,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 432.25, 366.5, 486.0, 20.0 ],
-									"presentation_rect" : [ 432.25, 366.5, 0.0, 0.0 ],
 									"text" : "The offset performs an xyz rotation of the channels positions.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -1800,7 +1777,7 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 180.0, 69.0, 159.094843, -0.0, 90.0, 20.905157, 135.0, 35.26439, 135.0, -35.26439, 180.0, -69.094843, 20.905157, -0.0, 90.0, -20.905157, 45.0, 35.26439, 45.0, -35.26439, 0.0, 69.094843, 200.905157, -0.0, 270.0, 20.905157, 225.0, 35.26439, 225.0, -35.26439, 0.0, -69.094843, 339.094843, -0.0, 270.0, -20.905157, 315.0, 35.26439, 315.0, -35.26439 ],
+									"angles" : [ 180.0, 69.094843, -200.905157, -0.0, 90.0, 20.905157, -225.0, 35.26439, -225.0, -35.26439, -180.0, -69.094843, 20.905157, -0.0, 90.0, -20.905157, 45.0, 35.26439, 45.0, -35.26439, 0.0, 69.094843, -159.094843, -0.0, -90.0, 20.905157, -135.0, 35.26439, -135.0, -35.26439, 0.0, -69.094843, -20.905157, -0.0, -90.0, -20.905157, -45.0, 35.26439, -45.0, -35.26439 ],
 									"channels" : 20,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-3",
@@ -1808,8 +1785,6 @@
 									"numinlets" : 20,
 									"numoutlets" : 0,
 									"patching_rect" : [ 31.0, 426.25, 382.0, 191.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 50.090923, 115.88636, 564.363647, 282.181824 ],
 									"vectors" : "both",
 									"view" : "top-bottom"
 								}
@@ -1824,7 +1799,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 20,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 31.0, 356.0, 275.5, 19.0 ],
+									"patching_rect" : [ 31.0, 356.0, 382.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "ambisonic"
 									}
@@ -1852,27 +1827,12 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"id" : "obj-18",
-									"maxclass" : "number~",
-									"mode" : 1,
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 213.0, 172.0, 56.0, 19.0 ],
-									"sig" : 0.0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
 									"id" : "obj-1",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 395.0, 153.0, 69.0, 19.0 ],
+									"patching_rect" : [ 395.0, 172.0, 69.0, 19.0 ],
 									"text" : "cycle~ 0.05"
 								}
 
@@ -1916,8 +1876,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 233.0, 147.5, 72.0, 19.0 ],
-									"text" : "phasor~ 0.1"
+									"patching_rect" : [ 199.25, 171.0, 72.0, 19.0 ],
+									"text" : "phasor~ 0.5"
 								}
 
 							}
@@ -1931,7 +1891,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 138.0, 70.0, 19.0 ],
+									"patching_rect" : [ 31.0, 171.0, 70.0, 19.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -1946,7 +1906,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 31.0, 170.0, 56.0, 19.0 ],
+									"patching_rect" : [ 31.0, 203.0, 56.0, 19.0 ],
 									"sig" : 1.0
 								}
 
@@ -1995,7 +1955,7 @@
 									"offgradcolor2" : [ 0.945098, 0.952941, 0.952941, 1.0 ],
 									"ongradcolor1" : [ 0.929412, 0.313725, 0.345098, 0.71 ],
 									"ongradcolor2" : [ 0.929412, 0.313725, 0.345098, 0.709804 ],
-									"patching_rect" : [ 699.863647, 625.590942, 45.0, 45.0 ]
+									"patching_rect" : [ 634.863647, 87.590942, 45.0, 45.0 ]
 								}
 
 							}
@@ -2009,7 +1969,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.25, 67.5, 483.0, 33.0 ],
+									"patching_rect" : [ 6.25, 67.5, 486.0, 33.0 ],
 									"text" : "hoa.3d.meter~ displays the peak levels for a spherical array of loudspeakers. It computes and displays the energy and velocity vectors.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -2317,7 +2277,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 31.0, 293.0, 189.0, 19.0 ],
+									"patching_rect" : [ 31.0, 293.0, 382.0, 19.0 ],
 									"text" : "hoa.3d.optim~ 3 inPhase"
 								}
 
@@ -2345,7 +2305,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 193.0, 203.0, 59.0, 19.0 ],
+									"patching_rect" : [ 159.25, 203.0, 59.0, 19.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -2359,7 +2319,7 @@
 									"numinlets" : 3,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 31.0, 249.0, 189.0, 19.0 ],
+									"patching_rect" : [ 31.0, 249.0, 382.0, 19.0 ],
 									"text" : "hoa.3d.encoder~ 3"
 								}
 
@@ -2448,15 +2408,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-16", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-23", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-18", 0 ]
 								}
 
 							}

@@ -29,15 +29,6 @@
 
 	<!--MESSAGES-->
 	<methodlist>
-		<method name="(mouse)">
-			<arglist />
-			<digest>
-				Change point of view by dragging the scene.
-			</digest>
-			<description>
-				Change point of view by dragging the scene.
-			</description>
-		</method>
 		<method name="signal">
 			<arglist />
 			<digest>
@@ -60,7 +51,7 @@
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Color" />
-				<attribute name="default" get="1" set="1" type="" size="1" value="0.1 0.1 0.1 1." />
+				<attribute name="default" get="1" set="1" type="" size="1" value="0.7 0.7 0.7 1." />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Border Color" />
 				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
@@ -76,26 +67,11 @@
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Color" />
-				<attribute name="default" get="1" set="1" type="" size="1" value="0.9 0.9 0.9 1." />
+				<attribute name="default" get="1" set="1" type="" size="1" value="0.76 0.76 0.76 1." />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Background Color" />
 				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
-			</attributelist>
-		</attribute>
-		<attribute name="camera" get="1" set="1" type="float_array" size="0">
-			<digest>
-				Camera
-			</digest>
-			<description>
-				The scene point of view.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="float_array" size="0" value="0. 0." />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Camera" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
 		<attribute name="color" get="1" set="1" type="" size="1">
@@ -108,32 +84,17 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
-		<attribute name="colorinterp" get="1" set="1" type="atom" size="1">
-			<digest>
-				Color interpolation type
-			</digest>
-			<description>
-				Color interpolation mode (only works in <m>mapping</m> drawing mode)
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="atom" size="1" value="0" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Color interpolation type" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
-			</attributelist>
-		</attribute>
 		<attribute name="gain" get="1" set="1" type="float" size="1">
 			<digest>
-				Gain factor
+				Gain
 			</digest>
 			<description>
 				The <b>gain</b> factor can be used to offer a better visualisation of low amplitude sound fields.
 			</description>
 			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
+				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
 				<attribute name="default" get="1" set="1" type="float" size="1" value="1." />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Gain factor" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Gain" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -146,26 +107,11 @@
 				The refresh interval time in milliseconds.
 			</description>
 			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
+				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
 				<attribute name="default" get="1" set="1" type="int" size="1" value="100" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Refresh Interval in Milliseconds" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
-			</attributelist>
-		</attribute>
-		<attribute name="light" get="1" set="1" type="atom" size="1">
-			<digest>
-				Enable light
-			</digest>
-			<description>
-				Activate or deactivate lighting.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="atom" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Enable light" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
 			</attributelist>
 		</attribute>
 		<attribute name="nhcolor" get="1" set="1" type="" size="1">
@@ -173,7 +119,7 @@
 				Negative Harmonics Color
 			</digest>
 			<description>
-				Sets the RGBA values for the negative harmonics color of the <o>hoa.2d.scope~</o> object
+				Sets the RGBA values for the negative harmonics color of the <o>hoa.3d.scope~</o> object
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Color" />
@@ -186,7 +132,7 @@
 		</attribute>
 		<attribute name="order" get="1" set="1" type="int" size="1">
 			<digest>
-				Order
+				Ambisonic Order
 			</digest>
 			<description>
 				The ambisonic order of decomposition. Will adapt the number of input accordingly.
@@ -194,7 +140,7 @@
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Ambisonic" />
 				<attribute name="default" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Order" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Ambisonic Order" />
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
@@ -206,7 +152,7 @@
 			<description>
 			</description>
 			<attributelist>
-				<attribute name="default" get="1" set="1" type="" size="1" value="0 0 200 200" />
+				<attribute name="default" get="1" set="1" type="" size="1" value="0 0 225 225" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
@@ -226,65 +172,14 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
 			</attributelist>
 		</attribute>
-		<attribute name="spcolor" get="1" set="1" type="" size="1">
+		<attribute name="textcolor" get="1" set="1" type="" size="1">
 			<digest>
-				Sphere Color
+				
 			</digest>
 			<description>
-				Sets the RGBA values for the sphere color of the <o>hoa.3d.scope~</o> object
 			</description>
 			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Color" />
-				<attribute name="default" get="1" set="1" type="" size="1" value="0. 0. 0. 1." />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Sphere Color" />
-				<attribute name="paint" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="rgba" />
-			</attributelist>
-		</attribute>
-		<attribute name="sphere" get="1" set="1" type="atom" size="1">
-			<digest>
-				Draw Sphere
-			</digest>
-			<description>
-				Display or not the sphere.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="atom" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Sphere" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
-			</attributelist>
-		</attribute>
-		<attribute name="style" get="1" set="1" type="atom" size="1">
-			<digest>
-				Style
-			</digest>
-			<description>
-				Display mode of the spherical harmonics.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="atom" size="1" value="0" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Style" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="enumindex" />
-			</attributelist>
-		</attribute>
-		<attribute name="vectors" get="1" set="1" type="atom" size="1">
-			<digest>
-				Draw Vectors
-			</digest>
-			<description>
-				Display or not the cartesian vectors.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Rendering" />
-				<attribute name="default" get="1" set="1" type="atom" size="1" value="1" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Draw Vectors" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
+				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
 	</attributelist>
@@ -296,11 +191,12 @@
 
 	<!--DISCUSSION-->
 	<discussion>
-		<o>hoa.3d.scope~</o> displays spherical harmonics of an ambisonic sound field
+		<o>hoa.3d.gl.scope~</o> displays spherical harmonics of an ambisonic sound field
 	</discussion>
 
 	<!--SEEALSO-->
 	<seealsolist>
+		<seealso name="hoa.3d.gl.scope~" />
 		<seealso name="hoa.2d.scope~" />
 		<seealso name="hoa.3d.decoder~" />
 		<seealso name="hoa.3d.encoder~" />
@@ -314,7 +210,7 @@
 	<misc name = "Discussion">
 		<entry name ="More details">
 			<description>
-		<o>hoa.3d.scope~</o> displays spherical harmonics of an ambisonic sound field
+		<o>hoa.3d.gl.scope~</o> displays spherical harmonics of an ambisonic sound field
 			</description>
 		</entry>
 		<entry name ="Keywords">

@@ -360,6 +360,32 @@
 		<seealso name="hoa.amp~" />
 	</seealsolist>
 
+	<misc name = "Input">
+		<entry name ="Inlets 1, 2, 3... (signal)">
+			<description>
+				input signals to be scaled..
+			</description>
+		</entry>
+		<entry name ="The last Inlet (float)">
+			<description>
+				slider value..
+			</description>
+		</entry>
+	</misc>
+
+	<misc name = "Output">
+		<entry name ="Outlets 1, 2, 3... (signal)">
+			<description>
+				output corresponding input scaled signal..
+			</description>
+		</entry>
+		<entry name ="The last Outlet (float)">
+			<description>
+				output slider value..
+			</description>
+		</entry>
+	</misc>
+
 	<misc name = "Discussion">
 		<entry name ="More details">
 			<description>

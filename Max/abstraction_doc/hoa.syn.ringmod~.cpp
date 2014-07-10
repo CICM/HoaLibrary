@@ -10,7 +10,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel sound field diffusion synthesizer with ring modulation.
+ A sound ring modulation field diffusion synthesizer.
  
  @description
  <o>hoa.syn.ringmod~</o> creates a diffuse sound field by modulating the amplitude of circular, spherical or plane waves signals depending on their number.

@@ -13,13 +13,13 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A spherical array of visual peak level indicators
+ Displays the peak level indicators for a spherical array of loudspeakers
  
  @description
- <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o> object with soundfield descriptors.
+ <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o>. It computes and displays the peak level indicators for a spherical array of loudspeakers, and the energy and velocity vectors.
  
  @discussion
- <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o> object with soundfield descriptors. It computes and displays the energy and velocity vectors.
+ <o>hoa.3d.meter~</o> is a spherical version of the <o>hoa.2d.meter~</o>. It computes and displays the peak level indicators for a spherical array of loudspeakers, and the energy and velocity vectors.
  
  @category planewaves, hoa objects, audio, GUI, MSP
  
@@ -468,9 +468,6 @@ t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
-	
-	
-    
 	jbox_redraw((t_jbox *)x);
     return MAX_ERR_NONE;
 }
@@ -957,7 +954,7 @@ void draw_vectors(t_hoa_meter_3d *x, t_object *view, t_rect *rect)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
-		size = x->f_center / 32.;
+		size = x->f_center / 20;
         
         if(x->f_vector_type == hoa_sym_3d_both || x->f_vector_type == hoa_sym_3d_energy)
         {

@@ -10,7 +10,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel delay processor.
+ A delay sound field synthesizer.
  
  @description
  <o>hoa.syn.delay~</o> allows you to synthesize a sound field by delaying a single signal.

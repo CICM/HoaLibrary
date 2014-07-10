@@ -159,19 +159,6 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
-		<attribute name="output3d" get="1" set="1" type="int" size="1">
-			<digest>
-				3d output
-			</digest>
-			<description>
-				Check this to output 3d coordinates, default is 2d.
-			</description>
-			<attributelist>
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="3d output" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
-			</attributelist>
-		</attribute>
 		<attribute name="outputmode" get="1" set="1" type="int" size="1">
 			<digest>
 				Output Mode
