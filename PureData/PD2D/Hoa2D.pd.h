@@ -24,6 +24,5 @@ extern "C" void setup_hoa0x2e2d0x2emeter_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2emap_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2eencoder_tilde(void);
 extern "C" void setup_hoa0x2e2d0x2edecoder_tilde(void);
-extern "C" void setup_hoa0x2e2d0x2ebinaural(void);
 
 #endif
