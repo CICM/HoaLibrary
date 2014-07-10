@@ -17,7 +17,7 @@
 #X obj 466 -416 loadbang;
 #X obj 465 -385 route lo hi;
 #X obj 388 -370 unpack s f;
-#X obj 342 -433 c.canvasargs 0 @lo -0.5 @hi 0.5;
+#X obj 342 -433 c.canvasargs 0 @lo -1 @hi 1;
 #X connect 0 0 3 0;
 #X connect 0 0 4 0;
 #X connect 1 0 11 0;

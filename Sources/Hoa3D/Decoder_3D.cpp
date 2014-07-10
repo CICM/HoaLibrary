@@ -242,7 +242,6 @@ namespace Hoa3D
                     m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;
                     m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] = value_right;
                 }
-                //post("-----------------\n h %i, %i, %i : left %f, right %f", i, getHarmonicDegree(i), getHarmonicOrder(i), left, right);
                 m_harmonics_vector[i] = 0.;
                 m_harmonics_vector[i+1] = 1.;
             }

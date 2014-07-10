@@ -95,7 +95,6 @@ void hoa_map_source(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_group(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_slot(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
 void hoa_map_trajectory(t_hoa_map *x, t_symbol *s, short ac, t_atom *av);
-void hoa_map_bang(t_hoa_map *x);
 void hoa_map_output(t_hoa_map *x);
 void hoa_map_infos(t_hoa_map *x);
 void hoa_map_clear_all(t_hoa_map *x);
@@ -147,7 +146,7 @@ extern "C" void setup_hoa0x2emap(void)
 	eclass_addmethod(c, (method) hoa_map_getdrawparams,   "getdrawparams",      A_CANT,    0);
     eclass_addmethod(c, (method) hoa_map_oksize,          "oksize",             A_CANT,    0);
 	eclass_addmethod(c, (method) hoa_map_notify,          "notify",             A_CANT,    0);
-    eclass_addmethod(c, (method) hoa_map_bang,            "bang",               A_CANT,    0);
+    eclass_addmethod(c, (method) hoa_map_output,          "bang",               A_CANT,    0);
     eclass_addmethod(c, (method) hoa_map_infos,           "getinfo",            A_CANT,    0);
     
     eclass_addmethod(c, (method) hoa_map_source,           "source",            A_GIMME,   0);
@@ -893,11 +892,6 @@ t_pd_err hoa_map_notify(t_hoa_map *x, t_symbol *s, t_symbol *msg, void *sender, 
 /*                          Sortie                        */
 /**********************************************************/
 
-void hoa_map_bang(t_hoa_map *x)
-{
-    hoa_map_output(x);
-}
-
 void hoa_map_output(t_hoa_map *x)
 {
 	if (!x->f_output_enabled)
@@ -926,7 +920,7 @@ void hoa_map_output(t_hoa_map *x)
             outlet_list(x->f_out_sources, 0L, 3, av);
         }
     }
-    if(x->f_output_mode == 0)
+    if(x->f_output_mode == hoa_sym_polar)
     {
         atom_setsym(av+1, hoa_sym_polar);
 		for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)

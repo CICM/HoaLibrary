@@ -171,8 +171,6 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         hoa_decoder_deprecated(x, NULL, argc, argv);
         
         x->f_number_of_channels = x->f_decoder->getNumberOfChannels();
-        x->f_decoder->setSampleRate(sys_getsr());
-        x->f_decoder->setVectorSize(sys_getblksize());
     
         eobj_dspsetup(x, x->f_decoder->getNumberOfHarmonics(), x->f_decoder->getNumberOfChannels());
         x->f_ins = new t_float[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
@@ -197,16 +195,13 @@ t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
 void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_decoder->setSampleRate(samplerate);
-    x->f_decoder->setVectorSize(maxvectorsize);
     
     if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Regular)
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_regular, 0, NULL);
     else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
         object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_irregular, 0, NULL);
-    else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Binaural && x->f_decoder->getBinauralState())
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_binaural, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_zero, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_decoder_perform64_binaural, 0, NULL);
 }
 
 void hoa_decoder_perform64_zero(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -252,7 +247,18 @@ void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, float **
 
 void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, float **ins, long numins, float **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    x->f_decoder->processBinaural(ins, outs);
+    for(int i = 0; i < numins; i++)
+    {
+        cblas_scopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
+    }
+	for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_decoder->processBinaural(x->f_ins + numins * i, x->f_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_scopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
+    }
 }
 
 

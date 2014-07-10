@@ -173,8 +173,6 @@ namespace Hoa2D
 		void process(const double* input, double* output);
     };
     
-    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth, bool large);
-    
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
      */
@@ -189,34 +187,277 @@ namespace Hoa2D
         };
         
     private:
-        float*          m_impulses_matrix;
-        float*          m_harmonics_vector;
-        float*          m_channels_vector;
-        double*         m_channels_vector_double;
-        unsigned int    m_number_of_virtual_channels;
-        unsigned int    m_sample_rate;
-        unsigned int    m_vector_size;
-        unsigned int    m_impulses_size;
         
-        bool            m_impulses_loaded;
-        bool            m_matrix_allocated;
+        class Delay
+        {
+        private:
+            
+            float              m_buffer[128];
+            int                m_ramp;
+            int                m_delay;
+            float              m_sample_rate;
+        public:
+            
+            Delay()
+            {
+                for(int i = 0; i < 128; i++)
+                    m_buffer[i] = 0;
+                m_ramp      = 0;
+                m_delay     = 0;
+                m_sample_rate = 44100.;
+            }
+            
+            void setSamplingRate(float sampleRate)
+            {
+                if(sampleRate != m_sample_rate)
+                {
+                    float delay = (float)m_delay / m_sample_rate;
+                    m_sample_rate = sampleRate;
+                    setDelay(delay);
+                }
+            }
+            
+            void setDelayMs(float delay)
+            {
+                setDelay(delay * m_sample_rate);
+            }
+            
+            void setDelay(int delay)
+            {
+                m_delay = delay;
+                if(m_delay > 128)
+                    m_delay = 128;
+                m_ramp      = 0;
+                for(int i = 0; i < 128; i++)
+                    m_buffer[i] = 0;
+            }
+            
+            float process(float sample)
+            {
+                int delay = m_ramp - m_delay;
+                m_buffer[m_ramp] = sample;
+                if(++m_ramp >= 128)
+                    m_ramp = 0;
+                if(delay < 0)
+                    delay += 128;
+                return m_buffer[delay];
+            }
+            
+            ~Delay(){}
+        };
         
-        float*          m_input_matrix;
-        float*          m_result_matrix;
-        float*          m_result_matrix_left;
-        float*          m_result_matrix_right;
-        float*          m_linear_vector_left;
-        float*          m_linear_vector_right;
+        class Biquad
+        {
+        protected:
+            float  m_coeff_a0, m_coeff_a1, m_coeff_a2, m_coeff_b1, m_coeff_b2;
+            float  m_delay_one, m_delay_two;
+            float  m_weight;
+            float  m_sample_rate;
+            
+        public:
+            Biquad()
+            {
+                m_sample_rate = 44100.f;
+                m_delay_one = 0.f;
+                m_delay_two = 0.f;
+                setCoefficients(0.f, 0.f, 0.f, 0.f, 0.f);
+            };
+            
+            void setSamplingRate(long sampleRate)
+            {
+                if(m_sample_rate != sampleRate)
+                {
+                    m_sample_rate = sampleRate;
+                    m_delay_one = 0.f;
+                    m_delay_two = 0.f;
+                    setCoefficients(m_coeff_a0, m_coeff_a1, m_coeff_a2, m_coeff_b1, m_coeff_b2);
+                }
+            }
+            
+            void setCoefficients(float a0, float a1, float a2, float b1, float b2)
+            {
+                m_coeff_a0 = a0 * m_sample_rate / 44100.f;
+                m_coeff_a1 = a1 * m_sample_rate / 44100.f;
+                m_coeff_a2 = a2 * m_sample_rate / 44100.f;
+                m_coeff_b1 = b1 * m_sample_rate / 44100.f;
+                m_coeff_b2 = b2 * m_sample_rate / 44100.f;
+            }
+            
+            void setCoefficients(float* coeffs1, float* coeffs2, float factor)
+            {
+                m_coeff_a0 = (coeffs1[0] * factor + coeffs2[0] * (1.f - factor)) * m_sample_rate / 44100.f;
+                m_coeff_a1 = (coeffs1[1] * factor + coeffs2[1] * (1.f - factor)) * m_sample_rate / 44100.f;
+                m_coeff_a2 = (coeffs1[2] * factor + coeffs2[2] * (1.f - factor)) * m_sample_rate / 44100.f;
+                m_coeff_b1 = (coeffs1[3] * factor + coeffs2[3] * (1.f - factor)) * m_sample_rate / 44100.f;
+                m_coeff_b2 = (coeffs1[4] * factor + coeffs2[4] * (1.f - factor)) * m_sample_rate / 44100.f;
+            }
+            
+            inline float process(float input)
+            {
+                float output = input * m_coeff_a0 + m_delay_one;
+                m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
+                m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
+                return output;
+            }
+            
+            ~Biquad(){};
+        };
         
-        // Sample by sample
-        float**         m_channels_inputs_right;
-        float**         m_channels_inputs_left;
-        int             m_index;
+        class BinauralFilter
+        {
+        private:
+            
+            Delay              m_delay;
+            Biquad             m_biquad[5];
+            double             m_width;
+            double             m_lenght_front;
+            double             m_lenght_back;
+            double             m_gain;
+            
+        public:
+            
+            BinauralFilter(double azimuth)
+            {
+                float a0[] =
+                {
+                    0.152034 ,0. ,-0.152034 ,-1.815326 ,0.914481,
+                    0.881248 ,-0.713042 ,0.854105 ,-0.713042 ,0.735353,
+                    1.090837 ,0.490579 ,0.72749 ,0.490579 ,0.818326,
+                    1.089543 ,0.491276 ,0.731369 ,0.491276 ,0.820913,
+                    1.002012 ,-1.27624 ,0.841009 ,-1.27624 ,0.843021,
+                    0.930155 ,1.706645 ,0.786791 ,1.693536 ,0.730055
+                };
+                
+                float a90[] =
+                {
+                    0.149582 ,0. ,-0.149582 ,-1.572131 ,0.682139,
+                    0.802786 ,-0.281769 ,0.792406 ,-0.281769 ,0.595192,
+                    1.200574 ,0.84932 ,0.398279 ,0.84932 ,0.598853,
+                    0.737594 ,0.925952 ,0.660416 ,0.925952 ,0.39801,
+                    0.908982 ,-1.236645 ,0.828076 ,-1.236645 ,0.737058,
+                    0.587956 ,1.464997 ,1. ,1.464997 ,0.587956
+                };
+                
+                float a180[] =
+                {
+                    0.135893 ,0. ,-0.135893 ,-1.622599 ,0.711227,
+                    0.920398 ,-0.295651 ,0.891452 ,-0.295651 ,0.81185,
+                    1.200574 ,0.84932 ,0.398279 ,0.84932 ,0.598853,
+                    0.737594 ,0.925952 ,0.660416 ,0.925952 ,0.39801,
+                    0.962813 ,-1.286172 ,0.843813 ,-1.286172 ,0.806626,
+                    0.667577 ,0.702615 ,0.307889 ,0.35535 ,0.322731
+                };
+                
+                float a270[] =
+                {
+                    0.140982 ,0. ,-0.140982 ,-1.683363 ,0.77531,
+                    1. ,-0.31358 ,0.921726 ,-0.31358 ,0.921726,
+                    1.0196 ,0.791713 ,0.470808 ,0.791713 ,0.490408,
+                    0.915346 ,0.977908 ,0.717821 ,0.977908 ,0.633167,
+                    0.962813 ,-1.286172 ,0.843813 ,-1.286172 ,0.806626,
+                    0.246902 ,0.294791 ,0.081504 ,-0.343893 ,-0.032909
+                };
+                
+                //int delay[] = {9, 0, 11, 27};
+                
+                m_width         = 0.5;
+                m_lenght_front  = 0.3;
+                m_lenght_back   = 0.4;
+                azimuth = wrap_twopi(azimuth);
+                
+                m_gain = (fabs(cos((azimuth - HOA_PI2) * 0.5)) + 0.1) / 1.1;
+                if(azimuth > HOA_PI2 && azimuth < 3. * HOA_PI2)
+                {
+                    m_gain *= (m_lenght_front / m_lenght_back);
+                    m_delay.setDelayMs(distance(-m_width, 0, abscissa(m_width, azimuth), ordinate(m_lenght_back, azimuth)) / 340. * 0.2);
+                }
+                else
+                {
+                    m_delay.setDelayMs(distance(-m_width, 0, abscissa(m_width, azimuth), ordinate(m_lenght_front, azimuth)) / 340. * 0.2);
+                }
+                float f1 = 1;
+                float *tab1 = a0, *tab2 = a270;
+                // Between 7Pi/4 (-Pi/4) & Pi/4
+                if(azimuth >= HOA_2PI - HOA_PI4)
+                {
+                    f1 = (HOA_2PI - azimuth) / HOA_PI4;
+                    tab1 = a0; tab2 = a270;
+                }
+                else if(azimuth >= 0.f && azimuth <= HOA_PI4)
+                {
+                    f1 = azimuth / HOA_PI4;
+                    tab1 = a0; tab2 = a90;
+                }
+                // Between Pi/4 & 3Pi/4
+                else if(azimuth >= HOA_PI4 && azimuth <= HOA_PI2)
+                {
+                    f1 = (HOA_PI2 - azimuth) / HOA_PI4;
+                    tab1 = a90; tab2 = a0;
+                }
+                else if(azimuth >= HOA_PI2 && azimuth <= HOA_PI2 + HOA_PI4)
+                {
+                    f1 = (azimuth - HOA_PI2) / HOA_PI4;
+                    tab1 = a90; tab2 = a180;
+                }
+                // Between 3Pi/4 & 5Pi/4
+                else if(azimuth >= HOA_PI2 + HOA_PI4 && azimuth <= HOA_PI)
+                {
+                    f1 = (HOA_PI - azimuth) / HOA_PI4;
+                    tab1 = a180; tab2 = a90;
+                }
+                else if(azimuth >= HOA_PI && azimuth <= HOA_PI + HOA_PI4)
+                {
+                    f1 = (azimuth - HOA_PI) / HOA_PI4;
+                    tab1 = a180; tab2 = a270;
+                }
+                // Between 5Pi/4 & 7Pi/4
+                else if(azimuth >= HOA_PI + HOA_PI4 && azimuth <= HOA_PI + HOA_PI2)
+                {
+                    f1 = (HOA_PI + HOA_PI2 - azimuth) / HOA_PI4;
+                    tab1 = a270; tab2 = a180;
+                }
+                else if(azimuth >= HOA_PI + HOA_PI2 && azimuth <= HOA_PI + HOA_PI2 + HOA_PI4)
+                {
+                    f1 = (azimuth - (HOA_PI + HOA_PI2)) / HOA_PI4;
+                    tab1 = a270; tab2 = a0;
+                }
+                
+                for(int i = 0; i < 5; i++)
+                    m_biquad[i].setCoefficients(tab1+i*5, tab2+i*5, f1);
+                
+                //freq = (ordinate(1, azimuth) + 1) * 3000. + 100;
+            }
+            
+            void setSampleRate(double samplerate)
+            {
+                for(int i = 0; i < 5; i++)
+                    m_biquad[i].setSamplingRate(samplerate);
+                m_delay.setSamplingRate(samplerate);
+            }
+            
+            inline float process(const float sample)
+            {
+                return m_biquad[0].process(
+                        m_biquad[1].process(
+                        m_biquad[2].process(
+                        m_biquad[3].process(
+                        m_biquad[4].process(
+                        m_delay.process(sample * m_gain))))));
+            }
+            
+            ~BinauralFilter()
+            {
+                ;
+            }
+        };
         
-        const float**   m_impulses_vector;
+        
         PinnaSize       m_pinna_size;
-        
+        double*         m_outputs_double;
+        float*          m_outputs_float;
         DecoderRegular* m_decoder;
+        std::vector<BinauralFilter> m_filters_left;
+        std::vector<BinauralFilter> m_filters_right;
     public:
         
         //! The binaural decoder constructor.
@@ -239,29 +480,6 @@ namespace Hoa2D
             @see    setVectorSize
          */
         void setSampleRate(unsigned int sampleRate);
-        
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding..
-         
-            @param     vectorSize		The vector size.
-         
-            @see    setSampleRate
-         */
-
-        void setVectorSize(unsigned int vectorSize);
-        
-        //! Retrieve if the decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-            @return    The function returns true if the decoder is ready to process and false if not.
-         */
-		inline bool getState() const
-        {
-            if(m_impulses_loaded && m_matrix_allocated)
-                return true;
-            else
-                return false;
-        };
         
         //! Set the pinna size.
         /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
@@ -296,22 +514,6 @@ namespace Hoa2D
             else
                 return "Headphone Right";
         };
-        
-        //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const float* const* inputs, float** outputs);
-		
-        //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     input    The input samples.
-            @param     outputs  The output array that contains samples destinated to channels.
-         */
-		void process(const double* const* inputs, double** outputs);
         
         //! This method performs the binaural decoding with single precision.
 		/**	You should use this method for not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples : inputs[number of harmonics] and the outputs array contains the headphones samples : outputs[2].
@@ -470,15 +672,6 @@ namespace Hoa2D
          */
         void setSampleRate(unsigned int sampleRate);
         
-        //! Set the vector size.
-        /** Set the vector size. Setting the sample size will allocate the vector to compute the binaural decoding.
-         
-         @param     vectorSize		The vector rate.
-         
-         @see    setSampleRate
-         */
-        
-        void setVectorSize(unsigned int vectorSize);
         
         //! Set the pinna size.
         /** Set the pinna size of the binaural decoding.
@@ -487,19 +680,6 @@ namespace Hoa2D
          
          */
         void setPinnaSize(DecoderBinaural::PinnaSize pinnaSize);
-        
-        //! Retrieve if the binaural decoder is ready to process.
-        /** Retrieve if the impulses has been loaded and the matrix allocated.
-         
-            @return    The function returns true if the binaural decoder is ready to process and false if not.
-         */
-		inline bool getBinauralState() const
-        {
-            if(m_mode == Binaural && m_decoder_binaural->getState())
-                return true;
-            else
-                return false;
-        };
         
         //! Retrieve if the pinna size of the binaural decoder.
         /** Retrieve if the pinna size of the binaural decoder.
@@ -610,28 +790,6 @@ namespace Hoa2D
             m_decoder_binaural->process(inputs, outputs);
         }
         
-        //! This method performs the binaural decoding with single precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-		inline void processBinaural(const float* const* inputs, float** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-		
-        //! This method performs the binaural decoding with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
-         
-            @param     inputs	The input samples.
-            @param     outputs  The output matrix that contains samples destinated to channels.
-         */
-		inline void processBinaural(const double* const* inputs, double** outputs)
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-        
         //! This method performs the decoding depending of the mode with single precision.
 		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs matrix contains the headphones samples : outputs[2][vector size].
          
@@ -676,7 +834,6 @@ namespace Hoa2D
             m_decoder_irregular->process(inputs, outputs);
         }
     };
-    
 }
 
 

@@ -283,14 +283,14 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
 #X obj 55 -303 c.prepend set;
-#X msg 55 -271 cartesian -1.10476 -1.25714 0;
+#X msg 55 -271 polar 1.67359 2.42062 0;
 #X obj -2 -333 route mute;
 #X obj -2 -271 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
 0.5 0.5 1;
 #X obj 51 -52 c.prepend set;
-#X msg 51 -20 cartesian -1.20635 0.15238 0;
+#X msg 51 -20 polar 1.67359 3.01594 0;
 #X obj -6 -82 route mute;
 #X obj -6 -20 c.toggle @size 15 15 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
@@ -454,7 +454,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 #X obj -700 -492 hoa.help.header;
 #X obj -554 153 hoa.help.pub;
 #X obj -284 -492 hoa.help.also;
-#N canvas 125 76 891 554 3D 1;
+#N canvas 125 76 891 554 3D 0;
 #X obj -637 30 hoa.map @size 225 225 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 hoamapex2 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view xy
@@ -464,7 +464,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @view xz @outputmode
 polar @zoom 0.35 @mapname cicm;
 #X obj -349 292 c.prepend set;
-#X msg -349 320 cartesian 1 1 0;
+#X msg -349 320 polar 1.41421 5.49779 0;
 #X obj -349 -10 c.prepend view;
 #X obj -349 -42 c.menu @size 40 17 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
@@ -520,11 +520,11 @@ modifications will affect all linked hoa.map objects., f 124;
 #X obj 111 -156 c.loadmess 1;
 #X obj 111 -136 pipe 200;
 #X obj -637 292 c.prepend set;
-#X msg -637 320 cartesian -1 1 1;
+#X msg -637 320 polar 1.73205 0.785398 0.61548;
 #X obj -349 267 route 2;
 #X obj -637 267 route 1;
 #X obj -58 292 c.prepend set;
-#X msg -58 320 cartesian -1 -1 -1;
+#X msg -58 320 polar 1.73205 2.35619 -0.61548;
 #X obj -58 267 route 3;
 #X text -669 -120 Change the coordinate system to change the point
 of view and interact differently with sources and groups.;
@@ -549,29 +549,6 @@ of view and interact differently with sources and groups.;
 #X connect 40 0 41 0;
 #X connect 42 0 40 0;
 #X restore -335 -137 pd 3D;
-#N canvas 0 22 450 300 (subpatch) 0;
-#X obj 0 10 inlet~;
-#X obj 50 10 inlet~;
-#X obj 100 10 inlet~;
-#X obj 150 10 inlet~;
-#X obj 200 10 inlet~;
-#X obj 250 10 inlet~;
-#X obj 300 10 inlet~;
-#X obj 0 100 hoa.2d.decoder~ 3 binaural @pinna large;
-#X obj 400 100 block~ 256;
-#X obj 0 200 outlet~;
-#X obj 100 200 outlet~;
-#X connect 0 0 7 0;
-#X connect 1 0 7 1;
-#X connect 2 0 7 2;
-#X connect 3 0 7 3;
-#X connect 4 0 7 4;
-#X connect 5 0 7 5;
-#X connect 6 0 7 6;
-#X connect 7 0 9 0;
-#X connect 7 1 10 0;
-#X restore -649 59 hoa.binaural~ 3 @block 256 @pinna large --------
-;
 #X obj -649 95 hoa.dac~ 1 2 -----------------------------------;
 #X obj -649 15 hoa.process~ 3 hoa.fx.freeverb~ harmonics ------;
 #X text -344 -397 To move source or group \, click on it and drag it.
@@ -583,6 +560,7 @@ on a plane to control hoa.2d.map~ or hoa.3d.map. You can add and remove
 sources \, change coordinates \, add description and create groups.
 , f 90;
 #X text -338 -153 3D Multimap;
+#X obj -649 59 hoa.decoder~ 3 binaural ------------------------;
 #X connect 1 0 11 0;
 #X connect 2 0 1 0;
 #X connect 6 0 5 0;
@@ -598,13 +576,13 @@ sources \, change coordinates \, add description and create groups.
 #X connect 12 1 11 1;
 #X connect 12 2 11 2;
 #X connect 12 3 11 3;
-#X connect 13 0 37 0;
-#X connect 13 1 37 1;
-#X connect 13 2 37 2;
-#X connect 13 3 37 3;
-#X connect 13 4 37 4;
-#X connect 13 5 37 5;
-#X connect 13 6 37 6;
+#X connect 13 0 36 0;
+#X connect 13 1 36 1;
+#X connect 13 2 36 2;
+#X connect 13 3 36 3;
+#X connect 13 4 36 4;
+#X connect 13 5 36 5;
+#X connect 13 6 36 6;
 #X connect 17 0 16 0;
 #X connect 18 0 17 0;
 #X connect 19 0 21 2;
@@ -614,13 +592,13 @@ sources \, change coordinates \, add description and create groups.
 #X connect 28 0 21 0;
 #X connect 29 0 31 0;
 #X connect 30 0 29 0;
-#X connect 35 0 36 0;
-#X connect 35 1 36 1;
-#X connect 37 0 35 0;
-#X connect 37 1 35 1;
-#X connect 37 2 35 2;
-#X connect 37 3 35 3;
-#X connect 37 4 35 4;
-#X connect 37 5 35 5;
-#X connect 37 6 35 6;
+#X connect 36 0 40 0;
+#X connect 36 1 40 1;
+#X connect 36 2 40 2;
+#X connect 36 3 40 3;
+#X connect 36 4 40 4;
+#X connect 36 5 40 5;
+#X connect 36 6 40 6;
+#X connect 40 0 35 0;
+#X connect 40 1 35 1;
 #X coords 0 709 1 708 85 60 0;
