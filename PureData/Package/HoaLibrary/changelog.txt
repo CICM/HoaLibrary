@@ -5,7 +5,13 @@ HoaLibrary for MaxMSP, Pure Data, Faust and VST
 		    PD Version 
 ------------------------ ------------------------
 
-Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
+Pd : For an overview of hoa.library, please refer to the ‘hoa.library-help.pd’ patch.
+
+------------------------
+version beta 2.0.0
+------------------------
+
+The 3D part of the library
 
 ------------------------
 version beta 2.0.0
@@ -13,6 +19,7 @@ version beta 2.0.0
 Systems : 
 - Mac OsX (Pd 32 bit)
 - Windows (Pd 32 bit)
+- Linux 64 bits
 
 ### Global Changes :
 
