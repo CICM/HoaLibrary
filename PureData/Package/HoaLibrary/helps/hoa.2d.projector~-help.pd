@@ -63,7 +63,8 @@ to harmonics domain.;
 #X text -131 -419 Sound field transformations have differents behavior
 in the plane waves domain compared to the circular harmonics domain.
 ;
-#X obj -447 -412 hoa.2d.process~ 10 hoa.fx.delay~ planewaves;
+#X obj -447 -412 hoa.2d.process~ 10 hoa.fx.delay~ planewaves, f 33
+;
 #X obj -447 -374 hoa.2d.recomposer~ 4 10 ---------;
 #X obj -447 -128 hoa.2d.decoder~ 4 ambisonic 10 --;
 #X obj -447 -95 hoa.dac~ 1:10 -------------------;

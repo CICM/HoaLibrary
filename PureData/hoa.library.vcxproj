@@ -5,6 +5,10 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_extented|Win32">
+      <Configuration>Release_extented</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -17,7 +21,6 @@
     <ClInclude Include="..\Sources\Hoa2D\Decoder.h" />
     <ClInclude Include="..\Sources\Hoa2D\Encoder.h" />
     <ClInclude Include="..\Sources\Hoa2D\Hoa2D.h" />
-    <ClInclude Include="..\Sources\Hoa2D\Kits.h" />
     <ClInclude Include="..\Sources\Hoa2D\Map.h" />
     <ClInclude Include="..\Sources\Hoa2D\Meter.h" />
     <ClInclude Include="..\Sources\Hoa2D\Optim.h" />
@@ -30,7 +33,6 @@
     <ClInclude Include="..\Sources\Hoa2D\Wider.h" />
     <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h" />
-    <ClInclude Include="..\Sources\Hoa3D\Delaunay.h" />
     <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h" />
     <ClInclude Include="..\Sources\Hoa3D\Map_3D.h" />
@@ -54,9 +56,6 @@
     <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\d_ugen.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\eboxflag.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\ecommon.h" />
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\g_canvas.h" />
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_imp.h" />
-    <ClInclude Include="..\ThirdParty\PureData\Sources\ecommon\m_pd.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\egraphics\egraphics.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\eobj\eobj.h" />
     <ClInclude Include="..\ThirdParty\PureData\Sources\epd.h" />
@@ -71,11 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\Hoa2D\Ambisonic.cpp" />
-    <ClCompile Include="..\Sources\Hoa2D\BinauralMatrix2D.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\ChannelManager.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Decoder.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Encoder.cpp" />
-    <ClCompile Include="..\Sources\Hoa2D\Kits.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Map.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Meter.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Optim.cpp" />
@@ -87,9 +84,7 @@
     <ClCompile Include="..\Sources\Hoa2D\Vector.cpp" />
     <ClCompile Include="..\Sources\Hoa2D\Wider.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp" />
-    <ClCompile Include="..\Sources\Hoa3D\BinauralMatrix_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp" />
-    <ClCompile Include="..\Sources\Hoa3D\Delaunay.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp" />
     <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp" />
@@ -151,6 +146,7 @@
     <ClCompile Include="PDCommon\hoa.dac_tilde.cpp" />
     <ClCompile Include="PDCommon\hoa.in.cpp" />
     <ClCompile Include="PDCommon\hoa.in_tilde.cpp" />
+    <ClCompile Include="PDCommon\hoa.map_gui.cpp" />
     <ClCompile Include="PDCommon\hoa.out.cpp" />
     <ClCompile Include="PDCommon\hoa.out_tilde.cpp" />
     <ClCompile Include="PDCommon\hoa.pi.cpp" />
@@ -172,6 +168,15 @@
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_extented|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseIntelIPP>false</UseIntelIPP>
+    <UseIntelMKL>No</UseIntelMKL>
+    <PlatformToolset>v100</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
@@ -185,6 +190,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_extented|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -194,7 +202,9 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../builds/</OutDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_extented|Win32'">false</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Package\HoaLibrary\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_extented|Win32'">Package\HoaLibrary\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -258,6 +268,44 @@
       <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2elibrary /LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>..\ThirdParty\PureData\Sources\ecommon\pd.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Package/HoaLibrary/$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\gsl\lib\Win32\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_extented|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <OmitFramePointers>false</OmitFramePointers>
+      <AdditionalIncludeDirectories>C:\gsl\gsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;NT;PD;PD_DEBUG;PD_EXTENTED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>false</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2elibrary /LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>..\ThirdParty\PureData\Sources\ecommon\pd.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>Package/HoaLibrary/pd-extented/$(ProjectName).dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>C:\gsl\lib\Win32\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>

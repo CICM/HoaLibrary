@@ -35,7 +35,6 @@ extern "C" void setup_hoa0x2elibrary(void)
 	setup_hoa0x2emap();
 
     // HOA 2D //
-	setup_hoa0x2e2d0x2ebinaural();
     setup_hoa0x2e2d0x2edecoder_tilde();
     setup_hoa0x2e2d0x2eencoder_tilde();
     setup_hoa0x2e2d0x2emap_tilde();
@@ -49,7 +48,6 @@ extern "C" void setup_hoa0x2elibrary(void)
     setup_hoa0x2e2d0x2ewider_tilde();
     
     // HOA 3D //
-	setup_hoa0x2e3d0x2ebinaural(); 
     setup_hoa0x2e3d0x2edecoder_tilde();
     setup_hoa0x2e3d0x2eencoder_tilde();
     setup_hoa0x2e3d0x2eoptim_tilde();
