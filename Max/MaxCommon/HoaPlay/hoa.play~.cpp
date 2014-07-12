@@ -32,14 +32,25 @@ t_class *play_class;
 
 void *play_new(t_symbol *s, int argc, t_atom *argv);
 
+#ifdef HOA_PACKED_LIB
+int hoa_play_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 
 	c = class_new("hoa.play~", (method)play_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.play~", (char *)"hoa.play~");
+    class_setname((char *)"hoa.2d.play~", (char *)"hoa.play~");
+    class_setname((char *)"hoa.3d.play~", (char *)"hoa.play~");
+    
 	hoa_initclass(c, NULL);
 	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.2d.play~"));
+    class_alias(c, gensym("hoa.3d.play~"));
 	play_class = c;
+    return 0;
 }
 
 void *play_new(t_symbol *s, int argc, t_atom *argv)

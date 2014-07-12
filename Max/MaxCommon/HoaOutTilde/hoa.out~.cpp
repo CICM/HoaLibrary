@@ -58,11 +58,16 @@ void hoa_sig_out_perform64 (t_hoa_sig_out *x, t_object *dsp64, double **ins, lon
 t_max_err hoa_sig_in_setattr_extra(t_hoa_sig_out *x, void *attr, long ac, t_atom *av);
 t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_out *x, void *attr, long ac, t_atom *av);
 
+#ifdef HOA_PACKED_LIB
+int hoa_out_sig_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
 	c = class_new("hoa.out~", (method) hoa_sig_out_new, (method)hoa_sig_out_free, sizeof(t_hoa_sig_out), NULL, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.out~", (char *)"hoa.out~");
+    
 	hoa_initclass(c, (method)NULL);
     
     // @method signal @digest output signal in the corresponding hoa.process~ object's signal outlet

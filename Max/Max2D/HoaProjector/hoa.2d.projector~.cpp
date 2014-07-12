@@ -48,11 +48,16 @@ t_hoa_err hoa_getinfos(t_hoa_projector* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_projector_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_2d_projector_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	
 	c = class_new("hoa.2d.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (long)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.2d.projector~", (char *)"hoa.2d.projector~");
 	
     hoa_initclass(c, (method)hoa_getinfos);
 	
@@ -62,7 +67,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_projector_assist,    "assist",	A_CANT, 0);
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.projector~"));
 	hoa_projector_class = c;
     
 	return 0;
@@ -78,20 +84,22 @@ void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 	
 	t_hoa_projector *x = NULL;
 	int	order = 1;
-    int numberOfLoudspeakers = 4;
+    int number_of_channels = 4;
     x = (t_hoa_projector *)object_alloc(hoa_projector_class);
 	if (x)
 	{		
-		if(atom_gettype(argv) == A_LONG)
+		if(argv && atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
-		if(order < 1)
+        
+        if(argc > 1 && atom_gettype(argv+1) == A_LONG)
+			number_of_channels = atom_getlong(argv+1);
+        
+        if(order < 1)
             order = 1;
-        if(atom_gettype(argv+1) == A_LONG)
-			numberOfLoudspeakers = atom_getlong(argv+1);
-        if(numberOfLoudspeakers < order * 2 + 1)
-            numberOfLoudspeakers = order * 2 + 1;
+        if(number_of_channels < order * 2 + 1)
+            number_of_channels = order * 2 + 1;
 		
-		x->f_projector = new Hoa2D::Projector(order, numberOfLoudspeakers);
+		x->f_projector = new Hoa2D::Projector(order, number_of_channels);
 		
 		dsp_setup((t_pxobject *)x, x->f_projector->getNumberOfHarmonics());
 		for (int i = 0; i < x->f_projector->getNumberOfChannels(); i++)

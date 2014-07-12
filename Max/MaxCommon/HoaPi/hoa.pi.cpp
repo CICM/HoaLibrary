@@ -28,57 +28,62 @@
 
 #include "../../hoa.max.h"
 
-typedef struct _pi 
+typedef struct _hoa_pi
 {	
 	t_object    f_ob;
 	double      f_value;	
 	void*       f_outlet;
     t_atom_long f_loadbang;
     
-} t_pi;
+} t_hoa_pi;
 
-void pi_bang(t_pi *x);
-void pi_loadbang(t_pi *x);
-void pi_int(t_pi *x, long n);
-void pi_float(t_pi *x, double n) ;
-void pi_assist(t_pi *x, void *b, long m, long a, char *s);
-void *pi_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_pi_bang(t_hoa_pi *x);
+void hoa_pi_loadbang(t_hoa_pi *x);
+void hoa_pi_int(t_hoa_pi *x, long n);
+void hoa_pi_float(t_hoa_pi *x, double n) ;
+void hoa_pi_assist(t_hoa_pi *x, void *b, long m, long a, char *s);
+void *hoa_pi_new(t_symbol *s, int argc, t_atom *argv);
 
-t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_pi* x, t_hoa_boxinfos* boxinfos);
 
-t_class *pi_class;
+t_class *hoa_pi_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_pi_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	
-	c = class_new("hoa.pi", (method)pi_new, (method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.pi", (method)hoa_pi_new, (method)NULL, sizeof(t_hoa_pi), 0L, A_GIMME, 0);
+	class_setname((char *)"hoa.pi", (char *)"hoa.pi");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
     
-    class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
+    class_addmethod(c, (method)hoa_pi_assist,	"assist",	A_CANT, 0);
 	
     // @method bang @digest Compute and output result
 	// @description The <m>bang</m> message compute and output result : pi * factor.
-    class_addmethod(c, (method)pi_bang,		"bang",		0);
+    class_addmethod(c, (method)hoa_pi_bang,		"bang",		0);
     
     // @method int @digest Set pi multiplier, and compute result
 	// @description The <m>int</m> message et pi multiplier, and compute the result
 	// @marg 0 @name value @optional 0 @type int
-    class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
+    class_addmethod(c, (method)hoa_pi_int,		"int",		A_LONG, 0);
     
     // @method float @digest Set pi multiplier, and compute result
 	// @description The <m>float</m> message et pi multiplier, and compute the result
 	// @marg 0 @name value @optional 0 @type float
-	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_pi_float,	"float",	A_FLOAT, 0);
     
     // @method dblclick @digest Compute and output result
 	// @description The <m>dblclick</m> on the object compute and output result
-	class_addmethod(c, (method)pi_bang,		"dblclick",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_pi_bang,		"dblclick",	A_CANT, 0);
     
-	class_addmethod(c, (method)pi_loadbang,	"loadbang",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_pi_loadbang,	"loadbang",	A_CANT, 0);
     
-    CLASS_ATTR_LONG             (c, "outonload",  0, t_pi, f_loadbang);
+    CLASS_ATTR_LONG             (c, "outonload",  0, t_hoa_pi, f_loadbang);
 	CLASS_ATTR_CATEGORY			(c, "outonload",  0, "Behavior");
     CLASS_ATTR_STYLE_LABEL      (c, "outonload",  0, "onoff", "Output value on load");
 	CLASS_ATTR_ORDER			(c, "outonload",  0, "1");
@@ -87,14 +92,14 @@ int C74_EXPORT main(void)
     // @description If the <b>outonload</b> is checked, <o>hoa.pi</o> object will send value at loadbang time. 
 	
 	class_register(CLASS_BOX, c);
-	pi_class = c;
+	hoa_pi_class = c;
 	return 0;
 }
 
-void *pi_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_pi_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_pi *x = NULL;
-    x = (t_pi *)object_alloc(pi_class);
+	t_hoa_pi *x = NULL;
+    x = (t_hoa_pi *)object_alloc(hoa_pi_class);
     if (x)
 	{
         // @arg 0 @name multiplier @optional 1 @type float @digest π multiplier
@@ -115,7 +120,7 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
 	return(x);
 }
 
-t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_pi* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_STANDARD;
 	boxinfos->autoconnect_inputs = 0;
@@ -125,13 +130,13 @@ t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void pi_loadbang(t_pi *x)
+void hoa_pi_loadbang(t_hoa_pi *x)
 {
 	if (x->f_loadbang)
-		pi_bang(x);
+		hoa_pi_bang(x);
 }
 
-void pi_assist(t_pi *x, void *b, long m, long a, char *s)
+void hoa_pi_assist(t_hoa_pi *x, void *b, long m, long a, char *s)
 {
     // @in 0 @type bang/int/float @digest bang to output π, set the π multiplier
 	if (m == ASSIST_INLET)
@@ -142,23 +147,23 @@ void pi_assist(t_pi *x, void *b, long m, long a, char *s)
 		sprintf(s,"(float) \u03C0 * %.2f", x->f_value);
 }
 
-void pi_bang(t_pi *x) 
+void hoa_pi_bang(t_hoa_pi *x) 
 {
 	outlet_float(x->f_outlet, PI * x->f_value);
 }
 
 
-void pi_int(t_pi *x, long n)
+void hoa_pi_int(t_hoa_pi *x, long n)
 {
 	x->f_value = n;
-	pi_bang(x);
+	hoa_pi_bang(x);
 }
 
 
-void pi_float(t_pi *x, double n) 
+void hoa_pi_float(t_hoa_pi *x, double n) 
 {
 	x->f_value = n;
-	pi_bang(x);
+	hoa_pi_bang(x);
 }
 
 

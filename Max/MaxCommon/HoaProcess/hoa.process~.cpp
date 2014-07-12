@@ -220,12 +220,19 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 // Main
 // ========================================================================================================================================== //
 
+#ifdef HOA_PACKED_LIB
+int hoa_process_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
 
 	c = class_new("hoa.process~", (method)hoa_processor_new,  (method)hoa_processor_free, sizeof(t_hoa_processor), NULL, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.process~", (char *)"hoa.process~");
+    class_setname((char *)"hoa.2d.process~", (char *)"hoa.process~");
+    class_setname((char *)"hoa.3d.process~", (char *)"hoa.process~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
     // @method signal @digest output signal in the corresponding <o>hoa.in~</o> object in the loaded patch.
@@ -320,7 +327,11 @@ int C74_EXPORT main(void)
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
-	hoa_processor_class = c;
+    
+    class_alias(c, gensym("hoa.2d.process~"));
+    class_alias(c, gensym("hoa.3d.process~"));
+    hoa_processor_class = c;
+    
 	return 0;
 }
 

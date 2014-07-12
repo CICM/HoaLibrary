@@ -35,7 +35,7 @@
 #define MIN_UI_CHANNELS 3
 #define DEF_UI_CHANNELS 4
 
-typedef struct  _hoa_recomposer
+typedef struct  _hoa_2d_recomposer_gui
 {
 	t_jbox		j_box;
 	t_rect		rect;
@@ -87,72 +87,77 @@ typedef struct  _hoa_recomposer
 	void*		f_out;
     void*		f_outlet_infos;
 
-} t_hoa_recomposer;
+} t_hoa_2d_recomposer_gui;
 
-t_class *hoa_recomposer_class;
+t_class *hoa_2d_recomposer_gui_class;
 
 // general methods
-void *hoa_recomposer_new(t_symbol *s, int argc, t_atom *argv);
-void hoa_recomposer_free(t_hoa_recomposer *x);
-void hoa_recomposer_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params);
-void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s);
-t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void hoa_recomposer_preset(t_hoa_recomposer *x);
-t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av);
-t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av);
-void notifyChange(t_hoa_recomposer *x);
-void hoa_recomposer_outputAndNotifyChange(t_hoa_recomposer *x);
+void *hoa_2d_recomposer_gui_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_2d_recomposer_gui_free(t_hoa_2d_recomposer_gui *x);
+void hoa_2d_recomposer_gui_getdrawparams(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoa_2d_recomposer_gui_assist(t_hoa_2d_recomposer_gui *x, void *b, long m, long a, char *s);
+t_max_err hoa_2d_recomposer_gui_notify(t_hoa_2d_recomposer_gui *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void hoa_2d_recomposer_gui_preset(t_hoa_2d_recomposer_gui *x);
+t_max_err hoa_2d_recomposer_gui_setvalueof(t_hoa_2d_recomposer_gui *x, long ac, t_atom *av);
+t_max_err hoa_2d_recomposer_gui_getvalueof(t_hoa_2d_recomposer_gui *x, long *ac, t_atom **av);
+void notifyChange(t_hoa_2d_recomposer_gui *x);
+void hoa_2d_recomposer_gui_outputAndNotifyChange(t_hoa_2d_recomposer_gui *x);
 
 // mouse/key/focus methods
 
-void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
-void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_recomposer_focuslost(t_hoa_recomposer *x);
+void hoa_2d_recomposer_gui_mousedown(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_recomposer_gui_mouseup(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers);
+long hoa_2d_recomposer_gui_key(t_hoa_2d_recomposer_gui *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
+void hoa_2d_recomposer_gui_mousemove(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_recomposer_gui_mousedrag(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_recomposer_gui_mousedoubleclick(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_recomposer_gui_focuslost(t_hoa_2d_recomposer_gui *x);
 
 // msg-in methods
-t_max_err set_numberOfChannels(t_hoa_recomposer *x, void *attr, long ac, t_atom *av);
-void hoa_recomposer_bang(t_hoa_recomposer *x);
-void hoa_recomposer_list(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
-void hoa_recomposer_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
-void hoa_recomposer_float(t_hoa_recomposer *x, double f);
-void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+t_max_err set_numberOfChannels(t_hoa_2d_recomposer_gui *x, void *attr, long ac, t_atom *av);
+void hoa_2d_recomposer_gui_bang(t_hoa_2d_recomposer_gui *x);
+void hoa_2d_recomposer_gui_list(t_hoa_2d_recomposer_gui *x, t_symbol *s, short ac, t_atom *av);
+void hoa_2d_recomposer_gui_anything(t_hoa_2d_recomposer_gui *x, t_symbol *s, short ac, t_atom *av);
+void hoa_2d_recomposer_gui_float(t_hoa_2d_recomposer_gui *x, double f);
+void hoa_2d_recomposer_gui_reset(t_hoa_2d_recomposer_gui *x, t_symbol *s, short ac, t_atom *av);
 
-void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void hoa_recomposer_nb_hp(t_hoa_recomposer *x, int v);
+void hoa_2d_recomposer_gui_set(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av);
+void hoa_2d_recomposer_gui_angles(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av);
+void hoa_2d_recomposer_gui_wide(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av);
+void hoa_2d_recomposer_gui_nb_hp(t_hoa_2d_recomposer_gui *x, int v);
 
 // msg-out methods
-void hoa_recomposer_output(t_hoa_recomposer *x);
+void hoa_2d_recomposer_gui_output(t_hoa_2d_recomposer_gui *x);
 
 // paint methods
-void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view);
-void draw_background(t_hoa_recomposer *x, t_object *view, t_rect *rect);
-void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect);
-void draw_channels_text(t_hoa_recomposer *x, t_object *view, t_rect *rect);
-void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect);
-void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect);
-void draw_rect_selection(t_hoa_recomposer *x, t_object *view, t_rect *rect);
+void hoa_2d_recomposer_gui_paint(t_hoa_2d_recomposer_gui *x, t_object *view);
+void draw_background(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
+void draw_channels(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
+void draw_channels_text(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
+void draw_channels_shape(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
+void draw_fishEye(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
+void draw_rect_selection(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect);
 
 //calcul methods
-int isPointOverAChannel(t_hoa_recomposer *x, t_pt *pt);
+int isPointOverAChannel(t_hoa_2d_recomposer_gui *x, t_pt *pt);
 
-void begin_rect_selection(t_hoa_recomposer *x, t_pt pt);
-void do_rect_selection(t_hoa_recomposer *x, t_pt pt);
-void end_rect_selection(t_hoa_recomposer *x, t_pt pt);
-bool isChannelInsideRect(t_hoa_recomposer *x, int micIndex, t_rect rectSelection);
+void begin_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt);
+void do_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt);
+void end_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt);
+bool isChannelInsideRect(t_hoa_2d_recomposer_gui *x, int micIndex, t_rect rectSelection);
 
-void computeRepresentation(t_hoa_recomposer *x, int micIndex);
+void computeRepresentation(t_hoa_2d_recomposer_gui *x, int micIndex);
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_2d_recomposer_gui_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	
-	c = class_new("hoa.2d.recomposer", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
+	c = class_new("hoa.2d.recomposer", (method)hoa_2d_recomposer_gui_new, (method)hoa_2d_recomposer_gui_free, (short)sizeof(t_hoa_2d_recomposer_gui), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.2d.recomposer", (char *)"hoa.2d.recomposer");
 	
 	hoa_initclass(c, NULL);
 	
@@ -160,17 +165,17 @@ int C74_EXPORT main()
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
 	
-	class_addmethod(c, (method) hoa_recomposer_assist,          "assist",        A_CANT,	0);
-    class_addmethod(c, (method) hoa_recomposer_preset,          "preset",					0);
-    class_addmethod(c, (method) hoa_recomposer_getvalueof,      "getvalueof",    A_CANT,	0);
-	class_addmethod(c, (method) hoa_recomposer_setvalueof,      "setvalueof",    A_CANT,	0);
-	class_addmethod(c, (method) hoa_recomposer_paint,           "paint",         A_CANT,	0);
-	class_addmethod(c, (method) hoa_recomposer_getdrawparams,   "getdrawparams", A_CANT,	0);
-	class_addmethod(c, (method) hoa_recomposer_notify,          "notify",        A_CANT,	0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_assist,          "assist",        A_CANT,	0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_preset,          "preset",					0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_getvalueof,      "getvalueof",    A_CANT,	0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_setvalueof,      "setvalueof",    A_CANT,	0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_paint,           "paint",         A_CANT,	0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_getdrawparams,   "getdrawparams", A_CANT,	0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_notify,          "notify",        A_CANT,	0);
 	
 	// @method bang @digest Output current values.
 	// @description The <m>bang</m> message report current values.
-	class_addmethod(c, (method) hoa_recomposer_bang,            "bang",                 0L,0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_bang,            "bang",                 0L,0);
 	
 	// @method set @digest Set angle or widening value for one or more channels without output.
 	// @description The word <m>set</m> followed by the symbol <b>wide</b> sets the widening value.
@@ -180,21 +185,21 @@ int C74_EXPORT main()
 	// @marg 0 @name wide/angles @optional 0 @type symbol
 	// @marg 1 @name channel-index @optional 0 @type int
 	// @marg 2 @name value @optional 0 @type float
-    class_addmethod(c, (method) hoa_recomposer_set,             "set",           A_GIMME,  0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_set,             "set",           A_GIMME,  0);
 	
 	// @method angles @digest Set angle value for one or more channels and trigger output.
 	// @description The word <m>angles</m> followed by an index and a float set a specific channel angle.
 	// The word <m>angles</m> followed by a list of float set several channel angles.
 	// @marg 0 @name channel-index/list @optional 0 @type int/list
 	// @marg 1 @name value @optional 0 @type float
-    class_addmethod(c, (method) hoa_recomposer_angles,          "angles",        A_GIMME,  0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_angles,          "angles",        A_GIMME,  0);
 	
 	// @method wide @digest Set widening value for one or more channels and trigger output.
 	// @description The word <m>wide</m> followed by an index and a float set a specific channel widening value. Pass 0 to set all widening values.
 	// The word <m>wide</m> followed by a list of float set widening value for a list of channel.
 	// @marg 0 @name channel-index/list @optional 0 @type int/list
 	// @marg 1 @name value @optional 0 @type float
-    class_addmethod(c, (method) hoa_recomposer_wide,			"wide",			 A_GIMME,  0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_wide,			"wide",			 A_GIMME,  0);
 	
 	// @method reset @digest Reset angle and widening value of one or more channels and trigger output.
 	// @description Without argument, the word <m>reset</m> will reset all of the angles and widening values of channels to default.
@@ -202,8 +207,8 @@ int C74_EXPORT main()
 	// The word <m>reset</m> followed by the symbol <m>angle</m> will reset all angles to default. To reset specific channels angles pass their index as a list of int as second argument.
 	// @marg 0 @name wide/angles @optional 1 @type symbol
 	// @marg 1 @name channel-index @optional 1 @type list
-    class_addmethod(c, (method) hoa_recomposer_reset,           "reset",         A_GIMME,  0);
-	class_addmethod(c, (method) hoa_recomposer_anything,        "anything",      A_GIMME,  0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_reset,           "reset",         A_GIMME,  0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_anything,        "anything",      A_GIMME,  0);
 	
 	// @method (mouse) @digest Click and drag to change angles and widening values of the channels.
 	// @description Click and drag the channel points select them and to set their angles and widening values.
@@ -219,13 +224,13 @@ int C74_EXPORT main()
 	// <li> double-click on a channel to set it to the closest default channel angle.</li>
 	// <li> Press <b>cmd</b> key when you drag to activate magnetism on the currently dragged channel</li>
 	// </ul>
-	class_addmethod(c, (method) hoa_recomposer_mousedown,       "mousedown",     A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_mousedrag,       "mousedrag",     A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_mouseup,         "mouseup",       A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_mousemove,       "mousemove",     A_CANT,   0);
-    class_addmethod(c, (method) hoa_recomposer_mousedoubleclick,"mousedoubleclick", A_CANT,0);
-	class_addmethod(c, (method) hoa_recomposer_key,             "key",           A_CANT,   0);
-	class_addmethod(c, (method) hoa_recomposer_focuslost,       "focuslost",     A_CANT,   0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_mousedown,       "mousedown",     A_CANT,   0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_mousedrag,       "mousedrag",     A_CANT,   0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_mouseup,         "mouseup",       A_CANT,   0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_mousemove,       "mousemove",     A_CANT,   0);
+    class_addmethod(c, (method) hoa_2d_recomposer_gui_mousedoubleclick,"mousedoubleclick", A_CANT,0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_key,             "key",           A_CANT,   0);
+	class_addmethod(c, (method) hoa_2d_recomposer_gui_focuslost,       "focuslost",     A_CANT,   0);
     	
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	// @exclude hoa.2d.map
@@ -235,77 +240,77 @@ int C74_EXPORT main()
 	// @exclude hoa.2d.map
 	
     CLASS_STICKY_CATEGORY(c, 0, "Color");
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoa_recomposer, f_color_bg);
+	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoa_2d_recomposer_gui, f_color_bg);
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.35 0.35 0.35 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_recomposer, f_color_bd);
+    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_2d_recomposer_gui, f_color_bd);
 	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.2 0.2 0.2 1.");
 	// @description Sets the RGBA values for the border color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "circlecolor", 0, t_hoa_recomposer, f_color_inner_circle);
+    CLASS_ATTR_RGBA				(c, "circlecolor", 0, t_hoa_2d_recomposer_gui, f_color_inner_circle);
 	CLASS_ATTR_STYLE			(c, "circlecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "circlecolor", 0, "Circle Inner Color");
 	CLASS_ATTR_ORDER			(c, "circlecolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "circlecolor", 0, "0.2 0.2 0.2 1.");
 	// @description Sets the RGBA values for the inner circle color of the <o>hoa.2d.recomposer</o> object
 	
-	CLASS_ATTR_RGBA				(c, "chacolor", 0, t_hoa_recomposer, f_color_channel_point);
+	CLASS_ATTR_RGBA				(c, "chacolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_point);
 	CLASS_ATTR_STYLE			(c, "chacolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "chacolor", 0, "Channels Color");
 	CLASS_ATTR_ORDER			(c, "chacolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "chacolor", 0, "0.5 0.5 0.5 1.");
 	// @description Sets the RGBA values for the channel point color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "selchacolor", 0, t_hoa_recomposer, f_color_channel_point_selected);
+    CLASS_ATTR_RGBA				(c, "selchacolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_point_selected);
 	CLASS_ATTR_STYLE			(c, "selchacolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selchacolor", 0, "Selected Channel Color");
 	CLASS_ATTR_ORDER			(c, "selchacolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchacolor", 0, "0.86 0.86 0.86 1.");
 	// @description Sets the RGBA values for the selected channel point color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "channelshapecolor", 0, t_hoa_recomposer, f_color_channel_shape);
+    CLASS_ATTR_RGBA				(c, "channelshapecolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_shape);
 	CLASS_ATTR_STYLE			(c, "channelshapecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "channelshapecolor", 0, "Channel Shape color");
 	CLASS_ATTR_ORDER			(c, "channelshapecolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "channelshapecolor", 0, "0.4 0.4 0.4 0.3");
 	// @description Sets the RGBA values for the channel shape color of the <o>hoa.2d.recomposer</o> object
 	
-	CLASS_ATTR_RGBA				(c, "selchannelshapecolor", 0, t_hoa_recomposer, f_color_channel_shape_selected);
+	CLASS_ATTR_RGBA				(c, "selchannelshapecolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_shape_selected);
 	CLASS_ATTR_STYLE			(c, "selchannelshapecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selchannelshapecolor", 0, "Channel Shape color");
 	CLASS_ATTR_ORDER			(c, "selchannelshapecolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selchannelshapecolor", 0, "0.4 0.4 0.8 0.3");
 	// @description Sets the RGBA values for the selected channel shape color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "fisheyecolor", 0, t_hoa_recomposer, f_color_fisheye);
+    CLASS_ATTR_RGBA				(c, "fisheyecolor", 0, t_hoa_2d_recomposer_gui, f_color_fisheye);
 	CLASS_ATTR_STYLE			(c, "fisheyecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "fisheyecolor", 0, "FishEye color");
 	CLASS_ATTR_ORDER			(c, "fisheyecolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "fisheyecolor", 0, "0.69 0.18 0.18 1.");
 	// @description Sets the RGBA values for the fisheye color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "rectselectcolor", 0, t_hoa_recomposer, f_color_selection);
+    CLASS_ATTR_RGBA				(c, "rectselectcolor", 0, t_hoa_2d_recomposer_gui, f_color_selection);
 	CLASS_ATTR_STYLE			(c, "rectselectcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "rectselectcolor", 0, "Rect Selection color");
 	CLASS_ATTR_ORDER			(c, "rectselectcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "rectselectcolor", 0, "0.39 0.52 0.8 1.");
 	// @description Sets the RGBA values for the rectangular selection color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "channeltextcolor", 0, t_hoa_recomposer, f_color_channel_point_text);
+    CLASS_ATTR_RGBA				(c, "channeltextcolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_point_text);
 	CLASS_ATTR_STYLE			(c, "channeltextcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "channeltextcolor", 0, "Channels text color");
 	CLASS_ATTR_ORDER			(c, "channeltextcolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "channeltextcolor", 0, "0.9 0.9 0.9 1.");
 	// @description Sets the RGBA values for the channel text color of the <o>hoa.2d.recomposer</o> object
     
-    CLASS_ATTR_RGBA				(c, "selchanneltextcolor", 0, t_hoa_recomposer, f_color_channel_point_text_sel);
+    CLASS_ATTR_RGBA				(c, "selchanneltextcolor", 0, t_hoa_2d_recomposer_gui, f_color_channel_point_text_sel);
 	CLASS_ATTR_STYLE			(c, "selchanneltextcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selchanneltextcolor", 0, "Selected Channels text color");
 	CLASS_ATTR_ORDER			(c, "selchanneltextcolor", 0, "10");
@@ -313,7 +318,7 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the selected channel text color of the <o>hoa.2d.recomposer</o> object
     CLASS_STICKY_CATEGORY_CLEAR(c);
 	
-	CLASS_ATTR_LONG				(c, "channels",0, t_hoa_recomposer, f_number_of_channels);
+	CLASS_ATTR_LONG				(c, "channels",0, t_hoa_2d_recomposer_gui, f_number_of_channels);
     CLASS_ATTR_CATEGORY			(c, "channels",0,"Custom");
 	CLASS_ATTR_FILTER_CLIP		(c, "channels", MIN_UI_CHANNELS, MAX_UI_CHANNELS);
     CLASS_ATTR_ACCESSORS		(c, "channels", NULL, set_numberOfChannels);
@@ -322,20 +327,21 @@ int C74_EXPORT main()
 	// @description Sets the number of channels.
 	
 	class_register(CLASS_BOX, c);
-	hoa_recomposer_class = c;
+    class_alias(c, gensym("hoa.recomposer"));
+	hoa_2d_recomposer_gui_class = c;
 	return 0;
 }
 
-void *hoa_recomposer_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_2d_recomposer_gui_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_hoa_recomposer *x =  NULL; 
+	t_hoa_2d_recomposer_gui *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 	
-	x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
+	x = (t_hoa_2d_recomposer_gui *)object_alloc(hoa_2d_recomposer_gui_class);
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
@@ -372,7 +378,7 @@ void *hoa_recomposer_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-void hoa_recomposer_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoa_2d_recomposer_gui_getdrawparams(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_bordercolor = x->f_color_bd;
     params->d_boxfillcolor = x->f_color_bg;
@@ -380,7 +386,7 @@ void hoa_recomposer_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_
 	params->d_cornersize = HOA_UI_CORNERSIZE;
 }
 
-void hoa_recomposer_free(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_free(t_hoa_2d_recomposer_gui *x)
 {
 	jbox_free(&x->j_box);
 	delete x->f_channels;
@@ -390,7 +396,7 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
 	delete [] x->f_harmonicsValues;
 }
 
-void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s)
+void hoa_2d_recomposer_gui_assist(t_hoa_2d_recomposer_gui *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
@@ -405,7 +411,7 @@ void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s
 	}
 }
 
-void hoa_recomposer_preset(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_preset(t_hoa_2d_recomposer_gui *x)
 {
     
     void* z;
@@ -421,7 +427,7 @@ void hoa_recomposer_preset(t_hoa_recomposer *x)
     }
 }
 
-t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
+t_max_err hoa_2d_recomposer_gui_setvalueof(t_hoa_2d_recomposer_gui *x, long ac, t_atom *av)
 {
     if (ac && av)
 	{
@@ -437,13 +443,13 @@ t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_redraw((t_jbox *)x);
         
-        hoa_recomposer_output(x);
+        hoa_2d_recomposer_gui_output(x);
 	}
 	return MAX_ERR_NONE;
 }
 
 // get a list of mic value : (x, y, wider)*numberOfchannel
-t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
+t_max_err hoa_2d_recomposer_gui_getvalueof(t_hoa_2d_recomposer_gui *x, long *ac, t_atom **av)
 {
     if (ac && av)
     {
@@ -475,7 +481,7 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
 
 /* --------- */
 
-void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+void hoa_2d_recomposer_gui_reset(t_hoa_2d_recomposer_gui *x, t_symbol *s, short ac, t_atom *av)
 {
     if (ac == 0)
     {
@@ -516,14 +522,14 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
         }
     }
     
-    hoa_recomposer_outputAndNotifyChange(x);
+    hoa_2d_recomposer_gui_outputAndNotifyChange(x);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
 	jbox_redraw((t_jbox *)x);
 }
 
-void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_2d_recomposer_gui_set(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av)
 {
     int isSet = (s == hoa_sym_set) ? 1 : 0;
     t_symbol *name = atom_getsym(av);
@@ -587,19 +593,19 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 	jbox_redraw((t_jbox *)x);
 }
 
-void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_2d_recomposer_gui_angles(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av)
 {
-    hoa_recomposer_set(x, s, ac, av); // notifying in set method
-    hoa_recomposer_output(x);
+    hoa_2d_recomposer_gui_set(x, s, ac, av); // notifying in set method
+    hoa_2d_recomposer_gui_output(x);
 }
 
-void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_2d_recomposer_gui_wide(t_hoa_2d_recomposer_gui *x, t_symbol *s, long ac, t_atom *av)
 {
-    hoa_recomposer_set(x, s, ac, av); // notifying in set method
-    hoa_recomposer_output(x);
+    hoa_2d_recomposer_gui_set(x, s, ac, av); // notifying in set method
+    hoa_2d_recomposer_gui_output(x);
 }
 
-t_max_err set_numberOfChannels(t_hoa_recomposer *x, void *attr, long ac, t_atom *av)
+t_max_err set_numberOfChannels(t_hoa_2d_recomposer_gui *x, void *attr, long ac, t_atom *av)
 {
 	long mics, order;
 	
@@ -629,30 +635,30 @@ t_max_err set_numberOfChannels(t_hoa_recomposer *x, void *attr, long ac, t_atom 
 		x->f_harmonicsValues	= new double[order * 2 + 1];
 		
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
-		hoa_recomposer_reset(x, gensym("reset"), 0, NULL);
+		hoa_2d_recomposer_gui_reset(x, gensym("reset"), 0, NULL);
     }
     return MAX_ERR_NONE;
 }
 
-void hoa_recomposer_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+void hoa_2d_recomposer_gui_anything(t_hoa_2d_recomposer_gui *x, t_symbol *s, short ac, t_atom *av)
 {
 	;
 }
 
 //========================= Output Methods :
 
-void hoa_recomposer_bang(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_bang(t_hoa_2d_recomposer_gui *x)
 {
-    hoa_recomposer_output(x);
+    hoa_2d_recomposer_gui_output(x);
 }
 
-void hoa_recomposer_outputAndNotifyChange(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_outputAndNotifyChange(t_hoa_2d_recomposer_gui *x)
 {
     object_notify(x, hoa_sym_modified, NULL);
-    hoa_recomposer_output(x);
+    hoa_2d_recomposer_gui_output(x);
 }
 
-void hoa_recomposer_output(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_output(t_hoa_2d_recomposer_gui *x)
 {
     int channels = x->f_channels->getNumberOfChannels();
 	t_atom*	av_left = new t_atom[channels];
@@ -679,7 +685,7 @@ void hoa_recomposer_output(t_hoa_recomposer *x)
 
 //========================= Notify Methods :
 
-t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoa_2d_recomposer_gui_notify(t_hoa_2d_recomposer_gui *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 
@@ -719,7 +725,7 @@ t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg,
 
 //========================= Paint Methods :
 
-void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view)
+void hoa_2d_recomposer_gui_paint(t_hoa_2d_recomposer_gui *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -734,7 +740,7 @@ void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view)
     draw_rect_selection(x, view, &rect);
 }
 
-void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
+void draw_background(t_hoa_2d_recomposer_gui *x,  t_object *view, t_rect *rect)
 {
 	double w = x->rect.width;
     t_jrgba HpMarkerColor = {0.2,0.2,0.2,1};
@@ -797,7 +803,7 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
-void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect)
+void draw_channels(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
 	int numChannels = x->f_number_of_channels;
@@ -843,7 +849,7 @@ void draw_channels(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_channels_layer, 0., 0.);
 }
 
-void draw_channels_text(t_hoa_recomposer *x, t_object *view, t_rect *rect)
+void draw_channels_text(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
 	int numChannels = x->f_number_of_channels;
@@ -880,7 +886,7 @@ void draw_channels_text(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_text_layer, 0., 0.);
 }
 
-void computeRepresentation(t_hoa_recomposer *x, int index)
+void computeRepresentation(t_hoa_2d_recomposer_gui *x, int index)
 {
 	x->f_encoder->setAzimuth(0);
 	x->f_encoder->process(10., x->f_harmonicsValues);
@@ -889,7 +895,7 @@ void computeRepresentation(t_hoa_recomposer *x, int index)
 	x->f_scope->process(x->f_harmonicsValues);
 }
 
-void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
+void draw_channels_shape(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_color_channel_shape;
@@ -950,7 +956,7 @@ void draw_channels_shape(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_harmonics_layer, 0., 0.);
 }
 
-void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect)
+void draw_fishEye(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect)
 {
     t_pt cartFisheyeDest, cart;
     double micAngle, w;
@@ -995,7 +1001,7 @@ void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_fisheye_layer, 0., 0.);
 }
 
-void draw_rect_selection(t_hoa_recomposer *x, t_object *view, t_rect *rect)
+void draw_rect_selection(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect)
 {
     t_jrgba fillColor = x->f_color_selection;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_rectselection_layer, rect->width, rect->height);
@@ -1018,7 +1024,7 @@ void draw_rect_selection(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 
 //========================= Mouse Methods :
 
-void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_recomposer_gui_mousedown(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double w = x->rect.width;
     x->f_last_mouseDown = pt;
@@ -1085,7 +1091,7 @@ void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     jbox_redraw((t_jbox *)x);
 }
 
-void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_recomposer_gui_mousedrag(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double w = x->rect.width;
     t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
@@ -1107,7 +1113,7 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
         double factor = isInsideRad(angleDrag, fisheyeAngle - HOA_PI2, fisheyeAngle + HOA_PI2) ? 1 : -1;
         double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_channel_radius;
         x->f_channels->setFisheyeStepWithDelta(-2, radiusDelta);
-        hoa_recomposer_outputAndNotifyChange(x);
+        hoa_2d_recomposer_gui_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_fisheye_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
@@ -1134,7 +1140,7 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
             x->f_channels->rotateSelectedChannels(angleDrag, x->f_last_mouseDownOverChannel, magnet);
         }
         
-        hoa_recomposer_outputAndNotifyChange(x);
+        hoa_2d_recomposer_gui_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
@@ -1146,7 +1152,7 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     x->f_last_mouseDragRadius = radiusDrag;
 }
 
-void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_recomposer_gui_mouseup(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_last_mouseDragRadius = x->f_channel_radius;
     x->f_last_mouseUp = pt;
@@ -1171,7 +1177,7 @@ void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt,
     jbox_redraw((t_jbox *)x);    
 }
 
-void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_recomposer_gui_mousemove(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double w = x->rect.width;
     if ( (x->f_last_mouseMove.x != pt.x) || (x->f_last_mouseMove.y != pt.y) ) 
@@ -1227,7 +1233,7 @@ void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     }
 }
 
-void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_recomposer_gui_mousedoubleclick(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     if (x->f_last_mouseDownOverChannel != -1)
 	{
@@ -1236,11 +1242,11 @@ void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview,
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_channels_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_redraw((t_jbox *)x);
-        hoa_recomposer_outputAndNotifyChange(x);
+        hoa_2d_recomposer_gui_outputAndNotifyChange(x);
     }
 }
 
-long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
+long hoa_2d_recomposer_gui_key(t_hoa_2d_recomposer_gui *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {	
 	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
     int filter = 0;
@@ -1262,7 +1268,7 @@ long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode
 	return filter;	// returns 1 if you want to filter it from the key object (otherwise return 0)
 }
 
-void begin_rect_selection(t_hoa_recomposer *x, t_pt pt)
+void begin_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt)
 {
     x->f_rectSelectionExist = true;
     x->f_rectSelection.width = x->f_rectSelection.height = 0;
@@ -1270,7 +1276,7 @@ void begin_rect_selection(t_hoa_recomposer *x, t_pt pt)
     x->f_rectSelection.y = x->f_rectSelectionBegin.y = pt.y;
 }
 
-void end_rect_selection(t_hoa_recomposer *x, t_pt pt)
+void end_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt)
 {
     for (int i=0; i < x->f_number_of_channels; i++)
 	{
@@ -1286,7 +1292,7 @@ void end_rect_selection(t_hoa_recomposer *x, t_pt pt)
     jbox_redraw((t_jbox *)x);
 }
 
-void do_rect_selection(t_hoa_recomposer *x, t_pt pt)
+void do_rect_selection(t_hoa_2d_recomposer_gui *x, t_pt pt)
 {
     x->f_rectSelectionExist = true;
     if (pt.x > x->f_rectSelectionBegin.x)
@@ -1315,7 +1321,7 @@ void do_rect_selection(t_hoa_recomposer *x, t_pt pt)
     jbox_redraw((t_jbox *)x);
 }
 
-void hoa_recomposer_focuslost(t_hoa_recomposer *x)
+void hoa_2d_recomposer_gui_focuslost(t_hoa_2d_recomposer_gui *x)
 {
 	x->f_channels->setSelected(-1, 0);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rectselection_layer);
@@ -1328,7 +1334,7 @@ void hoa_recomposer_focuslost(t_hoa_recomposer *x)
 
 /* ---- Utilities ---- */
 
-int isPointOverAChannel(t_hoa_recomposer *x, t_pt *pt)
+int isPointOverAChannel(t_hoa_2d_recomposer_gui *x, t_pt *pt)
 {
     double w = x->rect.width;
 	double _abscissa, _ordinate, _azimuth, _radius, chanSize;
@@ -1350,7 +1356,7 @@ int isPointOverAChannel(t_hoa_recomposer *x, t_pt *pt)
     return -1;
 }
 
-bool isChannelInsideRect(t_hoa_recomposer *x, int micIndex, t_rect rectSelection)
+bool isChannelInsideRect(t_hoa_2d_recomposer_gui *x, int micIndex, t_rect rectSelection)
 {
     double w = x->rect.width;
     t_pt micPoint;

@@ -122,11 +122,16 @@ t_hoa_err hoa_getinfos(t_meter* x, t_hoa_boxinfos* boxinfos);
 
 t_class *meter_class;
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_2d_meter_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
     
 	c = class_new("hoa.2d.meter~", (method)meter_new, (method)meter_free, (short)sizeof(t_meter), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.2d.meter~", (char *)"hoa.2d.meter~");
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
@@ -355,6 +360,7 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the velocity vector color of the <o>hoa.2d.meter~</o> object
 	
 	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.meter~"));
 	meter_class = c;
 	return 0;
 }

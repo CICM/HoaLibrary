@@ -28,57 +28,62 @@
 
 #include "../HoaCommon.max.h"
 
-typedef struct _pi 
+typedef struct _hoa_pi_sig
 {	
 	t_pxobject  f_ob;
 	double      f_value;
     double      f_phase;
-} t_pi;
+} t_hoa_pi_sig;
 
-void pi_int(t_pi *x, long n);
-void pi_float(t_pi *x, double n) ;
-void pi_assist(t_pi *x, void *b, long m, long a, char *s);
-void *pi_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_pi_sig_int(t_hoa_pi_sig *x, long n);
+void hoa_pi_sig_float(t_hoa_pi_sig *x, double n) ;
+void hoa_pi_sig_assist(t_hoa_pi_sig *x, void *b, long m, long a, char *s);
+void *hoa_pi_sig_new(t_symbol *s, int argc, t_atom *argv);
 
-void pi_dsp64(t_pi *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_pi_sig_dsp64(t_hoa_pi_sig *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_pi_sig_perform64(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_pi_sig_perform64_phase(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_pi_sig_perform64_offset(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_pi_sig* x, t_hoa_boxinfos* boxinfos);
 
-t_class *pi_class;
+t_class *hoa_pi_sig_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_pi_sig_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	
-	c = class_new("hoa.pi~", (method)pi_new, (method)dsp_free, sizeof(t_pi), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.pi~", (method)hoa_pi_sig_new, (method)dsp_free, sizeof(t_hoa_pi_sig), 0L, A_GIMME, 0);
+	class_setname((char *)"hoa.pi~", (char *)"hoa.pi~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
     
-	class_addmethod(c, (method)pi_dsp64,	"dsp64",    A_CANT, 0);
-    class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_pi_sig_dsp64,	"dsp64",    A_CANT, 0);
+    class_addmethod(c, (method)hoa_pi_sig_assist,	"assist",	A_CANT, 0);
 	
     // @method int @digest Set π multiplier or phase
 	// @description The <m>int</m> message set pi multiplier in the first inlet, the phase in the second one.
 	// @marg 0 @name value @optional 0 @type int
-    class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
+    class_addmethod(c, (method)hoa_pi_sig_int,		"int",		A_LONG, 0);
     
     // @method float @digest Set π multiplier or phase
 	// @description The <m>float</m> message set pi multiplier in the first inlet, the phase in the second one.
 	// @marg 0 @name value @optional 0 @type float
-	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_pi_sig_float,	"float",	A_FLOAT, 0);
 	
     class_dspinit(c);
 	class_register(CLASS_BOX, c);
-	pi_class = c;
+	hoa_pi_sig_class = c;
 	return 0;
 }
 
-void *pi_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_pi_sig_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_pi *x = (t_pi *)object_alloc(pi_class);
+	t_hoa_pi_sig *x = (t_hoa_pi_sig *)object_alloc(hoa_pi_sig_class);
     
     if (x)
     {
@@ -100,7 +105,7 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
 	return(x);
 }
 
-t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_pi_sig* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_STANDARD;
 	boxinfos->autoconnect_inputs = 0;
@@ -111,17 +116,17 @@ t_hoa_err hoa_getinfos(t_pi* x, t_hoa_boxinfos* boxinfos)
 }
 
 
-void pi_dsp64(t_pi *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_pi_sig_dsp64(t_hoa_pi_sig *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	if(count[0])
-		object_method(dsp64, gensym("dsp_add64"), x, pi_perform64, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_pi_sig_perform64, 0, NULL);
     else if(count[1])
-		object_method(dsp64, gensym("dsp_add64"), x, pi_perform64_phase, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_pi_sig_perform64_phase, 0, NULL);
     else
-		object_method(dsp64, gensym("dsp_add64"), x, pi_perform64_offset, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_pi_sig_perform64_offset, 0, NULL);
 }
 
-void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_pi_sig_perform64(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -130,7 +135,7 @@ void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **
     }
 }
 
-void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_pi_sig_perform64_phase(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -139,13 +144,13 @@ void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, dou
     }
 }
 
-void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_pi_sig_perform64_offset(t_hoa_pi_sig *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
         outs[0][i] = HOA_PI * x->f_value * x->f_phase;
 }
 
-void pi_assist(t_pi *x, void *b, long m, long a, char *s)
+void hoa_pi_sig_assist(t_hoa_pi_sig *x, void *b, long m, long a, char *s)
 {
     // @out 0 @type signal @digest output result
 	if (m == ASSIST_OUTLET)
@@ -159,7 +164,7 @@ void pi_assist(t_pi *x, void *b, long m, long a, char *s)
     }
 }
 
-void pi_int(t_pi *x, long n)
+void hoa_pi_sig_int(t_hoa_pi_sig *x, long n)
 {
     if (proxy_getinlet((t_object*)x))
         x->f_phase = n != 0;
@@ -171,7 +176,7 @@ void pi_int(t_pi *x, long n)
 }
 
 
-void pi_float(t_pi *x, double n) 
+void hoa_pi_sig_float(t_hoa_pi_sig *x, double n) 
 {
     if (proxy_getinlet((t_object*)x))
         x->f_phase = wrap(n, 0.0f, 1.0f);

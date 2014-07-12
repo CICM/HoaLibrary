@@ -122,10 +122,15 @@ t_symbol* hoa_sym_3d_topnextbottom = gensym("top-bottom");
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_3d_meter_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	c = class_new("hoa.3d.meter~", (method)hoa_meter_3d_new, (method)hoa_meter_3d_free, (short)sizeof(t_hoa_meter_3d), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.3d.meter~", (char *)"hoa.3d.meter~");
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
@@ -158,7 +163,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
     CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45");
-	// @description The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels<m> : interleaved azimuth and elevation value for each channels.
+	// @description The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels</m> : interleaved azimuth and elevation value for each channels.
     
     CLASS_ATTR_FLOAT_ARRAY			(c, "offset", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs, 3);
     CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
@@ -275,6 +280,8 @@ int C74_EXPORT main()
 	
     class_register(CLASS_BOX, c);
 	hoa_meter_3d_class = c;
+    
+    return 0;
 }
 
 void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)

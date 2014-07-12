@@ -6,7 +6,7 @@
 
 #include "../Hoa3D.max.h"
 
-typedef struct _hoa_vector 
+typedef struct _hoa_3d_vector 
 {
 	t_pxobject              f_ob;
     double*                 f_sig_ins;
@@ -15,37 +15,42 @@ typedef struct _hoa_vector
     int                     f_mode;
 	double					f_angles_of_channels[MAX_CHANNELS * 2];
 	long					f_number_of_angles;
-} t_hoa_vector;
+} t_hoa_3d_vector;
 
-void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_vector_free(t_hoa_vector *x);
-void hoa_vector_assist(t_hoa_vector *x, void *b, long m, long a, char *s);
+void *hoa_3d_vector_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_3d_vector_free(t_hoa_3d_vector *x);
+void hoa_3d_vector_assist(t_hoa_3d_vector *x, void *b, long m, long a, char *s);
 
-void hoa_vector_bang(t_hoa_vector *x);
+void hoa_3d_vector_bang(t_hoa_3d_vector *x);
 
-void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_vector_dsp64(t_hoa_3d_vector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_3d_vector_perform64_energy(t_hoa_3d_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_vector_perform64_velocity(t_hoa_3d_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
+t_max_err angles_set(t_hoa_3d_vector *x, t_object *attr, long argc, t_atom *argv);
 
-t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_3d_vector* x, t_hoa_boxinfos* boxinfos);
 
-t_class *hoa_vector_class;
+t_class *hoa_3d_vector_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_3d_vector_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {	
 
 	t_class *c;
 	
-	c = class_new("hoa.3d.vector~", (method)hoa_vector_new, (method)hoa_vector_free, (long)sizeof(t_hoa_vector), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.3d.vector~", (method)hoa_3d_vector_new, (method)hoa_3d_vector_free, (long)sizeof(t_hoa_3d_vector), 0L, A_GIMME, 0);
+	class_setname((char *)"hoa.3d.vector~", (char *)"hoa.3d.vector~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
-	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_vector_dsp64,	"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_vector_assist,   "assist",	A_CANT, 0);
 	
-	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", ATTR_SET_DEFER_LOW, t_hoa_vector, f_angles_of_channels, f_number_of_angles, MAX_CHANNELS*2);
+	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", ATTR_SET_DEFER_LOW, t_hoa_3d_vector, f_angles_of_channels, f_number_of_angles, MAX_CHANNELS*2);
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
@@ -53,17 +58,17 @@ int C74_EXPORT main(void)
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
-	hoa_vector_class = c;
+	hoa_3d_vector_class = c;
     
 	return 0;
 }
 
-void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_3d_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_hoa_vector *x = NULL;
+	t_hoa_3d_vector *x = NULL;
 	int	number_of_channels = 1;
     int mode = 1;
-    x = (t_hoa_vector *)object_alloc(hoa_vector_class);
+    x = (t_hoa_3d_vector *)object_alloc(hoa_3d_vector_class);
 	if (x)
 	{		
 		if(argc && (atom_gettype(argv) == A_LONG || atom_gettype(argv+1) == A_FLOAT))
@@ -99,7 +104,7 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_3d_vector* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	boxinfos->autoconnect_inputs = x->f_vector->getNumberOfChannels();
@@ -109,16 +114,16 @@ t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_3d_vector_dsp64(t_hoa_3d_vector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     if(x->f_mode)
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_vector_perform64_energy, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_3d_vector_perform64_energy, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_vector_perform64_velocity, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_3d_vector_perform64_velocity, 0, NULL);
         
 }
 
-void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_vector_perform64_energy(t_hoa_3d_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numins; i++)
     {
@@ -134,7 +139,7 @@ void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins,
     }
 }
 
-void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_vector_perform64_velocity(t_hoa_3d_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numins; i++)
     {
@@ -150,7 +155,7 @@ void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **in
     }
 }
 
-void hoa_vector_assist(t_hoa_vector *x, void *b, long m, long a, char *s)
+void hoa_3d_vector_assist(t_hoa_3d_vector *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
     {
@@ -179,7 +184,7 @@ void hoa_vector_assist(t_hoa_vector *x, void *b, long m, long a, char *s)
     }
 }
 
-void hoa_vector_free(t_hoa_vector *x) 
+void hoa_3d_vector_free(t_hoa_3d_vector *x) 
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_vector;
@@ -187,7 +192,7 @@ void hoa_vector_free(t_hoa_vector *x)
     delete [] x->f_sig_outs;
 }
 
-t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
+t_max_err angles_set(t_hoa_3d_vector *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {

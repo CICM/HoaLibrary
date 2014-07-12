@@ -31,7 +31,7 @@
 
 #include "../Hoa2D.max.h"
 
-typedef struct  _hoa_space
+typedef struct  _hoa_2d_space
 {
 	t_jbox		j_box;
 	void*		f_out;
@@ -63,79 +63,84 @@ typedef struct  _hoa_space
     double      f_radius;
 	
 	long		f_last_mouse_index;
-} t_hoa_space;
+} t_hoa_2d_space;
 
-void *hoa_space_new(t_symbol *s, int argc, t_atom *argv);
-void hoa_space_free(t_hoa_space *x);
-void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s);
-void hoa_space_preset(t_hoa_space *x);
-void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av);
-void hoa_space_output(t_hoa_space *x);
+void *hoa_2d_space_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_2d_space_free(t_hoa_2d_space *x);
+void hoa_2d_space_assist(t_hoa_2d_space *x, void *b, long m, long a, char *s);
+void hoa_2d_space_preset(t_hoa_2d_space *x);
+void hoa_2d_space_list(t_hoa_2d_space *x, t_symbol *s, long ac, t_atom *av);
+void hoa_2d_space_output(t_hoa_2d_space *x);
 
-t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params);
+t_max_err hoa_2d_space_notify(t_hoa_2d_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void hoa_2d_space_getdrawparams(t_hoa_2d_space *x, t_object *patcherview, t_jboxdrawparams *params);
 
-void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_space_mouse_move(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_space_mouse_down(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_space_mouse_drag(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_2d_space_mouse_leave(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers);
 
-void hoa_space_paint(t_hoa_space *x, t_object *view);
-void draw_background(t_hoa_space *x, t_object *view, t_rect *rect);
-void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect);
-void draw_points(t_hoa_space *x, t_object *view, t_rect *rect);
-void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect);
-void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect);
+void hoa_2d_space_paint(t_hoa_2d_space *x, t_object *view);
+void draw_background(t_hoa_2d_space *x, t_object *view, t_rect *rect);
+void draw_space(t_hoa_2d_space *x,  t_object *view, t_rect *rect);
+void draw_points(t_hoa_2d_space *x, t_object *view, t_rect *rect);
+void draw_slider_bars(t_hoa_2d_space *x, t_object *view, t_rect *rect);
+void draw_text_value(t_hoa_2d_space *x, t_object *view, t_rect *rect);
 
-t_max_err hoa_space_setvalueof(t_hoa_space *x, long ac, t_atom *av);
-t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av);
-void hoa_space_jsave(t_hoa_space *x, t_dictionary *d);
-t_hoa_err hoa_getinfos(t_hoa_space* x, t_hoa_boxinfos* boxinfos);
-t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
-t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoa_2d_space_setvalueof(t_hoa_2d_space *x, long ac, t_atom *av);
+t_max_err hoa_2d_space_getvalueof(t_hoa_2d_space *x, long *ac, t_atom **av);
+void hoa_2d_space_jsave(t_hoa_2d_space *x, t_dictionary *d);
+t_hoa_err hoa_getinfos(t_hoa_2d_space* x, t_hoa_boxinfos* boxinfos);
+t_max_err channels_set(t_hoa_2d_space *x, t_object *attr, long argc, t_atom *argv);
+t_max_err minmax_set(t_hoa_2d_space *x, t_object *attr, long argc, t_atom *argv);
 
-t_class *hoa_space_class;
+t_class *hoa_2d_space_class;
 
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_2d_space_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
     
-	c = class_new("hoa.2d.space", (method)hoa_space_new, (method)hoa_space_free, (short)sizeof(t_hoa_space), 0L, A_GIMME, 0);
+	c = class_new("hoa.2d.space", (method)hoa_2d_space_new, (method)hoa_2d_space_free, (short)sizeof(t_hoa_2d_space), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.2d.space", (char *)"hoa.2d.space");
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 
     hoa_initclass(c, (method)hoa_getinfos);
-	class_addmethod(c, (method)hoa_space_assist,          "assist",         A_CANT,	0);
-	class_addmethod(c, (method)hoa_space_paint,           "paint",          A_CANT,	0);
-	class_addmethod(c, (method)hoa_space_notify,          "notify",         A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_assist,          "assist",         A_CANT,	0);
+	class_addmethod(c, (method)hoa_2d_space_paint,           "paint",          A_CANT,	0);
+	class_addmethod(c, (method)hoa_2d_space_notify,          "notify",         A_CANT, 0);
 	
 	// @method bang @digest Output current values.
 	// @description The <m>bang</m> message report current values.
-    class_addmethod(c, (method)hoa_space_output,          "bang",           A_CANT, 0);
+    class_addmethod(c, (method)hoa_2d_space_output,          "bang",           A_CANT, 0);
 	
 	// @method list @digest set slider values.
 	// @description Sets slider values with a <m>list</m>.
 	// Set all the coefficients with a list of float. Set one coefficient with an index and a float.
-	class_addmethod(c, (method)hoa_space_list,            "list",           A_GIMME, 0);
+	class_addmethod(c, (method)hoa_2d_space_list,            "list",           A_GIMME, 0);
 	
 	// @method (mouse) @digest Click and drag to change slider values.
 	// @description Click and drag the sliders to set their value.
 	// Press <b>ctrl</b> key while you drag to make a rotation of the slider values.
 	// Press <b>shift</b> key while you drag to relatively increase or decrease all of the slider values.
-	class_addmethod(c, (method)hoa_space_getdrawparams,   "getdrawparams",  A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_mouse_down,      "mousedown",      A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_mouse_move,      "mousemove",      A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_mouse_drag,      "mousedrag",      A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_mouse_down,      "mouseup",        A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_mouse_leave,     "mouseleave",     A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_preset,          "preset",         0);
-    class_addmethod(c, (method)hoa_space_getvalueof,      "getvalueof",     A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_setvalueof,      "setvalueof",     A_CANT, 0);
-	class_addmethod(c, (method)hoa_space_jsave,           "jsave",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_getdrawparams,   "getdrawparams",  A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_mouse_down,      "mousedown",      A_CANT, 0);
+    class_addmethod(c, (method)hoa_2d_space_mouse_move,      "mousemove",      A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_mouse_drag,      "mousedrag",      A_CANT, 0);
+    class_addmethod(c, (method)hoa_2d_space_mouse_down,      "mouseup",        A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_mouse_leave,     "mouseleave",     A_CANT, 0);
+    class_addmethod(c, (method)hoa_2d_space_preset,          "preset",         0);
+    class_addmethod(c, (method)hoa_2d_space_getvalueof,      "getvalueof",     A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_setvalueof,      "setvalueof",     A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_space_jsave,           "jsave",			A_CANT, 0);
     
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	// @exclude hoa.2d.space
@@ -145,7 +150,7 @@ int C74_EXPORT main()
 	// @exclude hoa.2d.space
     
 	CLASS_STICKY_CATEGORY(c, 0, "Value");
-    CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_channels);
+    CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_2d_space, f_number_of_channels);
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
@@ -153,7 +158,7 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE                 (c, "channels", 1);
 	// @description The number of channels.
     
-    CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_space, f_minmax, 2);
+    CLASS_ATTR_DOUBLE_ARRAY         (c, "minmax",   0, t_hoa_2d_space, f_minmax, 2);
     CLASS_ATTR_LABEL                (c, "minmax",   0, "Range");
 	CLASS_ATTR_ACCESSORS            (c, "minmax", NULL, minmax_set);
     CLASS_ATTR_ORDER                (c, "minmax",   0, "2");
@@ -161,21 +166,21 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE                 (c, "minmax",   1);
 	// @description The minimum and maximum values that the sliders can reach.
 	
-	CLASS_ATTR_LONG					(c, "floatoutput", 0, t_hoa_space, f_floatoutput);
+	CLASS_ATTR_LONG					(c, "floatoutput", 0, t_hoa_2d_space, f_floatoutput);
 	CLASS_ATTR_STYLE_LABEL			(c, "floatoutput", 0, "onoff", "Float Output");
     CLASS_ATTR_ORDER				(c, "floatoutput", 0, "3");
 	CLASS_ATTR_DEFAULT				(c, "floatoutput", 0, "1");
     CLASS_ATTR_SAVE					(c, "floatoutput", 1);
     // @description The <m>floatoutput</m> attribute set the <o>hoa.2d.space</o> output type. If it is checked, sliders value are sent as floating-pont values, otherwise it will round slider values and send it as integers.
 	
-	CLASS_ATTR_LONG					(c, "snaptogrid", 0, t_hoa_space, f_snaptogrid);
+	CLASS_ATTR_LONG					(c, "snaptogrid", 0, t_hoa_2d_space, f_snaptogrid);
 	CLASS_ATTR_STYLE_LABEL			(c, "snaptogrid", 0, "onoff", "Snap to Grid");
     CLASS_ATTR_ORDER				(c, "snaptogrid", 0, "4");
 	CLASS_ATTR_DEFAULT				(c, "snaptogrid", 0, "0");
     CLASS_ATTR_SAVE					(c, "snaptogrid", 1);
     // @description If the <m>snaptogrid</m> attribute is checked, sliders will snap to the setted grid.
 	
-	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_space, f_grid);
+	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_2d_space, f_grid);
 	CLASS_ATTR_CATEGORY             (c, "grid", 0, "Value");
     CLASS_ATTR_LABEL                (c, "grid", 0, "Grid Size");
 	CLASS_ATTR_FILTER_MIN			(c, "grid", 0);
@@ -184,7 +189,7 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE                 (c, "grid", 1);
 	// @description Set the grid size
 	
-	CLASS_ATTR_LONG					(c, "save", 0, t_hoa_space, f_save_with_patcher);
+	CLASS_ATTR_LONG					(c, "save", 0, t_hoa_2d_space, f_save_with_patcher);
 	CLASS_ATTR_STYLE_LABEL			(c, "save", 0, "onoff", "Save Object State with Patcher");
 	CLASS_ATTR_DEFAULT				(c, "save", 0, "1");
 	CLASS_ATTR_SAVE					(c, "save", 1);
@@ -192,7 +197,7 @@ int C74_EXPORT main()
 	// @description Check this to save object' state with patcher. Warning : if Parameter Mode and Initial are enable, this <m>save</m> method is no longer effective.
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
-	CLASS_ATTR_LONG					(c, "drawvalue", 0, t_hoa_space, f_draw_value);
+	CLASS_ATTR_LONG					(c, "drawvalue", 0, t_hoa_2d_space, f_draw_value);
 	CLASS_ATTR_CATEGORY				(c, "drawvalue", 0, "Style");
 	CLASS_ATTR_STYLE_LABEL			(c, "drawvalue", 0, "onoff", "Draw Text Value");
     CLASS_ATTR_ORDER				(c, "drawvalue", 0, "1");
@@ -200,7 +205,7 @@ int C74_EXPORT main()
     CLASS_ATTR_SAVE					(c, "drawvalue", 1);
     // @description When the <m>drawvalue</m> attribute is checked, slider values are posted at the center.
 	
-	CLASS_ATTR_SYM					(c, "sliderstyle", 0, t_hoa_space, f_slider_style);
+	CLASS_ATTR_SYM					(c, "sliderstyle", 0, t_hoa_2d_space, f_slider_style);
 	CLASS_ATTR_CATEGORY				(c, "sliderstyle", 0, "Style");
     CLASS_ATTR_LABEL				(c, "sliderstyle", 0, "Slider Style");
     CLASS_ATTR_ENUM					(c, "sliderstyle", 0, "Blob Bar");
@@ -214,42 +219,42 @@ int C74_EXPORT main()
     // </ul>
     
 	CLASS_STICKY_CATEGORY(c, 0, "Color");
-	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_space, f_color_bg);
+	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_2d_space, f_color_bg);
 	CLASS_ATTR_STYLE                (c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.space</o> object
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_space, f_color_bd);
+    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_2d_space, f_color_bd);
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
 	// @description Sets the RGBA values for the border color of the <o>hoa.2d.space</o> object
 	
-	CLASS_ATTR_RGBA					(c, "spcolor", 0, t_hoa_space, f_color_sp);
+	CLASS_ATTR_RGBA					(c, "spcolor", 0, t_hoa_2d_space, f_color_sp);
 	CLASS_ATTR_STYLE				(c, "spcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "spcolor", 0, "Space Color");
     CLASS_ATTR_ORDER                (c, "spcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "spcolor", 0, "0. 0. 1. 0.25");
 	// @description Sets the RGBA values for the space color of the <o>hoa.2d.space</o> object
 	
-	CLASS_ATTR_RGBA					(c, "selcolor", 0, t_hoa_space, f_color_sel);
+	CLASS_ATTR_RGBA					(c, "selcolor", 0, t_hoa_2d_space, f_color_sel);
 	CLASS_ATTR_STYLE				(c, "selcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "selcolor", 0, "Select Color");
     CLASS_ATTR_ORDER                (c, "selcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "selcolor", 0, "1. 0. 0. 0.25");
 	// @description Sets the RGBA values for the selected slider color of the <o>hoa.2d.space</o> object
 	
-	CLASS_ATTR_RGBA					(c, "textcolor", 0, t_hoa_space, f_color_text);
+	CLASS_ATTR_RGBA					(c, "textcolor", 0, t_hoa_2d_space, f_color_text);
 	CLASS_ATTR_STYLE				(c, "textcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "textcolor", 0, "Text Color");
     CLASS_ATTR_ORDER                (c, "textcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "textcolor", 0, "0.1 0.1 0.1 1.");
 	// @description Sets the RGBA values for the text color of the <o>hoa.2d.space</o> object
 	
-	CLASS_ATTR_RGBA					(c, "ptcolor", 0, t_hoa_space, f_color_pt);
+	CLASS_ATTR_RGBA					(c, "ptcolor", 0, t_hoa_2d_space, f_color_pt);
 	CLASS_ATTR_STYLE				(c, "ptcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "ptcolor", 0, "Channel point Color");
     CLASS_ATTR_ORDER                (c, "ptcolor", 0, "4");
@@ -258,21 +263,22 @@ int C74_EXPORT main()
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	class_register(CLASS_BOX, c);
-	hoa_space_class = c;
+    class_alias(c, gensym("hoa.space"));
+	hoa_2d_space_class = c;
     
 	return 0;
 }
 
-void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_2d_space_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_hoa_space *x =  NULL; 
+	t_hoa_2d_space *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 
-	x = (t_hoa_space *)object_alloc(hoa_space_class);
+	x = (t_hoa_2d_space *)object_alloc(hoa_2d_space_class);
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
@@ -298,16 +304,16 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
 	// restore object state
 	long ac = 0;
 	t_atom *av = NULL;
-    dictionary_copyatoms(d, gensym("hoa_space_saved_state"), &ac, &av);
+    dictionary_copyatoms(d, gensym("hoa_2d_space_saved_state"), &ac, &av);
 	if (ac && av)
-		hoa_space_setvalueof(x, ac, av);
+		hoa_2d_space_setvalueof(x, ac, av);
 	
 	jbox_ready((t_jbox *)x);
 
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_hoa_space* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_2d_space* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_2D;
 	boxinfos->autoconnect_inputs    = 0;
@@ -318,7 +324,7 @@ t_hoa_err hoa_getinfos(t_hoa_space* x, t_hoa_boxinfos* boxinfos)
 }
 
 
-void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
+void hoa_2d_space_list(t_hoa_2d_space *x, t_symbol *s, long ac, t_atom *av)
 {
     if(ac && av)
     {
@@ -345,7 +351,7 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 			}
 		}
         
-        hoa_space_output(x);
+        hoa_2d_space_output(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
         jbox_redraw((t_jbox *)x);
@@ -354,7 +360,7 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
 }
 
 
-void hoa_space_free(t_hoa_space *x)
+void hoa_2d_space_free(t_hoa_2d_space *x)
 {
 	jbox_free((t_jbox *)x);
     delete [] x->f_channel_values;
@@ -362,7 +368,7 @@ void hoa_space_free(t_hoa_space *x)
     delete [] x->f_channel_radius;
 }
 
-void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
+void hoa_2d_space_assist(t_hoa_2d_space *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
@@ -377,7 +383,7 @@ void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
 	}
 }
 
-t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoa_2d_space_notify(t_hoa_2d_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == hoa_sym_attr_modified)
@@ -418,7 +424,7 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoa_2d_space_getdrawparams(t_hoa_2d_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
     params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
@@ -426,7 +432,7 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
 	params->d_cornersize = HOA_UI_CORNERSIZE;
 }
 
-void hoa_space_preset(t_hoa_space *x)
+void hoa_2d_space_preset(t_hoa_2d_space *x)
 {
     void* z;
     t_atom av[MAX_CHANNELS+3];
@@ -442,13 +448,13 @@ void hoa_space_preset(t_hoa_space *x)
     binbuf_insert(z, NULL, x->f_number_of_channels+3, av);
 }
 
-t_max_err hoa_space_setvalueof(t_hoa_space *x, long ac, t_atom *av)
+t_max_err hoa_2d_space_setvalueof(t_hoa_2d_space *x, long ac, t_atom *av)
 {
-    hoa_space_list(x, NULL, ac, av);
+    hoa_2d_space_list(x, NULL, ac, av);
 	return MAX_ERR_NONE;
 }
 
-t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av)
+t_max_err hoa_2d_space_getvalueof(t_hoa_2d_space *x, long *ac, t_atom **av)
 {
     int limit = 0;
 	if(ac && av)
@@ -471,23 +477,23 @@ t_max_err hoa_space_getvalueof(t_hoa_space *x, long *ac, t_atom **av)
 	return MAX_ERR_NONE;
 }
 
-void hoa_space_jsave(t_hoa_space *x, t_dictionary *d)
+void hoa_2d_space_jsave(t_hoa_2d_space *x, t_dictionary *d)
 {
 	if (x->f_save_with_patcher)
 	{
 		long ac = 0;
 		t_atom* av = NULL;
-		hoa_space_getvalueof(x, &ac, &av);
-		dictionary_appendatoms(d, gensym("hoa_space_saved_state"), ac, av);
+		hoa_2d_space_getvalueof(x, &ac, &av);
+		dictionary_appendatoms(d, gensym("hoa_2d_space_saved_state"), ac, av);
 		freebytes(av, ac * sizeof(t_atom));
 	}
-	else if(dictionary_hasentry(d, gensym("hoa_space_saved_state")))
+	else if(dictionary_hasentry(d, gensym("hoa_2d_space_saved_state")))
 	{
-		dictionary_chuckentry(d, gensym("hoa_space_saved_state"));
+		dictionary_chuckentry(d, gensym("hoa_2d_space_saved_state"));
 	}
 }
 
-void hoa_space_paint(t_hoa_space *x, t_object *view)
+void hoa_2d_space_paint(t_hoa_2d_space *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -513,7 +519,7 @@ void hoa_space_paint(t_hoa_space *x, t_object *view)
 	}
 }
 
-void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
+void draw_background(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
 {
     int i;
 	double y1, y2, rotateAngle, grid_rad, inner_radius, grid_range, grid_step;
@@ -600,7 +606,7 @@ double cosine_interpolation(double y1, double y2, float mu)
     return(y1*(1-mu2)+y2*mu2);;
 }
 
-void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
+void draw_space(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
 {
     int i, index1, index2;
     double angle, radius, abscissa, ordinate, mu, diff, ratio;
@@ -653,7 +659,7 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_space_layer, 0., 0.);
 }
 
-void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
+void draw_points(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
 {
     int i;
     double angle, radius, abscissa, ordinate;
@@ -692,7 +698,7 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_points_layer, 0., 0.);
 }
 
-void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
+void draw_slider_bars(t_hoa_2d_space *x, t_object *view, t_rect *rect)
 {
 	int i;
     double diff, ratio, angle1, angle2;
@@ -750,7 +756,7 @@ void draw_slider_bars(t_hoa_space *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_space_layer, 0., 0.);
 }
 
-void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect)
+void draw_text_value(t_hoa_2d_space *x, t_object *view, t_rect *rect)
 {
 	if (x->f_last_mouse_index < 0 || x->f_last_mouse_index > x->f_number_of_channels)
 		return;
@@ -786,7 +792,7 @@ void draw_text_value(t_hoa_space *x, t_object *view, t_rect *rect)
 /*                      Souris                            */
 /**********************************************************/
 
-void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_space_mouse_move(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt mouse;
     mouse.x = pt.x - x->f_center;
@@ -817,7 +823,7 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     jbox_redraw((t_jbox *)x);
 }
 
-void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_space_mouse_leave(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	x->f_last_mouse_index = -1;
 	outlet_int(x->f_out_mouse, x->f_last_mouse_index);
@@ -827,7 +833,7 @@ void hoa_space_mouse_leave(t_hoa_space *x, t_object *patcherview, t_pt pt, long 
     jbox_redraw((t_jbox *)x);
 }
 
-void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_space_mouse_down(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt mouse;
     double rad;
@@ -853,11 +859,11 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     else
     {
         x->f_mode = 0;
-        hoa_space_mouse_drag(x, patcherview, pt, modifiers);
+        hoa_2d_space_mouse_drag(x, patcherview, pt, modifiers);
     }
 }
 
-void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_2d_space_mouse_drag(t_hoa_2d_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     int index, index2;
     t_pt mouse;
@@ -945,10 +951,10 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_space_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_points_layer);
     jbox_redraw((t_jbox *)x);
-    hoa_space_output(x);
+    hoa_2d_space_output(x);
 }
 
-void hoa_space_output(t_hoa_space *x)
+void hoa_2d_space_output(t_hoa_2d_space *x)
 {
     t_atom argv[MAX_CHANNELS];
 	for(int i = 0; i < x->f_number_of_channels; i++)
@@ -962,7 +968,7 @@ void hoa_space_output(t_hoa_space *x)
     outlet_list(x->f_out, 0L, x->f_number_of_channels, argv);
 }
 
-t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
+t_max_err channels_set(t_hoa_2d_space *x, t_object *attr, long argc, t_atom *argv)
 {
     long numberOfChannels;
     if (argc && argv && atom_gettype(argv) == A_LONG)
@@ -985,7 +991,7 @@ t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
 	return 0;
 }
 
-t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
+t_max_err minmax_set(t_hoa_2d_space *x, t_object *attr, long argc, t_atom *argv)
 {
     double min, max;
     if(argc && argv)

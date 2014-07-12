@@ -31,7 +31,7 @@
 
 #include "../Hoa2D.max.h"
 
-typedef struct  _hoa_scope 
+typedef struct  _hoa_2d_scope 
 {
 	t_pxjbox        j_box;
     Hoa2D::Scope*   f_scope;
@@ -51,38 +51,42 @@ typedef struct  _hoa_scope
 	double          f_radius;
     double*         f_signals;
     
-} t_hoa_scope;
+} t_hoa_2d_scope;
 
-void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv);
-void hoa_scope_free(t_hoa_scope *x);
-void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s);
-void hoa_scope_tick(t_hoa_scope *x);
+void *hoa_2d_scope_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_2d_scope_free(t_hoa_2d_scope *x);
+void hoa_2d_scope_assist(t_hoa_2d_scope *x, void *b, long m, long a, char *s);
+void hoa_2d_scope_tick(t_hoa_2d_scope *x);
 
-void hoa_scope_dsp64(t_hoa_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_2d_scope_dsp64(t_hoa_2d_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_2d_scope_perform64(t_hoa_2d_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-long hoa_scope_oksize(t_hoa_scope *x, t_rect *newrect);
-void hoa_scope_getdrawparams(t_hoa_scope *x, t_object *patcherview, t_jboxdrawparams *params);
+t_max_err hoa_2d_scope_notify(t_hoa_2d_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+long hoa_2d_scope_oksize(t_hoa_2d_scope *x, t_rect *newrect);
+void hoa_2d_scope_getdrawparams(t_hoa_2d_scope *x, t_object *patcherview, t_jboxdrawparams *params);
 
-void hoa_scope_paint(t_hoa_scope *x, t_object *view);
-void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect);
-void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect);
+void hoa_2d_scope_paint(t_hoa_2d_scope *x, t_object *view);
+void draw_background(t_hoa_2d_scope *x, t_object *view, t_rect *rect);
+void draw_harmonics(t_hoa_2d_scope *x,  t_object *view, t_rect *rect);
 
-t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av);
-t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
+t_max_err set_order(t_hoa_2d_scope *x, t_object *attr, long ac, t_atom *av);
+t_hoa_err hoa_getinfos(t_hoa_2d_scope* x, t_hoa_boxinfos* boxinfos);
 
-t_class *hoa_scope_class;
+t_class *hoa_2d_scope_class;
 
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_2d_scope_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 
-	c = class_new("hoa.2d.scope~", (method)hoa_scope_new, (method)hoa_scope_free, (short)sizeof(t_hoa_scope), 0L, A_GIMME, 0);
-    class_alias(c, gensym("hoa.scope~"));
+	c = class_new("hoa.2d.scope~", (method)hoa_2d_scope_new, (method)hoa_2d_scope_free, (short)sizeof(t_hoa_2d_scope), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.2d.scope~", (char *)"hoa.2d.scope~");
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
@@ -92,18 +96,18 @@ int C74_EXPORT main()
 	
 	// @method signal @digest Array of circular harmonic signals to be represented.
 	// @description Array of circular harmonic signals to be represented.
-	class_addmethod(c, (method)hoa_scope_dsp64,			"dsp64",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_scope_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)hoa_scope_paint,			"paint",		A_CANT,	0);
-	class_addmethod(c, (method)hoa_scope_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_scope_getdrawparams, "getdrawparams", A_CANT, 0);
-	class_addmethod(c, (method)hoa_scope_oksize,		"oksize",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_scope_dsp64,			"dsp64",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_scope_assist,		"assist",		A_CANT,	0);
+	class_addmethod(c, (method)hoa_2d_scope_paint,			"paint",		A_CANT,	0);
+	class_addmethod(c, (method)hoa_2d_scope_notify,		"notify",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_scope_getdrawparams, "getdrawparams", A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_scope_oksize,		"oksize",		A_CANT, 0);
 
     CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
 	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
 
-    CLASS_ATTR_LONG                 (c, "order", 0, t_hoa_scope, f_order);
+    CLASS_ATTR_LONG                 (c, "order", 0, t_hoa_2d_scope, f_order);
     CLASS_ATTR_ACCESSORS            (c, "order", NULL, set_order);
 	CLASS_ATTR_CATEGORY             (c, "order", 0, "Ambisonic");
 	CLASS_ATTR_ORDER                (c, "order", 0, "1");
@@ -113,7 +117,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE                 (c, "order", 1);
 	// @description The ambisonic order of decomposition. Will adapt the number of input accordingly.
     
-    CLASS_ATTR_FLOAT                (c, "gain", 0, t_hoa_scope, f_gain);
+    CLASS_ATTR_FLOAT                (c, "gain", 0, t_hoa_2d_scope, f_gain);
 	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "gain", 0, "1");
 	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain");
@@ -122,7 +126,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
 	// @description The <b>gain</b> factor can be used to offer a better visualisation of low amplitude sound fields.
 
-	CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
+	CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_2d_scope, f_interval);
 	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "interval", 0, "2");
 	CLASS_ATTR_LABEL                (c, "interval", 0, "Refresh Interval in Milliseconds");
@@ -131,7 +135,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE                 (c, "interval", 1);
 	// @description The refresh interval time in milliseconds.
 	
-	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_scope, f_color_bg);
+	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_2d_scope, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Color");
@@ -139,7 +143,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.scope~</o> object
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_scope, f_color_bd);
+    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_2d_scope, f_color_bd);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
@@ -147,7 +151,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
 	// @description Sets the RGBA values for the border color of the <o>hoa.2d.scope~</o> object
 	
-	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_scope, f_color_ph);
+	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_2d_scope, f_color_ph);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "phcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positive Harmonics Color");
@@ -155,7 +159,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "phcolor", 0, "1. 0. 0. 1.");
 	// @description Sets the RGBA values for the positive harmonics color of the <o>hoa.2d.scope~</o> object
 	
-	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_hoa_scope, f_color_nh);
+	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_hoa_2d_scope, f_color_nh);
 	CLASS_ATTR_CATEGORY             (c, "nhcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "nhcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negative Harmonics Color");
@@ -164,21 +168,22 @@ int C74_EXPORT main()
 	// @description Sets the RGBA values for the negative harmonics color of the <o>hoa.2d.scope~</o> object
 	
 	class_register(CLASS_BOX, c);
-	hoa_scope_class = c;
+    class_alias(c, gensym("hoa.scope~"));
+	hoa_2d_scope_class = c;
 	
 	return 0;
 }
 
-void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_2d_scope_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_hoa_scope *x =  NULL; 
+	t_hoa_2d_scope *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if(!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 
-	x = (t_hoa_scope *)object_alloc(hoa_scope_class);
+	x = (t_hoa_2d_scope *)object_alloc(hoa_2d_scope_class);
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
@@ -201,7 +206,7 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
     
     dsp_setupjbox((t_pxjbox *)x, x->f_scope->getNumberOfHarmonics());
     
-    x->f_clock = clock_new(x,(method)hoa_scope_tick);
+    x->f_clock = clock_new(x,(method)hoa_2d_scope_tick);
 	x->f_startclock = 0;
     
     attr_dictionary_process(x, d);
@@ -210,7 +215,7 @@ void *hoa_scope_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_2d_scope* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_2D;
 	boxinfos->autoconnect_inputs    = x->f_scope->getNumberOfHarmonics();
@@ -220,14 +225,14 @@ t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_scope_dsp64(t_hoa_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_2d_scope_dsp64(t_hoa_2d_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_index = 0;
-    object_method(dsp64, gensym("dsp_add64"), x, hoa_scope_perform64, 0, NULL);
+    object_method(dsp64, gensym("dsp_add64"), x, hoa_2d_scope_perform64, 0, NULL);
     x->f_startclock = 1;
 }
 
-void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_2d_scope_perform64(t_hoa_2d_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numins; i++)
     {
@@ -247,7 +252,7 @@ void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long num
 	}
 }
 
-void hoa_scope_tick(t_hoa_scope *x)
+void hoa_2d_scope_tick(t_hoa_2d_scope *x)
 {
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
 
@@ -257,7 +262,7 @@ void hoa_scope_tick(t_hoa_scope *x)
 		clock_fdelay(x->f_clock, x->f_interval);
 }
 
-void hoa_scope_free(t_hoa_scope *x)
+void hoa_2d_scope_free(t_hoa_2d_scope *x)
 {
 	dsp_freejbox((t_pxjbox *)x);
 	freeobject((t_object *)x->f_clock);
@@ -267,12 +272,12 @@ void hoa_scope_free(t_hoa_scope *x)
     delete [] x->f_signals;
 }
 
-void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
+void hoa_2d_scope_assist(t_hoa_2d_scope *x, void *b, long m, long a, char *s)
 {
     sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
-t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoa_2d_scope_notify(t_hoa_2d_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == hoa_sym_attr_modified)
@@ -291,7 +296,7 @@ t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sen
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void hoa_scope_getdrawparams(t_hoa_scope *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoa_2d_scope_getdrawparams(t_hoa_2d_scope *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
@@ -299,14 +304,14 @@ void hoa_scope_getdrawparams(t_hoa_scope *x, t_object *patcherview, t_jboxdrawpa
 	params->d_cornersize = 8;
 }
 
-long hoa_scope_oksize(t_hoa_scope *x, t_rect *newrect)
+long hoa_2d_scope_oksize(t_hoa_2d_scope *x, t_rect *newrect)
 {
 	if (newrect->width < 20)
 		newrect->width = newrect->height = 20;
 	return 0;
 }
 
-void hoa_scope_paint(t_hoa_scope *x, t_object *view)
+void hoa_2d_scope_paint(t_hoa_2d_scope *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -318,7 +323,7 @@ void hoa_scope_paint(t_hoa_scope *x, t_object *view)
     draw_harmonics(x, view, &rect);
 }
 
-void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
+void draw_background(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double y1, y2, rotateAngle;
@@ -392,7 +397,7 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
-void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
+void draw_harmonics(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
 {
 	int pathLength = 0;
 	t_pt beginCoord;
@@ -518,7 +523,7 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
 }
 
 
-t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
+t_max_err set_order(t_hoa_2d_scope *x, t_object *attr, long ac, t_atom *av)
 {
     long order;
     t_object *b = NULL;

@@ -177,13 +177,20 @@ void hoamap_deprecated(t_hoa_map *x, t_symbol* s, long ac, t_atom* av);
 t_max_err bindname_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 void hoamap_send_binded_map_update(t_hoa_map *x, long flags); // BindingMapMsgFlag
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_map_gui_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
     hoa_textfield_init();
 	t_class *c;
     
 	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.map", (char *)"hoa.map");
+    class_setname((char *)"hoa.2d.map", (char *)"hoa.map");
+    class_setname((char *)"hoa.3d.map", (char *)"hoa.map");
+    
 	hoa_initclass(c, NULL);
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
@@ -328,6 +335,10 @@ int C74_EXPORT main()
 	// @description Use the <m>mapmode</m> attribute to bind multiple <o>hoa.map</o> objects together.
 
 	class_register(CLASS_BOX, c);
+    
+    class_alias(c, gensym("hoa.2d.map"));
+    class_alias(c, gensym("hoa.3d.map"));
+    
 	hoamap_class = c;
 	return 0;
 }

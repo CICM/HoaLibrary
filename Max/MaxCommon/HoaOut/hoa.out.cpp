@@ -58,11 +58,16 @@ void hoa_out_anything(t_hoa_out *x, t_symbol *s, short argc, t_atom *argv);
 t_max_err hoa_out_setattr_extra(t_hoa_out *x, void *attr, long ac, t_atom *av);
 t_max_err hoa_out_setattr_comment(t_hoa_out *x, void *attr, long ac, t_atom *av);
 
+#ifdef HOA_PACKED_LIB
+int hoa_out_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
 	c = class_new("hoa.out", (method)hoa_out_new, (method)hoa_out_free, sizeof(t_hoa_out), NULL, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.out", (char *)"hoa.out");
+    
 	hoa_initclass(c, (method)NULL);
     class_addmethod(c, (method)hoa_out_assist,			"assist",			A_CANT,	 0);
     

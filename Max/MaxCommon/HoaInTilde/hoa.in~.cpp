@@ -62,10 +62,15 @@ void hoa_sig_in_perform64(t_hoa_sig_in *x, t_object *dsp64, double **ins, long n
 t_max_err hoa_sig_in_setattr_extra(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
 t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
 
+#ifdef HOA_PACKED_LIB
+int hoa_in_sig_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
 	c = class_new("hoa.in~", (method)hoa_sig_in_new, (method)hoa_sig_in_free, sizeof(t_hoa_sig_in), NULL, A_GIMME, 0);
+    class_setname((char *)"hoa.in~", (char *)"hoa.in~");
     
 	hoa_initclass(c, NULL);
 	

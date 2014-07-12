@@ -50,14 +50,19 @@ t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_encoder_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_2d_encoder_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 	
-	c = class_new("hoa.2d.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L,A_GIMME,0);
-	
+	c = class_new("hoa.2d.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME,0);
+    class_setname((char *)"hoa.2d.encoder~", (char *)"hoa.2d.encoder~");
+    
     hoa_initclass(c, (method)hoa_getinfos);
-	
+
 	// @method float @digest Set the azimuth of the encoding in radians
 	// @description The <m>float</m> method sets the azimuth of the encoding in radians (between 0. and 2π).
 	// @marg 0 @name azimuth @optional 0 @type float
@@ -74,7 +79,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_encoder_assist,      "assist",	A_CANT, 0);
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.encoder~"));
 	hoa_encoder_class = c;
 
 	return 0;

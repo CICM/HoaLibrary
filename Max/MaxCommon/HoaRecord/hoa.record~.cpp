@@ -32,14 +32,26 @@ void *record_class;
 
 void *record_new(t_symbol *s, int argc, t_atom *argv);
 
+#ifdef HOA_PACKED_LIB
+int hoa_record_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 
 	c = class_new("hoa.record~", (method)record_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.record~", (char *)"hoa.record~");
+    class_setname((char *)"hoa.2d.record~", (char *)"hoa.record~");
+    class_setname((char *)"hoa.3d.record~", (char *)"hoa.record~");
+    
 	hoa_initclass(c, NULL);
 	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.2d.record~"));
+    class_alias(c, gensym("hoa.3d.record~"));
+    
 	record_class = c;
+    return 0;
 }
 
 void *record_new(t_symbol *s, int argc, t_atom *argv)

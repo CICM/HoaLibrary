@@ -10,6 +10,21 @@
 #include "../hoa.max.h"
 #include "../../Sources/HoaCommon/HoaCommon.h"
 
+int hoa_connect_main();
+int hoa_dac_main();
+int hoa_gain_main();
+int hoa_in_main();
+int hoa_in_sig_main();
+int hoa_map_gui_main();
+int hoa_out_main();
+int hoa_out_sig_main();
+int hoa_pi_main();
+int hoa_pi_sig_main();
+int hoa_play_main();
+int hoa_process_main();
+int hoa_record_main();
+int hoa_thisprocess_main();
+
 using namespace HoaCommon;
 
 #endif

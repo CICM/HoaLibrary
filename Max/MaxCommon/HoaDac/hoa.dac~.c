@@ -55,12 +55,17 @@ void hoa_dac_wclose(t_hoa_dac *x);
 
 t_hoa_err hoa_getinfos(t_hoa_dac* x, t_hoa_boxinfos* boxinfos);
 
+#ifdef HOA_PACKED_LIB
+int hoa_dac_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
     
 	c = class_new("hoa.dac~", (method)hoa_dac_new, (method)hoa_dac_free, (short)sizeof(t_hoa_dac), 0L, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.dac~", (char *)"hoa.dac~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
     // @method signal @digest Function depends on inlet

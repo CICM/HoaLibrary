@@ -67,11 +67,15 @@ long hoa_get_number_of_attributes(long ac, t_atom *av);
 void hoa_args_setup(short ac, t_atom *av, long *nAttr, t_args_struct *args, t_attr_struct **attrs);
 void hoa_init_args(t_hoa_thisprocess *x, short argc, t_atom *argv);
 
-
+#ifdef HOA_PACKED_LIB
+int hoa_thisprocess_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
     c = class_new("hoa.thisprocess~", (method)hoa_thisprocess_new, (method)hoa_thisprocess_free, sizeof(t_hoa_thisprocess), NULL, A_GIMME, 0);
+    class_setname((char *)"hoa.thisprocess~", (char *)"hoa.thisprocess~");
 	
 	hoa_initclass(c, (method)NULL);
 	

@@ -10,26 +10,30 @@ void hoa_print_credit()
 {
     if(gensym("hoa_print_credits")->s_thing == NULL)
     {
-		t_object* print;
+        t_object* print;
 		t_atom* sym = (t_atom*) malloc( sizeof(t_atom));
 		atom_setsym(sym, gensym("HoaLibrary"));
 		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
-		atom_setsym(sym, _sym_credit_line1);
-		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		atom_setsym(sym, _sym_hoa_version);
-		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
-		atom_setsym(sym, _sym_credit_line2);
-		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		gensym("hoa_print_credits")->s_thing = print;
-		freeobject(print);
-		free(sym);
+        if (print)
+        {
+            atom_setsym(sym, _sym_credit_line1);
+            object_method_typed(print, hoa_sym_list, 1, sym, NULL);
+            atom_setsym(sym, _sym_hoa_version);
+            freeobject(print);
+            print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
+            atom_setsym(sym, _sym_credit_line2);
+            object_method_typed(print, hoa_sym_list, 1, sym, NULL);
+            gensym("hoa_print_credits")->s_thing = print;
+            freeobject(print);
+        }
+        
+        free(sym);
     }
 }
 
 t_hoa_err hoa_initclass(t_class* c, method hoa_getinfos_method)
 {
-	hoa_print_credit();
-	
+    defer_low(NULL, (method)hoa_print_credit, NULL, NULL, NULL);
 	class_addmethod(c, (method)method_true, "is_hoa", A_CANT, 0);
 
 	if (hoa_getinfos_method)

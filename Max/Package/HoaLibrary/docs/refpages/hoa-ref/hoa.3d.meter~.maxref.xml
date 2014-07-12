@@ -47,7 +47,7 @@
 				Angles of Channels
 			</digest>
 			<description>
-				The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels<m> : interleaved azimuth and elevation value for each channels.
+				The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels</m> : interleaved azimuth and elevation value for each channels.
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="float_array" size="0" value="0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45" />
@@ -198,7 +198,7 @@
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
-		<attribute name="overcolor" get="1" set="1" type="" size="1">
+		<attribute name="overloadcolor" get="1" set="1" type="" size="1">
 			<digest>
 				Overload Signal Color
 			</digest>

@@ -70,11 +70,16 @@ void make_patchline(t_connect *x);
 void color_patchline(t_connect *x);
 void connect_connect(t_patcher *p, t_object *send, int outlet, t_object *receive, int inlet);
 
+#ifdef HOA_PACKED_LIB
+int hoa_connect_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 
 	c = class_new("hoa.connect", (method)connect_new, (method)connect_free, sizeof(t_connect), 0L, A_GIMME, 0);
+    class_setname((char *)"hoa.connect", (char *)"hoa.connect");
 	
 	hoa_initclass(c, (method)NULL);
 	

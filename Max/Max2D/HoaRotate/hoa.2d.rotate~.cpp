@@ -54,14 +54,17 @@ t_hoa_err hoa_getinfos(t_hoa_rotate* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_rotate_class;
 
-
+#ifdef HOA_PACKED_LIB
+int hoa_2d_rotate_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
-
 	t_class *c;
 	
 	c = class_new("hoa.2d.rotate~", (method)hoa_rotate_new, (method)hoa_rotate_free, (long)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.2d.rotate~", (char *)"hoa.2d.rotate~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Array of circular harmonic signals to be rotated, rotation angle.
@@ -78,7 +81,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_rotate_int,			"int",		A_LONG, 0);
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.rotate~"));
 	hoa_rotate_class = c;
     
 	return 0;
@@ -95,7 +99,7 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
 	if (x)
 	{		
-		if(atom_gettype(argv) == A_LONG)
+		if(argc && atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		if (order < 1)
 			order = 1;

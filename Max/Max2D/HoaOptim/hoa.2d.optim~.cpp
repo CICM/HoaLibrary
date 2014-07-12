@@ -52,14 +52,18 @@ t_hoa_err hoa_getinfos(t_hoa_optim* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_optim_class;
     
-
+#ifdef HOA_PACKED_LIB
+int hoa_2d_optim_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {	
 
 	t_class *c;
 	
 	c = class_new("hoa.2d.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (long)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.2d.optim~", (char *)"hoa.2d.optim~");
+    
     hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Array of circular harmonic signals to be optimized.
@@ -80,7 +84,8 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)hoa_optim_inphase,   "inPhase",	A_NOTHING, 0);
     
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.optim~"));
 	hoa_optim_class = c;
     
 	return 0;

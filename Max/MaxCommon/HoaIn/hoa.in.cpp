@@ -56,10 +56,15 @@ void hoa_in_anything(t_hoa_in *x, t_symbol *s, short argc, t_atom *argv);
 t_max_err hoa_in_setattr_extra(t_hoa_in *x, void *attr, long ac, t_atom *av);
 t_max_err hoa_in_setattr_comment(t_hoa_in *x, void *attr, long ac, t_atom *av);
 
+#ifdef HOA_PACKED_LIB
+int hoa_in_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {
 	t_class* c;
 	c = class_new("hoa.in", (method)hoa_in_new, (method)hoa_in_free, sizeof(t_hoa_in), NULL, A_GIMME, 0);
+    class_setname((char *)"hoa.in", (char *)"hoa.in");
     
 	hoa_initclass(c, (method)NULL);
 	

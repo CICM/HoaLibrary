@@ -28,66 +28,69 @@
 
 #include "../Hoa3D.max.h"
 
-typedef struct _hoa_wider 
+typedef struct _hoa_3d_wider 
 {
 	t_pxobject              f_ob;
     double*                 f_signals;
     Hoa3D::Wider*           f_wider;
     
-} t_hoa_wider;
+} t_hoa_3d_wider;
 
-void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_wider_free(t_hoa_wider *x);
-void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s);
+void *hoa_3d_wider_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_3d_wider_free(t_hoa_3d_wider *x);
+void hoa_3d_wider_assist(t_hoa_3d_wider *x, void *b, long m, long a, char *s);
 
-void hoa_wider_float(t_hoa_wider *x, double f);
-void hoa_wider_int(t_hoa_wider *x, long n);
+void hoa_3d_wider_float(t_hoa_3d_wider *x, double f);
+void hoa_3d_wider_int(t_hoa_3d_wider *x, long n);
 
-void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_wider_perform64_wide(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_wider_dsp64(t_hoa_3d_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_3d_wider_perform64(t_hoa_3d_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_wider_perform64_wide(t_hoa_3d_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_3d_wider* x, t_hoa_boxinfos* boxinfos);
 
-t_class *hoa_wider_class;
+t_class *hoa_3d_wider_class;
     
-
+#ifdef HOA_PACKED_LIB
+int hoa_3d_wider_main(void)
+#else
 int C74_EXPORT main(void)
-{	
-
+#endif
+{
 	t_class *c;
 	
-	c = class_new("hoa.3d.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.3d.wider~", (method)hoa_3d_wider_new, (method)hoa_3d_wider_free, (long)sizeof(t_hoa_3d_wider), 0L, A_GIMME, 0);
+	class_setname((char *)"hoa.3d.wider~", (char *)"hoa.3d.wider~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method float @digest Set the widening value.
 	// @description Set the widening value in the last inlet at control rate. The widening value is clipped between 0. and 1.
-	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_3d_wider_float,		"float",	A_FLOAT, 0);
 	
 	// @method int @digest Set the widening value.
 	// @description Set the widening value in the last inlet at control rate. The widening value is clipped between 0. and 1.
-	class_addmethod(c, (method)hoa_wider_int,       "int",		A_LONG, 0);
+	class_addmethod(c, (method)hoa_3d_wider_int,       "int",		A_LONG, 0);
 	
 	// @method signal @digest Array of spherical harmonics signals to be processed, widening value.
 	// @description Array of spherical harmonics signals to be processed. Set the widening value in the last inlet at signal rate. The widening value is clipped between 0. and 1.
-	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_wider_assist,    "assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_wider_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_wider_assist,    "assist",	A_CANT, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
-	hoa_wider_class = c;
+	hoa_3d_wider_class = c;
 	return 0;
 }
 
-void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_3d_wider_new(t_symbol *s, long argc, t_atom *argv)
 {
 	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
 	// @description First argument is the ambisonic order of decomposition.
 	
-	t_hoa_wider *x = NULL;
+	t_hoa_3d_wider *x = NULL;
 	int	order = 1;
-    x = (t_hoa_wider *)object_alloc(hoa_wider_class);
+    x = (t_hoa_3d_wider *)object_alloc(hoa_3d_wider_class);
 	if (x)
 	{		
 		if(atom_gettype(argv) == A_LONG)
@@ -105,7 +108,7 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_3d_wider* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	boxinfos->autoconnect_inputs = x->f_wider->getNumberOfHarmonics();
@@ -115,25 +118,25 @@ t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_wider_float(t_hoa_wider *x, double f)
+void hoa_3d_wider_float(t_hoa_3d_wider *x, double f)
 {
     x->f_wider->setWideningValue(f);
 }
 
-void hoa_wider_int(t_hoa_wider *x, long n)
+void hoa_3d_wider_int(t_hoa_3d_wider *x, long n)
 {
     x->f_wider->setWideningValue(n);
 }
 
-void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_3d_wider_dsp64(t_hoa_3d_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     if(count[x->f_wider->getNumberOfHarmonics()])
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64_wide, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_3d_wider_perform64_wide, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_3d_wider_perform64, 0, NULL);
 }
 
-void hoa_wider_perform64_wide(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_wider_perform64_wide(t_hoa_3d_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numouts; i++)
     {
@@ -150,7 +153,7 @@ void hoa_wider_perform64_wide(t_hoa_wider *x, t_object *dsp64, double **ins, lon
     }
 }
 
-void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_wider_perform64(t_hoa_3d_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numouts; i++)
     {
@@ -166,7 +169,7 @@ void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long num
     }
 }
 
-void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
+void hoa_3d_wider_assist(t_hoa_3d_wider *x, void *b, long m, long a, char *s)
 {
     if (a == x->f_wider->getNumberOfHarmonics())
 	{
@@ -178,7 +181,7 @@ void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
 	}
 }
 
-void hoa_wider_free(t_hoa_wider *x) 
+void hoa_3d_wider_free(t_hoa_3d_wider *x) 
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_wider;

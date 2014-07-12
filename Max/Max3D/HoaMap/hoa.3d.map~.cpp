@@ -27,9 +27,62 @@
  */
 
 #include "../Hoa3D.max.h"
-#include "MapPolarLines3D.h"
 
-typedef struct _hoa_map 
+class MapPolarLines3D
+{
+    
+private:
+    float*      m_values_old;
+    float*      m_values_new;
+    float*      m_values_step;
+    unsigned int m_counter;
+    unsigned int m_ramp;
+    unsigned int m_number_of_sources;
+    
+public:
+    MapPolarLines3D(unsigned int numberOfSources);
+    ~MapPolarLines3D();
+    
+    inline unsigned int getNumberOfSources() const
+    {
+        return m_number_of_sources;
+    }
+    
+    inline unsigned int getRamp() const
+    {
+        return m_ramp;
+    }
+    
+    inline double getRadius(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[index];
+    }
+    
+    inline double getAzimuth(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[m_number_of_sources +index];
+    }
+    
+    inline double getElevation(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[m_number_of_sources * 2 +index];
+    }
+    
+    void setRamp(unsigned int ramp);
+    void setRadius(unsigned int index, double radius);
+    void setAzimuth(unsigned int index, double azimuth);
+    void setElevation(unsigned int index, double elevation);
+    void setRadiusDirect(unsigned int index, double radius);
+    void setAzimuthDirect(unsigned int index, double azimuth);
+    void setElevationDirect(unsigned int index, double elevation);
+    
+    void process(float* vector);
+};
+
+typedef struct _hoa_3d_map 
 {
 	t_pxobject      f_ob;
     Hoa3D::Map*     f_map;
@@ -41,54 +94,58 @@ typedef struct _hoa_map
 	
 	double*         f_sig_ins;
     double*         f_sig_outs;
-} t_hoa_map;
+} t_hoa_3d_map;
 
 
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_map_free(t_hoa_map *x);
-void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s);
+void *hoa_3d_map_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_3d_map_free(t_hoa_3d_map *x);
+void hoa_3d_map_assist(t_hoa_3d_map *x, void *b, long m, long a, char *s);
 
-void hoa_map_float(t_hoa_map *x, double f);
-void hoa_map_int(t_hoa_map *x, long n);
-void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv);
+void hoa_3d_map_float(t_hoa_3d_map *x, double f);
+void hoa_3d_map_int(t_hoa_3d_map *x, long n);
+void hoa_3d_map_list(t_hoa_3d_map *x, t_symbol* s, long argc, t_atom* argv);
 
-void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_3d_map_dsp64(t_hoa_3d_map *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 
-void hoa_map_perform_in1_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in1_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in1_in2_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in1_in2(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in1_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in2_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in1(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in2(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_3d_map_perform_multisources(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
+t_max_err ramp_set(t_hoa_3d_map *x, t_object *attr, long argc, t_atom *argv);
 
-t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
-t_class *hoa_map_class;
-    
+t_hoa_err hoa_getinfos(t_hoa_3d_map* x, t_hoa_boxinfos* boxinfos);
+t_class *hoa_3d_map_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_3d_map_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {	
 
 	t_class *c;
 	
-	c = class_new("hoa.3d.map~", (method)hoa_map_new, (method)hoa_map_free, (long)sizeof(t_hoa_map), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.3d.map~", (method)hoa_3d_map_new, (method)hoa_3d_map_free, (long)sizeof(t_hoa_3d_map), 0L, A_GIMME, 0);
+	class_setname((char *)"hoa.3d.map~", (char *)"hoa.3d.map~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method float @digest Set single source coordinate with messages depending on the mode.
 	// @description Set single source coordinate with messages depending on the mode.
 	// @marg 0 @name coord @optional 0 @type float
-	class_addmethod(c, (method)hoa_map_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_3d_map_float,		"float",	A_FLOAT, 0);
 	
 	// @method int @digest Set single source coordinate with messages depending on the mode.
 	// @description Set single source coordinate with messages depending on the mode.
 	// @marg 0 @name coord @optional 0 @type int
-	class_addmethod(c, (method)hoa_map_int,         "int",		A_LONG, 0);
+	class_addmethod(c, (method)hoa_3d_map_int,         "int",		A_LONG, 0);
 	
 	// @method list @digest Send source messages (coordinates and mute state).
 	// @description Send source messages like coordinates and mute state. The list must be formatted like this : source-index input-mode radius azimuth elevation to set source positions or like this : source-index 'mute' mute-state to set the mute state of a source.
@@ -97,14 +154,14 @@ int C74_EXPORT main(void)
 	// marg 2 @name coord-1/mute-state @optional 0 @type float/int
 	// marg 3 @name coord-2 @optional 0 @type float
 	// marg 4 @name coord-3 @optional 0 @type float
-    class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
+    class_addmethod(c, (method)hoa_3d_map_list,        "list",		A_GIMME, 0);
 	
 	// @method signal @digest Sources signals to encode.
 	// @description If you have a single source, the first signal inlet is for the source to encode, the three other ones are to control source position at signal rate. If you have more than one source to spatialize, all of the inputs represent a signal to encode and coordonates are given with messages.
-	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_map_assist,      "assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_map_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_map_assist,      "assist",	A_CANT, 0);
 	
-	CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map, f_ramp);
+	CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_3d_map, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
@@ -113,11 +170,11 @@ int C74_EXPORT main(void)
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
-	hoa_map_class = c;
+	hoa_3d_map_class = c;
 	return 0;
 }
 
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_3d_map_new(t_symbol *s, long argc, t_atom *argv)
 {
 	// @arg 0 @name ambisonic-order @optional 0 @type int @digest The ambisonic order of decomposition
 	// @description First argument is the ambisonic order of decomposition.
@@ -126,11 +183,11 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	// @description Second argument is the number of sources to spatialize.
 	// If there is a single source, <o>hoa.2d.map~</o> object owns 4 inlets, the first one correspond to the signal to encode, the three other ones can be used to control source position at control or signal rate. If you have more than one source to spatialize, the number of signal inlets will be equal to the number of sources to encode, and coordinates will be given with list messages.
 	
-	t_hoa_map *x = NULL;
+	t_hoa_3d_map *x = NULL;
 	int	order = 1;
     int numberOfSources = 1;
 	
-    x = (t_hoa_map *)object_alloc(hoa_map_class);
+    x = (t_hoa_3d_map *)object_alloc(hoa_3d_map_class);
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -184,7 +241,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-void hoa_map_float(t_hoa_map *x, double f)
+void hoa_3d_map_float(t_hoa_3d_map *x, double f)
 {
 	if(x->f_map->getNumberOfSources() == 1)
     {
@@ -236,9 +293,9 @@ void hoa_map_float(t_hoa_map *x, double f)
     }
 }
 
-void hoa_map_int(t_hoa_map *x, long n)
+void hoa_3d_map_int(t_hoa_3d_map *x, long n)
 {
-	hoa_map_float(x, n);
+	hoa_3d_map_float(x, n);
 	/*
 	if(x->f_map->getNumberOfSources() == 1)
     {
@@ -258,7 +315,7 @@ void hoa_map_int(t_hoa_map *x, long n)
 	*/
 }
 
-t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
+t_max_err ramp_set(t_hoa_3d_map *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
     {
@@ -272,7 +329,7 @@ t_max_err ramp_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
-void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
+void hoa_3d_map_list(t_hoa_3d_map *x, t_symbol* s, long argc, t_atom* argv)
 {
 	if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
     {
@@ -299,7 +356,7 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
     }
 }
 
-void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_3d_map_dsp64(t_hoa_3d_map *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	
 	x->f_lines->setRamp(x->f_ramp / 1000. * samplerate);
@@ -307,29 +364,29 @@ void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerat
     if(x->f_map->getNumberOfSources() == 1)
     {
 		if(count[1] && count[2] && count[3])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in1_in2_in3, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in1_in2_in3, 0, NULL);
         else if(count[1] && count[2] && !count[3])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in1_in2, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in1_in2, 0, NULL);
         else if(count[1] && !count[2] && count[3])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in1_in3, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in1_in3, 0, NULL);
         else if(!count[1] && count[2] && count[3])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in1_in3, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in1_in3, 0, NULL);
         else if(count[1] && !count[2])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in1, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in1, 0, NULL);
         else if(!count[1] && count[2])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in2, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in2, 0, NULL);
         else if(!count[1] && count[2])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_in3, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_in3, 0, NULL);
 		else if(!count[1] && !count[2] && !count[3])
-            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform, 0, NULL);
+            object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform, 0, NULL);
     }
     else
     {
-        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_map_perform_multisources, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_map_perform_multisources, 0, NULL);
     }
 }
 
-void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform64_multisources(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int nsources = x->f_map->getNumberOfSources();
     for(int i = 0; i < numins; i++)
@@ -354,7 +411,7 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
     }
 }
 
-void hoa_map_perform_in1_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in1_in2_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -378,7 +435,7 @@ void hoa_map_perform_in1_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, lo
     }
 }
 
-void hoa_map_perform_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in1_in2(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -403,7 +460,7 @@ void hoa_map_perform_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long n
     }
 }
 
-void hoa_map_perform_in1_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in1_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -428,7 +485,7 @@ void hoa_map_perform_in1_in3(t_hoa_map *x, t_object *dsp64, double **ins, long n
     }
 }
 
-void hoa_map_perform_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in2_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -453,7 +510,7 @@ void hoa_map_perform_in2_in3(t_hoa_map *x, t_object *dsp64, double **ins, long n
     }
 }
 
-void hoa_map_perform_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in1(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -478,7 +535,7 @@ void hoa_map_perform_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numin
     }
 }
 
-void hoa_map_perform_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in2(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -503,7 +560,7 @@ void hoa_map_perform_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numin
     }
 }
 
-void hoa_map_perform_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_in3(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -528,7 +585,7 @@ void hoa_map_perform_in3(t_hoa_map *x, t_object *dsp64, double **ins, long numin
     }
 }
 
-void hoa_map_perform(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
@@ -544,7 +601,7 @@ void hoa_map_perform(t_hoa_map *x, t_object *dsp64, double **ins, long numins, d
     }
 }
 
-void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_3d_map_perform_multisources(t_hoa_3d_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int nsources = x->f_map->getNumberOfSources();
     for(int i = 0; i < numins; i++)
@@ -571,7 +628,7 @@ void hoa_map_perform_multisources(t_hoa_map *x, t_object *dsp64, double **ins, l
 
 
 
-t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_3d_map* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
@@ -581,7 +638,7 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
+void hoa_3d_map_assist(t_hoa_3d_map *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
 	{
@@ -612,7 +669,7 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 }
 
 
-void hoa_map_free(t_hoa_map *x) 
+void hoa_3d_map_free(t_hoa_3d_map *x) 
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_lines;
@@ -622,3 +679,133 @@ void hoa_map_free(t_hoa_map *x)
 	delete [] x->f_lines_vector;
 }
 
+// -----------------------------------------------------------------------------------------------------
+// MapPolarLines3D
+// -----------------------------------------------------------------------------------------------------
+
+MapPolarLines3D::MapPolarLines3D(unsigned int numberOfSources)
+{
+    assert(numberOfSources > 0);
+    m_number_of_sources = numberOfSources;
+    
+    m_values_old    = new float[m_number_of_sources * 3];
+    m_values_new    = new float[m_number_of_sources * 3];
+    m_values_step   = new float[m_number_of_sources * 3];
+}
+
+MapPolarLines3D::~MapPolarLines3D()
+{
+    delete [] m_values_old;
+    delete [] m_values_new;
+    delete [] m_values_step;
+}
+
+void MapPolarLines3D::setRamp(unsigned int ramp)
+{
+    m_ramp = clip_min(ramp, (long)1);
+}
+
+void MapPolarLines3D::setRadius(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index]  = radius;
+    m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
+    m_counter = 0;
+}
+
+void MapPolarLines3D::setAzimuth(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
+    m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+    
+    double distance;
+    if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
+        distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
+    else
+        distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+    
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new[index + m_number_of_sources] > m_values_old[index + m_number_of_sources])
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
+}
+
+void MapPolarLines3D::setElevation(unsigned int index, double elevation)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources * 2] = wrap_twopi(elevation);
+    m_values_old[index + m_number_of_sources * 2] = wrap_twopi(m_values_old[index + m_number_of_sources * 2]);
+    
+    double distance;
+    if(m_values_old[index + m_number_of_sources * 2] > m_values_new[index + m_number_of_sources * 2])
+        distance = (m_values_old[index + m_number_of_sources * 2] - m_values_new[index + m_number_of_sources * 2]);
+    else
+        distance = (m_values_new[index + m_number_of_sources * 2] - m_values_old[index + m_number_of_sources * 2]);
+    
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources * 2] = (m_values_new[index + m_number_of_sources * 2] - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new[index + m_number_of_sources * 2] > m_values_old[index + m_number_of_sources * 2])
+        {
+            m_values_step[index + m_number_of_sources * 2] = ((m_values_new[index + m_number_of_sources * 2] - HOA_2PI) - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources * 2] = ((m_values_new[index + m_number_of_sources * 2] + HOA_2PI) - m_values_old[index + m_number_of_sources * 2]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
+}
+
+void MapPolarLines3D::setRadiusDirect(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index] = m_values_new[index] = radius;
+    m_values_step[index] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines3D::setAzimuthDirect(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
+    m_values_step[index + m_number_of_sources] = 0.;
+    m_counter = 0;
+}
+
+
+void MapPolarLines3D::setElevationDirect(unsigned int index, double elevation)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources * 2] = m_values_new[index + m_number_of_sources * 2] = elevation;
+    m_values_step[index + m_number_of_sources * 2] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines3D::process(float* vector)
+{
+    cblas_saxpy(m_number_of_sources * 3, 1., m_values_step, 1, m_values_old, 1);
+    if(m_counter++ >= m_ramp)
+    {
+        cblas_scopy(m_number_of_sources * 3, m_values_new, 1, m_values_old, 1);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 3);
+        m_counter    = 0;
+    }
+    cblas_scopy(m_number_of_sources * 3, m_values_old, 1, vector, 1);
+}
