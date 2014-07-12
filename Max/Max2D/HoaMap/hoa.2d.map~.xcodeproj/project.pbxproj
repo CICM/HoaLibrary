@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2CEE6E571906AE7B00B6FD7B /* MaxLineMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */; };
-		2CEE6E581906AE7B00B6FD7B /* MaxLineMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */; };
 		8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BFD218C6282E00B408F9 /* hoa.max.cpp */; };
 		8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16BFD318C6282E00B408F9 /* hoa.max.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
@@ -17,7 +15,6 @@
 		8FCDF75C18D23D7C0019E1CE /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCDF75B18D23D7C0019E1CE /* MaxAudioAPI.framework */; };
 		8FCDF78A18D23DF60019E1CE /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */; };
 		8FCDF78B18D23DF60019E1CE /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76118D23DF60019E1CE /* Ambisonic.h */; };
-		8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */; };
 		8FCDF78D18D23DF60019E1CE /* ChannelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */; };
 		8FCDF78E18D23DF60019E1CE /* ChannelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76418D23DF60019E1CE /* ChannelManager.h */; };
 		8FCDF78F18D23DF60019E1CE /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76518D23DF60019E1CE /* Decoder.cpp */; };
@@ -25,8 +22,6 @@
 		8FCDF79118D23DF60019E1CE /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76718D23DF60019E1CE /* Encoder.cpp */; };
 		8FCDF79218D23DF60019E1CE /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76818D23DF60019E1CE /* Encoder.h */; };
 		8FCDF79318D23DF60019E1CE /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76918D23DF60019E1CE /* Hoa2D.h */; };
-		8FCDF79418D23DF60019E1CE /* Kits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76A18D23DF60019E1CE /* Kits.cpp */; };
-		8FCDF79518D23DF60019E1CE /* Kits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76B18D23DF60019E1CE /* Kits.h */; };
 		8FCDF79618D23DF60019E1CE /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76C18D23DF60019E1CE /* Map.cpp */; };
 		8FCDF79718D23DF60019E1CE /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCDF76D18D23DF60019E1CE /* Map.h */; };
 		8FCDF79818D23DF60019E1CE /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDF76E18D23DF60019E1CE /* Meter.cpp */; };
@@ -51,8 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaxLineMap.cpp; sourceTree = "<group>"; };
-		2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxLineMap.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.2d.map~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.map~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F16BFD218C6282E00B408F9 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
 		8F16BFD318C6282E00B408F9 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
@@ -63,7 +56,6 @@
 		8FCDF75B18D23D7C0019E1CE /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../ThirdParty/Max/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8FCDF76118D23DF60019E1CE /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix2D.cpp; sourceTree = "<group>"; };
 		8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelManager.cpp; sourceTree = "<group>"; };
 		8FCDF76418D23DF60019E1CE /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
 		8FCDF76518D23DF60019E1CE /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
@@ -71,8 +63,6 @@
 		8FCDF76718D23DF60019E1CE /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
 		8FCDF76818D23DF60019E1CE /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
 		8FCDF76918D23DF60019E1CE /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
-		8FCDF76A18D23DF60019E1CE /* Kits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kits.cpp; sourceTree = "<group>"; };
-		8FCDF76B18D23DF60019E1CE /* Kits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kits.h; sourceTree = "<group>"; };
 		8FCDF76C18D23DF60019E1CE /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		8FCDF76D18D23DF60019E1CE /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		8FCDF76E18D23DF60019E1CE /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
@@ -114,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				8FCDF7B418D23E5E0019E1CE /* hoa.2d.map~.cpp */,
-				2CEE6E551906AE7B00B6FD7B /* MaxLineMap.cpp */,
-				2CEE6E561906AE7B00B6FD7B /* MaxLineMap.h */,
 				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
@@ -142,7 +130,6 @@
 			children = (
 				8FCDF76018D23DF60019E1CE /* Ambisonic.cpp */,
 				8FCDF76118D23DF60019E1CE /* Ambisonic.h */,
-				8FCDF76218D23DF60019E1CE /* BinauralMatrix2D.cpp */,
 				8FCDF76318D23DF60019E1CE /* ChannelManager.cpp */,
 				8FCDF76418D23DF60019E1CE /* ChannelManager.h */,
 				8FCDF76518D23DF60019E1CE /* Decoder.cpp */,
@@ -150,8 +137,6 @@
 				8FCDF76718D23DF60019E1CE /* Encoder.cpp */,
 				8FCDF76818D23DF60019E1CE /* Encoder.h */,
 				8FCDF76918D23DF60019E1CE /* Hoa2D.h */,
-				8FCDF76A18D23DF60019E1CE /* Kits.cpp */,
-				8FCDF76B18D23DF60019E1CE /* Kits.h */,
 				8FCDF76C18D23DF60019E1CE /* Map.cpp */,
 				8FCDF76D18D23DF60019E1CE /* Map.h */,
 				8FCDF76E18D23DF60019E1CE /* Meter.cpp */,
@@ -200,8 +185,6 @@
 				8FCDF7A318D23DF60019E1CE /* Rotate.h in Headers */,
 				8FCDF78E18D23DF60019E1CE /* ChannelManager.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
-				8FCDF79518D23DF60019E1CE /* Kits.h in Headers */,
-				2CEE6E581906AE7B00B6FD7B /* MaxLineMap.h in Headers */,
 				8FCDF7A118D23DF60019E1CE /* Recomposer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,10 +275,7 @@
 				8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */,
 				8FCDF7A218D23DF60019E1CE /* Rotate.cpp in Sources */,
 				8FCDF79A18D23DF60019E1CE /* Optim.cpp in Sources */,
-				8FCDF79418D23DF60019E1CE /* Kits.cpp in Sources */,
 				8FCDF7B018D23DF60019E1CE /* Vector.cpp in Sources */,
-				8FCDF78C18D23DF60019E1CE /* BinauralMatrix2D.cpp in Sources */,
-				2CEE6E571906AE7B00B6FD7B /* MaxLineMap.cpp in Sources */,
 				8FCDF79118D23DF60019E1CE /* Encoder.cpp in Sources */,
 				8FCDF7B518D23E5E0019E1CE /* hoa.2d.map~.cpp in Sources */,
 				8FCDF78A18D23DF60019E1CE /* Ambisonic.cpp in Sources */,

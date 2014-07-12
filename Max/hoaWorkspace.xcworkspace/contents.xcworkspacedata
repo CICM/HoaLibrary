@@ -112,9 +112,6 @@
          location = "group:Max3D/HoaOptim/hoa.3d.optim~.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Max3D/HoaScope/HoaScope.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:Max3D/HoaVector/hoa.3d.vector~.xcodeproj">
       </FileRef>
       <FileRef

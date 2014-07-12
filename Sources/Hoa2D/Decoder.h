@@ -289,8 +289,6 @@ namespace Hoa2D
         DecoderBinaural*    m_decoder_binaural;
         Mode                m_mode;
         unsigned int        m_sample_rate;
-        unsigned int        m_vector_size;
-
         
     public:
         

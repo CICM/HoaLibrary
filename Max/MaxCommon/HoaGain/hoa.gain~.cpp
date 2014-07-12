@@ -30,7 +30,47 @@
  */
 
 #include "../../hoa.max.h"
-#include "Line.h"
+
+class Line
+{
+	
+private:
+	long        m_vector_size;
+	long        m_sampling_rate;
+	
+	double      m_value_old;
+	double      m_value_new;
+	double      m_value_step;
+	long        m_counter;
+	long        m_ramp;
+	
+	void init(long vector_size = 0, long sampling_rate = 44100);
+	
+public:
+	Line(long samps = 4410, long vector_size = 0, long sampling_rate = 44100);
+	Line(double ms = 100., long vector_size = 0, long sampling_rate = 44100);
+	
+	inline long		getVectorSize()		const {return m_vector_size;}
+	inline long		getSamplingRate()	const {return m_sampling_rate;}
+	inline long		getRampInSample()	const {return m_ramp;}
+	inline double	getRampInMs()		const {return ((double)m_ramp / (double)m_sampling_rate) * 1000.;}
+	inline double	getValue()			const {return m_value_new;}
+	
+	inline void setSamplingRate(const long sampling_rate) {m_sampling_rate = clip_min(sampling_rate, 1);}
+	inline void setVectorSize(const long vector_size)		{m_vector_size = vector_size;}
+	
+	void setRampInSample(const long samps);
+	void setRampInMs(const double ms);
+	void setValueDirect(const double value);
+	void setValue(const double value);
+	void setValueAngleDirect(const double angle);
+	void setValueAngle(const double angle);
+	
+	~Line() {};
+	
+	/* Perform sample by sample */
+	double process();
+};
 
 #define MAX_IO 64
 #define MIN_IO 1
@@ -145,12 +185,17 @@ void hoaGain_set_gain(t_hoaGain *x);
 
 t_hoa_err hoa_getinfos(t_hoaGain* x, t_hoa_boxinfos* boxinfos);
 
-int C74_EXPORT main()
+#ifdef HOA_PACKED_LIB
+int hoa_gain_main(void)
+#else
+int C74_EXPORT main(void)
+#endif
 {
 	t_class *c;
 
 	c = class_new("hoa.gain~", (method)hoaGain_new, (method)hoaGain_free, sizeof(t_hoaGain), (method)NULL, A_GIMME, 0L);
-
+    class_setname((char *)"hoa.gain~", (char *)"hoa.gain~");
+    
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
     class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_FIXWIDTH | JBOX_COLOR );
@@ -1185,4 +1230,101 @@ void HoaGain_reconnect_outlet(t_hoaGain *x)
             }
         }
     }
+}
+
+// -------------------------------------------------------------------------------------------
+// Line
+// -------------------------------------------------------------------------------------------
+
+Line::Line(long samps, long vector_size, long sampling_rate)
+{
+	init(vector_size, sampling_rate);
+	setRampInSample(samps);
+}
+
+Line::Line(double ms, long vector_size, long sampling_rate)
+{
+	init(vector_size, sampling_rate);
+	setRampInMs(ms);
+}
+
+void Line::init(const long vector_size, const long sampling_rate)
+{
+	m_value_old = 0.;
+	m_value_new = 0.;
+	m_value_step = 0.;
+	m_counter = 0;
+	
+	setVectorSize(vector_size);
+	setSamplingRate(sampling_rate);
+}
+
+double Line::process()
+{
+	m_value_old += m_value_step;
+	if(m_counter++ >= m_ramp)
+	{
+		m_value_step = 0.;
+		m_value_old  = m_value_new;
+		m_counter    = 0;
+	}
+	return m_value_old;
+}
+
+void Line::setRampInSample(const long samps)
+{
+	m_ramp = clip_min(samps, (long)1);
+}
+
+void Line::setRampInMs(const double ms)
+{
+	setRampInSample(ms * (double)m_sampling_rate / 1000.);
+}
+
+void Line::setValueDirect(const double value)
+{
+	m_value_old = m_value_new = value;
+	m_value_step = 0.;
+	m_counter = 0;
+}
+
+void Line::setValue(const double value)
+{
+	m_value_new  = value;
+	m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
+	m_counter = 0;
+}
+
+void Line::setValueAngleDirect(const double angle)
+{
+	m_value_old = m_value_new = wrap_twopi(angle);
+	m_value_step = 0.;
+	m_counter = 0;
+}
+
+void Line::setValueAngle(const double angle)
+{
+	m_value_new = wrap_twopi(angle);
+	m_value_old = wrap_twopi(m_value_old);
+    double distance;
+    if(m_value_old > m_value_new)
+        distance = (m_value_old - m_value_new);
+    else
+        distance = (m_value_new - m_value_old);
+	if(distance <= HOA_PI)
+	{
+		m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
+	}
+	else
+	{
+		if(m_value_new > m_value_old)
+		{
+			m_value_step = ((m_value_new - HOA_2PI) - m_value_old) / (double)m_ramp;
+		}
+		else
+		{
+			m_value_step = ((m_value_new + HOA_2PI) - m_value_old) / (double)m_ramp;
+		}
+	}
+	m_counter = 0;
 }

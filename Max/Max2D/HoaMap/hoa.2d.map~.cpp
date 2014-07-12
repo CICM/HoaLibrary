@@ -27,14 +27,150 @@
  */
 
 #include "../Hoa2D.max.h"
-#include "MaxLineMap.h"
 
 #define MAX_NUMBER_OF_SOURCES 64
+
+class MapPolarLines2D
+{
+    
+private:
+    float*      m_values_old;
+    float*      m_values_new;
+    float*      m_values_step;
+    unsigned int m_counter;
+    unsigned int m_ramp;
+    unsigned int m_number_of_sources;
+    
+public:
+    MapPolarLines2D(unsigned int numberOfSources);
+    ~MapPolarLines2D();
+    
+    inline unsigned int getNumberOfSources() const
+    {
+        return m_number_of_sources;
+    }
+    
+    inline unsigned int getRamp() const
+    {
+        return m_ramp;
+    }
+    
+    inline double getRadius(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[index];
+    }
+    
+    inline double getAzimuth(unsigned int index) const
+    {
+        assert(index < m_number_of_sources);
+        return m_values_new[m_number_of_sources +index];
+    }
+    
+    void setRamp(unsigned int ramp);
+    void setRadius(unsigned int index, double radius);
+    void setAzimuth(unsigned int index, double azimuth);
+    void setRadiusDirect(unsigned int index, double radius);
+    void setAzimuthDirect(unsigned int index, double azimuth);
+    
+    void process(float* vector);
+};
+
+MapPolarLines2D::MapPolarLines2D(unsigned int numberOfSources)
+{
+    assert(numberOfSources > 0);
+    m_number_of_sources = numberOfSources;
+    
+    m_values_old    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+    m_values_new    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+    m_values_step   = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+}
+
+MapPolarLines2D::~MapPolarLines2D()
+{
+    free(m_values_old);
+    free(m_values_new);
+    free(m_values_step);
+}
+
+void MapPolarLines2D::setRamp(unsigned int ramp)
+{
+	if(ramp < 1)
+		ramp = 1;
+    m_ramp = ramp;
+}
+
+void MapPolarLines2D::setRadius(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index]  = radius;
+    m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setAzimuth(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
+    m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+	
+    double distance;
+    if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
+        distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
+    else
+        distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+	
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new[index + m_number_of_sources] > m_values_old[index + m_number_of_sources])
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setRadiusDirect(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index] = m_values_new[index] = radius;
+    m_values_step[index] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setAzimuthDirect(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
+    m_values_step[index + m_number_of_sources] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::process(float* vector)
+{
+    cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
+    if(m_counter++ >= m_ramp)
+    {
+        cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
+        m_counter    = 0;
+    }
+    cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
+}
+
 
 typedef struct _hoa_map
 {
 	t_pxobject      f_ob;
-	PolarLines*     f_lines;
+	MapPolarLines2D*     f_lines;
 	Hoa2D::Map*     f_map;
 	
     float			f_lines_vector[128];
@@ -71,13 +207,18 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_map_class;
 
+#ifdef HOA_PACKED_LIB
+int hoa_2d_map_main(void)
+#else
 int C74_EXPORT main(void)
+#endif
 {	
 
 	t_class *c;
 	
 	c = class_new("hoa.2d.map~", (method)hoa_map_new, (method)hoa_map_free, (long)sizeof(t_hoa_map), 0L, A_GIMME, 0);
-	
+	class_setname((char *)"hoa.2d.map~", (char *)"hoa.2d.map~");
+    
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Sources signals to encode.
@@ -120,7 +261,8 @@ int C74_EXPORT main(void)
 	// @description The ramp time in milliseconds.
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+    class_alias(c, gensym("hoa.map~"));
 	hoa_map_class = c;
 	return 0;
 }
@@ -160,7 +302,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		}
 		
 		x->f_map        = new Hoa2D::Map(order, numberOfSources);
-		x->f_lines      = new PolarLines(x->f_map->getNumberOfSources());
+		x->f_lines      = new MapPolarLines2D(x->f_map->getNumberOfSources());
         x->f_lines->setRamp(0.1 * sys_getsr());
 		
         for (int i = 0; i < x->f_map->getNumberOfSources(); i++)

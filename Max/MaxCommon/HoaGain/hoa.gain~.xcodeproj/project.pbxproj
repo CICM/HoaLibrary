@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C30D2DD18E854B100ED0EBE /* hoa.gain~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30D2DA18E854B100ED0EBE /* hoa.gain~.cpp */; };
-		2C30D2DE18E854B100ED0EBE /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30D2DB18E854B100ED0EBE /* Line.cpp */; };
-		2C30D2DF18E854B100ED0EBE /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C30D2DC18E854B100ED0EBE /* Line.h */; };
 		8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BFD218C6282E00B408F9 /* hoa.max.cpp */; };
 		8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16BFD318C6282E00B408F9 /* hoa.max.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
@@ -20,8 +18,6 @@
 /* Begin PBXFileReference section */
 		2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoaCommon.xcconfig; path = ../MaxHoaCommon.xcconfig; sourceTree = "<group>"; };
 		2C30D2DA18E854B100ED0EBE /* hoa.gain~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.gain~.cpp"; sourceTree = "<group>"; };
-		2C30D2DB18E854B100ED0EBE /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Line.cpp; sourceTree = "<group>"; };
-		2C30D2DC18E854B100ED0EBE /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.gain~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.gain~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F16BFD218C6282E00B408F9 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
 		8F16BFD318C6282E00B408F9 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
@@ -48,8 +44,6 @@
 			isa = PBXGroup;
 			children = (
 				2C30D2DA18E854B100ED0EBE /* hoa.gain~.cpp */,
-				2C30D2DB18E854B100ED0EBE /* Line.cpp */,
-				2C30D2DC18E854B100ED0EBE /* Line.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
 				2C30D2A118E7411100ED0EBE /* MaxHoaCommon.xcconfig */,
@@ -77,7 +71,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C30D2DF18E854B100ED0EBE /* Line.h in Headers */,
 				8F16BFD518C6282E00B408F9 /* hoa.max.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C30D2DE18E854B100ED0EBE /* Line.cpp in Sources */,
 				8F16BFD418C6282E00B408F9 /* hoa.max.cpp in Sources */,
 				2C30D2DD18E854B100ED0EBE /* hoa.gain~.cpp in Sources */,
 			);

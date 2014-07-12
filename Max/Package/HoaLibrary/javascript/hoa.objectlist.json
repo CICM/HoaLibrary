@@ -53,9 +53,7 @@
 		"hoa.process~",
 		"hoa.record~",
 		"hoa.thisprocess~",
-		"hoa.receive",
 		"hoa.receive~",
-		"hoa.send",
 		"hoa.send~"
     	],
     	"description" : "Various utility tools for multichannel patching and processing."
