@@ -81,7 +81,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS            (c, "channels", channels_get, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
-    CLASS_ATTR_SAVE                 (c, "channels", 0);
 	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE               (c, "offset", 0, t_hoa_2d_vector, f_attrs);
@@ -90,7 +89,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
     CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
     CLASS_ATTR_ORDER                (c, "offset", 0, "2");
-    CLASS_ATTR_SAVE                 (c, "offset", 0);
 	// @description The offset of the channels.
     
     CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", 0, t_hoa_2d_vector, f_attrs, f_attrs, MAX_CHANNELS);
@@ -98,8 +96,6 @@ int C74_EXPORT main(void)
     CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
     CLASS_ATTR_ORDER                (c, "angles", 0, "3");
-	CLASS_ATTR_SAVE                 (c, "angles", 0);
-	CLASS_ATTR_DEFAULT              (c, "angles", 0, "0. 90. 180. 270.");
 	// @description The angles of the channels. Angles are in degree wrapped between 0. and 360.
     
     class_dspinit(c);
@@ -116,22 +112,13 @@ void *hoa_2d_vector_new(t_symbol *s, long argc, t_atom *argv)
 	// @description First argument sets the number of channels.
 	
 	t_hoa_2d_vector *x = NULL;
-    t_dictionary *d = NULL;
-    t_dictionary *attr = NULL;
-    t_atom_long number_of_channels = 4;
+    long number_of_channels = 4;
     x = (t_hoa_2d_vector *)object_alloc(hoa_2d_vector_class);
     
 	if(x)
 	{
-        d = (t_dictionary *)gensym("#D")->s_thing;
-        if(d && dictionary_getdictionary(d, gensym("saved_object_attributes"), (t_object **)&attr) == MAX_ERR_NONE)
-        {
-            if(dictionary_getlong(attr, gensym("channels"), &number_of_channels) != MAX_ERR_NONE)
-                number_of_channels = 4;
-        }
-       
-        if(number_of_channels < 1)
-            number_of_channels = 1;
+        if (argc && atom_gettype(argv) == A_LONG)
+            number_of_channels = clip_min(atom_getlong(argv), 1);
         
 		x->f_vector = new Hoa2D::Vector(number_of_channels);
 		
@@ -142,8 +129,7 @@ void *hoa_2d_vector_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ins = new double[x->f_vector->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_outs = new double[4 * SYS_MAXBLKSIZE];
         
-        if(d)
-            attr_dictionary_process(x, d);
+        attr_args_process(x, argc, argv);
 	}
 
 	return (x);

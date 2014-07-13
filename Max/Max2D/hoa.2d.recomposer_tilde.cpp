@@ -143,12 +143,10 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)hoa_2d_recomposer_float,    "float",            A_FLOAT,0);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_2d_recomposer, f_ramp);
-	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
+	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"ramp", NULL, ramp_set);
     CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
-    CLASS_ATTR_DEFAULT          (c,"ramp", 0, "100");
-    CLASS_ATTR_SAVE             (c,"ramp", 1);
 	// @description Ramp time in millisecond.
 	
 	class_dspinit(c);
@@ -219,6 +217,8 @@ void *hoa_2d_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ins            = new double[x->f_recomposer->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_outs           = new double[x->f_recomposer->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_lines_vector   = new float[x->f_recomposer->getNumberOfChannels() * 2];
+        
+        attr_args_process(x, argc, argv);
 	}
     
 	return (x);

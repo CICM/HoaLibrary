@@ -95,10 +95,8 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
 	{		
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
-		if(order < 1)
-            order = 1;
+		if(argc && argv && atom_gettype(argv) == A_LONG)
+			order = clip_min(atom_getlong(argv), 1);
         
 		x->f_encoder = new Hoa2D::Encoder(order);
 		

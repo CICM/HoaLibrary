@@ -83,19 +83,18 @@ void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 	// @description Second argument sets the number of channels.
 	
 	t_hoa_projector *x = NULL;
-	int	order = 1;
-    int number_of_channels = 4;
     x = (t_hoa_projector *)object_alloc(hoa_projector_class);
 	if (x)
-	{		
-		if(argv && atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
+	{
+        int	order = 1;
+        int number_of_channels = 4;
+        
+		if(argc && atom_gettype(argv) == A_LONG)
+			order = clip_min(atom_getlong(argv), 1);
         
         if(argc > 1 && atom_gettype(argv+1) == A_LONG)
 			number_of_channels = atom_getlong(argv+1);
         
-        if(order < 1)
-            order = 1;
         if(number_of_channels < order * 2 + 1)
             number_of_channels = order * 2 + 1;
 		

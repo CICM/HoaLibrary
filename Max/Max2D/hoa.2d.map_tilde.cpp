@@ -76,97 +76,6 @@ public:
     void process(float* vector);
 };
 
-MapPolarLines2D::MapPolarLines2D(unsigned int numberOfSources)
-{
-    assert(numberOfSources > 0);
-    m_number_of_sources = numberOfSources;
-    
-    m_values_old    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
-    m_values_new    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
-    m_values_step   = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
-}
-
-MapPolarLines2D::~MapPolarLines2D()
-{
-    free(m_values_old);
-    free(m_values_new);
-    free(m_values_step);
-}
-
-void MapPolarLines2D::setRamp(unsigned int ramp)
-{
-	if(ramp < 1)
-		ramp = 1;
-    m_ramp = ramp;
-}
-
-void MapPolarLines2D::setRadius(unsigned int index, double radius)
-{
-    assert(index < m_number_of_sources);
-    m_values_new[index]  = radius;
-    m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
-    m_counter = 0;
-}
-
-void MapPolarLines2D::setAzimuth(unsigned int index, double azimuth)
-{
-    assert(index < m_number_of_sources);
-    m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
-    m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
-	
-    double distance;
-    if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
-        distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
-    else
-        distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
-	
-    if(distance <= HOA_PI)
-    {
-        m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
-    }
-    else
-    {
-        if(m_values_new[index + m_number_of_sources] > m_values_old[index + m_number_of_sources])
-        {
-            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
-        }
-        else
-        {
-            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
-        }
-    }
-    m_counter = 0;
-}
-
-void MapPolarLines2D::setRadiusDirect(unsigned int index, double radius)
-{
-    assert(index < m_number_of_sources);
-    m_values_old[index] = m_values_new[index] = radius;
-    m_values_step[index] = 0.;
-    m_counter = 0;
-}
-
-void MapPolarLines2D::setAzimuthDirect(unsigned int index, double azimuth)
-{
-    assert(index < m_number_of_sources);
-    m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
-    m_values_step[index + m_number_of_sources] = 0.;
-    m_counter = 0;
-}
-
-void MapPolarLines2D::process(float* vector)
-{
-    cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
-    if(m_counter++ >= m_ramp)
-    {
-        cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
-        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
-        m_counter    = 0;
-    }
-    cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
-}
-
-
 typedef struct _hoa_map
 {
 	t_pxobject      f_ob;
@@ -255,9 +164,8 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DOUBLE           (c, "ramp", 0, t_hoa_map, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
-	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
-	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
-	CLASS_ATTR_SAVE				(c, "ramp", 1);
+    CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
+	CLASS_ATTR_ORDER			(c, "ramp", 0, "1");
 	// @description The ramp time in milliseconds.
 	
 	class_dspinit(c);
@@ -326,6 +234,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		for (int i = 0; i < x->f_map->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
+        attr_args_process(x, argc, argv);
 	}
 	
 	return (x);
@@ -626,5 +535,99 @@ void hoa_map_free(t_hoa_map *x)
     delete [] x->f_sig_ins;
     delete [] x->f_sig_outs;
 	delete x->f_lines;
+}
+
+// -------------------------------------------------------------------------------------------
+// MapPolarLines2D
+// -------------------------------------------------------------------------------------------
+
+MapPolarLines2D::MapPolarLines2D(unsigned int numberOfSources)
+{
+    assert(numberOfSources > 0);
+    m_number_of_sources = numberOfSources;
+    
+    m_values_old    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+    m_values_new    = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+    m_values_step   = (float *)malloc(m_number_of_sources * 2 * sizeof(float));
+}
+
+MapPolarLines2D::~MapPolarLines2D()
+{
+    free(m_values_old);
+    free(m_values_new);
+    free(m_values_step);
+}
+
+void MapPolarLines2D::setRamp(unsigned int ramp)
+{
+	if(ramp < 1)
+		ramp = 1;
+    m_ramp = ramp;
+}
+
+void MapPolarLines2D::setRadius(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index]  = radius;
+    m_values_step[index] = (m_values_new[index] - m_values_old[index]) / (double)m_ramp;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setAzimuth(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_new[index + m_number_of_sources] = wrap_twopi(azimuth);
+    m_values_old[index + m_number_of_sources] = wrap_twopi(m_values_old[index + m_number_of_sources]);
+	
+    double distance;
+    if(m_values_old[index + m_number_of_sources] > m_values_new[index + m_number_of_sources])
+        distance = (m_values_old[index + m_number_of_sources] - m_values_new[index + m_number_of_sources]);
+    else
+        distance = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]);
+	
+    if(distance <= HOA_PI)
+    {
+        m_values_step[index + m_number_of_sources] = (m_values_new[index + m_number_of_sources] - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+    }
+    else
+    {
+        if(m_values_new[index + m_number_of_sources] > m_values_old[index + m_number_of_sources])
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] - HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+        else
+        {
+            m_values_step[index + m_number_of_sources] = ((m_values_new[index + m_number_of_sources] + HOA_2PI) - m_values_old[index + m_number_of_sources]) / (double)m_ramp;
+        }
+    }
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setRadiusDirect(unsigned int index, double radius)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index] = m_values_new[index] = radius;
+    m_values_step[index] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::setAzimuthDirect(unsigned int index, double azimuth)
+{
+    assert(index < m_number_of_sources);
+    m_values_old[index + m_number_of_sources] = m_values_new[index + m_number_of_sources] = azimuth;
+    m_values_step[index + m_number_of_sources] = 0.;
+    m_counter = 0;
+}
+
+void MapPolarLines2D::process(float* vector)
+{
+    cblas_saxpy(m_number_of_sources * 2, 1., m_values_step, 1, m_values_old, 1);
+    if(m_counter++ >= m_ramp)
+    {
+        cblas_scopy(m_number_of_sources * 2, m_values_new, 1, m_values_old, 1);
+        memset(m_values_step, 0, sizeof(float) * m_number_of_sources * 2);
+        m_counter    = 0;
+    }
+    cblas_scopy(m_number_of_sources * 2, m_values_old, 1, vector, 1);
 }
 

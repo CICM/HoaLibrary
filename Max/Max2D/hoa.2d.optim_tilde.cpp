@@ -104,10 +104,8 @@ void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_hoa_optim *)object_alloc(hoa_optim_class);
 	if (x)
 	{		
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
-        if(order < 1)
-            order = 1;
+		if(argc && argv && atom_gettype(argv) == A_LONG)
+			order = clip_min(atom_getlong(argv), 1);
         
         x->f_optim = new Hoa2D::Optim(order, Hoa2D::Optim::InPhase);
 		

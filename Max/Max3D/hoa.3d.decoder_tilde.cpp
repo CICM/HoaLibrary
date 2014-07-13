@@ -83,7 +83,6 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, mode_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
-    CLASS_ATTR_SAVE             (c, "mode", 1);
     // @description There is two decoding <m>mode</m> :
     // <ul>
     // <li><b>Ambisonics</b> : for a standard or irregular loudspeakers repartition over a sphere.</li>
@@ -137,7 +136,7 @@ void *hoa_3d_decoder_new(t_symbol *s, long argc, t_atom *argv)
 	if(x)
 	{
 		x->f_mode = hoa_sym_ambisonic;
-		x->f_pinna = gensym("small");
+		x->f_pinna = hoa_sym_small;
 		
 		if(argc && atom_isNumber(argv))
 			order	= clip_min(atom_getlong(argv), 1);
@@ -337,14 +336,14 @@ t_max_err pinna_set(t_hoa_3d_decoder *x, t_object *attr, long argc, t_atom *argv
 {
 	if(argc && argv && atom_gettype(argv) == A_SYM)
 	{
-        if(atom_getsym(argv) == gensym("small") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Small)
+        if(atom_getsym(argv) == hoa_sym_small && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Small)
         {
             if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
                 object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             x->f_decoder->setPinnaSize(Hoa3D::DecoderBinaural::Small);
 			x->f_pinna = atom_getsym(argv);
 		}
-        else if(atom_getsym(argv) == gensym("large") && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Large)
+        else if(atom_getsym(argv) == hoa_sym_large && x->f_decoder->getPinnaSize() != Hoa3D::DecoderBinaural::Large)
         {
             if(x->f_decoder->getDecodingMode() == Hoa3D::DecoderMulti::Binaural)
                 object_method(gensym("dsp")->s_thing, hoa_sym_stop);

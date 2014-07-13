@@ -145,10 +145,8 @@ void *hoa_2d_decoder_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_hoa_2d_decoder *)object_alloc(hoa_2d_decoder_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
-		if(order < 1)
-            order = 1;
+		if(argc && argv && atom_gettype(argv) == A_LONG)
+			order = clip_min(atom_getlong(argv), 1);
         
         x->f_send_config = 1;
     
