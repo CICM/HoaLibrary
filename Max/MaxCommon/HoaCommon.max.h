@@ -8,8 +8,12 @@
 #define DEF_HOA_COMMON_MAX
 
 #include "../hoa.max.h"
+#include "../../Sources/Hoa2D/Hoa2D.h"
+#include "../../Sources/Hoa3D/Hoa3D.h"
 #include "../../Sources/HoaCommon/HoaCommon.h"
 
+int c_convolve_main();
+int c_freeverb_main();
 int hoa_connect_main();
 int hoa_dac_main();
 int hoa_gain_main();

@@ -19,6 +19,8 @@ int C74_EXPORT main(void)
     */
     
     // HOA COMMON //
+    c_convolve_main();
+    c_freeverb_main();
     hoa_connect_main();
     hoa_dac_main();
     hoa_gain_main();

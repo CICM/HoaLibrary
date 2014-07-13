@@ -24,9 +24,8 @@ extern "C"
 #include <jpatcher_syms.h>
 }
 
-#include "../Sources/Hoa3D/Hoa3D.h"
-
 #include "hoa.max_commonsyms.h"
+#include "../Sources/Hoa.h"
 
 #define MAX_CHANNELS SYS_MAXSIGS
 

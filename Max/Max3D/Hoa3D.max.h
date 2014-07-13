@@ -8,6 +8,7 @@
 #define __DEF_HOA_3D_MAX__
 
 #include "../hoa.max.h"
+#include "../../Sources/Hoa3D/Hoa3D.h"
 
 int hoa_3d_decoder_main();
 int hoa_3d_encoder_main();
