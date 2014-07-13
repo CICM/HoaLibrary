@@ -85,7 +85,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "autoconnect", 0, "Behavior");
 	CLASS_ATTR_STYLE_LABEL      (c, "autoconnect", 0, "onoff", "Auto connection");
     CLASS_ATTR_ORDER            (c, "autoconnect", 0, "1");
-    CLASS_ATTR_SAVE             (c, "autoconnect", 1);
     // @description If the <m>autoconnect</m> attribute is checked, connected objects like the <o>hoa.2d.meter~</o>, <o>hoa.2d.vector~</o>, <o>hoa.dac~</o> or <o>hoa.gain~</o> will be notified of changes and adapt their behavior accordingly.
     
     CLASS_ATTR_SYM              (c, "mode", ATTR_SET_DEFER_LOW, t_hoa_2d_decoder, f_attr);
@@ -93,7 +92,6 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural irregular");
 	CLASS_ATTR_ACCESSORS		(c, "mode", mode_get, mode_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
-    CLASS_ATTR_SAVE             (c, "mode", 1);
     // @description There is three decoding <m>mode</m> :
     // <ul>
     // <li><b>Ambisonics</b> : for a regular loudspeakers repartition over a circular array.</li>
@@ -106,7 +104,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "channels", channel_get, channel_set);
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "4");
     CLASS_ATTR_ORDER            (c, "channels", 0, "2");
-    CLASS_ATTR_SAVE             (c, "channels", 0);
     // @description The number of Channels. In <b>ambisonic</b> <m>mode</m>, the number of channels must be equal or higher to the number of harmonics : (order *2 + 1), (default : order * 2 + 2).
     
     CLASS_ATTR_DOUBLE           (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_2d_decoder, f_attr);
@@ -114,14 +111,12 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "offset", offset_get, offset_set);
     CLASS_ATTR_DEFAULT          (c, "offset", 0, "0");
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
-    CLASS_ATTR_SAVE             (c, "offset", 0);
     // @description The offset of channels, in degrees between 0. and 360.
     
     CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_2d_decoder, f_attr, f_attr, MAX_CHANNELS);
     CLASS_ATTR_LABEL            (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "angles", angles_get, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "4");
-	CLASS_ATTR_SAVE             (c, "angles", 0);
     // @description Angles of each channels. The angles of channels are only settable in <b>irregular</b> <m>mode</m>. Each angle are in degrees and is wrapped between 0. and 360. So you can also set an angle with a negative value. ex : angles for a 5.1 loudspeakers restitution system can be setted either by the "angles 0 30 110 250 330" or by "angles 0 30 110 -110 -30".
     
     CLASS_ATTR_SYM              (c, "pinna", ATTR_SET_DEFER_LOW, t_hoa_2d_decoder, f_attr);
@@ -129,7 +124,6 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ENUM             (c, "pinna", 0, "small large");
 	CLASS_ATTR_ACCESSORS		(c, "pinna", pinna_get, pinna_set);
     CLASS_ATTR_ORDER            (c, "pinna", 0, "5");
-    CLASS_ATTR_SAVE             (c, "pinna", 1);
     // @description The pinna size to use for the binaural restitution. The <m>pinna</m> message followed by the <b>symbol</b> <b>small</b> or <b>large</b> set the pinna size of the HRTF responses for the binaural restitution. Choose the one that suits you best.
 	
 	class_dspinit(c);
@@ -146,10 +140,6 @@ void *hoa_2d_decoder_new(t_symbol *s, long argc, t_atom *argv)
 	// @description First argument is the ambisonic order of decomposition.
     
 	t_hoa_2d_decoder *x = NULL;
-    t_dictionary *d = NULL;
-    t_dictionary *attr = NULL;
-    t_atom_long channels;
-    t_symbol*   mode;
 	int	order = 1;
     
     x = (t_hoa_2d_decoder *)object_alloc(hoa_2d_decoder_class);
@@ -163,33 +153,8 @@ void *hoa_2d_decoder_new(t_symbol *s, long argc, t_atom *argv)
         x->f_send_config = 1;
     
         x->f_decoder    = new Hoa2D::DecoderMulti(order);
-        
-        d = (t_dictionary *)gensym("#D")->s_thing;
-        if(d && dictionary_getdictionary(d, gensym("saved_object_attributes"), (t_object **)&attr) == MAX_ERR_NONE)
-        {
-            if(dictionary_getsym(attr, gensym("mode"), &mode) == MAX_ERR_NONE)
-            {
-                if(mode == hoa_sym_irregular)
-                    x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Irregular);
-                else if(mode == hoa_sym_binaural)
-                    x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Binaural);
-                else
-                    x->f_decoder->setDecodingMode(Hoa2D::DecoderMulti::Regular);
-            }
-            if(dictionary_getlong(attr, hoa_sym_channels, &channels) == MAX_ERR_NONE)
-                x->f_decoder->setNumberOfChannels(channels);
-            if(dictionary_getsym(attr, gensym("pinna"), &mode) == MAX_ERR_NONE)
-            {
-                if(mode == gensym("large"))
-                    x->f_decoder->setPinnaSize(DecoderBinaural::Large);
-                else if(mode == gensym("small"))
-                    x->f_decoder->setPinnaSize(DecoderBinaural::Small);
-            }
-            dictionary_getlong(attr, gensym("autoconnect"), &x->f_send_config);
-        }
        
         x->f_decoder->setSampleRate(sys_getsr());
-        //x->f_decoder->setVectorSize(sys_getblksize());
 		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
         for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
             outlet_new(x, "signal");
@@ -197,9 +162,6 @@ void *hoa_2d_decoder_new(t_symbol *s, long argc, t_atom *argv)
         x->f_ob.z_misc = Z_NO_INPLACE;
         x->f_ins = new double[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_outs= new double[MAX_CHANNELS * SYS_MAXBLKSIZE];
-        
-        if(d)
-            attr_dictionary_process(x, d);
         
         attr_args_process(x, argc, argv);
         
@@ -223,14 +185,6 @@ void hoa_2d_decoder_dsp64(t_hoa_2d_decoder *x, t_object *dsp64, short *count, do
 {
     x->f_decoder->setSampleRate(samplerate);
     object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_2d_decoder_perform64, 0, NULL);
-    /*
-    if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Regular)
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_2d_decoder_perform64_regular, 0, NULL);
-    else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_2d_decoder_perform64_irregular, 0, NULL);
-    else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Binaural && x->f_decoder->getBinauralState())
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_2d_decoder_perform64_binaural, 0, NULL);
-    */
 }
 
 void hoa_2d_decoder_perform64(t_hoa_2d_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -249,46 +203,6 @@ void hoa_2d_decoder_perform64(t_hoa_2d_decoder *x, t_object *dsp64, double **ins
     }
 }
 
-/*
-void hoa_2d_decoder_perform64_regular(t_hoa_2d_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < numins; i++)
-    {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
-    }
-	for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_decoder->processRegular(x->f_ins + numins * i, x->f_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
-    }
-    
-}
-
-void hoa_2d_decoder_perform64_irregular(t_hoa_2d_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < numins; i++)
-    {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
-    }
-	for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_decoder->processIrregular(x->f_ins + numins * i, x->f_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_2d_decoder_perform64_binaural(t_hoa_2d_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    x->f_decoder->processBinaural(ins, outs);
-}
-*/
-
 void hoa_2d_decoder_assist(t_hoa_2d_decoder *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
@@ -296,7 +210,6 @@ void hoa_2d_decoder_assist(t_hoa_2d_decoder *x, void *b, long m, long a, char *s
     else
         sprintf(s,"(signal) %s", x->f_decoder->getChannelName(a).c_str());
 }
-
 
 void hoa_2d_decoder_free(t_hoa_2d_decoder *x) 
 {
@@ -486,13 +399,13 @@ t_max_err angles_set(t_hoa_2d_decoder *x, t_object *attr, long argc, t_atom *arg
             object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
             {
-                if(i < argc && (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG))
+                if(i < argc && (atom_isNumber(argv+i)))
                     angles[i] = atom_getfloat(argv+i) / 360. * HOA_2PI;
                 else
                     angles[i] = x->f_decoder->getChannelAzimuth(i);
             }
             
-            x->f_decoder->setChannelsAzimtuh(angles);
+            x->f_decoder->setChannelsAzimuth(angles);
             free(angles);
             send_configuration(x);
         }
@@ -542,6 +455,9 @@ t_max_err pinna_set(t_hoa_2d_decoder *x, t_object *attr, long argc, t_atom *argv
 
 void send_configuration(t_hoa_2d_decoder *x)
 {
+    if(!x->f_send_config)
+        return;
+    
 	t_object *patcher;
 	t_object *decoder;
     t_object *object;
@@ -550,9 +466,6 @@ void send_configuration(t_hoa_2d_decoder *x)
 	t_max_err err;
     t_atom msg[4];
     t_atom rv;
-    
-    if(!x->f_send_config)
-        return;
     
 	err = object_obex_lookup(x, hoa_sym_pound_P, (t_object **)&patcher);
 	if (err != MAX_ERR_NONE)

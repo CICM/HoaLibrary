@@ -143,7 +143,7 @@ namespace Hoa2D
             @param     index		The index of the channel.
             @param     azimuth		The azimuth.
          
-            @see    setChannelsAzimtuh
+            @see    setChannelsAzimuth
          */
         void setChannelAzimuth(unsigned int index, double azimuth);
         
@@ -154,7 +154,7 @@ namespace Hoa2D
          
             @see    setChannelAzimuth
          */
-        void setChannelsAzimtuh(double* azimuths);
+        void setChannelsAzimuth(double* azimuths);
         
         //! This method performs the irregular decoding with single precision.
 		/**	You should use this method for in-place or not-in-place processing and performs the irregular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimum size must be the number of channels.
@@ -384,7 +384,7 @@ namespace Hoa2D
             @param     index		The index of the channel.
             @param     azimuth		The azimuth.
          
-            @see    setChannelsAzimtuh
+            @see    setChannelsAzimuth
          */
         void setChannelAzimuth(unsigned int index, double azimuth);
         
@@ -395,7 +395,7 @@ namespace Hoa2D
          
             @see    setChannelAzimuth
          */
-        void setChannelsAzimtuh(double* azimuths);
+        void setChannelsAzimuth(double* azimuths);
         
         //! Set the sample rate.
         /** Set the sample rate. The sample will change the impulse responses size and their sizes increase with it. The valid sample rate are 44100, 48000, 88200 and 9600. Setting the sample rate will load the impulse responses, it is essential to define it before the digital signal processing.

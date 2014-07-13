@@ -21,7 +21,7 @@
 namespace Hoa
 {
 	//! The int to string conversion
-    /** The function converts a interger to a string.
+    /** The function converts a integer to a string.
 
 	 @param     value   The value to convert.
 	 @return    The function return value in a string format.

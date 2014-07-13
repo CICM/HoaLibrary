@@ -78,7 +78,7 @@ namespace Hoa2D
         setChannelAzimuth(0, m_channels_azimuth[0]);
     }
 
-    void DecoderIrregular::setChannelsAzimtuh(double* azimuths)
+    void DecoderIrregular::setChannelsAzimuth(double* azimuths)
     {
         Planewaves::setChannelsAzimuth(azimuths);
         setChannelAzimuth(0, m_channels_azimuth[0]);
@@ -378,11 +378,11 @@ namespace Hoa2D
         }
     }
 
-    void DecoderMulti::setChannelsAzimtuh(double* azimuths)
+    void DecoderMulti::setChannelsAzimuth(double* azimuths)
     {
         if(m_mode == Irregular)
         {
-            m_decoder_irregular->setChannelsAzimtuh(azimuths);
+            m_decoder_irregular->setChannelsAzimuth(azimuths);
         }
     }
 
