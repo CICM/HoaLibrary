@@ -51,10 +51,6 @@
 		2CE0CD8A19720A0300217823 /* hoa.process_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CD5419720A0300217823 /* hoa.process_tilde.cpp */; };
 		2CE0CD8B19720A0300217823 /* hoa.record_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CD5519720A0300217823 /* hoa.record_tilde.cpp */; };
 		2CE0CD8C19720A0300217823 /* hoa.thisprocess_tilde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CD5619720A0300217823 /* hoa.thisprocess_tilde.cpp */; };
-		2CE0CD8D19720A0300217823 /* Hoa2D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5719720A0300217823 /* Hoa2D.max.h */; };
-		2CE0CD8E19720A0300217823 /* Hoa2D3D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5819720A0300217823 /* Hoa2D3D.max.h */; };
-		2CE0CD8F19720A0300217823 /* Hoa3D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5919720A0300217823 /* Hoa3D.max.h */; };
-		2CE0CD9019720A0300217823 /* HoaAll.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5A19720A0300217823 /* HoaAll.max.h */; };
 		2CE0CD9119720A0300217823 /* HoaCommon.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5B19720A0300217823 /* HoaCommon.max.h */; };
 		2CE0CD9219720A0300217823 /* HoaProcessSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE0CD5C19720A0300217823 /* HoaProcessSuite.h */; };
 		2CE0CD9319720A0300217823 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CD5D19720A0300217823 /* Utilities.cpp */; };
@@ -176,10 +172,6 @@
 		2CE0CD5419720A0300217823 /* hoa.process_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.process_tilde.cpp; sourceTree = "<group>"; };
 		2CE0CD5519720A0300217823 /* hoa.record_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.record_tilde.cpp; sourceTree = "<group>"; };
 		2CE0CD5619720A0300217823 /* hoa.thisprocess_tilde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.thisprocess_tilde.cpp; sourceTree = "<group>"; };
-		2CE0CD5719720A0300217823 /* Hoa2D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.max.h; sourceTree = "<group>"; };
-		2CE0CD5819720A0300217823 /* Hoa2D3D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D3D.max.h; sourceTree = "<group>"; };
-		2CE0CD5919720A0300217823 /* Hoa3D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.max.h; sourceTree = "<group>"; };
-		2CE0CD5A19720A0300217823 /* HoaAll.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaAll.max.h; sourceTree = "<group>"; };
 		2CE0CD5B19720A0300217823 /* HoaCommon.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaCommon.max.h; sourceTree = "<group>"; };
 		2CE0CD5C19720A0300217823 /* HoaProcessSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaProcessSuite.h; sourceTree = "<group>"; };
 		2CE0CD5D19720A0300217823 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
@@ -360,10 +352,6 @@
 				2CE0CD5419720A0300217823 /* hoa.process_tilde.cpp */,
 				2CE0CD5519720A0300217823 /* hoa.record_tilde.cpp */,
 				2CE0CD5619720A0300217823 /* hoa.thisprocess_tilde.cpp */,
-				2CE0CD5719720A0300217823 /* Hoa2D.max.h */,
-				2CE0CD5819720A0300217823 /* Hoa2D3D.max.h */,
-				2CE0CD5919720A0300217823 /* Hoa3D.max.h */,
-				2CE0CD5A19720A0300217823 /* HoaAll.max.h */,
 				2CE0CD5B19720A0300217823 /* HoaCommon.max.h */,
 				2CE0CD5C19720A0300217823 /* HoaProcessSuite.h */,
 				2CE0CD5D19720A0300217823 /* Utilities.cpp */,
@@ -506,7 +494,6 @@
 				2CE93382196EBBA00079A368 /* Ambisonic.h in Headers */,
 				2CE0CD9219720A0300217823 /* HoaProcessSuite.h in Headers */,
 				2CE933A6196EBBA00079A368 /* Hoa3D.h in Headers */,
-				2CE0CD8E19720A0300217823 /* Hoa2D3D.max.h in Headers */,
 				2CE93333196EB9B60079A368 /* hoa.max.h in Headers */,
 				2CE933AE196EBBA00079A368 /* Planewaves_3D.h in Headers */,
 				2CE9339D196EBBA00079A368 /* Vector.h in Headers */,
@@ -514,14 +501,11 @@
 				2CE93399196EBBA00079A368 /* Rotate.h in Headers */,
 				2CE9338F196EBBA00079A368 /* Meter.h in Headers */,
 				2CE933C2196EBBA00079A368 /* HoaUtils.h in Headers */,
-				2CE0CD9019720A0300217823 /* HoaAll.max.h in Headers */,
 				2CE933A3196EBBA00079A368 /* Decoder_3D.h in Headers */,
 				2CE933AA196EBBA00079A368 /* Meter_3D.h in Headers */,
-				2CE0CD8F19720A0300217823 /* Hoa3D.max.h in Headers */,
 				2CE933B0196EBBA00079A368 /* Rotate_3D.h in Headers */,
 				2CE0CD9419720A0300217823 /* Utilities.h in Headers */,
 				2CE93386196EBBA00079A368 /* Decoder.h in Headers */,
-				2CE0CD8D19720A0300217823 /* Hoa2D.max.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,12 +33,9 @@ typedef struct _hoa_pi
 	t_object    f_ob;
 	double      f_value;	
 	void*       f_outlet;
-    t_atom_long f_loadbang;
-    
 } t_hoa_pi;
 
 void hoa_pi_bang(t_hoa_pi *x);
-void hoa_pi_loadbang(t_hoa_pi *x);
 void hoa_pi_int(t_hoa_pi *x, long n);
 void hoa_pi_float(t_hoa_pi *x, double n) ;
 void hoa_pi_assist(t_hoa_pi *x, void *b, long m, long a, char *s);
@@ -80,16 +77,6 @@ int C74_EXPORT main(void)
     // @method dblclick @digest Compute and output result
 	// @description The <m>dblclick</m> on the object compute and output result
 	class_addmethod(c, (method)hoa_pi_bang,		"dblclick",	A_CANT, 0);
-    
-	class_addmethod(c, (method)hoa_pi_loadbang,	"loadbang",	A_CANT, 0);
-    
-    CLASS_ATTR_LONG             (c, "outonload",  0, t_hoa_pi, f_loadbang);
-	CLASS_ATTR_CATEGORY			(c, "outonload",  0, "Behavior");
-    CLASS_ATTR_STYLE_LABEL      (c, "outonload",  0, "onoff", "Output value on load");
-	CLASS_ATTR_ORDER			(c, "outonload",  0, "1");
-	CLASS_ATTR_DEFAULT			(c, "outonload",  0, "0");
-	CLASS_ATTR_SAVE				(c, "outonload",  1);
-    // @description If the <b>outonload</b> is checked, <o>hoa.pi</o> object will send value at loadbang time. 
 	
 	class_register(CLASS_BOX, c);
 	hoa_pi_class = c;
@@ -106,14 +93,13 @@ void *hoa_pi_new(t_symbol *s, int argc, t_atom *argv)
 		// @description First argument is the π multiplier
         
         x->f_value = 1.;
-        x->f_loadbang = 0;
         if (atom_gettype(argv) == A_LONG)
             x->f_value = atom_getlong(argv);
         else if (atom_gettype(argv) == A_FLOAT)
             x->f_value = atom_getfloat(argv);
         
         x->f_outlet = floatout(x);
-
+        
         attr_args_process(x, argc, argv);
     }
 	
@@ -128,12 +114,6 @@ t_hoa_err hoa_getinfos(t_hoa_pi* x, t_hoa_boxinfos* boxinfos)
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
-}
-
-void hoa_pi_loadbang(t_hoa_pi *x)
-{
-	if (x->f_loadbang)
-		hoa_pi_bang(x);
 }
 
 void hoa_pi_assist(t_hoa_pi *x, void *b, long m, long a, char *s)

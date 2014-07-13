@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
-			"architecture" : "x64"
+			"revision" : 7,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 100.0, 100.0, 559.0, 283.0 ],
@@ -44,8 +44,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
-							"architecture" : "x64"
+							"revision" : 7,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 100.0, 126.0, 559.0, 257.0 ],
@@ -81,7 +81,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 370.0, 158.0, 210.0, 55.0 ]
+									"patching_rect" : [ 305.0, 158.0, 210.0, 55.0 ]
 								}
 
 							}
@@ -121,25 +121,11 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 22.0, 128.0, 70.0, 19.0 ],
-									"text" : "auto load"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
 									"id" : "obj-2",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 158.0, 111.0, 70.0, 19.0 ],
+									"patching_rect" : [ 97.0, 110.0, 70.0, 19.0 ],
 									"text" : "bang me"
 								}
 
@@ -158,7 +144,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.pi", "@obj-desc", "A", "good", "pi", "number", "with", "loadbang", "and", "a", "multiply", "factor." ],
+									"args" : [ "@obj-name", "hoa.pi", "@obj-desc", "A", "good", "pi", "number", "with", "a", "multiply", "factor." ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -192,7 +178,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 232.0, 128.0, 70.0, 19.0 ],
+									"patching_rect" : [ 157.0, 128.0, 70.0, 19.0 ],
 									"text" : "dblclick me"
 								}
 
@@ -207,7 +193,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 232.0, 188.0, 50.0, 19.0 ]
+									"patching_rect" : [ 157.0, 188.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -220,40 +206,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 232.0, 158.0, 61.0, 19.0 ],
+									"patching_rect" : [ 157.0, 158.0, 61.0, 19.0 ],
 									"text" : "hoa.pi 1.5"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-23",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "float" ],
-									"patching_rect" : [ 22.0, 158.0, 68.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"outonload" : 1
-									}
-,
-									"text" : "hoa.pi 0.25"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-24",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 22.0, 188.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -266,7 +220,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 307.0, 158.0, 52.0, 19.0 ],
+									"patching_rect" : [ 232.0, 158.0, 52.0, 19.0 ],
 									"text" : "hoa.pi 2"
 								}
 
@@ -281,7 +235,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 307.0, 188.0, 50.0, 19.0 ]
+									"patching_rect" : [ 232.0, 188.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -294,7 +248,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 97.0, 158.0, 61.0, 19.0 ],
+									"patching_rect" : [ 22.0, 158.0, 61.0, 19.0 ],
 									"text" : "hoa.pi 0.5"
 								}
 
@@ -309,7 +263,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 97.0, 188.0, 50.0, 19.0 ]
+									"patching_rect" : [ 22.0, 188.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -323,7 +277,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 172.0, 188.0, 50.0, 19.0 ]
+									"patching_rect" : [ 97.0, 188.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -337,7 +291,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 97.0, 90.0, 79.0, 19.0 ],
+									"patching_rect" : [ 22.0, 102.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.5"
 								}
 
@@ -352,7 +306,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 307.0, 90.0, 70.0, 19.0 ],
+									"patching_rect" : [ 232.0, 102.0, 70.0, 19.0 ],
 									"text" : "loadmess 2"
 								}
 
@@ -367,7 +321,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 307.0, 128.0, 50.0, 19.0 ]
+									"patching_rect" : [ 232.0, 128.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -381,7 +335,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 97.0, 128.0, 50.0, 19.0 ]
+									"patching_rect" : [ 22.0, 128.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -394,7 +348,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 172.0, 158.0, 42.0, 19.0 ],
+									"patching_rect" : [ 97.0, 158.0, 42.0, 19.0 ],
 									"text" : "hoa.pi"
 								}
 
@@ -406,7 +360,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 172.0, 128.0, 20.0, 20.0 ]
+									"patching_rect" : [ 97.0, 128.0, 20.0, 20.0 ]
 								}
 
 							}
@@ -462,15 +416,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-19", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-24", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-23", 0 ]
 								}
 
 							}
@@ -537,8 +482,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
-							"architecture" : "x64"
+							"revision" : 7,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 559.0, 257.0 ],
@@ -590,28 +535,28 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
-				"patcherrelativepath" : "../misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "helpargs.js",
 				"bootpath" : "/Applications/Max 6.1/Cycling '74/help-resources",
-				"patcherrelativepath" : "../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/Cycling '74/help-resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
