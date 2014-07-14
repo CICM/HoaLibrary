@@ -10,6 +10,8 @@
 #include "../hoa.max.h"
 #include "../../Sources/Hoa3D/Hoa3D.h"
 
+using namespace Hoa3D;
+
 int hoa_3d_decoder_main();
 int hoa_3d_encoder_main();
 int hoa_3d_map_main();
@@ -18,7 +20,5 @@ int hoa_3d_optim_main();
 int hoa_3d_scope_main();
 int hoa_3d_vector_main();
 int hoa_3d_wider_main();
-
-using namespace Hoa3D;
 
 #endif

@@ -132,7 +132,7 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 	{
 		// load Ambisonic instances to query harmonics band or argument in 2D or 3D
 		x->f_ambi2D = new Hoa2D::Ambisonic( MAX_CHANNELS*0.5 -1  );
-		x->f_ambi3D = new Hoa3D::Ambisonic( sqrt(MAX_CHANNELS)-1 );
+		x->f_ambi3D = new Hoa3D::Ambisonic( sqrt((long double)MAX_CHANNELS)-1 );
 		
 		x->f_objects = new t_object*[CONNECT_MAX_TAB];
 		

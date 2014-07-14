@@ -12,6 +12,8 @@
 #include "../../Sources/Hoa3D/Hoa3D.h"
 #include "../../Sources/HoaCommon/HoaCommon.h"
 
+using namespace HoaCommon;
+
 int c_convolve_main();
 int c_freeverb_main();
 int hoa_connect_main();
@@ -28,7 +30,5 @@ int hoa_play_main();
 int hoa_process_main();
 int hoa_record_main();
 int hoa_thisprocess_main();
-
-using namespace HoaCommon;
 
 #endif

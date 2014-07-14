@@ -437,7 +437,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Initialise patcher symbol
 	
-	object_obex_lookup(x, _sym_pound_P, &x->parent_patch);									// store reference to parent patcher
+	object_obex_lookup(x, hoa_sym_pound_P, &x->parent_patch);									// store reference to parent patcher
 	
 	// load a single instance to query io informations
 	
@@ -975,18 +975,19 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 		{
 			harmonic_band = x->f_ambi2D->getHarmonicDegree(index);
 			harmonic_argument = x->f_ambi2D->getHarmonicOrder(index);
-			snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
+			sprintf(windowname, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
+			//snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
 			harmonic_band = x->f_ambi3D->getHarmonicDegree(index);
 			harmonic_argument = x->f_ambi3D->getHarmonicOrder(index);
-			snprintf(windowname, 256, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
+			sprintf(windowname, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
 		}
 	}
 	else
 	{
-		snprintf(windowname, 256, "%s (%ld)", patch_name_in->s_name, index+1);
+		sprintf(windowname, "%s (%ld)", patch_name_in->s_name, index+1);
 	}
 	
 	jpatcher_set_title(p, gensym(windowname));
@@ -1200,7 +1201,7 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
                     else
                         target_arg_index = target_arg * 2;
                     
-                    x->target_index = (long)pow(target_band, 2) + 1;
+                    x->target_index = (long)pow((float)target_band, 2) + 1;
                     x->target_index += target_arg_index;
                     
                     // bad target target none
@@ -1277,7 +1278,7 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
                     else
                         target_arg_index = target_arg * 2;
                     
-                    index = (long)pow(target_band, 2) + 1;
+                    index = (long)pow((float)target_band, 2) + 1;
                     index += target_arg_index;
                     
                     // bad target target none
@@ -1347,8 +1348,12 @@ void hoa_processor_mutemap(t_hoa_processor *x, long n)
 {
     int outlet_index = n;
     if (outlet_index < 1 || outlet_index > x->declared_outs) return;
+
+	//t_atom list[x->patch_spaces_allocated];
     
-    t_atom list[x->patch_spaces_allocated];
+	t_atom *list = NULL;
+	list = (t_atom *)sysmem_newptr(sizeof(x->patch_spaces_allocated));
+
     for (int i=0; i<x->patch_spaces_allocated; i++)
         atom_setlong(list+i, !x->patch_space_ptrs[i]->patch_on);
     
@@ -1700,7 +1705,7 @@ void hoa_processor_open(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *a
                 else
                     arg_index = arg * 2;
                 
-                index = (long)pow(band, 2) + 1;
+                index = (long)pow((float)band, 2) + 1;
                 index += arg_index;
                 
                 // bad target target none
@@ -1782,7 +1787,7 @@ void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom 
                 else
                     arg_index = arg * 2;
                 
-                index = (long)pow(band, 2) + 1;
+                index = (long)pow((float)band, 2) + 1;
                 index += arg_index;
                 
                 // bad target target none

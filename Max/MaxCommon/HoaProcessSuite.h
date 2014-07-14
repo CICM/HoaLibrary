@@ -102,7 +102,7 @@ __inline void ***HoaProcessor_Get_Outptrs_Ptr(void *HoaProcessor_Object, long in
 
 __inline long HoaProcessor_Get_IO_Index(void *HoaProcessor_Object, long patchIndex, t_object* io)
 {
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+	if (HoaProcessorIsValid(HoaProcessor_Object) && patchIndex > 0)
 		return (long) mess2((t_object *)HoaProcessor_Object, gensym("get_io_index"), patchIndex, io);
 	else
 		return 0;
@@ -143,7 +143,7 @@ __inline t_symbol *HoaProcessor_Get_Mode (void *HoaProcessor_Object)
 
 __inline long HoaProcessor_Get_Number_Of_Instances (void *HoaProcessor_Object)
 {
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+	if (HoaProcessorIsValid(HoaProcessor_Object))
 		return (long) mess0((t_object *)HoaProcessor_Object, gensym("get_number_of_instance"));
 	
 	return 0;

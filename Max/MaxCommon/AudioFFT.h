@@ -92,7 +92,7 @@
 #ifdef _APPLE_
 #define AUDIOFFT_APPLE_ACCELERATE
 #elif _WINDOWS
-#define AUDIOFFT_FFTW3
+#define AUDIOFFT_FFTW3 0
 #endif
 
 #ifdef _APPLE_

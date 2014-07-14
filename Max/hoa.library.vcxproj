@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6768CBB1-4D8A-47B2-BB27-0939CB16CF90}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v100</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Sequential</UseIntelMKL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v100</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseIntelIPP>Sequential</UseIntelIPP>
+    <WholeProgramOptimization>PGOptimize</WholeProgramOptimization>
+    <UseIntelTBB>true</UseIntelTBB>
+    <InstrumentIntelTBB>true</InstrumentIntelTBB>
+    <UseIntelMKL>Sequential</UseIntelMKL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v100</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Sequential</UseIntelMKL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v100</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="max_extern_common.props" />
+    <Import Project="max_extern_x86.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="max_extern_common.props" />
+    <Import Project="max_extern_x86.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="max_extern_common.props" />
+    <Import Project="max_extern_x64.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="max_extern_common.props" />
+    <Import Project="max_extern_x64.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.mxe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.mxe64</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.mxe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.mxe64</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(C74SUPPORT)\max-includes;$(C74SUPPORT)\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling />
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)$(TargetName).asm</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <MapFileName>$(IntDir)$(ProjectName).map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(C74SUPPORT)\max-includes;$(C74SUPPORT)\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling />
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)$(TargetName).asm</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).mxe64</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <MapFileName>$(IntDir)$(ProjectName).map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(C74SUPPORT)\max-includes;$(C74SUPPORT)\msp-includes;$(ProjectDir)..\ThirdParty\Gsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HOA_PACKED_LIB;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <PrecompiledHeader />
+      <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)$(TargetName).asm</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level1</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <FloatingPointModel>Fast</FloatingPointModel>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;MSVCRT.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <MapFileName>$(IntDir)$(ProjectName).map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\ThirdParty\Gsl;$(C74SUPPORT)\max-includes;$(C74SUPPORT)\msp-includes;$(C74SUPPORT)\jit-includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(C74SUPPORT)\max-includes;$(C74SUPPORT)\msp-includes;C:\usr\local\include\gsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling />
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader />
+      <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)$(TargetName).asm</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <FloatingPointModel>Fast</FloatingPointModel>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).mxe64</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;MSVCRT.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <MapFileName>$(IntDir)$(ProjectName).map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;cblas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\usr\local\lib;$(C74SUPPORT)\max-includes\x64;$(C74SUPPORT)\msp-includes\x64;$(C74SUPPORT)\jit-includes\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="..\Sources\Hoa2D\Ambisonic.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\ChannelManager.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Decoder.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Encoder.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Map.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Meter.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Optim.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Planewaves.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Projector.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Recomposer.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Rotate.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Scope.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Vector.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Wider.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Optim_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Planewaves_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Rotate_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Scope_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Vector_3D.cpp" />
+    <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\Source.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\SourcesGroup.cpp" />
+    <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp" />
+    <ClCompile Include="hoa.library.cpp" />
+    <ClCompile Include="hoa.max.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.decoder_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.encoder_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.map_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.meter_gui_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.optim_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.projector_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.recomposer_gui.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.recomposer_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.rotate_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.scope_gui_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.space_gui.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.vector_tilde.cpp" />
+    <ClCompile Include="Max2D\hoa.2d.wider_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.decoder_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.encoder_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.map_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.meter_gui_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.optim_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.scope_gui_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.vector_tilde.cpp" />
+    <ClCompile Include="Max3D\hoa.3d.wider_tilde.cpp" />
+    <ClCompile Include="MaxCommon\AudioFFT.cpp" />
+    <ClCompile Include="MaxCommon\c.convolve_tilde.cpp" />
+    <ClCompile Include="MaxCommon\c.freeverb_tilde.cpp" />
+    <ClCompile Include="MaxCommon\FFTConvolver.cpp" />
+    <ClCompile Include="MaxCommon\hoa.connect.cpp" />
+    <ClCompile Include="MaxCommon\hoa.dac_tilde.c" />
+    <ClCompile Include="MaxCommon\hoa.gain_gui_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.in.cpp" />
+    <ClCompile Include="MaxCommon\hoa.in_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.map_gui.cpp" />
+    <ClCompile Include="MaxCommon\hoa.out.cpp" />
+    <ClCompile Include="MaxCommon\hoa.out_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.pi.cpp" />
+    <ClCompile Include="MaxCommon\hoa.pi_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.play_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.process_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.record_tilde.cpp" />
+    <ClCompile Include="MaxCommon\hoa.thisprocess_tilde.cpp" />
+    <ClCompile Include="MaxCommon\Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\Hoa.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Ambisonic.h" />
+    <ClInclude Include="..\Sources\Hoa2D\ChannelManager.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Decoder.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Encoder.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Hoa2D.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Map.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Meter.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Optim.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Planewaves.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Projector.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Recomposer.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Rotate.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Scope.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Vector.h" />
+    <ClInclude Include="..\Sources\Hoa2D\Wider.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Map_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Meter_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Optim_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Planewaves_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Rotate_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h" />
+    <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h" />
+    <ClInclude Include="..\Sources\HoaCommon\HoaCommon.h" />
+    <ClInclude Include="..\Sources\HoaCommon\Source.h" />
+    <ClInclude Include="..\Sources\HoaCommon\SourcesGroup.h" />
+    <ClInclude Include="..\Sources\HoaCommon\SourcesManager.h" />
+    <ClInclude Include="..\Sources\HoaDefs.h" />
+    <ClInclude Include="..\Sources\HoaMath.h" />
+    <ClInclude Include="..\Sources\HoaUtils.h" />
+    <ClInclude Include="hoa.max.h" />
+    <ClInclude Include="hoa.max_commonsyms.h" />
+    <ClInclude Include="Max2D\Hoa2D.max.h" />
+    <ClInclude Include="Max3D\Hoa3D.max.h" />
+    <ClInclude Include="MaxCommon\AudioFFT.h" />
+    <ClInclude Include="MaxCommon\FFTConvolver.h" />
+    <ClInclude Include="MaxCommon\HoaCommon.max.h" />
+    <ClInclude Include="MaxCommon\HoaProcessSuite.h" />
+    <ClInclude Include="MaxCommon\Utilities.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

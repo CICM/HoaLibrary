@@ -27,6 +27,7 @@ extern "C"
 #include "hoa.max_commonsyms.h"
 #include "../Sources/Hoa.h"
 
+
 #define MAX_CHANNELS SYS_MAXSIGS
 
 #define HOA_UI_BORDERTHICKNESS 1

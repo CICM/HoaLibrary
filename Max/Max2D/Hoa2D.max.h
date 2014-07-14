@@ -10,6 +10,8 @@
 #include "../hoa.max.h"
 #include "../../Sources/Hoa2D/Hoa2D.h"
 
+using namespace Hoa2D;
+
 int hoa_2d_decoder_main();
 int hoa_2d_encoder_main();
 int hoa_2d_map_main();
@@ -23,7 +25,5 @@ int hoa_2d_scope_main();
 int hoa_2d_space_main();
 int hoa_2d_vector_main();
 int hoa_2d_wider_main();
-
-using namespace Hoa2D;
 
 #endif

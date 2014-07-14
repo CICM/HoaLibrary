@@ -24,7 +24,12 @@ static inline double round(double val)
 {    
     return floor(val + 0.5);
 }
+
+#undef min
+#undef max
+
 #endif
+
 //! The high order ambisonic namespace.
 /**
  This namespace have all the standard methods and functions necessary for ambisonic processing.
@@ -36,14 +41,14 @@ namespace Hoa
 
 	 @param     v1   The first value.
 	 @param     v2   The low boundary.
-	 @return    The maximum value.
+	 @return    The minimum value.
 
-	 @see    min
+	 @see    max
      */
 	inline double min(const double v1, const double v2)
 	{
 		if (v1 <= v2)
-			return v1;
+			return v1; 
 		else
 			return v2;
 	}

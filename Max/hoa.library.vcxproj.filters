@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="hoa.library.cpp" />
+    <ClCompile Include="..\Sources\Hoa2D\Ambisonic.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\ChannelManager.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Decoder.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Encoder.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Map.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Meter.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Optim.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Planewaves.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Projector.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Recomposer.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Rotate.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Scope.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Vector.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa2D\Wider.cpp">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Ambisonic_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Decoder_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Encoder_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Map_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Meter_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Optim_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Planewaves_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Rotate_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Scope_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Vector_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\Hoa3D\Wider_3D.cpp">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\Source.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\SourcesGroup.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\HoaCommon\SourcesManager.cpp">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.decoder_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.encoder_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.map_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.meter_gui_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.optim_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.projector_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.recomposer_gui.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.recomposer_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.rotate_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.scope_gui_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.space_gui.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.vector_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max2D\hoa.2d.wider_tilde.cpp">
+      <Filter>Max2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.decoder_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.encoder_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.map_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.meter_gui_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.optim_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.scope_gui_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.vector_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Max3D\hoa.3d.wider_tilde.cpp">
+      <Filter>Max3D</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\AudioFFT.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\c.convolve_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\c.freeverb_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\FFTConvolver.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.connect.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.dac_tilde.c">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.gain_gui_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.in.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.in_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.map_gui.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.out.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.out_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.pi.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.pi_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.play_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.process_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.record_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\hoa.thisprocess_tilde.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxCommon\Utilities.cpp">
+      <Filter>MaxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="hoa.max.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="HoaSources">
+      <UniqueIdentifier>{e99b56a7-7597-4a9e-b015-5ce75630b7aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources\Hoa2d">
+      <UniqueIdentifier>{2409585e-2e1f-460a-8eee-219b57ff7af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources\Hoa3d">
+      <UniqueIdentifier>{f1b819cf-cd7f-41cd-b941-bf24682de183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaSources\HoaCommon">
+      <UniqueIdentifier>{89c62484-dccd-461b-bcf6-fc3cf45838ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Max2D">
+      <UniqueIdentifier>{4c40e046-f7fb-4220-96c0-e73b4c2591d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Max3D">
+      <UniqueIdentifier>{0616288f-7e1c-4733-9b7d-af503519cde9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MaxCommon">
+      <UniqueIdentifier>{13617a7d-7619-40e7-9d65-aaaff53a8308}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\Hoa.h">
+      <Filter>HoaSources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaDefs.h">
+      <Filter>HoaSources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaMath.h">
+      <Filter>HoaSources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaUtils.h">
+      <Filter>HoaSources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Ambisonic.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\ChannelManager.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Decoder.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Encoder.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Hoa2D.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Map.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Meter.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Optim.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Planewaves.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Projector.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Recomposer.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Rotate.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Scope.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Vector.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa2D\Wider.h">
+      <Filter>HoaSources\Hoa2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Ambisonic_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Decoder_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Encoder_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Hoa3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Map_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Meter_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Optim_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Planewaves_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Rotate_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Scope_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Vector_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Hoa3D\Wider_3D.h">
+      <Filter>HoaSources\Hoa3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\HoaCommon.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\Source.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\SourcesGroup.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\HoaCommon\SourcesManager.h">
+      <Filter>HoaSources\HoaCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Max2D\Hoa2D.max.h">
+      <Filter>Max2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Max3D\Hoa3D.max.h">
+      <Filter>Max3D</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxCommon\AudioFFT.h">
+      <Filter>MaxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxCommon\FFTConvolver.h">
+      <Filter>MaxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxCommon\HoaCommon.max.h">
+      <Filter>MaxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxCommon\HoaProcessSuite.h">
+      <Filter>MaxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxCommon\Utilities.h">
+      <Filter>MaxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="hoa.max.h" />
+    <ClInclude Include="hoa.max_commonsyms.h" />
+  </ItemGroup>
+</Project>
