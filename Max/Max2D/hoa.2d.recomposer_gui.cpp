@@ -1136,7 +1136,12 @@ void hoa_2d_recomposer_gui_mousedrag(t_hoa_2d_recomposer_gui *x, t_object *patch
         }
         else // => simply rotate
         {
-            int magnet = (modifiers == 17) ? 1 : 0;
+			#ifdef _WINDOWS
+				int magnet = (modifiers == 21) ? 1 : 0;  // ctrl
+			#else
+				int magnet = (modifiers == 17) ? 1 : 0;  // ctrl
+			#endif
+
             x->f_channels->rotateSelectedChannels(angleDrag, x->f_last_mouseDownOverChannel, magnet);
         }
         

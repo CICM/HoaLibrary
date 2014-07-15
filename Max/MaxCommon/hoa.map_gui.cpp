@@ -2451,7 +2451,7 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 	
 	// check if we wanna constrain drag to cartesian
 #ifdef _WINDOWS
-	if(modifiers == 26 && x->f_mouse_was_dragging) // ??
+	if(modifiers == 24 && x->f_mouse_was_dragging) // alt
 #else
 	if (modifiers == 17 && x->f_mouse_was_dragging) // cmd
 #endif
@@ -2468,9 +2468,9 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
     {
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24) // Alt
+		if(modifiers == 21) // Ctrl
 #else
-		if( (modifiers == 148 || modifiers == 404)) // ctrl
+		if( (modifiers == 148 || modifiers == 404)) // Ctrl
 #endif
 		{
 			switch (x->f_coord_view)
@@ -2508,7 +2508,7 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
 #else
-		else if(modifiers == 18 || modifiers == 274)
+		else if(modifiers == 18 || modifiers == 274) // Shift
 #endif
 		{
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
@@ -2517,7 +2517,7 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 		
 		 // Cartesian constrain
 #ifdef _WINDOWS
-		else if(modifiers == 26) // Shift
+		else if(x->f_cartesian_drag) // Shift
 #else
 		else if (modifiers == 17) // cmd
 #endif
@@ -2570,9 +2570,9 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 
 		// Angle
 #ifdef _WINDOWS
-		if(modifiers == 24) // Alt
+		if(modifiers == 21) // Ctrl
 #else
-		if( (modifiers == 148 || modifiers == 404)) // ctrl
+		if( (modifiers == 148 || modifiers == 404)) // Ctrl
 #endif
 		{
 			switch (x->f_coord_view)
@@ -2654,7 +2654,7 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 		
 		 // Angle + radius
 #ifdef _WINDOWS
-		else if(modifiers == 26) // Shift + alt
+		else if(modifiers == 23) // Shift + Ctrl
 #else
 		else if (modifiers == 150 || modifiers == 406) // Shift + alt (Maj on/off)
 #endif
@@ -2733,7 +2733,7 @@ void hoamap_mousedrag(t_hoa_map *x, t_object *patcherview, t_pt pt, long modifie
 		
 // constrain drag to cartesian
 #ifdef _WINDOWS
-		else if(modifiers == 26) // ??
+		else if(x->f_cartesian_drag) // Alt
 #else
 		else if (modifiers == 17) // cmd
 #endif
