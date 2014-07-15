@@ -22,13 +22,10 @@
 *.suo
 *.cache
 *.unsuccessfulbuild
-*.exp
 *.ilk
 *.rc
 *.manifest
 *.res
-*.obj
-
 
 sysbuild/
 
