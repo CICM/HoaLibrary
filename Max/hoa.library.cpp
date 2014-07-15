@@ -12,12 +12,6 @@ char hoaversion[] = "Beta 2.0";
 
 int C74_EXPORT main(void)
 {
-    /*
-    post("HoaLibrary Version %s (%s)", hoaversion, __DATE__);
-    post("by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-    post("© 2012 - 2014  CICM | Paris 8 University");
-    */
-    
     // HOA COMMON //
     c_convolve_main();
     c_freeverb_main();

@@ -71,16 +71,6 @@
       "MSP"
     ]
   },
-  "hoa.2d.recomposer~": {
-    "digest": "Recomposes a 2d plane wave decomposition into circular harmonics",
-    "module": "hoa",
-    "category": [
-      "ambisonics",
-      "hoa objects",
-      "audio",
-      "MSP"
-    ]
-  },
   "hoa.2d.recomposer": {
     "digest": "A Graphical User Interface to manipulate channels in 2d.",
     "module": "hoa",
@@ -98,6 +88,16 @@
       "action": "hoa.2d.recomposer",
       "pic": "hoa.2d.recomposer.svg"
     }
+  },
+  "hoa.2d.recomposer~": {
+    "digest": "Recomposes a 2d plane wave decomposition into circular harmonics",
+    "module": "hoa",
+    "category": [
+      "ambisonics",
+      "hoa objects",
+      "audio",
+      "MSP"
+    ]
   },
   "hoa.2d.rotate~": {
     "digest": "A 2d ambisonic sound field rotation external",
@@ -252,6 +252,16 @@
       "action": "hoa.3d.scope~",
       "pic": "hoa.3d.scope~.svg"
     }
+  },
+  "hoa.3d.vector~": {
+    "digest": "A 3d soundfield energy and velocity vectors calculator.",
+    "module": "hoa",
+    "category": [
+      "ambisonics",
+      "hoa objects",
+      "audio",
+      "MSP"
+    ]
   },
   "hoa.3d.wider~": {
     "digest": "A 3d fractional ambisonic orders simulator",
@@ -493,20 +503,8 @@
     "category": [
     ]
   },
-  "hoa.receive": {
-    "digest": "A multichannel version of the <o>receive</o> object.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
   "hoa.receive~": {
     "digest": "A multichannel version of the <o>receive~</o> object.",
-    "module": "hoa",
-    "category": [
-    ]
-  },
-  "hoa.send": {
-    "digest": "A multichannel version of the <o>send</o> object.",
     "module": "hoa",
     "category": [
     ]

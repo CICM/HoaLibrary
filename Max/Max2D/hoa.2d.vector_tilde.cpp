@@ -80,14 +80,12 @@ int C74_EXPORT main(void)
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", channels_get, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
-    CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
 	// @description The number of channels.
     
     CLASS_ATTR_DOUBLE               (c, "offset", 0, t_hoa_2d_vector, f_attrs);
 	CLASS_ATTR_CATEGORY             (c, "offset", 0, "Planewaves");
     CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
-    CLASS_ATTR_DEFAULT              (c, "offset", 0, "0");
     CLASS_ATTR_ORDER                (c, "offset", 0, "2");
 	// @description The offset of the channels.
     
@@ -112,11 +110,11 @@ void *hoa_2d_vector_new(t_symbol *s, long argc, t_atom *argv)
 	// @description First argument sets the number of channels.
 	
 	t_hoa_2d_vector *x = NULL;
-    long number_of_channels = 4;
     x = (t_hoa_2d_vector *)object_alloc(hoa_2d_vector_class);
     
 	if(x)
 	{
+        long number_of_channels = 4;
         if (argc && atom_gettype(argv) == A_LONG)
             number_of_channels = clip_min(atom_getlong(argv), 1);
         

@@ -10,7 +10,7 @@
 	</digest>
 
 	<description>
-		<o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
+		<o>hoa.2d.vector~</o> computes the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
 	</description>
 
 	<!--METADATA-->
@@ -58,9 +58,7 @@
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
-				<attribute name="default" get="1" set="1" type="float_array" size="0" value="0. 90. 180. 270." />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Angles of Channels" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
@@ -73,9 +71,7 @@
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
-				<attribute name="default" get="1" set="1" type="int" size="1" value="4" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Number of Channels" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
@@ -88,9 +84,7 @@
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Planewaves" />
-				<attribute name="default" get="1" set="1" type="float" size="1" value="0" />
 				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Offset of Channels" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>
@@ -98,7 +92,7 @@
 
 	<!--DISCUSSION-->
 	<discussion>
-		<o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
+		<o>hoa.2d.vector~</o> computes the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
 	</discussion>
 
 	<!--SEEALSO-->
@@ -111,7 +105,7 @@
 	<misc name = "Discussion">
 		<entry name ="More details">
 			<description>
-		<o>hoa.2d.vector~</o> displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
+		<o>hoa.2d.vector~</o> computes the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.
 			</description>
 		</entry>
 		<entry name ="Keywords">

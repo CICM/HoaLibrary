@@ -130,14 +130,6 @@
 		<seealso name="hoa.in" />
 	</seealsolist>
 
-	<misc name = "Input">
-		<entry name ="Inlet 1 (message)">
-			<description>
-				output messages to a hoa.process~ object's outlet.
-			</description>
-		</entry>
-	</misc>
-
 	<misc name = "Discussion">
 		<entry name ="More details">
 			<description>

@@ -97,21 +97,6 @@
 
 	<!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="outonload" get="1" set="1" type="int" size="1">
-			<digest>
-				Output value on load
-			</digest>
-			<description>
-				If the <b>outonload</b> is checked, <o>hoa.pi</o> object will send value at loadbang time.
-			</description>
-			<attributelist>
-				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="default" get="1" set="1" type="int" size="1" value="0" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Output value on load" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="onoff" />
-			</attributelist>
-		</attribute>
 	</attributelist>
 
 	<!--DISCUSSION-->
@@ -123,22 +108,6 @@
 	<seealsolist>
 		<seealso name="hoa.pi~" />
 	</seealsolist>
-
-	<misc name = "Input">
-		<entry name ="Inlet 1 (bang/int/float)">
-			<description>
-				bang to output π, set the π multiplier.
-			</description>
-		</entry>
-	</misc>
-
-	<misc name = "Output">
-		<entry name ="Outlet 1 (float)">
-			<description>
-				output result.
-			</description>
-		</entry>
-	</misc>
 
 	<misc name = "Discussion">
 		<entry name ="More details">

@@ -69,6 +69,8 @@ int C74_EXPORT main(void)
     
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+    // @method signal @digest Array of channels signals.
+	// @description Array of channels signals.
 	class_addmethod(c, (method)hoa_3d_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_3d_vector_assist,   "assist",	A_CANT, 0);
 	
@@ -87,6 +89,9 @@ int C74_EXPORT main(void)
 
 void *hoa_3d_vector_new(t_symbol *s, long argc, t_atom *argv)
 {
+    // @arg 0 @name number-of-channels @optional 0 @type int @digest The number of channels
+	// @description First argument sets the number of channels.
+    
 	t_hoa_3d_vector *x = NULL;
 	int	number_of_channels = 1;
     int mode = 1;

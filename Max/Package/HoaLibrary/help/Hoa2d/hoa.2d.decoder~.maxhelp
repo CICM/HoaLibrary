@@ -189,7 +189,7 @@
 									"numoutlets" : 6,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 164.967712, 325.0, 279.080719, 19.0 ]
+									"patching_rect" : [ 164.967712, 331.0, 279.080719, 19.0 ]
 								}
 
 							}
@@ -2598,20 +2598,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-12",
+									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 5,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 164.967712, 293.0, 227.064575, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
-										"autoconnect" : 1,
-										"channels" : 5,
-										"mode" : "irregular",
-										"pinna" : "small"
-									}
-,
-									"text" : "hoa.2d.decoder~ 7 @mode irregular"
+									"patching_rect" : [ 164.967712, 293.0, 227.064575, 32.0 ],
+									"text" : "hoa.2d.decoder~ 7 @mode irregular @channels 5 @angles 0 30 110 250 330"
 								}
 
 							}
@@ -3268,46 +3261,15 @@
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.0,
+									"fontsize" : 11.595187,
 									"frgb" : 0.0,
-									"id" : "obj-1",
+									"id" : "obj-4",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 451.5, 132.0, 250.0, 47.0 ],
-									"text" : "Important : We use the matrice optimization that depends on the signal vector size that should be at least 256 sample.",
-									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[3]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"id" : "obj-2",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 451.5, 132.0, 250.0, 47.0 ],
-									"rounded" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-4",
-									"linecount" : 6,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 373.935425, 261.0, 84.0 ],
-									"text" : "Note that Kemar mannequins are not humans and every heads are differents thus binaural resittution doesn't work for everybody. Optimization can be useless for a binaural decoding and can create artefacts like unwanted filtering. ",
+									"patching_rect" : [ 447.5, 406.935425, 261.0, 45.0 ],
+									"text" : "Optimization can be useless for a binaural decoding and can create artefacts like unwanted filtering. ",
 									"textcolor" : [ 0.301961, 0.301961, 0.301961, 1.0 ]
 								}
 
@@ -3332,12 +3294,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-60",
-									"linecount" : 4,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 220.5, 258.0, 60.0 ],
-									"text" : "The only attribute of the binaural decoding is the pinnasize : small (default) or large. It corresponds to piannae of Kemar mannequins used to create Hrtf.",
+									"patching_rect" : [ 447.5, 220.5, 258.0, 33.0 ],
+									"text" : "The only attribute of the binaural decoding is the pinna size : small (default) or large.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
 								}
@@ -3352,7 +3314,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 220.5, 258.0, 60.0 ],
+									"patching_rect" : [ 447.5, 220.5, 258.0, 33.0 ],
 									"rounded" : 0
 								}
 
@@ -5544,12 +5506,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-18",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 600.0, 33.0 ],
-									"text" : "hoa.2d.decoder~ virtualizes ambisonics soundfield for a headphone. It uses hrtf to perform FIR filtering on the incoming signal. Hrtf are extracted from the \"MIT hrtf database\". Binaural works up to the order 35.",
+									"patching_rect" : [ 6.4375, 67.5, 373.0, 20.0 ],
+									"text" : "hoa.2d.decoder~ virtualizes ambisonics soundfield for a headphone.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -5564,7 +5525,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 600.0, 33.0 ],
+									"patching_rect" : [ 6.4375, 67.5, 483.0, 20.0 ],
 									"rounded" : 0
 								}
 
@@ -5765,14 +5726,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 294.0, 227.064575, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 90.0, 270.0 ],
-										"autoconnect" : 1,
-										"channels" : 2,
-										"mode" : "binaural",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 @mode binaural"
 								}
 
@@ -5801,7 +5754,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.5, 374.032288, 261.0, 83.903137 ],
+									"patching_rect" : [ 447.5, 407.032288, 261.0, 44.903137 ],
 									"rounded" : 0
 								}
 
@@ -6214,7 +6167,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 278.5, 351.0, 382.532288, 351.0 ],
+									"midpoints" : [ 278.5, 351.0, 382.532287, 351.0 ],
 									"source" : [ "obj-40", 1 ]
 								}
 
@@ -6452,7 +6405,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 471.0, 161.0, 95.0, 19.0 ],
+									"patching_rect" : [ 471.0, 176.0, 95.0, 19.0 ],
 									"text" : "loadmess set 16"
 								}
 
@@ -6466,7 +6419,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 471.0, 227.0, 86.0, 19.0 ],
+									"patching_rect" : [ 471.0, 231.0, 86.0, 19.0 ],
 									"text" : "speedlim 1000"
 								}
 
@@ -6482,7 +6435,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 471.0, 183.0, 50.0, 19.0 ]
+									"patching_rect" : [ 471.0, 198.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -6872,14 +6825,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 293.0, 227.064575, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 @mode ambisonics"
 								}
 
@@ -7283,7 +7228,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 480.5, 285.0, 382.532288, 285.0 ],
+									"midpoints" : [ 480.5, 285.0, 382.532287, 285.0 ],
 									"source" : [ "obj-36", 0 ]
 								}
 
@@ -8396,14 +8341,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 294.0, 227.064575, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7"
 								}
 

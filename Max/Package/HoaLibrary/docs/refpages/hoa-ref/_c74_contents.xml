@@ -6,8 +6,8 @@
 <refpage name='hoa.2d.meter~.maxref.xml'/>
 <refpage name='hoa.2d.optim~.maxref.xml'/>
 <refpage name='hoa.2d.projector~.maxref.xml'/>
-<refpage name='hoa.2d.recomposer~.maxref.xml'/>
 <refpage name='hoa.2d.recomposer.maxref.xml'/>
+<refpage name='hoa.2d.recomposer~.maxref.xml'/>
 <refpage name='hoa.2d.rotate~.maxref.xml'/>
 <refpage name='hoa.2d.scope~.maxref.xml'/>
 <refpage name='hoa.2d.space.maxref.xml'/>
@@ -19,6 +19,7 @@
 <refpage name='hoa.3d.meter~.maxref.xml'/>
 <refpage name='hoa.3d.optim~.maxref.xml'/>
 <refpage name='hoa.3d.scope~.maxref.xml'/>
+<refpage name='hoa.3d.vector~.maxref.xml'/>
 <refpage name='hoa.3d.wider~.maxref.xml'/>
 <refpage name='c.convolve~.maxref.xml'/>
 <refpage name='c.freeverb~.maxref.xml'/>
@@ -45,9 +46,7 @@
 <refpage name='hoa.fx.mirror~.maxref.xml'/>
 <refpage name='hoa.fx.mixer~.maxref.xml'/>
 <refpage name='hoa.fx.ringmod~.maxref.xml'/>
-<refpage name='hoa.receive.maxref.xml'/>
 <refpage name='hoa.receive~.maxref.xml'/>
-<refpage name='hoa.send.maxref.xml'/>
 <refpage name='hoa.send~.maxref.xml'/>
 <refpage name='hoa.syn.decorrelation~.maxref.xml'/>
 <refpage name='hoa.syn.delay~.maxref.xml'/>

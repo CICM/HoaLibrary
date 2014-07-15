@@ -99,16 +99,14 @@
 	<attributelist>
 		<attribute name="ramp" get="1" set="1" type="float" size="1">
 			<digest>
-				Ramp Time in milliseconds
+				Ramp Time (ms)
 			</digest>
 			<description>
 				Ramp time in millisecond.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="default" get="1" set="1" type="float" size="1" value="100" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Ramp Time in milliseconds" />
-				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Ramp Time (ms)" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="text" />
 			</attributelist>
 		</attribute>

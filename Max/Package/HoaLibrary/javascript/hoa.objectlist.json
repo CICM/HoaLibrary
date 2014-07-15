@@ -32,6 +32,7 @@
 		"hoa.3d.optim~",
 		"hoa.3d.process~",
 		"hoa.3d.scope~",
+		"hoa.3d.vector~",
 		"hoa.3d.wider~"
     	],
     	"description" : "The 3-D ambisonic and planewaves objects."
