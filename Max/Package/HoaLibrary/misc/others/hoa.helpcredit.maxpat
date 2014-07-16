@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -66,7 +66,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 311.0, 373.0, 204.0, 20.0 ],
-					"text" : "presentation_rect 1. 1. 322. 32."
+					"text" : "presentation_rect 1. 1. 328. 32."
 				}
 
 			}
@@ -110,8 +110,8 @@
 					"patching_rect" : [ 1.0, 1.0, 543.0, 19.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
-					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM | University Paris 8",
+					"presentation_rect" : [ 1.0, 1.0, 328.0, 32.0 ],
+					"text" : "HoaLibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM | University Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
 
@@ -126,7 +126,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1.0, 1.0, 543.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.0, 1.0, 322.0, 32.0 ],
+					"presentation_rect" : [ 1.0, 1.0, 328.0, 32.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
