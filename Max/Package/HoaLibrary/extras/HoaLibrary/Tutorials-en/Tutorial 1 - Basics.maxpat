@@ -46,7 +46,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 848.0, 780.0 ],
+						"rect" : [ 154.0, 72.0, 848.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -77,7 +77,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.724976, 567.0, 25.0, 20.0 ],
-									"text" : "=>"
+									"text" : " ="
 								}
 
 							}
@@ -90,8 +90,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 703.5, 567.0, 19.0, 20.0 ],
-									"text" : "="
+									"patching_rect" : [ 698.5, 567.0, 19.0, 20.0 ],
+									"text" : "or"
 								}
 
 							}
@@ -160,8 +160,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 495.449951, 567.0, 48.0, 20.0 ],
-									"text" : "degree"
+									"patching_rect" : [ 492.449951, 567.0, 54.0, 20.0 ],
+									"text" : "degrees"
 								}
 
 							}
@@ -203,7 +203,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.724976, 339.0, 25.0, 20.0 ],
-									"text" : "=>"
+									"text" : " ="
 								}
 
 							}
@@ -216,8 +216,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 703.5, 339.0, 19.0, 20.0 ],
-									"text" : "="
+									"patching_rect" : [ 698.5, 339.0, 19.0, 20.0 ],
+									"text" : "or"
 								}
 
 							}
@@ -316,8 +316,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 495.449951, 339.0, 48.0, 20.0 ],
-									"text" : "degree"
+									"patching_rect" : [ 492.449951, 339.0, 54.0, 20.0 ],
+									"text" : "degrees"
 								}
 
 							}
@@ -1284,7 +1284,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 154.0, 72.0, 848.0, 780.0 ],
+						"rect" : [ 0.0, 26.0, 848.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
