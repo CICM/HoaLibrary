@@ -216,7 +216,7 @@ t_pd_err angles_set(t_hoa_decoder *x, void *attr, long argc, t_atom *argv)
                     angles[i] = x->f_decoder->getChannelAzimuth(i);
             }
             
-            x->f_decoder->setChannelsAzimtuh(angles);
+            x->f_decoder->setChannelsAzimuth(angles);
             free(angles);
             canvas_resume_dsp(dspState);
         }
