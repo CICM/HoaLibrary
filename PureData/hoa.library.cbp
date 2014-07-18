@@ -19,15 +19,15 @@
 					<Add option="-fPIC" />
 					<Add option="-fpermissive" />
 					<Add option="-D_LINUX" />
-					<Add directory="/usr/lib/openBlas/lib/" />
-					<Add directory="/usr/lib/openBlas/include/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/lib/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/include/" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-fPIC" />
-					<Add library="/usr/lib/openBlas/lib/libopenblas.a" />
-					<Add directory="/usr/lib/openBlas/lib/" />
-					<Add directory="/usr/lib/openBlas/include/" />
+					<Add library="../ThirdParty/CBlas/Linux64/lib/libopenblas.a" />
+					<Add directory="../ThirdParty/CBlas/Linux64/lib/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/include/" />
 				</Linker>
 			</Target>
 			<Target title="Release32">
@@ -69,15 +69,15 @@
 					<Add option="-fpermissive" />
 					<Add option="-D_LINUX" />
 					<Add option="-DPD_EXTENTED=1" />
-					<Add directory="/usr/lib/openBlas/lib/" />
-					<Add directory="/usr/lib/openBlas/include/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/lib/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/include/" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-fPIC" />
-					<Add library="/usr/lib/openBlas/lib/libopenblas.a" />
-					<Add directory="/usr/lib/openBlas/lib/" />
-					<Add directory="/usr/lib/openBlas/include/" />
+					<Add library="../ThirdParty/CBlas/Linux64/lib/libopenblas.a" />
+					<Add directory="../ThirdParty/CBlas/Linux64/lib/" />
+					<Add directory="../ThirdParty/CBlas/Linux64/include/" />
 				</Linker>
 			</Target>
 			<Target title="Release32_extented">
