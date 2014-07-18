@@ -43,15 +43,16 @@
 					<Add option="-fPIC" />
 					<Add option="-m32" />
 					<Add option="-D_LINUX" />
-					<Add directory="../../../SDKs/pd-extended/pd/src" />
+					<Add directory="../ThirdParty/CBlas/Linux32/lib" />
+					<Add directory="../ThirdParty/CBlas/Linux32/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-fPIC" />
 					<Add option="-m32" />
-					<Add library="/usr/lib/libgoto2_nehalemp-r1.13.a" />
-					<Add directory="../../../SDKs/pd-extended/pd/src" />
-					<Add directory="/user/include" />
+					<Add library="../ThirdParty/CBlas/Linux32/lib/libopenblas.a" />
+					<Add directory="../ThirdParty/CBlas/Linux32/lib" />
+					<Add directory="../ThirdParty/CBlas/Linux32/include" />
 				</Linker>
 			</Target>
 			<Target title="Release_extented">
@@ -77,6 +78,32 @@
 					<Add library="/usr/lib/openBlas/lib/libopenblas.a" />
 					<Add directory="/usr/lib/openBlas/lib/" />
 					<Add directory="/usr/lib/openBlas/include/" />
+				</Linker>
+			</Target>
+			<Target title="Release32_extented">
+				<Option output="Package/HoaLibrary/Linux32/pd-extented/$(PROJECT_NAME).pd_linux" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="Linux" />
+				<Option object_output="Linux" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-fPIC" />
+					<Add option="-m32" />
+					<Add option="-D_LINUX" />
+					<Add option="-DPD_EXTENTED=1" />
+					<Add directory="../ThirdParty/CBlas/Linux32/lib" />
+					<Add directory="../ThirdParty/CBlas/Linux32/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fPIC" />
+					<Add option="-m32" />
+					<Add library="../ThirdParty/CBlas/Linux32/lib/libopenblas.a" />
+					<Add directory="../ThirdParty/CBlas/Linux32/lib" />
+					<Add directory="../ThirdParty/CBlas/Linux32/include" />
 				</Linker>
 			</Target>
 		</Build>
