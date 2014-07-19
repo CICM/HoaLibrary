@@ -77,7 +77,7 @@ int C74_EXPORT main(void)
     // @method dblclick @digest Compute and output result
 	// @description The <m>dblclick</m> on the object compute and output result
 	class_addmethod(c, (method)hoa_pi_bang,		"dblclick",	A_CANT, 0);
-	
+
 	class_register(CLASS_BOX, c);
 	hoa_pi_class = c;
 	return 0;

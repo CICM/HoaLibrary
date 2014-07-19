@@ -92,6 +92,9 @@ void *hoa_3d_vector_new(t_symbol *s, long argc, t_atom *argv)
     // @arg 0 @name number-of-channels @optional 0 @type int @digest The number of channels
 	// @description First argument sets the number of channels.
     
+    // @arg 1 @name vector-type @optional 1 @type symbol @digest The number of channels
+	// @description second argument sets the type of vector to compute (energy or velocity)
+    
 	t_hoa_3d_vector *x = NULL;
 	int	number_of_channels = 1;
     int mode = 1;

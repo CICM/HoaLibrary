@@ -33,11 +33,14 @@ void hoa_print_credit()
 
 t_hoa_err hoa_initclass(t_class* c, method hoa_getinfos_method)
 {
+    schedule_delay(NULL, (method)hoa_print_credit, 5000, NULL, NULL, NULL);
+/*
 #ifdef _WINDOWS
 		schedule_delay(NULL, (method)hoa_print_credit, 5000, NULL, NULL, NULL);
 #else
 		defer_low(NULL, (method)hoa_print_credit, NULL, NULL, NULL);
 #endif
+*/
 	
 	class_addmethod(c, (method)method_true, "is_hoa", A_CANT, 0);
 

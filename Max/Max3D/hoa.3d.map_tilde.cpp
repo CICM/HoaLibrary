@@ -645,26 +645,26 @@ void hoa_3d_map_assist(t_hoa_3d_map *x, void *b, long m, long a, char *s)
         if(x->f_map->getNumberOfSources() == 1)
         {
             if(a == 0)
-                sprintf(s,"(Signal) Input");
+                sprintf(s,"(signal) Input");
             else if(a == 1)
-                sprintf(s,"(Signal or float) Radius");
+                sprintf(s,"(signal/float) Radius");
             else if(a == 2)
-                sprintf(s,"(Signal or float) Azimuth");
+                sprintf(s,"(signal/float) Azimuth");
             else
-                sprintf(s,"(Signal or float) Elevation");
+                sprintf(s,"(signal/float) Elevation");
         }
         else
         {
             if(a == 0)
-                sprintf(s,"(Signal and messages) Input 0 and sources coordinates");
+                sprintf(s,"(signal and messages) Input 0 and sources coordinates");
             else
-                sprintf(s,"(Signal or float) Input %ld", a);
+                sprintf(s,"(signal/float) Input %ld", a);
         }
         
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_map->getHarmonicName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_map->getHarmonicName(a).c_str());
 	}
 }
 

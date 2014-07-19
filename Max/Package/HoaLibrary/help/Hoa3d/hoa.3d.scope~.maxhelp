@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 646.0, 701.0 ],
+		"rect" : [ 100.0, 45.0, 637.0, 735.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 646.0, 675.0 ],
+						"rect" : [ 100.0, 71.0, 637.0, 709.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -72,6 +72,88 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"args" : [ "@size", 0 ],
+									"id" : "obj-58",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 31.0, 673.0, 548.0, 23.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"hidden" : 1,
+									"id" : "obj-18",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 418.25, 524.0, 70.0, 19.0 ],
+									"text" : "loadmess 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"autoscroll" : 0,
+									"border" : 1.0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-13",
+									"maxclass" : "textedit",
+									"numinlets" : 1,
+									"numoutlets" : 4,
+									"outlettype" : [ "", "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 507.0, 552.0, 78.0, 18.0 ],
+									"readonly" : 1,
+									"text" : "Front"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "preset",
+									"numinlets" : 1,
+									"numoutlets" : 4,
+									"outlettype" : [ "preset", "int", "preset", "int" ],
+									"patching_rect" : [ 418.25, 552.0, 78.0, 17.0 ],
+									"preset_data" : [ 										{
+											"number" : 1,
+											"data" : [ 5, "obj-13", "textedit", "set", "Front", 5, "obj-28", "number~", "list", 0.0, 5, "obj-9", "number~", "list", 0.0 ]
+										}
+, 										{
+											"number" : 2,
+											"data" : [ 5, "obj-13", "textedit", "set", "Left", 5, "obj-28", "number~", "list", 0.0, 5, "obj-9", "number~", "list", 0.5 ]
+										}
+, 										{
+											"number" : 3,
+											"data" : [ 5, "obj-13", "textedit", "set", "Back", 5, "obj-28", "number~", "list", 0.0, 5, "obj-9", "number~", "list", 1.0 ]
+										}
+, 										{
+											"number" : 4,
+											"data" : [ 5, "obj-13", "textedit", "set", "Right", 5, "obj-28", "number~", "list", 0.0, 5, "obj-9", "number~", "list", -0.5 ]
+										}
+, 										{
+											"number" : 5,
+											"data" : [ 5, "obj-13", "textedit", "set", "Top", 5, "obj-28", "number~", "list", 0.5, 5, "obj-9", "number~", "list", 0.0 ]
+										}
+, 										{
+											"number" : 6,
+											"data" : [ 5, "obj-13", "textedit", "set", "Bottom", 5, "obj-28", "number~", "list", -0.5, 5, "obj-9", "number~", "list", 0.0 ]
+										}
+ ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
@@ -79,8 +161,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 418.25, 507.0, 177.0, 20.0 ],
-									"presentation_rect" : [ 402.25, 512.0, 0.0, 0.0 ],
+									"patching_rect" : [ 418.25, 513.0, 177.0, 20.0 ],
 									"text" : "View from the top of the sphere",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[5]"
@@ -96,8 +177,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 418.25, 507.0, 177.0, 20.0 ],
-									"presentation_rect" : [ 402.25, 512.0, 0.0, 0.0 ],
+									"patching_rect" : [ 418.25, 513.0, 177.0, 20.0 ],
 									"rounded" : 0
 								}
 
@@ -113,7 +193,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 193.0, 110.0, 56.0, 19.0 ],
-									"presentation_rect" : [ 193.0, 115.0, 0.0, 0.0 ],
 									"sig" : 0.0
 								}
 
@@ -167,6 +246,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"ft1" : 5.0,
 									"id" : "obj-28",
 									"maxclass" : "number~",
 									"mode" : 1,
@@ -174,7 +254,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 355.0, 110.0, 56.0, 19.0 ],
-									"sig" : -0.01
+									"sig" : 0.0
 								}
 
 							}
@@ -188,7 +268,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 418.25, 280.0, 194.0, 33.0 ],
+									"patching_rect" : [ 418.25, 280.0, 195.0, 33.0 ],
 									"text" : "gain attr can be usefull to visualize soundfield with low amplitude.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -291,7 +371,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 78.0, 70.0, 19.0 ],
+									"patching_rect" : [ 31.0, 87.5, 70.0, 19.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -321,7 +401,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 465.0, 120.0, 70.0, 19.0 ],
+									"patching_rect" : [ 465.0, 130.0, 70.0, 19.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -801,6 +881,33 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-13", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-28", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-7", 24 ],
 									"disabled" : 0,
@@ -1046,6 +1153,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-17", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-18", 0 ]
 								}
 
 							}
@@ -1731,7 +1847,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 646.0, 675.0 ],
+						"rect" : [ 0.0, 26.0, 637.0, 709.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -1789,6 +1905,13 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpcredit.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{

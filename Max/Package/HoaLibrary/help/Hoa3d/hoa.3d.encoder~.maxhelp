@@ -97,7 +97,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 121.625, 321.5, 56.0, 19.0 ],
-									"presentation_rect" : [ 192.0, 324.5, 0.0, 0.0 ],
 									"sig" : 0.0
 								}
 
@@ -362,7 +361,7 @@
 									"name" : "hoa.helpcredit.maxpat",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 498.5, 16.5, 326.0, 35.0 ]
+									"patching_rect" : [ 498.5, 16.5, 331.0, 35.0 ]
 								}
 
 							}

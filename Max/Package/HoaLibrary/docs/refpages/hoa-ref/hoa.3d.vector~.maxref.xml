@@ -32,6 +32,14 @@
 				First argument sets the number of channels.
 			</description>
 		</objarg>
+		<objarg name="vector-type" optional="1" type="symbol">
+			<digest>
+				The number of channels
+			</digest>
+			<description>
+				second argument sets the type of vector to compute (energy or velocity)
+			</description>
+		</objarg>
 	</objarglist>
 
 	<!--MESSAGES-->

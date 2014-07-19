@@ -419,6 +419,10 @@ t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
 					
 					if(dspState)
 						object_method(gensym("dsp")->s_thing, hoa_sym_start);
+                    
+                    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
+                    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+                    jbox_redraw((t_jbox *)x);
 				}
             }
         }
@@ -502,23 +506,22 @@ t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 	if(argc && argv)
     {
         double ax, ay, az;
-        if(atom_gettype(argv) == A_FLOAT)
+        if(atom_isNumber(argv))
             ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
             ax = x->f_meter->getChannelsRotationX();
-        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+        if(argc > 1 && atom_isNumber(argv+1))
             ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
             ay = x->f_meter->getChannelsRotationX();
-        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+        if(argc > 2 && atom_isNumber(argv+2))
             az = atom_getfloat(argv+2) / 360. * HOA_2PI;
         else
             az = x->f_meter->getChannelsRotationX();
 				
         x->f_meter->setChannelsRotation(ax, ay, az);
         x->f_vector->setChannelsRotation(ax, ay, az);
-				
-		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
+        
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
 		jbox_redraw((t_jbox *)x);
@@ -542,7 +545,7 @@ t_max_err vectors_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv
             else
                 x->f_vector_type = hoa_sym_3d_none;
         }
-        else if(atom_gettype(argv) == A_FLOAT)
+        else if(atom_isNumber(argv))
         {
             if(atom_getlong(argv) == 1)
                 x->f_vector_type = hoa_sym_3d_energy;
@@ -554,6 +557,7 @@ t_max_err vectors_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv
                 x->f_vector_type = hoa_sym_3d_none;
         }
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+        jbox_redraw((t_jbox *)x);
     }
     return 0;
 }
@@ -569,13 +573,17 @@ t_max_err rotation_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
             else
                 x->f_clockwise = hoa_sym_3d_anticlock;
         }
-        else if(atom_gettype(argv) == A_FLOAT)
+        else if(atom_isNumber(argv))
         {
             if(atom_getlong(argv) == 1)
                 x->f_clockwise = hoa_sym_3d_clockwise;
             else
                 x->f_clockwise = hoa_sym_3d_anticlock;
         }
+        
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+		jbox_redraw((t_jbox *)x);
     }
     return 0;
 }
@@ -596,7 +604,7 @@ t_max_err view_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
             else
                 view = hoa_sym_3d_top;
         }
-        else if(atom_gettype(argv) == A_FLOAT)
+        else if(atom_isNumber(argv))
         {
             if(atom_getlong(argv) == 1)
                 view = hoa_sym_3d_bottom;
@@ -613,6 +621,11 @@ t_max_err view_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 			jbox_set_patching_rect((t_object*)x, &x->f_rect);
 			jbox_set_presentation_rect((t_object*)x, &x->f_presentation_rect);
         }
+        
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+        jbox_redraw((t_jbox *)x);
     }
     return MAX_ERR_NONE;
 }

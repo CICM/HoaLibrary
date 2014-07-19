@@ -90,13 +90,13 @@ public:
          @see       getHarmonicOrder()
          @see       getHarmonicName()
          */
-        inline unsigned int getHarmonicIndex(const int order) const
+        inline unsigned int getHarmonicIndex(const int harmOrder) const
         {
-            assert(order >= getDecompositionOrder() && order <= -getDecompositionOrder());
-            if(order < 0)
-                return -order * 2 - 1;
+            assert(abs(harmOrder) <= getDecompositionOrder());
+            if(harmOrder < 0)
+                return -harmOrder * 2 - 1;
             else
-                return order * 2;
+                return harmOrder * 2;
         };
         
         //! Retrieve a name for an harmonic.
