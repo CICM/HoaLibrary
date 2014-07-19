@@ -83,8 +83,8 @@ namespace Hoa3D
         
         //! Retrieve the index of an harmonic.
         /** The degree of the harmonics are in the range 0 to the decomposition order. Each degree contains 2 * degree + 1 harmonics in the range -degree to degree. The harmonic input and output arrays in process method of ambisonic classes must have this configuration.
-         For the first bands, the harmonics arrangement is h[0, 0] h[1, 0] h[1, -1] h[1, 1] h[2, 0] h[2, -1] h[2, 1] h[2, -2] h[2, 2] etc.
-         with h[band, argument].
+         For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc.
+         with h[degree, order].
          
          @param     degree	The degree an harmonic.
          @param     order	The order an harmonic.
@@ -95,11 +95,7 @@ namespace Hoa3D
         inline unsigned int getHarmonicIndex(const unsigned int degree, const int order) const
         {
             assert(degree <= m_order);
-            //assert(order <= degree && order >= -degree);
-            if(order < 0)
-                return -order * 2 - 1 + degree * degree;
-            else
-                return order * 2 + degree * degree;
+            return degree * degree + degree + order;
         };
         
         //! Retrieve a name for an harmonic.
