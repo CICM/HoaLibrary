@@ -6,10 +6,6 @@
 
 #include "HoaCommon.pd.h"
 #define DEFDACBLKSIZE 64
-extern "C"
-{
-EXTERN t_sample *sys_soundout;
-}
 
 typedef struct _hoa_dac
 {
