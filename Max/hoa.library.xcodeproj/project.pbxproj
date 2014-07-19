@@ -124,7 +124,6 @@
 		2CE933C1196EBBA00079A368 /* HoaMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE9337E196EBBA00079A368 /* HoaMath.h */; };
 		2CE933C2196EBBA00079A368 /* HoaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE9337F196EBBA00079A368 /* HoaUtils.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
-		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,7 +245,6 @@
 		2CE9337F196EBBA00079A368 /* HoaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaUtils.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.library.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.library.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CE93335196EBA530079A368 /* MaxAudioAPI.framework in Frameworks */,
-				8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */,
 				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +273,6 @@
 				2CE93339196EBBA00079A368 /* Sources */,
 				2CE9332C196EB7A30079A368 /* MaxHoaLibrary.xcconfig */,
 				2CE93334196EBA530079A368 /* MaxAudioAPI.framework */,
-				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
 				8F18A8BD17287341005FD621 /* Accelerate.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -664,22 +660,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2CE9332C196EB7A30079A368 /* MaxHoaLibrary.xcconfig */;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
-					/Developer/usr/local/boost_1_48_0,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					Developer/usr/lib,
 				);
-				OTHER_LDFLAGS = (
-					libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
@@ -691,22 +681,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2CE9332C196EB7A30079A368 /* MaxHoaLibrary.xcconfig */;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
-					/Developer/usr/local/boost_1_48_0,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					Developer/usr/lib,
 				);
-				OTHER_LDFLAGS = (
-					libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;

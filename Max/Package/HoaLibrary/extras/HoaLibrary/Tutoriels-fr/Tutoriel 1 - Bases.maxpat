@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 227.0, 44.0, 896.0, 797.0 ],
+		"rect" : [ 451.0, 130.0, 896.0, 797.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -1284,7 +1284,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 227.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4037,7 +4037,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
+						"rect" : [ 451.0, 156.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4470,8 +4470,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 77.0, 823.0, 149.0 ],
-									"text" : "L'ordre de décomposition influence la qualité de resititution du champ sonore. Plus l'ordre de décomposition est élevé, plus le champ sonore est représenté par un nombre important d'harmoniques circulaires et plus la \"résolution spatiale\" du champ sonore augmente. \n\nLa \"qualité\" ou la \"pertinence\" des traitements ambisoniques varie en fonction de la résolution spatiale. Lors de l'encodage d'une source sonore dans le domaine des harmoniques circulaires, la précision avec laquelle l'auditeur perçoit une source sonore dépend ainsi de la résolution spatiale du champ sonore. \n\nPlus l'ordre de décomposition augmente, plus l'auditeur pourra définir avec précision la direction d'une source sonore. Il est d'usage de parler de \"résolution angulaire\" afin de qualifier la précision avec laquelle l'auditeur perçoit une source sonore.\n\nLa \"résolution spatiale\" est une notion plus générale permettant de qualifier des champs sonores plus variés et plus complexes où le champ sonore n'est pas forcément composé de sources sonores ponctuelles sur lesquelles nous reviendrons par la suite.",
+									"patching_rect" : [ 7.0, 77.0, 828.0, 149.0 ],
+									"text" : "L'ordre de décomposition influence la qualité de restitution du champ sonore. Plus l'ordre de décomposition est élevé, plus le champ sonore est représenté par un nombre important d'harmoniques circulaires et plus la \"résolution spatiale\" du champ sonore augmente. \n\nLa \"qualité\" des traitements ambisoniques varie en fonction de la résolution spatiale. Lors de l'encodage d'une source sonore dans le domaine des harmoniques circulaires, la précision avec laquelle l'auditeur perçoit une source sonore dépend ainsi de la résolution spatiale du champ sonore. \n\nPlus l'ordre de décomposition augmente, plus l'auditeur pourra définir avec précision la direction d'une source sonore. Il est d'usage de parler de \"résolution angulaire\" afin de qualifier la précision avec laquelle l'auditeur perçoit une source sonore.\n\nLa \"résolution spatiale\" est une notion plus générale permettant de qualifier des champs sonores plus variés et plus complexes où le champ sonore n'est pas forcément composé de sources sonores ponctuelles sur lesquelles nous reviendrons par la suite.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -7934,7 +7934,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 68.0, 823.0, 227.0 ],
-									"text" : "Les harmoniques circulaires sont des fonctions spatiales dépendant d’un ordre n et d’un indice i et prennent en variable un angle α en radian . \n\nChaque ordre n comprend une harmonique dîte négative dont l’indice est égal à -n et une harmonique positive dont l’indice est égal n hormis l’ordre 0, qui ne possède qu’une harmonique d’indice 0 considérée comme positive. \n\nCes fonctions circulaires peuvent être représentées sur un espace à 2 dimensions. Selon l’angle α, les fonctions sont positives (rouge) ou négatives (bleu).\n\nLa décomposition d'un champ sonore dans le domaine des harmoniques circulaires utilisée par les techniques ambisoniques s'éffectue selon un ordre de décomposition N. \n\nUn ordre de décomposition N donné \"englobe\" tous les ordres inférieurs ou égal à N (ordres de 0 à N), le champ sonore est alors encodé par 2 n + 1 harmoniques dont l'ordre de celles-ci vont de -n à n et sont entrelacées. \n\nAinsi, pour un ordre de décomposition 7, il y a 15 harmoniques dont les ordres sont : 0, -1, 1, -2, 2, -3, 3, ... , -7, 7.\n\nL'harmonique 0 est omnidirectionnelle, plus l'ordre auquel dépendent les harmoniques augmente plus le nombre de lobes augmente et leur directivité augmente.",
+									"text" : "Les harmoniques circulaires sont des fonctions spatiales dépendant d’un ordre n et d’un indice i et prennent en variable un angle α en radian . \n\nChaque ordre n comprend une harmonique dîte négative dont l’indice est égal à -n et une harmonique positive dont l’indice est égal à n hormis l’ordre 0, qui ne possède qu’une harmonique d’indice 0 considérée comme positive. \n\nCes fonctions circulaires peuvent être représentées sur un espace à 2 dimensions. Selon l’angle α, les fonctions sont positives (rouge) ou négatives (bleu).\n\nLa décomposition d'un champ sonore dans le domaine des harmoniques circulaires utilisée par les techniques ambisoniques s'éffectue selon un ordre de décomposition N. \n\nUn ordre de décomposition N donné \"englobe\" tous les ordres inférieurs ou égal à N (ordres de 0 à N), le champ sonore est alors encodé par 2 n + 1 harmoniques dont l'ordre de celles-ci vont de -n à n et sont entrelacées. \n\nAinsi, pour un ordre de décomposition 7, il y a 15 harmoniques dont les ordres sont : 0, -1, 1, -2, 2, -3, 3, ... , -7, 7.\n\nL'harmonique 0 est omnidirectionnelle, plus l'ordre auquel dépendent les harmoniques augmente plus le nombre de lobes augmente et leur directivité augmente.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 

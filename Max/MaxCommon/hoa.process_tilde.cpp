@@ -262,7 +262,7 @@ int C74_EXPORT main(void)
     // <ul>
     // <li> In <m>planewaves</m> mode (2d/3d), the message <b>target 1</b> will target the first instance corresponding to the first channel.</li>
     // <li> In 2d <m>harmonics</m> mode, target argument correspond to the harmonic index, the harmonics index go to <b>-order</b> to <b>order</b>.</li>
-    // <li> In 3d <m>harmonics</m> mode, the <m>target</m> message takes two arguments. First one is the ambisonic band (between 0 and the <b>order</b>), the second one correspond to the harmonic index (from <b>-order</b> to <b>order</b>).</li>
+    // <li> In 3d <m>harmonics</m> mode, the <m>target</m> message takes two arguments. First one is the ambisonic hdegree (between 0 and the <b>order</b>), the second one correspond to the harmonic index (from <b>-order</b> to <b>order</b>).</li>
     // </ul>
     // The message <b>target all</b> will target messages to all of the loaded instances.
     // The message <b>target none</b> disable input to all instances.
@@ -867,7 +867,7 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 	t_fourcc type;
 	t_fourcc filetypelist = 'JSON';
 	long patch_spaces_allocated = x->patch_spaces_allocated;
-	long harmonic_band, harmonic_argument;
+	long harmonic_hdegree, harmonic_argument;
 	long i;
 	
 	short patch_path;
@@ -967,22 +967,22 @@ t_hoa_err hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patc
 		return HOA_ERR_FAIL;
 	}
 	
-	// Change the window name to : "patchname [band arg]" (if mode no or post)
+	// Change the window name to : "patchname [hdegree arg]" (if mode no or post)
 	
 	if (x->f_mode == hoa_sym_harmonics)
 	{
 		if (x->f_object_type == HOA_OBJECT_2D)
 		{
-			harmonic_band = x->f_ambi2D->getHarmonicDegree(index);
+			harmonic_hdegree = x->f_ambi2D->getHarmonicDegree(index);
 			harmonic_argument = x->f_ambi2D->getHarmonicOrder(index);
 			sprintf(windowname, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 			//snprintf(windowname, 256, "%s [%ld]", patch_name_in->s_name, harmonic_argument);
 		}
 		else if (x->f_object_type == HOA_OBJECT_3D)
 		{
-			harmonic_band = x->f_ambi3D->getHarmonicDegree(index);
+			harmonic_hdegree = x->f_ambi3D->getHarmonicDegree(index);
 			harmonic_argument = x->f_ambi3D->getHarmonicOrder(index);
-			sprintf(windowname, "%s [%ld %ld]", patch_name_in->s_name, harmonic_band, harmonic_argument);
+			sprintf(windowname, "%s [%ld %ld]", patch_name_in->s_name, harmonic_hdegree, harmonic_argument);
 		}
 	}
 	else
@@ -1156,8 +1156,7 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-    long target_arg, target_band;
-    target_arg = target_band = 0;
+    x->target_index = -1;
     
     if (argc && argv)
     {
@@ -1173,41 +1172,36 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
         {
             if (x->f_mode == hoa_sym_harmonics)
             {
+                long harm_degree, harm_order = 0;
+                
                 if (x->f_object_type == HOA_OBJECT_2D)
                 {
-                    target_arg = atom_getlong(argv);
-                    if (target_arg < 0)
-                        x->target_index = abs(target_arg) * 2;
-                    else
-                        x->target_index = target_arg * 2 + 1;
+                    harm_order = atom_getlong(argv);
+                    
+                    if (abs(harm_order) <= x->f_ambi2D->getDecompositionOrder())
+                        x->target_index = x->f_ambi2D->getHarmonicIndex(harm_order) + 1;
                     
                     // bad target target none
                     if (x->target_index <= 0 || x->target_index > x->patch_spaces_allocated)
                     {
-                        object_warn((t_object *)x, "target [%ld] doesn't match any patcher instance", target_arg);
+                        object_warn((t_object *)x, "target [%ld] doesn't match any patcher instance", harm_order);
                         x->target_index = -1;
                     }
                 }
                 else if (x->f_object_type == HOA_OBJECT_3D)
                 {
-                    long target_arg_index = 0;
-                    target_band = atom_getlong(argv);
+                    harm_degree = atom_getlong(argv);
                     
                     if (argc > 1 && atom_gettype(argv+1) == A_LONG)
-                        target_arg = atom_getlong(argv+1);
+                        harm_order = atom_getlong(argv+1);
                     
-                    if (target_arg < 0)
-                        target_arg_index = abs(target_arg) * 2 - 1;
-                    else
-                        target_arg_index = target_arg * 2;
-                    
-                    x->target_index = (long)pow((float)target_band, 2) + 1;
-                    x->target_index += target_arg_index;
+                    if (harm_degree <= x->f_ambi3D->getDecompositionOrder() && abs(harm_order) <= harm_degree)
+                        x->target_index = x->f_ambi3D->getHarmonicIndex(harm_degree, harm_order) + 1;
                     
                     // bad target target none
-                    if (target_band < 0 || target_band > x->f_order || target_arg < -target_band || target_arg > target_band)
+                    if (x->target_index <= 0 || x->target_index > x->patch_spaces_allocated)
                     {
-                        object_warn((t_object *)x, "target [%ld, %ld] doesn't match any patcher instance", target_band, target_arg);
+                        object_warn((t_object *)x, "target [%ld, %ld] doesn't match any patcher instance", harm_degree, harm_order);
                         x->target_index = -1;
                     }
                 }
@@ -1229,10 +1223,8 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
 
 void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-    long target_arg, target_band;
     int state = 0;
     int index = -1;
-    target_arg = target_band = 0;
     
     if (argc && argv)
     {
@@ -1247,18 +1239,19 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
         {
             if (x->f_mode == hoa_sym_harmonics)
             {
+                long harm_degree, harm_order = 0;
+                
                 if (x->f_object_type == HOA_OBJECT_2D)
                 {
-                    target_arg = atom_getlong(argv);
-                    if (target_arg < 0)
-                        index = abs(target_arg) * 2;
-                    else
-                        index = target_arg * 2 + 1;
+                    harm_order = atom_getlong(argv);
+                    
+                    if (abs(harm_order) <= x->f_ambi2D->getDecompositionOrder())
+                        index = x->f_ambi2D->getHarmonicIndex(harm_order) + 1;
                     
                     // bad target target none
                     if (index <= 0 || index > x->patch_spaces_allocated)
                     {
-                        object_warn((t_object *)x, "mute [%ld] doesn't match any patcher instance", target_arg);
+                        object_error((t_object *)x, "mute [%ld] doesn't match any patcher instance", harm_order);
                         index = -1;
                     }
                     
@@ -1267,24 +1260,18 @@ void hoa_processor_user_mute(t_hoa_processor *x, t_symbol *msg, short argc, t_at
                 }
                 else if (x->f_object_type == HOA_OBJECT_3D)
                 {
-                    long target_arg_index = 0;
-                    target_band = atom_getlong(argv);
+                    harm_degree = atom_getlong(argv);
                     
                     if (argc > 1 && atom_gettype(argv+1) == A_LONG)
-                        target_arg = atom_getlong(argv+1);
+                        harm_order = atom_getlong(argv+1);
                     
-                    if (target_arg < 0)
-                        target_arg_index = abs(target_arg) * 2 - 1;
-                    else
-                        target_arg_index = target_arg * 2;
-                    
-                    index = (long)pow((float)target_band, 2) + 1;
-                    index += target_arg_index;
+                    if (harm_degree <= x->f_ambi3D->getDecompositionOrder() && abs(harm_order) <= harm_degree)
+                        index = x->f_ambi3D->getHarmonicIndex(harm_degree, harm_order) + 1;
                     
                     // bad target target none
-                    if (target_band < 0 || target_band > x->f_order || target_arg < -target_band || target_arg > target_band)
+                    if (index <= 0 || index > x->patch_spaces_allocated)
                     {
-                        object_warn((t_object *)x, "mute [%ld, %ld] doesn't match any patcher instance", target_band, target_arg);
+                        object_error((t_object *)x, "target [%ld, %ld] doesn't match any patcher instance", harm_degree, harm_order);
                         index = -1;
                     }
                     
@@ -1669,49 +1656,43 @@ void hoa_processor_dblclick(t_hoa_processor *x)
 
 void hoa_processor_open(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-    long index, arg, band;
-    index = arg = band = 0;
+    long index = 0;
 	t_atom a;
 
     if (argc && argv && atom_gettype(argv) == A_LONG)
     {
         if (x->f_mode == hoa_sym_harmonics)
         {
+            long harm_degree, harm_order = 0;
+            
             if (x->f_object_type == HOA_OBJECT_2D)
             {
-                arg = atom_getlong(argv);
-                if (arg < 0)
-                    index = abs(arg) * 2;
-                else
-                    index = arg * 2 + 1;
+                harm_order = atom_getlong(argv);
+                
+                if (abs(harm_order) <= x->f_ambi2D->getDecompositionOrder())
+                    index = x->f_ambi2D->getHarmonicIndex(harm_order) + 1;
                 
                 // bad target target none
                 if (index <= 0 || index > x->patch_spaces_allocated)
                 {
-                    object_error((t_object *)x, "open [%ld] doesn't match any patcher instance", arg);
+                    object_error((t_object *)x, "open [%ld] doesn't match any patcher instance", harm_order);
                     index = -1;
                 }
             }
             else if (x->f_object_type == HOA_OBJECT_3D)
             {
-                long arg_index = 0;
-                band = atom_getlong(argv);
+                harm_degree = atom_getlong(argv);
                 
                 if (argc > 1 && atom_gettype(argv+1) == A_LONG)
-                    arg = atom_getlong(argv+1);
+                    harm_order = atom_getlong(argv+1);
                 
-                if (arg < 0)
-                    arg_index = abs(arg) * 2 - 1;
-                else
-                    arg_index = arg * 2;
-                
-                index = (long)pow((float)band, 2) + 1;
-                index += arg_index;
+                if (harm_degree <= x->f_ambi3D->getDecompositionOrder() && abs(harm_order) <= harm_degree)
+                    index = x->f_ambi3D->getHarmonicIndex(harm_degree, harm_order) + 1;
                 
                 // bad target target none
-                if (band < 0 || band > x->f_order || arg < -band || arg > band)
+                if (index <= 0 || index > x->patch_spaces_allocated)
                 {
-                    object_error((t_object *)x, "open [%ld, %ld] doesn't match any patcher instance", band, arg);
+                    object_error((t_object *)x, "open [%ld, %ld] doesn't match any patcher instance", harm_degree, harm_order);
                     index = -1;
                 }
             }
@@ -1751,49 +1732,43 @@ void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *a
 
 void hoa_processor_wclose(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-    long index, arg, band;
-    index = arg = band = 0;
+    long index = 0;
 	t_atom a;
     
     if (argc && argv && atom_gettype(argv) == A_LONG)
     {
         if (x->f_mode == hoa_sym_harmonics)
         {
+            long harm_degree, harm_order = 0;
+            
             if (x->f_object_type == HOA_OBJECT_2D)
             {
-                arg = atom_getlong(argv);
-                if (arg < 0)
-                    index = abs(arg) * 2;
-                else
-                    index = arg * 2 + 1;
+                harm_order = atom_getlong(argv);
+                
+                if (abs(harm_order) <= x->f_ambi2D->getDecompositionOrder())
+                    index = x->f_ambi2D->getHarmonicIndex(harm_order) + 1;
                 
                 // bad target target none
                 if (index <= 0 || index > x->patch_spaces_allocated)
                 {
-                    object_error((t_object *)x, "wclose [%ld] doesn't match any patcher instance", arg);
+                    object_error((t_object *)x, "wclose [%ld] doesn't match any patcher instance", harm_order);
                     index = -1;
                 }
             }
             else if (x->f_object_type == HOA_OBJECT_3D)
             {
-                long arg_index = 0;
-                band = atom_getlong(argv);
+                harm_degree = atom_getlong(argv);
                 
                 if (argc > 1 && atom_gettype(argv+1) == A_LONG)
-                    arg = atom_getlong(argv+1);
+                    harm_order = atom_getlong(argv+1);
                 
-                if (arg < 0)
-                    arg_index = abs(arg) * 2 - 1;
-                else
-                    arg_index = arg * 2;
-                
-                index = (long)pow((float)band, 2) + 1;
-                index += arg_index;
+                if (harm_degree <= x->f_ambi3D->getDecompositionOrder() && abs(harm_order) <= harm_degree)
+                    index = x->f_ambi3D->getHarmonicIndex(harm_degree, harm_order) + 1;
                 
                 // bad target target none
-                if (band < 0 || band > x->f_order || arg < -band || arg > band)
+                if (index <= 0 || index > x->patch_spaces_allocated)
                 {
-                    object_error((t_object *)x, "wclose [%ld, %ld] doesn't match any patcher instance", band, arg);
+                    object_error((t_object *)x, "wclose [%ld, %ld] doesn't match any patcher instance", harm_degree, harm_order);
                     index = -1;
                 }
             }
