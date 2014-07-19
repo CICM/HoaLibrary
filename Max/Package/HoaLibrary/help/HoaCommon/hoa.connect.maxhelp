@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 343.0, 64.0, 744.0, 562.0 ],
+		"rect" : [ 100.0, 100.0, 744.0, 562.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,11 +44,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 744.0, 536.0 ],
+						"rect" : [ 100.0, 126.0, 744.0, 536.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -79,7 +79,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 91.223206, 199.0, 163.0, 20.0 ],
-									"presentation_rect" : [ 91.223206, 194.0, 0.0, 0.0 ],
 									"text" : "harmonics zero color",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[6]"
@@ -96,8 +95,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 19.625, 214.5, 75.375, 102.0 ],
-									"presentation_rect" : [ 19.625, 209.5, 0.0, 0.0 ]
+									"patching_rect" : [ 19.625, 214.5, 75.375, 102.0 ]
 								}
 
 							}
@@ -111,7 +109,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 91.223206, 199.0, 163.0, 20.0 ],
-									"presentation_rect" : [ 91.223206, 194.0, 0.0, 0.0 ],
 									"rounded" : 0
 								}
 
@@ -346,10 +343,6 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 372.294647, 366.0, 254.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"ramp" : 20.0
-									}
-,
 									"text" : "hoa.2d.recomposer~ 7 16"
 								}
 
@@ -450,14 +443,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 12.294642, 421.0, 250.428574, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
@@ -1607,11 +1592,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 343.0, 90.0, 744.0, 536.0 ],
+						"rect" : [ 0.0, 26.0, 744.0, 536.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1633,6 +1618,23 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-140",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 600.6875, 119.0, 92.0, 33.0 ],
+									"text" : "Find me in the HoaClippings",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[10]"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-28",
 									"maxclass" : "live.line",
@@ -1826,14 +1828,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 169.0, 405.0, 221.5, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7"
 								}
 
@@ -1968,7 +1962,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 235.4375, 450.0, 235.0, 19.0 ],
+									"patching_rect" : [ 292.5625, 455.0, 235.0, 19.0 ],
 									"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
 								}
 
@@ -2000,8 +1994,23 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 47.9375, 445.0, 183.0, 29.0 ],
+									"patching_rect" : [ 100.5, 450.0, 183.0, 29.0 ],
 									"text" : "I'm not a hoa but I'm a friend."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.187636, 0.74902, 0.121902, 1.0 ],
+									"id" : "obj-141",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 597.6875, 115.5, 95.0, 40.0 ],
+									"rounded" : 0
 								}
 
 							}
@@ -2069,8 +2078,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 56.0, 158.0, 199.0, 29.0 ],
-									"text" : "Spacebar to bang the hoas."
+									"patching_rect" : [ 56.0, 158.0, 211.0, 29.0 ],
+									"text" : "Spacebar to bang the hoa.connect"
 								}
 
 							}
@@ -2146,7 +2155,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -2198,28 +2207,28 @@
 		"dependency_cache" : [ 			{
 				"name" : "lock.js",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/javascript",
-				"patcherrelativepath" : "../javascript",
+				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
-				"patcherrelativepath" : "../misc/object-palettes",
+				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

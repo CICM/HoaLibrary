@@ -16,11 +16,17 @@ extern "C"
 static t_symbol* hoa_sym_hoa_getinfos				= gensym("hoa_getinfos");
 
 // Objects
-static t_symbol* hoa_sym_hoa_2d_meter				= gensym("hoa.2d.meter~");
 static t_symbol* hoa_sym_hoa_2d_vector				= gensym("hoa.2d.vector~");
 static t_symbol* hoa_sym_hoa_gain					= gensym("hoa.gain~");
+static t_symbol* hoa_sym_hoa_2d_meter				= gensym("hoa.2d.meter~");
+static t_symbol* hoa_sym_hoa_3d_meter				= gensym("hoa.3d.meter~");
+static t_symbol* hoa_sym_hoa_2d_scope				= gensym("hoa.2d.scope~");
+static t_symbol* hoa_sym_hoa_3d_scope				= gensym("hoa.3d.scope~");
 static t_symbol* hoa_sym_hoa_dac					= gensym("hoa.dac~");
 static t_symbol* hoa_sym_dac						= gensym("dac~");
+static t_symbol* hoa_sym_hoa_pi						= gensym("hoa.pi");
+static t_symbol* hoa_sym_hoa_pi_tilde               = gensym("hoa.pi~");
+
 
 // notify
 static t_symbol* hoa_sym_nothing 					= gensym("");

@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -549,7 +549,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -1026,7 +1026,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -1138,11 +1138,11 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 292.5, 226.0, 59.5, 20.0 ],
 									"restore" : 									{
-										"hoaGain" : [ 0, 0.0 ]
+										"hoaGain" : [ 0, -15.737265 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u421003611"
+									"varname" : "u025000227"
 								}
 
 							}
@@ -1336,7 +1336,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -2208,7 +2208,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -2562,7 +2562,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
@@ -2691,7 +2691,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -2839,7 +2839,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 292.585602, 384.5, 43.0, 18.0 ],
+									"patching_rect" : [ 292.585602, 391.5, 43.0, 18.0 ],
 									"text" : "set $1"
 								}
 
@@ -2861,7 +2861,6 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.350365, 0.350365, 0.350365, 1.0 ],
-									"bordercolor" : [ 0.196253, 0.196253, 0.196253, 1.0 ],
 									"channels" : 16,
 									"id" : "obj-1",
 									"interp" : 400.0,
@@ -2983,14 +2982,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.0, 217.5, 255.623215, 20.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7"
 								}
 
@@ -3010,7 +3001,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 7,
 											"architecture" : "x64"
 										}
 ,
@@ -3162,24 +3153,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-1", 16 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-23", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-1", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-23", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-1", 0 ]
 								}
 
 							}
@@ -3875,7 +3848,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,

@@ -68,12 +68,13 @@ void *play_new(t_symbol *s, int argc, t_atom *argv)
 	if(order < 1)
 		order = 1;
 	
-	if (s == gensym("hoa.play") || gensym("hoa.2d.play"))
+    
+	if (s == gensym("hoa.play~") || s == gensym("hoa.2d.play~"))
 		channels = order * 2 + 1;
-	else if (s == gensym("hoa.3d.play"))
+	else if (s == gensym("hoa.3d.play~"))
 		channels = (order+1) * (order+1);
-	
-	atom_setlong(arguments, order * 2 + 1);
+    
+	atom_setlong(arguments, channels);
 	x = (t_object *)object_new_typed(CLASS_BOX, gensym("sfplay~"), 1, arguments);
 	
 	return x;

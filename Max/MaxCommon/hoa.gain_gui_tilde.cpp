@@ -1197,36 +1197,42 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
 void HoaGain_reconnect_outlet(t_hoaGain *x)
 {
 	t_object *patcher;
-	t_object *decoder;
-    t_object *object;
+	t_object *gain_box;
+    t_object *obj2_box;
+    t_object *obj2;
     t_object *line;
 	t_max_err err;
     
-	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+	err = object_obex_lookup(x, hoa_sym_pound_P, (t_object **)&patcher);
 	if (err != MAX_ERR_NONE)
 		return;
 	
-	err = object_obex_lookup(x, gensym("#B"), (t_object **)&decoder);
+	err = object_obex_lookup(x, hoa_sym_pound_B, (t_object **)&gain_box);
 	if (err != MAX_ERR_NONE)
 		return;
 	
     for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
     {
-        if (jpatchline_get_box1(line) == decoder)
+        if (jpatchline_get_box1(line) == gain_box)
         {
-            object = jpatchline_get_box2(line);
+            obj2_box = jpatchline_get_box2(line);
+            obj2 = jbox_get_object(obj2_box);
+            t_symbol* classname = object_classname(obj2);
             
-            for(int i = 0; jbox_getinlet((t_jbox *)object, i) != NULL && i < x->f_numberOfChannels; i++)
+            if ( classname == hoa_sym_dac || (object_is_hoa(obj2) && classname != hoa_sym_hoa_pi && classname != hoa_sym_hoa_pi_tilde))
             {
-                t_atom msg[4];
-                t_atom rv;
-                
-                atom_setobj(msg, decoder);
-                atom_setlong(msg + 1, i);
-                atom_setobj(msg + 2, object);
-                atom_setlong(msg + 3, i);
-                
-                object_method_typed(patcher , hoa_sym_connect, 4, msg, &rv);
+                for(int i = 0; jbox_getinlet((t_jbox *)obj2_box, i) != NULL && i < x->f_numberOfChannels; i++)
+                {
+                    t_atom msg[4];
+                    t_atom rv;
+                    
+                    atom_setobj(msg, gain_box);
+                    atom_setlong(msg + 1, i);
+                    atom_setobj(msg + 2, obj2_box);
+                    atom_setlong(msg + 3, i);
+                    
+                    object_method_typed(patcher , hoa_sym_connect, 4, msg, &rv);
+                }
             }
         }
     }

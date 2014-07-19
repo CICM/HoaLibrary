@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1440.0, 806.0 ],
+		"rect" : [ -2.0, 48.0, 1432.0, 755.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,11 +44,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1440.0, 780.0 ],
+						"rect" : [ -2.0, 74.0, 1432.0, 729.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1789,11 +1789,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 7,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1440.0, 780.0 ],
+						"rect" : [ 0.0, 26.0, 1432.0, 729.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,

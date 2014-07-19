@@ -146,6 +146,9 @@ void *hoa_3d_decoder_new(t_symbol *s, long argc, t_atom *argv)
 			number_of_channels = (order+1)*(order+1);
 		
         x->f_decoder = new Hoa3D::DecoderMulti(order, number_of_channels);
+        
+        x->f_decoder->setSampleRate(sys_getsr());
+        
 		x->f_number_of_angles = x->f_decoder->getNumberOfChannels() * 2;
 		x->f_number_of_channels = x->f_decoder->getNumberOfChannels();
         
@@ -180,6 +183,7 @@ t_hoa_err hoa_getinfos(t_hoa_3d_decoder* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_3d_decoder_dsp64(t_hoa_3d_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
+    post("sample rate : %ld", samplerate);
 	x->f_decoder->setSampleRate(samplerate);
     object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_decoder_3D_perform64, 0, NULL);
 }
