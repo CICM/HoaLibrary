@@ -282,13 +282,30 @@ namespace Hoa2D
         m_pinna_size = pinnaSize;
     }
 
-    void DecoderBinaural::setSampleRate(unsigned int sampleRate)
+    void DecoderBinaural::setSampleRate(double sampleRate)
     {
+        if (m_sampleRate != sampleRate)
+        {
+            m_sampleRate = sampleRate;
+            
+            m_filters_left.clear();
+            m_filters_right.clear();
+            
+            for(int i = 0; i < m_decoder->getNumberOfChannels(); i++)
+            {
+                double angle = m_decoder->getChannelAzimuth(i);
+                m_filters_left.push_back(BinauralFilter(angle, 0));
+                m_filters_right.push_back(BinauralFilter(-angle, 0));
+            }
+        }
+        
+        /*
         for(int i = 0; i < m_decoder->getNumberOfChannels(); i++)
         {
             m_filters_left[i].setSampleRate(sampleRate);
             m_filters_right[i].setSampleRate(sampleRate);
         }
+        */
     }
 
     void DecoderBinaural::process(const float* inputs, float* outputs)
@@ -391,7 +408,7 @@ namespace Hoa2D
         m_decoder_binaural->setPinnaSize(pinnaSize);
     }
 
-    void DecoderMulti::setSampleRate(unsigned int sampleRate)
+    void DecoderMulti::setSampleRate(double sampleRate)
     {
         m_decoder_binaural->setSampleRate(sampleRate);
         m_sample_rate = sampleRate;

@@ -153,6 +153,7 @@ void *hoa_2d_decoder_new(t_symbol *s, long argc, t_atom *argv)
         x->f_decoder    = new Hoa2D::DecoderMulti(order);
        
         x->f_decoder->setSampleRate(sys_getsr());
+        
 		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
         for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
             outlet_new(x, "signal");

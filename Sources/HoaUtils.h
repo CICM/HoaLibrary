@@ -60,7 +60,7 @@ namespace Hoa
             {
                 if(sampleRate != m_sample_rate)
                 {
-                    float delay = (float)m_delay / m_sample_rate;
+                    float delay = (float)m_delay / sampleRate;
                     m_sample_rate = sampleRate;
                     setDelay(delay);
                 }
@@ -112,7 +112,7 @@ namespace Hoa
                 setCoefficients(0.f, 0.f, 0.f, 0.f, 0.f);
             };
             
-            void setSamplingRate(long sampleRate)
+            void setSamplingRate(float sampleRate)
             {
                 if(m_sample_rate != sampleRate)
                 {
@@ -153,7 +153,7 @@ namespace Hoa
             
             inline float process(float input)
             {
-                float output = input * m_coeff_a0 + m_delay_one;
+                float output = input * m_coeff_a0 + m_delay_one / (m_sample_rate / 44100.f);
                 m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
                 m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
                 return output;

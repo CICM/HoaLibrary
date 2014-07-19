@@ -94,6 +94,7 @@ namespace Hoa3D
         double*         m_outputs_double;
         float*          m_outputs_float;
         DecoderRegular* m_decoder;
+        double          m_sampleRate;
         std::vector<BinauralFilter> m_filters_left;
         std::vector<BinauralFilter> m_filters_right;
     public:
@@ -126,7 +127,7 @@ namespace Hoa3D
          
          @see    setVectorSize
          */
-        void setSampleRate(unsigned int sampleRate);
+        void setSampleRate(double sampleRate);
         
         //! Set the pinna size.
         /** Set the pinna size used to compute the HRTF. Setting the pinna size will re-allocate the vector to compute the binaural decoding.
@@ -193,10 +194,10 @@ namespace Hoa3D
         };
         
     private:
-        DecoderRegular*    m_decoder_regular;
+        DecoderRegular*     m_decoder_regular;
         DecoderBinaural*    m_decoder_binaural;
         Mode                m_mode;
-        unsigned int        m_sample_rate;        
+        double              m_sample_rate;
         
     public:
         
@@ -327,7 +328,7 @@ namespace Hoa3D
          
          @see    setVectorSize
          */
-        void setSampleRate(unsigned int sampleRate);
+        void setSampleRate(double sampleRate);
         
         //! Set the pinna size.
         /** Set the pinna size of the binaural decoding.

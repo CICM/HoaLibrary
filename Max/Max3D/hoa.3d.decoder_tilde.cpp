@@ -183,7 +183,6 @@ t_hoa_err hoa_getinfos(t_hoa_3d_decoder* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_3d_decoder_dsp64(t_hoa_3d_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    post("sample rate : %ld", samplerate);
 	x->f_decoder->setSampleRate(samplerate);
     object_method(dsp64, gensym("dsp_add64"), x, (method)hoa_3d_decoder_3D_perform64, 0, NULL);
 }
