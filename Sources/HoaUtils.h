@@ -153,7 +153,7 @@ namespace Hoa
             
             inline float process(float input)
             {
-                float output = input * m_coeff_a0 + m_delay_one / (m_sample_rate / 44100.f);
+                float output = input * m_coeff_a0 + m_delay_one;
                 m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
                 m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
                 return output;
