@@ -5,7 +5,7 @@
 			"major" : 6,
 			"minor" : 1,
 			"revision" : 7,
-			"architecture" : "x64"
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 100.0, 100.0, 690.0, 775.0 ],
@@ -46,7 +46,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 100.0, 126.0, 690.0, 749.0 ],
@@ -378,6 +378,7 @@
 , 							{
 								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"gain" : 50.0,
 									"id" : "obj-30",
 									"maxclass" : "hoa.3d.scope~",
 									"numinlets" : 16,
@@ -507,7 +508,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 7,
-											"architecture" : "x64"
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 413.0, 101.0, 204.0, 214.0 ],
@@ -1262,7 +1263,7 @@
 									"destination" : [ "obj-30", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 285.9, 460.125, 515.858333, 460.125 ],
+									"midpoints" : [ 285.899994, 460.125, 515.858337, 460.125 ],
 									"source" : [ "obj-19", 14 ]
 								}
 
@@ -1273,7 +1274,7 @@
 									"destination" : [ "obj-30", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 268.8, 460.125, 504.841667, 460.125 ],
+									"midpoints" : [ 268.799988, 460.125, 504.841675, 460.125 ],
 									"source" : [ "obj-19", 13 ]
 								}
 
@@ -1284,7 +1285,7 @@
 									"destination" : [ "obj-30", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 251.7, 460.125, 493.825, 460.125 ],
+									"midpoints" : [ 251.699997, 460.125, 493.825012, 460.125 ],
 									"source" : [ "obj-19", 12 ]
 								}
 
@@ -1295,7 +1296,7 @@
 									"destination" : [ "obj-30", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 234.6, 460.125, 482.808333, 460.125 ],
+									"midpoints" : [ 234.600006, 460.125, 482.808319, 460.125 ],
 									"source" : [ "obj-19", 11 ]
 								}
 
@@ -1306,7 +1307,7 @@
 									"destination" : [ "obj-30", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 217.5, 460.125, 471.791667, 460.125 ],
+									"midpoints" : [ 217.5, 460.125, 471.791656, 460.125 ],
 									"source" : [ "obj-19", 10 ]
 								}
 
@@ -1317,7 +1318,7 @@
 									"destination" : [ "obj-30", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 200.4, 460.125, 460.775, 460.125 ],
+									"midpoints" : [ 200.399994, 460.125, 460.774994, 460.125 ],
 									"source" : [ "obj-19", 9 ]
 								}
 
@@ -1328,7 +1329,7 @@
 									"destination" : [ "obj-30", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 183.3, 460.125, 449.758333, 460.125 ],
+									"midpoints" : [ 183.300003, 460.125, 449.758331, 460.125 ],
 									"source" : [ "obj-19", 8 ]
 								}
 
@@ -1339,7 +1340,7 @@
 									"destination" : [ "obj-30", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 166.2, 460.125, 438.741667, 460.125 ],
+									"midpoints" : [ 166.199997, 460.125, 438.741669, 460.125 ],
 									"source" : [ "obj-19", 7 ]
 								}
 
@@ -1350,7 +1351,7 @@
 									"destination" : [ "obj-30", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 149.1, 460.125, 427.725, 460.125 ],
+									"midpoints" : [ 149.100006, 460.125, 427.725006, 460.125 ],
 									"source" : [ "obj-19", 6 ]
 								}
 
@@ -1361,7 +1362,7 @@
 									"destination" : [ "obj-30", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 132.0, 460.125, 416.708333, 460.125 ],
+									"midpoints" : [ 132.0, 460.125, 416.708344, 460.125 ],
 									"source" : [ "obj-19", 5 ]
 								}
 
@@ -1372,7 +1373,7 @@
 									"destination" : [ "obj-30", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 114.9, 460.125, 405.691667, 460.125 ],
+									"midpoints" : [ 114.900002, 460.125, 405.691681, 460.125 ],
 									"source" : [ "obj-19", 4 ]
 								}
 
@@ -1383,7 +1384,7 @@
 									"destination" : [ "obj-30", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 97.8, 460.125, 394.675, 460.125 ],
+									"midpoints" : [ 97.800003, 460.125, 394.674988, 460.125 ],
 									"source" : [ "obj-19", 3 ]
 								}
 
@@ -1394,7 +1395,7 @@
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 80.7, 460.125, 383.658333, 460.125 ],
+									"midpoints" : [ 80.699997, 460.125, 383.658325, 460.125 ],
 									"source" : [ "obj-19", 2 ]
 								}
 
@@ -1405,7 +1406,7 @@
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 63.6, 460.125, 372.641667, 460.125 ],
+									"midpoints" : [ 63.599998, 460.125, 372.641663, 460.125 ],
 									"source" : [ "obj-19", 1 ]
 								}
 
@@ -2062,7 +2063,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 690.0, 749.0 ],

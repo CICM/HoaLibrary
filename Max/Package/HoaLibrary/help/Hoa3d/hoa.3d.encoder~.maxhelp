@@ -5,7 +5,7 @@
 			"major" : 6,
 			"minor" : 1,
 			"revision" : 7,
-			"architecture" : "x64"
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 100.0, 100.0, 837.0, 718.0 ],
@@ -46,7 +46,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 100.0, 126.0, 837.0, 692.0 ],
@@ -250,6 +250,7 @@
 , 							{
 								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"gain" : 50.0,
 									"id" : "obj-30",
 									"maxclass" : "hoa.3d.scope~",
 									"numinlets" : 16,
@@ -421,7 +422,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 7,
-											"architecture" : "x64"
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 413.0, 101.0, 204.0, 214.0 ],
@@ -1054,7 +1055,7 @@
 									"destination" : [ "obj-30", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 309.0, 392.75, 599.916667, 392.75 ],
+									"midpoints" : [ 309.0, 392.75, 599.916687, 392.75 ],
 									"source" : [ "obj-34", 14 ]
 								}
 
@@ -1065,7 +1066,7 @@
 									"destination" : [ "obj-30", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 290.25, 392.75, 584.583333, 392.75 ],
+									"midpoints" : [ 290.25, 392.75, 584.583313, 392.75 ],
 									"source" : [ "obj-34", 13 ]
 								}
 
@@ -1087,7 +1088,7 @@
 									"destination" : [ "obj-30", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 252.75, 392.75, 553.916667, 392.75 ],
+									"midpoints" : [ 252.75, 392.75, 553.916687, 392.75 ],
 									"source" : [ "obj-34", 11 ]
 								}
 
@@ -1098,7 +1099,7 @@
 									"destination" : [ "obj-30", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 234.0, 392.75, 538.583333, 392.75 ],
+									"midpoints" : [ 234.0, 392.75, 538.583313, 392.75 ],
 									"source" : [ "obj-34", 10 ]
 								}
 
@@ -1120,7 +1121,7 @@
 									"destination" : [ "obj-30", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 196.5, 392.75, 507.916667, 392.75 ],
+									"midpoints" : [ 196.5, 392.75, 507.916656, 392.75 ],
 									"source" : [ "obj-34", 8 ]
 								}
 
@@ -1131,7 +1132,7 @@
 									"destination" : [ "obj-30", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 177.75, 392.75, 492.583333, 392.75 ],
+									"midpoints" : [ 177.75, 392.75, 492.583344, 392.75 ],
 									"source" : [ "obj-34", 7 ]
 								}
 
@@ -1153,7 +1154,7 @@
 									"destination" : [ "obj-30", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 140.25, 392.75, 461.916667, 392.75 ],
+									"midpoints" : [ 140.25, 392.75, 461.916656, 392.75 ],
 									"source" : [ "obj-34", 5 ]
 								}
 
@@ -1164,7 +1165,7 @@
 									"destination" : [ "obj-30", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 121.5, 392.75, 446.583333, 392.75 ],
+									"midpoints" : [ 121.5, 392.75, 446.583344, 392.75 ],
 									"source" : [ "obj-34", 4 ]
 								}
 
@@ -1186,7 +1187,7 @@
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 84.0, 392.75, 415.916667, 392.75 ],
+									"midpoints" : [ 84.0, 392.75, 415.916656, 392.75 ],
 									"source" : [ "obj-34", 2 ]
 								}
 
@@ -1197,7 +1198,7 @@
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 65.25, 392.75, 400.583333, 392.75 ],
+									"midpoints" : [ 65.25, 392.75, 400.583344, 392.75 ],
 									"source" : [ "obj-34", 1 ]
 								}
 
@@ -1297,7 +1298,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 837.0, 692.0 ],

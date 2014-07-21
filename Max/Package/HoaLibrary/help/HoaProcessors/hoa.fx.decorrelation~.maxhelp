@@ -89,6 +89,7 @@
 , 							{
 								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"gain" : 50.0,
 									"id" : "obj-7",
 									"maxclass" : "hoa.3d.scope~",
 									"numinlets" : 16,
