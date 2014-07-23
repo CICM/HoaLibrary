@@ -5,7 +5,7 @@
 			"major" : 6,
 			"minor" : 1,
 			"revision" : 7,
-			"architecture" : "x86"
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 100.0, 100.0, 929.0, 577.0 ],
@@ -46,10 +46,10 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x86"
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 929.0, 551.0 ],
+						"rect" : [ 100.0, 126.0, 929.0, 551.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -124,7 +124,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 414.5, 220.5, 280.0, 47.0 ],
+									"patching_rect" : [ 397.5, 211.5, 280.0, 47.0 ],
 									"text" : "@window set the initial windowing time.\n@deltime set the inital delay in ms.\n@feedback set the initial feedback value.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[4]"
@@ -140,7 +140,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 414.5, 220.5, 280.0, 47.0 ],
+									"patching_rect" : [ 397.5, 211.5, 280.0, 47.0 ],
 									"rounded" : 0
 								}
 
@@ -304,7 +304,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 7,
-											"architecture" : "x86"
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -458,7 +458,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 57.5, 329.0, 320.0, 32.0 ],
+									"patching_rect" : [ 57.5, 329.0, 322.0, 32.0 ],
 									"text" : "hoa.3d.process~ 3 hoa.syn.delay~ harmonics @window 400 @deltime 1000. @feedback 0.5"
 								}
 
@@ -649,7 +649,7 @@
 									"destination" : [ "obj-6", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 368.0, 371.0, 483.5, 371.0, 483.5, 293.0, 712.0, 293.0 ],
+									"midpoints" : [ 370.0, 371.0, 483.5, 371.0, 483.5, 293.0, 712.0, 293.0 ],
 									"source" : [ "obj-14", 15 ]
 								}
 
@@ -660,7 +660,7 @@
 									"destination" : [ "obj-6", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 347.933319, 371.0, 483.5, 371.0, 483.5, 293.0, 698.400024, 293.0 ],
+									"midpoints" : [ 349.8, 371.0, 483.5, 371.0, 483.5, 293.0, 698.4, 293.0 ],
 									"source" : [ "obj-14", 14 ]
 								}
 
@@ -671,7 +671,7 @@
 									"destination" : [ "obj-6", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 327.866669, 371.0, 483.5, 371.0, 483.5, 293.0, 684.799988, 293.0 ],
+									"midpoints" : [ 329.6, 371.0, 483.5, 371.0, 483.5, 293.0, 684.8, 293.0 ],
 									"source" : [ "obj-14", 13 ]
 								}
 
@@ -682,7 +682,7 @@
 									"destination" : [ "obj-6", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 307.799988, 371.0, 483.5, 371.0, 483.5, 293.0, 671.200012, 293.0 ],
+									"midpoints" : [ 309.4, 371.0, 483.5, 371.0, 483.5, 293.0, 671.2, 293.0 ],
 									"source" : [ "obj-14", 12 ]
 								}
 
@@ -693,7 +693,7 @@
 									"destination" : [ "obj-6", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 287.733337, 371.0, 483.5, 371.0, 483.5, 293.0, 657.599976, 293.0 ],
+									"midpoints" : [ 289.2, 371.0, 483.5, 371.0, 483.5, 293.0, 657.6, 293.0 ],
 									"source" : [ "obj-14", 11 ]
 								}
 
@@ -704,7 +704,7 @@
 									"destination" : [ "obj-6", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 267.666656, 371.0, 483.5, 371.0, 483.5, 293.0, 644.0, 293.0 ],
+									"midpoints" : [ 269.0, 371.0, 483.5, 371.0, 483.5, 293.0, 644.0, 293.0 ],
 									"source" : [ "obj-14", 10 ]
 								}
 
@@ -715,7 +715,7 @@
 									"destination" : [ "obj-6", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 247.600006, 371.0, 483.5, 371.0, 483.5, 293.0, 630.400024, 293.0 ],
+									"midpoints" : [ 248.8, 371.0, 483.5, 371.0, 483.5, 293.0, 630.4, 293.0 ],
 									"source" : [ "obj-14", 9 ]
 								}
 
@@ -726,7 +726,7 @@
 									"destination" : [ "obj-6", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 227.53334, 371.0, 483.5, 371.0, 483.5, 293.0, 616.799988, 293.0 ],
+									"midpoints" : [ 228.6, 371.0, 483.5, 371.0, 483.5, 293.0, 616.8, 293.0 ],
 									"source" : [ "obj-14", 8 ]
 								}
 
@@ -737,7 +737,7 @@
 									"destination" : [ "obj-6", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 207.46666, 371.0, 483.5, 371.0, 483.5, 293.0, 603.200012, 293.0 ],
+									"midpoints" : [ 208.4, 371.0, 483.5, 371.0, 483.5, 293.0, 603.2, 293.0 ],
 									"source" : [ "obj-14", 7 ]
 								}
 
@@ -748,7 +748,7 @@
 									"destination" : [ "obj-6", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 187.399994, 371.0, 483.5, 371.0, 483.5, 293.0, 589.599976, 293.0 ],
+									"midpoints" : [ 188.2, 371.0, 483.5, 371.0, 483.5, 293.0, 589.6, 293.0 ],
 									"source" : [ "obj-14", 6 ]
 								}
 
@@ -759,7 +759,7 @@
 									"destination" : [ "obj-6", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 167.333328, 371.0, 483.5, 371.0, 483.5, 293.0, 576.0, 293.0 ],
+									"midpoints" : [ 168.0, 371.0, 483.5, 371.0, 483.5, 293.0, 576.0, 293.0 ],
 									"source" : [ "obj-14", 5 ]
 								}
 
@@ -770,7 +770,7 @@
 									"destination" : [ "obj-6", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 147.266663, 371.0, 483.5, 371.0, 483.5, 293.0, 562.400024, 293.0 ],
+									"midpoints" : [ 147.8, 371.0, 483.5, 371.0, 483.5, 293.0, 562.4, 293.0 ],
 									"source" : [ "obj-14", 4 ]
 								}
 
@@ -781,7 +781,7 @@
 									"destination" : [ "obj-6", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 127.199997, 371.0, 483.5, 371.0, 483.5, 293.0, 548.799988, 293.0 ],
+									"midpoints" : [ 127.6, 371.0, 483.5, 371.0, 483.5, 293.0, 548.8, 293.0 ],
 									"source" : [ "obj-14", 3 ]
 								}
 
@@ -792,7 +792,7 @@
 									"destination" : [ "obj-6", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 107.133331, 371.0, 483.5, 371.0, 483.5, 293.0, 535.200012, 293.0 ],
+									"midpoints" : [ 107.4, 371.0, 483.5, 371.0, 483.5, 293.0, 535.2, 293.0 ],
 									"source" : [ "obj-14", 2 ]
 								}
 
@@ -803,7 +803,7 @@
 									"destination" : [ "obj-6", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 87.066666, 371.0, 483.5, 371.0, 483.5, 293.0, 521.599976, 293.0 ],
+									"midpoints" : [ 87.2, 371.0, 483.5, 371.0, 483.5, 293.0, 521.6, 293.0 ],
 									"source" : [ "obj-14", 1 ]
 								}
 
@@ -1048,7 +1048,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x86"
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 929.0, 551.0 ],
@@ -1399,7 +1399,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 7,
-											"architecture" : "x86"
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1988,10 +1988,10 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x86"
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 929.0, 551.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 551.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2278,7 +2278,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 7,
-											"architecture" : "x86"
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2675,7 +2675,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 7,
-							"architecture" : "x86"
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 929.0, 551.0 ],

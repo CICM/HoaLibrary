@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -649,7 +649,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ]
+									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ],
+									"text" : "1. 1. 1. 1. 1. 1. 1. 0.6 1. 1. 1. 1. 1. 1. 1. 1."
 								}
 
 							}
@@ -662,10 +663,10 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"grid" : 10,
-									"hoa_space_saved_state" : [ 7.0, 3.0, 2.0, 7.0, 3.0, 7.0, 4.0, 1.0, 8.0, 3.0, 1.0, 3.0, 8.0, 1.0, 8.0, 4.0 ],
+									"hoa_2d_space_saved_state" : [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
-									"minmax" : [ 0.0, 20.0 ],
+									"minmax" : [ 0.5, 1.0 ],
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "int" ],
@@ -1149,7 +1150,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3517,14 +3518,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 624.0, 244.066666, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
@@ -3657,7 +3650,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u411010056"
+									"varname" : "u327010154"
 								}
 
 							}
@@ -3690,7 +3683,7 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"hoa_space_saved_state" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+									"hoa_2d_space_saved_state" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
@@ -8119,7 +8112,7 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"hoa_space_saved_state" : [ 1.0, 1.0, 1.0, 1.0, 0.27359, 0.277408, 0.282395, 0.275176, 0.284597, 0.276572, 0.281659, 0.27359, 0.27443, 1.0, 1.0, 1.0 ],
+									"hoa_2d_space_saved_state" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
 									"numinlets" : 1,
@@ -8200,10 +8193,6 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 507.0, 244.066666, 19.0 ],
-									"saved_object_attributes" : 									{
-										"ramp" : 20.0
-									}
-,
 									"text" : "hoa.2d.recomposer~ 7 16"
 								}
 
@@ -8347,14 +8336,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 443.5, 624.0, 244.066666, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
@@ -12737,14 +12718,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 406.0, 576.0, 241.933334, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"autoconnect" : 1,
-										"channels" : 16,
-										"mode" : "ambisonic",
-										"pinna" : "small"
-									}
-,
 									"text" : "hoa.2d.decoder~ 7 16"
 								}
 
@@ -14494,8 +14467,8 @@
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/operators",
-				"patcherrelativepath" : "../../patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/others",
+				"patcherrelativepath" : "../../patchers/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -14522,8 +14495,8 @@
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/operators",
-				"patcherrelativepath" : "../../patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/patchers/others",
+				"patcherrelativepath" : "../../patchers/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

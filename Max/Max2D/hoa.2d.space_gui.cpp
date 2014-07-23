@@ -1007,6 +1007,9 @@ t_max_err minmax_set(t_hoa_2d_space *x, t_object *attr, long argc, t_atom *argv)
         
 		x->f_minmax[0] = Hoa::min(min, max);
 		x->f_minmax[1] = Hoa::max(min, max);
+        
+        if (x->f_minmax[0] == x->f_minmax[1])
+            x->f_minmax[1] = x->f_minmax[0] + 1;
 		
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = clip_minmax(x->f_channel_values[i], x->f_minmax[0], x->f_minmax[1]);
