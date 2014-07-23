@@ -192,34 +192,29 @@ void *hoa_3d_map_new(t_symbol *s, long argc, t_atom *argv)
 	{
 		if(argc && atom_gettype(argv) == A_LONG)
 			order = clip_min(atom_getlong(argv), 0);
+        
 		if(argc > 1 && atom_gettype(argv+1) == A_LONG)
 			numberOfSources = clip_minmax(atom_getlong(argv+1), 1, 255);
+        
+        x->f_mode = 0;
 		if(argc > 2 && atom_gettype(argv+2) == A_SYM)
 		{
-			if(atom_getsym(argv+2) == gensym("car") || atom_getsym(argv+2) == gensym("cartesian"))
+			if(atom_getsym(argv+2) == hoa_sym_car || atom_getsym(argv+2) == hoa_sym_cartesian)
 				x->f_mode = 1;
-			else
-				x->f_mode = 0;
 		}
-		else
-			x->f_mode = 0;
 		
 		x->f_ramp       = 100;
 		x->f_map        = new Hoa3D::Map(order, numberOfSources);
 		x->f_lines      = new MapPolarLines3D(x->f_map->getNumberOfSources());
+        
 		x->f_lines->setRamp(0.1 * sys_getsr());
 		for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
 		{
 			x->f_lines->setRadiusDirect(i, 1);
 			x->f_lines->setAzimuthDirect(i, 0.);
+            x->f_lines->setElevationDirect(i, 0);
 		}
 		
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
-        if(argc > 1 && atom_gettype(argv+1) == A_LONG)
-            numberOfSources = atom_getlong(argv+1);
-
-		x->f_map = new Hoa3D::Map(order, numberOfSources);
 		if(x->f_map->getNumberOfSources() == 1)
             dsp_setup((t_pxobject *)x, 4);
         else
@@ -232,6 +227,7 @@ void *hoa_3d_map_new(t_symbol *s, long argc, t_atom *argv)
             x->f_sig_ins    =  new double[4 * SYS_MAXBLKSIZE];
         else
             x->f_sig_ins    =  new double[x->f_map->getNumberOfSources() * SYS_MAXBLKSIZE];
+        
         x->f_sig_outs		=  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 		x->f_lines_vector   = new float[x->f_map->getNumberOfSources() * 3];
 		
@@ -331,7 +327,7 @@ t_max_err ramp_set(t_hoa_3d_map *x, t_object *attr, long argc, t_atom *argv)
 
 void hoa_3d_map_list(t_hoa_3d_map *x, t_symbol* s, long argc, t_atom* argv)
 {
-	if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
+	if(argc > 2 && argv && (argv+1) && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_SYM)
     {
         int index = atom_getlong(argv);
         if(index < 1 || index > x->f_map->getNumberOfSources())

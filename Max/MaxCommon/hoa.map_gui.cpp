@@ -363,8 +363,8 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	;
     
 	jbox_new(&x->j_box, flags, argc, argv);
-	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
-	x->f_self_source_manager = x->f_source_manager;
+	x->f_self_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
+    x->f_source_manager = x->f_self_source_manager;
 	
     x->j_box.b_firstin = (t_object*) x;
         
@@ -384,12 +384,12 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_binding_name = hoa_sym_nothing;
 	x->f_listmap = NULL;
 	x->f_output_enabled = 1;
-	
 	x->f_save_with_patcher = 1;
 	
 	attr_dictionary_process(x, d);
 	
 	// restore object state
+    
 	long ac = 0;
 	t_atom *av = NULL;
     dictionary_copyatoms(d, gensym("map_saved_state"), &ac, &av);
@@ -405,7 +405,7 @@ void linkmap_add_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 	char strname[2048];
 	t_symbol* name = NULL;
 	t_object *jp = NULL;
-	object_obex_lookup(x, gensym("#P"), &jp);
+	object_obex_lookup(x, hoa_sym_pound_P, &jp);
 	if (jp && (jp = jpatcher_get_toppatcher(jp)))
 	{
 		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
@@ -472,7 +472,7 @@ void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 	char strname[2048];
 	t_symbol* name = NULL;
 	t_object *jp = NULL;
-	object_obex_lookup(x, gensym("#P"), &jp);
+	object_obex_lookup(x, hoa_sym_pound_P, &jp);
 	if (jp && (jp = jpatcher_get_toppatcher(jp)))
 	{
 		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
@@ -539,7 +539,10 @@ t_max_err bindname_set(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 		{
 			// remove previous binding
 			if (x->f_binding_name != hoa_sym_nothing)
-				linkmap_remove_with_binding_name(x, x->f_binding_name);
+            {
+                defer_low(x, (method)linkmap_remove_with_binding_name, x->f_binding_name, NULL, NULL);
+                //linkmap_remove_with_binding_name(x, x->f_binding_name);
+            }
 			
 			// add new one
 			if (new_binding_name != hoa_sym_nothing)
