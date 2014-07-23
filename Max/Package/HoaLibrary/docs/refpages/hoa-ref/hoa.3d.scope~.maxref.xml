@@ -196,7 +196,7 @@
 
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.3d.scope~" />
+		<seealso name="hoa.3d.meter~" />
 		<seealso name="hoa.2d.scope~" />
 		<seealso name="hoa.3d.decoder~" />
 		<seealso name="hoa.3d.encoder~" />

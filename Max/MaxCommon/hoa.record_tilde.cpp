@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- an ambisonic <o>sfrecord~</o> object
+ an ambisonic sfrecord~ object
  
  @description
  <o>hoa.record~</o> is a wrapped <o>sfrecord~</o> object

@@ -15,7 +15,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- Control <o>hoa.process~</o> voice allocation, muting, argument and attributes.
+ Control hoa.process~ voice allocation, muting, argument and attributes.
  
  @description
  Use the <o>hoa.thisprocess~</o> object to control <o>hoa.process~</o> voice allocation, muting, argument and attributes. When placed inside a patcher loaded by a <o>hoa.process~</o> object, it send and receive messages from the <o>hoa.process~</o> object that loads it.

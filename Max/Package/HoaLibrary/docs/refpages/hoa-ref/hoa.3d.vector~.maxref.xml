@@ -80,11 +80,11 @@
 	<seealsolist>
 		<seealso name="hoa.2d.vector~" />
 		<seealso name="hoa.3d.meter~" />
+		<seealso name="hoa.3d.scope~" />
 		<seealso name="hoa.3d.optim~" />
 		<seealso name="hoa.3d.map~" />
 		<seealso name="hoa.3d.encoder~" />
 		<seealso name="hoa.3d.decoder~" />
-		<seealso name="hoa.3d.scope~" />
 		<seealso name="hoa.3d.wider~" />
 	</seealsolist>
 

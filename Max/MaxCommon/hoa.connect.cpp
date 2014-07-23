@@ -162,7 +162,7 @@ void connect_free(t_connect *x)
 
 void connect_attach(t_connect *x)
 {
-	object_obex_lookup(x, gensym("#P"), &x->f_patcher);
+	object_obex_lookup(x, hoa_sym_pound_P, &x->f_patcher);
 	x->f_patcherview = object_attr_getobj(x->f_patcher, hoa_sym_firstview);
 	object_attach_byptr_register(x, x->f_patcherview, CLASS_NOBOX);
 }

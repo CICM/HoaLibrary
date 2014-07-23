@@ -649,8 +649,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ],
-									"text" : "1. 1. 1. 1. 1. 1. 1. 0.6 1. 1. 1. 1. 1. 1. 1. 1."
+									"patching_rect" : [ 104.25, 577.0, 298.0, 17.0 ]
 								}
 
 							}
@@ -663,10 +662,10 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"grid" : 10,
-									"hoa_2d_space_saved_state" : [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ],
+									"hoa_2d_space_saved_state" : [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.2d.space",
-									"minmax" : [ 0.5, 1.0 ],
+									"minmax" : [ -20.0, 20.0 ],
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "int" ],
@@ -3650,7 +3649,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u327010154"
+									"varname" : "u747019416"
 								}
 
 							}

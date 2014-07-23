@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, audio, MSP
  
- @seealso hoa.2d.recomposer~, hoa.2d.recomposer, hoa.2d.space, hoa.amp~, hoa.delay~, hoa.2d.wider~, hoa.2d.encoder~, hoa.2d.decoder~, hoa.process~, hoa.2d.meter~, hoa.2d.scope~
+ @seealso hoa.2d.recomposer~, hoa.2d.recomposer, hoa.2d.space, hoa.fx.gain~, hoa.fx.delay~, hoa.2d.wider~, hoa.2d.encoder~, hoa.2d.decoder~, hoa.process~, hoa.2d.meter~, hoa.2d.scope~
  */
 
 #include "Hoa2D.max.h"
@@ -145,9 +145,9 @@ void hoa_projector_perform64(t_hoa_projector *x, t_object *dsp64, double **ins, 
 void hoa_projector_assist(t_hoa_projector *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
-        sprintf(s,"(Signal) %s", x->f_projector->getHarmonicName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_projector->getHarmonicName(a).c_str());
     else
-        sprintf(s,"(Signal) %s", x->f_projector->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_projector->getChannelName(a).c_str());
 }
 
 

@@ -274,7 +274,7 @@ void hoa_2d_scope_free(t_hoa_2d_scope *x)
 
 void hoa_2d_scope_assist(t_hoa_2d_scope *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"(Signal) %s", x->f_scope->getHarmonicName(a).c_str());
+    sprintf(s,"(signal) %s", x->f_scope->getHarmonicName(a).c_str());
 }
 
 t_max_err hoa_2d_scope_notify(t_hoa_2d_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)

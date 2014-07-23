@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A custom <o>dac~</o> object with MathLab syntax.
+ A custom dac~ object with MathLab syntax.
  
  @description
  <o>hoa.dac~</o> is a wrapped <o>dac~</o> object (Digital-To-Analog-Converter) through which you will route all signals from MSP out to your computer speakers or audio hardware to be audible to the human ear. It also gives you access to the Audio Status window which controls your audio settings and hardware. Unlike <o>dac~</o> object, you can use a mathLab syntax to set channel routing. ex : "1:16" produce "1 2 3 ... 16"

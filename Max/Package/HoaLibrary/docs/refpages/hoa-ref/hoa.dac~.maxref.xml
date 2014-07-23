@@ -6,7 +6,7 @@
 <c74object name="hoa.dac~" module="hoa">
 
 	<digest>
-		A custom <o>dac~</o> object with MathLab syntax.
+		A custom dac~ object with MathLab syntax.
 	</digest>
 
 	<description>

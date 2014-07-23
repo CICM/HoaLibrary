@@ -6,7 +6,7 @@
 <c74object name="hoa.record~" module="hoa">
 
 	<digest>
-		an ambisonic <o>sfrecord~</o> object
+		an ambisonic sfrecord~ object
 	</digest>
 
 	<description>

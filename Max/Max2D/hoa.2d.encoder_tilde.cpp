@@ -168,13 +168,13 @@ void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
 	if(m == ASSIST_INLET)
 	{
         if(a == 0)
-            sprintf(s,"(Signal) Input");
+            sprintf(s,"(signal) Input");
         else
-            sprintf(s,"(Signal or float) Azimuth");
+            sprintf(s,"(signal/float) Azimuth");
 	} 
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_encoder->getHarmonicName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_encoder->getHarmonicName(a).c_str());
 	}
 }
 

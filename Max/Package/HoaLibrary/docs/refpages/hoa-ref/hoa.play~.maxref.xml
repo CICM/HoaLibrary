@@ -6,7 +6,7 @@
 <c74object name="hoa.play~" module="hoa">
 
 	<digest>
-		an ambisonic <o>sfplay~</o> object
+		an ambisonic sfplay~ object
 	</digest>
 
 	<description>

@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, audio, GUI, MSP
  
- @seealso hoa.3d.scope~, hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
+ @seealso hoa.3d.meter~, hoa.2d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
  
  @illustration on @caption the hoa.3d.scope~ GUI object
  @palette yes

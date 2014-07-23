@@ -99,6 +99,7 @@
 		<seealso name="hoa.3d.decoder~" />
 		<seealso name="hoa.3d.scope~" />
 		<seealso name="hoa.3d.wider~" />
+		<seealso name="hoa.3d.meter~" />
 	</seealsolist>
 
 	<misc name = "Discussion">

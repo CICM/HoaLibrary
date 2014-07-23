@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, audio, MSP
  
- @seealso hoa.2d.optim~, hoa.3d.map~, hoa.3d.encoder~, hoa.3d.decoder~, hoa.3d.scope~, hoa.3d.wider~
+ @seealso hoa.2d.optim~, hoa.3d.map~, hoa.3d.encoder~, hoa.3d.decoder~, hoa.3d.scope~, hoa.3d.wider~, hoa.3d.meter~
  */
 
 #include "Hoa3D.max.h"
@@ -158,7 +158,7 @@ void hoa_3d_optim_perform64(t_hoa_3d_optim *x, t_object *dsp64, double **ins, lo
 
 void hoa_3d_optim_assist(t_hoa_3d_optim *x, void *b, long m, long a, char *s)
 {
-	sprintf(s,"(Signal) %s", x->f_optim->getHarmonicName(a).c_str());
+	sprintf(s,"(signal) %s", x->f_optim->getHarmonicName(a).c_str());
 }
 
 void hoa_3d_optim_basic(t_hoa_3d_optim *x)

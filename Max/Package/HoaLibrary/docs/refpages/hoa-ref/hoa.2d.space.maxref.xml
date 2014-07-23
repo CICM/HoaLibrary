@@ -231,7 +231,7 @@
 				Snap to Grid
 			</digest>
 			<description>
-				If the <m>snaptogrid</m> attribute is checked, sliders will snap to the setted grid.
+				If the <m>snaptogrid</m> attribute is checked, sliders will snap to the grid.
 			</description>
 			<attributelist>
 				<attribute name="default" get="1" set="1" type="int" size="1" value="0" />
@@ -270,8 +270,8 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.2d.process~" />
-		<seealso name="hoa.amp~" />
-		<seealso name="hoa.delay~" />
+		<seealso name="hoa.fx.gain~" />
+		<seealso name="hoa.fx.delay~" />
 		<seealso name="hoa.gain~" />
 		<seealso name="hoa.2d.recomposer" />
 		<seealso name="hoa.2d.projector~" />

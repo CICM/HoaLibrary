@@ -23,7 +23,7 @@
  
  @category planewaves, hoa objects, audio, GUI, MSP
  
- @seealso meter~ hoa.2d.meter~ hoa.3d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
+ @seealso meter~, hoa.2d.meter~, hoa.3d.scope~, hoa.3d.decoder~, hoa.3d.encoder~, hoa.3d.map~, hoa.3d.optim~, hoa.3d.vector~, hoa.3d.wider~, hoa.dac~
  
  @illustration on @caption the hoa.3d.meter~ GUI object
  @palette yes

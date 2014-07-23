@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, GUI
  
- @seealso  hoa.2d.process~, hoa.amp~, hoa.delay~, hoa.gain~, hoa.2d.recomposer, hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~
+ @seealso  hoa.2d.process~, hoa.fx.gain~, hoa.fx.delay~, hoa.gain~, hoa.2d.recomposer, hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~
  
  @illustration on @caption the hoa.2d.space GUI object
  @palette yes
@@ -178,7 +178,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER				(c, "snaptogrid", 0, "4");
 	CLASS_ATTR_DEFAULT				(c, "snaptogrid", 0, "0");
     CLASS_ATTR_SAVE					(c, "snaptogrid", 1);
-    // @description If the <m>snaptogrid</m> attribute is checked, sliders will snap to the setted grid.
+    // @description If the <m>snaptogrid</m> attribute is checked, sliders will snap to the grid.
 	
 	CLASS_ATTR_LONG                 (c, "grid", 0, t_hoa_2d_space, f_grid);
 	CLASS_ATTR_CATEGORY             (c, "grid", 0, "Value");

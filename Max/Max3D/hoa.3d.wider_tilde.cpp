@@ -173,11 +173,11 @@ void hoa_3d_wider_assist(t_hoa_3d_wider *x, void *b, long m, long a, char *s)
 {
     if (a == x->f_wider->getNumberOfHarmonics())
 	{
-        sprintf(s,"(Signal or float) Widening value");
+        sprintf(s,"(signal/float) Widening value");
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_wider->getHarmonicName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_wider->getHarmonicName(a).c_str());
 	}
 }
 

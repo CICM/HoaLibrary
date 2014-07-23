@@ -813,10 +813,6 @@
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 168.0, 651.625, 167.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"mode" : "ambisonic"
-									}
-,
 									"text" : "hoa.3d.decoder~ 1 8"
 								}
 
@@ -5994,7 +5990,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
+						"rect" : [ 100.0, 126.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6270,7 +6266,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 767.533325, 642.0, 54.966705, 56.0 ],
+									"patching_rect" : [ 777.533325, 642.0, 54.966705, 56.0 ],
 									"text" : "cartesian -0. 0.374603 0."
 								}
 
@@ -6285,7 +6281,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 691.624939, 642.0, 59.0, 43.0 ],
+									"patching_rect" : [ 695.624939, 642.0, 60.0, 56.0 ],
 									"text" : "cartesian 0. 1.542857 0."
 								}
 
@@ -6314,7 +6310,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 196.5, 638.0, 59.0, 56.0 ],
+									"patching_rect" : [ 200.5, 638.0, 59.0, 56.0 ],
 									"text" : "cartesian -0. -1.961905 0."
 								}
 
@@ -6329,7 +6325,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 103.75, 638.0, 65.0, 43.0 ],
+									"patching_rect" : [ 103.75, 638.0, 65.0, 56.0 ],
 									"text" : "cartesian 1.352381 1.552381 0."
 								}
 
@@ -6344,7 +6340,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 13.0, 638.0, 59.0, 56.0 ],
+									"patching_rect" : [ 18.0, 638.0, 60.0, 69.0 ],
 									"text" : "cartesian -1.352381 1.533333 0."
 								}
 
@@ -7765,7 +7761,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u762012510"
+									"varname" : "u989000562"
 								}
 
 							}
@@ -8080,7 +8076,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 973.0, 776.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 776.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12888,10 +12884,6 @@
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 375.733307, 390.0, 329.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"ramp" : 100.0
-									}
-,
 									"text" : "hoa.2d.map~ 3 4"
 								}
 
@@ -13472,13 +13464,13 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
-			"obj-5::obj-18" : [ "hoa.2d.map[5]", "hoa.2d.map", 0 ],
-			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ],
-			"obj-5::obj-3" : [ "hoa.map[1]", "hoa.map[1]", 0 ],
 			"obj-5::obj-2" : [ "hoa.map", "hoa.map", 0 ],
+			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ],
+			"obj-5::obj-3" : [ "hoa.map[1]", "hoa.map[1]", 0 ],
+			"obj-4::obj-1" : [ "hoa.2d.map[4]", "hoa.2d.map[4]", 0 ],
 			"obj-3::obj-1" : [ "hoa.2d.map[3]", "hoa.2d.map[3]", 0 ],
-			"obj-45::obj-18" : [ "hoa.2d.map", "hoa.2d.map", 0 ]
+			"obj-5::obj-18" : [ "hoa.2d.map[5]", "hoa.2d.map", 0 ],
+			"obj-2::obj-1" : [ "hoa.2d.map[2]", "hoa.2d.map[2]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

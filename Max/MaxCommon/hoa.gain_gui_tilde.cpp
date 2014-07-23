@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- A multichannel <o>gain~</o> object.
+ A multichannel gain~ object.
  
  @description
  <o>hoa.gain~</o> is a multichannel exponential scaling volume slider. hoa.gain~ is a slider that scales signals. it can also make a smooth transition as you move from one value of the slider to the next.
@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, GUI, msp
  
- @seealso gain~, hoa.process~, hoa.amp~
+ @seealso gain~, hoa.process~, hoa.fx.gain~
  
  @illustration on @caption the hoa.gain~ GUI object
  @palette yes
@@ -438,10 +438,10 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
         {
             switch (x->f_inputMode) {
                 case DECIBELS:
-                    sprintf(s,"(Int/Float) Set dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
+                    sprintf(s,"(float/int) Set dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
                     break;
                 case AMPLITUDE:
-                    sprintf(s,"(Int/Float) Set Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
+                    sprintf(s,"(float/int) Set Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
                     break;
                 case MIDI:
                     sprintf(s,"(int) Set Midi Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
@@ -464,10 +464,10 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
         {
             switch (x->f_inputMode) {
                 case DECIBELS:
-                    sprintf(s,"(Float) dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
+                    sprintf(s,"(float) dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
                     break;
                 case AMPLITUDE:
-                    sprintf(s,"(Float) Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
+                    sprintf(s,"(float) Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
                     break;
                 case MIDI:
                     sprintf(s,"(int) Midi Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);

@@ -182,11 +182,11 @@ void hoa_rotate_assist(t_hoa_rotate *x, void *b, long m, long a, char *s)
 {
 	if(a == x->f_rotate->getNumberOfHarmonics())
 	{
-        sprintf(s,"(Signal or float) Rotation");
+        sprintf(s,"(signal/float) Rotation");
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_rotate->getHarmonicName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_rotate->getHarmonicName(a).c_str());
 	}
 }
 

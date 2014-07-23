@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, GUI
  
- @seealso  hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.process~, hoa.amp~, hoa.delay~, hoa.gain~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~, hoa.2d.wider~
+ @seealso  hoa.2d.projector~, hoa.2d.recomposer~, hoa.2d.process~, hoa.fx.gain~, hoa.fx.delay~, hoa.gain~, hoa.2d.meter~, hoa.2d.map, hoa.2d.decoder~, hoa.2d.encoder~, hoa.2d.wider~
  
  @illustration on @caption the hoa.2d.recomposer GUI object
  @palette yes

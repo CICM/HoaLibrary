@@ -301,7 +301,7 @@
     ]
   },
   "hoa.dac~": {
-    "digest": "A custom <o>dac~</o> object with MathLab syntax.",
+    "digest": "A custom dac~ object with MathLab syntax.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -311,7 +311,7 @@
     ]
   },
   "hoa.gain~": {
-    "digest": "A multichannel <o>gain~</o> object.",
+    "digest": "A multichannel gain~ object.",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -412,7 +412,7 @@
     ]
   },
   "hoa.play~": {
-    "digest": "an ambisonic <o>sfplay~</o> object",
+    "digest": "an ambisonic sfplay~ object",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -431,7 +431,7 @@
     ]
   },
   "hoa.record~": {
-    "digest": "an ambisonic <o>sfrecord~</o> object",
+    "digest": "an ambisonic sfrecord~ object",
     "module": "hoa",
     "category": [
       "ambisonics",
@@ -441,7 +441,7 @@
     ]
   },
   "hoa.thisprocess~": {
-    "digest": "Control <o>hoa.process~</o> voice allocation, muting, argument and attributes.",
+    "digest": "Control hoa.process~ voice allocation, muting, argument and attributes.",
     "module": "hoa",
     "category": [
       "ambisonics",

@@ -13,7 +13,7 @@
  @author    Julien Colafrancesco, Pierre Guillot, Eliott Paris.
  
  @digest
- an ambisonic <o>sfplay~</o> object
+ an ambisonic sfplay~ object
  
  @description
  <o>hoa.play~</o> is a wrapped <o>sfplay~</o> object

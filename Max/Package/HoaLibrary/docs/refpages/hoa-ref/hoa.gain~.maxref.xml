@@ -6,7 +6,7 @@
 <c74object name="hoa.gain~" module="hoa">
 
 	<digest>
-		A multichannel <o>gain~</o> object.
+		A multichannel gain~ object.
 	</digest>
 
 	<description>
@@ -357,7 +357,7 @@
 	<seealsolist>
 		<seealso name="gain~" />
 		<seealso name="hoa.process~" />
-		<seealso name="hoa.amp~" />
+		<seealso name="hoa.fx.gain~" />
 	</seealsolist>
 
 	<misc name = "Discussion">

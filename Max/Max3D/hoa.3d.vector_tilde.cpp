@@ -23,7 +23,7 @@
  
  @category ambisonics, hoa objects, audio, MSP
  
- @seealso hoa.2d.vector~, hoa.3d.meter~, hoa.3d.optim~, hoa.3d.map~, hoa.3d.encoder~, hoa.3d.decoder~, hoa.3d.scope~, hoa.3d.wider~
+ @seealso hoa.2d.vector~, hoa.3d.meter~, hoa.3d.scope~, hoa.3d.optim~, hoa.3d.map~, hoa.3d.encoder~, hoa.3d.decoder~, hoa.3d.wider~
  */
 
 #include "Hoa3D.max.h"
@@ -189,27 +189,27 @@ void hoa_3d_vector_assist(t_hoa_3d_vector *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
     {
-        sprintf(s,"(Signal) %s", x->f_vector->getChannelName(a).c_str());
+        sprintf(s,"(signal) %s", x->f_vector->getChannelName(a).c_str());
     }
     else
     {
         if(x->f_mode)
         {
             if(a == 0)
-                sprintf(s,"(Signal) Energy Vector Abscissa");
+                sprintf(s,"(signal) Energy Vector Abscissa");
             else if(a == 1)
-                sprintf(s,"(Signal) Energy Vector Ordinate");
+                sprintf(s,"(signal) Energy Vector Ordinate");
             else if(a == 2)
-                sprintf(s,"(Signal) Energy Vector Height");
+                sprintf(s,"(signal) Energy Vector Height");
         }
         else
         {
             if(a == 0)
-                sprintf(s,"(Signal) Velocity Vector Abscissa");
+                sprintf(s,"(signal) Velocity Vector Abscissa");
             else if(a == 1)
-                sprintf(s,"(Signal) Velocity Vector Ordinate");
+                sprintf(s,"(signal) Velocity Vector Ordinate");
             else if(a == 2)
-                sprintf(s,"(Signal) Velocity Vector Height");
+                sprintf(s,"(signal) Velocity Vector Height");
         }
     }
 }

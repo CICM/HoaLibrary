@@ -517,7 +517,7 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
             if(a == 0)
                 sprintf(s,"(signal/messages) Source 1 and sources messages");
             else
-                sprintf(s,"(Signal) Source %ld", a+1);
+                sprintf(s,"(signal) Source %ld", a+1);
         }
         
 	}

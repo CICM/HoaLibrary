@@ -6,7 +6,7 @@
 <c74object name="hoa.thisprocess~" module="hoa">
 
 	<digest>
-		Control <o>hoa.process~</o> voice allocation, muting, argument and attributes.
+		Control hoa.process~ voice allocation, muting, argument and attributes.
 	</digest>
 
 	<description>
