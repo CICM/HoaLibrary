@@ -9,7 +9,7 @@ Thus, they should be able to let their creativity run free.
 
 ------------------------------------------------------------------------------------------
 
-The hoa.library in under the GNU Public License. If you'd like to avoid the restrictions of the GPL and use how.library for a closed-source product, contact the CICM.
+The HoaLibrary is under the GNU Public License. If you'd like to avoid the restrictions of the GPL and use HoaLibrary for a closed-source product, please contact the CICM.
 
 http://cicm.mshparisnord.org/
 
@@ -20,7 +20,7 @@ Max (HoaLibrary Beta 2.0) :
 This version is compatible with Max 6.1 and higher
 
 Installation:
- - First remove any old version of HoaLibrary (if any).
+ - Firstly, remove any old version of HoaLibrary (if any).
  - To install the HoaLibrary package, simply copy it to your 'packages' folder.
  - To uninstall this package, simply remove it from your 'packages' folder.
 

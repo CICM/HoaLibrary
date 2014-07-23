@@ -21,12 +21,12 @@ Max : For an overview of hoa.library and new features in version Beta 2.0, pleas
 
 ¥ Changes :
 
- - hoa.map complete refactory, compatible with the pattrstorage and preset system, 2d/3d
+ - hoa.map : complete refactory, compatible with the pattrstorage and preset system, 2d/3d
 
- - All 2d objects are now prepended by a 2d symbol in their name, ex : hoa.wider~ => hoa.2d.wider~.
+ - All 2d objects should now be prepended by a 2d symbol in their name, ex : hoa.wider~ => hoa.2d.wider~.
  - All 3d objects are prepended by a 3d symbol in their name, ex : hoa.3d.wider~.
 
- - By convention and for clarity, patchers destinated to be loaded by a hoa.process~ object are now either prepended by syn or fx. ex hoa.syn.delay~ / hoa.fx.delay~
+ - By convention and for clarity, patchers destinated to be loaded by a hoa.process~ object are now either prepended by syn or fx. ex hoa.syn.delay~ / hoa.fx.delay~ (equivalent of the deprecated hoa.delay~ abstraction)
   |=> you will need to adapt you patch in function if you used it with the old hoa.plug~ object.
 
 ¥ Deprecated objects :
@@ -37,7 +37,7 @@ Max : For an overview of hoa.library and new features in version Beta 2.0, pleas
 
  - hoa.freeverb is now deprecated, have a look at the hoa.fx.convolve~ process patch
 
- - hoa.space~ is now deprecated. please use the hoa.fx.gain~ process patch.
+ - hoa.space~ is now deprecated. please use the hoa.fx.gain~ process patch instead.
 
 ------------------------
 version 1.3
