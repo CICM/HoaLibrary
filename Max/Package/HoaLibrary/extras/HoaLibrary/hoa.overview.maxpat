@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 392.0, 183.0, 700.0, 575.0 ],
+		"rect" : [ 402.0, 147.0, 700.0, 575.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -34,12 +34,27 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
+					"id" : "obj-32",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "bang", "" ],
+					"patching_rect" : [ -165.0, 428.117065, 32.5, 20.0 ],
+					"text" : "t b l"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 320.0, 56.0, 20.0 ],
+					"patching_rect" : [ -165.0, 525.117065, 56.0, 20.0 ],
 					"text" : "deferlow"
 				}
 
@@ -55,7 +70,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 252.882935, 105.0, 60.0 ],
+					"patching_rect" : [ -165.0, 458.0, 105.0, 62.0 ],
 					"text" : "loadmess patching_rect 31.6875 477.5 629.8125 23."
 				}
 
@@ -98,7 +113,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ -165.0, 129.0, 60.0, 20.0 ],
+					"patching_rect" : [ -211.4375, 129.0, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -128,23 +143,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 524.0, 74.0, 20.0 ],
+					"patching_rect" : [ -128.0, 369.5, 74.0, 20.0 ],
 					"text" : "prepend set"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"id" : "obj-16",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ -165.0, 401.0, 60.0, 20.0 ],
-					"text" : "loadbang"
 				}
 
 			}
@@ -159,7 +159,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 431.0, 164.0, 72.0 ],
+					"patching_rect" : [ -165.0, 285.5, 164.0, 73.0 ],
 					"text" : "\"hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.\""
 				}
 
@@ -208,8 +208,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 82.875, 242.0, 25.0 ],
-					"text" : ";\rmax launchbrowser https://www.gnu.org/copyleft/gpl.html"
+					"patching_rect" : [ 691.729187, 82.875, 242.0, 26.0 ],
+					"text" : ";\r\nmax launchbrowser https://www.gnu.org/copyleft/gpl.html"
 				}
 
 			}
@@ -387,7 +387,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 314.5625, 10.75, 262.0, 32.0 ],
+					"patching_rect" : [ 314.5625, 10.75, 262.0, 33.0 ],
 					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM / University of Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -417,7 +417,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -269.9375, 45.75, 177.0, 17.0 ],
+					"patching_rect" : [ -269.9375, 45.75, 177.0, 18.0 ],
 					"text" : "window flags grow, window exec"
 				}
 
@@ -432,7 +432,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -253.4375, 68.75, 190.0, 17.0 ],
+					"patching_rect" : [ -253.4375, 68.75, 190.0, 18.0 ],
 					"text" : "window flags nogrow, window exec"
 				}
 
@@ -460,7 +460,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 477.5, 629.8125, 22.0 ],
+					"patching_rect" : [ 31.6875, 477.5, 629.8125, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -532,8 +532,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 44.75, 318.0, 25.0 ],
-					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
+					"patching_rect" : [ 691.729187, 44.75, 318.0, 26.0 ],
+					"text" : ";\r\nmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
 				}
 
 			}
@@ -586,7 +586,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 410.0, 354.0, 665.0, 285.0 ],
+						"rect" : [ 420.0, 318.0, 665.0, 285.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -616,7 +616,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 568.0, 696.0, 150.0, 18.0 ],
-									"text" : "hoa.2d.projector~"
+									"text" : "hoa.3d.map"
 								}
 
 							}
@@ -1389,8 +1389,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 10.75, 261.5, 25.0 ],
-					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
+					"patching_rect" : [ 691.729187, 10.75, 261.5, 26.0 ],
+					"text" : ";\r\nmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
 				}
 
 			}
@@ -1418,7 +1418,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.9375, 85.25, 666.6875, 74.0 ],
+					"patching_rect" : [ 15.9375, 85.25, 666.6875, 75.0 ],
 					"text" : "HoaLibrary allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. A lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering...",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
@@ -1479,6 +1479,7 @@
 					"destination" : [ "obj-18", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
+					"midpoints" : [ -155.5, 546.0, -26.0, 546.0, -26.0, 468.0, 36.0, 468.0, 36.0, 474.0, 41.1875, 474.0 ],
 					"source" : [ "obj-12", 0 ]
 				}
 
@@ -1503,27 +1504,20 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-16", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
+					"midpoints" : [ -118.5, 450.0, -28.0, 450.0, -28.0, 468.0, 36.0, 468.0, 36.0, 474.0, 41.1875, 474.0 ],
 					"source" : [ "obj-20", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
+					"destination" : [ "obj-32", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
+					"midpoints" : [ 27.5625, 456.0, -13.0, 456.0, -13.0, 423.0, -155.5, 423.0 ],
 					"source" : [ "obj-22", 0 ]
 				}
 
@@ -1543,6 +1537,15 @@
 					"disabled" : 0,
 					"hidden" : 1,
 					"source" : [ "obj-24", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-14", 0 ],
+					"disabled" : 0,
+					"hidden" : 1,
+					"source" : [ "obj-25", 0 ]
 				}
 
 			}
@@ -1570,6 +1573,25 @@
 					"disabled" : 0,
 					"hidden" : 1,
 					"source" : [ "obj-31", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 1,
+					"source" : [ "obj-32", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"disabled" : 0,
+					"hidden" : 1,
+					"midpoints" : [ -142.0, 450.0, -28.0, 450.0, -28.0, 468.0, 36.0, 468.0, 36.0, 474.0, 41.1875, 474.0 ],
+					"source" : [ "obj-32", 1 ]
 				}
 
 			}
@@ -1630,28 +1652,28 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.overviewer.js",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/javascript",
+				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/javascript",
 				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
+				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "GPLv3_Logo.svg",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "svg ",
 				"implicit" : 1
