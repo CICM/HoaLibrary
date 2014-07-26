@@ -329,7 +329,7 @@
 									"outlettype" : [ "signal", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 69.0, 346.0, 320.0, 53.0 ],
-									"range" : [ -60.0, 18.0 ]
+									"range" : [ 0.0, 6.0 ]
 								}
 
 							}
@@ -845,7 +845,7 @@
 , 							{
 								"box" : 								{
 									"channels" : 2,
-									"defvaldb" : 0.6,
+									"defvaldb" : 2.0,
 									"id" : "obj-3",
 									"loudspeakers" : 2,
 									"maxclass" : "hoa.gain~",
@@ -1138,11 +1138,11 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 292.5, 226.0, 59.5, 20.0 ],
 									"restore" : 									{
-										"hoaGain" : [ 0, -15.737265 ]
+										"hoaGain" : [ 0, -26.540001 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u025000227"
+									"varname" : "u376001651"
 								}
 
 							}
@@ -1174,6 +1174,7 @@
 							}
 , 							{
 								"box" : 								{
+									"defvaldb" : 0.62,
 									"id" : "obj-3",
 									"maxclass" : "hoa.gain~",
 									"numinlets" : 9,
@@ -1267,6 +1268,7 @@
 									"destination" : [ "obj-3", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 436.5, 318.5, 107.5, 318.5 ],
 									"source" : [ "obj-19", 0 ]
 								}
 

@@ -3,9 +3,9 @@
 
 ##### Version :
 
-Release 1.3 for Max 6.1 (32 & 64 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
+Release 2.0 for Max 6.1 and higher (32 & 64 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
 
-![Image Max](https://raw.github.com/CICM/HoaLibrary/master/Ressources/PhotoMax.png "Max Patch")
+![Image Max](https://raw.github.com/CICM/HoaLibrary/master/Ressources/HoaLibrary-v2.0-beta.png "Max Patch")
 
 ##### Authors (Hoa for Max) :
 

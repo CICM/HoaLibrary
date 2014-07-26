@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 744.0, 536.0 ],
+						"rect" : [ 0.0, 26.0, 744.0, 536.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1596,7 +1596,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 744.0, 536.0 ],
+						"rect" : [ 100.0, 126.0, 744.0, 536.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1627,7 +1627,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 600.6875, 119.0, 92.0, 33.0 ],
+									"patching_rect" : [ 579.6875, 133.0, 92.0, 33.0 ],
 									"text" : "Find me in the HoaClippings",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[10]"
@@ -1842,7 +1842,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 539.4375, 78.5, 70.0, 19.0 ],
+									"patching_rect" : [ 649.6875, 14.0, 70.0, 19.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -1857,7 +1857,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 539.4375, 104.5, 43.0, 19.0 ],
+									"patching_rect" : [ 649.6875, 40.0, 43.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"filename" : "lock",
 										"parameter_enable" : 0
@@ -2009,7 +2009,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 597.6875, 115.5, 95.0, 40.0 ],
+									"patching_rect" : [ 576.6875, 129.5, 95.0, 40.0 ],
 									"rounded" : 0
 								}
 
