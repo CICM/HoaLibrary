@@ -14,7 +14,7 @@ Pure Data :
 
 - Mail list Pure Data
 - Forum Pure Data Hurleur
-- Forum Pure Data code Block
+- Forum Pure Data code lab
 
 Faust :
 

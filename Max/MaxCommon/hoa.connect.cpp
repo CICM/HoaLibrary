@@ -394,7 +394,11 @@ void connect_connect(t_patcher *p, t_object *send, int outlet, t_object *receive
 t_max_err connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	int i, j, k, tabcheck;
-	if (msg == hoa_sym_attr_modified && sender == x->f_patcherview)
+    if(msg == gensym("free") && sender == x->f_patcherview)
+	{
+        x->f_patcherview = NULL;
+    }
+	else if(msg == hoa_sym_attr_modified && sender == x->f_patcherview)
 	{
 		t_symbol *attrname;
 		attrname = (t_symbol *)object_method(data, hoa_sym_getname);
