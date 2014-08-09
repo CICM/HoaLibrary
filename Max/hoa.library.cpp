@@ -8,8 +8,6 @@
 #include "Max3D/Hoa3D.max.h"
 #include "MaxCommon/HoaCommon.max.h"
 
-char hoaversion[] = "Beta 2.0";
-
 int C74_EXPORT main(void)
 {
     // HOA COMMON //
