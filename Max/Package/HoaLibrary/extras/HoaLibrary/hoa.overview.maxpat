@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 8,
 			"architecture" : "x64"
 		}
 ,
@@ -70,7 +70,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 458.0, 105.0, 62.0 ],
+					"patching_rect" : [ -165.0, 458.0, 105.0, 60.0 ],
 					"text" : "loadmess patching_rect 31.6875 477.5 629.8125 23."
 				}
 
@@ -128,8 +128,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 159.0, 64.0, 18.0 ],
-					"text" : "\"Beta 2.0\""
+					"patching_rect" : [ -165.0, 159.0, 74.0, 18.0 ],
+					"text" : "\"Beta 2.0.1\""
 				}
 
 			}
@@ -159,7 +159,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -165.0, 285.5, 164.0, 73.0 ],
+					"patching_rect" : [ -165.0, 285.5, 164.0, 72.0 ],
 					"text" : "\"hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.\""
 				}
 
@@ -184,9 +184,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
+						"palette_caption" : "hoa.2d.scope~",
 						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
-						"palette_action" : "hoa.2d.scope~",
-						"palette_caption" : "hoa.2d.scope~"
+						"palette_action" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -208,8 +208,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 82.875, 242.0, 26.0 ],
-					"text" : ";\r\nmax launchbrowser https://www.gnu.org/copyleft/gpl.html"
+					"patching_rect" : [ 691.729187, 82.875, 242.0, 25.0 ],
+					"text" : ";\rmax launchbrowser https://www.gnu.org/copyleft/gpl.html"
 				}
 
 			}
@@ -246,7 +246,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 210.78125, 20.75, 73.0, 20.0 ],
-					"text" : "Beta 2.0",
+					"text" : "Beta 2.0.1",
 					"textcolor" : [ 0.9404, 0.940544, 0.940332, 1.0 ],
 					"textjustification" : 1,
 					"varname" : "autohelp_top_title[4]"
@@ -264,7 +264,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 211.78125, 21.75, 73.0, 20.0 ],
-					"text" : "Beta 2.0",
+					"text" : "Beta 2.0.1",
 					"textcolor" : [ 0.424631, 0.424696, 0.4246, 0.21 ],
 					"textjustification" : 1,
 					"varname" : "autohelp_top_title[5]"
@@ -387,7 +387,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 314.5625, 10.75, 262.0, 33.0 ],
+					"patching_rect" : [ 314.5625, 10.75, 262.0, 32.0 ],
 					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2014 CICM / University of Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -417,7 +417,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -269.9375, 45.75, 177.0, 18.0 ],
+					"patching_rect" : [ -269.9375, 45.75, 177.0, 17.0 ],
 					"text" : "window flags grow, window exec"
 				}
 
@@ -432,7 +432,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ -253.4375, 68.75, 190.0, 18.0 ],
+					"patching_rect" : [ -253.4375, 68.75, 190.0, 17.0 ],
 					"text" : "window flags nogrow, window exec"
 				}
 
@@ -457,10 +457,12 @@
 					"fontsize" : 14.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.6875, 477.5, 629.8125, 23.0 ],
+					"patching_rect" : [ 31.6875, 477.5, 629.8125, 38.0 ],
+					"text" : "hover each object to have a short description of their functionalities, click on them to open the corresponding help patch.",
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -532,8 +534,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 44.75, 318.0, 26.0 ],
-					"text" : ";\r\nmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
+					"patching_rect" : [ 691.729187, 44.75, 318.0, 25.0 ],
+					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
 				}
 
 			}
@@ -582,7 +584,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 8,
 							"architecture" : "x64"
 						}
 ,
@@ -1389,8 +1391,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 691.729187, 10.75, 261.5, 26.0 ],
-					"text" : ";\r\nmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
+					"patching_rect" : [ 691.729187, 10.75, 261.5, 25.0 ],
+					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
 				}
 
 			}
@@ -1418,7 +1420,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.9375, 85.25, 666.6875, 75.0 ],
+					"patching_rect" : [ 15.9375, 85.25, 666.6875, 74.0 ],
 					"text" : "HoaLibrary allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. A lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering...",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
@@ -1652,28 +1654,28 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.overviewer.js",
-				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/javascript",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/javascript",
 				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.2d.scope~.svg",
-				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/object-palettes",
 				"patcherrelativepath" : "../../misc/object-palettes",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "GPLv3_Logo.svg",
-				"bootpath" : "/Users/Eliott/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max/Package/HoaLibrary/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "svg ",
 				"implicit" : 1

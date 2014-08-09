@@ -6,6 +6,10 @@ HoaLibrary for MaxMSP, Pure Data, Faust and VST
 ------------------------ ------------------------
 
 ------------------------
+version Beta 2.0.1
+------------------------
+ - hoa.connect fix crash on Max 6.1.8
+------------------------
 version Beta 2.0
 ------------------------
 
@@ -128,68 +132,3 @@ BUGS FIXED:
 version beta 1.0.0
 ------------------------
  - first version.
-
------------------------- ------------------------
-		    PD Version 
------------------------- ------------------------
-
-Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
-
-------------------------
-version beta 1.0.0
-------------------------
-Systems : 
-- Mac OsX (Pd 32 bit)
-- Windows (Pd 32 bit)
-
-Objects :
-- hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
-- hoa.encoder~ : An ambisonic encoder.
-- hoa.map~ : An ambisonic sources spatializer.
-- hoa.delay~ : An ambisonic sound field delay.
-- hoa.freeverb~ : An implementation of the freeverb algorithm for ambisonics.
-- hoa.grain~ : An ambisonic granular synthesizer.
-- hoa.map : A GUI to spatialize sources on a map.
-- hoa.meter~ : A circular meter with sound field descriptor.
-- hoa.optim~ : An ambisonic sound field optimization.
-- hoa.pi : A good pi number.
-- hoa.projector~ : A plane wave decomposer.
-- hoa.recomposer~ : A plane wave recomposer to harmonics domain.
-- hoa.ringmod~ : An ambisonic sound field ring modulation.
-- hoa.rotate~ : An ambisonic sound field rotation external.
-- hoa.scope~ : An ambisonic harmonic scope.
-- hoa.space : A GUI to design ambisonic space.
-- hoa.space~ : A spatial filter.
-- hoa.wider~ : A fractional ambisonic orders simulator.
-
-Dependencies : 
-
-Cblas (http://www.netlib.org/clapack/cblas/) 
-You can use Accelerate for Mac Os and Ipp or GSL for all platforms.
-PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
-
------------------------- ------------------------
-		    Faust Version 
------------------------- ------------------------
-
-------------------------
-version 1.1
-------------------------
-
-Functions :
-
-- decoderStereo : decodes an ambisonic sound field for stereophonic configuration. 
-- map : encodes a source with distance compensation.
-- rotate : applies a rotation of the sound field.
-
-------------------------
-version 1.0
-------------------------
-
-Functions :
-
-- encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
-- decoder : decodes an ambisonics sound field for a circular array of loudspeakers. 
-- optimBasic, optimMaxRe, optimInPhase : weights the circular harmonics signals depending to the ambisonics optimization. It can be "basic" for no optimization, "maxRe" or "inPhase".
-- wider : can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.
-

@@ -14,7 +14,7 @@ The HoaLibrary is under the GNU Public License. If you'd like to avoid the restr
 http://cicm.mshparisnord.org/
 
 ----------------------------------
-Max (HoaLibrary Beta 2.0) :
+Max (HoaLibrary Beta 2.0.1) :
 ----------------------------------
 
 This version is compatible with Max 6.1 and higher
