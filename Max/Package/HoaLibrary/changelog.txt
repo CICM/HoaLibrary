@@ -6,9 +6,16 @@ HoaLibrary for MaxMSP, Pure Data, Faust and VST
 ------------------------ ------------------------
 
 ------------------------
+version Beta 2.0.2
+------------------------
+ - hoa.map : fix crash on Max 6.1.8
+
+------------------------
 version Beta 2.0.1
 ------------------------
- - hoa.connect fix crash on Max 6.1.8
+ - hoa.connect : fix crash on Max 6.1.8
+
+
 ------------------------
 version Beta 2.0
 ------------------------
