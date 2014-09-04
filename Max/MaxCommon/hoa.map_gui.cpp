@@ -473,6 +473,7 @@ void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 	t_symbol* name = NULL;
 	t_object *jp = NULL;
 	object_obex_lookup(x, hoa_sym_pound_P, &jp);
+    
 	if (jp && (jp = jpatcher_get_toppatcher(jp)))
 	{
 		sprintf(strname, "p%ld_%s_%s", (long)jp, binding_name->s_name, ODD_BINDING_SUFFIX);
@@ -504,11 +505,12 @@ void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 						temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
 					}
 					
-					sysmem_freeptr(x->f_listmap);
+					//sysmem_freeptr(x->f_listmap);
 					x->f_listmap = NULL;
 					
 					x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)
 				}
+                
 				else if(temp->next != NULL && temp->next->map == x)
 				{
 					// we restore the original pointer
@@ -626,6 +628,7 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 
 void hoamap_free(t_hoa_map *x)
 {
+    //defer_low(x, (method)linkmap_remove_with_binding_name, x->f_binding_name, NULL, NULL);
 	linkmap_remove_with_binding_name(x, x->f_binding_name);
 	
 	jbox_free(&x->j_box);

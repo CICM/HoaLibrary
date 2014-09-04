@@ -129,7 +129,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ -165.0, 159.0, 74.0, 18.0 ],
-					"text" : "\"Beta 2.0.1\""
+					"text" : "\"Beta 2.0.2\""
 				}
 
 			}
@@ -184,9 +184,9 @@
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
-						"palette_caption" : "hoa.2d.scope~",
 						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
-						"palette_action" : "hoa.2d.scope~"
+						"palette_action" : "hoa.2d.scope~",
+						"palette_caption" : "hoa.2d.scope~"
 					}
 ,
 					"maxclass" : "fpic",
@@ -246,7 +246,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 210.78125, 20.75, 73.0, 20.0 ],
-					"text" : "Beta 2.0.1",
+					"text" : "Beta 2.0.2",
 					"textcolor" : [ 0.9404, 0.940544, 0.940332, 1.0 ],
 					"textjustification" : 1,
 					"varname" : "autohelp_top_title[4]"
@@ -264,7 +264,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 211.78125, 21.75, 73.0, 20.0 ],
-					"text" : "Beta 2.0.1",
+					"text" : "Beta 2.0.2",
 					"textcolor" : [ 0.424631, 0.424696, 0.4246, 0.21 ],
 					"textjustification" : 1,
 					"varname" : "autohelp_top_title[5]"
@@ -618,7 +618,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 568.0, 696.0, 150.0, 18.0 ],
-									"text" : "hoa.3d.map"
+									"text" : "hoa.3d.decoder~"
 								}
 
 							}
@@ -1033,7 +1033,7 @@
 									"spacing_x" : 20.0,
 									"spacing_y" : 5.0,
 									"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.9 ],
-									"tabs" : [ "hoa.2d.decoder~", "hoa.2d.encoder~", "hoa.2d.map~", "hoa.2d.map", "hoa.2d.meter~", "hoa.2d.optim~", "hoa.2d.projector~", "hoa.2d.process~", "hoa.2d.recomposer~", "hoa.2d.recomposer", "hoa.2d.rotate~", "hoa.2d.scope~", "hoa.2d.space", "hoa.2d.vector~", "hoa.2d.wider~" ]
+									"tabs" : [ "hoa.3d.decoder~", "hoa.3d.encoder~", "hoa.3d.map~", "hoa.3d.map", "hoa.3d.meter~", "hoa.3d.optim~", "hoa.3d.process~", "hoa.3d.scope~", "hoa.3d.vector~", "hoa.3d.wider~" ]
 								}
 
 							}
