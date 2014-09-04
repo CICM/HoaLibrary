@@ -493,7 +493,7 @@ void hoa_process_click(t_hoa_process *x)
 
 void hoa_process_open(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
 {
-    int index, band;
+    int order, degree;
     if(!argc || !argv)
         return;
 
@@ -509,57 +509,45 @@ void hoa_process_open(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
     }
     else if(argc > 1 && argv && atom_gettype(argv) == A_FLOAT && atom_gettype(argv+1) == A_FLOAT && x->f_mode == 1)
     {
-        band = atom_getfloat(argv);
-        index = atom_getfloat(argv+1);
-        if(band < 0 || band > x->f_ambi_3d->getDecompositionOrder())
+        degree = atom_getfloat(argv);
+        order = atom_getfloat(argv+1);
+        if(degree < 0 || degree > x->f_ambi_3d->getDecompositionOrder())
         {
             object_error(x, "hoa.process~ open band index must be between 0 and %i", (int)x->f_ambi_3d->getDecompositionOrder());
             return;
         }
-        if(index < (int)-band || index > (int)band)
+        if(order < (int)-degree || order > (int)degree)
         {
             object_error(x, "hoa.process~ open argument index must be between %i and %i for the band %i", (int)-x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder());
             return;
         }
-        if(index < 0)
-            index = -index * 2 - 1;
-        else
-            index = index * 2;
-        index += band * band;
-        canvas_vis(x->f_canvas[index], 1);
+        canvas_vis(x->f_canvas[x->f_ambi_3d->getHarmonicIndex(degree, order)], 1);
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode > 1)
     {
-        index = atom_getfloat(argv);
-        if(index < 1 || index > (int)x->f_planewaves->getNumberOfChannels())
+        order = atom_getfloat(argv);
+        if(order < 1 || order > (int)x->f_planewaves->getNumberOfChannels())
         {
             object_error(x, "hoa.process~ open index must be between 1 and %i", (int)x->f_planewaves->getNumberOfChannels());
             return;
         }
-        index -= 1;
-        canvas_vis(x->f_canvas[index], 1);
+        canvas_vis(x->f_canvas[order-1], 1);
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode == 0)
     {
-        index = atom_getfloat(argv);
-
-        if(index < (int)-x->f_ambi_2d->getDecompositionOrder() || index > (int)x->f_ambi_2d->getDecompositionOrder())
+        order = atom_getfloat(argv);
+        if(order < (int)-x->f_ambi_2d->getDecompositionOrder() || order > (int)x->f_ambi_2d->getDecompositionOrder())
         {
             object_error(x, "hoa.process~ open index must be between %i and %i", (int)-x->f_ambi_2d->getDecompositionOrder(), x->f_ambi_2d->getDecompositionOrder());
             return;
         }
-        if(index < 0)
-            index = -index * 2 - 1;
-        else
-            index = index * 2;
-
-        canvas_vis(x->f_canvas[index], 1);
+        canvas_vis(x->f_canvas[x->f_ambi_2d->getHarmonicIndex(order)], 1);
     }
 }
 
 void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
 {
-    int index, band;
+    int order, degree;
     if(!argc || !argv)
         return;
 
@@ -569,50 +557,40 @@ void hoa_process_target(t_hoa_process *x, t_symbol* s, int argc, t_atom* argv)
         x->f_target = -1;
     else if(argc > 1 && atom_gettype(argv) == A_FLOAT && atom_gettype(argv+1) == A_FLOAT && x->f_mode == 1)
     {
-        band = atom_getfloat(argv);
-        index = atom_getfloat(argv+1);
-        if(band < 0 || band > x->f_ambi_3d->getDecompositionOrder())
+        degree = atom_getfloat(argv);
+        order = atom_getfloat(argv+1);
+        
+        if(degree < 0 || degree > x->f_ambi_3d->getDecompositionOrder())
         {
             object_error(x, "hoa.process~ target band index must be between 0 and %i", (int)x->f_ambi_3d->getDecompositionOrder());
             return;
         }
-        if(index < (int)-band || index > band)
+        if(order < (int)-degree || order > (int)degree)
         {
             object_error(x, "hoa.process~ target argument index must be between %i and %i for the band %i", (int)-x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder(), (int)x->f_ambi_3d->getDecompositionOrder());
             return;
         }
-        if(index < 0)
-            index = -index * 2 - 1;
-        else
-            index = index * 2;
-        index += band * band;
-        x->f_target = index;
+        x->f_target = x->f_ambi_3d->getHarmonicIndex(degree, order);
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode > 1)
     {
-        index = atom_getfloat(argv);
-        if(index < 1 || index > x->f_planewaves->getNumberOfChannels())
+        order = atom_getfloat(argv);
+        if(order < 1 || order > x->f_planewaves->getNumberOfChannels())
         {
             object_error(x, "hoa.process~ target index must be between 1 and %i", (int)x->f_planewaves->getNumberOfChannels());
             return;
         }
-        index -= 1;
-        x->f_target = index;
+        x->f_target = order - 1;
     }
     else if(atom_gettype(argv) == A_FLOAT && x->f_mode == 0)
     {
-        index = atom_getfloat(argv);
-        if(index < (int)-x->f_ambi_2d->getDecompositionOrder() || index > (int)x->f_ambi_2d->getDecompositionOrder())
+        order = atom_getfloat(argv);
+        if(order < (int)-x->f_ambi_2d->getDecompositionOrder() || order > (int)x->f_ambi_2d->getDecompositionOrder())
         {
             object_error(x, "hoa.process~ target index must be between %i and %i", (int)-x->f_ambi_2d->getDecompositionOrder(), x->f_ambi_2d->getDecompositionOrder());
             return;
         }
-        if(index < 0)
-            index = -index * 2 - 1;
-        else
-            index = index * 2;
-
-        x->f_target = index;
+        x->f_target = x->f_ambi_2d->getHarmonicIndex(order);
     }
 }
 

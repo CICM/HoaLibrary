@@ -6,7 +6,7 @@
 
 #include "Hoa3D.pd.h"
 
-#define MAX_SPEAKER 64
+#define MAX_SPEAKER 128
 
 typedef struct  _hoa_meter_3d
 {
@@ -402,8 +402,8 @@ t_pd_err angles_set(t_hoa_meter_3d *x, void *attr, long argc, t_atom *argv)
 {
     double azimuths[MAX_SPEAKER];
 	double elevations[MAX_SPEAKER];
-    if(argc > MAX_SPEAKER)
-        argc = MAX_SPEAKER;
+    if(argc > MAX_SPEAKER * 2)
+        argc = MAX_SPEAKER * 2;
 	
     if(argc && argv)
     {
