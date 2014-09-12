@@ -505,7 +505,8 @@ void linkmap_remove_with_binding_name(t_hoa_map *x, t_symbol* binding_name)
 						temp->next->update_headptr((t_linkmap *)name->s_thing, temp->next->map->f_self_source_manager);
 					}
 					
-					//sysmem_freeptr(x->f_listmap);
+                    //if(x->f_listmap)
+                    //    sysmem_freeptr(x->f_listmap);
 					x->f_listmap = NULL;
 					
 					x->f_source_manager = x->f_self_source_manager; // not sure if this is necessary (normally it is the same pointer)

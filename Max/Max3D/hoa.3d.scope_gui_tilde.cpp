@@ -198,7 +198,7 @@ void *hoa_3d_scope_new(t_symbol *s, int argc, t_atom *argv)
     if(x->f_order < 1)
         x->f_order = 1;
     
-	x->f_scope      = new Hoa3D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI2, NUMBEROFCIRCLEPOINTS_UI);
+	x->f_scope      = new Hoa3D::Scope(x->f_order, NUMBEROFCIRCLEPOINTS_UI2 * 0.5, NUMBEROFCIRCLEPOINTS_UI2);
     x->f_order      = x->f_scope->getDecompositionOrder();
     x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
     x->f_index      = 0;
@@ -333,137 +333,104 @@ t_jrgba rgba_addContrast(t_jrgba color, float contrast)
 void draw_harmonics(t_hoa_3d_scope *x, t_object *view, t_rect *rect)
 {
     char pathLength;
-	t_pt beginCoord;
     t_jmatrix transform;
-    long precIndex = 0;
     t_jrgba color_pos;
     t_jrgba color_neg;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_harmonics_layer, rect->width, rect->height);
-    
-	double y1, y2, rotateAngle;
-    t_jrgba black, white;
-    
-    black = white = x->f_color_bg;
-    black.red = clip_min(black.red - contrast_black, 0.);
-    black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue = clip_min(black.blue - contrast_black, 0.);
-    
-    white.red = clip_max(white.red + contrast_white, 1.);
-    white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue = clip_max(white.blue + contrast_white, 1.);
+    t_jrgba black = rgba_addContrast(x->f_color_bg, -contrast_black);
+    t_jrgba white = rgba_addContrast(x->f_color_bg, contrast_white);
     
 	if (g)
 	{
         jgraphics_rotate(g, HOA_PI);
         jgraphics_set_line_width(g, 1);
-		jgraphics_new_path(g);
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
         
         for(int j = 0; j < x->f_scope->getNumberOfRows() * 0.5; j++)
         {
-            // positive harmonics
             pathLength = 0;
             double constrast = (j - x->f_scope->getNumberOfRows() * 0.5) / (double)x->f_scope->getNumberOfRows();
             color_pos = rgba_addContrast(x->f_color_ph, constrast);
             color_neg = rgba_addContrast(x->f_color_nh, constrast);
-			
-			jgraphics_new_path(g);
-            
             jgraphics_set_source_jrgba(g, &color_pos);
+            double elev = x->f_scope->getElevation(j);
+            
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if(i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value >= 0)
                 {
-                    jgraphics_line_to(g, beginCoord.x, beginCoord.y );
-					//post("last %f %f", beginCoord.x, beginCoord.y);
-                }
-                else if(x->f_scope->getValue(j, i) >= 0)
-                {
-                    if (!pathLength)
+                    value *= x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        jgraphics_move_to(g, beginCoord.x, beginCoord.y );
-						//post("pathlen %f %f", beginCoord.x, beginCoord.y);
+                        jgraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        jgraphics_line_to(g, abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        jgraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            jgraphics_close_path(g);
             if(pathLength)
                 jgraphics_fill(g);
             
-            // negative harmonics
-			pathLength = 0;
-			jgraphics_new_path(g);
+            pathLength = 0;
             jgraphics_set_source_jrgba(g, &color_neg);
+            
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if (i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value < 0)
                 {
-                    jgraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) < 0)
-                {
-                    if (!pathLength)
+                    value *= -x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        jgraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        jgraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        jgraphics_line_to(g, abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        jgraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            jgraphics_close_path(g);
             if(pathLength)
                 jgraphics_fill(g);
         }
         
-		// draw background
-		pathLength = 0;
-		jgraphics_new_path(g);
+		double angle, x1, x2, y1, y2, cosa, sina;
         for(int i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
-            rotateAngle = ((double)i / (x->f_order * 2 + 2) * HOA_2PI ) - (0.5 / (x->f_order * 2 + 2) * HOA_2PI);
-			jgraphics_rotate(g, rotateAngle);
-			
-			y1 = x->f_radius / 5.;
-			y2 = x->f_radius;
+            angle = ((double)(i - 0.5) / (x->f_order * 2 + 2) * HOA_2PI);
+			cosa = cos(angle);
+            sina = sin(angle);
+            x1 = cosa * x->f_radius * 0.2;
+			y1 = sina * x->f_radius * 0.2;
+            x2 = cosa * x->f_radius;
+			y2 = sina * x->f_radius;
             
-            jgraphics_move_to(g, 0, y1);
-			jgraphics_line_to(g, 0, y2);
+            jgraphics_move_to(g, x1, y1);
+			jgraphics_line_to(g, x2, y2);
             jgraphics_set_line_width(g, 3);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_stroke_preserve(g);
-            
+            jgraphics_stroke(g);
             jgraphics_set_source_jrgba(g, &black);
 			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
-			
-			jgraphics_rotate(g, -rotateAngle);
 		}
         
         for(int i = 5; i > 0; i--)
 		{
             jgraphics_set_line_width(g, 3);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
-            jgraphics_stroke_preserve(g);
+            jgraphics_arc(g, 0, 0, (double)i * 0.2 * x->f_radius,  0., HOA_2PI);
+            jgraphics_stroke(g);
             jgraphics_set_line_width(g, 1);
             jgraphics_set_source_jrgba(g, &black);
             jgraphics_stroke(g);
@@ -472,106 +439,60 @@ void draw_harmonics(t_hoa_3d_scope *x, t_object *view, t_rect *rect)
         for(int j = x->f_scope->getNumberOfRows() * 0.5; j < x->f_scope->getNumberOfRows(); j++)
         {
             // positive harmonics
-			pathLength = 0;
-			jgraphics_new_path(g);
+            pathLength = 0;
             double constrast = (j - x->f_scope->getNumberOfRows() * 0.5) / (double)x->f_scope->getNumberOfRows();
             color_pos = rgba_addContrast(x->f_color_ph, constrast);
             color_neg = rgba_addContrast(x->f_color_nh, constrast);
-            
             jgraphics_set_source_jrgba(g, &color_pos);
+            double elev = x->f_scope->getElevation(j);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if(i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value >= 0)
                 {
-                    jgraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) >= 0)
-                {
-                    if (!pathLength)
+                    value *= x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        jgraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        jgraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        jgraphics_line_to(g, abscissa(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        jgraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            jgraphics_close_path(g);
             if(pathLength)
                 jgraphics_fill(g);
             
-			// negative harmonics
             pathLength = 0;
-			jgraphics_new_path(g);
+            // negative harmonics
             jgraphics_set_source_jrgba(g, &color_neg);
             for(int i = 0; i < x->f_scope->getNumberOfColumns(); i++)
             {
-                precIndex = i-1;
-                if(precIndex < 0)
-                    precIndex += x->f_scope->getNumberOfColumns();
-                
-                if (i == x->f_scope->getNumberOfColumns()-1)
+                double azim = x->f_scope->getAzimuth(i);
+                double value = x->f_scope->getValue(j, i);
+                if(value < 0)
                 {
-                    jgraphics_line_to(g, beginCoord.x, beginCoord.y );
-                }
-                else if(x->f_scope->getValue(j, i) < 0)
-                {
-                    if (!pathLength)
+                    value *= -x->f_radius;
+                    if(!pathLength)
                     {
-                        beginCoord.x = abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        beginCoord.y = ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j));
-                        jgraphics_move_to(g, beginCoord.x, beginCoord.y );
+                        jgraphics_move_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                         pathLength++;
                     }
                     else
                     {
-                        jgraphics_line_to(g, abscissa(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)), ordinate(x->f_radius *  -x->f_scope->getValue(j, i), x->f_scope->getAzimuth(i),x->f_scope->getElevation(j)));
+                        jgraphics_line_to(g, abscissa(value, azim,elev), ordinate(value, azim, elev));
                     }
                 }
             }
+            jgraphics_close_path(g);
             if(pathLength)
                 jgraphics_fill(g);
         }
-		
-		/*
-		jgraphics_new_path(g);
-		jgraphics_move_to(g, -x->f_radius, 0);
-		jgraphics_line_to(g, x->f_radius, 0);
-		jgraphics_set_line_width(g, 1);
-		jgraphics_set_source_jrgba(g, &black);
-		jgraphics_stroke(g);
-		
-		jgraphics_move_to(g, 0, x->f_radius);
-		jgraphics_line_to(g, 0, -x->f_radius);
-		jgraphics_set_line_width(g, 1);
-		jgraphics_set_source_jrgba(g, &black);
-		jgraphics_stroke(g);
-		
-		for (int i=1; i<=5; i++)
-		{
-			jgraphics_new_path(g);
-			jgraphics_move_to(g, x->f_radius, x->f_radius);
-			jgraphics_ovalarc(g, 0, 0, x->f_radius*((float)i/(float)5), x->f_radius, 0, HOA_2PI);
-			jgraphics_set_line_width(g, 1);
-			jgraphics_set_source_jrgba(g, &black);
-			jgraphics_stroke(g);
-			
-			jgraphics_rotate(g, HOA_PI2);
-			jgraphics_move_to(g, x->f_radius, x->f_radius);
-			jgraphics_ovalarc(g, 0, 0, x->f_radius*((float)i/(float)5), x->f_radius, 0, HOA_2PI);
-			jgraphics_set_line_width(g, 1);
-			jgraphics_set_source_jrgba(g, &black);
-			jgraphics_stroke(g);
-			jgraphics_rotate(g, -HOA_PI2);
-		}
-		*/
+
 		
 		jbox_end_layer((t_object*)x, view, hoa_sym_harmonics_layer);
 	}

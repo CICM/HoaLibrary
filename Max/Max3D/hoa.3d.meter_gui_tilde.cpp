@@ -31,7 +31,7 @@
 
 #include "Hoa3D.max.h"
 
-#define MAX_SPEAKER 64
+#define MAX_SPEAKER 128
 
 typedef struct  _hoa_meter_3d
 {
@@ -39,20 +39,14 @@ typedef struct  _hoa_meter_3d
 	t_rect			f_rect;
 	t_rect			f_presentation_rect;
     
-    Hoa3D::Meter*   f_meter;
-    Hoa3D::Vector*  f_vector;
-    double*			f_signals;
-    double			f_vector_coords[6];
-    int*            f_over_leds;
-    
-    long            f_ramp;
-	int             f_startclock;
-	long            f_interval;
-    
-    t_symbol*       f_vector_type;
+    long            f_number_of_channels;
+    double*         f_angles_of_channels;
+    double          f_offsets[3];
     t_symbol*       f_clockwise;
     t_symbol*       f_view;
-	
+    t_symbol*       f_vector_type;
+    long            f_interval;
+    
     t_jrgba         f_color_bg;
     t_jrgba         f_color_bd;
 	t_jrgba			f_color_off_signal;
@@ -64,13 +58,21 @@ typedef struct  _hoa_meter_3d
 	
 	t_jrgba         f_color_energy_vector;
 	t_jrgba         f_color_velocity_vector;
-	
+    
+    Hoa3D::Meter*   f_meter;
+    Hoa3D::Vector*  f_vector;
+    double*			f_signals;
+    double			f_vector_coords[6];
+    int*            f_over_leds;
+    
+    long            f_ramp;
+	int             f_startclock;
+    
     double          f_radius;
     double          f_center;
 	double          f_radius_center;
     
 	t_clock*        f_clock;
-    void*           f_attrs;
     
 } t_hoa_meter_3d;
 
@@ -85,11 +87,8 @@ void hoa_meter_3d_perform64(t_hoa_meter_3d *x, t_object *d, double **ins, long n
 void hoa_meter_3d_tick(t_hoa_meter_3d *x);
 
 t_max_err hoa_meter_3d_notify(t_hoa_meter_3d *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err channels_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv);
 t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
-t_max_err angles_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv);
 t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
-t_max_err offset_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv);
 t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
 t_max_err vectors_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
 t_max_err rotation_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
@@ -149,24 +148,24 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
 	
-    CLASS_ATTR_LONG                 (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs);
-    CLASS_ATTR_ACCESSORS            (c, "channels", channels_get, channels_set);
+    CLASS_ATTR_LONG                 (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_number_of_channels);
+    CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
 	CLASS_ATTR_ORDER                (c, "channels", 0, "1");
 	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_SAVE                 (c, "channels", 1);
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "8");
 	// @description The number of displayed channel and peak level indicators.
 	
-    CLASS_ATTR_FLOAT_VARSIZE        (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs, f_attrs, MAX_SPEAKER);
-	CLASS_ATTR_ACCESSORS            (c, "angles", angles_get, angles_set);
+    CLASS_ATTR_DOUBLE_VARSIZE       (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_angles_of_channels, f_number_of_channels, MAX_SPEAKER);
+	CLASS_ATTR_ACCESSORS            (c, "angles", NULL, angles_set);
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);
     CLASS_ATTR_DEFAULT              (c, "angles", 0, "0 45 90 45 180 45 270 45 0 -45 90 -45 180 -45 270 -45");
 	// @description The angles of displayed channels and peak level indicators. Values are in degrees, wrapped between 0. and 360. The list lenght must be equal to 2*<m>channels</m> : interleaved azimuth and elevation value for each channels.
     
-    CLASS_ATTR_FLOAT_ARRAY			(c, "offset", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_attrs, 3);
-    CLASS_ATTR_ACCESSORS            (c, "offset", offset_get, offset_set);
+    CLASS_ATTR_DOUBLE_ARRAY         (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_offsets, 3);
+    CLASS_ATTR_ACCESSORS            (c, "offset", NULL, offset_set);
 	CLASS_ATTR_ORDER                (c, "offset", 0, "3");
 	CLASS_ATTR_LABEL                (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_DEFAULT              (c, "offset", 0, "0. 0. 0.");
@@ -306,6 +305,8 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	
+    x->f_angles_of_channels = new double[MAX_SPEAKER * 2];
+
 	jbox_get_patching_rect((t_object*)x, &x->f_rect);
 	jbox_get_presentation_rect((t_object*)x, &x->f_presentation_rect);
     
@@ -314,9 +315,9 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
     x->f_vector = new Hoa3D::Vector(numberOfChannels);
     
     x->f_signals = new double[MAX_SPEAKER * SYS_MAXBLKSIZE];
-    x->f_over_leds = new int[MAX_CHANNELS];
+    x->f_over_leds = new int[MAX_SPEAKER];
 	
-    for(int i = 0; i < MAX_CHANNELS; i++)
+    for(int i = 0; i < MAX_SPEAKER; i++)
         x->f_over_leds[i] = 0;
 	
     x->f_clock = (t_clock*)clock_new(x,(method)hoa_meter_3d_tick);
@@ -328,6 +329,17 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_ready((t_jbox *)x);
 	return (x);
+}
+
+void hoa_meter_3d_free(t_hoa_meter_3d *x)
+{
+	jbox_free((t_jbox *)x);
+    clock_free(x->f_clock);
+    delete x->f_meter;
+    delete x->f_vector;
+    delete [] x->f_angles_of_channels;
+    delete [] x->f_signals;
+    delete [] x->f_over_leds;
 }
 
 t_hoa_err hoa_getinfos(t_hoa_meter_3d* x, t_hoa_boxinfos* boxinfos)
@@ -374,22 +386,6 @@ long hoa_meter_3d_oksize(t_hoa_meter_3d *x, t_rect *newrect)
 	return 0;
 }
 
-t_max_err channels_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv)
-{
-    argc[0] = 1;
-    argv[0] = (t_atom *)malloc(sizeof(t_atom));
-    if(argv[0] && argc[0])
-    {
-        atom_setlong(argv[0], x->f_meter->getNumberOfChannels());
-    }
-    else
-    {
-        argc[0] = 0;
-        argv[0] = NULL;
-    }
-    return MAX_ERR_NONE;
-}
-
 t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv)
@@ -427,26 +423,15 @@ t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
             }
         }
     }
-    return MAX_ERR_NONE;
-}
-
-t_max_err angles_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv)
-{
-    argc[0] = x->f_meter->getNumberOfChannels() * 2;
-    argv[0] = (t_atom *)malloc(sizeof(t_atom) * x->f_meter->getNumberOfChannels() * 2);
-    if(argv[0] && argc[0])
+    
+    for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels() * 2; i+=2, j++)
     {
-        for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels() * 2; i+=2, j++)
-		{
-            atom_setfloat(argv[0]+i, x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360.);
-			atom_setfloat(argv[0]+i+1, x->f_meter->getChannelElevation(j) / HOA_2PI * 360.);
-		}
+        x->f_angles_of_channels[i] = x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360.;
+        x->f_angles_of_channels[i+1] = x->f_meter->getChannelElevation(j) / HOA_2PI * 360.;
     }
-    else
-    {
-        argc[0] = 0;
-        argv[0] = NULL;
-    }
+    
+    x->f_number_of_channels = x->f_meter->getNumberOfChannels();
+    
     return MAX_ERR_NONE;
 }
 
@@ -454,8 +439,8 @@ t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 {
     double azimuths[MAX_SPEAKER];
 	double elevations[MAX_SPEAKER];
-    if(argc > MAX_SPEAKER)
-        argc = MAX_SPEAKER;
+    if(argc > MAX_SPEAKER * 2)
+        argc = MAX_SPEAKER * 2;
 	
     if(argc && argv)
     {
@@ -472,32 +457,22 @@ t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 				elevations[i] = x->f_meter->getChannelElevation(i);
 			}
         }
+        
 		x->f_meter->setChannelsPosition(azimuths, elevations);
         x->f_vector->setChannelsPosition(azimuths, elevations);
+    }
+    
+    for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels() * 2; i+=2, j++)
+    {
+        x->f_angles_of_channels[i] = x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360.;
+        x->f_angles_of_channels[i+1] = x->f_meter->getChannelElevation(j) / HOA_2PI * 360.;
     }
 	
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
 	jbox_redraw((t_jbox *)x);
-    return MAX_ERR_NONE;
-}
-
-t_max_err offset_get(t_hoa_meter_3d *x, t_object *attr, long *argc, t_atom **argv)
-{
-    argc[0] = 3;
-    argv[0] = (t_atom *)malloc(3 * sizeof(t_atom));
-    if(argv[0] && argc[0])
-    {
-        atom_setfloat(argv[0], x->f_meter->getChannelsRotationX() / HOA_2PI * 360.);
-        atom_setfloat(argv[0]+1, x->f_meter->getChannelsRotationY() / HOA_2PI * 360.);
-        atom_setfloat(argv[0]+2, x->f_meter->getChannelsRotationZ() / HOA_2PI * 360.);
-    }
-    else
-    {
-        argc[0] = 0;
-        argv[0] = NULL;
-    }
+    
     return MAX_ERR_NONE;
 }
 
@@ -506,15 +481,17 @@ t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 	if(argc && argv)
     {
         double ax, ay, az;
+        
         if(atom_isNumber(argv))
             ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
             ax = x->f_meter->getChannelsRotationX();
-        if(argc > 1 && atom_isNumber(argv+1))
+        
+        if(argc > 1 && argv+1 && atom_isNumber(argv+1))
             ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
             ay = x->f_meter->getChannelsRotationX();
-        if(argc > 2 && atom_isNumber(argv+2))
+        if(argc > 2 && argv+2 && atom_isNumber(argv+2))
             az = atom_getfloat(argv+2) / 360. * HOA_2PI;
         else
             az = x->f_meter->getChannelsRotationX();
@@ -526,6 +503,10 @@ t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
 		jbox_redraw((t_jbox *)x);
     }
+    
+    x->f_offsets[0] = x->f_meter->getChannelsRotationX() / HOA_2PI * 360.;
+    x->f_offsets[1] = x->f_meter->getChannelsRotationY() / HOA_2PI * 360.;
+    x->f_offsets[2] = x->f_meter->getChannelsRotationZ() / HOA_2PI * 360.;
 	
     return MAX_ERR_NONE;
 }
@@ -683,16 +664,6 @@ void hoa_meter_3d_tick(t_hoa_meter_3d *x)
     
 	if (sys_getdspstate())
 		clock_delay(x->f_clock, x->f_interval);
-}
-
-void hoa_meter_3d_free(t_hoa_meter_3d *x)
-{
-	jbox_free((t_jbox *)x);
-    clock_free(x->f_clock);
-    delete x->f_meter;
-    delete x->f_vector;
-    delete [] x->f_signals;
-    delete [] x->f_over_leds;
 }
 
 void hoa_meter_3d_assist(t_hoa_meter_3d *x, void *b, long m, long a, char *s)

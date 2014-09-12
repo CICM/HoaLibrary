@@ -38,7 +38,7 @@ typedef struct _hoa_3d_decoder
 	long					f_number_of_channels;
 	double					f_angles_of_channels[MAX_CHANNELS * 2];
 	long					f_number_of_angles;
-    double					f_offset[2];
+    double					f_offsets[3];
     t_symbol*				f_pinna;
 	t_symbol*				f_mode;
 } t_hoa_3d_decoder;
@@ -95,7 +95,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	// @description Set the angles of each channels in degrees. The angles of channels are only settable in <b>irregular</b> <m>mode</m>. Each angles are in degrees, wrapped between 0. and 360. You must specify 2 values per channel corresponding to the azimuth value followed by the elevation value.
     
-    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_3d_decoder, f_offset, 3);
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_3d_decoder, f_offsets, 3);
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "offset", NULL, offset_set);
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
@@ -318,20 +318,25 @@ t_max_err offset_set(t_hoa_3d_decoder *x, t_object *attr, long argc, t_atom *arg
     if(argc && argv)
     {
         double ax, ay, az;
-        if(atom_gettype(argv) == A_FLOAT)
+        if(atom_isNumber(argv))
             ax = atom_getfloat(argv) / 360. * HOA_2PI;
         else
             ax = x->f_decoder->getChannelsRotationX();
-        if(argc > 1 && atom_gettype(argv+1) == A_FLOAT)
+        if(argc > 1 && atom_isNumber(argv+1))
             ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
             ay = x->f_decoder->getChannelsRotationX();
-        if(argc > 2 &&  atom_gettype(argv+2) == A_FLOAT)
+        if(argc > 2 &&  atom_isNumber(argv+2))
             az = atom_getfloat(argv+2) / 360. * HOA_2PI;
         else
             az = x->f_decoder->getChannelsRotationX();
         x->f_decoder->setChannelsRotation(ax, ay, az);
     }
+    
+    x->f_offsets[0] = x->f_decoder->getChannelsRotationX() / HOA_2PI * 360.;
+    x->f_offsets[1] = x->f_decoder->getChannelsRotationY() / HOA_2PI * 360.;
+    x->f_offsets[2] = x->f_decoder->getChannelsRotationZ() / HOA_2PI * 360.;
+    
     return MAX_ERR_NONE;
 }
 
