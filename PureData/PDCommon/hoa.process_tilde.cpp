@@ -1022,7 +1022,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     char dirbuf[MAXPDSTRING], *nameptr;
     int ncnv;
     int state = canvas_suspend_dsp();
-
+    
     // Memory allocation for all the canvas, the inlets and the outlets
     x->f_canvas         = new t_canvas*[x->f_ncanvas];
     x->f_dsp_context    = new t_dspcontext*[x->f_ncanvas];
@@ -1127,6 +1127,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     {
         pd_error(x, "hoa.process~ : error while loading canvas.");
     }
+    
     canvas_setcurrent(eobj_getcanvas(x));
     canvas_resume_dsp(state);
 }
