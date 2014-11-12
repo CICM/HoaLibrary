@@ -1,21 +1,21 @@
 #N canvas 388 53 433 585 10;
-#X text -690 -1795 Hoa Library allows musicians and composers to synthesize
+#X text 8 -517 Hoa Library allows musicians and composers to synthesize
 \, transform and render sound fields in a creative and artistic way.
 This library facilitates the understanding and the appropriation of
 key concepts of Ambisonics. Thanks to original graphical interfaces
 a lot of new signal processing are allowed like diffuse sound field
 synthesis \, perspective distorsion or spatial filtering.;
-#X obj -680 -1821 c.patcherinfos;
-#X obj -675 -1838 loadbang;
-#X obj -691 -1839 hoa.help.header;
-#X obj -670 -1324 hoa.help.pub;
-#X obj -689 -1686 c.tab @size 398 36 @fontname Monaco @fontweight normal
+#X obj 18 -543 c.patcherinfos;
+#X obj 23 -560 loadbang;
+#X obj 7 -561 hoa.help.header;
+#X obj 28 -46 hoa.help.pub;
+#X obj 9 -408 c.tab @size 398 36 @fontname Monaco @fontweight normal
 @fontslant roman @fontsize 13 @receive (null) @send (null) @presetname
 (null) @orientation 0 @toggle 1 @items 2d 3d common process tutos @bgcolor
 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1 @hocolor
 0.5 0.5 0.5 1 @secolor 0.35 0.35 0.35 1;
-#X obj -689 -1646 c.tab @size 398 264 @fontname Monaco @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+#X obj 9 -368 c.tab @size 398 264 @fontname Monaco @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @orientation 1 @toggle 0 @items hoa.2d.decoder~ hoa.2d.encoder~
 hoa.2d.map~ hoa.2d.meter~ hoa.2d.optim~ hoa.2d.projector~ hoa.2d.recomposer~
 hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~ @bgcolor 0.75
@@ -46,7 +46,7 @@ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~ @bgcolor 0.75
 #X connect 9 2 1 0;
 #X connect 9 2 10 0;
 #X connect 10 0 4 0;
-#X restore -406 -1686 pd sel.hoa.txt;
+#X restore 292 -408 pd sel.hoa.txt;
 #N canvas 804 124 691 357 sel.hoa.text2 0;
 #X obj -326 -135 list split 1;
 #X obj -292 -115 list split 1;
@@ -97,7 +97,7 @@ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~ @bgcolor 0.75
 #X connect 20 0 9 0;
 #X connect 20 1 15 0;
 #X connect 21 0 8 0;
-#X restore -455 -1493 pd sel.hoa.text2;
+#X restore 243 -215 pd sel.hoa.text2;
 #N canvas 698 181 450 300 hoa.open.hel 0;
 #X obj -259 -281 makefilename %s-help.pd;
 #X obj -259 -248 pack s s;
@@ -128,14 +128,14 @@ hoa.2d.rotate~ hoa.2d.scope~ hoa.2d.space hoa.2d.wider~ @bgcolor 0.75
 #X connect 12 0 11 0;
 #X connect 12 1 9 0;
 #X connect 13 0 8 1;
-#X restore -498 -1426 pd hoa.open.hel;
-#X obj -610 -1679 c.loadmess 0;
-#X obj -689 -1378 c.blackboard @size 398 39 @fontname Monaco @fontweight
+#X restore 200 -148 pd hoa.open.hel;
+#X obj 88 -401 c.loadmess 0;
+#X obj 9 -100 c.blackboard @size 398 39 @fontname Monaco @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @chalkmode
 0 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
-#X obj -481 -1467 c.prepend text;
-#X obj -509 -1684 c.prepend append;
-#X msg -368 -1432 clear;
+#X obj 217 -189 c.prepend text;
+#X obj 189 -406 c.prepend append;
+#X msg 330 -154 clear;
 #X connect 1 0 3 0;
 #X connect 2 0 1 0;
 #X connect 5 1 7 0;

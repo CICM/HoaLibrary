@@ -11,6 +11,28 @@ extern "C"
 #include "../../ThirdParty/PureData/Sources/ecommon/d_ugen.h"
 }
 
+#ifdef PD_EXTENDED
+EXTERN t_canvas *canvas_list;
+#endif
+
+t_canvas *sys_getcanvaslist()
+{
+#ifdef PD_EXTENDED
+    return canvas_list;
+#else
+    return pd_this->pd_canvaslist;
+#endif
+}
+
+void sys_setcanvaslist(t_canvas* canvas)
+{
+#ifdef PD_EXTENDED
+    canvas_list = canvas;
+#else
+    pd_this->pd_canvaslist = canvas;
+#endif
+}
+
 typedef struct _hoa_in
 {
     t_eobj  f_obj;
@@ -1005,11 +1027,13 @@ void hoa_process_get_io(t_hoa_process *x, int index)
 static void canvas_removefromlist(t_canvas *x)
 {
     t_canvas *z;
-    if (x == canvas_list)
-        canvas_list = x->gl_next;
+    if (x == sys_getcanvaslist())
+    {
+        sys_setcanvaslist(x->gl_next);
+    }
     else
     {
-        for (z = canvas_list; z->gl_next != x; z = z->gl_next)
+        for (z = sys_getcanvaslist(); z->gl_next != x; z = z->gl_next)
             ;
         z->gl_next = x->gl_next;
     }
@@ -1022,7 +1046,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     char dirbuf[MAXPDSTRING], *nameptr;
     int ncnv;
     int state = canvas_suspend_dsp();
-
+    
     // Memory allocation for all the canvas, the inlets and the outlets
     x->f_canvas         = new t_canvas*[x->f_ncanvas];
     x->f_dsp_context    = new t_dspcontext*[x->f_ncanvas];
@@ -1127,6 +1151,7 @@ void hoa_process_load_canvas(t_hoa_process *x, t_symbol *s, long argc, t_atom* a
     {
         pd_error(x, "hoa.process~ : error while loading canvas.");
     }
+    
     canvas_setcurrent(eobj_getcanvas(x));
     canvas_resume_dsp(state);
 }

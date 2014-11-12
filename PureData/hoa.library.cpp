@@ -8,9 +8,9 @@
 #include "PD2D/Hoa2D.pd.h"
 #include "PD3D/Hoa3D.pd.h"
 
-char hoaversion[] = "Beta 2.1";
-#ifdef PD_EXTENTED
-char pdversion[] = "Pd-Extented";
+char hoaversion[] = "Beta 2.2";
+#ifdef PD_EXTENDED
+char pdversion[] = "Pd-Extended";
 #else
 char pdversion[] = "Pd-Vanilla";
 #endif
