@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 7,
-			"architecture" : "x86"
+			"revision" : 8,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 784.0, 754.0 ],
+		"rect" : [ 61.0, 62.0, 784.0, 754.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 7,
-							"architecture" : "x86"
+							"revision" : 8,
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 784.0, 728.0 ],
+						"rect" : [ 61.0, 88.0, 784.0, 728.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -86,15 +86,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 180.0, 69.094841, -200.905151, -0.0, 90.0, 20.905157, -225.0, 35.264389, -225.0, -35.264389, -180.0, -69.094841, 20.905157, -0.0, 90.0, -20.905157, 45.0, 35.264389, 45.0, -35.264389, 0.0, 69.094841, -159.094849, -0.0, -90.0, 20.905157, -135.0, 35.264389, -135.0, -35.264389, 0.0, -69.094841, -20.905157, -0.0, -90.0, -20.905157, -45.0, 35.264389, -45.0, -35.264389 ],
+									"angles" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.76, 0.76, 0.76, 1.0, 0.501814, 0.501814, 0.501814, 1.0, 0.0, 0.0, 0.0 ],
 									"bdcolor" : [ 0.501814, 0.501814, 0.501814, 1.0 ],
-									"channels" : 20,
+									"channels" : 19,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-3",
 									"maxclass" : "hoa.3d.meter~",
-									"numinlets" : 20,
+									"numinlets" : 19,
 									"numoutlets" : 0,
-									"patching_rect" : [ 31.0, 337.929077, 382.0, 191.0 ],
+									"patching_rect" : [ 31.0, 337.929077, 390.0, 195.0 ],
 									"vectors" : "both",
 									"view" : "top-bottom"
 								}
@@ -175,7 +175,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 592.5, 373.0, 56.0 ],
+									"patching_rect" : [ 31.0, 592.5, 377.0, 56.0 ],
 									"text" : "180 69.094803 159.095001 0 90 20.905199 135 35.2644 135 -35.2644 180 -69.094803 20.905199 0 90 -20.905199 45 35.2644 45 -35.2644 0 69.094803 200.904999 0 270 20.905199 225 35.2644 225 -35.2644 0 -69.094803 339.095001 0 270 -20.905199 315 35.2644 315 -35.2644"
 								}
 
@@ -566,8 +566,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 7,
-											"architecture" : "x86"
+											"revision" : 8,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 413.0, 101.0, 204.0, 214.0 ],
@@ -980,87 +980,6 @@
 									"hidden" : 0,
 									"midpoints" : [ 562.75, 324.0, 423.0, 324.0, 423.0, 324.0, 40.5, 324.0 ],
 									"source" : [ "obj-18", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 19 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 19 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 18 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 18 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 17 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 17 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 16 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 16 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 15 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 15 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 14 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 14 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 13 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 13 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 12 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 12 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 11 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-2", 11 ]
 								}
 
 							}
@@ -1711,8 +1630,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 7,
-							"architecture" : "x86"
+							"revision" : 8,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 784.0, 728.0 ],
