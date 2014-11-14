@@ -43,7 +43,7 @@ typedef struct  _hoa_2d_scope
     float           f_gain;
 	
 	t_jrgba         f_color_bg;
-    t_jrgba         f_color_bd;
+    t_jrgba         f_color_lines;
 	t_jrgba         f_color_nh;
 	t_jrgba         f_color_ph;
 	
@@ -96,16 +96,15 @@ int C74_EXPORT main(void)
 	
 	// @method signal @digest Array of circular harmonic signals to be represented.
 	// @description Array of circular harmonic signals to be represented.
-	class_addmethod(c, (method)hoa_2d_scope_dsp64,			"dsp64",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_2d_scope_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_2d_scope_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)hoa_2d_scope_paint,			"paint",		A_CANT,	0);
+	class_addmethod(c, (method)hoa_2d_scope_paint,		"paint",		A_CANT,	0);
 	class_addmethod(c, (method)hoa_2d_scope_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_2d_scope_getdrawparams, "getdrawparams", A_CANT, 0);
 	class_addmethod(c, (method)hoa_2d_scope_oksize,		"oksize",		A_CANT, 0);
 
     CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
-	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 150 150");
 
     CLASS_ATTR_LONG                 (c, "order", 0, t_hoa_2d_scope, f_order);
     CLASS_ATTR_ACCESSORS            (c, "order", NULL, set_order);
@@ -143,13 +142,13 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.scope~</o> object
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_2d_scope, f_color_bd);
-	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
-	// @description Sets the RGBA values for the border color of the <o>hoa.2d.scope~</o> object
+    CLASS_ATTR_RGBA                 (c, "linescolor", 0, t_hoa_2d_scope, f_color_lines);
+    CLASS_ATTR_CATEGORY             (c, "linescolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "linescolor", 0, "rgba");
+    CLASS_ATTR_LABEL                (c, "linescolor", 0, "Lines Color");
+    CLASS_ATTR_ORDER                (c, "linescolor", 0, "2");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "linescolor", 0, "0.65098 0.666667 0.662745 1.");
+    // @description Sets the RGBA values for the lines color of the <o>hoa.2d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_2d_scope, f_color_ph);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
@@ -283,7 +282,7 @@ t_max_err hoa_2d_scope_notify(t_hoa_2d_scope *x, t_symbol *s, t_symbol *msg, voi
 	if (msg == hoa_sym_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
-		if( name == hoa_sym_bgcolor || name == gensym("order"))
+		if( name == hoa_sym_bgcolor || name == gensym("order") || name == gensym("linescolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
 		}
@@ -294,14 +293,6 @@ t_max_err hoa_2d_scope_notify(t_hoa_2d_scope *x, t_symbol *s, t_symbol *msg, voi
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
-}
-
-void hoa_2d_scope_getdrawparams(t_hoa_2d_scope *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_boxfillcolor = x->f_color_bg;
-    params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 8;
 }
 
 long hoa_2d_scope_oksize(t_hoa_2d_scope *x, t_rect *newrect)
@@ -328,23 +319,20 @@ void draw_background(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
 	int i;
 	double y1, y2, rotateAngle;
     t_jmatrix transform;
-    t_jrgba black, white;
-    
-    black = white = x->f_color_bg;
-    black.red = clip_min(black.red - contrast_black, 0.);
-    black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue = clip_min(black.blue - contrast_black, 0.);
-    
-    white.red = clip_max(white.red + contrast_white, 1.);
-    white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue = clip_max(white.blue + contrast_white, 1.);
     
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, rect->width, rect->height);
 
 	if (g) 
 	{
+        jgraphics_rectangle(g, 0, 0, rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
+        
+        jgraphics_set_source_jrgba(g, &x->f_color_lines);
+        jgraphics_set_line_width(g, 1);
 
         for(i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
@@ -354,24 +342,8 @@ void draw_background(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            if(rotateAngle > HOA_PI2 && rotateAngle < HOA_PI + HOA_PI2)
-            {
-                jgraphics_move_to(g, -1, long(y1));
-                jgraphics_line_to(g, -1, long(y2));
-            }
-            else
-            {
-                jgraphics_move_to(g, 1, long(y1));
-                jgraphics_line_to(g, 1, long(y2));
-            }
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_stroke(g);
-            
 			jgraphics_move_to(g, 0, y1);
 			jgraphics_line_to(g, 0, y2);
-            jgraphics_set_source_jrgba(g, &black);
-			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
 			
 			jgraphics_rotate(g, -rotateAngle);
@@ -382,12 +354,6 @@ void draw_background(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
         
         for(i = 5; i > 0; i--)
 		{
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., HOA_2PI);
-            jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
             jgraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
             jgraphics_stroke(g);
 		}
@@ -404,18 +370,9 @@ void draw_harmonics(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
     t_jpath* posHarmPath = NULL;
     t_jpath* negHarmPath = NULL;
     t_jmatrix transform;
-    t_jrgba shadcolor = {0.4, 0.4, 0.4, 1.};
     long posPathLen = 0, negPathLen = 0, precIndex = 0;
 
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_harmonics_layer, rect->width, rect->height);
-    
-    if(shadcolor.alpha > x->f_color_nh.alpha)
-        shadcolor.alpha = x->f_color_ph.alpha;
-    if(shadcolor.alpha > x->f_color_nh.alpha)
-        shadcolor.alpha = x->f_color_nh.alpha;
-	shadcolor.alpha -= 0.5;
-	if(shadcolor.alpha < 0.)
-        shadcolor.alpha = 0;
     
 	if (g)
 	{
@@ -493,14 +450,6 @@ void draw_harmonics(t_hoa_2d_scope *x,  t_object *view, t_rect *rect)
             jgraphics_new_path(g);
             jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
             jgraphics_set_matrix(g, &transform);
-            
-            // shadows
-            jgraphics_translate(g, 1, 1); // decalage de l'ombre
-            if (posPathLen) jgraphics_append_path(g, posHarmPath);
-            if (negPathLen) jgraphics_append_path(g, negHarmPath);
-            jgraphics_set_source_jrgba(g, &shadcolor);
-            jgraphics_stroke(g);
-            jgraphics_translate(g, -1, -1); // annulation du decalage
             
             // harmocolor
             if(posPathLen)
