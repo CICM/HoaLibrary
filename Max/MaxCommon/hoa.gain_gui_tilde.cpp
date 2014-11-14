@@ -83,12 +83,11 @@ static double s_hoaGain_startval;
 
 #define INRANGE(v,lo,hi) ((v)<=(hi)&&(v)>=(lo))
 
-#define	hoaGain_BORDERTHICKNESS			(2.)
 #define hoaGain_CORNERSIZE				(6.)
 
-#define hoaGain_DISPLAYINSET			(11)	// amount subtracted from rect for value
-#define knobMargin                      (4)		// Knob Margin
-#define knobRound                       (8)		// Knob Round
+#define hoaGain_STRIPEWIDTH             (2.5)	// stripes width
+#define hoaGain_DISPLAYINSET			(4.)	// amount subtracted from rect for value
+#define knobMargin                      (2)		// Knob Margin
 
 enum inputmode {
 	DECIBELS	= 0,
@@ -105,9 +104,8 @@ typedef struct _hoaGain
 	char		j_relative;		// relative mousing (like orig miller slider, but not like h/uslider)
 	char		j_orientation;	// 0 = auto, 1 = horiz, 2 = vertical
 	t_jrgba		j_brgba;
-	t_jrgba		j_frgba2;
     t_jrgba     j_knobcolor;
-    t_jrgba     j_intknobcolor;
+    t_jrgba     j_stripecolor;
     
     // gain
     Line*		f_amp;
@@ -146,8 +144,9 @@ long hoaGain_oksize(t_hoaGain *x, t_rect *newrect);
 void hoaGain_paint(t_hoaGain *x, t_object *view);
 void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
 void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
+void draw_valuestripes(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
+void draw_offstripes(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
 void draw_dB_grid(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
-void hoaGain_getdrawparams(t_hoaGain *x, t_object *patcherview, t_jboxdrawparams *params);
 /* Input ------------------------------------- */
 void hoaGain_bang(t_hoaGain *x);
 void hoaGain_int(t_hoaGain *x, long n);
@@ -238,7 +237,6 @@ int C74_EXPORT main(void)
     // @method (mouse) @digest click and drag to set the slider outlet.
     // @description Clicking and dragging with the mouse sets the value of the slider, ramps the output signal to the level corresponding to the new value over the specified ramp time, and outputs the slider’s value out the right outlet. double-click to set the slider value to <m>defvaldb</m>
     
-	class_addmethod (c, (method) hoaGain_getdrawparams,       "getdrawparams",        A_CANT, 0);
     class_addmethod (c, (method) hoaGain_mousedoubleclick,    "mousedoubleclick",     A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_mousedown,           "mousedown",            A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_mousedragdelta,      "mousedragdelta",       A_CANT, 0);
@@ -287,28 +285,21 @@ int C74_EXPORT main(void)
     
 	CLASS_ATTR_RGBA_LEGACY		(c, "bgcolor", "brgb", 0, t_hoaGain, j_brgba);
 	CLASS_ATTR_ALIAS			(c,"bgcolor", "brgba");
-	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bgcolor",0,"0.35 0.35 0.35 1.");
+	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bgcolor",0,"0.290196 0.309804 0.301961 1.");
 	CLASS_ATTR_STYLE_LABEL		(c, "bgcolor", 0, "rgba", "Background Color");
 	class_parameter_register_default_color(c, gensym("bgcolor"), ps_control_text_bg);
 	CLASS_ATTR_BASIC			(c, "bgcolor", 0);
     // @description Sets the RGBA values for the background color of the <o>hoa.gain~</o> object
-	
-	CLASS_ATTR_RGBA_LEGACY		(c,"bdcolor", "rgb2",0, t_hoaGain, j_frgba2);
-	CLASS_ATTR_ALIAS			(c,"bdcolor", "rgba2");
-	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bdcolor",0,"0.2 0.2 0.2 1.");
-	CLASS_ATTR_STYLE_LABEL		(c,"bdcolor",0,"rgba","Border Color");
-	class_parameter_register_default_color(c, gensym("bdcolor"), ps_control_bg);
-    // @description Sets the RGBA values for the border color of the <o>hoa.gain~</o> object
     
     CLASS_ATTR_RGBA				(c, "knobcolor", 0, t_hoaGain, j_knobcolor);
-    CLASS_ATTR_STYLE_LABEL      (c, "knobcolor", 0, "rgba","Knob Background Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "knobcolor", 0, "0.16 0.16 0.16 1");
+    CLASS_ATTR_STYLE_LABEL      (c, "knobcolor", 0, "rgba","Value Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "knobcolor", 0, "0.803922 0.898039 0.909804 1.0");
     // @description Sets the RGBA values for the knob color of the <o>hoa.gain~</o> object
     
-    CLASS_ATTR_RGBA				(c, "intknobcolor", 0, t_hoaGain, j_intknobcolor);
-    CLASS_ATTR_STYLE_LABEL      (c, "intknobcolor", 0, "rgba","Interior Knob Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "intknobcolor", 0, "0.9 0.9 0.9 1");
-    // @description Sets the RGBA values for the interior knob color of the <o>hoa.gain~</o> object
+    CLASS_ATTR_RGBA				(c, "stripecolor", 0, t_hoaGain, j_stripecolor);
+    CLASS_ATTR_STYLE_LABEL      (c, "stripecolor", 0, "rgba","Off Color");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "stripecolor", 0, "0.376471 0.384314 0.4 1.0");
+    // @description Sets the RGBA values for the "Off" value stripe color of the <o>hoa.gain~</o> object
 	
 	CLASS_STICKY_CATEGORY_CLEAR(c);
     
@@ -337,7 +328,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_FILTER_CLIP		(c, "channels", 1, MAX_IO);
 	CLASS_ATTR_DEFAULT			(c, "channels", 0, "8");
 	CLASS_ATTR_SAVE				(c, "channels", 1);
-    CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
     
     CLASS_ATTR_CATEGORY			(c, "range", 0, "Value");
     CLASS_ATTR_FLOAT_ARRAY      (c, "range", 0, t_hoaGain, f_range, 2);
@@ -388,6 +378,7 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     
     // inputs
 	dsp_setupjbox((t_pxjbox *)x, x->f_numberOfChannels + 1);
+    
     // outputs
     x->f_outlet_infos = outlet_new(x, NULL);
     for (int i=0; i < x->f_numberOfChannels; i++)
@@ -607,168 +598,128 @@ void hoaGain_paint(t_hoaGain *x, t_object *view)
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
     isHoriz = hoaGain_ishorizontal(x, &rect);
     draw_background(x, view, &rect, isHoriz);
+    draw_offstripes(x, view, &rect, isHoriz);
+    draw_valuestripes(x, view, &rect, isHoriz);
     draw_cursor(x, view, &rect, isHoriz);
+}
+
+void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
+{
+    int zerodBpos;
+    zerodBpos = hoaGain_dBvaltopos(x, 0, rect, isHoriz);
+    
+    t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("bg_layer"), rect->width, rect->height);
+    
+    if (g)
+    {
+        // background
+        jgraphics_rectangle(g, 0, 0, rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->j_brgba);
+        jgraphics_fill(g);
+        
+        jgraphics_set_source_jrgba(g, &x->j_knobcolor);
+        
+        if (isHoriz)
+        {
+            jgraphics_line_draw_fast(g, zerodBpos - hoaGain_DISPLAYINSET*0.5-knobMargin, knobMargin*0.5, zerodBpos + hoaGain_DISPLAYINSET, knobMargin*0.5, 1);
+            jgraphics_line_draw_fast(g, zerodBpos - hoaGain_DISPLAYINSET*0.5-knobMargin, rect->height - knobMargin*0.5, zerodBpos + hoaGain_DISPLAYINSET, rect->height - knobMargin*0.5, 1);
+        }
+        else
+        {
+            jgraphics_line_draw_fast(g, knobMargin*0.5, zerodBpos - hoaGain_DISPLAYINSET*0.5-knobMargin, knobMargin*0.5, zerodBpos + hoaGain_DISPLAYINSET, 1);
+            jgraphics_line_draw_fast(g, rect->width - knobMargin*0.5, zerodBpos - hoaGain_DISPLAYINSET*0.5-knobMargin, rect->width - knobMargin*0.5, zerodBpos + hoaGain_DISPLAYINSET, 1);
+        }
+    }
+    
+    jbox_end_layer((t_object*)x, view, gensym("bg_layer"));
+    jbox_paint_layer((t_object *)x, view, gensym("bg_layer"), 0, 0);
+}
+
+void draw_offstripes(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
+{
+    t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("offstripe_layer"), rect->width - (knobMargin*2), rect->height - (knobMargin*2));
+    
+    if (g)
+    {
+        jgraphics_translate(g, -hoaGain_STRIPEWIDTH, -hoaGain_STRIPEWIDTH);
+        jgraphics_set_source_jrgba(g, &x->j_stripecolor);
+        jgraphics_diagonal_line_fill(g, hoaGain_STRIPEWIDTH, 0, 0, rect->width, rect->height);
+    }
+    
+    jbox_end_layer((t_object*)x, view, gensym("offstripe_layer"));
+    jbox_paint_layer((t_object *)x, view, gensym("offstripe_layer"), knobMargin, knobMargin);
 }
 
 void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
 {    
 	t_jgraphics *g;
-	int pos;
-    double dBval = x->j_valdB;
+    
+	int pos = hoaGain_dBvaltopos(x, CLAMP(x->j_valdB, x->f_range[0], x->f_range[1]), rect, isHoriz);
     
     g = jbox_start_layer((t_object *)x, view, gensym("cursor_layer"), rect->width, rect->height);
     
 	if (g)
 	{
-        dBval = CLAMP(dBval, x->f_range[0], x->f_range[1]);
-        pos = hoaGain_dBvaltopos(x, dBval, rect, isHoriz);
+        // draw knob rect
+        jgraphics_set_source_jrgba(g, &x->j_knobcolor);
         
         if (isHoriz)
-        {
-            // draw knob rect
-            jgraphics_set_source_jrgba(g, &x->j_knobcolor);
-            jgraphics_rectangle_rounded(g, pos-5, knobMargin, 11, rect->height - (knobMargin*2), knobRound, knobRound);
-            jgraphics_fill(g);
-            
-            //draw knob interior line
-            jgraphics_set_source_jrgba(g, &x->j_intknobcolor);
-            jgraphics_set_line_width(g,1);
-            jgraphics_move_to(g, long(pos)+0.5-3, knobMargin+(knobRound*0.5));
-            jgraphics_line_to(g, long(pos)+0.5-3, rect->height - (knobMargin+(knobRound*0.5)));
-            jgraphics_move_to(g, long(pos)+0.5, (knobMargin+2));
-            jgraphics_line_to(g, long(pos)+0.5, rect->height - (knobMargin+2));
-            jgraphics_move_to(g, long(pos)+0.5+3, (knobMargin+(knobRound*0.5)));
-            jgraphics_line_to(g, long(pos)+0.5+3, rect->height - (knobMargin+(knobRound*0.5)));
-            jgraphics_stroke(g);
-        }
+            jgraphics_rectangle(g, pos - hoaGain_DISPLAYINSET*0.5, knobMargin, hoaGain_DISPLAYINSET, rect->height - (knobMargin*2));
         else
-        {
-            // draw knob rect
-            jgraphics_set_source_jrgba(g, &x->j_knobcolor);
-            jgraphics_rectangle_rounded(g, knobMargin, pos-5, rect->width - (knobMargin*2), 11, knobRound, knobRound);
-            jgraphics_fill(g);
-            
-            //draw knob interior line
-            jgraphics_set_source_jrgba(g, &x->j_intknobcolor);
-            jgraphics_set_line_width(g,1);
-            jgraphics_move_to(g, (knobMargin+(knobRound*0.5)), long(pos)+0.5-3);
-            jgraphics_line_to(g, rect->width - (knobMargin+(knobRound*0.5)), long(pos)+0.5-3);
-            jgraphics_move_to(g, (knobMargin+2), long(pos)+0.5);
-            jgraphics_line_to(g, rect->width - (knobMargin+2), long(pos)+0.5);
-            jgraphics_move_to(g, (knobMargin+(knobRound*0.5)), long(pos)+0.5+3);
-            jgraphics_line_to(g, rect->width - (knobMargin+(knobRound*0.5)), long(pos)+0.5+3);
-            jgraphics_stroke(g);
-        }
+            jgraphics_rectangle(g, knobMargin, pos - hoaGain_DISPLAYINSET*0.5, rect->width - (knobMargin*2), hoaGain_DISPLAYINSET);
+        
+        jgraphics_fill(g);
 	}
 
     jbox_end_layer((t_object*)x, view, gensym("cursor_layer"));
 	jbox_paint_layer((t_object *)x, view, gensym("cursor_layer"), 0., 0.);
 }
 
-void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
+void draw_valuestripes(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
 {
-	t_jgraphics *g;
-	int zerodBpos;
-    t_jrgba black, white;
-    black = white = x->j_brgba;
-    double contrast = 0.05;
+    t_jgraphics *g;
+    t_rect layer;
     
-    black.red = clip_min(black.red -= contrast, 0);
-    black.green = clip_min(black.green -= contrast, 0);
-    black.blue = clip_min(black.blue -= contrast, 0);
+    int pos = hoaGain_dBvaltopos(x, CLAMP(x->j_valdB, x->f_range[0], x->f_range[1]), rect, isHoriz);
     
-    white.red = clip_max(white.red += contrast, 1.);
-    white.green = clip_max(white.green += contrast, 1.);
-    white.blue = clip_max(white.blue += contrast, 1.);
-    
-    zerodBpos = hoaGain_dBvaltopos(x, 0, rect, isHoriz);
-    
-    g = jbox_start_layer((t_object *)x, view, gensym("bg_layer"), rect->width, rect->height);
-    
-    if (g) {
-        
-        if (isHoriz)
-        {
-            // draw knob rect
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_set_line_width(g,1);
-            jgraphics_rectangle_rounded(g, zerodBpos-(knobMargin)-0.5, (knobMargin)-1.5, (knobMargin*2)+1, rect->height - (knobMargin*2)+2, knobRound, knobRound);
-            jgraphics_stroke(g);
-            
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_set_line_width(g,1);
-            jgraphics_rectangle_rounded(g, zerodBpos-(knobMargin)-0.5, (knobMargin)-1.5, (knobMargin*2)+2, rect->height - (knobMargin*2)+3, knobRound, knobRound);
-            jgraphics_stroke(g);
-
-            
-            // draw middle line :
-            jgraphics_set_line_width(g,1);
-            jgraphics_set_source_jrgba(g, &white);
-            // neg
-            jgraphics_move_to(g, 3, long(rect->height*0.5) + 0.5);
-            jgraphics_line_to(g, long(zerodBpos) - (knobMargin), long(rect->height*0.5) + 0.5);
-            // pos
-            jgraphics_move_to(g, long(zerodBpos) + (knobMargin)+1, long(rect->height*0.5) + 0.5);
-            jgraphics_line_to(g, rect->width - 4, long(rect->height*0.5) + 0.5);
-            jgraphics_stroke(g);
-            
-            
-            jgraphics_set_line_width(g,1);
-            jgraphics_set_source_jrgba(g, &black);
-            // neg
-            jgraphics_move_to(g, 3, long(rect->height*0.5)-1 + 0.5);
-            jgraphics_line_to(g, long(zerodBpos) - (knobMargin)-1, long(rect->height*0.5)-1 + 0.5);
-            // pos
-            jgraphics_move_to(g, long(zerodBpos) + (knobMargin)+1, long(rect->height*0.5)-1 + 0.5);
-            jgraphics_line_to(g, rect->width - 4, long(rect->height*0.5)-1 + 0.5);
-            jgraphics_stroke(g);
-        }
-        else
-        {
-            // draw knob rect
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_set_line_width(g,1);
-            jgraphics_rectangle_rounded(g, (knobMargin)-1.5, zerodBpos-(knobMargin)-0.5, rect->width - (knobMargin*2)+2, (knobMargin*2)+1, knobRound, knobRound);
-            jgraphics_stroke(g);
-            
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_set_line_width(g,1);
-            jgraphics_rectangle_rounded(g, (knobMargin)-1.5, zerodBpos-(knobMargin)-0.5, rect->width - (knobMargin*2)+3, (knobMargin*2)+2, knobRound, knobRound);
-            jgraphics_stroke(g);
-            
-            // draw middle line white :
-            jgraphics_set_line_width(g,1);
-            jgraphics_set_source_jrgba(g, &white);
-            // neg
-            jgraphics_move_to(g, long(rect->width*0.5) + 0.5, 3);
-            jgraphics_line_to(g, long(rect->width*0.5) + 0.5, long(zerodBpos) - (knobMargin));
-            // pos
-            jgraphics_move_to(g, long(rect->width*0.5) + 0.5, long(zerodBpos) + (knobMargin)+1);
-            jgraphics_line_to(g, long(rect->width*0.5) + 0.5, rect->height - 4);
-            jgraphics_stroke(g);
-            
-            // draw middle line white :
-            jgraphics_set_line_width(g,1);
-            jgraphics_set_source_jrgba(g, &black);
-            // neg
-            jgraphics_move_to(g, long(rect->width*0.5)-1 + 0.5, 3);
-            jgraphics_line_to(g, long(rect->width*0.5)-1 + 0.5, long(zerodBpos) - (knobMargin)-1);
-            // pos
-            jgraphics_move_to(g, long(rect->width*0.5)-1 + 0.5, long(zerodBpos) + (knobMargin)+1);
-            jgraphics_line_to(g, long(rect->width*0.5)-1 + 0.5, rect->height - 4);
-            jgraphics_stroke(g);
-        }
+    if (isHoriz)
+    {
+        layer.x = layer.y = knobMargin;
+        layer.width = pos - hoaGain_DISPLAYINSET*0.5 - knobMargin*1.5;
+        layer.height = rect->height - (knobMargin*2);
     }
-
-    jbox_end_layer((t_object*)x, view, gensym("bg_layer"));
-	jbox_paint_layer((t_object *)x, view, gensym("bg_layer"), 0., 0.);
+    else
+    {
+        layer.x = knobMargin;
+        layer.y = pos + hoaGain_DISPLAYINSET*0.5 + knobMargin*0.5;
+        layer.width = rect->width - (knobMargin*2);
+        layer.height = rect->height - layer.y - knobMargin;
+    }
+    
+    if (MAX(layer.width, 0) == 0 || MAX(layer.height, 0) == 0)
+        return;
+    
+    g = jbox_start_layer((t_object *)x, view, gensym("valuestripe_layer"), layer.width, layer.height);
+    
+    if (g)
+    {
+        if (isHoriz)
+            jgraphics_translate(g, -hoaGain_STRIPEWIDTH, -hoaGain_STRIPEWIDTH);
+        else
+            jgraphics_translate(g, -hoaGain_STRIPEWIDTH, hoaGain_STRIPEWIDTH - pos);
+        
+        jgraphics_set_source_jrgba(g, &x->j_knobcolor);
+        jgraphics_diagonal_line_fill(g, hoaGain_STRIPEWIDTH, 0, 0, rect->width, rect->height);
+    }
+    
+    jbox_end_layer((t_object*)x, view, gensym("valuestripe_layer"));
+    jbox_paint_layer((t_object *)x, view, gensym("valuestripe_layer"), layer.x, layer.y);
 }
 
 void hoaGain_bang(t_hoaGain *x)
 {
-    if (x->f_inputMode == MIDI) {
+    if (x->f_inputMode == MIDI)
         outlet_int(x->f_outlet_infos, (long)hoaGain_getInputModeValue(x));
-    }
     else
         outlet_float(x->f_outlet_infos, hoaGain_getInputModeValue(x));
 }
@@ -1066,7 +1017,8 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 	
 	jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
 	
-	if (modifiers & eShiftKey || x->j_valdB >= 0) {
+	if (modifiers & eShiftKey)
+    {
 		pt.y *= 0.2;
 		pt.x *= 0.2;
 	}
@@ -1074,7 +1026,8 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 	// need to cancel cum change if it is beyond zero or the max value
 	s_hoaGain_cum.x += pt.x;
 	s_hoaGain_cum.y -= pt.y;
-	if (hoaGain_ishorizontal(x, &rect)) {
+	if (hoaGain_ishorizontal(x, &rect))
+    {
 		factor = x->j_size / (rect.width - (hoaGain_DISPLAYINSET*2));
 		inc = s_hoaGain_cum.x * factor;
 		val = s_hoaGain_startval + inc;
@@ -1083,7 +1036,9 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 		// in case we were constrained, adjust the cum
 		if (cval != val)
 			s_hoaGain_cum.x = (cval-s_hoaGain_startval) / factor;
-	} else {
+	}
+    else
+    {
 		factor = x->j_size / (rect.height - (hoaGain_DISPLAYINSET*2)); 
 		inc = s_hoaGain_cum.y * factor;
 		val = s_hoaGain_startval + inc;
@@ -1094,9 +1049,8 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 	}
     
     // force to 0dB :
-    if (isInside(x->j_valdB, -0.05, 0.05) ) {
+    if (isInside(x->j_valdB, -0.05, 0.05) )
         hoaGain_float_dB(x, 0);
-    }
 }
 
 void hoaGain_mouseup(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -1110,24 +1064,19 @@ void hoaGain_mouseup(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifier
 	ishoriz = hoaGain_ishorizontal(x, &rect);
 	pos = hoaGain_valtopos(x, x->j_val, &rect, ishoriz);
 	vp = pos + 0.5;
-	if (ishoriz) {
+	if (ishoriz)
+    {
 		mx = vp; 
 		my = pt.y;	// have y position be same as where mouse down clicked
-	} else {
+	}
+    else
+    {
 		mx = pt.x;	// have x position be same as where mouse down clicked
 		my = vp; 
 	}
 	
 	if (fabs(pt.x-mx) > 1. || fabs(pt.y-my) > 1.) // this make sure that if you click at the "same" location we don't move the mouse.
 		jmouse_setposition_box(patcherview, (t_object*) x, mx, my); 
-}
-
-void hoaGain_getdrawparams(t_hoaGain *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_borderthickness = hoaGain_BORDERTHICKNESS;
-	params->d_bordercolor = x->j_frgba2;
-	params->d_cornersize = hoaGain_CORNERSIZE; 
-	params->d_boxfillcolor = x->j_brgba;
 }
 
 t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
@@ -1148,14 +1097,20 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
 				sysmem_freeptr(argv);
 			}
 		}
-        else if (name == gensym("knobcolor") || name == gensym("intknobcolor"))
+        else if (name == gensym("knobcolor"))
         {
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("bg_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("valuestripe_layer"));
         }
         else if(name == gensym("bgcolor"))
 		{
             jbox_invalidate_layer((t_object *)x, NULL, gensym("bg_layer"));
 		}
+        else if (name == gensym("stripecolor"))
+        {
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("offstripe_layer"));
+        }
         jbox_redraw((t_jbox *)x);
 	}
     
