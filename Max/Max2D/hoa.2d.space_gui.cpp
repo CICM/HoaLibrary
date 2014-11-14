@@ -53,7 +53,7 @@ typedef struct  _hoa_2d_space
     double      f_angle_ref;
     
 	t_jrgba     f_color_bg;
-    t_jrgba     f_color_bd;
+    t_jrgba     f_color_lines;
 	t_jrgba		f_color_sp;
 	t_jrgba		f_color_pt;
 	t_jrgba		f_color_sel;
@@ -131,7 +131,6 @@ int C74_EXPORT main(void)
 	// @description Click and drag the sliders to set their value.
 	// Press <b>ctrl</b> key while you drag to make a rotation of the slider values.
 	// Press <b>shift</b> key while you drag to relatively increase or decrease all of the slider values.
-	class_addmethod(c, (method)hoa_2d_space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)hoa_2d_space_mouse_down,      "mousedown",      A_CANT, 0);
     class_addmethod(c, (method)hoa_2d_space_mouse_move,      "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)hoa_2d_space_mouse_drag,      "mousedrag",      A_CANT, 0);
@@ -226,11 +225,11 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.space</o> object
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_2d_space, f_color_bd);
-	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
+    CLASS_ATTR_RGBA                 (c, "linescolor", 0, t_hoa_2d_space, f_color_lines);
+	CLASS_ATTR_STYLE                (c, "linescolor", 0, "rgba");
+	CLASS_ATTR_LABEL                (c, "linescolor", 0, "Lines Color");
+	CLASS_ATTR_ORDER                (c, "linescolor", 0, "2");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "linescolor", 0, "0.65098 0.666667 0.662745 1.");
 	// @description Sets the RGBA values for the border color of the <o>hoa.2d.space</o> object
 	
 	CLASS_ATTR_RGBA					(c, "spcolor", 0, t_hoa_2d_space, f_color_sp);
@@ -390,7 +389,7 @@ t_max_err hoa_2d_space_notify(t_hoa_2d_space *x, t_symbol *s, t_symbol *msg, voi
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
 		
-		if(name == hoa_sym_bgcolor || name == hoa_sym_bdcolor || name == gensym("grid"))
+		if(name == hoa_sym_bgcolor || name == gensym("linescolor") || name == gensym("grid"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
 		}
@@ -422,14 +421,6 @@ t_max_err hoa_2d_space_notify(t_hoa_2d_space *x, t_symbol *s, t_symbol *msg, voi
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
-}
-
-void hoa_2d_space_getdrawparams(t_hoa_2d_space *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-    params->d_boxfillcolor = x->f_color_bg;
-    params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
-	params->d_cornersize = HOA_UI_CORNERSIZE;
 }
 
 void hoa_2d_space_preset(t_hoa_2d_space *x)
@@ -524,28 +515,25 @@ void draw_background(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
     int i;
 	double y1, y2, rotateAngle, grid_rad, inner_radius, grid_range, grid_step;
     t_jmatrix transform;
-    t_jrgba black, white;
 	
 	long grid = x->f_grid;
 	inner_radius = (double) 1 / 5 * x->f_radius;
 	grid_range = x->f_radius - inner_radius;
 	grid_step = safediv(grid_range, grid);
     
-    black = white = x->f_color_bg;
-    black.red   = clip_min(black.red - contrast_black, 0.);
-    black.green = clip_min(black.green - contrast_black, 0.);
-    black.blue  = clip_min(black.blue - contrast_black, 0.);
-    
-    white.red   = clip_max(white.red + contrast_white, 1.);
-    white.green = clip_max(white.green + contrast_white, 1.);
-    white.blue  = clip_max(white.blue + contrast_white, 1.);
-    
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, rect->width, rect->height);
     
 	if (g)
 	{
+        jgraphics_rectangle(g, 0, 0, rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
+        
+        jgraphics_set_source_jrgba(g, &x->f_color_lines);
+        jgraphics_set_line_width(g, 1);
         
         for(i = 0; i < x->f_number_of_channels ; i++)
 		{
@@ -555,24 +543,8 @@ void draw_background(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            if(rotateAngle > HOA_PI2 && rotateAngle < HOA_PI + HOA_PI2)
-            {
-                jgraphics_move_to(g, -1, long(y1));
-                jgraphics_line_to(g, -1, long(y2));
-            }
-            else
-            {
-                jgraphics_move_to(g, 1, long(y1));
-                jgraphics_line_to(g, 1, long(y2));
-            }
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_stroke(g);
-            
 			jgraphics_move_to(g, 0, y1);
 			jgraphics_line_to(g, 0, y2);
-            jgraphics_set_source_jrgba(g, &black);
-			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
 			
 			jgraphics_rotate(g, -rotateAngle);
@@ -584,12 +556,6 @@ void draw_background(t_hoa_2d_space *x,  t_object *view, t_rect *rect)
 		for(i = grid; i >= 0; i--)
 		{
 			grid_rad = grid_step * i + inner_radius;
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, 1, 1, grid_rad,  0., HOA_2PI);
-            jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
             jgraphics_arc(g, 0, 0, grid_rad,  0., HOA_2PI);
             jgraphics_stroke(g);
 		}
