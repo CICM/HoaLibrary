@@ -247,7 +247,7 @@ int C74_EXPORT main(void)
 	class_addmethod (c, (method) hoaGain_notify,              "notify",               A_CANT, 0); 
 	class_addmethod (c, (method) hoaGain_oksize,              "oksize",               A_CANT, 0);
     
-	CLASS_ATTR_DEFAULT(c,"patching_rect",0, "0. 0. 200. 30.");
+	CLASS_ATTR_DEFAULT(c,"patching_rect",0, "0. 0. 140. 22.");
 	
 	CLASS_STICKY_CATEGORY		(c,0,"Value");
 	
