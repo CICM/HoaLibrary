@@ -43,7 +43,6 @@ typedef struct  _hoa_3d_scope
     float           f_gain;
 	
 	t_jrgba         f_color_bg;
-    t_jrgba         f_color_bd;
 	t_jrgba         f_color_nh;
 	t_jrgba         f_color_ph;
 	
@@ -63,7 +62,6 @@ void hoa_3d_scope_perform64(t_hoa_3d_scope *x, t_object *dsp64, double **ins, lo
 
 t_max_err hoa_3d_scope_notify(t_hoa_3d_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 long hoa_3d_scope_oksize(t_hoa_3d_scope *x, t_rect *newrect);
-void hoa_3d_scope_getdrawparams(t_hoa_3d_scope *x, t_object *patcherview, t_jboxdrawparams *params);
 
 void hoa_3d_scope_paint(t_hoa_3d_scope *x, t_object *view);
 void draw_background(t_hoa_3d_scope *x,  t_object *view, t_rect *rect);
@@ -96,16 +94,15 @@ int C74_EXPORT main(void)
 	
 	// @method signal @digest Array of spherical harmonic signals that represent a sound field
 	// @description Array of spherical harmonic signals that represent a sound field
-	class_addmethod(c, (method)hoa_3d_scope_dsp64,			"dsp64",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_3d_scope_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_3d_scope_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)hoa_3d_scope_paint,			"paint",		A_CANT,	0);
+	class_addmethod(c, (method)hoa_3d_scope_paint,		"paint",		A_CANT,	0);
 	class_addmethod(c, (method)hoa_3d_scope_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_3d_scope_getdrawparams, "getdrawparams", A_CANT, 0);
 	class_addmethod(c, (method)hoa_3d_scope_oksize,		"oksize",		A_CANT, 0);
 
     CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
-	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 150 150");
 
     CLASS_ATTR_LONG                 (c, "order", 0, t_hoa_3d_scope, f_order);
     CLASS_ATTR_ACCESSORS            (c, "order", NULL, set_order);
@@ -142,14 +139,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.3d.scope~</o> object
-    
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_hoa_3d_scope, f_color_bd);
-	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
-	// @description Sets the RGBA values for the border color of the <o>hoa.3d.scope~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_hoa_3d_scope, f_color_ph);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
@@ -295,14 +284,6 @@ t_max_err hoa_3d_scope_notify(t_hoa_3d_scope *x, t_symbol *s, t_symbol *msg, voi
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void hoa_3d_scope_getdrawparams(t_hoa_3d_scope *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_boxfillcolor = x->f_color_bg;
-    params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 8;
-}
-
 long hoa_3d_scope_oksize(t_hoa_3d_scope *x, t_rect *newrect)
 {
 	if (newrect->width < 20)
@@ -318,6 +299,7 @@ void hoa_3d_scope_paint(t_hoa_3d_scope *x, t_object *view)
 	x->f_center = rect.width * .5;
 	x->f_radius = x->f_center * 0.95;
 	
+    draw_background(x, view, &rect);
     draw_harmonics(x, view, &rect);
 }
 
@@ -328,6 +310,20 @@ t_jrgba rgba_addContrast(t_jrgba color, float contrast)
     new_color.green = clip_minmax(new_color.green += contrast, 0., 1.);
     new_color.blue = clip_minmax(new_color.blue += contrast, 0., 1.);
     return new_color;
+}
+
+void draw_background(t_hoa_3d_scope *x,  t_object *view, t_rect *rect)
+{
+    t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, rect->width, rect->height);
+    
+    if (g)
+    {
+        jgraphics_rectangle(g, 0, 0, rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
+    }
+    jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
 void draw_harmonics(t_hoa_3d_scope *x, t_object *view, t_rect *rect)
