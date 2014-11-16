@@ -145,7 +145,7 @@ int C74_EXPORT main(void)
 	// @exclude hoa.2d.space
 	CLASS_ATTR_INVISIBLE            (c, "textcolor", 0);
 	// @exclude hoa.2d.space
-	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 150 150");
 	// @exclude hoa.2d.space
     
 	CLASS_STICKY_CATEGORY(c, 0, "Value");
