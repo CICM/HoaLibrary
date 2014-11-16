@@ -42,7 +42,6 @@ typedef struct  _hoa_2d_recomposer_gui
     
     // colors
 	t_jrgba		f_color_bg;
-    t_jrgba		f_color_bd;
     t_jrgba		f_color_inner_circle;
 	t_jrgba		f_color_channel_point;
     t_jrgba		f_color_channel_point_selected;
@@ -94,7 +93,6 @@ t_class *hoa_2d_recomposer_gui_class;
 // general methods
 void *hoa_2d_recomposer_gui_new(t_symbol *s, int argc, t_atom *argv);
 void hoa_2d_recomposer_gui_free(t_hoa_2d_recomposer_gui *x);
-void hoa_2d_recomposer_gui_getdrawparams(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_jboxdrawparams *params);
 void hoa_2d_recomposer_gui_assist(t_hoa_2d_recomposer_gui *x, void *b, long m, long a, char *s);
 t_max_err hoa_2d_recomposer_gui_notify(t_hoa_2d_recomposer_gui *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void hoa_2d_recomposer_gui_preset(t_hoa_2d_recomposer_gui *x);
@@ -170,7 +168,6 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method) hoa_2d_recomposer_gui_getvalueof,      "getvalueof",    A_CANT,	0);
 	class_addmethod(c, (method) hoa_2d_recomposer_gui_setvalueof,      "setvalueof",    A_CANT,	0);
 	class_addmethod(c, (method) hoa_2d_recomposer_gui_paint,           "paint",         A_CANT,	0);
-	class_addmethod(c, (method) hoa_2d_recomposer_gui_getdrawparams,   "getdrawparams", A_CANT,	0);
 	class_addmethod(c, (method) hoa_2d_recomposer_gui_notify,          "notify",        A_CANT,	0);
 	
 	// @method bang @digest Output current values.
@@ -232,7 +229,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method) hoa_2d_recomposer_gui_key,             "key",           A_CANT,   0);
 	class_addmethod(c, (method) hoa_2d_recomposer_gui_focuslost,       "focuslost",     A_CANT,   0);
     	
-	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
+	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 150 150");
 	// @exclude hoa.2d.map
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	// @exclude hoa.2d.map
@@ -244,15 +241,8 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.35 0.35 0.35 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.376471 0.384314 0.4 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.recomposer</o> object
-    
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_2d_recomposer_gui, f_color_bd);
-	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.2 0.2 0.2 1.");
-	// @description Sets the RGBA values for the border color of the <o>hoa.2d.recomposer</o> object
     
     CLASS_ATTR_RGBA				(c, "circlecolor", 0, t_hoa_2d_recomposer_gui, f_color_inner_circle);
 	CLASS_ATTR_STYLE			(c, "circlecolor", 0, "rgba");
@@ -376,14 +366,6 @@ void *hoa_2d_recomposer_gui_new(t_symbol *s, int argc, t_atom *argv)
 	jbox_ready(&x->j_box);
     
 	return (x);
-}
-
-void hoa_2d_recomposer_gui_getdrawparams(t_hoa_2d_recomposer_gui *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_bordercolor = x->f_color_bd;
-    params->d_boxfillcolor = x->f_color_bg;
-	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
-	params->d_cornersize = HOA_UI_CORNERSIZE;
 }
 
 void hoa_2d_recomposer_gui_free(t_hoa_2d_recomposer_gui *x)
@@ -768,6 +750,10 @@ void draw_background(t_hoa_2d_recomposer_gui *x,  t_object *view, t_rect *rect)
 	
 	if (g)
 	{
+        jgraphics_rectangle(g, 0., 0., rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_source_jrgba(g, &x->f_color_inner_circle);
 		jgraphics_arc(g, w*0.5, w*0.5, x->f_channel_radius,  0., HOA_2PI);
@@ -858,7 +844,7 @@ void draw_channels_text(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect
     t_jfont *jf;
 	t_jtextlayout *jtl;
     char text[16];
-    double fontsize = 10;
+    double fontsize = rect->width * 0.04;
     double x1, y1;
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_text_layer, rect->width, rect->height);
@@ -868,7 +854,7 @@ void draw_channels_text(t_hoa_2d_recomposer_gui *x, t_object *view, t_rect *rect
         jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_ITALIC, JGRAPHICS_FONT_WEIGHT_BOLD, fontsize);
         jtl = jtextlayout_withbgcolor(g, &x->f_color_channel_point);
         
-        for(int i=numChannels-1; i>=0; i--)
+        for(int i = numChannels-1; i >= 0; i--)
         {
             jtextlayout_settextcolor(jtl, (x->f_channels->isSelected(i) || x->f_last_mouseMoveOverChannel == i) ? &x->f_color_channel_point_text_sel : &x->f_color_channel_point_text);
 			
@@ -1076,7 +1062,7 @@ void hoa_2d_recomposer_gui_mousedown(t_hoa_2d_recomposer_gui *x, t_object *patch
 #ifdef _WINDOWS
 		else if (modifiers == 21)  // Control
 #else
-		else if (modifiers == 17)  // Cmd
+		else if (modifiers == 17 || modifiers == 18)  // Cmd / shift
 #endif
         {
             x->f_channels->setSelected(isMouseDownOverAChannel, -1);
