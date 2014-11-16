@@ -92,7 +92,6 @@ typedef struct  _hoamap
     long        f_index_of_group_to_color;
     
     t_jrgba		f_color_bg;
-    t_jrgba     f_color_bd;
     t_jrgba     f_color_selection;
     
     int         f_cartesian_drag;
@@ -135,7 +134,6 @@ t_class *hoamap_class;
 void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
 void hoamap_free(t_hoa_map *x);
 void hoamap_tick(t_hoa_map *x);
-void hoamap_getdrawparams(t_hoa_map *x, t_object *patcherview, t_jboxdrawparams *params);
 void hoamap_assist(t_hoa_map *x, void *b, long m, long a, char *s);
 void hoamap_preset(t_hoa_map *x);
 t_max_err hoamap_setvalueof(t_hoa_map *x, long ac, t_atom *av);
@@ -198,7 +196,6 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method) hoamap_assist,           "assist",			A_CANT,	0);
 	class_addmethod(c, (method) hoamap_paint,            "paint",			A_CANT,	0);
-	class_addmethod(c, (method) hoamap_getdrawparams,    "getdrawparams",	A_CANT, 0);
 	class_addmethod(c, (method) hoamap_notify,           "notify",			A_CANT, 0);
 	class_addmethod(c, (method) hoamap_preset,			 "preset",			0);
     class_addmethod(c, (method) hoamap_getvalueof,		 "getvalueof",		A_CANT, 0);
@@ -267,14 +264,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.75 0.75 0.75 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.3d.map</o> object
-    
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoa_map, f_color_bd);
-	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
-	// @description Sets the RGBA values for the border color of the <o>hoa.3d.map</o> object
     
     CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoa_map, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
@@ -659,19 +648,6 @@ void hoamap_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         if(a == 2)
             sprintf(s,"(list) Infos");
     }
-}
-
-void hoamap_getdrawparams(t_hoa_map *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
-	params->d_cornersize = HOA_UI_CORNERSIZE;
-	
-	t_jrgba bgcolor = x->f_color_bg;
-	vector_add(3, (double*)&bgcolor, -0.1);
-	vector_clip_minmax(3, (double*)&bgcolor, 0., 1.);
-	
-	params->d_boxfillcolor = bgcolor;
-    params->d_bordercolor =  x->f_color_bd;
 }
 
 /**********************************************************/
@@ -1660,26 +1636,30 @@ void hoamap_paint(t_hoa_map *x, t_object *view)
 void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g;
-    t_jrgba black, white;
+    t_jrgba black;
     double w = rect->width;
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
     double maxctr = max(w, h)*0.5;
     
+    t_jrgba bgcolor = x->f_color_bg;
+    vector_add(3, (double*)&bgcolor, -0.1);
+    vector_clip_minmax(3, (double*)&bgcolor, 0., 1.);
+    
     double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
-    black = white = x->f_color_bg;
+    black = x->f_color_bg;
 	
 	vector_add(3, (double*)&black, -contrastBlack);
 	vector_clip_minmax(3, (double*)&black, 0., 1.);
-	
-	vector_add(3, (double*)&white, contrastWhite);
-	vector_clip_minmax(3, (double*)&white, 0., 1.);
 	
 	g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, w, h);
 	
 	if (g)
     {
+        jgraphics_rectangle(g, 0., 0., rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &bgcolor);
+        jgraphics_fill(g);
+        
         jgraphics_set_source_jrgba(g, &x->f_color_bg);
         jgraphics_set_line_width(g, 1);
         jgraphics_arc(g, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor),  0., HOA_2PI);
@@ -1691,25 +1671,11 @@ void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
         else if(ecart < 2.5) ecart *= 16;
         ecart = int(ecart);
         
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_set_line_width(g, 1);
+        
 		for(double i = 0; i < maxctr; i += ecart)
         {
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_move_to(g, 0., long(ctr.y - i) + 0.5);
-            jgraphics_line_to(g, w,  long(ctr.y - i) + 0.5);
-            jgraphics_move_to(g, 0., long(ctr.y + i) + 0.5);
-            jgraphics_line_to(g, w,  long(ctr.y + i) + 0.5);
-            jgraphics_move_to(g, long(ctr.x - i) + 0.5, 0.);
-            jgraphics_line_to(g, long(ctr.x - i) + 0.5, w);
-            jgraphics_move_to(g, long(ctr.x + i) + 0.5, 0.);
-            jgraphics_line_to(g, long(ctr.x + i) + 0.5, w);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_scale(g, 0.5, 0.5);
-            jgraphics_stroke(g);
-            jgraphics_scale(g, 2, 2);
-            
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
             jgraphics_move_to(g, 0. - 0.5, long(ctr.y - i) - 0.5);
             jgraphics_line_to(g, w - 0.5, long(ctr.y - i) - 0.5);
             jgraphics_move_to(g, 0. - 0.5, long(ctr.y + i) - 0.5);
@@ -1718,29 +1684,15 @@ void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
             jgraphics_line_to(g, long(ctr.x - i) - 0.5, w - 0.5);
             jgraphics_move_to(g, long(ctr.x + i) - 0.5, 0. - 0.5);
             jgraphics_line_to(g, long(ctr.x + i) - 0.5, w - 0.5);
-            jgraphics_set_line_width(g, 2);
-            jgraphics_scale(g, 0.25, 0.25);
             jgraphics_stroke(g);
-            jgraphics_scale(g, 4, 4);
         }
         
         /* Circles */
         double radius = x->f_zoom_factor * (maxctr*2) / 10.;
         for(int i = 5; i > 0; i--)
         {
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, long(ctr.x)+0.5, long(ctr.y)+0.5, (double)i * radius - 1,  0., HOA_2PI);
-            jgraphics_scale(g, 0.5, 0.5);
-            jgraphics_stroke(g);
-            jgraphics_scale(g, 2, 2);
-            
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &black);
             jgraphics_arc(g, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., HOA_2PI);
-            jgraphics_scale(g, 0.5, 0.5);
             jgraphics_stroke(g);
-            jgraphics_scale(g, 2, 2);
         }
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
