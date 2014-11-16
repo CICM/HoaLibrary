@@ -40,7 +40,7 @@ typedef struct  _hoa_meter_3d
 	t_rect			f_presentation_rect;
     
     long            f_number_of_channels;
-    double*         f_angles_of_channels;
+    double          f_angles_of_channels[MAX_CHANNELS * 2];
     double          f_offsets[3];
     t_symbol*       f_clockwise;
     t_symbol*       f_view;
@@ -48,7 +48,6 @@ typedef struct  _hoa_meter_3d
     long            f_interval;
     
     t_jrgba         f_color_bg;
-    t_jrgba         f_color_bd;
 	t_jrgba			f_color_off_signal;
 	t_jrgba         f_color_cold_signal;
 	t_jrgba         f_color_tepid_signal;
@@ -94,7 +93,6 @@ t_max_err vectors_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv
 t_max_err rotation_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
 t_max_err view_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv);
 
-void hoa_meter_3d_getdrawparams(t_hoa_meter_3d *x, t_object *patcherview, t_jboxdrawparams *params);
 long hoa_meter_3d_oksize(t_hoa_meter_3d *x, t_rect *newrect);
 
 void hoa_meter_3d_paint(t_hoa_meter_3d *x, t_object *view);
@@ -137,16 +135,15 @@ int C74_EXPORT main(void)
 	hoa_initclass(c, (method)hoa_getinfos);
 	
 	// @method signal @digest Array of signals to be visualize.
-	// @description Array of signals to be visualize.
+	// @description Array of signals to visualize.
 	class_addmethod(c, (method) hoa_meter_3d_dsp64,           "dsp64",			A_CANT, 0);
 	class_addmethod(c, (method) hoa_meter_3d_assist,          "assist",			A_CANT, 0);
 	class_addmethod(c, (method) hoa_meter_3d_paint,           "paint",			A_CANT, 0);
 	class_addmethod(c, (method) hoa_meter_3d_notify,          "notify",			A_CANT, 0);
-    class_addmethod(c, (method) hoa_meter_3d_getdrawparams,   "getdrawparams",	A_CANT, 0);
     class_addmethod(c, (method) hoa_meter_3d_oksize,          "oksize",			A_CANT, 0);
 	
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
-	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 150 150");
 	
     CLASS_ATTR_LONG                 (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_number_of_channels);
     CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
@@ -156,7 +153,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "8");
 	// @description The number of displayed channel and peak level indicators.
 	
-    CLASS_ATTR_DOUBLE_VARSIZE       (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_angles_of_channels, f_number_of_channels, MAX_SPEAKER);
+    CLASS_ATTR_DOUBLE_VARSIZE       (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_meter_3d, f_angles_of_channels, f_number_of_channels, MAX_CHANNELS*2);
 	CLASS_ATTR_ACCESSORS            (c, "angles", NULL, angles_set);
 	CLASS_ATTR_ORDER                (c, "angles", 0, "2");
 	CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
@@ -212,13 +209,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 1, "rgba");
 	// @description Sets the RGBA values for the background color of the <o>hoa.3d.meter~</o> object
-    
-    CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoa_meter_3d, f_color_bd);
-	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.7 0.7 0.7 1.");
-	CLASS_ATTR_STYLE                (c, "bdcolor", 1, "rgba");
-	// @description Sets the RGBA values for the border color of the <o>hoa.3d.meter~</o> object
     
 	CLASS_ATTR_RGBA                 (c, "offcolor", 0, t_hoa_meter_3d, f_color_off_signal);
 	CLASS_ATTR_LABEL                (c, "offcolor", 0, "Off Signal Color");
@@ -304,8 +294,6 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
-	
-    x->f_angles_of_channels = new double[MAX_SPEAKER * 2];
 
 	jbox_get_patching_rect((t_object*)x, &x->f_rect);
 	jbox_get_presentation_rect((t_object*)x, &x->f_presentation_rect);
@@ -324,6 +312,12 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_startclock = 0;
 	
     dsp_setupjbox((t_pxjbox *)x, x->f_meter->getNumberOfChannels());
+    
+    for(int i = 0; i < x->f_meter->getNumberOfChannels() * 2; i+= 2)
+    {
+        x->f_angles_of_channels[i] = x->f_meter->getChannelAzimuth(i/2) / HOA_2PI * 360;
+        x->f_angles_of_channels[i+1] = x->f_meter->getChannelElevation(i/2) / HOA_2PI * 360;
+    }
 
 	attr_dictionary_process(x, d);
     
@@ -337,7 +331,6 @@ void hoa_meter_3d_free(t_hoa_meter_3d *x)
     clock_free(x->f_clock);
     delete x->f_meter;
     delete x->f_vector;
-    delete [] x->f_angles_of_channels;
     delete [] x->f_signals;
     delete [] x->f_over_leds;
 }
@@ -350,14 +343,6 @@ t_hoa_err hoa_getinfos(t_hoa_meter_3d* x, t_hoa_boxinfos* boxinfos)
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_PLANEWAVES;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
 	return HOA_ERR_NONE;
-}
-
-void hoa_meter_3d_getdrawparams(t_hoa_meter_3d *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-    params->d_boxfillcolor = x->f_color_bg;
-    params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 8;
 }
 
 long hoa_meter_3d_oksize(t_hoa_meter_3d *x, t_rect *newrect)
@@ -432,46 +417,39 @@ t_max_err channels_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *arg
     
     x->f_number_of_channels = x->f_meter->getNumberOfChannels();
     
+    object_attr_touch((t_object*)x, gensym("angles"));
+    
     return MAX_ERR_NONE;
 }
 
 t_max_err angles_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
 {
-    double azimuths[MAX_SPEAKER];
-	double elevations[MAX_SPEAKER];
-    if(argc > MAX_SPEAKER * 2)
-        argc = MAX_SPEAKER * 2;
-	
     if(argc && argv)
     {
-		for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels(); i++, j+=2)
+        short dspstate = dsp_setloadupdate(false);
+        double pos1, pos2;
+        for(int i = 1, j = 0; i < x->f_meter->getNumberOfChannels() * 2 && i < argc; i+= 2, j++)
         {
-            if(j < argc-1 && atom_isNumber(argv+j) && atom_isNumber(argv+j+1))
+            if( (atom_gettype(argv+i-1) == A_FLOAT || atom_gettype(argv+i-1) == A_LONG) &&
+               (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG) )
             {
-                azimuths[i] = atom_getfloat(argv+j) / 360. * HOA_2PI;
-				elevations[i] = atom_getfloat(argv+j+1) / 360. * HOA_2PI;
+                pos1 = atom_getfloat(argv+i-1) / 360. * HOA_2PI;
+                pos2 = atom_getfloat(argv+i) / 360. * HOA_2PI;
             }
-			else
-			{
-				azimuths[i] = x->f_meter->getChannelAzimuth(i);
-				elevations[i] = x->f_meter->getChannelElevation(i);
-			}
+            
+            x->f_meter->setChannelPosition(j, pos1, pos2);
+            x->f_vector->setChannelPosition(j, pos1, pos2);
+            
+            x->f_angles_of_channels[i-1] = x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360;
+            x->f_angles_of_channels[i] = x->f_meter->getChannelElevation(j) / HOA_2PI * 360;
         }
-        
-		x->f_meter->setChannelsPosition(azimuths, elevations);
-        x->f_vector->setChannelsPosition(azimuths, elevations);
+        dsp_setloadupdate(dspstate);
     }
     
-    for(int i = 0, j = 0; i < x->f_meter->getNumberOfChannels() * 2; i+=2, j++)
-    {
-        x->f_angles_of_channels[i] = x->f_meter->getChannelAzimuth(j) / HOA_2PI * 360.;
-        x->f_angles_of_channels[i+1] = x->f_meter->getChannelElevation(j) / HOA_2PI * 360.;
-    }
-	
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
-	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
-	jbox_redraw((t_jbox *)x);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_vector_layer);
+    jbox_redraw((t_jbox *)x);
     
     return MAX_ERR_NONE;
 }
@@ -491,6 +469,7 @@ t_max_err offset_set(t_hoa_meter_3d *x, t_object *attr, long argc, t_atom *argv)
             ay = atom_getfloat(argv+1) / 360. * HOA_2PI;
         else
             ay = x->f_meter->getChannelsRotationX();
+        
         if(argc > 2 && argv+2 && atom_isNumber(argv+2))
             az = atom_getfloat(argv+2) / 360. * HOA_2PI;
         else
@@ -678,7 +657,7 @@ t_max_err hoa_meter_3d_notify(t_hoa_meter_3d *x, t_symbol *s, t_symbol *msg, voi
 	if (msg == hoa_sym_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
-		if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overloadcolor") || name == gensym("offcolor"))
+		if(name == gensym("bgcolor") || name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overloadcolor") || name == gensym("offcolor"))
 		{
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_background_layer);
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_3d_leds_layer);
@@ -729,6 +708,10 @@ void draw_background(t_hoa_meter_3d *x,  t_object *view, t_rect *rect)
     
 	if (g)
 	{
+        jgraphics_rectangle(g, 0, 0, rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        
 		jgraphics_set_line_width(g, 1.);
 		
 		if(x->f_view == hoa_sym_3d_topnextbottom)
