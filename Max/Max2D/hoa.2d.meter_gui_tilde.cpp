@@ -68,8 +68,8 @@ typedef struct  _meter
 	t_atom_long	f_numleds;
 	
 	t_jrgba		f_color_bg;
-    t_jrgba		f_color_bd;
 	t_jrgba		f_color_mbg;
+    t_jrgba		f_color_ledbg;
 	t_jrgba		f_color_cold;
 	t_jrgba		f_color_tepid;
 	t_jrgba		f_color_warm;
@@ -109,7 +109,6 @@ t_max_err number_of_channels_set(t_meter *x, t_object *attr, long argc, t_atom *
 t_max_err azimuths_of_channels_set(t_meter *x, void *attr, long ac, t_atom *av);
 t_max_err azimuths_of_channels_get(t_meter *x, t_object *attr, long *argc, t_atom **argv);
 
-void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params);
 void meter_paint(t_meter *x, t_object *view);
 void draw_background(t_meter *x, t_object *view, t_rect *rect);
 void draw_leds(t_meter *x,  t_object *view, t_rect *rect);
@@ -146,9 +145,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method) meter_assist,		 "assist",		  A_CANT, 0);
 	class_addmethod(c, (method) meter_paint,		 "paint",		  A_CANT, 0);
 	class_addmethod(c, (method) meter_notify,        "notify",		  A_CANT, 0);
-    class_addmethod(c, (method) meter_getdrawparams, "getdrawparams", A_CANT, 0);
     
-	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 150 150");
 	CLASS_ATTR_INVISIBLE            (c, "color", 0);
 	
 	/* APPEARANCE */
@@ -287,21 +285,21 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.76 0.76 0.76 1.");
 	// @description Sets the RGBA values for the background color of the <o>hoa.2d.meter~</o> object
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_meter, f_color_bd);
-	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.7 0.7 0.7 1.");
-	// @description Sets the RGBA values for the border color of the <o>hoa.2d.meter~</o> object
-    
 	CLASS_ATTR_RGBA                 (c, "mbgcolor", 0, t_meter, f_color_mbg);
 	CLASS_ATTR_LABEL                (c, "mbgcolor", 0, "Meter Background Color");
     CLASS_ATTR_CATEGORY             (c, "mbgcolor", 0, "Color");
     CLASS_ATTR_STYLE                (c, "mbgcolor", 0, "rgba");
-	CLASS_ATTR_ORDER                (c, "mbgcolor", 0, "3");
+	CLASS_ATTR_ORDER                (c, "mbgcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "mbgcolor", 0, "0.61 0.61 0.61 1.");
 	// @description Sets the RGBA values for the filled circle background color of the <o>hoa.2d.meter~</o> object
+    
+    CLASS_ATTR_RGBA                 (c, "ledbgcolor", 0, t_meter, f_color_ledbg);
+    CLASS_ATTR_LABEL                (c, "ledbgcolor", 0, "Leds Background Color");
+    CLASS_ATTR_CATEGORY             (c, "ledbgcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "ledbgcolor", 0, "rgba");
+    CLASS_ATTR_ORDER                (c, "ledbgcolor", 0, "3");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "ledbgcolor", 0, "0. 0. 0. 0.05");
+    // @description Sets the RGBA values for leds background color of the <o>hoa.2d.meter~</o> object
 	
 	CLASS_ATTR_RGBA                 (c, "coldcolor", 0, t_meter, f_color_cold);
     CLASS_ATTR_CATEGORY             (c, "coldcolor", 0, "Color");
@@ -432,14 +430,6 @@ void meter_free(t_meter *x)
     delete [] x->f_azimuth_of_channels;
     delete [] x->f_signals;
     delete [] x->f_overled;
-}
-
-void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_boxfillcolor = x->f_color_bg;
-    params->d_bordercolor = x->f_color_bd;
-	params->d_cornersize = HOA_UI_CORNERSIZE;
-	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
 }
 
 t_max_err number_of_channels_set(t_meter *x, t_object *attr, long argc, t_atom *argv)
@@ -612,7 +602,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	if (msg == hoa_sym_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
-		if(name == gensym("mbgcolor") || name == gensym("ledsbg") || name == gensym("mborder"))
+		if(name == gensym("bgcolor") || name == gensym("mbgcolor") || name == gensym("ledsbg") || name == gensym("mborder") || name == gensym("ledbgcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_skeleton_layer);
             jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_separator_layer);
@@ -669,9 +659,8 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 	int i,j;
 	double deg1, deg2, rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, channelWidth;
 	t_jrgba ledBgColor = {0,0,0,0.05};
-    t_jrgba black, white;
+    t_jrgba black;
     double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_skeleton_layer, rect->width, rect->height);
 	
@@ -681,15 +670,18 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 	ledStroke = ledOffset * 0.75;
 	ledMargin = ledOffset * 0.5;
     
-    black = white = x->f_color_mbg;
+    black = x->f_color_mbg;
 	vector_add(3, (double*)&black, -contrastBlack);
 	vector_clip_minmax(3, (double*)&black, 0., 1.);
-	vector_add(3, (double*)&white, contrastWhite);
-	vector_clip_minmax(3, (double*)&white, 0., 1.);
 	
 	if (g)
 	{
 		// Background :
+        jgraphics_rectangle(g, 0., 0., rect->width, rect->height);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_fill(g);
+        
+        // Meter Background :
 		jgraphics_set_source_jrgba(g, &x->f_color_mbg);
 		jgraphics_set_line_width(g, (x->f_rayonExt - x->f_rayonInt) - 0.5);
 		jgraphics_arc(g, x->f_center, x->f_center, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), 0., HOA_2PI);
@@ -700,13 +692,6 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
         // skelton circles :
         if (x->f_drawmborder == 1 || x->f_drawmborder == 3)
         {
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_arc(g, x->f_center+1, x->f_center+1, x->f_rayonExt,  0., HOA_2PI);
-            jgraphics_stroke(g);
-            jgraphics_arc(g, x->f_center+1, x->f_center+1, x->f_rayonInt,  0., HOA_2PI);
-            jgraphics_stroke(g);
-            
             jgraphics_set_source_jrgba(g, &black);
             jgraphics_set_line_width(g, 1);
             jgraphics_arc(g, x->f_center, x->f_center, x->f_rayonExt,  0., HOA_2PI);
@@ -719,8 +704,6 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
         {
             jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
             jgraphics_set_matrix(g, &transform);
-            
-            white.alpha = 0.6;
 			
             // skelton separators and leds bg:
             for(i = 0; i < x->f_number_of_channels; i++)
@@ -739,105 +722,10 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 				
                 // leds Background :
                 jgraphics_set_line_width(g, ledStroke);
-				jgraphics_set_line_cap(g, (x->f_number_of_channels < 24 && (channelWidth > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
-				
-				jgraphics_set_source_jrgba(g, &white);
+                jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_BUTT);
+                jgraphics_set_source_jrgba(g, &x->f_color_ledbg);
                 for( j=0; j < x->f_numleds; j++ )
                 {
-					if ( isInsideRad(x->f_meter->getChannelAzimuth(i), -HOA_PI4, HOA_PI4*3) )
-                    {
-                        if (x->f_number_of_channels > 1)
-						{
-                            if ( x->f_number_of_channels < 24  && (channelWidth > 14.5)) {
-                                
-                                double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                                
-								// inside
-                                if (x->f_direction == 0)
-								{
-                                    tmpdeg1 = deg1+(0.008 * (j+4) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (j+4) * x->f_metersize);
-                                    tmprad = x->f_rayonExt - (j*ledOffset) - ledMargin - 2;
-                                }
-								// outside
-								else
-								{
-                                    tmpdeg1 = deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmprad = x->f_rayonInt+(j*ledOffset) + ledMargin + 2;
-                                }
-								
-                                if (tmpdeg1 < tmpdeg2)
-									jgraphics_arc(g, 0, 1, tmprad,  tmpdeg1, tmpdeg2);
-                                else
-                                    jgraphics_arc(g, 0, 1, tmprad, tmpdeg2, tmpdeg1);
-                            }
-                            else
-							{
-                                if (x->f_direction == 0) // inside
-                                    jgraphics_arc_negative(g, 0, 1, x->f_rayonExt - (j*ledOffset) - ledMargin - 4, deg2, deg1);
-                                else // outside
-                                    jgraphics_arc_negative(g, 0, 1, x->f_rayonInt + (j*ledOffset) + ledMargin + 2, deg2, deg1);
-                            }
-                        }
-                        else // mono
-						{
-                            if (x->f_direction == 0) // inside
-                                jgraphics_arc(g, 0, -1, x->f_rayonExt - (j*ledOffset) - ledMargin - 3,  0, HOA_2PI);
-                            else // outside
-                                jgraphics_arc(g, 0, -1, x->f_rayonInt + (j*ledOffset) + ledMargin + 1,  0, HOA_2PI);
-                        }
-                    }
-                    else
-                    {
-                        if (x->f_number_of_channels > 1)
-						{
-                            if ( x->f_number_of_channels < 24  && (channelWidth > 14.5))
-                            {
-                                double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                                
-                                if (x->f_direction == 0) // inside
-								{
-                                    tmpdeg1 = deg1+(0.008 * (j+4) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (j+4) * x->f_metersize);
-                                    tmprad = x->f_rayonExt-(j*ledOffset) - ledMargin - 2;
-                                }
-								else // outside
-								{
-                                    tmpdeg1 = deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmprad = x->f_rayonInt+(j*ledOffset) + ledMargin + 2;
-                                }
-                                if (tmpdeg1 < tmpdeg2)
-									jgraphics_arc(g, 0, -1, tmprad,  tmpdeg1, tmpdeg2);
-                                else
-                                    jgraphics_arc(g, 0, -1, tmprad, tmpdeg2, tmpdeg1);
-                            }
-                            else
-							{
-                                if (x->f_direction == 0) // inside
-                                    jgraphics_arc_negative(g, 0, -1, x->f_rayonExt - (j*ledOffset) - ledMargin - 2, deg2, deg1);
-                                else // outside
-                                    jgraphics_arc_negative(g, 0, -1, x->f_rayonInt + (j*ledOffset) + ledMargin + 2, deg2, deg1);
-                            }
-                        }
-                        else // mono
-						{
-                            if (x->f_direction == 0) // inside
-                                jgraphics_arc(g, 0, -1, x->f_rayonExt - (j*ledOffset) - ledMargin - 3, 0, HOA_2PI);
-                            else // outside
-                                jgraphics_arc(g, 0, -1, x->f_rayonInt + (j*ledOffset) + ledMargin + 1, 0, HOA_2PI);
-                        }
-                    }
-                    
-                    jgraphics_stroke(g);
-                }
-                
-                // black
-                jgraphics_set_source_jrgba(g, &ledBgColor);
-                for( j=0; j < x->f_numleds; j++ )
-                {
-                    jgraphics_set_line_cap(g, (x->f_number_of_channels < 24 && (channelWidth > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
                     if (x->f_number_of_channels > 1)
 					{
                         if ( x->f_number_of_channels < 24  && (channelWidth > 14.5))
@@ -922,20 +810,6 @@ void draw_separator(t_meter *x,  t_object *view, t_rect *rect)
 			if (x->f_number_of_channels > 1)
 			{
                 jgraphics_set_line_width(g, 1);
-                jgraphics_set_source_jrgba(g, &white);
-                
-                if ( isInsideDeg(rotateAngle, 45, 225) )
-                {
-                    jgraphics_move_to(g, -0.5, x->f_rayonInt-0.5);
-                    jgraphics_line_to(g, -0.5, x->f_rayonExt-0.5);
-                }
-                else
-                {
-                    jgraphics_move_to(g, 0.5, x->f_rayonInt+0.5);
-                    jgraphics_line_to(g, 0.5, x->f_rayonExt+0.5);
-                }
-                jgraphics_stroke(g);
-                
                 jgraphics_set_source_jrgba(g, &black);
 				jgraphics_move_to(g, 0., x->f_rayonInt);
 				jgraphics_line_to(g, 0, x->f_rayonExt);
@@ -974,6 +848,8 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
+        
+        jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_BUTT);
 		
 		for(i = 0; i < nLoudSpeak; i++)
 		{
@@ -989,8 +865,6 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
                 rotateAngle *= -1;
             }
             jgraphics_rotate(g, degToRad(rotateAngle));
-            
-            jgraphics_set_line_cap(g, (nLoudSpeak < 24 && (channelWidth > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
             
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{
@@ -1118,7 +992,6 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 	
 	double vecX, vecY;
 	t_jmatrix transform;
-	t_jpattern *pattern = NULL;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_vectors_layer, rect->width, rect->height);
 	
 	if (g)
@@ -1180,9 +1053,6 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_vectors_layer);
 	}
-	
-	if (pattern)
-		jgraphics_pattern_destroy(pattern);
 	
 	jbox_paint_layer((t_object *)x, view, hoa_sym_vectors_layer, 0., 0.);
 }
