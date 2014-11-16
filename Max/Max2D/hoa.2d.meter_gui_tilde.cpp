@@ -658,7 +658,6 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 {
 	int i,j;
 	double deg1, deg2, rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, channelWidth;
-	t_jrgba ledBgColor = {0,0,0,0.05};
     t_jrgba black;
     double contrastBlack = 0.12;
 	t_jmatrix transform;
