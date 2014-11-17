@@ -2,45 +2,55 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 6,
-			"minor" : 1,
-			"revision" : 6,
-			"architecture" : "x64"
+			"major" : 7,
+			"minor" : 0,
+			"revision" : 0,
+			"architecture" : "x86",
+			"modernui" : 1
 		}
 ,
-		"rect" : [ 507.0, 129.0, 773.0, 648.0 ],
+		"rect" : [ 106.0, 111.0, 483.0, 56.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 14.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
-		"gridonopen" : 0,
+		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 0,
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
 		"statusbarvisible" : 2,
 		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"imprint" : 0,
 		"enablehscroll" : 1,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
 					"autofit" : 1,
 					"id" : "hoa.2d.scope~",
 					"instance_attributes" : 					{
+						"palette_action" : "hoa.2d.scope~",
 						"palette_caption" : "hoa.2d.scope~",
-						"palette_category" : [ "HoaLib", "Interface", "Recent" ],
-						"palette_action" : "hoa.2d.scope~"
+						"palette_category" : [ "HoaLib", "Interface", "Recent" ]
 					}
 ,
 					"maxclass" : "fpic",
 					"numinlets" : 1,
-					"numoutlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "jit_matrix" ],
 					"patching_rect" : [ 6.0, 4.0, 45.0, 45.0 ],
 					"pic" : "hoa.2d.scope~.svg"
 				}
@@ -55,7 +65,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 90.0, 169.0, 68.0, 22.0 ],
+					"patching_rect" : [ 90.0, 169.0, 68.0, 24.0 ],
+					"style" : "",
 					"text" : "loadbang"
 				}
 
@@ -69,7 +80,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 387.770844, 442.0, 37.0, 22.0 ],
+					"patching_rect" : [ 387.770844, 442.0, 37.0, 24.0 ],
+					"style" : "",
 					"text" : "t b s"
 				}
 
@@ -82,7 +94,8 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 286.4375, 217.0, 25.0, 25.0 ]
+					"patching_rect" : [ 286.4375, 217.0, 25.0, 25.0 ],
+					"style" : ""
 				}
 
 			}
@@ -95,7 +108,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 337.104156, 398.0, 168.0, 20.0 ],
+					"patching_rect" : [ 337.104156, 398.0, 168.0, 24.0 ],
+					"style" : "",
 					"text" : "patching_rect 0. 0. $1 54."
 				}
 
@@ -109,7 +123,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 286.4375, 427.0, 74.0, 20.0 ],
+					"patching_rect" : [ 286.4375, 427.0, 74.0, 22.0 ],
+					"style" : "",
 					"text" : "prepend set"
 				}
 
@@ -139,13 +154,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.754705,
-					"frgb" : 0.0,
 					"id" : "obj-12",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 78.0, 32.0, 402.0, 21.0 ],
-					"text" : "High Order Ambisonics Library ",
+					"style" : "",
+					"text" : "A graphic user interface to spatialize sources in a 2d or 3d context.",
 					"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
 					"varname" : "autohelp_top_digest[1]"
 				}
@@ -156,13 +171,13 @@
 					"fontface" : 3,
 					"fontname" : "Arial",
 					"fontsize" : 20.871338,
-					"frgb" : 0.0,
 					"id" : "obj-13",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 77.0, 3.0, 403.0, 30.0 ],
-					"text" : "HoaLibrary",
+					"style" : "",
+					"text" : "hoa.map",
 					"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
 					"varname" : "autohelp_top_title[1]"
 				}
@@ -173,13 +188,13 @@
 					"fontface" : 3,
 					"fontname" : "Arial",
 					"fontsize" : 20.871338,
-					"frgb" : 0.0,
 					"id" : "obj-14",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 79.0, 5.0, 401.0, 30.0 ],
-					"text" : "HoaLibrary",
+					"style" : "",
+					"text" : "hoa.map",
 					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 					"varname" : "autohelp_top_title[2]"
 				}
@@ -189,13 +204,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.754705,
-					"frgb" : 0.0,
 					"id" : "obj-15",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 79.0, 33.0, 401.0, 21.0 ],
-					"text" : "High Order Ambisonics Library ",
+					"style" : "",
+					"text" : "A graphic user interface to spatialize sources in a 2d or 3d context.",
 					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 					"varname" : "autohelp_top_digest[4]"
 				}
@@ -203,14 +218,18 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.392157, 0.494118, 0.666667, 0.5 ],
+					"angle" : 0.0,
+					"bgcolor" : [ 0.376187, 0.409384, 0.445165, 0.62 ],
 					"bordercolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
 					"id" : "obj-16",
 					"maxclass" : "panel",
+					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 0.0, 290.0, 54.0 ],
-					"rounded" : 15
+					"patching_rect" : [ 0.0, 0.0, 480.0, 54.0 ],
+					"proportion" : 0.39,
+					"rounded" : 0,
+					"style" : ""
 				}
 
 			}
@@ -223,7 +242,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 90.0, 268.0, 342.0, 20.0 ],
+					"patching_rect" : [ 90.0, 268.0, 342.0, 22.0 ],
+					"style" : "",
 					"text" : "patcherargs @obj-name hoa.library @obj-desc \" \" @width 480"
 				}
 
@@ -237,7 +257,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 462.770844, 475.0, 74.0, 20.0 ],
+					"patching_rect" : [ 462.770844, 475.0, 74.0, 22.0 ],
+					"style" : "",
 					"text" : "prepend set"
 				}
 
@@ -251,7 +272,8 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 286.4375, 355.0, 171.0, 20.0 ],
+					"patching_rect" : [ 286.4375, 355.0, 171.0, 22.0 ],
+					"style" : "",
 					"text" : "route obj-desc width obj-name"
 				}
 
