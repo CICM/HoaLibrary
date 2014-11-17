@@ -374,6 +374,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	x = (t_meter *)object_alloc(meter_class);
 	flags = 0
     | JBOX_DRAWFIRSTIN
+    | JBOX_NODRAWBOX
     | JBOX_DRAWINLAST
     | JBOX_TRANSPARENT
     | JBOX_DRAWBACKGROUND

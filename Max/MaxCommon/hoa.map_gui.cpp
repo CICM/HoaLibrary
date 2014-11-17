@@ -345,7 +345,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
-	| JBOX_TRANSPARENT
+    | JBOX_NODRAWBOX
 	| JBOX_DRAWBACKGROUND
 	| JBOX_GROWY
 	| JBOX_HILITE

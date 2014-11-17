@@ -287,6 +287,7 @@ void *hoa_meter_3d_new(t_symbol *s, int argc, t_atom *argv)
 	flags = 0
 	| JBOX_DRAWFIRSTIN
 	| JBOX_DRAWINLAST
+    | JBOX_NODRAWBOX
 	| JBOX_DRAWBACKGROUND
 	| JBOX_TRANSPARENT
 	| JBOX_GROWBOTH
