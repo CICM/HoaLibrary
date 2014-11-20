@@ -1676,14 +1676,14 @@ void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
         
 		for(double i = 0; i < maxctr; i += ecart)
         {
-            jgraphics_move_to(g, 0. - 0.5, long(ctr.y - i) - 0.5);
-            jgraphics_line_to(g, w - 0.5, long(ctr.y - i) - 0.5);
-            jgraphics_move_to(g, 0. - 0.5, long(ctr.y + i) - 0.5);
-            jgraphics_line_to(g, w - 0.5, long(ctr.y + i) - 0.5);
-            jgraphics_move_to(g, long(ctr.x - i) - 0.5, 0. - 0.5);
-            jgraphics_line_to(g, long(ctr.x - i) - 0.5, w - 0.5);
-            jgraphics_move_to(g, long(ctr.x + i) - 0.5, 0. - 0.5);
-            jgraphics_line_to(g, long(ctr.x + i) - 0.5, w - 0.5);
+            jgraphics_move_to(g, 0., ctr.y - i);
+            jgraphics_line_to(g, w, ctr.y - i);
+            jgraphics_move_to(g, 0., ctr.y + i);
+            jgraphics_line_to(g, w, ctr.y + i);
+            jgraphics_move_to(g, ctr.x - i, 0.);
+            jgraphics_line_to(g, ctr.x - i, w);
+            jgraphics_move_to(g, ctr.x + i, 0.);
+            jgraphics_line_to(g, ctr.x + i, w);
             jgraphics_stroke(g);
         }
         
@@ -1691,7 +1691,7 @@ void draw_background(t_hoa_map *x,  t_object *view, t_rect *rect)
         double radius = x->f_zoom_factor * (maxctr*2) / 10.;
         for(int i = 5; i > 0; i--)
         {
-            jgraphics_arc(g, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., HOA_2PI);
+            jgraphics_arc(g, ctr.x, ctr.y, (double)i * radius - 1,  0., HOA_2PI);
             jgraphics_stroke(g);
         }
         
