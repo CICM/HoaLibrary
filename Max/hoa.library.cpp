@@ -8,6 +8,7 @@
 #include "Max3D/Hoa3D.max.h"
 #include "MaxCommon/HoaCommon.max.h"
 
+#ifdef HOA_PACKED_LIB
 int C74_EXPORT main(void)
 {
     // HOA COMMON //
@@ -55,3 +56,4 @@ int C74_EXPORT main(void)
     
     //return 0;
 }
+#endif

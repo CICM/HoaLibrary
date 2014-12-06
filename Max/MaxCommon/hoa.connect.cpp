@@ -409,6 +409,9 @@ t_max_err connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender,
 			long current_nb_selected = 0;
 			
 			object_attr_getvalueof(sender, attrname, &current_nb_selected, &av);
+            
+            current_nb_selected = clip_max(current_nb_selected, CONNECT_MAX_TAB - 1);
+            
 			if (current_nb_selected && av)
 			{				
 				// on supprime tous les objets du tableau qui ne sont plus dans la selection

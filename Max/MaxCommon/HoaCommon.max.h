@@ -14,6 +14,7 @@
 
 using namespace HoaCommon;
 
+#ifdef HOA_PACKED_LIB
 int c_convolve_main();
 int c_freeverb_main();
 int hoa_connect_main();
@@ -30,5 +31,6 @@ int hoa_play_main();
 int hoa_process_main();
 int hoa_record_main();
 int hoa_thisprocess_main();
+#endif
 
 #endif
