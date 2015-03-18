@@ -1,4 +1,4 @@
-## Hoa Library 
+## Hoa Library (Deprecated, please see <a title="Hoa Library (Light)" href="https://github.com/CICM/HoaLibrary-Light/" target="_blank">)
 
 #### A high order ambisonics library.
 
